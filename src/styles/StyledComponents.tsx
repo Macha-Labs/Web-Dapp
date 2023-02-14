@@ -468,6 +468,22 @@ position: relative;
     background: ${style.bgLayout.secondry}
 
 }
+
+`
+export const StyledLayoutChatItem = styled(Row)`
+    text-align: start;
+    align-items: center;
+    justify-content: flex-start;
+
+    .settingsIcon {
+        display: none;
+    }
+
+    &:hover {
+        .settingsIcon {
+            display: inline;
+        }
+    }
 `
 
 export const StyledConversationView = styled.div`
