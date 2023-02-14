@@ -3,9 +3,9 @@ import OrgControl from "../org/OrgControl";
 
 const ChatList = () => {
     return (
-        <StyledChatList>
+        <>
             <OrgControl />
-        </StyledChatList>
+        </>
     )
 }
 

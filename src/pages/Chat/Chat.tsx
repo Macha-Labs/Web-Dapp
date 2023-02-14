@@ -1,12 +1,22 @@
 import ChatHeader from "@/components/chat/ChatHeader";
-import { StyledChat } from "@/styles/StyledComponents";
+import ChatInput from "@/components/chat/ChatInput";
+import ChatList from "@/components/chat/ChatList";
+import ChatWindow from "@/components/chat/ChatWindow";
+import { Row, StyledChat, StyledChatList } from "@/styles/StyledComponents";
 import React from "react";
 
 function Chat() {
   return (
-    <StyledChat>
-      <ChatHeader />
-    </StyledChat>
+    <Row>
+      <StyledChatList>
+        <ChatList />
+      </StyledChatList>
+        <StyledChat>
+          <ChatHeader />
+          <ChatWindow />
+          <ChatInput />
+        </StyledChat>
+    </Row>
   );
 }
 
