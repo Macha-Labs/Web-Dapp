@@ -88,7 +88,7 @@ const ChatList = (props) => {
     return (
         <>
             {
-                (!props.event.channelLoader && !props.chatMenu?.length)
+                (!props?.event?.channelLoader && !props?.chatMenu?.length)
                     ?
                     (
                         <>

@@ -68,92 +68,92 @@ const ChatInput = (props: any) => {
     );
   };
 
-  const templateAttachment = () => {
-    let type;
-    if (props?.chatContext.attachItem) {
-      type = props?.chatContext.attachItem.type.split("/")[0];
-    }
-    return (
-      <>
-        {props?.chatContext.attachItem ? (
-          <div className="attachment show">
-            <Row className="vr-start hr-between">
-              <Col className="w-100">
-                {/* {
+    const templateAttachment = () => {
+        let type;
+        if (props?.chatContext?.attachItem) {
+            type = props?.chatContext?.attachItem.type.split("/")[0];
+        }
+        return (
+            <>
+                {
+                    props?.chatContext?.attachItem
+                        ?
+                        (
+                            <div className="attachment show">
+                                <Row className="vr-start hr-between">
+                                    <Col className="w-100">
+                                        {/* {
                                             type == "image" ?
                                                 <Image src={URL.createObjectURL(props?.chatContext.attachItem)} alt={props?.chatContext.attachItem?.name} width="300px" />
                                                 :
                                                 <FileIcon width="150px" height="150px" />
                                         } */}
-                <Text className="m-t-0-5">
-                  {props?.chatContext.attachItem.name}
-                </Text>
-              </Col>
-              <Icon onClick={() => props?.chatContext.deleteAttachment()}>
-                {/* <DeleteIcon width="20" height="20" fill="#efefef" /> */}
-              </Icon>
-            </Row>
-          </div>
-        ) : (
-          <></>
-        )}
-      </>
-    );
-  };
+                                        <Text className="m-t-0-5">{props?.chatContext?.attachItem?.name}</Text>
+                                    </Col>
+                                    <Icon onClick={() => props?.chatContext.deleteAttachment()}>
+                                        {/* <DeleteIcon width="20" height="20" fill="#efefef" /> */}
+                                    </Icon>
+                                </Row>
+                            </div>
+                        )
+                        :
+                        (
+                            <></>
+                        )
+                }
+            </>
+        )
+    }
 
-  const templateSlashPreview = () => {
-    const objs = {
-      post: <LayoutPostCard item={props?.chatContext?.chatMeta?.meta} />,
-      proposal: (
-        <LayoutProposalCard item={props?.chatContext?.chatMeta?.meta} />
-      ),
-      nft: <LayoutNFTCard nft={props?.chatContext?.chatMeta?.meta} />,
-      "/send-payment": (
-        <LayoutTransactionCard meta={props.chatContext?.chatMeta?.meta} />
-      ),
-      poll: <LayoutPollCard poll={props?.chatContext?.chatMeta?.meta} />,
-    };
-    return objs[props.chatContext?.chatMeta?.type];
-  };
+    const templateSlashPreview = () => {
+        const objs = {
+            // 'post': <LayoutPostCard item={props?.chatContext?.chatMeta?.meta} />,
+            // 'proposal': <LayoutProposalCard item={props?.chatContext?.chatMeta?.meta} />,
+            'nft': <LayoutNFTCard nft={props?.chatContext?.chatMeta?.meta} />,
+            // '/send-payment': <LayoutTransactionCard meta={props.chatContext?.chatMeta?.meta} />,
+            // 'poll': <LayoutPollCard poll={props?.chatContext?.chatMeta?.meta} />
+        }
+        return objs[props.chatContext?.chatMeta?.type]
+    }
+    
 
-  const templatePreview = () => {
-    return (
-      <>
-        {props?.chatContext?.actionMessage?.actionType == "Reply" ||
-        props?.chatContext.attachItem ||
-        props?.chatContext?.chatMeta?.type ||
-        props?.chatContext.slashCmd ||
-        props?.chatContext.isTyping ? (
-          <StyledChatPreview>
-            <Row className="m-b-1 vr-center w-100 hr-between">
-              <Heading as="h6" size="sm">
-                Preview
-              </Heading>
-              <Icon>
-                <CloseIcon />
-              </Icon>
-            </Row>
-            {templateReply()}
-            {templateAttachment()}
-            {templateSlashPreview()}
-            {props?.chatContext.isTyping ? templateMention() : <></>}
-            {props?.chatContext.slashCmd ? (
-              <LayoutSlashPreview
-                chatContext={props.chatContext}
-                handleTask={props.handleTask}
-                txnModalOpen={props.txnModalOpen}
-                slashCmds={props.slashCmds}
-              />
-            ) : (
-              <></>
-            )}
-          </StyledChatPreview>
-        ) : (
-          <></>
-        )}
-      </>
-    );
-  };
+    const templatePreview = () => {
+        
+        return (
+            <>
+                {
+                    props?.chatContext?.actionMessage?.actionType == 'Reply' || props?.chatContext?.attachItem || props?.chatContext?.chatMeta?.type || props?.chatContext?.slashCmd || props?.chatContext?.isTyping  ? (
+                        <StyledChatPreview>
+                            <Row className="m-b-1 vr-center w-100 hr-between">
+                                <Heading as="h6" size="sm">Preview</Heading>
+                                <Icon><CloseIcon /></Icon>
+                            </Row>
+                            {
+                                templateReply()
+                            }
+                            {
+                                templateAttachment()
+                            }
+                            {
+                                templateSlashPreview()
+                            }
+                            {props?.chatContext?.isTyping ? (templateMention()) : (<></>)}
+                            {/* {props?.chatContext.slashCmd ? (
+                                <LayoutSlashPreview
+                                    chatContext={props.chatContext}
+                                    handleTask={props.handleTask}
+                                    txnModalOpen={props.txnModalOpen}
+                                    slashCmds={props.slashCmds}
+                                />
+                                ) : (<></>)
+                            } */}
+                        </StyledChatPreview>
+                    ) : (<></>)
+                }
+            </>
+
+        )
+    }
 
   const templateMention = () => {
     return (
@@ -212,47 +212,50 @@ const ChatInput = (props: any) => {
           <>
             <Col className="vr-center hr-center sideIcons">{templateAdd()}</Col>
 
-            <Col className="w-100 vr-center">
-              <Textarea
-                onChange={event => {
-                  event.target.style.height = "auto";
-                  event.target.style.height = `${event.target.scrollHeight}px`;
-                  props?.chatContext.onChange(event);
-                }}
-                ref={props?.chatContext.textareaRef}
-                className="inputElement"
-                variant="unstyled"
-                style={{ minHeight: "45px" }}
-                onKeyDown={event => props?.chatContext?.keyDownMessage(event)}
-                placeholder="Message..."
-                height="auto"
-                rows={1}
-              />
-            </Col>
-            <Col className="vr-center hr-center sideIcons">
-              <Icon className="circled">
-                {/* <EmojiIcon width="20" height="20" fill="#e8e8e8" /> */}
-              </Icon>
-            </Col>
-          </>
-        ) : (
-          <>
-            <Col className="w-100 vr-center m-l-0-5">
-              Join the Channel to Message
-            </Col>
-            <Col>
-              <Button
-                isLoading={props.isLoading}
-                onClick={() => props.addMemberToChannel(props.channel?.id)}
-              >
-                Join
-              </Button>
-            </Col>
-          </>
-        )}
-      </StyledChatInput>
-    );
-  };
+                            <Col className="w-100 vr-center">
+                                <Textarea
+                                    onChange={event => {
+                                        event.target.style.height = 'auto';
+                                        event.target.style.height = `${event.target.scrollHeight}px`;
+                                        props?.chatContext.onChange(event);
+                                    }
+                                    }
+                                    ref={props?.chatContext?.textareaRef}
+                                    className="inputElement"
+                                    variant="unstyled"
+                                    style={{ minHeight: '45px' }}
+                                    onKeyDown={event => props?.chatContext?.keyDownMessage(event)}
+                                    placeholder="Message..."
+                                    height="auto"
+                                    rows={1}
+                                />
+                            </Col>
+                            <Col className="vr-center hr-center sideIcons">
+                                <Icon className="circled">
+                                    {/* <EmojiIcon width="20" height="20" fill="#e8e8e8" /> */}
+                                </Icon>
+                            </Col>
+                        </>
+                    ) : (
+                        <>
+                            <Col className="w-100 vr-center m-l-0-5">
+                                Join the Channel to Message
+                            </Col>
+                            <Col>
+                                <Button
+                                    isLoading={props.isLoading}
+                                    onClick={() => props.addMemberToChannel(props.channel?.id)}>
+                                    Join
+                                </Button>
+                            </Col>
+                        </>
+                    )
+                }
+            </ StyledChatInput >
+        )
+    }
+
+
 
   return (
     <StyledChatInputContainer>
@@ -261,23 +264,18 @@ const ChatInput = (props: any) => {
 
         {templateChatInputRow()}
 
-        <Row>
-          <Col className="w-100 vr-center">
-            {props?.chatContext.userObjTyping ? (
-              <Text fontSize="xs">
-                <Spinner size="xs" />@{props?.chatContext.userObjTyping} is
-                typing
-              </Text>
-            ) : (
-              <Text fontSize="xs">
-                <br />
-              </Text>
-            )}
-          </Col>
-        </Row>
-      </Col>
-    </StyledChatInputContainer>
-  );
-};
+                <Row>
+                    <Col className="w-100 vr-center">
+                        {props?.chatContext?.userObjTyping ? (
+                            <Text fontSize='xs'>
+                                <Spinner size='xs' />@{props?.chatContext?.userObjTyping} is typing 
+                            </Text>
+                        ) : (<Text fontSize='xs'><br /></Text>)}
+                    </Col>
+                </Row>
+            </Col>
+        </StyledChatInputContainer>
+    )
+}
 
 export default ChatInput;

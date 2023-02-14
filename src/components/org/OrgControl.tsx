@@ -1,7 +1,6 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Icon, Logo, Row } from "style";
+import { Icon, Logo, Row } from  "@/styles/StyledComponents";
 import { Modal, ModalBody, ModalContent, ModalOverlay, Heading, useDisclosure } from "@chakra-ui/react";
-import OrgSetting from "./OrgSetting/OrgSetting";
 import { useEffect, useState } from "react";
 
 const OrgControl = (props) => {
@@ -21,7 +20,7 @@ const OrgControl = (props) => {
                 <ModalOverlay />
                 <ModalContent className="hidescroll">
                     <ModalBody className="hidescroll" style={{ padding: "0px" }}>
-                        <OrgSetting org={org} setOrg={setOrg} modal={settingModal} />
+                        {/* <OrgSetting org={org} setOrg={setOrg} modal={settingModal} /> */}
                     </ModalBody>
                 </ModalContent>
             </Modal>

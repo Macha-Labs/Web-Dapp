@@ -1,11 +1,10 @@
 import { Avatar, Button, Heading, Text } from "@chakra-ui/react";
-import { truncateAddress } from "helpers";
-import { Col, Row } from "style";
-import { TransactionCard } from "style/card";
+import { Col, Row, StyledTransactionCard } from "@/styles/StyledComponents";
+import { truncateAddress } from "@/helpers";
 
 const LayoutTransactionCard = (props) => {
     return (
-        <TransactionCard>
+        <StyledTransactionCard>
             <Col className="card-body">
                 <Row className="m-b-2">
                     <Col className="w-50">
@@ -29,7 +28,7 @@ const LayoutTransactionCard = (props) => {
                 </Row>
             </Col>
 
-        </TransactionCard>
+        </StyledTransactionCard>
     )
 }
 export default LayoutTransactionCard;
