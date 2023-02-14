@@ -354,7 +354,7 @@ export const LinkContainer = styled.div`
 `;
 
 
-export const Nav = styled.div`
+export const StyledNav = styled.div`
   width: 5%;
   height: 100vh;
   background: #00042c;
