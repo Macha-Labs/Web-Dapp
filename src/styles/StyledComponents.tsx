@@ -457,6 +457,7 @@ position: relative;
 .header {
     height: 55px;
     padding: 0px 10px;
+    background: ${style.bgHeader}
 }
 
 .body {
