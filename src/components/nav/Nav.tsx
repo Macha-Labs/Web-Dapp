@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Col, Icon, Logo, Row } from "styles/StyledComponents";
-import ChatIcon from "components/Icon/ChatIcon";
-import { Link } from "react-router-dom";
+import { Col, Icon, Logo, Row, Nav } from "../../styles/StyledComponents";
+import ChatIcon from "../icons/IconChat";
 import { useRef } from "react";
-import HashIcon from "components/Icon/HashIcon";
-import UserIcon from "components/Icon/UserIcon";
-import NFTIcon from "components/Icon/NFTIcon";
+import HashIcon from "../icons/IconDarkUser";
+import UserIcon from "../icons/IconDarkUser";
+import NFTIcon from "../icons/IconDarkUser";
 import {
   Modal,
   ModalOverlay,
@@ -15,10 +14,9 @@ import {
   useDisclosure,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { Nav } from "style/base";
-import { Col, Icon, Logo, Row } from "@/styles/StyledComponents";
+import Link from "next/link";
 
-const DashNav = props => {
+const DashNav = (props: any) => {
   const orgsDrawer = useDisclosure();
 
   const templateOrgs = () => {
@@ -74,7 +72,7 @@ const DashNav = props => {
                     props.setNav("channels");
                   }}
                 >
-                  <HashIcon width="25" fill="#e8e8e8" />
+                  <HashIcon />
                 </Icon>
                 <Icon
                   className="state-1-2 scale m-b-1"
@@ -82,7 +80,7 @@ const DashNav = props => {
                     props.setNav("users");
                   }}
                 >
-                  <UserIcon width="25" height="25" fill="#e8e8e8" />
+                  <UserIcon />
                 </Icon>
                 <Icon
                   className="state-1-2 scale m-b-1"
@@ -90,16 +88,16 @@ const DashNav = props => {
                     props.setNav("nfts");
                   }}
                 >
-                  <NFTIcon width="25" height="25" fill="#e8e8e8" />
+                  <NFTIcon />
                 </Icon>
               </Col>
 
               <Col className="hr-center">
                 {props.context?.currentAccount ? (
                   <>
-                    <Link to="/chat">
+                    <Link href="/chat">
                       <Icon className="state-2-3 m-b-0-5 scale">
-                        <ChatIcon width="35" height="35" fill="#e8e8e8" />
+                        <ChatIcon />
                       </Icon>
                     </Link>
                   </>
