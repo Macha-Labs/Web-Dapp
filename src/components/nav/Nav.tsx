@@ -14,6 +14,7 @@ import {
   useDisclosure,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
 const DashNav = (props: any) => {
   const orgsDrawer = useDisclosure();
