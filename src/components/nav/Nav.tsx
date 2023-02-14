@@ -16,6 +16,7 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { Nav } from "style/base";
+import { Col, Icon, Logo, Row } from "@/styles/StyledComponents";
 
 const DashNav = props => {
   const orgsDrawer = useDisclosure();
