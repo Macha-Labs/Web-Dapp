@@ -1,6 +1,11 @@
 import { style } from "./StyledConstants";
 import styled from "styled-components";
 
+export const StyledWindow = styled.div`
+    position: fixed;
+    width: 100vW;
+`
+
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
@@ -378,7 +383,50 @@ export const StyledNav = styled.div`
 `;
 
 //
-export const ConversationView = styled.div`
+export const StyledMenu = styled.div`
+    width: 20%;
+    height: 100vh;
+    background: ${style.bgLayout.primary};
+
+    .body {
+        height: calc(100vh - 150px);
+        width: 100%;
+        margin: auto;
+        padding: 20px 10px;
+        border-right: 1px solid rgba(247,248,248,0.1);
+        border-top: 1px solid rgba(247,248,248,0.1);
+
+        .menu-heading {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .menu-item {
+            text-align: start;
+            padding: 10px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    }
+
+    .footer {
+        border-right: 1px solid rgba(247,248,248,0.1);
+        padding: 20px 10px;
+        width: 100%;
+    }
+
+    .header {
+        height: 55px;
+        padding: 0px 10px;
+
+        .brand {
+            width: 100%;
+            margin: auto;
+        }
+    }
+`
+
+export const StyledConversationView = styled.div`
     width: 100%;
     height: calc(100% - 50px);
     overflow-y: scroll;
