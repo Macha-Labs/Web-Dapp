@@ -376,3 +376,77 @@ export const Nav = styled.div`
     padding: 10px 0px;
   }
 `;
+
+//
+export const ConversationView = styled.div`
+    width: 100%;
+    height: calc(100% - 50px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 3rem;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    .emogiPicker {
+        background-color: black;
+    }
+`
+
+export const StyledConversationContainer = styled.div`
+    height: -webkit-fill-available;
+    position: absolute;
+    width: 100%;
+`
+
+export const StyledConversation = styled(Col)`
+    cursor: pointer;
+    padding: 15px 15px;
+    position: relative;
+    opacity: 0.75;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 1;
+        background: ${style.bg4};
+        .action {
+            display: block;
+            color: red;
+        }
+    }
+    
+    .replyTo {
+        margin-left: 60px;
+        margin-bottom: 0.5rem;
+    }
+
+    .message {
+        .action {
+            display: none;
+            position: absolute;
+            top: -10px;
+            right: 0;
+            padding: 5px;
+            border: ${style.borderInput};
+            background: #01041f;
+            border-radius: 5px;
+        }
+
+        // &:hover {
+        //     .action {
+        //         display: block;
+        //     }
+        // }
+
+        .inputElement {
+            resize: none;
+            width: 100%;
+            border: none !important;
+            background-color: transparent;
+            outline: none;
+        }
+        
+    }
+`
