@@ -383,7 +383,7 @@ export const StyledNav = styled.div`
 `;
 
 //
-export const StyledMenu = styled.div`
+export const StyledChatList = styled.div`
     width: 20%;
     height: 100vh;
     background: ${style.bgLayout.primary};
