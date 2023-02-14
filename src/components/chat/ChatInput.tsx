@@ -1,7 +1,13 @@
 import { CloseIcon, PlusSquareIcon } from "@chakra-ui/icons";
 import { Avatar, Button, Heading, Image, Popover, PopoverBody, PopoverContent, PopoverTrigger, Spinner, Text, Textarea } from "@chakra-ui/react";
-import { InputPreview, InputRow, Item } from "style/chat";
-import { Row, Col, Icon } from "@/styles/StyledComponents";
+import { Row, Col, Icon, StyledChatInputContainer, StyledChatPreview,  StyledChatInput} from "@/styles/StyledComponents";
+import LayoutSlashPreview from "@/layouts/chat/LayoutSlashPreview";
+import LayoutPostCard from "../post/LayoutPostCard";
+import LayoutProposalCard from "../proposal/LayoutProposalCard";
+import LayoutNFTCard from "../nft/LayoutNFTCard";
+import LayoutTransactionCard from "../payment/LayoutTransactionCard";
+import LayoutPollCard from "../poll/LayoutPollCard";
+import ChatMention from "./ChatMention";
 
 
 // const TypingRow = styled(Row)`
@@ -19,7 +25,7 @@ const ChatInput = (props) => {
                             <Row className="vr-center"><Text fontSize="xs" className="m-r-1">Replying to:</Text> <Avatar size="xs" src={`https://meta-profile-photos.s3.ap-south-1.amazonaws.com/${props.actionMessage.item.user.id}.png`} />  <Text fontSize="xs">@{props.actionMessage.item.user.id}</Text></Row>
                         </Col>
                         <Icon onClick={() => props?.chatContext.setActionMessage({ actionType: '', item: {} })}>
-                            <CrossIcon width="12" height="12" fill="#efefef" />
+                            {/* <CrossIcon width="12" height="12" fill="#efefef" /> */}
                         </Icon>
                     </div>
                 ) : (<></>)}
@@ -41,16 +47,16 @@ const ChatInput = (props) => {
                             <div className="attachment show">
                                 <Row className="vr-start hr-between">
                                     <Col className="w-100">
-                                        {
+                                        {/* {
                                             type == "image" ?
                                                 <Image src={URL.createObjectURL(props?.chatContext.attachItem)} alt={props?.chatContext.attachItem?.name} width="300px" />
                                                 :
                                                 <FileIcon width="150px" height="150px" />
-                                        }
+                                        } */}
                                         <Text className="m-t-0-5">{props?.chatContext.attachItem.name}</Text>
                                     </Col>
                                     <Icon onClick={() => props?.chatContext.deleteAttachment()}>
-                                        <DeleteIcon width="20" height="20" fill="#efefef" />
+                                        {/* <DeleteIcon width="20" height="20" fill="#efefef" /> */}
                                     </Icon>
                                 </Row>
                             </div>
@@ -69,7 +75,6 @@ const ChatInput = (props) => {
             'post': <LayoutPostCard item={props?.chatContext?.chatMeta?.meta} />,
             'proposal': <LayoutProposalCard item={props?.chatContext?.chatMeta?.meta} />,
             'nft': <LayoutNFTCard nft={props?.chatContext?.chatMeta?.meta} />,
-            'task': <LayoutTaskCard task={props?.chatContext?.chatMeta?.meta} />,
             '/send-payment': <LayoutTransactionCard meta={props.chatContext?.chatMeta?.meta} />,
             'poll': <LayoutPollCard poll={props?.chatContext?.chatMeta?.meta} />
         }
@@ -83,7 +88,7 @@ const ChatInput = (props) => {
             <>
                 {
                     props?.chatContext?.actionMessage?.actionType == 'Reply' || props?.chatContext.attachItem || props?.chatContext?.chatMeta?.type || props?.chatContext.slashCmd || props?.chatContext.isTyping  ? (
-                        <InputPreview>
+                        <StyledChatPreview>
                             <Row className="m-b-1 vr-center w-100 hr-between">
                                 <Heading as="h6" size="sm">Preview</Heading>
                                 <Icon><CloseIcon /></Icon>
@@ -107,7 +112,7 @@ const ChatInput = (props) => {
                                 />
                                 ) : (<></>)
                             }
-                        </InputPreview>
+                        </StyledChatPreview>
                     ) : (<></>)
                 }
             </>
@@ -117,7 +122,7 @@ const ChatInput = (props) => {
 
     const templateMention = () => {
         return (
-            <LayoutMentionPreview
+            <ChatMention
                 users={props.users}
                 setMentionList={props?.chatContext.setMentionList}
                 mentionList={props?.chatContext.mentionList}
@@ -141,7 +146,7 @@ const ChatInput = (props) => {
                             <Button variant="transparent" size="sm" className="text-start" isLoading={props.attachLoading}>
                                 <label htmlFor="upload-file" className="w-100">
                                     <Row className="hr-between w-100">
-                                        Add File<FileIcon width="20" height="20" fill="#efefef" className="m-r-0-5" />
+                                        {/* Add File <FileIcon width="20" height="20" fill="#efefef" className="m-r-0-5" /> */}
                                     </Row>
                                 </label>
                             </Button>
@@ -151,7 +156,7 @@ const ChatInput = (props) => {
                                 type="file"
                                 hidden
                             />
-                            <Button variant="transparent" size="sm" className="text-start"><Row className="hr-between w-100">Add Poll<PollIcon width="20" height="20" fill="#efefef" className="m-r-0-5" /></Row></Button>
+                            {/* <Button variant="transparent" size="sm" className="text-start"><Row className="hr-between w-100">Add Poll<PollIcon width="20" height="20" fill="#efefef" className="m-r-0-5" /></Row></Button> */}
                         </Col>
                     </PopoverBody>
                 </PopoverContent>
@@ -161,7 +166,7 @@ const ChatInput = (props) => {
 
     const templateChatInputRow = () => {
         return (
-            <InputRow>
+            <StyledChatInput>
                 {
                     props.channel?.data?.created_by?.id == props.currentUser?.id || props.userIsMember ? (
                         <>
@@ -189,7 +194,7 @@ const ChatInput = (props) => {
                             </Col>
                             <Col className="vr-center hr-center sideIcons">
                                 <Icon className="circled">
-                                    <EmojiIcon width="20" height="20" fill="#e8e8e8" />
+                                    {/* <EmojiIcon width="20" height="20" fill="#e8e8e8" /> */}
                                 </Icon>
                             </Col>
                         </>
@@ -208,14 +213,14 @@ const ChatInput = (props) => {
                         </>
                     )
                 }
-            </InputRow >
+            </ StyledChatInput >
         )
     }
 
 
 
     return (
-        <Item>
+        <StyledChatInputContainer>
             <Col className="w-100">
                 {templatePreview()}
 
@@ -231,7 +236,7 @@ const ChatInput = (props) => {
                     </Col>
                 </Row>
             </Col>
-        </Item>
+        </StyledChatInputContainer>
     )
 }
 

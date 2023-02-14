@@ -470,7 +470,7 @@ position: relative;
 }
 
 `
-export const StyledLayoutChatItem = styled(Row)`
+export const StyledChatItem = styled(Row)`
     text-align: start;
     align-items: center;
     justify-content: flex-start;
@@ -484,6 +484,54 @@ export const StyledLayoutChatItem = styled(Row)`
             display: inline;
         }
     }
+`
+
+export const StyledChatPreview = styled.div`
+  background: ${style.bgLayout.primary}; 
+  border: ${style.borderInput};
+  border-radius: 2px 2px 0px 0px;
+  padding: 0.5rem 0.5rem;
+
+  .attachment {
+      display: hidden;
+      padding: 10px;
+
+      &.show {
+          display: block;
+      }
+  }
+
+  .reply {
+      padding: 10px 5px 10px 5px;
+      font-size: 10px;
+  }
+`
+export const StyledChatInputContainer = styled.div`
+  width: 100%;
+      position: absolute;
+      bottom: 0;
+      padding: 0px 10px;
+    `
+
+export const StyledChatInput = styled(Row)`
+width: 100%;
+border-radius: 5px;
+background: ${style.bgCard};
+margin-bottom: 5px;
+padding: 0.3rem 0;
+
+.inputElement {
+    resize: none;
+    width: 100%;
+    border: none !important;
+    max-height: 100px;
+    background-color: transparent;
+    outline: none;
+}
+
+.sideIcons {
+    padding: 0px 8px;
+}
 `
 
 export const StyledConversationView = styled.div`

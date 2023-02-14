@@ -1,4 +1,4 @@
-import { Col, Row, StyledChatList, StyledLayoutChatItem } from "@/styles/StyledComponents";
+import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Icon } from "@chakra-ui/react";
 import OrgControl from "../org/OrgControl";
 
@@ -27,7 +27,7 @@ const ChatList = (props) => {
                                                 (
                                                     <Col>
                                                         <Icon className="state-2-3 m-b-1" onClick={props.channelNew}>
-                                                            <AddIcon />
+                                                            {/* <AddIcon /> */}
                                                         </Icon>
 
                                                     </Col>
@@ -39,7 +39,7 @@ const ChatList = (props) => {
                                     <ul>
                                         {
                                             list.map((item, index) =>
-                                                <StyledLayoutChatItem key={index}>
+                                                <StyledChatItem key={index}>
                                                     <Button
                                                         onClick={() => { props.triggerMenu(item) }}
                                                         className="menu-item w-100 m-b-1"
@@ -68,7 +68,7 @@ const ChatList = (props) => {
                                                                 )
                                                         }
                                                     </Button>
-                                                </StyledLayoutChatItem>
+                                                </StyledChatItem>
                                             )
                                         }
                                     </ul>
