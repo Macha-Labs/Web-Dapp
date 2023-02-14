@@ -2,9 +2,9 @@ import { style } from "./StyledConstants";
 import styled from "styled-components";
 
 export const StyledWindow = styled.div`
-    position: fixed;
-    width: 100vW;
-`
+  position: fixed;
+  width: 100vw;
+`;
 
 export const Row = styled.div`
   display: flex;
@@ -358,7 +358,6 @@ export const LinkContainer = styled.div`
   }
 `;
 
-
 export const StyledNav = styled.div`
   width: 5%;
   height: 100vh;
@@ -384,64 +383,64 @@ export const StyledNav = styled.div`
 
 //
 export const StyledChatList = styled.div`
-    width: 20%;
-    height: 100vh;
-    background: ${style.bgLayout.primary};
+  width: 20%;
+  height: 100vh;
+  background: ${style.bgLayout.primary};
 
-    .body {
-        height: calc(100vh - 150px);
-        width: 100%;
-        margin: auto;
-        padding: 20px 10px;
-        border-right: 1px solid rgba(247,248,248,0.1);
-        border-top: 1px solid rgba(247,248,248,0.1);
+  .body {
+    height: calc(100vh - 150px);
+    width: 100%;
+    margin: auto;
+    padding: 20px 10px;
+    border-right: 1px solid rgba(247, 248, 248, 0.1);
+    border-top: 1px solid rgba(247, 248, 248, 0.1);
 
-        .menu-heading {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-
-        .menu-item {
-            text-align: start;
-            padding: 10px;
-            align-items: center;
-            justify-content: flex-start;
-        }
+    .menu-heading {
+      padding-left: 10px;
+      padding-right: 10px;
     }
 
-    .footer {
-        border-right: 1px solid rgba(247,248,248,0.1);
-        padding: 20px 10px;
-        width: 100%;
+    .menu-item {
+      text-align: start;
+      padding: 10px;
+      align-items: center;
+      justify-content: flex-start;
     }
+  }
 
-    .header {
-        height: 55px;
-        padding: 0px 10px;
+  .footer {
+    border-right: 1px solid rgba(247, 248, 248, 0.1);
+    padding: 20px 10px;
+    width: 100%;
+  }
 
-        .brand {
-            width: 100%;
-            margin: auto;
-        }
+  .header {
+    height: 55px;
+    padding: 0px 10px;
+
+    .brand {
+      width: 100%;
+      margin: auto;
     }
-`
+  }
+`;
 
 export const StyledChat = styled.div`
-width: 80%;
-height: 100vh;
-background: ${style.bgLayout.primary};
-position: relative;
+  width: 80%;
+  height: 100vh;
+  background: ${style.bgLayout.primary};
+  position: relative;
 
-&.full {
+  &.full {
     width: calc(75% + 20px);
-} 
+  }
 
-&.expand {
+  &.expand {
     width: 95%;
     left: 5%;
-}
+  }
 
-.padded-content {
+  .padded-content {
     padding: 0px 10px;
     padding-bottom: 50px;
     height: -webkit-fill-available;
@@ -450,159 +449,229 @@ position: relative;
     scrollbar-width: none;
     -ms-overflow-style: none;
     ::-webkit-scrollbar {
-        display: none;
+      display: none;
     }
-}
+  }
 
-.header {
+  .header {
     height: 55px;
     padding: 0px 10px;
-    background: ${style.bgHeader}
-}
+    background: ${style.bgHeader};
+  }
 
-.body {
+  .body {
     overflow: inherit;
     padding: 20px 0px;
     height: calc(100vh - 55px);
-    border-top: 1px solid rgba(247,248,248,0.1);
-    background: ${style.bgLayout.secondry}
-
-}
-
-`
+    border-top: 1px solid rgba(247, 248, 248, 0.1);
+    background: ${style.bgLayout.secondry};
+  }
+`;
 export const StyledChatItem = styled(Row)`
-    text-align: start;
-    align-items: center;
-    justify-content: flex-start;
+  text-align: start;
+  align-items: center;
+  justify-content: flex-start;
 
+  .settingsIcon {
+    display: none;
+  }
+
+  &:hover {
     .settingsIcon {
-        display: none;
+      display: inline;
     }
+  }
+`;
+export const RowHover = styled(Row)`
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 0.5rem;
 
+  &:hover {
+    background-color: ${style.bgButton.default};
+    cursor: pointer;
+  }
+  &.selected {
+    background-color: ${style.bgButton.default};
+  }
+`;
+export const Card = styled.div`
+  border-radius: ${style.borderRadiusCard};
+  background: ${style.bgCard};
+  padding: ${style.paddingCard};
+  box-shadow: ${style.shadowCard};
+  curspor: pointer;
+
+  .card-body {
+    padding: 0px 20px;
+  }
+  .card-footer {
+    padding: 0px 20px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(247, 248, 248, 0.1);
+  }
+
+  &.border {
+    border: 1px solid ${style.brCard.default};
     &:hover {
-        .settingsIcon {
-            display: inline;
-        }
+      border: 1px solid ${style.brCard.hover};
     }
-`
+  }
 
+  &.border-with-hover {
+    border: 1px solid ${style.brCard.transparent};
+    &:hover {
+      border: 1px solid ${style.brCard.hover};
+    }
+  }
+
+  &.locked {
+    opacity: 0.4 !important;
+  }
+
+  &.outline-brand {
+    background: transparent;
+    border: 1px solid #1c2150;
+  }
+  .card-hr-center {
+    align-items: center;
+  }
+  .card-vr-center {
+    justify-content: center;
+  }
+`;
+export const ChatPreviewCard = styled(Card)`
+  margin-bottom: 0.5rem;
+  height: 200px;
+
+  .template-body {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+`;
 export const StyledChatPreview = styled.div`
-  background: ${style.bgLayout.primary}; 
+  background: ${style.bgLayout.primary};
   border: ${style.borderInput};
   border-radius: 2px 2px 0px 0px;
   padding: 0.5rem 0.5rem;
 
   .attachment {
-      display: hidden;
-      padding: 10px;
+    display: hidden;
+    padding: 10px;
 
-      &.show {
-          display: block;
-      }
+    &.show {
+      display: block;
+    }
   }
 
   .reply {
-      padding: 10px 5px 10px 5px;
-      font-size: 10px;
+    padding: 10px 5px 10px 5px;
+    font-size: 10px;
   }
-`
+`;
 export const StyledChatInputContainer = styled.div`
   width: 100%;
-      position: absolute;
-      bottom: 0;
-      padding: 0px 10px;
-    `
+  position: absolute;
+  bottom: 0;
+  padding: 0px 10px;
+`;
 
 export const StyledChatInput = styled(Row)`
-width: 100%;
-border-radius: 5px;
-background: ${style.bgCard};
-margin-bottom: 5px;
-padding: 0.3rem 0;
+  width: 100%;
+  border-radius: 5px;
+  background: ${style.bgCard};
+  margin-bottom: 5px;
+  padding: 0.3rem 0;
 
-.inputElement {
+  .inputElement {
     resize: none;
     width: 100%;
     border: none !important;
     max-height: 100px;
     background-color: transparent;
     outline: none;
-}
+  }
 
-.sideIcons {
+  .sideIcons {
     padding: 0px 8px;
-}
-`
+  }
+`;
 
 export const StyledConversationView = styled.div`
-    width: 100%;
-    height: calc(100% - 50px);
-    overflow-y: scroll;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: 3rem;
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 3rem;
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
-    .emogiPicker {
-        background-color: black;
-    }
-`
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  .emogiPicker {
+    background-color: black;
+  }
+`;
 
 export const StyledConversationContainer = styled.div`
-    height: -webkit-fill-available;
-    position: absolute;
-    width: 100%;
-`
+  height: -webkit-fill-available;
+  position: absolute;
+  width: 100%;
+`;
 
 export const StyledConversation = styled(Col)`
-    cursor: pointer;
-    padding: 15px 15px;
-    position: relative;
-    opacity: 0.75;
-    cursor: pointer;
+  cursor: pointer;
+  padding: 15px 15px;
+  position: relative;
+  opacity: 0.75;
+  cursor: pointer;
 
-    &:hover {
-        opacity: 1;
-        background: ${style.bg4};
-        .action {
-            display: block;
-            color: red;
-        }
+  &:hover {
+    opacity: 1;
+    background: ${style.bg4};
+    .action {
+      display: block;
+      color: red;
     }
-    
-    .replyTo {
-        margin-left: 60px;
-        margin-bottom: 0.5rem;
+  }
+
+  .replyTo {
+    margin-left: 60px;
+    margin-bottom: 0.5rem;
+  }
+
+  .message {
+    .action {
+      display: none;
+      position: absolute;
+      top: -10px;
+      right: 0;
+      padding: 5px;
+      border: ${style.borderInput};
+      background: #01041f;
+      border-radius: 5px;
     }
 
-    .message {
-        .action {
-            display: none;
-            position: absolute;
-            top: -10px;
-            right: 0;
-            padding: 5px;
-            border: ${style.borderInput};
-            background: #01041f;
-            border-radius: 5px;
-        }
+    // &:hover {
+    //     .action {
+    //         display: block;
+    //     }
+    // }
 
-        // &:hover {
-        //     .action {
-        //         display: block;
-        //     }
-        // }
-
-        .inputElement {
-            resize: none;
-            width: 100%;
-            border: none !important;
-            background-color: transparent;
-            outline: none;
-        }
-        
+    .inputElement {
+      resize: none;
+      width: 100%;
+      border: none !important;
+      background-color: transparent;
+      outline: none;
     }
-`
+  }
+`;
