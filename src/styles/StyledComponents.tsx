@@ -426,6 +426,49 @@ export const StyledMenu = styled.div`
     }
 `
 
+export const StyledChat = styled.div`
+width: 80%;
+height: 100vh;
+background: ${style.bgLayout.primary};
+position: relative;
+
+&.full {
+    width: calc(75% + 20px);
+} 
+
+&.expand {
+    width: 95%;
+    left: 5%;
+}
+
+.padded-content {
+    padding: 0px 10px;
+    padding-bottom: 50px;
+    height: -webkit-fill-available;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.header {
+    height: 55px;
+    padding: 0px 10px;
+}
+
+.body {
+    overflow: inherit;
+    padding: 20px 0px;
+    height: calc(100vh - 55px);
+    border-top: 1px solid rgba(247,248,248,0.1);
+    background: ${style.bgLayout.secondry}
+
+}
+`
+
 export const StyledConversationView = styled.div`
     width: 100%;
     height: calc(100% - 50px);
