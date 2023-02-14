@@ -1,11 +1,11 @@
 import { Row } from "@/styles/StyledComponents";
 import { Heading, Icon } from "@chakra-ui/react";
 
-const ChatHeader = () => {
+const ChatHeader = (props) => {
     return (
         <div className="header hr-between vr-center">
             <Row className="w-100 h-100 hr-between vr-center">
-                <Heading as="h4" size="sm">#{channelData?.name}</Heading>
+                <Heading as="h4" size="sm">#{props?.channelData?.name}</Heading>
                 <div>
                     <Row className="vr-center">
                         <Icon className="m-r-0-5">

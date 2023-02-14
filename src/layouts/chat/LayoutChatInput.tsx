@@ -1,14 +1,27 @@
 import { CloseIcon, PlusSquareIcon } from "@chakra-ui/icons";
 import { Avatar, Button, Heading, Image, Popover, PopoverBody, PopoverContent, PopoverTrigger, Spinner, Text, Textarea } from "@chakra-ui/react";
+import LayoutNFTCard from "cLayouts/NFT/LayoutNFTCard";
+import LayoutPostCard from "cLayouts/Post/LayoutPostCard";
+import LayoutProposalCard from "cLayouts/Proposal/LayoutProposalCard";
+import LayoutTaskCard from "cLayouts/Task/LayoutTaskCard";
+import CrossIcon from "components/Icon/CrossIcon";
+import DeleteIcon from "components/Icon/DeleteIcon";
+import EmojiIcon from "components/Icon/EmojiIcon";
+import FileIcon from "components/Icon/FileIcon";
+import PollIcon from "components/Icon/PollIcon";
+import { Col, Icon, Row } from "style";
 import { InputPreview, InputRow, Item } from "style/chat";
-import { Row, Col, Icon } from "@/styles/StyledComponents";
+import LayoutMentionPreview from "./LayoutMentionPreview";
+import LayoutSlashPreview from "./LayoutSlashPreview";
+import LayoutTransactionCard from "../Payment/LayoutTransactionCard";
+import LayoutPollCard from "cLayouts/Poll/LayoutPollCard";
 
 
 // const TypingRow = styled(Row)`
 //     display: none;
 // `
 
-const ChatInput = (props) => {
+const LayoutChatInput = (props) => {
 
     const templateReply = () => {
         return (
@@ -235,4 +248,4 @@ const ChatInput = (props) => {
     )
 }
 
-export default ChatInput;
+export default LayoutChatInput;
