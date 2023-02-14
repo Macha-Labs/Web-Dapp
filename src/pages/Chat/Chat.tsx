@@ -11,11 +11,11 @@ function Chat() {
       <StyledChatList>
         <ChatList />
       </StyledChatList>
-        <StyledChat>
-          <ChatHeader />
-          <ChatWindow />
-          <ChatInput />
-        </StyledChat>
+      <StyledChat>
+        <ChatHeader />
+        <ChatWindow />
+        <ChatInput />
+      </StyledChat>
     </Row>
   );
 }

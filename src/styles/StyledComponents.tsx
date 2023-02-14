@@ -37,18 +37,18 @@ export const Row = styled.div`
 `;
 
 export const RowHover = styled(Row)`
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 0.5rem;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 0.5rem;
 
-    &:hover {
-        background-color: ${style.bgButton.default};
-        cursor: pointer;
-    }
-    &.selected {
-        background-color: ${style.bgButton.default};
-    }
-`
+  &:hover {
+    background-color: ${style.bgButton.default};
+    cursor: pointer;
+  }
+  &.selected {
+    background-color: ${style.bgButton.default};
+  }
+`;
 
 export const Col = styled.div`
   display: flex;
@@ -172,51 +172,50 @@ export const List = styled.div`
 `;
 
 export const Card = styled.div`
-    border-radius: ${style.borderRadiusCard};
-    background: ${style.bgCard};
-    padding: ${style.paddingCard};
-    box-shadow: ${style.shadowCard};
-    curspor: pointer;
+  border-radius: ${style.borderRadiusCard};
+  background: ${style.bgCard};
+  padding: ${style.paddingCard};
+  box-shadow: ${style.shadowCard};
+  curspor: pointer;
 
-    .card-body {
-        padding: 0px 20px;
-    }
-    .card-footer {
-        padding: 0px 20px;
-        padding-top: 10px;
-        border-top: 1px solid rgba(247,248,248,0.1);
-    }
+  .card-body {
+    padding: 0px 20px;
+  }
+  .card-footer {
+    padding: 0px 20px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(247, 248, 248, 0.1);
+  }
 
-    
-    &.border {
-        border: 1px solid ${style.brCard.default};
-        &:hover {
-            border: 1px solid ${style.brCard.hover};
-        }
+  &.border {
+    border: 1px solid ${style.brCard.default};
+    &:hover {
+      border: 1px solid ${style.brCard.hover};
     }
+  }
 
-    &.border-with-hover {
-        border: 1px solid ${style.brCard.transparent};
-        &:hover {
-            border: 1px solid ${style.brCard.hover};
-        }
+  &.border-with-hover {
+    border: 1px solid ${style.brCard.transparent};
+    &:hover {
+      border: 1px solid ${style.brCard.hover};
     }
+  }
 
-    &.locked {
-      opacity: 0.4 !important;
-    }
+  &.locked {
+    opacity: 0.4 !important;
+  }
 
-    &.outline-brand {
-      background: transparent;
-      border: 1px solid #1C2150;
-    }
-    .card-hr-center {
-      align-items: center;
-    }
-    .card-vr-center {
-      justify-content: center;
-    }
-`
+  &.outline-brand {
+    background: transparent;
+    border: 1px solid #1c2150;
+  }
+  .card-hr-center {
+    align-items: center;
+  }
+  .card-vr-center {
+    justify-content: center;
+  }
+`;
 
 export const Nav = styled.div`
   width: 5%;
@@ -488,7 +487,7 @@ export const StyledChatList = styled.div`
 `;
 
 export const StyledChat = styled.div`
-  width: 80%;
+  width: 80vw;
   height: 100vh;
   background: ${style.bgLayout.primary};
   position: relative;
@@ -610,21 +609,21 @@ export const StyledChatInput = styled(Row)`
 `;
 
 export const StyledChatPreviewCard = styled(Card)`
-    margin-bottom: 0.5rem;
-    height: 200px;
-    
-    .template-body {
-        height: 100%;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+  margin-bottom: 0.5rem;
+  height: 200px;
 
-        ::-webkit-scrollbar {
-            display: none;
-        }
+  .template-body {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    ::-webkit-scrollbar {
+      display: none;
     }
-`
+  }
+`;
 
 export const StyledConversationView = styled.div`
   width: 100%;
@@ -635,15 +634,13 @@ export const StyledConversationView = styled.div`
   -ms-overflow-style: none;
   padding-bottom: 3rem;
 
-<<<<<<< HEAD
-  ::-webkit-scrollbar {
+  <<<<<<< HEAD ::-webkit-scrollbar {
     display: none;
   }
   .emogiPicker {
     background-color: black;
   }
 `;
-
 
 export const StyledConversationContainer = styled.div`
   height: -webkit-fill-available;
@@ -700,22 +697,21 @@ export const StyledConversation = styled(Col)`
   }
 `;
 
-
 //
 export const StyledNFTCard = styled(Card)`
-    width: 250px;
-    cursor: pointer;
-    background-position: center;
-    background-size: cover;
-    padding: 2px;
+  width: 250px;
+  cursor: pointer;
+  background-position: center;
+  background-size: cover;
+  padding: 2px;
 
-    .content {
-        padding: 1rem;
-    }
-`
+  .content {
+    padding: 1rem;
+  }
+`;
 
 export const StyledTransactionCard = styled(Card)`
-    width: 400px;
-    padding: 10px 0px;
-    cursor: pointer;
-`
+  width: 400px;
+  padding: 10px 0px;
+  cursor: pointer;
+`;
