@@ -352,3 +352,27 @@ export const LinkContainer = styled.div`
     color: #333;
   }
 `;
+
+
+export const Nav = styled.div`
+  width: 5%;
+  height: 100vh;
+  background: #00042c;
+  position: fixed;
+  left: 0;
+  border-right: 1px solid rgba(247, 248, 248, 0.1);
+
+  .header {
+    height: 55px;
+    padding: 0px;
+  }
+
+  .body {
+    padding: 10px 0px;
+    height: calc(100% - 55px);
+  }
+
+  .footer {
+    padding: 10px 0px;
+  }
+`;
