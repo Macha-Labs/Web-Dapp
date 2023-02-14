@@ -1,4 +1,4 @@
-import { helperIPFS } from "../helpers"
+import { helperIPFS } from "../helpers/IpfsLink";
 
 export const UserDb$ = (dbData: any) => {
     return ( {
@@ -13,7 +13,7 @@ export const UserDb$ = (dbData: any) => {
 }
 
 export const UserLens$ = (lensData: any) => {
-    let attributes = {
+    let attributes: any = {
         "website": {
             value: ""
         },
@@ -22,7 +22,7 @@ export const UserLens$ = (lensData: any) => {
         }
     };
     if (lensData?.attributes?.length > 0) {
-        lensData?.attributes?.map(attribute => {
+        lensData?.attributes?.map((attribute: any) => {
             attributes[attribute.key] = attribute
         });
     }
