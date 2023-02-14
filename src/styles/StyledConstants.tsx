@@ -99,6 +99,7 @@ export const darkStyle = {
   bgModal: "#181A20",
   bgCard: "#20232b",
   bgInput: { default: "#111315" },
+  bgHeader: "rgba(0,21,74, 0.2)",
   //
   brCard: {
     transparent: "#262A34",
