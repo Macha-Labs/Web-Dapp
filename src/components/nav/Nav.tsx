@@ -1,5 +1,6 @@
+import React from "react";
 import styled from "styled-components";
-import { Col, Icon, Logo, Row } from "style";
+import { Col, Icon, Logo, Row } from "styles/StyledComponents";
 import ChatIcon from "components/Icon/ChatIcon";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
@@ -14,9 +15,9 @@ import {
   useDisclosure,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { Nav } from "style/base";
+import { Nav } from "../../styles/StyledComponents";
 
-const DashNav = (props) => {
+const DashNav = props => {
   const orgsDrawer = useDisclosure();
 
   const templateOrgs = () => {
