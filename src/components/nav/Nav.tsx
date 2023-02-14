@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Col, Icon, Logo, Row, Nav } from "../../styles/StyledComponents";
+import { Col, Icon, Logo, Row, StyledNav } from "../../styles/StyledComponents";
 import ChatIcon from "../icons/IconChat";
 import { useRef } from "react";
 import HashIcon from "../icons/IconDarkUser";
@@ -14,13 +14,8 @@ import {
   useDisclosure,
   ModalCloseButton,
 } from "@chakra-ui/react";
-<<<<<<< HEAD
-import Link from "next/link";
-=======
-import { Nav } from "../../styles/StyledComponents";
->>>>>>> 05188ef0d8e69e617470e73fd1343c1d913c01a2
 
-const DashNav = (props: any) => {
+const Nav = (props: any) => {
   const orgsDrawer = useDisclosure();
 
   const templateOrgs = () => {
@@ -47,7 +42,7 @@ const DashNav = (props: any) => {
   return (
     <>
       <Row>
-        <Nav>
+        <StyledNav>
           <div className="header">
             <Col className="hr-center vr-center h-100">
               <Icon onClick={orgsDrawer.onOpen}>
@@ -111,7 +106,7 @@ const DashNav = (props: any) => {
               </Col>
             </Col>
           </div>
-        </Nav>
+        </StyledNav>
       </Row>
       {templateOrgs()}
     </>
