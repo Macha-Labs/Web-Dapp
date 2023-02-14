@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { Nav } from "../../styles/StyledComponents";
 
-const DashNav = props => {
+const DashNav = (props: any) => {
   const orgsDrawer = useDisclosure();
 
   const templateOrgs = () => {
