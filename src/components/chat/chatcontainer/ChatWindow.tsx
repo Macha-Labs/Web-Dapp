@@ -14,7 +14,7 @@ const ChatWindow = (props: any) => {
                             (
                                 <>
                                     {
-                                        props.hookChannel.messages?.map((item: any, index) =>
+                                        props.hookChannel.messages?.map((item: any, index: number) =>
                                             <ChatMessage message={item} />
                                             // {item.text}
                                         )

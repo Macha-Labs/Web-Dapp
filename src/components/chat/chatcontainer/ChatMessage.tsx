@@ -4,7 +4,7 @@ import LayoutImagePreview from "@/layouts/chat/LayoutImagePreview";
 import LayoutLinkPreview from "@/layouts/chat/LayoutLinkPreview";
 import { StyledConversation } from "@/styles/StyledComponents";
 import { Col, Icon, Row } from "@/styles/StyledComponents";
-import { Avatar, AvatarBadge, Heading, Tag, Textarea } from "@chakra-ui/react";
+import { Avatar, AvatarBadge, Heading, Tag, Text, Textarea } from "@chakra-ui/react";
 
 const ChatMessage = (props: any) => {
 
@@ -35,7 +35,7 @@ const ChatMessage = (props: any) => {
                 </Col>
                 
                 <Col className="w-100" style={{color: "#ffffff"}}>
-                    <Heading as="h6">
+                    <Text fontSize="sm">
                         {props.message?.user?.lensUsername ||
                                     props.message?.user?.lensHandle ||
                                         truncateAddress(
@@ -43,7 +43,7 @@ const ChatMessage = (props: any) => {
                                         )
                         }
                         
-                    </Heading>
+                    </Text>
                     {
                         props.message?.text
                     }

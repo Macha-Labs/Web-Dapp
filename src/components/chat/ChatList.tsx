@@ -13,7 +13,7 @@ const ChatList = (props: any) => {
     const authContext = useContext(AuthContext) as AuthContextType;
     const hookOrgChannels = useOrgChannels("6246c7045cc31c36781d668e");
     
-    const templateMenuSection = (type) => {
+    const templateMenuSection = (type: any) => {
         return (
             <>
                 {
@@ -93,7 +93,7 @@ const ChatList = (props: any) => {
             <Row className="header vr-center hr-between">
                 <OrgControl />
             </Row>
-            <ConnectButton />
+            {!authContext.isConnected && <ConnectButton />} 
             {
                 (!chatProvider?.hookChannels?.channels)
                     ?

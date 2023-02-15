@@ -17,6 +17,7 @@ export type AuthContextType = {
     updateUser: (...params: any) => void;
     connectLens: () => void;
     authToken: any | undefined;
+    isConnected: any | undefined;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -29,6 +30,7 @@ export const AuthContext = createContext<AuthContextType>({
     updateUser: (...params) => {},
     connectLens: () => {},
     authToken: null,
+    isConnected: null
 });
 
 const AuthProvider = ({children}: any) => {
@@ -115,6 +117,7 @@ const AuthProvider = ({children}: any) => {
                 updateUser,
                 connectLens,
                 authToken,
+                isConnected
             }}
         >
             {children}
