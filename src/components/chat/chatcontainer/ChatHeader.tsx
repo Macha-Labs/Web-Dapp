@@ -1,4 +1,5 @@
 import ModalSlider from "@/components/modal/ModalSlider";
+import UserList from "@/components/user/UserList";
 import { Row } from "@/styles/StyledComponents";
 import { Heading, Icon, useDisclosure } from "@chakra-ui/react";
 
@@ -6,7 +7,11 @@ const ChatHeader = props => {
   const membersModal = useDisclosure();
 
   const templateMembers = () => {
-    return (<ModalSlider event={membersModal}></ModalSlider>)
+    return (
+      <ModalSlider event={membersModal}>
+        {console.log(props.hookMembers, 'hellooooo')}
+        <UserList onlineUsers={props.hookMembers.onlineUsers} offlineUsers={props.hookMembers.offlineUsers} />
+      </ModalSlider>)
   }
 
   const templatePinnedMessages = () => {
