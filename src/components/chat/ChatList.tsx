@@ -2,14 +2,22 @@ import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Icon } from "@chakra-ui/react";
 import OrgControl from "../org/OrgControl";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useContext } from "react";
+import { ChatContext } from "@/providers/ChatProvider";
+import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
+import useOrgChannels from "@/hooks/portal/useOrgChannels";
+import { StreamContext } from "@/providers/StreamProvider";
 
-const ChatList = (props) => {
+const ChatList = (props: any) => {
+    const chatProvider = useContext(ChatContext);
+    const authContext = useContext(AuthContext) as AuthContextType;
+    const hookOrgChannels = useOrgChannels("6246c7045cc31c36781d668e");
+    
     const templateMenuSection = (type) => {
-
         return (
             <>
                 {
-                    props.channels?.length
+                    chatProvider?.channels?.length
                         ?
                         (
                             <>
@@ -33,10 +41,10 @@ const ChatList = (props) => {
                                     </Row>
                                     <ul>
                                         {
-                                            props.channels.map((item: any, index: number) =>
+                                            chatProvider?.channels?.map((item: any, index: number) =>
                                                 <StyledChatItem key={index}>
                                                     <Button
-                                                        onClick={() => { props.triggerMenu(item) }}
+                                                        onClick={() => { console.log('Click on button', item); chatProvider.initiate(item, authContext.address) }}
                                                         className="menu-item w-100 m-b-1"
                                                         size="md"
                                                         variant={props.menu?._id == item?._id ? 'state_card' : 'transparent'}>

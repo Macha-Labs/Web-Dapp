@@ -1,3 +1,4 @@
+import { logger } from "@/helpers/logger";
 import {createContext, useContext, useEffect, useRef, useState} from "react";
 import useStreamClient from "../hooks/stream/useStreamClient";
 import useStreamUserChannels from "../hooks/stream/useStreamUserChannels";
@@ -29,10 +30,6 @@ const StreamProvider = ({children}: any) => {
         hookStreamClient.connectToStream();
     }, [authContext?.user?.db?.tokens?.stream]);
 
-    const setChannelsCallback = (channels: any) => {
-        setChannels(channels);
-    };
-
     useEffect(() => {
         if (hookStreamClient.client?.user?.id) {
             setClient(hookStreamClient.client);
@@ -41,22 +38,16 @@ const StreamProvider = ({children}: any) => {
             //sending a callback function with this
             hookChannels.fetchUserChannels(
                 hookStreamClient.client,
-                setChannelsCallback
+                setChannels(channels)
             );
         }
     }, [hookStreamClient.client]);
 
     useEffect(() => {
-        console.log("The channels data was just updated");
-        console.log(channels);
+        logger('channel', 'StreamProvider.useEffect[channels]', 'The channel Data was just updated', [channels])
     }, [channels]);
 
-    // const [providerState, setProviderState] = useState<StreamContextType>({
-    //   client,
-    //   channels,
-    //   messages,
-    //   loadingMessages,
-    // });
+
 
     return (
         <StreamContext.Provider

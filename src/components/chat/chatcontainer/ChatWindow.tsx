@@ -1,6 +1,6 @@
 import { StyledConversationContainer } from "@/styles/StyledComponents";
 
-const ChatWindow = () => {
+const ChatWindow = (props: any) => {
     return (
         <StyledConversationContainer>
                 

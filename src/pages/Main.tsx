@@ -10,6 +10,7 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import AuthProvider from "@/providers/AuthProvider";
 import StreamProvider from "@/providers/StreamProvider";
+import { ChatProvider } from "@/providers/ChatProvider";
 
 const { chains, provider } = configureChains(
   [polygonMumbai],
@@ -33,15 +34,17 @@ function Main() {
       <RainbowKitProvider chains={chains}>
         <AuthProvider>
           <StreamProvider>
-            <StyledWindow>
-              <div className="left">
-                <Nav />
-              </div>
+            <ChatProvider>
+              <StyledWindow>
+                <div className="left">
+                  <Nav />
+                </div>
 
-              <div className="right">
-                <Chat />
-              </div>
-            </StyledWindow>
+                <div className="right">
+                  <Chat />
+                </div>
+              </StyledWindow>
+            </ChatProvider>
           </StreamProvider>
         </AuthProvider>
       </RainbowKitProvider>

@@ -21,12 +21,12 @@ import {
   StyledChatInput,
 } from "@/styles/StyledComponents";
 import LayoutSlashPreview from "@/layouts/chat/LayoutSlashPreview";
-import LayoutPostCard from "../post/LayoutPostCard";
-import LayoutProposalCard from "../proposal/LayoutProposalCard";
-import LayoutNFTCard from "../nft/LayoutNFTCard";
-import LayoutTransactionCard from "../payment/LayoutTransactionCard";
-import LayoutPollCard from "../poll/LayoutPollCard";
-import ChatMention from "./ChatMention";
+import LayoutPostCard from "../../post/LayoutPostCard";
+import LayoutProposalCard from "../../proposal/LayoutProposalCard";
+import LayoutNFTCard from "../../nft/LayoutNFTCard";
+import LayoutTransactionCard from "../../payment/LayoutTransactionCard";
+import LayoutPollCard from "../../poll/LayoutPollCard";
+import ChatMention from "../ChatMention";
 
 // const TypingRow = styled(Row)`
 //     display: none;
