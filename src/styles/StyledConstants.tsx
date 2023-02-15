@@ -137,6 +137,8 @@ export const darkStyle = {
   pannel: {bg: {default: ''}, shadow: {default: ''}},
   input: {bg: {default: "#020a21"}, border: {default: '1px solid #0F172E'}},
   modal: {bg: {default: ''}, border: {default: ''}, shadow: {default: ''}},
+  sidebar: {},
+  dropdown: {},
   icon: {bg: { transparent: "transparent", default: "#262A34", hover: "#1b1e250", active: ""}},
   button: {bg: { transparent: "transparent", default: "#262A34", hover: "#1b1e25",active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)", activeTranslucent: "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);", disabled: "",}},
   shadowDropdown:
