@@ -2,7 +2,7 @@ import { getProfiles } from "../../helpers/lens/lens";
 import { useEffect, useMemo, useState } from "react";
 import { UserLens$ } from "../../schema/user";
 
-const useLensProfile = (address) => {
+const useLensProfile = (address: any) => {
     const [lensProfile, setLensProfile] = useState<any>();
     const [isLoading, setIsLoading] = useState<any>(false);
     const [loadingText, setLoadingText] = useState<any>('Fetching profile from lens');

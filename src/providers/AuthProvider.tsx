@@ -1,14 +1,11 @@
-import { ethers } from "ethers";
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { logger } from "../helpers/logger";
 import useLensAuth from "../hooks/lens/useLensAuth";
 import useStreamClient from "../hooks/stream/useStreamClient";
 import { UserDb$ } from "../schema/user";
-// import { removeAsyncData } from "../service/AsyncStorageService";
+import { useAccount, useDisconnect } from 'wagmi';
 import { putStreamToken } from "../service/StreamService";
 import { findOrCreateUser } from "../service/UserService";
-import {useAccount, useConnect, useDisconnect} from 'wagmi';
-import { InjectedConnector } from 'wagmi/connectors/injected'
 
 export type AuthContextType = {
     signer: any | undefined;
@@ -42,9 +39,6 @@ const AuthProvider = ({children}: any) => {
     const [user, setUser] = useState<any>();
     const [streamClient, setStreamClient] = useState<any>();
     const {address, isConnected} = useAccount();
-    // const {connect} = useConnect({
-    //     connector: new InjectedConnector()
-    // });
     const {disconnect} = useDisconnect();
    
 
@@ -81,8 +75,7 @@ const AuthProvider = ({children}: any) => {
         hookLensAuth.connect();
     };
 
-    // setting the address in context
-
+    // updating the data from DB in user
     useEffect(() => {
         logger('auth', 'useMemo[user.lens]', 'User is',  [user])
         if (address) {
