@@ -1,4 +1,3 @@
-import { logger } from "@/helpers/logger";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
 import { useContext } from "react";
@@ -16,6 +15,7 @@ const ChatContainer = (channel: any) => {
              <ChatHeader 
                     hookChat={chatProvider.hookChat}
                     hookChannel={chatProvider.hookChannel}
+                    hookMembers={chatProvider.hookMembers}
             />
              <ChatWindow  
                     hookChat={chatProvider.hookChat}
