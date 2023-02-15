@@ -17,7 +17,7 @@ const ChatList = (props: any) => {
         return (
             <>
                 {
-                    chatProvider?.channels?.length
+                    chatProvider?.hookChannels?.channels?.length
                         ?
                         (
                             <>
@@ -41,7 +41,7 @@ const ChatList = (props: any) => {
                                     </Row>
                                     <ul>
                                         {
-                                            chatProvider?.channels?.map((item: any, index: number) =>
+                                            chatProvider?.hookChannels?.channels?.map((item: any, index: number) =>
                                                 <StyledChatItem key={index}>
                                                     <Button
                                                         onClick={() => { console.log('Click on button', item); chatProvider.initiate(item, authContext.address) }}
@@ -95,7 +95,7 @@ const ChatList = (props: any) => {
             </Row>
             <ConnectButton />
             {
-                (!props?.channels?.length)
+                (!chatProvider?.hookChannels?.channels)
                     ?
                     (
                         <>

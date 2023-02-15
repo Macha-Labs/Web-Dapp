@@ -9,7 +9,7 @@ type ChatContextType = {
     hookChannel: any | undefined
     hookChat: any | undefined;
     hookMembers: any | undefined;
-    channels: any;
+    hookChannels: any;
     initiate: (channel: any, userAddress: any) => void;
 };
 
@@ -17,7 +17,7 @@ export const ChatContext = createContext<ChatContextType>({
     hookChannel: null,
     hookChat: null,
     hookMembers: null,
-    channels: [],
+    hookChannels: [],
     initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
 });
 
@@ -38,15 +38,15 @@ export const ChatProvider = ({children}: any) => {
     };
 
     const clearUnreadCount = async (channel: any) => {
-        console.log("Marking all messages read in this channel");
-        await channel.raw?.markRead(); // setting the unread_count in the api to 0, but it is not setting it in the local state
-        let channelList = streamContext.channels;
-        console.log("The non-updated channel list is ", channelList);
+        // console.log("Marking all messages read in this channel");
+        // await channel.raw?.markRead(); // setting the unread_count in the api to 0, but it is not setting it in the local state
+        // let channelList = streamContext.channels;
+        // console.log("The non-updated channel list is ", channelList);
         // channelList[appChannelIndex].unreadCountObject[userAddress].unread_messages = 0;
-        console.log("The updated channel list is ", channelList);
+        // console.log("The updated channel list is ", channelList);
 
         // BUG: Channel unread count not updating in real-time
-        streamContext.setChannels(channelList);
+        // streamContext.setChannels(channelList);
     }
 
     return (
@@ -55,7 +55,7 @@ export const ChatProvider = ({children}: any) => {
                 hookChannel: hookStreamChannel,
                 hookChat: hookChat,
                 hookMembers: hookStreamChannelMembers,
-                channels: streamContext.channels,
+                hookChannels: streamContext?.hookChannels,
                 initiate: initiate,
             }}
         >

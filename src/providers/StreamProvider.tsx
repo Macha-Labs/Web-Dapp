@@ -6,20 +6,16 @@ import {AuthContext, AuthContextType} from "./AuthProvider";
 
 export type StreamContextType = {
     client: any | undefined;
-    channels: any | undefined;
-    setChannels: (params: any) => void;
+    hookChannels: any | undefined;
 };
 
 export const StreamContext = createContext<StreamContextType>({
     client: null,
-    channels: [],
-    setChannels: (params) => {},
+    hookChannels: [],
 });
 
 const StreamProvider = ({children}: any) => {
-    const [client, setClient] = useState<any>();
-    const [channels, setChannels] = useState<any>([]);
-    
+    const [client, setClient] = useState<any>();    
     const authContext = useContext(AuthContext) as AuthContextType;
     const hookStreamClient = useStreamClient();
     const hookChannels = useStreamUserChannels();
@@ -38,23 +34,16 @@ const StreamProvider = ({children}: any) => {
             //sending a callback function with this
             hookChannels.fetchUserChannels(
                 hookStreamClient.client,
-                setChannels(channels)
             );
         }
     }, [hookStreamClient.client]);
-
-    useEffect(() => {
-        logger('channel', 'StreamProvider.useEffect[channels]', 'The channel Data was just updated', [channels])
-    }, [channels]);
-
 
 
     return (
         <StreamContext.Provider
             value={{
-                client,
-                channels,
-                setChannels,
+                client: client,
+                hookChannels: hookChannels,
             }}
         >
             {children}
