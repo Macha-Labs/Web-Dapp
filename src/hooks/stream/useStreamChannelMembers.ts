@@ -12,7 +12,7 @@ const useStreamChannelMembers = (channel: any) => {
 
     const fetchChannelMembers = async () => {
         console.log("Called fetchChannelMembers");
-        const response = await channel?.raw?.queryMembers({});
+        const response = await channel?.queryMembers({});
         console.log("Fetched channel members ", response);
         let onlineIds: any[] = [];
         let offlineIds: any[] = [];

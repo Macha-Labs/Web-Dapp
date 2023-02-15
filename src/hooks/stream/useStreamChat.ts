@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
@@ -16,16 +16,16 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     const [attachLoading, setAttachLoading] = useState<any>();
     const [attachItem, setAttachItem] = useState<any>();
     const [reactions, setReactions] = useState<any>({});
-    //
     const [actionMessage, setActionMessage] = useState<any>({
         action: "",
         item: {},
     });
     const [selectedMessages, setSelectedMessages] = useState<any>([]);
     const [userObjTyping, setUserObjTyping] = useState<any>();
-    const [textareaRef, setTextAreaRef] = useState<any>();
     const [searchActive, setSearchActive] = useState<any>();
     const [searchQuery, setSearchQuery] = useState<any>();
+
+    const textareaRef = useRef<any>(null);
 
     // custom hooks
     // const chatFilterHook = useChatFilters(users);
@@ -38,7 +38,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     const slashRun = (command: any) => {
         setSlashCmdValue(command.name);
         setSlashCmd(false);
-        setTextAreaRef("");
+        textareaRef.current = "";
     };
 
     const searchMessage = () => {};
@@ -66,7 +66,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
             // addMessageToStream({...chatMeta, meta: {...chatMeta.meta, response: response }});
             // setSlashCmdValue("");
         } else {
-            if (!textareaRef) {
+            if (!textareaRef.current.value) {
                 alert("The Message input shouldn't be empty");
                 return;
             }
@@ -97,7 +97,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
                 };
             } else {
                 messageData = {
-                    text: textareaRef,
+                    text: textareaRef.current?.value,
                     mentioned_users: hookMention.mentionList.map((user: any, index: number) => {
                         console.log("MessageData", user);
                         return user?.ownedBy;
@@ -159,11 +159,9 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         } catch (error) {
             console.log("Could not send message", error);
         }
-        console.log("Message added", textareaRef);
-        setTextAreaRef(null);
+        textareaRef.current.value = ""
         setAttachItem(null);
         setActionMessage(null);
-        callback();
     };
 
     const editMessage = async () => {
@@ -215,16 +213,23 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         return pinnedMessages;
     };
 
-    const keyDownMessage = async () => {
-        if (textareaRef?.substring(0, 1) == "/") {
-            setSlashCmdValue(textareaRef);
-            setSlashCmd(false);
-            setTextAreaRef("");
-            // widgetDrawer.onOpen();
-        } else {
-            if (actionMessage?.action == "EDIT") {
-                await editMessage();
-            } else await addMessage();
+    const keyDownMessage = async (event: any) => {
+        const keycode = event.which || event.keycode;
+        if (keycode == 13 && !event.shiftKey) {
+            event.preventDefault();
+
+            if (textareaRef.current.value.substring(0, 1) == '/') {
+                setSlashCmdValue(textareaRef.current.value);
+                setSlashCmd(false);
+                textareaRef.current.value = "";
+                // widgetDrawer.onOpen();
+            } else {
+                await addMessage();
+            }
+        }
+        else if (event.key == "/") {
+            console.log("slash key was pressed");
+            setSlashCmd(true);
         }
     };
 
@@ -334,7 +339,9 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         }
     };
 
-    const onChange = async (value: any, users: any) => {
+    const onChange = async (event: any, users?: any) => {
+        const value = event.target.value;
+        console.log("Typing value is ", textareaRef.current.value);
         const lastChar = value.split("")[value.length - 1];
         if (lastChar == " " || value == "") {
             console.log("set isTyping to false");
@@ -361,14 +368,14 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
     const mentionSelect = (user: any) => {
         console.log("The cliked value ", user);
-        const msg = textareaRef;
+        const msg = textareaRef.current.value;
         const result =
-            textareaRef.substr(
+            textareaRef.current.value.substr(
                 0,
                 msg.length - hookMention.mention.length
                 // msg.length
             ) + user.name;
-        setTextAreaRef(result);
+        textareaRef.current = result;
         hookMention.onSelect(user);
     };
 
@@ -394,7 +401,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         //
         keyDownMessage: keyDownMessage,
         textareaRef: textareaRef,
-        setTextAreaRef: setTextAreaRef,
         attachItem: attachItem,
         attachLoading: attachLoading,
         handleAttachment: handleAttachment,
