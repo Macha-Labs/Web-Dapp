@@ -24,15 +24,19 @@ const ModalSlider = (props) => {
             <DrawerOverlay />
             <DrawerContent>
                 
-            <DrawerHeader>
-                <Row className="vr-center">
+                {props.header ? <DrawerHeader>
                     <Row className="vr-center">
-                        <Heading as="h5" fontSize={18}>{props.header.title}</Heading>
+                        <Row className="vr-center">
+                            <Heading as="h5" fontSize={18}>{props?.header?.title}</Heading>
+                        </Row>
+                        
+                        <DrawerCloseButton />
                     </Row>
-                    
-                    <DrawerCloseButton />
-                </Row>
-            </DrawerHeader>
+                </DrawerHeader>
+                :
+                <></>
+                }
+                
                 <DrawerBody>
                         {props.children}
                 </DrawerBody>

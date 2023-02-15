@@ -6,7 +6,7 @@ const ChatHeader = props => {
   const membersModal = useDisclosure();
 
   const templateMembers = () => {
-    <ModalSlider event={membersModal}></ModalSlider>
+    return (<ModalSlider event={membersModal}></ModalSlider>)
   }
 
   const templatePinnedMessages = () => {
