@@ -47,7 +47,7 @@ const ChatMessage = (props: any) => {
                     {
                         props.message?.text
                     }
-                    {props?.message?.attachments.map((item) => {
+                    {props?.message?.attachments.map((item: any) => {
                             return templateAttachment(item);
                     })}
                 </Col>
