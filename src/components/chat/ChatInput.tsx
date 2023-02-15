@@ -186,7 +186,7 @@ const ChatInput = (props: any) => {
               >
                 <label htmlFor="upload-file" className="w-100">
                   <Row className="hr-between w-100">
-                    {/* Add File <FileIcon width="20" height="20" fill="#efefef" className="m-r-0-5" /> */}
+                    Add File {/* <FileIcon width="20" height="20" fill="#efefef" className="m-r-0-5" /> */}
                   </Row>
                 </label>
               </Button>
@@ -264,17 +264,17 @@ const ChatInput = (props: any) => {
 
         {templateChatInputRow()}
 
-                <Row>
-                    <Col className="w-100 vr-center">
-                        {props?.chatContext?.userObjTyping ? (
-                            <Text fontSize='xs'>
-                                <Spinner size='xs' />@{props?.chatContext?.userObjTyping} is typing 
-                            </Text>
-                        ) : (<Text fontSize='xs'><br /></Text>)}
-                    </Col>
-                </Row>
+        <Row>
+            <Col className="w-100 vr-center">
+                {props?.chatContext?.userObjTyping ? (
+                    <Text fontSize='xs'>
+                        <Spinner size='xs' />@{props?.chatContext?.userObjTyping} is typing 
+                    </Text>
+                ) : (<Text fontSize='xs'><br /></Text>)}
             </Col>
-        </StyledChatInputContainer>
+        </Row>
+      </Col>
+    </StyledChatInputContainer>
     )
 }
 

@@ -4,6 +4,14 @@ import styled from "styled-components";
 export const StyledWindow = styled.div`
   position: fixed;
   width: 100vw;
+
+  .left {
+  }
+
+  .right {
+    width: calc(100vw - ${style.nav.width});
+    margin-left: ${style.nav.width}
+  }
 `;
 
 export const Row = styled.div`
@@ -218,7 +226,7 @@ export const Card = styled.div`
 `;
 
 export const Nav = styled.div`
-  width: 5%;
+  width: ${style.nav.width};
   height: 100vh;
   background: ${style.bgNav}
   position: fixed;
@@ -478,11 +486,10 @@ export const StyledChatList = styled.div`
   .header {
     height: 55px;
     padding: 0px 10px;
-
-    .brand {
-      width: 100%;
-      margin: auto;
-    }
+    background: ${style.bgHeader};
+    border-bottom: ${style.borderHeader};
+    width: 100%;
+    margin: auto;
   }
 `;
 
@@ -518,6 +525,7 @@ export const StyledChat = styled.div`
     height: 55px;
     padding: 0px 10px;
     background: ${style.bgHeader};
+    border: ${style.borderHeader}
   }
 
   .body {

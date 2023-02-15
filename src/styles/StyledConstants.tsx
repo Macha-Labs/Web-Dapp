@@ -123,10 +123,11 @@ export const darkStyle = {
   bgSidebar: "#232323",
   bgSidebarMenu: "#232323",
   bgDropdown: "#202124",
-  bgNav: "#FFF",
+  bgNav: "#000511",
   bgPannelHeader: "#00042C",
   bgPlaceholder: "#1D224A",
-  border: "1px solid #E2E8F0",
+  border: "1px solid #0F172E",
+  borderHeader: "1px solid #0F172E",
   borderDark: "1px solid #232323",
   borderInput: "1px solid rgba(247,248,248,0.1)",
   borderCard: "1px solid RGBA(0, 0, 0, 0.20)",
@@ -162,6 +163,7 @@ export const darkStyle = {
   shadowPannel: "0 0 0 1px rgba(0, 0, 0, 0.05)",
   shadowPallet: "0px 1.6095px 3.219px rgb(0 0 0 / 5%)",
   shadowModal: "0px 1.6095px 3.219px rgb(0 0 0 / 5%)",
+  nav: {width: "5%"},
   shadowDropdown:
     "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",
 };

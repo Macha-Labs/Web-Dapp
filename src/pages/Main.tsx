@@ -5,10 +5,10 @@ import Chat from "./chat/Chat";
 
 function Main() {
   return (
-    <>
-      <Nav />
-      <Chat />
-    </>
+    <StyledWindow>
+      <div className="left"><Nav /></div>
+      <div className="right"><Chat /></div>
+    </StyledWindow>
   );
 }
 

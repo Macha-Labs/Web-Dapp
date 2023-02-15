@@ -87,6 +87,9 @@ const ChatList = (props) => {
 
     return (
         <>
+            <Row className="header vr-center hr-between">
+                <OrgControl />
+            </Row>
             {
                 (!props?.event?.channelLoader && !props?.chatMenu?.length)
                     ?
@@ -105,11 +108,6 @@ const ChatList = (props) => {
                         </Col>
                     )
             }
-        </>
-    )
-    return (
-        <>
-            <OrgControl />
         </>
     )
 }
