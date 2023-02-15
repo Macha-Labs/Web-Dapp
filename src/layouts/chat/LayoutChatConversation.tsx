@@ -1,29 +1,23 @@
 import { Avatar, AvatarBadge, Badge, Button, Heading, Popover, PopoverBody, PopoverContent, PopoverTrigger, Tag, TagLabel, Text, Textarea } from "@chakra-ui/react";
-import data from '@emoji-mart/data';
-import Picker from '@emoji-mart/react';
-import LayoutPostCard from "cLayouts/Post/LayoutPostCard";
-import LayoutProposalCard from "cLayouts/Proposal/LayoutProposalCard";
-import LayoutTaskCard from "cLayouts/Task/LayoutTaskCard";
-import CopyIcon from "components/Icon/CopyIcon";
-import DeleteIcon from "components/Icon/DeleteIcon";
-import DotsHIcon from "components/Icon/DotsHIcon";
-import EmojiIcon from "components/Icon/EmojiIcon";
-import PinIcon from "components/Icon/PinIcon";
-import ReplyIcon from "components/Icon/ReplyIcon";
-import ShareIcon from "components/Icon/ShareIcon";
-import useUserMsg from "hooks/useUserMsg";
+// import data from '@emoji-mart/data';
+// import Picker from '@emoji-mart/react';
+import styled from "styled-components";
+
+// import CopyIcon from "components/Icon/CopyIcon";
+// import DeleteIcon from "components/Icon/DeleteIcon";
+// import DotsHIcon from "components/Icon/DotsHIcon";
+// import EmojiIcon from "components/Icon/EmojiIcon";
+// import PinIcon from "components/Icon/PinIcon";
+// import ReplyIcon from "components/Icon/ReplyIcon";
+// import ShareIcon from "components/Icon/ShareIcon";
+// import useUserMsg from "hooks/useUserMsg";
 import { useLayoutEffect, useRef, useState } from "react";
-import { Col, Icon, Row } from "style";
+import { Col, Icon, Row } from "@/styles/StyledComponents";
 import { Conversation } from "style/chat";
 import LayoutFilePreview from "./LayoutFilePreview";
 import LayoutImagePreview from "./LayoutImagePreview";
 import LayoutLinkPreview from "./LayoutLinkPreview";
-import LayoutTransactionCard from "../Payment/LayoutTransactionCard";
-import styled from "styled-components";
-import { truncateAddress } from "helpers";
-import LayoutNFTCard from "cLayouts/NFT/LayoutNFTCard";
-import { Post } from "style/card";
-import LayoutPollCard from "cLayouts/Poll/LayoutPollCard";
+import LayoutPostCard from "@/components/post/LayoutPostCard";
 
 const TextareaDiv = styled.div`
     padding: 5px;
@@ -82,14 +76,14 @@ const LayoutChatConversation = (props) => {
 
     const templateChatPreview = () => {
         const objs = {
-            'post': <LayoutPostCard item={props?.item?.message_custom_data?.meta} />,
-            'task': <LayoutTaskCard task={props?.item?.message_custom_data?.meta}
-                openTask={() => { props.handleTask(props?.item?.message_custom_data?.meta) }}
-            />,
-            'nft': <LayoutNFTCard nft={props.item.message_custom_data.meta} />,
-            'proposal': <LayoutProposalCard item={props?.item?.message_custom_data?.meta} />,
-            '/send-payment': <LayoutTransactionCard meta={props.item?.message_custom_data?.meta} />,
-            'poll': <LayoutPollCard poll={props.item.message_custom_data.meta} />
+            // 'post': <LayoutPostCard item={props?.item?.message_custom_data?.meta} />,
+            // 'task': <LayoutTaskCard task={props?.item?.message_custom_data?.meta}
+            //     openTask={() => { props.handleTask(props?.item?.message_custom_data?.meta) }}
+            // />,
+            // 'nft': <LayoutNFTCard nft={props.item.message_custom_data.meta} />,
+            // 'proposal': <LayoutProposalCard item={props?.item?.message_custom_data?.meta} />,
+            // '/send-payment': <LayoutTransactionCard meta={props.item?.message_custom_data?.meta} />,
+            // 'poll': <LayoutPollCard poll={props.item.message_custom_data.meta} />
         }
         return objs[props.item?.message_custom_data?.type];
     }
@@ -98,7 +92,7 @@ const LayoutChatConversation = (props) => {
         return (
             <Popover placement='top-start'>
                 <PopoverTrigger>
-                    <Icon className="circled"><DotsHIcon width="20" height="20" fill="#e8e8e8" /></Icon>
+                    {/* <Icon className="circled"><DotsHIcon width="20" height="20" fill="#e8e8e8" /></Icon> */}
                 </PopoverTrigger>
                 <PopoverContent className="">
                     <PopoverBody>
@@ -165,7 +159,7 @@ const LayoutChatConversation = (props) => {
             <Popover key={index} placement='left-end'>
                 <PopoverTrigger>
                     <Icon className="circled m-r-0-5">
-                        <EmojiIcon width="20" height="20" fill="#e8e8e8" />
+                        {/* <EmojiIcon width="20" height="20" fill="#e8e8e8" /> */}
                     </Icon>
                 </PopoverTrigger>
                 <PopoverContent className="m-r-2">
@@ -226,7 +220,7 @@ const LayoutChatConversation = (props) => {
                         <Row className="w-100 action">
                             {templateEmoji(props.item, props.index)}
                             <Icon className="circled m-r-0-5" onClick={() => props.setActionMessage({ actionType: "Reply", item: props.item })}>
-                                <ReplyIcon width="20" height="20" fill="#e8e8e8" />
+                                {/* <ReplyIcon width="20" height="20" fill="#e8e8e8" /> */}
                             </Icon>
                             {templateAction(props.item, props.index)}
                         </Row>
@@ -283,7 +277,7 @@ const LayoutChatConversation = (props) => {
                         <Row className="w-100 action">
                             {templateEmoji(props.item, props.index)}
                             <Icon className="circled m-r-0-5" onClick={() => props.setActionMessage({ actionType: "Reply", item: props.item })}>
-                                <ReplyIcon width="20" height="20" fill="#e8e8e8" />
+                                {/* <ReplyIcon width="20" height="20" fill="#e8e8e8" /> */}
                             </Icon>
                             {templateAction(props.item, props.index)}
                         </Row>

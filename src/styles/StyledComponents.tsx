@@ -752,3 +752,7 @@ export const PageMain = styled.div`
     }
 `
 
+
+export const TextareaDiv = styled.div`
+    padding: 5px;
+`
