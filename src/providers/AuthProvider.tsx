@@ -1,8 +1,6 @@
-import { ethers } from "ethers";
 import { createContext, useEffect, useMemo, useState } from "react";
 import { logger } from "../helpers/logger";
 import useLensAuth from "../hooks/lens/useLensAuth";
-import useStreamClient from "../hooks/stream/useStreamClient";
 import { UserDb$ } from "../schema/user";
 // import { removeAsyncData } from "../service/AsyncStorageService";
 import { putStreamToken } from "../service/StreamService";
@@ -42,23 +40,24 @@ const AuthProvider = ({children}: any) => {
     const [user, setUser] = useState<any>();
     const [streamClient, setStreamClient] = useState<any>();
     const {address, isConnected} = useAccount();
-    // const {connect} = useConnect({
-    //     connector: new InjectedConnector()
-    // });
-    const {disconnect} = useDisconnect();
-   
 
+    //
     const updateUser = (key: any, data: any) => {
         logger('auth', 'updateUser', "Updating user data", [key, data]);
         const newData: any = {};
         newData[key] = data;
         setUser({...user, ...newData});
     };
-
+    
     const hookLensAuth = useLensAuth(address, updateUser);
     const authToken = hookLensAuth.accessToken;
-    const hookStreamClient = useStreamClient();
+    // const {connect} = useConnect({
+    //     connector: new InjectedConnector()
+    // });
 
+
+    const {disconnect} = useDisconnect();
+    
     // connecting user wallet
     const connectWallet = async () => {
         logger('auth', 'connectWallet', 'Trigger connectWallet', []);
