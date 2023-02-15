@@ -134,6 +134,7 @@ export const darkStyle = {
   body: {bg: {default: '#000511'}},
   nav: {width: "5%", bg: {default: '#00081A'}, border: {default:'1px solid #0F172E'}},
   card: {bg: {default: '#00081A'}, border: {default: '1px solid #0F172E'}, shadow: {default: '0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)'}},
+  pannel: {bg: {default: ''}, shadow: {default: ''}},
   input: {bg: {default: "#020a21"}, border: {default: '1px solid #0F172E'}},
   modal: {bg: {default: ''}, border: {default: ''}, shadow: {default: ''}},
   icon: {bg: { transparent: "transparent", default: "#262A34", hover: "#1b1e250", active: ""}},

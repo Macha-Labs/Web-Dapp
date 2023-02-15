@@ -181,9 +181,9 @@ export const List = styled.div`
 
 export const Card = styled.div`
   border-radius: ${style.borderRadiusCard};
-  background: ${style.bgCard};
+  background: ${style.card.bg.default};
   padding: ${style.paddingCard};
-  box-shadow: ${style.shadowCard};
+  box-shadow: ${style.card.shadow.default};
   curspor: pointer;
 
   .card-body {
@@ -245,7 +245,7 @@ export const Pallet = styled.div`
 export const Pannel = styled.div`
   border: ${style.borderPannel};
   border-radius: ${style.borderRadiusCard};
-  box-shadow: ${style.shadowPannel};
+  box-shadow: ${style.pannel.shadow.default};
   .header {
     background: ${style.bgPannelHeader};
     padding: ${style.paddingPannel};
