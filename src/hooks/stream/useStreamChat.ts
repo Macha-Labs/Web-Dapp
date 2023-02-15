@@ -2,7 +2,10 @@ import { useContext, useState, useRef } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import { StreamContext, StreamContextType } from "../../providers/StreamProvider";
+import {
+  StreamContext,
+  StreamContextType,
+} from "../../providers/StreamProvider";
 // import { newMessageNotification } from "../../service/NotificationService";
 // import useChatFilters from "../useChatFilters";
 import useMention from "./useMention";
@@ -27,13 +30,13 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
     const textareaRef = useRef<any>(null);
 
-    // custom hooks
-    // const chatFilterHook = useChatFilters(users);
-    const hookMention = useMention();
+  // custom hooks
+  // const chatFilterHook = useChatFilters(users);
+  const hookMention = useMention();
 
-    // Slash & Widget
-    const [slashCmd, setSlashCmd] = useState<any>();
-    const [slashCmdValue, setSlashCmdValue] = useState<any>();
+  // Slash & Widget
+  const [slashCmd, setSlashCmd] = useState<any>();
+  const [slashCmdValue, setSlashCmdValue] = useState<any>();
 
     const slashRun = (command: any) => {
         setSlashCmdValue(command.name);
@@ -41,17 +44,17 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         textareaRef.current = "";
     };
 
-    const searchMessage = () => {};
+  const searchMessage = () => {};
 
-    // channel?.raw.on('typing.start', event => {
-    //   console.log("User is typing");
-    //     setUserObjTyping(event?.user?.handle);
-    // });
+  // channel?.raw.on('typing.start', event => {
+  //   console.log("User is typing");
+  //     setUserObjTyping(event?.user?.handle);
+  // });
 
-    // channel?.raw.on('typing.stop', event => {
-    //   console.log("User has stopped typing");
-    //     setUserObjTyping(null);
-    // });
+  // channel?.raw.on('typing.stop', event => {
+  //   console.log("User has stopped typing");
+  //     setUserObjTyping(null);
+  // });
 
     const addMessage = async () => {
         if (!authContext?.address) {
@@ -71,15 +74,15 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
                 return;
             }
 
-            addMessageToStream(chatMeta);
-        }
-    };
+      addMessageToStream(chatMeta);
+    }
+  };
 
-    // useEffect(() => {
-    //     if (attachItem) {
-    //         console.log("Message from useStreamChat ", attachItem);
-    //     }
-    // }, [attachItem]);
+  // useEffect(() => {
+  //     if (attachItem) {
+  //         console.log("Message from useStreamChat ", attachItem);
+  //     }
+  // }, [attachItem]);
 
     const addMessageToStream = async (msgData?: any) => {
         try {
@@ -106,17 +109,17 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
                 };
             }
 
-            console.log("The messageData is ", messageData);
+      console.log("The messageData is ", messageData);
 
-            if (actionMessage?.action == "REPLY" && actionMessage?.item) {
-                messageData = {
-                    ...messageData,
-                    ...{
-                        parent_id: actionMessage.item.id,
-                        show_in_channel: true,
-                    },
-                };
-            }
+      if (actionMessage?.action == "REPLY" && actionMessage?.item) {
+        messageData = {
+          ...messageData,
+          ...{
+            parent_id: actionMessage.item.id,
+            show_in_channel: true,
+          },
+        };
+      }
 
             if (attachItem) {
                 // const fileCid = await storeFiles([attachItem]);
@@ -164,54 +167,44 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         setActionMessage(null);
     };
 
-    const editMessage = async () => {
-        if (!authContext?.address) {
-            console.log("Wallet is not connected");
-            return;
-        }
-        if (actionMessage?.action !== "EDIT") {
-            return;
-        }
-        await streamContext.client.updateMessage({
-            id: actionMessage.item?.id,
-            text: textareaRef,
-        });
-    };
+  const editMessage = async () => {
+    if (!authContext?.address) {
+      console.log("Wallet is not connected");
+      return;
+    }
+    if (actionMessage?.action !== "EDIT") {
+      return;
+    }
+    await streamContext.client.updateMessage({
+      id: actionMessage.item?.id,
+      text: textareaRef,
+    });
+  };
 
-    const deleteMessage = async (message: any) => {
-        if (message?.message_custom_data?.type == "post") {
-            // deleting lens post
-            await deletePost({
-                publicationId: message.message_custom_data?.postID,
-            });
-        }
+  const deleteMessage = async (message: any) => {
+    if (message?.message_custom_data?.type == "post") {
+      // deleting lens post
+      await deletePost({
+        publicationId: message.message_custom_data?.postID,
+      });
+    }
 
-        streamContext.client.deleteMessage(message?.id, true);
-        // callback();
-        console.log("Message deleted");
-    };
+    streamContext.client.deleteMessage(message?.id, true);
+    // callback();
+    console.log("Message deleted");
+  };
 
-    const pinMessage = async (message: any) => {
-        await streamContext.client.pinMessage(message, null);
-        // callback();
-        console.log("Pinned a message");
-    };
+  const pinMessage = async (message: any) => {
+    await streamContext.client.pinMessage(message, null);
+    // callback();
+    console.log("Pinned a message");
+  };
 
-    const unPinMessage = async (message: any) => {
-        await streamContext.client.unpinMessage(message);
-        // callback();
-        console.log("Un-Pinned a message");
-    };
-
-    const getPinnedMessages = async () => {
-        const channelState = await channel.raw.query();
-        const pinnedMessages = channelState.pinned_messages;
-        console.log(
-            "These messages are pinned in current channel ",
-            pinnedMessages
-        );
-        return pinnedMessages;
-    };
+  const unPinMessage = async (message: any) => {
+    await streamContext.client.unpinMessage(message);
+    // callback();
+    console.log("Un-Pinned a message");
+  };
 
     const keyDownMessage = async (event: any) => {
         const keycode = event.which || event.keycode;
@@ -233,111 +226,108 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         }
     };
 
-    const handleEdit = (message: any) => {
-        setActionMessage({action: "EDIT", item: message});
-    };
+  const handleEdit = (message: any) => {
+    setActionMessage({ action: "EDIT", item: message });
+  };
 
-    const handleEditClose = () => {
-        setActionMessage(null);
-    };
+  const handleEditClose = () => {
+    setActionMessage(null);
+  };
 
-    const handleAttachment = async (attachment: any) => {
-        setAttachLoading(true);
-        setAttachItem(attachment);
-        setAttachLoading(false);
-    };
+  const handleAttachment = async (attachment: any) => {
+    setAttachLoading(true);
+    setAttachItem(attachment);
+    setAttachLoading(false);
+  };
 
-    const deleteAttachment = () => {
-        setAttachItem(null);
-    };
+  const deleteAttachment = () => {
+    setAttachItem(null);
+  };
 
-    const handleSearch = (e: any) => {
-        setSearchActive(true);
-        setSearchQuery("");
-    };
+  const handleSearch = (e: any) => {
+    setSearchActive(true);
+    setSearchQuery("");
+  };
 
-    const handleSearchClose = () => {
-        setSearchActive(false);
-        setSearchQuery("");
-    };
+  const handleSearchClose = () => {
+    setSearchActive(false);
+    setSearchQuery("");
+  };
 
-    const handleSelect = (message: any) => {
-        // This checks if the message is already selected and removes it from the array if the user tries to uncheck it
-        if (selectedMessages.includes(message.id)) {
-            setSelectedMessages(
-                selectedMessages.filter((id: any) => id !== message.id)
-            );
-        } else {
-            setSelectedMessages([...selectedMessages, message.id]);
+  const handleSelect = (message: any) => {
+    // This checks if the message is already selected and removes it from the array if the user tries to uncheck it
+    if (selectedMessages.includes(message.id)) {
+      setSelectedMessages(
+        selectedMessages.filter((id: any) => id !== message.id)
+      );
+    } else {
+      setSelectedMessages([...selectedMessages, message.id]);
+    }
+    // setActionMessage({ ...actionMessage, item: result });
+  };
+
+  const handleMultiSelect = () => {
+    setActionMessage({ action: "MULTISELECT", item: null });
+  };
+  const handleMultiSelectClose = () => {
+    setActionMessage(null);
+  };
+  const handleLongPressSelect = (message: any) => {
+    console.log("Pressed long press button");
+    setActionMessage({ action: "LONGPRESS", item: message });
+  };
+  const handleLongPressSelectClose = () => {
+    setActionMessage(null);
+  };
+  const handleReply = (message: any) => {
+    setActionMessage({ action: "REPLY", item: message });
+  };
+
+  const handleReplyClose = () => {
+    setActionMessage(null);
+  };
+
+  const handleCopy = (message: any) => {
+    // onCopy(message.text);
+    // handleLongPressSelectClose();
+    // toast.show({
+    //     title: "Copied to clipboard",
+    //     placement: "bottom",
+    // });
+  };
+
+  const sendReaction = async (reaction: any, message: any) => {
+    return await channel.raw.sendReaction(message?.id, {
+      type: reaction?.type,
+      score: message.reaction_scores[reaction.type]
+        ? message.reaction_scores[reaction?.type] + 1
+        : 1,
+    });
+  };
+
+  const handleReaction = async (reaction: any, message: any) => {
+    console.log(reaction);
+    console.log(message);
+    let result;
+    if (message.own_reactions.length) {
+      let available = false;
+      message.own_reactions.filter(async (item: any) => {
+        if (item.type == reaction.type) {
+          available = true;
+          console.log("Got existing reaction");
+          result = await channel.raw.deleteReaction(message?.id, reaction.type);
+          console.log("Reactions ", result);
         }
-        // setActionMessage({ ...actionMessage, item: result });
-    };
-
-    const handleMultiSelect = () => {
-        setActionMessage({action: "MULTISELECT", item: null});
-    };
-    const handleMultiSelectClose = () => {
-        setActionMessage(null);
-    };
-    const handleLongPressSelect = (message: any) => {
-        console.log("Pressed long press button");
-        setActionMessage({action: "LONGPRESS", item: message});
-    };
-    const handleLongPressSelectClose = () => {
-        setActionMessage(null);
-    };
-    const handleReply = (message: any) => {
-        setActionMessage({action: "REPLY", item: message});
-    };
-
-    const handleReplyClose = () => {
-        setActionMessage(null);
-    };
-
-    const handleCopy = (message: any) => {
-        // onCopy(message.text);
-        // handleLongPressSelectClose();
-        // toast.show({
-        //     title: "Copied to clipboard",
-        //     placement: "bottom",
-        // });
-    };
-
-    const sendReaction = async (reaction: any, message: any) => {
-        return await channel.raw.sendReaction(message?.id, {
-            type: reaction?.type,
-            score: message.reaction_scores[reaction.type]
-                ? message.reaction_scores[reaction?.type] + 1
-                : 1,
-        });
-    };
-
-    const handleReaction = async (reaction: any, message: any) => {
-        console.log(reaction);
-        console.log(message);
-        let result;
-        if (message.own_reactions.length) {
-            let available = false;
-            message.own_reactions.filter(async (item: any) => {
-                if (item.type == reaction.type) {
-                    available = true;
-                    console.log("Got existing reaction");
-                    result = await channel.raw.deleteReaction(
-                        message?.id,
-                        reaction.type
-                    );
-                    console.log("Reactions ", result);
-                }
-            });
-            if (!available) {
-                result = sendReaction(reaction, message);
-                console.log("Reactions ", result);
-            }
-        } else {
-            result = sendReaction(reaction, message);
-            console.log("Reactions ", result);
-        }
-    };
+      });
+      if (!available) {
+        result = sendReaction(reaction, message);
+        console.log("Reactions ", result);
+      }
+    } else {
+      result = sendReaction(reaction, message);
+      console.log("Reactions ", result);
+    }
+  };
 
     const onChange = async (event: any, users?: any) => {
         const value = event.target.value;
@@ -357,14 +347,14 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
             hookMention.onTrigger(value, users);
         }
 
-        if (slashCmd) {
-            const cmds = value.split(" ");
-            // chatFilterHook.setSlashCmdFilter(
-            //     cmds[cmds.length - 1].substring(1)
-            // );
-        }
-        // await channel.keystroke();
-    };
+    if (slashCmd) {
+      const cmds = value.split(" ");
+      // chatFilterHook.setSlashCmdFilter(
+      //     cmds[cmds.length - 1].substring(1)
+      // );
+    }
+    // await channel.keystroke();
+  };
 
     const mentionSelect = (user: any) => {
         console.log("The cliked value ", user);
