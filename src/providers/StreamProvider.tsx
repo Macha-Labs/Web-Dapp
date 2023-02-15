@@ -6,7 +6,7 @@ import {AuthContext, AuthContextType} from "./AuthProvider";
 export type StreamContextType = {
     client: any | undefined;
     channels: any | undefined;
-    setChannels: (params) => void;
+    setChannels: (params: any) => void;
 };
 
 export const StreamContext = createContext<StreamContextType>({
@@ -15,7 +15,7 @@ export const StreamContext = createContext<StreamContextType>({
     setChannels: (params) => {},
 });
 
-const StreamProvider = ({children}) => {
+const StreamProvider = ({children}: any) => {
     const [client, setClient] = useState<any>();
     const [channels, setChannels] = useState<any>([]);
     
@@ -29,7 +29,7 @@ const StreamProvider = ({children}) => {
         hookStreamClient.connectToStream();
     }, [authContext?.user?.db?.tokens?.stream]);
 
-    const setChannelsCallback = (channels) => {
+    const setChannelsCallback = (channels: any) => {
         setChannels(channels);
     };
 

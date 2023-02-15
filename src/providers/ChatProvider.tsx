@@ -4,14 +4,21 @@ import useStreamChannelMembers from "../hooks/stream/useStreamChannelMembers";
 import useStreamChat from "../hooks/stream/useStreamChat";
 import {StreamContext, StreamContextType} from "./StreamProvider";
 
-export const ChatContext = createContext({
+type ChatContextType = {
+    hookChannel: any | undefined
+    hookChat: any | undefined;
+    hookMembers: any | undefined;
+    initiate: (params: any) => void;
+};
+
+export const ChatContext = createContext<ChatContextType>({
     hookChannel: null,
     hookChat: null,
     hookMembers: null,
-    initiate: (channel, userAddress?, appChannelIndex?) => {},
+    initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
 });
 
-export const ChatProvider = ({children}) => {
+export const ChatProvider = ({children}: any) => {
     const [channelId, setChannelId] = useState<any>();
     const hookStreamChannel = useStreamChannel(channelId);
     const hookChat = useStreamChat(hookStreamChannel.channel);
@@ -20,7 +27,7 @@ export const ChatProvider = ({children}) => {
     );
     const streamContext = useContext(StreamContext) as StreamContextType;
 
-    const initiate = async (channel, userAddress?, appChannelIndex?) => {
+    const initiate = async (channel: any, userAddress?: any, appChannelIndex?: any) => {
         console.log("ChatProvider.initiate called");
         setChannelId(channel.id);
         console.log("Marking all messages read in this channel");

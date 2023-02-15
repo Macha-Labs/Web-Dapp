@@ -91,21 +91,28 @@ const AuthProvider = ({children}: any) => {
                 address: address.toLowerCase(),
             }).then((data: any) => {
                 logger('auth', 'useEffect[user.lens]', 'response of user from DB', [JSON.stringify(data)]);
-                updateUser("db", UserDb$(data));
+                const userData = UserDb$(data);
+                updateUser("db", userData);
+                if (userData?.id && !userData.tokens?.stream) {
+                    putStreamToken({userAddress: address}).then((res: any) => {
+                        logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
+                        updateUser("db", UserDb$(res));
+                    });
+                }
             });
         }
-    }, [user?.lens])
+    }, [address, user?.lens?.id]);
 
-    useEffect(() => {
-        logger('auth', 'useEffect[user.db.id]', 'run', [])
-        if (user?.db?.id && !user?.db?.tokens?.stream) {
-            putStreamToken({userAddress: address}).then((res: any) => {
-                logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
-                updateUser("db", UserDb$(res));
-            });
-        }
-        // hookStreamClient.connectStreamClient();
-    }, [user?.db?.id]);
+    // useMemo(() => {
+    //     logger('auth', 'useEffect[user.db.id]', 'run', [])
+    //     if (user?.db?.id && !user?.db?.tokens?.stream) {
+    //         putStreamToken({userAddress: address}).then((res: any) => {
+    //             logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
+    //             updateUser("db", UserDb$(res));
+    //         });
+    //     }
+    //     // hookStreamClient.connectStreamClient();
+    // }, [user?.db?.id]);
 
     return (
         <AuthContext.Provider

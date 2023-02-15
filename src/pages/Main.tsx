@@ -1,5 +1,5 @@
 import Nav from "@/components/nav/Nav";
-import { StyledWindow } from "@/styles/StyledComponents";
+import { StyledWindow } from "../styles/StyledComponents";
 import React from "react";
 import Chat from "./chat/Chat";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -8,8 +8,8 @@ import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { mainnet, polygon, polygonMumbai } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import AuthProvider from "@/providers/AuthProvider";
+import StreamProvider from "@/providers/StreamProvider";
 
 const { chains, provider } = configureChains(
   [polygonMumbai],
@@ -29,17 +29,23 @@ const wagmiClient = createClient({
 
 function Main() {
   return (
-    <StyledWindow>
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
-          <AuthProvider>
-            <div className="left"><Nav /></div>
-            <ConnectButton />
-            <div className="right"><Chat /></div>
-          </AuthProvider>
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </StyledWindow>
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
+        <AuthProvider>
+          <StreamProvider>
+            <StyledWindow>
+              <div className="left">
+                <Nav />
+              </div>
+
+              <div className="right">
+                <Chat />
+              </div>
+            </StyledWindow>
+          </StreamProvider>
+        </AuthProvider>
+      </RainbowKitProvider>
+    </WagmiConfig>
   );
 }
 

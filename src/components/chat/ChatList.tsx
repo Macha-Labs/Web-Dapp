@@ -1,9 +1,11 @@
 import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Icon } from "@chakra-ui/react";
 import OrgControl from "../org/OrgControl";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-const ChatList = (props) => {
-    const templateMenuSection = (type) => {
+
+const ChatList = (props: any) => {
+    const templateMenuSection = (type: any) => {
         let list: any = [];
         let name: any = '';
         if (type == 'chat') {
@@ -38,7 +40,7 @@ const ChatList = (props) => {
                                     </Row>
                                     <ul>
                                         {
-                                            list.map((item, index) =>
+                                            list.map((item: any, index: number) =>
                                                 <StyledChatItem key={index}>
                                                     <Button
                                                         onClick={() => { props.triggerMenu(item) }}
@@ -90,6 +92,7 @@ const ChatList = (props) => {
             <Row className="header vr-center hr-between">
                 <OrgControl />
             </Row>
+            <ConnectButton />
             {
                 (!props?.event?.channelLoader && !props?.chatMenu?.length)
                     ?
