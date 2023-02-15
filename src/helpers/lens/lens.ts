@@ -22,7 +22,7 @@ import {
 } from "./query";
 import { CreatePublicPostRequest } from "./lensInterfaces";
 
-export const generateChallenge = async (address) => {
+export const generateChallenge = async (address: string) => {
   console.log("generateChallenge got the address ", address);
   const res = await apolloClient.query({
     query: gql(GET_CHALLENGE),
@@ -36,7 +36,7 @@ export const generateChallenge = async (address) => {
   return res.data.challenge.text;
 };
 
-export const authenticate_user = async (address, signature) => {
+export const authenticate_user = async (address: any, signature: any) => {
   console.log("Got the address ", address);
   console.log("Got the signature ", signature);
   try {
@@ -57,7 +57,7 @@ export const authenticate_user = async (address, signature) => {
   }
 };
 
-export const newRefreshToken = async (refreshtoken) => {
+export const newRefreshToken = async (refreshtoken: string) => {
   const { data } = await apolloClient.mutate({
     mutation: gql(REFRESH_TOKEN),
     variables: {
@@ -78,7 +78,7 @@ export const newRefreshToken = async (refreshtoken) => {
 }
 */
 
-export const getPublications = (getPublicationQuery) => {
+export const getPublications = (getPublicationQuery: any) => {
   return apolloClient.query({
     query: gql(GET_PUBLICATIONS),
     variables: {
@@ -87,7 +87,7 @@ export const getPublications = (getPublicationQuery) => {
   });
 };
 
-export const getDefaultProfile = (ethereumAddress) => {
+export const getDefaultProfile = (ethereumAddress: string) => {
   return apolloClient.query({
     query: gql(GET_DEFAULT_PROFILES),
     variables: {
@@ -101,7 +101,7 @@ export const getDefaultProfile = (ethereumAddress) => {
 /* 
 { ownedBy: ["0xD020E01C0c90Ab005A01482d34B808874345FD82"], limit: 10 }
 */
-export const getProfiles = async (requestParams) => {
+export const getProfiles = async (requestParams: any) => {
   return await apolloClient.query({
     query: gql(GET_PROFILES),
     variables: {
@@ -110,7 +110,7 @@ export const getProfiles = async (requestParams) => {
   });
 };
 
-export const getProfileForHandle = async (requestParams) => {
+export const getProfileForHandle = async (requestParams: any) => {
   return await apolloClient.query({
     query: gql(GET_PROFILE),
     variables: {
@@ -125,7 +125,7 @@ export const getProfileForHandle = async (requestParams) => {
   limit: 10
 }
 */
-export const fetchFollowers = async (requestParams) => {
+export const fetchFollowers = async (requestParams: any) => {
   return await apolloClient.query({
     query: gql(GET_FOLLOWERS),
     variables: {
@@ -140,7 +140,7 @@ export const fetchFollowers = async (requestParams) => {
   limit: 10
 }
 */
-export const fetchFollowing = async (requestParams) => {
+export const fetchFollowing = async (requestParams: any) => {
   return await apolloClient.query({
     query: gql(GET_FOLLOWING),
     variables: {
@@ -149,7 +149,7 @@ export const fetchFollowing = async (requestParams) => {
   });
 };
 
-export const explorePublications = (explorePublicationQueryRequest) => {
+export const explorePublications = (explorePublicationQueryRequest: any) => {
   return apolloClient.query({
     query: gql(EXPLORE_PUBLICATIONS),
     variables: {
@@ -158,7 +158,7 @@ export const explorePublications = (explorePublicationQueryRequest) => {
   });
 };
 
-export const setMetaData = async (profileId, metadata, accessToken) => {
+export const setMetaData = async (profileId: string, metadata: any, accessToken: string) => {
   const result = await apolloClient.mutate({
     mutation: gql(SET_METADATA),
     variables: {
@@ -171,7 +171,7 @@ export const setMetaData = async (profileId, metadata, accessToken) => {
   console.log(result);
 };
 
-export const followUser = async (requestParams) => {
+export const followUser = async (requestParams: any) => {
   return apolloClient.mutate({
     mutation: gql(FOLLOW),
     variables: {
@@ -180,7 +180,7 @@ export const followUser = async (requestParams) => {
   });
 };
 
-export const unfollowUser = async (requestParams) => {
+export const unfollowUser = async (requestParams: any) => {
   return apolloClient.mutate({
     mutation: gql(UNFOLLOW),
     variables: {
@@ -206,7 +206,7 @@ export const createNewPost = async (request: CreatePublicPostRequest) => {
   
 };
 
-export const validateMetadata = async (requestParams) => {
+export const validateMetadata = async (requestParams: any) => {
   try {
     const result = await apolloClient.query({
       query: gql(VALIDATE),
@@ -221,7 +221,7 @@ export const validateMetadata = async (requestParams) => {
   }
 };
 
-export const deletePost = async (requestParam) => {
+export const deletePost = async (requestParam: any) => {
   console.log("Request Param ", requestParam);
   const result = await apolloClient.mutate({
     mutation: gql(DELETE_POST),
@@ -232,7 +232,7 @@ export const deletePost = async (requestParam) => {
   return result.data!.hidePublication;
 };
 
-export const likePost = async (requestParam) => {
+export const likePost = async (requestParam: any) => {
   try {
     const result = await apolloClient.mutate({
       mutation: gql(LIKE_POST),
@@ -248,7 +248,7 @@ export const likePost = async (requestParam) => {
   }
 };
 
-export const mirrorPost = async (requestParam) => {
+export const mirrorPost = async (requestParam: any) => {
   try {
     const result = await apolloClient.mutate({
       mutation: gql(MIRROR_POST),

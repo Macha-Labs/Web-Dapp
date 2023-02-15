@@ -7,6 +7,8 @@ import { UserDb$ } from "../schema/user";
 // import { removeAsyncData } from "../service/AsyncStorageService";
 import { putStreamToken } from "../service/StreamService";
 import { findOrCreateUser } from "../service/UserService";
+import {useAccount, useConnect, useDisconnect} from 'wagmi';
+import { InjectedConnector } from 'wagmi/connectors/injected'
 
 export type AuthContextType = {
     signer: any | undefined;
@@ -36,9 +38,15 @@ export const AuthContext = createContext<AuthContextType>({
 
 const AuthProvider = ({children}: any) => {
     const [signer, setSigner] = useState<any>("");
-    const [address, setAddress] = useState<any>();
+    // const [address, setAddress] = useState<any>();
     const [user, setUser] = useState<any>();
     const [streamClient, setStreamClient] = useState<any>();
+    const {address, isConnected} = useAccount();
+    const {connect} = useConnect({
+        connector: new InjectedConnector()
+    });
+    const {disconnect} = useDisconnect();
+   
 
     const updateUser = (key: any, data: any) => {
         logger('auth', 'updateUser', "Updating user data", [key, data]);
@@ -59,12 +67,12 @@ const AuthProvider = ({children}: any) => {
 
     // Disconnecting user Wallet
     const disconnectWallet = async () => {
-               
+        disconnect();
     };
 
     const resetToDefault = () => {
         // the lens data in the useLensProfile should also be set to default
-        setAddress(null);
+        // setAddress(null);
         setUser(null);
         hookLensAuth.setLensProfile(null);
     };
@@ -103,6 +111,11 @@ const AuthProvider = ({children}: any) => {
         }
         // hookStreamClient.connectStreamClient();
     }, [user?.db?.id]);
+
+    useEffect(() => {
+        if (isConnected)
+        console.log("The connected address is ", address);
+    }, [isConnected])
 
     return (
         <AuthContext.Provider
