@@ -220,7 +220,7 @@ export const Card = styled.div`
 export const Nav = styled.div`
   width: 5%;
   height: 100vh;
-  background: #00042c;
+  background: ${style.bgNav}
   position: fixed;
   left: 0;
   border-right: 1px solid rgba(247, 248, 248, 0.1);
@@ -446,7 +446,7 @@ export const StyledNav = styled.div`
 export const StyledChatList = styled.div`
   width: 20%;
   height: 100vh;
-  background: ${style.bgLayout.primary};
+  background: ${style.bgMain};
 
   .body {
     height: calc(100vh - 150px);

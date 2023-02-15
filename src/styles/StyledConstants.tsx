@@ -80,6 +80,7 @@ export const darkStyle = {
   bg2: "#181A20",
   bg3: "#16191B",
   bg4: "#111315",
+  bg: "#000511",
   bgLayout: { primary: "#181A20", secondry: "#111315" },
   bgButton: {
     transparent: "transparent",
@@ -98,7 +99,7 @@ export const darkStyle = {
   },
   bgModal: "#181A20",
   bgCard: "#20232b",
-  bgInput: { default: "#111315" },
+  bgInput: { default: "#020a21" },
   bgHeader: "rgba(0,21,74, 0.2)",
   //
   brCard: {
@@ -110,7 +111,7 @@ export const darkStyle = {
   brButton: { active: "#2A85FF" },
   //
   color5: "#3182CE",
-  bgMain: "#000320",
+  bgMain: "#000511",
   bgModalOverlay: "#000320",
   bgCardHover: "RGBA(0, 0, 0, 0.60)",
   bgPallet: "#333233",
