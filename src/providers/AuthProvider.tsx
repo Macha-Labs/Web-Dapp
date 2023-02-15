@@ -42,9 +42,9 @@ const AuthProvider = ({children}: any) => {
     const [user, setUser] = useState<any>();
     const [streamClient, setStreamClient] = useState<any>();
     const {address, isConnected} = useAccount();
-    const {connect} = useConnect({
-        connector: new InjectedConnector()
-    });
+    // const {connect} = useConnect({
+    //     connector: new InjectedConnector()
+    // });
     const {disconnect} = useDisconnect();
    
 

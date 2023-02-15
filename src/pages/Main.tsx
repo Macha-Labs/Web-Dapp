@@ -29,21 +29,17 @@ const wagmiClient = createClient({
 
 function Main() {
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <AuthProvider>
-          <StyledWindow>
-            <div className="left">
-              <Nav />
-            </div>
-            {/* <ConnectButton /> */}
-            <div className="right">
-              <Chat />
-            </div>
-          </StyledWindow>
-        </AuthProvider>
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <StyledWindow>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <AuthProvider>
+            <div className="left"><Nav /></div>
+            <ConnectButton />
+            <div className="right"><Chat /></div>
+          </AuthProvider>
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </StyledWindow>
   );
 }
 
