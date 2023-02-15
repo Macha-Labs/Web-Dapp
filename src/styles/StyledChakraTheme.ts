@@ -26,19 +26,19 @@ const theme = extendTheme({
             paddingRight: '0.5rem !important',
         },
         '.chakra-modal__body': {
-            background: `${style.bgModal}`,
+            background: `${style.modal.bg.default}`,
             paddingTop: '1rem !importannt',
         },
         '.chakra-modal__header': {
-            background: `${style.bgModal}`,
-            borderBottom: `${style.borderModal} !important`
+            background: `${style.modal.bg.default}`,
+            borderBottom: `${style.modal.border.default} !important`
         },
         '.chakra-modal__footer': {
-            background: `${style.bgModal}`,
-            borderTop: `${style.borderModal} !important`
+            background: `${style.modal.bg.default}`,
+            borderTop: `${style.modal.border.default} !important`
         },
         'chakra-modal__overlay': {
-            background: `${style.bgModal} !important`,
+            background: `${style.modal.bg.default} !important`,
         },
         '.alert': {
             background: `${style.bgPannelHeader}`
@@ -56,7 +56,7 @@ const theme = extendTheme({
         variants: {
             normal: {
                 field: {
-                    bg: `${style.bgInput}`
+                    bg: `${style.input.bg.default}`
                 }
             }
         },
@@ -69,33 +69,33 @@ const theme = extendTheme({
         variants: {
             normal: {
                 field: {
-                    bg: `${style.bgInput}`
+                    bg: `${style.input.bg.default}`
                 }
             }
         },
     },
     Button: {
         baseStyle: {
-            background: `${style.bgButton.default}`
+            background: `${style.button.bg.default}`
         },
         variants: {
             transparent: {
                 background: 'transparent',
                 opacity: '0.5',
                 _hover: {
-                    background: `${style.bgButton}`,
+                    background: `${style.button.bg.default}`,
                     opacity: '1',
                 }
             },
             state_default_to_brand: {
-                background: `${style.bgButton.default}`,
+                background: `${style.button.bg.default}`,
                 _hover: {
-                    background: `${style.bgButton.active}`,
+                    background: `${style.button.bg.active}`,
                     color: '#FF'
                 }
             },
             state_brand: {
-                background: `${style.bgButton.active}`,
+                background: `${style.button.bg.active}`,
                 color: '#FF'
             },
             state_transparent_to_brand_hover: {
@@ -103,13 +103,13 @@ const theme = extendTheme({
                 border: `1px solid transparent`,
                 cursor: 'pointer',
                 _hover: {
-                    background: `${style.bgButton.activeTranslucent}`,
+                    background: `${style.button.bg.activeTranslucent}`,
                     border: `1px solid ${style.brButton.active}`,
                     color: '#FFF'
                 }
             },
             state_brand_hover: {
-                background: `${style.bgButton.activeTranslucent}`,
+                background: `${style.button.bg.activeTranslucent}`,
                 border: `1px solid ${style.brButton.active}`,
                 color: '#FFF'
             },
@@ -136,7 +136,7 @@ const theme = extendTheme({
     },
     Tag: {
         baseStyle: {
-            background: `${style.bgButton}`,
+            background: `${style.button.bg.default}`,
             cursor: 'pointer'
         },
         defaultProps: {
@@ -153,7 +153,7 @@ const theme = extendTheme({
             },
             item: {
                 _focus: {
-                    bg: `${style.bgButton}`
+                    bg: `${style.button.bg.default}`
                 },
             }
         }

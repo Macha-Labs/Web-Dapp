@@ -82,15 +82,6 @@ export const darkStyle = {
   bg4: "#111315",
   bg: "#000511",
   bgLayout: { primary: "#181A20", secondry: "#111315" },
-  bgButton: {
-    transparent: "transparent",
-    default: "#262A34",
-    hover: "#1b1e25",
-    active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
-    activeTranslucent:
-      "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);",
-    disabled: "",
-  },
   //
   brCard: {
     transparent: "#262A34",
@@ -140,11 +131,13 @@ export const darkStyle = {
   colorIconActive: "#333",
   focusInput: "0",
   header: {bg: {default: '#00081A'}, border: {default: '1px solid #0F172E'}},
-  nav: {width: "5%", bg: {default: '#00081A'}, border: {default: '1px solid rgba(247, 248, 248, 0.1)'}},
+  body: {bg: {default: '#000511'}},
+  nav: {width: "5%", bg: {default: '#00081A'}, border: {default:'1px solid #0F172E'}},
   card: {bg: {default: '#00081A'}, border: {default: '1px solid #0F172E'}, shadow: {default: '0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)'}},
-  input: {bg: {default: "#020a21"}, border: {default: "1px solid rgba(0,20,60, 0.76)"}},
+  input: {bg: {default: "#020a21"}, border: {default: '1px solid #0F172E'}},
   modal: {bg: {default: ''}, border: {default: ''}, shadow: {default: ''}},
   icon: {bg: { transparent: "transparent", default: "#262A34", hover: "#1b1e250", active: ""}},
+  button: {bg: { transparent: "transparent", default: "#262A34", hover: "#1b1e25",active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)", activeTranslucent: "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);", disabled: "",}},
   shadowDropdown:
     "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",
 };

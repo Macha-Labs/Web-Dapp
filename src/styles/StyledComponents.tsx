@@ -50,11 +50,11 @@ export const RowHover = styled(Row)`
   margin-bottom: 0.5rem;
 
   &:hover {
-    background-color: ${style.bgButton.default};
+    background-color: ${style.button.bg.default};
     cursor: pointer;
   }
   &.selected {
-    background-color: ${style.bgButton.default};
+    background-color: ${style.button.bg.default};
   }
 `;
 
@@ -434,6 +434,7 @@ export const StyledChatList = styled.div`
   width: 20%;
   height: 100vh;
   background: ${style.bgMain};
+  border-right: ${style.header.border.default};
 
   .body {
     height: calc(100vh - 150px);
@@ -465,8 +466,8 @@ export const StyledChatList = styled.div`
   .header {
     height: 55px;
     padding: 0px 10px;
-    background: ${style.bgHeader};
-    border-bottom: ${style.borderHeader};
+    background: ${style.header.bg.default};
+    border-bottom: ${style.header.border.default};
     width: 100%;
     margin: auto;
   }
@@ -475,7 +476,7 @@ export const StyledChatList = styled.div`
 export const StyledChat = styled.div`
   width: 80vw;
   height: 100vh;
-  background: ${style.bgLayout.primary};
+  background: ${style.body.bg.default};
   position: relative;
 
   &.full {
@@ -504,15 +505,13 @@ export const StyledChat = styled.div`
     height: 55px;
     padding: 0px 10px;
     background: ${style.header.bg.default};
-    border: ${style.header.border.default}
+    border-bottom: ${style.header.border.default}
   }
 
   .body {
     overflow: inherit;
     padding: 20px 0px;
     height: calc(100vh - 55px);
-    border-top: 1px solid rgba(247, 248, 248, 0.1);
-    background: ${style.bgLayout.secondry};
   }
 `;
 export const StyledChatItem = styled(Row)`
@@ -578,6 +577,7 @@ export const StyledChatInput = styled(Row)`
   width: 100%;
   border-radius: 5px;
   background: ${style.card.bg.default};
+  border: ${style.card.border.default};
   margin-bottom: 5px;
   padding: 0.3rem 0;
 
