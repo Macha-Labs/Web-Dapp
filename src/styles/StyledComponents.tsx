@@ -10,7 +10,8 @@ export const StyledWindow = styled.div`
 
   .right {
     width: calc(100vw - ${style.nav.width});
-    margin-left: ${style.nav.width}
+    position: fixed;
+    left: ${style.nav.width};
   }
 `;
 

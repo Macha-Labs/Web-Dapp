@@ -28,15 +28,15 @@ const wagmiClient = createClient({
 });
 
 function Main() {
-  return (
+  return (    
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
         <AuthProvider>
-          <StyledWindow>
+        <StyledWindow>
             <div className="left">
               <Nav />
             </div>
-            {/* <ConnectButton /> */}
+            
             <div className="right">
               <Chat />
             </div>
