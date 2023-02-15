@@ -3,26 +3,19 @@ import { Avatar, Button, Heading, Icon } from "@chakra-ui/react";
 import OrgControl from "../org/OrgControl";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-
-const ChatList = (props: any) => {
-    const templateMenuSection = (type: any) => {
-        let list: any = [];
-        let name: any = '';
-        if (type == 'chat') {
-            list = props.chatMenu;
-            name = 'Channels';
-        }
+const ChatList = (props) => {
+    const templateMenuSection = (type) => {
 
         return (
             <>
                 {
-                    list.length
+                    props.channels?.length
                         ?
                         (
                             <>
                                 <div className="m-b-2">
                                     <Row className="vr-center menu-heading hr-between">
-                                        <Heading as="h4" size="md" className="m-b-1">{name}</Heading>
+                                        <Heading as="h4" size="md" className="m-b-1"></Heading>
                                         {
                                             (props?.context?.user?._id == props?.org?.owner)
                                                 ?
@@ -40,13 +33,13 @@ const ChatList = (props: any) => {
                                     </Row>
                                     <ul>
                                         {
-                                            list.map((item: any, index: number) =>
+                                            props.channels.map((item: any, index: number) =>
                                                 <StyledChatItem key={index}>
                                                     <Button
                                                         onClick={() => { props.triggerMenu(item) }}
                                                         className="menu-item w-100 m-b-1"
                                                         size="md"
-                                                        variant={props.menu._id == item._id ? 'state_brand' : 'transparent'}>
+                                                        variant={props.menu?._id == item?._id ? 'state_card' : 'transparent'}>
                                                             <Avatar size="sm" src="" className="m-r-0-5"/>
                                                             <Col className="w-100">
                                                                 {item.name}
@@ -94,7 +87,7 @@ const ChatList = (props: any) => {
             </Row>
             <ConnectButton />
             {
-                (!props?.event?.channelLoader && !props?.chatMenu?.length)
+                (!props?.channels?.length)
                     ?
                     (
                         <>

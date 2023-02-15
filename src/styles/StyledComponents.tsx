@@ -703,3 +703,52 @@ export const StyledTransactionCard = styled(Card)`
   padding: 10px 0px;
   cursor: pointer;
 `;
+
+
+// Page
+
+export const PageMenu = styled.div`
+    width: calc(30%);
+    height: 100vh;
+    background: ${style.header.bg.default};
+    border-right: ${style.header.border.default};
+    position: fixed;
+    padding: 1rem;
+
+    .content {
+        width: 60%;
+        margin: auto;
+        margin-top: 5rem;
+        text-align: left;
+    }
+
+    .menu-item {
+        text-align: start;
+        padding: 10px;
+        align-items: center;
+        justify-content: flex-start;
+    }
+`
+
+export const PageMain = styled.div`
+    margin-left: 30%;
+    width: calc(70%);
+    height: 100vh;
+    background: ${style.body.bg.default};
+    position: fixed;
+    padding: 2rem 5rem;
+    overflow-y: auto;
+
+    .content {
+        width: 100%;
+        margin-top: 4rem;
+        text-align: left;
+    }
+
+    .close {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+    }
+`
+

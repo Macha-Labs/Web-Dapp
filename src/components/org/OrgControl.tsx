@@ -2,6 +2,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Icon, Logo, Row } from  "@/styles/StyledComponents";
 import { Modal, ModalBody, ModalContent, ModalOverlay, Heading, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import ModalPage from "../modal/ModalPage";
 
 const OrgControl = (props) => {
     const settingModal = useDisclosure();
@@ -16,14 +17,8 @@ const OrgControl = (props) => {
     const templateSetting = () => {
         return (
             <>
-            <Modal onClose={settingModal.onClose} isOpen={settingModal.isOpen} size='full'>
-                <ModalOverlay />
-                <ModalContent className="hidescroll">
-                    <ModalBody className="hidescroll" style={{ padding: "0px" }}>
-                        {/* <OrgSetting org={org} setOrg={setOrg} modal={settingModal} /> */}
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
+            
+            <ModalPage event={settingModal}></ModalPage>
             </>
         )
     }
