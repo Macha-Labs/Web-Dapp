@@ -442,8 +442,6 @@ export const StyledChatList = styled.div`
     width: 100%;
     margin: auto;
     padding: 20px 10px;
-    border-right: 1px solid rgba(247, 248, 248, 0.1);
-    border-top: 1px solid rgba(247, 248, 248, 0.1);
 
     .menu-heading {
       padding-left: 10px;
@@ -698,8 +696,79 @@ export const StyledNFTCard = styled(Card)`
   }
 `;
 
+export const StyledFileCard = styled(Card)`
+    margin: 5px 0 5px 0;
+    padding: 10px;
+    border: 1px;
+    background: ${style.card.bg.default};
+    opacity: 0.8;
+    border-radius: 5px;
+    width: 50vh;
+
+    .name {
+        width: 40vh;
+    }   
+
+    &:hover {
+        opacity: 0.9;
+    }
+`
+
 export const StyledTransactionCard = styled(Card)`
   width: 400px;
   padding: 10px 0px;
   cursor: pointer;
 `;
+
+
+// Page
+
+export const PageMenu = styled.div`
+    width: calc(30%);
+    height: 100vh;
+    background: ${style.header.bg.default};
+    border-right: ${style.header.border.default};
+    position: fixed;
+    padding: 1rem;
+
+    .content {
+        width: 60%;
+        margin: auto;
+        margin-top: 5rem;
+        text-align: left;
+    }
+
+    .menu-item {
+        text-align: start;
+        padding: 10px;
+        align-items: center;
+        justify-content: flex-start;
+    }
+`
+
+export const PageMain = styled.div`
+    margin-left: 30%;
+    width: calc(70%);
+    height: 100vh;
+    background: ${style.body.bg.default};
+    position: fixed;
+    padding: 2rem 5rem;
+    overflow-y: auto;
+
+    .content {
+        width: 100%;
+        margin-top: 4rem;
+        text-align: left;
+    }
+
+    .close {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+    }
+`
+
+
+export const TextareaDiv = styled.div`
+    padding: 5px;
+`

@@ -1,5 +1,5 @@
 import { Heading, Text } from "@chakra-ui/react";
-import { Col } from "style";
+import { Col } from "@/styles/StyledComponents";
 
 const LayoutChatEmpty = (props) => {
     return (

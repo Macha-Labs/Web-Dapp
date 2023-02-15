@@ -1,16 +1,14 @@
 import { DownloadIcon } from "@chakra-ui/icons";
 import { Text } from "@chakra-ui/react";
-import FileIcon from "components/Icon/FileIcon";
-import { truncateString } from "helpers";
-import { Icon, Row } from "style";
-import { AttachmentFilePreview } from "style/card";
+import { Icon, Row, StyledFileCard } from "@/styles/StyledComponents";
+import { truncateString } from "@/helpers";
 
 const LayoutFilePreview = (props) => {
     return (
         <>
-            <AttachmentFilePreview className="hr-between vr-center">
+            <StyledFileCard className="hr-between vr-center">
                 <Row className="vr-center">
-                    <FileIcon width="20" height="20" fill="#efefef" className="m-r-1" />
+                    {/* <FileIcon width="20" height="20" fill="#efefef" className="m-r-1" /> */}
                     <Text fontSize='md'>
                         {props.attachment?.name?.length > 30 ? (truncateString(props.attachment?.name)) : (props.attachment?.name)}
                     </Text>
@@ -21,7 +19,7 @@ const LayoutFilePreview = (props) => {
                     </a>
                 </Icon>
 
-            </AttachmentFilePreview>
+            </StyledFileCard>
         </>
     )
 }

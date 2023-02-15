@@ -113,6 +113,10 @@ const theme = extendTheme({
                 border: `1px solid ${style.brButton.active}`,
                 color: '#FFF'
             },
+            state_card: {
+                background: `${style.card.bg.default}`,
+                border: `${style.card.border.default}`,
+            },
             state_lens: {
                 opacity: '0.95',
                 background: '#ABFD2C',

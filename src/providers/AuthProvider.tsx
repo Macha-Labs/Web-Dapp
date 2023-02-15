@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { logger } from "../helpers/logger";
 import useLensAuth from "../hooks/lens/useLensAuth";
-import useStreamClient from "../hooks/stream/useStreamClient";
 import { UserDb$ } from "../schema/user";
+// import { removeAsyncData } from "../service/AsyncStorageService";
 import { useAccount, useDisconnect } from 'wagmi';
 import { putStreamToken } from "../service/StreamService";
 import { findOrCreateUser } from "../service/UserService";
@@ -15,9 +15,9 @@ export type AuthContextType = {
     user: any | undefined;
     setUser: (param: any) => void;
     updateUser: (...params: any) => void;
-    streamClient: any | undefined;
     connectLens: () => void;
     authToken: any | undefined;
+    isConnected: any | undefined;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -28,16 +28,14 @@ export const AuthContext = createContext<AuthContextType>({
     user: null,
     setUser: (param) => {},
     updateUser: (...params) => {},
-    streamClient: null,
     connectLens: () => {},
     authToken: null,
+    isConnected: null
 });
 
 const AuthProvider = ({children}: any) => {
     const [signer, setSigner] = useState<any>("");
-    // const [address, setAddress] = useState<any>();
     const [user, setUser] = useState<any>();
-    const [streamClient, setStreamClient] = useState<any>();
     const {address, isConnected} = useAccount();
     const {disconnect} = useDisconnect();
    
@@ -48,10 +46,9 @@ const AuthProvider = ({children}: any) => {
         newData[key] = data;
         setUser({...user, ...newData});
     };
-
+    
     const hookLensAuth = useLensAuth(address, updateUser);
     const authToken = hookLensAuth.accessToken;
-    const hookStreamClient = useStreamClient();
 
     // connecting user wallet
     const connectWallet = async () => {
@@ -117,9 +114,9 @@ const AuthProvider = ({children}: any) => {
                 user,
                 setUser,
                 updateUser,
-                streamClient,
                 connectLens,
                 authToken,
+                isConnected
             }}
         >
             {children}

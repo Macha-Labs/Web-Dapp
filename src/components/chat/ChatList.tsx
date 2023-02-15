@@ -2,27 +2,28 @@ import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Icon } from "@chakra-ui/react";
 import OrgControl from "../org/OrgControl";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-
+import { useContext } from "react";
+import { ChatContext } from "@/providers/ChatProvider";
+import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
+import useOrgChannels from "@/hooks/portal/useOrgChannels";
+import { StreamContext } from "@/providers/StreamProvider";
 
 const ChatList = (props: any) => {
+    const chatProvider = useContext(ChatContext);
+    const authContext = useContext(AuthContext) as AuthContextType;
+    const hookOrgChannels = useOrgChannels("6246c7045cc31c36781d668e");
+    
     const templateMenuSection = (type: any) => {
-        let list: any = [];
-        let name: any = '';
-        if (type == 'chat') {
-            list = props.chatMenu;
-            name = 'Channels';
-        }
-
         return (
             <>
                 {
-                    list.length
+                    chatProvider?.hookChannels?.channels?.length
                         ?
                         (
                             <>
                                 <div className="m-b-2">
                                     <Row className="vr-center menu-heading hr-between">
-                                        <Heading as="h4" size="md" className="m-b-1">{name}</Heading>
+                                        <Heading as="h4" size="md" className="m-b-1"></Heading>
                                         {
                                             (props?.context?.user?._id == props?.org?.owner)
                                                 ?
@@ -40,13 +41,13 @@ const ChatList = (props: any) => {
                                     </Row>
                                     <ul>
                                         {
-                                            list.map((item: any, index: number) =>
+                                            chatProvider?.hookChannels?.channels?.map((item: any, index: number) =>
                                                 <StyledChatItem key={index}>
                                                     <Button
-                                                        onClick={() => { props.triggerMenu(item) }}
+                                                        onClick={() => { console.log('Click on button', item); chatProvider.initiate(item, authContext.address) }}
                                                         className="menu-item w-100 m-b-1"
                                                         size="md"
-                                                        variant={props.menu._id == item._id ? 'state_brand' : 'transparent'}>
+                                                        variant={props.menu?._id == item?._id ? 'state_card' : 'transparent'}>
                                                             <Avatar size="sm" src="" className="m-r-0-5"/>
                                                             <Col className="w-100">
                                                                 {item.name}
@@ -92,9 +93,9 @@ const ChatList = (props: any) => {
             <Row className="header vr-center hr-between">
                 <OrgControl />
             </Row>
-            <ConnectButton />
+            {!authContext.isConnected && <ConnectButton />} 
             {
-                (!props?.event?.channelLoader && !props?.chatMenu?.length)
+                (!chatProvider?.hookChannels?.channels)
                     ?
                     (
                         <>

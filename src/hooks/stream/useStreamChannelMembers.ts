@@ -12,7 +12,7 @@ const useStreamChannelMembers = (channel: any) => {
 
     const fetchChannelMembers = async () => {
         console.log("Called fetchChannelMembers");
-        const response = await channel?.queryMembers({});
+        const response = await channel?.raw?.queryMembers({});
         console.log("Fetched channel members ", response);
         let onlineIds: any[] = [];
         let offlineIds: any[] = [];
@@ -63,7 +63,7 @@ const useStreamChannelMembers = (channel: any) => {
 
         // checking if current user is a member of this channel
         try {
-            const result = await channel?.queryMembers({
+            const result = await channel?.raw?.queryMembers({
                 id: authContext?.user.lens?.id,
             });
 

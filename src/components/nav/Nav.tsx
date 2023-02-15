@@ -15,30 +15,26 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import ModalPage from "../modal/ModalPage";
+import UserSetting from "../user/UserSetting";
 
 const Nav = (props: any) => {
   const orgsDrawer = useDisclosure();
+  const userDrawer = useDisclosure();
 
   const templateOrgs = () => {
     return (
-      <>
-        <Modal
-          onClose={orgsDrawer.onClose}
-          isOpen={orgsDrawer.isOpen}
-          size="full"
-        >
-          <ModalOverlay />
-          <ModalContent className="hidescroll">
-            <ModalCloseButton />
-            <ModalBody
-              className="hidescroll"
-              style={{ padding: "0px" }}
-            ></ModalBody>
-          </ModalContent>
-        </Modal>
-      </>
+      <ModalPage></ModalPage>
     );
   };
+
+  const templateUser = () => {
+    return (<ModalPage children={<UserSetting modal={userDrawer} />} event={userDrawer}></ModalPage>)
+  }
+
+  const templateNotifications = () => {
+    return <></>
+  }
 
   return (
     <>
@@ -68,25 +64,18 @@ const Nav = (props: any) => {
               <Col className="hr-center">
                 <Icon
                   className="state-1-2 scale m-b-1"
-                  onClick={() => {
-                    props.setNav("channels");
-                  }}
+                  onClick={orgsDrawer.onOpen}
                 >
                   <HashIcon />
                 </Icon>
                 <Icon
                   className="state-1-2 scale m-b-1"
-                  onClick={() => {
-                    props.setNav("users");
-                  }}
+                  onClick={userDrawer.onOpen}
                 >
                   <UserIcon />
                 </Icon>
                 <Icon
                   className="state-1-2 scale m-b-1"
-                  onClick={() => {
-                    props.setNav("nfts");
-                  }}
                 >
                   <NFTIcon />
                 </Icon>
@@ -110,6 +99,7 @@ const Nav = (props: any) => {
         </StyledNav>
       </Row>
       {templateOrgs()}
+      {templateUser()}
     </>
   );
 };

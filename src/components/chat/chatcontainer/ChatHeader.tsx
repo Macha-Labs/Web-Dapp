@@ -6,7 +6,7 @@ const ChatHeader = props => {
     <div className="header hr-between vr-center">
       <Row className="w-100 h-100 hr-between vr-center">
         <Heading as="h4" size="sm">
-          #{props?.channelData?.name}
+          #{props?.hookChannel?.channel?.name}
         </Heading>
         <div>
           <Row className="vr-center">
