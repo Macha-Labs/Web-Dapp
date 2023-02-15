@@ -19,9 +19,9 @@ const theme = extendTheme({
             color: `${style.colorPlaceholder}`,
         },
         'input, textarea': {
-            border: `${style.borderInput} !important`,
+            border: `${style.input.border.default} !important`,
             color: `${style.colorInput} !important`,
-            background: `${style.bgInput.default} !important`,
+            background: `${style.input.bg.default} !important`,
             paddingLeft: '0.5rem !important',
             paddingRight: '0.5rem !important',
         },

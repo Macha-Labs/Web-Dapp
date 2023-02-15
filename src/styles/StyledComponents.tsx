@@ -225,28 +225,7 @@ export const Card = styled.div`
   }
 `;
 
-export const Nav = styled.div`
-  width: ${style.nav.width};
-  height: 100vh;
-  background: ${style.bgNav}
-  position: fixed;
-  left: 0;
-  border-right: 1px solid rgba(247, 248, 248, 0.1);
 
-  .header {
-    height: 55px;
-    padding: 0px;
-  }
-
-  .body {
-    padding: 10px 0px;
-    height: calc(100% - 55px);
-  }
-
-  .footer {
-    padding: 10px 0px;
-  }
-`;
 export const Placeholder = styled.div`
   border: ${style.borderPlaceholder};
   border-radius: ${style.borderRadius};
@@ -384,14 +363,14 @@ export const Icon = styled.i`
   padding: 5px;
   cursor: pointer;
   width: fit-content;
-  background: ${style.bgIcon.default};
+  background: ${style.icon.bg.default};
   border-radius: ${style.borderRadiusIcon};
 
   &:hover {
-    background: ${style.bgIcon.hover};
+    background: ${style.icon.bg.hover};
   }
   &.active {
-    background: ${style.bgIcon.active};
+    background: ${style.icon.bg.active};
   }
 
   &.scale {
@@ -428,12 +407,12 @@ export const LinkContainer = styled.div`
 `;
 
 export const StyledNav = styled.div`
-  width: 5%;
+  width: ${style.nav.width};
   height: 100vh;
-  background: #00042c;
+  background: ${style.nav.bg.default};
   position: fixed;
   left: 0;
-  border-right: 1px solid rgba(247, 248, 248, 0.1);
+  border-right: ${style.nav.border.default};
 
   .header {
     height: 55px;
@@ -524,8 +503,8 @@ export const StyledChat = styled.div`
   .header {
     height: 55px;
     padding: 0px 10px;
-    background: ${style.bgHeader};
-    border: ${style.borderHeader}
+    background: ${style.header.bg.default};
+    border: ${style.header.border.default}
   }
 
   .body {
@@ -598,7 +577,7 @@ export const StyledChatInputContainer = styled.div`
 export const StyledChatInput = styled(Row)`
   width: 100%;
   border-radius: 5px;
-  background: ${style.bgCard};
+  background: ${style.card.bg.default};
   margin-bottom: 5px;
   padding: 0.3rem 0;
 
