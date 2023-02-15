@@ -44,7 +44,7 @@ const AuthProvider = ({children}: any) => {
         newData[key] = data;
         setUser({...user, ...newData});
     };
-
+    
     const hookLensAuth = useLensAuth(address, updateUser);
     const authToken = hookLensAuth.accessToken;
 
