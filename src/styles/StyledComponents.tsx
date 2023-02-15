@@ -431,7 +431,7 @@ export const StyledNav = styled.div`
 
 //
 export const StyledChatList = styled.div`
-  width: 20%;
+  width: 25%;
   height: 100vh;
   background: ${style.bgMain};
   border-right: ${style.header.border.default};
@@ -472,7 +472,7 @@ export const StyledChatList = styled.div`
 `;
 
 export const StyledChat = styled.div`
-  width: 80vw;
+  width: 75vw;
   height: 100vh;
   background: ${style.body.bg.default};
   position: relative;
