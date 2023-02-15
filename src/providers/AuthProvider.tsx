@@ -82,20 +82,15 @@ const AuthProvider = ({children}: any) => {
     };
 
     // setting the address in context
-    
 
     useEffect(() => {
-        logger('auth', 'useEffect[user]', 'User is', [user])
-    }, [user]);
-
-    useMemo(() => {
         logger('auth', 'useMemo[user.lens]', 'User is',  [user])
         if (address) {
-            logger('auth', 'useMemo[user.lens]','requesting user from DB with address', [address])
+            logger('auth', 'useEffect[user.lens]','requesting user from DB with address', [address])
             findOrCreateUser({
                 address: address.toLowerCase(),
             }).then((data: any) => {
-                logger('auth', 'useMemo[user.lens]', 'response of user from DB', [JSON.stringify(data)]);
+                logger('auth', 'useEffect[user.lens]', 'response of user from DB', [JSON.stringify(data)]);
                 updateUser("db", UserDb$(data));
             });
         }
@@ -111,11 +106,6 @@ const AuthProvider = ({children}: any) => {
         }
         // hookStreamClient.connectStreamClient();
     }, [user?.db?.id]);
-
-    useEffect(() => {
-        if (isConnected)
-        console.log("The connected address is ", address);
-    }, [isConnected])
 
     return (
         <AuthContext.Provider
