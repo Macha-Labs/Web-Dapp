@@ -4,6 +4,7 @@ import { StyledConversationContainer, StyledConversationView } from "@/styles/St
 import ChatMessage from "./ChatMessage";
 
 const ChatWindow = (props: any) => {
+    
     return (
         <StyledConversationContainer>
                 <StyledConversationView>
@@ -13,8 +14,9 @@ const ChatWindow = (props: any) => {
                             (
                                 <>
                                     {
-                                        props.hookChannel.messages?.map((item, index) =>
+                                        props.hookChannel.messages?.map((item: any, index) =>
                                             <ChatMessage message={item} />
+                                            // {item.text}
                                         )
                                     }
                                     

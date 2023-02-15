@@ -3,15 +3,15 @@ import { StyledConversation } from "@/styles/StyledComponents";
 import { Col, Icon, Row } from "@/styles/StyledComponents";
 import { Avatar, Heading, Tag, Textarea } from "@chakra-ui/react";
 
-const ChatMessage = (message) => {
+const ChatMessage = (props: any) => {
     return (
         <StyledConversation>
                     
             <Row className="message">
                 
-                <Col className="w-100">
+                <Col className="w-100" style={{color: "#ffffff"}}>
                     {
-                        message?.text
+                        props.message?.text
                     }
                 </Col>
                 <Row className="w-100 action">
