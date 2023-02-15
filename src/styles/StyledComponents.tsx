@@ -442,8 +442,6 @@ export const StyledChatList = styled.div`
     width: 100%;
     margin: auto;
     padding: 20px 10px;
-    border-right: 1px solid rgba(247, 248, 248, 0.1);
-    border-top: 1px solid rgba(247, 248, 248, 0.1);
 
     .menu-heading {
       padding-left: 10px;
@@ -697,6 +695,24 @@ export const StyledNFTCard = styled(Card)`
     padding: 1rem;
   }
 `;
+
+export const StyledFileCard = styled(Card)`
+    margin: 5px 0 5px 0;
+    padding: 10px;
+    border: 1px;
+    background: ${style.card.bg.default};
+    opacity: 0.8;
+    border-radius: 5px;
+    width: 50vh;
+
+    .name {
+        width: 40vh;
+    }   
+
+    &:hover {
+        opacity: 0.9;
+    }
+`
 
 export const StyledTransactionCard = styled(Card)`
   width: 400px;
