@@ -6,26 +6,27 @@ import {
 } from "../../helpers/lens/lens";
 import {ethers} from "ethers";
 import useLensProfile from "./useLensProfile";
-import {useWalletConnect} from "@walletconnect/react-native-dapp";
-import {storeAsyncData, getAsyncData} from "../../service/AsyncStorageService";
+import { useSignMessage } from 'wagmi'
 
-const useLensAuth = (address, updateUser) => {
+const useLensAuth = (address: any, updateUser: any) => {
     const hookLensProfile = useLensProfile(address);
-    const connector = useWalletConnect();
     const [token, setToken] = useState<any>(null);
     const [refreshToken, setRefreshToken] = useState<any>(null);
     const [isLoading, setIsLoading] = useState<any>();
     const [signButtonText, setSignButtonText] =
         useState<any>("Sign-In with Lens");
 
-    const signText = async (text) => {
+    const signText = async (text: any) => {
         console.log("Signing the message");
         var message = ethers.utils.toUtf8Bytes(
             "\x19Ethereum Signed Message:\n" + text.length + text
         );
         let msg = ethers.utils.keccak256(message);
-        const params = [connector.accounts[0], msg];
-        return await connector.signMessage(params);
+        // const params = [address, msg];
+        const {data, isError, isLoading, isSuccess, signMessage} = useSignMessage({
+            message: msg
+        });
+        return data;
     };
 
     const fetchLensToken = async () => {
@@ -45,8 +46,6 @@ const useLensAuth = (address, updateUser) => {
                     setToken(data["accessToken"]);
                     setRefreshToken(data["refreshToken"]);
                     // storing in async data
-                    storeAsyncData("accessToken", data["accessToken"]);
-                    storeAsyncData("refreshToken", data["refreshToken"]);
                     //
                     updateUser("lens", {
                         ...hookLensProfile.lensData,
@@ -57,7 +56,6 @@ const useLensAuth = (address, updateUser) => {
             } catch (error) {
                 console.log("Couldn't Sign request");
                 console.log(error);
-                console.log(error?.networkError?.result?.errors);
                 setSignButtonText("Couldn't sign request");
                 setIsLoading(false);
             }
@@ -71,7 +69,8 @@ const useLensAuth = (address, updateUser) => {
     const getLensTokens = async () => {
         let refreshToken;
         console.log("Getting the lens data ", hookLensProfile.lensData);
-        const accessToken = await getAsyncData("accessToken");
+        // const accessToken = await getAsyncData("accessToken");
+        const accessToken = "";
         console.log("accessToken from Async storage ", accessToken);
         updateUser("lens", {
                 ...hookLensProfile.lensData,
