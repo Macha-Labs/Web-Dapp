@@ -10,6 +10,7 @@ import AuthProvider from "@/providers/AuthProvider";
 import StreamProvider from "@/providers/StreamProvider";
 import { ChatProvider } from "@/providers/ChatProvider";
 import User from "./user";
+import { IKContext } from "imagekitio-react";
 
 const { chains, provider } = configureChains(
   [polygonMumbai],
@@ -31,13 +32,15 @@ function Main() {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
-        <AuthProvider>
-          <StreamProvider>
-            <ChatProvider>
-              <User/>
-            </ChatProvider>
-          </StreamProvider>
-        </AuthProvider>
+        <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">
+          <AuthProvider>
+            <StreamProvider>
+              <ChatProvider>
+                <User />
+              </ChatProvider>
+            </StreamProvider>
+          </AuthProvider>
+        </IKContext>
       </RainbowKitProvider>
     </WagmiConfig>
   );

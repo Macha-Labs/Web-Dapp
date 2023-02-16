@@ -7,6 +7,7 @@ import NFTIcon from "../icons/IconDarkUser";
 import { useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
+import { IKImage } from "imagekitio-react";
 
 const Nav = (props: any) => {
   const orgsDrawer = useDisclosure();
@@ -51,7 +52,15 @@ const Nav = (props: any) => {
                     className="state-1-2 scale m-b-1"
                     onClick={orgsDrawer.onOpen}
                   >
-                    <HashIcon />
+                    <IKImage
+                      path="/icons/IconBrandProfile.png"
+                      transformation={[
+                        {
+                          height: "25",
+                          width: "25",
+                        },
+                      ]}
+                    />
                   </Icon>
                 </Link>
                 <Link href="/user">
@@ -59,11 +68,27 @@ const Nav = (props: any) => {
                     className="state-1-2 scale m-b-1"
                     onClick={userDrawer.onOpen}
                   >
-                    <UserIcon />
+                    <IKImage
+                      path="/icons/IconBrandChat.png"
+                      transformation={[
+                        {
+                          height: "25",
+                          width: "25",
+                        },
+                      ]}
+                    />
                   </Icon>
                 </Link>
                 <Icon className="state-1-2 scale m-b-1">
-                  <NFTIcon />
+                  <IKImage
+                    path="/icons/IconBrandDiscover.png"
+                    transformation={[
+                      {
+                        height: "25",
+                        width: "25",
+                      },
+                    ]}
+                  />
                 </Icon>
               </Col>
 
