@@ -250,30 +250,42 @@ const ChatInput = (props: any) => {
     );
   };
 
-  return (
-    <StyledChatInputContainer>
-      <Col className="w-100">
-        {templatePreview()}
+  const TemplateInput = () => {
+    return (
+      <StyledChatInputContainer>
+        <Col className="w-100">
+          {templatePreview()}
 
-        {templateChatInputRow()}
+          {templateChatInputRow()}
 
-        <Row>
-          <Col className="w-100 vr-center">
-            {props?.chatContext?.userObjTyping ? (
-              <Text fontSize="xs">
-                <Spinner size="xs" />@{props?.chatContext?.userObjTyping} is
-                typing
-              </Text>
-            ) : (
-              <Text fontSize="xs">
-                <br />
-              </Text>
-            )}
-          </Col>
-        </Row>
-      </Col>
-    </StyledChatInputContainer>
-  );
+          <Row>
+            <Col className="w-100 vr-center">
+              {props?.chatContext?.userObjTyping ? (
+                <Text fontSize="xs">
+                  <Spinner size="xs" />@{props?.chatContext?.userObjTyping} is
+                  typing
+                </Text>
+              ) : (
+                <Text fontSize="xs">
+                  <br />
+                </Text>
+              )}
+            </Col>
+          </Row>
+        </Col>
+      </StyledChatInputContainer>
+    );
+  };
+
+  const TemplateMultiSelect = () => {
+    return <></>;
+  };
+
+  const TemplateSearch = () => {
+    return <></>;
+  };
+
+  return <TemplateInput />;
 };
 
 export default ChatInput;
