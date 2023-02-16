@@ -1,4 +1,5 @@
 import { uploadAtIpfsRoot } from "@/helpers/storage/web3storage";
+import { newMessageNotification } from "@/service/NotificationService";
 import { useContext, useRef, useState } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
@@ -108,8 +109,8 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
           attachments: [
             {
               type: attachItem.type.split("/")[0],
-              asset_url: fileCid,
-              thumb_url: fileCid,
+              asset_url: `https://ipfs.io/ipfs/${fileCid}`,
+              thumb_url: `https://ipfs.io/ipfs/${fileCid}`,
               name: attachItem?.name,
             },
           ],
@@ -117,9 +118,14 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       }
       console.log("connected channel", channel);
       console.log("Sending messsageData is ", messageData);
-      // await channel.raw.sendMessage(messageData); // sending a new message
+      await channel.raw.sendMessage(messageData); // sending a new message
+      
       setRerenderSwitch(!rerenderSwitch);
       setStreamLoading(false);
+      textareaRef.current.value = ""
+      setAttachItem(null);
+      setActionMessage(null);
+
       const notificationPayload = {
         topic: "newMessage",
         notification: {
@@ -138,14 +144,11 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       }
       hookMention.onRefresh();
       setChatMeta(null);
-      // await newMessageNotification(notificationPayload); // sending new message notification
+      await newMessageNotification(notificationPayload); // sending new message notification
     } catch (error) {
       console.log("Could not send message", error);
       setStreamLoading(false);
     }
-    textareaRef.current.value = ""
-    setAttachItem(null);
-    setActionMessage(null);
   };
 
   const editMessage = async () => {
