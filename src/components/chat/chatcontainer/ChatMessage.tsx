@@ -20,7 +20,7 @@ const ChatMessage = (props: any) => {
             return <LayoutFilePreview attachment={attachment} />;
         }
     };
-    
+
     return (
         <StyledConversation>
             <Row className="message">
@@ -38,7 +38,7 @@ const ChatMessage = (props: any) => {
                             truncateAddress(props.message?.user?.id)}
                     </Text>
                     {props.message?.text}
-                    {props?.message?.attachments.map((item: any) => {
+                    {props?.message?.attachments.map((item: any, index: number) => {
                         return templateAttachment(item);
                     })}
                 </Col>
