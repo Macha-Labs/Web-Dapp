@@ -209,82 +209,90 @@ const ChatInput = (props: any) => {
     );
   };
 
-  const templateChatInputRow = () => {
-    return (
-      <StyledChatInput>
-        {props.channel?.data?.created_by?.id == props.currentUser?.id ||
-        props.userIsMember ? (
-          <>
-            <Col className="vr-center hr-center sideIcons">{templateAdd()}</Col>
-
-            <Col className="w-100 vr-center">
-              <Textarea
-                onChange={event => {
-                  event.target.style.height = "auto";
-                  event.target.style.height = `${event.target.scrollHeight}px`;
-                  props.hookChat.onChange(event);
-                }}
-                ref={props.hookChat?.textareaRef}
-                className="inputElement"
-                variant="unstyled"
-                style={{ minHeight: "45px" }}
-                onKeyDown={event => props?.hookChat?.keyDownMessage(event)}
-                placeholder="Message..."
-                height="auto"
-                rows={1}
-                isDisabled={props.hookChat.streamLoading}
-              />
-            </Col>
-            <Col className="vr-center hr-center sideIcons">
-              <StyledIcon className="circled">
-                {/* <EmojiIcon width="20" height="20" fill="#e8e8e8" /> */}
-              </StyledIcon>
-            </Col>
-          </>
-        ) : (
-          <>
-            <Col className="w-100 vr-center m-l-0-5">
-              Join the Channel to Message
-            </Col>
-            <Col>
-              <Button
-                isLoading={props.isLoading}
-                onClick={() => props.addMemberToChannel(props.channel?.id)}
-              >
-                Join
-              </Button>
-            </Col>
-          </>
-        )}
-      </StyledChatInput>
-    );
-  };
-
   const TemplateInput = () => {
     return (
       <StyledChatInputContainer>
-        <Col className="w-100">
-          {templatePreview()}
+      <Col className="w-100">
+        {templatePreview()}
 
-          {templateChatInputRow()}
+        <StyledChatInput>
+        <Col className="vr-center hr-center sideIcons">{templateAdd()}</Col>
+          <Col className="w-100 vr-center">
+            <Textarea
+              onChange={event => {
+                event.target.style.height = "auto";
+                event.target.style.height = `${event.target.scrollHeight}px`;
+                props.hookChat.onChange(event);
+              }}
+              ref={props.hookChat?.textareaRef}
+              className="inputElement"
+              variant="unstyled"
+              style={{ minHeight: "45px" }}
+              onKeyDown={event => props?.hookChat?.keyDownMessage(event)}
+              placeholder="Message..."
+              height="auto"
+              rows={1}
+            />
+          </Col>
+          <Col className="vr-center hr-center sideIcons">
+            <StyledIcon className="circled">
+              {/* <EmojiIcon width="20" height="20" fill="#e8e8e8" /> */}
+            </StyledIcon>
+          </Col>
+        </StyledChatInput>
 
-          <Row>
-            <Col className="w-100 vr-center">
-              {props?.hookChat?.userObjTyping ? (
-                <Text fontSize="xs">
-                  <Spinner size="xs" />@{props?.hookChat?.userObjTyping} is
-                  typing
-                </Text>
-              ) : (
-                <Text fontSize="xs">
-                  <br />
-                </Text>
-              )}
-            </Col>
-          </Row>
-        </Col>
-      </StyledChatInputContainer>
-    );
-  };
+        <Row>
+          <Col className="w-100 vr-center">
+            {props?.chatContext?.userObjTyping ? (
+              <Text fontSize="xs">
+                <Spinner size="xs" />@{props?.chatContext?.userObjTyping} is
+                typing
+              </Text>
+            ) : (
+              <Text fontSize="xs">
+                <br />
+              </Text>
+            )}
+          </Col>
+        </Row>
+      </Col>
+    </StyledChatInputContainer>
+    )
+  }
+
+  const TemplateMembership = () => {
+    return (
+      <>
+        <Col className="w-100 vr-center m-l-0-5">
+              Join the Channel to Message
+          </Col>
+          <Col>
+            <Button
+              isLoading={props.isLoading}
+              onClick={() => props.addMemberToChannel(props.channel?.id)}
+            >
+              Join
+            </Button>
+          </Col>
+      </>
+    )
+  }
+  
+  const TemplateSearch = () => {
+    return (
+      <></>
+    )
+  }
+
+  const TempalateMultiselect = () => {
+    return (
+      <></>
+    )
+  }
+
+  return (
+    <TemplateInput />
+  );
 };
+
 export default ChatInput;
