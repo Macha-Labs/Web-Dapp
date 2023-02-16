@@ -236,8 +236,10 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleAttachment = async (attachment: any) => {
+    const filePicked = attachment.target.files[0];
+    console.log(filePicked);
     setAttachLoading(true);
-    setAttachItem(attachment);
+    setAttachItem(filePicked);
     setAttachLoading(false);
   };
 
