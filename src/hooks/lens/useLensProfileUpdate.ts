@@ -18,7 +18,8 @@ const useLensProfileUpdate = () => {
     return {
         isLoading: isLoading,
         loadingText: loadingText,
-        userLens: userLens
+        userLens: userLens,
+        setUserLens:setUserLens,
     }
 }
 export default useLensProfileUpdate;
