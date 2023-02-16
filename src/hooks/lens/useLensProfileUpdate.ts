@@ -1,4 +1,5 @@
 
+import { logger } from "@/helpers/logger";
 import { AuthContext } from "@/providers/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 
@@ -9,6 +10,7 @@ const useLensProfileUpdate = () => {
     const authContext = useContext(AuthContext);
 
     useEffect(() => {
+        logger('lens', 'useLensProfileUpdate.useEffect[authContext.user?.lens]', 'lens data', [authContext.user?.lens])
         setUserLens(authContext.user?.lens)
     }, [authContext.user?.lens])
 
