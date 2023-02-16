@@ -11,6 +11,7 @@ import { publicProvider } from "wagmi/providers/public";
 import AuthProvider from "@/providers/AuthProvider";
 import StreamProvider from "@/providers/StreamProvider";
 import { ChatProvider } from "@/providers/ChatProvider";
+import User from "./User/User";
 
 const { chains, provider } = configureChains(
   [polygonMumbai],
@@ -41,7 +42,7 @@ function Main() {
                 </div>
 
                 <div className="right">
-                  <Chat />
+                  <User />
                 </div>
               </StyledWindow>
             </ChatProvider>

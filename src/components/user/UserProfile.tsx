@@ -15,7 +15,7 @@ interface Props {
 
 
 const UserProfile = ({ ...props }) => {
-    const hookLensFollow = useLensFollows(props.user.lens?.id);
+    const hookLensFollow = useLensFollows(props.user?.lens?.id);
     const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.id);
     const hookLensConnections = useLensConnections(props.user?.lens?.ownedBy);
 
@@ -165,18 +165,18 @@ const UserProfile = ({ ...props }) => {
 
                             <Row>
                                 <Col className="m-v-1 w-100 hr-center">
-                                    <Heading as="h3" size="lg">{props.profile?.name ? props.profile?.name : props.profile?.handle}</Heading>
-                                    <h6>@{props.profile?.handle}</h6>
+                                    <Heading as="h3" size="lg">{props.user?.lens?.name ? props.user?.lens?.name : props.user?.lens?.handle}</Heading>
+                                    <h6>@{props.user?.lens?.handle}</h6>
                                 </Col>
                             </Row>
 
                             <Row className="vr-center hr-center">
                                 {
-                                    props.profile?.bio
+                                    props.user?.lens?.bio
                                         ?
                                         (
                                             <Col className="m-v-1">
-                                                <Text className="bioText">{props.profile?.bio}</Text>
+                                                <Text className="bioText">{props?.user?.lens?.bio}</Text>
                                             </Col>
                                         )
                                         :
@@ -188,7 +188,7 @@ const UserProfile = ({ ...props }) => {
 
                             <Row className="m-v-1 vr-center hr-center">
                                 {
-                                    props.profile?.isFollowedByMe ? (
+                                    props.user?.lens?.isFollowedByMe ? (
                                         <Button
                                             variant="state_lens_unfollow"
                                             size="md"

@@ -813,7 +813,7 @@ export const StyledProfileBanner = styled.div`
     .bannerAvatar {
         position: absolute;
         top: 5rem;
-        left: 41%;
+        left: 45%;
     }
 
     .bioText {
