@@ -271,25 +271,25 @@ export const StyledTransactionCard = styled(StyledCard)`
 `;
 
 export const StyledPostCard = styled(StyledCard)`
-    cursor: pointer;
-    padding: 10px 0px;
-    img {
-        border-radius: ${style.borderRadius};
-    }
+  cursor: pointer;
+  padding: 10px 0px;
+  img {
+    border-radius: ${style.borderRadius};
+  }
 
-    .actions {
-      width: 100%;
+  .actions {
+    width: 100%;
 
-      .buttonCol {
-          background: transparent;
-      }
+    .buttonCol {
+      background: transparent;
     }
-`
+  }
+`;
 export const StyledOptionsCard = styled(StyledCard)`
-    .item {
-      padding: 5px 0px;
-    }
-`
+  .item {
+    padding: 5px 0px;
+  }
+`;
 
 //
 
@@ -423,7 +423,7 @@ export const Cover = styled.div`
     }
   }
 `;
-export const Icon = styled.i`
+export const StyledIcon = styled.i`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -754,7 +754,6 @@ export const StyledConversation = styled(Col)`
   }
 `;
 
-
 //
 export const StyledPageList = styled.div`
   width: 25%;
@@ -853,29 +852,27 @@ export const TextareaDiv = styled.div`
   padding: 5px;
 `;
 
-
-
 // Profile
 export const StyledProfileBanner = styled.div`
-    position: relative;
-    margin-bottom: 3rem;
+  position: relative;
+  margin-bottom: 3rem;
 
-    .bannerImage {
-        background-color: #121533;
-        border-radius: 10px;
-        height: 150px;
-        width: 100%;
-        text-align: center;
-    }
+  .bannerImage {
+    background-color: #121533;
+    border-radius: 10px;
+    height: 150px;
+    width: 100%;
+    text-align: center;
+  }
 
-    .bannerAvatar {
-        position: absolute;
-        top: 5rem;
-        left: 45%;
-    }
+  .bannerAvatar {
+    position: absolute;
+    top: 5rem;
+    left: 45%;
+  }
 
-    .bioText {
-        font-weight: 500;
-        color: #6F767E;
-    }
-`
+  .bioText {
+    font-weight: 500;
+    color: #6f767e;
+  }
+`;

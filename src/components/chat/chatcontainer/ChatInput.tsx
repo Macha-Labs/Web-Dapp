@@ -15,7 +15,7 @@ import {
 import {
   Row,
   Col,
-  Icon,
+  StyledIcon,
   StyledChatInputContainer,
   StyledChatPreview,
   StyledChatInput,
@@ -50,7 +50,7 @@ const ChatInput = (props: any) => {
                 <Text fontSize="xs">@{props.actionMessage.item.user.id}</Text>
               </Row>
             </Col>
-            <Icon
+            <StyledIcon
               onClick={() =>
                 props?.chatContext.setActionMessage({
                   actionType: "",
@@ -59,7 +59,7 @@ const ChatInput = (props: any) => {
               }
             >
               {/* <CrossIcon width="12" height="12" fill="#efefef" /> */}
-            </Icon>
+            </StyledIcon>
           </div>
         ) : (
           <></>
@@ -89,9 +89,9 @@ const ChatInput = (props: any) => {
                   {props?.chatContext?.attachItem?.name}
                 </Text>
               </Col>
-              <Icon onClick={() => props?.chatContext.deleteAttachment()}>
+              <StyledIcon onClick={() => props?.chatContext.deleteAttachment()}>
                 {/* <DeleteIcon width="20" height="20" fill="#efefef" /> */}
-              </Icon>
+              </StyledIcon>
             </Row>
           </div>
         ) : (
@@ -125,9 +125,9 @@ const ChatInput = (props: any) => {
               <Heading as="h6" size="sm">
                 Preview
               </Heading>
-              <Icon>
+              <StyledIcon>
                 <CloseIcon />
-              </Icon>
+              </StyledIcon>
             </Row>
             {templateReply()}
             {templateAttachment()}
@@ -166,9 +166,9 @@ const ChatInput = (props: any) => {
     return (
       <Popover placement="top-start">
         <PopoverTrigger>
-          <Icon className="circled">
+          <StyledIcon className="circled">
             <PlusSquareIcon color="gray.300" />
-          </Icon>
+          </StyledIcon>
         </PopoverTrigger>
         <PopoverContent className="m-b-1">
           <PopoverBody>
@@ -226,9 +226,9 @@ const ChatInput = (props: any) => {
               />
             </Col>
             <Col className="vr-center hr-center sideIcons">
-              <Icon className="circled">
+              <StyledIcon className="circled">
                 {/* <EmojiIcon width="20" height="20" fill="#e8e8e8" /> */}
-              </Icon>
+              </StyledIcon>
             </Col>
           </>
         ) : (

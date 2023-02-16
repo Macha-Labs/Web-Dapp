@@ -1,5 +1,10 @@
 import { truncateAddress } from "@/helpers";
-import { Col, Icon, Row, StyledMessageCard } from "@/styles/StyledComponents";
+import {
+  Col,
+  StyledIcon,
+  Row,
+  StyledMessageCard,
+} from "@/styles/StyledComponents";
 import { Avatar, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import ChatMessage from "./ChatMessage";
