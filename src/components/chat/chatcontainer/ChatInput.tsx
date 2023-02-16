@@ -27,6 +27,9 @@ import LayoutNFTCard from "../../nft/LayoutNFTCard";
 import LayoutTransactionCard from "../../payment/LayoutTransactionCard";
 import LayoutPollCard from "../../poll/LayoutPollCard";
 import ChatMention from "../ChatMention";
+import IconFile from "@/components/icons/IconFile";
+import IconDelete from "@/components/icons/IconDelete";
+import PortalLoader from "@/components/PortalLoader";
 
 // const TypingRow = styled(Row)`
 //     display: none;
@@ -83,16 +86,16 @@ const ChatInput = (props: any) => {
                   type == "image" ?
                     <Image src={URL.createObjectURL(props?.hookChat.attachItem)} alt={props?.hookChat.attachItem?.name} width="300px" />
                     :
-                    // <FileIcon width="150px" height="150px" />
-                    <></>
+                    <IconFile width={24} height={24} fill="#efefef" />
                 }
                 <Text className="m-t-0-5">
                   {props?.hookChat?.attachItem?.name}
                 </Text>
               </Col>
-              <Icon onClick={() => props?.hookChat.deleteAttachment()}>
-                {/* <DeleteIcon width="20" height="20" fill="#efefef" /> */}
-              </Icon>
+              {props.hookChat.streamLoading ? (<PortalLoader size="xs" />) : (
+                <Icon onClick={() => props?.hookChat.deleteAttachment()}>
+                <IconDelete width="20" height="20" fill="#efefef" />
+              </Icon>)}
             </Row>
           </div>
         ) : (
@@ -126,9 +129,9 @@ const ChatInput = (props: any) => {
               <Heading as="h6" size="sm">
                 Preview
               </Heading>
-              <Icon>
-                <CloseIcon />
-              </Icon>
+              {/* <Icon>
+                <CloseIcon  />
+              </Icon> */}
             </Row>
             {templateReply()}
             {templateAttachment()}
@@ -224,6 +227,7 @@ const ChatInput = (props: any) => {
                 placeholder="Message..."
                 height="auto"
                 rows={1}
+                isDisabled={props.hookChat.streamLoading}
               />
             </Col>
             <Col className="vr-center hr-center sideIcons">
