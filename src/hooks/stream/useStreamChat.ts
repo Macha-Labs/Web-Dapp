@@ -1,34 +1,29 @@
-import { useContext, useState, useRef } from "react";
+import { uploadAtIpfsRoot } from "@/helpers/storage/web3storage";
+import { newMessageNotification } from "@/service/NotificationService";
+import { useContext, useRef, useState } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import {
-  StreamContext,
-  StreamContextType,
-} from "../../providers/StreamProvider";
-// import { newMessageNotification } from "../../service/NotificationService";
+import { StreamContext, StreamContextType } from "../../providers/StreamProvider";
 // import useChatFilters from "../useChatFilters";
 import useMention from "./useMention";
 // import useCommand from "./useCommand";
 
 const useStreamChat = (channel: any, users?: any, callback?: any) => {
-    const authContext = useContext(AuthContext) as AuthContextType;
-    const streamContext = useContext(StreamContext) as StreamContextType;
-    const [chatMeta, setChatMeta] = useState<any>({});
-    const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
-    const [attachLoading, setAttachLoading] = useState<any>();
-    const [attachItem, setAttachItem] = useState<any>();
-    const [reactions, setReactions] = useState<any>({});
-    const [actionMessage, setActionMessage] = useState<any>({
-        action: "",
-        item: {},
-    });
-    const [selectedMessages, setSelectedMessages] = useState<any>([]);
-    const [userObjTyping, setUserObjTyping] = useState<any>();
-    const [searchActive, setSearchActive] = useState<any>();
-    const [searchQuery, setSearchQuery] = useState<any>();
+  const authContext = useContext(AuthContext) as AuthContextType;
+  const streamContext = useContext(StreamContext) as StreamContextType;
+  const [chatMeta, setChatMeta] = useState<any>({});
+  const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
+  const [streamLoading, setStreamLoading] = useState<any>(false);
+  const [attachItem, setAttachItem] = useState<any>();
+  const [reactions, setReactions] = useState<any>({});
+  const [actionMessage, setActionMessage] = useState<any>({ action: "", item: {} });
+  const [selectedMessages, setSelectedMessages] = useState<any>([]);
+  const [userObjTyping, setUserObjTyping] = useState<any>();
+  const [searchActive, setSearchActive] = useState<any>();
+  const [searchQuery, setSearchQuery] = useState<any>();
 
-    const textareaRef = useRef<any>(null);
+  const textareaRef = useRef<any>(null);
 
   // custom hooks
   // const chatFilterHook = useChatFilters(users);
@@ -38,76 +33,61 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const [slashCmd, setSlashCmd] = useState<any>();
   const [slashCmdValue, setSlashCmdValue] = useState<any>();
 
-    const slashRun = (command: any) => {
-        setSlashCmdValue(command.name);
-        setSlashCmd(false);
-        textareaRef.current = "";
-    };
+  const slashRun = (command: any) => {
+    setSlashCmdValue(command.name);
+    setSlashCmd(false);
+    textareaRef.current = "";
+  };
 
-  const searchMessage = () => {};
-
-  // channel?.raw.on('typing.start', event => {
-  //   console.log("User is typing");
-  //     setUserObjTyping(event?.user?.handle);
-  // });
-
-  // channel?.raw.on('typing.stop', event => {
-  //   console.log("User has stopped typing");
-  //     setUserObjTyping(null);
-  // });
-
-    const addMessage = async () => {
-        if (!authContext?.address) {
-            console.log("Didn't find user address");
-            return;
-        }
-        if (slashCmdValue) {
-            console.log("Logic to run a slash command");
-            // console.log("Called slash cmd", slashCmdValue);
-            // const response = await commandHook.run(slashCmdValue, chatMeta?.meta);
-            // console.log(response);
-            // addMessageToStream({...chatMeta, meta: {...chatMeta.meta, response: response }});
-            // setSlashCmdValue("");
-        } else {
-            if (!textareaRef.current.value) {
-                alert("The Message input shouldn't be empty");
-                return;
-            }
+  const addMessage = async () => {
+    setStreamLoading(true);
+    if (!authContext?.address) {
+      console.log("Didn't find user address");
+      setStreamLoading(false);
+      return;
+    }
+    if (slashCmdValue) {
+      console.log("Logic to run a slash command");
+      // console.log("Called slash cmd", slashCmdValue);
+      // const response = await commandHook.run(slashCmdValue, chatMeta?.meta);
+      // console.log(response);
+      // addMessageToStream({...chatMeta, meta: {...chatMeta.meta, response: response }});
+      // setSlashCmdValue("");
+    } else {
+      if (!textareaRef.current.value && !attachItem) {
+        alert("You are not sending anything");
+        setStreamLoading(false);
+        return;
+      }
 
       addMessageToStream(chatMeta);
     }
   };
 
-  // useEffect(() => {
-  //     if (attachItem) {
-  //         console.log("Message from useStreamChat ", attachItem);
-  //     }
-  // }, [attachItem]);
-
-    const addMessageToStream = async (msgData?: any) => {
-        try {
-            let messageData: any = {};
-            if (actionMessage?.action == "FORWARD") {
-                messageData = {
-                    text: actionMessage?.item?.text,
-                    mentioned_users: actionMessage?.item.mentioned_users,
-                    message_custom_data: {
-                        ...msgData,
-                        forwarded: true,
-                        fromChannel: actionMessage?.item?.cid,
-                        ownerId: actionMessage?.item?.user?.id,
-                    },
-                };
-            } else {
-                messageData = {
-                    text: textareaRef.current?.value,
-                    mentioned_users: hookMention.mentionList.map((user: any, index: number) => {
-                        console.log("MessageData", user);
-                        return user?.ownedBy;
-                    }),
-                    message_custom_data: msgData,
-                };
-            }
+  const addMessageToStream = async (msgData?: any) => {
+    try {
+      let messageData: any = {};
+      if (actionMessage?.action == "FORWARD") {
+        messageData = {
+          text: actionMessage?.item?.text,
+          mentioned_users: actionMessage?.item.mentioned_users,
+          message_custom_data: {
+            ...msgData,
+            forwarded: true,
+            fromChannel: actionMessage?.item?.cid,
+            ownerId: actionMessage?.item?.user?.id,
+          },
+        };
+      } else {
+        messageData = {
+          text: textareaRef.current?.value,
+          mentioned_users: hookMention.mentionList.map((user: any, index: number) => {
+            console.log("MessageData", user);
+            return user?.ownedBy;
+          }),
+          message_custom_data: msgData,
+        };
+      }
 
       console.log("The messageData is ", messageData);
 
@@ -121,51 +101,55 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         };
       }
 
-            if (attachItem) {
-                // const fileCid = await storeFiles([attachItem]);
-                console.log(attachItem);
-                messageData = {
-                    ...messageData,
-                    attachments: [
-                        {
-                            type: attachItem.type.split("/")[0],
-                            asset_url: `https://ipfs.io/ipfs/${attachItem?.cid}`,
-                            thumb_url: `https://ipfs.io/ipfs/${attachItem?.cid}`,
-                            name: attachItem?.name,
-                        },
-                    ],
-                };
-            }
-            console.log("connected channel", channel);
-            console.log("Sending messsageData is ", messageData);
-            await channel.raw.sendMessage(messageData); // sending a new message
-            setRerenderSwitch(!rerenderSwitch);
-            const notificationPayload = {
-                topic: "newMessage",
-                notification: {
-                    title: channel.name,
-                    body: `${authContext.user?.lens?.name || authContext.user?.lens?.handle || authContext.user?.lens?.id || truncateAddress(authContext.user?.lens?.ownedBy)}: ${messageData.text}`
-                },
-                data: {
-                    type: "channelMessage",
-                    name: "Portal New Message",
-                    channelId: channel.id
-                },
-                android: {
-                    ttl: 4500,
-                    priority: "normal"
-                }
-            }
-            hookMention.onRefresh();
-            setChatMeta(null);
-            // await newMessageNotification(notificationPayload); // sending new message notification
-        } catch (error) {
-            console.log("Could not send message", error);
+      if (attachItem) {
+        const fileCid = await uploadAtIpfsRoot([attachItem]);
+        console.log("The uploaded file", fileCid);
+        messageData = {
+          ...messageData,
+          attachments: [
+            {
+              type: attachItem.type.split("/")[0],
+              asset_url: `https://ipfs.io/ipfs/${fileCid}`,
+              thumb_url: `https://ipfs.io/ipfs/${fileCid}`,
+              name: attachItem?.name,
+            },
+          ],
+        };
+      }
+      console.log("connected channel", channel);
+      console.log("Sending messsageData is ", messageData);
+      await channel.raw.sendMessage(messageData); // sending a new message
+      
+      setRerenderSwitch(!rerenderSwitch);
+      setStreamLoading(false);
+      textareaRef.current.value = ""
+      setAttachItem(null);
+      setActionMessage(null);
+
+      const notificationPayload = {
+        topic: "newMessage",
+        notification: {
+          title: channel.name,
+          body: `${authContext.user?.lens?.name || authContext.user?.lens?.handle || authContext.user?.lens?.id || truncateAddress(authContext.user?.lens?.ownedBy)}: ${messageData.text}`
+        },
+        data: {
+          type: "channelMessage",
+          name: "Portal New Message",
+          channelId: channel.id
+        },
+        android: {
+          ttl: 4500,
+          priority: "normal"
         }
-        textareaRef.current.value = ""
-        setAttachItem(null);
-        setActionMessage(null);
-    };
+      }
+      hookMention.onRefresh();
+      setChatMeta(null);
+      await newMessageNotification(notificationPayload); // sending new message notification
+    } catch (error) {
+      console.log("Could not send message", error);
+      setStreamLoading(false);
+    }
+  };
 
   const editMessage = async () => {
     if (!authContext?.address) {
@@ -206,25 +190,25 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     console.log("Un-Pinned a message");
   };
 
-    const keyDownMessage = async (event: any) => {
-        const keycode = event.which || event.keycode;
-        if (keycode == 13 && !event.shiftKey) {
-            event.preventDefault();
+  const keyDownMessage = async (event: any) => {
+    const keycode = event.which || event.keycode;
+    if (keycode == 13 && !event.shiftKey) {
+      event.preventDefault();
 
-            if (textareaRef.current.value.substring(0, 1) == '/') {
-                setSlashCmdValue(textareaRef.current.value);
-                setSlashCmd(false);
-                textareaRef.current.value = "";
-                // widgetDrawer.onOpen();
-            } else {
-                await addMessage();
-            }
-        }
-        else if (event.key == "/") {
-            console.log("slash key was pressed");
-            setSlashCmd(true);
-        }
-    };
+      if (textareaRef.current.value.substring(0, 1) == '/') {
+        setSlashCmdValue(textareaRef.current.value);
+        setSlashCmd(false);
+        textareaRef.current.value = "";
+        // widgetDrawer.onOpen();
+      } else {
+        await addMessage();
+      }
+    }
+    else if (event.key == "/") {
+      console.log("slash key was pressed");
+      setSlashCmd(true);
+    }
+  };
 
   const handleEdit = (message: any) => {
     setActionMessage({ action: "EDIT", item: message });
@@ -235,9 +219,9 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleAttachment = async (attachment: any) => {
-    setAttachLoading(true);
-    setAttachItem(attachment);
-    setAttachLoading(false);
+    const filePicked = attachment.target.files[0];
+    console.log(filePicked);
+    setAttachItem(filePicked);
   };
 
   const deleteAttachment = () => {
@@ -329,23 +313,23 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     }
   };
 
-    const onChange = async (event: any, users?: any) => {
-        const value = event.target.value;
-        console.log("Typing value is ", textareaRef.current.value);
-        const lastChar = value.split("")[value.length - 1];
-        if (lastChar == " " || value == "") {
-            console.log("set isTyping to false");
-            hookMention.setIsActive(false);
-            setSlashCmd(false);
-        }
-        if (lastChar == "@") {
-            console.log("set isTyping to true");
-            setSlashCmd(false);
-            hookMention.setIsActive(true);
-        }
-        if (hookMention.isActive) {
-            hookMention.onTrigger(value, users);
-        }
+  const onChange = async (event: any, users?: any) => {
+    const value = event.target.value;
+    console.log("Typing value is ", textareaRef.current.value);
+    const lastChar = value.split("")[value.length - 1];
+    if (lastChar == " " || value == "") {
+      console.log("set isTyping to false");
+      hookMention.setIsActive(false);
+      setSlashCmd(false);
+    }
+    if (lastChar == "@") {
+      console.log("set isTyping to true");
+      setSlashCmd(false);
+      hookMention.setIsActive(true);
+    }
+    if (hookMention.isActive) {
+      hookMention.onTrigger(value, users);
+    }
 
     if (slashCmd) {
       const cmds = value.split(" ");
@@ -356,75 +340,75 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     // await channel.keystroke();
   };
 
-    const mentionSelect = (user: any) => {
-        console.log("The cliked value ", user);
-        const msg = textareaRef.current.value;
-        const result =
-            textareaRef.current.value.substr(
-                0,
-                msg.length - hookMention.mention.length
-                // msg.length
-            ) + user.name;
-        textareaRef.current = result;
-        hookMention.onSelect(user);
-    };
+  const mentionSelect = (user: any) => {
+    console.log("The cliked value ", user);
+    const msg = textareaRef.current.value;
+    const result =
+      textareaRef.current.value.substr(
+        0,
+        msg.length - hookMention.mention.length
+        // msg.length
+      ) + user.name;
+    textareaRef.current = result;
+    hookMention.onSelect(user);
+  };
 
-    return {
-        // REACTIONS
-        reactions: reactions,
-        setReactions: setReactions,
-        handleReaction: handleReaction,
-        rerenderSwitch: rerenderSwitch,
-        // MENTIONS
-        mentionActive: hookMention.isActive,
-        mentionList: hookMention.mentionList,
-        mentionSelect: mentionSelect,
-        //
-        userObjTyping: userObjTyping,
-        onChange: onChange,
-        addMessage: addMessage,
-        editMessage: editMessage,
-        deleteMessage: deleteMessage,
-        // PINS
-        pinMessage: pinMessage,
-        unPinMessage: unPinMessage,
-        //
-        keyDownMessage: keyDownMessage,
-        textareaRef: textareaRef,
-        attachItem: attachItem,
-        attachLoading: attachLoading,
-        handleAttachment: handleAttachment,
-        deleteAttachment: deleteAttachment,
-        actionMessage: actionMessage,
-        setActionMessage: setActionMessage,
-        setSelectedMessages:setSelectedMessages,
-        // transactionModal: transactionModal,
-        chatMeta: chatMeta,
-        setChatMeta: setChatMeta,
-        slashCmd: slashCmd,
-        setSlashCmd: setSlashCmd,
-        // slashCmds: chatFilterHook.slashCmds,
-        slashCmdValue: slashCmdValue,
-        setSlashCmdValue: setSlashCmdValue,
-        slashRun: slashRun,
-        handleSearch: handleSearch,
-        handleSearchClose: handleSearchClose,
-        searchActive: searchActive,
-        searchQuery: searchQuery,
-        setSearchQuery: setSearchQuery,
-        handleMultiSelect: handleMultiSelect,
-        handleMultiSelectClose: handleMultiSelectClose,
-        handleLongPressSelect: handleLongPressSelect,
-        handleLongPressSelectClose: handleLongPressSelectClose,
-        handleReply: handleReply,
-        handleReplyClose: handleReplyClose,
-        handleCopy: handleCopy,
-        handleEdit: handleEdit,
-        handleEditClose: handleEditClose,
-        handleSelect: handleSelect,
-        selectedMessages: selectedMessages,
-        // widgetDrawer: widgetDrawer
-    };
+  return {
+    // REACTIONS
+    reactions: reactions,
+    setReactions: setReactions,
+    handleReaction: handleReaction,
+    rerenderSwitch: rerenderSwitch,
+    // MENTIONS
+    mentionActive: hookMention.isActive,
+    mentionList: hookMention.mentionList,
+    mentionSelect: mentionSelect,
+    //
+    userObjTyping: userObjTyping,
+    onChange: onChange,
+    addMessage: addMessage,
+    editMessage: editMessage,
+    deleteMessage: deleteMessage,
+    // PINS
+    pinMessage: pinMessage,
+    unPinMessage: unPinMessage,
+    //
+    keyDownMessage: keyDownMessage,
+    textareaRef: textareaRef,
+    attachItem: attachItem,
+    streamLoading: streamLoading,
+    handleAttachment: handleAttachment,
+    deleteAttachment: deleteAttachment,
+    actionMessage: actionMessage,
+    setActionMessage: setActionMessage,
+    setSelectedMessages: setSelectedMessages,
+    // transactionModal: transactionModal,
+    chatMeta: chatMeta,
+    setChatMeta: setChatMeta,
+    slashCmd: slashCmd,
+    setSlashCmd: setSlashCmd,
+    // slashCmds: chatFilterHook.slashCmds,
+    slashCmdValue: slashCmdValue,
+    setSlashCmdValue: setSlashCmdValue,
+    slashRun: slashRun,
+    handleSearch: handleSearch,
+    handleSearchClose: handleSearchClose,
+    searchActive: searchActive,
+    searchQuery: searchQuery,
+    setSearchQuery: setSearchQuery,
+    handleMultiSelect: handleMultiSelect,
+    handleMultiSelectClose: handleMultiSelectClose,
+    handleLongPressSelect: handleLongPressSelect,
+    handleLongPressSelectClose: handleLongPressSelectClose,
+    handleReply: handleReply,
+    handleReplyClose: handleReplyClose,
+    handleCopy: handleCopy,
+    handleEdit: handleEdit,
+    handleEditClose: handleEditClose,
+    handleSelect: handleSelect,
+    selectedMessages: selectedMessages,
+    // widgetDrawer: widgetDrawer
+  };
 };
 
 export default useStreamChat;

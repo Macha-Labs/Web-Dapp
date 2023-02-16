@@ -25,7 +25,6 @@ const ChatMessage = (props: any) => {
     ) {
       return <LayoutFilePreview attachment={attachment} />;
     }
-  };
 
   return (
     <StyledConversation>
