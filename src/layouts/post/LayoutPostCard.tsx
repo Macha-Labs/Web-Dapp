@@ -1,24 +1,9 @@
 import { Avatar, Button, Heading, Text } from "@chakra-ui/react";
-import LikeIcon from "components/Icon/LikeIcon";
-import { Col, Icon, Row } from "style";
+import { Col, Row, StyledPostCard } from "@/styles/StyledComponents";
 import styled from "styled-components";
-import { helperIPFS } from "helpers";
-import { Post } from "style/card";
-import CommentIcon from "components/Icon/CommentIcon";
-import { likePost } from "helpers/lens/lens";
-import { useContext } from "react";
-import AuthContext from "contexts/auth";
-
-const ActionRow = styled(Row)`
-    width: 100%;
-
-    .buttonCol {
-        background: transparent;
-    }
-`
+import { helperIPFS } from "@/helpers";
 
 const LayoutPostCard = (props: any) => {
-    const authContext = useContext(AuthContext);
     return (
         <>
             {
@@ -26,7 +11,7 @@ const LayoutPostCard = (props: any) => {
                     ?
                     (
                         <>
-                            <Post className="m-b-1 border-with-hover">
+                            <StyledPostCard className="m-b-1 border-with-hover">
                                 <Col className="card-body">
                                     <Row>
                                         <Col className="m-b-1">
@@ -56,12 +41,12 @@ const LayoutPostCard = (props: any) => {
                                         }
                                     </Col>
                                     <Col className="m-b-1">
-                                        <ActionRow>
+                                        <div className="actions">
                                             <Col className="m-r-0-5">
                                                 <Button
                                                     className="buttonCol"
                                                     size="xs"
-                                                    leftIcon={<LikeIcon width="20" height="20" fill="#efefef" />}
+                                                    // leftIcon={<LikeIcon width="20" height="20" fill="#efefef" />}
                                                     variant="state_transparent_to_brand_hover"
                                                     onClick={() => likePost({profileId: authContext.userLens?.profile?.id, reaction: 'UPVOTE', publicationId: props.item?.response ? props.item?.response : props.item?.id})}
                                                     >
@@ -72,12 +57,12 @@ const LayoutPostCard = (props: any) => {
                                                 <Button
                                                     className="buttonCol"
                                                     size="xs"
-                                                    leftIcon={<CommentIcon width="20" height="20" fill="#efefef" />}
+                                                    // leftIcon={<CommentIcon width="20" height="20" fill="#efefef" />}
                                                     variant="state_transparent_to_brand_hover">
                                                     Comment
                                                 </Button>
                                             </Col>
-                                        </ActionRow>
+                                        </div>
                                     </Col>
                                 </Col>
                                 <Col className="card-footer">
@@ -86,7 +71,7 @@ const LayoutPostCard = (props: any) => {
                                         <Heading className="h6 m-b-0" size="xs">From Lens Protocol</Heading>
                                     </Row>
                                 </Col>
-                            </Post>
+                            </StyledPostCard>
                         </>
                     )
                     :

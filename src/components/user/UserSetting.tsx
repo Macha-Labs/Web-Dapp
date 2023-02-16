@@ -1,14 +1,14 @@
 import useUserSetting from "@/hooks/user/useUserSetting";
-import { Icon, Row, Card, PageMenu, PageMain } from "@/styles/StyledComponents";
+import { Icon, Row, StyledCard, PageMenu, PageMain } from "@/styles/StyledComponents";
 import { Button, Heading, useToast } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import UserProfile from "./UserProfile";
 
 
 const UserSetting = (props) => {
     const hookUserSetting = useUserSetting();
 
     const template = () => {
-        return (<></>)
+        return (<UserProfile />)
     }
 
 
@@ -34,11 +34,11 @@ const UserSetting = (props) => {
                 </PageMenu>
                 <PageMain>
                     <div className="content">
-                        <Card>
+                        <StyledCard>
                             {
                                 template()
                             }
-                        </Card>
+                        </StyledCard>
                     </div>
                     <div className="close">
                         <Icon className="state-2-3" onClick={props.modal.onClose}></Icon>

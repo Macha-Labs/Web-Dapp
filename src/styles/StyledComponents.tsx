@@ -180,7 +180,9 @@ export const List = styled.div`
   }
 `;
 
-export const Card = styled.div`
+// StyledCard
+
+export const StyledCard = styled.div`
   border-radius: ${style.borderRadiusCard};
   background: ${style.card.bg.default};
   padding: ${style.paddingCard};
@@ -225,6 +227,65 @@ export const Card = styled.div`
     justify-content: center;
   }
 `;
+
+//
+export const StyledNFTCard = styled(StyledCard)`
+  width: 250px;
+  cursor: pointer;
+  background-position: center;
+  background-size: cover;
+  padding: 2px;
+
+  .content {
+    padding: 1rem;
+  }
+`;
+
+export const StyledFileCard = styled(StyledCard)`
+  margin: 5px 0 5px 0;
+  padding: 10px;
+  border: 1px;
+  background: ${style.card.bg.default};
+  opacity: 0.8;
+  border-radius: 5px;
+  width: 50vh;
+
+  .name {
+    width: 40vh;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+export const StyledMessageCard = styled(StyledCard)`
+  margin-bottom: 0.5rem;
+`;
+
+export const StyledTransactionCard = styled(StyledCard)`
+  width: 400px;
+  padding: 10px 0px;
+  cursor: pointer;
+`;
+
+export const StyledPostCard = styled(StyledCard)`
+    cursor: pointer;
+    padding: 10px 0px;
+    img {
+        border-radius: ${style.borderRadius};
+    }
+
+    .actions {
+      width: 100%;
+
+      .buttonCol {
+          background: transparent;
+      }
+    }
+`
+
+//
 
 export const Placeholder = styled.div`
   border: ${style.borderPlaceholder};
@@ -528,7 +589,7 @@ export const StyledChatItem = styled(Row)`
   }
 `;
 
-export const ChatPreviewCard = styled(Card)`
+export const ChatPreviewCard = styled(StyledCard)`
   margin-bottom: 0.5rem;
   height: 200px;
 
@@ -593,7 +654,7 @@ export const StyledChatInput = styled(Row)`
   }
 `;
 
-export const StyledChatPreviewCard = styled(Card)`
+export const StyledChatPreviewCard = styled(StyledCard)`
   margin-bottom: 0.5rem;
   height: 200px;
 
@@ -682,46 +743,6 @@ export const StyledConversation = styled(Col)`
   }
 `;
 
-//
-export const StyledNFTCard = styled(Card)`
-  width: 250px;
-  cursor: pointer;
-  background-position: center;
-  background-size: cover;
-  padding: 2px;
-
-  .content {
-    padding: 1rem;
-  }
-`;
-
-export const StyledFileCard = styled(Card)`
-  margin: 5px 0 5px 0;
-  padding: 10px;
-  border: 1px;
-  background: ${style.card.bg.default};
-  opacity: 0.8;
-  border-radius: 5px;
-  width: 50vh;
-
-  .name {
-    width: 40vh;
-  }
-
-  &:hover {
-    opacity: 0.9;
-  }
-`;
-
-export const StyledMessageCard = styled(Card)`
-  margin-bottom: 0.5rem;
-`;
-
-export const StyledTransactionCard = styled(Card)`
-  width: 400px;
-  padding: 10px 0px;
-  cursor: pointer;
-`;
 
 // Page
 
@@ -773,3 +794,30 @@ export const PageMain = styled.div`
 export const TextareaDiv = styled.div`
   padding: 5px;
 `;
+
+
+
+// Profile
+export const StyledProfileBanner = styled.div`
+    position: relative;
+    margin-bottom: 3rem;
+
+    .bannerImage {
+        background-color: #121533;
+        border-radius: 10px;
+        height: 150px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .bannerAvatar {
+        position: absolute;
+        top: 5rem;
+        left: 41%;
+    }
+
+    .bioText {
+        font-weight: 500;
+        color: #6F767E;
+    }
+`

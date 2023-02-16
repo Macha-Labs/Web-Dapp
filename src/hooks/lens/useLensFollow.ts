@@ -19,7 +19,7 @@ const useLensFollows = (profileID: any) => {
 
     const TEST_LENS_HUB_CONTRACT = "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82";
 
-    const getVRS = async (typedData) => {
+    const getVRS = async (typedData: any) => {
         const signature = await signedTypeData(
             typedData.domain,
             typedData.types,
