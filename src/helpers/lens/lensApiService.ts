@@ -1,5 +1,4 @@
 import { TypedDataDomain } from "@ethersproject/abstract-signer";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
 import { ethers, utils } from "ethers";
 import omitDeep from "omit-deep";
 
@@ -12,8 +11,8 @@ export const signedTypeData = async (
   domain: TypedDataDomain,
   types: Record<string, any>,
   value: Record<string, any>,
-  addr,
-  fn
+  address: any,
+  fn?: any
 ) => {
   // remove the __typedname from the signature!
   let typedData = {
@@ -22,7 +21,7 @@ export const signedTypeData = async (
     "value": omit(value, "__typename"),
     "message": {
       "from": {
-        "wallet": addr
+        "wallet": address
       },
       contents: "Posting on Lens"
     }
@@ -34,9 +33,9 @@ export const signedTypeData = async (
   let msg = ethers.utils.keccak256(message);
   console.log("Here it the typed data message ", msg);
   try {
-    console.log(addr);
+    console.log(address);
     return await fn.signMessage([
-      addr, 
+      address, 
       msg
     ]
     );

@@ -45,9 +45,9 @@ const ChatList = (props: any) => {
                                                     <Button
                                                         onClick={() => { console.log('Click on button', item); chatProvider.initiate(item, authContext.address) }}
                                                         className="menu-item w-100 m-b-1"
-                                                        size="md"
-                                                        variant={props.menu?._id == item?._id ? 'state_card' : 'transparent'}>
-                                                            <Avatar size="sm" src="" className="m-r-0-5"/>
+                                                        size="xl"
+                                                        variant={chatProvider.hookChannel.channel?.id == item?.id ? 'state_brand' : 'state_card'}>
+                                                            <Avatar size="md" src="" className="m-r-0-5"/>
                                                             <Col className="w-100">
                                                                 {item.name}
                                                             </Col>

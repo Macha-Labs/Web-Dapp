@@ -14,9 +14,6 @@ const useLensFollows = (profileID: any) => {
     const [isFollowingByMe, setIsFollowingYou] = useState<any>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [loadingText, setLoadingText] = useState<string>("");
-    // TODO: Handle This
-    // const connector = useWalletConnect();
-    const connector = {accounts: []}
 
     const TEST_LENS_HUB_CONTRACT = "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82";
 
@@ -25,8 +22,7 @@ const useLensFollows = (profileID: any) => {
             typedData.domain,
             typedData.types,
             typedData.value,
-            connector.accounts[0],
-            connector
+            authContext.address,
         );
         console.log("Signature", signature);
         const {v, r, s} = splitSignature(signature);
