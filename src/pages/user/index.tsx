@@ -25,10 +25,10 @@ const User = () => {
   const authContext = useContext(AuthContext);
   const hookUserSetting = useUserSettings();
 
+  const [window,setwindow]=useState("UserProfile");
   const TempalteRight = () => {
     return (
-      <UserProfile user={authContext?.user} />
-        // <UserEdit/>
+      window=="UserProfile"?<UserProfile user={authContext?.user} />:window=="UserEdit"?<UserEdit/>:<UserProfile user={authContext?.user}/>
     );
   };
 
@@ -45,6 +45,7 @@ const User = () => {
             <LayoutOptions
               options={hookUserSetting.userSettings}
               style={{ class: "m-t-1" }}
+              setwindow={setwindow}
             />
           </div>
         </StyledPageList>
