@@ -286,10 +286,14 @@ export const StyledPostCard = styled(StyledCard)`
   }
 `;
 export const StyledOptionsCard = styled(StyledCard)`
-  .item {
-    padding: 5px 0px;
-  }
-`;
+    padding: 0px;
+    .item {
+      padding: 10px;
+      &:hover {
+        background: ${style.button.bg.hover};
+      }
+    }
+`
 
 //
 
@@ -762,7 +766,7 @@ export const StyledPageList = styled.div`
   border-right: ${style.header.border.default};
 
   .body {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 55px);
     width: 100%;
     margin: auto;
     padding: 20px 10px;
