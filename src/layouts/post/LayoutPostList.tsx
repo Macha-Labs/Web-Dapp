@@ -3,40 +3,34 @@ import LayoutPostCard from "./LayoutPostCard";
 import LayoutPostLoading from "./LayoutPostLoading";
 
 interface Props {
-    [key: string]: any
+  [key: string]: any;
 }
-
-
 
 const LayoutPostList = ({ ...props }) => {
-
-    const template = () => {
-        if (props?.isLoading) {
-            return (
-                <LayoutPostLoading />
-            )
-        } else if (props?.list?.length) {
-            return (
-                <>
-                    {
-                        props.list.map((item, index) =>
-                            <LayoutPostCard item={item} />
-                        )
-                    }
-                </>
-            )
-        } else {
-            return (
-                <LayoutCard size="lg" hr='center' vr='center' children={'No Posts Yet'}></LayoutCard>
-            )
-        }
-    }
-
-    return (
+  const template = () => {
+    if (props?.isLoading) {
+      return <LayoutPostLoading />;
+    } else if (props?.list?.length) {
+      return (
         <>
-            {template()}
+          {props.list.map((item: any, index: any) => (
+            <LayoutPostCard item={item} key={index} />
+          ))}
         </>
-    )
-}
+      );
+    } else {
+      return (
+        <LayoutCard
+          size="lg"
+          hr="center"
+          vr="center"
+          text={"No Posts Yet"}
+        ></LayoutCard>
+      );
+    }
+  };
+
+  return <>{template()}</>;
+};
 
 export default LayoutPostList;
