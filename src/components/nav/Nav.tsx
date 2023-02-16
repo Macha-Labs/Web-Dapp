@@ -4,7 +4,7 @@ import ChatIcon from "../icons/IconChat";
 import HashIcon from "../icons/IconDarkUser";
 import UserIcon from "../icons/IconDarkUser";
 import NFTIcon from "../icons/IconDarkUser";
-import {useDisclosure,} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
 
@@ -13,15 +13,12 @@ const Nav = (props: any) => {
   const userDrawer = useDisclosure();
 
   const templateOrgs = () => {
-    return (
-      <ModalPage></ModalPage>
-    );
+    return <ModalPage></ModalPage>;
   };
 
-
   const templateNotifications = () => {
-    return <></>
-  }
+    return <></>;
+  };
 
   return (
     <>
@@ -49,21 +46,23 @@ const Nav = (props: any) => {
           <div className="body">
             <Col className="hr-center vr-between h-100">
               <Col className="hr-center">
-                <Icon
-                  className="state-1-2 scale m-b-1"
-                  onClick={orgsDrawer.onOpen}
-                >
-                  <HashIcon />
-                </Icon>
-                <Icon
-                  className="state-1-2 scale m-b-1"
-                  onClick={userDrawer.onOpen}
-                >
-                  <UserIcon />
-                </Icon>
-                <Icon
-                  className="state-1-2 scale m-b-1"
-                >
+                <Link href="/chat/Chat">
+                  <Icon
+                    className="state-1-2 scale m-b-1"
+                    onClick={orgsDrawer.onOpen}
+                  >
+                    <HashIcon />
+                  </Icon>
+                </Link>
+                <Link href="user/User">
+                  <Icon
+                    className="state-1-2 scale m-b-1"
+                    onClick={userDrawer.onOpen}
+                  >
+                    <UserIcon />
+                  </Icon>
+                </Link>
+                <Icon className="state-1-2 scale m-b-1">
                   <NFTIcon />
                 </Icon>
               </Col>

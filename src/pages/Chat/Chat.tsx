@@ -4,15 +4,13 @@ import React, { useState } from "react";
 import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 
 function Chat() {
-  
-
   return (
     <Row>
       <StyledChatList>
-        <ChatList/>
+        <ChatList />
       </StyledChatList>
       <StyledChat>
-        <ChatContainer/>
+        <ChatContainer />
       </StyledChat>
     </Row>
   );

@@ -12,8 +12,8 @@ const ChatHeader = props => {
     return (
       <ModalSlider event={membersModal}>
         <UserList
-          onlineUsers={props.hookMembers.onlineUsers}
-          offlineUsers={props.hookMembers.offlineUsers}
+          onlineUsers={props.hookMembers?.onlineUsers}
+          offlineUsers={props.hookMembers?.offlineUsers}
         />
       </ModalSlider>
     );
@@ -22,7 +22,9 @@ const ChatHeader = props => {
   const TemplatePinnedMessages = () => {
     return (
       <ModalSlider event={pinneddMessageModal}>
-        <ChatMessageList pinnedMessageList={props.hookChannel.pinnedMessages} />
+        <ChatMessageList
+          pinnedMessageList={props.hookChannel?.pinnedMessages}
+        />
       </ModalSlider>
     );
   };

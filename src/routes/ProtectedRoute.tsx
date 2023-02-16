@@ -1,6 +1,7 @@
 import { AuthContext } from "@/providers/AuthProvider";
 import { useRouter } from "next/router";
 import React from "react";
+
 export const ProtectRoute = ({ children, routeName }: any) => {
   const router = useRouter();
   const authContext = React.useContext(AuthContext);

@@ -210,16 +210,16 @@ const ChatInput = (props: any) => {
 
             <Col className="w-100 vr-center">
               <Textarea
-                onChange={(event) => {
+                onChange={event => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
                   props.hookChat.onChange(event);
                 }}
-                ref={props.hookChat.textareaRef}
+                ref={props.hookChat?.textareaRef}
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
-                onKeyDown={(event) => props?.hookChat?.keyDownMessage(event)}
+                onKeyDown={event => props?.hookChat?.keyDownMessage(event)}
                 placeholder="Message..."
                 height="auto"
                 rows={1}
