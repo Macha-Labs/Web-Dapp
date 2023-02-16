@@ -25,9 +25,7 @@ const User = () => {
 
   const TempalteRight = () => {
     return (
-      <StyledCard>
         <UserProfile user={authContext?.user} />
-      </StyledCard>
     );
   };
 
