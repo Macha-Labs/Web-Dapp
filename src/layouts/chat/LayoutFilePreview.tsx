@@ -27,8 +27,6 @@ const LayoutFilePreview = (props: any) => {
                         </Icon>
                     </Col>
                 </Row>
-
-
             </StyledFileCard>
         </>
     )

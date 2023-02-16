@@ -2,9 +2,8 @@ import { truncateAddress } from "@/helpers";
 import LayoutFilePreview from "@/layouts/chat/LayoutFilePreview";
 import LayoutImagePreview from "@/layouts/chat/LayoutImagePreview";
 import LayoutLinkPreview from "@/layouts/chat/LayoutLinkPreview";
-import { StyledConversation } from "@/styles/StyledComponents";
-import { Col, Icon, Row } from "@/styles/StyledComponents";
-import { Avatar, AvatarBadge, Heading, Tag, Text, Textarea } from "@chakra-ui/react";
+import { Col, Icon, Row, StyledConversation } from "@/styles/StyledComponents";
+import { Avatar, Text } from "@chakra-ui/react";
 
 const ChatMessage = (props: any) => {
 
@@ -25,30 +24,28 @@ const ChatMessage = (props: any) => {
         }
     }
 
-
     return (
         <StyledConversation>
-                    
             <Row className="message">
                 <Col>
                     <Avatar src={props.message?.user?.lensImage} className="m-r-1"></Avatar>
                 </Col>
-                
-                <Col className="w-100" style={{color: "#ffffff"}}>
+
+                <Col className="w-100" style={{ color: "#ffffff" }}>
                     <Text fontSize="sm">
                         {props.message?.user?.lensUsername ||
-                                    props.message?.user?.lensHandle ||
-                                        truncateAddress(
-                                            props.message?.user?.id
-                                        )
+                            props.message?.user?.lensHandle ||
+                            truncateAddress(
+                                props.message?.user?.id
+                            )
                         }
-                        
+
                     </Text>
                     {
                         props.message?.text
                     }
                     {props?.message?.attachments.map((item: any) => {
-                            return templateAttachment(item);
+                        return templateAttachment(item);
                     })}
                 </Col>
                 <Row className="w-100 action">
