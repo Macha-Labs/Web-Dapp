@@ -1,9 +1,10 @@
 import { StyledIcon } from "@/styles/StyledComponents";
 import React from "react";
 import { IKImage } from "imagekitio-react";
+import { style } from "@/styles/StyledConstants";
 function IconImage(props: any) {
   return (
-    <StyledIcon className="state-1-2 scale m-b-1" onClick={props.onClick}>
+    <StyledIcon className={props.style?.className + " state-1-2 scale"} onClick={props.onClick}>
       <IKImage
         path={`/icons/${props.path}`}
         transformation={[

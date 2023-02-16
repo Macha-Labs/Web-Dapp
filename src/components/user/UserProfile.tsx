@@ -12,7 +12,7 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { Col, StyledIcon, Row } from "@/styles/StyledComponents";
+import { Col, StyledIcon, Row, StyledCard } from "@/styles/StyledComponents";
 import { ChatIcon } from "@chakra-ui/icons";
 import useLensFollows from "@/hooks/lens/useLensFollow";
 import useLensPostsForUser from "@/hooks/lens/useLensPostsForUser";
@@ -128,67 +128,72 @@ const UserProfile = ({ ...props }) => {
     );
   };
 
-  return (
-    <>
-      {props.user ? (
-        <>
-          <LayoutProfileBanner profile={props.user?.lens} />
+  const TemplateProfile = () => {
+    return (
+      <StyledCard>
+        <LayoutProfileBanner profile={props.user?.lens} />
 
-          <Row>
-            <Col className="m-v-1 w-100 hr-center">
-              <Heading as="h3" size="lg">
-                {props.user?.lens?.name
-                  ? props.user?.lens?.name
-                  : props.user?.lens?.handle}
-              </Heading>
-              <h6>@{props.user?.lens?.handle}</h6>
-            </Col>
-          </Row>
+<Row>
+  <Col className="m-v-1 w-100 hr-center">
+    <Heading as="h3" size="lg">
+      {props.user?.lens?.name
+        ? props.user?.lens?.name
+        : props.user?.lens?.handle}
+    </Heading>
+    <h6>@{props.user?.lens?.handle}</h6>
+  </Col>
+</Row>
 
-          <Row className="vr-center hr-center">
-            {props.user?.lens?.bio ? (
-              <Col className="m-v-1">
-                <Text className="bioText">{props?.user?.lens?.bio}</Text>
-              </Col>
-            ) : (
-              <></>
-            )}
-          </Row>
+<Row className="vr-center hr-center">
+  {props.user?.lens?.bio ? (
+    <Col className="m-v-1">
+      <Text className="bioText">{props?.user?.lens?.bio}</Text>
+    </Col>
+  ) : (
+    <></>
+  )}
+</Row>
 
-          <Row className="m-v-1 vr-center hr-center">
-            {props.user?.lens?.isFollowedByMe ? (
-              <Button
-                variant="state_lens_unfollow"
-                size="md"
-                className="m-r-1"
-                onClick={() => {
-                  hookLensFollow.triggerUnFollow();
-                }}
-                isLoading={hookLensFollow.isLoading}
-                loadingText={hookLensFollow.loadingText}
-              >
-                Unfollow on Lens
-              </Button>
-            ) : (
-              <Button
-                variant="state_lens"
-                size="md"
-                className="m-r-1"
-                onClick={() => {
-                  hookLensFollow.triggerFollow();
-                }}
-                isLoading={hookLensFollow.isLoading}
-                loadingText={hookLensFollow.loadingText}
-              >
-                Follow on Lens
-              </Button>
-            )}
-            <Button leftIcon={<ChatIcon />} variant="outline" size="md">
-              Message
-            </Button>
-          </Row>
+<Row className="m-v-1 vr-center hr-center">
+  {props.user?.lens?.isFollowedByMe ? (
+    <Button
+      variant="state_lens_unfollow"
+      size="md"
+      className="m-r-1"
+      onClick={() => {
+        hookLensFollow.triggerUnFollow();
+      }}
+      isLoading={hookLensFollow.isLoading}
+      loadingText={hookLensFollow.loadingText}
+    >
+      Unfollow on Lens
+    </Button>
+  ) : (
+    <Button
+      variant="state_lens"
+      size="md"
+      className="m-r-1"
+      onClick={() => {
+        hookLensFollow.triggerFollow();
+      }}
+      isLoading={hookLensFollow.isLoading}
+      loadingText={hookLensFollow.loadingText}
+    >
+      Follow on Lens
+    </Button>
+  )}
+  <Button leftIcon={<ChatIcon />} variant="state_brand" size="md">
+    Message
+  </Button>
+</Row>
 
-          <Tabs variant="unstyled">
+      </StyledCard>
+    )
+  }
+
+  const TemplateTabs = () => {
+    return (
+      <Tabs variant="unstyled">
             <TabList>
               <Row className="m-v-1 w-100 vr-center hr-center">
                 <Tab>
@@ -215,7 +220,7 @@ const UserProfile = ({ ...props }) => {
                       <Avatar size="sm" />
                     </Col>
 
-                    <Col>Projects</Col>
+                    <Col>Followers</Col>
                   </Row>
                 </Tab>
                 <Tab>
@@ -224,7 +229,7 @@ const UserProfile = ({ ...props }) => {
                       <Avatar size="sm" />
                     </Col>
 
-                    <Col>People</Col>
+                    <Col>Following</Col>
                   </Row>
                 </Tab>
               </Row>
@@ -242,6 +247,15 @@ const UserProfile = ({ ...props }) => {
               <TabPanel>{templateConnections()}</TabPanel>
             </TabPanels>
           </Tabs>
+    )
+  }
+
+  return (
+    <>
+      {props.user ? (
+        <>
+          <TemplateProfile />
+          <TemplateTabs />
         </>
       ) : (
         <></>

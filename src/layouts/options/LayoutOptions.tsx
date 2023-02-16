@@ -10,14 +10,14 @@ const LayoutOptions = (props: any) => {
           {props.options?.map((item: any, index: any) => {
             return (
               <Row className="item m-b-0-5 hr-between" key={index}>
-                <Row>
+                <Row className="vr-center">
                   <IconImage path={item.icon} />
                   <Text fontSize="md" className="m-l-0-5">
                     {item.name}
                   </Text>
                 </Row>
                 <Row>
-                  <StyledIcon></StyledIcon>
+                  
                 </Row>
               </Row>
             );
