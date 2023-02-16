@@ -7,6 +7,7 @@ import useLensConnections from "@/hooks/lens/useLensConnections";
 import LayoutPostList from "../../layouts/post/LayoutPostList";
 import LayoutProfileBanner from "@/layouts/LayoutProfileBanner";
 import LayoutCard from "@/layouts/LayoutCard";
+import UserCard from "./UserCard";
 
 
 interface Props {
@@ -32,38 +33,13 @@ const UserProfile = ({ ...props }) => {
                                     hookLensConnections.following.length
                                         ?
                                         (
-                                            <WrapItem className="w-1-2 m-0">
-                                                <LayoutCard className="m-h-0-5">
-                                                    <Col className="w-100 vr-center">
-                                                        <Heading as="h5" size="sm" className="m-b-1">{props.profile?.name ? props.profile?.name : props.profile?.handle} Follows</Heading>
-                                                        <Row>
-                                                            <Wrap>
-                                                                {
-                                                                    hookLensConnections.following.slice(0, 5).map((item:any) =>
-                                                                        <WrapItem>
-                                                                            <Avatar size='sm' src={item.image} name={item.name}></Avatar>
-                                                                        </WrapItem>
-                                                                    )
-                                                                }
-
-                                                                {
-                                                                    hookLensConnections.following.length > 5
-                                                                        ?
-                                                                        (
-                                                                            <WrapItem>
-                                                                                <Avatar onClick={props.transitionUsers} size='sm' icon={<Text>{hookLensConnections.following.length - 5}</Text>}></Avatar>
-                                                                            </WrapItem>
-                                                                        )
-                                                                        :
-                                                                        (
-                                                                            <></>
-                                                                        )
-                                                                }
-                                                            </Wrap>
-                                                        </Row>
-                                                    </Col>
-                                                </LayoutCard>
-                                            </WrapItem>
+                                            <>
+                                                {hookLensConnections.following.map((item: key) => {
+                                                    return (
+                                                        <UserCard user={item}/>
+                                                    )
+                                                })}
+                                            </>
                                         )
                                         :
                                         (

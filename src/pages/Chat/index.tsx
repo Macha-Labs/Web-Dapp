@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import Nav from "@/components/nav/Nav";
 import { ChakraProvider } from "@chakra-ui/react";
+import theme from "@/styles/StyledChakraTheme";
 
 function Chat() {
   const Template = () => {
@@ -19,18 +20,18 @@ function Chat() {
     )
   }
   return (
-    <ChakraProvider>
-      
-    </ChakraProvider>
-    <StyledWindow>
-      <div className="left">
-          <Nav />
-      </div>
+    <ChakraProvider theme={theme}>
+        <StyledWindow>
+        <div className="left">
+            <Nav />
+        </div>
 
-      <div className="right">
-          <Template />
-      </div>
-  </StyledWindow>
+        <div className="right">
+            <Template />
+        </div>
+    </StyledWindow>
+    </ChakraProvider>
+    
   );
 }
 

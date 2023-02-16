@@ -34,7 +34,7 @@ function Main() {
         <AuthProvider>
           <StreamProvider>
             <ChatProvider>
-              
+              <User/>
             </ChatProvider>
           </StreamProvider>
         </AuthProvider>

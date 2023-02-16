@@ -188,6 +188,7 @@ export const StyledCard = styled.div`
   padding: ${style.paddingCard};
   box-shadow: ${style.card.shadow.default};
   cursor: pointer;
+  width: 100%;
 
   .card-body {
     padding: 0px 20px;
