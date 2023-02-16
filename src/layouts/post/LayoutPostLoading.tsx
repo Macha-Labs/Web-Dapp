@@ -1,11 +1,11 @@
+import { StyledPostCard } from "@/styles/StyledComponents";
 import { Avatar } from "@chakra-ui/react";
-import { Post } from "style/card";
 
 const LayoutPostLoading = () => {
     return (
-        <Post>
+        <StyledPostCard>
             <Avatar size="md" />
-        </Post>
+        </StyledPostCard>
     )
 }
 

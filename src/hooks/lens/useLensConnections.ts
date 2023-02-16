@@ -10,7 +10,7 @@ const useLensConnections = (account?: any) => {
     const getFollowing = (account) => {
         fetchFollowing({address: account}).then((data) => {
             const followingData = data.data.following.items.map((item) => {
-                return UserLens$(item.profile);
+                return {db: null, lens: UserLens$(item.profile)};
             });
             logger(
                 "lens",

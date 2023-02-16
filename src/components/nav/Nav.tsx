@@ -1,40 +1,31 @@
 import React from "react";
-import styled from "styled-components";
-import { Col, Icon, Logo, Row, StyledNav } from "../../styles/StyledComponents";
+import {
+  Col,
+  StyledIcon,
+  Logo,
+  Row,
+  StyledNav,
+} from "../../styles/StyledComponents";
 import ChatIcon from "../icons/IconChat";
-import { useRef } from "react";
 import HashIcon from "../icons/IconDarkUser";
 import UserIcon from "../icons/IconDarkUser";
 import NFTIcon from "../icons/IconDarkUser";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalBody,
-  useDisclosure,
-  ModalCloseButton,
-} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
-import UserSetting from "../user/UserSetting";
+import IconImage from "../icons/IconImage";
 
 const Nav = (props: any) => {
   const orgsDrawer = useDisclosure();
   const userDrawer = useDisclosure();
 
   const templateOrgs = () => {
-    return (
-      <ModalPage></ModalPage>
-    );
+    return <ModalPage></ModalPage>;
   };
 
-  const templateUser = () => {
-    return (<ModalPage children={<UserSetting modal={userDrawer} />} event={userDrawer}></ModalPage>)
-  }
-
   const templateNotifications = () => {
-    return <></>
-  }
+    return <></>;
+  };
 
   return (
     <>
@@ -42,7 +33,7 @@ const Nav = (props: any) => {
         <StyledNav>
           <div className="header">
             <Col className="hr-center vr-center h-100">
-              <Icon onClick={orgsDrawer.onOpen}>
+              <StyledIcon onClick={orgsDrawer.onOpen}>
                 <Logo
                   className="sm"
                   src={
@@ -56,38 +47,28 @@ const Nav = (props: any) => {
                       "https://0xmetame-assets.s3.ap-south-1.amazonaws.com/default-user.png";
                   }}
                 />
-              </Icon>
+              </StyledIcon>
             </Col>
           </div>
           <div className="body">
             <Col className="hr-center vr-between h-100">
               <Col className="hr-center">
-                <Icon
-                  className="state-1-2 scale m-b-1"
-                  onClick={orgsDrawer.onOpen}
-                >
-                  <HashIcon />
-                </Icon>
-                <Icon
-                  className="state-1-2 scale m-b-1"
-                  onClick={userDrawer.onOpen}
-                >
-                  <UserIcon />
-                </Icon>
-                <Icon
-                  className="state-1-2 scale m-b-1"
-                >
-                  <NFTIcon />
-                </Icon>
+                <Link href="/chat">
+                  <IconImage path="IconBrandChat.png" style={{className: "m-b-1"}} />
+                </Link>
+                <Link href="/user">
+                  <IconImage path="IconBrandProfile.png" style={{className: "m-b-1"}} />
+                </Link>
+                <IconImage path="IconBrandDiscover.png" style={{className: "m-b-1"}} />
               </Col>
 
               <Col className="hr-center">
                 {props.context?.currentAccount ? (
                   <>
                     <Link href="/chat">
-                      <Icon className="state-2-3 m-b-0-5 scale">
+                      <StyledIcon className="state-2-3 m-b-0-5 scale">
                         <ChatIcon />
-                      </Icon>
+                      </StyledIcon>
                     </Link>
                   </>
                 ) : (
@@ -99,7 +80,6 @@ const Nav = (props: any) => {
         </StyledNav>
       </Row>
       {templateOrgs()}
-      {templateUser()}
     </>
   );
 };
