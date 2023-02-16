@@ -11,6 +11,9 @@ import StreamProvider from "@/providers/StreamProvider";
 import { ChatProvider } from "@/providers/ChatProvider";
 import User from "./user";
 import { IKContext } from "imagekitio-react";
+import Chat from "./chat";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "@/styles/StyledChakraTheme";
 
 const { chains, provider } = configureChains(
   [polygonMumbai],
@@ -36,7 +39,9 @@ function Main() {
           <AuthProvider>
             <StreamProvider>
               <ChatProvider>
-                <User />
+                <ChakraProvider theme={theme}>
+                  <Chat />
+                </ChakraProvider>
               </ChatProvider>
             </StreamProvider>
           </AuthProvider>

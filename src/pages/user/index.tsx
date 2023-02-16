@@ -6,18 +6,14 @@ import { helperIPFS } from "@/helpers";
 import { useUserSettings } from "@/hooks/user/useUserSetting";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { AuthContext } from "@/providers/AuthProvider";
-import theme from "@/styles/StyledChakraTheme";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import {
   Row,
-  StyledCard,
-  StyledChat,
-  StyledChatList,
   StyledPageContainer,
   StyledPageList,
   StyledWindow,
 } from "@/styles/StyledComponents";
-import { Avatar, ChakraProvider, Input, Text } from "@chakra-ui/react";
+import { Avatar, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useContext } from "react";
 
@@ -66,17 +62,15 @@ const User = () => {
   }
 
   return (
-    <ChakraProvider theme={theme}>
-        <StyledWindow>
-            <div className="left">
-                <Nav />
-            </div>
+    <StyledWindow>
+      <div className="left">
+          <Nav />
+      </div>
 
-            <div className="right">
-                <Template />
-            </div>
-        </StyledWindow>
-    </ChakraProvider> 
+      <div className="right">
+          <Template />
+      </div>
+    </StyledWindow>
   );
 };
 

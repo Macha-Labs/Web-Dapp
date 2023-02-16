@@ -12,6 +12,7 @@ export const StyledWindow = styled.div`
     width: calc(100vw - ${style.nav.width});
     position: fixed;
     left: ${style.nav.width};
+    display: flex;
   }
 `;
 
@@ -508,7 +509,7 @@ export const StyledChatList = styled.div`
   border-right: ${style.header.border.default};
 
   .body {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 55px);
     width: 100%;
     margin: auto;
     padding: 20px 10px;

@@ -31,7 +31,7 @@ const OrgControl = props => {
 
   return (
     <>
-      <Row className="vr-center">
+      <Row className="w-100 vr-center">
         <Logo
           src={
             "https://meta-org-logos.s3.ap-south-1.amazonaws.com/" +
