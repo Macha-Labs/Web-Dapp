@@ -12,6 +12,13 @@ import AuthProvider from "@/providers/AuthProvider";
 import StreamProvider from "@/providers/StreamProvider";
 import { ChatProvider } from "@/providers/ChatProvider";
 import User from "./User/User";
+import {
+  useQuery,
+  QueryClientProvider,
+  QueryClient,
+} from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const { chains, provider } = configureChains(
   [polygonMumbai],
@@ -33,21 +40,23 @@ function Main() {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
-        <AuthProvider>
-          <StreamProvider>
-            <ChatProvider>
-              <StyledWindow>
-                <div className="left">
-                  <Nav />
-                </div>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <StreamProvider>
+              <ChatProvider>
+                <StyledWindow>
+                  <div className="left">
+                    <Nav />
+                  </div>
 
-                <div className="right">
-                  <User />
-                </div>
-              </StyledWindow>
-            </ChatProvider>
-          </StreamProvider>
-        </AuthProvider>
+                  <div className="right">
+                    <User />
+                  </div>
+                </StyledWindow>
+              </ChatProvider>
+            </StreamProvider>
+          </AuthProvider>
+        </QueryClientProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );
