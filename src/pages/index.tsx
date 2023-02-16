@@ -6,6 +6,7 @@ import Main from "./Main";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "@/styles/StyledChakraTheme";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -17,11 +18,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ChakraProvider theme={theme}>
-        <main className={styles.main}>
-          <Main />
-        </main>
-      </ChakraProvider>
+        <ChakraProvider theme={theme}>
+          <main className={styles.main}>
+            <Main />
+          </main>
+        </ChakraProvider>
     </>
   );
 }
