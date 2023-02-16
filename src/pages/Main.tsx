@@ -1,7 +1,6 @@
 import Nav from "@/components/nav/Nav";
 import { StyledWindow } from "../styles/StyledComponents";
 import React from "react";
-import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { mainnet, polygon, polygonMumbai } from "wagmi/chains";
@@ -35,15 +34,7 @@ function Main() {
         <AuthProvider>
           <StreamProvider>
             <ChatProvider>
-              <StyledWindow>
-                <div className="left">
-                  <Nav />
-                </div>
-
-                <div className="right">
-                  <User />
-                </div>
-              </StyledWindow>
+              
             </ChatProvider>
           </StreamProvider>
         </AuthProvider>
