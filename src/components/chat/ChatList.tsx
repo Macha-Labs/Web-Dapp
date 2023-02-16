@@ -93,8 +93,7 @@ const ChatList = (props: any) => {
             <Row className="header vr-center hr-between">
                 <OrgControl />
             </Row>
-            {/* {!authContext.isConnected && <ConnectButton />}  */}
-            <ConnectButton />
+            {!authContext.isConnected && <ConnectButton />} 
             {
                 (!chatProvider?.hookChannels?.channels)
                     ?
