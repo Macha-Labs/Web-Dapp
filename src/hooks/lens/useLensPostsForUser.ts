@@ -1,6 +1,7 @@
 import { getPublications } from "../../helpers/lens/lens";
 import { useEffect, useState } from "react";
 import { Post$ } from "../../schema/post";
+import { logger } from "@/helpers/logger";
 
 const useLensPostsForUser = (lensId: any) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -8,13 +9,12 @@ const useLensPostsForUser = (lensId: any) => {
 
     const getPosts = async () => {
         setIsLoading(true);
-        console.log(lensId);
         try {
             const res = await getPublications({
                 "profileId": lensId,
                 "publicationTypes": ["POST"]
             });
-            console.log('PostsByHandle', res.data.publications.items[0]);
+            logger('lens', 'useLensPostsForUser.getPosts', 'PostsByHandle', [res.data.publications.items[0]]);
             const result = res.data.publications.items.map((item: any) => {
                 return (
                     Post$(item)
@@ -23,7 +23,6 @@ const useLensPostsForUser = (lensId: any) => {
             setPosts(result);
             setIsLoading(false);
         } catch (err) {
-            console.log('error searching profiles...', err)
             setIsLoading(false);
         }
     }

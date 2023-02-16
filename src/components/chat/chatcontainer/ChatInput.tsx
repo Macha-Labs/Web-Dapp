@@ -15,17 +15,17 @@ import {
 import {
   Row,
   Col,
-  Icon,
+  StyledIcon,
   StyledChatInputContainer,
   StyledChatPreview,
   StyledChatInput,
 } from "@/styles/StyledComponents";
 import LayoutSlashPreview from "@/layouts/chat/LayoutSlashPreview";
-import LayoutPostCard from "../../post/LayoutPostCard";
-import LayoutProposalCard from "../../proposal/LayoutProposalCard";
-import LayoutNFTCard from "../../nft/LayoutNFTCard";
-import LayoutTransactionCard from "../../payment/LayoutTransactionCard";
-import LayoutPollCard from "../../poll/LayoutPollCard";
+import LayoutPostCard from "../../../layouts/post/LayoutPostCard";
+import LayoutProposalCard from "../../../layouts/proposal/LayoutProposalCard";
+import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
+import LayoutTransactionCard from "../../user/payment/LayoutTransactionCard";
+import LayoutPollCard from "../../../layouts/poll/LayoutPollCard";
 import ChatMention from "../ChatMention";
 
 // const TypingRow = styled(Row)`
@@ -50,7 +50,7 @@ const ChatInput = (props: any) => {
                 <Text fontSize="xs">@{props.actionMessage.item.user.id}</Text>
               </Row>
             </Col>
-            <Icon
+            <StyledIcon
               onClick={() =>
                 props?.chatContext.setActionMessage({
                   actionType: "",
@@ -59,7 +59,7 @@ const ChatInput = (props: any) => {
               }
             >
               {/* <CrossIcon width="12" height="12" fill="#efefef" /> */}
-            </Icon>
+            </StyledIcon>
           </div>
         ) : (
           <></>
@@ -89,9 +89,9 @@ const ChatInput = (props: any) => {
                   {props?.chatContext?.attachItem?.name}
                 </Text>
               </Col>
-              <Icon onClick={() => props?.chatContext.deleteAttachment()}>
+              <StyledIcon onClick={() => props?.chatContext.deleteAttachment()}>
                 {/* <DeleteIcon width="20" height="20" fill="#efefef" /> */}
-              </Icon>
+              </StyledIcon>
             </Row>
           </div>
         ) : (
@@ -125,9 +125,9 @@ const ChatInput = (props: any) => {
               <Heading as="h6" size="sm">
                 Preview
               </Heading>
-              <Icon>
+              <StyledIcon>
                 <CloseIcon />
-              </Icon>
+              </StyledIcon>
             </Row>
             {templateReply()}
             {templateAttachment()}
@@ -166,9 +166,9 @@ const ChatInput = (props: any) => {
     return (
       <Popover placement="top-start">
         <PopoverTrigger>
-          <Icon className="circled">
+          <StyledIcon className="circled">
             <PlusSquareIcon color="gray.300" />
-          </Icon>
+          </StyledIcon>
         </PopoverTrigger>
         <PopoverContent className="m-b-1">
           <PopoverBody>
@@ -210,25 +210,25 @@ const ChatInput = (props: any) => {
 
             <Col className="w-100 vr-center">
               <Textarea
-                onChange={(event) => {
+                onChange={event => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
                   props.hookChat.onChange(event);
                 }}
-                ref={props.hookChat.textareaRef}
+                ref={props.hookChat?.textareaRef}
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
-                onKeyDown={(event) => props?.hookChat?.keyDownMessage(event)}
+                onKeyDown={event => props?.hookChat?.keyDownMessage(event)}
                 placeholder="Message..."
                 height="auto"
                 rows={1}
               />
             </Col>
             <Col className="vr-center hr-center sideIcons">
-              <Icon className="circled">
+              <StyledIcon className="circled">
                 {/* <EmojiIcon width="20" height="20" fill="#e8e8e8" /> */}
-              </Icon>
+              </StyledIcon>
             </Col>
           </>
         ) : (

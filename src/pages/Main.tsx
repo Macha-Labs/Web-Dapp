@@ -1,8 +1,6 @@
 import Nav from "@/components/nav/Nav";
 import { StyledWindow } from "../styles/StyledComponents";
 import React from "react";
-import Chat from "./chat/Chat";
-import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { mainnet, polygon, polygonMumbai } from "wagmi/chains";
@@ -11,6 +9,8 @@ import { publicProvider } from "wagmi/providers/public";
 import AuthProvider from "@/providers/AuthProvider";
 import StreamProvider from "@/providers/StreamProvider";
 import { ChatProvider } from "@/providers/ChatProvider";
+import User from "./user";
+import { IKContext } from "imagekitio-react";
 
 const { chains, provider } = configureChains(
   [polygonMumbai],
@@ -32,21 +32,15 @@ function Main() {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
-        <AuthProvider>
-          <StreamProvider>
-            <ChatProvider>
-              <StyledWindow>
-                <div className="left">
-                  <Nav />
-                </div>
-
-                <div className="right">
-                  <Chat />
-                </div>
-              </StyledWindow>
-            </ChatProvider>
-          </StreamProvider>
-        </AuthProvider>
+        <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">
+          <AuthProvider>
+            <StreamProvider>
+              <ChatProvider>
+                <User />
+              </ChatProvider>
+            </StreamProvider>
+          </AuthProvider>
+        </IKContext>
       </RainbowKitProvider>
     </WagmiConfig>
   );

@@ -130,16 +130,19 @@ export const darkStyle = {
   colorIcon: "#888",
   colorIconActive: "#333",
   focusInput: "0",
-  header: {bg: {default: '#00081A'}, border: {default: '1px solid #0F172E'}},
+  header: {bg: {default: '#000C29'}, border: {default: '1px solid #0F172E'}},
   body: {bg: {default: '#000511'}},
-  nav: {width: "5%", bg: {default: '#00081A'}, border: {default:'1px solid #0F172E'}},
-  card: {bg: {default: '#00081A'}, border: {default: '1px solid #0F172E'}, shadow: {default: '0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)'}},
+  nav: {width: "5%", bg: {default: '#000C29'}, border: {default:'1px solid #0F172E'}},
+  card: {bg: {default: '#00081A'}, border: {default: '1px solid #14244B', hover: ''}, shadow: {default: '0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)'}},
   pannel: {bg: {default: ''}, shadow: {default: ''}},
   input: {bg: {default: "#020a21"}, border: {default: '1px solid #0F172E'}},
   modal: {bg: {default: '#000511'}, border: {default:'1px solid #0F172E'}, shadow: {default: ''}},
   sidebar: {},
   dropdown: {},
-  icon: {bg: { transparent: "transparent", default: "#262A34", hover: "#1b1e250", active: ""}},
+  icon: {
+    bg: { transparent: "transparent", default: "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)", hover: "#1b1e250", active: ""}, 
+    borderRadius: '12px'
+  },
   button: {bg: { transparent: "transparent", default: "linear-gradient(100.07deg, #197CEC 0.39%, #004AD9 73.45%)", hover: "#1b1e25",active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)", activeTranslucent: "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);", disabled: "",}},
   shadowDropdown:
     "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",

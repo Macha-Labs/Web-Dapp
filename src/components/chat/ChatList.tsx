@@ -6,7 +6,6 @@ import { useContext } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import useOrgChannels from "@/hooks/portal/useOrgChannels";
-import { StreamContext } from "@/providers/StreamProvider";
 
 const ChatList = (props: any) => {
     const chatProvider = useContext(ChatContext);
