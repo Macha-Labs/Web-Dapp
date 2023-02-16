@@ -9,7 +9,8 @@ type ChatContextType = {
   hookChannel: any | undefined;
   hookChat: any | undefined;
   hookMembers: any | undefined;
-  hookChannels: any;
+  hookChannels: any | undefined;
+  hookStreamAttachment: any | undefined;
   initiate: (channel: any, userAddress: any) => void;
 };
 
@@ -18,6 +19,7 @@ export const ChatContext = createContext<ChatContextType>({
   hookChat: null,
   hookMembers: null,
   hookChannels: [],
+  hookStreamAttachment: null,
   initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
 });
 
