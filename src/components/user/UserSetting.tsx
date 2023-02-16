@@ -1,14 +1,17 @@
 import useUserSetting from "@/hooks/user/useUserSetting";
+import { AuthContext } from "@/providers/AuthProvider";
 import { Icon, Row, StyledCard, PageMenu, PageMain } from "@/styles/StyledComponents";
 import { Button, Heading, useToast } from "@chakra-ui/react";
+import { useContext } from "react";
 import UserProfile from "./UserProfile";
 
 
 const UserSetting = (props) => {
     const hookUserSetting = useUserSetting();
+    const authContext = useContext(AuthContext);
 
     const template = () => {
-        return (<UserProfile />)
+        return (<UserProfile user={authContext?.user} />)
     }
 
 
