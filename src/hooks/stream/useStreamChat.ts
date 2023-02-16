@@ -1,3 +1,4 @@
+import { newMessageNotification } from "@/service/NotificationService";
 import { useContext, useState, useRef } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
@@ -158,7 +159,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
             }
             hookMention.onRefresh();
             setChatMeta(null);
-            // await newMessageNotification(notificationPayload); // sending new message notification
+            await newMessageNotification(notificationPayload); // sending new message notification
         } catch (error) {
             console.log("Could not send message", error);
         }
