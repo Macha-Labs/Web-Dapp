@@ -28,7 +28,7 @@ const ChatMessage = (props: any) => {
         <StyledConversation>
             <Row className="message">
                 <Col>
-                    <Avatar src={props.message?.user?.lensImage} className="m-r-1"></Avatar>
+                    <Avatar src={props.message?.user?.lensImage} className="m-r-1" />
                 </Col>
 
                 <Col className="w-100" style={{ color: "#ffffff" }}>
