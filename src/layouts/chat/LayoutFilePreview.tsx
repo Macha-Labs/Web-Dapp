@@ -18,13 +18,13 @@ const LayoutFilePreview = (props: any) => {
                         </Row>
                     </Col>
                     <Col>
-                        <Icon>
+                        <StyledIcon>
                             <a href={props.attachment?.thumb_url} target="_blank" download>
-                                <Icon className="state-2-3">
+                                <StyledIcon className="state-2-3">
                                     <DownloadIcon width="15" height="15" fill="#efefef" />
-                                </Icon>
+                                </StyledIcon>
                             </a>
-                        </Icon>
+                        </StyledIcon>
                     </Col>
                 </Row>
             </StyledFileCard>
