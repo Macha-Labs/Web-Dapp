@@ -161,7 +161,7 @@ const UserProfile = ({ ...props }) => {
                     ?
                     (
                         <>
-                            <LayoutProfileBanner profile={props.user}/>
+                            <LayoutProfileBanner profile={props.user?.lens}/>
 
                             <Row>
                                 <Col className="m-v-1 w-100 hr-center">

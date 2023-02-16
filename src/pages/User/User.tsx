@@ -1,28 +1,48 @@
+import UserCard from "@/components/user/UserCard";
 import UserProfile from "@/components/user/UserProfile";
 import UserSetting from "@/components/user/UserSetting";
+import { useUserSettings } from "@/hooks/user/useUserSetting";
+import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { AuthContext } from "@/providers/AuthProvider";
-import { Row, StyledChat, StyledChatList } from "@/styles/StyledComponents";
+import { Row, StyledCard, StyledChat, StyledChatList, StyledPageContainer, StyledPageList } from "@/styles/StyledComponents";
+import { Input } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useContext } from "react";
 
 const User = () => {
     const authContext = useContext(AuthContext);
+    const hookUserSetting = useUserSettings();
 
     const TempalteRight = () => {
         return (
-            <UserProfile user={authContext?.user} />
+            <StyledCard><UserProfile user={authContext?.user} /></StyledCard>
         )
     }
+
+    const settingOptions = [
+
+    ]
 
 
     return (
         <Row>
-        <StyledChatList>
+        <StyledPageList>
+            <div className="header vr-center">
+                <Input />
+            </div>
+            <div className="body">
+                <UserCard user={authContext?.user} />
+                <LayoutOptions options={hookUserSetting.userSettings} />
+            </div>
+        </StyledPageList>
+        <StyledPageContainer>
+            <div className="header">
 
-        </StyledChatList>
-        <StyledChat>
-            <TempalteRight />
-        </StyledChat>
+            </div>
+            <div className="body">
+                <TempalteRight />
+            </div>
+        </StyledPageContainer>
         </Row>
     )
 }

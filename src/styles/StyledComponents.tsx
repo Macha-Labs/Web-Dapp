@@ -187,7 +187,7 @@ export const StyledCard = styled.div`
   background: ${style.card.bg.default};
   padding: ${style.paddingCard};
   box-shadow: ${style.card.shadow.default};
-  curspor: pointer;
+  cursor: pointer;
 
   .card-body {
     padding: 0px 20px;
@@ -199,16 +199,16 @@ export const StyledCard = styled.div`
   }
 
   &.border {
-    border: 1px solid ${style.brCard.default};
+    border: ${style.card.border.default};
     &:hover {
-      border: 1px solid ${style.brCard.hover};
+      border: ${style.card.border.default};
     }
   }
 
   &.border-with-hover {
-    border: 1px solid ${style.brCard.transparent};
+    border: ${style.card.border.default};
     &:hover {
-      border: 1px solid ${style.brCard.hover};
+      border: ${style.card.border.hover};
     }
   }
 
@@ -425,7 +425,7 @@ export const Icon = styled.i`
   cursor: pointer;
   width: fit-content;
   background: ${style.icon.bg.default};
-  border-radius: ${style.borderRadiusIcon};
+  border-radius: ${style.icon.borderRadius};
 
   &:hover {
     background: ${style.icon.bg.hover};
@@ -502,6 +502,7 @@ export const StyledChatList = styled.div`
     width: 100%;
     margin: auto;
     padding: 20px 10px;
+    background: ${style.card.bg.default};
 
     .menu-heading {
       padding-left: 10px;
@@ -520,6 +521,7 @@ export const StyledChatList = styled.div`
     border-right: 1px solid rgba(247, 248, 248, 0.1);
     padding: 20px 10px;
     width: 100%;
+    background: ${style.card.bg.default};
   }
 
   .header {
@@ -529,6 +531,9 @@ export const StyledChatList = styled.div`
     border-bottom: ${style.header.border.default};
     width: 100%;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -744,52 +749,97 @@ export const StyledConversation = styled(Col)`
 `;
 
 
-// Page
-
-export const PageMenu = styled.div`
-  width: calc(30%);
+//
+export const StyledPageList = styled.div`
+  width: 25%;
   height: 100vh;
-  background: ${style.header.bg.default};
+  background: ${style.bgMain};
   border-right: ${style.header.border.default};
-  position: fixed;
-  padding: 1rem;
 
-  .content {
-    width: 60%;
+  .body {
+    height: calc(100vh - 150px);
+    width: 100%;
     margin: auto;
-    margin-top: 5rem;
-    text-align: left;
+    padding: 20px 10px;
+    background: ${style.card.bg.default};
+
+    .menu-heading {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .menu-item {
+      text-align: start;
+      padding: 10px;
+      align-items: center;
+      justify-content: flex-start;
+    }
   }
 
-  .menu-item {
-    text-align: start;
-    padding: 10px;
+  .footer {
+    border-right: 1px solid rgba(247, 248, 248, 0.1);
+    padding: 20px 10px;
+    width: 100%;
+    background: ${style.card.bg.default};
+  }
+
+  .header {
+    height: 55px;
+    padding: 0px 10px;
+    background: ${style.header.bg.default};
+    border-bottom: ${style.header.border.default};
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-start;
   }
 `;
 
-export const PageMain = styled.div`
-  margin-left: 30%;
-  width: calc(70%);
+export const StyledPageContainer = styled.div`
+  width: 75vw;
   height: 100vh;
   background: ${style.body.bg.default};
-  position: fixed;
-  padding: 2rem 5rem;
-  overflow-y: auto;
+  position: relative;
 
-  .content {
-    width: 100%;
-    margin-top: 4rem;
-    text-align: left;
+  &.full {
+    width: calc(75% + 20px);
   }
 
-  .close {
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
+  &.expand {
+    width: 95%;
+    left: 5%;
+  }
+
+  .padded-content {
+    padding: 0px 10px;
+    padding-bottom: 50px;
+    height: -webkit-fill-available;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .header {
+    height: 55px;
+    padding: 0px 10px;
+    background: ${style.header.bg.default};
+    border-bottom: ${style.header.border.default};
+  }
+
+  .body {
+    overflow: inherit;
+    padding: 20px 0px;
+    height: calc(100vh - 55px);
+    padding: 25px 10%;
   }
 `;
+
+//
 
 export const TextareaDiv = styled.div`
   padding: 5px;
