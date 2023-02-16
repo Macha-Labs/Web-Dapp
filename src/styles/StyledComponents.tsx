@@ -12,7 +12,7 @@ export const StyledWindow = styled.div`
     width: calc(100vw - ${style.nav.width});
     position: fixed;
     left: ${style.nav.width};
-    display: flex;
+    display: flex !important;
   }
 `;
 
@@ -287,14 +287,14 @@ export const StyledPostCard = styled(StyledCard)`
   }
 `;
 export const StyledOptionsCard = styled(StyledCard)`
-    padding: 0px;
-    .item {
-      padding: 10px;
-      &:hover {
-        background: ${style.button.bg.hover};
-      }
+  padding: 0px;
+  .item {
+    padding: 10px;
+    &:hover {
+      background: ${style.button.bg.hover};
     }
-`
+  }
+`;
 
 //
 

@@ -3,6 +3,7 @@ import {
   Avatar,
   Button,
   Heading,
+  Icon,
   Image,
   Popover,
   PopoverBody,
@@ -24,8 +25,6 @@ import LayoutSlashPreview from "@/layouts/chat/LayoutSlashPreview";
 import LayoutPostCard from "../../../layouts/post/LayoutPostCard";
 import LayoutProposalCard from "../../../layouts/proposal/LayoutProposalCard";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
-import LayoutTransactionCard from "../../user/payment/LayoutTransactionCard";
-import LayoutPollCard from "../../../layouts/poll/LayoutPollCard";
 import ChatMention from "../ChatMention";
 import IconFile from "@/components/icons/IconFile";
 import IconDelete from "@/components/icons/IconDelete";
@@ -82,20 +81,26 @@ const ChatInput = (props: any) => {
           <div className="attachment show">
             <Row className="vr-start hr-between">
               <Col className="w-100">
-                {
-                  type == "image" ?
-                    <Image src={URL.createObjectURL(props?.hookChat.attachItem)} alt={props?.hookChat.attachItem?.name} width="300px" />
-                    :
-                    <IconFile width={24} height={24} fill="#efefef" />
-                }
+                {type == "image" ? (
+                  <Image
+                    src={URL.createObjectURL(props?.hookChat.attachItem)}
+                    alt={props?.hookChat.attachItem?.name}
+                    width="300px"
+                  />
+                ) : (
+                  <IconFile width={24} height={24} fill="#efefef" />
+                )}
                 <Text className="m-t-0-5">
                   {props?.hookChat?.attachItem?.name}
                 </Text>
               </Col>
-              {props.hookChat.streamLoading ? (<PortalLoader size="xs" />) : (
+              {props.hookChat.streamLoading ? (
+                <PortalLoader size="xs" />
+              ) : (
                 <Icon onClick={() => props?.hookChat.deleteAttachment()}>
-                <IconDelete width="20" height="20" fill="#efefef" />
-              </Icon>)}
+                  <IconDelete width="20" height="20" fill="#efefef" />
+                </Icon>
+              )}
             </Row>
           </div>
         ) : (
@@ -120,10 +125,10 @@ const ChatInput = (props: any) => {
     return (
       <>
         {props?.hookChat?.actionMessage?.actionType == "Reply" ||
-          props?.hookChat?.attachItem ||
-          props?.hookChat?.chatMeta?.type ||
-          props?.hookChat?.slashCmd ||
-          props?.hookChat?.isTyping ? (
+        props?.hookChat?.attachItem ||
+        props?.hookChat?.chatMeta?.type ||
+        props?.hookChat?.slashCmd ||
+        props?.hookChat?.isTyping ? (
           <StyledChatPreview>
             <Row className="m-b-1 vr-center w-100 hr-between">
               <Heading as="h6" size="sm">
@@ -208,7 +213,7 @@ const ChatInput = (props: any) => {
     return (
       <StyledChatInput>
         {props.channel?.data?.created_by?.id == props.currentUser?.id ||
-          props.userIsMember ? (
+        props.userIsMember ? (
           <>
             <Col className="vr-center hr-center sideIcons">{templateAdd()}</Col>
 
@@ -255,30 +260,31 @@ const ChatInput = (props: any) => {
     );
   };
 
-  return (
-    <StyledChatInputContainer>
-      <Col className="w-100">
-        {templatePreview()}
+  const TemplateInput = () => {
+    return (
+      <StyledChatInputContainer>
+        <Col className="w-100">
+          {templatePreview()}
 
-        {templateChatInputRow()}
+          {templateChatInputRow()}
 
-        <Row>
-          <Col className="w-100 vr-center">
-            {props?.hookChat?.userObjTyping ? (
-              <Text fontSize="xs">
-                <Spinner size="xs" />@{props?.hookChat?.userObjTyping} is
-                typing
-              </Text>
-            ) : (
-              <Text fontSize="xs">
-                <br />
-              </Text>
-            )}
-          </Col>
-        </Row>
-      </Col>
-    </StyledChatInputContainer>
-  );
+          <Row>
+            <Col className="w-100 vr-center">
+              {props?.hookChat?.userObjTyping ? (
+                <Text fontSize="xs">
+                  <Spinner size="xs" />@{props?.hookChat?.userObjTyping} is
+                  typing
+                </Text>
+              ) : (
+                <Text fontSize="xs">
+                  <br />
+                </Text>
+              )}
+            </Col>
+          </Row>
+        </Col>
+      </StyledChatInputContainer>
+    );
+  };
 };
-
 export default ChatInput;

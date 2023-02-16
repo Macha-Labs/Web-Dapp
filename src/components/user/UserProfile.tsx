@@ -38,8 +38,8 @@ const UserProfile = ({ ...props }) => {
           <Wrap className="m-b-2">
             {hookLensConnections.following.length ? (
               <>
-                {hookLensConnections.following.map((item: key) => {
-                  return <UserCard user={item} />;
+                {hookLensConnections.following.map((item: any, index: any) => {
+                  return <UserCard user={item} key={index} />;
                 })}
               </>
             ) : (
