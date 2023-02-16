@@ -188,7 +188,7 @@ const UserProfile = ({ ...props }) => {
                                 }
                                 <Button
                                     leftIcon={<ChatIcon />}
-                                    variant="outline"
+                                    variant="state_brand"
                                     size="md">
                                     Message
                                 </Button>
