@@ -54,10 +54,10 @@ const Nav = (props: any) => {
             <Col className="hr-center vr-between h-100">
               <Col className="hr-center">
                 <Link href="/chat">
-                  <IconImage path="IconBrandProfile.png" />
+                  <IconImage path="IconBrandChat.png" />
                 </Link>
                 <Link href="/user">
-                  <IconImage path="IconBrandChat.png" />
+                  <IconImage path="IconBrandProfile.png" />
                 </Link>
                 <IconImage path="IconBrandDiscover.png" />
               </Col>
