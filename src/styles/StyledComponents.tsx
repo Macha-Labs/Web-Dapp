@@ -180,12 +180,14 @@ export const List = styled.div`
   }
 `;
 
-export const Card = styled.div`
+// StyledCard
+
+export const StyledCard = styled.div`
   border-radius: ${style.borderRadiusCard};
   background: ${style.card.bg.default};
   padding: ${style.paddingCard};
   box-shadow: ${style.card.shadow.default};
-  curspor: pointer;
+  cursor: pointer;
 
   .card-body {
     padding: 0px 20px;
@@ -197,16 +199,16 @@ export const Card = styled.div`
   }
 
   &.border {
-    border: 1px solid ${style.brCard.default};
+    border: ${style.card.border.default};
     &:hover {
-      border: 1px solid ${style.brCard.hover};
+      border: ${style.card.border.default};
     }
   }
 
   &.border-with-hover {
-    border: 1px solid ${style.brCard.transparent};
+    border: ${style.card.border.default};
     &:hover {
-      border: 1px solid ${style.brCard.hover};
+      border: ${style.card.border.hover};
     }
   }
 
@@ -225,6 +227,65 @@ export const Card = styled.div`
     justify-content: center;
   }
 `;
+
+//
+export const StyledNFTCard = styled(StyledCard)`
+  width: 250px;
+  cursor: pointer;
+  background-position: center;
+  background-size: cover;
+  padding: 2px;
+
+  .content {
+    padding: 1rem;
+  }
+`;
+
+export const StyledFileCard = styled(StyledCard)`
+  margin: 5px 0 5px 0;
+  padding: 10px;
+  border: 1px;
+  background: ${style.card.bg.default};
+  opacity: 0.8;
+  border-radius: 5px;
+  width: 50vh;
+
+  .name {
+    width: 40vh;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+export const StyledMessageCard = styled(StyledCard)`
+  margin-bottom: 0.5rem;
+`;
+
+export const StyledTransactionCard = styled(StyledCard)`
+  width: 400px;
+  padding: 10px 0px;
+  cursor: pointer;
+`;
+
+export const StyledPostCard = styled(StyledCard)`
+    cursor: pointer;
+    padding: 10px 0px;
+    img {
+        border-radius: ${style.borderRadius};
+    }
+
+    .actions {
+      width: 100%;
+
+      .buttonCol {
+          background: transparent;
+      }
+    }
+`
+
+//
 
 export const Placeholder = styled.div`
   border: ${style.borderPlaceholder};
@@ -364,7 +425,7 @@ export const Icon = styled.i`
   cursor: pointer;
   width: fit-content;
   background: ${style.icon.bg.default};
-  border-radius: ${style.borderRadiusIcon};
+  border-radius: ${style.icon.borderRadius};
 
   &:hover {
     background: ${style.icon.bg.hover};
@@ -441,6 +502,7 @@ export const StyledChatList = styled.div`
     width: 100%;
     margin: auto;
     padding: 20px 10px;
+    background: ${style.card.bg.default};
 
     .menu-heading {
       padding-left: 10px;
@@ -459,6 +521,7 @@ export const StyledChatList = styled.div`
     border-right: 1px solid rgba(247, 248, 248, 0.1);
     padding: 20px 10px;
     width: 100%;
+    background: ${style.card.bg.default};
   }
 
   .header {
@@ -468,6 +531,9 @@ export const StyledChatList = styled.div`
     border-bottom: ${style.header.border.default};
     width: 100%;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -528,7 +594,7 @@ export const StyledChatItem = styled(Row)`
   }
 `;
 
-export const ChatPreviewCard = styled(Card)`
+export const ChatPreviewCard = styled(StyledCard)`
   margin-bottom: 0.5rem;
   height: 200px;
 
@@ -593,7 +659,7 @@ export const StyledChatInput = styled(Row)`
   }
 `;
 
-export const StyledChatPreviewCard = styled(Card)`
+export const StyledChatPreviewCard = styled(StyledCard)`
   margin-bottom: 0.5rem;
   height: 200px;
 
@@ -682,94 +748,126 @@ export const StyledConversation = styled(Col)`
   }
 `;
 
+
 //
-export const StyledNFTCard = styled(Card)`
-  width: 250px;
-  cursor: pointer;
-  background-position: center;
-  background-size: cover;
-  padding: 2px;
-
-  .content {
-    padding: 1rem;
-  }
-`;
-
-export const StyledFileCard = styled(Card)`
-  margin: 5px 0 5px 0;
-  padding: 10px;
-  border: 1px;
-  background: ${style.card.bg.default};
-  opacity: 0.8;
-  border-radius: 5px;
-  width: 50vh;
-
-  .name {
-    width: 40vh;
-  }
-
-  &:hover {
-    opacity: 0.9;
-  }
-`;
-
-export const StyledMessageCard = styled(Card)`
-  margin-bottom: 0.5rem;
-`;
-
-export const StyledTransactionCard = styled(Card)`
-  width: 400px;
-  padding: 10px 0px;
-  cursor: pointer;
-`;
-
-// Page
-
-export const PageMenu = styled.div`
-  width: calc(30%);
+export const StyledPageList = styled.div`
+  width: 25%;
   height: 100vh;
-  background: ${style.header.bg.default};
+  background: ${style.bgMain};
   border-right: ${style.header.border.default};
-  position: fixed;
-  padding: 1rem;
 
-  .content {
-    width: 60%;
+  .body {
+    height: calc(100vh - 150px);
+    width: 100%;
     margin: auto;
-    margin-top: 5rem;
-    text-align: left;
+    padding: 20px 10px;
+    background: ${style.card.bg.default};
+
+    .menu-heading {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .menu-item {
+      text-align: start;
+      padding: 10px;
+      align-items: center;
+      justify-content: flex-start;
+    }
   }
 
-  .menu-item {
-    text-align: start;
-    padding: 10px;
+  .footer {
+    border-right: 1px solid rgba(247, 248, 248, 0.1);
+    padding: 20px 10px;
+    width: 100%;
+    background: ${style.card.bg.default};
+  }
+
+  .header {
+    height: 55px;
+    padding: 0px 10px;
+    background: ${style.header.bg.default};
+    border-bottom: ${style.header.border.default};
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-start;
   }
 `;
 
-export const PageMain = styled.div`
-  margin-left: 30%;
-  width: calc(70%);
+export const StyledPageContainer = styled.div`
+  width: 75vw;
   height: 100vh;
   background: ${style.body.bg.default};
-  position: fixed;
-  padding: 2rem 5rem;
-  overflow-y: auto;
+  position: relative;
 
-  .content {
-    width: 100%;
-    margin-top: 4rem;
-    text-align: left;
+  &.full {
+    width: calc(75% + 20px);
   }
 
-  .close {
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
+  &.expand {
+    width: 95%;
+    left: 5%;
+  }
+
+  .padded-content {
+    padding: 0px 10px;
+    padding-bottom: 50px;
+    height: -webkit-fill-available;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .header {
+    height: 55px;
+    padding: 0px 10px;
+    background: ${style.header.bg.default};
+    border-bottom: ${style.header.border.default};
+  }
+
+  .body {
+    overflow: inherit;
+    padding: 20px 0px;
+    height: calc(100vh - 55px);
+    padding: 25px 10%;
   }
 `;
+
+//
 
 export const TextareaDiv = styled.div`
   padding: 5px;
 `;
+
+
+
+// Profile
+export const StyledProfileBanner = styled.div`
+    position: relative;
+    margin-bottom: 3rem;
+
+    .bannerImage {
+        background-color: #121533;
+        border-radius: 10px;
+        height: 150px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .bannerAvatar {
+        position: absolute;
+        top: 5rem;
+        left: 45%;
+    }
+
+    .bioText {
+        font-weight: 500;
+        color: #6F767E;
+    }
+`

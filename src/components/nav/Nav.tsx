@@ -1,22 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 import { Col, Icon, Logo, Row, StyledNav } from "../../styles/StyledComponents";
 import ChatIcon from "../icons/IconChat";
-import { useRef } from "react";
 import HashIcon from "../icons/IconDarkUser";
 import UserIcon from "../icons/IconDarkUser";
 import NFTIcon from "../icons/IconDarkUser";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalBody,
-  useDisclosure,
-  ModalCloseButton,
-} from "@chakra-ui/react";
+import {useDisclosure,} from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
-import UserSetting from "../user/UserSetting";
 
 const Nav = (props: any) => {
   const orgsDrawer = useDisclosure();
@@ -28,9 +18,6 @@ const Nav = (props: any) => {
     );
   };
 
-  const templateUser = () => {
-    return (<ModalPage children={<UserSetting modal={userDrawer} />} event={userDrawer}></ModalPage>)
-  }
 
   const templateNotifications = () => {
     return <></>
@@ -99,7 +86,6 @@ const Nav = (props: any) => {
         </StyledNav>
       </Row>
       {templateOrgs()}
-      {templateUser()}
     </>
   );
 };

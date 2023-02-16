@@ -1,21 +1,24 @@
 import useUserSetting from "@/hooks/user/useUserSetting";
-import { Icon, Row, Card, PageMenu, PageMain } from "@/styles/StyledComponents";
+import { AuthContext } from "@/providers/AuthProvider";
+import { Icon, Row, StyledCard, PageMenu, PageMain, StyledPageList, StyledPageContainer } from "@/styles/StyledComponents";
 import { Button, Heading, useToast } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
+import UserProfile from "./UserProfile";
 
 
 const UserSetting = (props) => {
     const hookUserSetting = useUserSetting();
+    const authContext = useContext(AuthContext);
 
     const template = () => {
-        return (<></>)
+        return (<UserProfile user={authContext?.user} />)
     }
 
 
     return (
         <>
             <Row>
-                <PageMenu>
+                <StyledPageList>
                     <div className="content">
                         <Row className="header vr-center m-b-1">
                             <div className="brand">
@@ -31,19 +34,19 @@ const UserSetting = (props) => {
                             </div>
                         </div>
                     </div>
-                </PageMenu>
-                <PageMain>
+                </StyledPageList>
+                <StyledPageContainer>
                     <div className="content">
-                        <Card>
+                        <StyledCard>
                             {
                                 template()
                             }
-                        </Card>
+                        </StyledCard>
                     </div>
                     <div className="close">
                         <Icon className="state-2-3" onClick={props.modal.onClose}></Icon>
                     </div>
-                </PageMain>
+                </StyledPageContainer>
             </Row>
         </>
     )

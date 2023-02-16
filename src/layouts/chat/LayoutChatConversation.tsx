@@ -17,7 +17,7 @@ import { Conversation } from "style/chat";
 import LayoutFilePreview from "./LayoutFilePreview";
 import LayoutImagePreview from "./LayoutImagePreview";
 import LayoutLinkPreview from "./LayoutLinkPreview";
-import LayoutPostCard from "@/components/post/LayoutPostCard";
+import LayoutPostCard from "@/layouts/post/LayoutPostCard";
 
 const TextareaDiv = styled.div`
     padding: 5px;
