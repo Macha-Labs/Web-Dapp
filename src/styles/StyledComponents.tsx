@@ -284,6 +284,11 @@ export const StyledPostCard = styled(StyledCard)`
       }
     }
 `
+export const StyledOptionsCard = styled(StyledCard)`
+    .item {
+      padding: 5px 0px;
+    }
+`
 
 //
 
@@ -829,6 +834,8 @@ export const StyledPageContainer = styled.div`
     padding: 0px 10px;
     background: ${style.header.bg.default};
     border-bottom: ${style.header.border.default};
+    display: flex;
+    align-items: center;
   }
 
   .body {

@@ -1,7 +1,7 @@
 import Nav from "@/components/nav/Nav";
 import { StyledWindow } from "../styles/StyledComponents";
 import React from "react";
-import Chat from "./chat/Chat";
+import Chat from "./Chat/Index";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
@@ -11,7 +11,7 @@ import { publicProvider } from "wagmi/providers/public";
 import AuthProvider from "@/providers/AuthProvider";
 import StreamProvider from "@/providers/StreamProvider";
 import { ChatProvider } from "@/providers/ChatProvider";
-import User from "./User/User";
+import User from "./User";
 
 const { chains, provider } = configureChains(
   [polygonMumbai],

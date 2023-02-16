@@ -46,7 +46,7 @@ const Nav = (props: any) => {
           <div className="body">
             <Col className="hr-center vr-between h-100">
               <Col className="hr-center">
-                <Link href="/chat/Chat">
+                <Link href="/chat">
                   <Icon
                     className="state-1-2 scale m-b-1"
                     onClick={orgsDrawer.onOpen}
@@ -54,7 +54,7 @@ const Nav = (props: any) => {
                     <HashIcon />
                   </Icon>
                 </Link>
-                <Link href="user/User">
+                <Link href="/user">
                   <Icon
                     className="state-1-2 scale m-b-1"
                     onClick={userDrawer.onOpen}
