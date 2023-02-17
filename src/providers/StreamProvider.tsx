@@ -23,7 +23,11 @@ const StreamProvider = ({children}: any) => {
     
 
     useEffect(() => {
-        hookStreamClient.connectToStream();
+        console.log("Checking for stream tokens and creating stream client");
+        if (authContext?.user?.db?.tokens?.stream) {
+            console.log("Got stream tokens");
+            hookStreamClient.connectToStream();
+        }
     }, [authContext?.user?.db?.tokens?.stream]);
 
     useEffect(() => {

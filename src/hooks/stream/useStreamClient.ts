@@ -13,7 +13,6 @@ const useStreamClient = () => {
 
     
     const connectToStream = async () => {
-        console.log("Calling empty body of connectToStream");
         try {
             if (client?.user) {
                 client.disconnect();
