@@ -1,6 +1,7 @@
 import { getProfiles } from "../../helpers/lens/lens";
 import { useEffect, useMemo, useState } from "react";
 import { UserLens$ } from "../../schema/user";
+import { logger } from "@/helpers/logger";
 
 const useLensProfile = (address: any) => {
     const [lensProfile, setLensProfile] = useState<any>();
@@ -27,14 +28,13 @@ const useLensProfile = (address: any) => {
 
     useMemo(() => {
         if (address) {
-            console.log("Address used in next function ", address);
-            console.log("Executing getOwnedProfiles()");
+            logger('lens', 'useLensProfile.useMemo[address]', 'Getting Profile for address', [])
             getOwnedProfiles();
         }
     }, [address]);
 
     return ({
-        lensData: UserLens$(lensProfile),
+        userLens: UserLens$(lensProfile),
         setLensProfile: setLensProfile,
         isLoading: isLoading,
         loadingText: loadingText,

@@ -94,7 +94,7 @@ const useLensAuth = (address: any, updateUser: any) => {
             console.log("Checking connected address", address);
             getLensTokens();
         }
-    }, [hookLensProfile.lensData?.id]);
+    }, [hookLensProfile.userLens?.id]);
 
     return {
         accessToken: token,
