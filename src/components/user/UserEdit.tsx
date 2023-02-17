@@ -7,9 +7,12 @@ import { Avatar } from "@chakra-ui/react";
 const UserEdit =  ()=>{
     const hookLensProfileUpdate = useLensProfileUpdate()
 
-    const handleChange= (e, val) => {
-      hookLensProfileUpdate.setUserLens({val: e.target.value, ...hookLensProfileUpdate?.userLens})
-    } 
+    const handleChange = (e: any, val: any) => {
+      hookLensProfileUpdate.setUserLens({
+        val: e.target.value,
+        ...hookLensProfileUpdate?.userLens,
+      });
+    }; 
 
     const data = [
         {label: 'Name', value: hookLensProfileUpdate?.userLens?.name, onChange: (e: any) => {handleChange(e, 'name')}, disabled: false},        
