@@ -34,7 +34,7 @@ const Nav = (props: any) => {
           <div className="header">
             <Col className="hr-center vr-center h-100">
               <StyledIcon onClick={orgsDrawer.onOpen}>
-                <Logo
+                {/* <Logo
                   className="sm"
                   src={
                     "https://meta-org-logos.s3.ap-south-1.amazonaws.com/" +
@@ -46,7 +46,7 @@ const Nav = (props: any) => {
                     currentTarget.src =
                       "https://0xmetame-assets.s3.ap-south-1.amazonaws.com/default-user.png";
                   }}
-                />
+                /> */}
               </StyledIcon>
             </Col>
           </div>
