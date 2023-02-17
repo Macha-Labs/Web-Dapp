@@ -41,17 +41,16 @@ const ChatHeader = props => {
           </Heading>
           <div>
             <Row className="vr-center">
-              <IconImage path="IconDarkMenu.png" className="m-r-0-5" />
+              <IconImage path="IconDarkMenu.png" style={{className:"m-r-0-5"}} />
 
               <IconImage
                 path="IconDarkPinned.png"
                 onClick={pinneddMessageModal.onOpen}
-                className="m-r-0-5"
+                style={{className:"m-r-0-5"}}
               />
 
               <IconImage
                 path="IconDarkUsers.png"
-                className="m-r-0-5"
                 onClick={membersModal.onOpen}
               />
             </Row>
