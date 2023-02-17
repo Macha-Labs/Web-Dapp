@@ -6,7 +6,7 @@ import ChatMessageList from "./ChatMessageList";
 import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
 
-const ChatHeader = (props) => {
+const ChatHeader = props => {
   const membersModal = useDisclosure();
   const pinneddMessageModal = useDisclosure();
   const channelSettingsModal = useDisclosure();
@@ -27,6 +27,7 @@ const ChatHeader = (props) => {
       <ModalSlider event={pinneddMessageModal} size="md">
         <ChatMessageList
           pinnedMessageList={props.hookChannel?.pinnedMessages}
+          hookChat={props.hookChat}
         />
       </ModalSlider>
     );
@@ -69,32 +70,32 @@ const ChatHeader = (props) => {
   const TemplateProfile = () => {
     return (
       <Row className="header w-100 hr-between vr-center">
-          <Row className="vr-center">
-            <Avatar
-              size="sm"
-              className="m-r-0-5"
-              name={props?.hookChannel?.channel?.name}
-            />
-            <Heading as="h4" size="sm">
-              {props?.hookChannel?.channel?.name}
-            </Heading>
-          </Row>
+        <Row className="vr-center">
+          <Avatar
+            size="sm"
+            className="m-r-0-5"
+            name={props?.hookChannel?.channel?.name}
+          />
+          <Heading as="h4" size="sm">
+            {props?.hookChannel?.channel?.name}
+          </Heading>
+        </Row>
 
-          <Row className="vr-center">
-            <IconImage
-              path="IconDarkMenu.png"
-              onClick={channelSettingsModal.onOpen}
-              style={{ className: "m-r-0-5" }}
-            />
+        <Row className="vr-center">
+          <IconImage
+            path="IconDarkMenu.png"
+            onClick={channelSettingsModal.onOpen}
+            style={{ className: "m-r-0-5" }}
+          />
 
-            <IconImage
-              path="IconDarkPinned.png"
-              onClick={pinneddMessageModal.onOpen}
-              style={{ className: "m-r-0-5" }}
-            />
+          <IconImage
+            path="IconDarkPinned.png"
+            onClick={pinneddMessageModal.onOpen}
+            style={{ className: "m-r-0-5" }}
+          />
 
-            <IconImage path="IconDarkUsers.png" onClick={membersModal.onOpen} />
-          </Row>
+          <IconImage path="IconDarkUsers.png" onClick={membersModal.onOpen} />
+        </Row>
       </Row>
     );
   };
