@@ -24,7 +24,7 @@ const ChatMessage = (props: any) => {
 
     return (
         <StyledConversation>
-            <Row className="message">
+            <Row className="message w-100">
                 <Col>
                     <Row>
                     {props.hookChat?.actionMessage?.action === "MULTISELECT" && <Checkbox defaultChecked className="m-r-0-5"></Checkbox>}
