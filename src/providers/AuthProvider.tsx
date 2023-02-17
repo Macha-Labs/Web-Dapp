@@ -85,7 +85,7 @@ const AuthProvider = ({children}: any) => {
         <AuthContext.Provider
             value={{
                 signer: signer,
-                address: address,
+                address: address?.toLowerCase(),
                 connectWallet: connectWallet,
                 connectLens: hookLensAuth.connect,
                 disconnectWallet: disconnectWallet,
