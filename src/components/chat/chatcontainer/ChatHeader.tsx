@@ -24,7 +24,7 @@ const ChatHeader = props => {
 
   const TemplatePinnedMessages = () => {
     return (
-      <ModalSlider event={pinneddMessageModal}>
+      <ModalSlider event={pinneddMessageModal} size="md">
         <ChatMessageList
           pinnedMessageList={props.hookChannel?.pinnedMessages}
         />
