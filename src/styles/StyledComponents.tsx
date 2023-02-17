@@ -623,8 +623,8 @@ export const ChatPreviewCard = styled(StyledCard)`
   }
 `;
 export const StyledChatPreview = styled.div`
-  background: ${style.bgLayout.primary};
-  border: ${style.borderInput};
+  background: ${style.card.bg.default};
+  border: ${style.card.border.default};
   border-radius: 2px 2px 0px 0px;
   padding: 0.5rem 0.5rem;
 

@@ -5,7 +5,7 @@ import LayoutImagePreview from "@/layouts/chat/LayoutImagePreview";
 import LayoutLinkPreview from "@/layouts/chat/LayoutLinkPreview";
 import { Col, Row, StyledConversation, StyledIcon } from "@/styles/StyledComponents";
 import {
-    Avatar, Checkbox, Text
+    Avatar, Button, Checkbox, Popover, PopoverBody, PopoverContent, PopoverTrigger, Text
 } from "@chakra-ui/react";
 
 const ChatMessage = (props: any) => {
@@ -21,6 +21,25 @@ const ChatMessage = (props: any) => {
             return <LayoutFilePreview attachment={attachment} />;
         }
     };
+
+    const TemplateActions = () => {
+        return (
+            <Popover placement="top-start">
+        <PopoverTrigger>
+            <IconImage path="IconDarkMenu.png" />
+        </PopoverTrigger>
+        <PopoverContent className="m-b-1">
+          <PopoverBody>
+            <Col className="text-start">
+              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />}><Row className="hr-between w-100">Reply</Row></Button>
+              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />}><Row className="hr-between w-100">Pin Message</Row></Button>
+              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkWallet.png" />}><Row className="hr-between w-100">Delete</Row></Button>
+            </Col>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+        )
+    }
 
     return (
         <StyledConversation>
@@ -49,13 +68,11 @@ const ChatMessage = (props: any) => {
                 </Col>
                 <Row className="w-100 action">
                     <IconImage
-                        path="IconDarkPinned.png"
+                        path="IconDarkEmoji.png"
                         style={{className:"m-r-0-5"}}
                     />
 
-                    <IconImage
-                        path="IconDarkUsers.png"
-                    />
+                   <TemplateActions />
                 </Row>
             </Row>
         </StyledConversation>

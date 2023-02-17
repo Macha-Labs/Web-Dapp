@@ -179,7 +179,7 @@ const theme = extendTheme({
         baseStyle: {
             content: {
                 width: "3xs",
-                bg: `#1c1c23`,
+                bg: `${style.popover.bg.default}`,
                 border: "1px solid",
                 borderColor: "gray.800",
             }

@@ -137,6 +137,7 @@ export const darkStyle = {
   pannel: {bg: {default: ''}, shadow: {default: ''}},
   input: {bg: {default: "#020a21"}, border: {default: '1px solid #0F172E'}},
   modal: {bg: {default: '#000511'}, border: {default:'1px solid #0F172E'}, shadow: {default: ''}},
+  popover: {bg: {default: '#000511'}},
   sidebar: {},
   dropdown: {},
   icon: {
