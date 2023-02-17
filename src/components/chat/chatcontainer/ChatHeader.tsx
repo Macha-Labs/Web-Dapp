@@ -4,10 +4,12 @@ import { Row } from "@/styles/StyledComponents";
 import { Heading, Icon, useDisclosure } from "@chakra-ui/react";
 import ChatMessageList from "./ChatMessageList";
 import IconImage from "@/components/icons/IconImage";
+import ChatSetting from "./ChatSetting";
 
 const ChatHeader = props => {
   const membersModal = useDisclosure();
   const pinneddMessageModal = useDisclosure();
+  const channelSettingsModal = useDisclosure();
 
   const TemplateMembers = () => {
     return (
@@ -30,8 +32,13 @@ const ChatHeader = props => {
     );
   };
 
-  const templateProfile = () => {};
-
+  const TemplateChannelSettings = () => {
+    return (
+      <ModalSlider event={channelSettingsModal}>
+        <ChatSetting />
+      </ModalSlider>
+    );
+  };
   return (
     <>
       <div className="header hr-between vr-center">
@@ -41,7 +48,11 @@ const ChatHeader = props => {
           </Heading>
           <div>
             <Row className="vr-center">
-              <IconImage path="IconDarkMenu.png" className="m-r-0-5" />
+              <IconImage
+                path="IconDarkMenu.png"
+                className="m-r-0-5"
+                onClick={channelSettingsModal.onOpen}
+              />
 
               <IconImage
                 path="IconDarkPinned.png"
@@ -60,6 +71,7 @@ const ChatHeader = props => {
       </div>
       <TemplateMembers />
       <TemplatePinnedMessages />
+      <TemplateChannelSettings />
     </>
   );
 };
