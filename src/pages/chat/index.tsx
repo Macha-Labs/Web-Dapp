@@ -3,6 +3,7 @@ import { Row, StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledCo
 import React, { useState } from "react";
 import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import Nav from "@/components/nav/Nav";
+import ChatProfile from "@/components/chat/ChatProfile";
 
 function Chat() {
   return (
@@ -16,6 +17,7 @@ function Chat() {
             <ChatList />
           </StyledChatList>
           <StyledChat>
+            {/* <ChatProfile channel={null}/> */}
             <ChatContainer />
           </StyledChat>
         </div>

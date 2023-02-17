@@ -1,36 +1,65 @@
 import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
-import { Avatar, Button, Heading, Icon } from "@chakra-ui/react";
+import { Avatar, Button, Heading, Icon, useDisclosure } from "@chakra-ui/react";
 import OrgControl from "../org/OrgControl";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useContext } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import useOrgChannels from "@/hooks/portal/useOrgChannels";
+import ModalSlider from "../modal/ModalSlider";
+import ChatProfile from "./ChatProfile";
+import IconImage from "../icons/IconImage";
 
 const ChatList = (props: any) => {
     const chatProvider = useContext(ChatContext);
     const authContext = useContext(AuthContext) as AuthContextType;
     const hookOrgChannels = useOrgChannels("6246c7045cc31c36781d668e");
-    
-    const templateMenuSection = (type: any) => {
+    const modalChatNew = useDisclosure();
+
+
+    const TemplateChatNew =()=>{
+        return (
+            <ModalSlider event={modalChatNew} size="lg">
+                <ChatProfile/>
+            </ModalSlider>
+        )
+    }
+
+    const TemplateChatList = () => {
         return (
             <>
-                {
+                <Row className="header vr-center hr-between">
+                <OrgControl />
+            </Row>
+            {!authContext.isConnected && <ConnectButton />} 
+            {
+                (!chatProvider?.hookChannels?.channels)
+                    ?
+                    (
+                        <>
+                            Create your first channel
+                            <Button size="sm" onClick={props.channelNew}>First Channel</Button>
+                        </>
+                    )
+                    :
+                    (
+                        <Col className="body verticlescroll hidescroll">
+                            {
                     chatProvider?.hookChannels?.channels?.length
                         ?
                         (
                             <>
                                 <div className="m-b-2">
-                                    <Row className="vr-center menu-heading hr-between">
-                                        <Heading as="h4" size="md" className="m-b-1"></Heading>
+                                    <Row className="menu-heading hr-between vr-center m-b-1">
+                                        <Heading as="h4" size="md" className="m-b-1">New Channel</Heading>
                                         {
                                             (props?.context?.user?._id == props?.org?.owner)
                                                 ?
                                                 (
                                                     <Col>
-                                                        <Icon className="state-2-3 m-b-1" onClick={props.channelNew}>
-                                                            {/* <AddIcon /> */}
-                                                        </Icon>
+                                                        <IconImage path="IconDarkPlus.png"
+                                                        onClick={modalChatNew.onOpen}
+                                                         />
 
                                                     </Col>
                                                 )
@@ -82,6 +111,9 @@ const ChatList = (props: any) => {
                             <></>
                         )
                 }
+                        </Col>
+                    )
+            }
             </>
         )
     }
@@ -89,28 +121,8 @@ const ChatList = (props: any) => {
 
     return (
         <>
-            <Row className="header vr-center hr-between">
-                <OrgControl />
-            </Row>
-            {!authContext.isConnected && <ConnectButton />} 
-            {
-                (!chatProvider?.hookChannels?.channels)
-                    ?
-                    (
-                        <>
-                            Create your first channel
-                            <Button size="sm" onClick={props.channelNew}>First Channel</Button>
-                        </>
-                    )
-                    :
-                    (
-                        <Col className="body verticlescroll hidescroll">
-                            {
-                                templateMenuSection('chat')
-                            }
-                        </Col>
-                    )
-            }
+            <TemplateChatList />
+            <TemplateChatNew/>
         </>
     )
 }
