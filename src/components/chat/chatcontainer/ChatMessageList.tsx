@@ -17,7 +17,7 @@ function ChatMessageList(props: any) {
       <Heading as="h4" size="md" className="m-b-1">
         Pinned Messages
       </Heading>
-      {props.pinnedMessageList.map((message, index) => {
+      {props.pinnedMessageList?.map((message, index) => {
         return (
           <StyledMessageCard key={index}>
             <ChatMessage message={message} />

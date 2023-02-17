@@ -108,7 +108,9 @@ const ChatList = (props: any) => {
                         )
                         :
                         (
-                            <></>
+                            <>
+                                <Button onClick={modalChatNew.onOpen} variant="state_brand">Create Channel</Button>
+                            </>
                         )
                 }
                         </Col>
