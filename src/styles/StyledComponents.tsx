@@ -438,6 +438,7 @@ export const StyledIcon = styled.i`
   height: fit-content;
   background: ${style.icon.bg.default};
   border-radius: ${style.icon.borderRadius};
+  box-shadow: ${style.icon.shadow.default};
 
   &:hover {
     background: ${style.icon.bg.hover};
