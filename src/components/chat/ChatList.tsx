@@ -83,7 +83,6 @@ const ChatList = (props: any) => {
                                 : "state_card"
                             }
                           >
-                            {console.log("asdf", item)}
                             <Avatar size="md" src="" className="m-r-0-5" />
                             <Col className="w-100 d-flex flex-col">
                               {item.name}
