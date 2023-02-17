@@ -19,7 +19,7 @@ const ModalSlider = (props) => {
         <Drawer
             isOpen={props.event.isOpen}
             onClose={props.event.onClose}
-            size="xs"
+            size={props.size ? props.size : 'xs'}
         >
             <DrawerOverlay />
             <DrawerContent>
