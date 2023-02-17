@@ -1,3 +1,4 @@
+import { logger } from "@/helpers/logger";
 import { uploadAtIpfsRoot } from "@/helpers/storage/web3storage";
 import { newMessageNotification } from "@/service/NotificationService";
 import { useContext, useRef, useState } from "react";
@@ -251,13 +252,13 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleMultiSelect = () => {
+    logger('channel', 'useStreamChat.handleMultiSelect', 'Trigger MultiSelect', [])
     setActionMessage({ action: "MULTISELECT", item: null });
   };
   const handleMultiSelectClose = () => {
     setActionMessage(null);
   };
   const handleLongPressSelect = (message: any) => {
-    console.log("Pressed long press button");
     setActionMessage({ action: "LONGPRESS", item: message });
   };
   const handleLongPressSelectClose = () => {

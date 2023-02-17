@@ -9,11 +9,8 @@ const LayoutOptions = (props: any) => {
         <>
           
           {props.options?.map((item: any, index: any) => {
-            const handleClick = () => {
-              props.setwindow(item.route);
-            };  
             return (
-              <Row className="item m-b-0-5 hr-between" key={index} onClick={handleClick}>
+              <Row className="item m-b-0-5 hr-between" key={index} onClick={item.onPress}>
                 <Row className="vr-center">
                   <IconImage path={item.icon} />
                   <Text fontSize="md" className="m-l-0-5">
