@@ -67,7 +67,7 @@ const AuthProvider = ({children}: any) => {
                 logger('auth', 'useEffect[user.lens]', 'response of user from DB', [JSON.stringify(data)]);
                 const userData = UserDb$(data);
                 updateUser("db", userData);
-                putStreamToken({userAddress: address}).then((res: any) => {
+                putStreamToken({userAddress: address.toLowerCase()}).then((res: any) => {
                     logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
                     updateUser("db", UserDb$(res));
                 });
