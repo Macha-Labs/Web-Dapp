@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import ModalPage from "../modal/ModalPage";
 
-const OrgControl = props => {
+const OrgControl = (props:any) => {
   const settingModal = useDisclosure();
   const [org, setOrg] = useState<any>();
 
@@ -32,7 +32,7 @@ const OrgControl = props => {
   return (
     <>
       <Row className="w-100 vr-center">
-        <Logo
+        {/* <Logo
           src={
             "https://meta-org-logos.s3.ap-south-1.amazonaws.com/" +
             props.org?._id +
@@ -44,7 +44,7 @@ const OrgControl = props => {
               "https://0xmetame-assets.s3.ap-south-1.amazonaws.com/default-user.png";
           }}
           className="sm m-r-0-5"
-        />
+        /> */}
         <Heading as="h4" size="sm">
           Portal
         </Heading>
