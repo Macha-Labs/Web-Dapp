@@ -30,7 +30,7 @@ const useLensAuth = (address: any, updateUser: any) => {
 
     const fetchLensToken = async () => {
         setIsLoading(true);
-        if (hookLensProfile?.lensData) {
+        if (hookLensProfile?.userLens) {
             try {
                 const challenge = await generateChallenge(address);
                 const signature = await signText(challenge);
