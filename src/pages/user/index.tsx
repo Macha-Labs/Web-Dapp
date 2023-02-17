@@ -30,7 +30,7 @@ const User = () => {
 
   const Template = () => {
     return (
-      <Row>
+      <>
         <StyledPageList>
           <div className="header vr-center">
             <Input />
@@ -40,7 +40,7 @@ const User = () => {
             <UserCard user={authContext?.user} />
             <LayoutOptions
               options={hookUserSetting.userSettings}
-              style={{ class: "m-t-1" }}
+              style={{ className: "m-t-1" }}
               setwindow={setwindow}
             />
           </div>
@@ -58,7 +58,7 @@ const User = () => {
             <TempalteRight />
           </div>
         </StyledPageContainer>
-      </Row>
+      </>
     );
   }
 
@@ -67,7 +67,6 @@ const User = () => {
       <div className="left">
           <Nav />
       </div>
-
       <div className="right">
           <Template />
       </div>

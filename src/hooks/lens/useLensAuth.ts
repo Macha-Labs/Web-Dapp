@@ -7,6 +7,7 @@ import {
 import {ethers} from "ethers";
 import useLensProfile from "./useLensProfile";
 import { useSignMessage } from 'wagmi'
+import { logger } from "@/helpers/logger";
 
 const useLensAuth = (address: any, updateUser: any) => {
     const hookLensProfile = useLensProfile(address);
@@ -29,6 +30,7 @@ const useLensAuth = (address: any, updateUser: any) => {
     };
 
     const fetchLensToken = async () => {
+        logger('lens', 'useLensAuth.fetchLensToken', 'Getting Lens Token from Lens and updating user lens data', [])
         setIsLoading(true);
         if (hookLensProfile?.userLens) {
             try {
@@ -39,6 +41,7 @@ const useLensAuth = (address: any, updateUser: any) => {
                 authenticate_user(address, signature).then((data) => {
                     setToken(data["accessToken"]);
                     setRefreshToken(data["refreshToken"]);
+                    
                     // storing in async data
                     window.localStorage.setItem("accessToken", data["accessToken"]);
                     window.localStorage.setItem("refreshToken", data["refreshToken"]);
@@ -60,8 +63,8 @@ const useLensAuth = (address: any, updateUser: any) => {
     // Get lens tokens from local storage or new tokens
     const getLensTokens = async () => {
         let refreshToken;
-        // const accessToken = await getAsyncData("accessToken");
         const accessToken = window.localStorage.getItem("accessToken");
+        logger('lens', 'useLensAuth.getLensToken', 'Getting Lens Token from Local Storage and updating user lens data', [accessToken])
         updateUser("lens", {
                 ...hookLensProfile.userLens,
                 accessToken: accessToken,
