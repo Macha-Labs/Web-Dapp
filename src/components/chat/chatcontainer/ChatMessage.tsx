@@ -49,7 +49,14 @@ const ChatMessage = (props: any) => {
                 className="text-start"
                 rightIcon={<IconImage path="IconDarkFiles.png" />}
               >
-                <Row className="hr-between w-100">Reply</Row>
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    props.hookChat.handleReply(props.message);
+                  }}
+                >
+                  Reply
+                </Row>
               </Button>
               <Button
                 variant="transparent"

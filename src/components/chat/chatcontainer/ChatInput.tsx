@@ -36,34 +36,30 @@ import IconImage from "@/components/icons/IconImage";
 // `
 
 const ChatInput = (props: any) => {
-
   const templateReply = () => {
     return (
       <>
-        {props?.hookChat?.actionMessage?.actionType == "Reply" ? (
+        {props?.hookChat?.actionMessage?.action === "REPLY" ? (
           <div className="reply">
             <Col className="w-100 vr-center">
               <Row className="vr-center">
                 <Text fontSize="xs" className="m-r-1">
                   Replying to:
-                </Text>{" "}
+                </Text>
                 <Avatar
                   size="xs"
-                  src={`https://meta-profile-photos.s3.ap-south-1.amazonaws.com/${props.actionMessage.item.user.id}.png`}
-                />{" "}
-                <Text fontSize="xs">@{props.actionMessage.item.user.id}</Text>
+                  src={props.hookChat?.actionMessage?.item?.user.lensImage}
+                />
+                <Text fontSize="xs">
+                  @{props.hookChat?.actionMessage?.item?.user?.lensHandle}
+                </Text>
+              </Row>
+              <Row>
+                <Text fontSize="xs">
+                  {props.hookChat?.actionMessage?.item?.text}
+                </Text>
               </Row>
             </Col>
-            <StyledIcon
-              onClick={() =>
-                props?.hookChat.setActionMessage({
-                  actionType: "",
-                  item: {},
-                })
-              }
-            >
-              {/* <CrossIcon width="12" height="12" fill="#efefef" /> */}
-            </StyledIcon>
           </div>
         ) : (
           <></>
@@ -124,7 +120,7 @@ const ChatInput = (props: any) => {
   const TemplatePreview = () => {
     return (
       <>
-        {props?.hookChat?.actionMessage?.actionType == "Reply" ||
+        {props?.hookChat?.actionMessage?.action == "REPLY" ||
         props?.hookChat?.attachItem ||
         props?.hookChat?.chatMeta?.type ||
         props?.hookChat?.slashCmd ||
@@ -135,10 +131,10 @@ const ChatInput = (props: any) => {
                 Preview
               </Heading>
               <IconImage
-                        path="IconDarkCross.png"
-                        style={{className:"m-r-0-5"}}
-                        onClick={() => props?.hookChat.deleteAttachment()}
-                    />
+                path="IconDarkCross.png"
+                style={{ className: "m-r-0-5" }}
+                onClick={() => previewCloseHandler()}
+              />
             </Row>
             {templateReply()}
             {templateAttachment()}
@@ -192,9 +188,7 @@ const ChatInput = (props: any) => {
                 rightIcon={<IconImage path="IconDarkFiles.png" />}
               >
                 <label htmlFor="upload-file" className="w-100">
-                  <Row className="vr-center hr-between w-100">
-                  Upload File{" "}
-                  </Row>
+                  <Row className="vr-center hr-between w-100">Upload File </Row>
                 </label>
               </Button>
               <input
@@ -203,9 +197,30 @@ const ChatInput = (props: any) => {
                 type="file"
                 hidden
               />
-              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />}><Row className="hr-between w-100">Create Poll</Row></Button>
-              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />}><Row className="hr-between w-100">Create Post</Row></Button>
-              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkWallet.png" />}><Row className="hr-between w-100">Send Payment</Row></Button>
+              <Button
+                variant="transparent"
+                size="md"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkFiles.png" />}
+              >
+                <Row className="hr-between w-100">Create Poll</Row>
+              </Button>
+              <Button
+                variant="transparent"
+                size="md"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkFiles.png" />}
+              >
+                <Row className="hr-between w-100">Create Post</Row>
+              </Button>
+              <Button
+                variant="transparent"
+                size="md"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkWallet.png" />}
+              >
+                <Row className="hr-between w-100">Send Payment</Row>
+              </Button>
             </Col>
           </PopoverBody>
         </PopoverContent>
@@ -290,6 +305,12 @@ const ChatInput = (props: any) => {
 
   const TemplateMultiselect = () => {
     return <></>;
+  };
+
+  const previewCloseHandler = () => {
+    if (props?.hookChat?.actionMessage?.action == "REPLY") {
+      props?.hookChat?.handleReplyClose();
+    }
   };
 
   if (props.hookChat.searchActive) return <TemplateSearch />;
