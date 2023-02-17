@@ -25,6 +25,9 @@ const theme = extendTheme({
             paddingLeft: '0.5rem !important',
             paddingRight: '0.5rem !important',
         },
+        '.chakra-modal': {
+            border: `${style.modal.border.default} !important`
+        },
         '.chakra-modal__body': {
             background: `${style.modal.bg.default}`,
             paddingTop: '1rem !importannt',

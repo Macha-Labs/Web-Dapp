@@ -8,6 +8,7 @@ import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import useOrgChannels from "@/hooks/portal/useOrgChannels";
 import ModalSlider from "../modal/ModalSlider";
 import ChatProfile from "./ChatProfile";
+import IconImage from "../icons/IconImage";
 
 const ChatList = (props: any) => {
     const chatProvider = useContext(ChatContext);
@@ -49,16 +50,16 @@ const ChatList = (props: any) => {
                         (
                             <>
                                 <div className="m-b-2">
-                                    <Row className="vr-center menu-heading hr-between">
-                                        <Heading as="h4" size="md" className="m-b-1"></Heading>
+                                    <Row className="menu-heading hr-between vr-center m-b-1">
+                                        <Heading as="h4" size="md" className="m-b-1">New Channel</Heading>
                                         {
                                             (props?.context?.user?._id == props?.org?.owner)
                                                 ?
                                                 (
                                                     <Col>
-                                                        <Icon className="state-2-3 m-b-1" onClick={modalChatNew.onOpen}>
-                                                            {/* <AddIcon /> */}
-                                                        </Icon>
+                                                        <IconImage path="IconDarkPlus.png"
+                                                        onClick={modalChatNew.onOpen}
+                                                         />
 
                                                     </Col>
                                                 )
