@@ -435,6 +435,7 @@ export const StyledIcon = styled.i`
   padding: 5px;
   cursor: pointer;
   width: fit-content;
+  height: fit-content;
   background: ${style.icon.bg.default};
   border-radius: ${style.icon.borderRadius};
 
@@ -622,8 +623,8 @@ export const ChatPreviewCard = styled(StyledCard)`
   }
 `;
 export const StyledChatPreview = styled.div`
-  background: ${style.bgLayout.primary};
-  border: ${style.borderInput};
+  background: ${style.card.bg.default};
+  border: ${style.card.border.default};
   border-radius: 2px 2px 0px 0px;
   padding: 0.5rem 0.5rem;
 
@@ -719,7 +720,7 @@ export const StyledConversation = styled(Col)`
 
   &:hover {
     opacity: 1;
-    background: ${style.bg4};
+    background: ${style.card.bg.hover};
     .action {
       display: block;
       color: red;
@@ -741,13 +742,14 @@ export const StyledConversation = styled(Col)`
       border: ${style.borderInput};
       background: #01041f;
       border-radius: 5px;
+      width: fit-content
     }
 
-    // &:hover {
-    //     .action {
-    //         display: block;
-    //     }
-    // }
+    &:hover {
+        .action {
+            display: flex;
+        }
+    }
 
     .inputElement {
       resize: none;

@@ -29,12 +29,14 @@ import ChatMention from "../ChatMention";
 import IconFile from "@/components/icons/IconFile";
 import IconDelete from "@/components/icons/IconDelete";
 import PortalLoader from "@/components/PortalLoader";
+import IconImage from "@/components/icons/IconImage";
 
 // const TypingRow = styled(Row)`
 //     display: none;
 // `
 
 const ChatInput = (props: any) => {
+
   const templateReply = () => {
     return (
       <>
@@ -97,9 +99,7 @@ const ChatInput = (props: any) => {
               {props.hookChat.streamLoading ? (
                 <PortalLoader size="xs" />
               ) : (
-                <Icon onClick={() => props?.hookChat.deleteAttachment()}>
-                  <IconDelete width="20" height="20" fill="#efefef" />
-                </Icon>
+                <></>
               )}
             </Row>
           </div>
@@ -121,7 +121,7 @@ const ChatInput = (props: any) => {
     return objs[props.hookChat?.chatMeta?.type];
   };
 
-  const templatePreview = () => {
+  const TemplatePreview = () => {
     return (
       <>
         {props?.hookChat?.actionMessage?.actionType == "Reply" ||
@@ -134,9 +134,11 @@ const ChatInput = (props: any) => {
               <Heading as="h6" size="sm">
                 Preview
               </Heading>
-              <StyledIcon>
-                <CloseIcon />
-              </StyledIcon>
+              <IconImage
+                        path="IconDarkCross.png"
+                        style={{className:"m-r-0-5"}}
+                        onClick={() => props?.hookChat.deleteAttachment()}
+                    />
             </Row>
             {templateReply()}
             {templateAttachment()}
@@ -171,7 +173,7 @@ const ChatInput = (props: any) => {
     );
   };
 
-  const templateAdd = () => {
+  const TemplateAction = () => {
     return (
       <Popover placement="top-start">
         <PopoverTrigger>
@@ -184,14 +186,14 @@ const ChatInput = (props: any) => {
             <Col className="text-start">
               <Button
                 variant="transparent"
-                size="sm"
+                size="md"
                 className="text-start"
                 isLoading={props.attachLoading}
+                rightIcon={<IconImage path="IconDarkFiles.png" />}
               >
                 <label htmlFor="upload-file" className="w-100">
-                  <Row className="hr-between w-100">
-                    Add File{" "}
-                    {/* <FileIcon width="20" height="20" fill="#efefef" className="m-r-0-5" /> */}
+                  <Row className="vr-center hr-between w-100">
+                  Upload File{" "}
                   </Row>
                 </label>
               </Button>
@@ -201,7 +203,9 @@ const ChatInput = (props: any) => {
                 type="file"
                 hidden
               />
-              {/* <Button variant="transparent" size="sm" className="text-start"><Row className="hr-between w-100">Add Poll<PollIcon width="20" height="20" fill="#efefef" className="m-r-0-5" /></Row></Button> */}
+              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />}><Row className="hr-between w-100">Create Poll</Row></Button>
+              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />}><Row className="hr-between w-100">Create Post</Row></Button>
+              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkWallet.png" />}><Row className="hr-between w-100">Send Payment</Row></Button>
             </Col>
           </PopoverBody>
         </PopoverContent>
@@ -213,10 +217,12 @@ const ChatInput = (props: any) => {
     return (
       <StyledChatInputContainer>
         <Col className="w-100">
-          {templatePreview()}
+          <TemplatePreview />
 
           <StyledChatInput>
-            <Col className="vr-center hr-center sideIcons">{templateAdd()}</Col>
+            <Col className="vr-center hr-center sideIcons">
+              <TemplateAction />
+            </Col>
             <Col className="w-100 vr-center">
               <Textarea
                 onChange={event => {
@@ -262,7 +268,7 @@ const ChatInput = (props: any) => {
 
   const TemplateMembership = () => {
     return (
-      <StyleChatInputContainer>
+      <StyledChatInputContainer>
         <Col className="w-100 vr-center m-l-0-5">
           Join the Channel to Message
         </Col>
@@ -274,7 +280,7 @@ const ChatInput = (props: any) => {
             Join
           </Button>
         </Col>
-      </StyleChatInputContainer>
+      </StyledChatInputContainer>
     );
   };
 

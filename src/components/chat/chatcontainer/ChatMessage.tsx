@@ -1,10 +1,11 @@
+import IconImage from "@/components/icons/IconImage";
 import { truncateAddress } from "@/helpers";
 import LayoutFilePreview from "@/layouts/chat/LayoutFilePreview";
 import LayoutImagePreview from "@/layouts/chat/LayoutImagePreview";
 import LayoutLinkPreview from "@/layouts/chat/LayoutLinkPreview";
 import { Col, Row, StyledConversation, StyledIcon } from "@/styles/StyledComponents";
 import {
-    Avatar, Text
+    Avatar, Button, Checkbox, Popover, PopoverBody, PopoverContent, PopoverTrigger, Text
 } from "@chakra-ui/react";
 
 const ChatMessage = (props: any) => {
@@ -21,14 +22,37 @@ const ChatMessage = (props: any) => {
         }
     };
 
+    const TemplateActions = () => {
+        return (
+            <Popover placement="top-start">
+        <PopoverTrigger>
+            <IconImage path="IconDarkMenu.png" />
+        </PopoverTrigger>
+        <PopoverContent className="m-b-1">
+          <PopoverBody>
+            <Col className="text-start">
+              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />}><Row className="hr-between w-100">Reply</Row></Button>
+              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />}><Row className="hr-between w-100" onClick={() => {props.hookChat.pinMessage(props.message)}}>Pin Message</Row></Button>
+              {(props.message?.user?.id == props?.authContext?.address) && <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />} onClick={() => {props.hookChat.deleteMessage(props.message)}}><Row className="hr-between w-100">Delete Message</Row></Button>}
+            </Col>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+        )
+    }
+
     return (
         <StyledConversation>
-            <Row className="message">
+            <Row className="message w-100">
                 <Col>
-                    <Avatar
-                        src={props.message?.user?.lensImage}
-                        className="m-r-1"
-                    ></Avatar>
+                    <Row>
+                    {props.hookChat?.actionMessage?.action === "MULTISELECT" && <Checkbox defaultChecked className="m-r-0-5"></Checkbox>}
+                        
+                        <Avatar
+                            src={props.message?.user?.lensImage}
+                            className="m-r-1"
+                        ></Avatar>
+                    </Row>
                 </Col>
 
                 <Col className="w-100" style={{ color: "#ffffff" }}>
@@ -43,9 +67,12 @@ const ChatMessage = (props: any) => {
                     })}
                 </Col>
                 <Row className="w-100 action">
-                    <StyledIcon className="circled m-r-0-5">
-                        {/* <ReplyIcon width="20" height="20" fill="#e8e8e8" /> */}
-                    </StyledIcon>
+                    <IconImage
+                        path="IconDarkEmoji.png"
+                        style={{className:"m-r-0-5"}}
+                    />
+
+                   <TemplateActions />
                 </Row>
             </Row>
         </StyledConversation>
