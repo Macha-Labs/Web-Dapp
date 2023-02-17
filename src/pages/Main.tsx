@@ -41,6 +41,7 @@ function Main() {
               <ChatProvider>
                 <ChakraProvider theme={theme}>
                   <Chat />
+                  {/* <User /> */}
                 </ChakraProvider>
               </ChatProvider>
             </StreamProvider>
