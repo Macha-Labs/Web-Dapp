@@ -17,7 +17,6 @@ function Chat() {
             <ChatList />
           </StyledChatList>
           <StyledChat>
-            {/* <ChatProfile channel={null}/> */}
             <ChatContainer />
           </StyledChat>
         </div>
