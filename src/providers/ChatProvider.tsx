@@ -23,12 +23,14 @@ export const ChatContext = createContext<ChatContextType>({
   initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
 });
 
-export const ChatProvider = ({children}: any) => {
-    const [channelId, setChannelId] = useState<any>();
-    const hookStreamChannel = useStreamChannel(channelId);
-    const hookChat = useStreamChat(hookStreamChannel.channel);
-    const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel?.raw);
-    const streamContext = useContext(StreamContext) as StreamContextType;
+export const ChatProvider = ({ children }: any) => {
+  const [channelId, setChannelId] = useState<any>();
+  const hookStreamChannel = useStreamChannel(channelId);
+  const hookChat = useStreamChat(hookStreamChannel.channel);
+  const hookStreamChannelMembers = useStreamChannelMembers(
+    hookStreamChannel?.channel?.raw
+  );
+  const streamContext = useContext(StreamContext) as StreamContextType;
 
   const initiate = async (channel: any, userAddress?: any) => {
     logger(

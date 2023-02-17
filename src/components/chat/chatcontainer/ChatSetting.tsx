@@ -1,11 +1,11 @@
-import { useChannelSettings } from "@/hooks/useChannelSettings";
+import { useChannelSettings } from "@/dex/useChannelSettings";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { Col } from "@/styles/StyledComponents";
 import { Heading } from "@chakra-ui/react";
 import React from "react";
 
 function ChatSetting() {
-  const hookChannelSettings = useChannelSettings();
+  const dexChannelSettings = useChannelSettings();
 
   return (
     <div>
@@ -15,14 +15,14 @@ function ChatSetting() {
 
       <Col>
         <LayoutOptions
-          options={hookChannelSettings.chatOptions}
+          options={dexChannelSettings.chatOptions}
           style={{ className: "m-b-1" }}
         />
         <LayoutOptions
-          options={hookChannelSettings.chatOptions2}
+          options={dexChannelSettings.chatOptions2}
           style={{ className: "m-b-1" }}
         />
-        <LayoutOptions options={hookChannelSettings.chatOptions3} />
+        <LayoutOptions options={dexChannelSettings.chatOptions3} />
       </Col>
     </div>
   );
