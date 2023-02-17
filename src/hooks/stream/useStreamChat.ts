@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import { logger } from "@/helpers/logger";
 import { uploadAtIpfsRoot } from "@/helpers/storage/web3storage";
 import { newMessageNotification } from "@/service/NotificationService";
@@ -5,7 +6,10 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import { StreamContext, StreamContextType } from "../../providers/StreamProvider";
+import {
+  StreamContext,
+  StreamContextType,
+} from "../../providers/StreamProvider";
 // import useChatFilters from "../useChatFilters";
 import useMention from "./useMention";
 // import useCommand from "./useCommand";
@@ -18,7 +22,10 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const [streamLoading, setStreamLoading] = useState<any>(false);
   const [attachItem, setAttachItem] = useState<any>();
   const [reactions, setReactions] = useState<any>({});
-  const [actionMessage, setActionMessage] = useState<any>({ action: "", item: {} });
+  const [actionMessage, setActionMessage] = useState<any>({
+    action: "",
+    item: {},
+  });
   const [selectedMessages, setSelectedMessages] = useState<any>([]);
   const [userObjTyping, setUserObjTyping] = useState<any>();
   const [searchActive, setSearchActive] = useState<any>();
@@ -29,6 +36,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   // custom hooks
   // const chatFilterHook = useChatFilters(users);
   const hookMention = useMention();
+  const toast = useToast();
 
   // Slash & Widget
   const [slashCmd, setSlashCmd] = useState<any>();
@@ -82,10 +90,12 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       } else {
         messageData = {
           text: textareaRef.current?.value,
-          mentioned_users: hookMention.mentionList.map((user: any, index: number) => {
-            console.log("MessageData", user);
-            return user?.ownedBy;
-          }),
+          mentioned_users: hookMention.mentionList.map(
+            (user: any, index: number) => {
+              console.log("MessageData", user);
+              return user?.ownedBy;
+            }
+          ),
           message_custom_data: msgData,
         };
       }
@@ -120,10 +130,10 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       console.log("connected channel", channel);
       console.log("Sending messsageData is ", messageData);
       await channel.raw.sendMessage(messageData); // sending a new message
-      
+
       setRerenderSwitch(!rerenderSwitch);
       setStreamLoading(false);
-      textareaRef.current.value = ""
+      textareaRef.current.value = "";
       setAttachItem(null);
       setActionMessage(null);
 
@@ -131,18 +141,23 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         topic: "newMessage",
         notification: {
           title: channel.name,
-          body: `${authContext.user?.lens?.name || authContext.user?.lens?.handle || authContext.user?.lens?.id || truncateAddress(authContext.user?.lens?.ownedBy)}: ${messageData.text}`
+          body: `${
+            authContext.user?.lens?.name ||
+            authContext.user?.lens?.handle ||
+            authContext.user?.lens?.id ||
+            truncateAddress(authContext.user?.lens?.ownedBy)
+          }: ${messageData.text}`,
         },
         data: {
           type: "channelMessage",
           name: "Portal New Message",
-          channelId: channel.id
+          channelId: channel.id,
         },
         android: {
           ttl: 4500,
-          priority: "normal"
-        }
-      }
+          priority: "normal",
+        },
+      };
       hookMention.onRefresh();
       setChatMeta(null);
       await newMessageNotification(notificationPayload); // sending new message notification
@@ -174,19 +189,66 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       });
     }
 
-    streamContext.client.deleteMessage(message?.id, true);
-    // callback();
-    console.log("Message deleted");
+    streamContext.client
+      .deleteMessage(message?.id, true)
+      .then(() => {
+        toast({
+          title: "Message deleted",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      })
+      .catch((err: any) => {
+        toast({
+          title: "Message could not be deleted",
+          status: "error",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      });
   };
 
   const pinMessage = async (message: any) => {
-    await streamContext.client.pinMessage(message, null);
-    // callback();
-    console.log("Pinned a message");
+    await streamContext.client
+      .pinMessage(message, null)
+      .then(() => {
+        toast({
+          title: "Message Pinned Successfully",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      })
+      .catch((err: any) => {
+        toast({
+          title: "Message could not be pinned",
+          status: "error",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      });
   };
 
   const unPinMessage = async (message: any) => {
-    await streamContext.client.unpinMessage(message);
+    await streamContext.client
+      .unpinMessage(message)
+      .then(() => {
+        toast({
+          title: "Message Unpinned Successfully",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      })
+      .catch((err: any) => {
+        toast({
+          title: "Message could not be unpinned",
+          status: "error",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      });
     // callback();
     console.log("Un-Pinned a message");
   };
@@ -196,7 +258,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     if (keycode == 13 && !event.shiftKey) {
       event.preventDefault();
 
-      if (textareaRef.current.value.substring(0, 1) == '/') {
+      if (textareaRef.current.value.substring(0, 1) == "/") {
         setSlashCmdValue(textareaRef.current.value);
         setSlashCmd(false);
         textareaRef.current.value = "";
@@ -204,8 +266,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       } else {
         await addMessage();
       }
-    }
-    else if (event.key == "/") {
+    } else if (event.key == "/") {
       console.log("slash key was pressed");
       setSlashCmd(true);
     }
@@ -252,7 +313,12 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleMultiSelect = () => {
-    logger('channel', 'useStreamChat.handleMultiSelect', 'Trigger MultiSelect', [])
+    logger(
+      "channel",
+      "useStreamChat.handleMultiSelect",
+      "Trigger MultiSelect",
+      []
+    );
     setActionMessage({ action: "MULTISELECT", item: null });
   };
   const handleMultiSelectClose = () => {
