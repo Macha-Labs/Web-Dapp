@@ -1,7 +1,7 @@
 import { logger } from "@/helpers/logger";
 import { uploadAtIpfsRoot } from "@/helpers/storage/web3storage";
 import { newMessageNotification } from "@/service/NotificationService";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
@@ -353,6 +353,10 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     textareaRef.current = result;
     hookMention.onSelect(user);
   };
+
+  useEffect(() => {
+    logger('channel', 'useStreamChat.useEffect[actionMessage]', 'actionMessage is', [actionMessage])
+  }, [actionMessage]) 
 
   return {
     // REACTIONS
