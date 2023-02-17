@@ -68,8 +68,7 @@ const ChatHeader = (props) => {
 
   const TemplateProfile = () => {
     return (
-      <div className="header hr-between vr-center">
-        <Row className="w-100 h-100 hr-between vr-center">
+      <Row className="header w-100 hr-between vr-center">
           <Row className="vr-center">
             <Avatar
               size="sm"
@@ -96,8 +95,7 @@ const ChatHeader = (props) => {
 
             <IconImage path="IconDarkUsers.png" onClick={membersModal.onOpen} />
           </Row>
-        </Row>
-      </div>
+      </Row>
     );
   };
 
@@ -114,12 +112,7 @@ const ChatHeader = (props) => {
     <>
       <div className="header hr-between vr-center">
         <Row className="w-100 h-100 hr-between vr-center">
-          {/* <Heading as="h4" size="sm">
-            {props?.hookChannel?.channel?.name}
-          </Heading> */}
-          <div>
-            <Template />
-          </div>
+          <Template />
         </Row>
       </div>
       <TemplateMembers />
