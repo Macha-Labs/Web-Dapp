@@ -33,6 +33,7 @@ const ChatList = (props: any) => {
   };
 
   const TemplateChatList = () => {
+    // const channelDisplayImage = ;
     return (
       <>
         <Row className="header vr-center hr-between">
@@ -83,8 +84,11 @@ const ChatList = (props: any) => {
                                 : "state_card"
                             }
                           >
-                            {console.log("asdf", item)}
-                            <Avatar size="md" src="" className="m-r-0-5" />
+                            <Avatar
+                              size="md"
+                              className="m-r-0-5"
+                              name={item.name}
+                            />
                             <Col className="w-100 d-flex flex-col">
                               {item.name}
                               <Col className="m-t-0-5">
