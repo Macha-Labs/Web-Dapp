@@ -17,7 +17,6 @@ const useLensAuth = (address: any, updateUser: any) => {
         useState<any>("Sign-In with Lens");
 
     const signText = async (text: any) => {
-        console.log("Signing the message");
         var message = ethers.utils.toUtf8Bytes(
             "\x19Ethereum Signed Message:\n" + text.length + text
         );
@@ -30,38 +29,30 @@ const useLensAuth = (address: any, updateUser: any) => {
     };
 
     const fetchLensToken = async () => {
-        console.log("signerAddress", address);
         setIsLoading(true);
         if (hookLensProfile?.lensData) {
             try {
-                console.log("enter try");
                 const challenge = await generateChallenge(address);
-                console.log("Challenge generated ", challenge);
                 const signature = await signText(challenge);
                 // const authRequest = await authenticate_user(signerAddress, signature);
-                console.log("Got signature", signature);
 
                 authenticate_user(address, signature).then((data) => {
-                    console.log("Lens Tokens", data);
                     setToken(data["accessToken"]);
                     setRefreshToken(data["refreshToken"]);
                     // storing in async data
                     window.localStorage.setItem("accessToken", data["accessToken"]);
                     window.localStorage.setItem("refreshToken", data["refreshToken"]);
                     updateUser("lens", {
-                        ...hookLensProfile.lensData,
+                        ...hookLensProfile.userLens,
                         accessToken: data["accessToken"],
                         refreshToken: data["refreshToken"],
                     });
                 });
             } catch (error) {
-                console.log("Couldn't Sign request");
-                console.log(error);
                 setSignButtonText("Couldn't sign request");
                 setIsLoading(false);
             }
         } else {
-            console.log("Couldn't find any Lens profile with this address");
         }
         // setIsLoading(false);
     };
@@ -69,12 +60,10 @@ const useLensAuth = (address: any, updateUser: any) => {
     // Get lens tokens from local storage or new tokens
     const getLensTokens = async () => {
         let refreshToken;
-        console.log("Getting the lens data ", hookLensProfile.lensData);
         // const accessToken = await getAsyncData("accessToken");
         const accessToken = window.localStorage.getItem("accessToken");
-        console.log("accessToken from Async storage ", accessToken);
         updateUser("lens", {
-                ...hookLensProfile.lensData,
+                ...hookLensProfile.userLens,
                 accessToken: accessToken,
                 refreshToken: refreshToken,
             });
@@ -91,9 +80,10 @@ const useLensAuth = (address: any, updateUser: any) => {
     };
 
     useEffect(() => {
-        if (address) {
-            console.log("Checking connected address", address);
+        if (window.localStorage.getItem("accessToken")) {
             getLensTokens();
+        } else {
+            fetchLensToken();
         }
     }, [hookLensProfile.userLens?.id]);
 
