@@ -16,8 +16,7 @@ export type AuthContextType = {
     setUser: (param: any) => void;
     updateUser: (...params: any) => void;
     connectLens: () => void;
-    authToken: any | undefined;
-    isConnected: any | undefined;
+    isConnected: boolean | undefined;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -29,8 +28,7 @@ export const AuthContext = createContext<AuthContextType>({
     setUser: (param) => {},
     updateUser: (...params) => {},
     connectLens: () => {},
-    authToken: null,
-    isConnected: null
+    isConnected: false
 });
 
 const AuthProvider = ({children}: any) => {
@@ -48,12 +46,10 @@ const AuthProvider = ({children}: any) => {
     };
     
     const hookLensAuth = useLensAuth(address, updateUser);
-    const authToken = hookLensAuth.accessToken;
 
     // connecting user wallet
     const connectWallet = async () => {
         logger('auth', 'connectWallet', 'Trigger connectWallet', []);
-        
     };
 
     // Disconnecting user Wallet
@@ -61,18 +57,6 @@ const AuthProvider = ({children}: any) => {
         disconnect();
     };
 
-    const resetToDefault = () => {
-        // the lens data in the useLensProfile should also be set to default
-        // setAddress(null);
-        setUser(null);
-        hookLensAuth.setLensProfile(null);
-    };
-
-    const connectLens = () => {
-        hookLensAuth.connect();
-    };
-
-    // updating the data from DB in user
     useEffect(() => {
         logger('auth', 'useMemo[user.lens]', 'User is',  [user])
         if (address) {
@@ -83,40 +67,32 @@ const AuthProvider = ({children}: any) => {
                 logger('auth', 'useEffect[user.lens]', 'response of user from DB', [JSON.stringify(data)]);
                 const userData = UserDb$(data);
                 updateUser("db", userData);
-                if (userData?.id && !userData.tokens?.stream) {
-                    putStreamToken({userAddress: address}).then((res: any) => {
-                        logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
-                        updateUser("db", UserDb$(res));
-                    });
-                }
+                putStreamToken({userAddress: address}).then((res: any) => {
+                    logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
+                    updateUser("db", UserDb$(res));
+                });
+                // if (userData?.id && !userData.tokens?.stream) {
+                //     putStreamToken({userAddress: address}).then((res: any) => {
+                //         logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
+                //         updateUser("db", UserDb$(res));
+                //     });
+                // }
             });
         }
     }, [address, user?.lens?.id]);
 
-    // useMemo(() => {
-    //     logger('auth', 'useEffect[user.db.id]', 'run', [])
-    //     if (user?.db?.id && !user?.db?.tokens?.stream) {
-    //         putStreamToken({userAddress: address}).then((res: any) => {
-    //             logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
-    //             updateUser("db", UserDb$(res));
-    //         });
-    //     }
-    //     // hookStreamClient.connectStreamClient();
-    // }, [user?.db?.id]);
-
     return (
         <AuthContext.Provider
             value={{
-                signer,
-                address,
-                connectWallet,
-                disconnectWallet,
-                user,
-                setUser,
-                updateUser,
-                connectLens,
-                authToken,
-                isConnected
+                signer: signer,
+                address: address,
+                connectWallet: connectWallet,
+                connectLens: hookLensAuth.connect,
+                disconnectWallet: disconnectWallet,
+                user: user,
+                setUser: setUser,
+                updateUser: updateUser,
+                isConnected: isConnected,
             }}
         >
             {children}

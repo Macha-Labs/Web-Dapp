@@ -77,18 +77,6 @@ const useLensAuth = (address: any, updateUser: any) => {
                 accessToken: accessToken,
                 refreshToken: refreshToken,
             });
-        if (accessToken) {
-            console.log("Executing if block");
-            
-        } else {
-            console.log("Calling fetchLensToken function");
-            // will call this function in a later build
-            // fetchLensToken(); 
-        }
-        // getAsyncData("refreshToken").then((result) => {
-        //     refreshToken = result;
-        //     console.log("refreshToken from Async storage ", refreshToken);
-        // });
     };
 
     const connect = () => {
