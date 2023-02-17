@@ -46,7 +46,8 @@ const useLensAuth = (address: any, updateUser: any) => {
                     setToken(data["accessToken"]);
                     setRefreshToken(data["refreshToken"]);
                     // storing in async data
-                    //
+                    window.localStorage.setItem("accessToken", data["accessToken"]);
+                    window.localStorage.setItem("refreshToken", data["refreshToken"]);
                     updateUser("lens", {
                         ...hookLensProfile.lensData,
                         accessToken: data["accessToken"],
@@ -70,7 +71,7 @@ const useLensAuth = (address: any, updateUser: any) => {
         let refreshToken;
         console.log("Getting the lens data ", hookLensProfile.lensData);
         // const accessToken = await getAsyncData("accessToken");
-        const accessToken = "";
+        const accessToken = window.localStorage.getItem("accessToken");
         console.log("accessToken from Async storage ", accessToken);
         updateUser("lens", {
                 ...hookLensProfile.lensData,
