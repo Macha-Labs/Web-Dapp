@@ -3,6 +3,7 @@ import UserList from "@/components/user/UserList";
 import { Row } from "@/styles/StyledComponents";
 import { Heading, Icon, useDisclosure } from "@chakra-ui/react";
 import ChatMessageList from "./ChatMessageList";
+import IconImage from "@/components/icons/IconImage";
 
 const ChatHeader = props => {
   const membersModal = useDisclosure();
@@ -40,15 +41,19 @@ const ChatHeader = props => {
           </Heading>
           <div>
             <Row className="vr-center">
-              <Icon className="m-r-0-5">
-                {/* <PinIcon width="25" height="25" fill="#efefef" onClick={() => {}}></PinIcon> */}
-              </Icon>
-              <Icon className="m-r-0-5" onClick={pinneddMessageModal.onOpen}>
-                {/* <SearchIcon width="25" height="25" fill="#efefef"></SearchIcon>/ */}
-              </Icon>
-              <Icon className="" onClick={membersModal.onOpen}>
-                {/* <UserIcon width="25" height="25" fill="#efefef"></UserIcon> */}
-              </Icon>
+              <IconImage path="IconDarkMenu.png" className="m-r-0-5" />
+
+              <IconImage
+                path="IconDarkPinned.png"
+                onClick={pinneddMessageModal.onOpen}
+                className="m-r-0-5"
+              />
+
+              <IconImage
+                path="IconDarkUsers.png"
+                className="m-r-0-5"
+                onClick={membersModal.onOpen}
+              />
             </Row>
           </div>
         </Row>

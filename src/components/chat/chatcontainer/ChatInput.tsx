@@ -3,6 +3,7 @@ import {
   Avatar,
   Button,
   Heading,
+  Icon,
   Image,
   Popover,
   PopoverBody,
@@ -24,9 +25,10 @@ import LayoutSlashPreview from "@/layouts/chat/LayoutSlashPreview";
 import LayoutPostCard from "../../../layouts/post/LayoutPostCard";
 import LayoutProposalCard from "../../../layouts/proposal/LayoutProposalCard";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
-import LayoutTransactionCard from "../../user/payment/LayoutTransactionCard";
-import LayoutPollCard from "../../../layouts/poll/LayoutPollCard";
 import ChatMention from "../ChatMention";
+import IconFile from "@/components/icons/IconFile";
+import IconDelete from "@/components/icons/IconDelete";
+import PortalLoader from "@/components/PortalLoader";
 
 // const TypingRow = styled(Row)`
 //     display: none;
@@ -36,7 +38,7 @@ const ChatInput = (props: any) => {
   const templateReply = () => {
     return (
       <>
-        {props?.chatContext?.actionMessage?.actionType == "Reply" ? (
+        {props?.hookChat?.actionMessage?.actionType == "Reply" ? (
           <div className="reply">
             <Col className="w-100 vr-center">
               <Row className="vr-center">
@@ -52,7 +54,7 @@ const ChatInput = (props: any) => {
             </Col>
             <StyledIcon
               onClick={() =>
-                props?.chatContext.setActionMessage({
+                props?.hookChat.setActionMessage({
                   actionType: "",
                   item: {},
                 })
@@ -70,28 +72,35 @@ const ChatInput = (props: any) => {
 
   const templateAttachment = () => {
     let type;
-    if (props?.chatContext?.attachItem) {
-      type = props?.chatContext?.attachItem.type.split("/")[0];
+    if (props?.hookChat?.attachItem) {
+      type = props?.hookChat?.attachItem.type.split("/")[0];
     }
     return (
       <>
-        {props?.chatContext?.attachItem ? (
+        {props?.hookChat?.attachItem ? (
           <div className="attachment show">
             <Row className="vr-start hr-between">
               <Col className="w-100">
-                {/* {
-                                            type == "image" ?
-                                                <Image src={URL.createObjectURL(props?.chatContext.attachItem)} alt={props?.chatContext.attachItem?.name} width="300px" />
-                                                :
-                                                <FileIcon width="150px" height="150px" />
-                                        } */}
+                {type == "image" ? (
+                  <Image
+                    src={URL.createObjectURL(props?.hookChat.attachItem)}
+                    alt={props?.hookChat.attachItem?.name}
+                    width="300px"
+                  />
+                ) : (
+                  <IconFile width={24} height={24} fill="#efefef" />
+                )}
                 <Text className="m-t-0-5">
-                  {props?.chatContext?.attachItem?.name}
+                  {props?.hookChat?.attachItem?.name}
                 </Text>
               </Col>
-              <StyledIcon onClick={() => props?.chatContext.deleteAttachment()}>
-                {/* <DeleteIcon width="20" height="20" fill="#efefef" /> */}
-              </StyledIcon>
+              {props.hookChat.streamLoading ? (
+                <PortalLoader size="xs" />
+              ) : (
+                <Icon onClick={() => props?.hookChat.deleteAttachment()}>
+                  <IconDelete width="20" height="20" fill="#efefef" />
+                </Icon>
+              )}
             </Row>
           </div>
         ) : (
@@ -103,23 +112,23 @@ const ChatInput = (props: any) => {
 
   const templateSlashPreview = () => {
     const objs: any = {
-      // 'post': <LayoutPostCard item={props?.chatContext?.chatMeta?.meta} />,
-      // 'proposal': <LayoutProposalCard item={props?.chatContext?.chatMeta?.meta} />,
-      nft: <LayoutNFTCard nft={props?.chatContext?.chatMeta?.meta} />,
-      // '/send-payment': <LayoutTransactionCard meta={props.chatContext?.chatMeta?.meta} />,
-      // 'poll': <LayoutPollCard poll={props?.chatContext?.chatMeta?.meta} />
+      // 'post': <LayoutPostCard item={props?.hookChat?.chatMeta?.meta} />,
+      // 'proposal': <LayoutProposalCard item={props?.hookChat?.chatMeta?.meta} />,
+      nft: <LayoutNFTCard nft={props?.hookChat?.chatMeta?.meta} />,
+      // '/send-payment': <LayoutTransactionCard meta={props.hookChat?.chatMeta?.meta} />,
+      // 'poll': <LayoutPollCard poll={props?.hookChat?.chatMeta?.meta} />
     };
-    return objs[props.chatContext?.chatMeta?.type];
+    return objs[props.hookChat?.chatMeta?.type];
   };
 
   const templatePreview = () => {
     return (
       <>
-        {props?.chatContext?.actionMessage?.actionType == "Reply" ||
-        props?.chatContext?.attachItem ||
-        props?.chatContext?.chatMeta?.type ||
-        props?.chatContext?.slashCmd ||
-        props?.chatContext?.isTyping ? (
+        {props?.hookChat?.actionMessage?.actionType == "Reply" ||
+        props?.hookChat?.attachItem ||
+        props?.hookChat?.chatMeta?.type ||
+        props?.hookChat?.slashCmd ||
+        props?.hookChat?.isTyping ? (
           <StyledChatPreview>
             <Row className="m-b-1 vr-center w-100 hr-between">
               <Heading as="h6" size="sm">
@@ -132,10 +141,10 @@ const ChatInput = (props: any) => {
             {templateReply()}
             {templateAttachment()}
             {templateSlashPreview()}
-            {props?.chatContext?.isTyping ? templateMention() : <></>}
-            {/* {props?.chatContext.slashCmd ? (
+            {props?.hookChat?.isTyping ? templateMention() : <></>}
+            {/* {props?.hookChat.slashCmd ? (
                                 <LayoutSlashPreview
-                                    chatContext={props.chatContext}
+                                    hookChat={props.hookChat}
                                     handleTask={props.handleTask}
                                     txnModalOpen={props.txnModalOpen}
                                     slashCmds={props.slashCmds}
@@ -154,10 +163,10 @@ const ChatInput = (props: any) => {
     return (
       <ChatMention
         users={props.users}
-        setMentionList={props?.chatContext.setMentionList}
-        mentionList={props?.chatContext.mentionList}
-        mention={props?.chatContext.mention}
-        selectedText={props?.chatContext.selectedText}
+        setMentionList={props?.hookChat.setMentionList}
+        mentionList={props?.hookChat.mentionList}
+        mention={props?.hookChat.mention}
+        selectedText={props?.hookChat.selectedText}
       />
     );
   };
@@ -188,7 +197,7 @@ const ChatInput = (props: any) => {
               </Button>
               <input
                 id="upload-file"
-                onChange={props.handleAttachment}
+                onChange={props.hookChat.handleAttachment}
                 type="file"
                 hidden
               />
@@ -200,62 +209,37 @@ const ChatInput = (props: any) => {
     );
   };
 
-  const templateChatInputRow = () => {
+  const TemplateInput = () => {
     return (
-      <StyledChatInput>
-        {props.channel?.data?.created_by?.id == props.currentUser?.id ||
-        props.userIsMember ? (
-          <>
-            <Col className="vr-center hr-center sideIcons">{templateAdd()}</Col>
-
-            <Col className="w-100 vr-center">
-              <Textarea
-                onChange={event => {
-                  event.target.style.height = "auto";
-                  event.target.style.height = `${event.target.scrollHeight}px`;
-                  props.hookChat.onChange(event);
-                }}
-                ref={props.hookChat?.textareaRef}
-                className="inputElement"
-                variant="unstyled"
-                style={{ minHeight: "45px" }}
-                onKeyDown={event => props?.hookChat?.keyDownMessage(event)}
-                placeholder="Message..."
-                height="auto"
-                rows={1}
-              />
-            </Col>
-            <Col className="vr-center hr-center sideIcons">
-              <StyledIcon className="circled">
-                {/* <EmojiIcon width="20" height="20" fill="#e8e8e8" /> */}
-              </StyledIcon>
-            </Col>
-          </>
-        ) : (
-          <>
-            <Col className="w-100 vr-center m-l-0-5">
-              Join the Channel to Message
-            </Col>
-            <Col>
-              <Button
-                isLoading={props.isLoading}
-                onClick={() => props.addMemberToChannel(props.channel?.id)}
-              >
-                Join
-              </Button>
-            </Col>
-          </>
-        )}
-      </StyledChatInput>
-    );
-  };
-
-  return (
-    <StyledChatInputContainer>
+      <StyledChatInputContainer>
       <Col className="w-100">
         {templatePreview()}
 
-        {templateChatInputRow()}
+        <StyledChatInput>
+        <Col className="vr-center hr-center sideIcons">{templateAdd()}</Col>
+          <Col className="w-100 vr-center">
+            <Textarea
+              onChange={event => {
+                event.target.style.height = "auto";
+                event.target.style.height = `${event.target.scrollHeight}px`;
+                props.hookChat.onChange(event);
+              }}
+              ref={props.hookChat?.textareaRef}
+              className="inputElement"
+              variant="unstyled"
+              style={{ minHeight: "45px" }}
+              onKeyDown={event => props?.hookChat?.keyDownMessage(event)}
+              placeholder="Message..."
+              height="auto"
+              rows={1}
+            />
+          </Col>
+          <Col className="vr-center hr-center sideIcons">
+            <StyledIcon className="circled">
+              {/* <EmojiIcon width="20" height="20" fill="#e8e8e8" /> */}
+            </StyledIcon>
+          </Col>
+        </StyledChatInput>
 
         <Row>
           <Col className="w-100 vr-center">
@@ -273,6 +257,41 @@ const ChatInput = (props: any) => {
         </Row>
       </Col>
     </StyledChatInputContainer>
+    )
+  }
+
+  const TemplateMembership = () => {
+    return (
+      <>
+        <Col className="w-100 vr-center m-l-0-5">
+              Join the Channel to Message
+          </Col>
+          <Col>
+            <Button
+              isLoading={props.isLoading}
+              onClick={() => props.addMemberToChannel(props.channel?.id)}
+            >
+              Join
+            </Button>
+          </Col>
+      </>
+    )
+  }
+  
+  const TemplateSearch = () => {
+    return (
+      <></>
+    )
+  }
+
+  const TempalateMultiselect = () => {
+    return (
+      <></>
+    )
+  }
+
+  return (
+    <TemplateInput />
   );
 };
 
