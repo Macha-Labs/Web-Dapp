@@ -33,7 +33,7 @@ const ChatMessage = (props: any) => {
             <Col className="text-start">
               <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />}><Row className="hr-between w-100">Reply</Row></Button>
               <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />}><Row className="hr-between w-100">Pin Message</Row></Button>
-              <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkWallet.png" />}><Row className="hr-between w-100">Delete</Row></Button>
+              {(props.message?.user?.lensHandle == props?.authContext?.user?.lens?.handle) && <Button variant="transparent" size="md" className="text-start" rightIcon={<IconImage path="IconDarkFiles.png" />} onClick={() => {props.hookChat.deleteMessage(props.message)}}><Row className="hr-between w-100">Delete Message</Row></Button>}
             </Col>
           </PopoverBody>
         </PopoverContent>
