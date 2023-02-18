@@ -26,7 +26,7 @@ const ChatMembers = (props) => {
         <LayoutCardPannel
           header={
             <Row className="hr-between w-full">
-              <Button size="sm" onClick={() => props.setVisible(false)}>
+              <Button size="sm" onClick={modalAddMembers.onClose}>
                 Cancel
               </Button>
               <Text size={"sm"}>Add Members</Text>
@@ -36,7 +36,7 @@ const ChatMembers = (props) => {
             </Row>
           }
         >
-          {hookPortalChannelMembership.following.map((item, index) => {
+          {hookPortalChannelMembership.followers.map((item, index) => {
             return (
               <>
                 <Row key={index} className="hr-between p-1">
