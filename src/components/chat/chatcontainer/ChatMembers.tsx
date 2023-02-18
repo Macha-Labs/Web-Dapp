@@ -1,10 +1,9 @@
-import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import { Col, Row} from "@/styles/StyledComponents";
 import {
   Avatar,
   Button,
   Checkbox,
   Text,
-  Icon,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useContext } from "react";
@@ -15,7 +14,6 @@ import ModalSlider from "@/components/modal/ModalSlider";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatMembers = (props) => {
-  console.log("hookchannel", props?.hookChannel?.channel);
   const hookPortalChannelMembership = usePortalChannelMembership(props?.hookChannel?.channel);
   const chatContext = useContext(ChatContext);
   const modalAddMembers = useDisclosure();
@@ -36,7 +34,7 @@ const ChatMembers = (props) => {
             </Row>
           }
         >
-          {hookPortalChannelMembership.following.map((item, index) => {
+          {hookPortalChannelMembership?.following?.map((item, index) => {
             return (
               <>
                 <Row key={index} className="hr-between p-1">

@@ -42,7 +42,7 @@ const useLensConnections = (account?: any) => {
             console.log("Not getting account");
         }
     }, [account]);
-    console.log("uselensconnections", followers);
+
     return {
         following: following,
         followers: followers,

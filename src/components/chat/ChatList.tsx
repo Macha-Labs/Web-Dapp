@@ -48,7 +48,7 @@ const ChatList = (props: any) => {
     return (
       <>
         <Row className="header vr-center hr-between">
-          <OrgControl />
+          <ChatSearch onSearch={handleSearch} />
         </Row>
         {!authContext.isConnected && <ConnectButton />}
         {!chatProvider?.hookChannels?.channels ? (
@@ -78,12 +78,6 @@ const ChatList = (props: any) => {
                       <></>
                     )}
                   </Row>
-                  <Col className="hr-between vr-center m-b-1">
-                    <Heading as="h4" size="md" className="m-b-1">
-                      Search
-                    </Heading>
-                    <ChatSearch onSearch={handleSearch} />
-                  </Col>
                   <ul>
                     {filteredList.map((item: any, index: number) => (
                       <StyledChatItem key={index}>

@@ -1,5 +1,6 @@
 import useLensProfileUpdate from "@/hooks/lens/useLensProfileUpdate";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
+import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { Row } from "@/styles/StyledComponents";
 import { Avatar, Button } from "@chakra-ui/react";
@@ -29,7 +30,7 @@ const ChatProfile = (props: any) => {
     },
   ];
   return (
-    <>
+    <LayoutCardPannel>
       <Row className="hr-center w-100 m-b-1">
         <Avatar size="2xl" />
       </Row>
@@ -41,7 +42,7 @@ const ChatProfile = (props: any) => {
       >
         Save
       </Button>
-    </>
+    </LayoutCardPannel>
   );
 };
 export default ChatProfile; 
