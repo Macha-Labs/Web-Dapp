@@ -89,6 +89,7 @@ const usePortalChannelMembership = (channel) => {
   return {
     removeMembersFromChannel,
     followers: hookLensConnections.followers,
+    following: hookLensConnections.following,
     isLoading: isLoading,
     setIsLoading: setIsLoading,
     visible: visible,

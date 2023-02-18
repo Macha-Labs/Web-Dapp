@@ -6,6 +6,7 @@ import { helperIPFS, truncateAddress } from "../../helpers";
 
 
 const UserListPopup = (props) => {
+  console.log("userlistpopup",props);
   return (
     <>
       {/* <Popup display={props.visible} style={{ bgColor: "rgb(0,0,0)" }}> */}

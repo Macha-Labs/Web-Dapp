@@ -181,12 +181,13 @@ export const List = styled.div`
   }
 `;
 
-// StyledCard
+//////////////////////////////// Card //////////////////////////////// 
 
 export const StyledCard = styled.div`
-  border-radius: ${style.borderRadiusCard};
+  border-radius: ${style.card.borderRadius};
+  border: ${styled.card.border.default};
   background: ${style.card.bg.default};
-  padding: ${style.paddingCard};
+  padding: ${style.card.padding.default};
   box-shadow: ${style.card.shadow.default};
   cursor: pointer;
   width: 100%;
@@ -230,17 +231,24 @@ export const StyledCard = styled.div`
   }
 `;
 
-// Input
-export const StyledInput = styled.div`
-  width: 100%;
-  border-radius: 5px;
+export const StyledCardPannel = styled.div`
+  border-radius: ${style.card.borderRadius};
+  border: ${styled.card.border.default};
   background: ${style.card.bg.default};
-  border: ${style.card.border.default};
-  margin-bottom: 5px;
-  padding: 0.5rem;
+  box-shadow: ${style.card.shadow.default};
+  cursor: pointer;
+  width: 100%;
+
+  .header {
+    border-bottom: ${style.card.border.default};
+    padding: ${style.paddingCard};
+  }
+
+  .body {
+
+  }
 `
 
-//
 export const StyledNFTCard = styled(StyledCard)`
   width: 250px;
   cursor: pointer;
@@ -305,6 +313,16 @@ export const StyledOptionsCard = styled(StyledCard)`
     }
   }
 `;
+
+//////////////////////////////// Input //////////////////////////////// 
+export const StyledInput = styled.div`
+  width: 100%;
+  border-radius: 5px;
+  background: ${style.card.bg.default};
+  border: ${style.card.border.default};
+  margin-bottom: 5px;
+  padding: 0.5rem;
+`
 
 //
 
@@ -513,7 +531,8 @@ export const StyledNav = styled.div`
   }
 `;
 
-//
+//////////////////////////////// Chat ////////////////////////////////
+
 export const StyledChatList = styled.div`
   width: 25%;
   height: 100vh;
