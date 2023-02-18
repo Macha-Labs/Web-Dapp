@@ -1,11 +1,19 @@
-import { Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Checkbox, Text, Icon, useDisclosure } from "@chakra-ui/react";
+import { Row, StyledCard } from "@/styles/StyledComponents";
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  Text,
+  Icon,
+  useDisclosure,
+} from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import UserListPopup from "@/components/user/UserListPopup";
 import ModalSlider from "@/components/modal/ModalSlider";
+import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatMembers = (props) => {
   const channel = props.route?.params?.channel;
@@ -15,7 +23,7 @@ const ChatMembers = (props) => {
 
   const modalAddMembers = useDisclosure();
 
-  const TemplateAddMembers = ()=>{
+  const TemplateAddMembers = () => {
     return (
       <ModalSlider event={modalAddMembers} size="lg">
         <UserListPopup
@@ -24,23 +32,37 @@ const ChatMembers = (props) => {
           addMembersToChannel={hookPortalChannelMembership.addMembersToChannel}
           handleCheckedUsers={hookPortalChannelMembership.handleCheckedUsers}
           followers={hookPortalChannelMembership.followers}
+          following={hookPortalChannelMembership.following}
         />
       </ModalSlider>
     );
-  }
+  };
 
   return (
     <>
-      <div className="p-1">
-        {/* <div onClick={() => hookPortalChannelMembership.setVisible(true)}> */}
-        {/* <Row className="p-1"> */}
-        {/* <Icon> */}
-        {/* <IconAddMembers /> */}
-
-        {/* </Icon> */}
-        {/* <Text >Add Members</Text> */}
-        {/* </Row> */}
-        {/* </div> */}
+      <LayoutCardPannel
+        header={
+          <>
+            <Row className="hr-between vr-center">
+              <Button
+                onClick={() => modalAddMembers.onOpen()}
+                size="sm"
+                variant="state_brand"
+              >
+                Add New Members
+              </Button>
+              <Button
+                onClick={function (): void {
+                  hookPortalChannelMembership.removeMembersFromChannel();
+                }}
+                size="xs"
+              >
+                Remove
+              </Button>
+            </Row>
+          </>
+        }
+      >
         {chatContext.hookMembers.offlineUsers
           .concat(chatContext.hookMembers.onlineUsers)
           ?.map((item, index) => {
@@ -71,19 +93,7 @@ const ChatMembers = (props) => {
               </>
             );
           })}
-        <Row className="p-2">
-          <Button
-            onClick={function (): void {
-              hookPortalChannelMembership.removeMembersFromChannel();
-            }}
-          >
-            Remove
-          </Button>
-        </Row>
-        <Row className="p-2">
-          <Button onClick={()=> modalAddMembers.onOpen()}>Add New Members</Button>
-        </Row>
-      </div>
+      </LayoutCardPannel>
 
       <TemplateAddMembers />
     </>

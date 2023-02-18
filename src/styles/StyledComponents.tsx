@@ -230,6 +230,23 @@ export const StyledCard = styled.div`
   }
 `;
 
+export const StyledCardPannel = styled.div`
+  border-radius: ${style.borderRadiusCard};
+  border: ${styled.card.border.default}
+  background: ${style.card.bg.default};
+  box-shadow: ${style.card.shadow.default};
+  cursor: pointer;
+  width: 100%;
+  .header {
+    border-bottom: ${style.card.border.default};
+    padding: ${style.paddingCard};
+  }
+
+  .body {
+
+  }
+`
+
 //
 export const StyledNFTCard = styled(StyledCard)`
   width: 250px;
