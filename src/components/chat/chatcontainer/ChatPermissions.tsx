@@ -3,7 +3,7 @@ import React, { useContext, useMemo } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Switch, Text } from "@chakra-ui/react";
+import { Button, Switch, Text } from "@chakra-ui/react";
 
 const ChatPermissions = () => {
   const chatProvider = useContext(ChatContext);
@@ -83,20 +83,20 @@ const ChatPermissions = () => {
         {permissionOptions.map((permission, index) => {
           return (
             <>
-              <Col key={index} className="p-1 hr-between">
-                <Text fontSize="sm" >{permission.text}</Text>
+              <Row key={index} className="p-1 hr-between">
+                <Text fontSize="sm" >{permission.text}</Text>                
                 <Switch
-                  defaultChecked={hookPortalChannel.channel.permissions.includes(
+                  defaultChecked={hookPortalChannel?.channel?.permissions?.includes(
                     permission.value
                   )}
                   onChange={() =>
-                    hookPortalChannel.togglePermission(permission.value)
+                    hookPortalChannel?.togglePermission(permission.value)
                   }
-                  isChecked={hookPortalChannel.channel.permissions.includes(
+                  isChecked={hookPortalChannel?.channel?.permissions?.includes(
                     permission.value
                   )}
                 />
-              </Col>              
+              </Row>              
             </>
           );
         })}
@@ -105,13 +105,18 @@ const ChatPermissions = () => {
   };
 
   return (
-    <Col className="p-5">            
-          <div className="m-t-5 ">
-            {layoutUserPermissions()}
-          </div>
-          <div className="p-t-3">
-            Changes done will be reflected for all the members of the channel
-          </div>        
+    <Col className="p-5">
+      <div className="m-t-5 ">{layoutUserPermissions()}</div>
+      <div className="p-t-3">
+        Changes done will be reflected for all the members of the channel
+      </div>
+      <Button
+        onClick={() => {
+          hookPortalChannel.updatePermissions();
+        }}
+      >
+        Save
+      </Button>
     </Col>
   );
 };
