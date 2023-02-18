@@ -233,7 +233,7 @@ export const StyledCard = styled.div`
 
 export const StyledCardPannel = styled.div`
   border-radius: ${style.card.borderRadius};
-  border: ${styled.card.border.default};
+  border: ${style.card.border.default};
   background: ${style.card.bg.default};
   box-shadow: ${style.card.shadow.default};
   cursor: pointer;
