@@ -101,12 +101,22 @@ const ChatMessage = (props: any) => {
 
   const TemplateReply = () => {
     return (
-      <Col className="m-b-1 m-l-1">
+      <>
+        {
+        props?.message?.quoted_message && <Col className="m-b-1 m-l-1">
         <Heading as="h6" size="xs" className="m-b-0-5">Reply To</Heading>
         <Row>
-          <Avatar size="sm"/>
+          <Avatar size="sm" src={props?.message?.quoted_message?.user?.lensImage} className="m-r-0-5"/>
+          <Text fontSize="sm">
+            {props.message?.quoted_message?.user?.lensUsername ||
+              props.message?.quoted_message?.user?.lensHandle ||
+              truncateAddress(props.message?.quoted_message?.user?.id)}
+          </Text>
         </Row>
+        <Text>{props?.message.quoted_message?.text}</Text>
       </Col>
+      }
+      </>
     )
   }
 
