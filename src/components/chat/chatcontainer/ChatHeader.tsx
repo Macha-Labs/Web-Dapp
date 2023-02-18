@@ -5,12 +5,14 @@ import { Button, Avatar, Heading, Icon, useDisclosure } from "@chakra-ui/react";
 import ChatMessageList from "./ChatMessageList";
 import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
+import { useContext } from "react";
+import { AuthContext } from "@/providers/AuthProvider";
 
-const ChatHeader = props => {
+const ChatHeader = (props) => {
   const membersModal = useDisclosure();
   const pinneddMessageModal = useDisclosure();
   const channelSettingsModal = useDisclosure();
-
+  const authProvider = useContext(AuthContext);
   const TemplateMembers = () => {
     return (
       <ModalSlider event={membersModal}>
@@ -36,7 +38,11 @@ const ChatHeader = props => {
   const TemplateChannelSettings = () => {
     return (
       <ModalSlider event={channelSettingsModal}>
-        <ChatSetting />
+        <ChatSetting
+          hookChat={props.hookChat}
+          hookChannel={props.hookChannel}
+          authProvider={authProvider}
+        />
       </ModalSlider>
     );
   };

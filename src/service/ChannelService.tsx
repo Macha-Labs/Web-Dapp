@@ -96,3 +96,17 @@ export const addMembers = async (data) => {
         },
     });
 };
+
+export const removeMembers = async (data) => {
+  console.log(data);
+  const response = await fetch(
+    `${config.url}/api/channel/admin-remove-members/${data.id}`,
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
