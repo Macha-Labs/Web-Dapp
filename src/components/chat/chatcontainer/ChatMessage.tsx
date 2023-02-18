@@ -13,6 +13,7 @@ import {
   Avatar,
   Button,
   Checkbox,
+  Heading,
   Popover,
   PopoverBody,
   PopoverContent,
@@ -21,6 +22,7 @@ import {
 } from "@chakra-ui/react";
 
 const ChatMessage = (props: any) => {
+  console.log(props.message)
   const templateAttachment = (attachment: any) => {
     if (attachment?.og_scrape_url) {
       return <LayoutLinkPreview attachment={attachment} />;
@@ -97,8 +99,20 @@ const ChatMessage = (props: any) => {
     );
   };
 
+  const TemplateReply = () => {
+    return (
+      <Col className="m-b-1 m-l-1">
+        <Heading as="h6" size="xs" className="m-b-0-5">Reply To</Heading>
+        <Row>
+          <Avatar size="sm"/>
+        </Row>
+      </Col>
+    )
+  }
+
   return (
     <StyledConversation>
+      <TemplateReply />
       <Row className="message w-100">
         <Col>
           <Row>

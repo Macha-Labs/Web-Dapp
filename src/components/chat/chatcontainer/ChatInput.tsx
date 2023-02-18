@@ -126,7 +126,7 @@ const ChatInput = (props: any) => {
         props?.hookChat?.slashCmd ||
         props?.hookChat?.isTyping ? (
           <StyledChatPreview>
-            <Row className="m-b-1 vr-center w-100 hr-between">
+            <Row className="vr-center w-100 hr-between">
               <Heading as="h6" size="sm">
                 Preview
               </Heading>
@@ -310,6 +310,8 @@ const ChatInput = (props: any) => {
   const previewCloseHandler = () => {
     if (props?.hookChat?.actionMessage?.action == "REPLY") {
       props?.hookChat?.handleReplyClose();
+    } else if (props?.hookChat?.attachItem) {
+      props?.hookChat?.deleteAttachment();
     }
   };
 

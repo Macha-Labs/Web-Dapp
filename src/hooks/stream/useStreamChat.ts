@@ -106,7 +106,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         messageData = {
           ...messageData,
           ...{
-            parent_id: actionMessage.item.id,
+            quoted_message_id: actionMessage.item.id,
             show_in_channel: true,
           },
         };
