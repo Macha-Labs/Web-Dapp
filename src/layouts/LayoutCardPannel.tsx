@@ -9,6 +9,7 @@ const LayoutCardPannel = (props) => {
             <div className="body">
                     {props.children}
             </div>
+            {props.footer && <div className="footer">{props.footer}</div>}
         </StyledCardPannel>
     )
 }

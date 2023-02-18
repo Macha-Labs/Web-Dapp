@@ -121,7 +121,7 @@ function ChatSetting(props) {
   const TemplateMembers =()=>{
     return (
       <ModalSlider size={"md"} event={modalChatMembers}>
-        <ChatMembers />
+        <ChatMembers hookChannel={props.hookChannel}/>
       </ModalSlider>
     );
   }
