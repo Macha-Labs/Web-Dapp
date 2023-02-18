@@ -245,9 +245,12 @@ export const StyledCardPannel = styled.div`
   }
 
   .body {
-
   }
-`
+  .footer {
+    border-top: ${style.card.border.default};
+    padding: ${style.paddingCard};
+  }
+`;
 
 export const StyledNFTCard = styled(StyledCard)`
   width: 250px;

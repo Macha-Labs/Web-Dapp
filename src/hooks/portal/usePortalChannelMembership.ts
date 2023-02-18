@@ -5,7 +5,7 @@ import useLensConnections from "../lens/useLensConnections";
 
 const usePortalChannelMembership = (channel) => {
   const authContext = useContext(AuthContext) as AuthContextType;
-  const hookLensConnections = useLensConnections();
+  const hookLensConnections = useLensConnections(authContext?.address);
   const [isLoading, setIsLoading] = useState<any>();
   const [visible, setVisible] = useState<boolean>(false);
   const [users, setUsers] = useState<any>([]);

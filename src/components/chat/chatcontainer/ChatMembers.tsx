@@ -1,4 +1,4 @@
-import { Row, StyledCard } from "@/styles/StyledComponents";
+import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import {
   Avatar,
   Button,
@@ -9,31 +9,73 @@ import {
 } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
-import { truncateAddress } from "@/helpers";
+import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import UserListPopup from "@/components/user/UserListPopup";
 import ModalSlider from "@/components/modal/ModalSlider";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatMembers = (props) => {
-  const channel = props.route?.params?.channel;
-  console.log("Focusing channel ", channel);
-  const hookPortalChannelMembership = usePortalChannelMembership(channel);
+  console.log("hookchannel", props?.hookChannel?.channel);
+  const hookPortalChannelMembership = usePortalChannelMembership(props?.hookChannel?.channel);
   const chatContext = useContext(ChatContext);
-
   const modalAddMembers = useDisclosure();
 
   const TemplateAddMembers = () => {
     return (
-      <ModalSlider event={modalAddMembers} size="lg">
-        <UserListPopup
-          visible={hookPortalChannelMembership.visible}
-          setVisible={hookPortalChannelMembership.setVisible}
-          addMembersToChannel={hookPortalChannelMembership.addMembersToChannel}
-          handleCheckedUsers={hookPortalChannelMembership.handleCheckedUsers}
-          followers={hookPortalChannelMembership.followers}
-          following={hookPortalChannelMembership.following}
-        />
+      <ModalSlider event={modalAddMembers} size="md">
+        <LayoutCardPannel
+          header={
+            <Row className="hr-between w-full">
+              <Button size="sm" onClick={() => props.setVisible(false)}>
+                Cancel
+              </Button>
+              <Text size={"sm"}>Add Members</Text>
+              <Button variant="state_brand" size="sm" onClick={() => props.addMembersToChannel()}>
+                Save
+              </Button>
+            </Row>
+          }
+        >
+          {hookPortalChannelMembership.following.map((item, index) => {
+            return (
+              <>
+                <Row key={index} className="p-5 hr-between">
+                  <Row className="hr-between">
+                    <div>
+                      <Avatar
+                        src={helperIPFS(
+                          item?.image
+                        )}
+                      />
+                    </div>
+                    <div>
+                      <Text>
+                        {item?.name
+                          ? item?.name
+                          : truncateAddress(
+                              item?.ownedBy
+                            )}
+                      </Text>
+                      <Text color="#6FC62A">
+                        @{item?.handle}
+                      </Text>
+                    </div>
+                  </Row>
+
+                  <Checkbox
+                    value=""
+                    onChange={() =>
+                      props.handleCheckedUsers(
+                        item?.wallet?.defaultProfile?.ownedBy,
+                        index
+                      )
+                    }
+                  />
+                </Row>
+              </>
+            );
+          })}
+        </LayoutCardPannel>
       </ModalSlider>
     );
   };

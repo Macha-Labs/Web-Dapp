@@ -3,7 +3,8 @@ import React, { useContext, useMemo } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
-import { Button, Switch, Text } from "@chakra-ui/react";
+import { Button, Heading, Switch, Text } from "@chakra-ui/react";
+import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatPermissions = () => {
   const chatProvider = useContext(ChatContext);
@@ -105,19 +106,25 @@ const ChatPermissions = () => {
   };
 
   return (
-    <Col className="p-5">
-      <TemplateUserPermissions />
-      <div className="p-t-3">
-        Changes done will be reflected for all the members of the channel
-      </div>
-      <Button
-        onClick={() => {
-          hookPortalChannel.updatePermissions();
-        }}
-      >
-        Save
-      </Button>
-    </Col>
+    <LayoutCardPannel
+      header={
+        <Row className="hr-between vr-center">
+          <Heading as="h6" size="sm">Permissions</Heading>
+          <Button
+            size="sm"
+            variant="state_brand"
+            onClick={() => {
+              hookPortalChannel.updatePermissions();
+            }}
+          >
+            Save
+          </Button>
+        </Row>
+      }
+      footer={<Text>Changes done will be reflected for all the members of the channel</Text>}
+    >
+      <TemplateUserPermissions />      
+    </LayoutCardPannel>
   );
 };
 
