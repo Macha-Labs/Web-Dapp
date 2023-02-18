@@ -184,9 +184,10 @@ export const List = styled.div`
 // StyledCard
 
 export const StyledCard = styled.div`
-  border-radius: ${style.borderRadiusCard};
+  border-radius: ${style.card.borderRadius};
+  border: ${styled.card.border.default};
   background: ${style.card.bg.default};
-  padding: ${style.paddingCard};
+  padding: ${style.card.padding.default};
   box-shadow: ${style.card.shadow.default};
   cursor: pointer;
   width: 100%;
@@ -231,12 +232,13 @@ export const StyledCard = styled.div`
 `;
 
 export const StyledCardPannel = styled.div`
-  border-radius: ${style.borderRadiusCard};
-  border: ${styled.card.border.default}
+  border-radius: ${style.card.borderRadius};
+  border: ${styled.card.border.default};
   background: ${style.card.bg.default};
   box-shadow: ${style.card.shadow.default};
   cursor: pointer;
   width: 100%;
+
   .header {
     border-bottom: ${style.card.border.default};
     padding: ${style.paddingCard};
