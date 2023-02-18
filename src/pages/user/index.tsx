@@ -21,10 +21,10 @@ const User = () => {
   const authContext = useContext(AuthContext);
   const hookUserSetting = useUserSettings();
 
-  const [window,setwindow]=useState("UserProfile");
+  const [window, setwindow] = useState("UserProfile");
   const TempalteRight = () => {
     return (
-      window=="UserProfile"?<UserProfile user={authContext?.user} />:window=="UserEdit"?<UserEdit/>:<UserProfile user={authContext?.user}/>
+      window == "UserProfile" ? <UserProfile user={authContext?.user} /> : window == "UserEdit" ? <UserEdit /> : <UserProfile user={authContext?.user} />
     );
   };
 
@@ -65,11 +65,11 @@ const User = () => {
   return (
     <StyledWindow>
       <div className="left">
-          <Nav />
+        <Nav />
       </div>
 
       <div className="right">
-          <Template />
+        <Template />
       </div>
     </StyledWindow>
   );

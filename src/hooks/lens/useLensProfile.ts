@@ -3,12 +3,12 @@ import { useEffect, useMemo, useState } from "react";
 import { UserLens$ } from "../../schema/user";
 import { logger } from "@/helpers/logger";
 
-const useLensProfile = (address: any) => {
+const useLensProfile = () => {
     const [lensProfile, setLensProfile] = useState<any>();
     const [isLoading, setIsLoading] = useState<any>(false);
     const [loadingText, setLoadingText] = useState<any>('Fetching profile from lens');
 
-    const getOwnedProfiles = async () => {
+    const getOwnedProfiles = async (address: any) => {
         setIsLoading(true);
         try {
             const userProfile = await getProfiles({
@@ -16,22 +16,24 @@ const useLensProfile = (address: any) => {
                 "limit": 1
             });
             if (userProfile) {
-                console.log("Lens profiles", userProfile);
                 setLensProfile(userProfile?.data?.profiles?.items[0]);
                 // await updatePluginLens('wallet', address, userProfile?.data?.profiles?.items[0]);
             }
+            setIsLoading(false);
+            return UserLens$(userProfile?.data?.profiles?.items[0]);
         } catch (error) {
             console.log("Error in fetching lens profile ", error);
+            setIsLoading(false);
+            return ;
         }
-        setIsLoading(false);
     }
 
-    useMemo(() => {
-        if (address) {
-            logger('lens', 'useLensProfile.useMemo[address]', 'Getting Profile for address', [])
-            getOwnedProfiles();
-        }
-    }, [address]);
+    // useMemo(() => {
+    //     if (address) {
+    //         logger('lens', 'useLensProfile.useMemo[address]', 'Getting Profile for address', [])
+    //         getOwnedProfiles();
+    //     }
+    // }, [address]);
 
     return ({
         userLens: UserLens$(lensProfile),
