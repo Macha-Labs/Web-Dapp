@@ -335,6 +335,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleReplyClose = () => {
+    console.log("replyclosed ");
     setActionMessage(null);
   };
 
