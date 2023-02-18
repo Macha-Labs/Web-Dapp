@@ -13,13 +13,8 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, {headers}) => {
     // const token = localStorage.getItem("accessToken");
-    // console.log("Authentication token", token);
     let token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjB4REFFQjQ4NDEwRUEwMmM0RDk2NERCMjA2QUJBQmRBMTI4NjJBQTgxRSIsInJvbGUiOiJub3JtYWwiLCJpYXQiOjE2NzM1MjY3MDYsImV4cCI6MTY3MzUyODUwNn0.oSVQWuGSVDAcb_W9FR6mqORrcDbsOZdiGgwX6XSWPoA";
-    // getAsyncData("accessToken").then(result => {
-    //   console.log("Setting the accessToken in token ", result);
-    //   token = result;
-    //   console.log("Returned promise auth token", token);
 
     // });
     return {

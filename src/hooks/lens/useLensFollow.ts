@@ -24,7 +24,6 @@ const useLensFollows = (profileID: any) => {
             typedData.value,
             authContext.address,
         );
-        console.log("Signature", signature);
         const {v, r, s} = splitSignature(signature);
 
         const sig = {
@@ -53,17 +52,12 @@ const useLensFollows = (profileID: any) => {
                 const [typedData, sig] = await getVRS(
                     result.data!.createFollowTypedData.typedData
                 );
-                console.log("get vrs:", result.data!.createFollowTypedData);
-                console.log("Typed data:", typedData);
 
                 const lensHub = new ethers.Contract(
                     config.TESTNET_LENS_HUB_CONTRACT,
                     lensHubAbi,
                     authContext.signer
                 );
-
-                console.log("This is the sig ", sig);
-                console.log("This is the typedData ", typedData);
 
                 // const tx = await connector.sendTransaction(
                 //     {
@@ -88,20 +82,15 @@ const useLensFollows = (profileID: any) => {
                     
                     
 
-                console.log("follow: tx hash", tx.hash);
                 setIsLoading(false);
                 setLoadingText("Following");
                 // await updateLens.updateLensState();
-                console.log(
-                    "Updated the lens state, returning transaction hash"
-                );
                 return tx.hash;
             } catch (error) {
-                console.log("Error in following profile", error);
                 setIsLoading(false);
             }
         } else {
-            console.log("Not getting profile ID to follow");
+            throw new Error ("Profile ID to follow is not provided");
         }
     };
 
@@ -112,12 +101,9 @@ const useLensFollows = (profileID: any) => {
                 setLoadingText("UnFollowing");
 
                 const result = await unfollowUser({profile: profileID});
-                console.log("Resulr:", result);
                 const [typedData, sig] = await getVRS(
                     result.data!.createUnfollowTypedData.typedData
                 );
-                console.log("TYped data", typedData);
-                console.log("Sig:", sig);
 
                 // load up the follower nft contract
                 const followNftContract = new ethers.Contract(
@@ -130,21 +116,17 @@ const useLensFollows = (profileID: any) => {
                     typedData.value.tokenId,
                     sig
                 );
-                console.log("follow: tx hash", tx.hash);
                 setIsLoading(false);
                 setLoadingText("");
                 // await updateLens.updateLensState();
-                console.log(
-                    "Updated the lens state, returning transaction hash"
-                );
                 return tx.hash;
-            } catch (error) {
-                console.log("Error in Unfollowing profile", error);
+            } catch (error: any) {
                 setIsLoading(false);
                 setLoadingText("");
+                throw new Error("Error in Unfollowing profile ", error);
             }
         } else {
-            console.log("Not getting profile ID to Unfollow");
+            throw new Error("Not getting profile ID to Unfollow");
         }
     };
 

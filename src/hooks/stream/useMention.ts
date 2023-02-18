@@ -10,18 +10,15 @@ const useMention = () => {
         setMentionList([]);
     }
 
-    const onTrigger = (value, users) => {
-        console.log("Users ", users);
+    const onTrigger = (value: any, users: any) => {
         const words = value.split(" ");
         const mentionWord = words[words.length - 1].substring(1);
-        console.log("Mentionword ", mentionWord);
         setMention(mentionWord);
 
         const mentions = !mentionWord
             ? users
             : users.filter(
-                (user) => {
-                    console.log("Mention filter", user);
+                (user: any) => {
                     return (user?.name?.toLowerCase().includes(mentionWord) ||
                         user?.handle?.toLowerCase().includes(mentionWord))
 
@@ -32,7 +29,7 @@ const useMention = () => {
         setMentionList(mentions);
     }
 
-    const onSelect = (user) => {
+    const onSelect = (user: any) => {
         setMentionList([...mentionList, user])
         setIsActive(false);
     }

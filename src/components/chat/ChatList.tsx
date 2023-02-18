@@ -72,7 +72,6 @@ const ChatList = (props: any) => {
                         <StyledChatItem key={index}>
                           <Button
                             onClick={() => {
-                              console.log("Click on button", item);
                               chatProvider.initiate(item, authContext.address);
                             }}
                             className="menu-item w-100 m-b-0-5"

@@ -21,10 +21,9 @@ const useLensProfile = () => {
             }
             setIsLoading(false);
             return UserLens$(userProfile?.data?.profiles?.items[0]);
-        } catch (error) {
-            console.log("Error in fetching lens profile ", error);
+        } catch (error: any) {
             setIsLoading(false);
-            return ;
+            throw new Error ("Error in fetching lens profile ", error)
         }
     }
 

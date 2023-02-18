@@ -31,16 +31,14 @@ export const signedTypeData = async (
     "\x19Ethereum Signed Message:\n" + text.length + text
   );
   let msg = ethers.utils.keccak256(message);
-  console.log("Here it the typed data message ", msg);
   try {
-    console.log(address);
     return await fn.signMessage([
       address, 
       msg
     ]
     );
-  } catch (error) {
-    console.log("Error in signTypedData", error);
+  } catch (error: any) {
+    throw new Error("Error in validating Metadata ", error);
   }
 };
 

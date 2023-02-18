@@ -19,7 +19,6 @@ export const useChannelSettings = () => {
       icon: "IconDarkMute.png",
       name: "Mute Chat",
       onPress: () => {
-        console.log("Mute Chat");
       },
     },
     {
@@ -66,21 +65,18 @@ export const useChannelSettings = () => {
       icon: "IconDarkPhotos.png",
       name: "21 Photos",
       onPress: () => {
-        console.log("Search Chat");
       },
     },
     {
       icon: "IconDarkVideos.png",
       name: "4 Videos",
       onPress: () => {
-        console.log("Mute Chat");
       },
     },
     {
       icon: "IconDarkFiles.png",
       name: "4 Files",
       onPress: () => {
-        console.log("Select Chat");
       },
     },
     {
@@ -95,14 +91,12 @@ export const useChannelSettings = () => {
       //   icon: IconBrandClearChat,
       name: "Clear Chat",
       onPress: () => {
-        console.log("Search Chat");
       },
     },
     {
       //   icon: IconBrandClearChat,
       name: "Delete Channel",
       onPress: () => {
-        console.log("Mute Chat");
       },
     },
   ];

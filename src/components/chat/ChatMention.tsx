@@ -4,9 +4,8 @@ import styled from "styled-components";
 
 const ChatMention = (props: any) => {
     // const mentions = props.mention? props.users : props.users.filter(user => user?.first_name?.toLowerCase().includes(props.mention));
-    console.log(props.users);
 
-    const onMemberClick = (item) => {
+    const onMemberClick = (item: any) => {
         props.setMentionList([...props.mentionList, item.id]);
         props.selectedText(item.name);
     }

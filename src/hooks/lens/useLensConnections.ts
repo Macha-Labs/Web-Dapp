@@ -39,7 +39,7 @@ const useLensConnections = (account?: any) => {
         if (account) {
             getFollowing(account);
         } else {
-            console.log("Not getting account");
+            throw new Error("Not getting user account");
         }
     }, [account]);
 
