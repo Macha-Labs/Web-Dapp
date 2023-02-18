@@ -10,24 +10,6 @@ const usePortalChannelMembership = (channel) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [users, setUsers] = useState<any>([]);
 
-  // handling selection of users
-  // const handleCheckedUsers = (userAddress, index) => {
-  //     if (users[userAddress]) {
-  //         console.log(`found ${users[userAddress]} at ${index}. Now removing user`);
-  //         // users[index] = null
-  //         setUsers({...users, [userAddress.toString()]: null});
-  //         console.log(users);
-  //     } else {
-  //         console.log(`Not found Adding address ${userAddress} at ${index}`);
-  //         // users[index] = userAddress.toLowerCase();
-  //         setUsers({
-  //             ...users,
-  //             [userAddress.toString()]: userAddress.toLowerCase(),
-  //         });
-  //         console.log(users);
-  //     }
-  // };
-  // var users = [];
   const handleCheckedUsers = (userAddress, index) => {
     console.log("Focusing address ", userAddress);
     if (!users.includes(userAddress)) {

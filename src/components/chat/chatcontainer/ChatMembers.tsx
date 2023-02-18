@@ -36,7 +36,7 @@ const ChatMembers = (props) => {
             </Row>
           }
         >
-          {hookPortalChannelMembership.followers.map((item, index) => {
+          {hookPortalChannelMembership.following.map((item, index) => {
             return (
               <>
                 <Row key={index} className="hr-between p-1">
@@ -59,7 +59,7 @@ const ChatMembers = (props) => {
                   <Checkbox
                     value=""
                     onChange={() =>
-                      props.handleCheckedUsers(
+                      hookPortalChannelMembership.handleCheckedUsers(
                         item?.lens?.ownedBy,
                         index
                       )
