@@ -185,7 +185,7 @@ export const List = styled.div`
 
 export const StyledCard = styled.div`
   border-radius: ${style.card.borderRadius};
-  border: ${styled.card.border.default};
+  border: ${style.card.border.default};
   background: ${style.card.bg.default};
   padding: ${style.card.padding.default};
   box-shadow: ${style.card.shadow.default};
