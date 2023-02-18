@@ -39,34 +39,28 @@ const ChatMembers = (props) => {
           {hookPortalChannelMembership.following.map((item, index) => {
             return (
               <>
-                <Row key={index} className="p-5 hr-between">
-                  <Row className="hr-between">
-                    <div>
-                      <Avatar
+                <Row key={index} className="hr-between p-1">
+                  <Row className="vr-center">
+                    <Avatar
                         src={helperIPFS(
-                          item?.image
+                          item?.lens?.image
                         )}
+                        className="m-r-0-5"
                       />
-                    </div>
-                    <div>
-                      <Text>
+                    <Text>
                         {item?.name
                           ? item?.name
                           : truncateAddress(
-                              item?.ownedBy
+                              item?.lens?.ownedBy
                             )}
                       </Text>
-                      <Text color="#6FC62A">
-                        @{item?.handle}
-                      </Text>
-                    </div>
                   </Row>
 
                   <Checkbox
                     value=""
                     onChange={() =>
                       props.handleCheckedUsers(
-                        item?.wallet?.defaultProfile?.ownedBy,
+                        item?.lens?.ownedBy,
                         index
                       )
                     }
