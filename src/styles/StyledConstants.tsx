@@ -135,7 +135,7 @@ export const darkStyle = {
   nav: {width: "5%", bg: {default: '#000C29'}, border: {default:'1px solid #0F172E'}},
   card: {bg: {default: '#00081A', hover: '#000C29'}, border: {default: '1px solid #14244B', hover: '1px solid #14244B'}, shadow: {default: 'inset 0 1px 0 0 hsl(0deg 0% 100% / 5%)'}},
   pannel: {bg: {default: ''}, shadow: {default: ''}},
-  input: {bg: {default: "#020a21"}, border: {default: '1px solid #0F172E'}},
+  input: {bg: {default: "#020a21"}, border: {default: '1px solid #14244B'}},
   modal: {bg: {default: '#000511'}, border: {default:'1px solid #0F172E'}, shadow: {default: ''}},
   popover: {bg: {default: '#000511'}},
   sidebar: {},

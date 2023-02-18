@@ -230,6 +230,16 @@ export const StyledCard = styled.div`
   }
 `;
 
+// Input
+export const StyledInput = styled.div`
+  width: 100%;
+  border-radius: 5px;
+  background: ${style.card.bg.default};
+  border: ${style.card.border.default};
+  margin-bottom: 5px;
+  padding: 0.5rem;
+`
+
 //
 export const StyledNFTCard = styled(StyledCard)`
   width: 250px;
