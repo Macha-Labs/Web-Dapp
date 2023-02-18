@@ -733,25 +733,25 @@ export const StyledConversation = styled(Col)`
     margin-bottom: 0.5rem;
   }
 
+  .action {
+    display: none;
+    position: absolute;
+    top: -10px;
+    right: 0;
+    padding: 5px;
+    border: ${style.borderInput};
+    background: #01041f;
+    border-radius: 5px;
+    width: fit-content
+  }
+
+  &:hover {
+      .action {
+          display: flex;
+      }
+  }
+
   .message {
-    .action {
-      display: none;
-      position: absolute;
-      top: -10px;
-      right: 0;
-      padding: 5px;
-      border: ${style.borderInput};
-      background: #01041f;
-      border-radius: 5px;
-      width: fit-content
-    }
-
-    &:hover {
-        .action {
-            display: flex;
-        }
-    }
-
     .inputElement {
       resize: none;
       width: 100%;
