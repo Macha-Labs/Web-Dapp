@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from "react";
 
 import { ChatContext } from "@/providers/ChatProvider";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
-import { Col, Row } from "@/styles/StyledComponents";
+import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import { Button, Switch, Text } from "@chakra-ui/react";
 
 const ChatPermissions = () => {
@@ -76,10 +76,10 @@ const ChatPermissions = () => {
   ];
 
 
-  const layoutUserPermissions = () => {
+  const TemplateUserPermissions = () => {
     console.log("Re rendering this permission layout");
     return (
-      <>
+      <StyledCard>
         {permissionOptions.map((permission, index) => {
           return (
             <>
@@ -100,13 +100,13 @@ const ChatPermissions = () => {
             </>
           );
         })}
-      </>
+      </StyledCard>
     );
   };
 
   return (
     <Col className="p-5">
-      <div className="m-t-5 ">{layoutUserPermissions()}</div>
+      <TemplateUserPermissions />
       <div className="p-t-3">
         Changes done will be reflected for all the members of the channel
       </div>

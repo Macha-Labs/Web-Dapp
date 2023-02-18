@@ -81,6 +81,10 @@ const AuthProvider = ({children}: any) => {
         }
     }, [address, user?.lens?.id]);
 
+    useEffect(() => {
+        logger('auth', 'AuthProvider.useEffect[user]', 'User is', [user]);
+    }, [user])
+
     return (
         <AuthContext.Provider
             value={{

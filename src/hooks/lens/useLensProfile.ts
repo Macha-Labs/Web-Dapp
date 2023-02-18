@@ -16,7 +16,7 @@ const useLensProfile = (address: any) => {
                 "limit": 1
             });
             if (userProfile) {
-                console.log("Lens profiles", userProfile);
+                logger('lens', 'useLensProfile.getOwnedProfiles', 'Profiles fetched', [userProfile])
                 setLensProfile(userProfile?.data?.profiles?.items[0]);
                 // await updatePluginLens('wallet', address, userProfile?.data?.profiles?.items[0]);
             }
@@ -28,7 +28,7 @@ const useLensProfile = (address: any) => {
 
     useMemo(() => {
         if (address) {
-            logger('lens', 'useLensProfile.useMemo[address]', 'Getting Profile for address', [])
+            logger('lens', 'useLensProfile.useMemo[address]', 'Getting Profile for address', [address])
             getOwnedProfiles();
         }
     }, [address]);

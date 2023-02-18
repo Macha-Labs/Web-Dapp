@@ -106,7 +106,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         messageData = {
           ...messageData,
           ...{
-            parent_id: actionMessage.item.id,
+            quoted_message_id: actionMessage.item.id,
             show_in_channel: true,
           },
         };
@@ -168,6 +168,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const editMessage = async () => {
+    console.log('editing message');
     if (!authContext?.address) {
       console.log("Wallet is not connected");
       return;
@@ -177,7 +178,15 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     }
     await streamContext.client.updateMessage({
       id: actionMessage.item?.id,
-      text: textareaRef,
+      text: textareaRef.current.value,
+    }).then(() => {
+      toast({
+        title: "Message Updated",
+        status: "success",
+        duration: 3000,
+        position: "bottom-right",
+      });
+      setActionMessage(null);
     });
   };
 
@@ -335,6 +344,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleReplyClose = () => {
+    console.log("replyclosed ");
     setActionMessage(null);
   };
 

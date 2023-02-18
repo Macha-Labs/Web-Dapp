@@ -181,7 +181,7 @@ export const List = styled.div`
   }
 `;
 
-// StyledCard
+//////////////////////////////// Card //////////////////////////////// 
 
 export const StyledCard = styled.div`
   border-radius: ${style.card.borderRadius};
@@ -249,7 +249,6 @@ export const StyledCardPannel = styled.div`
   }
 `
 
-//
 export const StyledNFTCard = styled(StyledCard)`
   width: 250px;
   cursor: pointer;
@@ -314,6 +313,16 @@ export const StyledOptionsCard = styled(StyledCard)`
     }
   }
 `;
+
+//////////////////////////////// Input //////////////////////////////// 
+export const StyledInput = styled.div`
+  width: 100%;
+  border-radius: 5px;
+  background: ${style.card.bg.default};
+  border: ${style.card.border.default};
+  margin-bottom: 5px;
+  padding: 0.5rem;
+`
 
 //
 
@@ -457,6 +466,7 @@ export const StyledIcon = styled.i`
   height: fit-content;
   background: ${style.icon.bg.default};
   border-radius: ${style.icon.borderRadius};
+  box-shadow: ${style.icon.shadow.default};
 
   &:hover {
     background: ${style.icon.bg.hover};
@@ -521,7 +531,8 @@ export const StyledNav = styled.div`
   }
 `;
 
-//
+//////////////////////////////// Chat ////////////////////////////////
+
 export const StyledChatList = styled.div`
   width: 25%;
   height: 100vh;
@@ -751,25 +762,25 @@ export const StyledConversation = styled(Col)`
     margin-bottom: 0.5rem;
   }
 
+  .action {
+    display: none;
+    position: absolute;
+    top: -10px;
+    right: 0;
+    padding: 5px;
+    border: ${style.borderInput};
+    background: #01041f;
+    border-radius: 5px;
+    width: fit-content
+  }
+
+  &:hover {
+      .action {
+          display: flex;
+      }
+  }
+
   .message {
-    .action {
-      display: none;
-      position: absolute;
-      top: -10px;
-      right: 0;
-      padding: 5px;
-      border: ${style.borderInput};
-      background: #01041f;
-      border-radius: 5px;
-      width: fit-content
-    }
-
-    &:hover {
-        .action {
-            display: flex;
-        }
-    }
-
     .inputElement {
       resize: none;
       width: 100%;

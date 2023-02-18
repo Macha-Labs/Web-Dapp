@@ -141,7 +141,7 @@ export const darkStyle = {
     padding: {default: '10px'}
   },
   pannel: {bg: {default: ''}, shadow: {default: ''}},
-  input: {bg: {default: "#020a21"}, border: {default: '1px solid #0F172E'}},
+  input: {bg: {default: "#020a21"}, border: {default: '1px solid #14244B'}},
   modal: {bg: {default: '#000511'}, border: {default:'1px solid #0F172E'}, shadow: {default: ''}},
   popover: {bg: {default: '#000511'}},
   sidebar: {},
@@ -154,7 +154,8 @@ export const darkStyle = {
       active: "",
       
     }, 
-    borderRadius: '12px'
+    borderRadius: '12px',
+    shadow: {default: 'inset 0 1px 0 0 hsl(0deg 0% 100% / 5%)'}
   },
   button: {
     bg: { 

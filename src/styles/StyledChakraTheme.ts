@@ -119,6 +119,17 @@ const theme = extendTheme({
             state_card: {
                 background: `${style.card.bg.default}`,
                 border: `${style.card.border.default}`,
+                shadow: `${style.card.shadow.default}`
+            },
+            state_card_hover: {
+                background: `${style.card.bg.default}`,
+                border: `${style.card.border.default}`,
+                shadow: `${style.card.shadow.default}`,
+                _hover: {
+                    background: `${style.card.bg.hover}`,
+                    border: `1px solid ${style.card.border.hover}`,
+                    shadow: `${style.card.shadow.default}`,
+                }
             },
             state_lens: {
                 opacity: '0.95',
