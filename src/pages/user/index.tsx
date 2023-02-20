@@ -13,7 +13,7 @@ import {
   StyledPageList,
   StyledWindow,
 } from "@/styles/StyledComponents";
-import { Avatar, Input, Text } from "@chakra-ui/react";
+import { Avatar, Button, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useContext } from "react";
 
@@ -37,6 +37,7 @@ const User = () => {
           </div>
           <div className="body">
             {!authContext.isConnected && <ConnectButton />}
+            <Button onClick={() => authContext.connectLens()} >Connect to lens</Button>
             <UserCard user={authContext?.user} />
             <LayoutOptions
               options={hookUserSetting.userSettings}
