@@ -32,6 +32,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const [searchQuery, setSearchQuery] = useState<any>();
 
   const textareaRef = useRef<any>(null);
+  const editMessageRef = useRef<any>(null);
 
   // custom hooks
   // const chatFilterHook = useChatFilters(users);
@@ -168,7 +169,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const editMessage = async () => {
-    console.log('editing message');
+    console.log('editing message- ', editMessageRef.current.value);
     if (!authContext?.address) {
       console.log("Wallet is not connected");
       return;
@@ -178,7 +179,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     }
     await streamContext.client.updateMessage({
       id: actionMessage.item?.id,
-      text: textareaRef.current.value,
+      text: editMessageRef.current.value,
     }).then(() => {
       toast({
         title: "Message Updated",
@@ -456,6 +457,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     //
     keyDownMessage: keyDownMessage,
     textareaRef: textareaRef,
+    editMessageRef: editMessageRef,
     attachItem: attachItem,
     streamLoading: streamLoading,
     handleAttachment: handleAttachment,
