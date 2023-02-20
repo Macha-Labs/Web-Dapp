@@ -23,12 +23,12 @@ export type AuthContextType = {
 export const AuthContext = createContext<AuthContextType>({
     signer: null,
     address: "",
-    connectWallet: () => { },
+    connectWallet: () => {},
     connectLens: (param) => {},
-    disconnectWallet: () => { },
+    disconnectWallet: () => {},
     user: null,
-    setUser: (param) => { },
-    updateUser: (...params) => { },
+    setUser: (param) => {},
+    updateUser: (...params) => {},
     isConnected: false
 });
 
@@ -72,12 +72,6 @@ const AuthProvider = ({ children }: any) => {
                     logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
                     updateUser("db", UserDb$(res));
                 });
-                // if (userData?.id && !userData.tokens?.stream) {
-                //     putStreamToken({userAddress: address}).then((res: any) => {
-                //         logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
-                //         updateUser("db", UserDb$(res));
-                //     });
-                // }
             });
         }
     }
@@ -89,6 +83,7 @@ const AuthProvider = ({ children }: any) => {
             console.log("Fetched lens profile = ", lensProfile);
             if (lensProfile) {
                 const tokens: any | { accessToken: string, refreshToken: string } = await hookLensAuth.connectToLens(address);
+                console.log("Tokens resolving promise ", tokens);
                 if (tokens?.accessToken) {
                     updateUser("lens", {
                         ...lensProfile,
@@ -98,6 +93,7 @@ const AuthProvider = ({ children }: any) => {
                 } else {
                     updateUser("lens", lensProfile);
                 }
+                console.log("Reaching here ----------------------------------------------------------")
             } else {
                 throw Error(`Couldn't find Lens Profile with address ${address}`);
             }
