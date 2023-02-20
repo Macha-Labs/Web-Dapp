@@ -3,7 +3,7 @@ import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { Row } from "@/styles/StyledComponents";
-import { Avatar, Button } from "@chakra-ui/react";
+import { Avatar, Button, Heading, Text } from "@chakra-ui/react";
 
 const ChatProfile = (props: any) => {
   const hookPortalChannel = usePortalChannel(props?.channel);
@@ -30,18 +30,26 @@ const ChatProfile = (props: any) => {
     },
   ];
   return (
-    <LayoutCardPannel>
+    <LayoutCardPannel
+      header={
+        <Row className="hr-between v-center">
+          <Text>New Channel</Text>
+          <Button
+            onClick={() => {
+              hookPortalChannel?.update();
+            }}
+            variant="state-brand"
+            size="sm"
+          >
+            Create New
+          </Button>
+        </Row>
+      }
+    >
       <Row className="hr-center w-100 m-b-1">
         <Avatar size="2xl" />
       </Row>
       <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-      <Button
-        onClick={() => {
-          hookPortalChannel?.update();
-        }}
-      >
-        Save
-      </Button>
     </LayoutCardPannel>
   );
 };
