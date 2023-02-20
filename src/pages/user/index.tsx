@@ -13,7 +13,7 @@ import {
   StyledPageList,
   StyledWindow,
 } from "@/styles/StyledComponents";
-import { Avatar, Input, Text } from "@chakra-ui/react";
+import { Avatar, Button, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useContext } from "react";
 
@@ -30,17 +30,18 @@ const User = () => {
 
   const Template = () => {
     return (
-      <Row>
+      <>
         <StyledPageList>
           <div className="header vr-center">
             <Input />
           </div>
           <div className="body">
             {!authContext.isConnected && <ConnectButton />}
+            <Button onClick={() => authContext.connectLens(authContext.address)} >Connect to lens</Button>
             <UserCard user={authContext?.user} />
             <LayoutOptions
               options={hookUserSetting.userSettings}
-              style={{ class: "m-t-1" }}
+              style={{ className: "m-t-1" }}
               setwindow={setwindow}
             />
           </div>
@@ -58,7 +59,7 @@ const User = () => {
             <TempalteRight />
           </div>
         </StyledPageContainer>
-      </Row>
+      </>
     );
   }
 
@@ -67,7 +68,6 @@ const User = () => {
       <div className="left">
         <Nav />
       </div>
-
       <div className="right">
         <Template />
       </div>

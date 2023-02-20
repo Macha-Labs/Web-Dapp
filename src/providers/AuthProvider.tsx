@@ -12,6 +12,7 @@ export type AuthContextType = {
     signer: any | undefined;
     address: any | undefined;
     connectWallet: () => void;
+    connectLens: (param: any) => void;
     disconnectWallet: () => void;
     user: any | undefined;
     setUser: (param: any) => void;
@@ -23,6 +24,7 @@ export const AuthContext = createContext<AuthContextType>({
     signer: null,
     address: "",
     connectWallet: () => { },
+    connectLens: (param) => {},
     disconnectWallet: () => { },
     user: null,
     setUser: (param) => { },
@@ -119,7 +121,7 @@ const AuthProvider = ({ children }: any) => {
                 signer: signer,
                 address: address?.toLowerCase(),
                 connectWallet: connectWallet,
-                // connectLens: hookLensAuth.connect,
+                connectLens: hookLensAuth.connectToLens,
                 disconnectWallet: disconnectWallet,
                 user: user,
                 setUser: setUser,

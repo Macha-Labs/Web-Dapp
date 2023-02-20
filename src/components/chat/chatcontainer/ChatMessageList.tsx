@@ -19,7 +19,7 @@ function ChatMessageList(props: any) {
       {props.pinnedMessageList?.map((message: any, index: number) => {
         return (
           <StyledMessageCard key={index}>
-            <ChatMessage message={message} />
+            <ChatMessage message={message} hookChat={props.hookChat} />
           </StyledMessageCard>
         );
       })}

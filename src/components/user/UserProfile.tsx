@@ -133,59 +133,59 @@ const UserProfile = ({ ...props }) => {
       <StyledCard>
         <LayoutProfileBanner profile={props.user?.lens} />
 
-<Row>
-  <Col className="m-v-1 w-100 hr-center">
-    <Heading as="h3" size="lg">
-      {props.user?.lens?.name
-        ? props.user?.lens?.name
-        : props.user?.lens?.handle}
-    </Heading>
-    <h6>@{props.user?.lens?.handle}</h6>
-  </Col>
-</Row>
+        <Row>
+          <Col className="m-v-1 w-100 hr-center">
+            <Heading as="h3" size="lg">
+              {props.user?.lens?.name
+                ? props.user?.lens?.name
+                : props.user?.lens?.handle}
+            </Heading>
+            <h6>@{props.user?.lens?.handle}</h6>
+          </Col>
+        </Row>
 
-<Row className="vr-center hr-center">
-  {props.user?.lens?.bio ? (
-    <Col className="m-v-1">
-      <Text className="bioText">{props?.user?.lens?.bio}</Text>
-    </Col>
-  ) : (
-    <></>
-  )}
-</Row>
+        <Row className="vr-center hr-center">
+          {props.user?.lens?.bio ? (
+            <Col className="m-v-1">
+              <Text className="bioText">{props?.user?.lens?.bio}</Text>
+            </Col>
+          ) : (
+            <></>
+          )}
+        </Row>
 
-<Row className="m-v-1 vr-center hr-center">
-  {props.user?.lens?.isFollowedByMe ? (
-    <Button
-      variant="state_lens_unfollow"
-      size="md"
-      className="m-r-1"
-      onClick={() => {
-        hookLensFollow.triggerUnFollow();
-      }}
-      isLoading={hookLensFollow.isLoading}
-      loadingText={hookLensFollow.loadingText}
-    >
-      Unfollow on Lens
-    </Button>
-  ) : (
-    <Button
-      variant="state_lens"
-      size="md"
-      className="m-r-1"
-      onClick={() => {
-        hookLensFollow.triggerFollow();
-      }}
-      isLoading={hookLensFollow.isLoading}
-      loadingText={hookLensFollow.loadingText}
-    >
-      Follow on Lens
-    </Button>
-  )}
-  <Button leftIcon={<ChatIcon />} variant="state_brand" size="md">
-    Message
-  </Button>
-</Row>
+        <Row className="m-v-1 vr-center hr-center">
+          {props.user?.lens?.isFollowedByMe ? (
+            <Button
+              variant="state_lens_unfollow"
+              size="md"
+              className="m-r-1"
+              onClick={() => {
+                hookLensFollow.triggerUnFollow();
+              }}
+              isLoading={hookLensFollow.isLoading}
+              loadingText={hookLensFollow.loadingText}
+            >
+              Unfollow on Lens
+            </Button>
+          ) : (
+            <Button
+              variant="state_lens"
+              size="md"
+              className="m-r-1"
+              onClick={() => {
+                hookLensFollow.triggerFollow();
+              }}
+              isLoading={hookLensFollow.isLoading}
+              loadingText={hookLensFollow.loadingText}
+            >
+              Follow on Lens
+            </Button>
+          )}
+          <Button leftIcon={<ChatIcon />} variant="state_brand" size="md">
+            Message
+          </Button>
+        </Row>
 
       </StyledCard>
     )
@@ -194,59 +194,59 @@ const UserProfile = ({ ...props }) => {
   const TemplateTabs = () => {
     return (
       <Tabs variant="unstyled">
-            <TabList>
-              <Row className="m-v-1 w-100 vr-center hr-center">
-                <Tab>
-                  <Row className="m-h-0-5">
-                    <Col className="m-r-0-5">
-                      <Avatar size="sm" />
-                    </Col>
+        <TabList>
+          <Row className="m-v-1 w-100 vr-center hr-center">
+            <Tab>
+              <Row className="m-h-0-5">
+                <Col className="m-r-0-5">
+                  <Avatar size="sm" />
+                </Col>
 
-                    <Col>Post</Col>
-                  </Row>
-                </Tab>
-                <Tab>
-                  <Row className="m-h-0-5">
-                    <Col className="m-r-0-5">
-                      <Avatar size="sm" />
-                    </Col>
-
-                    <Col>NFTs</Col>
-                  </Row>
-                </Tab>
-                <Tab>
-                  <Row className="m-h-0-5">
-                    <Col className="m-r-0-5">
-                      <Avatar size="sm" />
-                    </Col>
-
-                    <Col>Followers</Col>
-                  </Row>
-                </Tab>
-                <Tab>
-                  <Row className="m-h-0-5">
-                    <Col className="m-r-0-5">
-                      <Avatar size="sm" />
-                    </Col>
-
-                    <Col>Following</Col>
-                  </Row>
-                </Tab>
+                <Col>Post</Col>
               </Row>
-            </TabList>
+            </Tab>
+            <Tab>
+              <Row className="m-h-0-5">
+                <Col className="m-r-0-5">
+                  <Avatar size="sm" />
+                </Col>
 
-            <TabPanels>
-              <TabPanel>{templatePosts()}</TabPanel>
+                <Col>NFTs</Col>
+              </Row>
+            </Tab>
+            <Tab>
+              <Row className="m-h-0-5">
+                <Col className="m-r-0-5">
+                  <Avatar size="sm" />
+                </Col>
 
-              <TabPanel>{templateNfts()}</TabPanel>
+                <Col>Followers</Col>
+              </Row>
+            </Tab>
+            <Tab>
+              <Row className="m-h-0-5">
+                <Col className="m-r-0-5">
+                  <Avatar size="sm" />
+                </Col>
 
-              <TabPanel>
-                <Text>Projects coming up</Text>
-              </TabPanel>
+                <Col>Following</Col>
+              </Row>
+            </Tab>
+          </Row>
+        </TabList>
 
-              <TabPanel>{templateConnections()}</TabPanel>
-            </TabPanels>
-          </Tabs>
+        <TabPanels>
+          <TabPanel>{templatePosts()}</TabPanel>
+
+          <TabPanel>{templateNfts()}</TabPanel>
+
+          <TabPanel>
+            <Text>Projects coming up</Text>
+          </TabPanel>
+
+          <TabPanel>{templateConnections()}</TabPanel>
+        </TabPanels>
+      </Tabs>
     )
   }
 

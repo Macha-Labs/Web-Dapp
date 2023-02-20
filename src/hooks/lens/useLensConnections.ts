@@ -8,7 +8,7 @@ const useLensConnections = (account?: any) => {
     const [followers, setFollowers] = useState<any>([]);
 
     const getFollowing = (account) => {
-        fetchFollowing({address: account}).then((data) => {
+        fetchFollowing({address: account}).then((data) => {            
             const followingData = data.data.following.items.map((item) => {
                 return {db: null, lens: UserLens$(item.profile)};
             });
@@ -39,7 +39,8 @@ const useLensConnections = (account?: any) => {
         if (account) {
             getFollowing(account);
         } else {
-            throw new Error("Not getting user account");
+            // throw new Error("Not getting user account");
+            console.log("Not getting user account");
         }
     }, [account]);
 

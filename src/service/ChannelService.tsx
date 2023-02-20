@@ -57,7 +57,8 @@ export const permissionsChannel = async (data: any, id: any) => {
             },
         }
     );
-    return response.json();
+    console.log("Channel permission response ", response);
+    return response;
 };
 
 export const editChannel = async (data: any, id: any) => {
@@ -91,4 +92,18 @@ export const addMembers = async (data: any) => {
             "Content-Type": "application/json",
         },
     });
+};
+
+export const removeMembers = async (data) => {
+  console.log(data);
+  const response = await fetch(
+    `${config.url}/api/channel/admin-remove-members/${data.id}`,
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
