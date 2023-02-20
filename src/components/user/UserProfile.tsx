@@ -27,7 +27,10 @@ interface Props {
 const UserProfile = (props: any) => {
   const hookLensFollow = useLensFollows(props.user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.id);
-  const hookLensConnections = useLensConnections(props.user?.lens?.ownedBy);
+  const hookLensConnections = useLensConnections(
+    props.user?.lens?.ownedBy,
+    props?.user?.lens?.id
+  );
 
   const templateConnections = () => {
     return (
