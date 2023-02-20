@@ -7,6 +7,7 @@ import {signedTypeData} from "../../helpers/lens/lensApiService";
 import {useContext, useState} from "react";
 import {lensHubAbi} from "../../abi/lensHubAbi";
 import {lensFollowAbi} from "../../abi/lensFollowAbi";
+import { fetchSigner } from "@wagmi/core";
 
 const useLensFollows = (profileID: any) => {
     const authContext = useContext(AuthContext) as AuthContextType;
@@ -56,10 +57,14 @@ const useLensFollows = (profileID: any) => {
                     result.data!.createFollowTypedData.typedData
                 );
 
+                const signer: any = await fetchSigner();
+
+                console.log("The authsigner is ", signer);
+
                 const lensHub = new ethers.Contract(
                     config.TESTNET_LENS_HUB_CONTRACT,
                     lensHubAbi,
-                    authContext.signer
+                    signer
                 );
 
                 const tx = await lensHub.followWithSig({
@@ -67,10 +72,11 @@ const useLensFollows = (profileID: any) => {
                     profileIds: typedData.value.profileIds,
                     datas: typedData.value.datas,
                     sig: sig,
-                }, {gasLimit: 100000})
+                })
                     
                 setIsLoading(false);
                 setLoadingText("Following");
+                
                 // await updateLens.updateLensState();
                 return tx.hash;
             } catch (error) {
