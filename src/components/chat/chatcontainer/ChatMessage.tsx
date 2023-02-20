@@ -229,7 +229,7 @@ const ChatMessage = (props: any) => {
           })}
 
           <Row className="vr-center">
-          {Object.keys(props?.message.reaction_scores).length > 0 && (Object.keys(props.message.reaction_scores).map( (item: any) => {
+          {Object.keys(props?.message?.reaction_scores)?.length > 0 && (Object.keys(props.message?.reaction_scores).map( (item: any) => {
         return (
           <>
             <Button className="w-content m-r-0-5" size="xs" variant="state_brand" onClick={() => {props?.hookChat?.handleReaction({type: item}, props?.message)}}>
