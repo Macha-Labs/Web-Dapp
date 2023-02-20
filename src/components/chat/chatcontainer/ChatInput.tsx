@@ -1,17 +1,13 @@
-import { CloseIcon, PlusSquareIcon } from "@chakra-ui/icons";
+import { PlusSquareIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Button,
   Heading,
-  Icon,
   Image,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
   Spinner,
   Text,
   Textarea,
+  useDisclosure,
 } from "@chakra-ui/react";
 import {
   Row,
@@ -21,21 +17,21 @@ import {
   StyledChatPreview,
   StyledChatInput,
 } from "@/styles/StyledComponents";
-import LayoutSlashPreview from "@/layouts/chat/LayoutSlashPreview";
-import LayoutPostCard from "../../../layouts/post/LayoutPostCard";
-import LayoutProposalCard from "../../../layouts/proposal/LayoutProposalCard";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
 import ChatMention from "../ChatMention";
 import IconFile from "@/components/icons/IconFile";
-import IconDelete from "@/components/icons/IconDelete";
 import PortalLoader from "@/components/PortalLoader";
 import IconImage from "@/components/icons/IconImage";
+import Pop from "@/components/pop/Pop";
+import ModalWindow from "@/components/modal/ModalWindow";
 
 // const TypingRow = styled(Row)`
 //     display: none;
 // `
 
 const ChatInput = (props: any) => {
+  const modalPost = useDisclosure();
+
   const templateReply = () => {
     return (
       <>
@@ -68,6 +64,21 @@ const ChatInput = (props: any) => {
     );
   };
 
+  const TemplatePostNew = () => {
+    return (
+      <ModalWindow event={modalPost} header={<Heading as="h6" size="sm">New Lens Post</Heading>}>
+        <Col className="p-1">
+          <Text fontSize={16}>Your Lens Post Heading Here</Text>
+          <Textarea className="m-b-1 m-t-1" size="xl"></Textarea>
+          <Row className="m-b-1">
+            <IconImage path="IconDarkFiles.png" style={{className:"m-r-0-5"}} />
+            <IconImage path="IconDarkPhotos.png" />
+          </Row>
+          <Button size="sm" variant="state_brand w-content">Create Post</Button>
+        </Col>
+      </ModalWindow>
+    )
+  } 
   const templateAttachment = () => {
     let type;
     if (props?.hookChat?.attachItem) {
@@ -171,15 +182,12 @@ const ChatInput = (props: any) => {
 
   const TemplateAction = () => {
     return (
-      <Popover placement="top-start">
-        <PopoverTrigger>
-          <StyledIcon className="circled">
-            <PlusSquareIcon color="gray.300" />
-          </StyledIcon>
-        </PopoverTrigger>
-        <PopoverContent className="m-b-1">
-          <PopoverBody>
-            <Col className="text-start">
+      <Pop 
+      trigger={<StyledIcon className="circled">
+      <PlusSquareIcon color="gray.300" />
+      </StyledIcon>
+      }>
+          <Col className="text-start">
               <Button
                 variant="transparent"
                 size="md"
@@ -210,6 +218,7 @@ const ChatInput = (props: any) => {
                 size="md"
                 className="text-start"
                 rightIcon={<IconImage path="IconDarkFiles.png" />}
+                onClick={modalPost.onOpen}
               >
                 <Row className="hr-between w-100">Create Post</Row>
               </Button>
@@ -222,9 +231,7 @@ const ChatInput = (props: any) => {
                 <Row className="hr-between w-100">Send Payment</Row>
               </Button>
             </Col>
-          </PopoverBody>
-        </PopoverContent>
-      </Popover>
+    </Pop>
     );
   };
 
@@ -315,10 +322,16 @@ const ChatInput = (props: any) => {
     }
   };
 
-  if (props.hookChat.searchActive) return <TemplateSearch />;
-  else if (props.hookChat.actionMessage?.action === "MULTISELECT")
-    return <TemplateMultiselect />;
-  else return <TemplateInput />;
+  // if (props.hookChat.searchActive) return <TemplateSearch />;
+  // else if (props.hookChat.actionMessage?.action === "MULTISELECT")
+  //   return <TemplateMultiselect />;
+  // else return <TemplateInput />;
+  return (
+    <>
+      <TemplateInput />
+      <TemplatePostNew />
+    </>
+  )
 };
 
 export default ChatInput;

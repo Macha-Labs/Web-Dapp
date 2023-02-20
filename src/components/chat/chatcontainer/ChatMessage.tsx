@@ -1,5 +1,6 @@
 import IconImage from "@/components/icons/IconImage";
 import InputAction from "@/components/input/InputAction";
+import Pop from "@/components/pop/Pop";
 import { truncateAddress } from "@/helpers";
 import LayoutFilePreview from "@/layouts/chat/LayoutFilePreview";
 import LayoutImagePreview from "@/layouts/chat/LayoutImagePreview";
@@ -43,13 +44,9 @@ const ChatMessage = (props: any) => {
 
   const TemplateActions = () => {
     return (
-      <Popover placement="top-start">
-        <PopoverTrigger>
-          <IconImage path="IconDarkMenu.png" />
-        </PopoverTrigger>
-        <PopoverContent className="m-b-1">
-          <PopoverBody>
-            <Col className="text-start">
+      <Pop
+      trigger={<IconImage path="IconDarkMenu.png" />}>
+        <Col className="text-start">
               {props.message?.user?.id == props?.authContext?.address && (
                 <Button
                   variant="transparent"
@@ -116,9 +113,7 @@ const ChatMessage = (props: any) => {
                 </Button>
               )}
             </Col>
-          </PopoverBody>
-        </PopoverContent>
-      </Popover>
+      </Pop>
     );
   };
 
