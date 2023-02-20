@@ -148,7 +148,6 @@ const ChatMessage = (props: any) => {
       </>
     );
   };
-  console.log("props.message", props.hookChat?.actionMessage);
 
   return (
     <StyledConversation>
