@@ -49,7 +49,7 @@ export const putChannel = async (data) => {
     return response.json();
 };
 
-export const permissionsChannel = async (data, id) => {
+export const permissionsChannel = async (data: any, id: any) => {
     const response = await fetch(
         `${config.url}/api/channel/permissions/${id}`,
         {
@@ -60,7 +60,8 @@ export const permissionsChannel = async (data, id) => {
             },
         }
     );
-    return response.json();
+    console.log("Channel permission response ", response);
+    return response;
 };
 
 export const editChannel = async (data, id) => {

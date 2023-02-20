@@ -4,7 +4,7 @@ export const config = {
     STREAM_APIKEY: 'bpm3zjatbqj3',
     STREAM_SECRET: 'rgvd9g2c3z5mecz2bz9qysncwvrd997d96mupu8bgss7zkumxq2pp82yjyu9yvbk',
     url: 'https://metawork-server.herokuapp.com',
-    // url: 'http://192.168.29.165:3080',
+    // url: 'http://localhost:3080',
     DISCORD_API_ENDPOINT: "https://discord.com/api/v10",
     DISCORD_REDIRECT_URL: "http://localhost:3000/app",
     DISCORD_CLIENT_ID: "1019347765395996804",
