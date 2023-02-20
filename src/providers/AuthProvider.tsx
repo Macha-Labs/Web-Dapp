@@ -91,7 +91,7 @@ const AuthProvider = ({children}: any) => {
                 signer: signer,
                 address: address?.toLowerCase(),
                 connectWallet: connectWallet,
-                connectLens: hookLensAuth.connect,
+                connectLens: hookLensAuth.connectToLens,
                 disconnectWallet: disconnectWallet,
                 user: user,
                 setUser: setUser,
