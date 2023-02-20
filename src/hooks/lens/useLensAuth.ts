@@ -6,7 +6,7 @@ import {
 } from "../../helpers/lens/lens";
 import {ethers} from "ethers";
 import useLensProfile from "./useLensProfile";
-import { useSignMessage } from 'wagmi'
+import { signMessage } from '@wagmi/core'
 import { logger } from "@/helpers/logger";
 
 const useLensAuth = (address: any, updateUser: any) => {
@@ -18,25 +18,24 @@ const useLensAuth = (address: any, updateUser: any) => {
         useState<any>("Sign-In with Lens");
 
     const signText = async (text: any) => {
-        var message = ethers.utils.toUtf8Bytes(
-            "\x19Ethereum Signed Message:\n" + text.length + text
-        );
+        var message = ethers.utils.toUtf8Bytes(text);
         let msg = ethers.utils.keccak256(message);
         // const params = [address, msg];
-        const {data, isError, isLoading, isSuccess, signMessage} = useSignMessage({
-            message: msg
-        });
-        return data;
+        // const {data, isError, isLoading, isSuccess, signMessage} = useSignMessage({
+        //     message: msg
+        // });
+        const signature = await signMessage({ message: message });
+        return signature;
     };
 
     const fetchLensToken = async () => {
         logger('lens', 'useLensAuth.fetchLensToken', 'Getting Lens Token from Lens and updating user lens data', [])
         setIsLoading(true);
-        if (hookLensProfile?.userLens) {
             try {
                 const challenge = await generateChallenge(address);
                 const signature = await signText(challenge);
                 // const authRequest = await authenticate_user(signerAddress, signature);
+                console.log("Calling fetch lens token signature ", signature);
 
                 authenticate_user(address, signature).then((data) => {
                     setToken(data["accessToken"]);
@@ -55,8 +54,7 @@ const useLensAuth = (address: any, updateUser: any) => {
                 setSignButtonText("Couldn't sign request");
                 setIsLoading(false);
             }
-        } else {
-        }
+        
         // setIsLoading(false);
     };
 
@@ -72,7 +70,7 @@ const useLensAuth = (address: any, updateUser: any) => {
             });
     };
 
-    const connect = () => {
+    const connectToLens = () => {
         fetchLensToken();
     };
 
@@ -86,7 +84,8 @@ const useLensAuth = (address: any, updateUser: any) => {
         if (window.localStorage.getItem("accessToken")) {
             getLensTokens();
         } else {
-            fetchLensToken();
+            // fetchLensToken();
+            console.log("Connect to Lens to get authTokens");
         }
     }, [hookLensProfile.userLens?.id]);
 
@@ -95,7 +94,7 @@ const useLensAuth = (address: any, updateUser: any) => {
         refreshToken: refreshToken,
         isLoading: isLoading,
         signButtonText: signButtonText,
-        connect: connect,
+        connectToLens: connectToLens,
         setLensProfile: hookLensProfile.setLensProfile
     };
 };
