@@ -25,7 +25,7 @@ const usePortalChannel = (channelData:any) => {
                     name: channel.name,
                     description: channel.description,
                     image: channel.image,
-                },
+                },  
                 channel.id
             )
                 .then((res) => {
@@ -90,6 +90,7 @@ const usePortalChannel = (channelData:any) => {
     };
 
     const togglePermission = (value: any) => {
+        console.log("channel.permissions", channel.permissions);
       if (channel.permissions.includes(value)) {
         setChannel({
           ...channel,
@@ -112,6 +113,7 @@ const usePortalChannel = (channelData:any) => {
             "updating permissions",
             [channel]
         );
+        console.log("channelPermission", channel.permissions);
         setIsLoading(true);
         permissionsChannel({permissions: channel.permissions}, channel.id)
             .then((res) => {

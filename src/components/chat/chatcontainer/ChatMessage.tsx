@@ -42,7 +42,6 @@ const ChatMessage = (props: any) => {
   };
 
   const TemplateActions = () => {
-    
     return (
       <Popover placement="top-start">
         <PopoverTrigger>
@@ -51,23 +50,24 @@ const ChatMessage = (props: any) => {
         <PopoverContent className="m-b-1">
           <PopoverBody>
             <Col className="text-start">
-              {props.message?.user?.id == props?.authContext?.address && <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-              >
-                <Row
-                  className="hr-between w-100"
-                  onClick={() => {
-                    props.hookChat.handleEdit(props.message);
-                  }}
+              {props.message?.user?.id == props?.authContext?.address && (
+                <Button
+                  variant="transparent"
+                  size="md"
+                  className="text-start"
+                  rightIcon={<IconImage path="IconDarkFiles.png" />}
                 >
-                  Edit
-                </Row>
-              </Button>
-              }
-              
+                  <Row
+                    className="hr-between w-100"
+                    onClick={() => {
+                      props.hookChat.handleEdit(props.message);
+                    }}
+                  >
+                    Edit
+                  </Row>
+                </Button>
+              )}
+
               <Button
                 variant="transparent"
                 size="md"
@@ -125,72 +125,91 @@ const ChatMessage = (props: any) => {
   const TemplateReply = () => {
     return (
       <>
-        {
-        props?.message?.quoted_message && <Col className="m-b-1 m-l-1">
-        <Heading as="h6" size="xs" className="m-b-0-5">Reply To</Heading>
-        <Row>
-          <Avatar size="sm" src={props?.message?.quoted_message?.user?.lensImage} className="m-r-0-5"/>
-          <Text fontSize="sm">
-            {props.message?.quoted_message?.user?.lensUsername ||
-              props.message?.quoted_message?.user?.lensHandle ||
-              truncateAddress(props.message?.quoted_message?.user?.id)}
-          </Text>
-        </Row>
-        <Text>{props?.message.quoted_message?.text}</Text>
-      </Col>
-      }
+        {props?.message?.quoted_message && (
+          <Col className="m-b-1 m-l-1">
+            <Heading as="h6" size="xs" className="m-b-0-5">
+              Reply To
+            </Heading>
+            <Row>
+              <Avatar
+                size="sm"
+                src={props?.message?.quoted_message?.user?.lensImage}
+                className="m-r-0-5"
+              />
+              <Text fontSize="sm">
+                {props.message?.quoted_message?.user?.lensUsername ||
+                  props.message?.quoted_message?.user?.lensHandle ||
+                  truncateAddress(props.message?.quoted_message?.user?.id)}
+              </Text>
+            </Row>
+            <Text>{props?.message.quoted_message?.text}</Text>
+          </Col>
+        )}
       </>
-    )
-  }
+    );
+  };
+  console.log("props.message", props.hookChat?.actionMessage);
 
   return (
     <StyledConversation>
       <TemplateReply />
-      <Row className="message w-100">
+      <Row className="w-100">
         <Col>
           <Row>
             {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
-              <Checkbox defaultChecked className="m-r-0-5"></Checkbox>
+              <Checkbox defaultChecked className="m-r-0-5" />
             )}
 
             <Avatar
               src={props.message?.user?.lensImage}
-              className="m-r-1"
+              className="m-r-0-5"
             ></Avatar>
           </Row>
         </Col>
-
-        <Col className="w-100" style={{ color: "#ffffff" }}>
-          <Text fontSize="sm">
+        <Col className={(props.authContext?.address == props?.message?.user?.id )? "active message w-100": "message w-100"} style={{ color: "#ffffff" }}>
+          <Text fontSize="sm" className="heading">
             {props.message?.user?.lensUsername ||
               props.message?.user?.lensHandle ||
               truncateAddress(props.message?.user?.id)}
           </Text>
-          
 
-          {(props?.hookChat?.actionMessage?.action == 'EDIT' && props?.hookChat?.actionMessage?.item?.id == props?.message?.id) ?
-          (
-            <InputAction style={{className: "w-100 vr-center m-t-0-5"}}
-              actions={
-              [
-                <Button size="xs" className="m-l-0-5" variant="state_brand" onClick={props.hookChat?.editMessage}>Update</Button>,
-                <Button size="xs" className="m-l-0-5" variant="state_brand" onClick={props.hookChat?.handleEditClose}>Cancel</Button>
-              ]
-            }
-              >
+          {props?.hookChat?.actionMessage?.action == "EDIT" &&
+          props?.hookChat?.actionMessage?.item?.id == props?.message?.id ? (
+            <InputAction
+              style={{ className: "w-100 vr-center m-t-0-5" }}
+              actions={[
+                <Button
+                  size="xs"
+                  className="m-l-0-5"
+                  variant="state_brand"
+                  onClick={props.hookChat?.editMessage}
+                >
+                  Update
+                </Button>,
+                <Button
+                  size="xs"
+                  className="m-l-0-5"
+                  variant="state_brand"
+                  onClick={props.hookChat?.handleEditClose}
+                >
+                  Cancel
+                </Button>,
+              ]}
+            >
               <Textarea
-                  ref={props.hookChat?.editMessageRef}
-                  className="inputElement"
-                  variant="unstyled"
-                  style={{ minHeight: min_textarea_height }}
-                  placeholder={props.message?.text}
-                  height="auto"
-                  rows={1}
+                ref={props.hookChat?.editMessageRef}
+                className="inputElement"
+                variant="unstyled"
+                style={{ minHeight: min_textarea_height }}
+                placeholder={props.message?.text}
+                height="auto"
+                rows={1}
               />
-          </InputAction>
-          ): 
-          (
-            <TextareaDiv dangerouslySetInnerHTML={{ __html: props.message?.html }} />
+            </InputAction>
+          ) : (
+            <TextareaDiv
+              dangerouslySetInnerHTML={{ __html: props.message?.html }}
+            />
           )}
 
           {props?.message?.attachments.map((item: any, index: number) => {

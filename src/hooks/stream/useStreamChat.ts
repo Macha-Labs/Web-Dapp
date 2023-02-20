@@ -162,25 +162,27 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const editMessage = async () => {
-    console.log('editing message- ', editMessageRef.current.value);
+    console.log("editing message- ", editMessageRef.current.value);
     if (!authContext?.address) {
       throw new Error ("Couldn't find the user address");
     }
     if (actionMessage?.action !== "EDIT") {
       return;
     }
-    await streamContext.client.updateMessage({
-      id: actionMessage.item?.id,
-      text: editMessageRef.current.value,
-    }).then(() => {
-      toast({
-        title: "Message Updated",
-        status: "success",
-        duration: 3000,
-        position: "bottom-right",
+    await streamContext.client
+      .updateMessage({
+        id: actionMessage.item?.id,
+        text: editMessageRef.current.value,
+      })
+      .then(() => {
+        toast({
+          title: "Message Updated",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+        setActionMessage(null);
       });
-      setActionMessage(null);
-    });
   };
 
   const deleteMessage = async (message: any) => {
@@ -323,6 +325,12 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     setActionMessage({ action: "MULTISELECT", item: null });
   };
   const handleMultiSelectClose = () => {
+    logger(
+      "channel",
+      "useStreamChat.handleMultiSelect",
+      "Trigger MultiSelectClose",
+      []
+    );
     setActionMessage(null);
   };
   const handleLongPressSelect = (message: any) => {
@@ -413,8 +421,13 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   useEffect(() => {
-    logger('channel', 'useStreamChat.useEffect[actionMessage]', 'actionMessage is', [actionMessage])
-  }, [actionMessage]) 
+    logger(
+      "channel",
+      "useStreamChat.useEffect[actionMessage]",
+      "actionMessage is",
+      [actionMessage]
+    );
+  }, [actionMessage]);
 
   return {
     // REACTIONS

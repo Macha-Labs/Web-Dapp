@@ -753,7 +753,6 @@ export const StyledConversation = styled(Col)`
 
   &:hover {
     opacity: 1;
-    background: ${style.card.bg.hover};
     .action {
       display: block;
       color: red;
@@ -784,6 +783,19 @@ export const StyledConversation = styled(Col)`
   }
 
   .message {
+    color: rgb(255, 255, 255);
+    background: #000C29;
+    width: fit-content;
+    min-width: 40%;
+    max-width: 70%;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px -2px 8px rgba(19, 112, 231, 0.15), 0px 2px 8px rgba(19, 112, 231, 0.15);
+
+    .heading {
+      color: #246bfd;
+      font-weight: 700;
+    }
     .inputElement {
       resize: none;
       width: 100%;
@@ -791,6 +803,19 @@ export const StyledConversation = styled(Col)`
       background-color: transparent;
       outline: none;
     }
+
+    &.active {
+      background: linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%);
+      
+      .heading {
+        color: #FFF;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0px -2px 8px rgba(19, 112, 231, 0.25), 0px 2px 8px rgba(19, 112, 231, 0.25);
+    }
+
   }
 `;
 

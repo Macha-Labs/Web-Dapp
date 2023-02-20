@@ -69,7 +69,7 @@ export const editChannel = async (data: any, id: any) => {
             "Content-type": "application/json",
         },
     });
-    return response.json();
+    return response;
 };
 
 export const delChannel = async (data: any) => {

@@ -91,7 +91,7 @@ const ChatList = (props: any) => {
                           variant={
                             chatProvider.hookChannel.channel?.id == item?.id
                               ? "state_brand"
-                              : "state_card"
+                              : "state_card_hover"
                           }
                         >
                           <Avatar

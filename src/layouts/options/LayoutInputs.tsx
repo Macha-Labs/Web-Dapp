@@ -6,8 +6,9 @@ const LayoutInputs = (props:any)=>{
         <StyledCard className={props.style.class}>
             {
                 props.data.map((item:any) => {
+                    console.log("propsoflayoutinput",item?.onChangeText);
                     return (
-                        <Input placeholder={item?.label} value={item?.value} onChange={(e) => {item?.onChange(e)}} disabled={item.disabled}/>
+                        <Input placeholder={item?.label} value={item?.value} onChange={(e) => {item?.onChangeText(e.target.value)}} disabled={item.disabled}/>
                     )
                 })
             }
