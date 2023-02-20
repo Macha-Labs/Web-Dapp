@@ -12,8 +12,9 @@ import {
   TabList,
   TabPanel,
   TabPanels,
-  Tabs, Text,
-  Wrap
+  Tabs,
+  Text,
+  Wrap,
 } from "@chakra-ui/react";
 import LayoutPostList from "../../layouts/post/LayoutPostList";
 import UserCard from "./UserCard";
@@ -124,6 +125,28 @@ const UserProfile = (props: any) => {
     );
   };
 
+  const TemplateFollowers = () => {
+    return (
+      <>
+        {hookLensConnections.followers?.length ? (
+          <Wrap className="m-b-2">
+            {hookLensConnections.followers.length ? (
+              <>
+                {hookLensConnections.followers.map((item: any, index: any) => {
+                  return <UserCard user={item} key={index} />;
+                })}
+              </>
+            ) : (
+              <></>
+            )}
+          </Wrap>
+        ) : (
+          <>Zero followers</>
+        )}
+      </>
+    );
+  };
+
   const TemplateProfile = () => {
     return (
       <StyledCard>
@@ -150,8 +173,8 @@ const UserProfile = (props: any) => {
           )}
         </Row>
 
-        {
-          props.address == props.user?.lens?.ownedBy && <Row className="m-v-1 vr-center hr-center">
+        {props.address == props.user?.lens?.ownedBy && (
+          <Row className="m-v-1 vr-center hr-center">
             {props.user?.lens?.isFollowedByMe ? (
               <Button
                 variant="state_lens_unfollow"
@@ -183,12 +206,10 @@ const UserProfile = (props: any) => {
               Message
             </Button>
           </Row>
-        }
-
-
+        )}
       </StyledCard>
-    )
-  }
+    );
+  };
 
   const TemplateTabs = () => {
     return (
@@ -240,14 +261,14 @@ const UserProfile = (props: any) => {
           <TabPanel>{templateNfts()}</TabPanel>
 
           <TabPanel>
-            <Text>Projects coming up</Text>
+            <TemplateFollowers />
           </TabPanel>
 
           <TabPanel>{templateConnections()}</TabPanel>
         </TabPanels>
       </Tabs>
-    )
-  }
+    );
+  };
 
   return (
     <>
