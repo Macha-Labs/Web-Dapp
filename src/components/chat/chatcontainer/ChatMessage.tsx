@@ -160,7 +160,7 @@ const ChatMessage = (props: any) => {
           </Row>
         </Col>
         <Col className={(props.authContext?.address == props?.message?.user?.id )? "active message w-100": "message w-100"} style={{ color: "#ffffff" }}>
-          <Text fontSize="sm">
+          <Text fontSize="sm" className="heading">
             {props.message?.user?.lensUsername ||
               props.message?.user?.lensHandle ||
               truncateAddress(props.message?.user?.id)}
