@@ -20,6 +20,8 @@ import LayoutPostList from "../../layouts/post/LayoutPostList";
 import UserCard from "./UserCard";
 import UserFollowersCard from "./UserFollowersCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
+import { useContext } from "react";
+import { AuthContext } from "@/providers/AuthProvider";
 
 interface Props {
   [key: string]: any;
@@ -32,6 +34,7 @@ const UserProfile = (props: any) => {
     props.user?.lens?.ownedBy,
     props?.user?.lens?.id
   );
+  const authContext = useContext(AuthContext);
 
   const templateConnections = () => {
     return (
@@ -153,6 +156,13 @@ const UserProfile = (props: any) => {
   };
 
   const TemplateProfile = () => {
+    console.log(
+      "Address",
+      authContext.address,
+      props.user?.lens?.ownedBy,
+      props.user?.lens?.ownedBy.toLowerCase() ===
+        authContext.address.toLowerCase()
+    );
     return (
       <StyledCard>
         <LayoutProfileBanner profile={props.user?.lens} />
@@ -178,7 +188,8 @@ const UserProfile = (props: any) => {
           )}
         </Row>
 
-        {props.address == props.user?.lens?.ownedBy && (
+        {props.user?.lens?.ownedBy.toLowerCase() !==
+          authContext.address.toLowerCase() && (
           <Row className="m-v-1 vr-center hr-center">
             {props.user?.lens?.isFollowedByMe ? (
               <Button
