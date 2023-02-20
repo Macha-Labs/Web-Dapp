@@ -181,7 +181,9 @@ export const darkStyle = {
       active: "",
     },
     borderRadius: "12px",
-    shadow: { default: "inset 0 1px 0 0 hsl(0deg 0% 100% / 5%)" },
+    shadow: { 
+      default: "inset 0 1px 0 0 hsl(0deg 0% 100% / 5%)" 
+    },
   },
   button: {
     bg: {

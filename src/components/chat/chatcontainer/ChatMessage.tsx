@@ -146,7 +146,7 @@ const ChatMessage = (props: any) => {
   return (
     <StyledConversation>
       <TemplateReply />
-      <Row className="message w-100">
+      <Row className="w-100">
         <Col>
           <Row>
             {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
@@ -155,12 +155,11 @@ const ChatMessage = (props: any) => {
 
             <Avatar
               src={props.message?.user?.lensImage}
-              className="m-r-1"
+              className="m-r-0-5"
             ></Avatar>
           </Row>
         </Col>
-
-        <Col className="w-100" style={{ color: "#ffffff" }}>
+        <Col className={(props.authContext?.address == props?.message?.user?.id )? "active message w-100": "message w-100"} style={{ color: "#ffffff" }}>
           <Text fontSize="sm">
             {props.message?.user?.lensUsername ||
               props.message?.user?.lensHandle ||
