@@ -30,6 +30,7 @@ import IconFile from "@/components/icons/IconFile";
 import IconDelete from "@/components/icons/IconDelete";
 import PortalLoader from "@/components/PortalLoader";
 import IconImage from "@/components/icons/IconImage";
+import Pop from "@/components/pop/Pop";
 
 // const TypingRow = styled(Row)`
 //     display: none;
@@ -171,15 +172,12 @@ const ChatInput = (props: any) => {
 
   const TemplateAction = () => {
     return (
-      <Popover placement="top-start">
-        <PopoverTrigger>
-          <StyledIcon className="circled">
-            <PlusSquareIcon color="gray.300" />
-          </StyledIcon>
-        </PopoverTrigger>
-        <PopoverContent className="m-b-1">
-          <PopoverBody>
-            <Col className="text-start">
+      <Pop 
+      trigger={<StyledIcon className="circled">
+      <PlusSquareIcon color="gray.300" />
+      </StyledIcon>
+      }>
+          <Col className="text-start">
               <Button
                 variant="transparent"
                 size="md"
@@ -222,9 +220,7 @@ const ChatInput = (props: any) => {
                 <Row className="hr-between w-100">Send Payment</Row>
               </Button>
             </Col>
-          </PopoverBody>
-        </PopoverContent>
-      </Popover>
+    </Pop>
     );
   };
 

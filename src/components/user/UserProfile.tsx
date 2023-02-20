@@ -21,6 +21,7 @@ import LayoutPostList from "../../layouts/post/LayoutPostList";
 import LayoutProfileBanner from "@/layouts/LayoutProfileBanner";
 import LayoutCard from "@/layouts/LayoutCard";
 import UserCard from "./UserCard";
+import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 interface Props {
   [key: string]: any;
@@ -194,51 +195,46 @@ const UserProfile = ({ ...props }) => {
   const TemplateTabs = () => {
     return (
       <Tabs variant="unstyled">
-        <TabList>
-          <Row className="m-v-1 w-100 vr-center hr-center">
-            <Tab>
-              <Row className="m-h-0-5">
-                <Col className="m-r-0-5">
-                  <Avatar size="sm" />
-                </Col>
+        <LayoutCardPannel
+          style={{className: 'm-t-1'}}
+          header={
+            <TabList className="w-100">
+            <Row className="m-v-1 w-100 vr-center hr-center">
+              <Tab>
+                <Row className="m-h-0-5 vr-center">
+                  <Col className="m-r-0-5">
+                    <Avatar size="sm" />
+                  </Col>
 
-                <Col>Post</Col>
-              </Row>
-            </Tab>
-            <Tab>
-              <Row className="m-h-0-5">
-                <Col className="m-r-0-5">
-                  <Avatar size="sm" />
-                </Col>
+                  <Col>Post</Col>
+                </Row>
+              </Tab>
+              <Tab>
+                <Row className="m-h-0-5  vr-center">
+                  <Col className="m-r-0-5">
+                    <Avatar size="sm" />
+                  </Col>
 
-                <Col>NFTs</Col>
-              </Row>
-            </Tab>
-            <Tab>
-              <Row className="m-h-0-5">
-                <Col className="m-r-0-5">
-                  <Avatar size="sm" />
-                </Col>
+                  <Col>Followers</Col>
+                </Row>
+              </Tab>
+              <Tab>
+                <Row className="m-h-0-5  vr-center">
+                  <Col className="m-r-0-5">
+                    <Avatar size="sm" />
+                  </Col>
 
-                <Col>Followers</Col>
-              </Row>
-            </Tab>
-            <Tab>
-              <Row className="m-h-0-5">
-                <Col className="m-r-0-5">
-                  <Avatar size="sm" />
-                </Col>
-
-                <Col>Following</Col>
-              </Row>
-            </Tab>
-          </Row>
-        </TabList>
+                  <Col>Following</Col>
+                </Row>
+              </Tab>
+            </Row>
+          </TabList>
+          }
+        >
+        
 
         <TabPanels>
           <TabPanel>{templatePosts()}</TabPanel>
-
-          <TabPanel>{templateNfts()}</TabPanel>
 
           <TabPanel>
             <Text>Projects coming up</Text>
@@ -246,6 +242,7 @@ const UserProfile = ({ ...props }) => {
 
           <TabPanel>{templateConnections()}</TabPanel>
         </TabPanels>
+        </LayoutCardPannel>
       </Tabs>
     )
   }

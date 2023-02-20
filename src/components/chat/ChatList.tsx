@@ -2,6 +2,7 @@ import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
 import {
   Avatar,
   Button,
+  Checkbox,
   Heading,
   Icon,
   Text,
@@ -21,6 +22,7 @@ import ChatSearch from "./chatcontainer/ChatSearch";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
+import Pop from "../pop/Pop";
 
 const ChatList = (props: any) => {
   const chatProvider = useContext(ChatContext);
@@ -33,6 +35,64 @@ const ChatList = (props: any) => {
       <ModalSlider event={modalChatNew} size="lg">
         <ChatProfile />
       </ModalSlider>
+    );
+  };
+
+  const TemplateActions = () => {
+    return (
+      <Pop
+        trigger={<IconImage path="IconDarkMenu.png" />}
+        placement="bottom-end">
+        <Col className="text-start">
+                <Button
+                  variant="transparent"
+                  size="md"
+                  className="text-start"
+                  rightIcon={<IconImage path="IconDarkFiles.png" />}
+                >
+                  <Row
+                    className="hr-between w-100"
+                    onClick={() => {
+                      
+                    }}
+                  >
+                    Pin Channel
+                  </Row>
+                </Button>
+              <Button
+                variant="transparent"
+                size="md"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkFiles.png" />}
+              >
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    
+                  }}
+                >
+                  Mute Channel
+                </Row>
+              </Button>
+              <Button
+                variant="transparent"
+                size="md"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkFiles.png" />}
+              >
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    
+                  }}
+                >
+                  Clear Chat
+                </Row>
+              </Button>
+              
+              
+            </Col>
+      </Pop>
     );
   };
 
@@ -94,6 +154,7 @@ const ChatList = (props: any) => {
                               : "state_card_hover"
                           }
                         >
+                          {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
                           <Avatar
                             size="md"
                             className="m-r-0-5"
@@ -112,12 +173,7 @@ const ChatList = (props: any) => {
                           </Col>
                           {props.context?.user?._id == props.org?.owner ? (
                             <Col className="hr-center settingsIcon">
-                              <Icon>
-                                {/* <SettingsIcon
-                                                                                as='button'
-                                                                                key={item.id}
-                                                                                onClick={event => props.channelSetting(event, item)} /> */}
-                              </Icon>
+                              <TemplateActions />
                             </Col>
                           ) : (
                             <></>
