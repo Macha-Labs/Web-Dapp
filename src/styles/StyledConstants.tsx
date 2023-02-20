@@ -154,7 +154,7 @@ export const darkStyle = {
     shadow: {
       default: "0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)",
       hover:
-        "-1px 1px 4px rgba(17, 108, 230, 0.3),1px -1px 4px rgba(17, 108, 230, 0.3)",
+        "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
     padding: { default: "10px" },
   },
@@ -181,7 +181,11 @@ export const darkStyle = {
       active: "",
     },
     borderRadius: "12px",
-    shadow: { default: "inset 0 1px 0 0 hsl(0deg 0% 100% / 5%)" },
+    shadow: {
+      default: "inset 0 1px 0 0 hsl(0deg 0% 100% / 5%)",
+      hover:
+        "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
+    },
   },
   button: {
     bg: {

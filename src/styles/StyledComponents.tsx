@@ -181,7 +181,7 @@ export const List = styled.div`
   }
 `;
 
-//////////////////////////////// Card //////////////////////////////// 
+//////////////////////////////// Card ////////////////////////////////
 
 export const StyledCard = styled.div`
   border-radius: ${style.card.borderRadius};
@@ -317,7 +317,7 @@ export const StyledOptionsCard = styled(StyledCard)`
   }
 `;
 
-//////////////////////////////// Input //////////////////////////////// 
+//////////////////////////////// Input ////////////////////////////////
 export const StyledInput = styled.div`
   width: 100%;
   border-radius: 5px;
@@ -325,7 +325,7 @@ export const StyledInput = styled.div`
   border: ${style.card.border.default};
   margin-bottom: 5px;
   padding: 0.5rem;
-`
+`;
 
 //
 
@@ -471,10 +471,13 @@ export const StyledIcon = styled.i`
   border-radius: ${style.icon.borderRadius};
   box-shadow: ${style.icon.shadow.default};
 
-  &:hover {
+  &.state_hover {
     background: ${style.icon.bg.hover};
+    &:hover {
+      box-shadow: ${style.icon.shadow.hover};
+    }
   }
-  &.active {
+  &.state_active {
     background: ${style.icon.bg.active};
   }
 
@@ -774,13 +777,13 @@ export const StyledConversation = styled(Col)`
     border: ${style.borderInput};
     background: #01041f;
     border-radius: 5px;
-    width: fit-content
+    width: fit-content;
   }
 
   &:hover {
-      .action {
-          display: flex;
-      }
+    .action {
+      display: flex;
+    }
   }
 
   .message {
