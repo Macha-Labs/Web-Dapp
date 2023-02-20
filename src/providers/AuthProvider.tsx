@@ -7,6 +7,7 @@ import { useAccount, useDisconnect } from 'wagmi';
 import { putStreamToken } from "../service/StreamService";
 import { findOrCreateUser } from "../service/UserService";
 import useLensProfile from "@/hooks/lens/useLensProfile";
+import {fetchSigner} from "@wagmi/core"
 
 export type AuthContextType = {
     signer: any | undefined;
@@ -79,6 +80,8 @@ const AuthProvider = ({ children }: any) => {
     useEffect(() => {
         logger("auth", "useEffect", "Current user address", [address]);
         const lensAuthenticate = async () => {
+            const currentSigner = await fetchSigner();
+            setSigner(currentSigner);
             const lensProfile = await hookLensProfile.getOwnedProfiles(address);
             console.log("Fetched lens profile = ", lensProfile);
             if (lensProfile) {
@@ -100,6 +103,7 @@ const AuthProvider = ({ children }: any) => {
         }
 
         if (address) {
+            const currentSigner = 
             lensAuthenticate();
             userDataFromDB();
             console.log("Updated the userData ", user);
