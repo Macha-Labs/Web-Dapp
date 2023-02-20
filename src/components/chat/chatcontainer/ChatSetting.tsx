@@ -4,6 +4,7 @@ import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { Col } from "@/styles/StyledComponents";
 import { Heading, useDisclosure } from "@chakra-ui/react";
 import React from "react";
+import ChatEdit from "../ChatEdit";
 import ChatMembers from "./ChatMembers";
 import ChatPermissions from "./ChatPermissions";
 
@@ -33,7 +34,7 @@ function ChatSetting(props) {
     {
       icon: "IconDarkEdit.png",
       name: "Edit Channel",
-      onPress: () => {},
+      onPress: () => {modalChatEdit.onOpen()},
       condition: {
         enabled: true,
         check:
@@ -129,7 +130,7 @@ function ChatSetting(props) {
   const TemplateEditChannel = () => {
     return (
       <ModalSlider size={"md"} event={modalChatEdit}>
-        {/* <ChatMembers hookChannel={props.hookChannel} /> */}
+        <ChatEdit hookChannel={props.hookChannel} />
       </ModalSlider>
     );
   };

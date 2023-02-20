@@ -1,17 +1,17 @@
 import { Button, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
-const SearchBox = ({ onSearch }) => {
+const SearchBox = () => {
   const [query, setQuery] = useState("");
 
   const handleQueryChange = (event) => {
     setQuery(event.target.value);
     
-    handleSearch();
+    // handleSearch();  
   };
 
   const handleSearch = () => {
-    onSearch(query);
+    // onSearch(query);
   };
 
   return (
