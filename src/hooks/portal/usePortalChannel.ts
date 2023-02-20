@@ -20,74 +20,72 @@ const usePortalChannel = (channelData: any) => {
     const update = () => {
         setIsLoading(true);
         if (channel.id) {
-            console.log("Editing existing channel");
-            // editChannel(
-            //     {
-            //         name: channel.name,
-            //         description: channel.description,
-            //         image: channel.image,
-            //     },
-            //     channel.id
-            // )
-            //     .then((res) => {
-            //         logger(
-            //             "channel",
-            //             "usePortalChannelUpdate.update",
-            //             "getting response from API",
-            //             [res]
-            //         );
-            //         // toast.show({
-            //         //     description: "Channel Details updated successfully",
-            //         //     avoidKeyboard: true,
-            //         //     duration: 3000,
-            //         // });
-            //         setIsLoading(false);
-            //         // navigation.navigate("Chat", {
-            //         //     channel: channel,
-            //         // });
-            //     })
-            //     .catch((err) => {
-            //         logger(
-            //             "channel",
-            //             "usePortalChannelUpdate.update",
-            //             "getting error from API",
-            //             [err]
-            //         );
-            //     });
+            editChannel(
+                {
+                    name: channel.name,
+                    description: channel.description,
+                    image: channel.image,
+                },
+                channel.id
+            )
+                .then((res) => {
+                    logger(
+                        "channel",
+                        "usePortalChannelUpdate.update",
+                        "getting response from API",
+                        [res]
+                    );
+                    // toast.show({
+                    //     description: "Channel Details updated successfully",
+                    //     avoidKeyboard: true,
+                    //     duration: 3000,
+                    // });
+                    setIsLoading(false);
+                    // navigation.navigate("Chat", {
+                    //     channel: channel,
+                    // });
+                })
+                .catch((err) => {
+                    logger(
+                        "channel",
+                        "usePortalChannelUpdate.update",
+                        "getting error from API",
+                        [err]
+                    );
+                });
         } else {
-            console.log("creating new channel");
-            // putChannelForUser({
-            //     name: channel.name,
-            //     description: channel.description,
-            //     userAddress: authProvider.address,
-            //     image: channel.image,
-            // })
-            //     .then((res) => {
-            //         logger(
-            //             "channel",
-            //             "usePortalChannelUpdate.create",
-            //             "getting response from API",
-            //             [res]
-            //         );
-            //         // toast.show({
-            //         //     description: "Channel Created Successfully",
-            //         //     avoidKeyboard: true,
-            //         //     duration: 3000,
-            //         // });
-            //         setIsLoading(false);
-            //         // ! TODO: This data is sent by DB and not getStream, have to resolve this
-            //         // navigation.navigate("Chat", {
-            //         //     channel: channel,
-            //         // });
-            //     })
-            //     .catch((err) => {
-            //         logger(
-            //             "channel",
-            //             "usePortalChannelUpdate.create",
-            //             "getting error from API",
-            //             [err]
-            //         );
-            //     });
+            putChannelForUser({
+                name: channel.name,
+                description: channel.description,
+                userAddress: authProvider.address,
+                image: channel.image,
+            })
+                .then((res) => {
+                    logger(
+                        "channel",
+                        "usePortalChannelUpdate.create",
+                        "getting response from API",
+                        [res]
+                    );
+                    // toast.show({
+                    //     description: "Channel Created Successfully",
+                    //     avoidKeyboard: true,
+                    //     duration: 3000,
+                    // });
+                    setIsLoading(false);
+                    // ! TODO: This data is sent by DB and not getStream, have to resolve this
+                    // navigation.navigate("Chat", {
+                    //     channel: channel,
+                    // });
+                })
+                .catch((err) => {
+                    logger(
+                        "channel",
+                        "usePortalChannelUpdate.create",
+                        "getting error from API",
+                        [err]
+                    );
+                });
         }
     };
 
