@@ -60,7 +60,7 @@ export const permissionsChannel = async (data, id) => {
             },
         }
     );
-    return response.json();
+    return response;
 };
 
 export const editChannel = async (data, id) => {
@@ -71,7 +71,7 @@ export const editChannel = async (data, id) => {
             "Content-type": "application/json",
         },
     });
-    return response.json();
+    return response;
 };
 
 export const delChannel = async (data) => {

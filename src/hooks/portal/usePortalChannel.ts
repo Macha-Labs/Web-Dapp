@@ -25,7 +25,7 @@ const usePortalChannel = (channelData:any) => {
                     name: channel.name,
                     description: channel.description,
                     image: channel.image,
-                },
+                },  
                 channel.id
             )
                 .then((res) => {
