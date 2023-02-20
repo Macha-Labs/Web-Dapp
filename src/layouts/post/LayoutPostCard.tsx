@@ -1,9 +1,10 @@
-import { Avatar, Button, Flex, Heading, Text } from "@chakra-ui/react";
-import { Col, Row, StyledPostCard } from "@/styles/StyledComponents";
-import styled from "styled-components";
 import { helperIPFS } from "@/helpers";
+import { likePost } from "@/helpers/lens/lens";
+import { Col, Row, StyledPostCard } from "@/styles/StyledComponents";
+import { Avatar, Button, Flex, Heading, Text } from "@chakra-ui/react";
 
 const LayoutPostCard = (props: any) => {
+  console.log("Lens Posts ", props.item);
   return (
     <>
       {props?.item ? (
@@ -51,11 +52,10 @@ const LayoutPostCard = (props: any) => {
                       <Button
                         className="buttonCol"
                         size="xs"
-                        // leftIcon={<LikeIcon width="20" height="20" fill="#efefef" />}
                         variant="state_transparent_to_brand_hover"
                         onClick={() =>
                           likePost({
-                            profileId: authContext.userLens?.profile?.id,
+                            profileId: props.item?.profile?.id,
                             reaction: "UPVOTE",
                             publicationId: props.item?.response
                               ? props.item?.response

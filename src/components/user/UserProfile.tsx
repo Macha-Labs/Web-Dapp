@@ -1,3 +1,9 @@
+import useLensConnections from "@/hooks/lens/useLensConnections";
+import useLensFollows from "@/hooks/lens/useLensFollow";
+import useLensPostsForUser from "@/hooks/lens/useLensPostsForUser";
+import LayoutProfileBanner from "@/layouts/LayoutProfileBanner";
+import { Col, Row, StyledCard, StyledIcon } from "@/styles/StyledComponents";
+import { ChatIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Button,
@@ -7,26 +13,17 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
-  Tag,
   Text,
   Wrap,
-  WrapItem,
 } from "@chakra-ui/react";
-import { Col, StyledIcon, Row, StyledCard } from "@/styles/StyledComponents";
-import { ChatIcon } from "@chakra-ui/icons";
-import useLensFollows from "@/hooks/lens/useLensFollow";
-import useLensPostsForUser from "@/hooks/lens/useLensPostsForUser";
-import useLensConnections from "@/hooks/lens/useLensConnections";
 import LayoutPostList from "../../layouts/post/LayoutPostList";
-import LayoutProfileBanner from "@/layouts/LayoutProfileBanner";
-import LayoutCard from "@/layouts/LayoutCard";
 import UserCard from "./UserCard";
 
 interface Props {
   [key: string]: any;
 }
 
-const UserProfile = ({ ...props }) => {
+const UserProfile = (props: any) => {
   const hookLensFollow = useLensFollows(props.user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.id);
   const hookLensConnections = useLensConnections(props.user?.lens?.ownedBy);
@@ -176,38 +173,40 @@ const UserProfile = ({ ...props }) => {
           )}
         </Row>
 
-        <Row className="m-v-1 vr-center hr-center">
-          {props.user?.lens?.isFollowedByMe ? (
-            <Button
-              variant="state_lens_unfollow"
-              size="md"
-              className="m-r-1"
-              onClick={() => {
-                hookLensFollow.triggerUnFollow();
-              }}
-              isLoading={hookLensFollow.isLoading}
-              loadingText={hookLensFollow.loadingText}
-            >
-              Unfollow on Lens
+        {props.address == props.user?.lens?.ownedBy && (
+          <Row className="m-v-1 vr-center hr-center">
+            {props.user?.lens?.isFollowedByMe ? (
+              <Button
+                variant="state_lens_unfollow"
+                size="md"
+                className="m-r-1"
+                onClick={() => {
+                  hookLensFollow.triggerUnFollow();
+                }}
+                isLoading={hookLensFollow.isLoading}
+                loadingText={hookLensFollow.loadingText}
+              >
+                Unfollow on Lens
+              </Button>
+            ) : (
+              <Button
+                variant="state_lens"
+                size="md"
+                className="m-r-1"
+                onClick={() => {
+                  hookLensFollow.triggerFollow();
+                }}
+                isLoading={hookLensFollow.isLoading}
+                loadingText={hookLensFollow.loadingText}
+              >
+                Follow on Lens
+              </Button>
+            )}
+            <Button leftIcon={<ChatIcon />} variant="state_brand" size="md">
+              Message
             </Button>
-          ) : (
-            <Button
-              variant="state_lens"
-              size="md"
-              className="m-r-1"
-              onClick={() => {
-                hookLensFollow.triggerFollow();
-              }}
-              isLoading={hookLensFollow.isLoading}
-              loadingText={hookLensFollow.loadingText}
-            >
-              Follow on Lens
-            </Button>
-          )}
-          <Button leftIcon={<ChatIcon />} variant="state_brand" size="md">
-            Message
-          </Button>
-        </Row>
+          </Row>
+        )}
       </StyledCard>
     );
   };

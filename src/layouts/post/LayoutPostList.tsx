@@ -25,7 +25,7 @@ const LayoutPostList = ({ ...props }) => {
           hr="center"
           vr="center"
           text={"No Posts Yet"}
-        ></LayoutCard>
+        />
       );
     }
   };
