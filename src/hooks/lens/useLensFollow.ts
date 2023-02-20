@@ -18,12 +18,12 @@ const useLensFollows = (profileID: any) => {
     const TEST_LENS_HUB_CONTRACT = "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82";
 
     const getVRS = async (typedData: any) => {
-        const signature = await signedTypeData(
+        const signature: any = await signedTypeData(
             typedData.domain,
             typedData.types,
             typedData.value,
-            authContext.address,
         );
+
         const {v, r, s} = splitSignature(signature);
 
         const sig = {
@@ -32,11 +32,13 @@ const useLensFollows = (profileID: any) => {
             s,
             deadline: typedData.value.deadline,
         };
+        console.log("The sig we got is ", sig);
         return [typedData, sig];
     };
 
     const triggerFollow = async () => {
         if (profileID) {
+            console.log("Got profile id ", profileID);
             try {
                 setIsLoading(true);
                 setLoadingText("Following");
@@ -48,6 +50,7 @@ const useLensFollows = (profileID: any) => {
                         },
                     ],
                 });
+                console.log("Getting graph ql result ", result);
 
                 const [typedData, sig] = await getVRS(
                     result.data!.createFollowTypedData.typedData
@@ -59,20 +62,6 @@ const useLensFollows = (profileID: any) => {
                     authContext.signer
                 );
 
-                // const tx = await connector.sendTransaction(
-                //     {
-                //         from: authContext.address,
-                //         to: TEST_LENS_HUB_CONTRACT,
-                //         data: lensHub.followWithSig({
-                //             follower: authContext.address,
-                //             profileIds: typedData.value.profileIds,
-                //             datas: typedData.value.datas,
-                //             sig: sig,
-                //         }, {gasLimit: 100000}),
-                //         gasLimit: 100000
-                //     }
-                // )
-
                 const tx = await lensHub.followWithSig({
                     follower: authContext.address,
                     profileIds: typedData.value.profileIds,
@@ -80,8 +69,6 @@ const useLensFollows = (profileID: any) => {
                     sig: sig,
                 }, {gasLimit: 100000})
                     
-                    
-
                 setIsLoading(false);
                 setLoadingText("Following");
                 // await updateLens.updateLensState();
