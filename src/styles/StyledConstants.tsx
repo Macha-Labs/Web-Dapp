@@ -131,13 +131,13 @@ export const darkStyle = {
   colorIconActive: "#333",
   focusInput: "0",
   header: {
-    bg: { default: "#000C29" },
+    bg: { default: "#00081A" },
     border: { default: "1px solid #0F172E" },
   },
   body: { bg: { default: "#000511" } },
   nav: {
     width: "5%",
-    bg: { default: "#000C29" },
+    bg: { default: "#00081A" },
     border: { default: "1px solid #0F172E" },
   },
   card: {
@@ -147,7 +147,7 @@ export const darkStyle = {
         "linear-gradient(141.09deg, rgba(13, 25, 65, 0.5) 11.08%, rgba(0, 20, 60, 0.38) 89.68%)",
     },
     border: {
-      default: "1px solid #14244B",
+      default: "1px solid rgba(15,23,46,0.5)",
       hover: "1px solid #001E57",
     },
     borderRadius: "5px",
@@ -181,7 +181,9 @@ export const darkStyle = {
       active: "",
     },
     borderRadius: "12px",
-    shadow: { default: "inset 0 1px 0 0 hsl(0deg 0% 100% / 5%)" },
+    shadow: { 
+      default: "inset 0 1px 0 0 hsl(0deg 0% 100% / 5%)" 
+    },
   },
   button: {
     bg: {
