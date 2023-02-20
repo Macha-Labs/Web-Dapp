@@ -131,13 +131,13 @@ export const darkStyle = {
   colorIconActive: "#333",
   focusInput: "0",
   header: {
-    bg: { default: "#000C29" },
+    bg: { default: "#00081A" },
     border: { default: "1px solid #0F172E" },
   },
   body: { bg: { default: "#000511" } },
   nav: {
     width: "5%",
-    bg: { default: "#000C29" },
+    bg: { default: "#00081A" },
     border: { default: "1px solid #0F172E" },
   },
   card: {
