@@ -111,6 +111,7 @@ function ChatSetting(props) {
   
   const modalChatPermission = useDisclosure();
   const modalChatMembers = useDisclosure();
+  const modalChatEdit = useDisclosure();
   const TemplatePermission = () => {
     return (
       <ModalSlider size={"md"} event={modalChatPermission}>
@@ -125,6 +126,13 @@ function ChatSetting(props) {
       </ModalSlider>
     );
   }
+  const TemplateEditChannel = () => {
+    return (
+      <ModalSlider size={"md"} event={modalChatEdit}>
+        {/* <ChatMembers hookChannel={props.hookChannel} /> */}
+      </ModalSlider>
+    );
+  };
   return (
     <>
       <div>
@@ -145,6 +153,7 @@ function ChatSetting(props) {
       </div>
       <TemplatePermission />
       <TemplateMembers/>
+      <TemplateEditChannel/>
     </>
   );
 }
