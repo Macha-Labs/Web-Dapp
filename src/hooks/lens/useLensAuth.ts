@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
+import { logger } from "@/helpers/logger";
+import { ethers } from "ethers";
+import { useState } from "react";
+import { useSignMessage } from 'wagmi';
 import {
     authenticate_user,
     generateChallenge,
-    newRefreshToken,
+    newRefreshToken
 } from "../../helpers/lens/lens";
-import { ethers } from "ethers";
-import useLensProfile from "./useLensProfile";
-import { useSignMessage } from 'wagmi'
-import { logger } from "@/helpers/logger";
 
 const useLensAuth = () => {
-    // const hookLensProfile = useLensProfile(address);
     const [token, setToken] = useState<any>(null);
     const [refreshToken, setRefreshToken] = useState<any>(null);
     const [isLoading, setIsLoading] = useState<any>();
@@ -84,8 +82,6 @@ const useLensAuth = () => {
         isLoading: isLoading,
         signButtonText: signButtonText,
         connectToLens: connectToLens
-        // connect: connect,
-        // setLensProfile: hookLensProfile.setLensProfile
     };
 };
 

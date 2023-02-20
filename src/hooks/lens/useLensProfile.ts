@@ -1,7 +1,6 @@
+import { useState } from "react";
 import { getProfiles } from "../../helpers/lens/lens";
-import { useEffect, useMemo, useState } from "react";
 import { UserLens$ } from "../../schema/user";
-import { logger } from "@/helpers/logger";
 
 const useLensProfile = () => {
     const [lensProfile, setLensProfile] = useState<any>();
@@ -26,13 +25,6 @@ const useLensProfile = () => {
             throw new Error ("Error in fetching lens profile ", error)
         }
     }
-
-    // useMemo(() => {
-    //     if (address) {
-    //         logger('lens', 'useLensProfile.useMemo[address]', 'Getting Profile for address', [])
-    //         getOwnedProfiles();
-    //     }
-    // }, [address]);
 
     return ({
         userLens: UserLens$(lensProfile),
