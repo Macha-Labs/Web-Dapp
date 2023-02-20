@@ -3,8 +3,6 @@ import { Row, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, AvatarBadge } from "@chakra-ui/react";
 
 const UserFollowersCard = (props: any) => {
-  console.log(props.user, "Follloweers");
-
   const userData = props.user?.wallet?.defaultProfile;
   return (
     <StyledCard className="border">
