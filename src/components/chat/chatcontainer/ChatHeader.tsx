@@ -8,7 +8,7 @@ import ChatSetting from "./ChatSetting";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 
-const ChatHeader = (props) => {
+const ChatHeader = props => {
   const membersModal = useDisclosure();
   const pinneddMessageModal = useDisclosure();
   const channelSettingsModal = useDisclosure();
@@ -42,6 +42,7 @@ const ChatHeader = (props) => {
           hookChat={props.hookChat}
           hookChannel={props.hookChannel}
           authProvider={authProvider}
+          channelSettingsModal={channelSettingsModal}
         />
       </ModalSlider>
     );
@@ -65,7 +66,7 @@ const ChatHeader = (props) => {
         <Button
           variant="state_brand"
           size="sm"
-          onClick={props.hookChat.handleMultiSelectClose()}
+          onClick={props.hookChat.handleMultiSelectClose}
         >
           Cancel
         </Button>
