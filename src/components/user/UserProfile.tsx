@@ -128,6 +128,28 @@ const UserProfile = ({ ...props }) => {
     );
   };
 
+  const TemplateFollowers = () => {
+    return (
+      <>
+        {hookLensConnections.followers?.length ? (
+          <Wrap className="m-b-2">
+            {hookLensConnections.followers.length ? (
+              <>
+                {hookLensConnections.followers.map((item: any, index: any) => {
+                  return <UserCard user={item} key={index} />;
+                })}
+              </>
+            ) : (
+              <></>
+            )}
+          </Wrap>
+        ) : (
+          <>Zero followers</>
+        )}
+      </>
+    );
+  };
+
   const TemplateProfile = () => {
     return (
       <StyledCard>
@@ -186,10 +208,9 @@ const UserProfile = ({ ...props }) => {
             Message
           </Button>
         </Row>
-
       </StyledCard>
-    )
-  }
+    );
+  };
 
   const TemplateTabs = () => {
     return (
@@ -241,14 +262,14 @@ const UserProfile = ({ ...props }) => {
           <TabPanel>{templateNfts()}</TabPanel>
 
           <TabPanel>
-            <Text>Projects coming up</Text>
+            <TemplateFollowers />
           </TabPanel>
 
           <TabPanel>{templateConnections()}</TabPanel>
         </TabPanels>
       </Tabs>
-    )
-  }
+    );
+  };
 
   return (
     <>
