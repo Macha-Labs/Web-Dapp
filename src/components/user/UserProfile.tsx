@@ -18,6 +18,10 @@ import {
 } from "@chakra-ui/react";
 import LayoutPostList from "../../layouts/post/LayoutPostList";
 import UserCard from "./UserCard";
+import UserFollowersCard from "./UserFollowersCard";
+import LayoutCardPannel from "@/layouts/LayoutCardPannel";
+import { useContext } from "react";
+import { AuthContext } from "@/providers/AuthProvider";
 
 interface Props {
   [key: string]: any;
@@ -26,7 +30,11 @@ interface Props {
 const UserProfile = (props: any) => {
   const hookLensFollow = useLensFollows(props.user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.id);
-  const hookLensConnections = useLensConnections(props.user?.lens?.ownedBy);
+  const hookLensConnections = useLensConnections(
+    props.user?.lens?.ownedBy,
+    props?.user?.lens?.id
+  );
+  const authContext = useContext(AuthContext);
 
   const templateConnections = () => {
     return (
@@ -133,7 +141,7 @@ const UserProfile = (props: any) => {
             {hookLensConnections.followers.length ? (
               <>
                 {hookLensConnections.followers.map((item: any, index: any) => {
-                  return <UserCard user={item} key={index} />;
+                  return <UserFollowersCard user={item} key={index} />;
                 })}
               </>
             ) : (
@@ -148,6 +156,13 @@ const UserProfile = (props: any) => {
   };
 
   const TemplateProfile = () => {
+    console.log(
+      "Address",
+      authContext.address,
+      props.user?.lens?.ownedBy,
+      props.user?.lens?.ownedBy.toLowerCase() ===
+        authContext.address.toLowerCase()
+    );
     return (
       <StyledCard>
         <LayoutProfileBanner profile={props.user?.lens} />
@@ -173,7 +188,8 @@ const UserProfile = (props: any) => {
           )}
         </Row>
 
-        {props.address == props.user?.lens?.ownedBy && (
+        {props.user?.lens?.ownedBy.toLowerCase() !==
+          authContext.address.toLowerCase() && (
           <Row className="m-v-1 vr-center hr-center">
             {props.user?.lens?.isFollowedByMe ? (
               <Button
@@ -214,58 +230,52 @@ const UserProfile = (props: any) => {
   const TemplateTabs = () => {
     return (
       <Tabs variant="unstyled">
-        <TabList>
-          <Row className="m-v-1 w-100 vr-center hr-center">
-            <Tab>
-              <Row className="m-h-0-5">
-                <Col className="m-r-0-5">
-                  <Avatar size="sm" />
-                </Col>
+        <LayoutCardPannel
+          style={{ className: "m-t-1" }}
+          header={
+            <TabList className="w-100">
+              <Row className="m-v-1 w-100 vr-center hr-center">
+                <Tab>
+                  <Row className="m-h-0-5 vr-center">
+                    <Col className="m-r-0-5">
+                      <Avatar size="sm" />
+                    </Col>
 
-                <Col>Post</Col>
+                    <Col>Post</Col>
+                  </Row>
+                </Tab>
+                <Tab>
+                  <Row className="m-h-0-5  vr-center">
+                    <Col className="m-r-0-5">
+                      <Avatar size="sm" />
+                    </Col>
+
+                    <Col>Followers</Col>
+                  </Row>
+                </Tab>
+                <Tab>
+                  <Row className="m-h-0-5  vr-center">
+                    <Col className="m-r-0-5">
+                      <Avatar size="sm" />
+                    </Col>
+
+                    <Col>Following</Col>
+                  </Row>
+                </Tab>
               </Row>
-            </Tab>
-            <Tab>
-              <Row className="m-h-0-5">
-                <Col className="m-r-0-5">
-                  <Avatar size="sm" />
-                </Col>
+            </TabList>
+          }
+        >
+          <TabPanels>
+            <TabPanel>{templatePosts()}</TabPanel>
 
-                <Col>NFTs</Col>
-              </Row>
-            </Tab>
-            <Tab>
-              <Row className="m-h-0-5">
-                <Col className="m-r-0-5">
-                  <Avatar size="sm" />
-                </Col>
+            <TabPanel>
+              <TemplateFollowers />
+            </TabPanel>
 
-                <Col>Followers</Col>
-              </Row>
-            </Tab>
-            <Tab>
-              <Row className="m-h-0-5">
-                <Col className="m-r-0-5">
-                  <Avatar size="sm" />
-                </Col>
-
-                <Col>Following</Col>
-              </Row>
-            </Tab>
-          </Row>
-        </TabList>
-
-        <TabPanels>
-          <TabPanel>{templatePosts()}</TabPanel>
-
-          <TabPanel>{templateNfts()}</TabPanel>
-
-          <TabPanel>
-            <TemplateFollowers />
-          </TabPanel>
-
-          <TabPanel>{templateConnections()}</TabPanel>
-        </TabPanels>
+            <TabPanel>{templateConnections()}</TabPanel>
+          </TabPanels>
+        </LayoutCardPannel>
       </Tabs>
     );
   };
