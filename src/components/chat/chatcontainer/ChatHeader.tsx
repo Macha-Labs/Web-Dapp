@@ -8,7 +8,7 @@ import ChatSetting from "./ChatSetting";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 
-const ChatHeader = props => {
+const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
   const pinneddMessageModal = useDisclosure();
   const channelSettingsModal = useDisclosure();
