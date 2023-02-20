@@ -22,12 +22,11 @@ export const REFRESH_TOKEN = `
   }
 `;
 
-
 export const GET_PUBLICATIONS = `
   query($request: PublicationsQueryRequest!) {
     publications(request: $request) {
       items {
-        __typename 
+        __typename
         ... on Post {
           ...PostFields
         }
@@ -129,7 +128,7 @@ export const GET_PUBLICATIONS = `
     }
   }
 
-  fragment PublicationStatsFields on PublicationStats { 
+  fragment PublicationStatsFields on PublicationStats {
     totalAmountOfMirrors
     totalAmountOfCollects
     totalAmountOfComments
@@ -269,10 +268,10 @@ export const GET_PUBLICATIONS = `
     ...MirrorBaseFields
     mirrorOf {
      ... on Post {
-        ...PostFields          
+        ...PostFields
      }
      ... on Comment {
-        ...CommentFields          
+        ...CommentFields
      }
     }
   }
@@ -313,10 +312,10 @@ export const GET_PUBLICATIONS = `
         ...MirrorBaseFields
         mirrorOf {
           ... on Post {
-             ...PostFields          
+             ...PostFields
           }
           ... on Comment {
-             ...CommentMirrorOfFields        
+             ...CommentMirrorOfFields
           }
         }
       }
@@ -334,7 +333,7 @@ export const GET_PUBLICATIONS = `
       }
     }
   }
-`
+`;
 
 export const GET_DEFAULT_PROFILES = `
   query($request: DefaultProfileRequest!) {
@@ -425,7 +424,7 @@ export const EXPLORE_PUBLICATIONS = `
   query($request: ExplorePublicationRequest!) {
     explorePublications(request: $request) {
       items {
-        __typename 
+        __typename
         ... on Post {
           ...PostFields
         }
@@ -541,7 +540,7 @@ export const EXPLORE_PUBLICATIONS = `
     }
   }
 
-  fragment PublicationStatsFields on PublicationStats { 
+  fragment PublicationStatsFields on PublicationStats {
     totalAmountOfMirrors
     totalAmountOfCollects
     totalAmountOfComments
@@ -691,10 +690,10 @@ export const EXPLORE_PUBLICATIONS = `
     ...MirrorBaseFields
     mirrorOf {
      ... on Post {
-        ...PostFields          
+        ...PostFields
      }
      ... on Comment {
-        ...CommentFields          
+        ...CommentFields
      }
     }
   }
@@ -736,10 +735,10 @@ export const EXPLORE_PUBLICATIONS = `
         ...MirrorBaseFields
         mirrorOf {
           ... on Post {
-             ...PostFields          
+             ...PostFields
           }
           ... on Comment {
-             ...CommentMirrorOfFields        
+             ...CommentMirrorOfFields
           }
         }
       }
@@ -757,7 +756,7 @@ export const EXPLORE_PUBLICATIONS = `
       }
     }
   }
-`
+`;
 
 export const GET_PROFILES = `
 query($request: ProfileQueryRequest!) {
@@ -849,7 +848,7 @@ query($request: ProfileQueryRequest!) {
       }
     }
   }
-`
+`;
 
 export const GET_PROFILE = `
   query($request: SingleProfileQueryRequest!) {
@@ -935,7 +934,7 @@ export const GET_PROFILE = `
         }
     }
   }
-`
+`;
 
 export const GET_FOLLOWING = `
   query($request: FollowingRequest!) {
@@ -1056,7 +1055,7 @@ export const GET_FOLLOWING = `
       }
     }
   }
-`
+`;
 
 export const GET_FOLLOWERS = `
   query($request: FollowersRequest!) {
@@ -1153,7 +1152,7 @@ export const GET_FOLLOWERS = `
       }
     }
   }
-`
+`;
 
 export const SET_METADATA = `
   mutation($request: CreatePublicSetProfileMetadataURIRequest!) {
@@ -1183,7 +1182,7 @@ export const SET_METADATA = `
         }
     }
   }
-`
+`;
 
 export const FOLLOW = `
 mutation($request: FollowRequest!) {
@@ -1211,13 +1210,13 @@ mutation($request: FollowRequest!) {
       }
     }
   }
-}`
+}`;
 
 export const UNFOLLOW = `
 mutation($request: UnfollowRequest!) {
   createUnfollowTypedData(request: $request) {
     id
-    expiresAt   
+    expiresAt
     typedData {
       types {
         BurnWithSig {
@@ -1239,7 +1238,7 @@ mutation($request: UnfollowRequest!) {
     }
   }
 }
-`
+`;
 
 export const SET_PROFILE_IMG = `
   mutation($request: UpdateProfileImageRequest!) {
@@ -1268,7 +1267,7 @@ export const SET_PROFILE_IMG = `
       }
     }
   }
-`
+`;
 
 export const CREATE_POST = `
   mutation($request: CreatePublicPostRequest!) {
@@ -1302,7 +1301,7 @@ export const CREATE_POST = `
         }
       }
     }
-  `
+  `;
 
 export const VALIDATE = `
   query ($request: ValidatePublicationMetadataRequest!) {
@@ -1312,19 +1311,19 @@ export const VALIDATE = `
       reason
     }
   }
-`
+`;
 
 export const DELETE_POST = `
   mutation($request: HidePublicationRequest!) {
     hidePublication(request: $request)
   }
-`
+`;
 
 export const LIKE_POST = `
   mutation($request: ReactionRequest!) {
-    addReaction(request: $request) 
+    addReaction(request: $request)
   }
-`
+`;
 
 export const MIRROR_POST = `
 mutation($request: CreateMirrorRequest!) {
@@ -1357,4 +1356,4 @@ mutation($request: CreateMirrorRequest!) {
     }
   }
 }
-`
+`;

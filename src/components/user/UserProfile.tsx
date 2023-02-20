@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import LayoutPostList from "../../layouts/post/LayoutPostList";
 import UserCard from "./UserCard";
+import UserFollowersCard from "./UserFollowersCard";
 
 interface Props {
   [key: string]: any;
@@ -133,7 +134,7 @@ const UserProfile = (props: any) => {
             {hookLensConnections.followers.length ? (
               <>
                 {hookLensConnections.followers.map((item: any, index: any) => {
-                  return <UserCard user={item} key={index} />;
+                  return <UserFollowersCard user={item} key={index} />;
                 })}
               </>
             ) : (
