@@ -6,7 +6,7 @@ import { Row } from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text } from "@chakra-ui/react";
 
 const ChatProfile = (props: any) => {
-  const hookPortalChannel = usePortalChannel(props?.channel);
+  const hookPortalChannel = usePortalChannel(props?.hookChannel?.channel);
   const data = [
     {
       label: "Name",

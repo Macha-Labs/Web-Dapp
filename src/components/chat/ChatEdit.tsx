@@ -14,7 +14,7 @@ import LayoutCard from "@/layouts/LayoutCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatEdit = (props: any) => {
-  const hookPortalChannel = usePortalChannel(props?.channel);
+  const hookPortalChannel = usePortalChannel(props?.hookChannel?.channel);
   const modalAddMembers = useDisclosure();
   const data = [
     {
