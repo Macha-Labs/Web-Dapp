@@ -36,19 +36,19 @@ const ChatList = (props: any) => {
     );
   };
 
-  const handleSearch = (query: any) => {
-    filteredList = chatProvider?.hookChannels?.channels.filter((item: any) =>
-      item.name.toLowerCase().includes(query.toLowerCase())
-    );
-    console.log("filter",filteredList);
-    return filteredList;
-  };
+  // const handleSearch = (query) => {
+  //   filteredList = chatProvider?.hookChannels?.channels.filter((item) =>
+  //     item.name.toLowerCase().includes(query.toLowerCase())
+  //   );
+  //   console.log("filter",filteredList);
+  //   return filteredList;
+  // };
   const TemplateChatList = () => {
     // const channelDisplayImage = ;
     return (
       <>
         <Row className="header vr-center hr-between">
-          <ChatSearch onSearch={handleSearch} />
+          <ChatSearch />
         </Row>
         {!authContext.isConnected && <ConnectButton />}
         {!chatProvider?.hookChannels?.channels ? (
@@ -79,52 +79,54 @@ const ChatList = (props: any) => {
                     )}
                   </Row>
                   <ul>
-                    {filteredList.map((item: any, index: number) => (
-                      <StyledChatItem key={index}>
-                        <Button
-                          onClick={() => {
-                            console.log("Click on button", item);
-                            chatProvider.initiate(item, authContext.address);
-                          }}
-                          className="menu-item w-100 m-b-0-5"
-                          size="xl"
-                          variant={
-                            chatProvider.hookChannel.channel?.id == item?.id
-                              ? "state_brand"
-                              : "state_card_hover"
-                          }
-                        >
-                          <Avatar
-                            size="md"
-                            className="m-r-0-5"
-                            name={item.name}
-                          />
-                          <Col className="w-100 d-flex flex-col">
-                            {item.name}
-                            <Col className="m-t-0-5">
-                              <Text fontSize={"sm"}>
-                                {item.lastMessage?.user?.lensUsername ||
-                                  item.lastMessage?.user?.lensHandle ||
-                                  truncateAddress(item.lastMessage?.user?.id)}
-                                : {item.lastMessage?.text}
-                              </Text>
+                    {chatProvider?.hookChannels?.channels.map(
+                      (item: any, index: number) => (
+                        <StyledChatItem key={index}>
+                          <Button
+                            onClick={() => {
+                              console.log("Click on button", item);
+                              chatProvider.initiate(item, authContext.address);
+                            }}
+                            className="menu-item w-100 m-b-0-5"
+                            size="xl"
+                            variant={
+                              chatProvider.hookChannel.channel?.id == item?.id
+                                ? "state_brand"
+                                : "state_card_hover"
+                            }
+                          >
+                            <Avatar
+                              size="md"
+                              className="m-r-0-5"
+                              name={item.name}
+                            />
+                            <Col className="w-100 d-flex flex-col">
+                              {item.name}
+                              <Col className="m-t-0-5">
+                                <Text fontSize={"sm"}>
+                                  {item.lastMessage?.user?.lensUsername ||
+                                    item.lastMessage?.user?.lensHandle ||
+                                    truncateAddress(item.lastMessage?.user?.id)}
+                                  : {item.lastMessage?.text}
+                                </Text>
+                              </Col>
                             </Col>
-                          </Col>
-                          {props.context?.user?._id == props.org?.owner ? (
-                            <Col className="hr-center settingsIcon">
-                              <Icon>
-                                {/* <SettingsIcon
+                            {props.context?.user?._id == props.org?.owner ? (
+                              <Col className="hr-center settingsIcon">
+                                <Icon>
+                                  {/* <SettingsIcon
                                                                                 as='button'
                                                                                 key={item.id}
                                                                                 onClick={event => props.channelSetting(event, item)} /> */}
-                              </Icon>
-                            </Col>
-                          ) : (
-                            <></>
-                          )}
-                        </Button>
-                      </StyledChatItem>
-                    ))}
+                                </Icon>
+                              </Col>
+                            ) : (
+                              <></>
+                            )}
+                          </Button>
+                        </StyledChatItem>
+                      )
+                    )}
                   </ul>
                 </div>
               </>

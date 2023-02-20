@@ -5,7 +5,7 @@ import { style } from "@/styles/StyledConstants";
 function IconImage(props: any) {
   return (
     <StyledIcon
-      className={props.style?.className + " state-1-2 scale"}
+      className={props.style?.className + " state-1-2 scale state_hover "}
       onClick={props.onClick}
     >
       <IKImage
