@@ -1,7 +1,7 @@
 import { TypedDataDomain } from "@ethersproject/abstract-signer";
 import { ethers, utils } from "ethers";
 import omitDeep from "omit-deep";
-import { useSignTypedData } from 'wagmi';
+import { signTypedData } from '@wagmi/core';
 
 
 
@@ -27,9 +27,11 @@ export const signedTypeData = async (
     "types": omit(types, "__typename"),
     "value": omit(value, "__typename"),
   }
-  const { data, isError, isLoading, isSuccess, signTypedData } = useSignTypedData(typedData);
-  console.log("Getting data", data);
-  return await signTypedData();
+  console.log("Got the typedData ", typedData);
+  // const { data, isError, isLoading, isSuccess, signTypedData } = useSignTypedData(typedData);
+  const result = await signTypedData(typedData);
+  console.log("Getting result from signTypedData", result);
+  return result;
 };
 
 export const splitSignature = (signature: string) => {
