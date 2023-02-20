@@ -24,7 +24,7 @@ const User = () => {
   const [window, setwindow] = useState("UserProfile");
   const TempalteRight = () => {
     return (
-      window == "UserProfile" ? <UserProfile user={authContext?.user} /> : window == "UserEdit" ? <UserEdit /> : <UserProfile user={authContext?.user} />
+      window == "UserProfile" ? <UserProfile user={authContext?.user} address = {authContext?.address} /> : window == "UserEdit" ? <UserEdit /> : <UserProfile user={authContext?.user} />
     );
   };
 
