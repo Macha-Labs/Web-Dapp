@@ -1,15 +1,16 @@
 import { logger } from "./../../helpers/logger";
 import { fetchFollowers, fetchFollowing } from "../../helpers/lens/lens";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserLens$ } from "../../schema/user";
+import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 
-const useLensConnections = (account?: any) => {
+const useLensConnections = (account?: any, lensId?: any) => {
   const [following, setFollowing] = useState<any>([]);
   const [followers, setFollowers] = useState<any>([]);
 
-  const getFollowing = account => {
+  const getFollowing = (account: any) => {
     fetchFollowing({ address: account }).then(data => {
-      const followingData = data.data.following.items.map(item => {
+      const followingData = data.data.following.items.map((item: any) => {
         return { db: null, lens: UserLens$(item.profile) };
       });
       logger(
@@ -23,8 +24,8 @@ const useLensConnections = (account?: any) => {
   };
 
   // @param: lens id
-  const getFollowers = (profileID: any) => {
-    fetchFollowers({ profileId: profileID }).then(data => {
+  const getFollowers = (lensId: any) => {
+    fetchFollowers({ profileId: lensId }).then(data => {
       logger(
         "lens",
         "useLensConnections.getFollowers",
@@ -36,14 +37,15 @@ const useLensConnections = (account?: any) => {
   };
 
   useEffect(() => {
-    if (account) {
+    if (lensId) {
       getFollowing(account);
-      getFollowers(account);
+      getFollowers(lensId);
+      console.log(lensId, "lensId");
     } else {
       // throw new Error("Not getting user account");
       console.log("Not getting user account");
     }
-  }, [account]);
+  }, [lensId]);
 
   return {
     following: following,
