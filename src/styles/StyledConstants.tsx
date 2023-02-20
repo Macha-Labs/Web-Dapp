@@ -147,7 +147,7 @@ export const darkStyle = {
         "linear-gradient(141.09deg, rgba(13, 25, 65, 0.5) 11.08%, rgba(0, 20, 60, 0.38) 89.68%)",
     },
     border: {
-      default: "1px solid #14244B",
+      default: "1px solid rgba(15,23,46,0.5)",
       hover: "1px solid #001E57",
     },
     borderRadius: "5px",
