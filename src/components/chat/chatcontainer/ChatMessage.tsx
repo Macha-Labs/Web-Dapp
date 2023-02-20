@@ -1,3 +1,4 @@
+import IconEmoji from "@/components/icons/IconEmoji";
 import IconImage from "@/components/icons/IconImage";
 import InputAction from "@/components/input/InputAction";
 import Pop from "@/components/pop/Pop";
@@ -9,7 +10,6 @@ import {
   Col,
   Row,
   StyledConversation,
-  StyledIcon,
   TextareaDiv,
 } from "@/styles/StyledComponents";
 import {
@@ -17,14 +17,10 @@ import {
   Button,
   Checkbox,
   Heading,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import emoji from "../../../data/emoji.json";
 
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
@@ -42,9 +38,31 @@ const ChatMessage = (props: any) => {
     }
   };
 
+  const TemplateReactions = () => {
+    return (
+     <Pop
+      placement={'left-start'}
+      trigger={
+        <IconImage
+        path="IconDarkEmoji.png"
+        style={{ className: "m-r-0-5" }}
+      />
+      }
+     >
+      <Row className="vr-center">
+        <IconEmoji style={{className:"m-r-0-5"}} onClick={() => {props?.hookChat?.handleReaction({type: 'smile'}, props?.message)}}>😀</IconEmoji>
+        <IconEmoji style={{className:"m-r-0-5"}} onClick={() => {props?.hookChat?.handleReaction({type: 'wave'}, props?.message)}}>👋</IconEmoji>
+        <IconEmoji style={{className:"m-r-0-5"}} onClick={() => {props?.hookChat?.handleReaction({type: 'good'}, props?.message)}}>👌</IconEmoji>
+        <IconEmoji style={{className:"m-r-0-5"}} onClick={() => {props?.hookChat?.handleReaction({type: 'like'}, props?.message)}}>👍</IconEmoji>
+      </Row>
+     </Pop>
+    )
+  }
+
   const TemplateActions = () => {
     return (
       <Pop
+      placement={'top-end'}
       trigger={<IconImage path="IconDarkMenu.png" />}>
         <Col className="text-start">
               {props.message?.user?.id == props?.authContext?.address && (
@@ -209,12 +227,27 @@ const ChatMessage = (props: any) => {
           {props?.message?.attachments.map((item: any, index: number) => {
             return templateAttachment(item);
           })}
+
+          <Row className="vr-center">
+          {Object.keys(props?.message.reaction_scores).length > 0 && (Object.keys(props.message.reaction_scores).map( (item: any) => {
+        return (
+          <>
+            <Button className="w-content m-r-0-5" size="xs" variant="state_brand" onClick={() => {props?.hookChat?.handleReaction({type: item}, props?.message)}}>
+            {emoji[item]}{" "}
+              {
+                  props?.message?.reaction_scores[
+                      item
+                  ]
+              }
+            </Button>
+          </>
+        )
+      }))}
+          </Row>
+      
         </Col>
         <Row className="w-100 action">
-          <IconImage
-            path="IconDarkEmoji.png"
-            style={{ className: "m-r-0-5" }}
-          />
+          <TemplateReactions/>
 
           <TemplateActions />
         </Row>
