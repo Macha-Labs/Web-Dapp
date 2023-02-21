@@ -27,8 +27,7 @@ const Nav = (props: any) => {
     <>
       <Row>
         <StyledNav>
-          <div className="container">
-          <div className="header">
+        <div className="header">
             <Col className="hr-center vr-center h-100">
               <StyledIcon onClick={orgsDrawer.onOpen}>
                 {/* <Logo
@@ -73,7 +72,6 @@ const Nav = (props: any) => {
                 )}
               </Col>
             </Col>
-          </div>
           </div>
         </StyledNav>
       </Row>

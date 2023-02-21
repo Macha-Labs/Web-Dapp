@@ -11,7 +11,7 @@ export const StyledWindow = styled.div`
   .right {
     width: calc(100vw - ${style.nav.width});
     position: fixed;
-    left: calc(${style.nav.width} + 2%);
+    left: calc(${style.nav.width});
     display: flex !important;
   }
 `;
@@ -514,14 +514,9 @@ export const StyledNav = styled.div`
   position: fixed;
   left: 0;
   padding: 10px 5px;
-  .container {
-    padding: 5px;
-    background: ${style.nav.bg.default};
-    border: ${style.nav.border.default};
-    border-radius: 10px;
-    height: 99%;
-  }
-
+  background: ${style.nav.bg.default};
+  border-right: ${style.nav.border.default};
+  
   .header {
     height: 55px;
     padding: 0px;
