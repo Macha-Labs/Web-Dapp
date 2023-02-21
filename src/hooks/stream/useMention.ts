@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const useMention = () => {
-    const [isActive, setIsActive] = useState<Boolean>(false);
+    const [mentionActive, setMentionActive] = useState<Boolean>(false);
     const [mention, setMention] = useState<any>();
     const [mentionList, setMentionList] = useState<any>([]);
 
@@ -31,12 +31,12 @@ const useMention = () => {
 
     const onSelect = (user: any) => {
         setMentionList([...mentionList, user])
-        setIsActive(false);
+        setMentionActive(false);
     }
 
     return {
-        isActive: isActive,
-        setIsActive: setIsActive,
+        mentionActive: mentionActive,
+        setMentionActive: setMentionActive,
         mention: mention,
         mentionList: mentionList,
         onRefresh: onRefresh,

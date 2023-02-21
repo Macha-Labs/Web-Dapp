@@ -17,6 +17,7 @@ import useMention from "./useMention";
 const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const streamContext = useContext(StreamContext) as StreamContextType;
+
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
   const [streamLoading, setStreamLoading] = useState<any>(false);
@@ -384,19 +385,19 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     }
   };
 
-  const onChange = async (event: any, users?: any) => {
+  const onChange = async (event: any) => {
     const value = event.target.value;
     const lastChar = value.split("")[value.length - 1];
     if (lastChar == " " || value == "") {
-      hookMention.setIsActive(false);
+      hookMention.setMentionActive(false);
       setSlashCmd(false);
     }
     if (lastChar == "@") {
       setSlashCmd(false);
-      hookMention.setIsActive(true);
-    }
-    if (hookMention.isActive) {
-      hookMention.onTrigger(value, users);
+      // hookMention.setMentionActive(true);
+      console.log("Here are the users you can mention on this channel ", users);
+      // hookMention.onTrigger(value, users);
+
     }
 
     if (slashCmd) {
@@ -436,7 +437,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     handleReaction: handleReaction,
     rerenderSwitch: rerenderSwitch,
     // MENTIONS
-    mentionActive: hookMention.isActive,
+    mentionActive: hookMention.mentionActive,
     mentionList: hookMention.mentionList,
     mentionSelect: mentionSelect,
     //
