@@ -1,5 +1,4 @@
-import { TypedDataDomain } from "@ethersproject/abstract-signer";
-import { ethers, utils } from "ethers";
+import { utils } from "ethers";
 import omitDeep from "omit-deep";
 import { signTypedData } from '@wagmi/core';
 
