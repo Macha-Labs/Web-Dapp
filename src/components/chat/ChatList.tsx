@@ -96,71 +96,7 @@ const ChatList = (props: any) => {
     );
   };
 
-  const TemplateActions = () => {
-    return (
-      <Pop
-        trigger={<IconImage path="IconDarkMenu.png" />}
-        placement="bottom-end">
-        <Col className="text-start">
-                <Button
-                  variant="transparent"
-                  size="md"
-                  className="text-start"
-                  rightIcon={<IconImage path="IconDarkFiles.png" />}
-                >
-                  <Row
-                    className="hr-between w-100"
-                    onClick={() => {
-                      
-                    }}
-                  >
-                    Pin Channel
-                  </Row>
-                </Button>
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-              >
-                <Row
-                  className="hr-between w-100"
-                  onClick={() => {
-                    
-                  }}
-                >
-                  Mute Channel
-                </Row>
-              </Button>
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-              >
-                <Row
-                  className="hr-between w-100"
-                  onClick={() => {
-                    
-                  }}
-                >
-                  Clear Chat
-                </Row>
-              </Button>
-              
-              
-            </Col>
-      </Pop>
-    );
-  };
 
-  // const handleSearch = (query) => {
-  //   filteredList = chatProvider?.hookChannels?.channels.filter((item) =>
-  //     item.name.toLowerCase().includes(query.toLowerCase())
-  //   );
-  //   console.log("filter",filteredList);
-  //   return filteredList;
-  // };
   const TemplateChatList = () => {
     return (
       <>
