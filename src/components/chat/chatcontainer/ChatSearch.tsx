@@ -16,7 +16,6 @@ const ChatSearch = (props: any) => {
 
   return (
     <InputGroup>
-      <InputLeftElement pointerEvents="none"><SearchIcon /></InputLeftElement>
       <Input
         type="text"
         placeholder="Search"

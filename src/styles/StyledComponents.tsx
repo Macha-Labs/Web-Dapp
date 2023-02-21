@@ -673,7 +673,7 @@ export const StyledChatInputContainer = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0;
-  padding: 0px 10px;
+  padding: 5px 10px;
 `;
 
 export const StyledChatInput = styled(Row)`
@@ -682,7 +682,8 @@ export const StyledChatInput = styled(Row)`
   background: ${style.card.bg.default};
   border: ${style.card.border.default};
   margin-bottom: 5px;
-  padding: 0.3rem 0;
+  padding: 0.3rem;
+  min-height: 55px;
 
   .inputElement {
     resize: none;

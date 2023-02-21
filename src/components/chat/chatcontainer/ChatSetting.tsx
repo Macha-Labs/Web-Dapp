@@ -13,6 +13,7 @@ function ChatSetting(props: any) {
       name: "Search Chat",
       onPress: () => {
         props.hookChat.handleSearch();
+        props?.event?.onClose();
       },
     },
     {
