@@ -30,6 +30,8 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const [userObjTyping, setUserObjTyping] = useState<any>();
   const [searchActive, setSearchActive] = useState<any>();
   const [searchQuery, setSearchQuery] = useState<any>();
+  const [usersWhoAreTyping, setUsersWhoAreTyping] = useState<any>();
+  const [typingMessage, setTypingMessage] = useState<any>();
 
   const textareaRef = useRef<any>(null);
   const editMessageRef = useRef<any>(null);
@@ -91,9 +93,11 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       } else {
         messageData = {
           text: textareaRef.current?.value,
-          mentioned_users: hookMention.mentionList.map((user: any, index: number) => {
-            return user?.ownedBy;
-          }),
+          mentioned_users: hookMention.mentionList.map(
+            (user: any, index: number) => {
+              return user?.ownedBy;
+            }
+          ),
           message_custom_data: msgData,
         };
       }
@@ -164,7 +168,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const editMessage = async () => {
     console.log("editing message- ", editMessageRef.current.value);
     if (!authContext?.address) {
-      throw new Error ("Couldn't find the user address");
+      throw new Error("Couldn't find the user address");
     }
     if (actionMessage?.action !== "EDIT") {
       return;
@@ -259,6 +263,27 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
   const keyDownMessage = async (event: any) => {
     const keycode = event.which || event.keycode;
+
+    //Logic for typing indicators begins
+    let typingTimeout;
+    if (typingTimeout !== undefined) clearTimeout(typingTimeout);
+
+    await channel.raw.keystroke();
+
+    typingTimeout = setTimeout(async () => {
+      await channel.raw.stopTyping();
+    }, 3000);
+
+    channel.raw.on("typing.start", (event: any) => {
+      let typingUser = Object.keys(channel.raw.state.typing);
+      setUsersWhoAreTyping(typingUser);
+    });
+    channel.raw.on("typing.stop", (event: any) => {
+      setUsersWhoAreTyping(null);
+    });
+
+    //Logic for typing indicators ends
+
     if (keycode == 13 && !event.shiftKey) {
       event.preventDefault();
 
@@ -386,6 +411,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
   const onChange = async (event: any, users?: any) => {
     const value = event.target.value;
+    setTypingMessage(value);
     const lastChar = value.split("")[value.length - 1];
     if (lastChar == " " || value == "") {
       hookMention.setIsActive(false);
@@ -484,6 +510,9 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     handleEditClose: handleEditClose,
     handleSelect: handleSelect,
     selectedMessages: selectedMessages,
+    usersWhoAreTyping: usersWhoAreTyping,
+    typingMessage: typingMessage,
+    setTypingMessage: setTypingMessage,
     // widgetDrawer: widgetDrawer
   };
 };
