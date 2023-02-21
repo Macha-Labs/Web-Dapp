@@ -114,6 +114,7 @@ function ChatSetting(props: any) {
   const modalChatPermission = useDisclosure();
   const modalChatMembers = useDisclosure();
   const modalChatEdit = useDisclosure();
+  
   const TemplatePermission = () => {
     return (
       <ModalSlider size={"md"} event={modalChatPermission}>
