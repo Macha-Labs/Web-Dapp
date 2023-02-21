@@ -203,9 +203,6 @@ export const StyledCard = styled.div`
 
   &.border {
     border: ${style.card.border.default};
-    &:hover {
-      border: ${style.card.border.default};
-    }
   }
 
   &.border-with-hover {
@@ -219,15 +216,12 @@ export const StyledCard = styled.div`
     opacity: 0.4 !important;
   }
 
-  &.outline-brand {
-    background: transparent;
-    border: 1px solid #1c2150;
-  }
-  .card-hr-center {
-    align-items: center;
-  }
-  .card-vr-center {
-    justify-content: center;
+  &.state_hover {
+    &:hover {
+      background: ${style.card.bg.hover};
+      border: 1px solid ${style.card.border.hover};
+      box-shadow: ${style.card.shadow.hover};
+    }
   }
 `;
 
