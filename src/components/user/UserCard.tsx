@@ -2,7 +2,7 @@ import { helperIPFS, truncateAddress } from "@/helpers";
 import { Row, StyledCard } from "@/styles/StyledComponents"
 import { Avatar, AvatarBadge } from "@chakra-ui/react";
 
-const UserCard = (props) => {
+const UserCard = (props: any) => {
     return (
         <StyledCard className="border">
             <Row className="vr-center item m-b-0-5" >

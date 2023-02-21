@@ -27,14 +27,14 @@ const ChatMessage = (props: any) => {
 
   const templateAttachment = (attachment: any) => {
     if (attachment?.og_scrape_url) {
-      return <LayoutLinkPreview attachment={attachment} />;
+      return <LayoutLinkPreview key={attachment?.id} attachment={attachment} />;
     } else if (attachment?.type == "image") {
-      return <LayoutImagePreview attachment={attachment} />;
+      return <LayoutImagePreview key={attachment?.id} attachment={attachment} />;
     } else if (
       attachment?.type == "text" ||
       attachment?.type == "application"
     ) {
-      return <LayoutFilePreview attachment={attachment} />;
+      return <LayoutFilePreview key={attachment?.id} attachment={attachment} />;
     }
   };
 
@@ -191,6 +191,7 @@ const ChatMessage = (props: any) => {
               style={{ className: "w-100 vr-center m-t-0-5" }}
               actions={[
                 <Button
+                  key={props?.message?.id}
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
@@ -199,6 +200,7 @@ const ChatMessage = (props: any) => {
                   Update
                 </Button>,
                 <Button
+                  key={props?.message?.id}
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
@@ -232,13 +234,13 @@ const ChatMessage = (props: any) => {
           {Object.keys(props?.message?.reaction_scores)?.length > 0 && (Object.keys(props.message?.reaction_scores)?.map( (item: any) => {
             return (
               <>
-                <Button className="w-content m-r-0-5" size="xs" variant="state_brand" onClick={() => {props?.hookChat?.handleReaction({type: item}, props?.message)}}>
-                {emoji[item]}{" "}
-                  {
-                      props?.message?.reaction_scores[
-                          item
-                      ]
-                  }
+                <Button key={item} className="w-content m-r-0-5" size="xs" variant="state_brand" onClick={() => {props?.hookChat?.handleReaction({type: item}, props?.message)}}>
+                {emoji[item as keyof typeof emoji]}{" "}
+                {
+                    props?.imessage?.reaction_scores[
+                        item
+                    ]
+                }
                 </Button>
               </>
             )

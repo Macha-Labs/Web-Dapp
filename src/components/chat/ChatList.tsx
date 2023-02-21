@@ -104,7 +104,6 @@ const ChatList = (props: any) => {
     return filteredList;
   };
   const TemplateChatList = () => {
-    // const channelDisplayImage = ;
     return (
       <>
         <Row className="header vr-center hr-between">

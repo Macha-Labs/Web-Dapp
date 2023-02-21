@@ -19,7 +19,6 @@ import {
 } from "@/styles/StyledComponents";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
 import ChatMention from "../ChatMention";
-import IconFile from "@/components/icons/IconFile";
 import PortalLoader from "@/components/PortalLoader";
 import IconImage from "@/components/icons/IconImage";
 import Pop from "@/components/pop/Pop";
@@ -97,7 +96,10 @@ const ChatInput = (props: any) => {
                     width="300px"
                   />
                 ) : (
-                  <IconFile width={24} height={24} fill="#efefef" />
+                  <IconImage
+                    path="IconDarkFiles.png"
+                    style={{ className: "m-r-0-5" }}
+                  />
                 )}
                 <Text className="m-t-0-5">
                   {props?.hookChat?.attachItem?.name}

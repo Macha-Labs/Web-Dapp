@@ -31,7 +31,7 @@ const UserList: FC<Props> = (props) => {
         setSelectedUser(user)
     }
 
-    const template = (heading, users) => {
+    const template = (heading: any, users: any) => {
         return (
             <Col className="m-b-1"> 
                 {
@@ -43,7 +43,7 @@ const UserList: FC<Props> = (props) => {
                         </Col>
                         <Container>
                             {
-                                users.map((item: any, index) =>
+                                users.map((item: any, index: any) =>
                                     <Row key={index} className="vr-center item m-b-0-5" onClick={() => {handleSelectedUser(item)}} >
                                         <Avatar src={helperIPFS(item.image)} className="m-r-0-5" size="sm" >
                                         {
