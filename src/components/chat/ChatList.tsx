@@ -105,12 +105,12 @@ const ChatList = (props: any) => {
         </Row>
         {!authContext.isConnected && <ConnectButton />}
         {!chatProvider?.hookChannels?.channels ? (
-          <>
+          <Col className="body">
             Create your first channel
             <Button size="sm" onClick={props.channelNew}>
               First Channel
             </Button>
-          </>
+          </Col>
         ) : (
           <Col className="body verticlescroll hidescroll">
             {chatProvider?.hookChannels?.channels?.length ? (
