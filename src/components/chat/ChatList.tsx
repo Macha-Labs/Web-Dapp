@@ -101,82 +101,67 @@ const ChatList = (props: any) => {
     return (
       <>
         <Row className="header vr-center hr-between">
-          <ChatSearch />
+          <ChatSearch style={{className: 'w-90'}}/>
+          <IconImage
+              path="IconDarkPlus.png"
+              onClick={modalChatNew.onOpen}
+              styled={{className: 'm-l-1'}}
+            />
         </Row>
-        {!authContext.isConnected && <ConnectButton />}
         {!chatProvider?.hookChannels?.channels ? (
-          <>
+          <Col className="body">
             Create your first channel
             <Button size="sm" onClick={props.channelNew}>
               First Channel
             </Button>
-          </>
+          </Col>
         ) : (
           <Col className="body verticlescroll hidescroll">
             {chatProvider?.hookChannels?.channels?.length ? (
-              <>
-                <div className="m-b-2">
-                  <Row className="menu-heading hr-between vr-center m-b-1">
-                    <Heading as="h4" size="md" className="m-b-1">
-                      New Channel
-                    </Heading>
-                    {props?.context?.user?._id == props?.org?.owner ? (
-                      <Col>
-                        <IconImage
-                          path="IconDarkPlus.png"
-                          onClick={modalChatNew.onOpen}
-                        />
+              <ul>
+              {filteredList.map((item: any, index: number) => (
+                <StyledChatItem key={index}>
+                  <Button
+                    onClick={() => {
+                      console.log("Click on button", item);
+                      chatProvider.initiate(item, authContext.address);
+                    }}
+                    className="menu-item w-100 m-b-0-5"
+                    size="xl"
+                    variant={
+                      chatProvider.hookChannel.channel?.id == item?.id
+                        ? "state_list_active"
+                        : "state_list_hover"
+                    }
+                  >
+                    {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
+                    <Avatar
+                      size="md"
+                      className="m-r-0-5"
+                      name={item.name}
+                    />
+                    <Col className="w-100 d-flex flex-col">
+                      {item.name}
+                      <Col className="m-t-0-5">
+                        <Text fontSize={"sm"}>
+                          {item.lastMessage?.user?.lensUsername ||
+                            item.lastMessage?.user?.lensHandle ||
+                            truncateAddress(item.lastMessage?.user?.id)}
+                          : {item.lastMessage?.text}
+                        </Text>
+                      </Col>
+                    </Col>
+                    {props.context?.user?._id == props.org?.owner ? (
+                      <Col className="hr-center settingsIcon">
+                        <TemplateActions />
                       </Col>
                     ) : (
                       <></>
                     )}
-                  </Row>
-                  <ul>
-                    {filteredList.map((item: any, index: number) => (
-                      <StyledChatItem key={index}>
-                        <Button
-                          onClick={() => {
-                            console.log("Click on button", item);
-                            chatProvider.initiate(item, authContext.address);
-                          }}
-                          className="menu-item w-100 m-b-0-5"
-                          size="xl"
-                          variant={
-                            chatProvider.hookChannel.channel?.id == item?.id
-                              ? "state_brand"
-                              : "state_card_hover"
-                          }
-                        >
-                          {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                          <Avatar
-                            size="md"
-                            className="m-r-0-5"
-                            name={item.name}
-                          />
-                          <Col className="w-100 d-flex flex-col">
-                            {item.name}
-                            <Col className="m-t-0-5">
-                              <Text fontSize={"sm"}>
-                                {item.lastMessage?.user?.lensUsername ||
-                                  item.lastMessage?.user?.lensHandle ||
-                                  truncateAddress(item.lastMessage?.user?.id)}
-                                : {item.lastMessage?.text}
-                              </Text>
-                            </Col>
-                          </Col>
-                          {props.context?.user?._id == props.org?.owner ? (
-                            <Col className="hr-center settingsIcon">
-                              <TemplateActions />
-                            </Col>
-                          ) : (
-                            <></>
-                          )}
-                        </Button>
-                      </StyledChatItem>
-                    ))}
-                  </ul>
-                </div>
-              </>
+                  </Button>
+                </StyledChatItem>
+              ))}
+            </ul>
             ) : (
               <>
                 <Button onClick={modalChatNew.onOpen} variant="state_brand">

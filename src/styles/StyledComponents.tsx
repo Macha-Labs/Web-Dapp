@@ -11,7 +11,7 @@ export const StyledWindow = styled.div`
   .right {
     width: calc(100vw - ${style.nav.width});
     position: fixed;
-    left: ${style.nav.width};
+    left: calc(${style.nav.width});
     display: flex !important;
   }
 `;
@@ -302,11 +302,15 @@ export const StyledPostCard = styled(StyledCard)`
   }
 `;
 export const StyledOptionsCard = styled(StyledCard)`
-  padding: 0px;
+  padding: ${style.list.padding};
+  background: transparent;
   .item {
     padding: 10px;
+    background: ${style.list.bg.default};
     &:hover {
-      background: ${style.button.bg.hover};
+      background: ${style.list.bg.hover};
+      box-shadow: ${style.list.shadow.hover};
+      border-radius: 5px;
     }
   }
 `;
@@ -511,11 +515,12 @@ export const LinkContainer = styled.div`
 export const StyledNav = styled.div`
   width: ${style.nav.width};
   height: 100vh;
-  background: ${style.nav.bg.default};
   position: fixed;
   left: 0;
+  padding: 10px 5px;
+  background: ${style.nav.bg.default};
   border-right: ${style.nav.border.default};
-
+  
   .header {
     height: 55px;
     padding: 0px;
@@ -547,8 +552,8 @@ export const StyledChatList = styled.div`
     height: calc(100vh - 55px);
     width: 100%;
     margin: auto;
-    padding: 20px 10px;
-    background: ${style.card.bg.default};
+    padding: ${style.body.padding};
+    background: ${style.body.bg};
 
     .menu-heading {
       padding-left: 10px;
@@ -831,7 +836,7 @@ export const StyledPageList = styled.div`
     width: 100%;
     margin: auto;
     padding: 20px 10px;
-    background: ${style.card.bg.default};
+    background: ${style.body.bg};
 
     .menu-heading {
       padding-left: 10px;

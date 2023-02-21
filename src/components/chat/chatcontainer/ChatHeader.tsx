@@ -40,7 +40,7 @@ const ChatHeader = (props: any) => {
 
   const TemplateChannelSettings = () => {
     return (
-      <ModalSlider event={modalSettings}>
+      <ModalSlider event={modalSettings} size="sm">
         <ChatSetting
           event={modalSettings}
           hookChat={props.hookChat}
