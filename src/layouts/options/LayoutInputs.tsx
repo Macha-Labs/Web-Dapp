@@ -5,10 +5,10 @@ const LayoutInputs = (props:any)=>{
     return (
         <div className={props.style.class}>
             {
-                props.data.map((item:any) => {
-                    // console.log("propsoflayoutinput",item?.onChangeText);
+                props.data.map((item:any, index: any) => {
+                    console.log("propsoflayoutinput",item?.onChangeText);
                     return (
-                        <Input placeholder={item?.label} value={item?.value} onChange={(e) => {item?.onChangeText(e.target.value)}} disabled={item.disabled} className="m-b-0-5"/>
+                        <Input key={index} placeholder={item?.label} value={item?.value} onChange={(e) => {item?.onChangeText(e.target.value)}} disabled={item.disabled} className="m-b-0-5"/>
                     )
                 })
             }

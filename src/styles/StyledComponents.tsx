@@ -203,9 +203,6 @@ export const StyledCard = styled.div`
 
   &.border {
     border: ${style.card.border.default};
-    &:hover {
-      border: ${style.card.border.default};
-    }
   }
 
   &.border-with-hover {
@@ -219,15 +216,12 @@ export const StyledCard = styled.div`
     opacity: 0.4 !important;
   }
 
-  &.outline-brand {
-    background: transparent;
-    border: 1px solid #1c2150;
-  }
-  .card-hr-center {
-    align-items: center;
-  }
-  .card-vr-center {
-    justify-content: center;
+  &.state_hover {
+    &:hover {
+      background: ${style.card.bg.hover};
+      border: 1px solid ${style.card.border.hover};
+      box-shadow: ${style.card.shadow.hover};
+    }
   }
 `;
 
@@ -685,7 +679,7 @@ export const StyledChatInputContainer = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0;
-  padding: 0px 10px;
+  padding: 5px 10px;
 `;
 
 export const StyledChatInput = styled(Row)`
@@ -694,7 +688,8 @@ export const StyledChatInput = styled(Row)`
   background: ${style.card.bg.default};
   border: ${style.card.border.default};
   margin-bottom: 5px;
-  padding: 0.3rem 0;
+  padding: 0.3rem;
+  min-height: 55px;
 
   .inputElement {
     resize: none;

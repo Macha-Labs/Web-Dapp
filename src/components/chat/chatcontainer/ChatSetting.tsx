@@ -14,6 +14,7 @@ function ChatSetting(props: any) {
       name: "Search Chat",
       onPress: () => {
         props.hookChat.handleSearch();
+        props?.event?.onClose();
       },
     },
     {
@@ -28,6 +29,7 @@ function ChatSetting(props: any) {
       name: "Select Chat",
       onPress: () => {
         props.hookChat.handleMultiSelect();
+        props?.event?.onClose();
       },
     },
     {
@@ -115,6 +117,7 @@ function ChatSetting(props: any) {
   const modalChatPermission = useDisclosure();
   const modalChatMembers = useDisclosure();
   const modalChatEdit = useDisclosure();
+  
   const TemplatePermission = () => {
     return (
       <ModalSlider size={"md"} event={modalChatPermission}>

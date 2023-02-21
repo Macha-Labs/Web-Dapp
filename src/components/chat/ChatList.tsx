@@ -46,9 +46,9 @@ const ChatList = (props: any) => {
         <Col className="text-start">
                 <Button
                   variant="transparent"
-                  size="md"
+                  size="sm"
                   className="text-start"
-                  rightIcon={<IconImage path="IconDarkFiles.png" />}
+                  rightIcon={<IconImage path="IconDarkFiles.png" size="16"/>}
                 >
                   <Row
                     className="hr-between w-100"
@@ -61,9 +61,9 @@ const ChatList = (props: any) => {
                 </Button>
               <Button
                 variant="transparent"
-                size="md"
+                size="sm"
                 className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
+                rightIcon={<IconImage path="IconDarkMute.png"  size="16" />}
               >
                 <Row
                   className="hr-between w-100"
@@ -76,9 +76,9 @@ const ChatList = (props: any) => {
               </Button>
               <Button
                 variant="transparent"
-                size="md"
+                size="sm"
                 className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
+                rightIcon={<IconImage path="IconDarkFiles.png"  size="16"/>}
               >
                 <Row
                   className="hr-between w-100"
@@ -162,7 +162,6 @@ const ChatList = (props: any) => {
   //   return filteredList;
   // };
   const TemplateChatList = () => {
-    // const channelDisplayImage = ;
     return (
       <>
         <Row className="header vr-center hr-between">

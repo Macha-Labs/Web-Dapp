@@ -1,8 +1,7 @@
 import { logger } from "./../../helpers/logger";
 import { fetchFollowers, fetchFollowing } from "../../helpers/lens/lens";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UserLens$ } from "../../schema/user";
-import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 
 const useLensConnections = (account?: any, lensId?: any) => {
   const [following, setFollowing] = useState<any>([]);
@@ -40,10 +39,6 @@ const useLensConnections = (account?: any, lensId?: any) => {
     if (lensId) {
       getFollowing(account);
       getFollowers(lensId);
-      console.log(lensId, "lensId");
-    } else {
-      // throw new Error("Not getting user account");
-      console.log("Not getting user account");
     }
   }, [lensId]);
 

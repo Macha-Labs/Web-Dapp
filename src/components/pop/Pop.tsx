@@ -1,7 +1,7 @@
 import { Popover, PopoverBody, PopoverContent, PopoverTrigger } from "@chakra-ui/react";
 import Props from "imagekitio-react/dist/types/components/IKContext/props";
 
-const Pop = (props) => {
+const Pop = (props: any) => {
     return (
         <Popover placement={props?.placement? props?.placement : "top-start"}>
                 <PopoverTrigger>

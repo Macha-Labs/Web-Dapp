@@ -6,10 +6,6 @@ import {
   Row,
   StyledNav,
 } from "../../styles/StyledComponents";
-import ChatIcon from "../icons/IconChat";
-import HashIcon from "../icons/IconDarkUser";
-import UserIcon from "../icons/IconDarkUser";
-import NFTIcon from "../icons/IconDarkUser";
 import { useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
@@ -67,7 +63,7 @@ const Nav = (props: any) => {
                   <>
                     <Link href="/chat">
                       <StyledIcon className="state-2-3 m-b-0-5 scale">
-                        <ChatIcon />
+                        <IconImage path="IconBrandChat.png" style={{className: "m-b-1"}} />
                       </StyledIcon>
                     </Link>
                   </>
