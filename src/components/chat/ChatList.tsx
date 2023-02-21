@@ -102,8 +102,12 @@ const ChatList = (props: any) => {
       <>
         <Row className="header vr-center hr-between">
           <ChatSearch />
+          <IconImage
+              path="IconDarkPlus.png"
+              onClick={modalChatNew.onOpen}
+              styled={{className: 'm-l-1'}}
+            />
         </Row>
-        {!authContext.isConnected && <ConnectButton />}
         {!chatProvider?.hookChannels?.channels ? (
           <Col className="body">
             Create your first channel
@@ -116,21 +120,6 @@ const ChatList = (props: any) => {
             {chatProvider?.hookChannels?.channels?.length ? (
               <>
                 <div className="m-b-2">
-                  <Row className="menu-heading hr-between vr-center m-b-1">
-                    <Heading as="h4" size="md" className="m-b-1">
-                      New Channel
-                    </Heading>
-                    {props?.context?.user?._id == props?.org?.owner ? (
-                      <Col>
-                        <IconImage
-                          path="IconDarkPlus.png"
-                          onClick={modalChatNew.onOpen}
-                        />
-                      </Col>
-                    ) : (
-                      <></>
-                    )}
-                  </Row>
                   <ul>
                     {filteredList.map((item: any, index: number) => (
                       <StyledChatItem key={index}>
@@ -139,12 +128,12 @@ const ChatList = (props: any) => {
                             console.log("Click on button", item);
                             chatProvider.initiate(item, authContext.address);
                           }}
-                          className="menu-item w-100 m-b-0-5"
+                          className="menu-item w-100"
                           size="xl"
                           variant={
                             chatProvider.hookChannel.channel?.id == item?.id
                               ? "state_brand"
-                              : "state_card_hover"
+                              : "state_list"
                           }
                         >
                           {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
