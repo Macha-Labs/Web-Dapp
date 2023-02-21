@@ -138,7 +138,7 @@ export const darkStyle = {
   nav: {
     width: "5%",
     bg: { default: "#00081A" },
-    border: { default: "1px solid #0F172E" },
+    border: { default: "1px solid #001a4b" },
   },
   card: {
     bg: {
