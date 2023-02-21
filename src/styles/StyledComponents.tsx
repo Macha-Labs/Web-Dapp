@@ -533,6 +533,10 @@ export const StyledNav = styled.div`
 
 //////////////////////////////// Chat ////////////////////////////////
 
+// export const StyledUl = styled.ul`
+//   border:"1px solid red";
+// `
+
 export const StyledChatList = styled.div`
   width: 25%;
   height: 100vh;
@@ -623,8 +627,7 @@ export const StyledChat = styled.div`
 export const StyledChatItem = styled(Row)`
   text-align: start;
   align-items: center;
-  justify-content: flex-start;
-
+  justify-content: flex-start;  
   .settingsIcon {
     display: none;
   }
