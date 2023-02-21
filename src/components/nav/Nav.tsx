@@ -59,17 +59,7 @@ const Nav = (props: any) => {
               </Col>
 
               <Col className="hr-center">
-                {props.context?.currentAccount ? (
-                  <>
-                    <Link href="/chat">
-                      <StyledIcon className="state-2-3 m-b-0-5 scale">
-                        <IconImage path="IconBrandChat.png" style={{className: "m-b-1"}} />
-                      </StyledIcon>
-                    </Link>
-                  </>
-                ) : (
-                  <></>
-                )}
+                <IconImage path="IconDarkBell.png" style={{className: "m-b-1"}} />
               </Col>
             </Col>
           </div>
