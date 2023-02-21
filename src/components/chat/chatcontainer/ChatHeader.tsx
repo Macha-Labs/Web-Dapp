@@ -1,6 +1,6 @@
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserList from "@/components/user/UserList";
-import { Row } from "@/styles/StyledComponents";
+import { Col, Row } from "@/styles/StyledComponents";
 import { Button, Avatar, Heading, Icon, useDisclosure } from "@chakra-ui/react";
 import ChatMessageList from "./ChatMessageList";
 import IconImage from "@/components/icons/IconImage";
@@ -92,9 +92,30 @@ const ChatHeader = (props: any) => {
             className="m-r-0-5"
             name={props?.hookChannel?.channel?.name}
           />
-          <Heading as="h4" size="sm">
-            {props?.hookChannel?.channel?.name}
-          </Heading>
+          <Col>
+            <Heading as="h4" size="sm">
+              {props?.hookChannel?.channel?.name}
+            </Heading>
+            <Heading as="h6" size="xs">
+              {props.hookChat?.usersWhoAreTyping && (
+                <>
+                  {props.hookChat?.usersWhoAreTyping?.map(
+                    (user: any, index: number) => {
+                      return (
+                        <span key={index}>
+                          {`${user}${
+                            index! ==
+                              props.hookChat?.usersWhoAreTyping.length - 1 &&
+                            ","
+                          } is typing...`}
+                        </span>
+                      );
+                    }
+                  )}
+                </>
+              )}
+            </Heading>
+          </Col>
         </Row>
 
         <Row className="vr-center">
