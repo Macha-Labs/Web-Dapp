@@ -101,7 +101,7 @@ const ChatList = (props: any) => {
     return (
       <>
         <Row className="header vr-center hr-between">
-          <ChatSearch />
+          <ChatSearch style={{className: 'w-90'}}/>
           <IconImage
               path="IconDarkPlus.png"
               onClick={modalChatNew.onOpen}
@@ -132,8 +132,8 @@ const ChatList = (props: any) => {
                           size="xl"
                           variant={
                             chatProvider.hookChannel.channel?.id == item?.id
-                              ? "state_brand"
-                              : "state_list"
+                              ? "state_list_active"
+                              : "state_list_hover"
                           }
                         >
                           {/* <Checkbox defaultChecked className="m-r-0-5" /> */}

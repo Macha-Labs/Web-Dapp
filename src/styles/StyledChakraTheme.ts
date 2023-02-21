@@ -135,6 +135,24 @@ const theme = extendTheme({
           borderBottom: `${style.card.border.default}`,
           shadow: `${style.card.shadow.default}`,
         },
+        state_list_hover: {
+            background: `${style.card.bg.default}`,
+            borderBottom: `${style.card.border.default}`,
+            shadow: `${style.card.shadow.default}`,
+            borderRadius:"0px",
+          _hover: {
+            background: `${style.card.bg.hover}`,
+            borderBottom: `1px solid ${style.card.border.hover}`,
+            shadow: `${style.card.shadow.hover}`,
+          },
+        },
+        state_list_active: {
+            background: `${style.button.bg.active}`,
+            color: "#FF",
+            borderRadius:"0px",
+            borderBottom: `${style.card.border.default}`,
+            shadow: `${style.card.shadow.default}`,
+        },
         state_lens: {
           opacity: "0.95",
           background: "#ABFD2C",
