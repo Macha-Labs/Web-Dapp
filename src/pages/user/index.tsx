@@ -3,7 +3,6 @@ import UserCard from "@/components/user/UserCard";
 import UserProfile from "@/components/user/UserProfile";
 import UserEdit from "@/components/user/UserEdit"
 import { helperIPFS } from "@/helpers";
-import { useUserSettings } from "@/hooks/user/useUserSetting";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { AuthContext } from "@/providers/AuthProvider";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
@@ -19,12 +18,64 @@ import { useContext } from "react";
 
 const User = () => {
   const authContext = useContext(AuthContext);
-  const hookUserSetting = useUserSettings();
 
-  const [window,setwindow]=useState("UserProfile");
-  const TempalteRight = () => {
+  const [window, setWindow] = useState("UserProfile");
+
+  const userSettings = [
+    {
+      icon: "IconDarkEdit.png",
+      name: "Edit Profile",
+      onPress: () => {console.log('window'); setWindow('UserEdit')},
+    },
+    {
+      icon: "IconDarkPrivacy.png",
+      name: "Privacy and Security",
+      route: "",
+    },
+    {
+      icon: "IconDarkNotification.png",
+      name: "Notifications and Sounds",
+      route: "",
+    },
+    {
+      icon: "IconDarkCall.png",
+      name: "Call and Video",
+      route: "",
+    },
+    {
+      icon: "IconDarkWallet.png",
+      name: "Wallet and Payments",
+      route: "",
+    },
+    {
+      icon: "IconDarkDatabase.png",
+      name: "Storage and Data",
+      route: "",
+    },
+    {
+      icon: "IconDarkLinkedDevices.png",
+      name: "Linked Devices",
+      route: "",
+    },
+    {
+      icon: "IconDarkLanguages.png",
+      name: "Languages",
+      route: "",
+    },
+    {
+      icon: "IconDarkAppearance.png",
+      name: "Appearance",
+      route: "",
+    },
+  ];
+
+  const TemplateRight = () => {
     return (
-      window=="UserProfile"?<UserProfile user={authContext?.user} />:window=="UserEdit"?<UserEdit/>:<UserProfile user={authContext?.user}/>
+      <>
+        {
+          window == "UserProfile" ? <UserProfile user={authContext?.user} /> : <UserEdit />
+        }
+      </>
     );
   };
 
@@ -37,12 +88,11 @@ const User = () => {
           </div>
           <div className="body">
             {!authContext.isConnected && <ConnectButton />}
-            <Button onClick={() => authContext.connectLens()} >Connect to lens</Button>
-            <UserCard user={authContext?.user} />
+            <Button onClick={() => authContext.connectLens(authContext.address)} >Connect to lens</Button>
+            <UserCard user={authContext?.user} onClick={setWindow('UserProfile')}/>
             <LayoutOptions
-              options={hookUserSetting.userSettings}
+              options={userSettings}
               style={{ className: "m-t-1" }}
-              setwindow={setwindow}
             />
           </div>
         </StyledPageList>
@@ -56,7 +106,7 @@ const User = () => {
             <Text fontSize="sm">{authContext?.user?.lens?.name}</Text>
           </div>
           <div className="body">
-            <TempalteRight />
+            <TemplateRight />
           </div>
         </StyledPageContainer>
       </>
@@ -66,10 +116,10 @@ const User = () => {
   return (
     <StyledWindow>
       <div className="left">
-          <Nav />
+        <Nav />
       </div>
       <div className="right">
-          <Template />
+        <Template />
       </div>
     </StyledWindow>
   );

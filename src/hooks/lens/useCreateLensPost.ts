@@ -18,10 +18,8 @@ const useCreateLensPost = () => {
 
   const signCreatePostTypedData = async (request: CreatePublicPostRequest) => {
       const result = await createNewPost(request);
-      console.log("create post: createPostTypedData", result);
 
       const typedData = result.data!.createPostTypedData.typedData;
-      console.log("create post: typedData", typedData);
     try {
       const signature = await signedTypeData(
         typedData.domain,
@@ -30,31 +28,29 @@ const useCreateLensPost = () => {
         connector.accounts[0],
         connector
       );
-      console.log("create post: signature", signature);
 
       return { result, signature };
-    } catch (error) {
-      console.log("Some error occured ", error);
+    } catch (error: any) {
+      throw new Error("Error in signing Typed Data ", error);
     }
 
     
   };
 
-  const validate = async (params) => {
+  const validate = async (params: any) => {
     if (!params.profileId) {
       throw new Error("Missing Profile id");
     }
 
     if (params?.postContent == null && params?.file == null) {
-      console.log("Content is missing");
+      throw new Error("Nothing to Upload");
       return;
     }
 
     let fileCid: any = null;
     let fileObj: any = null;
     if (params?.file?.type) {
-      nonWrappedData([params?.file]).then((result) => {
-        console.log("File uploaded to ipfs, cid ", result);
+      nonWrappedData([params?.file]).then((result: any) => {
         fileCid = result;
       });
       if (fileCid != null) {
@@ -65,8 +61,6 @@ const useCreateLensPost = () => {
         };
       }
     }
-    console.log("Got file cid ", fileCid);
-
     const postMetadata = {
       version: "2.0.0",
       mainContentFocus: params?.file?.type
@@ -92,26 +86,20 @@ const useCreateLensPost = () => {
       metadatav2: postMetadata,
     });
 
-    console.log("Response:", validateRes);
-    console.log("Metadata", postMetadata);
     if (validateRes?.data?.validatePublicationMetadata?.valid) {
-      console.log("Metadata validated");
       const lensPostId = await createPost(params, postMetadata);
       return lensPostId;
     } else {
-      console.log("Metadata couldnot be validated");
+      throw new Error("Metadata could not be validated");
       return;
     }
   };
 
-  const createPost = async (params, postMetadata) => {
-    console.log("Called the createPost function", params, postMetadata);
+  const createPost = async (params: any, postMetadata: any) => {
     let ipfsFileCid;
-    makeFileObjects(postMetadata).then((result) => {
-      console.log("Getting the result", result);
+    makeFileObjects(postMetadata).then((result: any) => {
       ipfsFileCid = result;
     });
-    console.log("create post: ipfs result", ipfsFileCid);
 
     const createPostRequest = {
       profileId: params.profileId,
@@ -127,14 +115,7 @@ const useCreateLensPost = () => {
       },
     };
 
-    console.log("createPostRequest ", createPostRequest);
     const signedResult = await signCreatePostTypedData(createPostRequest);
-    console.log("signedResult", signedResult);
-    console.log(
-      "signedResult post ID",
-      signedResult?.result.data?.createPostTypedData.id
-    );
-
     const typedData = signedResult.result.data!.createPostTypedData.typedData;
 
     const { v, r, s } = splitSignature(signedResult.signature);

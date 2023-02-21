@@ -214,6 +214,9 @@ a {
 .w-screen {
   width: 100vw;
 }
+.w-content {
+  width: fit-content;
+}
 
 /* HEIGHT */
 .h-100 {

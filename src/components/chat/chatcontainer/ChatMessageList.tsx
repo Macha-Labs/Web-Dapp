@@ -10,7 +10,6 @@ import React from "react";
 import ChatMessage from "./ChatMessage";
 
 function ChatMessageList(props: any) {
-  console.log(props.pinnedMessageList, "pinned");
 
   return (
     <div>
@@ -19,9 +18,7 @@ function ChatMessageList(props: any) {
       </Heading>
       {props.pinnedMessageList?.map((message: any, index: number) => {
         return (
-          <StyledMessageCard key={index}>
-            <ChatMessage message={message} hookChat={props.hookChat} />
-          </StyledMessageCard>
+          <ChatMessage key={message?.id} message={message} hookChat={props.hookChat} />
         );
       })}
     </div>

@@ -7,10 +7,13 @@ const LayoutOptions = (props: any) => {
     <StyledOptionsCard className={props.style?.className + " border"}>
       {props.options.length ? (
         <>
-          
           {props.options?.map((item: any, index: any) => {
             return (
-              <Row className="item m-b-0-5 hr-between" key={index} onClick={item.onPress}>
+              <Row
+                className="item m-b-0-5 hr-between"
+                key={index}
+                onClick={item.onPress}
+              >
                 <Row className="vr-center">
                   <IconImage path={item.icon} />
                   <Text fontSize="md" className="m-l-0-5">

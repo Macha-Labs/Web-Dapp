@@ -2,7 +2,7 @@ import { StyledCardPannel } from "@/styles/StyledComponents";
 
 const LayoutCardPannel = (props) => {
     return (
-        <StyledCardPannel>
+        <StyledCardPannel className={props.style?.className}>
             <div className="header">
                     {props.header}
             </div>

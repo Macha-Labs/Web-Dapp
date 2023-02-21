@@ -1,5 +1,4 @@
 import ModalSlider from "@/components/modal/ModalSlider";
-import { useChannelSettings } from "@/dex/useChannelSettings";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { Col } from "@/styles/StyledComponents";
 import { Heading, useDisclosure } from "@chakra-ui/react";
@@ -7,13 +6,14 @@ import React from "react";
 import ChatMembers from "./ChatMembers";
 import ChatPermissions from "./ChatPermissions";
 
-function ChatSetting(props) {
+function ChatSetting(props: any) {
   const chatOptions = [
     {
       icon: "IconDarkSearch.png",
       name: "Search Chat",
       onPress: () => {
         props.hookChat.handleSearch();
+        props?.event?.onClose();
       },
     },
     {
@@ -28,6 +28,7 @@ function ChatSetting(props) {
       name: "Select Chat",
       onPress: () => {
         props.hookChat.handleMultiSelect();
+        props?.event?.onClose();
       },
     },
     {
@@ -43,7 +44,9 @@ function ChatSetting(props) {
     {
       icon: "IconDarkPermissions.png",
       name: "Permissions",
-      onPress: () => {modalChatPermission.onOpen()},
+      onPress: () => {
+        modalChatPermission.onOpen();
+      },
       condition: {
         enabled: true,
         check:
@@ -53,7 +56,9 @@ function ChatSetting(props) {
     {
       icon: "IconDarkMembers.png",
       name: "Members",
-      onPress: () => {modalChatMembers.onOpen()},
+      onPress: () => {
+        modalChatMembers.onOpen();
+      },
       condition: {
         enabled: true,
         check:
@@ -107,11 +112,11 @@ function ChatSetting(props) {
       },
     },
   ];
-  
-  
+
   const modalChatPermission = useDisclosure();
   const modalChatMembers = useDisclosure();
   const modalChatEdit = useDisclosure();
+  
   const TemplatePermission = () => {
     return (
       <ModalSlider size={"md"} event={modalChatPermission}>
@@ -119,13 +124,13 @@ function ChatSetting(props) {
       </ModalSlider>
     );
   };
-  const TemplateMembers =()=>{
+  const TemplateMembers = () => {
     return (
       <ModalSlider size={"md"} event={modalChatMembers}>
-        <ChatMembers hookChannel={props.hookChannel}/>
+        <ChatMembers hookChannel={props.hookChannel} />
       </ModalSlider>
     );
-  }
+  };
   const TemplateEditChannel = () => {
     return (
       <ModalSlider size={"md"} event={modalChatEdit}>
@@ -140,10 +145,7 @@ function ChatSetting(props) {
           Channel Settings
         </Heading>
         <Col>
-          <LayoutOptions
-            options={chatOptions}
-            style={{ className: "m-b-1" }}
-          />
+          <LayoutOptions options={chatOptions} style={{ className: "m-b-1" }} />
           <LayoutOptions
             options={chatOptions2}
             style={{ className: "m-b-1" }}
@@ -152,8 +154,8 @@ function ChatSetting(props) {
         </Col>
       </div>
       <TemplatePermission />
-      <TemplateMembers/>
-      <TemplateEditChannel/>
+      <TemplateMembers />
+      <TemplateEditChannel />
     </>
   );
 }

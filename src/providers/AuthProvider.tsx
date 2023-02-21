@@ -6,16 +6,18 @@ import { UserDb$ } from "../schema/user";
 import { useAccount, useDisconnect } from 'wagmi';
 import { putStreamToken } from "../service/StreamService";
 import { findOrCreateUser } from "../service/UserService";
+import useLensProfile from "@/hooks/lens/useLensProfile";
+import {fetchSigner} from "@wagmi/core"
 
 export type AuthContextType = {
     signer: any | undefined;
     address: any | undefined;
     connectWallet: () => void;
+    connectLens: (param: any) => void;
     disconnectWallet: () => void;
     user: any | undefined;
     setUser: (param: any) => void;
     updateUser: (...params: any) => void;
-    connectLens: () => void;
     isConnected: boolean | undefined;
 };
 
@@ -23,29 +25,31 @@ export const AuthContext = createContext<AuthContextType>({
     signer: null,
     address: "",
     connectWallet: () => {},
+    connectLens: (param) => {},
     disconnectWallet: () => {},
     user: null,
     setUser: (param) => {},
     updateUser: (...params) => {},
-    connectLens: () => {},
     isConnected: false
 });
 
-const AuthProvider = ({children}: any) => {
+const AuthProvider = ({ children }: any) => {
     const [signer, setSigner] = useState<any>("");
     const [user, setUser] = useState<any>();
-    const {address, isConnected} = useAccount();
-    const {disconnect} = useDisconnect();
-   
+    const { address, isConnected } = useAccount();
+    const { disconnect } = useDisconnect();
 
+    // callback for useLensAuth
     const updateUser = (key: any, data: any) => {
         logger('auth', 'updateUser', "Updating user data", [key, data]);
         const newData: any = {};
         newData[key] = data;
-        setUser({...user, ...newData});
+        setUser({ ...user, ...newData });
     };
-    
-    const hookLensAuth = useLensAuth(address, updateUser);
+
+    // custom hooks
+    const hookLensAuth = useLensAuth();
+    const hookLensProfile = useLensProfile();
 
     // connecting user wallet
     const connectWallet = async () => {
@@ -57,33 +61,59 @@ const AuthProvider = ({children}: any) => {
         disconnect();
     };
 
-    useEffect(() => {
-        logger('auth', 'useMemo[user.lens]', 'User is',  [user])
+    const userDataFromDB = async () => {
+        logger('auth', 'useEffect[user.lens]', 'User is', [user])
         if (address) {
-            logger('auth', 'useEffect[user.lens]','requesting user from DB with address', [address])
-            findOrCreateUser({
-                address: address.toLowerCase(),
-            }).then((data: any) => {
-                logger('auth', 'useEffect[user.lens]', 'response of user from DB', [JSON.stringify(data)]);
+            // fetching the userData from the Database
+            findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
                 const userData = UserDb$(data);
+                console.log("Presenting the userData from findOrCreateUser ", userData);
                 updateUser("db", userData);
-                putStreamToken({userAddress: address.toLowerCase()}).then((res: any) => {
+                putStreamToken({ userAddress: address.toLowerCase() }).then((res: any) => {
                     logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
                     updateUser("db", UserDb$(res));
                 });
-                // if (userData?.id && !userData.tokens?.stream) {
-                //     putStreamToken({userAddress: address}).then((res: any) => {
-                //         logger('auth', 'useEffect[user.db.id]', 'response from putStreamToken api', [res])
-                //         updateUser("db", UserDb$(res));
-                //     });
-                // }
             });
         }
-    }, [address, user?.lens?.id]);
+    }
 
     useEffect(() => {
-        logger('auth', 'AuthProvider.useEffect[user]', 'User is', [user]);
-    }, [user])
+        logger("auth", "useEffect", "Current user address", [address]);
+        const lensAuthenticate = async () => {
+            const currentSigner = await fetchSigner();
+            setSigner(currentSigner);
+            const lensProfile = await hookLensProfile.getOwnedProfiles(address);
+            console.log("Fetched lens profile = ", lensProfile);
+            if (lensProfile) {
+                const tokens: any | { accessToken: string, refreshToken: string } = await hookLensAuth.connectToLens(address);
+                console.log("Tokens resolving promise ", tokens);
+                if (tokens?.accessToken) {
+                    updateUser("lens", {
+                        ...lensProfile,
+                        accessToken: tokens['accessToken'],
+                        refreshToken: tokens['refreshToken']
+                    });
+                } else {
+                    updateUser("lens", lensProfile);
+                }
+                console.log("Reaching here ----------------------------------------------------------")
+            } else {
+                throw Error(`Couldn't find Lens Profile with address ${address}`);
+            }
+        }
+
+        if (address) {
+            const currentSigner = 
+            lensAuthenticate();
+            userDataFromDB();
+            console.log("Updated the userData ", user);
+        }
+    }, [address]);
+
+    useEffect(() => {
+        if (user)
+        logger("auth", "useEffect", "Logging the userData", [user]);
+    }, [user]);
 
     return (
         <AuthContext.Provider

@@ -25,11 +25,10 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const [actionMessage, setActionMessage] = useState<any>({
     action: "",
     item: {},
+    data: {}
   });
   const [selectedMessages, setSelectedMessages] = useState<any>([]);
   const [userObjTyping, setUserObjTyping] = useState<any>();
-  const [searchActive, setSearchActive] = useState<any>();
-  const [searchQuery, setSearchQuery] = useState<any>();
 
   const textareaRef = useRef<any>(null);
   const editMessageRef = useRef<any>(null);
@@ -52,8 +51,8 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const addMessage = async () => {
     setStreamLoading(true);
     if (!authContext?.address) {
-      console.log("Didn't find user address");
       setStreamLoading(false);
+      throw new Error("Couldn't find a user address");
       return;
     }
     if (slashCmdValue) {
@@ -91,17 +90,12 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       } else {
         messageData = {
           text: textareaRef.current?.value,
-          mentioned_users: hookMention.mentionList.map(
-            (user: any, index: number) => {
-              console.log("MessageData", user);
-              return user?.ownedBy;
-            }
-          ),
+          mentioned_users: hookMention.mentionList.map((user: any, index: number) => {
+            return user?.ownedBy;
+          }),
           message_custom_data: msgData,
         };
       }
-
-      console.log("The messageData is ", messageData);
 
       if (actionMessage?.action == "REPLY" && actionMessage?.item) {
         messageData = {
@@ -115,7 +109,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
       if (attachItem) {
         const fileCid = await uploadAtIpfsRoot([attachItem]);
-        console.log("The uploaded file", fileCid);
         messageData = {
           ...messageData,
           attachments: [
@@ -128,7 +121,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
           ],
         };
       }
-      console.log("connected channel", channel);
       console.log("Sending messsageData is ", messageData);
       await channel.raw.sendMessage(messageData); // sending a new message
 
@@ -162,33 +154,34 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       hookMention.onRefresh();
       setChatMeta(null);
       await newMessageNotification(notificationPayload); // sending new message notification
-    } catch (error) {
-      console.log("Could not send message", error);
+    } catch (error: any) {
       setStreamLoading(false);
+      throw new Error("Sending message failed ", error);
     }
   };
 
   const editMessage = async () => {
-    console.log('editing message- ', editMessageRef.current.value);
+    console.log("editing message- ", editMessageRef.current.value);
     if (!authContext?.address) {
-      console.log("Wallet is not connected");
-      return;
+      throw new Error ("Couldn't find the user address");
     }
     if (actionMessage?.action !== "EDIT") {
       return;
     }
-    await streamContext.client.updateMessage({
-      id: actionMessage.item?.id,
-      text: editMessageRef.current.value,
-    }).then(() => {
-      toast({
-        title: "Message Updated",
-        status: "success",
-        duration: 3000,
-        position: "bottom-right",
+    await streamContext.client
+      .updateMessage({
+        id: actionMessage.item?.id,
+        text: editMessageRef.current.value,
+      })
+      .then(() => {
+        toast({
+          title: "Message Updated",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+        setActionMessage(null);
       });
-      setActionMessage(null);
-    });
   };
 
   const deleteMessage = async (message: any) => {
@@ -292,7 +285,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
   const handleAttachment = async (attachment: any) => {
     const filePicked = attachment.target.files[0];
-    console.log(filePicked);
     setAttachItem(filePicked);
   };
 
@@ -301,13 +293,11 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleSearch = (e: any) => {
-    setSearchActive(true);
-    setSearchQuery("");
+    setActionMessage({action: 'SEARCH', data: {query: ''}});
   };
 
   const handleSearchClose = () => {
-    setSearchActive(false);
-    setSearchQuery("");
+    setActionMessage(null);
   };
 
   const handleSelect = (message: any) => {
@@ -323,15 +313,16 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleMultiSelect = () => {
+    setActionMessage({action: 'SEARCH', data: {query: ''}});
+    // setActionMessage({ action: "MULTISELECT", item: null, data: null });
+  };
+  const handleMultiSelectClose = () => {
     logger(
       "channel",
       "useStreamChat.handleMultiSelect",
-      "Trigger MultiSelect",
+      "Trigger MultiSelectClose",
       []
     );
-    setActionMessage({ action: "MULTISELECT", item: null });
-  };
-  const handleMultiSelectClose = () => {
     setActionMessage(null);
   };
   const handleLongPressSelect = (message: any) => {
@@ -368,40 +359,31 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleReaction = async (reaction: any, message: any) => {
-    console.log(reaction);
-    console.log(message);
     let result;
     if (message.own_reactions.length) {
       let available = false;
       message.own_reactions.filter(async (item: any) => {
         if (item.type == reaction.type) {
           available = true;
-          console.log("Got existing reaction");
           result = await channel.raw.deleteReaction(message?.id, reaction.type);
-          console.log("Reactions ", result);
         }
       });
       if (!available) {
         result = sendReaction(reaction, message);
-        console.log("Reactions ", result);
       }
     } else {
       result = sendReaction(reaction, message);
-      console.log("Reactions ", result);
     }
   };
 
   const onChange = async (event: any, users?: any) => {
     const value = event.target.value;
-    console.log("Typing value is ", textareaRef.current.value);
     const lastChar = value.split("")[value.length - 1];
     if (lastChar == " " || value == "") {
-      console.log("set isTyping to false");
       hookMention.setIsActive(false);
       setSlashCmd(false);
     }
     if (lastChar == "@") {
-      console.log("set isTyping to true");
       setSlashCmd(false);
       hookMention.setIsActive(true);
     }
@@ -419,7 +401,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const mentionSelect = (user: any) => {
-    console.log("The cliked value ", user);
     const msg = textareaRef.current.value;
     const result =
       textareaRef.current.value.substr(
@@ -432,8 +413,13 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   useEffect(() => {
-    logger('channel', 'useStreamChat.useEffect[actionMessage]', 'actionMessage is', [actionMessage])
-  }, [actionMessage]) 
+    logger(
+      "channel",
+      "useStreamChat.useEffect[actionMessage]",
+      "actionMessage is",
+      [actionMessage]
+    );
+  }, [actionMessage]);
 
   return {
     // REACTIONS
@@ -476,9 +462,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     slashRun: slashRun,
     handleSearch: handleSearch,
     handleSearchClose: handleSearchClose,
-    searchActive: searchActive,
-    searchQuery: searchQuery,
-    setSearchQuery: setSearchQuery,
     handleMultiSelect: handleMultiSelect,
     handleMultiSelectClose: handleMultiSelectClose,
     handleLongPressSelect: handleLongPressSelect,

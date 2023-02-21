@@ -7,12 +7,15 @@ import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
+import ChatSearch from "./ChatSearch";
 
-const ChatHeader = (props) => {
+const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
-  const pinneddMessageModal = useDisclosure();
-  const channelSettingsModal = useDisclosure();
+  const modalPinned = useDisclosure();
+  const modalSettings = useDisclosure();
   const authProvider = useContext(AuthContext);
+
+
   const TemplateMembers = () => {
     return (
       <ModalSlider event={membersModal}>
@@ -26,7 +29,7 @@ const ChatHeader = (props) => {
 
   const TemplatePinnedMessages = () => {
     return (
-      <ModalSlider event={pinneddMessageModal} size="md">
+      <ModalSlider event={modalPinned} size="md">
         <ChatMessageList
           pinnedMessageList={props.hookChannel?.pinnedMessages}
           hookChat={props.hookChat}
@@ -37,18 +40,25 @@ const ChatHeader = (props) => {
 
   const TemplateChannelSettings = () => {
     return (
-      <ModalSlider event={channelSettingsModal}>
+      <ModalSlider event={modalSettings}>
         <ChatSetting
+          event={modalSettings}
           hookChat={props.hookChat}
           hookChannel={props.hookChannel}
           authProvider={authProvider}
+          modalSettings={modalSettings}
         />
       </ModalSlider>
     );
   };
 
   const TemplateSearch = () => {
-    return <></>;
+    return (
+      <Row className="w-100 vr-center hr-between">
+        <ChatSearch />
+        <Button size="sm" variant="state_brand" className="m-l-1" onClick={props?.hookChat?.handleSearchClose}>Cancel</Button>
+      </Row>
+    )
   };
 
   const TemplateMultiSelect = () => {
@@ -58,14 +68,14 @@ const ChatHeader = (props) => {
           variant="state_brand"
           size="sm"
           className="m-r-0-5"
-          onClick={props.hookChat.setSelectedMessages([])}
+          // onClick={props.hookChat.setSelectedMessages([])}
         >
           Clear
         </Button>
         <Button
           variant="state_brand"
           size="sm"
-          onClick={props.hookChat.handleMultiSelectClose()}
+          // onClick={props.hookChat.handleMultiSelectClose}
         >
           Cancel
         </Button>
@@ -90,13 +100,13 @@ const ChatHeader = (props) => {
         <Row className="vr-center">
           <IconImage
             path="IconDarkMenu.png"
-            onClick={channelSettingsModal.onOpen}
+            onClick={modalSettings.onOpen}
             style={{ className: "m-r-0-5" }}
           />
 
           <IconImage
             path="IconDarkPinned.png"
-            onClick={pinneddMessageModal.onOpen}
+            onClick={modalPinned.onOpen}
             style={{ className: "m-r-0-5" }}
           />
 
@@ -107,7 +117,8 @@ const ChatHeader = (props) => {
   };
 
   const Template = () => {
-    if (props.hookChat.searchActive) return <TemplateSearch />;
+    if (props.hookChat.actionMessage?.action === "SEARCH")
+      return <TemplateSearch />;
     else if (props.hookChat.actionMessage?.action === "MULTISELECT")
       return <TemplateMultiSelect />;
     else {
