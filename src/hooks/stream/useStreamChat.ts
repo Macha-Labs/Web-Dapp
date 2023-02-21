@@ -32,13 +32,14 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const [searchActive, setSearchActive] = useState<any>();
   const [searchQuery, setSearchQuery] = useState<any>();
 
-  const textareaRef = useRef<any>(null);
+  const textareaRef = useRef<any>();
   const editMessageRef = useRef<any>(null);
 
   // custom hooks
   // const chatFilterHook = useChatFilters(users);
   const hookMention = useMention();
   const toast = useToast();
+  console.log("Loading the useStreamChat");
 
   // Slash & Widget
   const [slashCmd, setSlashCmd] = useState<any>();
@@ -47,7 +48,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const slashRun = (command: any) => {
     setSlashCmdValue(command.name);
     setSlashCmd(false);
-    textareaRef.current = "";
   };
 
   const addMessage = async () => {
@@ -128,7 +128,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
       setRerenderSwitch(!rerenderSwitch);
       setStreamLoading(false);
-      textareaRef.current.value = "";
       setAttachItem(null);
       setActionMessage(null);
 
@@ -260,13 +259,14 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
   const keyDownMessage = async (event: any) => {
     const keycode = event.which || event.keycode;
+
+    console.log("keyDownMessage");
     if (keycode == 13 && !event.shiftKey) {
       event.preventDefault();
 
       if (textareaRef.current.value.substring(0, 1) == "/") {
         setSlashCmdValue(textareaRef.current.value);
         setSlashCmd(false);
-        textareaRef.current.value = "";
         // widgetDrawer.onOpen();
       } else {
         await addMessage();
@@ -274,6 +274,11 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     } else if (event.key == "/") {
       console.log("slash key was pressed");
       setSlashCmd(true);
+    }
+    if (event.key == "@") {
+      console.log("You pressed mention");
+      hookMention.setMentionActive(true);
+      console.log("Here are the users you can mention on this channel ", users);
     }
   };
 
@@ -385,16 +390,18 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     }
   };
 
-  const onChange = async (event: any) => {
-    const value = event.target.value;
+  const onChange = async () => {
+    const value = textareaRef.current.value;
     const lastChar = value.split("")[value.length - 1];
     if (lastChar == " " || value == "") {
+      console.log("Setting mention false");
       hookMention.setMentionActive(false);
       setSlashCmd(false);
     }
     if (lastChar == "@") {
-      setSlashCmd(false);
-      // hookMention.setMentionActive(true);
+      // setSlashCmd(false);
+      console.log("Setting mention true");
+      hookMention.setMentionActive(true);
       console.log("Here are the users you can mention on this channel ", users);
       // hookMention.onTrigger(value, users);
 

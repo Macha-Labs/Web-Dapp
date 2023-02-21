@@ -36,7 +36,7 @@ const ChatMention = (props: any) => {
                     )
                     :
                     (
-                        <></>
+                        <Text>Displaying members</Text>
                     )
             }
         </>
