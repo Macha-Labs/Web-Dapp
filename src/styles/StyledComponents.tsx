@@ -547,7 +547,7 @@ export const StyledChatList = styled.div`
     height: calc(100vh - 55px);
     width: 100%;
     margin: auto;
-    padding: 20px 10px;
+    padding: ${style.body.padding}
     background: ${style.card.bg.default};
 
     .menu-heading {

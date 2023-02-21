@@ -134,7 +134,7 @@ export const darkStyle = {
     bg: { default: "#00081A" },
     border: { default: "1px solid #0F172E" },
   },
-  body: { bg: { default: "#000511" } },
+  body: { bg: { default: "#000511" }, padding: "0px" },
   nav: {
     width: "5%",
     bg: { default: "#00081A" },
