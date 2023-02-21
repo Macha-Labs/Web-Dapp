@@ -131,14 +131,15 @@ export const darkStyle = {
   colorIconActive: "#333",
   focusInput: "0",
   header: {
-    bg: { default: "#00081A" },
+    bg: { default: "#000511" },
     border: { default: "1px solid #0F172E" },
   },
   body: { bg: { default: "#000511" }, padding: "20px 10px" },
   nav: {
     width: "5%",
-    bg: { default: "#00081A" },
-    border: { default: "1px solid #001a4b" },
+    height: "90%",
+    bg: { default: "#000511" },
+    border: { default: "1px solid #0F172E" },
   },
   card: {
     bg: {
@@ -181,7 +182,7 @@ export const darkStyle = {
       default:
         "0px -2px 8px rgba(19, 112, 231, 0.15), 0px 2px 8px rgba(19, 112, 231, 0.15)",
       hover:
-        "0px -2px 8px rgba(19, 112, 231, 0.25), 0px 2px 8px rgba(19, 112, 231, 0.25)",
+        "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
   },
   modal: {

@@ -11,7 +11,7 @@ export const StyledWindow = styled.div`
   .right {
     width: calc(100vw - ${style.nav.width});
     position: fixed;
-    left: ${style.nav.width};
+    left: calc(${style.nav.width} + 2%);
     display: flex !important;
   }
 `;
@@ -511,10 +511,16 @@ export const LinkContainer = styled.div`
 export const StyledNav = styled.div`
   width: ${style.nav.width};
   height: 100vh;
-  background: ${style.nav.bg.default};
   position: fixed;
   left: 0;
-  border-right: ${style.nav.border.default};
+  padding: 10px 5px;
+  .container {
+    padding: 5px;
+    background: ${style.nav.bg.default};
+    border: ${style.nav.border.default};
+    border-radius: 10px;
+    height: 99%;
+  }
 
   .header {
     height: 55px;
@@ -831,7 +837,7 @@ export const StyledPageList = styled.div`
     width: 100%;
     margin: auto;
     padding: 20px 10px;
-    background: ${style.card.bg.default};
+    background: ${style.body.bg};
 
     .menu-heading {
       padding-left: 10px;
