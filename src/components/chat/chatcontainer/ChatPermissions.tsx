@@ -81,7 +81,7 @@ const ChatPermissions = () => {
     console.log("Re rendering this permission layout");
     return (
       <StyledCard>
-        {hookPortalChannel?.channel?.permissions.map((permission: any, index: any) => {
+        {permissionOptions.map((permission: any, index: any) => {
           // console.log(
           //   "permissionOption",
           //   permissionOptions,
@@ -90,17 +90,18 @@ const ChatPermissions = () => {
           // );
           return (
             <>
+              
               <Row key={index} className="p-1 hr-between">
-                <Text fontSize="sm">{permission}</Text>
+                <Text fontSize="sm">{permission.text}</Text>
                 <Switch
                   defaultChecked={hookPortalChannel?.channel?.permissions?.includes(
-                    permission
+                    permission.value
                   )}
                   onChange={() =>
-                    hookPortalChannel?.togglePermission(permission)
+                    hookPortalChannel?.togglePermission(permission.value)
                   }
                   isChecked={hookPortalChannel?.channel?.permissions?.includes(
-                    permission
+                    permission.value
                   )}
                 />
               </Row>
