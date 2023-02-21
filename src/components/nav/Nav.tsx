@@ -6,10 +6,6 @@ import {
   Row,
   StyledNav,
 } from "../../styles/StyledComponents";
-import ChatIcon from "../icons/IconChat";
-import HashIcon from "../icons/IconDarkUser";
-import UserIcon from "../icons/IconDarkUser";
-import NFTIcon from "../icons/IconDarkUser";
 import { useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
@@ -31,23 +27,9 @@ const Nav = (props: any) => {
     <>
       <Row>
         <StyledNav>
-          <div className="header">
+          <div className="header m-b-0-5">
             <Col className="hr-center vr-center h-100">
-              <StyledIcon onClick={orgsDrawer.onOpen}>
-                {/* <Logo
-                  className="sm"
-                  src={
-                    "https://meta-org-logos.s3.ap-south-1.amazonaws.com/" +
-                    "6246c7045cc31c36781d668e" +
-                    ".png"
-                  }
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null;
-                    currentTarget.src =
-                      "https://0xmetame-assets.s3.ap-south-1.amazonaws.com/default-user.png";
-                  }}
-                /> */}
-              </StyledIcon>
+              <IconImage path="Logo.png" size="42"/>
             </Col>
           </div>
           <div className="body">
@@ -63,17 +45,7 @@ const Nav = (props: any) => {
               </Col>
 
               <Col className="hr-center">
-                {props.context?.currentAccount ? (
-                  <>
-                    <Link href="/chat">
-                      <StyledIcon className="state-2-3 m-b-0-5 scale">
-                        <ChatIcon />
-                      </StyledIcon>
-                    </Link>
-                  </>
-                ) : (
-                  <></>
-                )}
+                <IconImage path="IconDarkBell.png" style={{className: "m-b-1"}} />
               </Col>
             </Col>
           </div>

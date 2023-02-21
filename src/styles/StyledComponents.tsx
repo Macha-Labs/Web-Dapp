@@ -11,7 +11,7 @@ export const StyledWindow = styled.div`
   .right {
     width: calc(100vw - ${style.nav.width});
     position: fixed;
-    left: ${style.nav.width};
+    left: calc(${style.nav.width});
     display: flex !important;
   }
 `;
@@ -181,7 +181,7 @@ export const List = styled.div`
   }
 `;
 
-//////////////////////////////// Card //////////////////////////////// 
+//////////////////////////////// Card ////////////////////////////////
 
 export const StyledCard = styled.div`
   border-radius: ${style.card.borderRadius};
@@ -203,9 +203,6 @@ export const StyledCard = styled.div`
 
   &.border {
     border: ${style.card.border.default};
-    &:hover {
-      border: ${style.card.border.default};
-    }
   }
 
   &.border-with-hover {
@@ -219,15 +216,12 @@ export const StyledCard = styled.div`
     opacity: 0.4 !important;
   }
 
-  &.outline-brand {
-    background: transparent;
-    border: 1px solid #1c2150;
-  }
-  .card-hr-center {
-    align-items: center;
-  }
-  .card-vr-center {
-    justify-content: center;
+  &.state_hover {
+    &:hover {
+      background: ${style.card.bg.hover};
+      border: 1px solid ${style.card.border.hover};
+      box-shadow: ${style.card.shadow.hover};
+    }
   }
 `;
 
@@ -308,16 +302,20 @@ export const StyledPostCard = styled(StyledCard)`
   }
 `;
 export const StyledOptionsCard = styled(StyledCard)`
-  padding: 0px;
+  padding: ${style.list.padding};
+  background: transparent;
   .item {
     padding: 10px;
+    background: ${style.list.bg.default};
     &:hover {
-      background: ${style.button.bg.hover};
+      background: ${style.list.bg.hover};
+      box-shadow: ${style.list.shadow.hover};
+      border-radius: 5px;
     }
   }
 `;
 
-//////////////////////////////// Input //////////////////////////////// 
+//////////////////////////////// Input ////////////////////////////////
 export const StyledInput = styled.div`
   width: 100%;
   border-radius: 5px;
@@ -325,7 +323,7 @@ export const StyledInput = styled.div`
   border: ${style.card.border.default};
   margin-bottom: 5px;
   padding: 0.5rem;
-`
+`;
 
 //
 
@@ -471,10 +469,13 @@ export const StyledIcon = styled.i`
   border-radius: ${style.icon.borderRadius};
   box-shadow: ${style.icon.shadow.default};
 
-  &:hover {
+  &.state_hover {
     background: ${style.icon.bg.hover};
+    &:hover {
+      box-shadow: ${style.icon.shadow.hover};
+    }
   }
-  &.active {
+  &.state_active {
     background: ${style.icon.bg.active};
   }
 
@@ -514,11 +515,12 @@ export const LinkContainer = styled.div`
 export const StyledNav = styled.div`
   width: ${style.nav.width};
   height: 100vh;
-  background: ${style.nav.bg.default};
   position: fixed;
   left: 0;
+  padding: 10px 5px;
+  background: ${style.nav.bg.default};
   border-right: ${style.nav.border.default};
-
+  
   .header {
     height: 55px;
     padding: 0px;
@@ -536,6 +538,10 @@ export const StyledNav = styled.div`
 
 //////////////////////////////// Chat ////////////////////////////////
 
+// export const StyledUl = styled.ul`
+//   border:"1px solid red";
+// `
+
 export const StyledChatList = styled.div`
   width: 25%;
   height: 100vh;
@@ -546,8 +552,8 @@ export const StyledChatList = styled.div`
     height: calc(100vh - 55px);
     width: 100%;
     margin: auto;
-    padding: 20px 10px;
-    background: ${style.card.bg.default};
+    padding: ${style.body.padding};
+    background: ${style.body.bg};
 
     .menu-heading {
       padding-left: 10px;
@@ -626,8 +632,7 @@ export const StyledChat = styled.div`
 export const StyledChatItem = styled(Row)`
   text-align: start;
   align-items: center;
-  justify-content: flex-start;
-
+  justify-content: flex-start;  
   .settingsIcon {
     display: none;
   }
@@ -679,7 +684,7 @@ export const StyledChatInputContainer = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0;
-  padding: 0px 10px;
+  padding: 5px 10px;
 `;
 
 export const StyledChatInput = styled(Row)`
@@ -688,7 +693,8 @@ export const StyledChatInput = styled(Row)`
   background: ${style.card.bg.default};
   border: ${style.card.border.default};
   margin-bottom: 5px;
-  padding: 0.3rem 0;
+  padding: 0.3rem;
+  min-height: 55px;
 
   .inputElement {
     resize: none;
@@ -773,27 +779,27 @@ export const StyledConversation = styled(Col)`
     border: ${style.borderInput};
     background: #01041f;
     border-radius: 5px;
-    width: fit-content
+    width: fit-content;
   }
 
   &:hover {
-      .action {
-          display: flex;
-      }
+    .action {
+      display: flex;
+    }
   }
 
   .message {
-    color: rgb(255, 255, 255);
-    background: #000C29;
+    color: ${style.message.color.default};
+    background: ${style.message.bg.default};
     width: fit-content;
     min-width: 40%;
     max-width: 70%;
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 0px -2px 8px rgba(19, 112, 231, 0.15), 0px 2px 8px rgba(19, 112, 231, 0.15);
+    box-shadow: ${style.message.shadow.default};
 
     .heading {
-      color: #246bfd;
+      color: ${style.message.color.heading.color.default};
       font-weight: 700;
     }
     .inputElement {
@@ -805,17 +811,16 @@ export const StyledConversation = styled(Col)`
     }
 
     &.active {
-      background: linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%);
-      
+      background: ${style.message.bg.active};
+
       .heading {
-        color: #FFF;
+        color: ${style.message.color.heading.color.active};
       }
     }
 
     &:hover {
-      box-shadow: 0px -2px 8px rgba(19, 112, 231, 0.25), 0px 2px 8px rgba(19, 112, 231, 0.25);
+      box-shadow: ${style.message.shadow.hover};
     }
-
   }
 `;
 
@@ -831,7 +836,7 @@ export const StyledPageList = styled.div`
     width: 100%;
     margin: auto;
     padding: 20px 10px;
-    background: ${style.card.bg.default};
+    background: ${style.body.bg};
 
     .menu-heading {
       padding-left: 10px;

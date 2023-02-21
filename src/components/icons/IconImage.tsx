@@ -5,15 +5,15 @@ import { style } from "@/styles/StyledConstants";
 function IconImage(props: any) {
   return (
     <StyledIcon
-      className={props.style?.className + " state-1-2 scale"}
+      className={props.style?.className + " state-1-2 scale state_hover "}
       onClick={props.onClick}
     >
       <IKImage
         path={`/icons/${props.path}`}
         transformation={[
           {
-            height: "25",
-            width: "25",
+            height: props?.size ? props?.size : '25',
+            width: props?.size ? props?.size : '25',
           },
         ]}
       />

@@ -92,20 +92,23 @@ const ChatList = (props: any) => {
     return filteredList;
   };
   const TemplateChatList = () => {
-    // const channelDisplayImage = ;
     return (
       <>
         <Row className="header vr-center hr-between">
-          <ChatSearch onSearch={handleSearch} />
+          <ChatSearch style={{ className: "w-90" }} />
+          <IconImage
+            path="IconDarkPlus.png"
+            onClick={modalChatNew.onOpen}
+            styled={{ className: "m-l-1" }}
+          />
         </Row>
-        {!authContext.isConnected && <ConnectButton />}
         {!chatProvider?.hookChannels?.channels ? (
-          <>
+          <Col className="body">
             Create your first channel
             <Button size="sm" onClick={props.channelNew}>
               First Channel
             </Button>
-          </>
+          </Col>
         ) : (
           <Col className="body verticlescroll hidescroll">
             {chatProvider?.hookChannels?.channels?.length ? (

@@ -1,4 +1,3 @@
-import LayoutChatConversation from "@/layouts/chat/LayoutChatConversation";
 import LayoutChatEmpty from "@/layouts/chat/LayoutChatEmpty";
 import {
   StyledConversationContainer,

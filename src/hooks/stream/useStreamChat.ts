@@ -25,6 +25,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const [actionMessage, setActionMessage] = useState<any>({
     action: "",
     item: {},
+    data: {},
   });
   const [selectedMessages, setSelectedMessages] = useState<any>([]);
   const [userObjTyping, setUserObjTyping] = useState<any>();
@@ -319,13 +320,11 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleSearch = (e: any) => {
-    setSearchActive(true);
-    setSearchQuery("");
+    setActionMessage({ action: "SEARCH", data: { query: "" } });
   };
 
   const handleSearchClose = () => {
-    setSearchActive(false);
-    setSearchQuery("");
+    setActionMessage(null);
   };
 
   const handleSelect = (message: any) => {
@@ -341,13 +340,8 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleMultiSelect = () => {
-    logger(
-      "channel",
-      "useStreamChat.handleMultiSelect",
-      "Trigger MultiSelect",
-      []
-    );
-    setActionMessage({ action: "MULTISELECT", item: null });
+    setActionMessage({ action: "SEARCH", data: { query: "" } });
+    // setActionMessage({ action: "MULTISELECT", item: null, data: null });
   };
   const handleMultiSelectClose = () => {
     logger(
@@ -496,9 +490,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     slashRun: slashRun,
     handleSearch: handleSearch,
     handleSearchClose: handleSearchClose,
-    searchActive: searchActive,
-    searchQuery: searchQuery,
-    setSearchQuery: setSearchQuery,
     handleMultiSelect: handleMultiSelect,
     handleMultiSelectClose: handleMultiSelectClose,
     handleLongPressSelect: handleLongPressSelect,

@@ -3,6 +3,7 @@ import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { Col } from "@/styles/StyledComponents";
 import { Heading, useDisclosure } from "@chakra-ui/react";
 import React from "react";
+import ChatEdit from "../ChatEdit";
 import ChatMembers from "./ChatMembers";
 import ChatPermissions from "./ChatPermissions";
 
@@ -13,6 +14,7 @@ function ChatSetting(props: any) {
       name: "Search Chat",
       onPress: () => {
         props.hookChat.handleSearch();
+        props?.event?.onClose();
       },
     },
     {
@@ -27,12 +29,13 @@ function ChatSetting(props: any) {
       name: "Select Chat",
       onPress: () => {
         props.hookChat.handleMultiSelect();
+        props?.event?.onClose();
       },
     },
     {
       icon: "IconDarkEdit.png",
       name: "Edit Channel",
-      onPress: () => {},
+      onPress: () => {modalChatEdit.onOpen()},
       condition: {
         enabled: true,
         check:
@@ -114,6 +117,7 @@ function ChatSetting(props: any) {
   const modalChatPermission = useDisclosure();
   const modalChatMembers = useDisclosure();
   const modalChatEdit = useDisclosure();
+  
   const TemplatePermission = () => {
     return (
       <ModalSlider size={"md"} event={modalChatPermission}>
@@ -131,7 +135,7 @@ function ChatSetting(props: any) {
   const TemplateEditChannel = () => {
     return (
       <ModalSlider size={"md"} event={modalChatEdit}>
-        {/* <ChatMembers hookChannel={props.hookChannel} /> */}
+        <ChatEdit hookChannel={props.hookChannel} />
       </ModalSlider>
     );
   };

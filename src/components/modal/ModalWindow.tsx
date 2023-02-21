@@ -1,6 +1,6 @@
 import { Modal, ModalOverlay, ModalContent, ModalBody, ModalHeader, ModalCloseButton } from "@chakra-ui/react";
 
-const ModalWindow = (props) => {
+const ModalWindow = (props: any) => {
     return <>
         <Modal onClose={props.event?.onClose} isOpen={props.event?.isOpen} size='xl'>
                 <ModalOverlay />

@@ -27,8 +27,8 @@ const LayoutPollCard = (props: any) => {
                 <Row className="m-b-1">
                 <ButtonGroup gap='4'>
                 <Stack>
-                    {Object.keys(props.poll?.options).map((c) => {
-                        return <Button className="w-100" variant='outline' colorScheme='trasparent' value={props.poll?.options[c]} onClick = {(e) => handleClick(e,c)}>{props.poll?.options[c]}</Button>;
+                    {Object.keys(props.poll?.options).map((c, index) => {
+                        return <Button key={index} className="w-100" variant='outline' colorScheme='trasparent' value={props.poll?.options[c]} onClick = {(e) => handleClick(e,c)}>{props.poll?.options[c]}</Button>;
                     })}
                 </Stack>
                 </ButtonGroup>

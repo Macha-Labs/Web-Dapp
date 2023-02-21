@@ -1,22 +1,21 @@
 import { Button, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
-const SearchBox = ({ onSearch }) => {
+const ChatSearch = (props: any) => {
   const [query, setQuery] = useState("");
 
-  const handleQueryChange = (event) => {
+  const handleQueryChange = (event: any) => {
     setQuery(event.target.value);
     
-    handleSearch();
+    // handleSearch();  
   };
 
   const handleSearch = () => {
-    onSearch(query);
+    props?.onSearch(query);
   };
 
   return (
-    <InputGroup>
-      <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
+    <InputGroup className={props.style?.className}>
       <Input
         type="text"
         placeholder="Search"
@@ -28,4 +27,4 @@ const SearchBox = ({ onSearch }) => {
   );
 };
 
-export default SearchBox;
+export default ChatSearch;
