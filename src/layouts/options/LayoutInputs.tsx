@@ -6,7 +6,6 @@ const LayoutInputs = (props:any)=>{
         <div className={props.style.class}>
             {
                 props.data.map((item:any, index: any) => {
-                    console.log("propsoflayoutinput",item?.onChangeText);
                     return (
                         <Input key={index} placeholder={item?.label} value={item?.value} onChange={(e) => {item?.onChangeText(e.target.value)}} disabled={item.disabled} className="m-b-0-5"/>
                     )

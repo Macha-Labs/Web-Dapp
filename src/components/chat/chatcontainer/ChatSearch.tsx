@@ -7,7 +7,7 @@ const ChatSearch = (props: any) => {
   const handleQueryChange = (event: any) => {
     setQuery(event.target.value);
     
-    handleSearch();
+    // handleSearch();  
   };
 
   const handleSearch = () => {

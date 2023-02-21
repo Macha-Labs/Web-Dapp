@@ -163,6 +163,27 @@ export const darkStyle = {
     bg: { default: "#020a21" },
     border: { default: "1px solid #14244B" },
   },
+  message: {
+    bg: {
+      default: "#000C29",
+      active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
+    },
+    color: {
+      default: "rgb(255, 255, 255)",
+      heading: {
+        color: {
+          default: "#246bfd",
+          active: "#FFF",
+        },
+      },
+    },
+    shadow: {
+      default:
+        "0px -2px 8px rgba(19, 112, 231, 0.15), 0px 2px 8px rgba(19, 112, 231, 0.15)",
+      hover:
+        "0px -2px 8px rgba(19, 112, 231, 0.25), 0px 2px 8px rgba(19, 112, 231, 0.25)",
+    },
+  },
   modal: {
     bg: { default: "#000511" },
     border: { default: "1px solid #0F172E" },
@@ -198,6 +219,7 @@ export const darkStyle = {
       disabled: "",
     },
   },
+
   shadowDropdown:
     "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",
 };
