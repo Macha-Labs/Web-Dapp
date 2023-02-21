@@ -147,14 +147,14 @@ export const darkStyle = {
         "linear-gradient(141.09deg, rgba(13, 25, 65, 0.5) 11.08%, rgba(0, 20, 60, 0.38) 89.68%)",
     },
     border: {
-      default: "1px solid rgba(15,23,46,0.5)",
+      default: "1px solid rgba(15,23,46,1)",
       hover: "1px solid #001E57",
     },
     borderRadius: "5px",
     shadow: {
       default: "0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)",
       hover:
-        "-1px 1px 4px rgba(17, 108, 230, 0.3),1px -1px 4px rgba(17, 108, 230, 0.3)",
+        "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
     padding: { default: "10px" },
   },
@@ -162,6 +162,27 @@ export const darkStyle = {
   input: {
     bg: { default: "#020a21" },
     border: { default: "1px solid #14244B" },
+  },
+  message: {
+    bg: {
+      default: "#000C29",
+      active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
+    },
+    color: {
+      default: "rgb(255, 255, 255)",
+      heading: {
+        color: {
+          default: "#246bfd",
+          active: "#FFF",
+        },
+      },
+    },
+    shadow: {
+      default:
+        "0px -2px 8px rgba(19, 112, 231, 0.15), 0px 2px 8px rgba(19, 112, 231, 0.15)",
+      hover:
+        "0px -2px 8px rgba(19, 112, 231, 0.25), 0px 2px 8px rgba(19, 112, 231, 0.25)",
+    },
   },
   modal: {
     bg: { default: "#000511" },
@@ -181,8 +202,10 @@ export const darkStyle = {
       active: "",
     },
     borderRadius: "12px",
-    shadow: { 
-      default: "inset 0 1px 0 0 hsl(0deg 0% 100% / 5%)" 
+    shadow: {
+      default: "inset 0 1px 0 0 hsl(0deg 0% 100% / 5%)",
+      hover:
+        "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
   },
   button: {
@@ -196,6 +219,7 @@ export const darkStyle = {
       disabled: "",
     },
   },
+
   shadowDropdown:
     "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",
 };

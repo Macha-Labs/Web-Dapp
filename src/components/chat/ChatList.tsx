@@ -96,18 +96,12 @@ const ChatList = (props: any) => {
     );
   };
 
-  const handleSearch = (query: any) => {
-    filteredList = chatProvider?.hookChannels?.channels.filter((item: any) =>
-      item.name.toLowerCase().includes(query.toLowerCase())
-    );
-    console.log("filter",filteredList);
-    return filteredList;
-  };
+
   const TemplateChatList = () => {
     return (
       <>
         <Row className="header vr-center hr-between">
-          <ChatSearch onSearch={handleSearch} />
+          <ChatSearch />
         </Row>
         {!authContext.isConnected && <ConnectButton />}
         {!chatProvider?.hookChannels?.channels ? (
