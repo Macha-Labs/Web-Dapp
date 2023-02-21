@@ -28,6 +28,7 @@ function ChatSetting(props: any) {
       name: "Select Chat",
       onPress: () => {
         props.hookChat.handleMultiSelect();
+        props?.event?.onClose();
       },
     },
     {

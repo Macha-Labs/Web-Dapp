@@ -68,14 +68,14 @@ const ChatHeader = (props: any) => {
           variant="state_brand"
           size="sm"
           className="m-r-0-5"
-          onClick={props.hookChat.setSelectedMessages([])}
+          // onClick={props.hookChat.setSelectedMessages([])}
         >
           Clear
         </Button>
         <Button
           variant="state_brand"
           size="sm"
-          onClick={props.hookChat.handleMultiSelectClose}
+          // onClick={props.hookChat.handleMultiSelectClose}
         >
           Cancel
         </Button>
