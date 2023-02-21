@@ -52,7 +52,15 @@ const theme = extendTheme({
   components: {
     Input: {
       baseStyle: {
-        field: {},
+        field: {
+          bg: `${style.input.bg.default}`,
+          _hover: {
+            borderColor: `${style.input.border.active}`,
+          },
+          _focusVisible: {
+            borderColor: `${style.input.border.active}`,
+          },
+        },
       },
       variants: {
         normal: {
@@ -67,6 +75,11 @@ const theme = extendTheme({
       },
     },
     TextArea: {
+      baseStyle: {
+        field: {
+          bg: `${style.input.bg.default}`
+        },
+      },
       variants: {
         normal: {
           field: {

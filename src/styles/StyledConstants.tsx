@@ -141,9 +141,22 @@ export const darkStyle = {
     bg: { default: "#000511" },
     border: { default: "1px solid #0F172E" },
   },
+  list: {
+    padding: '5px',
+    bg: {
+      default: 'transparent',
+      hover:
+        "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
+    },
+    shadow: {
+      default: '',
+      hover: "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)"
+    }
+  },
   card: {
     bg: {
-      default: "#00081A",
+      default: "#000416",
+      highlight: "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
       hover:
         "linear-gradient(141.09deg, rgba(13, 25, 65, 0.5) 11.08%, rgba(0, 20, 60, 0.38) 89.68%)",
     },
@@ -161,8 +174,11 @@ export const darkStyle = {
   },
   pannel: { bg: { default: "" }, shadow: { default: "" } },
   input: {
-    bg: { default: "#020a21" },
-    border: { default: "1px solid #14244B" },
+    bg: { 
+      default: "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);",
+      active: "linear-gradient(141.09deg, rgba(15, 28, 72, 0.5) 11.08%, rgba(0, 26, 78, 0.38) 89.68%);"
+    },
+    border: { default: "1px solid #14244B", active: "1px solid linear-gradient(102.47deg, #197CEC 1.3%, #004AD9 59.9%)" },
   },
   message: {
     bg: {
@@ -190,9 +206,12 @@ export const darkStyle = {
     border: { default: "1px solid #0F172E" },
     shadow: { default: "" },
   },
-  popover: { bg: { default: "#000511" } },
+  popover: { bg: { default: "#000416" } },
   sidebar: {},
   dropdown: {},
+  avatar: {
+    border: '2px solid #246bfd',
+  },
   icon: {
     bg: {
       transparent: "transparent",

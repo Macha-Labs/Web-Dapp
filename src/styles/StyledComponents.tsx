@@ -302,11 +302,15 @@ export const StyledPostCard = styled(StyledCard)`
   }
 `;
 export const StyledOptionsCard = styled(StyledCard)`
-  padding: 0px;
+  padding: ${style.list.padding};
+  background: transparent;
   .item {
     padding: 10px;
+    background: ${style.list.bg.default};
     &:hover {
-      background: ${style.button.bg.hover};
+      background: ${style.list.bg.hover};
+      box-shadow: ${style.list.shadow.hover};
+      border-radius: 5px;
     }
   }
 `;

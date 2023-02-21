@@ -15,7 +15,7 @@ const ChatSearch = (props: any) => {
   };
 
   return (
-    <InputGroup className={props.style.className}>
+    <InputGroup className={props.style?.className}>
       <Input
         type="text"
         placeholder="Search"
