@@ -118,54 +118,50 @@ const ChatList = (props: any) => {
         ) : (
           <Col className="body verticlescroll hidescroll">
             {chatProvider?.hookChannels?.channels?.length ? (
-              <>
-                <div className="m-b-2">
-                  <ul>
-                    {filteredList.map((item: any, index: number) => (
-                      <StyledChatItem key={index}>
-                        <Button
-                          onClick={() => {
-                            console.log("Click on button", item);
-                            chatProvider.initiate(item, authContext.address);
-                          }}
-                          className="menu-item w-100"
-                          size="xl"
-                          variant={
-                            chatProvider.hookChannel.channel?.id == item?.id
-                              ? "state_list_active"
-                              : "state_list_hover"
-                          }
-                        >
-                          {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                          <Avatar
-                            size="md"
-                            className="m-r-0-5"
-                            name={item.name}
-                          />
-                          <Col className="w-100 d-flex flex-col">
-                            {item.name}
-                            <Col className="m-t-0-5">
-                              <Text fontSize={"sm"}>
-                                {item.lastMessage?.user?.lensUsername ||
-                                  item.lastMessage?.user?.lensHandle ||
-                                  truncateAddress(item.lastMessage?.user?.id)}
-                                : {item.lastMessage?.text}
-                              </Text>
-                            </Col>
-                          </Col>
-                          {props.context?.user?._id == props.org?.owner ? (
-                            <Col className="hr-center settingsIcon">
-                              <TemplateActions />
-                            </Col>
-                          ) : (
-                            <></>
-                          )}
-                        </Button>
-                      </StyledChatItem>
-                    ))}
-                  </ul>
-                </div>
-              </>
+              <ul>
+              {filteredList.map((item: any, index: number) => (
+                <StyledChatItem key={index}>
+                  <Button
+                    onClick={() => {
+                      console.log("Click on button", item);
+                      chatProvider.initiate(item, authContext.address);
+                    }}
+                    className="menu-item w-100 m-b-0-5"
+                    size="xl"
+                    variant={
+                      chatProvider.hookChannel.channel?.id == item?.id
+                        ? "state_list_active"
+                        : "state_list_hover"
+                    }
+                  >
+                    {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
+                    <Avatar
+                      size="md"
+                      className="m-r-0-5"
+                      name={item.name}
+                    />
+                    <Col className="w-100 d-flex flex-col">
+                      {item.name}
+                      <Col className="m-t-0-5">
+                        <Text fontSize={"sm"}>
+                          {item.lastMessage?.user?.lensUsername ||
+                            item.lastMessage?.user?.lensHandle ||
+                            truncateAddress(item.lastMessage?.user?.id)}
+                          : {item.lastMessage?.text}
+                        </Text>
+                      </Col>
+                    </Col>
+                    {props.context?.user?._id == props.org?.owner ? (
+                      <Col className="hr-center settingsIcon">
+                        <TemplateActions />
+                      </Col>
+                    ) : (
+                      <></>
+                    )}
+                  </Button>
+                </StyledChatItem>
+              ))}
+            </ul>
             ) : (
               <>
                 <Button onClick={modalChatNew.onOpen} variant="state_brand">
