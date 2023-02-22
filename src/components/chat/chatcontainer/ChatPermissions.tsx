@@ -78,7 +78,8 @@ const ChatPermissions = () => {
 
 
   const TemplateUserPermissions = () => {
-    console.log("Re rendering this permission layout");
+    
+    
     return (
       <StyledCard>
         {permissionOptions.map((permission: any, index: any) => {

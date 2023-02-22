@@ -113,6 +113,7 @@ const usePortalChannel = (channelData: any) => {
             "updating permissions",
             [channel]
         );
+        
         setIsLoading(true);
         permissionsChannel({ permissions: channel.permissions }, channel.id)
             .then((res) => {
