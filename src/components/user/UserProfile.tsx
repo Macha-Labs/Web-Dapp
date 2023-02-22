@@ -20,7 +20,7 @@ import LayoutPostList from "../../layouts/post/LayoutPostList";
 import UserCard from "./UserCard";
 import UserFollowersCard from "./UserFollowersCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 
 interface Props {
@@ -28,6 +28,7 @@ interface Props {
 }
 
 const UserProfile = (props: any) => {
+  const [isFollowed, setIsFollowed] = useState<boolean>(false);
   const hookLensFollow = useLensFollows(props.user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.id);
   const hookLensConnections = useLensConnections(
@@ -191,13 +192,14 @@ const UserProfile = (props: any) => {
         {props.user?.lens?.ownedBy.toLowerCase() !==
           authContext.address.toLowerCase() && (
           <Row className="m-v-1 vr-center hr-center">
-            {props.user?.lens?.isFollowedByMe ? (
+            {props.user?.lens?.isFollowedByMe || isFollowed ? (
               <Button
                 variant="state_lens_unfollow"
                 size="md"
                 className="m-r-1"
                 onClick={() => {
                   hookLensFollow.triggerUnFollow();
+                  setIsFollowed(false);
                 }}
                 isLoading={hookLensFollow.isLoading}
                 loadingText={hookLensFollow.loadingText}
@@ -211,6 +213,7 @@ const UserProfile = (props: any) => {
                 className="m-r-1"
                 onClick={() => {
                   hookLensFollow.triggerFollow();
+                  setIsFollowed(!isFollowed);
                 }}
                 isLoading={hookLensFollow.isLoading}
                 loadingText={hookLensFollow.loadingText}
@@ -241,7 +244,7 @@ const UserProfile = (props: any) => {
                       <Avatar size="sm" />
                     </Col>
 
-                    <Col>Post</Col>
+                    <Col>Posts</Col>
                   </Row>
                 </Tab>
                 <Tab>

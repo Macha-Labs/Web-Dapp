@@ -13,13 +13,13 @@ const ChatMention = (props: any) => {
     return (
         <>
             {
-                props.users?.length ?
+                props.mentionList?.length ?
                     (
                         <StyledChatPreviewCard>
                             <Text className="m-b-1">Members Matching @</Text>
                             <Col className="w-100 template-body">
                                 {
-                                    props.users.map((item: any, index: any) =>
+                                    props.mentionList.map((item: any, index: number) =>
                                         <RowHover key={index} className="hr-between vr-center w-100" onClick={() => onMemberClick(item)}>
                                             <Row className="vr-center">
                                                 <Avatar src={item?.image} className="m-r-1" size="sm" />
@@ -36,7 +36,7 @@ const ChatMention = (props: any) => {
                     )
                     :
                     (
-                        <></>
+                        <Text style={{color: "#ffffff"}}>Displaying members</Text>
                     )
             }
         </>

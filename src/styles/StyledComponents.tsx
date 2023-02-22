@@ -583,8 +583,6 @@ export const StyledChatList = styled.div`
     width: 100%;
     margin: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
   }
 `;
 

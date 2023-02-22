@@ -65,19 +65,31 @@ const ChatInput = (props: any) => {
 
   const TemplatePostNew = () => {
     return (
-      <ModalWindow event={modalPost} header={<Heading as="h6" size="sm">New Lens Post</Heading>}>
+      <ModalWindow
+        event={modalPost}
+        header={
+          <Heading as="h6" size="sm">
+            New Lens Post
+          </Heading>
+        }
+      >
         <Col className="p-1">
           <Text fontSize={16}>Your Lens Post Heading Here</Text>
           <Textarea className="m-b-1 m-t-1" size="xl"></Textarea>
           <Row className="m-b-1">
-            <IconImage path="IconDarkFiles.png" style={{className:"m-r-0-5"}} />
+            <IconImage
+              path="IconDarkFiles.png"
+              style={{ className: "m-r-0-5" }}
+            />
             <IconImage path="IconDarkPhotos.png" />
           </Row>
-          <Button size="sm" variant="state_brand w-content">Create Post</Button>
+          <Button size="sm" variant="state_brand w-content">
+            Create Post
+          </Button>
         </Col>
       </ModalWindow>
-    )
-  } 
+    );
+  };
   const templateAttachment = () => {
     let type;
     if (props?.hookChat?.attachItem) {
@@ -133,11 +145,11 @@ const ChatInput = (props: any) => {
   const TemplatePreview = () => {
     return (
       <>
-        {props?.hookChat?.actionMessage?.action == "REPLY" ||
-        props?.hookChat?.attachItem ||
-        props?.hookChat?.chatMeta?.type ||
-        props?.hookChat?.slashCmd ||
-        props?.hookChat?.isTyping ? (
+        {props.hookChat?.actionMessage?.action == "REPLY" ||
+        props.hookChat?.attachItem ||
+        props.hookChat?.chatMeta?.type ||
+        props.hookChat?.slashCmd ||
+        props.hookChat?.mentionActive ? (
           <StyledChatPreview>
             <Row className="vr-center w-100 hr-between">
               <Heading as="h6" size="sm">
@@ -152,7 +164,7 @@ const ChatInput = (props: any) => {
             {templateReply()}
             {templateAttachment()}
             {templateSlashPreview()}
-            {props?.hookChat?.isTyping ? templateMention() : <></>}
+            {props.hookChat?.mentionActive ? templateMention() : <></>}
             {/* {props?.hookChat.slashCmd ? (
                                 <LayoutSlashPreview
                                     hookChat={props.hookChat}
@@ -173,67 +185,68 @@ const ChatInput = (props: any) => {
   const templateMention = () => {
     return (
       <ChatMention
-        users={props.users}
-        setMentionList={props?.hookChat.setMentionList}
-        mentionList={props?.hookChat.mentionList}
-        mention={props?.hookChat.mention}
-        selectedText={props?.hookChat.selectedText}
+        setMentionList={props.hookChat.setMentionList}
+        mentionList={props.hookChat.mentionList}
+        mention={props.hookChat.mention}
+        selectedText={props.hookChat.selectedText}
       />
     );
   };
 
   const TemplateAction = () => {
     return (
-      <Pop 
-      trigger={<StyledIcon className="circled">
-      <PlusSquareIcon color="gray.300" />
-      </StyledIcon>
-      }>
-          <Col className="text-start">
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                isLoading={props.attachLoading}
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-              >
-                <label htmlFor="upload-file" className="w-100">
-                  <Row className="vr-center hr-between w-100">Upload File </Row>
-                </label>
-              </Button>
-              <input
-                id="upload-file"
-                onChange={props.hookChat.handleAttachment}
-                type="file"
-                hidden
-              />
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-              >
-                <Row className="hr-between w-100">Create Poll</Row>
-              </Button>
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-                onClick={modalPost.onOpen}
-              >
-                <Row className="hr-between w-100">Create Post</Row>
-              </Button>
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkWallet.png" />}
-              >
-                <Row className="hr-between w-100">Send Payment</Row>
-              </Button>
-            </Col>
-    </Pop>
+      <Pop
+        trigger={
+          <StyledIcon className="circled">
+            <PlusSquareIcon color="gray.300" />
+          </StyledIcon>
+        }
+      >
+        <Col className="text-start">
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            isLoading={props.attachLoading}
+            rightIcon={<IconImage path="IconDarkFiles.png" />}
+          >
+            <label htmlFor="upload-file" className="w-100">
+              <Row className="vr-center hr-between w-100">Upload File </Row>
+            </label>
+          </Button>
+          <input
+            id="upload-file"
+            onChange={props.hookChat.handleAttachment}
+            type="file"
+            hidden
+          />
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkFiles.png" />}
+          >
+            <Row className="hr-between w-100">Create Poll</Row>
+          </Button>
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkFiles.png" />}
+            onClick={modalPost.onOpen}
+          >
+            <Row className="hr-between w-100">Create Post</Row>
+          </Button>
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkWallet.png" />}
+          >
+            <Row className="hr-between w-100">Send Payment</Row>
+          </Button>
+        </Col>
+      </Pop>
     );
   };
 
@@ -252,13 +265,13 @@ const ChatInput = (props: any) => {
                 onChange={event => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
-                  props.hookChat.onChange(event);
                 }}
-                ref={props.hookChat?.textareaRef}
+                // ref={props.hookChat?.textareaRef}
+                value={props.hookChat?.typingMessage}
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
-                onKeyDown={event => props?.hookChat?.keyDownMessage(event)}
+                onKeyDown={event => props.hookChat?.keyDownMessage(event)}
                 placeholder="Message..."
                 height="auto"
                 rows={1}
@@ -344,7 +357,7 @@ const ChatInput = (props: any) => {
       <Template />
       <TemplatePostNew />
     </>
-  )
+  );
 };
 
 export default ChatInput;

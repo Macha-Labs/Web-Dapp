@@ -3,9 +3,11 @@ import {
   StyledConversationContainer,
   StyledConversationView,
 } from "@/styles/StyledComponents";
+import { useEffect } from "react";
 import ChatMessage from "./ChatMessage";
 
 const ChatWindow = (props: any) => {
+
   return (
     <StyledConversationContainer>
       <StyledConversationView>

@@ -17,6 +17,7 @@ import useMention from "./useMention";
 const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const streamContext = useContext(StreamContext) as StreamContextType;
+
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
   const [streamLoading, setStreamLoading] = useState<any>(false);
@@ -25,18 +26,23 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const [actionMessage, setActionMessage] = useState<any>({
     action: "",
     item: {},
-    data: {}
+    data: {},
   });
   const [selectedMessages, setSelectedMessages] = useState<any>([]);
   const [userObjTyping, setUserObjTyping] = useState<any>();
+  const [searchActive, setSearchActive] = useState<any>();
+  const [searchQuery, setSearchQuery] = useState<any>();
+  const [usersWhoAreTyping, setUsersWhoAreTyping] = useState<any>();
+  const [typingMessage, setTypingMessage] = useState<any>();
 
-  const textareaRef = useRef<any>(null);
+  const textareaRef = useRef<any>();
   const editMessageRef = useRef<any>(null);
 
   // custom hooks
   // const chatFilterHook = useChatFilters(users);
   const hookMention = useMention();
   const toast = useToast();
+  console.log("Loading the useStreamChat");
 
   // Slash & Widget
   const [slashCmd, setSlashCmd] = useState<any>();
@@ -45,7 +51,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const slashRun = (command: any) => {
     setSlashCmdValue(command.name);
     setSlashCmd(false);
-    textareaRef.current = "";
   };
 
   const addMessage = async () => {
@@ -90,9 +95,11 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       } else {
         messageData = {
           text: textareaRef.current?.value,
-          mentioned_users: hookMention.mentionList.map((user: any, index: number) => {
-            return user?.ownedBy;
-          }),
+          mentioned_users: hookMention.mentionList.map(
+            (user: any, index: number) => {
+              return user?.ownedBy;
+            }
+          ),
           message_custom_data: msgData,
         };
       }
@@ -126,7 +133,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
       setRerenderSwitch(!rerenderSwitch);
       setStreamLoading(false);
-      textareaRef.current.value = "";
       setAttachItem(null);
       setActionMessage(null);
 
@@ -163,7 +169,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const editMessage = async () => {
     console.log("editing message- ", editMessageRef.current.value);
     if (!authContext?.address) {
-      throw new Error ("Couldn't find the user address");
+      throw new Error("Couldn't find the user address");
     }
     if (actionMessage?.action !== "EDIT") {
       return;
@@ -258,13 +264,33 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
   const keyDownMessage = async (event: any) => {
     const keycode = event.which || event.keycode;
+
+    //Logic for typing indicators begins
+    let typingTimeout;
+    if (typingTimeout !== undefined) clearTimeout(typingTimeout);
+
+    await channel.raw.keystroke();
+
+    typingTimeout = setTimeout(async () => {
+      await channel.raw.stopTyping();
+    }, 3000);
+
+    channel.raw.on("typing.start", (event: any) => {
+      let typingUser = Object.keys(channel.raw.state.typing);
+      setUsersWhoAreTyping(typingUser);
+    });
+    channel.raw.on("typing.stop", (event: any) => {
+      setUsersWhoAreTyping(null);
+    });
+
+    //Logic for typing indicators ends
+
     if (keycode == 13 && !event.shiftKey) {
       event.preventDefault();
 
       if (textareaRef.current.value.substring(0, 1) == "/") {
         setSlashCmdValue(textareaRef.current.value);
         setSlashCmd(false);
-        textareaRef.current.value = "";
         // widgetDrawer.onOpen();
       } else {
         await addMessage();
@@ -293,7 +319,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleSearch = (e: any) => {
-    setActionMessage({action: 'SEARCH', data: {query: ''}});
+    setActionMessage({ action: "SEARCH", data: { query: "" } });
   };
 
   const handleSearchClose = () => {
@@ -313,7 +339,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleMultiSelect = () => {
-    setActionMessage({action: 'SEARCH', data: {query: ''}});
+    setActionMessage({ action: "SEARCH", data: { query: "" } });
     // setActionMessage({ action: "MULTISELECT", item: null, data: null });
   };
   const handleMultiSelectClose = () => {
@@ -378,17 +404,20 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
   const onChange = async (event: any, users?: any) => {
     const value = event.target.value;
+    setTypingMessage(value);
     const lastChar = value.split("")[value.length - 1];
     if (lastChar == " " || value == "") {
-      hookMention.setIsActive(false);
+      console.log("Setting mention false");
+      hookMention.setMentionActive(false);
       setSlashCmd(false);
     }
     if (lastChar == "@") {
-      setSlashCmd(false);
-      hookMention.setIsActive(true);
-    }
-    if (hookMention.isActive) {
-      hookMention.onTrigger(value, users);
+      // setSlashCmd(false);
+      console.log("Setting mention true");
+      hookMention.setMentionActive(true);
+      console.log("Here are the users you can mention on this channel ", users);
+      // hookMention.onTrigger(value, users);
+
     }
 
     if (slashCmd) {
@@ -428,7 +457,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     handleReaction: handleReaction,
     rerenderSwitch: rerenderSwitch,
     // MENTIONS
-    mentionActive: hookMention.isActive,
+    mentionActive: hookMention.mentionActive,
     mentionList: hookMention.mentionList,
     mentionSelect: mentionSelect,
     //
@@ -473,6 +502,9 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     handleEditClose: handleEditClose,
     handleSelect: handleSelect,
     selectedMessages: selectedMessages,
+    usersWhoAreTyping: usersWhoAreTyping,
+    typingMessage: typingMessage,
+    setTypingMessage: setTypingMessage,
     // widgetDrawer: widgetDrawer
   };
 };
