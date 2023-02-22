@@ -1,7 +1,7 @@
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserList from "@/components/user/UserList";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Button, Avatar, Heading, Icon, useDisclosure } from "@chakra-ui/react";
+import { Button, Avatar, Heading, Icon, useDisclosure, Text } from "@chakra-ui/react";
 import ChatMessageList from "./ChatMessageList";
 import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
@@ -102,13 +102,13 @@ const ChatHeader = (props: any) => {
                   {props.hookChat?.usersWhoAreTyping?.map(
                     (user: any, index: number) => {
                       return (
-                        <span key={index}>
+                        <Text key={index} fontSize="12">
                           {`${user}${
                             index! ==
                               props.hookChat?.usersWhoAreTyping.length - 1 &&
                             ","
                           } is typing...`}
-                        </span>
+                        </Text>
                       );
                     }
                   )}
