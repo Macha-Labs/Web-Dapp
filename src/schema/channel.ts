@@ -40,7 +40,7 @@ export const ChannelStream$ = (data: any, raw?: any) => {
         permissions: data?.own_capabilities,
         image: "",
         unreadCountObject: raw?.state?.read ? raw?.state?.read : 0,
-        lastMessage: raw?.state?.messageSets[0]?.messages[raw.state.messageSets[0]?.messages.length - 1],
+        lastMessage: raw?.state?.messageSets[0]?.messages[raw?.state?.messageSets[0]?.messages?.length - 1],
         membersCount: data?.member_count,
         notificationCount: 0,
         raw: omit(raw, "data"),
