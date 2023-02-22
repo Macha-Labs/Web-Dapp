@@ -88,7 +88,6 @@ const User = () => {
           </div>
           <div className="body">
             {!authContext.isConnected && <ConnectButton />}
-            <Button onClick={() => authContext.connectLens(authContext.address)} >Connect to lens</Button>
             <UserCard user={authContext?.user} onClick={setWindow('UserProfile')}/>
             <LayoutOptions
               options={userSettings}
