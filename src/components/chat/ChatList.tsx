@@ -2,15 +2,10 @@ import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
 import {
   Avatar,
   Button,
-  Checkbox,
-  Heading,
-  Icon,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import OrgControl from "../org/OrgControl";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import useOrgChannels from "@/hooks/portal/useOrgChannels";
@@ -19,8 +14,6 @@ import ChatNew from "./ChatNew";
 import IconImage from "../icons/IconImage";
 import { truncateAddress } from "@/helpers";
 import ChatSearch from "./chatcontainer/ChatSearch";
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import Pop from "../pop/Pop";
 import { darkStyle } from "@/styles/StyledConstants";
@@ -30,9 +23,11 @@ const ChatList = (props: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const hookOrgChannels = useOrgChannels("6246c7045cc31c36781d668e");
   const modalChatNew = useDisclosure();
-  let filteredList = [...chatProvider?.hookChannels?.channels];
   const [isClicked, setIsClicked] = useState<any>([]);
-  console.log("filteredList", filteredList);
+
+  useEffect(() => {
+    chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient)
+  }, [])
 
   const TemplateChatNew = () => {
     return (
@@ -85,13 +80,7 @@ const ChatList = (props: any) => {
     );
   };
 
-  const handleSearch = (query: any) => {
-    filteredList = chatProvider?.hookChannels?.channels.filter((item: any) =>
-      item.name.toLowerCase().includes(query.toLowerCase())
-    );
-    console.log("filter", filteredList);
-    return filteredList;
-  };
+
   const TemplateChatList = () => {
     return (
       <>
@@ -114,54 +103,59 @@ const ChatList = (props: any) => {
           <Col className="body verticlescroll hidescroll">
             {chatProvider?.hookChannels?.channels?.length ? (
               <ul>
-                {filteredList.map((item: any, index: number) => (
-                  <StyledChatItem key={index}>
-                    <Button
-                      onClick={() => {
-                        console.log("Click on button", item);
-                        chatProvider.initiate(item, authContext.address);
-                        setIsClicked((prevState: any) => [...prevState, index]);
-                      }}
-                      className="menu-item w-100 m-b-0-5"
-                      size="xl"
-                      variant={
-                        chatProvider.hookChannel.channel?.id == item?.id
-                          ? "state_brand"
-                          : "state_card_hover"
-                      }
-                    >
-                      {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                      <Avatar size="md" className="m-r-0-5" name={item.name} />
-                      <Col className="w-100 d-flex flex-col">
-                        {item.name}
-                        {item?.lastMessage && (
-                          <Col className="m-t-0-5">
-                            <Text fontSize={"sm"}>
-                              {item.lastMessage?.user?.lensUsername ||
-                                item.lastMessage?.user?.lensHandle ||
-                                truncateAddress(item.lastMessage?.user?.id)}
-                              : {item.lastMessage?.text}
-                            </Text>
-                          </Col>
-                        )}
+              {chatProvider?.hookChannels?.channels.map((item: any, index: number) => (
+                <StyledChatItem key={index}>
+                  <Button
+                    onClick={() => {
+                      console.log("Click on button", item);
+                      chatProvider.initiate(item, authContext?.address);
+                      setIsClicked((prevState: any) => [
+                        ...prevState,
+                        index,
+                      ]);
+                    }}
+                    className="menu-item w-100 m-b-0-5"
+                    size="xl"
+                    variant={
+                      chatProvider.hookChannel.channel?.id == item?.id
+                        ? "state_brand"
+                        : "state_card_hover"
+                    }
+                  >
+                    {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
+                    <Avatar
+                      size="md"
+                      className="m-r-0-5"
+                      name={item?.name}
+                    />
+                    <Col className="w-100 d-flex flex-col">
+                      {item?.name}
+                      <Col className="m-t-0-5">
+                        <Text fontSize={"sm"}>
+                          {item?.lastMessage?.user?.lensUsername ||
+                            item?.lastMessage?.user?.lensHandle ||
+                            truncateAddress(item?.lastMessage?.user?.id)}
+                          : {item?.lastMessage?.text}
+                        </Text>
                       </Col>
-                      {item.unreadCountObject[authContext.address]
-                        .unread_messages > 0 &&
-                        !isClicked.includes(index) && (
-                          <Col>
-                            <Text
-                              padding={1}
-                              background={darkStyle.color5}
-                              borderRadius="full"
-                            >
-                              {
-                                item.unreadCountObject[authContext.address]
-                                  .unread_messages
-                              }
-                            </Text>
-                          </Col>
-                        )}
-
+                    </Col>
+                    {item?.unreadCountObject[authContext?.address]
+                      ?.unread_messages > 0 &&
+                      !isClicked.includes(index) && (
+                        <Col>
+                          <Text
+                            padding={1}
+                            background={darkStyle.color5}
+                            borderRadius="full"
+                          >
+                            {
+                              item?.unreadCountObject[authContext?.address]
+                                ?.unread_messages
+                            }
+                          </Text>
+                        </Col>
+                      )}
+                    
                       <Col className="hr-center settingsIcon">
                         <TemplateActions />
                       </Col>

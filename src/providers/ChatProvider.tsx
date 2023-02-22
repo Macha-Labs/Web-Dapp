@@ -11,6 +11,7 @@ export type ChatContextType = {
   hookChat: any | undefined;
   hookMembers: any | undefined;
   hookChannels: any | undefined;
+  streamClient: any | undefined;
   initiate: (channel: any, userAddress: any) => void;
 };
 
@@ -20,10 +21,12 @@ export const ChatContext = createContext<ChatContextType>({
   hookChat: null,
   hookMembers: null,
   hookChannels: [],
+  streamClient: null,
   initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
 });
 
 export const ChatProvider = ({ children }: any) => {
+  console.log('Chat Provider')
   const [channelId, setChannelId] = useState<any>();
   const hookStreamChannel = useStreamChannel(channelId);
   const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel?.raw);
@@ -63,6 +66,7 @@ export const ChatProvider = ({ children }: any) => {
         hookChat: hookChat,
         hookMembers: hookStreamChannelMembers,
         hookChannels: streamContext?.hookChannels,
+        streamClient: streamContext?.client,
         initiate: initiate,
       }}
     >

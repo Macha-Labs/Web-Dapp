@@ -288,7 +288,7 @@ const ChatMessage = (props: any) => {
                         );
                       }}
                     >
-                      {emoji[item]} {props?.message?.reaction_scores[item]}
+                      {emoji[item as keyof typeof emoji]} {props?.message?.reaction_scores[item]}
                     </Button>
                   </>
                 );

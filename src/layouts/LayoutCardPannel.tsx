@@ -1,6 +1,6 @@
 import { StyledCardPannel } from "@/styles/StyledComponents";
 
-const LayoutCardPannel = (props) => {
+const LayoutCardPannel = (props: any) => {
     return (
         <StyledCardPannel className={props.style?.className}>
             <div className="header">
