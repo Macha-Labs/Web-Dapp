@@ -43,6 +43,6 @@ export const ChannelStream$ = (data: any, raw?: any) => {
         lastMessage: raw?.state?.messageSets[0]?.messages[raw?.state?.messageSets[0]?.messages?.length - 1],
         membersCount: data?.member_count,
         notificationCount: 0,
-        raw: omit(raw, "data"),
+        raw: raw,
     };
 };
