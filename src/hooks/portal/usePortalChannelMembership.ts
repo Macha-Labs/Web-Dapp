@@ -58,10 +58,7 @@ const usePortalChannelMembership = (channel: any) => {
   // fetching my lens followers
   useEffect(() => {
     if (authContext.address) {
-      console.log(
-        "Fetching followers for lens id ",
-        authContext.user?.lens?.id
-      );
+      console.log("Fetching followers for lens id ", authContext.user?.lens?.id);
       hookLensConnections.getFollowers(authContext.user?.lens?.id);
     } else {
       console.log("User address not found");
