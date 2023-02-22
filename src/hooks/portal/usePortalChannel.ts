@@ -1,21 +1,21 @@
-import {permissionsChannel} from "./../../service/ChannelService";
-import {useNavigation} from "@react-navigation/native";
-import {putChannelForUser} from "../../service/ChannelService";
-import {logger} from "../../helpers/logger";
-import {editChannel} from "../../service/ChannelService";
-import {useContext, useState} from "react";
-import {useToast} from "native-base";
-import {AuthContext, AuthContextType} from "../../providers/AuthProvider";
-import {ChannelStream$} from "../../schema/channel";
+import { permissionsChannel } from "./../../service/ChannelService";
+// import {useNavigation} from "@react-navigation/native";
+import { putChannelForUser } from "../../service/ChannelService";
+import { logger } from "../../helpers/logger";
+import { editChannel } from "../../service/ChannelService";
+import { useContext, useState } from "react";
+// import {useToast} from "native-base";
+import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
+import { ChannelStream$ } from "../../schema/channel";
 
-const usePortalChannel = (channelData) => {
+const usePortalChannel = (channelData: any) => {
     const [channel, setChannel] = useState(
         channelData ? channelData : ChannelStream$({})
     );
     const [isLoading, setIsLoading] = useState(false);
-    const toast = useToast();
+    // const toast = useToast();
     const authProvider = useContext(AuthContext) as AuthContextType;
-    const navigation = useNavigation<any>();
+    // const navigation = useNavigation<any>();
 
     const update = () => {
         setIsLoading(true);
@@ -35,15 +35,15 @@ const usePortalChannel = (channelData) => {
                         "getting response from API",
                         [res]
                     );
-                    toast.show({
-                        description: "Channel Details updated successfully",
-                        avoidKeyboard: true,
-                        duration: 3000,
-                    });
+                    // toast.show({
+                    //     description: "Channel Details updated successfully",
+                    //     avoidKeyboard: true,
+                    //     duration: 3000,
+                    // });
                     setIsLoading(false);
-                    navigation.navigate("Chat", {
-                        channel: channel,
-                    });
+                    // navigation.navigate("Chat", {
+                    //     channel: channel,
+                    // });
                 })
                 .catch((err) => {
                     logger(
@@ -67,16 +67,16 @@ const usePortalChannel = (channelData) => {
                         "getting response from API",
                         [res]
                     );
-                    toast.show({
-                        description: "Channel Created Successfully",
-                        avoidKeyboard: true,
-                        duration: 3000,
-                    });
+                    // toast.show({
+                    //     description: "Channel Created Successfully",
+                    //     avoidKeyboard: true,
+                    //     duration: 3000,
+                    // });
                     setIsLoading(false);
                     // ! TODO: This data is sent by DB and not getStream, have to resolve this
-                    navigation.navigate("Chat", {
-                        channel: channel,
-                    });
+                    // navigation.navigate("Chat", {
+                    //     channel: channel,
+                    // });
                 })
                 .catch((err) => {
                     logger(
@@ -89,12 +89,13 @@ const usePortalChannel = (channelData) => {
         }
     };
 
-    const togglePermission = (value) => {
+    const togglePermission = (value: any) => {
+        console.log("channel.permissions", channel.permissions);
         if (channel.permissions.includes(value)) {
             setChannel({
                 ...channel,
                 permissions: channel.permissions.filter(
-                    (permission) => permission !== value
+                    (permission: any) => permission !== value
                 ),
             });
         } else {
@@ -112,8 +113,9 @@ const usePortalChannel = (channelData) => {
             "updating permissions",
             [channel]
         );
+        
         setIsLoading(true);
-        permissionsChannel({permissions: channel.permissions}, channel.id)
+        permissionsChannel({ permissions: channel.permissions }, channel.id)
             .then((res) => {
                 logger(
                     "channel",
@@ -121,13 +123,13 @@ const usePortalChannel = (channelData) => {
                     "getting response from API",
                     [res]
                 );
-                toast.show({
-                    description: "Channel Permissions updated successfully",
-                    avoidKeyboard: true,
-                    duration: 3000,
-                });
+                // toast.show({
+                //     description: "Channel Permissions updated successfully",
+                //     avoidKeyboard: true,
+                //     duration: 3000,
+                // });
                 setIsLoading(false);
-                navigation.goBack();
+                // navigation.goBack();
             })
             .catch((err) => {
                 logger(

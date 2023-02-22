@@ -9,7 +9,6 @@ import ChatWindow from "./ChatWindow";
 const ChatContainer = (channel: any) => {
     const chatProvider = useContext(ChatContext);
     const authContext = useContext(AuthContext) as AuthContextType;
-    
     return (
         <>
              <ChatHeader 
@@ -20,6 +19,7 @@ const ChatContainer = (channel: any) => {
              <ChatWindow  
                     hookChat={chatProvider.hookChat}
                     hookChannel={chatProvider.hookChannel}
+                    authContext={authContext}
                     address={authContext.address}
             />
              <ChatInput  

@@ -12,14 +12,14 @@ import {
 } from '@chakra-ui/react';
 import { Row } from '@/styles/StyledComponents';
 
-const ModalSlider = (props) => {
+const ModalSlider = (props: any) => {
 
 
     return (
         <Drawer
             isOpen={props.event.isOpen}
             onClose={props.event.onClose}
-            size="xs"
+            size={props.size ? props.size : 'xs'}
         >
             <DrawerOverlay />
             <DrawerContent>

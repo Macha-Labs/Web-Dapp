@@ -1,9 +1,11 @@
-import { Avatar, AvatarBadge, Heading } from "@chakra-ui/react";
+import { Avatar, AvatarBadge, Heading, useDisclosure } from "@chakra-ui/react";
 import { FC, useState } from "react";
 import { Col, Row } from "@/styles/StyledComponents";
 import styled from "styled-components";
 import { helperIPFS, truncateAddress } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
+import ModalSlider from "../modal/ModalSlider";
+import UserProfile from "./UserProfile";
 
 interface Props {
     [key: string]: any
@@ -21,8 +23,15 @@ const Container = styled.div`
 `
 
 const UserList: FC<Props> = (props) => {
+    const modalProfile = useDisclosure();
+    const [selectedUser, setSelectedUser] = useState<any>();
 
-    const template = (heading, users) => {
+    const handleSelectedUser = (user: any) => {
+        modalProfile.onOpen();
+        setSelectedUser(user)
+    }
+
+    const template = (heading: any, users: any) => {
         return (
             <Col className="m-b-1"> 
                 {
@@ -34,8 +43,8 @@ const UserList: FC<Props> = (props) => {
                         </Col>
                         <Container>
                             {
-                                users.map((item: any, index) =>
-                                    <Row key={index} className="vr-center item m-b-0-5" >
+                                users.map((item: any, index: any) =>
+                                    <Row key={index} className="vr-center item m-b-0-5" onClick={() => {handleSelectedUser(item)}} >
                                         <Avatar src={helperIPFS(item.image)} className="m-r-0-5" size="sm" >
                                         {
                                             heading == 'Online' ? (<AvatarBadge boxSize='0.7em' bg='green.500' />) : (<></>)
@@ -65,12 +74,22 @@ const UserList: FC<Props> = (props) => {
         )
     }
 
+    const TemplateProfile = () => {
+        return (
+            <ModalSlider event={modalProfile} size="lg">
+                <UserProfile user={{lens: selectedUser}} />
+            </ModalSlider>
+        )
+    }
+
     return (
         <>
             
             {template('Online', props.onlineUsers)}
 
             {template('Ofline', props.offlineUsers)}
+
+            <TemplateProfile />
         </>
     )
 }

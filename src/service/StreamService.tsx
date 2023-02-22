@@ -50,7 +50,6 @@ export const removeStreamMembers = async (data: any) => {
 export const viewStreamMembers = async (channelId: string) => {
     const response = await fetch (`${config.url}/api/stream/viewmembers/${channelId}`);
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
@@ -60,7 +59,6 @@ export const listenPresence = async(channelId: string) => {
 
 //creating a relation between channel and member added to stream
 export const addChannelMembers = async(data: any) => {
-    console.log("Channel add data", data);
     const response = await fetch(`${config.url}/api/channel/member/add`, {
         method: 'POST',
         body: JSON.stringify(data),

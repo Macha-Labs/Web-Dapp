@@ -5,15 +5,17 @@ import useStreamChannelMembers from "../hooks/stream/useStreamChannelMembers";
 import useStreamChat from "../hooks/stream/useStreamChat";
 import { StreamContext, StreamContextType } from "./StreamProvider";
 
-type ChatContextType = {
+export type ChatContextType = {
+  channelId: any;
   hookChannel: any | undefined;
   hookChat: any | undefined;
   hookMembers: any | undefined;
-  hookChannels: any;
+  hookChannels: any | undefined;
   initiate: (channel: any, userAddress: any) => void;
 };
 
 export const ChatContext = createContext<ChatContextType>({
+  channelId: null,
   hookChannel: null,
   hookChat: null,
   hookMembers: null,
@@ -21,12 +23,15 @@ export const ChatContext = createContext<ChatContextType>({
   initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
 });
 
-export const ChatProvider = ({children}: any) => {
-    const [channelId, setChannelId] = useState<any>();
-    const hookStreamChannel = useStreamChannel(channelId);
-    const hookChat = useStreamChat(hookStreamChannel.channel);
-    const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel?.raw);
-    const streamContext = useContext(StreamContext) as StreamContextType;
+export const ChatProvider = ({ children }: any) => {
+  const [channelId, setChannelId] = useState<any>();
+  const hookStreamChannel = useStreamChannel(channelId);
+  const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel?.raw);
+  
+  let channelUsers = hookStreamChannelMembers?.onlineUsers.concat(hookStreamChannelMembers?.offlineUsers);
+  const hookChat = useStreamChat(hookStreamChannel.channel, channelUsers);
+
+  const streamContext = useContext(StreamContext) as StreamContextType;
 
   const initiate = async (channel: any, userAddress?: any) => {
     logger(
@@ -53,6 +58,7 @@ export const ChatProvider = ({children}: any) => {
   return (
     <ChatContext.Provider
       value={{
+        channelId: channelId,
         hookChannel: hookStreamChannel,
         hookChat: hookChat,
         hookMembers: hookStreamChannelMembers,
