@@ -15,7 +15,7 @@ import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import useOrgChannels from "@/hooks/portal/useOrgChannels";
 import ModalSlider from "../modal/ModalSlider";
-import ChatProfile from "./ChatProfile";
+import ChatNew from "./ChatNew";
 import IconImage from "../icons/IconImage";
 import { truncateAddress } from "@/helpers";
 import ChatSearch from "./chatcontainer/ChatSearch";
@@ -37,7 +37,7 @@ const ChatList = (props: any) => {
   const TemplateChatNew = () => {
     return (
       <ModalSlider event={modalChatNew} size="lg">
-        <ChatProfile />
+        <ChatNew />
       </ModalSlider>
     );
   };

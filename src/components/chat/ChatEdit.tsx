@@ -58,7 +58,7 @@ const ChatEdit = (props: any) => {
         </Row>
       }
     >
-      <Col className="hr-center w-full">
+      <Col className="hr-center w-full p-3">
         <Avatar
           size="2xl"
           className="m-v-1"
