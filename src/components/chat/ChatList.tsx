@@ -32,16 +32,17 @@ const ChatList = (props: any) => {
   const TemplateChatNew = () => {
     return (
       <ModalSlider event={modalChatNew} size="lg">
-        <ChatNew />
+        <ChatNew modal={modalChatNew} />
       </ModalSlider>
     );
   };
 
   const TemplateActions = () => {
+    // console.log("helo") ;
     return (
       <Pop
         trigger={<IconImage path="IconDarkMenu.png" />}
-        placement="bottom-end"
+        // placement="bottom-end"
       >
         <Col className="text-start">
           <Button
@@ -154,17 +155,14 @@ const ChatList = (props: any) => {
                           </Text>
                         </Col>
                       )}
-                    {props.context?.user?._id == props.org?.owner ? (
+                    
                       <Col className="hr-center settingsIcon">
                         <TemplateActions />
                       </Col>
-                    ) : (
-                      <></>
-                    )}
-                  </Button>
-                </StyledChatItem>
-              ))}
-            </ul>
+                    </Button>
+                  </StyledChatItem>
+                ))}
+              </ul>
             ) : (
               <>
                 <Button onClick={modalChatNew.onOpen} variant="state_brand">

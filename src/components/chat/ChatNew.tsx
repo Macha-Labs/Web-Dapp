@@ -3,10 +3,23 @@ import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Heading, Text } from "@chakra-ui/react";
+import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
 
 const ChatNew = (props: any) => {
-  const hookPortalChannel = usePortalChannel(props?.hookChannel?.channel);
+  const toast = useToast();
+  const callBack = ()=>{
+    toast({
+      title: "Channel Created Successfully",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.modal.onClose();
+  }
+  const hookPortalChannel = usePortalChannel(
+    props?.hookChannel?.channel,
+    {new:callBack}
+  );
   const data = [
     {
       label: "Name",
@@ -40,6 +53,7 @@ const ChatNew = (props: any) => {
             }}
             variant="state-brand"
             size="sm"
+            isLoading={hookPortalChannel?.isLoading}
           >
             Create New
           </Button>
@@ -48,7 +62,7 @@ const ChatNew = (props: any) => {
     >
       <Col className="p-2">
         <Row className="hr-center w-100 m-b-1">
-          <Avatar size="2xl" />
+          <Avatar size="2xl" name={data[0].value}/>
         </Row>
         <LayoutInputs data={data} style={{ class: "m-b-1" }} />
       </Col>

@@ -1,5 +1,5 @@
 import { Popover, PopoverBody, PopoverContent, PopoverTrigger } from "@chakra-ui/react";
-import Props from "imagekitio-react/dist/types/components/IKContext/props";
+
 
 const Pop = (props: any) => {
     return (
