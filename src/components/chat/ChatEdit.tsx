@@ -59,7 +59,11 @@ const ChatEdit = (props: any) => {
       }
     >
       <Col className="hr-center w-full">
-        <Avatar size="2xl" className="m-v-1" />
+        <Avatar
+          size="2xl"
+          className="m-v-1"
+          name={hookPortalChannel?.channel?.name}
+        />
         <Text fontSize={14} fontWeight={800}>
           Set New Profile Photo
         </Text>
