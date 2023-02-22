@@ -1,10 +1,10 @@
 import LayoutChatEmpty from "@/layouts/chat/LayoutChatEmpty";
 import {
   StyledConversationContainer,
-  StyledConversationView,
+  StyledConversationView
 } from "@/styles/StyledComponents";
-import { useEffect } from "react";
 import ChatMessage from "./ChatMessage";
+
 
 const ChatWindow = (props: any) => {
 
