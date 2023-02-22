@@ -12,6 +12,18 @@ export const UserDb$ = (dbData: any) => {
     })
 }
 
+export const UserStream$ = (dbData: any) => {
+  return {
+    id: dbData?._id || dbData?.id,
+    address: dbData?.address, 
+    image:dbData?.lensImage,   
+    handle: dbData?.lensHandle,
+    tokens: {
+      stream: dbData?.tokens?.stream,
+    },
+  };
+};
+
 export const UserLens$ = (lensData: any) => {
     let attributes: any = {
         "website": {

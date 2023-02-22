@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { getProfiles } from "../../helpers/lens/lens";
-import { UserLens$ } from "../../schema/user";
+import { UserLens$, UserStream$ } from "../../schema/user";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
+import { off } from "process";
 
 const useStreamChannelMembers = (channel: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
@@ -15,53 +16,16 @@ const useStreamChannelMembers = (channel: any) => {
     let onlineIds: any[] = [];
     let offlineIds: any[] = [];
     response?.members.map((item: any, index: number) => {
-      if (item.user?.lensId) {
-        if (item.user?.online) onlineIds.push(item.user?.lensId);
-        else offlineIds.push(item?.user?.lensId);
-      }
+      console.log("items", item.user);
+      if (item.user?.online) {
+        onlineIds.push(UserStream$(item.user));
+      } else offlineIds.push(UserStream$(item?.user));
     });
-
-    console.log("Online lens ids array", onlineIds);
-    console.log("Offline lens ids array", offlineIds);
-
-    // getting online lens profiles
-    if (onlineIds.length > 0) {
-      getProfiles({ profileIds: onlineIds, limit: 50 }).then(data => {
-        try {
-          const usersList = data.data?.profiles?.items.map(
-            (item: any, index: number) => {
-              return UserLens$(item);
-            }
-          );
-
-          setOnlineUsers(usersList);
-        } catch (error) {
-          setOnlineUsers([]);
-        }
-      });
-    } else {
-      setOnlineUsers([]);
-    }
-
-    // getting offline lens profiles
-    if (offlineIds.length > 0) {
-      getProfiles({ profileIds: offlineIds, limit: 50 }).then(data => {
-        try {
-          const usersList = data.data?.profiles?.items.map(
-            (item: any, index: number) => {
-              return UserLens$(item);
-            }
-          );
-          setOfflineUsers(usersList);
-        } catch (error) {
-          setOfflineUsers([]);
-        }
-      });
-    } else {
-      setOfflineUsers([]);
-    }
-
-    // checking if current user is a member of this channel
+    setOnlineUsers(onlineIds);
+    setOfflineUsers(offlineIds);
+  };
+  // checking if current user is a member of this channel
+  const checkUserIsAMember = async () => {
     try {
       const result = await channel?.raw?.queryMembers({
         id: authContext?.user.lens?.id,
@@ -77,7 +41,6 @@ const useStreamChannelMembers = (channel: any) => {
       return false;
     }
   };
-
   useEffect(() => {
     if (channel) fetchChannelMembers();
   }, [channel]);
@@ -85,7 +48,7 @@ const useStreamChannelMembers = (channel: any) => {
   const checkOnline = (user: any) => {
     return user.online == true;
   };
-
+  // console.log("userismember",response)
   return {
     fetchChannelMembers: fetchChannelMembers,
     checkOnline: checkOnline,
