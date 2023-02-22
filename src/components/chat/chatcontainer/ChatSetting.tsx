@@ -173,12 +173,23 @@ function ChatSetting(props: any) {
           Channel Settings
         </Heading>
         <Col>
-          <LayoutOptions options={chatOptions} style={{ className: "m-b-1" }} />
+          <LayoutOptions
+            options={chatOptions}
+            style={{ className: "m-b-1" }}
+            channelAdmin={props.hookChannel.channel.createdBy}
+            userId={props.authProvider.address}
+          />
           <LayoutOptions
             options={chatOptions2}
             style={{ className: "m-b-1" }}
+            channelAdmin={props.hookChannel.channel.createdBy}
+            userId={props.authProvider.address}
           />
-          <LayoutOptions options={chatOptions3} />
+          <LayoutOptions
+            options={chatOptions3}
+            channelAdmin={props.hookChannel.channel.createdBy}
+            userId={props.authProvider.address}
+          />
         </Col>
       </div>
       <TemplatePermission />
