@@ -44,6 +44,5 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
-    "netlify-cli": "^13.0.0"
   }
 }
