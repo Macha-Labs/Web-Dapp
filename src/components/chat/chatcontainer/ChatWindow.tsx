@@ -6,8 +6,11 @@ import {
 } from "@/styles/StyledComponents";
 import { useEffect } from "react";
 import ChatMessage from "./ChatMessage";
+import { useChannelStateContext } from "stream-chat-react";
+
 
 const ChatWindow = (props: any) => {
+  // const {messages} = useChannelStateContext();
 
   return (
     <StyledConversationContainer>

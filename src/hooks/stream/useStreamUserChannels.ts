@@ -16,8 +16,7 @@ const useStreamUserChannels = () => {
       setIsLoading(true);
       try {
         let result = await client.queryChannels(filter, sort, {
-          watch: true,
-          state: true,
+          limit: 15
         });
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The channel Data was just updated', [result])
         setChannels(

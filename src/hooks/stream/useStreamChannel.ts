@@ -12,24 +12,25 @@ const useStreamChannel = (channelId: any) => {
   const streamContext = useContext(StreamContext) as StreamContextType;
 
   // const commandHook = useCommand();
-  const getChannelMessages = async () => {
-      const lastMessageId =
-          channel?.raw?.state?.messageSets[0]?.messages[
-              channel?.raw?.state?.messageSets[0]?.messages.length - 1
-          ]?.id;
+  // const getChannelMessages = async () => {
+  //     const lastMessageId =
+  //         channel?.raw?.state?.messageSets[0]?.messages[
+  //             channel?.raw?.state?.messageSets[0]?.messages.length - 1
+  //         ]?.id;
 
-      // TEST: Try making a promise, Flatlist crashing if messages not loaded
-      const messages = await channel.raw.query({
-          messages: {limit: 10, id_lte: lastMessageId},
-      });
+  //     // TEST: Try making a promise, Flatlist crashing if messages not loaded
+  //     const messages = await channel.raw.query({
+  //         messages: {limit: 10, id_lte: lastMessageId},
+  //     });
 
-      console.log("Paginated messages ", messages);
-      setChannelMessages(messages.messages);
-  };
+  //     console.log("Paginated messages ", messages);
+  //     setChannelMessages(messages.messages);
+  // };
 
   const setUpChannel = async () => {
     const newChannel = streamContext?.client?.channel("team", channelId, {});
-    await newChannel?.watch();
+    await newChannel.watch();
+    setChannelMessages(channel?.raw?.state?.messageSets[0]?.messages);
     logger("channel", "setupChannel", "channel data from stream ", [
       newChannel,
     ]);
@@ -48,12 +49,12 @@ const useStreamChannel = (channelId: any) => {
 
   useEffect(() => {
     logger("channel", "useEffect[channel]", "channel is ", [channel]);
-    getChannelMessages();
+    // getChannelMessages();
   }, [channel]);
 
   return {
     channel: channel,
-    messages: channel?.raw?.state?.messageSets[0]?.messages,
+    messages: channelMessages,
     pinnedMessages: channel?.raw?.state?.pinnedMessages,
 
     // messages: channelMessages,
