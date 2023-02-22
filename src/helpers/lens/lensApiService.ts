@@ -1,5 +1,5 @@
 import { utils } from "ethers";
-import omitDeep from "omit-deep";
+import {omitDeep} from "@patomation/omit-deep";
 import { signTypedData } from '@wagmi/core';
 
 const omit = (object: any, name: string) => {
@@ -16,10 +16,8 @@ export const signedTypeData = async (
     "types": omit(types, "__typename"),
     "value": omit(value, "__typename"),
   }
-  console.log("Got the typedData ", typedData);
-  const result = await signTypedData(typedData);
-  console.log("Getting result from signTypedData", result);
-  return result;
+  // // const result = await signTypedData(typedData);
+  // return result;
 };
 
 export const splitSignature = (signature: string) => {

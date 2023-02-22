@@ -2,7 +2,7 @@ import { Avatar, Button, Heading, Text } from "@chakra-ui/react";
 import { Col, Row, StyledTransactionCard } from "@/styles/StyledComponents";
 import { truncateAddress } from "@/helpers";
 
-const LayoutTransactionCard = (props) => {
+const LayoutTransactionCard = (props: any) => {
     return (
         <StyledTransactionCard>
             <Col className="card-body">

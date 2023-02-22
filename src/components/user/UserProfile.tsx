@@ -244,7 +244,7 @@ const UserProfile = (props: any) => {
                       <Avatar size="sm" />
                     </Col>
 
-                    <Col>Post</Col>
+                    <Col>Posts</Col>
                   </Row>
                 </Tab>
                 <Tab>

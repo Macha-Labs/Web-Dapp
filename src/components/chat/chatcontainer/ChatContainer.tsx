@@ -9,7 +9,6 @@ import ChatWindow from "./ChatWindow";
 const ChatContainer = (channel: any) => {
     const chatProvider = useContext(ChatContext);
     const authContext = useContext(AuthContext) as AuthContextType;
-    
     return (
         <>
              <ChatHeader 

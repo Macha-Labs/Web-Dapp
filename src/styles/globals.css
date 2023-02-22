@@ -111,6 +111,12 @@ a {
 .w-100 {
   width: 100%;
 }
+.w-90 {
+  width: 90%;
+}
+.w-80 {
+  width: 80% !important;
+}
 .w-70 {
   width: 70%;
 }
@@ -338,6 +344,15 @@ a {
 }
 .p-1 {
   padding: 1rem;
+}
+.p-2 {
+  padding: 2rem;
+}
+.p-3 {
+  padding: 3rem !important;
+}
+.p-4 {
+  padding: 4rem !important;
 }
 .p-5 {
   padding: 5rem;

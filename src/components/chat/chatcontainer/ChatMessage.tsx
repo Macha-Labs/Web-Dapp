@@ -271,7 +271,8 @@ const ChatMessage = (props: any) => {
             return templateAttachment(item);
           })}
 
-          <Row className="vr-center">
+          {
+            props?.message.reaction_scores && <Row className="vr-center">
             {Object.keys(props?.message.reaction_scores).length > 0 &&
               Object.keys(props.message.reaction_scores).map((item: any) => {
                 return (
@@ -287,12 +288,13 @@ const ChatMessage = (props: any) => {
                         );
                       }}
                     >
-                      {emoji[item]} {props?.message?.reaction_scores[item]}
+                      {emoji[item as keyof typeof emoji]} {props?.message?.reaction_scores[item]}
                     </Button>
                   </>
                 );
               })}
           </Row>
+          }
         </Col>
         <Row className="w-100 action">
           <TemplateReactions />

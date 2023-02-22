@@ -21,8 +21,8 @@ const ChatSearch = (props: any) => {
         placeholder="Search"
         value={query}
         onChange={handleQueryChange}
+        // borderImage="linear-gradient(to right, #ff8a00, #e52e71) 1"
       />
-      
     </InputGroup>
   );
 };

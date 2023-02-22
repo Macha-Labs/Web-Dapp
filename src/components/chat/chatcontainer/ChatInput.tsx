@@ -167,11 +167,11 @@ const ChatInput = (props: any) => {
   const TemplatePreview = () => {
     return (
       <>
-        {props?.hookChat?.actionMessage?.action == "REPLY" ||
-        props?.hookChat?.attachItem ||
-        props?.hookChat?.chatMeta?.type ||
-        props?.hookChat?.slashCmd ||
-        props?.hookChat?.isTyping ? (
+        {props.hookChat?.actionMessage?.action == "REPLY" ||
+        props.hookChat?.attachItem ||
+        props.hookChat?.chatMeta?.type ||
+        props.hookChat?.slashCmd ||
+        props.hookChat?.mentionActive ? (
           <StyledChatPreview>
             <Row className="vr-center w-100 hr-between">
               <Heading as="h6" size="sm">
@@ -186,7 +186,7 @@ const ChatInput = (props: any) => {
             {templateReply()}
             {templateAttachment()}
             {templateSlashPreview()}
-            {props?.hookChat?.isTyping ? templateMention() : <></>}
+            {props.hookChat?.mentionActive ? templateMention() : <></>}
             {/* {props?.hookChat.slashCmd ? (
                                 <LayoutSlashPreview
                                     hookChat={props.hookChat}
@@ -207,11 +207,10 @@ const ChatInput = (props: any) => {
   const templateMention = () => {
     return (
       <ChatMention
-        users={props.users}
-        setMentionList={props?.hookChat.setMentionList}
-        mentionList={props?.hookChat.mentionList}
-        mention={props?.hookChat.mention}
-        selectedText={props?.hookChat.selectedText}
+        setMentionList={props.hookChat.setMentionList}
+        mentionList={props.hookChat.mentionList}
+        mention={props.hookChat.mention}
+        selectedText={props.hookChat.selectedText}
       />
     );
   };
@@ -288,14 +287,13 @@ const ChatInput = (props: any) => {
                 onChange={event => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
-                  props.hookChat.onChange(event);
                 }}
-                // ref={props.hookChat?.textareaRef}
+                ref={props.hookChat?.textareaRef}
                 value={props.hookChat?.typingMessage}
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
-                onKeyDown={event => props?.hookChat?.keyDownMessage(event)}
+                onKeyDown={event => props.hookChat?.keyDownMessage(event)}
                 placeholder="Message..."
                 height="auto"
                 rows={1}
