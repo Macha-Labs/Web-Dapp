@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Channel$, ChannelStream$ } from "../../schema/channel";
 
 const useStreamUserChannels = () => {
-  const [channelsRaw, setChannelsRaw] = useState<any>([]);
   const [channels, setChannels] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<any>(false);
 
@@ -21,29 +20,18 @@ const useStreamUserChannels = () => {
           watch: true,
           state: true,
         })
-        setChannelsRaw(result);
+        
+        let newResult = result?.map((item: any) => {
+          return ChannelStream$(item.data, item);
+        })
+        setChannels(newResult)
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The channel Data was just updated', [result])
       } catch (error: any) {
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The error is', [error]);
-        throw new Error("Error in fetching user Channels ", error);
       }
       
     }
   };
-
-  useEffect(() => {
-    try {
-      console.log('useStreamUserChannels.useEffect[channelsRaw]')
-      const channelsData = channelsRaw
-      channelsData?.map((item: any) => {
-        return ChannelStream$(item.data, item);
-      })
-      setChannels(channelsData)
-    }
-    catch(error) {
-        console.log("Error in setChannels", error);
-    }
-  }, [channelsRaw])
 
   return {
     channels: channels,
