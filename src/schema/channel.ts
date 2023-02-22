@@ -1,9 +1,3 @@
-import {omitDeep} from "@patomation/omit-deep";
-
-const omit = (object: any, name: string) => {
-    return omitDeep(object, name);
-};
-
 export const Channel$ = (data: any) => {
     return {
         id: data?._id,
@@ -43,6 +37,6 @@ export const ChannelStream$ = (data: any, raw?: any) => {
         lastMessage: raw?.state?.messageSets[0]?.messages[raw?.state?.messageSets[0]?.messages?.length - 1],
         membersCount: data?.member_count,
         notificationCount: 0,
-        raw: omit(raw, "data"),
+        raw: raw,
     };
 };

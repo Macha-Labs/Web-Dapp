@@ -36,7 +36,7 @@ const StreamProvider = ({children}: any) => {
                 hookStreamClient.client,
             );
         }
-    }, [hookStreamClient.client]);
+    }, [hookStreamClient.client?.user?.id]);
 
 
     return (
