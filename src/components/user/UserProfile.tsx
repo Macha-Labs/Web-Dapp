@@ -284,7 +284,7 @@ const UserProfile = (props: any) => {
   };
 
   return (
-    <>
+    <div>
       {props.user ? (
         <>
           <TemplateProfile />
@@ -293,7 +293,7 @@ const UserProfile = (props: any) => {
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };
 
