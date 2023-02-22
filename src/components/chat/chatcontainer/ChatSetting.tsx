@@ -134,7 +134,7 @@ function ChatSetting(props: any) {
   };
   const TemplateEditChannel = () => {
     return (
-      <ModalSlider size={"md"} event={modalChatEdit}>
+      <ModalSlider size={"lg"} event={modalChatEdit}>
         <ChatEdit hookChannel={props.hookChannel} />
       </ModalSlider>
     );
