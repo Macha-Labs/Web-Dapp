@@ -23,9 +23,7 @@ const ChatList = (props: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const hookOrgChannels = useOrgChannels("6246c7045cc31c36781d668e");
   const modalChatNew = useDisclosure();
-  let filteredList = [...chatProvider?.hookChannels?.channels];
   const [isClicked, setIsClicked] = useState<any>([]);
-  console.log("filteredList", filteredList);
 
   useEffect(() => {
     chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient)
@@ -81,13 +79,7 @@ const ChatList = (props: any) => {
     );
   };
 
-  const handleSearch = (query: any) => {
-    filteredList = chatProvider?.hookChannels?.channels.filter((item: any) =>
-      item.name.toLowerCase().includes(query.toLowerCase())
-    );
-    console.log("filter", filteredList);
-    return filteredList;
-  };
+
   const TemplateChatList = () => {
     return (
       <>
@@ -110,7 +102,7 @@ const ChatList = (props: any) => {
           <Col className="body verticlescroll hidescroll">
             {chatProvider?.hookChannels?.channels?.length ? (
               <ul>
-              {filteredList.map((item: any, index: number) => (
+              {chatProvider?.hookChannels?.channels.map((item: any, index: number) => (
                 <StyledChatItem key={index}>
                   <Button
                     onClick={() => {

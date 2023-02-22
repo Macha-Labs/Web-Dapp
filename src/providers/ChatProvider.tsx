@@ -26,6 +26,7 @@ export const ChatContext = createContext<ChatContextType>({
 });
 
 export const ChatProvider = ({ children }: any) => {
+  console.log('Chat Provider')
   const [channelId, setChannelId] = useState<any>();
   const hookStreamChannel = useStreamChannel(channelId);
   const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel?.raw);
