@@ -7,7 +7,7 @@ function Auth() {
     return (
         <StyledWindow>
                 <div className="middle">
-                    <StyledCard className="w-100  p-3">
+                    <StyledCard className="w-100 p-4">
                         <Col className="hr-center">
                             <Col className="m-b-2 hr-center">
                                 <IconImage path="Logo.png" size="90" style={{className: 'm-b-1'}}/>
