@@ -162,7 +162,7 @@ const UserProfile = (props: any) => {
       authContext.address,
       props.user?.lens?.ownedBy,
       props.user?.lens?.ownedBy.toLowerCase() ===
-        authContext.address.toLowerCase()
+        authContext?.address?.toLowerCase()
     );
     return (
       <StyledCard>
@@ -190,7 +190,7 @@ const UserProfile = (props: any) => {
         </Row>
 
         {props.user?.lens?.ownedBy.toLowerCase() !==
-          authContext.address.toLowerCase() && (
+          authContext?.address?.toLowerCase() && (
           <Row className="m-v-1 vr-center hr-center">
             {props.user?.lens?.isFollowedByMe || isFollowed ? (
               <Button
