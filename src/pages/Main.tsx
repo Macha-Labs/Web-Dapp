@@ -3,7 +3,6 @@ import AuthProvider from "@/providers/AuthProvider";
 import { ChatProvider } from "@/providers/ChatProvider";
 import StreamProvider from "@/providers/StreamProvider";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import "@rainbow-me/rainbowkit/styles.css";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
