@@ -1,4 +1,4 @@
-import React, { useContext, useDebugValue } from "react";
+import React, { useContext, useDebugValue, useState } from "react";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import usePortalChannel from "../../hooks/portal/usePortalChannel";
 import {
@@ -14,7 +14,12 @@ import LayoutCard from "@/layouts/LayoutCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatEdit = (props: any) => {
+  const [profileImage, setProfileImage] = useState(null);
   const hookPortalChannel = usePortalChannel(props.hookChannel?.channel);
+
+  const handleSelectClick = () => {
+    document.getElementById("galleryInput").click();
+  };
   const modalAddMembers = useDisclosure();
   const data = [
     {
@@ -59,12 +64,28 @@ const ChatEdit = (props: any) => {
       }
     >
       <Col className="hr-center w-full">
-        <Avatar
-          size="2xl"
-          className="m-v-1"
-          name={hookPortalChannel?.channel?.name}
+        {profileImage ? (
+          <Avatar
+            size="2xl"
+            className="m-v-1"
+            name={hookPortalChannel?.channel?.name}
+            src={URL.createObjectURL(profileImage)}
+          />
+        ) : (
+          <Avatar
+            size="2xl"
+            className="m-v-1"
+            name={hookPortalChannel?.channel?.name}
+          />
+        )}
+        <input
+          type="file"
+          id="galleryInput"
+          accept="image/*"
+          onChange={(e) => setProfileImage(e.target.files[0])}
+          style={{ display: "none" }}
         />
-        <Text fontSize={14} fontWeight={800}>
+        <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
           Set New Profile Photo
         </Text>
       </Col>
