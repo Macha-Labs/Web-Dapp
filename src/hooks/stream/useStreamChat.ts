@@ -17,6 +17,7 @@ import useMention from "./useMention";
 const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const streamContext = useContext(StreamContext) as StreamContextType;
+
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
   const [streamLoading, setStreamLoading] = useState<any>(false);
@@ -34,13 +35,14 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const [usersWhoAreTyping, setUsersWhoAreTyping] = useState<any>();
   const [typingMessage, setTypingMessage] = useState<any>();
 
-  const textareaRef = useRef<any>(null);
+  const textareaRef = useRef<any>();
   const editMessageRef = useRef<any>(null);
 
   // custom hooks
   // const chatFilterHook = useChatFilters(users);
   const hookMention = useMention();
   const toast = useToast();
+  console.log("Loading the useStreamChat");
 
   // Slash & Widget
   const [slashCmd, setSlashCmd] = useState<any>();
@@ -49,7 +51,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const slashRun = (command: any) => {
     setSlashCmdValue(command.name);
     setSlashCmd(false);
-    textareaRef.current = "";
   };
 
   const addMessage = async () => {
@@ -132,7 +133,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
       setRerenderSwitch(!rerenderSwitch);
       setStreamLoading(false);
-      textareaRef.current.value = "";
       setAttachItem(null);
       setActionMessage(null);
 
@@ -291,7 +291,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       if (textareaRef.current.value.substring(0, 1) == "/") {
         setSlashCmdValue(textareaRef.current.value);
         setSlashCmd(false);
-        textareaRef.current.value = "";
         // widgetDrawer.onOpen();
       } else {
         await addMessage();
@@ -408,15 +407,17 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     setTypingMessage(value);
     const lastChar = value.split("")[value.length - 1];
     if (lastChar == " " || value == "") {
-      hookMention.setIsActive(false);
+      console.log("Setting mention false");
+      hookMention.setMentionActive(false);
       setSlashCmd(false);
     }
     if (lastChar == "@") {
-      setSlashCmd(false);
-      hookMention.setIsActive(true);
-    }
-    if (hookMention.isActive) {
-      hookMention.onTrigger(value, users);
+      // setSlashCmd(false);
+      console.log("Setting mention true");
+      hookMention.setMentionActive(true);
+      console.log("Here are the users you can mention on this channel ", users);
+      // hookMention.onTrigger(value, users);
+
     }
 
     if (slashCmd) {
@@ -456,7 +457,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     handleReaction: handleReaction,
     rerenderSwitch: rerenderSwitch,
     // MENTIONS
-    mentionActive: hookMention.isActive,
+    mentionActive: hookMention.mentionActive,
     mentionList: hookMention.mentionList,
     mentionSelect: mentionSelect,
     //
