@@ -3,7 +3,7 @@ import { Row, StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledCo
 import React, { useState } from "react";
 import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import Nav from "@/components/nav/Nav";
-import ChatProfile from "@/components/chat/ChatProfile";
+import ChatNew from "@/components/chat/ChatNew";
 
 function Chat() {
   return (

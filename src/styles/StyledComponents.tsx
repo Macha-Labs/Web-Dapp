@@ -14,6 +14,14 @@ export const StyledWindow = styled.div`
     left: calc(${style.nav.width});
     display: flex !important;
   }
+
+  .middle {
+    width: 50%;
+    margin: auto;
+    margin-top: 10%;
+  }
+
+
 `;
 
 export const Row = styled.div`

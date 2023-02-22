@@ -345,6 +345,15 @@ a {
 .p-1 {
   padding: 1rem;
 }
+.p-2 {
+  padding: 2rem;
+}
+.p-3 {
+  padding: 3rem !important;
+}
+.p-4 {
+  padding: 4rem !important;
+}
 .p-5 {
   padding: 5rem;
 }

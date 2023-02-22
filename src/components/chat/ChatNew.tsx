@@ -2,10 +2,10 @@ import useLensProfileUpdate from "@/hooks/lens/useLensProfileUpdate";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
-import { Row } from "@/styles/StyledComponents";
+import { Col, Row } from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text } from "@chakra-ui/react";
 
-const ChatProfile = (props: any) => {
+const ChatNew = (props: any) => {
   const hookPortalChannel = usePortalChannel(props?.hookChannel?.channel);
   const data = [
     {
@@ -46,11 +46,13 @@ const ChatProfile = (props: any) => {
         </Row>
       }
     >
-      <Row className="hr-center w-100 m-b-1">
-        <Avatar size="2xl" />
-      </Row>
-      <LayoutInputs data={data} style={{ class: "m-b-1" }} />
+      <Col className="p-2">
+        <Row className="hr-center w-100 m-b-1">
+          <Avatar size="2xl" />
+        </Row>
+        <LayoutInputs data={data} style={{ class: "m-b-1" }} />
+      </Col>
     </LayoutCardPannel>
   );
 };
-export default ChatProfile; 
+export default ChatNew; 

@@ -63,7 +63,7 @@ const ChatEdit = (props: any) => {
         </Row>
       }
     >
-      <Col className="hr-center w-full">
+      <Col className="hr-center w-full p-3" >
         {profileImage ? (
           <Avatar
             size="2xl"
