@@ -7,15 +7,20 @@ import { useState, useEffect } from "react";
 
 const LayoutPostCard = (props: any) => {
   console.log("Lens Posts ", props.item);
-  const [tempState, setTempState] = useState<boolean>(false);
-
   const hookLensPosts = useLensPosts();
+  const [tempState, setTempState] = useState<boolean>(hookLensPosts.haveILiked);
 
   useEffect(() => {
     hookLensPosts.getHaveILikedPost(props.item?.id);
 
     console.log(hookLensPosts.haveILiked, "hookLensPosts.haveILikedPost");
   }, [props.item?.id]);
+
+  console.log(
+    !hookLensPosts.haveILiked,
+    tempState,
+    "hookLensPosts.haveILikedPost"
+  );
   return (
     <>
       {props?.item ? (
@@ -61,7 +66,7 @@ const LayoutPostCard = (props: any) => {
                 <div className="actions">
                   <Flex>
                     <Row className="m-r-0-5">
-                      {!hookLensPosts.haveILiked ? (
+                      {!tempState ? (
                         <Button
                           className="buttonCol"
                           size="xs"
