@@ -19,7 +19,8 @@ const LayoutPostCard = (props: any) => {
   console.log(
     !hookLensPosts.haveILiked,
     tempState,
-    "hookLensPosts.haveILikedPost"
+    "hookLensPosts.haveILikedPost",
+    props.item
   );
   return (
     <>
@@ -66,7 +67,7 @@ const LayoutPostCard = (props: any) => {
                 <div className="actions">
                   <Flex>
                     <Row className="m-r-0-5">
-                      {!tempState ? (
+                      {tempState ? (
                         <Button
                           className="buttonCol"
                           size="xs"
