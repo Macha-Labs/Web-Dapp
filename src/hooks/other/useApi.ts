@@ -8,10 +8,8 @@ const useAPI = () => {
     const hookApollo = useApollo();
     const hookIpfs = useIpfs();
 
-    const callContract = async (contractAddress, contractABI, signer, functionName, functionParams) => {
-        console.log('I am inside action on contract');
+    const callContract = async (contractAddress: any, contractABI: any, signer: any, functionName: any, functionParams: any) => {
         const contract = new ethers.Contract(contractAddress, contractABI, signer);
-        console.log(contract, functionParams);
 
         let promise = new Promise(async function (resolve, reject) {
             try {
@@ -19,7 +17,6 @@ const useAPI = () => {
                    ...functionParams
                 )
                 const receipt = await tx.wait();
-                console.log("Txn Created", tx.hash);
                 resolve(receipt);
             } catch (error) {
                 reject(error);
@@ -28,14 +25,14 @@ const useAPI = () => {
         return promise;
     }
 
-    const callIpfsWithContract = async (ipfsFile, ipfsName, contractAddress, contractABI, signer, functionName, functionParams) => {
+    const callIpfsWithContract = async (ipfsFile: any, ipfsName: any, contractAddress: any, contractABI: any, signer: any, functionName: any, functionParams: any) => {
         const ipfsMeta: any = await hookIpfs.store(ipfsFile, ipfsName);
         functionParams.push(ipfsMeta.url);
         const promise = callContract(contractAddress, contractABI, signer, functionName, functionParams)
         return promise;
     }
 
-    const callGraphQuery = async (graphURL, graphSchema, graphQuery) => {
+    const callGraphQuery = async (graphURL: any, graphSchema: any, graphQuery: any) => {
         return await hookApollo.client(graphURL).query(
           {
             query: gql(graphSchema),

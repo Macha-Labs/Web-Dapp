@@ -1,9 +1,7 @@
 import { Heading, Image, Text } from "@chakra-ui/react";
 import { Col, StyledNFTCard } from "@/styles/StyledComponents";
 
-const LayoutNFTCard = (props) => {
-    console.log("NFT Image file:",props.nft?.file);
-    
+const LayoutNFTCard = (props: any) => {
     return (
         <StyledNFTCard className="">
             <Col className="vr-center">

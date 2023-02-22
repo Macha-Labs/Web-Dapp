@@ -1,6 +1,8 @@
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
+import { StreamContext } from "@/providers/StreamProvider";
 import { useContext } from "react";
+import { Chat } from "stream-chat-react"
 
 import ChatHeader from "./ChatHeader";
 import ChatInput from "./ChatInput";
@@ -9,22 +11,27 @@ import ChatWindow from "./ChatWindow";
 const ChatContainer = (channel: any) => {
     const chatProvider = useContext(ChatContext);
     const authContext = useContext(AuthContext) as AuthContextType;
-    
+    const streamContext = useContext(StreamContext);
+    console.log("streamContext client in ChatContainer", streamContext.client);
     return (
         <>
-             <ChatHeader 
+            <Chat client={streamContext.client}>
+
+                <ChatHeader
                     hookChat={chatProvider.hookChat}
                     hookChannel={chatProvider.hookChannel}
                     hookMembers={chatProvider.hookMembers}
-            />
-             <ChatWindow  
+                />
+                <ChatWindow
                     hookChat={chatProvider.hookChat}
                     hookChannel={chatProvider.hookChannel}
+                    authContext={authContext}
                     address={authContext.address}
-            />
-             <ChatInput  
+                />
+                <ChatInput
                     hookChat={chatProvider.hookChat}
-            />
+                />
+            </Chat>
         </>
     )
 }

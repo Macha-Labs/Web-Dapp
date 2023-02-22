@@ -23,14 +23,14 @@ const StreamProvider = ({children}: any) => {
     
 
     useEffect(() => {
-        hookStreamClient.connectToStream();
+        if (authContext?.user?.db?.tokens?.stream) {
+            hookStreamClient.connectToStream();
+        }
     }, [authContext?.user?.db?.tokens?.stream]);
 
     useEffect(() => {
         if (hookStreamClient.client?.user?.id) {
             setClient(hookStreamClient.client);
-            console.log("The stream client is set", hookStreamClient.client);
-
             //sending a callback function with this
             hookChannels.fetchUserChannels(
                 hookStreamClient.client,

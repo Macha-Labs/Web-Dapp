@@ -4,7 +4,6 @@ import { config } from "../config";
 export const getUsers = async () => {
     const response = await fetch(`${config.url}/api/users`);
     const data = await response.json();
-    console.log("The get users data is ", data);
     return data;
 }
 
@@ -21,7 +20,6 @@ export const getAllUsers = async (username: string) => {
 }
 
 export const findOrCreateUser = async (userData: any) => {
-    console.log("Called find of create user with data ", userData);
     const response = await fetch(`${config.url}/api/user/find-or-create`, {
         method: 'POST',
         body: JSON.stringify(userData),
@@ -31,7 +29,6 @@ export const findOrCreateUser = async (userData: any) => {
         }
     });
     const data = await response.json();
-    console.log("Got return data from the database ",JSON.stringify(data));
     return data;
 }
 
@@ -56,13 +53,10 @@ export const createUser = async(auth: any, uniqueId: string, userData: any) => {
             // 'Content-Type': 'application/x-www-form-urlencoded',
         },
     });
-    // const data = await response.json();
-    // console.log(data);
 }
 
 
 export const updateUser = async(auth: any, uniqueId: string, userData: any) => {
-    console.log(userData);
     const response = await fetch(`${config.url}/api/user/${auth}/${uniqueId}/update`, {
         method: 'POST',
         body: JSON.stringify(userData),
@@ -143,7 +137,6 @@ export const updatePluginLens = async(auth: any, uniqueId: string, data: any) =>
             'Content-Type': 'application/json'
         },
     });
-    console.log(response);
 }
 
 export const updateCalendar = async(auth: any, uniqueId: string, calendar: any) => {

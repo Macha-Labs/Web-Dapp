@@ -1,4 +1,4 @@
-import { Web3Storage } from 'web3.storage'
+import { Web3Storage } from "web3.storage";
 import { config } from "@/config";
 
 export const getAccessToken = () => {
@@ -6,7 +6,7 @@ export const getAccessToken = () => {
 }
 
 export const makeStorageClient = () => {
-  return new Web3Storage({ token: config.WEB3STORAGE_TOKEN, endpoint: new URL('https://api.web3.storage')})
+  return new Web3Storage({ token: config.WEB3STORAGE_TOKEN, endpoint: new URL('https://api.web3.storage') })
 }
 
 export const makeFileObjects = async (objectBody: any) => {
@@ -21,12 +21,8 @@ export const makeFileObjects = async (objectBody: any) => {
   const files = [
     new File([blob], 'file.json')
   ]
-  
-  if (objectBody?.metadata_id) {
-    return await nonWrappedData(files);
-  } else {
-    return await storeFiles(files);
-  }
+
+  return await uploadAtIpfsRoot(files);
 }
 
 export const storeFiles = async (files: any) => {
@@ -34,7 +30,7 @@ export const storeFiles = async (files: any) => {
   return client.put(files);
 }
 
-export const nonWrappedData = (files: any) => {
+export const uploadAtIpfsRoot = (files: any) => {
   const client = makeStorageClient();
-  return client.put(files, {wrapWithDirectory: false});
+  return client.put(files, { wrapWithDirectory: false });
 }

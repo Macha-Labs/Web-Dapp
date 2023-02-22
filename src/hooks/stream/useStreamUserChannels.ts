@@ -16,8 +16,7 @@ const useStreamUserChannels = () => {
       setIsLoading(true);
       try {
         let result = await client.queryChannels(filter, sort, {
-          watch: true,
-          state: true,
+          limit: 15
         });
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The channel Data was just updated', [result])
         setChannels(
@@ -25,8 +24,8 @@ const useStreamUserChannels = () => {
             return ChannelStream$(item.data, item);
           })
         );
-      } catch (e) {
-        console.log("StreamAuth Step 6", e);
+      } catch (error: any) {
+        throw new Error("Error in fetching user Channels ", error);
       }
     }
   };

@@ -14,13 +14,13 @@ const useStreamChannel = (channelId: any) => {
   // const commandHook = useCommand();
   // const getChannelMessages = async () => {
   //     const lastMessageId =
-  //         channel.raw.state.messageSets[0]?.messages[
-  //             channel.raw.state.messageSets[0]?.messages.length - 1
+  //         channel?.raw?.state?.messageSets[0]?.messages[
+  //             channel?.raw?.state?.messageSets[0]?.messages.length - 1
   //         ]?.id;
 
   //     // TEST: Try making a promise, Flatlist crashing if messages not loaded
   //     const messages = await channel.raw.query({
-  //         messages: {limit: 20, id_lte: lastMessageId},
+  //         messages: {limit: 10, id_lte: lastMessageId},
   //     });
 
   //     console.log("Paginated messages ", messages);
@@ -29,7 +29,8 @@ const useStreamChannel = (channelId: any) => {
 
   const setUpChannel = async () => {
     const newChannel = streamContext?.client?.channel("team", channelId, {});
-    await newChannel?.watch();
+    await newChannel.watch();
+    setChannelMessages(channel?.raw?.state?.messageSets[0]?.messages);
     logger("channel", "setupChannel", "channel data from stream ", [
       newChannel,
     ]);
@@ -53,7 +54,7 @@ const useStreamChannel = (channelId: any) => {
 
   return {
     channel: channel,
-    messages: channel?.raw?.state?.messageSets[0]?.messages,
+    messages: channelMessages,
     pinnedMessages: channel?.raw?.state?.pinnedMessages,
 
     // messages: channelMessages,

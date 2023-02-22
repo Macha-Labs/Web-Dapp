@@ -106,6 +106,7 @@ a {
   }
 }
 
+
 /* WIDTH */
 .w-100 {
   width: 100%;
@@ -212,6 +213,9 @@ a {
 }
 .w-screen {
   width: 100vw;
+}
+.w-content {
+  width: fit-content;
 }
 
 /* HEIGHT */
@@ -334,6 +338,9 @@ a {
 }
 .p-1 {
   padding: 1rem;
+}
+.p-5 {
+  padding: 5rem;
 }
 .p-v-2 {
   padding: 3rem 0 rem;

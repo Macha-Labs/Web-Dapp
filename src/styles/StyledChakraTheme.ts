@@ -25,6 +25,9 @@ const theme = extendTheme({
             paddingLeft: '0.5rem !important',
             paddingRight: '0.5rem !important',
         },
+        '.chakra-modal': {
+            border: `${style.modal.border.default} !important`
+        },
         '.chakra-modal__body': {
             background: `${style.modal.bg.default}`,
             paddingTop: '1rem !importannt',
@@ -116,6 +119,17 @@ const theme = extendTheme({
             state_card: {
                 background: `${style.card.bg.default}`,
                 border: `${style.card.border.default}`,
+                shadow: `${style.card.shadow.default}`
+            },
+            state_card_hover: {
+                background: `${style.card.bg.default}`,
+                border: `${style.card.border.default}`,
+                shadow: `${style.card.shadow.default}`,
+                _hover: {
+                    background: `${style.card.bg.hover}`,
+                    border: `1px solid ${style.card.border.hover}`,
+                    shadow: `${style.card.shadow.hover}`,
+                }
             },
             state_lens: {
                 opacity: '0.95',
@@ -176,7 +190,7 @@ const theme = extendTheme({
         baseStyle: {
             content: {
                 width: "3xs",
-                bg: `#1c1c23`,
+                bg: `${style.popover.bg.default}`,
                 border: "1px solid",
                 borderColor: "gray.800",
             }

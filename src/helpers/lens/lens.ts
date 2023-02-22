@@ -23,7 +23,6 @@ import {
 import { CreatePublicPostRequest } from "./lensInterfaces";
 
 export const generateChallenge = async (address: string) => {
-  console.log("generateChallenge got the address ", address);
   const res = await apolloClient.query({
     query: gql(GET_CHALLENGE),
     variables: {
@@ -32,13 +31,10 @@ export const generateChallenge = async (address: string) => {
       },
     },
   });
-  console.log("Returnin the res ", res.data.challenge);
   return res.data.challenge.text;
 };
 
 export const authenticate_user = async (address: any, signature: any) => {
-  console.log("Got the address ", address);
-  console.log("Got the signature ", signature);
   try {
     const { data } = await apolloClient.mutate({
       mutation: gql(AUTHENTICATION),
@@ -49,11 +45,9 @@ export const authenticate_user = async (address: any, signature: any) => {
         },
       },
     });
-    console.log("Got the return data ", data);
     return data.authenticate;
   } catch (error: any) {
-    console.log(error);
-    console.log(error?.networkError?.result?.errors);
+    throw new Error("Error in authenticating user with Lens ", error)
   }
 };
 
@@ -168,7 +162,6 @@ export const setMetaData = async (profileId: string, metadata: any, accessToken:
       },
     },
   });
-  console.log(result);
 };
 
 export const followUser = async (requestParams: any) => {
@@ -191,7 +184,6 @@ export const unfollowUser = async (requestParams: any) => {
 
 export const createNewPost = async (request: CreatePublicPostRequest) => {
   try {
-    console.log(apolloClient);
     const result = await apolloClient.mutate({
       mutation: gql(CREATE_POST),
       variables: {
@@ -200,8 +192,7 @@ export const createNewPost = async (request: CreatePublicPostRequest) => {
     });
     return result;
   } catch (error: any) {
-    console.log(error);
-    console.log(error?.networkError?.result?.errors);
+    throw new Error("Error in creaing new Lens Post ", error);
   }
   
 };
@@ -216,13 +207,11 @@ export const validateMetadata = async (requestParams: any) => {
     });
     return result;
   } catch (error: any) {
-    console.log(error);
-    console.log(error?.networkError?.result?.errors);
+    throw new Error("Error in validating Metadata ", error?.networkError?.result?.errors);
   }
 };
 
 export const deletePost = async (requestParam: any) => {
-  console.log("Request Param ", requestParam);
   const result = await apolloClient.mutate({
     mutation: gql(DELETE_POST),
     variables: {
@@ -240,11 +229,9 @@ export const likePost = async (requestParam: any) => {
         request: requestParam,
       },
     });
-    console.log("Liked Successfully..", result.data!.addReaction);
     return result.data!.addReaction;
   } catch (error: any) {
-    console.log(error);
-    console.log(error?.networkError?.result?.errors);
+    throw new Error("Error in Liking Lens post ", error?.networkError?.result?.errors);
   }
 };
 
@@ -256,10 +243,8 @@ export const mirrorPost = async (requestParam: any) => {
         request: requestParam,
       },
     });
-    console.log("Mirror Successfully..", result.data!.addReaction);
     return result.data!.createMirrorTypedData;
   } catch (error: any) {
-    console.log(error);
-    console.log(error?.networkError?.result?.errors);
+    throw new Error("Error in Mirroring Lens Post ", error?.networkError?.result?.errors);
   }
 };
