@@ -2,42 +2,39 @@ import { BigNumber, ethers, utils } from "ethers";
 import { splitSignature } from "ethers/lib/utils";
 import { createNewPost, validateMetadata } from "../../helpers/lens/lens";
 import { LENS_HUB_CONTRACT } from "../../helpers/lens/lensContract";
-import  signedTypeData  from "../../helpers/lens/lensApiService";
+import signedTypeData from "../../helpers/lens/lensApiService";
 import { CreatePublicPostRequest } from "../../helpers/lens/lensInterfaces";
 import { PublicationMainFocus } from "../../helpers/lens/publication";
 import { makeFileObjects, nonWrappedData } from "../../helpers/web3Storage";
-import { useContext } from "react";
-import { v4 } from "uuid";
+import { useContext, useRef } from "react";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { LensHubAbi } from "../../contracts/lens/lensHubContractAbi";
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
+// import { useWalletConnect } from "@walletconnect/react-native-dapp";
+import { v4 as uuidv4 } from "uuid";
 
 const useCreateLensPost = () => {
   const authContext = useContext(AuthContext) as AuthContextType;
-  const connector = useWalletConnect();
+  const postContentRef = useRef<any>();
+  // const connector = useWalletConnect();
 
   const signCreatePostTypedData = async (request: CreatePublicPostRequest) => {
-      const result = await createNewPost(request);
+    const result = await createNewPost(request);
 
-      const typedData = result.data!.createPostTypedData.typedData;
+    const typedData = result.data!.createPostTypedData.typedData;
     try {
       const signature = await signedTypeData(
         typedData.domain,
         typedData.types,
-        typedData.value,
-        connector.accounts[0],
-        connector
+        typedData.value
       );
 
       return { result, signature };
     } catch (error: any) {
       throw new Error("Error in signing Typed Data ", error);
     }
-
-    
   };
 
-  const validate = async (params: any) => {
+  const validateMetadataAndPostOnLens = async (params: any) => {
     if (!params.profileId) {
       throw new Error("Missing Profile id");
     }
@@ -56,7 +53,7 @@ const useCreateLensPost = () => {
       if (fileCid != null) {
         fileObj = {
           // item: `ipfs://${fileCid}`,
-          item: 'ipfs://bafkreiakj3oidnfr7kbv6k4fqgzg44it6how3d73zqfbzlkfb4kx7x2zke',
+          item: "ipfs://bafkreiakj3oidnfr7kbv6k4fqgzg44it6how3d73zqfbzlkfb4kx7x2zke",
           type: params?.file?.type,
         };
       }
@@ -66,7 +63,7 @@ const useCreateLensPost = () => {
       mainContentFocus: params?.file?.type
         ? PublicationMainFocus[params?.file?.type]
         : PublicationMainFocus.TEXT_ONLY,
-      metadata_id: v4(),
+      metadata_id: uuidv4(),
       description: params?.postContent,
       locale: "en-US",
       content: params?.postContent,
@@ -87,6 +84,7 @@ const useCreateLensPost = () => {
     });
 
     if (validateRes?.data?.validatePublicationMetadata?.valid) {
+      console.log("HEEEEERRRRREEEEEE");
       const lensPostId = await createPost(params, postMetadata);
       return lensPostId;
     } else {
@@ -100,11 +98,13 @@ const useCreateLensPost = () => {
     makeFileObjects(postMetadata).then((result: any) => {
       ipfsFileCid = result;
     });
+    console.log("postReq", LENS_HUB_CONTRACT, LensHubAbi, authContext.signer);
 
     const createPostRequest = {
       profileId: params.profileId,
       // contentURI: `ipfs://${ipfsFileCid}`,
-      contentURI: 'ipfs://bafkreiakj3oidnfr7kbv6k4fqgzg44it6how3d73zqfbzlkfb4kx7x2zke',
+      contentURI:
+        "ipfs://bafkreiakj3oidnfr7kbv6k4fqgzg44it6how3d73zqfbzlkfb4kx7x2zke",
       collectModule: {
         freeCollectModule: {
           followerOnly: false,
@@ -119,6 +119,7 @@ const useCreateLensPost = () => {
     const typedData = signedResult.result.data!.createPostTypedData.typedData;
 
     const { v, r, s } = splitSignature(signedResult.signature);
+    console.log("typedData", authContext.signer);
     const lensHub = new ethers.Contract(
       LENS_HUB_CONTRACT,
       LensHubAbi,
@@ -148,7 +149,7 @@ const useCreateLensPost = () => {
     console.log("topicid we care about", topicId);
 
     const profileCreatedLog = logs.find((l: any) => l.topics[0] === topicId);
-    console.log("create post: created log", profileCreatedLog);
+    console.log("create post: created log", profileCreatedLog, logs, topicId);
 
     let profileCreatedEventLog = profileCreatedLog!.topics;
     console.log("create post: created event logs", profileCreatedEventLog);
@@ -173,7 +174,8 @@ const useCreateLensPost = () => {
   };
   return {
     createPost: createPost,
-    validate: validate,
+    validateMetadataAndPostOnLens: validateMetadataAndPostOnLens,
+    postContentRef: postContentRef,
   };
 };
 
