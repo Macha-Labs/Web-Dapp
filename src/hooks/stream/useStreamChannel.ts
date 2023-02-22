@@ -19,12 +19,12 @@ const useStreamChannel = (channelId: any) => {
           ]?.id;
 
       // TEST: Try making a promise, Flatlist crashing if messages not loaded
-      const messages = await channel.raw.query({
+      const messages = await channel?.raw?.query({
           messages: {limit: 10, id_lte: lastMessageId},
       });
 
       console.log("Paginated messages ", messages);
-      setChannelMessages(messages.messages);
+      setChannelMessages(messages?.messages);
   };
 
   const setUpChannel = async () => {

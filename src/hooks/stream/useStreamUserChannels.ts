@@ -14,20 +14,22 @@ const useStreamUserChannels = () => {
       };
       const sort = [{ last_message_at: -1 }];
       setIsLoading(true);
+      let result: any;
       try {
         let result = await client?.queryChannels(filter, sort, {
           watch: true,
           state: true,
-        });
+        })
+        
+        let newResult = result?.map((item: any) => {
+          return ChannelStream$(item.data, item);
+        })
+        setChannels(newResult)
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The channel Data was just updated', [result])
-        setChannels(
-          result?.map((item: any) => {
-            return ChannelStream$(item.data, item);
-          })
-        );
       } catch (error: any) {
-        throw new Error("Error in fetching user Channels ", error);
+        logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The error is', [error]);
       }
+      
     }
   };
 
