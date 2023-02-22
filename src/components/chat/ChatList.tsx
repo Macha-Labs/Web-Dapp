@@ -131,7 +131,7 @@ const ChatList = (props: any) => {
                     <Col className="w-100 d-flex flex-col">
                       {item?.name}
                       <Col className="m-t-0-5">
-                        <Text fontSize={"sm"}>
+                        <Text fontSize={"xs"}>
                           {item?.lastMessage?.user?.lensUsername ||
                             item?.lastMessage?.user?.lensHandle ||
                             truncateAddress(item?.lastMessage?.user?.id)}

@@ -189,7 +189,7 @@ const UserProfile = (props: any) => {
           )}
         </Row>
 
-        {props.user?.lens?.ownedBy.toLowerCase() !==
+        {props.user?.lens?.ownedBy?.toLowerCase() !==
           authContext?.address?.toLowerCase() && (
           <Row className="m-v-1 vr-center hr-center">
             {props.user?.lens?.isFollowedByMe || isFollowed ? (
