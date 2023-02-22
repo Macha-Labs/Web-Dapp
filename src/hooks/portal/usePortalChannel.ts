@@ -9,12 +9,11 @@ import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { ChannelStream$ } from "../../schema/channel";
 import { useToast } from "@chakra-ui/react";
 
-const usePortalChannel = (channelData: any) => {
+const usePortalChannel = (channelData: any, callback:any=null) => {
     const [channel, setChannel] = useState(
         channelData ? channelData : ChannelStream$({})
     );
-    const [isLoading, setIsLoading] = useState(false);
-    const toast = useToast();
+    const [isLoading, setIsLoading] = useState(false);    
     const authProvider = useContext(AuthContext) as AuthContextType;
     // const navigation = useNavigation<any>();
 
@@ -36,11 +35,8 @@ const usePortalChannel = (channelData: any) => {
                         "getting response from API",
                         [res]
                     );
-                    // toast.show({
-                    //     description: "Channel Details updated successfully",
-                    //     avoidKeyboard: true,
-                    //     duration: 3000,
-                    // });
+                    callback();
+                    
                     setIsLoading(false);
                     // navigation.navigate("Chat", {
                     //     channel: channel,
@@ -68,13 +64,9 @@ const usePortalChannel = (channelData: any) => {
                         "getting response from API",
                         [res]
                     );                    
-                    toast({
-                      title: "Channel Created Successfully",
-                      status: "success",
-                      duration: 3000,
-                      position: "bottom-right",
-                    });
+                    
                     setIsLoading(false);
+                    callback();
                     // ! TODO: This data is sent by DB and not getStream, have to resolve this
                     // navigation.navigate("Chat", {
                     //     channel: channel,
@@ -107,7 +99,9 @@ const usePortalChannel = (channelData: any) => {
             });
         }
     };
+const deleteChannel= ()=>{
 
+}
     const updatePermissions = () => {
         logger(
             "channel",

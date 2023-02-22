@@ -37,7 +37,7 @@ const ChatList = (props: any) => {
   const TemplateChatNew = () => {
     return (
       <ModalSlider event={modalChatNew} size="lg">
-        <ChatNew />
+        <ChatNew modal={modalChatNew}/>
       </ModalSlider>
     );
   };
@@ -140,14 +140,14 @@ const ChatList = (props: any) => {
                     />
                     <Col className="w-100 d-flex flex-col">
                       {item.name}
-                      <Col className="m-t-0-5">
+                      {item?.lastMessage && <Col className="m-t-0-5">
                         <Text fontSize={"sm"}>
                           {item.lastMessage?.user?.lensUsername ||
                             item.lastMessage?.user?.lensHandle ||
                             truncateAddress(item.lastMessage?.user?.id)}
                           : {item.lastMessage?.text}
                         </Text>
-                      </Col>
+                      </Col>}
                     </Col>
                     {item.unreadCountObject[authContext.address]
                       .unread_messages > 0 &&

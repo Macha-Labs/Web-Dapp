@@ -8,15 +8,28 @@ import {
   Icon,
   Switch,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { Col, Row } from "@/styles/StyledComponents";
 import LayoutCard from "@/layouts/LayoutCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatEdit = (props: any) => {
+  const toast = useToast();
+  const callBack=()=>{
+    toast({
+      title: "Channel Details updated successfully",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.modal.onClose();
+  }
   const [profileImage, setProfileImage] = useState(null);
-  const hookPortalChannel = usePortalChannel(props.hookChannel?.channel);
-
+  const hookPortalChannel = usePortalChannel(
+    props.hookChannel?.channel,
+    callBack
+  );
   const handleSelectClick = () => {
     document.getElementById("galleryInput").click();
   };
@@ -57,13 +70,15 @@ const ChatEdit = (props: any) => {
             onClick={() => {
               hookPortalChannel?.update();
             }}
+            isLoading={hookPortalChannel?.isLoading}
           >
             Save
           </Button>
         </Row>
       }
     >
-      <Col className="hr-center w-full p-3" >
+      <Col className="p-3">
+      <Col className="hr-center w-full">
         {profileImage ? (
           <Avatar
             size="2xl"
@@ -109,6 +124,7 @@ const ChatEdit = (props: any) => {
         <Text>Allow Gating</Text>
         <Switch colorScheme="emerald" />
       </Row>
+      </Col>
     </LayoutCardPannel>
   );
 };
