@@ -32,9 +32,9 @@ const useStreamUserChannels = () => {
   };
 
   useEffect(() => {
-    // setChannels(channelsRaw?.map((item: any) => {
-    //   return ChannelStream$(item.data, item);
-    // }))
+    setChannels(channelsRaw?.map((item: any) => {
+      return ChannelStream$(item.data, item);
+    }))
   }, [channelsRaw])
 
   return {
