@@ -288,8 +288,7 @@ const ChatInput = (props: any) => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
                 }}
-                ref={props.hookChat?.textareaRef}
-                value={props.hookChat?.typingMessage}
+                ref={props.hookChat.textareaRef}
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
