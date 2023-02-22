@@ -54,8 +54,8 @@ const useStreamChannel = (channelId: any) => {
     if (channel)
     channel?.raw?.on((event: any) => {
       console.log("This is a channel event handler log ", event);
-      let messages = channelMessages.concat([event?.message]);
-      setChannelMessages(messages);
+      ;
+      setChannelMessages([...channelMessages, event?.message]);
     });
   }, [channel]);
 
