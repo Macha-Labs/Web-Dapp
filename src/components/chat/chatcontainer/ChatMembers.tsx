@@ -13,7 +13,7 @@ import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembershi
 import ModalSlider from "@/components/modal/ModalSlider";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
-const ChatMembers = (props) => {
+const ChatMembers = (props: any) => {
   const hookPortalChannelMembership = usePortalChannelMembership(props?.hookChannel?.channel);
   const chatContext = useContext(ChatContext);
   const modalAddMembers = useDisclosure();
@@ -34,7 +34,7 @@ const ChatMembers = (props) => {
             </Row>
           }
         >
-          {hookPortalChannelMembership?.following?.map((item, index) => {
+          {hookPortalChannelMembership?.following?.map((item: any, index: any) => {
             return (
               <>
                 <Row key={index} className="hr-between p-1">
@@ -99,7 +99,7 @@ const ChatMembers = (props) => {
       >
         {chatContext.hookMembers.offlineUsers
           .concat(chatContext.hookMembers.onlineUsers)
-          ?.map((item, index) => {
+          ?.map((item: any, index: any) => {
             return (
               <>
                 <Row className="hr-between p-1">

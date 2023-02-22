@@ -81,7 +81,7 @@ const ChatPermissions = () => {
     console.log("Re rendering this permission layout");
     return (
       <StyledCard>
-        {hookPortalChannel?.channel?.permissions.map((permission, index) => {
+        {hookPortalChannel?.channel?.permissions.map((permission: any, index: any) => {
           // console.log(
           //   "permissionOption",
           //   permissionOptions,

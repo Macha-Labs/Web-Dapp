@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { Row } from '@/styles/StyledComponents';
 
-const ModalSlider = (props) => {
+const ModalSlider = (props: any) => {
 
 
     return (

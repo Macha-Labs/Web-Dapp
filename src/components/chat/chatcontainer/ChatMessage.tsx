@@ -27,110 +27,144 @@ const ChatMessage = (props: any) => {
 
   const templateAttachment = (attachment: any) => {
     if (attachment?.og_scrape_url) {
-      return <LayoutLinkPreview attachment={attachment} />;
+      return <LayoutLinkPreview key={attachment?.id} attachment={attachment} />;
     } else if (attachment?.type == "image") {
-      return <LayoutImagePreview attachment={attachment} />;
+      return (
+        <LayoutImagePreview key={attachment?.id} attachment={attachment} />
+      );
     } else if (
       attachment?.type == "text" ||
       attachment?.type == "application"
     ) {
-      return <LayoutFilePreview attachment={attachment} />;
+      return <LayoutFilePreview key={attachment?.id} attachment={attachment} />;
     }
   };
 
   const TemplateReactions = () => {
     return (
-     <Pop
-      placement={'left-start'}
-      trigger={
-        <IconImage
-        path="IconDarkEmoji.png"
-        style={{ className: "m-r-0-5" }}
-      />
-      }
-     >
-      <Row className="vr-center">
-        <IconEmoji style={{className:"m-r-0-5"}} onClick={() => {props?.hookChat?.handleReaction({type: 'smile'}, props?.message)}}>😀</IconEmoji>
-        <IconEmoji style={{className:"m-r-0-5"}} onClick={() => {props?.hookChat?.handleReaction({type: 'wave'}, props?.message)}}>👋</IconEmoji>
-        <IconEmoji style={{className:"m-r-0-5"}} onClick={() => {props?.hookChat?.handleReaction({type: 'good'}, props?.message)}}>👌</IconEmoji>
-        <IconEmoji style={{className:"m-r-0-5"}} onClick={() => {props?.hookChat?.handleReaction({type: 'like'}, props?.message)}}>👍</IconEmoji>
-      </Row>
-     </Pop>
-    )
-  }
+      <Pop
+        placement={"left-start"}
+        trigger={
+          <IconImage
+            path="IconDarkEmoji.png"
+            style={{ className: "m-r-0-5" }}
+          />
+        }
+      >
+        <Row className="vr-center">
+          <IconEmoji
+            style={{ className: "m-r-0-5" }}
+            onClick={() => {
+              props?.hookChat?.handleReaction(
+                { type: "smile" },
+                props?.message
+              );
+            }}
+          >
+            😀
+          </IconEmoji>
+          <IconEmoji
+            style={{ className: "m-r-0-5" }}
+            onClick={() => {
+              props?.hookChat?.handleReaction({ type: "wave" }, props?.message);
+            }}
+          >
+            👋
+          </IconEmoji>
+          <IconEmoji
+            style={{ className: "m-r-0-5" }}
+            onClick={() => {
+              props?.hookChat?.handleReaction({ type: "good" }, props?.message);
+            }}
+          >
+            👌
+          </IconEmoji>
+          <IconEmoji
+            style={{ className: "m-r-0-5" }}
+            onClick={() => {
+              props?.hookChat?.handleReaction({ type: "like" }, props?.message);
+            }}
+          >
+            👍
+          </IconEmoji>
+        </Row>
+      </Pop>
+    );
+  };
 
   const TemplateActions = () => {
     return (
       <Pop
-      placement={'top-end'}
-      trigger={<IconImage path="IconDarkMenu.png" />}>
+        placement={"top-end"}
+        trigger={<IconImage path="IconDarkMenu.png" />}
+      >
         <Col className="text-start">
-              {props.message?.user?.id == props?.authContext?.address && (
-                <Button
-                  variant="transparent"
-                  size="md"
-                  className="text-start"
-                  rightIcon={<IconImage path="IconDarkFiles.png" />}
-                >
-                  <Row
-                    className="hr-between w-100"
-                    onClick={() => {
-                      props.hookChat.handleEdit(props.message);
-                    }}
-                  >
-                    Edit
-                  </Row>
-                </Button>
-              )}
+          {props.message?.user?.id == props?.authContext?.address && (
+            <Button
+              variant="transparent"
+              size="md"
+              className="text-start"
+              rightIcon={<IconImage path="IconDarkFiles.png" />}
+            >
+              <Row
+                className="hr-between w-100"
+                onClick={() => {
+                  props.hookChat.handleEdit(props.message);
+                }}
+              >
+                Edit
+              </Row>
+            </Button>
+          )}
 
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-              >
-                <Row
-                  className="hr-between w-100"
-                  onClick={() => {
-                    props.hookChat.handleReply(props.message);
-                  }}
-                >
-                  Reply
-                </Row>
-              </Button>
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-              >
-                <Row
-                  className="hr-between w-100"
-                  onClick={() => {
-                    if (props.message?.pinned) {
-                      props.hookChat.unPinMessage(props.message);
-                    } else {
-                      props.hookChat.pinMessage(props.message);
-                    }
-                  }}
-                >
-                  {props.message?.pinned ? "Unpin Message" : "Pin Message"}
-                </Row>
-              </Button>
-              {props.message?.user?.id == props?.authContext?.address && (
-                <Button
-                  variant="transparent"
-                  size="md"
-                  className="text-start"
-                  rightIcon={<IconImage path="IconDarkFiles.png" />}
-                  onClick={() => {
-                    props.hookChat.deleteMessage(props.message);
-                  }}
-                >
-                  <Row className="hr-between w-100">Delete Message</Row>
-                </Button>
-              )}
-            </Col>
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkFiles.png" />}
+          >
+            <Row
+              className="hr-between w-100"
+              onClick={() => {
+                props.hookChat.handleReply(props.message);
+              }}
+            >
+              Reply
+            </Row>
+          </Button>
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkFiles.png" />}
+          >
+            <Row
+              className="hr-between w-100"
+              onClick={() => {
+                if (props.message?.pinned) {
+                  props.hookChat.unPinMessage(props.message);
+                } else {
+                  props.hookChat.pinMessage(props.message);
+                }
+              }}
+            >
+              {props.message?.pinned ? "Unpin Message" : "Pin Message"}
+            </Row>
+          </Button>
+          {props.message?.user?.id == props?.authContext?.address && (
+            <Button
+              variant="transparent"
+              size="md"
+              className="text-start"
+              rightIcon={<IconImage path="IconDarkFiles.png" />}
+              onClick={() => {
+                props.hookChat.deleteMessage(props.message);
+              }}
+            >
+              <Row className="hr-between w-100">Delete Message</Row>
+            </Button>
+          )}
+        </Col>
       </Pop>
     );
   };
@@ -178,7 +212,14 @@ const ChatMessage = (props: any) => {
             ></Avatar>
           </Row>
         </Col>
-        <Col className={(props.authContext?.address == props?.message?.user?.id )? "active message w-100": "message w-100"} style={{ color: "#ffffff" }}>
+        <Col
+          className={
+            props.authContext?.address == props?.message?.user?.id
+              ? "active message w-100"
+              : "message w-100"
+          }
+          style={{ color: "#ffffff" }}
+        >
           <Text fontSize="sm" className="heading">
             {props.message?.user?.lensUsername ||
               props.message?.user?.lensHandle ||
@@ -191,6 +232,7 @@ const ChatMessage = (props: any) => {
               style={{ className: "w-100 vr-center m-t-0-5" }}
               actions={[
                 <Button
+                  key={props?.message?.id}
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
@@ -199,6 +241,7 @@ const ChatMessage = (props: any) => {
                   Update
                 </Button>,
                 <Button
+                  key={props?.message?.id}
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
@@ -228,26 +271,33 @@ const ChatMessage = (props: any) => {
             return templateAttachment(item);
           })}
 
-          <Row className="vr-center">
-          {Object.keys(props?.message.reaction_scores).length > 0 && (Object.keys(props.message.reaction_scores).map( (item: any) => {
-        return (
-          <>
-            <Button className="w-content m-r-0-5" size="xs" variant="state_brand" onClick={() => {props?.hookChat?.handleReaction({type: item}, props?.message)}}>
-            {emoji[item]}{" "}
-              {
-                  props?.message?.reaction_scores[
-                      item
-                  ]
-              }
-            </Button>
-          </>
-        )
-      }))}
+          {
+            props?.message.reaction_scores && <Row className="vr-center">
+            {Object.keys(props?.message.reaction_scores).length > 0 &&
+              Object.keys(props.message.reaction_scores).map((item: any) => {
+                return (
+                  <>
+                    <Button
+                      className="w-content m-r-0-5"
+                      size="xs"
+                      variant="state_brand"
+                      onClick={() => {
+                        props?.hookChat?.handleReaction(
+                          { type: item },
+                          props?.message
+                        );
+                      }}
+                    >
+                      {emoji[item]} {props?.message?.reaction_scores[item]}
+                    </Button>
+                  </>
+                );
+              })}
           </Row>
-      
+          }
         </Col>
         <Row className="w-100 action">
-          <TemplateReactions/>
+          <TemplateReactions />
 
           <TemplateActions />
         </Row>

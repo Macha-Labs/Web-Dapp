@@ -1,14 +1,14 @@
-import {permissionsChannel} from "./../../service/ChannelService";
+import { permissionsChannel } from "./../../service/ChannelService";
 // import {useNavigation} from "@react-navigation/native";
-import {putChannelForUser} from "../../service/ChannelService";
-import {logger} from "../../helpers/logger";
-import {editChannel} from "../../service/ChannelService";
-import {useContext, useState} from "react";
+import { putChannelForUser } from "../../service/ChannelService";
+import { logger } from "../../helpers/logger";
+import { editChannel } from "../../service/ChannelService";
+import { useContext, useState } from "react";
 // import {useToast} from "native-base";
-import {AuthContext, AuthContextType} from "../../providers/AuthProvider";
-import {ChannelStream$} from "../../schema/channel";
+import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
+import { ChannelStream$ } from "../../schema/channel";
 
-const usePortalChannel = (channelData:any) => {
+const usePortalChannel = (channelData: any) => {
     const [channel, setChannel] = useState(
         channelData ? channelData : ChannelStream$({})
     );
@@ -25,7 +25,7 @@ const usePortalChannel = (channelData:any) => {
                     name: channel.name,
                     description: channel.description,
                     image: channel.image,
-                },  
+                },
                 channel.id
             )
                 .then((res) => {
@@ -91,19 +91,19 @@ const usePortalChannel = (channelData:any) => {
 
     const togglePermission = (value: any) => {
         console.log("channel.permissions", channel.permissions);
-      if (channel.permissions.includes(value)) {
-        setChannel({
-          ...channel,
-          permissions: channel.permissions.filter(
-            (permission: any) => permission !== value
-          ),
-        });
-      } else {
-        setChannel({
-          ...channel,
-          permissions: [...channel.permissions, value],
-        });
-      }
+        if (channel.permissions.includes(value)) {
+            setChannel({
+                ...channel,
+                permissions: channel.permissions.filter(
+                    (permission: any) => permission !== value
+                ),
+            });
+        } else {
+            setChannel({
+                ...channel,
+                permissions: [...channel.permissions, value],
+            });
+        }
     };
 
     const updatePermissions = () => {
@@ -115,7 +115,7 @@ const usePortalChannel = (channelData:any) => {
         );
         console.log("channelPermission", channel.permissions);
         setIsLoading(true);
-        permissionsChannel({permissions: channel.permissions}, channel.id)
+        permissionsChannel({ permissions: channel.permissions }, channel.id)
             .then((res) => {
                 logger(
                     "channel",

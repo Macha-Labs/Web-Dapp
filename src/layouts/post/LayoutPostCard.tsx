@@ -1,7 +1,7 @@
 import { helperIPFS } from "@/helpers";
 import { likePost } from "@/helpers/lens/lens";
 import { Col, Row, StyledPostCard } from "@/styles/StyledComponents";
-import { Avatar, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { Avatar, Button, Flex, Heading, Text, Image } from "@chakra-ui/react";
 
 const LayoutPostCard = (props: any) => {
   console.log("Lens Posts ", props.item);
@@ -35,8 +35,9 @@ const LayoutPostCard = (props: any) => {
               <Col className="m-b-1">
                 <div className="m-b-1">{props.item?.metadata?.content}</div>
                 {props?.item?.metadata?.media ? (
-                  <img
+                  <Image
                     className="w-60"
+                    alt="lens post image"
                     src={helperIPFS(
                       props?.item?.metadata?.media[0]?.original?.url
                     )}

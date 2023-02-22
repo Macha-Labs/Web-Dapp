@@ -26,11 +26,14 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const [actionMessage, setActionMessage] = useState<any>({
     action: "",
     item: {},
+    data: {},
   });
   const [selectedMessages, setSelectedMessages] = useState<any>([]);
   const [userObjTyping, setUserObjTyping] = useState<any>();
   const [searchActive, setSearchActive] = useState<any>();
   const [searchQuery, setSearchQuery] = useState<any>();
+  const [usersWhoAreTyping, setUsersWhoAreTyping] = useState<any>();
+  const [typingMessage, setTypingMessage] = useState<any>();
 
   const textareaRef = useRef<any>();
   const editMessageRef = useRef<any>(null);
@@ -92,9 +95,11 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       } else {
         messageData = {
           text: textareaRef.current?.value,
-          mentioned_users: hookMention.mentionList.map((user: any, index: number) => {
-            return user?.ownedBy;
-          }),
+          mentioned_users: hookMention.mentionList.map(
+            (user: any, index: number) => {
+              return user?.ownedBy;
+            }
+          ),
           message_custom_data: msgData,
         };
       }
@@ -164,7 +169,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const editMessage = async () => {
     console.log("editing message- ", editMessageRef.current.value);
     if (!authContext?.address) {
-      throw new Error ("Couldn't find the user address");
+      throw new Error("Couldn't find the user address");
     }
     if (actionMessage?.action !== "EDIT") {
       return;
@@ -260,7 +265,26 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const keyDownMessage = async (event: any) => {
     const keycode = event.which || event.keycode;
 
-    console.log("keyDownMessage");
+    //Logic for typing indicators begins
+    let typingTimeout;
+    if (typingTimeout !== undefined) clearTimeout(typingTimeout);
+
+    await channel.raw.keystroke();
+
+    typingTimeout = setTimeout(async () => {
+      await channel.raw.stopTyping();
+    }, 3000);
+
+    channel.raw.on("typing.start", (event: any) => {
+      let typingUser = Object.keys(channel.raw.state.typing);
+      setUsersWhoAreTyping(typingUser);
+    });
+    channel.raw.on("typing.stop", (event: any) => {
+      setUsersWhoAreTyping(null);
+    });
+
+    //Logic for typing indicators ends
+
     if (keycode == 13 && !event.shiftKey) {
       event.preventDefault();
 
@@ -274,11 +298,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     } else if (event.key == "/") {
       console.log("slash key was pressed");
       setSlashCmd(true);
-    }
-    if (event.key == "@") {
-      console.log("You pressed mention");
-      hookMention.setMentionActive(true);
-      console.log("Here are the users you can mention on this channel ", users);
     }
   };
 
@@ -300,13 +319,11 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleSearch = (e: any) => {
-    setSearchActive(true);
-    setSearchQuery("");
+    setActionMessage({ action: "SEARCH", data: { query: "" } });
   };
 
   const handleSearchClose = () => {
-    setSearchActive(false);
-    setSearchQuery("");
+    setActionMessage(null);
   };
 
   const handleSelect = (message: any) => {
@@ -322,13 +339,8 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleMultiSelect = () => {
-    logger(
-      "channel",
-      "useStreamChat.handleMultiSelect",
-      "Trigger MultiSelect",
-      []
-    );
-    setActionMessage({ action: "MULTISELECT", item: null });
+    setActionMessage({ action: "SEARCH", data: { query: "" } });
+    // setActionMessage({ action: "MULTISELECT", item: null, data: null });
   };
   const handleMultiSelectClose = () => {
     logger(
@@ -390,8 +402,9 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     }
   };
 
-  const onChange = async () => {
-    const value = textareaRef.current.value;
+  const onChange = async (event: any, users?: any) => {
+    const value = event.target.value;
+    setTypingMessage(value);
     const lastChar = value.split("")[value.length - 1];
     if (lastChar == " " || value == "") {
       console.log("Setting mention false");
@@ -478,9 +491,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     slashRun: slashRun,
     handleSearch: handleSearch,
     handleSearchClose: handleSearchClose,
-    searchActive: searchActive,
-    searchQuery: searchQuery,
-    setSearchQuery: setSearchQuery,
     handleMultiSelect: handleMultiSelect,
     handleMultiSelectClose: handleMultiSelectClose,
     handleLongPressSelect: handleLongPressSelect,
@@ -492,6 +502,9 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     handleEditClose: handleEditClose,
     handleSelect: handleSelect,
     selectedMessages: selectedMessages,
+    usersWhoAreTyping: usersWhoAreTyping,
+    typingMessage: typingMessage,
+    setTypingMessage: setTypingMessage,
     // widgetDrawer: widgetDrawer
   };
 };

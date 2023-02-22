@@ -19,7 +19,6 @@ import {
 } from "@/styles/StyledComponents";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
 import ChatMention from "../ChatMention";
-import IconFile from "@/components/icons/IconFile";
 import PortalLoader from "@/components/PortalLoader";
 import IconImage from "@/components/icons/IconImage";
 import Pop from "@/components/pop/Pop";
@@ -66,19 +65,31 @@ const ChatInput = (props: any) => {
 
   const TemplatePostNew = () => {
     return (
-      <ModalWindow event={modalPost} header={<Heading as="h6" size="sm">New Lens Post</Heading>}>
+      <ModalWindow
+        event={modalPost}
+        header={
+          <Heading as="h6" size="sm">
+            New Lens Post
+          </Heading>
+        }
+      >
         <Col className="p-1">
           <Text fontSize={16}>Your Lens Post Heading Here</Text>
           <Textarea className="m-b-1 m-t-1" size="xl"></Textarea>
           <Row className="m-b-1">
-            <IconImage path="IconDarkFiles.png" style={{className:"m-r-0-5"}} />
+            <IconImage
+              path="IconDarkFiles.png"
+              style={{ className: "m-r-0-5" }}
+            />
             <IconImage path="IconDarkPhotos.png" />
           </Row>
-          <Button size="sm" variant="state_brand w-content">Create Post</Button>
+          <Button size="sm" variant="state_brand w-content">
+            Create Post
+          </Button>
         </Col>
       </ModalWindow>
-    )
-  } 
+    );
+  };
   const templateAttachment = () => {
     let type;
     if (props?.hookChat?.attachItem) {
@@ -97,7 +108,10 @@ const ChatInput = (props: any) => {
                     width="300px"
                   />
                 ) : (
-                  <IconFile width={24} height={24} fill="#efefef" />
+                  <IconImage
+                    path="IconDarkFiles.png"
+                    style={{ className: "m-r-0-5" }}
+                  />
                 )}
                 <Text className="m-t-0-5">
                   {props?.hookChat?.attachItem?.name}
@@ -181,56 +195,58 @@ const ChatInput = (props: any) => {
 
   const TemplateAction = () => {
     return (
-      <Pop 
-      trigger={<StyledIcon className="circled">
-      <PlusSquareIcon color="gray.300" />
-      </StyledIcon>
-      }>
-          <Col className="text-start">
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                isLoading={props.attachLoading}
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-              >
-                <label htmlFor="upload-file" className="w-100">
-                  <Row className="vr-center hr-between w-100">Upload File </Row>
-                </label>
-              </Button>
-              <input
-                id="upload-file"
-                onChange={props.hookChat.handleAttachment}
-                type="file"
-                hidden
-              />
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-              >
-                <Row className="hr-between w-100">Create Poll</Row>
-              </Button>
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkFiles.png" />}
-                onClick={modalPost.onOpen}
-              >
-                <Row className="hr-between w-100">Create Post</Row>
-              </Button>
-              <Button
-                variant="transparent"
-                size="md"
-                className="text-start"
-                rightIcon={<IconImage path="IconDarkWallet.png" />}
-              >
-                <Row className="hr-between w-100">Send Payment</Row>
-              </Button>
-            </Col>
-    </Pop>
+      <Pop
+        trigger={
+          <StyledIcon className="circled">
+            <PlusSquareIcon color="gray.300" />
+          </StyledIcon>
+        }
+      >
+        <Col className="text-start">
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            isLoading={props.attachLoading}
+            rightIcon={<IconImage path="IconDarkFiles.png" />}
+          >
+            <label htmlFor="upload-file" className="w-100">
+              <Row className="vr-center hr-between w-100">Upload File </Row>
+            </label>
+          </Button>
+          <input
+            id="upload-file"
+            onChange={props.hookChat.handleAttachment}
+            type="file"
+            hidden
+          />
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkFiles.png" />}
+          >
+            <Row className="hr-between w-100">Create Poll</Row>
+          </Button>
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkFiles.png" />}
+            onClick={modalPost.onOpen}
+          >
+            <Row className="hr-between w-100">Create Post</Row>
+          </Button>
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkWallet.png" />}
+          >
+            <Row className="hr-between w-100">Send Payment</Row>
+          </Button>
+        </Col>
+      </Pop>
     );
   };
 
@@ -250,6 +266,8 @@ const ChatInput = (props: any) => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
                 }}
+                // ref={props.hookChat?.textareaRef}
+                value={props.hookChat?.typingMessage}
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
@@ -265,21 +283,6 @@ const ChatInput = (props: any) => {
               </StyledIcon>
             </Col>
           </StyledChatInput>
-
-          <Row>
-            <Col className="w-100 vr-center">
-              {props?.chatContext?.userObjTyping ? (
-                <Text fontSize="xs">
-                  <Spinner size="xs" />@{props?.chatContext?.userObjTyping} is
-                  typing
-                </Text>
-              ) : (
-                <Text fontSize="xs">
-                  <br />
-                </Text>
-              )}
-            </Col>
-          </Row>
         </Col>
       </StyledChatInputContainer>
     );
@@ -287,7 +290,7 @@ const ChatInput = (props: any) => {
 
   const TemplateMembership = () => {
     return (
-      <StyledChatInputContainer>
+      <>
         <Col className="w-100 vr-center m-l-0-5">
           Join the Channel to Message
         </Col>
@@ -299,12 +302,20 @@ const ChatInput = (props: any) => {
             Join
           </Button>
         </Col>
-      </StyledChatInputContainer>
+      </>
     );
   };
 
   const TemplateSearch = () => {
-    return <></>;
+    return (
+      <Row className="vr-center hr-between w-100">
+            <IconImage path="IconDarkCalendar.png" />
+            <Row className="vr-center">
+              <IconImage path="IconDarkArrowUp.png" style={{className:"m-r-0-5"}} />
+              <IconImage path="IconDarkArrowDown.png"/>
+            </Row>
+          </Row>
+    )
   };
 
   const TemplateMultiselect = () => {
@@ -319,16 +330,34 @@ const ChatInput = (props: any) => {
     }
   };
 
-  // if (props.hookChat.searchActive) return <TemplateSearch />;
-  // else if (props.hookChat.actionMessage?.action === "MULTISELECT")
-  //   return <TemplateMultiselect />;
-  // else return <TemplateInput />;
+  const Template = () => {
+    if (props.hookChat.actionMessage?.action === "SEARCH")
+      return (
+        <StyledChatInputContainer>
+        <StyledChatInput>
+          <TemplateSearch />
+        </StyledChatInput>
+      </StyledChatInputContainer>
+      )
+    else if (props.hookChat.actionMessage?.action === "MULTISELECT")
+      return (
+        <StyledChatInputContainer>
+        <StyledChatInput>
+          <TemplateMultiselect />
+        </StyledChatInput>
+      </StyledChatInputContainer>
+      );
+    else return (
+      <TemplateInput />
+    );
+  }
+
   return (
     <>
-      <TemplateInput />
+      <Template />
       <TemplatePostNew />
     </>
-  )
+  );
 };
 
 export default ChatInput;
