@@ -135,12 +135,12 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
         );
       });
   };
-  const deleteChannel = (channel) => {
+  const deleteChannel = (channel: any) => {
     logger("channel", "usePortalChanneldelete", "Deleting Channel", [channel]);
     channel.raw.delete();
     callback.delete();
   };
-  const muteChannel = (channel) => {
+  const muteChannel = (channel: any) => {
     logger("channel", "usePortalChannelmute", "Muting Channel", [channel]);
     channel.raw.mute();
     callback.mute();

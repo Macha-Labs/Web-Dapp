@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@babel/runtime": "^7.21.0",
     "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.5.0",
     "@emoji-mart/react": "^1.1.1",
@@ -43,7 +44,6 @@
     "web3.storage": "^4.4.0"
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.26",
-    "netlify-cli": "^13.0.0"
+    "@types/styled-components": "^5.1.26"
   }
 }
