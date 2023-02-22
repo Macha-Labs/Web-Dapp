@@ -32,6 +32,7 @@ const ChatEdit = (props: any) => {
   );
   const handleSelectClick = () => {
     // document.getElementById("galleryInput").click();
+    console.log('');
   };
   const modalAddMembers = useDisclosure();
   const data = [
