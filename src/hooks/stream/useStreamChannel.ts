@@ -50,11 +50,16 @@ const useStreamChannel = (channelId: any) => {
   useEffect(() => {
     logger("channel", "useEffect[channel]", "channel is ", [channel]);
     // getChannelMessages();
+    // listening to message events
+    if (channel)
+    channel.raw.on((event: any) => {
+      console.log("This is a channel event handler log ", event);
+    })
   }, [channel]);
 
   return {
     channel: channel,
-    messages: channelMessages,
+    messages: channel?.raw?.state?.messageSets[0]?.messages,
     pinnedMessages: channel?.raw?.state?.pinnedMessages,
 
     // messages: channelMessages,

@@ -15,8 +15,6 @@ const ChatContainer = (channel: any) => {
     console.log("streamContext client in ChatContainer", streamContext.client);
     return (
         <>
-            <Chat client={streamContext.client}>
-
                 <ChatHeader
                     hookChat={chatProvider.hookChat}
                     hookChannel={chatProvider.hookChannel}
@@ -31,7 +29,6 @@ const ChatContainer = (channel: any) => {
                 <ChatInput
                     hookChat={chatProvider.hookChat}
                 />
-            </Chat>
         </>
     )
 }

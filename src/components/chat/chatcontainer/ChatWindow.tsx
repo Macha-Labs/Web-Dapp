@@ -1,16 +1,12 @@
-import LayoutChatConversation from "@/layouts/chat/LayoutChatConversation";
 import LayoutChatEmpty from "@/layouts/chat/LayoutChatEmpty";
 import {
   StyledConversationContainer,
-  StyledConversationView,
+  StyledConversationView
 } from "@/styles/StyledComponents";
-import { useEffect } from "react";
 import ChatMessage from "./ChatMessage";
-import { useChannelStateContext } from "stream-chat-react";
 
 
 const ChatWindow = (props: any) => {
-  // const {messages} = useChannelStateContext();
 
   return (
     <StyledConversationContainer>
