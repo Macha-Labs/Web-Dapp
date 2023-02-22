@@ -15,13 +15,13 @@ const useStreamUserChannels = () => {
       const sort = [{ last_message_at: -1 }];
       setIsLoading(true);
       try {
-        let result = await client.queryChannels(filter, sort, {
+        let result = await client?.queryChannels(filter, sort, {
           watch: true,
           state: true,
         });
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The channel Data was just updated', [result])
         setChannels(
-          result.map((item: any, index: number) => {
+          result?.map((item: any) => {
             return ChannelStream$(item.data, item);
           })
         );
