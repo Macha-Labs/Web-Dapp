@@ -16,15 +16,14 @@ const useStreamUserChannels = () => {
       setIsLoading(true);
       let result: any;
       try {
-        let result = await client?.queryChannels(filter, sort, {
-          watch: true,
-          state: true,
-        })
-        
+        let result = await client.queryChannels(filter, sort, {
+          limit: 15
+        });
         let newResult = result?.map((item: any) => {
           return ChannelStream$(item.data, item);
         })
         setChannels(newResult)
+
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The channel Data was just updated', [result])
       } catch (error: any) {
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The error is', [error]);

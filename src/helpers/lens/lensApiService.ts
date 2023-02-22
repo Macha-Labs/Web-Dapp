@@ -9,7 +9,7 @@ import { signTypedData } from '@wagmi/core';
 export const signedTypeData = async (
   domain: any,
   types: Record<string, any>,
-  value: Record<string, any>,
+  value: Record<string, any>
 ) => {
   let typedData = {
     "domain": domain,

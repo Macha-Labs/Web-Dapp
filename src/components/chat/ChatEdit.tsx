@@ -31,7 +31,8 @@ const ChatEdit = (props: any) => {
     {edit:callBack}
   );
   const handleSelectClick = () => {
-    document.getElementById("galleryInput").click();
+    // document.getElementById("galleryInput").click();
+    console.log('');
   };
   const modalAddMembers = useDisclosure();
   const data = [
@@ -97,7 +98,7 @@ const ChatEdit = (props: any) => {
           type="file"
           id="galleryInput"
           accept="image/*"
-          onChange={(e) => setProfileImage(e.target.files[0])}
+          onChange={(e) => {}}
           style={{ display: "none" }}
         />
         <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>

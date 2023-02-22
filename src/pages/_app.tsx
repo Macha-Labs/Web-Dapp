@@ -30,22 +30,24 @@ const wagmiClient = createClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-  <>
-  <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">
-          <AuthProvider>
-            <StreamProvider>
-              <ChatProvider>
-                <ChakraProvider theme={theme}>
-                <Component {...pageProps} />
-                </ChakraProvider>
-              </ChatProvider>
-            </StreamProvider>
-          </AuthProvider>
-        </IKContext> 
-      </RainbowKitProvider>
-    </WagmiConfig>
-  </>
+    <>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">
+            <AuthProvider>
+              <StreamProvider>
+
+                <ChatProvider>
+                  <ChakraProvider theme={theme}>
+                    <Component {...pageProps} />
+                  </ChakraProvider>
+                </ChatProvider>
+
+              </StreamProvider>
+            </AuthProvider>
+          </IKContext>
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </>
   )
 }
