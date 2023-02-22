@@ -3,25 +3,27 @@ import { Row, StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledCo
 import React, { useState } from "react";
 import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import Nav from "@/components/nav/Nav";
-import ChatNew from "@/components/chat/ChatNew";
+import useStreamClient from "@/hooks/stream/useStreamClient";
 
-function Chat() {
+function ChatComponent() {
+  const streamClient = useStreamClient();
   return (
-      <StyledWindow>
-        <div className="left">
-            <Nav />
-        </div>
+    <StyledWindow>
+      <div className="left">
+        <Nav />
+      </div>
 
-        <div className="right">
+      <div className="right">
           <StyledChatList>
             <ChatList />
           </StyledChatList>
           <StyledChat>
             <ChatContainer />
           </StyledChat>
-        </div>
-      </StyledWindow>
+
+      </div>
+    </StyledWindow>
   );
 }
 
-export default Chat;
+export default ChatComponent;
