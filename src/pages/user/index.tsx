@@ -1,7 +1,7 @@
 import Nav from "@/components/nav/Nav";
 import UserCard from "@/components/user/UserCard";
 import UserProfile from "@/components/user/UserProfile";
-import UserEdit from "@/components/user/UserEdit"
+import UserEdit from "@/components/user/UserEdit";
 import { helperIPFS } from "@/helpers";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { AuthContext } from "@/providers/AuthProvider";
@@ -25,7 +25,10 @@ const User = () => {
     {
       icon: "IconDarkEdit.png",
       name: "Edit Profile",
-      onPress: () => {console.log('window'); setWindow('UserEdit')},
+      onPress: () => {
+        console.log("window");
+        setWindow("UserEdit");
+      },
     },
     {
       icon: "IconDarkPrivacy.png",
@@ -72,9 +75,11 @@ const User = () => {
   const TemplateRight = () => {
     return (
       <>
-        {
-          window == "UserProfile" ? <UserProfile user={authContext?.user} /> : <UserEdit />
-        }
+        {window == "UserProfile" ? (
+          <UserProfile user={authContext?.user} />
+        ) : (
+          <UserEdit />
+        )}
       </>
     );
   };
@@ -88,8 +93,15 @@ const User = () => {
           </div>
           <div className="body">
             {!authContext.isConnected && <ConnectButton />}
-            <Button onClick={() => authContext.connectLens(authContext.address)} >Connect to lens</Button>
-            <UserCard user={authContext?.user} onClick={setWindow('UserProfile')}/>
+            <Button
+              onClick={() => authContext.connectLens(authContext.address)}
+            >
+              Connect to lens
+            </Button>
+            <UserCard
+              user={authContext?.user}
+              onClick={setWindow("UserProfile")}
+            />
             <LayoutOptions
               options={userSettings}
               style={{ className: "m-t-1" }}
@@ -111,7 +123,7 @@ const User = () => {
         </StyledPageContainer>
       </>
     );
-  }
+  };
 
   return (
     <StyledWindow>
