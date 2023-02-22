@@ -95,7 +95,7 @@ const ChatList = (props: any) => {
     return (
       <>
         <Row className="header vr-center hr-between">
-          <ChatSearch style={{ className: "w-90" }} />
+          <ChatSearch style={{ className: "w-80" }} />
           <IconImage
             path="IconDarkPlus.png"
             onClick={modalChatNew.onOpen}
