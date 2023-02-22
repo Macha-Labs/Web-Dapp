@@ -266,30 +266,30 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     const keycode = event.which || event.keycode;
 
     //Logic for typing indicators begins
-    let typingTimeout;
-    if (typingTimeout !== undefined) clearTimeout(typingTimeout);
+    // let typingTimeout;
+    // if (typingTimeout !== undefined) clearTimeout(typingTimeout);
 
-    await channel.raw.keystroke();
+    // await channel.raw.keystroke();
 
-    typingTimeout = setTimeout(async () => {
-      await channel.raw.stopTyping();
-    }, 3000);
+    // typingTimeout = setTimeout(async () => {
+    //   await channel.raw.stopTyping();
+    // }, 3000);
 
-    channel.raw.on("typing.start", (event: any) => {
-      let typingUser = Object.keys(channel.raw.state.typing);
-      setUsersWhoAreTyping(typingUser);
-    });
-    channel.raw.on("typing.stop", (event: any) => {
-      setUsersWhoAreTyping(null);
-    });
+    // channel.raw.on("typing.start", (event: any) => {
+    //   let typingUser = Object.keys(channel.raw.state.typing);
+    //   setUsersWhoAreTyping(typingUser);
+    // });
+    // channel.raw.on("typing.stop", (event: any) => {
+    //   setUsersWhoAreTyping(null);
+    // });
 
     //Logic for typing indicators ends
 
     if (keycode == 13 && !event.shiftKey) {
       event.preventDefault();
 
-      if (textareaRef.current.value.substring(0, 1) == "/") {
-        setSlashCmdValue(textareaRef.current.value);
+      if (textareaRef.current?.value.substring(0, 1) == "/") {
+        setSlashCmdValue(textareaRef.current?.value);
         setSlashCmd(false);
         // widgetDrawer.onOpen();
       } else {
@@ -414,8 +414,8 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     if (lastChar == "@") {
       // setSlashCmd(false);
       console.log("Setting mention true");
-      hookMention.setMentionActive(true);
-      console.log("Here are the users you can mention on this channel ", users);
+      // hookMention.setMentionActive(true);
+      // console.log("Here are the users you can mention on this channel ", users);
       // hookMention.onTrigger(value, users);
 
     }
