@@ -32,9 +32,14 @@ const useStreamUserChannels = () => {
   };
 
   useEffect(() => {
-    setChannels(channelsRaw?.map((item: any) => {
-      return ChannelStream$(item.data, item);
-    }))
+    try {
+      setChannels(channelsRaw?.map((item: any) => {
+        return ChannelStream$(item.data, item);
+      }))
+    }
+    catch(error) {
+        console.log("Error in setChannels", error);
+    }
   }, [channelsRaw])
 
   return {
