@@ -1,8 +1,5 @@
+import { ChatPreviewCard, Col, Row, RowHover } from "@/styles/StyledComponents";
 import { Avatar, Text } from "@chakra-ui/react";
-import {  Col, Row } from "style";
-import { RowHover } from "style/app";
-import { ChatPreviewCard } from "style/card";
-import styled from "styled-components";
 
 
 

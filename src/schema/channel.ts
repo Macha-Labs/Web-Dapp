@@ -1,4 +1,4 @@
-import omitDeep from "omit-deep";
+import {omitDeep} from "@patomation/omit-deep";
 
 const omit = (object: any, name: string) => {
     return omitDeep(object, name);

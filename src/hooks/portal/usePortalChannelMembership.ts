@@ -3,14 +3,14 @@ import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { addMembers, removeMembers } from "../../service/ChannelService";
 import useLensConnections from "../lens/useLensConnections";
 
-const usePortalChannelMembership = (channel) => {
+const usePortalChannelMembership = (channel: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const hookLensConnections = useLensConnections(authContext?.address);
   const [isLoading, setIsLoading] = useState<any>();
   const [visible, setVisible] = useState<boolean>(false);
   const [users, setUsers] = useState<any>([]);
 
-  const handleCheckedUsers = (userAddress, index) => {
+  const handleCheckedUsers = (userAddress: any, index: any) => {
     console.log("Focusing address ", userAddress);
     if (!users.includes(userAddress)) {
       // users.push(userAddress);
@@ -18,7 +18,7 @@ const usePortalChannelMembership = (channel) => {
       console.log(`Added ${userAddress}, updated array ${users}`);
     } else {
       const usersFilter = users.filter(
-        (user) => user != userAddress.toLowerCase()
+        (user: any) => user != userAddress.toLowerCase()
       );
       setUsers(usersFilter);
       console.log(`Removed ${userAddress}, updated array ${users}`);

@@ -1,6 +1,6 @@
 import { Row, StyledCard } from "@/styles/StyledComponents";
 
-const LayoutCard = props => {
+const LayoutCard = (props: any) => {
   return (
     <StyledCard
       className={

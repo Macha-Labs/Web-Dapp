@@ -6,11 +6,9 @@ export const ProtectRoute = ({ children, routeName }: any) => {
   const router = useRouter();
   const authContext = React.useContext(AuthContext);
 
-  const isLoggedIn = authContext.isConnected();
-
-  if (isLoggedIn && window.location.pathname === "/") {
+  if (authContext.isConnected && window.location.pathname === "/") {
     router.push(routeName);
-  } else if (!isLoggedIn && window.location.pathname !== "/") {
+  } else if (!authContext.isConnected && window.location.pathname !== "/") {
     router.push("/");
   }
 
