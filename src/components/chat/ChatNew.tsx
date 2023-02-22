@@ -18,7 +18,7 @@ const ChatNew = (props: any) => {
   }
   const hookPortalChannel = usePortalChannel(
     props?.hookChannel?.channel,
-    callBack
+    {new:callBack}
   );
   const data = [
     {

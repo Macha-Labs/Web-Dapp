@@ -37,16 +37,17 @@ const ChatList = (props: any) => {
   const TemplateChatNew = () => {
     return (
       <ModalSlider event={modalChatNew} size="lg">
-        <ChatNew modal={modalChatNew}/>
+        <ChatNew modal={modalChatNew} />
       </ModalSlider>
     );
   };
 
   const TemplateActions = () => {
+    // console.log("helo") ;
     return (
       <Pop
         trigger={<IconImage path="IconDarkMenu.png" />}
-        placement="bottom-end"
+        // placement="bottom-end"
       >
         <Col className="text-start">
           <Button
@@ -113,69 +114,61 @@ const ChatList = (props: any) => {
           <Col className="body verticlescroll hidescroll">
             {chatProvider?.hookChannels?.channels?.length ? (
               <ul>
-              {filteredList.map((item: any, index: number) => (
-                <StyledChatItem key={index}>
-                  <Button
-                    onClick={() => {
-                      console.log("Click on button", item);
-                      chatProvider.initiate(item, authContext.address);
-                      setIsClicked((prevState: any) => [
-                        ...prevState,
-                        index,
-                      ]);
-                    }}
-                    className="menu-item w-100 m-b-0-5"
-                    size="xl"
-                    variant={
-                      chatProvider.hookChannel.channel?.id == item?.id
-                        ? "state_brand"
-                        : "state_card_hover"
-                    }
-                  >
-                    {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                    <Avatar
-                      size="md"
-                      className="m-r-0-5"
-                      name={item.name}
-                    />
-                    <Col className="w-100 d-flex flex-col">
-                      {item.name}
-                      {item?.lastMessage && <Col className="m-t-0-5">
-                        <Text fontSize={"sm"}>
-                          {item.lastMessage?.user?.lensUsername ||
-                            item.lastMessage?.user?.lensHandle ||
-                            truncateAddress(item.lastMessage?.user?.id)}
-                          : {item.lastMessage?.text}
-                        </Text>
-                      </Col>}
-                    </Col>
-                    {item.unreadCountObject[authContext.address]
-                      .unread_messages > 0 &&
-                      !isClicked.includes(index) && (
-                        <Col>
-                          <Text
-                            padding={1}
-                            background={darkStyle.color5}
-                            borderRadius="full"
-                          >
-                            {
-                              item.unreadCountObject[authContext.address]
-                                .unread_messages
-                            }
-                          </Text>
-                        </Col>
-                      )}
-                    {props.context?.user?._id == props.org?.owner ? (
+                {filteredList.map((item: any, index: number) => (
+                  <StyledChatItem key={index}>
+                    <Button
+                      onClick={() => {
+                        console.log("Click on button", item);
+                        chatProvider.initiate(item, authContext.address);
+                        setIsClicked((prevState: any) => [...prevState, index]);
+                      }}
+                      className="menu-item w-100 m-b-0-5"
+                      size="xl"
+                      variant={
+                        chatProvider.hookChannel.channel?.id == item?.id
+                          ? "state_brand"
+                          : "state_card_hover"
+                      }
+                    >
+                      {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
+                      <Avatar size="md" className="m-r-0-5" name={item.name} />
+                      <Col className="w-100 d-flex flex-col">
+                        {item.name}
+                        {item?.lastMessage && (
+                          <Col className="m-t-0-5">
+                            <Text fontSize={"sm"}>
+                              {item.lastMessage?.user?.lensUsername ||
+                                item.lastMessage?.user?.lensHandle ||
+                                truncateAddress(item.lastMessage?.user?.id)}
+                              : {item.lastMessage?.text}
+                            </Text>
+                          </Col>
+                        )}
+                      </Col>
+                      {item.unreadCountObject[authContext.address]
+                        .unread_messages > 0 &&
+                        !isClicked.includes(index) && (
+                          <Col>
+                            <Text
+                              padding={1}
+                              background={darkStyle.color5}
+                              borderRadius="full"
+                            >
+                              {
+                                item.unreadCountObject[authContext.address]
+                                  .unread_messages
+                              }
+                            </Text>
+                          </Col>
+                        )}
+
                       <Col className="hr-center settingsIcon">
                         <TemplateActions />
                       </Col>
-                    ) : (
-                      <></>
-                    )}
-                  </Button>
-                </StyledChatItem>
-              ))}
-            </ul>
+                    </Button>
+                  </StyledChatItem>
+                ))}
+              </ul>
             ) : (
               <>
                 <Button onClick={modalChatNew.onOpen} variant="state_brand">

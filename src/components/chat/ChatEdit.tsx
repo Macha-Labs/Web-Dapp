@@ -28,7 +28,7 @@ const ChatEdit = (props: any) => {
   const [profileImage, setProfileImage] = useState(null);
   const hookPortalChannel = usePortalChannel(
     props.hookChannel?.channel,
-    callBack
+    {edit:callBack}
   );
   const handleSelectClick = () => {
     document.getElementById("galleryInput").click();
