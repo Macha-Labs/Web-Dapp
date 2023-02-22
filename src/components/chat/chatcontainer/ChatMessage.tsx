@@ -19,11 +19,13 @@ import {
   Heading,
   Text,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import emoji from "../../../data/emoji.json";
 
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
+  const toast = useToast();
 
   const templateAttachment = (attachment: any) => {
     if (attachment?.og_scrape_url) {
@@ -130,6 +132,27 @@ const ChatMessage = (props: any) => {
               }}
             >
               Reply
+            </Row>
+          </Button>
+          <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkFiles.png" />}
+          >
+            <Row
+              className="hr-between w-100"
+              onClick={() => {
+                navigator.clipboard.writeText(props.message?.text);
+                toast({
+                  title: "Copied to clipboard",
+                  status: "success",
+                  duration: 3000,
+                  position: "bottom-right",
+                });
+              }}
+            >
+              Copy
             </Row>
           </Button>
           <Button
@@ -271,30 +294,31 @@ const ChatMessage = (props: any) => {
             return templateAttachment(item);
           })}
 
-          {
-            props?.message.reaction_scores && <Row className="vr-center">
-            {Object.keys(props?.message.reaction_scores).length > 0 &&
-              Object.keys(props.message.reaction_scores).map((item: any) => {
-                return (
-                  <>
-                    <Button
-                      className="w-content m-r-0-5"
-                      size="xs"
-                      variant="state_brand"
-                      onClick={() => {
-                        props?.hookChat?.handleReaction(
-                          { type: item },
-                          props?.message
-                        );
-                      }}
-                    >
-                      {emoji[item as keyof typeof emoji]} {props?.message?.reaction_scores[item]}
-                    </Button>
-                  </>
-                );
-              })}
-          </Row>
-          }
+          {props?.message.reaction_scores && (
+            <Row className="vr-center">
+              {Object.keys(props?.message.reaction_scores).length > 0 &&
+                Object.keys(props.message.reaction_scores).map((item: any) => {
+                  return (
+                    <>
+                      <Button
+                        className="w-content m-r-0-5"
+                        size="xs"
+                        variant="state_brand"
+                        onClick={() => {
+                          props?.hookChat?.handleReaction(
+                            { type: item },
+                            props?.message
+                          );
+                        }}
+                      >
+                        {emoji[item as keyof typeof emoji]}{" "}
+                        {props?.message?.reaction_scores[item]}
+                      </Button>
+                    </>
+                  );
+                })}
+            </Row>
+          )}
         </Col>
         <Row className="w-100 action">
           <TemplateReactions />

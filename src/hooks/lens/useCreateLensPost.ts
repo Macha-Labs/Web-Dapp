@@ -2,7 +2,7 @@ import { BigNumber, ethers, utils } from "ethers";
 import { splitSignature } from "ethers/lib/utils";
 import { createNewPost, validateMetadata } from "../../helpers/lens/lens";
 import { LENS_HUB_CONTRACT } from "../../helpers/lens/lensContract";
-import signedTypeData from "../../helpers/lens/lensApiService";
+import { signedTypeData } from "../../helpers/lens/lensApiService";
 import { CreatePublicPostRequest } from "../../helpers/lens/lensInterfaces";
 import { PublicationMainFocus } from "../../helpers/lens/publication";
 import { makeFileObjects, nonWrappedData } from "../../helpers/web3Storage";
@@ -21,12 +21,14 @@ const useCreateLensPost = () => {
     const result = await createNewPost(request);
 
     const typedData = result.data!.createPostTypedData.typedData;
+    console.log("The typedData is ", typedData);
     try {
       const signature = await signedTypeData(
         typedData.domain,
         typedData.types,
         typedData.value
       );
+      console.log("The signature is ", signature, result);
 
       return { result, signature };
     } catch (error: any) {
@@ -84,12 +86,10 @@ const useCreateLensPost = () => {
     });
 
     if (validateRes?.data?.validatePublicationMetadata?.valid) {
-      console.log("HEEEEERRRRREEEEEE");
       const lensPostId = await createPost(params, postMetadata);
       return lensPostId;
     } else {
       throw new Error("Metadata could not be validated");
-      return;
     }
   };
 
@@ -117,6 +117,8 @@ const useCreateLensPost = () => {
 
     const signedResult = await signCreatePostTypedData(createPostRequest);
     const typedData = signedResult.result.data!.createPostTypedData.typedData;
+
+    console.log("signedResult", signedResult);
 
     const { v, r, s } = splitSignature(signedResult.signature);
     console.log("typedData", authContext.signer);

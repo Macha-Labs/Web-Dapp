@@ -16,7 +16,6 @@ const LayoutPostCard = (props: any) => {
 
     console.log(hookLensPosts.haveILiked, "hookLensPosts.haveILikedPost");
   }, [props.item?.id]);
-
   return (
     <>
       {props?.item ? (
@@ -46,7 +45,7 @@ const LayoutPostCard = (props: any) => {
 
               <Col className="m-b-1">
                 <div className="m-b-1">{props.item?.metadata?.content}</div>
-                {props?.item?.metadata?.media ? (
+                {props?.item?.metadata?.media.length > 0 ? (
                   <Image
                     className="w-60"
                     alt="lens post image"
