@@ -1,13 +1,15 @@
 import ModalSlider from "@/components/modal/ModalSlider";
+import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { Col } from "@/styles/StyledComponents";
-import { Heading, useDisclosure } from "@chakra-ui/react";
+import { Heading, useDisclosure, useToast } from "@chakra-ui/react";
 import React from "react";
 import ChatEdit from "../ChatEdit";
 import ChatMembers from "./ChatMembers";
 import ChatPermissions from "./ChatPermissions";
 
 function ChatSetting(props: any) {
+  const toast = useToast();
   const chatOptions = [
     {
       icon: "IconDarkSearch.png",
@@ -21,7 +23,7 @@ function ChatSetting(props: any) {
       icon: "IconDarkMute.png",
       name: "Mute Chat",
       onPress: () => {
-        console.log("Mute Chat");
+        hookPortalChannel?.muteChannel(props.hookChannel.channel);
       },
     },
     {
@@ -35,7 +37,9 @@ function ChatSetting(props: any) {
     {
       icon: "IconDarkEdit.png",
       name: "Edit Channel",
-      onPress: () => {modalChatEdit.onOpen()},
+      onPress: () => {
+        modalChatEdit.onOpen();
+      },
       condition: {
         enabled: true,
         check:
@@ -109,15 +113,38 @@ function ChatSetting(props: any) {
       //   icon: IconBrandClearChat,
       name: "Delete Channel",
       onPress: () => {
-        console.log("Mute Chat");
+        // console.log(props);
+        hookPortalChannel?.deleteChannel(props.hookChannel.channel);
       },
     },
   ];
+  const remove = () => {
+    toast({
+      title: "Channel Deleted",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.modalSettings.onClose();
+  };
+  const mute = () => {
+    toast({
+      title: "Channel Muted",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.modalSettings.onClose();
+  };
 
+  const hookPortalChannel = usePortalChannel(
+    props.hookChannel.channel.id,
+    {delete:remove, mute:mute}
+  );
   const modalChatPermission = useDisclosure();
   const modalChatMembers = useDisclosure();
   const modalChatEdit = useDisclosure();
-  
+
   const TemplatePermission = () => {
     return (
       <ModalSlider size={"md"} event={modalChatPermission}>
@@ -135,7 +162,7 @@ function ChatSetting(props: any) {
   const TemplateEditChannel = () => {
     return (
       <ModalSlider size={"lg"} event={modalChatEdit}>
-        <ChatEdit hookChannel={props.hookChannel} />
+        <ChatEdit hookChannel={props.hookChannel} modal={modalChatEdit} />
       </ModalSlider>
     );
   };

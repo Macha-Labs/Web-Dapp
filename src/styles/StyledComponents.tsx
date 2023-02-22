@@ -528,7 +528,7 @@ export const StyledNav = styled.div`
   padding: 10px 5px;
   background: ${style.nav.bg.default};
   border-right: ${style.nav.border.default};
-  
+
   .header {
     height: 55px;
     padding: 0px;
@@ -638,7 +638,7 @@ export const StyledChat = styled.div`
 export const StyledChatItem = styled(Row)`
   text-align: start;
   align-items: center;
-  justify-content: flex-start;  
+  justify-content: flex-start;
   .settingsIcon {
     display: none;
   }

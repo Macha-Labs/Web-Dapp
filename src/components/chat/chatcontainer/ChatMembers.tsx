@@ -34,31 +34,31 @@ const ChatMembers = (props: any) => {
             </Row>
           }
         >
-          {hookPortalChannelMembership?.following?.map((item: any, index: any) => {
+          {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
+            console.log("followings",item)
             return (
               <>
                 <Row key={index} className="hr-between p-1">
                   <Row className="vr-center">
                     <Avatar
-                        src={helperIPFS(
-                          item?.lens?.image
-                        )}
-                        className="m-r-0-5"
-                      />
+                      src={helperIPFS(item?.lens?.image)}
+                      className="m-r-0-5"
+                    />
                     <Text>
-                        {item?.name
+                      {truncateAddress(item?.wallet?.address)}
+                      {/* {item?.name
                           ? item?.name
                           : truncateAddress(
                               item?.lens?.ownedBy
-                            )}
-                      </Text>
+                            )} */}
+                    </Text>
                   </Row>
 
                   <Checkbox
                     value=""
                     onChange={() =>
                       hookPortalChannelMembership.handleCheckedUsers(
-                        item?.lens?.ownedBy,
+                        item?.wallet?.address,
                         index
                       )
                     }
@@ -97,19 +97,20 @@ const ChatMembers = (props: any) => {
           </>
         }
       >
-        {chatContext.hookMembers.offlineUsers
-          .concat(chatContext.hookMembers.onlineUsers)
+        {chatContext.hookMembers.onlineUsers
+          .concat(chatContext.hookMembers.offlineUsers)
           ?.map((item: any, index: any) => {
             return (
               <>
+              {/* {console.log("itm",item.name,"full ",item)}  */}
                 <Row className="hr-between p-1">
                   <Row className="hr-between">
                     <div>
-                      <Avatar src={item?.image} />
+                      <Avatar src={item?.image} className="m-r-1"/>
                     </div>
                     <div>
                       <Text>
-                        {item?.name ? item.name : truncateAddress(item.ownedBy)}
+                        {item?.name ? item?.name : truncateAddress(item?.id)}
                       </Text>
                       <Text color="#6FC62A">@{item?.handle}</Text>
                     </div>
@@ -118,7 +119,7 @@ const ChatMembers = (props: any) => {
                     value=""
                     onChange={() =>
                       hookPortalChannelMembership.handleCheckedUsers(
-                        item?.ownedBy,
+                        item?.id,
                         index
                       )
                     }

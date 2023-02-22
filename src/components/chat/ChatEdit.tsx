@@ -1,4 +1,4 @@
-import React, { useContext, useDebugValue } from "react";
+import React, { useContext, useDebugValue, useState } from "react";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import usePortalChannel from "../../hooks/portal/usePortalChannel";
 import {
@@ -8,13 +8,31 @@ import {
   Icon,
   Switch,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { Col, Row } from "@/styles/StyledComponents";
 import LayoutCard from "@/layouts/LayoutCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatEdit = (props: any) => {
-  const hookPortalChannel = usePortalChannel(props.hookChannel?.channel);
+  const toast = useToast();
+  const callBack=()=>{
+    toast({
+      title: "Channel Details updated successfully",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.modal.onClose();
+  }
+  const [profileImage, setProfileImage] = useState(null);
+  const hookPortalChannel = usePortalChannel(
+    props.hookChannel?.channel,
+    {edit:callBack}
+  );
+  const handleSelectClick = () => {
+    document.getElementById("galleryInput").click();
+  };
   const modalAddMembers = useDisclosure();
   const data = [
     {
@@ -52,19 +70,37 @@ const ChatEdit = (props: any) => {
             onClick={() => {
               hookPortalChannel?.update();
             }}
+            isLoading={hookPortalChannel?.isLoading}
           >
             Save
           </Button>
         </Row>
       }
     >
-      <Col className="hr-center w-full p-3">
-        <Avatar
-          size="2xl"
-          className="m-v-1"
-          name={hookPortalChannel?.channel?.name}
+      <Col className="p-3">
+      <Col className="hr-center w-full">
+        {profileImage ? (
+          <Avatar
+            size="2xl"
+            className="m-v-1"
+            name={hookPortalChannel?.channel?.name}
+            src={URL.createObjectURL(profileImage)}
+          />
+        ) : (
+          <Avatar
+            size="2xl"
+            className="m-v-1"
+            name={hookPortalChannel?.channel?.name}
+          />
+        )}
+        <input
+          type="file"
+          id="galleryInput"
+          accept="image/*"
+          onChange={(e) => setProfileImage(e.target.files[0])}
+          style={{ display: "none" }}
         />
-        <Text fontSize={14} fontWeight={800}>
+        <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
           Set New Profile Photo
         </Text>
       </Col>
@@ -88,6 +124,7 @@ const ChatEdit = (props: any) => {
         <Text>Allow Gating</Text>
         <Switch colorScheme="emerald" />
       </Row>
+      </Col>
     </LayoutCardPannel>
   );
 };

@@ -23,6 +23,10 @@ import PortalLoader from "@/components/PortalLoader";
 import IconImage from "@/components/icons/IconImage";
 import Pop from "@/components/pop/Pop";
 import ModalWindow from "@/components/modal/ModalWindow";
+import useCreateLensPost from "@/hooks/lens/useCreateLensPost";
+import useLensProfile from "@/hooks/lens/useLensProfile";
+import { AuthContext } from "@/providers/AuthProvider";
+import { useContext } from "react";
 
 // const TypingRow = styled(Row)`
 //     display: none;
@@ -30,6 +34,10 @@ import ModalWindow from "@/components/modal/ModalWindow";
 
 const ChatInput = (props: any) => {
   const modalPost = useDisclosure();
+  const hookCreateLensPost = useCreateLensPost();
+  const hookLensProfile = useLensProfile();
+  const profileID = hookLensProfile?.userLens?.id;
+  console.log("Lens ProfileID", hookLensProfile.userLens);
 
   const templateReply = () => {
     return (
@@ -75,7 +83,12 @@ const ChatInput = (props: any) => {
       >
         <Col className="p-1">
           <Text fontSize={16}>Your Lens Post Heading Here</Text>
-          <Textarea className="m-b-1 m-t-1" size="xl"></Textarea>
+          <Textarea
+            className="m-b-1 m-t-1"
+            size="xl"
+            placeholder="Your Lens Post Content Here"
+            ref={hookCreateLensPost.postContentRef}
+          ></Textarea>
           <Row className="m-b-1">
             <IconImage
               path="IconDarkFiles.png"
@@ -83,7 +96,16 @@ const ChatInput = (props: any) => {
             />
             <IconImage path="IconDarkPhotos.png" />
           </Row>
-          <Button size="sm" variant="state_brand w-content">
+          <Button
+            size="sm"
+            variant="state_brand w-content"
+            onClick={() => {
+              hookCreateLensPost.validateMetadataAndPostOnLens({
+                profileId: profileID,
+                postContent: hookCreateLensPost.postContentRef.current.value,
+              });
+            }}
+          >
             Create Post
           </Button>
         </Col>
@@ -308,13 +330,16 @@ const ChatInput = (props: any) => {
   const TemplateSearch = () => {
     return (
       <Row className="vr-center hr-between w-100">
-            <IconImage path="IconDarkCalendar.png" />
-            <Row className="vr-center">
-              <IconImage path="IconDarkArrowUp.png" style={{className:"m-r-0-5"}} />
-              <IconImage path="IconDarkArrowDown.png"/>
-            </Row>
-          </Row>
-    )
+        <IconImage path="IconDarkCalendar.png" />
+        <Row className="vr-center">
+          <IconImage
+            path="IconDarkArrowUp.png"
+            style={{ className: "m-r-0-5" }}
+          />
+          <IconImage path="IconDarkArrowDown.png" />
+        </Row>
+      </Row>
+    );
   };
 
   const TemplateMultiselect = () => {
@@ -333,23 +358,21 @@ const ChatInput = (props: any) => {
     if (props.hookChat.actionMessage?.action === "SEARCH")
       return (
         <StyledChatInputContainer>
-        <StyledChatInput>
-          <TemplateSearch />
-        </StyledChatInput>
-      </StyledChatInputContainer>
-      )
+          <StyledChatInput>
+            <TemplateSearch />
+          </StyledChatInput>
+        </StyledChatInputContainer>
+      );
     else if (props.hookChat.actionMessage?.action === "MULTISELECT")
       return (
         <StyledChatInputContainer>
-        <StyledChatInput>
-          <TemplateMultiselect />
-        </StyledChatInput>
-      </StyledChatInputContainer>
+          <StyledChatInput>
+            <TemplateMultiselect />
+          </StyledChatInput>
+        </StyledChatInputContainer>
       );
-    else return (
-      <TemplateInput />
-    );
-  }
+    else return <TemplateInput />;
+  };
 
   return (
     <>

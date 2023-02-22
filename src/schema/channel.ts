@@ -1,9 +1,3 @@
-import {omitDeep} from "@patomation/omit-deep";
-
-const omit = (object: any, name: string) => {
-    return omitDeep(object, name);
-};
-
 export const Channel$ = (data: any) => {
     return {
         id: data?._id,
