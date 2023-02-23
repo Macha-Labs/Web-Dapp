@@ -221,7 +221,6 @@ const ChatMessage = (props: any) => {
 
   return (
     <StyledConversation key={props?.message?.id}>
-      {props?.message?.id}
       <TemplateReply />
       <Row className="w-100">
         <Col>
