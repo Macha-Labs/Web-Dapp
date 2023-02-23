@@ -157,13 +157,6 @@ const UserProfile = (props: any) => {
   };
 
   const TemplateProfile = () => {
-
-      "Address",
-      authContext.address,
-      props.user?.lens?.ownedBy,
-      props.user?.lens?.ownedBy.toLowerCase() ===
-        authContext?.address?.toLowerCase()
-    );
     return (
       <StyledCard>
         <LayoutProfileBanner profile={props.user?.lens} />
