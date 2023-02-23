@@ -107,12 +107,14 @@ const ChatMessage = (props: any) => {
               size="md"
               className="text-start"
               rightIcon={<IconImage path="IconDarkFiles.png" />}
+              key={`c-${props?.message?.id}`}
             >
               <Row
                 className="hr-between w-100"
                 onClick={() => {
                   props.hookChat.handleEdit(props.message);
                 }}
+                key={`d-${props?.message?.id}`}
               >
                 Edit
               </Row>
@@ -220,7 +222,7 @@ const ChatMessage = (props: any) => {
   };
 
   return (
-    <StyledConversation>
+    <StyledConversation key={`b-${props?.message?.id}`}>
       <TemplateReply />
       <Row className="w-100">
         <Col>
@@ -255,20 +257,20 @@ const ChatMessage = (props: any) => {
               style={{ className: "w-100 vr-center m-t-0-5" }}
               actions={[
                 <Button
-                  key={props?.message?.id}
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
                   onClick={props.hookChat?.editMessage}
+                  key={`g-${props?.message?.id}`}
                 >
                   Update
                 </Button>,
                 <Button
-                  key={props?.message?.id}
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
                   onClick={props.hookChat?.handleEditClose}
+                  key={`h-${props?.message?.id}`}
                 >
                   Cancel
                 </Button>,
@@ -299,22 +301,21 @@ const ChatMessage = (props: any) => {
               {Object.keys(props?.message.reaction_scores).length > 0 &&
                 Object.keys(props.message.reaction_scores).map((item: any) => {
                   return (
-                    <>
-                      <Button
-                        className="w-content m-r-0-5"
-                        size="xs"
-                        variant="state_brand"
-                        onClick={() => {
-                          props?.hookChat?.handleReaction(
-                            { type: item },
-                            props?.message
-                          );
-                        }}
-                      >
-                        {emoji[item as keyof typeof emoji]}{" "}
-                        {props?.message?.reaction_scores[item]}
-                      </Button>
-                    </>
+                    <Button
+                      className="w-content m-r-0-5"
+                      size="xs"
+                      variant="state_brand"
+                      onClick={() => {
+                        props?.hookChat?.handleReaction(
+                          { type: item },
+                          props?.message
+                        );
+                      }}
+                      key={`f-${props?.message?.id}`}
+                    >
+                      {emoji[item as keyof typeof emoji]}{" "}
+                      {props?.message?.reaction_scores[item]}
+                    </Button>
                   );
                 })}
             </Row>

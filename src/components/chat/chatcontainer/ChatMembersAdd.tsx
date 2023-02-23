@@ -43,7 +43,7 @@ const ChatMembersAdd = (props: any) => {
           {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
             return (
               <>
-                <Row key={index} className="hr-between p-1">
+                <Row key={item?.id} className="hr-between p-1">
                   <Row className="vr-center">
                     <Avatar
                       src={helperIPFS(item?.lens?.image)}

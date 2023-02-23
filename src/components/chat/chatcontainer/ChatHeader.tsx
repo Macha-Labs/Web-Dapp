@@ -102,7 +102,7 @@ const ChatHeader = (props: any) => {
                   {props.hookChat?.usersWhoAreTyping?.map(
                     (user: any, index: number) => {
                       return (
-                        <Text key={index} fontSize="12">
+                        <Text key={user?.id} fontSize="12">
                           {`${user}${
                             index! ==
                               props.hookChat?.usersWhoAreTyping.length - 1 &&
