@@ -35,7 +35,7 @@ export const AuthContext = createContext<AuthContextType>({
 
 const AuthProvider = ({ children }: any) => {
   const [signer, setSigner] = useState<any>("");
-  const [user, setUser] = useState<a>({});
+  const [user, setUser] = useState<any>({});
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
 
