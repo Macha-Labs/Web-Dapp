@@ -1,6 +1,9 @@
 import IconImage from "@/components/icons/IconImage";
 import { Col, StyledCard} from "@/styles/StyledComponents";
 import { Button, Heading } from "@chakra-ui/react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
+
 
 const AuthCard = () => {
     return (
@@ -14,7 +17,8 @@ const AuthCard = () => {
                     </Heading>
                 </Col>
                 <Col className="w-60">
-                    <Button className="m-b-0-5" size="md" variant="state_brand" onClick={() => {}}>Connect Wallet</Button>
+                    <ConnectWalletButton />
+                    {/* <Button className="m-b-0-5" size="md" variant="state_brand" onClick={() => {}}>Connect Wallet</Button> */}
                     <Button className="" size="md" variant="state_lens" onClick={() => {}}>Sign In With Lens</Button>
                 </Col>
             </Col>
