@@ -237,7 +237,6 @@ export const likePost = async (requestParam: any) => {
         request: requestParam,
       },
     });
-    console.log("result", result, requestParam);
     return result.data!.addReaction;
   } catch (error: any) {
     throw new Error(
@@ -289,7 +288,6 @@ export const haveILikedPost = async (requestParam: any) => {
         request: requestParam,
       },
     });
-    console.log("result", result);
     return result.data!.whoReactedPublication;
   } catch (error: any) {
     throw new Error(

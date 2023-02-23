@@ -4,7 +4,6 @@ import {
   Button,
   Heading,
   Image,
-  Spinner,
   Text,
   Textarea,
   useDisclosure,
@@ -23,19 +22,10 @@ import PortalLoader from "@/components/PortalLoader";
 import IconImage from "@/components/icons/IconImage";
 import Pop from "@/components/pop/Pop";
 import ModalWindow from "@/components/modal/ModalWindow";
-import useLensProfile from "@/hooks/lens/useLensProfile";
-import { AuthContext } from "@/providers/AuthProvider";
-import { useContext } from "react";
 
-// const TypingRow = styled(Row)`
-//     display: none;
-// `
 
 const ChatInput = (props: any) => {
   const modalPost = useDisclosure();
-  const hookLensProfile = useLensProfile();
-  const profileID = hookLensProfile?.userLens?.id;
-  console.log("Lens ProfileID", hookLensProfile.userLens);
 
   const templateReply = () => {
     return (

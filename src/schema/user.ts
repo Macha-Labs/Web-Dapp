@@ -64,12 +64,13 @@ export const UserLens$ = (lensData: any) => {
 }
  
  
-export const User$ = (dbData=null, lensData=null) => {
+export const User$ = (dbData=null, lensData=null, streamData=null) => {
     
     return (
         {   
             db: dbData,
-            lens: lensData
+            lens: lensData,
+            stream: streamData
         }
     )
 }

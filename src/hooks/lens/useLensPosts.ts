@@ -32,7 +32,6 @@ const useLensPosts = () => {
     if (haveIliked) {
       setHaveILiked(true);
     }
-    console.log("The haveIliked is ", haveIliked);
   };
 
   useEffect(() => {

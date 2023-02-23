@@ -23,7 +23,6 @@ const useStreamChannel = (channelId: any) => {
   //         messages: {limit: 10, id_lte: lastMessageId},
   //     });
 
-  //     console.log("Paginated messages ", messages);
   //     setChannelMessages(messages.messages);
   // };
 
@@ -52,8 +51,6 @@ const useStreamChannel = (channelId: any) => {
     // listening to message events
     if (channel)
     channel?.raw?.on((event: any) => {
-      console.log("This is a channel event handler log ", event);
-      console.log("Channel messages after the event ", channel?.raw?.state?.messageSets[0]?.messages);
       setChannelMessages(!channelMessages);
     });
   }, [channel]);

@@ -16,7 +16,6 @@ const useStreamChannelMembers = (channel: any) => {
     let onlineIds: any[] = [];
     let offlineIds: any[] = [];
     response?.members.map((item: any, index: number) => {
-      console.log("items", item.user);
       if (item.user?.online) {
         onlineIds.push({lens: UserStream$(item.user)});
       } else offlineIds.push({stream: UserStream$(item.user), lens: {}});
@@ -48,7 +47,6 @@ const useStreamChannelMembers = (channel: any) => {
   const checkOnline = (user: any) => {
     return user.online == true;
   };
-  // console.log("userismember",response)
   return {
     fetchChannelMembers: fetchChannelMembers,
     checkOnline: checkOnline,
