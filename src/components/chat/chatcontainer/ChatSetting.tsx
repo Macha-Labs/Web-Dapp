@@ -6,6 +6,7 @@ import { Heading, useDisclosure, useToast } from "@chakra-ui/react";
 import React from "react";
 import ChatEdit from "../ChatEdit";
 import ChatMembers from "./ChatMembers";
+import ChatMembersAdd from "./ChatMembersAdd";
 import ChatPermissions from "./ChatPermissions";
 
 function ChatSetting(props: any) {
@@ -143,6 +144,7 @@ function ChatSetting(props: any) {
   );
   const modalChatPermission = useDisclosure();
   const modalChatMembers = useDisclosure();
+  const modalAddMembers = useDisclosure();
   const modalChatEdit = useDisclosure();
 
   const TemplatePermission = () => {
@@ -155,7 +157,14 @@ function ChatSetting(props: any) {
   const TemplateMembers = () => {
     return (
       <ModalSlider size={"md"} event={modalChatMembers}>
-        <ChatMembers hookChannel={props.hookChannel} />
+        <ChatMembers hookChannel={props.hookChannel} modalAddMembers={modalAddMembers} />
+      </ModalSlider>
+    );
+  };
+  const TemplateMembersAdd = () => {
+    return (
+      <ModalSlider size={"md"} event={modalAddMembers}>
+        <ChatMembersAdd hookChannel={props.hookChannel} modalAddMembers={modalAddMembers} />
       </ModalSlider>
     );
   };
@@ -194,6 +203,7 @@ function ChatSetting(props: any) {
       </div>
       <TemplatePermission />
       <TemplateMembers />
+      <TemplateMembersAdd />
       <TemplateEditChannel />
     </>
   );

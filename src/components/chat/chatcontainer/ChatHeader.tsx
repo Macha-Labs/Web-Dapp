@@ -56,7 +56,7 @@ const ChatHeader = (props: any) => {
     return (
       <Row className="header w-100 vr-center hr-between">
         <ChatSearch />
-        <Button size="sm" variant="state_brand" className="m-l-1" onClick={props?.hookChat?.handleSearchClose}>Cancel</Button>
+        <Button size="xs" variant="state_default_hover" className="m-l-1" onClick={props?.hookChat?.handleSearchClose}>Cancel</Button>
       </Row>
     )
   };
@@ -68,13 +68,13 @@ const ChatHeader = (props: any) => {
           variant="state_brand"
           size="sm"
           className="m-r-0-5"
-          // onClick={props.hookChat.setSelectedMessages([])}
+          onClick={() => {props.hookChat?.setSelectedMessages([])}}
         >
           Clear
         </Button>
         <Button
-          variant=""
-          size="sm"
+          variant="state_default_hover"
+          size="xs"
           onClick={props.hookChat.handleMultiSelectClose}
         >
           Cancel

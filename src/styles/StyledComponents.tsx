@@ -843,6 +843,7 @@ export const StyledPageList = styled.div`
     margin: auto;
     padding: 20px 10px;
     background: ${style.body.bg};
+    overflow-y: scroll;
 
     .menu-heading {
       padding-left: 10px;
@@ -915,7 +916,7 @@ export const StyledPageContainer = styled.div`
   }
 
   .body {
-    overflow: inherit;
+    overflow-y: scroll;
     padding: 20px 0px;
     height: calc(100vh - 55px);
     padding: 25px 10%;

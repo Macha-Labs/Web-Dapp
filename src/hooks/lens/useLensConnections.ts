@@ -16,7 +16,7 @@ const useLensConnections = (account?: any, lensId?: any) => {
         "lens",
         "useLensConnections.getFollowing",
         "getting following data",
-        [followingData]
+        [followingData, data.data.following]
       );
       setFollowing(followingData);
     });
@@ -25,13 +25,16 @@ const useLensConnections = (account?: any, lensId?: any) => {
   // @param: lens id
   const getFollowers = (lensId: any) => {
     fetchFollowers({ profileId: lensId }).then(data => {
+      const followersData = data.data.followers.items.map((item: any) => {
+        return { db: null, lens: UserLens$(item.wallet.defaultProfile)};
+      });
       logger(
         "lens",
         "useLensConnections.getFollowers",
         "getting followers data",
-        [data]
+        [data, followersData]
       );
-      setFollowers(data?.data?.followers?.items);
+      setFollowers(followersData);
     });
   };
 

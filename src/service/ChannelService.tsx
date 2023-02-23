@@ -95,15 +95,11 @@ export const addMembers = async (data: any) => {
 };
 
 export const removeMembers = async (data: any) => {
-  console.log(data);
-  const response = await fetch(
-    `${config.url}/api/channel/admin-remove-members/${data.id}`,
-    {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+    const resopnse = await fetch(`${config.url}/api/channel/admin-remove-members/${data.id}`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
 };

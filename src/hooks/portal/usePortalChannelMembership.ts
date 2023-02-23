@@ -5,23 +5,21 @@ import useLensConnections from "../lens/useLensConnections";
 
 const usePortalChannelMembership = (channel: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
-  const hookLensConnections = useLensConnections(authContext?.address);
+  const hookLensConnections = useLensConnections(authContext?.address, authContext?.user?.lens?.id);
   const [isLoading, setIsLoading] = useState<any>();
   const [visible, setVisible] = useState<boolean>(false);
   const [users, setUsers] = useState<any>([]);
 
-  const handleCheckedUsers = (userAddress: any, index: any) => {
-    console.log("Focusing address ", userAddress);
-    if (!users.includes(userAddress)) {
-      // users.push(userAddress);
-      setUsers([...users, userAddress.toLowerCase()]);
-      console.log(`Added ${userAddress}, updated array ${users}`);
+  const handleCheckedUsers = (user: any) => {
+    console.log("Focusing address ", user?.lens?.ownedBy);
+    if (!users.includes(user?.lens?.ownedBy)) {
+      setUsers([...users, user?.lens?.ownedBy?.toLowerCase()]);
     } else {
       const usersFilter = users.filter(
-        (user: any) => user != userAddress.toLowerCase()
+        (user: any) => user != user?.lens?.ownedBy?.toLowerCase()
       );
       setUsers(usersFilter);
-      console.log(`Removed ${userAddress}, updated array ${users}`);
+      console.log(`Removed ${user?.lens?.ownedBy}, updated array ${users}`);
     }
   };
 
@@ -43,7 +41,6 @@ const usePortalChannelMembership = (channel: any) => {
 
   // run when -> members selected -> clicked on remove
   const removeMembersFromChannel = async () => {
-    console.log(`Users to remove ${users}`);
     if (users) {
       const data = {
         members: users,
@@ -58,10 +55,7 @@ const usePortalChannelMembership = (channel: any) => {
   // fetching my lens followers
   useEffect(() => {
     if (authContext.address) {
-      console.log("Fetching followers for lens id ", authContext.user?.lens?.id);
       hookLensConnections.getFollowers(authContext.user?.lens?.id);
-    } else {
-      console.log("User address not found");
     }
   }, [authContext.address]);
 

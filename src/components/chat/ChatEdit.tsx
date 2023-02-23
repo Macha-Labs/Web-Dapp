@@ -61,7 +61,7 @@ const ChatEdit = (props: any) => {
     <LayoutCardPannel
       header={
         <Row className="hr-between w-full">
-          <Button size="sm" onClick={modalAddMembers.onClose}>
+          <Button size="sm" onClick={modalAddMembers.onClose} variant="state_default_hover">
             Cancel
           </Button>
           <Text size={"sm"}>Edit Channel</Text>

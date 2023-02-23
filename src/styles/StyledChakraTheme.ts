@@ -101,6 +101,16 @@ const theme = extendTheme({
             opacity: "1",
           },
         },
+        state_default_hover: {
+          background: `${style.card.bg.default}`,
+          border: `${style.card.border.default}`,
+          shadow: `${style.card.shadow.default}`,
+          _hover: {
+            background: `${style.card.bg.hover}`,
+            border: `1px solid ${style.card.border.hover}`,
+            shadow: `${style.card.shadow.hover}`,
+          }
+        },
         state_default_to_brand: {
           background: `${style.button.bg.default}`,
           _hover: {
@@ -108,10 +118,7 @@ const theme = extendTheme({
             color: "#FF",
           },
         },
-        state_brand: {
-          background: `${style.button.bg.active}`,
-          color: "#FF",
-        },
+        
         state_transparent_to_brand_hover: {
           background: "transparent",
           border: `1px solid transparent`,
@@ -121,6 +128,10 @@ const theme = extendTheme({
             border: `1px solid ${style.brButton.active}`,
             color: "#FFF",
           },
+        },
+        state_brand: {
+          background: `${style.button.bg.active}`,
+          color: "#FF",
         },
         state_brand_hover: {
           background: `${style.button.bg.activeTranslucent}`,

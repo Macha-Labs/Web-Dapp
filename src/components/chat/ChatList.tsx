@@ -129,15 +129,17 @@ const ChatList = (props: any) => {
                       name={item?.name}
                     />
                     <Col className="w-100 d-flex flex-col">
-                      {item?.name}
-                      <Col className="m-t-0-5">
+                      <Text>
+                        {item?.name}
+                      </Text>
+                      {item?.lastMessage && <Col className="m-t-0-5">
                         <Text fontSize={"xs"}>
                           {item?.lastMessage?.user?.lensUsername ||
                             item?.lastMessage?.user?.lensHandle ||
                             truncateAddress(item?.lastMessage?.user?.id)}
                           : {item?.lastMessage?.text}
                         </Text>
-                      </Col>
+                      </Col>}
                     </Col>
                     {item?.unreadCountObject[authContext?.address]
                       ?.unread_messages > 0 &&
