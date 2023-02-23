@@ -220,7 +220,7 @@ const ChatMessage = (props: any) => {
   };
 
   return (
-    <StyledConversation>
+    <StyledConversation key={props?.message?.id}>
       <TemplateReply />
       <Row className="w-100">
         <Col>
