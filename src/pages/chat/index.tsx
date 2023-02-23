@@ -14,7 +14,7 @@ function ChatComponent() {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    if (!authContext?.address || !AuthContext?.user?.lens?.id) modalAuth.onOpen(); else {modalAuth.onClose()}
+    if (!authContext?.address || !authContext?.user?.lens?.id) modalAuth.onOpen(); else {modalAuth.onClose()}
   }, [modalAuth.isOpen])
 
   const TemplateAuth = () => {
