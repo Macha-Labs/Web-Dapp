@@ -52,6 +52,8 @@ const useStreamChannel = (channelId: any) => {
     if (channel)
     channel?.raw?.on((event: any) => {
       setChannelMessages(!channelMessages);
+      logger("streamChannel", "useEffect", "logging the channel events", [event]);
+      logger("streamChannel", "useEffect", "logging the channel Messages", [channel?.raw?.state?.messageSets[0]?.messages]);
     });
   }, [channel]);
 

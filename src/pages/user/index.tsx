@@ -5,21 +5,21 @@ import UserEdit from "@/components/user/UserEdit";
 import { helperIPFS } from "@/helpers";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { AuthContext } from "@/providers/AuthProvider";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import {
-  Row,
   StyledPageContainer,
   StyledPageList,
   StyledWindow,
 } from "@/styles/StyledComponents";
-import { Avatar, Button, Input, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Avatar, Input, Text, useDisclosure } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
+import ModalWindow from "@/components/modal/ModalWindow";
+import AuthCard from "@/components/auth/AuthCard";
 
 const User = () => {
   const authContext = useContext(AuthContext);
-
   const [window, setWindow] = useState("UserProfile");
+  const modalAuth = useDisclosure();
 
   const userSettings = [
     {
@@ -71,6 +71,12 @@ const User = () => {
     },
   ];
 
+  useEffect(() => {
+    if (!authContext?.address || !authContext?.user?.lens?.id) 
+      modalAuth.onOpen(); 
+    else {modalAuth.onClose()}
+  }, [authContext?.user?.lens?.id])
+
   const TemplateRight = () => {
     return (
       <>
@@ -83,6 +89,16 @@ const User = () => {
     );
   };
 
+  const TemplateAuth = () => {
+    return (
+      <>
+        <ModalWindow event={modalAuth} style={{className: 'm-t-2'}}>
+          <AuthCard/>
+        </ModalWindow>
+      </>
+    )
+  }
+
   const Template = () => {
     return (
       <>
@@ -90,13 +106,7 @@ const User = () => {
           <div className="header vr-center">
             <Input />
           </div>
-          <div className="body">
-            {!authContext.isConnected && <ConnectButton />}
-            <Button
-              onClick={() => authContext.connectLens(authContext.address)}
-            >
-              Connect to lens
-            </Button>
+          <div className="body">            
             <UserCard
               user={authContext?.user}
               onClick={setWindow("UserProfile")}
@@ -125,14 +135,18 @@ const User = () => {
   };
 
   return (
-    <StyledWindow>
-      <div className="left">
-        <Nav />
-      </div>
-      <div className="right">
-        <Template />
-      </div>
-    </StyledWindow>
+    <>
+    {authContext?.user?.lens?.id && <StyledWindow>
+        <div className="left">
+          <Nav />
+        </div>
+        <div className="right">
+          <Template />
+        </div>
+      </StyledWindow>}
+      
+      <TemplateAuth />
+    </>
   );
 };
 

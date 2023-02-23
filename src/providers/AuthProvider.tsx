@@ -13,7 +13,7 @@ export type AuthContextType = {
   signer: any | undefined;
   address: any | undefined;
   connectWallet: () => void;
-  connectLens: (param: any) => void;
+  connectLens: (param?: any) => void;
   disconnectWallet: () => void;
   user: any | undefined;
   setUser: (param: any) => void;
@@ -66,22 +66,28 @@ const AuthProvider = ({ children }: any) => {
    * 
    **/
   const _fetchUserFromLens = async () => {
-    const lensProfile = await hookLensProfile.getOwnedProfiles(address);
-    if (lensProfile) {
-      const tokens: any | { accessToken: string; refreshToken: string } =
-        await hookLensAuth.connectToLens(address);
-      if (tokens?.accessToken) {
-        _updateUser("lens", {
-          ...lensProfile,
-          accessToken: tokens["accessToken"],
-          refreshToken: tokens["refreshToken"],
-        });
+    const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
+    try {
+      if (lensProfile) {
+        const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
+        logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
+        if (tokens?.accessToken) {
+          _updateUser("lens", {
+            ...lensProfile,
+            accessToken: tokens["accessToken"],
+            refreshToken: tokens["refreshToken"],
+          });
+        } else {
+          _updateUser("lens", lensProfile);
+        }
       } else {
-        _updateUser("lens", lensProfile);
+        throw Error(`Couldn't find Lens Profile with address ${address}`);
       }
-    } else {
-      throw Error(`Couldn't find Lens Profile with address ${address}`);
+    } catch (error) {
+      logger("auth", "_fetchUserFromLens", "Error in fetching userData from Lens", [error]);
+
     }
+    
   };
 
   /** 
@@ -143,10 +149,14 @@ const AuthProvider = ({ children }: any) => {
     logger("auth", "useEffect", "Portal 1: Current user address", [address]);
     if (address) {
       _fetchSignerFromWagmi();
-      _fetchUserFromLens();
       _fetchUserFromDB();
     }
   }, [address]);
+
+  useEffect(() => {
+    if (user) 
+      logger("auth", "useEffect", "Logging user object", [user]);
+  }, [user]);
 
   return (
     <AuthContext.Provider
@@ -154,7 +164,7 @@ const AuthProvider = ({ children }: any) => {
         signer: signer,
         address: address?.toLowerCase(),
         connectWallet: connectWallet,
-        connectLens: () => {},
+        connectLens: _fetchUserFromLens,
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,

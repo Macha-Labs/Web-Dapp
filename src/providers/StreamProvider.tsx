@@ -1,5 +1,4 @@
-import { logger } from "@/helpers/logger";
-import {createContext, useContext, useEffect, useRef, useState} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import useStreamClient from "../hooks/stream/useStreamClient";
 import useStreamUserChannels from "../hooks/stream/useStreamUserChannels";
 import {AuthContext, AuthContextType} from "./AuthProvider";
@@ -23,15 +22,14 @@ const StreamProvider = ({children}: any) => {
     
 
     useEffect(() => {
-        if (authContext?.user?.db?.tokens?.stream) {
+        if (authContext?.user?.lens?.id) {
             hookStreamClient.connectToStream();
         }
-    }, [authContext?.user?.db?.tokens?.stream]);
+    }, [authContext?.user?.lens?.id]);
 
     useEffect(() => {
         if (hookStreamClient.client?.user?.id) {
             setClient(hookStreamClient.client);
-            //sending a callback function with this
             hookChannels.fetchUserChannels(
                 hookStreamClient.client,
             );
