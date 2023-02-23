@@ -54,7 +54,7 @@ const ChatHeader = (props: any) => {
 
   const TemplateSearch = () => {
     return (
-      <Row className="w-100 vr-center hr-between">
+      <Row className="header w-100 vr-center hr-between">
         <ChatSearch />
         <Button size="sm" variant="state_brand" className="m-l-1" onClick={props?.hookChat?.handleSearchClose}>Cancel</Button>
       </Row>
@@ -63,7 +63,7 @@ const ChatHeader = (props: any) => {
 
   const TemplateMultiSelect = () => {
     return (
-      <Row>
+      <Row className="header w-100 hr-between vr-center">
         <Button
           variant="state_brand"
           size="sm"
@@ -73,9 +73,9 @@ const ChatHeader = (props: any) => {
           Clear
         </Button>
         <Button
-          variant="state_brand"
+          variant=""
           size="sm"
-          // onClick={props.hookChat.handleMultiSelectClose}
+          onClick={props.hookChat.handleMultiSelectClose}
         >
           Cancel
         </Button>

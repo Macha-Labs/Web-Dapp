@@ -338,7 +338,20 @@ const ChatInput = (props: any) => {
   };
 
   const TemplateMultiselect = () => {
-    return <></>;
+    return <Row className="vr-center hr-between w-100">
+      <IconImage
+            path="IconDarkMenu.png"
+            style={{ className: "m-r-0-5" }}
+          />
+          <IconImage
+            path="IconDarkMenu.png"
+            style={{ className: "m-r-0-5" }}
+          />
+          <IconImage
+            path="IconDarkMenu.png"
+            style={{ className: "m-r-0-5" }}
+          />
+    </Row>;
   };
 
   const previewCloseHandler = () => {
