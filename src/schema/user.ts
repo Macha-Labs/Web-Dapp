@@ -19,9 +19,6 @@ export const UserStream$ = (dbData: any) => {
     image:dbData?.lensImage,   
     handle: dbData?.lensHandle,
     ownedBy: dbData?.id,
-    tokens: {
-      stream: dbData?.tokens?.stream,
-    },
   };
 };
 

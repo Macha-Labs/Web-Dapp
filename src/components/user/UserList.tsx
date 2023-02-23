@@ -45,20 +45,14 @@ const UserList: FC<Props> = (props) => {
                             {
                                 users.map((item: any, index: any) =>
                                     <Row key={index} className="vr-center item m-b-0-5" onClick={() => {handleSelectedUser(item)}} >
-                                        <Avatar src={helperIPFS(item.image)} className="m-r-0-5" size="sm" >
+                                        <Avatar src={helperIPFS(item?.lens?.image)} className="m-r-0-5" size="sm" >
                                         {
                                             heading == 'Online' ? (<AvatarBadge boxSize='0.7em' bg='green.500' />) : (<></>)
                                         }
                                         </Avatar>
-                                        {
-                                            item?.name
-                                                ?
-                                                (<h6>{item?.name}</h6>)
-                                                :
-                                                (
-                                                    <h6>{truncateAddress(item?.handle)}</h6>
-                                                )
-                                        }
+                                        <h6>
+                                        {item?.lens?.name ? item?.lens?.name : (item?.lens?.handle ? item?.lens?.handle: truncateAddress(item?.lens?.ownedBy))}
+                                        </h6>
                                     </Row>
                                 )
                             }

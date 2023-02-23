@@ -24,7 +24,7 @@ const usePortalChannelMembership = (channel: any) => {
   };
 
   // adding selected members to current channel
-  const addMembersToChannel = () => {
+  const addMembersToChannel = (callback:any = null) => {
     // const myFollowers = Object.values(users);
     if (users) {
       const data = {
@@ -34,22 +34,25 @@ const usePortalChannelMembership = (channel: any) => {
       console.log(data);
       console.log(users);
       addMembers(data);
+      callback();
     } else {
       console.log("No followers selected");
     }
   };
 
   // run when -> members selected -> clicked on remove
-  const removeMembersFromChannel = async () => {
-    if (users) {
-      const data = {
-        members: users,
-        id: channel.id,
-      };
-      removeMembers(data);
-    } else {
-      console.log("No members selected");
-    }
+  const removeMembersFromChannel = async (callback:any = null) => {
+    console.log(users);
+    // if (users) {
+    //   const data = {
+    //     members: users,
+    //     id: channel.id,
+    //   };
+    //   removeMembers(data);
+    //   callback();
+    // } else {
+    //   console.log("No members selected");
+    // }
   };
 
   // fetching my lens followers

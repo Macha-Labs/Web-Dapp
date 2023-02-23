@@ -4,6 +4,7 @@ import {
   Button,
   Checkbox,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
@@ -14,6 +15,17 @@ import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 const ChatMembers = (props: any) => {
   const hookPortalChannelMembership = usePortalChannelMembership(props?.hookChannel?.channel);
   const chatContext = useContext(ChatContext);
+  const toast = useToast();
+
+  const callbackRemove = () => {
+    props?.modalAddMembers.onClose();
+    toast({
+      title: "Channel Members Removed",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+  }
 
   return (
     <>
@@ -23,7 +35,7 @@ const ChatMembers = (props: any) => {
             <Row className="hr-between vr-center">
               <Button
                 onClick={function (): void {
-                  hookPortalChannelMembership.removeMembersFromChannel();
+                  hookPortalChannelMembership.removeMembersFromChannel(callbackRemove);
                 }}
                 size="xs"
                 variant="state_default_hover"
@@ -50,13 +62,13 @@ const ChatMembers = (props: any) => {
                 <Row className="hr-between p-1">
                   <Row className="hr-between">
                     <div>
-                      <Avatar src={item?.image} className="m-r-1"/>
+                      <Avatar src={item?.lens?.image} className="m-r-1"/>
                     </div>
                     <div>
                       <Text>
-                        {item?.name ? item?.name : truncateAddress(item?.id)}
+                        {item?.lens?.name ? item?.lens?.name : truncateAddress(item?.lens?.id)}
                       </Text>
-                      <Text color="#6FC62A">@{item?.handle}</Text>
+                      <Text color="#6FC62A">@{item?.lens?.handle}</Text>
                     </div>
                   </Row>
                   <Checkbox

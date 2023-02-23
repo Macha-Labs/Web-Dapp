@@ -4,6 +4,7 @@ import {
   Button,
   Checkbox,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import { helperIPFS, truncateAddress } from "@/helpers";
@@ -13,7 +14,18 @@ import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatMembersAdd = (props: any) => {
     const hookPortalChannelMembership = usePortalChannelMembership(props?.hookChannel?.channel);
+    const toast = useToast();
 
+    const callbackAdd = () => {
+      props?.modalAddMembers.onClose();
+      toast({
+        title: "Channel Members Added",
+        status: "success",
+        duration: 3000,
+        position: "bottom-right",
+      });
+    }
+ 
     return (
         <LayoutCardPannel
           header={
@@ -22,7 +34,7 @@ const ChatMembersAdd = (props: any) => {
                 Cancel
               </Button>
               <Text size={"sm"}>Add Members</Text>
-              <Button variant="state_brand" size="sm" onClick={() => hookPortalChannelMembership?.addMembersToChannel()}>
+              <Button variant="state_brand" size="sm" onClick={() => hookPortalChannelMembership?.addMembersToChannel(callbackAdd)}>
                 Save
               </Button>
             </Row>
