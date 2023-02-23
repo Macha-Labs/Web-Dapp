@@ -86,7 +86,7 @@ const ChatPermissions = () => {
           return (
             <>
               
-              <Row key={index} className="p-1 hr-between">
+              <Row key={permission.value} className="p-1 hr-between">
                 <Text fontSize="sm">{permission.text}</Text>
                 <Switch
                   defaultChecked={hookPortalChannel?.channel?.permissions?.includes(

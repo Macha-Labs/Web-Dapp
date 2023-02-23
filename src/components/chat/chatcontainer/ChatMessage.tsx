@@ -221,6 +221,7 @@ const ChatMessage = (props: any) => {
 
   return (
     <StyledConversation key={props?.message?.id}>
+      {props?.message?.id}
       <TemplateReply />
       <Row className="w-100">
         <Col>
@@ -255,7 +256,6 @@ const ChatMessage = (props: any) => {
               style={{ className: "w-100 vr-center m-t-0-5" }}
               actions={[
                 <Button
-                  key={props?.message?.id}
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
@@ -264,7 +264,6 @@ const ChatMessage = (props: any) => {
                   Update
                 </Button>,
                 <Button
-                  key={props?.message?.id}
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
