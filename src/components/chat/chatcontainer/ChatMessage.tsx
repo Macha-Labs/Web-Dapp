@@ -290,9 +290,9 @@ const ChatMessage = (props: any) => {
             />
           )}
 
-          {props?.message?.attachments.map((item: any, index: number) => {
+          {props?.message?.attachments ? (props?.message?.attachments?.map((item: any, index: number) => {
             return templateAttachment(item);
-          })}
+          })) : (<></>)}
 
           {props?.message?.reaction_scores && (
             <Row className="vr-center">
