@@ -1,12 +1,32 @@
 import ChatList from "@/components/chat/ChatList";
 import { Row, StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledComponents";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import Nav from "@/components/nav/Nav";
-import useStreamClient from "@/hooks/stream/useStreamClient";
+import ModalWindow from "@/components/modal/ModalWindow";
+import AuthCard from "@/components/auth/AuthCard";
+import { useDisclosure } from "@chakra-ui/react";
+import { useContext } from "react";
+import { AuthContext } from "@/providers/AuthProvider";
 
 function ChatComponent() {
-  const streamClient = useStreamClient();
+  const modalAuth = useDisclosure();
+  const authContext = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!authContext?.address || !AuthContext?.user?.lens?.id) modalAuth.onOpen(); else {modalAuth.onClose()}
+  }, [modalAuth.isOpen])
+
+  const TemplateAuth = () => {
+    return (
+      <>
+        <ModalWindow event={modalAuth}>
+          <AuthCard/>
+        </ModalWindow>
+      </>
+    )
+  }
+
   return (
     <StyledWindow>
       <div className="left">

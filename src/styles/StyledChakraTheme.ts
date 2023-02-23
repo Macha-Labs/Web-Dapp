@@ -41,7 +41,8 @@ const theme = extendTheme({
         borderTop: `${style.modal.border.default} !important`,
       },
       "chakra-modal__overlay": {
-        background: `${style.modal.bg.default} !important`,
+        opacity: '0.9',
+        background: '#000511 !important',
       },
       ".alert": {
         background: `${style.bgPannelHeader}`,
@@ -223,6 +224,15 @@ const theme = extendTheme({
       },
     },
     Modal: {
+      baseStyle: {
+        overlay: {
+          background: '#000511',
+          opacity: '0.9'
+        },
+        dialogContainer: {
+          alignItems: 'center'
+        }
+      },
       sizes: {},
     },
     Toast: {
