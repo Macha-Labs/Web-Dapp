@@ -8,7 +8,6 @@ const LayoutOptions = (props: any) => {
       {props.options.length ? (
         <>
           {props.options?.map((item: any, index: any) => {
-            console.log(props.channelAdmin, props.userId, "check")
              if (
                (item.name === "Delete Channel" ||
                  item.name === "Permissions" ||
@@ -18,7 +17,6 @@ const LayoutOptions = (props: any) => {
              ) {
                return null;
              }
-            // console.log("items of layoutoptions",props)
             return (
               <Row
                 className="item m-b-0-5 hr-between"

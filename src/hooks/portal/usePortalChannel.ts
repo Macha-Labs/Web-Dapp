@@ -85,7 +85,6 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
   };
 
   const togglePermission = (value: any) => {
-    console.log("channel.permissions", channel.permissions);
     if (channel.permissions.includes(value)) {
       setChannel({
         ...channel,

@@ -33,7 +33,6 @@ const useLensFollows = (profileID: any) => {
       s,
       deadline: typedData.value.deadline,
     };
-    console.log("The sig we got is ", sig);
     return [typedData, sig];
   };
 

@@ -11,7 +11,6 @@ const ChatContainer = (channel: any) => {
     const chatProvider = useContext(ChatContext);
     const authContext = useContext(AuthContext) as AuthContextType;
     const streamContext = useContext(StreamContext);
-    console.log("streamContext client in ChatContainer", streamContext.client);
     return (
         <>
                 <ChatHeader

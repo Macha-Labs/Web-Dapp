@@ -26,7 +26,6 @@ const User = () => {
       icon: "IconDarkEdit.png",
       name: "Edit Profile",
       onPress: () => {
-        console.log("window");
         setWindow("UserEdit");
       },
     },

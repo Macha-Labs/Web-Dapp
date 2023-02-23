@@ -38,7 +38,7 @@ const ChatList = (props: any) => {
   };
 
   const TemplateActions = () => {
-    // console.log("helo") ;
+
     return (
       <Pop
         trigger={<IconImage path="IconDarkMenu.png" />}
@@ -107,7 +107,6 @@ const ChatList = (props: any) => {
                 <StyledChatItem key={index}>
                   <Button
                     onClick={() => {
-                      console.log("Click on button", item);
                       chatProvider.initiate(item, authContext?.address);
                       setIsClicked((prevState: any) => [
                         ...prevState,

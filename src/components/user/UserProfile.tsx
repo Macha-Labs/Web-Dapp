@@ -157,7 +157,7 @@ const UserProfile = (props: any) => {
   };
 
   const TemplateProfile = () => {
-    console.log(
+
       "Address",
       authContext.address,
       props.user?.lens?.ownedBy,

@@ -58,7 +58,6 @@ const ChatMembers = (props: any) => {
           ?.map((item: any, index: any) => {
             return (
               <>
-              {/* {console.log("itm",item.name,"full ",item)}  */}
                 <Row className="hr-between p-1">
                   <Row className="hr-between">
                     <div>

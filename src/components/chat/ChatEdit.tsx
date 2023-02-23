@@ -31,8 +31,7 @@ const ChatEdit = (props: any) => {
     {edit:callBack}
   );
   const handleSelectClick = () => {
-    // document.getElementById("galleryInput").click();
-    console.log('');
+
   };
   const modalAddMembers = useDisclosure();
   const data = [

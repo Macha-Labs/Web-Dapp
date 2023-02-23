@@ -42,7 +42,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   // const chatFilterHook = useChatFilters(users);
   const hookMention = useMention();
   const toast = useToast();
-  console.log("Loading the useStreamChat");
 
   // Slash & Widget
   const [slashCmd, setSlashCmd] = useState<any>();
@@ -61,10 +60,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       return;
     }
     if (slashCmdValue) {
-      console.log("Logic to run a slash command");
-      // console.log("Called slash cmd", slashCmdValue);
       // const response = await commandHook.run(slashCmdValue, chatMeta?.meta);
-      // console.log(response);
       // addMessageToStream({...chatMeta, meta: {...chatMeta.meta, response: response }});
       // setSlashCmdValue("");
     } else {
@@ -128,7 +124,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
           ],
         };
       }
-      console.log("Sending messsageData is ", messageData);
       await channel.raw.sendMessage(messageData); // sending a new message
 
       setRerenderSwitch(!rerenderSwitch);
@@ -167,7 +162,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const editMessage = async () => {
-    console.log("editing message- ", editMessageRef.current.value);
     if (!authContext?.address) {
       throw new Error("Couldn't find the user address");
     }
@@ -259,7 +253,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         });
       });
     // callback();
-    console.log("Un-Pinned a message");
   };
 
   const keyDownMessage = async (event: any) => {
@@ -296,7 +289,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         await addMessage();
       }
     } else if (event.key == "/") {
-      console.log("slash key was pressed");
       setSlashCmd(true);
     }
   };
@@ -361,7 +353,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleReplyClose = () => {
-    console.log("replyclosed ");
     setActionMessage(null);
   };
 
@@ -406,15 +397,12 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     setTypingMessage(value);
     const lastChar = value.split("")[value.length - 1];
     if (lastChar == " " || value == "") {
-      console.log("Setting mention false");
       hookMention.setMentionActive(false);
       setSlashCmd(false);
     }
     if (lastChar == "@") {
       // setSlashCmd(false);
-      console.log("Setting mention true");
       // hookMention.setMentionActive(true);
-      // console.log("Here are the users you can mention on this channel ", users);
       // hookMention.onTrigger(value, users);
 
     }
