@@ -134,14 +134,15 @@ const User = () => {
 
   return (
     <>
-      <StyledWindow>
+    {authContext?.user?.lens?.id && <StyledWindow>
         <div className="left">
           <Nav />
         </div>
         <div className="right">
           <Template />
         </div>
-      </StyledWindow>
+      </StyledWindow>}
+      
       <TemplateAuth />
     </>
   );

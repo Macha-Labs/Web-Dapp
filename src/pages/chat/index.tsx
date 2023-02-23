@@ -1,6 +1,6 @@
 import ChatList from "@/components/chat/ChatList";
-import { Row, StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledComponents";
-import React, { useEffect, useState } from "react";
+import { StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledComponents";
+import React, { useEffect} from "react";
 import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import Nav from "@/components/nav/Nav";
 import ModalWindow from "@/components/modal/ModalWindow";
@@ -28,7 +28,9 @@ function ChatComponent() {
   }
 
   return (
-    <StyledWindow>
+    <>
+      {authContext?.user?.lens?.id && 
+      <StyledWindow>
       <div className="left">
         <Nav />
       </div>
@@ -43,6 +45,9 @@ function ChatComponent() {
 
       </div>
     </StyledWindow>
+    } 
+      <TemplateAuth />
+    </>
   );
 }
 
