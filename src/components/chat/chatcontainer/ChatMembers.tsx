@@ -24,7 +24,7 @@ const ChatMembers = (props: any) => {
         <LayoutCardPannel
           header={
             <Row className="hr-between w-full">
-              <Button size="sm" onClick={modalAddMembers.onClose}>
+              <Button size="xs" onClick={modalAddMembers.onClose} variant="state_default_hover">
                 Cancel
               </Button>
               <Text size={"sm"}>Add Members</Text>
@@ -79,19 +79,20 @@ const ChatMembers = (props: any) => {
           <>
             <Row className="hr-between vr-center">
               <Button
+                onClick={function (): void {
+                  hookPortalChannelMembership.removeMembersFromChannel();
+                }}
+                size="xs"
+                variant="state_default_hover"
+              >
+                Remove
+              </Button>
+              <Button
                 onClick={() => modalAddMembers.onOpen()}
                 size="sm"
                 variant="state_brand"
               >
                 Add New Members
-              </Button>
-              <Button
-                onClick={function (): void {
-                  hookPortalChannelMembership.removeMembersFromChannel();
-                }}
-                size="xs"
-              >
-                Remove
               </Button>
             </Row>
           </>
