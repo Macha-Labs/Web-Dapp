@@ -24,6 +24,7 @@ export const ConnectWalletButton = () => {
             authenticationStatus === 'authenticated');
         return (
           <div
+           className="w-100"
             {...(!ready && {
               'aria-hidden': true,
               'style': {
@@ -36,7 +37,7 @@ export const ConnectWalletButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <Button className="m-b-0-5" size="md" variant="state_brand" onClick={openConnectModal}>Connect Wallet</Button>
+                  <Button className="m-b-0-5 w-100GIT" size="md" variant="state_brand" onClick={openConnectModal}>Connect Wallet</Button>
                 );
               }
               if (chain.unsupported) {
@@ -47,8 +48,9 @@ export const ConnectWalletButton = () => {
                 );
               }
               return (
-                <div style={{ display: 'flex', gap: 12 }}>
+                <div style={{ display: 'flex', gap: 12 }} className="w-100">
                   <button
+                    className="w-100"
                     onClick={openChainModal}
                     style={{ display: 'flex', alignItems: 'center' }}
                     type="button"
