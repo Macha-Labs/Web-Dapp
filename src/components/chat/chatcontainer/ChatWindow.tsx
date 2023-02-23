@@ -11,13 +11,13 @@ const ChatWindow = (props: any) => {
       <StyledConversationView>
         {props.hookChannel?.messages?.length ? (
           <>
-            {props.hookChannel?.messages?.map((item: any, index: number) => {
+            {props.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages?.map((item: any, index: number) => {
               return (
                 <ChatMessage
                   message={item}
                   hookChat={props.hookChat}
                   authContext={props.authContext}
-                  key={index}
+                  key={item}
                 />
               );
             })}
