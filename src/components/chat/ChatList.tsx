@@ -125,12 +125,18 @@ const ChatList = (props: any) => {
                         <Col className="w-100 d-flex flex-col">
                           <Text>{item?.name}</Text>
                           {item?.lastMessage && (
-                            <Col className="m-t-0-5">
+                            <Col
+                              style={{ paddingRight: "5px" }}
+                              className="m-t-0-5"
+                            >
                               <Text fontSize={"xs"}>
                                 {item?.lastMessage?.user?.lensUsername ||
                                   item?.lastMessage?.user?.lensHandle ||
                                   truncateAddress(item?.lastMessage?.user?.id)}
-                                : {item?.lastMessage?.text}
+                                :{" "}
+                                {item?.lastMessage?.text.length > 20
+                                  ? `${item?.lastMessage?.text.slice(0, 20)}...`
+                                  : item?.lastMessage?.text}
                               </Text>
                             </Col>
                           )}
