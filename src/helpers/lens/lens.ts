@@ -23,6 +23,7 @@ import {
   VALIDATE,
 } from "./query";
 import { CreatePublicPostRequest } from "./lensInterfaces";
+import { logger } from "../logger";
 
 export const generateChallenge = async (address: string) => {
   const res = await apolloClient.query({
@@ -49,7 +50,7 @@ export const authenticate_user = async (address: any, signature: any) => {
     });
     return data.authenticate;
   } catch (error: any) {
-    throw new Error("Error in authenticating user with Lens ", error);
+    logger("lens", "lens.authenticate_user", "Error in authenticating user with Lens", [error]);
   }
 };
 

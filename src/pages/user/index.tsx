@@ -72,8 +72,10 @@ const User = () => {
   ];
 
   useEffect(() => {
-    if (!authContext?.address || !authContext?.user?.lens?.id) modalAuth.onOpen(); else {modalAuth.onClose()}
-  }, [modalAuth.isOpen])
+    if (!authContext?.address || !authContext?.user?.lens?.id) 
+      modalAuth.onOpen(); 
+    else {modalAuth.onClose()}
+  }, [authContext?.user?.lens?.id])
 
   const TemplateRight = () => {
     return (

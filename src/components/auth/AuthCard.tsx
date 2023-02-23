@@ -1,11 +1,14 @@
 import IconImage from "@/components/icons/IconImage";
+import { AuthContext } from "@/providers/AuthProvider";
 import { Col, StyledCard} from "@/styles/StyledComponents";
 import { Button, Heading } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useContext } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
 
 
 const AuthCard = () => {
+    const authContext = useContext(AuthContext);
     return (
         <div className="middle">
         <StyledCard className="w-100 p-4">
@@ -17,9 +20,8 @@ const AuthCard = () => {
                     </Heading>
                 </Col>
                 <Col className="w-60">
-                    <ConnectWalletButton />
-                    {/* <Button className="m-b-0-5" size="md" variant="state_brand" onClick={() => {}}>Connect Wallet</Button> */}
-                    <Button className="" size="md" variant="state_lens" onClick={() => {}}>Sign In With Lens</Button>
+                    {!authContext.address && <ConnectWalletButton />}
+                    {(authContext.address && !authContext?.user?.lens?.id) && <Button className="" size="md" variant="state_lens" onClick={() => {authContext.connectLens()}}>Sign In With Lens</Button>}
                 </Col>
             </Col>
         </StyledCard>
