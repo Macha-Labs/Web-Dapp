@@ -34,41 +34,68 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 const AuthProvider = ({ children }: any) => {
-    const [signer, setSigner] = useState<any>("");
-    const [user, setUser] = useState<any>({});
-    const { address, isConnected } = useAccount();
-    const { disconnect } = useDisconnect();
+  const [signer, setSigner] = useState<any>("");
+  const [user, setUser] = useState<any>({});
+  const { address, isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
 
-  // callback for useLensAuth
-  const updateUser = (key: any, data: any) => {
+  /** 
+   * @description Initiating Hooks
+   * 
+   * 
+   **/
+  const hookLensProfile = useLensProfile();
+  const hookLensAuth = useLensAuth();
+
+  /** 
+   * @description Internal function to store user in provider
+   * 
+   * 
+   **/
+  const _updateUser = (key: any, data: any) => {
     logger("auth", "updateUser", "Updating user data", [key, data]);
     const newData: any = {};
     newData[key] = data;
     setUser({ ...user, ...newData });
   };
+  
 
-  // custom hooks
-  const hookLensAuth = useLensAuth();
-  const hookLensProfile = useLensProfile();
-
-  // connecting user wallet
-  const connectWallet = async () => {
-    logger("auth", "connectWallet", "Trigger connectWallet", []);
+  /** 
+   * @description Internal Function to get user from lens
+   * 
+   * 
+   **/
+  const _fetchUserFromLens = async () => {
+    const lensProfile = await hookLensProfile.getOwnedProfiles(address);
+    if (lensProfile) {
+      const tokens: any | { accessToken: string; refreshToken: string } =
+        await hookLensAuth.connectToLens(address);
+      if (tokens?.accessToken) {
+        _updateUser("lens", {
+          ...lensProfile,
+          accessToken: tokens["accessToken"],
+          refreshToken: tokens["refreshToken"],
+        });
+      } else {
+        _updateUser("lens", lensProfile);
+      }
+    } else {
+      throw Error(`Couldn't find Lens Profile with address ${address}`);
+    }
   };
 
-  // Disconnecting user Wallet
-  const disconnectWallet = async () => {
-    disconnect();
-  };
-
-  const userDataFromDB = async () => {
+  /** 
+   * @description Internal Function to get user from DB
+   * 
+   * 
+   **/
+  const _fetchUserFromDB = async () => {
     logger("auth", "useEffect[user.lens]", "User is", [user]);
     if (address) {
       // fetching the userData from the Database
       findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
         const userData = UserDb$(data);
-        console.log("Presenting the userData from findOrCreateUser ", userData);
-        updateUser("db", userData);
+        _updateUser("db", userData);
         putStreamToken({ userAddress: address.toLowerCase() }).then(
           (res: any) => {
             logger(
@@ -77,52 +104,49 @@ const AuthProvider = ({ children }: any) => {
               "response from putStreamToken api",
               [res]
             );
-            updateUser("db", UserDb$(res));
+            _updateUser("db", UserDb$(res));
           }
         );
       });
     }
   };
 
-  useEffect(() => {
-    logger("auth", "useEffect", "Current user address", [address]);
-    const lensAuthenticate = async () => {
-      const currentSigner = await fetchSigner();
-      console.log("Current signer ", currentSigner);
-      setSigner(currentSigner);
-      const lensProfile = await hookLensProfile.getOwnedProfiles(address);
-      console.log("Fetched lens profile = ", lensProfile);
-      if (lensProfile) {
-        const tokens: any | { accessToken: string; refreshToken: string } =
-          await hookLensAuth.connectToLens(address);
-        console.log("Tokens resolving promise ", tokens);
-        if (tokens?.accessToken) {
-          updateUser("lens", {
-            ...lensProfile,
-            accessToken: tokens["accessToken"],
-            refreshToken: tokens["refreshToken"],
-          });
-        } else {
-          updateUser("lens", lensProfile);
-        }
-        console.log(
-          "Reaching here ----------------------------------------------------------"
-        );
-      } else {
-        throw Error(`Couldn't find Lens Profile with address ${address}`);
-      }
-    };
+  /** 
+   * @description Internal Function to get address from WAGMI
+   * 
+   * 
+   **/
+  const _fetchSignerFromWagmi = async () => {
+    setSigner(await fetchSigner())
+  } 
 
+  
+  /** 
+   * @description Function to connect to wallet
+   * 
+   * 
+   **/
+  const connectWallet = async () => {
+    logger("auth", "connectWallet", "Trigger connectWallet", []);
+  };
+
+  /** 
+   * @description Function to disconnect from wallet
+   * 
+   * 
+   **/
+  const disconnectWallet = async () => {
+    disconnect();
+  };
+
+  useEffect(() => {
+    logger("auth", "useEffect", "Portal 1: Current user address", [address]);
     if (address) {
-      const currentSigner = lensAuthenticate();
-      userDataFromDB();
-      console.log("Updated the userData ", user);
+      _fetchSignerFromWagmi();
+      _fetchUserFromLens();
+      _fetchUserFromDB();
     }
   }, [address]);
-
-  useEffect(() => {
-    if (user) logger("auth", "useEffect", "Logging the userData", [user]);
-  }, [user]);
 
   return (
     <AuthContext.Provider
@@ -130,11 +154,11 @@ const AuthProvider = ({ children }: any) => {
         signer: signer,
         address: address?.toLowerCase(),
         connectWallet: connectWallet,
-        connectLens: hookLensAuth.connectToLens,
+        connectLens: () => {},
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,
-        updateUser: updateUser,
+        updateUser: _updateUser,
         isConnected: isConnected,
       }}
     >

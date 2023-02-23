@@ -57,7 +57,6 @@ export const permissionsChannel = async (data: any, id: any) => {
             },
         }
     );
-    console.log("Channel permission response ", response);
     return response;
 };
 

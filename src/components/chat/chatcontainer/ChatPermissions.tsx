@@ -83,12 +83,6 @@ const ChatPermissions = () => {
     return (
       <StyledCard>
         {permissionOptions.map((permission: any, index: any) => {
-          // console.log(
-          //   "permissionOption",
-          //   permissionOptions,
-          //   "getstreamper",
-          //   hookPortalChannel?.channel
-          // );
           return (
             <>
               

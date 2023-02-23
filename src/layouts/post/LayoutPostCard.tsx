@@ -6,22 +6,13 @@ import { Avatar, Button, Flex, Heading, Text, Image } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 
 const LayoutPostCard = (props: any) => {
-  console.log("Lens Posts ", props.item);
   const hookLensPosts = useLensPosts();
   const [tempState, setTempState] = useState<boolean>(hookLensPosts.haveILiked);
 
   useEffect(() => {
     hookLensPosts.getHaveILikedPost(props.item?.id);
-
-    console.log(hookLensPosts.haveILiked, "hookLensPosts.haveILikedPost");
   }, [props.item?.id]);
 
-  console.log(
-    !hookLensPosts.haveILiked,
-    tempState,
-    "hookLensPosts.haveILikedPost",
-    props.item
-  );
   return (
     <>
       {props?.item ? (

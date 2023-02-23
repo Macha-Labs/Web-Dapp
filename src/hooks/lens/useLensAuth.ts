@@ -70,7 +70,6 @@ const useLensAuth = () => {
         //     return getLensTokens();
         // } else {
 
-        //     // console.log("Connect to Lens to get authTokens");
         // }
         return fetchLensToken(address);
     }

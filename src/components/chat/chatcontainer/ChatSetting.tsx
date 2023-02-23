@@ -78,21 +78,21 @@ function ChatSetting(props: any) {
       icon: "IconDarkPhotos.png",
       name: "21 Photos",
       onPress: () => {
-        console.log("Search Chat");
+
       },
     },
     {
       icon: "IconDarkVideos.png",
       name: "4 Videos",
       onPress: () => {
-        console.log("Mute Chat");
+
       },
     },
     {
       icon: "IconDarkFiles.png",
       name: "4 Files",
       onPress: () => {
-        console.log("Select Chat");
+
       },
     },
     {
@@ -107,14 +107,14 @@ function ChatSetting(props: any) {
       //   icon: IconBrandClearChat,
       name: "Clear Chat",
       onPress: () => {
-        console.log("Search Chat");
+
       },
     },
     {
       //   icon: IconBrandClearChat,
       name: "Delete Channel",
       onPress: () => {
-        // console.log(props);
+
         hookPortalChannel?.deleteChannel(props.hookChannel.channel);
       },
     },
