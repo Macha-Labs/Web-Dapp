@@ -254,7 +254,7 @@ const ChatMessage = (props: any) => {
           {props?.hookChat?.actionMessage?.action == "EDIT" &&
           props?.hookChat?.actionMessage?.item?.id == props?.message?.id ? (
             <InputAction
-              style={{ className: "w-100 vr-center m-t-0-5" }}
+              style={{ className: "w-100 vr-center m-t-0- 5" }}
               actions={[
                 <Button
                   size="xs"
