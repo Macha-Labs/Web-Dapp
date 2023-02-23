@@ -11,7 +11,6 @@ const usePortalChannelMembership = (channel: any) => {
   const [users, setUsers] = useState<any>([]);
 
   const handleCheckedUsers = (user: any) => {
-    console.log("Focusing address ", user?.lens?.ownedBy);
     if (!users.includes(user?.lens?.ownedBy)) {
       setUsers([...users, user?.lens?.ownedBy?.toLowerCase()]);
     } else {
@@ -19,7 +18,6 @@ const usePortalChannelMembership = (channel: any) => {
         (item: any) => item != user?.lens?.ownedBy?.toLowerCase()
       );
       setUsers(usersFilter);
-      console.log(`Removed ${user?.lens?.ownedBy}, updated array ${users}`);
     }
   };
 
@@ -31,28 +29,21 @@ const usePortalChannelMembership = (channel: any) => {
         members: users,
         id: channel.id,
       };
-      console.log(data);
-      console.log(users);
       addMembers(data);
       callback();
-    } else {
-      console.log("No followers selected");
     }
   };
 
   // run when -> members selected -> clicked on remove
   const removeMembersFromChannel = async (callback:any = null) => {
-    console.log(users);
-    // if (users) {
-    //   const data = {
-    //     members: users,
-    //     id: channel.id,
-    //   };
-    //   removeMembers(data);
-    //   callback();
-    // } else {
-    //   console.log("No members selected");
-    // }
+    if (users) {
+      const data = {
+        members: users,
+        id: channel.id,
+      };
+      removeMembers(data);
+      callback();
+    }
   };
 
   // fetching my lens followers
