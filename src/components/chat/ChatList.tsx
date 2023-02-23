@@ -98,7 +98,7 @@ const ChatList = (props: any) => {
               <ul>
                 {chatProvider?.hookChannels?.channels.map(
                   (item: any, index: number) => (
-                    <StyledChatItem key={index}>
+                    <StyledChatItem key={item?.index}>
                       <Button
                         onClick={() => {
                           chatProvider.initiate(item, authContext?.address);

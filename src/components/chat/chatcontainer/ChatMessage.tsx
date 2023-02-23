@@ -107,12 +107,14 @@ const ChatMessage = (props: any) => {
               size="md"
               className="text-start"
               rightIcon={<IconImage path="IconDarkFiles.png" />}
+              key={'a'}
             >
               <Row
                 className="hr-between w-100"
                 onClick={() => {
                   props.hookChat.handleEdit(props.message);
                 }}
+                key={'b'}
               >
                 Edit
               </Row>
