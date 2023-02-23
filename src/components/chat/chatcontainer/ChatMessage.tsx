@@ -107,14 +107,14 @@ const ChatMessage = (props: any) => {
               size="md"
               className="text-start"
               rightIcon={<IconImage path="IconDarkFiles.png" />}
-              key={'a'}
+              key={`c-${props?.message?.id}`}
             >
               <Row
                 className="hr-between w-100"
                 onClick={() => {
                   props.hookChat.handleEdit(props.message);
                 }}
-                key={'b'}
+                key={`d-${props?.message?.id}`}
               >
                 Edit
               </Row>
@@ -222,7 +222,7 @@ const ChatMessage = (props: any) => {
   };
 
   return (
-    <StyledConversation key={props?.message?.id}>
+    <StyledConversation key={`b-${props?.message?.id}`}>
       <TemplateReply />
       <Row className="w-100">
         <Col>
@@ -299,22 +299,21 @@ const ChatMessage = (props: any) => {
               {Object.keys(props?.message.reaction_scores).length > 0 &&
                 Object.keys(props.message.reaction_scores).map((item: any) => {
                   return (
-                    <>
-                      <Button
-                        className="w-content m-r-0-5"
-                        size="xs"
-                        variant="state_brand"
-                        onClick={() => {
-                          props?.hookChat?.handleReaction(
-                            { type: item },
-                            props?.message
-                          );
-                        }}
-                      >
-                        {emoji[item as keyof typeof emoji]}{" "}
-                        {props?.message?.reaction_scores[item]}
-                      </Button>
-                    </>
+                    <Button
+                      className="w-content m-r-0-5"
+                      size="xs"
+                      variant="state_brand"
+                      onClick={() => {
+                        props?.hookChat?.handleReaction(
+                          { type: item },
+                          props?.message
+                        );
+                      }}
+                      key={`f-${props?.message?.id}`}
+                    >
+                      {emoji[item as keyof typeof emoji]}{" "}
+                      {props?.message?.reaction_scores[item]}
+                    </Button>
                   );
                 })}
             </Row>
