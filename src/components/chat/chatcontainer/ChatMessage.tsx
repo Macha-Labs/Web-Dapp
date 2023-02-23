@@ -226,7 +226,7 @@ const ChatMessage = (props: any) => {
         <Col>
           <Row>
             {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
-              <Checkbox defaultChecked className="m-r-0-5" />
+              <Checkbox defaultChecked={props?.hookChat?.selectedMessages?.includes(props.messages?.id)} onChange={() => {props?.hookChat?.handleSelect(props?.message)}} className="m-r-0-5" />
             )}
 
             <Avatar
@@ -290,9 +290,9 @@ const ChatMessage = (props: any) => {
             />
           )}
 
-          {props?.message?.attachments.map((item: any, index: number) => {
+          {props?.message?.attachments ? (props?.message?.attachments?.map((item: any, index: number) => {
             return templateAttachment(item);
-          })}
+          })) : (<></>)}
 
           {props?.message?.reaction_scores && (
             <Row className="vr-center">

@@ -339,8 +339,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleMultiSelect = () => {
-    setActionMessage({ action: "SEARCH", data: { query: "" } });
-    // setActionMessage({ action: "MULTISELECT", item: null, data: null });
+    setActionMessage({ action: "MULTISELECT", item: null, data: { query: "" } });
   };
   const handleMultiSelectClose = () => {
     logger(
