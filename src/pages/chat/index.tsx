@@ -29,6 +29,7 @@ function ChatComponent() {
 
   return (
     <>
+      {authContext?.user?.lens?.id && 
       <StyledWindow>
       <div className="left">
         <Nav />
@@ -44,6 +45,7 @@ function ChatComponent() {
 
       </div>
     </StyledWindow>
+    } 
       <TemplateAuth />
     </>
   );
