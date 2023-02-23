@@ -8,6 +8,7 @@ import { ChannelStream$ } from "../../schema/channel";
 
 const useStreamChannel = (channelId: any) => {
   const [channel, setChannel] = useState<any>();
+  const [messages, setMessages] = useState<any>();
   const streamContext = useContext(StreamContext) as StreamContextType;
 
   // const commandHook = useCommand();
@@ -52,12 +53,13 @@ const useStreamChannel = (channelId: any) => {
     channel?.raw?.on((event: any) => {
       logger("stream", "useEffect", "logging the channel events", [event]);
       logger("stream", "useEffect", "logging the channel Messages", [channel?.raw?.state?.messageSets[0]?.messages]);
+      setMessages(channel?.raw?.state?.messageSets[0]?.messages);
     });
   }, [channel]);
 
   return {
     channel: channel,
-    messages: channel?.raw?.state?.messageSets[0]?.messages,
+    messages: messages || channel?.raw?.state?.messageSets[0]?.messages,
     pinnedMessages: channel?.raw?.state?.pinnedMessages,
 
     // messages: channelMessages,
