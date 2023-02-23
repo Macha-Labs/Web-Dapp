@@ -22,6 +22,7 @@ import UserFollowersCard from "./UserFollowersCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { useContext, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
+import IconImage from "../icons/IconImage";
 
 interface Props {
   [key: string]: any;
@@ -233,29 +234,20 @@ const UserProfile = (props: any) => {
               <Row className="m-v-1 w-100 vr-center hr-center">
                 <Tab>
                   <Row className="m-h-0-5 vr-center">
-                    <Col className="m-r-0-5">
-                      <Avatar size="sm" />
-                    </Col>
-
-                    <Col>Posts</Col>
+                    <IconImage path="IconDarkPost.png" />
+                    <Col className="m-l-0-5">Posts</Col>
                   </Row>
                 </Tab>
                 <Tab>
                   <Row className="m-h-0-5  vr-center">
-                    <Col className="m-r-0-5">
-                      <Avatar size="sm" />
-                    </Col>
-
-                    <Col>Followers</Col>
+                    <IconImage path="IconDarkFollowers.png" />
+                    <Col className="m-l-0-5">Followers</Col>
                   </Row>
                 </Tab>
                 <Tab>
                   <Row className="m-h-0-5  vr-center">
-                    <Col className="m-r-0-5">
-                      <Avatar size="sm" />
-                    </Col>
-
-                    <Col>Following</Col>
+                    <IconImage path="IconDarkFollowing.png" />
+                    <Col className="m-l-0-5">Following</Col>
                   </Row>
                 </Tab>
               </Row>
