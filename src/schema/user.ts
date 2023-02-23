@@ -18,10 +18,7 @@ export const UserStream$ = (dbData: any) => {
     address: dbData?.address, 
     image:dbData?.lensImage,   
     handle: dbData?.lensHandle,
-    ownedBy: dbData?.id,
-    tokens: {
-      stream: dbData?.tokens?.stream,
-    },
+    ownedBy: dbData?.id || dbData?.address,
   };
 };
 

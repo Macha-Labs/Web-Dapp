@@ -11,44 +11,38 @@ const usePortalChannelMembership = (channel: any) => {
   const [users, setUsers] = useState<any>([]);
 
   const handleCheckedUsers = (user: any) => {
-    console.log("Focusing address ", user?.lens?.ownedBy);
     if (!users.includes(user?.lens?.ownedBy)) {
       setUsers([...users, user?.lens?.ownedBy?.toLowerCase()]);
     } else {
       const usersFilter = users.filter(
-        (user: any) => user != user?.lens?.ownedBy?.toLowerCase()
+        (item: any) => item != user?.lens?.ownedBy?.toLowerCase()
       );
       setUsers(usersFilter);
-      console.log(`Removed ${user?.lens?.ownedBy}, updated array ${users}`);
     }
   };
 
   // adding selected members to current channel
-  const addMembersToChannel = () => {
+  const addMembersToChannel = (callback:any = null) => {
     // const myFollowers = Object.values(users);
     if (users) {
       const data = {
         members: users,
         id: channel.id,
       };
-      console.log(data);
-      console.log(users);
       addMembers(data);
-    } else {
-      console.log("No followers selected");
+      callback();
     }
   };
 
   // run when -> members selected -> clicked on remove
-  const removeMembersFromChannel = async () => {
+  const removeMembersFromChannel = async (callback:any = null) => {
     if (users) {
       const data = {
         members: users,
         id: channel.id,
       };
       removeMembers(data);
-    } else {
-      console.log("No members selected");
+      callback();
     }
   };
 

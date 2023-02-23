@@ -18,8 +18,8 @@ const useStreamChannelMembers = (channel: any) => {
     response?.members.map((item: any, index: number) => {
       console.log("items", item.user);
       if (item.user?.online) {
-        onlineIds.push(UserStream$(item.user));
-      } else offlineIds.push(UserStream$(item?.user));
+        onlineIds.push({lens: UserStream$(item.user)});
+      } else offlineIds.push({stream: UserStream$(item.user), lens: {}});
     });
     setOnlineUsers(onlineIds);
     setOfflineUsers(offlineIds);
