@@ -16,7 +16,7 @@ const usePortalChannelMembership = (channel: any) => {
       setUsers([...users, user?.lens?.ownedBy?.toLowerCase()]);
     } else {
       const usersFilter = users.filter(
-        (user: any) => user != user?.lens?.ownedBy?.toLowerCase()
+        (item: any) => item != user?.lens?.ownedBy?.toLowerCase()
       );
       setUsers(usersFilter);
       console.log(`Removed ${user?.lens?.ownedBy}, updated array ${users}`);
