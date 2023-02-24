@@ -15,12 +15,16 @@ const useStreamChannel = (client: any) => {
    * 
    **/
   const setUpChannel = async (channelId: any) => {
-    const newChannel = client?.channel("team", channelId, {});
-    await newChannel?.watch();
-    logger("channel", "setupChannel", "channel data from stream ", [
-      newChannel,
-    ]);
-    setChannel(ChannelStream$(newChannel?.data, newChannel));
+    if (channelId) {
+      const newChannel = client?.channel("team", channelId, {});
+      await newChannel?.watch();
+      logger("channel", "setupChannel", "channel data from stream ", [
+        newChannel,
+      ]);
+      setChannel(ChannelStream$(newChannel?.data, newChannel));
+    } else {
+      setChannel(null);
+    }
   };
 
 

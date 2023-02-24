@@ -562,6 +562,7 @@ export const StyledChatList = styled.div`
     margin: auto;
     padding: ${style.body.padding};
     background: ${style.body.bg};
+    overflow-y: scroll;
 
     .menu-heading {
       padding-left: 10px;
