@@ -41,6 +41,11 @@ const ChatMembersAdd = (props: any) => {
           }
         >
           {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
+          if (
+            !Object.keys(props.members).includes(
+              item.lens.ownedBy.toLowerCase()
+            )
+          )
             return (
               <>
                 <Row key={item?.id} className="hr-between p-1">
@@ -51,10 +56,10 @@ const ChatMembersAdd = (props: any) => {
                     />
                     <Text>
                       {item?.lens?.name
-                          ? item?.lens?.name
-                          : (item?.lens?.handle ? item?.lens?.handle: truncateAddress(
-                            item?.lens?.ownedBy
-                          ))}
+                        ? item?.lens?.name
+                        : item?.lens?.handle
+                        ? item?.lens?.handle
+                        : truncateAddress(item?.lens?.ownedBy)}
                     </Text>
                   </Row>
 
