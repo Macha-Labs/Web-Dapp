@@ -2,11 +2,11 @@ import { logger } from "@/helpers/logger";
 import { useEffect, useState } from "react";
 import { Channel$, ChannelStream$ } from "../../schema/channel";
 
-const useStreamUserChannels = () => {
+const useStreamUserChannels = (client: any) => {
   const [channels, setChannels] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<any>(false);
 
-  const fetchUserChannels = async (client: any, callback?: any) => {
+  const fetchUserChannels = async (callback?: any) => {
     if (client) {
       const filter = {
         type: "team",

@@ -35,6 +35,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.8.1",
+    "react-virtualized-auto-sizer": "^1.0.7",
+    "react-window": "^1.8.8",
     "stream-chat": "^8.3.0",
     "stream-chat-react": "^10.6.0",
     "styled-components": "^5.3.6",
@@ -44,6 +46,8 @@
     "web3.storage": "^4.4.0"
   },
   "devDependencies": {
+    "@types/react-virtualized-auto-sizer": "^1.0.1",
+    "@types/react-window": "^1.8.5",
     "@types/styled-components": "^5.1.26"
   }
 }
