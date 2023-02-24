@@ -33,7 +33,7 @@ const StreamProvider = ({children}: any) => {
     const hookStreamChannels = useStreamUserChannels();
     const hookStreamChannel = useStreamChannel(hookStreamClient.client);
     const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel?.raw);
-    const hookStreamChat = useStreamChat(hookStreamChannel?.channel);
+    const hookStreamChat = useStreamChat(hookStreamClient.client, hookStreamChannel?.channel);
 
     
 

@@ -14,7 +14,7 @@ import {
 import useMention from "./useMention";
 // import useCommand from "./useCommand";
 
-const useStreamChat = (channel: any, callback?: any) => {
+const useStreamChat = (client :any, channel: any, callback?: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const streamContext = useContext(StreamContext) as StreamContextType;
 
@@ -190,7 +190,7 @@ const useStreamChat = (channel: any, callback?: any) => {
       });
     }
 
-    streamContext.client
+    client
       .deleteMessage(message?.id, true)
       .then(() => {
         toast({
@@ -211,7 +211,7 @@ const useStreamChat = (channel: any, callback?: any) => {
   };
 
   const pinMessage = async (message: any) => {
-    await streamContext.client
+    await client
       .pinMessage(message, null)
       .then(() => {
         toast({
