@@ -1,28 +1,35 @@
 import { useContext, useEffect, useState } from "react";
-import { getProfiles } from "../../helpers/lens/lens";
-import { UserLens$, UserStream$ } from "../../schema/user";
+import { User$ } from "../../schema/user";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import { off } from "process";
 
 const useStreamChannelMembers = (channel: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
+  const [allUsersIds, setAllUsersIds] = useState<any>([]);
   const [onlineUsers, setOnlineUsers] = useState<any>([]);
   const [offlineUsers, setOfflineUsers] = useState<any>([]);
   const [userIsMember, setUserIsMember] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>();
 
   const fetchChannelMembers = async () => {
-    const response = await channel?.queryMembers({});
+    const response = await channel?.raw?.queryMembers({});
     let onlineIds: any[] = [];
     let offlineIds: any[] = [];
     response?.members.map((item: any, index: number) => {
+      const user = new User$(null, null, item.user);
+      user.setLensFromStream();
       if (item.user?.online) {
-        onlineIds.push({lens: UserStream$(item.user)});
-      } else offlineIds.push({stream: UserStream$(item.user), lens: {}});
+        onlineIds.push(user);
+      } else offlineIds.push(user);
     });
+    const result = [...onlineIds, ...offlineIds].map((item: any) => {
+      return item.address;
+    });
+
     setOnlineUsers(onlineIds);
     setOfflineUsers(offlineIds);
+    setAllUsersIds(result);
   };
+
   // checking if current user is a member of this channel
   const checkUserIsAMember = async () => {
     try {
@@ -47,9 +54,12 @@ const useStreamChannelMembers = (channel: any) => {
   const checkOnline = (user: any) => {
     return user.online == true;
   };
+
   return {
     fetchChannelMembers: fetchChannelMembers,
     checkOnline: checkOnline,
+    allUsers: onlineUsers.concat(offlineUsers),
+    allUsersIds: allUsersIds,
     onlineUsers: onlineUsers,
     offlineUsers: offlineUsers,
     userIsMember: userIsMember,
