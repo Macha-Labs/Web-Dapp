@@ -22,6 +22,7 @@ import UserFollowersCard from "./UserFollowersCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { useContext, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
+import IconImage from "../icons/IconImage";
 
 interface Props {
   [key: string]: any;
@@ -232,31 +233,22 @@ const UserProfile = (props: any) => {
             <TabList className="w-100">
               <Row className="m-v-1 w-100 vr-center hr-center">
                 <Tab>
-                  <Row className="m-h-0-5 vr-center">
-                    <Col className="m-r-0-5">
-                      <Avatar size="sm" />
-                    </Col>
-
-                    <Col>Posts</Col>
-                  </Row>
+                  <Button variant="state_default_hover">
+                    <IconImage path="IconDarkPost.png" size="15"/>
+                    <Text className="m-l-0-5">Posts</Text>
+                  </Button>
                 </Tab>
                 <Tab>
-                  <Row className="m-h-0-5  vr-center">
-                    <Col className="m-r-0-5">
-                      <Avatar size="sm" />
-                    </Col>
-
-                    <Col>Followers</Col>
-                  </Row>
+                  <Button variant="state_default_hover">
+                    <IconImage path="IconDarkFollowers.png" size="15"/>
+                    <Text className="m-l-0-5">Followers</Text>
+                  </Button>
                 </Tab>
                 <Tab>
-                  <Row className="m-h-0-5  vr-center">
-                    <Col className="m-r-0-5">
-                      <Avatar size="sm" />
-                    </Col>
-
-                    <Col>Following</Col>
-                  </Row>
+                <Button variant="state_default_hover">
+                    <IconImage path="IconDarkFollowing.png" size="15"/>
+                    <Text className="m-l-0-5">Following</Text>
+                  </Button>
                 </Tab>
               </Row>
             </TabList>

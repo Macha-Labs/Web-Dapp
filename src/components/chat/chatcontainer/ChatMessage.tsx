@@ -269,7 +269,7 @@ const ChatMessage = (props: any) => {
           {props?.hookChat?.actionMessage?.action == "EDIT" &&
           props?.hookChat?.actionMessage?.item?.id == props?.message?.id ? (
             <InputAction
-              style={{ className: "w-100 vr-center m-t-0-5" }}
+              style={{ className: "w-100 vr-center m-t-0- 5" }}
               actions={[
                 <Button
                   size="xs"
@@ -286,6 +286,7 @@ const ChatMessage = (props: any) => {
                   className="m-l-0-5"
                   variant="state_brand"
                   onClick={props.hookChat?.handleEditClose}
+                  key={`h-${props?.message?.id}`}
                 >
                   Cancel
                 </Button>,

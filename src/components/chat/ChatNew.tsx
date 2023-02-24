@@ -1,25 +1,49 @@
-import useLensProfileUpdate from "@/hooks/lens/useLensProfileUpdate";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
+import { ChatContext } from "@/providers/ChatProvider";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
+import { Avatar, Button, Text, useToast } from "@chakra-ui/react";
+import { useContext } from "react";
 
 const ChatNew = (props: any) => {
+  const chatContext = useContext(ChatContext);
+
+  /**
+   * 
+   **/
   const toast = useToast();
-  const callBack = ()=>{
+  const callbackNew = ()=>{
     toast({
       title: "Channel Created Successfully",
       status: "success",
       duration: 3000,
       position: "bottom-right",
     });
+    chatContext?.hookChannels?.fetchUserChannels();
     props.modal.onClose();
   }
+
+  const callbackPrompt = (message: any) => {
+    toast({
+      title: message,
+      status: "error",
+      duration: 3000,
+      position: "bottom-right",
+    });
+  }
+  
+  /**
+   * 
+   **/
   const hookPortalChannel = usePortalChannel(
     props?.hookChannel?.channel,
-    {new:callBack}
+    {new:callbackNew, prompt: callbackPrompt}
   );
+
+  /**
+   * 
+   **/
   const data = [
     {
       label: "Name",
@@ -42,6 +66,12 @@ const ChatNew = (props: any) => {
       },
     },
   ];
+
+  /**
+   * 
+   **/
+  
+
   return (
     <LayoutCardPannel
       header={

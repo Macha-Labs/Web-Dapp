@@ -6,61 +6,48 @@ import {
 } from "../../providers/StreamProvider";
 import { ChannelStream$ } from "../../schema/channel";
 
-const useStreamChannel = (channelId: any) => {
+const useStreamChannel = (client: any) => {
   const [channel, setChannel] = useState<any>();
-  const streamContext = useContext(StreamContext) as StreamContextType;
+  const [messages, setMessages] = useState<any>();
 
-  // const commandHook = useCommand();
-  // const getChannelMessages = async () => {
-  //     const lastMessageId =
-  //         channel?.raw?.state?.messageSets[0]?.messages[
-  //             channel?.raw?.state?.messageSets[0]?.messages.length - 1
-  //         ]?.id;
-
-  //     // TEST: Try making a promise, Flatlist crashing if messages not loaded
-  //     const messages = await channel.raw.query({
-  //         messages: {limit: 10, id_lte: lastMessageId},
-  //     });
-
-  //     setChannelMessages(messages.messages);
-  // };
-
-  const setUpChannel = async () => {
-    const newChannel = streamContext?.client?.channel("team", channelId, {});
-    await newChannel?.watch();
-    logger("channel", "setupChannel", "channel data from stream ", [
-      newChannel,
-    ]);
-    setChannel(ChannelStream$(newChannel?.data, newChannel));
+  /** 
+   * @description Function to setup channel
+   * 
+   **/
+  const setUpChannel = async (channelId: any) => {
+    if (channelId) {
+      const newChannel = client?.channel("team", channelId, {});
+      await newChannel?.watch();
+      logger("channel", "setupChannel", "channel data from stream ", [
+        newChannel,
+      ]);
+      setChannel(ChannelStream$(newChannel?.data, newChannel));
+    } else {
+      setChannel(null);
+    }
   };
 
-  useEffect(() => {
-    setUpChannel();
-  }, [streamContext.client]);
 
-  useEffect(() => {
-    if (streamContext.client) {
-      setUpChannel();
-    }
-  }, [channelId]);
-
+  /** 
+   * @description Watching Channel
+   * 
+   **/
   useEffect(() => {
     logger("channel", "useEffect[channel]", "channel is ", [channel]);
-    // getChannelMessages();
-    // listening to message events
     if (channel)
-    channel?.raw?.on((event: any) => {
-      logger("stream", "useEffect", "logging the channel events", [event]);
-      logger("stream", "useEffect", "logging the channel Messages", [channel?.raw?.state?.messageSets[0]?.messages]);
-    });
+      channel?.raw?.markRead()
+      channel?.raw?.on((event: any) => {
+        logger("stream", "useEffect", "logging the channel events", [event]);
+        logger("stream", "useEffect", "logging the channel Messages", [channel?.raw?.state?.messageSets[0]?.messages]);
+        setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
+      });
   }, [channel]);
 
   return {
+    setUpChannel: setUpChannel,
     channel: channel,
-    messages: channel?.raw?.state?.messageSets[0]?.messages,
+    messages: messages || channel?.raw?.state?.messageSets[0]?.messages,
     pinnedMessages: channel?.raw?.state?.pinnedMessages,
-
-    // messages: channelMessages,
   };
 };
 export default useStreamChannel;

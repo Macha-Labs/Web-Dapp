@@ -15,6 +15,9 @@ import LayoutCard from "@/layouts/LayoutCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatEdit = (props: any) => {
+   /**
+   * 
+   **/
   const toast = useToast();
   const callBack=()=>{
     toast({
@@ -25,10 +28,22 @@ const ChatEdit = (props: any) => {
     });
     props.modal.onClose();
   }
+  const callBackPrompt = (message: any) => {
+    toast({
+      title: message,
+      status: "error",
+      duration: 3000,
+      position: "bottom-right",
+    });
+  }
+  
+   /**
+   * 
+   **/
   const [profileImage, setProfileImage] = useState(null);
   const hookPortalChannel = usePortalChannel(
     props.hookChannel?.channel,
-    {edit:callBack}
+    {edit:callBack, prompt: callBackPrompt}
   );
   const handleSelectClick = () => {
 
