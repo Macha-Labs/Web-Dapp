@@ -22,10 +22,11 @@ import PortalLoader from "@/components/PortalLoader";
 import IconImage from "@/components/icons/IconImage";
 import Pop from "@/components/pop/Pop";
 import ModalWindow from "@/components/modal/ModalWindow";
-
+import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
 
 const ChatInput = (props: any) => {
   const modalPost = useDisclosure();
+  const hookCreateLensPost = useCreateLensPost();
 
   const templateReply = () => {
     return (
@@ -88,7 +89,11 @@ const ChatInput = (props: any) => {
             size="sm"
             variant="state_brand w-content"
             onClick={() => {
-              
+              hookCreateLensPost.validateMetadataAndPostOnLens({
+                profileId: "0x1",
+                postContent: "test",
+              });
+              console.log(props);
             }}
           >
             Create Post
@@ -277,7 +282,9 @@ const ChatInput = (props: any) => {
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
-                onKeyDown={event => props.hookChat?.keyDownMessage(event)}
+                onKeyDown={event => {
+                  props.hookChat?.keyDownMessage(event);
+                }}
                 placeholder="Message..."
                 height="auto"
                 rows={1}
@@ -328,20 +335,13 @@ const ChatInput = (props: any) => {
   };
 
   const TemplateMultiselect = () => {
-    return <Row className="vr-center hr-between w-100">
-      <IconImage
-            path="IconDarkReply.png"
-            style={{ className: "m-r-0-5" }}
-          />
-          <IconImage
-            path="IconDarkDelete.png"
-            style={{ className: "m-r-0-5" }}
-          />
-          <IconImage
-            path="IconDarkForward.png"
-            style={{ className: "m-r-0-5" }}
-          />
-    </Row>;
+    return (
+      <Row className="vr-center hr-between w-100">
+        <IconImage path="IconDarkMenu.png" style={{ className: "m-r-0-5" }} />
+        <IconImage path="IconDarkMenu.png" style={{ className: "m-r-0-5" }} />
+        <IconImage path="IconDarkMenu.png" style={{ className: "m-r-0-5" }} />
+      </Row>
+    );
   };
 
   const previewCloseHandler = () => {
