@@ -74,7 +74,7 @@ function ChatSetting(props: any) {
     },
     {
       icon: "IconDarkMembers.png",
-      name: "Members",
+      name: "Manage Members",
       onPress: () => {
         modalChatMembers.onOpen();
       },

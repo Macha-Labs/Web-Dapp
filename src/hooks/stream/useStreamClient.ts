@@ -25,8 +25,9 @@ const useStreamClient = () => {
                     id: authContext.address.toLowerCase(),
                     lensId: authContext?.user?.lens?.id,
                     lensImage: authContext?.user?.lens?.image,
-                    lensUsername: authContext.user?.lens?.name,
+                    lensName: authContext.user?.lens?.name,
                     lensHandle: authContext?.user?.lens?.handle,
+                    lensOwnedBy: authContext?.user?.lens?.ownedBy,
                     dbId: authContext?.user?.db?.id,
                 },
                 authContext?.user?.db?.tokens?.stream
