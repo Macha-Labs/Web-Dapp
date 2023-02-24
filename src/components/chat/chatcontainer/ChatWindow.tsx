@@ -14,7 +14,7 @@ const ChatWindow = (props: any) => {
   const templateMessages = ({ index, style }) => {
     const message = props.hookChannel.messages[index];
     return (
-      <div style={style}>
+      <div style={style} className="body">
         <ChatMessage
           message={message}
           hookChat={props.hookChat}
@@ -29,10 +29,10 @@ const ChatWindow = (props: any) => {
     <>
       <VariableSizeList
         ref={messageListRef}
-        height={600}
+        height={700}
         itemCount={props.hookChannel.messages.length}
         itemSize={(index: number) => messageAreaHeight[index]}
-        width={1150}>
+        width={1080}>
         {templateMessages}
       </VariableSizeList>
     </>
