@@ -639,7 +639,7 @@ export const StyledChat = styled.div`
   .body {
     overflow: inherit;
     padding: 20px 0px;
-    height: calc(100vh - 55px);
+    height: calc(100vh - 100px);
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;
     &::-webkit-scrollbar { 
