@@ -204,7 +204,7 @@ function ChatSetting(props: any) {
         <ChatMembersAdd
           hookChannel={props.chatContext.hookChannel}
           modalAddMembers={modalAddMembers}
-          members={props.hookChannel.channel.raw.state.members}
+          
         />
       </ModalSlider>
     );

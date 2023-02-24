@@ -1,52 +1,59 @@
-import { Row} from "@/styles/StyledComponents";
-import {
-  Avatar,
-  Button,
-  Checkbox,
-  Text,
-  useToast,
-} from "@chakra-ui/react";
-import React from "react";
+import { Row } from "@/styles/StyledComponents";
+import { Avatar, Button, Checkbox, Text, useToast } from "@chakra-ui/react";
+import React, { useContext } from "react";
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatMembersAdd = (props: any) => {
-    const hookPortalChannelMembership = usePortalChannelMembership(props?.hookChannel?.channel);
-    const toast = useToast();
+  const hookPortalChannelMembership = usePortalChannelMembership(
+    props?.hookChannel?.channel
+  );
+  const chatContext=useContext(ChatContext);  
+  const toast = useToast();
 
-    const callbackAdd = () => {
-      props?.modalAddMembers.onClose();
-      toast({
-        title: "Channel Members Added",
-        status: "success",
-        duration: 3000,
-        position: "bottom-right",
-      });
-    }
- 
-    return (
-        <LayoutCardPannel
-          header={
-            <Row className="hr-between w-full">
-              <Button size="xs" onClick={props?.modalAddMembers.onClose} variant="state_default_hover">
-                Cancel
-              </Button>
-              <Text size={"sm"}>Add Members</Text>
-              <Button variant="state_brand" size="sm" onClick={() => hookPortalChannelMembership?.addMembersToChannel(callbackAdd)}>
-                Save
-              </Button>
-            </Row>
-          }
-        >
-          {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
-          if (
-            !Object.keys(props.members).includes(
-              item.lens.ownedBy.toLowerCase()
-            )
-          )
-            return (
+  const callbackAdd = () => {
+    props?.modalAddMembers.onClose();
+    toast({
+      title: "Channel Members Added",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+  };
+
+  return (
+    <LayoutCardPannel
+      header={
+        <Row className="hr-between w-full">
+          <Button
+            size="xs"
+            onClick={props?.modalAddMembers.onClose}
+            variant="state_default_hover"
+          >
+            Cancel
+          </Button>
+          <Text size={"sm"}>Add Members</Text>
+          <Button
+            variant="state_brand"
+            size="sm"
+            onClick={() =>
+              hookPortalChannelMembership?.addMembersToChannel(callbackAdd)
+            }
+          >
+            Save
+          </Button>
+        </Row>
+      }
+    >
+      {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
+        return (
+          <>
+            {/* members={props.hookChannel.channel.raw.state.members} */}
+            {!Object.keys(chatContext?.hookMembers?.allUsers).includes(
+              item?.lens?.ownedBy?.toLowerCase()
+            ) && (
               <>
                 <Row key={item?.id} className="hr-between p-1">
                   <Row className="vr-center">
@@ -71,10 +78,12 @@ const ChatMembersAdd = (props: any) => {
                   />
                 </Row>
               </>
-            );
-          })}
-        </LayoutCardPannel>
-    )
-}
+            )}
+          </>
+        );
+      })}
+    </LayoutCardPannel>
+  );
+};
 
 export default ChatMembersAdd;
