@@ -6,6 +6,9 @@ import { Col, Row } from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
 
 const ChatNew = (props: any) => {
+  /**
+   * 
+   **/
   const toast = useToast();
   const callBack = ()=>{
     toast({
@@ -16,10 +19,27 @@ const ChatNew = (props: any) => {
     });
     props.modal.onClose();
   }
+
+  const callBackPrompt = (message: any) => {
+    toast({
+      title: message,
+      status: "error",
+      duration: 3000,
+      position: "bottom-right",
+    });
+  }
+  
+  /**
+   * 
+   **/
   const hookPortalChannel = usePortalChannel(
     props?.hookChannel?.channel,
-    {new:callBack}
+    {new:callBack, prompt: callBackPrompt}
   );
+
+  /**
+   * 
+   **/
   const data = [
     {
       label: "Name",
@@ -42,6 +62,12 @@ const ChatNew = (props: any) => {
       },
     },
   ];
+
+  /**
+   * 
+   **/
+  
+
   return (
     <LayoutCardPannel
       header={

@@ -107,11 +107,15 @@ function ChatSetting(props: any) {
     {
       //   icon: IconBrandClearChat,
       name: "Clear Chat",
-      onPress: () => {},
+      icon: "IconRedDelete.png",
+      onPress: () => {
+
+      },
     },
     {
       //   icon: IconBrandClearChat,
       name: "Delete Channel",
+      icon: "IconRedDelete.png",
       onPress: () => {
         hookPortalChannel?.deleteChannel(props.hookChannel.channel);
       },

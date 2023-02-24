@@ -110,7 +110,7 @@ const ChatList = (props: any) => {
                         className="menu-item w-100 m-b-0-5"
                         size="xl"
                         variant={
-                          chatProvider.hookChannel.channel?.id == item?.id
+                          chatProvider.hookChannel?.channel?.id == item?.id
                             ? "state_brand"
                             : "state_card_hover"
                         }
