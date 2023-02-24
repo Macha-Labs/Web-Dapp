@@ -110,7 +110,7 @@ const ChatList = (props: any) => {
                         className="menu-item w-100 m-b-0-5"
                         size="xl"
                         variant={
-                          chatProvider.hookChannel.channel?.id == item?.id
+                          chatProvider.hookChannel?.channel?.id == item?.id
                             ? "state_brand"
                             : "state_card_hover"
                         }
@@ -123,7 +123,16 @@ const ChatList = (props: any) => {
                           name={item?.name}
                         />
                         <Col className="w-100 d-flex flex-col">
-                          <Text>{item?.name}</Text>
+                          <Row>
+                            <Text>{item?.name}</Text>
+                            {item.raw?.muteStatus().muted && (
+                              <IconImage
+                                path="IconDarkMute.png"
+                                style={{ className: "m-l-0-5" }}
+                                size={10}
+                              />
+                            )}
+                          </Row>
                           {item?.lastMessage && (
                             <Col
                               style={{ paddingRight: "5px" }}

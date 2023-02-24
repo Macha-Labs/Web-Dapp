@@ -14,7 +14,7 @@ import {
 import useMention from "./useMention";
 // import useCommand from "./useCommand";
 
-const useStreamChat = (channel: any, users?: any, callback?: any) => {
+const useStreamChat = (client :any,channel: any, callback?: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const streamContext = useContext(StreamContext) as StreamContextType;
 
@@ -38,8 +38,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const textareaRef = useRef<any>();
   const editMessageRef = useRef<any>(null);
 
-  // custom hooks
-  // const chatFilterHook = useChatFilters(users);
   const hookMention = useMention();
   const toast = useToast();
 
@@ -192,7 +190,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       });
     }
 
-    streamContext.client
+    client
       .deleteMessage(message?.id, true)
       .then(() => {
         toast({
@@ -213,7 +211,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const pinMessage = async (message: any) => {
-    await streamContext.client
+    await client
       .pinMessage(message, null)
       .then(() => {
         toast({
@@ -368,9 +366,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const sendReaction = async (reaction: any, message: any) => {
     return await channel.raw.sendReaction(message?.id, {
       type: reaction?.type,
-      score: message.reaction_scores[reaction.type]
-        ? message.reaction_scores[reaction?.type] + 1
-        : 1,
+      score: 1
     });
   };
 
