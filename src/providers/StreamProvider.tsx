@@ -52,11 +52,10 @@ const StreamProvider = ({children}: any) => {
         }
     }, [hookStreamClient.client?.user?.id]);
 
-    useEffect(() => {
-        if (hookStreamChannels?.channels?.length) {
-            initiate(hookStreamChannels?.channels[0]);
-        }
-    }, [hookStreamChannels?.channels])
+    
+    const reload = () => {
+        
+    }
 
     const initiate = async (channel: any, userAddress?: any) => {
         logger(
@@ -68,9 +67,6 @@ const StreamProvider = ({children}: any) => {
         hookStreamChannel?.setUpChannel(channel?.id)
       };
 
-    const reload = () => {
-        
-    }
 
     return (
         <StreamContext.Provider

@@ -599,6 +599,7 @@ export const StyledChat = styled.div`
   height: 100vh;
   background: ${style.body.bg.default};
   position: relative;
+  flex-direction: column;
 
   &.full {
     width: calc(75% + 20px);

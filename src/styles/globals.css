@@ -106,6 +106,12 @@ a {
   }
 }
 
+/* FLEX */
+.flex-hr-vr-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* WIDTH */
 .w-100 {
