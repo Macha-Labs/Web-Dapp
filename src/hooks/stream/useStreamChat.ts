@@ -285,7 +285,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
         setSlashCmdValue(textareaRef.current?.value);
         setSlashCmd(false);
         // widgetDrawer.onOpen();
-      } else {
+      } else if (textareaRef.current?.value.length > 0) {
         await addMessage();
       }
     } else if (event.key == "/") {
@@ -331,7 +331,11 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleMultiSelect = () => {
-    setActionMessage({ action: "MULTISELECT", item: null, data: { query: "" } });
+    setActionMessage({
+      action: "MULTISELECT",
+      item: null,
+      data: { query: "" },
+    });
   };
   const handleMultiSelectClose = () => {
     logger(
@@ -404,7 +408,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       // setSlashCmd(false);
       // hookMention.setMentionActive(true);
       // hookMention.onTrigger(value, users);
-
     }
 
     if (slashCmd) {
