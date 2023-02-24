@@ -12,7 +12,8 @@ const useStreamChannelMembers = (channel: any) => {
   const [isLoading, setIsLoading] = useState<any>();
 
   const fetchChannelMembers = async () => {
-    const response = await channel?.queryMembers({});
+    console.log(channel);
+    const response = await channel?.raw?.queryMembers({});
     let onlineIds: any[] = [];
     let offlineIds: any[] = [];
     response?.members.map((item: any, index: number) => {
