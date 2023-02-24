@@ -28,7 +28,7 @@ const ChatWindow = (props: any) => {
   }
 
   return (
-    <>
+    <div className="body">
     <AutoSizer>
     {({ height, width }) => (
       <VariableSizeList
@@ -41,7 +41,7 @@ const ChatWindow = (props: any) => {
       </VariableSizeList>
     )}
     </AutoSizer>
-    </>
+    </div>
 
   );
 };
