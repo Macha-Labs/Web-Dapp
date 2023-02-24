@@ -13,7 +13,7 @@ const ChatWindow = (props: any) => {
 
   const messageAreaHeight = props.hookChannel.messages.map((message: any) => 100 + message.text.length);
 
-  const templateMessages = ({ index, style }) => {
+  const templateMessages = ({ index, style }: any) => {
     const message = props.hookChannel.messages[index];
     return (
       <div style={style} className="body">
