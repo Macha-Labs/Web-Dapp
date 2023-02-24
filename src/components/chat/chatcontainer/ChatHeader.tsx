@@ -8,12 +8,14 @@ import ChatSetting from "./ChatSetting";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import ChatSearch from "./ChatSearch";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
   const modalPinned = useDisclosure();
   const modalSettings = useDisclosure();
-  const authProvider = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
+  const chatContext = useContext(ChatContext)
 
 
   const TemplateMembers = () => {
@@ -31,7 +33,7 @@ const ChatHeader = (props: any) => {
     return (
       <ModalSlider event={modalPinned} size="md">
         <ChatMessageList
-          pinnedMessageList={props.hookChannel?.pinnedMessages}
+          pinnedMessageList={chatContext.hookChannel?.pinnedMessages}
           hookChat={props.hookChat}
         />
       </ModalSlider>
@@ -43,9 +45,10 @@ const ChatHeader = (props: any) => {
       <ModalSlider event={modalSettings} size="sm">
         <ChatSetting
           event={modalSettings}
-          hookChat={props.hookChat}
-          hookChannel={props.hookChannel}
-          authProvider={authProvider}
+          chatContext={chatContext}
+          authContext={authContext}
+          hookChannel={chatContext.hookChannel}
+          hookChat={chatContext.hookChat}
           modalSettings={modalSettings}
         />
       </ModalSlider>
@@ -68,14 +71,14 @@ const ChatHeader = (props: any) => {
           variant="state_brand"
           size="sm"
           className="m-r-0-5"
-          onClick={() => {props.hookChat?.setSelectedMessages([])}}
+          onClick={() => {chatContext.hookChat?.setSelectedMessages([])}}
         >
           Clear
         </Button>
         <Button
           variant="state_default_hover"
           size="xs"
-          onClick={props.hookChat.handleMultiSelectClose}
+          onClick={chatContext.hookChat.handleMultiSelectClose}
         >
           Cancel
         </Button>
@@ -97,13 +100,13 @@ const ChatHeader = (props: any) => {
               <Heading as="h4" size="sm">
                 {props?.hookChannel?.channel?.name}
               </Heading>
-              {props?.hookChannel?.channel?.raw.muteStatus().muted && (
+              {/* {props?.hookChannel?.channel?.raw.muteStatus().muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}
                   size={15}
                 />
-              )}
+              )} */}
             </Row>
             <Heading as="h6" size="xs">
               {props.hookChat?.usersWhoAreTyping && (

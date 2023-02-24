@@ -27,7 +27,7 @@ const ChatList = (props: any) => {
   const TemplateChatNew = () => {
     return (
       <ModalSlider event={modalChatNew} size="lg">
-        <ChatNew modal={modalChatNew} />
+        <ChatNew modal={modalChatNew} chatProvider={chatProvider} />
       </ModalSlider>
     );
   };
@@ -125,13 +125,14 @@ const ChatList = (props: any) => {
                         <Col className="w-100 d-flex flex-col">
                           <Row>
                             <Text>{item?.name}</Text>
-                            {item.raw?.muteStatus().muted && (
+                            {/* {item?.raw && <> {item.raw?.muteStatus()?.muted && (
                               <IconImage
                                 path="IconDarkMute.png"
                                 style={{ className: "m-l-0-5" }}
                                 size={10}
                               />
                             )}
+                            </>} */}
                           </Row>
                           {item?.lastMessage && (
                             <Col

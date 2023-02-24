@@ -30,7 +30,7 @@ const StreamProvider = ({children}: any) => {
     const [client, setClient] = useState<any>();    
     const authContext = useContext(AuthContext) as AuthContextType;
     const hookStreamClient = useStreamClient();
-    const hookStreamChannels = useStreamUserChannels();
+    const hookStreamChannels = useStreamUserChannels(hookStreamClient.client);
     const hookStreamChannel = useStreamChannel(hookStreamClient.client);
     const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel?.raw);
     const hookStreamChat = useStreamChat(hookStreamClient.client, hookStreamChannel?.channel);
@@ -46,9 +46,7 @@ const StreamProvider = ({children}: any) => {
     useEffect(() => {
         if (hookStreamClient.client?.user?.id) {
             setClient(hookStreamClient.client);
-            hookStreamChannels.fetchUserChannels(
-                hookStreamClient.client,
-            );
+            hookStreamChannels.fetchUserChannels();
         }
     }, [hookStreamClient.client?.user?.id]);
 
