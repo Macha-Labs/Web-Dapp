@@ -20,13 +20,14 @@ const User = () => {
   const authContext = useContext(AuthContext);
   const [window, setWindow] = useState("UserProfile");
   const modalAuth = useDisclosure();
-
+  const modalEdit = useDisclosure();
   const userSettings = [
     {
       icon: "IconDarkEdit.png",
       name: "Edit Profile",
       onPress: () => {
         setWindow("UserEdit");
+        console.log("Edit Profile");
       },
     },
     {
@@ -72,12 +73,15 @@ const User = () => {
   ];
 
   useEffect(() => {
-    if (!authContext?.address || !authContext?.user?.lens?.id) 
-      modalAuth.onOpen(); 
-    else {modalAuth.onClose()}
-  }, [authContext?.user?.lens?.id])
+    if (!authContext?.address || !authContext?.user?.lens?.id)
+      modalAuth.onOpen();
+    else {
+      modalAuth.onClose();
+    }
+  }, [authContext?.user?.lens?.id]);
 
   const TemplateRight = () => {
+    console.log(window, "WINDOW");
     return (
       <>
         {window == "UserProfile" ? (
@@ -92,12 +96,12 @@ const User = () => {
   const TemplateAuth = () => {
     return (
       <>
-        <ModalWindow event={modalAuth} style={{className: 'm-t-2'}}>
-          <AuthCard/>
+        <ModalWindow event={modalAuth} style={{ className: "m-t-2" }}>
+          <AuthCard />
         </ModalWindow>
       </>
-    )
-  }
+    );
+  };
 
   const Template = () => {
     return (
@@ -106,10 +110,10 @@ const User = () => {
           <div className="header vr-center">
             <Input />
           </div>
-          <div className="body">            
+          <div className="body">
             <UserCard
               user={authContext?.user}
-              onClick={setWindow("UserProfile")}
+              // onClick={setWindow("UserProfile")}
             />
             <LayoutOptions
               options={userSettings}
@@ -136,15 +140,17 @@ const User = () => {
 
   return (
     <>
-    {authContext?.user?.lens?.id && <StyledWindow>
-        <div className="left">
-          <Nav />
-        </div>
-        <div className="right">
-          <Template />
-        </div>
-      </StyledWindow>}
-      
+      {authContext?.user?.lens?.id && (
+        <StyledWindow>
+          <div className="left">
+            <Nav />
+          </div>
+          <div className="right">
+            <Template />
+          </div>
+        </StyledWindow>
+      )}
+
       <TemplateAuth />
     </>
   );
