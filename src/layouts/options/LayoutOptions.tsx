@@ -8,20 +8,22 @@ const LayoutOptions = (props: any) => {
       {props.options.length ? (
         <>
           {props.options?.map((item: any, index: any) => {
-             if (
-               (item.name === "Delete Channel" ||
-                 item.name === "Permissions" ||
-                 item.name === "Members" ||
-                 item.name === "Edit Channel") &&
-               props.channelAdmin !== props.userId
-             ) {
-               return null;
-             }
+            if (
+              (item.name === "Delete Channel" ||
+                item.name === "Permissions" ||
+                item.name === "Members" ||
+                item.name === "Edit Channel") &&
+              props.channelAdmin !== props.userId
+            ) {
+              return null;
+            }
             return (
               <Row
                 className="item m-b-0-5 hr-between"
                 key={index}
-                onClick={item.onPress}
+                onClick={() => {
+                  item.onPress();
+                }}
               >
                 <Row className="vr-center">
                   <IconImage path={item.icon} />
