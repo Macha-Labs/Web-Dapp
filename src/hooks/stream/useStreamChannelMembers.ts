@@ -50,6 +50,7 @@ const useStreamChannelMembers = (channel: any) => {
   return {
     fetchChannelMembers: fetchChannelMembers,
     checkOnline: checkOnline,
+    allUsers:onlineUsers.concat(offlineUsers),
     onlineUsers: onlineUsers,
     offlineUsers: offlineUsers,
     userIsMember: userIsMember,
