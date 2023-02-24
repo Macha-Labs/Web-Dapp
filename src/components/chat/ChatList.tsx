@@ -123,7 +123,16 @@ const ChatList = (props: any) => {
                           name={item?.name}
                         />
                         <Col className="w-100 d-flex flex-col">
-                          <Text>{item?.name}</Text>
+                          <Row>
+                            <Text>{item?.name}</Text>
+                            {item.raw?.muteStatus().muted && (
+                              <IconImage
+                                path="IconDarkMute.png"
+                                style={{ className: "m-l-0-5" }}
+                                size={10}
+                              />
+                            )}
+                          </Row>
                           {item?.lastMessage && (
                             <Col
                               style={{ paddingRight: "5px" }}

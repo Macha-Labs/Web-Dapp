@@ -144,6 +144,11 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
     channel.raw.mute();
     callback.mute();
   };
+  const unMuteChannel = (channel: any) => {
+    logger("channel", "usePortalChannelUnmute", "UnMuting Channel", [channel]);
+    channel.raw.unmute();
+    callback.unmute();
+  };
   return {
     update,
     channel,
@@ -154,6 +159,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
     updatePermissions,
     deleteChannel,
     muteChannel,
+    unMuteChannel,
   };
 };
 
