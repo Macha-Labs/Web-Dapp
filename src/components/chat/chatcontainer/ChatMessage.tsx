@@ -26,6 +26,10 @@ import emoji from "../../../data/emoji.json";
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
   const toast = useToast();
+  const date = new Date(props.message.created_at);
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const time = `${hours}:${minutes}`;
 
   const templateAttachment = (attachment: any) => {
     if (attachment?.og_scrape_url) {
@@ -228,7 +232,18 @@ const ChatMessage = (props: any) => {
         <Col>
           <Row>
             {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
-              <Checkbox defaultChecked={props?.hookChat?.selectedMessages?.includes(props.messages?.id)} value={props?.hookChat?.selectedMessages?.includes(props.messages?.id)} onChange={() => {props?.hookChat?.handleSelect(props?.message)}} className="m-r-0-5" />
+              <Checkbox
+                defaultChecked={props?.hookChat?.selectedMessages?.includes(
+                  props.messages?.id
+                )}
+                value={props?.hookChat?.selectedMessages?.includes(
+                  props.messages?.id
+                )}
+                onChange={() => {
+                  props?.hookChat?.handleSelect(props?.message);
+                }}
+                className="m-r-0-5"
+              />
             )}
 
             <Avatar
@@ -261,10 +276,12 @@ const ChatMessage = (props: any) => {
                   className="m-l-0-5"
                   variant="state_brand"
                   onClick={props.hookChat?.editMessage}
+                  key={`e-${props?.message?.id}`}
                 >
                   Update
                 </Button>,
                 <Button
+                  key={`e-${props?.message?.id}`}
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
@@ -289,10 +306,16 @@ const ChatMessage = (props: any) => {
               dangerouslySetInnerHTML={{ __html: props.message?.html }}
             />
           )}
-
-          {props?.message?.attachments ? (props?.message?.attachments?.map((item: any, index: number) => {
-            return templateAttachment(item);
-          })) : (<></>)}
+          <Col>
+            <span style={{ alignSelf: "flex-end" }}>{time}</span>
+          </Col>
+          {props?.message?.attachments ? (
+            props?.message?.attachments?.map((item: any, index: number) => {
+              return templateAttachment(item);
+            })
+          ) : (
+            <></>
+          )}
 
           {props?.message?.reaction_scores && (
             <Row className="vr-center">
