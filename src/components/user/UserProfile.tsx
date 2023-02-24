@@ -233,22 +233,22 @@ const UserProfile = (props: any) => {
             <TabList className="w-100">
               <Row className="m-v-1 w-100 vr-center hr-center">
                 <Tab>
-                  <Row className="m-h-0-5 vr-center">
-                    <IconImage path="IconDarkPost.png" />
-                    <Col className="m-l-0-5">Posts</Col>
-                  </Row>
+                  <Button variant="state_default_hover">
+                    <IconImage path="IconDarkPost.png" size="15"/>
+                    <Text className="m-l-0-5">Posts</Text>
+                  </Button>
                 </Tab>
                 <Tab>
-                  <Row className="m-h-0-5  vr-center">
-                    <IconImage path="IconDarkFollowers.png" />
-                    <Col className="m-l-0-5">Followers</Col>
-                  </Row>
+                  <Button variant="state_default_hover">
+                    <IconImage path="IconDarkFollowers.png" size="15"/>
+                    <Text className="m-l-0-5">Followers</Text>
+                  </Button>
                 </Tab>
                 <Tab>
-                  <Row className="m-h-0-5  vr-center">
-                    <IconImage path="IconDarkFollowing.png" />
-                    <Col className="m-l-0-5">Following</Col>
-                  </Row>
+                <Button variant="state_default_hover">
+                    <IconImage path="IconDarkFollowing.png" size="15"/>
+                    <Text className="m-l-0-5">Following</Text>
+                  </Button>
                 </Tab>
               </Row>
             </TabList>

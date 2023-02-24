@@ -30,7 +30,7 @@ const StreamProvider = ({children}: any) => {
     const [client, setClient] = useState<any>();    
     const authContext = useContext(AuthContext) as AuthContextType;
     const hookStreamClient = useStreamClient();
-    const hookStreamChannels = useStreamUserChannels();
+    const hookStreamChannels = useStreamUserChannels(hookStreamClient.client);
     const hookStreamChannel = useStreamChannel(hookStreamClient.client);
     const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel?.raw);
     const hookStreamChat = useStreamChat(hookStreamClient.client, hookStreamChannel?.channel);
@@ -46,17 +46,14 @@ const StreamProvider = ({children}: any) => {
     useEffect(() => {
         if (hookStreamClient.client?.user?.id) {
             setClient(hookStreamClient.client);
-            hookStreamChannels.fetchUserChannels(
-                hookStreamClient.client,
-            );
+            hookStreamChannels.fetchUserChannels();
         }
     }, [hookStreamClient.client?.user?.id]);
 
-    useEffect(() => {
-        if (hookStreamChannels?.channels?.length) {
-            initiate(hookStreamChannels?.channels[0]);
-        }
-    }, [hookStreamChannels?.channels])
+    
+    const reload = () => {
+        
+    }
 
     const initiate = async (channel: any, userAddress?: any) => {
         logger(
@@ -68,9 +65,6 @@ const StreamProvider = ({children}: any) => {
         hookStreamChannel?.setUpChannel(channel?.id)
       };
 
-    const reload = () => {
-        
-    }
 
     return (
         <StreamContext.Provider

@@ -15,12 +15,16 @@ const useStreamChannel = (client: any) => {
    * 
    **/
   const setUpChannel = async (channelId: any) => {
-    const newChannel = client?.channel("team", channelId, {});
-    await newChannel?.watch();
-    logger("channel", "setupChannel", "channel data from stream ", [
-      newChannel,
-    ]);
-    setChannel(ChannelStream$(newChannel?.data, newChannel));
+    if (channelId) {
+      const newChannel = client?.channel("team", channelId, {});
+      await newChannel?.watch();
+      logger("channel", "setupChannel", "channel data from stream ", [
+        newChannel,
+      ]);
+      setChannel(ChannelStream$(newChannel?.data, newChannel));
+    } else {
+      setChannel(null);
+    }
   };
 
 
@@ -31,6 +35,7 @@ const useStreamChannel = (client: any) => {
   useEffect(() => {
     logger("channel", "useEffect[channel]", "channel is ", [channel]);
     if (channel)
+      channel?.raw?.markRead()
       channel?.raw?.on((event: any) => {
         logger("stream", "useEffect", "logging the channel events", [event]);
         logger("stream", "useEffect", "logging the channel Messages", [channel?.raw?.state?.messageSets[0]?.messages]);

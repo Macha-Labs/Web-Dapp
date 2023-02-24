@@ -5,28 +5,35 @@ import { useContext } from "react";
 
 import ChatHeader from "./ChatHeader";
 import ChatInput from "./ChatInput";
+import ChatNonDisplay from "./ChatNonDisplay";
 import ChatWindow from "./ChatWindow";
 
 const ChatContainer = (channel: any) => {
     const chatProvider = useContext(ChatContext);
     const authContext = useContext(AuthContext) as AuthContextType;
-    const streamContext = useContext(StreamContext);
     return (
         <>
-                <ChatHeader
+            {chatProvider?.hookChannel?.channel ? 
+                <>
+                    <ChatHeader
                     hookChat={chatProvider.hookChat}
                     hookChannel={chatProvider.hookChannel}
                     hookMembers={chatProvider.hookMembers}
-                />
-                <ChatWindow
-                    hookChat={chatProvider.hookChat}
-                    hookChannel={chatProvider.hookChannel}
-                    authContext={authContext}
-                    address={authContext.address}
-                />
-                <ChatInput
-                    hookChat={chatProvider.hookChat}
-                />
+                    />
+                    <ChatWindow
+                        hookChat={chatProvider.hookChat}
+                        hookChannel={chatProvider.hookChannel}
+                        authContext={authContext}
+                        address={authContext.address}
+                    />
+                    <ChatInput
+                        hookChat={chatProvider.hookChat}
+                    />
+                </>
+            :
+                <ChatNonDisplay></ChatNonDisplay>
+            }
+                
         </>
     )
 }

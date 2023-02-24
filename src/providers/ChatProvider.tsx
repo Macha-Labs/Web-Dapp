@@ -26,14 +26,6 @@ export const ChatContext = createContext<ChatContextType>({
 export const ChatProvider = ({ children }: any) => {
   const streamContext = useContext(StreamContext) as StreamContextType;  
 
-  const clearUnreadCount = async (channel: any) => {
-    // await channel.raw?.markRead(); // setting the unread_count in the api to 0, but it is not setting it in the local state
-    // let channelList = streamContext.channels;
-    // channelList[appChannelIndex].unreadCountObject[userAddress].unread_messages = 0;
-    // BUG: Channel unread count not updating in real-time
-    // streamContext.setChannels(channelList);
-  };
-
   return (
     <ChatContext.Provider
       value={{

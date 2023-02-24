@@ -14,7 +14,7 @@ import {
 import useMention from "./useMention";
 // import useCommand from "./useCommand";
 
-const useStreamChat = (client :any, channel: any, callback?: any) => {
+const useStreamChat = (client :any,channel: any, callback?: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const streamContext = useContext(StreamContext) as StreamContextType;
 
@@ -366,9 +366,7 @@ const useStreamChat = (client :any, channel: any, callback?: any) => {
   const sendReaction = async (reaction: any, message: any) => {
     return await channel.raw.sendReaction(message?.id, {
       type: reaction?.type,
-      score: message.reaction_scores[reaction.type]
-        ? message.reaction_scores[reaction?.type] + 1
-        : 1,
+      score: 1
     });
   };
 

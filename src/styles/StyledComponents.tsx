@@ -562,6 +562,7 @@ export const StyledChatList = styled.div`
     margin: auto;
     padding: ${style.body.padding};
     background: ${style.body.bg};
+    overflow-y: scroll;
 
     .menu-heading {
       padding-left: 10px;
@@ -599,6 +600,7 @@ export const StyledChat = styled.div`
   height: 100vh;
   background: ${style.body.bg.default};
   position: relative;
+  flex-direction: column;
 
   &.full {
     width: calc(75% + 20px);
