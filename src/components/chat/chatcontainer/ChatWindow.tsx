@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { VariableSizeList } from 'react-window';
 import ChatMessage from "./ChatMessage";
+import AutoSizer from "react-virtualized-auto-sizer";
 
 const ChatWindow = (props: any) => {
   const messageListRef = useRef<any>();
@@ -27,6 +28,8 @@ const ChatWindow = (props: any) => {
 
   return (
     <>
+    <AutoSizer>
+    {({ height, width }) => (
       <VariableSizeList
         ref={messageListRef}
         height={600}
@@ -35,6 +38,8 @@ const ChatWindow = (props: any) => {
         width={1150}>
         {templateMessages}
       </VariableSizeList>
+    )}
+    </AutoSizer>
     </>
 
   );
