@@ -14,7 +14,7 @@ import {
 import useMention from "./useMention";
 // import useCommand from "./useCommand";
 
-const useStreamChat = (channel: any, users?: any, callback?: any) => {
+const useStreamChat = (channel: any, callback?: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const streamContext = useContext(StreamContext) as StreamContextType;
 
@@ -38,8 +38,6 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const textareaRef = useRef<any>();
   const editMessageRef = useRef<any>(null);
 
-  // custom hooks
-  // const chatFilterHook = useChatFilters(users);
   const hookMention = useMention();
   const toast = useToast();
 
