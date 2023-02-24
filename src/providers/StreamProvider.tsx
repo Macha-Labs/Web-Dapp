@@ -68,6 +68,10 @@ const StreamProvider = ({children}: any) => {
         hookStreamChannel?.setUpChannel(channel?.id)
       };
 
+    const reload = () => {
+        
+    }
+
     return (
         <StreamContext.Provider
             value={{

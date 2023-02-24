@@ -19,6 +19,10 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
   // const navigation = useNavigation<any>();
 
   const update = () => {
+    if (!channel?.name) {
+      callback?.prompt('Add a name to the channel')
+      return;
+    }
     setIsLoading(true);
     if (channel.id) {
       editChannel(
@@ -39,9 +43,6 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
           callback.edit();
 
           setIsLoading(false);
-          // navigation.navigate("Chat", {
-          //     channel: channel,
-          // });
         })
         .catch((err) => {
           logger(
