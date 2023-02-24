@@ -50,12 +50,8 @@ const ChatMembersAdd = (props: any) => {
       {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
         return (
           <>
-            {/* {console.log(
-              "itemsssss",chatContext?.hookMembers?.allUsersIds,
-              item?.lens?.ownedBy?.toLowerCase()
-            )} */}
             {!chatContext?.hookMembers?.allUsersIds.includes(
-              item?.lens?.ownedBy?.toLowerCase()
+              item?.lens?.ownedBy.toLowerCase()
             ) && (
               <>
                 <Row key={item?.id} className="hr-between p-1">

@@ -1,9 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { getProfiles } from "../../helpers/lens/lens";
-import { UserLens$, UserStream$, User$ } from "../../schema/user";
+import { User$ } from "../../schema/user";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import { off } from "process";
-import { isTemplateExpression } from "typescript";
 
 const useStreamChannelMembers = (channel: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
@@ -14,7 +11,6 @@ const useStreamChannelMembers = (channel: any) => {
   const [isLoading, setIsLoading] = useState<any>();
 
   const fetchChannelMembers = async () => {
-    console.log(channel);
     const response = await channel?.raw?.queryMembers({});
     let onlineIds: any[] = [];
     let offlineIds: any[] = [];
@@ -23,18 +19,17 @@ const useStreamChannelMembers = (channel: any) => {
       user.setLensFromStream();
       if (item.user?.online) {
         onlineIds.push(user);
-        console.log("onlineids", onlineIds);
       } else offlineIds.push(user);
     });
-    setOnlineUsers(onlineIds);
-    setOfflineUsers(offlineIds);
-    const result = [...offlineUsers, ...onlineUsers].map((item: any) => {
+    const result = [...onlineIds, ...offlineIds].map((item: any) => {
       return item.address;
     });
+
+    setOnlineUsers(onlineIds);
+    setOfflineUsers(offlineIds);
     setAllUsersIds(result);
-    console.log("result", result);
   };
-  console.log(allUsersIds);
+
   // checking if current user is a member of this channel
   const checkUserIsAMember = async () => {
     try {

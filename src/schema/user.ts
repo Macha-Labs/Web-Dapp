@@ -76,7 +76,7 @@ export class User$ {
     lensData: any = null,
     streamData: any = null
   ) {
-    this.address = dbData?.address || lensData?.ownedBy || streamData?.id
+    this.address = dbData?.address?.toLowerCase() || lensData?.ownedBy?.toLowerCase() || streamData?.id?.toLowerCase()
     this.db = UserDb$(dbData);
     this.lens = UserLens$(lensData);
     this.stream = UserStream$(streamData);
