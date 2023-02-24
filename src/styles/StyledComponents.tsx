@@ -565,6 +565,9 @@ export const StyledChatList = styled.div`
     overflow-y: scroll;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;
+    &::-webkit-scrollbar { 
+      display: none;  /* Safari and Chrome */
+    }
 
     .menu-heading {
       padding-left: 10px;
@@ -639,6 +642,9 @@ export const StyledChat = styled.div`
     height: calc(100vh - 55px);
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;
+    &::-webkit-scrollbar { 
+      display: none;  /* Safari and Chrome */
+    }
   }
 `;
 export const StyledChatItem = styled(Row)`
