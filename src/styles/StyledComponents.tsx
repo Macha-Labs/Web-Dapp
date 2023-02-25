@@ -20,8 +20,6 @@ export const StyledWindow = styled.div`
     margin: auto;
     margin-top: 10%;
   }
-
-
 `;
 
 export const Row = styled.div`
@@ -485,6 +483,8 @@ export const StyledIcon = styled.i`
   }
   &.state_active {
     background: ${style.icon.bg.active};
+    transform: scale(1.1);
+    box-shadow: ${style.icon.shadow.hover};
   }
 
   &.scale {
@@ -563,10 +563,10 @@ export const StyledChatList = styled.div`
     padding: ${style.body.padding};
     background: ${style.body.bg};
     overflow-y: scroll;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none;
-    &::-webkit-scrollbar { 
-      display: none;  /* Safari and Chrome */
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
     }
 
     .menu-heading {
@@ -640,10 +640,10 @@ export const StyledChat = styled.div`
     overflow: inherit;
     padding: 20px 0px;
     height: calc(100vh - 100px);
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none;
-    &::-webkit-scrollbar { 
-      display: none;  /* Safari and Chrome */
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
     }
   }
 `;
