@@ -32,12 +32,12 @@ interface Props {
 const UserProfile = (props: any) => {
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
   const hookLensFollow = useLensFollows(props.user?.lens?.id);
-  const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.lens.id);
+  const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.lens?.id);
   const { getOwnedProfiles, userLens } = useLensProfile();
 
   useEffect(() => {
-    getOwnedProfiles(props.user?.lens?.lens.ownedBy);
-  }, [props.user?.lens?.lens.ownedBy]);
+    getOwnedProfiles(props.user?.lens?.lens?.ownedBy);
+  }, [props.user?.lens?.lens?.ownedBy]);
 
   const hookLensConnections = useLensConnections(
     userLens?.ownedBy,
@@ -168,33 +168,33 @@ const UserProfile = (props: any) => {
   const TemplateProfile = () => {
     return (
       <StyledCard>
-        <LayoutProfileBanner profile={props.user?.lens.lens} />
+        <LayoutProfileBanner profile={props.user?.lens?.lens} />
 
         <Row>
           <Col className="m-v-1 w-100 hr-center">
             <Heading as="h3" size="lg">
-              {props.user?.lens?.lens.name
-                ? props.user?.lens?.lens.name
-                : props.user?.lens?.lens.handle}
+              {props.user?.lens?.lens?.name
+                ? props.user?.lens?.lens?.name
+                : props.user?.lens?.lens?.handle}
             </Heading>
-            <h6>@{props.user?.lens?.lens.handle}</h6>
+            <h6>@{props.user?.lens?.lens?.handle}</h6>
           </Col>
         </Row>
 
         <Row className="vr-center hr-center">
-          {props.user?.lens?.lens.bio ? (
+          {props.user?.lens?.lens?.bio ? (
             <Col className="m-v-1">
-              <Text className="bioText">{props?.user?.lens?.lens.bio}</Text>
+              <Text className="bioText">{props?.user?.lens?.lens?.bio}</Text>
             </Col>
           ) : (
             <></>
           )}
         </Row>
 
-        {props.user?.lens?.lens.ownedBy?.toLowerCase() !==
+        {props.user?.lens?.lens?.ownedBy?.toLowerCase() !==
           authContext?.address?.toLowerCase() && (
           <Row className="m-v-1 vr-center hr-center">
-            {props.user?.lens?.lens.isFollowedByMe || isFollowed ? (
+            {props.user?.lens?.lens?.isFollowedByMe || isFollowed ? (
               <Button
                 variant="state_lens_unfollow"
                 size="md"
