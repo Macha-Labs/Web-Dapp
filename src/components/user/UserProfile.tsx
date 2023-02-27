@@ -24,6 +24,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import IconImage from "../icons/IconImage";
 import useLensProfile from "@/hooks/lens/useLensProfile";
+import { User$ } from "@/schema/user";
 
 interface Props {
   [key: string]: any;
@@ -31,13 +32,15 @@ interface Props {
 
 const UserProfile = (props: any) => {
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
-  const hookLensFollow = useLensFollows(props.user?.lens?.id);
-  const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.lens?.id);
+  const user = new User$(props.user.lens);
+  console.log("userrrrr", user, props.user.lens);
+  const hookLensFollow = useLensFollows(user?.lens?.id);
+  const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.id);
   const { getOwnedProfiles, userLens } = useLensProfile();
 
   useEffect(() => {
-    getOwnedProfiles(props.user?.lens?.lens?.ownedBy);
-  }, [props.user?.lens?.lens?.ownedBy]);
+    getOwnedProfiles(user?.lens?.ownedBy);
+  }, [user?.lens?.ownedBy]);
 
   const hookLensConnections = useLensConnections(
     userLens?.ownedBy,
@@ -168,33 +171,31 @@ const UserProfile = (props: any) => {
   const TemplateProfile = () => {
     return (
       <StyledCard>
-        <LayoutProfileBanner profile={props.user?.lens?.lens} />
+        <LayoutProfileBanner profile={user?.lens} />
 
         <Row>
           <Col className="m-v-1 w-100 hr-center">
             <Heading as="h3" size="lg">
-              {props.user?.lens?.lens?.name
-                ? props.user?.lens?.lens?.name
-                : props.user?.lens?.lens?.handle}
+              {user?.lens?.name ? user?.lens?.name : user?.lens?.handle}
             </Heading>
-            <h6>@{props.user?.lens?.lens?.handle}</h6>
+            <h6>@{user?.lens?.handle}</h6>
           </Col>
         </Row>
 
         <Row className="vr-center hr-center">
-          {props.user?.lens?.lens?.bio ? (
+          {user?.lens?.bio ? (
             <Col className="m-v-1">
-              <Text className="bioText">{props?.user?.lens?.lens?.bio}</Text>
+              <Text className="bioText">{props?.user?.lens?.bio}</Text>
             </Col>
           ) : (
             <></>
           )}
         </Row>
 
-        {props.user?.lens?.lens?.ownedBy?.toLowerCase() !==
+        {user?.lens?.ownedBy?.toLowerCase() !==
           authContext?.address?.toLowerCase() && (
           <Row className="m-v-1 vr-center hr-center">
-            {props.user?.lens?.lens?.isFollowedByMe || isFollowed ? (
+            {user?.lens?.isFollowedByMe || isFollowed ? (
               <Button
                 variant="state_lens_unfollow"
                 size="md"
@@ -278,7 +279,7 @@ const UserProfile = (props: any) => {
 
   return (
     <div>
-      {props.user ? (
+      {user ? (
         <>
           <TemplateProfile />
           <TemplateTabs />

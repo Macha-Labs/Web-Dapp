@@ -48,14 +48,11 @@ const UserList: FC<Props> = props => {
                   key={index}
                   className="vr-center item m-b-0-5"
                   onClick={() => {
+                    console.log(item.lens, "itemmmmm");
                     handleSelectedUser(item);
                   }}
                 >
-                  <Avatar
-                    src={helperIPFS(item?.lens?.image)}
-                    className="m-r-0-5"
-                    size="sm"
-                  >
+                  <Avatar src={item?.lens?.image} className="m-r-0-5" size="sm">
                     {heading == "Online" ? (
                       <AvatarBadge boxSize="0.7em" bg="green.500" />
                     ) : (
