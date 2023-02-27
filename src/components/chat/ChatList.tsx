@@ -124,7 +124,11 @@ const ChatList = (props: any) => {
                         />
                         <Col className="w-100 d-flex flex-col">
                           <Row>
-                            <Text>{item?.name}</Text>
+                            <Text>
+                              {item?.name.length > 12
+                                ? `${item?.name.slice(0, 12)}...`
+                                : item?.name}
+                            </Text>
                             {/* {item?.raw && <> {item.raw?.muteStatus()?.muted && (
                               <IconImage
                                 path="IconDarkMute.png"
@@ -134,6 +138,15 @@ const ChatList = (props: any) => {
                             )}
                             </>} */}
                           </Row>
+                          <Col>
+                            <Text fontSize={"xs"}>
+                              {item?.lastMessage?.created_at
+                                ? new Date(
+                                    item?.lastMessage?.created_at
+                                  ).toLocaleString()
+                                : ""}
+                            </Text>
+                          </Col>
                           {item?.lastMessage && (
                             <Col
                               style={{ paddingRight: "5px" }}
@@ -144,8 +157,8 @@ const ChatList = (props: any) => {
                                   item?.lastMessage?.user?.lensHandle ||
                                   truncateAddress(item?.lastMessage?.user?.id)}
                                 :{" "}
-                                {item?.lastMessage?.text.length > 20
-                                  ? `${item?.lastMessage?.text.slice(0, 20)}...`
+                                {item?.lastMessage?.text.length > 14
+                                  ? `${item?.lastMessage?.text.slice(0, 14)}...`
                                   : item?.lastMessage?.text}
                               </Text>
                             </Col>

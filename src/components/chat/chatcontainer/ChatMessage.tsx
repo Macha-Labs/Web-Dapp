@@ -302,6 +302,7 @@ const ChatMessage = (props: any) => {
               />
             </InputAction>
           ) : (
+            // The text message is being set here. TextareaDiv is directly setting the html to the div.
             <TextareaDiv
               dangerouslySetInnerHTML={{ __html: props.message?.html }}
             />

@@ -484,6 +484,7 @@ export const StyledIcon = styled.i`
   &.state_active {
     background: ${style.icon.bg.active};
     transform: scale(1.1);
+
     box-shadow: ${style.icon.shadow.hover};
   }
 
@@ -754,9 +755,6 @@ export const StyledConversationView = styled.div`
   -ms-overflow-style: none;
   padding-bottom: 3rem;
 
-  <<<<<<< HEAD ::-webkit-scrollbar {
-    display: none;
-  }
   .emogiPicker {
     background-color: black;
   }
@@ -790,12 +788,9 @@ export const StyledConversation = styled(Col)`
 
   .action {
     display: none;
-    position: absolute;
-    top: -10px;
-    right: 0;
-    padding: 5px;
-    border: ${style.borderInput};
-    background: #01041f;
+    padding-left: 10px;
+    /* border: ${style.borderInput}; */
+    /* background: #01041f; */
     border-radius: 5px;
     width: fit-content;
   }

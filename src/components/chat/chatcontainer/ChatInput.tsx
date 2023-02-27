@@ -2,6 +2,7 @@ import { PlusSquareIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Button,
+  Divider,
   Heading,
   Image,
   Text,
@@ -35,16 +36,15 @@ const ChatInput = (props: any) => {
           <div className="reply">
             <Col className="w-100 vr-center">
               <Row className="vr-center">
-                <Text fontSize="xs" className="m-r-1">
-                  Replying to:
-                </Text>
-                <Avatar
+                <IconImage path="IconDarkReply.png" />
+                <Divider orientation="vertical" color={"#246BFD"} />
+                {/* <Avatar
                   size="xs"
                   src={props.hookChat?.actionMessage?.item?.user.lensImage}
                 />
                 <Text fontSize="xs">
                   @{props.hookChat?.actionMessage?.item?.user?.lensHandle}
-                </Text>
+                </Text> */}
               </Row>
               <Row>
                 <Text fontSize="xs">
