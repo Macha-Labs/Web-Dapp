@@ -1,10 +1,12 @@
+import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
+import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useToast } from "@chakra-ui/react";
+import { Avatar, Button, Text, useToast, Checkbox } from "@chakra-ui/react";
 import { useContext } from "react";
 
 const ChatNew = (props: any) => {
@@ -45,6 +47,11 @@ const ChatNew = (props: any) => {
   /**
    * 
    **/
+
+   const hookPortalChannelMembership = usePortalChannelMembership(
+    Channel$({})
+  );
+
   const data = [
     {
       label: "Name",
@@ -87,7 +94,32 @@ const ChatNew = (props: any) => {
   const TemplateMembers = () => {
     return (
       <>
-      
+      {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
+        return (
+          <Row key={item?.id} className="hr-between p-1">
+            <Row className="vr-center">
+              <Avatar
+                src={helperIPFS(item?.lens?.image)}
+                className="m-r-0-5"
+              />
+              <Text>
+                {item?.lens?.name
+                  ? item?.lens?.name
+                  : item?.lens?.handle
+                  ? item?.lens?.handle
+                  : truncateAddress(item?.lens?.ownedBy)}
+              </Text>
+            </Row>
+
+            <Checkbox
+              value=""
+              onChange={() =>
+                hookPortalChannelMembership.handleCheckedUsers(item)
+              }
+            />
+          </Row>
+        );
+      })}
       </>
     )
   }
@@ -110,7 +142,8 @@ const ChatNew = (props: any) => {
         </Row>
       }
     >
-    <TemplateDetails />
+    {/* <TemplateDetails /> */}
+    <TemplateMembers/>
     </LayoutCardPannel>
   );
 };
