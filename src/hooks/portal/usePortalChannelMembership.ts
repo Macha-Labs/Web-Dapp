@@ -11,7 +11,10 @@ const usePortalChannelMembership = (channel: any) => {
   const [users, setUsers] = useState<any>([]);
 
   const handleCheckedUsers = (user: any) => {
-    if (!users.includes(user?.lens?.ownedBy)) {
+    console.log("Check", user);
+    
+    if (!users.includes(user?.lens?.ownedBy.toLowerCase())) {
+      console.log("Check", user);
       setUsers([...users, user?.lens?.ownedBy?.toLowerCase()]);
     } else {
       const usersFilter = users.filter(
@@ -20,6 +23,11 @@ const usePortalChannelMembership = (channel: any) => {
       setUsers(usersFilter);
     }
   };
+
+  useEffect(() => {
+console.log("user", users);
+
+  }, [users])
 
   // adding selected members to current channel
   const addMembersToChannel = (callback:any = null) => {
@@ -63,6 +71,7 @@ const usePortalChannelMembership = (channel: any) => {
     setVisible: setVisible,
     handleCheckedUsers: handleCheckedUsers,
     addMembersToChannel: addMembersToChannel,
+    users: users
   };
 };
 export default usePortalChannelMembership;
