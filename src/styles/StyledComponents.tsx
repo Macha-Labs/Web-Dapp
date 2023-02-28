@@ -29,8 +29,8 @@ export const Row = styled.div`
   flex-direction: row;
   text-align: left;
 
-  &.flex-wrap: {
-    flex-wrap: wrap
+  &.flex-wrap {
+    flex-wrap: wrap !important;
   }
 
   &.vr-start {
