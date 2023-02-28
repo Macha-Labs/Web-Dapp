@@ -2,6 +2,7 @@ import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
+import { Channel$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
 import { Avatar, Button, Text, useToast } from "@chakra-ui/react";
 import { useContext } from "react";
@@ -37,7 +38,7 @@ const ChatNew = (props: any) => {
    * 
    **/
   const hookPortalChannel = usePortalChannel(
-    props?.hookChannel?.channel,
+    Channel$({}),
     {new:callbackNew, prompt: callbackPrompt}
   );
 
@@ -48,7 +49,7 @@ const ChatNew = (props: any) => {
     {
       label: "Name",
       value: hookPortalChannel?.channel?.name,
-      onChangeText: (text: any) => {
+      onChange: (text: any) => {
         hookPortalChannel?.setChannel({
           ...hookPortalChannel?.channel,
           name: text,
@@ -58,7 +59,7 @@ const ChatNew = (props: any) => {
     {
       label: "Description",
       value: hookPortalChannel?.channel?.description,
-      onChangeText: (text: any) => {
+      onChange: (text: any) => {
         hookPortalChannel?.setChannel({
           ...hookPortalChannel?.channel,
           description: text,
@@ -70,7 +71,26 @@ const ChatNew = (props: any) => {
   /**
    * 
    **/
-  
+  const TemplateDetails = () => {
+    return (
+      <>
+            <Col className="p-2">
+        <Row className="hr-center w-100 m-b-1">
+          <Avatar size="2xl" name={data[0].value}/>
+        </Row>
+        <LayoutInputs data={data} style={{ class: "m-b-1" }} />
+      </Col>
+      </>
+    )
+  }
+
+  const TemplateMembers = () => {
+    return (
+      <>
+      
+      </>
+    )
+  }
 
   return (
     <LayoutCardPannel
@@ -90,12 +110,7 @@ const ChatNew = (props: any) => {
         </Row>
       }
     >
-      <Col className="p-2">
-        <Row className="hr-center w-100 m-b-1">
-          <Avatar size="2xl" name={data[0].value}/>
-        </Row>
-        <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-      </Col>
+    <TemplateDetails />
     </LayoutCardPannel>
   );
 };
