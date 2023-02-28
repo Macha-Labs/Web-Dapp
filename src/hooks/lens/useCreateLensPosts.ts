@@ -10,6 +10,8 @@ import { BigNumber, ethers, utils } from "ethers";
 import { splitSignature } from "ethers/lib/utils";
 import { useContext } from "react";
 import { v4 } from "uuid";
+import { fetchSigner } from "@wagmi/core";
+
 
 const useCreateLensPost = () => {
   const authContext = useContext(AuthContext);
@@ -119,10 +121,12 @@ const useCreateLensPost = () => {
     const typedData = signedResult.result.data!.createPostTypedData.typedData;
 
     const { v, r, s } = splitSignature(signedResult.signature);
+    const signer: any = await fetchSigner();
+    
     const lensHub = new ethers.Contract(
       LENS_HUB_CONTRACT,
       LensHubAbi,
-      authContext.signer
+      signer
     );
     const tx = await lensHub.postWithSig({
       profileId: typedData.value.profileId,
