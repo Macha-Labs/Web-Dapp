@@ -1,22 +1,26 @@
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
+import LayoutCard from "@/layouts/LayoutCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useToast, Checkbox } from "@chakra-ui/react";
+import { Avatar, Button, Text, useToast, Checkbox, Tag } from "@chakra-ui/react";
+import { useState } from "react";
 import { useContext } from "react";
 
 const ChatNew = (props: any) => {
   const chatContext = useContext(ChatContext);
+  const [tab, setTab] = useState('members')
 
+  
   /**
-   * 
+   *
    **/
   const toast = useToast();
-  const callbackNew = ()=>{
+  const callbackNew = () => {
     toast({
       title: "Channel Created Successfully",
       status: "success",
@@ -25,7 +29,7 @@ const ChatNew = (props: any) => {
     });
     chatContext?.hookChannels?.fetchUserChannels();
     props.modal.onClose();
-  }
+  };
 
   const callbackPrompt = (message: any) => {
     toast({
@@ -34,23 +38,44 @@ const ChatNew = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-  }
+  };
+
+  /**
+   *
+   **/
+  const hookPortalChannel = usePortalChannel(Channel$({}), {
+    new: callbackNew,
+    prompt: callbackPrompt,
+  });
+
+  /**
+   *
+   **/
+
+  const hookPortalChannelMembership = usePortalChannelMembership(Channel$({}));
   
   /**
-   * 
+   *
    **/
-  const hookPortalChannel = usePortalChannel(
-    Channel$({}),
-    {new:callbackNew, prompt: callbackPrompt}
-  );
-
-  /**
-   * 
-   **/
-
-   const hookPortalChannelMembership = usePortalChannelMembership(
-    Channel$({})
-  );
+  const handleTabs = () => {
+    if (tab == 'members') {
+        if (hookPortalChannelMembership?.users?.length) {
+          setTab('details');
+        } else {
+          toast(
+            {
+            title: 'Add atleast one member',
+            status: "error",
+            duration: 3000,
+            position: "bottom-right",
+            }
+          )
+        }
+    }
+    else {
+      setTab('members');
+    }
+  }
 
   const data = [
     {
@@ -76,75 +101,122 @@ const ChatNew = (props: any) => {
   ];
 
   /**
-   * 
+   *
    **/
   const TemplateDetails = () => {
     return (
       <>
-            <Col className="p-2">
-        <Row className="hr-center w-100 m-b-1">
-          <Avatar size="2xl" name={data[0].value}/>
-        </Row>
-        <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-      </Col>
+        <LayoutCardPannel
+          header={
+            <Row className="hr-between v-center">
+              <Button
+                onClick={handleTabs}
+                variant="state_default_hover"
+                size="sm"
+              >Back</Button>
+              <Text>New Channel</Text>
+              <Button
+                onClick={() => {
+                  hookPortalChannel?.update(hookPortalChannelMembership?.userIds);
+                }}
+                variant="state-brand"
+                size="sm"
+                isLoading={hookPortalChannel?.isLoading}
+              >
+                Create New
+              </Button>
+            </Row>
+          }
+        >
+          <Col className="p-2">
+            <Row className="hr-center w-100 m-b-1">
+              <Avatar size="2xl" name={data[0].value} />
+            </Row>
+            <LayoutInputs data={data} style={{ class: "m-b-1" }} />
+            <Row>
+              {
+                hookPortalChannelMembership?.users?.map((item: any) => { return (
+                  <Tag className="m-r-0-5" key={`label-${item}`}>
+                            <Row className="vr-center">
+                    <Avatar
+                      src={helperIPFS(item?.lens?.image)}
+                      className="m-r-0-5"
+                      size="sm"
+                    />
+                    <Text>
+                      {item?.lens?.name
+                        ? item?.lens?.name
+                        : item?.lens?.handle
+                        ? item?.lens?.handle
+                        : truncateAddress(item?.lens?.ownedBy)}
+                    </Text>
+                  </Row>
+                   </Tag> 
+                )})
+              }
+            </Row>
+          </Col>
+        </LayoutCardPannel>
       </>
-    )
-  }
+    );
+  };
 
   const TemplateMembers = () => {
     return (
       <>
-      {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
-        return (
-          <Row key={`key-${item?.id}`} className="hr-between p-1">
-            <Row className="vr-center">
-              <Avatar
-                src={helperIPFS(item?.lens?.image)}
-                className="m-r-0-5"
-              />
-              <Text>
-                {item?.lens?.name
-                  ? item?.lens?.name
-                  : item?.lens?.handle
-                  ? item?.lens?.handle
-                  : truncateAddress(item?.lens?.ownedBy)}
-              </Text>
+        <LayoutCardPannel
+          header={
+            <Row className="hr-between v-center">
+              <Text>New Channel</Text>
+              <Button
+                onClick={handleTabs}
+                variant="state-brand"
+                size="sm"
+              >
+                Next
+              </Button>
             </Row>
+          }
+        >
+          {hookPortalChannelMembership?.followers?.map(
+            (item: any, index: any) => {
+              return (
+                <Row key={`key-${item?.id}`} className="hr-between p-1">
+                  <Row className="vr-center">
+                    <Avatar
+                      src={helperIPFS(item?.lens?.image)}
+                      className="m-r-0-5"
+                    />
+                    <Text>
+                      {item?.lens?.name
+                        ? item?.lens?.name
+                        : item?.lens?.handle
+                        ? item?.lens?.handle
+                        : truncateAddress(item?.lens?.ownedBy)}
+                    </Text>
+                  </Row>
 
-            <Checkbox
-              isChecked={hookPortalChannelMembership.users.includes(String(item?.lens?.ownedBy?.toLowerCase()))}
-              onChange={() =>
-                hookPortalChannelMembership.handleCheckedUsers(item)
-              }
-            />
-          </Row>
-        );
-      })}
+                  <Checkbox
+                    isChecked={hookPortalChannelMembership?.userIds?.includes(
+                      String(item?.lens?.ownedBy?.toLowerCase())
+                    )}
+                    onChange={() =>
+                      hookPortalChannelMembership.handleCheckedUsers(item)
+                    }
+                  />
+                </Row>
+              );
+            }
+          )}
+        </LayoutCardPannel>
       </>
-    )
-  }
+    );
+  };
 
   return (
-    <LayoutCardPannel
-      header={
-        <Row className="hr-between v-center">
-          <Text>New Channel</Text>
-          <Button
-            onClick={() => {
-              hookPortalChannel?.update();
-            }}
-            variant="state-brand"
-            size="sm"
-            isLoading={hookPortalChannel?.isLoading}
-          >
-            Create New
-          </Button>
-        </Row>
-      }
-    >
-    {/* <TemplateDetails /> */}
-    <TemplateMembers/>
-    </LayoutCardPannel>
+<>{tab == 'members'? <TemplateMembers/> : <TemplateDetails/>}
+</>
+     
   );
 };
-export default ChatNew; 
+export default ChatNew;

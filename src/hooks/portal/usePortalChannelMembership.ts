@@ -9,32 +9,27 @@ const usePortalChannelMembership = (channel: any) => {
   const [isLoading, setIsLoading] = useState<any>();
   const [visible, setVisible] = useState<boolean>(false);
   const [users, setUsers] = useState<any>([]);
+  const [usersIds, setUsersIds] = useState<any>([]);
 
   const handleCheckedUsers = (user: any) => {
-    console.log("Check", user);
-    
     if (!users.includes(user?.lens?.ownedBy.toLowerCase())) {
-      console.log("Check", user);
-      setUsers([...users, user?.lens?.ownedBy?.toLowerCase()]);
+      setUsers([...users, user]);
+      setUsersIds([...usersIds, user?.lens?.ownedBy?.toLowerCase()]);
     } else {
       const usersFilter = users.filter(
-        (item: any) => item != user?.lens?.ownedBy?.toLowerCase()
+        (item: any) => item?.lens?.ownedBy?.toLowerCase() != user?.lens?.ownedBy?.toLowerCase()
       );
       setUsers(usersFilter);
+      setUsersIds(usersFilter.map((item: any) => {return item?.lens?.ownedBy?.toLowerCase()}));
     }
   };
-
-  useEffect(() => {
-console.log("user", users);
-
-  }, [users])
 
   // adding selected members to current channel
   const addMembersToChannel = (callback:any = null) => {
     // const myFollowers = Object.values(users);
     if (users) {
       const data = {
-        members: users,
+        members: usersIds,
         id: channel.id,
       };
       addMembers(data);
@@ -46,7 +41,7 @@ console.log("user", users);
   const removeMembersFromChannel = async (callback:any = null) => {
     if (users) {
       const data = {
-        members: users,
+        members: usersIds,
         id: channel.id,
       };
       removeMembers(data);
@@ -71,7 +66,8 @@ console.log("user", users);
     setVisible: setVisible,
     handleCheckedUsers: handleCheckedUsers,
     addMembersToChannel: addMembersToChannel,
-    users: users
+    users: users,
+    userIds: usersIds
   };
 };
 export default usePortalChannelMembership;
