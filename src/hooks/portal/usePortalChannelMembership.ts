@@ -12,7 +12,7 @@ const usePortalChannelMembership = (channel: any) => {
   const [usersIds, setUsersIds] = useState<any>([]);
 
   const handleCheckedUsers = (user: any) => {
-    if (!users.includes(user?.lens?.ownedBy.toLowerCase())) {
+    if (!usersIds.includes(user?.lens?.ownedBy.toLowerCase())) {
       setUsers([...users, user]);
       setUsersIds([...usersIds, user?.lens?.ownedBy?.toLowerCase()]);
     } else {
