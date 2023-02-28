@@ -1,39 +1,35 @@
+import { LensHubAbi } from "@/contracts/lens/lensHubContractAbi";
+import { createNewPost, validateMetadata } from "@/helpers/lens/lens";
+import signedTypeData from "@/helpers/lens/lensApiService";
+import { LENS_HUB_CONTRACT } from "@/helpers/lens/lensContract";
+import { CreatePublicPostRequest } from "@/helpers/lens/lensInterfaces";
+import { PublicationMainFocus } from "@/helpers/lens/publication";
+import { nonWrappedData, makeFileObjects } from "@/helpers/web3Storage";
+import { AuthContext } from "@/providers/AuthProvider";
 import { BigNumber, ethers, utils } from "ethers";
 import { splitSignature } from "ethers/lib/utils";
-import { createNewPost, validateMetadata } from "../../helpers/lens/lens";
-import { LENS_HUB_CONTRACT } from "../../helpers/lens/lensContract";
-import { signedTypeData } from "../../helpers/lens/lensApiService";
-import { CreatePublicPostRequest } from "../../helpers/lens/lensInterfaces";
-import { PublicationMainFocus } from "../../helpers/lens/publication";
-import { makeFileObjects, nonWrappedData } from "../../helpers/web3Storage";
-import { useContext, useRef } from "react";
-import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import { LensHubAbi } from "../../contracts/lens/lensHubContractAbi";
-// import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import { v4 as uuidv4 } from "uuid";
+import { useContext } from "react";
+import { v4 } from "uuid";
 
 const useCreateLensPost = () => {
-  const authContext = useContext(AuthContext) as AuthContextType;
-  const postContentRef = useRef<any>();
-  // const connector = useWalletConnect();
+  const authContext = useContext(AuthContext);
 
   const signCreatePostTypedData = async (request: CreatePublicPostRequest) => {
+    console.log("create post: request", request);
     const result = await createNewPost(request);
+    console.log("create post: createPostTypedData", result);
 
     const typedData = result.data!.createPostTypedData.typedData;
-    console.log("The typedData is ", typedData);
-    try {
-      const signature = await signedTypeData(
-        typedData.domain,
-        typedData.types,
-        typedData.value
-      );
-      console.log("The signature is ", signature, result);
+    console.log("create post: typedData", typedData);
 
-      return { result, signature };
-    } catch (error: any) {
-      throw new Error("Error in signing Typed Data ", error);
-    }
+    const signature = await signedTypeData(
+      typedData.domain,
+      typedData.types,
+      typedData.value
+    );
+    console.log("create post: signature", signature);
+
+    return { result, signature };
   };
 
   const validateMetadataAndPostOnLens = async (params: any) => {
@@ -42,30 +38,29 @@ const useCreateLensPost = () => {
     }
 
     if (params?.postContent == null && params?.file == null) {
-      throw new Error("Nothing to Upload");
+      console.log("Content is missing");
       return;
     }
 
     let fileCid: any = null;
     let fileObj: any = null;
     if (params?.file?.type) {
-      nonWrappedData([params?.file]).then((result: any) => {
-        fileCid = result;
-      });
+      fileCid = await nonWrappedData([params?.file]);
       if (fileCid != null) {
         fileObj = {
-          // item: `ipfs://${fileCid}`,
-          item: "ipfs://bafkreiakj3oidnfr7kbv6k4fqgzg44it6how3d73zqfbzlkfb4kx7x2zke",
+          item: `ipfs://${fileCid}`,
           type: params?.file?.type,
         };
       }
     }
+    console.log("Got file cid ", fileCid);
+
     const postMetadata = {
       version: "2.0.0",
       mainContentFocus: params?.file?.type
         ? PublicationMainFocus[params?.file?.type]
         : PublicationMainFocus.TEXT_ONLY,
-      metadata_id: uuidv4(),
+      metadata_id: v4(),
       description: params?.postContent,
       locale: "en-US",
       content: params?.postContent,
@@ -85,26 +80,25 @@ const useCreateLensPost = () => {
       metadatav2: postMetadata,
     });
 
+    console.log("Response:", validateRes);
     if (validateRes?.data?.validatePublicationMetadata?.valid) {
+      console.log("Metadata validated");
       const lensPostId = await createPost(params, postMetadata);
       return lensPostId;
     } else {
-      throw new Error("Metadata could not be validated");
+      console.log("Metadata couldnot be validated");
+      return;
     }
   };
 
   const createPost = async (params: any, postMetadata: any) => {
-    let ipfsFileCid;
-    makeFileObjects(postMetadata).then((result: any) => {
-      ipfsFileCid = result;
-    });
-    console.log("postReq", LENS_HUB_CONTRACT, LensHubAbi, authContext.signer);
+    // const ipfsFileCid = await makeFileObjects(postMetadata);
+    const ipfsFileCid = await makeFileObjects(postMetadata);
+    console.log("create post: ipfs result", ipfsFileCid);
 
     const createPostRequest = {
       profileId: params.profileId,
-      // contentURI: `ipfs://${ipfsFileCid}`,
-      contentURI:
-        "ipfs://bafkreiakj3oidnfr7kbv6k4fqgzg44it6how3d73zqfbzlkfb4kx7x2zke",
+      contentURI: `ipfs://${ipfsFileCid}`,
       collectModule: {
         freeCollectModule: {
           followerOnly: false,
@@ -116,12 +110,15 @@ const useCreateLensPost = () => {
     };
 
     const signedResult = await signCreatePostTypedData(createPostRequest);
+    console.log("signedResult", signedResult);
+    console.log(
+      "signedResult post ID",
+      signedResult.result.data?.createPostTypedData.id
+    );
+
     const typedData = signedResult.result.data!.createPostTypedData.typedData;
 
-    console.log("signedResult", signedResult);
-
     const { v, r, s } = splitSignature(signedResult.signature);
-    console.log("typedData", authContext.signer);
     const lensHub = new ethers.Contract(
       LENS_HUB_CONTRACT,
       LensHubAbi,
@@ -151,7 +148,7 @@ const useCreateLensPost = () => {
     console.log("topicid we care about", topicId);
 
     const profileCreatedLog = logs.find((l: any) => l.topics[0] === topicId);
-    console.log("create post: created log", profileCreatedLog, logs, topicId);
+    console.log("create post: created log", profileCreatedLog);
 
     let profileCreatedEventLog = profileCreatedLog!.topics;
     console.log("create post: created event logs", profileCreatedEventLog);
@@ -175,9 +172,8 @@ const useCreateLensPost = () => {
     return lensPostID;
   };
   return {
-    createPost: createPost,
+    // createPost: createPost,
     validateMetadataAndPostOnLens: validateMetadataAndPostOnLens,
-    postContentRef: postContentRef,
   };
 };
 

@@ -24,10 +24,12 @@ import IconImage from "@/components/icons/IconImage";
 import Pop from "@/components/pop/Pop";
 import ModalWindow from "@/components/modal/ModalWindow";
 import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
+import { useRef } from "react";
 
 const ChatInput = (props: any) => {
   const modalPost = useDisclosure();
   const hookCreateLensPost = useCreateLensPost();
+  const createPostRef = useRef<any>();
 
   const templateReply = () => {
     return (
@@ -76,7 +78,7 @@ const ChatInput = (props: any) => {
             className="m-b-1 m-t-1"
             size="xl"
             placeholder="Your Lens Post Content Here"
-            ref={null}
+            ref={createPostRef}
           ></Textarea>
           <Row className="m-b-1">
             <IconImage
@@ -90,10 +92,9 @@ const ChatInput = (props: any) => {
             variant="state_brand w-content"
             onClick={() => {
               hookCreateLensPost.validateMetadataAndPostOnLens({
-                profileId: "0x1",
-                postContent: "test",
+                profileId: props?.lensId,
+                postContent: createPostRef.current.value,
               });
-              console.log(props);
             }}
           >
             Create Post

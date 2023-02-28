@@ -200,6 +200,7 @@ export const createNewPost = async (request: CreatePublicPostRequest) => {
     });
     return result;
   } catch (error: any) {
+    console.log("Error in creaing new Lens Post ", error);
     throw new Error("Error in creaing new Lens Post ", error);
   }
 };
