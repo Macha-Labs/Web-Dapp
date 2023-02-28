@@ -114,7 +114,7 @@ const ChatNew = (props: any) => {
             <Checkbox
               value=""
               onChange={() =>
-                hookPortalChannelMembership.handleCheckedUsers(item)
+                {hookPortalChannelMembership.handleCheckedUsers(item)}
               }
             />
           </Row>
