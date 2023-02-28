@@ -96,7 +96,7 @@ const ChatNew = (props: any) => {
       <>
       {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
         return (
-          <Row key={item?.id} className="hr-between p-1">
+          <Row key={`key-${item?.id}`} className="hr-between p-1">
             <Row className="vr-center">
               <Avatar
                 src={helperIPFS(item?.lens?.image)}
@@ -112,7 +112,7 @@ const ChatNew = (props: any) => {
             </Row>
 
             <Checkbox
-              value=""
+              isChecked={hookPortalChannelMembership.users.includes(String(item?.lens?.ownedBy?.toLowerCase()))}
               onChange={() =>
                 {hookPortalChannelMembership.handleCheckedUsers(item)}
               }
