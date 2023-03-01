@@ -166,6 +166,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
+    props.chatContext?.streamContext?.reloadChannelList();
+    props.chatContext?.streamContext?.reloadChannel();
     props.modalSettings.onClose();
   };
 
@@ -179,6 +181,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
+    props.chatContext?.streamContext?.reloadChannel();
+    props.chatContext?.streamContext?.reloadChannelList();
     props.modalSettings.onClose();
   };
   /**
