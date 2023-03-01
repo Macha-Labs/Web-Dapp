@@ -5,6 +5,11 @@ import { AuthContext } from "@/providers/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import { setMetaData } from "@/helpers/lens/lens";
 import { v4 as uuidv4 } from "uuid";
+import { fetchSigner, signTypedData } from "@wagmi/core";
+import signedTypeData, { splitSignature } from "@/helpers/lens/lensApiService";
+import { LensHubAbi } from "@/contracts/lens/lensHubContractAbi";
+import { LENS_HUB_CONTRACT } from "@/helpers/lens/lensContract";
+import { ethers } from "ethers";
 const useLensProfileUpdate = () => {
   const [isLoading, setIsLoading] = useState<any>(false);
   const [loadingText, setLoadingText] = useState<any>("Sending Request");
@@ -36,7 +41,32 @@ const useLensProfileUpdate = () => {
 
     console.log("cid", `ipfs://${cid}`);
 
-    return await setMetaData(userLens?.id, cid);
+    const metadata = await setMetaData(userLens?.id, cid);
+    const typedData =
+      metadata.data!.createSetProfileMetadataTypedData.typedData;
+
+    const signature = await signedTypeData(
+      typedData.domain,
+      typedData.types,
+      typedData.value
+    );
+
+    const { v, r, s } = splitSignature(signature);
+    const signer: any = await fetchSigner();
+
+    const lensHub = new ethers.Contract(LENS_HUB_CONTRACT, LensHubAbi, signer);
+    const tx = await lensHub.setProfileMetadataURIWithSig({
+      profileId: typedData.value.profileId,
+      contentURI: typedData.value.contentURI,
+      sig: {
+        v,
+        r,
+        s,
+        deadline: typedData.value.deadline,
+      },
+    });
+    const receipt = await tx.wait();
+    console.log("Tx receipt:", receipt);
   };
   return {
     isLoading: isLoading,
