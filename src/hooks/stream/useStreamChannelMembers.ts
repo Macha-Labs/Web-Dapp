@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { User$ } from "../../schema/user";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
+import { logger } from "@/helpers/logger";
 
 const useStreamChannelMembers = (channel: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
@@ -24,6 +25,8 @@ const useStreamChannelMembers = (channel: any) => {
     const result = [...onlineIds, ...offlineIds].map((item: any) => {
       return item.address;
     });
+
+    logger('stream', 'useStreamChannelMembers?.fetchChannelMembers', 'Loading channel members', [onlineIds, offlineIds])
 
     setOnlineUsers(onlineIds);
     setOfflineUsers(offlineIds);
