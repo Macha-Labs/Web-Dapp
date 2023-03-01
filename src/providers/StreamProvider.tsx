@@ -40,8 +40,6 @@ const StreamProvider = ({children}: any) => {
     const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel);
     const hookStreamChat = useStreamChat(hookStreamClient.client, hookStreamChannel?.channel);
 
-    
-
     useEffect(() => {
         if (authContext?.user?.lens?.id) {
             hookStreamClient.connectToStream();
