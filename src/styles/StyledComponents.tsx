@@ -657,12 +657,12 @@ export const StyledChatItem = styled(Row)`
   align-items: center;
   justify-content: flex-start;
   .settingsIcon {
-    display: none;
+    visibility: hidden;
   }
 
   &:hover {
     .settingsIcon {
-      display: inline;
+      visibility: visible;
     }
   }
 `;

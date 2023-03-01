@@ -1,5 +1,11 @@
 import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  Text,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
@@ -12,13 +18,42 @@ import ChatSearch from "./chatcontainer/ChatSearch";
 import React, { useState } from "react";
 import Pop from "../pop/Pop";
 import { darkStyle } from "@/styles/StyledConstants";
+import usePortalChannel from "@/hooks/portal/usePortalChannel";
 
 const ChatList = (props: any) => {
   const chatProvider = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
   const hookOrgChannels = useOrgChannels("6246c7045cc31c36781d668e");
   const modalChatNew = useDisclosure();
+  const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
+  const [channel, setChannel] = useState<any>();
+
+  const hookPortalChannel = usePortalChannel(
+    {},
+    {
+      mute: () => {
+        toast({
+          title: "Channel Muted",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+        chatProvider?.streamContext?.reloadChannelList();
+        chatProvider?.streamContext?.reloadChannel();
+      },
+      unmute: () => {
+        toast({
+          title: "Channel Unmuted",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+        chatProvider?.streamContext?.reloadChannelList();
+        chatProvider?.streamContext?.reloadChannel();
+      },
+    }
+  );
 
   useEffect(() => {
     chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient);
@@ -33,7 +68,8 @@ const ChatList = (props: any) => {
     );
   };
 
-  const TemplateActions = () => {
+  const TemplateActions = (props: any) => {
+    console.log("props", props);
     return (
       <Pop
         trigger={<IconImage path="IconDarkMenu.png" />}
@@ -44,27 +80,50 @@ const ChatList = (props: any) => {
             variant="transparent"
             size="md"
             className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
+            rightIcon={<IconImage path="IconDarkPinned.png" />}
           >
             <Row className="hr-between w-100" onClick={() => {}}>
               Pin Channel
             </Row>
           </Button>
+          {!props.item.raw?.muteStatus()?.muted ? (
+            <Button
+              variant="transparent"
+              size="md"
+              className="text-start"
+              rightIcon={<IconImage path="IconDarkMute.png" />}
+            >
+              <Row
+                className="hr-between w-100"
+                onClick={() => {
+                  hookPortalChannel.muteChannel(props.item);
+                }}
+              >
+                Mute Channel
+              </Row>
+            </Button>
+          ) : (
+            <Button
+              variant="transparent"
+              size="md"
+              className="text-start"
+              rightIcon={<IconImage path="IconDarkUnMute.png" />}
+            >
+              <Row
+                className="hr-between w-100"
+                onClick={() => {
+                  hookPortalChannel.unMuteChannel(props.item);
+                }}
+              >
+                Unmute Channel
+              </Row>
+            </Button>
+          )}
           <Button
             variant="transparent"
             size="md"
             className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
-          >
-            <Row className="hr-between w-100" onClick={() => {}}>
-              Mute Channel
-            </Row>
-          </Button>
-          <Button
-            variant="transparent"
-            size="md"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
+            rightIcon={<IconImage path="IconRedDelete.png" />}
           >
             <Row className="hr-between w-100" onClick={() => {}}>
               Clear Chat
@@ -101,13 +160,6 @@ const ChatList = (props: any) => {
                   (item: any, index: number) => (
                     <StyledChatItem key={item?.index}>
                       <Button
-                        onClick={() => {
-                          chatProvider.initiate(item, authContext?.address);
-                          setIsClicked((prevState: any) => [
-                            ...prevState,
-                            index,
-                          ]);
-                        }}
                         className="menu-item w-100 m-b-0-5"
                         size="xl"
                         variant={
@@ -115,75 +167,96 @@ const ChatList = (props: any) => {
                             ? "state_brand"
                             : "state_card_hover"
                         }
-                        overflow="hidden"
+                        // overflow="hidden"
                       >
-                        {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                        <Avatar
-                          size="md"
-                          className="m-r-0-5"
-                          name={item?.name}
-                        />
-                        <Col className="w-100 d-flex flex-col">
-                          <Row>
-                            <Text>
-                              {item?.name.length > 12
-                                ? `${item?.name.slice(0, 12)}...`
-                                : item?.name}
-                            </Text>
-                            {/* {item?.raw && <> {item.raw?.muteStatus()?.muted && (
-                              <IconImage
-                                path="IconDarkMute.png"
-                                style={{ className: "m-l-0-5" }}
-                                size={10}
-                              />
-                            )}
-                            </>} */}
-                          </Row>
-                          <Col>
-                            <Text fontSize={"xs"}>
-                              {item?.lastMessage?.created_at
-                                ? new Date(
-                                    item?.lastMessage?.created_at
-                                  ).toLocaleString()
-                                : ""}
-                            </Text>
-                          </Col>
-                          {item?.lastMessage && (
-                            <Col
-                              style={{ paddingRight: "5px" }}
-                              className="m-t-0-5"
-                            >
-                              <Text fontSize={"xs"}>
-                                {item?.lastMessage?.user?.lensUsername ||
-                                  item?.lastMessage?.user?.lensHandle ||
-                                  truncateAddress(item?.lastMessage?.user?.id)}
-                                :{" "}
-                                {item?.lastMessage?.text.length > 14
-                                  ? `${item?.lastMessage?.text.slice(0, 14)}...`
-                                  : item?.lastMessage?.text}
+                        <Row
+                          onClick={() => {
+                            chatProvider.initiate(item, authContext?.address);
+                            setIsClicked((prevState: any) => [
+                              ...prevState,
+                              index,
+                            ]);
+                          }}
+                          className="w-11-12"
+                        >
+                          {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
+                          <Avatar
+                            size="md"
+                            className="m-r-0-5"
+                            name={item?.name}
+                          />
+                          <Col className="w-100 d-flex flex-col">
+                            <Row>
+                              <Text>
+                                {item?.name.length > 12
+                                  ? `${item?.name.slice(0, 12)}...`
+                                  : item?.name}
                               </Text>
-                            </Col>
-                          )}
-                        </Col>
-                        {item?.unreadCountObject[authContext?.address]
-                          ?.unread_messages > 0 &&
-                          !isClicked.includes(index) && (
+                              {item?.raw && (
+                                <>
+                                  {" "}
+                                  {item.raw?.muteStatus()?.muted && (
+                                    <IconImage
+                                      path="IconDarkMute.png"
+                                      style={{ className: "m-l-0-5" }}
+                                      size={10}
+                                    />
+                                  )}
+                                </>
+                              )}
+                            </Row>
                             <Col>
-                              <Text
-                                padding={1}
-                                background={darkStyle.color5}
-                                borderRadius="full"
-                              >
-                                {
-                                  item?.unreadCountObject[authContext?.address]
-                                    ?.unread_messages
-                                }
+                              <Text fontSize={"xs"}>
+                                {item?.lastMessage?.created_at
+                                  ? new Date(
+                                      item?.lastMessage?.created_at
+                                    ).toLocaleString()
+                                  : ""}
                               </Text>
                             </Col>
-                          )}
+                            {item?.lastMessage && (
+                              <Col
+                                style={{ paddingRight: "5px" }}
+                                className="m-t-0-5"
+                              >
+                                <Text fontSize={"xs"}>
+                                  {item?.lastMessage?.user?.lensUsername ||
+                                    item?.lastMessage?.user?.lensHandle ||
+                                    truncateAddress(
+                                      item?.lastMessage?.user?.id
+                                    )}
+                                  :{" "}
+                                  {item?.lastMessage?.text.length > 14
+                                    ? `${item?.lastMessage?.text.slice(
+                                        0,
+                                        14
+                                      )}...`
+                                    : item?.lastMessage?.text}
+                                </Text>
+                              </Col>
+                            )}
+                          </Col>
+                          {item?.unreadCountObject[authContext?.address]
+                            ?.unread_messages > 0 &&
+                            !isClicked.includes(index) && (
+                              <Col>
+                                <Text
+                                  padding={1}
+                                  background={darkStyle.color5}
+                                  borderRadius="full"
+                                >
+                                  {
+                                    item?.unreadCountObject[
+                                      authContext?.address
+                                    ]?.unread_messages
+                                  }
+                                </Text>
+                              </Col>
+                            )}
+                        </Row>
 
-                        <Col className="hr-center settingsIcon">
-                          <TemplateActions />
+                        <Col className="hr-center w-1-12 settingsIcon">
+                          <TemplateActions item={item} />
                         </Col>
                       </Button>
                     </StyledChatItem>
