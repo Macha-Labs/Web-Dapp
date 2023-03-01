@@ -7,7 +7,7 @@ import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useToast, Checkbox, Tag } from "@chakra-ui/react";
+import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton } from "@chakra-ui/react";
 import { useState } from "react";
 import { useContext } from "react";
 
@@ -137,7 +137,7 @@ const ChatNew = (props: any) => {
               {
                 hookPortalChannelMembership?.users?.map((item: any) => { return (
                   <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
-                            <Row className="vr-center">
+                            <Row className="vr-center p-0-5">
                     <Avatar
                       src={helperIPFS(item?.lens?.image)}
                       className="m-r-0-5"
@@ -151,6 +151,7 @@ const ChatNew = (props: any) => {
                         : truncateAddress(item?.lens?.ownedBy)}
                     </Text>
                   </Row>
+                  <TagCloseButton onClick={() => {hookPortalChannelMembership.handleCheckedUsers(item)}}/>
                    </Tag> 
                 )})
               }
