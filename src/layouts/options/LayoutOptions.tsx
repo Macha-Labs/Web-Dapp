@@ -29,13 +29,13 @@ const LayoutOptions = (props: any) => {
             // console.log("channelrawdata", props.channelRawData);
             if (
               item.name === "Mute Chat" &&
-              props.channelRawData.muteStatus().muted
+              props.channelRawData?.muteStatus().muted
             ) {
               return null;
             }
             if (
               item.name === "UnMute Chat" &&
-              !props.channelRawData.muteStatus().muted
+              !props.channelRawData?.muteStatus().muted
             ) {
               return null;
             }
