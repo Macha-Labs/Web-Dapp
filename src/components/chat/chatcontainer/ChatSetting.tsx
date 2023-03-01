@@ -132,6 +132,14 @@ function ChatSetting(props: any) {
         hookPortalChannel?.deleteChannel(props.chatContext.hookChannel.channel);
       },
     },
+    {
+      //   icon: IconBrandClearChat,
+      name: "Leave Channel",
+      icon: "IconDarkLeave.png",
+      onPress: () => {
+        hookPortalChannel?.leaveChannel(props.chatContext.hookChannel.channel);
+      },
+    },
   ];
   /**
    * @description
@@ -173,6 +181,20 @@ function ChatSetting(props: any) {
     });
     props.modalSettings.onClose();
   };
+  /**
+   * @description
+   **/
+  const callbackLeave = () => {
+    toast({
+      title: "Channel Left",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.chatContext?.streamContext?.reloadChannelList();
+    props.chatContext?.initiate(null);
+    props.modalSettings.onClose();
+  };
 
   /**
    * @description
@@ -183,6 +205,7 @@ function ChatSetting(props: any) {
       delete: callbackDelete,
       mute: callbackMute,
       unmute: callbackUnmute,
+      leave: callbackLeave,
     }
   );
   const modalChatPermission = useDisclosure();
@@ -220,9 +243,7 @@ function ChatSetting(props: any) {
   const TemplateEditChannel = () => {
     return (
       <ModalSlider size={"lg"} event={modalChatEdit}>
-        <ChatEdit
-          modal={modalChatEdit}
-        />
+        <ChatEdit modal={modalChatEdit} />
       </ModalSlider>
     );
   };

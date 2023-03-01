@@ -20,7 +20,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
 
   const update = (usersIds: any = null) => {
     if (!channel?.name) {
-      callback?.prompt('Add a name to the channel')
+      callback?.prompt("Add a name to the channel");
       return;
     }
     setIsLoading(true);
@@ -33,7 +33,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
         },
         channel.id
       )
-        .then((res) => {
+        .then(res => {
           logger(
             "channel",
             "usePortalChannelUpdate.update",
@@ -44,7 +44,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
 
           setIsLoading(false);
         })
-        .catch((err) => {
+        .catch(err => {
           logger(
             "channel",
             "usePortalChannelUpdate.update",
@@ -58,9 +58,9 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
         description: channel.description,
         userAddress: authProvider.address,
         image: channel.image,
-        members: usersIds
+        members: usersIds,
       })
-        .then((res) => {
+        .then(res => {
           logger(
             "channel",
             "usePortalChannelUpdate.create",
@@ -75,7 +75,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
           //     channel: channel,
           // });
         })
-        .catch((err) => {
+        .catch(err => {
           logger(
             "channel",
             "usePortalChannelUpdate.create",
@@ -112,7 +112,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
 
     setIsLoading(true);
     permissionsChannel({ permissions: channel.permissions }, channel.id)
-      .then((res) => {
+      .then(res => {
         logger(
           "channel",
           "usePortalChannelUpdate.updatePermissions",
@@ -127,7 +127,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
         setIsLoading(false);
         // navigation.goBack();
       })
-      .catch((err) => {
+      .catch(err => {
         logger(
           "channel",
           "usePortalChannelUpdate.updatePermissions",
@@ -152,6 +152,12 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
     channel.raw.unmute();
     callback.unmute();
   };
+
+  const leaveChannel = (channel: any) => {
+    logger("channel", "usePortalChannelLeave", "Leaving Channel", [channel]);
+    channel.raw.removeMembers([authProvider.address]);
+    callback.leave();
+  };
   return {
     update,
     channel,
@@ -163,6 +169,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
     deleteChannel,
     muteChannel,
     unMuteChannel,
+    leaveChannel,
   };
 };
 
