@@ -8,7 +8,9 @@ const LayoutProfileBanner = (props: any) => {
         <Col className="w-100 bannerImage">{/* image banner */}</Col>
       </Row>
       {/* This is the profile picture */}
-      <Avatar className="bannerAvatar" src={props.profile?.image} size="2xl" />
+      <Row className="bannerAvatar hr-center w-100">
+        <Avatar  src={props.profile?.image} size="2xl" />
+      </Row>
     </StyledProfileBanner>
   );
 };

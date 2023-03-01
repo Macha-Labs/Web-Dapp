@@ -956,7 +956,7 @@ export const StyledProfileBanner = styled.div`
   .bannerAvatar {
     position: absolute;
     top: 5rem;
-    left: 45%;
+    left: 0;
   }
 
   .bioText {

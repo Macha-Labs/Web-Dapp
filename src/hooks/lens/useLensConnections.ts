@@ -1,7 +1,7 @@
 import { logger } from "./../../helpers/logger";
 import { fetchFollowers, fetchFollowing } from "../../helpers/lens/lens";
 import { useEffect, useState } from "react";
-import { UserLens$ } from "../../schema/user";
+import { User$, UserLens$ } from "../../schema/user";
 
 const useLensConnections = (account?: any, lensId?: any) => {
   const [following, setFollowing] = useState<any>([]);
@@ -10,7 +10,7 @@ const useLensConnections = (account?: any, lensId?: any) => {
   const getFollowing = (account: any) => {
     fetchFollowing({ address: account }).then(data => {
       const followingData = data.data.following.items.map((item: any) => {
-        return { db: null, lens: UserLens$(item.profile) };
+        return new User$(null, item?.profile, null);
       });
       logger(
         "lens",
@@ -26,7 +26,7 @@ const useLensConnections = (account?: any, lensId?: any) => {
   const getFollowers = (lensId: any) => {
     fetchFollowers({ profileId: lensId }).then(data => {
       const followersData = data.data.followers.items.map((item: any) => {
-        return { db: null, lens: UserLens$(item.wallet.defaultProfile)};
+        return new User$(null, item?.wallet?.defaultProfile, null);
       });
       logger(
         "lens",

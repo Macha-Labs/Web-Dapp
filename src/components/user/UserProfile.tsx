@@ -5,7 +5,6 @@ import LayoutProfileBanner from "@/layouts/LayoutProfileBanner";
 import { Col, Row, StyledCard, StyledIcon } from "@/styles/StyledComponents";
 import { ChatIcon } from "@chakra-ui/icons";
 import {
-  Avatar,
   Button,
   Heading,
   Tab,
@@ -24,18 +23,12 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import IconImage from "../icons/IconImage";
 import useLensProfile from "@/hooks/lens/useLensProfile";
-import { User$ } from "@/schema/user";
 
-interface Props {
-  [key: string]: any;
-}
 
-const UserProfile = (props: any) => {
+const UserProfile = ({user}) => {
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
-  const user = new User$(props.user.lens);
-  console.log("userrrrr", user, props.user.lens);
   const hookLensFollow = useLensFollows(user?.lens?.id);
-  const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.id);
+  const hookLensPostsForUser = useLensPostsForUser(user?.lens?.id);
   const { getOwnedProfiles, userLens } = useLensProfile();
 
   useEffect(() => {
@@ -49,62 +42,7 @@ const UserProfile = (props: any) => {
 
   const authContext = useContext(AuthContext);
 
-  const templateConnections = () => {
-    return (
-      <>
-        {hookLensConnections.following?.length ? (
-          <Wrap className="m-b-2">
-            {hookLensConnections.following.length ? (
-              <>
-                {hookLensConnections.following.map((item: any, index: any) => {
-                  return <UserCard user={item} key={index} />;
-                })}
-              </>
-            ) : (
-              <></>
-            )}
-          </Wrap>
-        ) : (
-          <></>
-        )}
-      </>
-    );
-  };
-
-  const templateSocial = () => {
-    return (
-      <>
-        <Row className="m-t-0-5">
-          {props.profile?.attributesObj?.website?.value ? (
-            <a
-              href={props.profile?.attributesObj?.website?.value}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <StyledIcon className="state-1-2">
-                {/* <GlobeIcon width="24" height="24" fill="#e8e8e8" /> */}
-              </StyledIcon>
-            </a>
-          ) : (
-            <></>
-          )}
-          {props.profile?.attributesObj?.twitter?.value ? (
-            <a
-              href={props.profile?.attributesObj?.twitter?.value}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <StyledIcon className="state-1-2">
-                {/* <TwitterIcon width="24" height="24" fill="#e8e8e8" /> */}
-              </StyledIcon>
-            </a>
-          ) : (
-            <></>
-          )}
-        </Row>
-      </>
-    );
-  };
+  
 
   const templatePosts = () => {
     return (
@@ -143,6 +81,22 @@ const UserProfile = (props: any) => {
                         )
                 } */}
       </Col>
+    );
+  };
+
+  const TemplateFollowing = () => {
+    return (
+      <>
+        {hookLensConnections.following?.length ? (
+          <Wrap className="m-b-2">
+            {hookLensConnections.following.map((item: any, index: any) => {
+                  return <UserCard user={item} key={index} />;
+            })}
+          </Wrap>
+        ) : (
+          <></>
+        )}
+      </>
     );
   };
 
@@ -185,7 +139,7 @@ const UserProfile = (props: any) => {
         <Row className="vr-center hr-center">
           {user?.lens?.bio ? (
             <Col className="m-v-1">
-              <Text className="bioText">{props?.user?.lens?.bio}</Text>
+              <Text className="bioText">{user?.lens?.bio}</Text>
             </Col>
           ) : (
             <></>
@@ -270,7 +224,9 @@ const UserProfile = (props: any) => {
               <TemplateFollowers />
             </TabPanel>
 
-            <TabPanel>{templateConnections()}</TabPanel>
+            <TabPanel>
+              <TemplateFollowing />
+            </TabPanel>
           </TabPanels>
         </LayoutCardPannel>
       </Tabs>

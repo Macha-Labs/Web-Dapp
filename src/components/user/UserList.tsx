@@ -81,7 +81,7 @@ const UserList: FC<Props> = props => {
     console.log(selectedUser, "selectedUser");
     return (
       <ModalSlider event={modalProfile} size="lg">
-        <UserProfile user={{ lens: selectedUser }} />
+        <UserProfile user={selectedUser} />
       </ModalSlider>
     );
   };
