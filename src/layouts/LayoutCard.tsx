@@ -11,9 +11,7 @@ const LayoutCard = (props: any) => {
       }
       onClick={props.onClick}
     >
-      <Row className={`card-hr-${props.hr}` + ` card-vr-${props.vr}`}>
-        {props.text}
-      </Row>
+     {props.children}
     </StyledCard>
   );
 };

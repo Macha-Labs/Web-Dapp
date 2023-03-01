@@ -10,9 +10,7 @@ const LayoutInputs = (props: any) => {
             key={index}
             placeholder={item?.label}
             value={item?.value}
-            onChange={e => {
-              item?.onChange(e.target.value);
-            }}
+            onChange={(e) => item?.onChange(e.target.value)}
             disabled={item.disabled}
             className="m-b-0-5"
           />

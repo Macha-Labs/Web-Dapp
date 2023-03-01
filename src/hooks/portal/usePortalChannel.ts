@@ -18,7 +18,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
   const authProvider = useContext(AuthContext) as AuthContextType;
   // const navigation = useNavigation<any>();
 
-  const update = () => {
+  const update = (usersIds: any = null) => {
     if (!channel?.name) {
       callback?.prompt('Add a name to the channel')
       return;
@@ -58,6 +58,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
         description: channel.description,
         userAddress: authProvider.address,
         image: channel.image,
+        members: usersIds
       })
         .then((res) => {
           logger(

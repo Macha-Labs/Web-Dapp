@@ -337,9 +337,9 @@ const ChatInput = (props: any) => {
   const TemplateMultiselect = () => {
     return (
       <Row className="vr-center hr-between w-100">
-        <IconImage path="IconDarkMenu.png" style={{ className: "m-r-0-5" }} />
-        <IconImage path="IconDarkMenu.png" style={{ className: "m-r-0-5" }} />
-        <IconImage path="IconDarkMenu.png" style={{ className: "m-r-0-5" }} />
+        <IconImage path="IconDarkReply.png" style={{ className: "m-r-0-5" }} />
+        <IconImage path="IconDarkDelete.png" style={{ className: "m-r-0-5" }} />
+        <IconImage path="IconDarkForward.png" style={{ className: "m-r-0-5" }} />
       </Row>
     );
   };
