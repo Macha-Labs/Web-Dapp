@@ -7,7 +7,7 @@ import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton } from "@chakra-ui/react";
+import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch } from "@chakra-ui/react";
 import { useState } from "react";
 import { useContext } from "react";
 
@@ -133,7 +133,9 @@ const ChatNew = (props: any) => {
               <Avatar size="2xl" name={data[0].value} />
             </Row>
             <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-            <Row className="flex-wrap">
+            <Col className="flex-wrap m-b-1">
+              <Heading as="h6" fontSize="md" className="m-b-0-5">Add Members</Heading>
+              <Row className="flex-wrap">
               {
                 hookPortalChannelMembership?.users?.map((item: any) => { return (
                   <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
@@ -155,7 +157,16 @@ const ChatNew = (props: any) => {
                    </Tag> 
                 )})
               }
-            </Row>
+              </Row>
+            </Col>
+
+            <Col>
+              <Heading as="h6" fontSize="md" className="m-b-0-5">Public</Heading>
+              <Row>
+                <Text>Allow channel to be joined and discoverable by anyone on Portal irrespective of your network</Text>
+                <Switch></Switch>
+              </Row>
+            </Col>
           </Col>
         </LayoutCardPannel>
       </>
