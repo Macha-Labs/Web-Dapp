@@ -13,9 +13,8 @@ import { useContext } from "react";
 
 const ChatNew = (props: any) => {
   const chatContext = useContext(ChatContext);
-  const [tab, setTab] = useState('members')
+  const [tab, setTab] = useState("members");
 
-  
   /**
    *
    **/
@@ -53,50 +52,37 @@ const ChatNew = (props: any) => {
    **/
 
   const hookPortalChannelMembership = usePortalChannelMembership(Channel$({}));
-  
+
   /**
    *
    **/
   const handleTabs = () => {
-    if (tab == 'members') {
-        if (hookPortalChannelMembership?.users?.length) {
-          setTab('details');
-        } else {
-          toast(
-            {
-            title: 'Add atleast one member',
-            status: "error",
-            duration: 3000,
-            position: "bottom-right",
-            }
-          )
-        }
+    if (tab == "members") {
+      if (hookPortalChannelMembership?.users?.length) {
+        setTab("details");
+      } else {
+        toast({
+          title: "Add atleast one member",
+          status: "error",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      }
+    } else {
+      setTab("members");
     }
-    else {
-      setTab('members');
-    }
-  }
+  };
 
   const data = [
     {
       label: "Name",
       value: hookPortalChannel?.channel?.name,
-      onChange: (text: any) => {
-        hookPortalChannel?.setChannel({
-          ...hookPortalChannel?.channel,
-          name: text,
-        });
-      },
+      key: "name",
     },
     {
       label: "Description",
       value: hookPortalChannel?.channel?.description,
-      onChange: (text: any) => {
-        hookPortalChannel?.setChannel({
-          ...hookPortalChannel?.channel,
-          description: text,
-        });
-      },
+      key: "description",
     },
   ];
 
@@ -113,11 +99,15 @@ const ChatNew = (props: any) => {
                 onClick={handleTabs}
                 variant="state_default_hover"
                 size="sm"
-              >Back</Button>
+              >
+                Back
+              </Button>
               <Text>New Channel</Text>
               <Button
                 onClick={() => {
-                  hookPortalChannel?.update(hookPortalChannelMembership?.userIds);
+                  hookPortalChannel?.update(
+                    hookPortalChannelMembership?.userIds
+                  );
                 }}
                 variant="state-brand"
                 size="sm"
@@ -180,11 +170,7 @@ const ChatNew = (props: any) => {
           header={
             <Row className="hr-between v-center">
               <Text>New Channel</Text>
-              <Button
-                onClick={handleTabs}
-                variant="state-brand"
-                size="sm"
-              >
+              <Button onClick={handleTabs} variant="state-brand" size="sm">
                 Next
               </Button>
             </Row>
@@ -225,10 +211,6 @@ const ChatNew = (props: any) => {
     );
   };
 
-  return (
-<>{tab == 'members'? <TemplateMembers/> : <TemplateDetails/>}
-</>
-     
-  );
+  return <>{tab == "members" ? <TemplateMembers /> : <TemplateDetails />}</>;
 };
 export default ChatNew;

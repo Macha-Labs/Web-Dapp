@@ -29,6 +29,7 @@ const useLensProfile = () => {
     } catch (error: any) {
       setIsLoading(false);
       console.log("Error in fetching lens profile ", error);
+      return null;
     }
   };
 
