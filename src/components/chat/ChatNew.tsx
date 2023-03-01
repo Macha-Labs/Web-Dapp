@@ -123,32 +123,36 @@ const ChatNew = (props: any) => {
               <Avatar size="2xl" name={data[0].value} />
             </Row>
             <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-            <Col className="flex-wrap m-b-1">
-              <Heading as="h6" fontSize="md" className="m-b-0-5">Add Members</Heading>
-              <Row className="flex-wrap">
-              {
-                hookPortalChannelMembership?.users?.map((item: any) => { return (
-                  <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
-                            <Row className="vr-center p-0-5">
-                    <Avatar
-                      src={helperIPFS(item?.lens?.image)}
-                      className="m-r-0-5"
-                      size="sm"
-                    />
-                    <Text>
-                      {item?.lens?.name
-                        ? item?.lens?.name
-                        : item?.lens?.handle
-                        ? item?.lens?.handle
-                        : truncateAddress(item?.lens?.ownedBy)}
-                    </Text>
-                  </Row>
-                  <TagCloseButton onClick={() => {hookPortalChannelMembership.handleCheckedUsers(item)}}/>
-                   </Tag> 
-                )})
-              }
-              </Row>
-            </Col>
+
+            {hookPortalChannelMembership?.users?.length ? (<Col className="flex-wrap m-b-1">
+            <Heading as="h6" fontSize="md" className="m-b-0-5">Add Members</Heading>
+            <Row className="flex-wrap">
+            {
+              hookPortalChannelMembership?.users?.map((item: any) => { return (
+                <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
+                          <Row className="vr-center p-0-5">
+                  <Avatar
+                    src={helperIPFS(item?.lens?.image)}
+                    className="m-r-0-5"
+                    size="sm"
+                  />
+                  <Text>
+                    {item?.lens?.name
+                      ? item?.lens?.name
+                      : item?.lens?.handle
+                      ? item?.lens?.handle
+                      : truncateAddress(item?.lens?.ownedBy)}
+                  </Text>
+                </Row>
+                <TagCloseButton onClick={() => {hookPortalChannelMembership.handleCheckedUsers(item)}}/>
+                 </Tag> 
+              )})
+            }
+            </Row>
+          </Col>) : (<></>)
+            
+            }
+            
 
             <Col>
               <Heading as="h6" fontSize="md" className="m-b-0-5">Public</Heading>
