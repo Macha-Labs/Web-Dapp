@@ -15,11 +15,15 @@ function ChatComponent() {
 
   useEffect(() => {
     if (!authContext?.address || !authContext?.user?.lens?.id) {
-      authContext.connectLens();
-      modalAuth.onOpen(); 
+      const modal: any = window.localStorage.getItem("accessToken");
+      console.log("auth card modal", modal);
+      if (modal == null) 
+        modalAuth.onOpen(); 
+      else {
+        authContext.connectLens();
+        modalAuth.onClose();
+      }
     }
-    else {modalAuth.onClose()}
-
   }, [authContext?.user?.lens?.id])
 
   const TemplateAuth = () => {

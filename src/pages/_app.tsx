@@ -36,13 +36,11 @@ export default function App({ Component, pageProps }: AppProps) {
           <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">
             <AuthProvider>
               <StreamProvider>
-
                 <ChatProvider>
                   <ChakraProvider theme={theme}>
                     <Component {...pageProps} />
                   </ChakraProvider>
                 </ChatProvider>
-
               </StreamProvider>
             </AuthProvider>
           </IKContext>

@@ -14,6 +14,7 @@ export type AuthContextType = {
   address: any | undefined;
   connectWallet: () => void;
   connectLens: (param?: any) => void;
+  authenticateWithLens: (param?: any) => void;
   disconnectWallet: () => void;
   user: any | undefined;
   setUser: (param: any) => void;
@@ -26,6 +27,7 @@ export const AuthContext = createContext<AuthContextType>({
   address: "",
   connectWallet: () => {},
   connectLens: param => {},
+  authenticateWithLens: param => {},
   disconnectWallet: () => {},
   user: null,
   setUser: param => {},
@@ -38,6 +40,7 @@ const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<any>({});
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
+  const [authenticated, setAuthenticated] = useState<any>();
 
   /** 
    * @description Initiating Hooks
@@ -67,9 +70,10 @@ const AuthProvider = ({ children }: any) => {
    **/
   const _fetchUserFromLens = async () => {
     const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
+    console.log("auth card lensprofile ", lensProfile);
     try {
       if (lensProfile) {
-        const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
+        const tokens: any | { accessToken: string; refreshToken: string } = hookLensAuth.getLensTokens();
         logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
         if (tokens?.accessToken) {
           _updateUser("lens", {
@@ -77,17 +81,14 @@ const AuthProvider = ({ children }: any) => {
             accessToken: tokens["accessToken"],
             refreshToken: tokens["refreshToken"],
           });
-        } else {
-          _updateUser("lens", lensProfile);
+          setAuthenticated(true);
         }
       } else {
         throw Error(`Couldn't find Lens Profile with address ${address}`);
       }
     } catch (error) {
       logger("auth", "_fetchUserFromLens", "Error in fetching userData from Lens", [error]);
-
     }
-    
   };
 
   /** 
@@ -148,6 +149,7 @@ const AuthProvider = ({ children }: any) => {
   useEffect(() => {
     logger("auth", "useEffect", "Portal 1: Current user address", [address]);
     if (address) {
+
       _fetchSignerFromWagmi();
       _fetchUserFromDB();
     }
@@ -165,6 +167,7 @@ const AuthProvider = ({ children }: any) => {
         address: address?.toLowerCase(),
         connectWallet: connectWallet,
         connectLens: _fetchUserFromLens,
+        authenticateWithLens: hookLensAuth.fetchLensToken,
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,

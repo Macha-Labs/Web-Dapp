@@ -21,7 +21,7 @@ const AuthCard = () => {
                 </Col>
                 <Col className="w-60">
                     {!authContext.address && <ConnectWalletButton />}
-                    {(authContext.address && !authContext?.user?.lens?.id) && <Button className="" size="md" variant="state_lens" onClick={() => {authContext.connectLens()}}>Sign In With Lens</Button>}
+                    {(authContext.address && !authContext?.user?.lens?.id) && <Button className="" size="md" variant="state_lens" onClick={() => {authContext.authenticateWithLens(authContext.address)}}>Sign In With Lens</Button>}
                 </Col>
             </Col>
         </StyledCard>
