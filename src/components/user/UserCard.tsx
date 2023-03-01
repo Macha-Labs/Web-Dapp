@@ -6,10 +6,9 @@ import { useState } from "react";
 import ModalSlider from "../modal/ModalSlider";
 import UserProfile from "./UserProfile";
 
-const UserCard = (props: any) => {
+const UserCard = ({user}) => {
   const modalProfile = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<any>();
-  const user = new User$(props.user);
 
   const handleSelectedUser = (user: any) => {
     modalProfile.onOpen();
