@@ -29,7 +29,6 @@ const useLensProfileUpdate = () => {
     );
     setUserLens(authContext.user?.lens);
   }, [authContext.user?.lens]);
-  console.log("userLens", userLens);
 
   const updateLensProfile = async () => {
     const cid = await makeFileObjects({
