@@ -25,9 +25,10 @@ const ChatList = (props: any) => {
   }, []);
 
   const TemplateChatNew = () => {
+    console.log("modalChatNew", modalChatNew);
     return (
       <ModalSlider event={modalChatNew} size="md">
-        <ChatNew modal={modalChatNew}  />
+        <ChatNew modal={modalChatNew} />
       </ModalSlider>
     );
   };
