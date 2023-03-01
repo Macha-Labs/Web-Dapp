@@ -16,7 +16,7 @@ const useLensConnections = (account?: any, lensId?: any) => {
         "lens",
         "useLensConnections.getFollowing",
         "getting following data",
-        [followingData, data.data.following]
+        [followingData]
       );
       setFollowing(followingData);
     });
@@ -32,7 +32,7 @@ const useLensConnections = (account?: any, lensId?: any) => {
         "lens",
         "useLensConnections.getFollowers",
         "getting followers data",
-        [data, followersData]
+        [followersData]
       );
       setFollowers(followersData);
     });

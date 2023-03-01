@@ -90,7 +90,7 @@ const UserProfile = ({user}) => {
         {hookLensConnections.following?.length ? (
           <Wrap className="m-b-2">
             {hookLensConnections.following.map((item: any, index: any) => {
-                  return <UserCard user={item} key={index} />;
+                  return <UserFollowersCard user={item} key={index} />;
             })}
           </Wrap>
         ) : (

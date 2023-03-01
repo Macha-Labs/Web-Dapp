@@ -85,7 +85,7 @@ const ChatInput = (props: any) => {
               path="IconDarkFiles.png"
               style={{ className: "m-r-0-5" }}
             />
-            <IconImage path="IconDarkPhotos.png" />
+            <IconImage path="IconDarkPost.png" />
           </Row>
           <Button
             size="sm"
