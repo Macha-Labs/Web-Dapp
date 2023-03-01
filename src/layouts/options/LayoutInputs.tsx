@@ -1,4 +1,3 @@
-import { StyledCard } from "@/styles/StyledComponents";
 import { Input } from "@chakra-ui/react";
 
 const LayoutInputs = (props: any) => {
