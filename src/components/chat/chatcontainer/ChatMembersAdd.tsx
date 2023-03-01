@@ -7,20 +7,22 @@ import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatMembersAdd = (props: any) => {
-  const hookPortalChannelMembership = usePortalChannelMembership(
-    props?.hookChannel?.channel
-  );
   const chatContext=useContext(ChatContext);  
+  const hookPortalChannelMembership = usePortalChannelMembership(
+    chatContext?.hookChannel?.channel
+  );
   const toast = useToast();
 
   const callbackAdd = () => {
-    props?.modalAddMembers.onClose();
+    chatContext?.streamContext.reloadMembers();
     toast({
       title: "Channel Members Added",
       status: "success",
       duration: 3000,
       position: "bottom-right",
     });
+    props?.modalAddMembers.onClose();
+    props?.modalChatMembers.onOpen();
   };
 
   return (
@@ -38,6 +40,7 @@ const ChatMembersAdd = (props: any) => {
           <Button
             variant="state_brand"
             size="sm"
+            isLoading={hookPortalChannelMembership?.isLoading}
             onClick={() =>
               hookPortalChannelMembership?.addMembersToChannel(callbackAdd)
             }

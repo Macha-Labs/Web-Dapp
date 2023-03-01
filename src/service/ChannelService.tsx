@@ -83,22 +83,24 @@ export const delChannel = async (data: any) => {
 };
 
 // adding a user in a channel
-export const addMembers = async (data: any) => {
-    const resopnse = await fetch(`${config.url}/api/channel/admin-add-members/${data.id}`, {
+export const serviceAddMembers = async (data: any) => {
+    const response = await fetch(`${config.url}/api/channel/admin-add-members/${data.id}`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
             "Content-Type": "application/json",
         },
     });
+    return response;
 };
 
-export const removeMembers = async (data: any) => {
-    const resopnse = await fetch(`${config.url}/api/channel/admin-remove-members/${data.id}`, {
+export const serviceRemoveMembers  = async (data: any) => {
+    const response = await fetch(`${config.url}/api/channel/admin-remove-members/${data.id}`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
             "Content-Type": "application/json",
         },
     });
+    return response;
 };

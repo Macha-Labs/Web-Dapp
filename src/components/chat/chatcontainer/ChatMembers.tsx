@@ -13,18 +13,18 @@ import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembershi
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 
 const ChatMembers = (props: any) => {
-  const hookPortalChannelMembership = usePortalChannelMembership(props?.hookChannel?.channel);
   const chatContext = useContext(ChatContext);
+  const hookPortalChannelMembership = usePortalChannelMembership(chatContext?.hookChannel?.channel);
   const toast = useToast();
 
   const callbackRemove = () => {
-    props?.modalAddMembers.onClose();
     toast({
       title: "Channel Members Removed",
       status: "success",
       duration: 3000,
       position: "bottom-right",
     });
+    chatContext?.streamContext.reloadMembers();
   }
 
   return (
@@ -37,6 +37,7 @@ const ChatMembers = (props: any) => {
                 onClick={function (): void {
                   hookPortalChannelMembership.removeMembersFromChannel(callbackRemove);
                 }}
+                isLoading={hookPortalChannelMembership?.isLoading}
                 size="xs"
                 variant="state_default_hover"
               >

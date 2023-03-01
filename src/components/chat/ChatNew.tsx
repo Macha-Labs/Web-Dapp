@@ -27,7 +27,7 @@ const ChatNew = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    chatContext?.hookChannels?.fetchUserChannels();
+    chatContext?.streamContext?.reloadChannelList();
     props.modal.onClose();
   };
 

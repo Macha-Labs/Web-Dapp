@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import { addMembers, removeMembers } from "../../service/ChannelService";
+import { serviceAddMembers, serviceRemoveMembers } from "../../service/ChannelService";
 import useLensConnections from "../lens/useLensConnections";
 
 const usePortalChannelMembership = (channel: any) => {
@@ -26,26 +26,32 @@ const usePortalChannelMembership = (channel: any) => {
 
   // adding selected members to current channel
   const addMembersToChannel = (callback:any = null) => {
-    // const myFollowers = Object.values(users);
+    setIsLoading(true);
     if (users) {
       const data = {
         members: usersIds,
         id: channel.id,
       };
-      addMembers(data);
-      callback();
+      serviceAddMembers(data).then(res => {
+        callback();
+        setIsLoading(false);
+      });
+      
     }
   };
 
   // run when -> members selected -> clicked on remove
   const removeMembersFromChannel = async (callback:any = null) => {
+    setIsLoading(true);
     if (users) {
       const data = {
         members: usersIds,
         id: channel.id,
       };
-      removeMembers(data);
-      callback();
+      serviceRemoveMembers(data).then(res => {
+        callback();
+        setIsLoading(false);
+      });
     }
   };
 

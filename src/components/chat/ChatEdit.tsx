@@ -1,4 +1,4 @@
-import React, { useContext, useDebugValue, useState } from "react";
+import React, { useContext, useState } from "react";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import usePortalChannel from "../../hooks/portal/usePortalChannel";
 import {
@@ -11,14 +11,23 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Col, Row } from "@/styles/StyledComponents";
-import LayoutCard from "@/layouts/LayoutCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatEdit = (props: any) => {
-   /**
+  /** 
+   * @description 
+   * 
    * 
    **/
   const toast = useToast();
+  const chatContext = useContext(ChatContext)
+
+  /** 
+   * @description callbacks
+   * 
+   * 
+   **/
   const callBack=()=>{
     toast({
       title: "Channel Details updated successfully",
@@ -26,8 +35,12 @@ const ChatEdit = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
+
+    chatContext?.streamContext?.reloadChannel();
+    chatContext?.streamContext?.reloadChannelList();
     props.modal.onClose();
   }
+
   const callBackPrompt = (message: any) => {
     toast({
       title: message,
@@ -37,23 +50,44 @@ const ChatEdit = (props: any) => {
     });
   }
   
-   /**
+  /** 
+   * @description 
+   * 
    * 
    **/
   const [profileImage, setProfileImage] = useState(null);
+
+  /** 
+   * @description 
+   * 
+   * 
+   **/
   const hookPortalChannel = usePortalChannel(
-    props.hookChannel?.channel,
+    chatContext?.hookChannel?.channel,
     {edit:callBack, prompt: callBackPrompt}
   );
+
+  /** 
+   * @description 
+   * 
+   * 
+   **/
   const handleSelectClick = () => {
 
   };
   const modalAddMembers = useDisclosure();
+
+
+  /** 
+   * @description 
+   * 
+   * 
+   **/
   const data = [
     {
       label: "Name",
       value: hookPortalChannel?.channel?.name,
-      onChangeText: (text: any) => {
+      onChange: (text: any) => {
         hookPortalChannel?.setChannel({
           ...hookPortalChannel?.channel,
           name: text,
@@ -63,7 +97,7 @@ const ChatEdit = (props: any) => {
     {
       label: "Description",
       value: hookPortalChannel?.channel?.description,
-      onChangeText: (text: any) => {
+      onChange: (text: any) => {
         hookPortalChannel?.setChannel({
           ...hookPortalChannel?.channel,
           description: text,
@@ -71,6 +105,12 @@ const ChatEdit = (props: any) => {
       },
     },
   ];
+
+  /** 
+   * @description 
+   * 
+   * 
+   **/
   return (
     <LayoutCardPannel
       header={

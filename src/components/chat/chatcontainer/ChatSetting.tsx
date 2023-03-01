@@ -201,7 +201,7 @@ function ChatSetting(props: any) {
     return (
       <ModalSlider size={"md"} event={modalChatMembers}>
         <ChatMembers
-          hookChannel={props.chatContext.hookChannel}
+          modalChatMembers={modalChatMembers}
           modalAddMembers={modalAddMembers}
         />
       </ModalSlider>
@@ -211,8 +211,8 @@ function ChatSetting(props: any) {
     return (
       <ModalSlider size={"md"} event={modalAddMembers}>
         <ChatMembersAdd
-          hookChannel={props.chatContext.hookChannel}
           modalAddMembers={modalAddMembers}
+          modalChatMembers={modalChatMembers}
         />
       </ModalSlider>
     );
@@ -221,7 +221,6 @@ function ChatSetting(props: any) {
     return (
       <ModalSlider size={"lg"} event={modalChatEdit}>
         <ChatEdit
-          hookChannel={props.chatContext.hookChannel}
           modal={modalChatEdit}
         />
       </ModalSlider>
