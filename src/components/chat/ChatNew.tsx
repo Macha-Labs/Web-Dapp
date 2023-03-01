@@ -77,12 +77,22 @@ const ChatNew = (props: any) => {
     {
       label: "Name",
       value: hookPortalChannel?.channel?.name,
-      key: "name",
+      onChange: (text: any) => {
+        hookPortalChannel?.setChannel({
+          ...hookPortalChannel?.channel,
+          name: text,
+        });
+      },
     },
     {
       label: "Description",
       value: hookPortalChannel?.channel?.description,
-      key: "description",
+      onChange: (text: any) => {
+        hookPortalChannel?.setChannel({
+          ...hookPortalChannel?.channel,
+          description: text,
+        });
+      },
     },
   ];
 
