@@ -20,9 +20,11 @@ import LayoutPostList from "../../layouts/post/LayoutPostList";
 import UserCard from "./UserCard";
 import UserFollowersCard from "./UserFollowersCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import IconImage from "../icons/IconImage";
+import useLensProfile from "@/hooks/lens/useLensProfile";
+import { User$ } from "@/schema/user";
 
 interface Props {
   [key: string]: any;
@@ -30,12 +32,21 @@ interface Props {
 
 const UserProfile = (props: any) => {
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
-  const hookLensFollow = useLensFollows(props.user?.lens?.id);
+  const user = new User$(props.user.lens);
+  console.log("userrrrr", user, props.user.lens);
+  const hookLensFollow = useLensFollows(user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.id);
+  const { getOwnedProfiles, userLens } = useLensProfile();
+
+  useEffect(() => {
+    getOwnedProfiles(user?.lens?.ownedBy);
+  }, [user?.lens?.ownedBy]);
+
   const hookLensConnections = useLensConnections(
-    props.user?.lens?.ownedBy,
-    props?.user?.lens?.id
+    userLens?.ownedBy,
+    userLens?.id
   );
+
   const authContext = useContext(AuthContext);
 
   const templateConnections = () => {
@@ -160,21 +171,19 @@ const UserProfile = (props: any) => {
   const TemplateProfile = () => {
     return (
       <StyledCard>
-        <LayoutProfileBanner profile={props.user?.lens} />
+        <LayoutProfileBanner profile={user?.lens} />
 
         <Row>
           <Col className="m-v-1 w-100 hr-center">
             <Heading as="h3" size="lg">
-              {props.user?.lens?.name
-                ? props.user?.lens?.name
-                : props.user?.lens?.handle}
+              {user?.lens?.name ? user?.lens?.name : user?.lens?.handle}
             </Heading>
-            <h6>@{props.user?.lens?.handle}</h6>
+            <h6>@{user?.lens?.handle}</h6>
           </Col>
         </Row>
 
         <Row className="vr-center hr-center">
-          {props.user?.lens?.bio ? (
+          {user?.lens?.bio ? (
             <Col className="m-v-1">
               <Text className="bioText">{props?.user?.lens?.bio}</Text>
             </Col>
@@ -183,10 +192,10 @@ const UserProfile = (props: any) => {
           )}
         </Row>
 
-        {props.user?.lens?.ownedBy?.toLowerCase() !==
+        {user?.lens?.ownedBy?.toLowerCase() !==
           authContext?.address?.toLowerCase() && (
           <Row className="m-v-1 vr-center hr-center">
-            {props.user?.lens?.isFollowedByMe || isFollowed ? (
+            {user?.lens?.isFollowedByMe || isFollowed ? (
               <Button
                 variant="state_lens_unfollow"
                 size="md"
@@ -234,19 +243,19 @@ const UserProfile = (props: any) => {
               <Row className="m-v-1 w-100 vr-center hr-center">
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage path="IconDarkPost.png" size="15"/>
+                    <IconImage path="IconDarkPost.png" size="15" />
                     <Text className="m-l-0-5">Posts</Text>
                   </Button>
                 </Tab>
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage path="IconDarkFollowers.png" size="15"/>
+                    <IconImage path="IconDarkFollowers.png" size="15" />
                     <Text className="m-l-0-5">Followers</Text>
                   </Button>
                 </Tab>
                 <Tab>
-                <Button variant="state_default_hover">
-                    <IconImage path="IconDarkFollowing.png" size="15"/>
+                  <Button variant="state_default_hover">
+                    <IconImage path="IconDarkFollowing.png" size="15" />
                     <Text className="m-l-0-5">Following</Text>
                   </Button>
                 </Tab>
@@ -270,7 +279,7 @@ const UserProfile = (props: any) => {
 
   return (
     <div>
-      {props.user ? (
+      {user ? (
         <>
           <TemplateProfile />
           <TemplateTabs />

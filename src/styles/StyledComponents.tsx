@@ -20,8 +20,6 @@ export const StyledWindow = styled.div`
     margin: auto;
     margin-top: 10%;
   }
-
-
 `;
 
 export const Row = styled.div`
@@ -489,6 +487,9 @@ export const StyledIcon = styled.i`
   }
   &.state_active {
     background: ${style.icon.bg.active};
+    transform: scale(1.1);
+
+    box-shadow: ${style.icon.shadow.hover};
   }
 
   &.scale {
@@ -567,10 +568,10 @@ export const StyledChatList = styled.div`
     padding: ${style.body.padding};
     background: ${style.body.bg};
     overflow-y: scroll;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none;
-    &::-webkit-scrollbar { 
-      display: none;  /* Safari and Chrome */
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
     }
 
     .menu-heading {
@@ -644,10 +645,10 @@ export const StyledChat = styled.div`
     overflow: inherit;
     padding: 20px 0px;
     height: calc(100vh - 100px);
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none;
-    &::-webkit-scrollbar { 
-      display: none;  /* Safari and Chrome */
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
     }
   }
 `;
@@ -758,9 +759,6 @@ export const StyledConversationView = styled.div`
   -ms-overflow-style: none;
   padding-bottom: 3rem;
 
-  <<<<<<< HEAD ::-webkit-scrollbar {
-    display: none;
-  }
   .emogiPicker {
     background-color: black;
   }
@@ -794,12 +792,9 @@ export const StyledConversation = styled(Col)`
 
   .action {
     display: none;
-    position: absolute;
-    top: -10px;
-    right: 0;
-    padding: 5px;
-    border: ${style.borderInput};
-    background: #01041f;
+    padding-left: 10px;
+    /* border: ${style.borderInput}; */
+    /* background: #01041f; */
     border-radius: 5px;
     width: fit-content;
   }

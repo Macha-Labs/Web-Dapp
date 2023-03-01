@@ -6,7 +6,7 @@ import {
   Row,
   StyledNav,
 } from "../../styles/StyledComponents";
-import { useDisclosure } from "@chakra-ui/react";
+import { Tooltip, useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
 import IconImage from "../icons/IconImage";
@@ -14,6 +14,9 @@ import IconImage from "../icons/IconImage";
 const Nav = (props: any) => {
   const orgsDrawer = useDisclosure();
   const userDrawer = useDisclosure();
+  const [active, setActive] = React.useState(
+    window.location.href.split("/")[3]
+  );
 
   const templateOrgs = () => {
     return <ModalPage></ModalPage>;
@@ -29,23 +32,54 @@ const Nav = (props: any) => {
         <StyledNav>
           <div className="header m-b-0-5">
             <Col className="hr-center vr-center h-100">
-              <IconImage path="Logo.png" size="42"/>
+              <Tooltip label="Metawork">
+                <IconImage path="Logo.png" size="42" />
+              </Tooltip>
             </Col>
           </div>
           <div className="body">
             <Col className="hr-center vr-between h-100">
               <Col className="hr-center">
                 <Link href="/chat">
-                  <IconImage path="IconBrandChat.png" style={{className: "m-b-1"}} />
+                  <Tooltip label="Chat">
+                    <IconImage
+                      path="IconBrandChat.png"
+                      style={{
+                        className: `m-b-1 ${
+                          active === "chat" ? "state_active" : ""
+                        } `,
+                      }}
+                      onClick={() => setActive("chat")}
+                    />
+                  </Tooltip>
                 </Link>
                 <Link href="/user">
-                  <IconImage path="IconBrandProfile.png" style={{className: "m-b-1"}} />
+                  <IconImage
+                    path="IconBrandProfile.png"
+                    style={{
+                      className: `m-b-1 ${
+                        active === "user" ? "state_active" : ""
+                      } `,
+                    }}
+                    onClick={() => setActive("user")}
+                  />
                 </Link>
-                <IconImage path="IconBrandDiscover.png" style={{className: "m-b-1"}} />
+                <IconImage
+                  path="IconBrandDiscover.png"
+                  style={{
+                    className: `m-b-1 ${
+                      active === "discover" ? "state_active" : ""
+                    } `,
+                  }}
+                  onClick={() => setActive("discover")}
+                />
               </Col>
 
               <Col className="hr-center">
-                <IconImage path="IconDarkBell.png" style={{className: "m-b-1"}} />
+                <IconImage
+                  path="IconDarkBell.png"
+                  style={{ className: "m-b-1" }}
+                />
               </Col>
             </Col>
           </div>

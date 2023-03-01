@@ -5,7 +5,7 @@ export const getAccessToken = () => {
   return config.WEB3STORAGE_TOKEN;
 };
 
-export const makeStorageClient = () => {
+export const makeStorageClient = async () => {
   return new Web3Storage({
     token: config.WEB3STORAGE_TOKEN,
     endpoint: new URL("https://api.web3.storage"),
@@ -34,24 +34,33 @@ export const makeFileObjects = async (objectBody: any) => {
 };
 
 export const storeFiles = async (files: any) => {
-  const client = makeStorageClient();
+  const client = await makeStorageClient();
   return client.put(files);
 };
 
 export const nonWrappedData = async (files: any) => {
-  console.log("Lens files being uploaded", files);
-  const client = await makeStorageClient();
-  console.log("Storage client ", client);
-  let cid;
-  try {
-    client.put(files, { wrapWithDirectory: false }).then(result => {
-      console.log("Uploaded to ipfs, here is the result ", result);
-      cid = result;
-      return cid;
+  const promise = new Promise((resolve, reject) => {
+    const client = makeStorageClient();
+    client.then(client => {
+      client.put(files, { wrapWithDirectory: false }).then(result => {
+        console.log("Uploaded to ipfs, here is the result ", result);
+        resolve(result);
+      });
     });
-  } catch (e) {
-    console.log("Error happening in uploading to ipfs ", e);
-  }
+  });
+  // console.log("Lens files being uploaded", files);
+  // const client = await makeStorageClient();
+  // console.log("Storage client ", client);
+  // let cid;
+  // try {
+  //   client.put(files, { wrapWithDirectory: false }).then(result => {
+  //     console.log("Uploaded to ipfs, here is the result ", result);
+  //     cid = result;
+  //     return cid;
+  //   });
+  // } catch (e) {
+  //   console.log("Error happening in uploading to ipfs ", e);
+  // }
 
-  console.log("here");
+  return promise;
 };

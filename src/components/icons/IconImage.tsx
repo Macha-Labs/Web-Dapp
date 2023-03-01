@@ -12,8 +12,8 @@ function IconImage(props: any) {
         path={`/icons/${props.path}`}
         transformation={[
           {
-            height: props?.size ? props?.size : '25',
-            width: props?.size ? props?.size : '25',
+            height: props?.size ? props?.size : "25",
+            width: props?.size ? props?.size : "25",
           },
         ]}
       />

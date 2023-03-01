@@ -1,21 +1,24 @@
 import ModalSlider from "@/components/modal/ModalSlider";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
+import { ChatContext } from "@/providers/ChatProvider";
 import { Col } from "@/styles/StyledComponents";
 import { Heading, useDisclosure, useToast } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import ChatEdit from "../ChatEdit";
 import ChatMembers from "./ChatMembers";
 import ChatMembersAdd from "./ChatMembersAdd";
+import ChatMessageList from "./ChatMessageList";
 import ChatPermissions from "./ChatPermissions";
 
 function ChatSetting(props: any) {
   const toast = useToast();
+  const modalPinned = useDisclosure();
 
-  /** 
+  /**
    * @description Setting options
-   * 
-   * 
+   *
+   *
    **/
   const chatOptions = [
     {
@@ -57,7 +60,8 @@ function ChatSetting(props: any) {
       condition: {
         enabled: true,
         check:
-          props.chatContext.hookChannel?.channel?.createdBy === props.authContext.address,
+          props.chatContext.hookChannel?.channel?.createdBy ===
+          props.authContext.address,
       },
     },
     {
@@ -69,7 +73,8 @@ function ChatSetting(props: any) {
       condition: {
         enabled: true,
         check:
-          props.chatContext.hookChannel?.channel?.createdBy === props.authContext.address,
+          props.chatContext.hookChannel?.channel?.createdBy ===
+          props.authContext.address,
       },
     },
     {
@@ -81,7 +86,8 @@ function ChatSetting(props: any) {
       condition: {
         enabled: true,
         check:
-          props.chatContext.hookChannel?.channel?.createdBy === props.authContext.address,
+          props.chatContext.hookChannel?.channel?.createdBy ===
+          props.authContext.address,
       },
     },
   ];
@@ -89,23 +95,25 @@ function ChatSetting(props: any) {
   const chatOptions2 = [
     {
       icon: "IconDarkPhotos.png",
-      name: "21 Photos",
+      name: "Photos",
       onPress: () => {},
     },
     {
       icon: "IconDarkVideos.png",
-      name: "4 Videos",
+      name: "Videos",
       onPress: () => {},
     },
     {
       icon: "IconDarkFiles.png",
-      name: "4 Files",
+      name: "Files",
       onPress: () => {},
     },
     {
       icon: "IconDarkPinned.png",
-      name: "21 Pinned Messages",
-      onPress: () => {},
+      name: "Pinned Messages",
+      onPress: () => {
+        modalPinned.onOpen();
+      },
     },
   ];
 
@@ -114,9 +122,7 @@ function ChatSetting(props: any) {
       //   icon: IconBrandClearChat,
       name: "Clear Chat",
       icon: "IconRedDelete.png",
-      onPress: () => {
-
-      },
+      onPress: () => {},
     },
     {
       //   icon: IconBrandClearChat,
@@ -127,9 +133,9 @@ function ChatSetting(props: any) {
       },
     },
   ];
-  /** 
+  /**
    * @description
-  **/
+   **/
   const callbackDelete = () => {
     toast({
       title: "Channel Deleted",
@@ -142,9 +148,9 @@ function ChatSetting(props: any) {
     props.modalSettings.onClose();
   };
 
-   /** 
+  /**
    * @description
-  **/
+   **/
   const callbackMute = () => {
     toast({
       title: "Channel Muted",
@@ -155,9 +161,9 @@ function ChatSetting(props: any) {
     props.modalSettings.onClose();
   };
 
-   /** 
-    * @description
-    **/
+  /**
+   * @description
+   **/
   const callbackUnmute = () => {
     toast({
       title: "Channel Unmuted",
@@ -168,14 +174,17 @@ function ChatSetting(props: any) {
     props.modalSettings.onClose();
   };
 
-  /** 
-    * @description
-  **/
-  const hookPortalChannel = usePortalChannel(props.chatContext.hookChannel.channel.id, {
-    delete: callbackDelete,
-    mute: callbackMute,
-    unmute: callbackUnmute,
-  });
+  /**
+   * @description
+   **/
+  const hookPortalChannel = usePortalChannel(
+    props.chatContext.hookChannel.channel.id,
+    {
+      delete: callbackDelete,
+      mute: callbackMute,
+      unmute: callbackUnmute,
+    }
+  );
   const modalChatPermission = useDisclosure();
   const modalChatMembers = useDisclosure();
   const modalAddMembers = useDisclosure();
@@ -204,7 +213,6 @@ function ChatSetting(props: any) {
         <ChatMembersAdd
           hookChannel={props.chatContext.hookChannel}
           modalAddMembers={modalAddMembers}
-          
         />
       </ModalSlider>
     );
@@ -212,7 +220,21 @@ function ChatSetting(props: any) {
   const TemplateEditChannel = () => {
     return (
       <ModalSlider size={"lg"} event={modalChatEdit}>
-        <ChatEdit hookChannel={props.chatContext.hookChannel} modal={modalChatEdit} />
+        <ChatEdit
+          hookChannel={props.chatContext.hookChannel}
+          modal={modalChatEdit}
+        />
+      </ModalSlider>
+    );
+  };
+
+  const TemplatePinnedMessages = () => {
+    return (
+      <ModalSlider event={modalPinned} size="md">
+        <ChatMessageList
+          pinnedMessageList={props.chatContext.hookChannel?.pinnedMessages}
+          hookChat={props.hookChat}
+        />
       </ModalSlider>
     );
   };
@@ -249,6 +271,7 @@ function ChatSetting(props: any) {
       <TemplateMembers />
       <TemplateMembersAdd />
       <TemplateEditChannel />
+      <TemplatePinnedMessages />
     </>
   );
 }
