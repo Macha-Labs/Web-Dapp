@@ -7,15 +7,21 @@ import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useToast, Checkbox, Tag } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  Text,
+  useToast,
+  Checkbox,
+  Tag,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { useContext } from "react";
 
 const ChatNew = (props: any) => {
   const chatContext = useContext(ChatContext);
-  const [tab, setTab] = useState('members')
+  const [tab, setTab] = useState("members");
 
-  
   /**
    *
    **/
@@ -53,50 +59,37 @@ const ChatNew = (props: any) => {
    **/
 
   const hookPortalChannelMembership = usePortalChannelMembership(Channel$({}));
-  
+
   /**
    *
    **/
   const handleTabs = () => {
-    if (tab == 'members') {
-        if (hookPortalChannelMembership?.users?.length) {
-          setTab('details');
-        } else {
-          toast(
-            {
-            title: 'Add atleast one member',
-            status: "error",
-            duration: 3000,
-            position: "bottom-right",
-            }
-          )
-        }
+    if (tab == "members") {
+      if (hookPortalChannelMembership?.users?.length) {
+        setTab("details");
+      } else {
+        toast({
+          title: "Add atleast one member",
+          status: "error",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      }
+    } else {
+      setTab("members");
     }
-    else {
-      setTab('members');
-    }
-  }
+  };
 
   const data = [
     {
       label: "Name",
       value: hookPortalChannel?.channel?.name,
-      onChange: (text: any) => {
-        hookPortalChannel?.setChannel({
-          ...hookPortalChannel?.channel,
-          name: text,
-        });
-      },
+      key: "name",
     },
     {
       label: "Description",
       value: hookPortalChannel?.channel?.description,
-      onChange: (text: any) => {
-        hookPortalChannel?.setChannel({
-          ...hookPortalChannel?.channel,
-          description: text,
-        });
-      },
+      key: "description",
     },
   ];
 
@@ -113,11 +106,15 @@ const ChatNew = (props: any) => {
                 onClick={handleTabs}
                 variant="state_default_hover"
                 size="sm"
-              >Back</Button>
+              >
+                Back
+              </Button>
               <Text>New Channel</Text>
               <Button
                 onClick={() => {
-                  hookPortalChannel?.update(hookPortalChannelMembership?.userIds);
+                  hookPortalChannel?.update(
+                    hookPortalChannelMembership?.userIds
+                  );
                 }}
                 variant="state-brand"
                 size="sm"
@@ -134,26 +131,26 @@ const ChatNew = (props: any) => {
             </Row>
             <LayoutInputs data={data} style={{ class: "m-b-1" }} />
             <Row className="flex-wrap">
-              {
-                hookPortalChannelMembership?.users?.map((item: any) => { return (
+              {hookPortalChannelMembership?.users?.map((item: any) => {
+                return (
                   <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
-                            <Row className="vr-center">
-                    <Avatar
-                      src={helperIPFS(item?.lens?.image)}
-                      className="m-r-0-5"
-                      size="sm"
-                    />
-                    <Text>
-                      {item?.lens?.name
-                        ? item?.lens?.name
-                        : item?.lens?.handle
-                        ? item?.lens?.handle
-                        : truncateAddress(item?.lens?.ownedBy)}
-                    </Text>
-                  </Row>
-                   </Tag> 
-                )})
-              }
+                    <Row className="vr-center">
+                      <Avatar
+                        src={helperIPFS(item?.lens?.image)}
+                        className="m-r-0-5"
+                        size="sm"
+                      />
+                      <Text>
+                        {item?.lens?.name
+                          ? item?.lens?.name
+                          : item?.lens?.handle
+                          ? item?.lens?.handle
+                          : truncateAddress(item?.lens?.ownedBy)}
+                      </Text>
+                    </Row>
+                  </Tag>
+                );
+              })}
             </Row>
           </Col>
         </LayoutCardPannel>
@@ -168,11 +165,7 @@ const ChatNew = (props: any) => {
           header={
             <Row className="hr-between v-center">
               <Text>New Channel</Text>
-              <Button
-                onClick={handleTabs}
-                variant="state-brand"
-                size="sm"
-              >
+              <Button onClick={handleTabs} variant="state-brand" size="sm">
                 Next
               </Button>
             </Row>
@@ -213,10 +206,6 @@ const ChatNew = (props: any) => {
     );
   };
 
-  return (
-<>{tab == 'members'? <TemplateMembers/> : <TemplateDetails/>}
-</>
-     
-  );
+  return <>{tab == "members" ? <TemplateMembers /> : <TemplateDetails />}</>;
 };
 export default ChatNew;
