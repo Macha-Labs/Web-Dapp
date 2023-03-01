@@ -41,10 +41,16 @@ const StreamProvider = ({children}: any) => {
     const hookStreamChat = useStreamChat(hookStreamClient.client, hookStreamChannel?.channel);
 
     useEffect(() => {
-        if (authContext?.user?.lens?.id) {
+        if (authContext?.user?.lens?.id && !hookStreamClient?.client) {
             hookStreamClient.connectToStream();
         }
     }, [authContext?.user?.lens?.id]);
+
+    useEffect(() => {
+        if (authContext?.user?.db?.tokens?.stream && !hookStreamClient?.client) {
+            hookStreamClient.connectToStream();
+        }
+    }, [authContext?.user?.db?.tokens?.stream]);
 
     useEffect(() => {
         if (hookStreamClient.client?.user?.id) {

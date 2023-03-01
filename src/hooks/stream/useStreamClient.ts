@@ -13,12 +13,19 @@ const useStreamClient = () => {
 
     
     const connectToStream = async () => {
+        if (!authContext?.user?.lens?.id) {
+            logger('stream', 'connecttostream', 'user.lens error', [authContext?.user]);
+            return;
+        } else if (!authContext?.user?.db?.tokens?.stream) {
+            logger('stream', 'connecttostream', 'user.db error', [authContext?.user]);
+            return;
+        }
         try {
             if (client?.user) {
                 client.disconnect();
             }
             const newClient = StreamChat.getInstance(`${config.STREAM_APIKEY}`);
-            logger('stream', 'connectToStream', 'StreamAuth Step 1', [newClient]);
+            logger('stream', 'connectToStream', 'StreamAuth Step 1', [newClient, authContext?.user]);
 
             await newClient.connectUser(
                 {

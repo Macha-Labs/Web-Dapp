@@ -143,7 +143,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.hookChannels?.fetchUserChannels();
+    props.chatContext?.streamContext?.reloadChannelList();
     props.chatContext?.initiate(null);
     props.modalSettings.onClose();
   };
