@@ -14,12 +14,14 @@ function ChatComponent() {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    if (authContext.authenticated) {      
-        modalAuth.onClose(); 
-    } else {
+    if (authContext?.isConnected) {
+      modalAuth.onClose()
+    }
+    else {
       modalAuth.onOpen();
     }
-  }, [authContext?.user?.lens?.id])
+
+  }, [authContext?.isConnected])
 
   const TemplateAuth = () => {
     return (

@@ -54,7 +54,6 @@ const ChatList = (props: any) => {
   }, []);
 
   const TemplateChatNew = () => {
-    console.log("modalChatNew", modalChatNew);
     return (
       <ModalSlider event={modalChatNew} size="md">
         <ChatNew modal={modalChatNew} />
@@ -177,6 +176,7 @@ const ChatList = (props: any) => {
                         // overflow="hidden"
                       >
                         <Row
+                          className="vr-center w-11-12"
                           onClick={() => {
                             chatProvider.initiate(item, authContext?.address);
                             setIsClicked((prevState: any) => [
@@ -184,7 +184,6 @@ const ChatList = (props: any) => {
                               index,
                             ]);
                           }}
-                          className="w-11-12"
                         >
                           {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
                           <Avatar
@@ -192,7 +191,7 @@ const ChatList = (props: any) => {
                             className="m-r-0-5"
                             name={item?.name}
                           />
-                          <Col className="w-100 d-flex flex-col">
+                          <Col className="w-100 d-flex flex-col vr-center">
                             <Row>
                               <Text>
                                 {item?.name.length > 12
@@ -212,15 +211,14 @@ const ChatList = (props: any) => {
                                 </>
                               )}
                             </Row>
-                            <Col>
+                            {item?.lastMessage?.created_at && <Col>
                               <Text fontSize={"xs"}>
-                                {item?.lastMessage?.created_at
-                                  ? new Date(
+                                 {new Date(
                                       item?.lastMessage?.created_at
-                                    ).toLocaleString()
-                                  : ""}
+                                    ).toLocaleString()}
                               </Text>
-                            </Col>
+                            </Col>}
+                            
                             {item?.lastMessage && (
                               <Col
                                 style={{ paddingRight: "5px" }}

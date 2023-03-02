@@ -32,8 +32,8 @@ export const StreamContext = createContext<StreamContextType>({
 });
 
 const StreamProvider = ({children}: any) => {
-    const [client, setClient] = useState<any>();    
     const authContext = useContext(AuthContext) as AuthContextType;
+
     const hookStreamClient = useStreamClient();
     const hookStreamChannels = useStreamUserChannels(hookStreamClient.client);
     const hookStreamChannel = useStreamChannel(hookStreamClient.client);
@@ -41,16 +41,14 @@ const StreamProvider = ({children}: any) => {
     const hookStreamChat = useStreamChat(hookStreamClient.client, hookStreamChannel?.channel);
 
     useEffect(() => {
-        if (authContext?.authenticated) {
-            console.log("We should be connecting to stream");
+        if (authContext?.isConnected && !hookStreamClient?.client) {
             hookStreamClient.connectToStream();
         }
-    }, [authContext?.user?.db?.tokens?.stream]);
+    }, [authContext?.isConnected]);
+
 
     useEffect(() => {
-        if (hookStreamClient.client?.user?.id) {
-            setClient(hookStreamClient.client);
-            console.log("fetching user channels");
+        if (authContext?.isConnected && hookStreamClient.client?.user?.id) {
             hookStreamChannels.fetchUserChannels();
         }
     }, [hookStreamClient.client?.user?.id]);
@@ -82,7 +80,7 @@ const StreamProvider = ({children}: any) => {
     return (
         <StreamContext.Provider
             value={{
-                client: client,
+                client: hookStreamClient.client,
                 hookChannels: hookStreamChannels,
                 hookChannel: hookStreamChannel,
                 hookMembers: hookStreamChannelMembers,

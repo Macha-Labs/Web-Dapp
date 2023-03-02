@@ -70,10 +70,6 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
 
           setIsLoading(false);
           callback.new();
-          // ! TODO: This data is sent by DB and not getStream, have to resolve this
-          // navigation.navigate("Chat", {
-          //     channel: channel,
-          // });
         })
         .catch(err => {
           logger(

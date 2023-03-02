@@ -20,6 +20,7 @@ export type AuthContextType = {
   authenticated: any | undefined;
   setUser: (param: any) => void;
   isConnected: boolean | undefined;
+  isLoadingLens: boolean | undefined;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -33,6 +34,7 @@ export const AuthContext = createContext<AuthContextType>({
   authenticated: null,
   setUser: param => {},
   isConnected: false,
+  isLoadingLens: false
 });
 
 const AuthProvider = ({ children }: any) => {
@@ -40,7 +42,7 @@ const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<any>(new User$(null, null, null));
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
-  const [authenticated, setAuthenticated] = useState<any>();
+  const [isLoadingLens, setLoadingLens] = useState<any>(false);
 
   /** 
    * @description Initiating Hooks
@@ -49,25 +51,6 @@ const AuthProvider = ({ children }: any) => {
    **/
   const hookLensProfile = useLensProfile();
   const hookLensAuth = useLensAuth();
-
-  useEffect(() => {
-    if (address && isConnected) {
-      const authenticate = async() => {
-        let accessToken = window.localStorage.getItem("accessToken");
-        if (accessToken) {
-          let lensAuth = await _fetchUserFromLens();
-          // keep the authCard modal close and proceed to Chat page
-          console.log("Checking if this commend is waiting for _fetchUserFromDB ", lensAuth);
-          setAuthenticated(lensAuth);
-        }
-        else {
-          setAuthenticated(false);
-          // open the authCard modal and show connect to lens button.
-        } 
-      }
-      authenticate();
-    }
-  },[address, isConnected]);
 
   /** 
    * @description Internal function to store user in provider
@@ -88,30 +71,34 @@ const AuthProvider = ({ children }: any) => {
    * 
    **/
   const _fetchUserFromLens = async () => {
-    const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
-    console.log("auth card lensprofile ", lensProfile);
-    try {
-      if (lensProfile) {
-        const tokens: any | { accessToken: string; refreshToken: string } = hookLensAuth.getLensTokens();
-        logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
-        if (tokens?.accessToken) {
-          user.setLensDirect({
-            ...lensProfile,
-            accessToken: tokens["accessToken"],
-            refreshToken: tokens["refreshToken"],
-          });
-          setAuthenticated(true);
-          const userDbData: any = await _fetchUserFromDB();
-          console.log("Logging the userDbData ",userDbData);
-          user.setDb(userDbData);
-          setUser(user);
-          return true;
+    if (!address) {
+      logger("auth", "_fetchUserFromLens", "Address not found", [user]);
+      return;
+    }
+    if (address != user.lens.ownedBy) {
+      setLoadingLens(true);
+      const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
+      try {
+        if (lensProfile) {
+          const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
+          logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
+          setLoadingLens(false);
+          if (tokens?.accessToken) {
+            user.setLensDirect({
+              ...lensProfile,
+              accessToken: tokens["accessToken"],
+              refreshToken: tokens["refreshToken"],
+            });
+          } else {
+            user.setLensDirect(lensProfile);
+          }
+        } else {
+          throw Error(`Couldn't find Lens Profile with address ${address}`);
         }
-      } else {
-        throw Error(`Couldn't find Lens Profile with address ${address}`);
+      } catch (error) {
+        logger("auth", "_fetchUserFromLens", "Error in fetching userData from Lens", [error]);
       }
-    } catch (error) {
-      logger("auth", "_fetchUserFromLens", "Error in fetching userData from Lens", [error]);
+      return;
     }
   };
 
@@ -128,7 +115,6 @@ const AuthProvider = ({ children }: any) => {
             accessToken: tokens["accessToken"],
             refreshToken: tokens["refreshToken"],
           });
-          setAuthenticated(true);
           const userDbData: any = await _fetchUserFromDB();
           console.log("Logging the userDbData ",userDbData);
           user.setDb(userDbData);
@@ -149,15 +135,21 @@ const AuthProvider = ({ children }: any) => {
   const _fetchUserFromDB = async () => {
     if (address) {
       // fetching the userData from the Database
-      const promise = new Promise(async resolve => {
-        let userData = await findOrCreateUser({address: address.toLowerCase()});
-        userData = UserDb$(userData);
-        console.log("The user data from _fetchUserFromDb ", userData);
-        const streamToken = await putStreamToken({userAddress: address.toLowerCase()});
-        console.log("Getting the stream token", streamToken);
-        resolve (streamToken);
+      findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
+        user.setDb(data);
+        logger('auth', 'AuthProvider._fetchUserFromDB', 'Response from findOrCreateUser', [data]);
+        putStreamToken({ userAddress: address.toLowerCase() }).then(
+          (res: any) => {
+            logger(
+              "auth",
+              "useEffect[user.db.id]",
+              "response from putStreamToken api",
+              [res]
+            );
+            user.setDb(res);
+          }
+        );
       });
-      return promise;
     }
   };
 
@@ -204,9 +196,9 @@ const AuthProvider = ({ children }: any) => {
         authenticateWithLens: _authenticateUserWithLens,
         disconnectWallet: disconnectWallet,
         user: user,
-        authenticated: authenticated,
         setUser: setUser,
-        isConnected: isConnected,
+        isConnected: address && user?.lens?.id && user?.db?.id,
+        isLoadingLens: isLoadingLens
       }}
     >
       {children}
