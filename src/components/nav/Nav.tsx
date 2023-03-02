@@ -43,7 +43,7 @@ const Nav = (props: any) => {
                 <Link href="/chat">
                   <Tooltip label="Chat">
                     <IconImage
-                      path="IconBrandChat.png"
+                      path="IconDarkHash.png"
                       style={{
                         className: `m-b-1 ${
                           active === "chat" ? "state_active" : ""
