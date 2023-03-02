@@ -776,7 +776,7 @@ export const StyledConversation = styled(Col)`
   position: relative;
   opacity: 0.75;
   cursor: pointer;
-
+  overflow: hidden;
   &:hover {
     opacity: 1;
     .action {

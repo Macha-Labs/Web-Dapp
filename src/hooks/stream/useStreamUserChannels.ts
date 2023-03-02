@@ -5,6 +5,8 @@ import { Channel$, ChannelStream$ } from "../../schema/channel";
 const useStreamUserChannels = (client: any) => {
   const [channels, setChannels] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<any>(false);
+  const [selectedChannels, setSelectedChannels] = useState<any>([]) 
+  const [actionMessage, setActionMessage] = useState<String>('')
 
   const fetchUserChannels = async (callback?: any) => {
     if (client) {
@@ -32,9 +34,28 @@ const useStreamUserChannels = (client: any) => {
     }
   };
 
+  const handleChannelAction = (action: String) => {
+    setActionMessage(action)
+  }
+
+  const handleSelectChannel = (channel: any) => {
+    if (selectedChannels.includes(channel.id)) {
+      setSelectedChannels(
+        selectedChannels.filter((id: any) => id !== channel.id)
+      );
+    } else {
+      setSelectedChannels([...selectedChannels, channel.id]);
+    }
+    
+  }
+
   return {
     channels: channels,
     fetchUserChannels: fetchUserChannels,
+    selectedChannels: selectedChannels,
+    handleSelectChannel: handleSelectChannel,
+    handleChannelAction: handleChannelAction,
+    actionMessage: actionMessage
   };
 };
 export default useStreamUserChannels;

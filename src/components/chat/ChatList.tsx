@@ -1,11 +1,5 @@
 import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
-import {
-  Avatar,
-  Button,
-  Text,
-  useDisclosure,
-  useToast,
-} from "@chakra-ui/react";
+import { Avatar, Button, Checkbox, Text, useDisclosure, useToast } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
@@ -73,7 +67,7 @@ const ChatList = (props: any) => {
     return (
       <Pop
         trigger={<IconImage path="IconDarkMenu.png" />}
-        // placement="bottom-end"
+        placement="bottom-end"
       >
         <Col className="text-start">
           <Button
@@ -156,10 +150,24 @@ const ChatList = (props: any) => {
           <Col className="body verticlescroll hidescroll">
             {chatProvider?.hookChannels?.channels?.length ? (
               <ul>
+                {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
                 {chatProvider?.hookChannels?.channels.map(
                   (item: any, index: number) => (
                     <StyledChatItem key={item?.index}>
+                 {  chatProvider?.hookChannels?.actionMessage == 'MULTISELECT' &&   <Checkbox className="m-r-0-5" 
+                      isChecked={chatProvider.hookChannels?.selectedChannels.includes(item?.id)}
+                      onChange={() => chatProvider.hookChannels?.handleSelectChannel(item) }
+                      />}
                       <Button
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          chatProvider.initiate(item, authContext?.address);
+                          setIsClicked((prevState: any) => [
+                            ...prevState,
+                            index,
+                          ]);
+                        }}
                         className="menu-item w-100 m-b-0-5"
                         size="xl"
                         variant={
