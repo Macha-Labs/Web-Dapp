@@ -52,21 +52,22 @@ const AuthProvider = ({ children }: any) => {
 
   useEffect(() => {
     if (address && isConnected) {
-      let accessToken = window.localStorage.getItem("accessToken");
-      if (accessToken) {
-        setAuthenticated(true);
-        _fetchUserFromLens();
-        // keep the authCard modal close and proceed to Chat page
-        console.log("Checking if this commend is waiting for _fetchUserFromDB");
+      const authenticate = async() => {
+        let accessToken = window.localStorage.getItem("accessToken");
+        if (accessToken) {
+          let lensAuth = await _fetchUserFromLens();
+          // keep the authCard modal close and proceed to Chat page
+          console.log("Checking if this commend is waiting for _fetchUserFromDB ", lensAuth);
+          setAuthenticated(lensAuth);
+        }
+        else {
+          setAuthenticated(false);
+          // open the authCard modal and show connect to lens button.
+        } 
       }
-      else {
-        setAuthenticated(false);
-        // open the authCard modal and show connect to lens button.
-      } 
+      authenticate();
     }
   },[address, isConnected]);
-
-
 
   /** 
    * @description Internal function to store user in provider
@@ -100,6 +101,11 @@ const AuthProvider = ({ children }: any) => {
             refreshToken: tokens["refreshToken"],
           });
           setAuthenticated(true);
+          const userDbData: any = await _fetchUserFromDB();
+          console.log("Logging the userDbData ",userDbData);
+          user.setDb(userDbData);
+          setUser(user);
+          return true;
         }
       } else {
         throw Error(`Couldn't find Lens Profile with address ${address}`);
@@ -152,21 +158,6 @@ const AuthProvider = ({ children }: any) => {
         resolve (streamToken);
       });
       return promise;
-      // findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
-      //   const userData = UserDb$(data);
-      //   _updateUser("db", userData);
-      //   putStreamToken({ userAddress: address.toLowerCase() }).then(
-      //     (res: any) => {
-      //       logger(
-      //         "auth",
-      //         "useEffect[user.db.id]",
-      //         "response from putStreamToken api",
-      //         [res]
-      //       );
-      //       _updateUser("db", UserDb$(res));
-      //     }
-      //   );
-      // });
     }
   };
 

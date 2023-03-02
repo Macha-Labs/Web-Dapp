@@ -12,6 +12,7 @@ const useStreamClient = () => {
   const unsubscribeTokenRefreshListenerRef = useRef<() => void>();
 
   const connectToStream = async () => {
+    console.log("calling connectToStream");
     if (!authContext?.user?.lens?.id) {
       logger("stream", "connecttostream", "user.lens error", [
         authContext?.user,

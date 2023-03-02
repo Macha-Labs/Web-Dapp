@@ -41,13 +41,8 @@ const StreamProvider = ({children}: any) => {
     const hookStreamChat = useStreamChat(hookStreamClient.client, hookStreamChannel?.channel);
 
     useEffect(() => {
-        if (authContext?.user?.lens?.id && !hookStreamClient?.client) {
-            hookStreamClient.connectToStream();
-        }
-    }, [authContext?.user?.lens?.id]);
-
-    useEffect(() => {
-        if (authContext?.user?.db?.tokens?.stream && !hookStreamClient?.client) {
+        if (authContext?.authenticated) {
+            console.log("We should be connecting to stream");
             hookStreamClient.connectToStream();
         }
     }, [authContext?.user?.db?.tokens?.stream]);
@@ -55,6 +50,7 @@ const StreamProvider = ({children}: any) => {
     useEffect(() => {
         if (hookStreamClient.client?.user?.id) {
             setClient(hookStreamClient.client);
+            console.log("fetching user channels");
             hookStreamChannels.fetchUserChannels();
         }
     }, [hookStreamClient.client?.user?.id]);
