@@ -50,6 +50,24 @@ const AuthProvider = ({ children }: any) => {
   const hookLensProfile = useLensProfile();
   const hookLensAuth = useLensAuth();
 
+  useEffect(() => {
+    if (address && isConnected) {
+      let accessToken = window.localStorage.getItem("accessToken");
+      if (accessToken) {
+        setAuthenticated(true);
+        _fetchUserFromDB();
+        // keep the authCard modal close and proceed to Chat page
+
+      }
+      else {
+        setAuthenticated(false);
+        // open the authCard modal and show connect to lens button.
+      } 
+    }
+  },[address, isConnected]);
+
+
+
   /** 
    * @description Internal function to store user in provider
    * 
@@ -100,21 +118,29 @@ const AuthProvider = ({ children }: any) => {
     logger("auth", "useEffect[user.lens]", "User is", [user]);
     if (address) {
       // fetching the userData from the Database
-      findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
-        const userData = UserDb$(data);
-        _updateUser("db", userData);
-        putStreamToken({ userAddress: address.toLowerCase() }).then(
-          (res: any) => {
-            logger(
-              "auth",
-              "useEffect[user.db.id]",
-              "response from putStreamToken api",
-              [res]
-            );
-            _updateUser("db", UserDb$(res));
-          }
-        );
+      const promise = new Promise(async resolve => {
+        let userData = await findOrCreateUser({address: address.toLowerCase()});
+        userData = UserDb$(userData);
+        const streamToken = await putStreamToken({userAddress: address.toLowerCase()});
+        console.log("Getting the stream token", streamToken);
+        resolve(_updateUser("db", UserDb$(streamToken)));
       });
+      return promise;
+      // findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
+      //   const userData = UserDb$(data);
+      //   _updateUser("db", userData);
+      //   putStreamToken({ userAddress: address.toLowerCase() }).then(
+      //     (res: any) => {
+      //       logger(
+      //         "auth",
+      //         "useEffect[user.db.id]",
+      //         "response from putStreamToken api",
+      //         [res]
+      //       );
+      //       _updateUser("db", UserDb$(res));
+      //     }
+      //   );
+      // });
     }
   };
 
@@ -145,15 +171,6 @@ const AuthProvider = ({ children }: any) => {
   const disconnectWallet = async () => {
     disconnect();
   };
-
-  useEffect(() => {
-    logger("auth", "useEffect", "Portal 1: Current user address", [address]);
-    if (address) {
-
-      _fetchSignerFromWagmi();
-      _fetchUserFromDB();
-    }
-  }, [address]);
 
   useEffect(() => {
     if (user) 
