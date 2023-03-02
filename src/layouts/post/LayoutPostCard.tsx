@@ -96,16 +96,6 @@ const LayoutPostCard = (props: any) => {
                         </Button>
                       )}
                     </Row>
-                    <Row className="m-r-0-5">
-                      <Button
-                        className="buttonCol"
-                        size="xs"
-                        // leftIcon={<CommentIcon width="20" height="20" fill="#efefef" />}
-                        variant="state_transparent_to_brand_hover"
-                      >
-                        Comment
-                      </Button>
-                    </Row>
                   </Flex>
                 </div>
               </Col>

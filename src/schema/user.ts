@@ -82,6 +82,22 @@ export class User$ {
     this.stream = UserStream$(streamData);
   }
 
+  setDb(dbData: any) {
+    this.db = UserDb$(dbData);
+  }
+
+  setLens(lensData: any) {
+    this.lens = UserLens$(lensData);
+  }
+
+  setLensDirect(lensData: any) {
+    this.lens = lensData;
+  }
+
+  setStream(streamData: any) {
+    this.stream = UserStream$(streamData);
+  }
+
   setLensFromStream() {
     this.lens = UserLens$({ 
         handle: this.stream.lensHandle,

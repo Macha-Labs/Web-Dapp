@@ -132,6 +132,14 @@ function ChatSetting(props: any) {
         hookPortalChannel?.deleteChannel(props.chatContext.hookChannel.channel);
       },
     },
+    {
+      //   icon: IconBrandClearChat,
+      name: "Leave Channel",
+      icon: "IconDarkLeave.png",
+      onPress: () => {
+        hookPortalChannel?.leaveChannel(props.chatContext.hookChannel.channel);
+      },
+    },
   ];
   /**
    * @description
@@ -143,7 +151,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.hookChannels?.fetchUserChannels();
+    props.chatContext?.streamContext?.reloadChannelList();
     props.chatContext?.initiate(null);
     props.modalSettings.onClose();
   };
@@ -158,6 +166,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
+    props.chatContext?.streamContext?.reloadChannelList();
+    props.chatContext?.streamContext?.reloadChannel();
     props.modalSettings.onClose();
   };
 
@@ -171,6 +181,22 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
+    props.chatContext?.streamContext?.reloadChannel();
+    props.chatContext?.streamContext?.reloadChannelList();
+    props.modalSettings.onClose();
+  };
+  /**
+   * @description
+   **/
+  const callbackLeave = () => {
+    toast({
+      title: "Channel Left",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.chatContext?.streamContext?.reloadChannelList();
+    props.chatContext?.initiate(null);
     props.modalSettings.onClose();
   };
 
@@ -183,6 +209,7 @@ function ChatSetting(props: any) {
       delete: callbackDelete,
       mute: callbackMute,
       unmute: callbackUnmute,
+      leave: callbackLeave,
     }
   );
   const modalChatPermission = useDisclosure();
@@ -201,7 +228,7 @@ function ChatSetting(props: any) {
     return (
       <ModalSlider size={"md"} event={modalChatMembers}>
         <ChatMembers
-          hookChannel={props.chatContext.hookChannel}
+          modalChatMembers={modalChatMembers}
           modalAddMembers={modalAddMembers}
         />
       </ModalSlider>
@@ -211,8 +238,8 @@ function ChatSetting(props: any) {
     return (
       <ModalSlider size={"md"} event={modalAddMembers}>
         <ChatMembersAdd
-          hookChannel={props.chatContext.hookChannel}
           modalAddMembers={modalAddMembers}
+          modalChatMembers={modalChatMembers}
         />
       </ModalSlider>
     );
@@ -220,10 +247,7 @@ function ChatSetting(props: any) {
   const TemplateEditChannel = () => {
     return (
       <ModalSlider size={"lg"} event={modalChatEdit}>
-        <ChatEdit
-          hookChannel={props.chatContext.hookChannel}
-          modal={modalChatEdit}
-        />
+        <ChatEdit modal={modalChatEdit} />
       </ModalSlider>
     );
   };

@@ -657,12 +657,12 @@ export const StyledChatItem = styled(Row)`
   align-items: center;
   justify-content: flex-start;
   .settingsIcon {
-    display: none;
+    visibility: hidden;
   }
 
   &:hover {
     .settingsIcon {
-      display: inline;
+      visibility: visible;
     }
   }
 `;
@@ -776,7 +776,7 @@ export const StyledConversation = styled(Col)`
   position: relative;
   opacity: 0.75;
   cursor: pointer;
-
+  overflow: hidden;
   &:hover {
     opacity: 1;
     .action {

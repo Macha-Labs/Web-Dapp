@@ -8,8 +8,12 @@ import { v4 as uuidv4 } from "uuid";
 import { fetchSigner, signTypedData } from "@wagmi/core";
 import signedTypeData, { splitSignature } from "@/helpers/lens/lensApiService";
 import { LensHubAbi } from "@/contracts/lens/lensHubContractAbi";
-import { LENS_HUB_CONTRACT } from "@/helpers/lens/lensContract";
+import {
+  LENS_HUB_CONTRACT,
+  LENS_PERIPHERY_CONTRACT,
+} from "@/helpers/lens/lensContract";
 import { ethers } from "ethers";
+import { LensPheripheryAbi } from "@/abi/lensPheripheryAbi";
 const useLensProfileUpdate = () => {
   const [isLoading, setIsLoading] = useState<any>(false);
   const [loadingText, setLoadingText] = useState<any>("Sending Request");
@@ -25,7 +29,6 @@ const useLensProfileUpdate = () => {
     );
     setUserLens(authContext.user?.lens);
   }, [authContext.user?.lens]);
-  console.log("userLens", userLens);
 
   const updateLensProfile = async () => {
     const cid = await makeFileObjects({
@@ -54,7 +57,12 @@ const useLensProfileUpdate = () => {
     const { v, r, s } = splitSignature(signature);
     const signer: any = await fetchSigner();
 
-    const lensHub = new ethers.Contract(LENS_HUB_CONTRACT, LensHubAbi, signer);
+    console.log(signer);
+    const lensHub = new ethers.Contract(
+      LENS_PERIPHERY_CONTRACT,
+      LensPheripheryAbi,
+      signer
+    );
     const tx = await lensHub.setProfileMetadataURIWithSig({
       profileId: typedData.value.profileId,
       contentURI: typedData.value.contentURI,
@@ -65,6 +73,7 @@ const useLensProfileUpdate = () => {
         deadline: typedData.value.deadline,
       },
     });
+    console.log("Tx:", tx);
     const receipt = await tx.wait();
     console.log("Tx receipt:", receipt);
   };

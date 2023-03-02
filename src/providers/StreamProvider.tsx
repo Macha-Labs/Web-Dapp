@@ -2,7 +2,6 @@ import { logger } from "@/helpers/logger";
 import useStreamChannel from "@/hooks/stream/useStreamChannel";
 import useStreamChannelMembers from "@/hooks/stream/useStreamChannelMembers";
 import useStreamChat from "@/hooks/stream/useStreamChat";
-import { channel } from "diagnostics_channel";
 import {createContext, useContext, useEffect, useState} from "react";
 import useStreamClient from "../hooks/stream/useStreamClient";
 import useStreamUserChannels from "../hooks/stream/useStreamUserChannels";
@@ -14,6 +13,9 @@ export type StreamContextType = {
     hookChannel: any | undefined;
     hookMembers: any | undefined;
     hookChat: any | undefined;
+    reloadMembers: () => void;
+    reloadChannel: () => void;
+    reloadChannelList: () => void;
     initiate: (channel: any, userAddress: any) => void;
 };
 
@@ -23,6 +25,9 @@ export const StreamContext = createContext<StreamContextType>({
     hookChannel: {},
     hookMembers: {},
     hookChat: {},
+    reloadMembers: () => {},
+    reloadChannel: () => {},
+    reloadChannelList: () => {},
     initiate: (channel: any, userAddress: any) => {}
 });
 
@@ -36,10 +41,16 @@ const StreamProvider = ({children}: any) => {
     const hookStreamChat = useStreamChat(hookStreamClient.client, hookStreamChannel?.channel);
 
     useEffect(() => {
-        if (authContext?.user?.lens?.id) {
+        if (authContext?.user?.lens?.id && !hookStreamClient?.client) {
             hookStreamClient.connectToStream();
         }
     }, [authContext?.user?.lens?.id]);
+
+    useEffect(() => {
+        if (authContext?.user?.db?.tokens?.stream && !hookStreamClient?.client) {
+            hookStreamClient.connectToStream();
+        }
+    }, [authContext?.user?.db?.tokens?.stream]);
 
     useEffect(() => {
         if (hookStreamClient.client?.user?.id) {
@@ -49,8 +60,16 @@ const StreamProvider = ({children}: any) => {
     }, [hookStreamClient.client?.user?.id]);
 
     
-    const reload = () => {
-        
+    const reloadMembers = () => {
+        hookStreamChannelMembers.fetchChannelMembers()
+    }
+
+    const reloadChannel = () => {
+        hookStreamChannel.setUpChannel(hookStreamChannel?.channel?.id)
+    }
+
+    const reloadChannelList = () => {
+        hookStreamChannels.fetchUserChannels();
     }
 
     const initiate = async (channel: any, userAddress?: any) => {
@@ -72,6 +91,9 @@ const StreamProvider = ({children}: any) => {
                 hookChannel: hookStreamChannel,
                 hookMembers: hookStreamChannelMembers,
                 hookChat: hookStreamChat,
+                reloadMembers: reloadMembers,
+                reloadChannel:  reloadChannel,
+                reloadChannelList: reloadChannelList,
                 initiate: initiate
             }}
         >

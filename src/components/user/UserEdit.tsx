@@ -10,15 +10,12 @@ const UserEdit = () => {
   const hookLensProfileUpdate = useLensProfileUpdate();
 
   const handleChange = (e: any, val: any) => {
-    console.log(e, val, "eeeeeeee");
     hookLensProfileUpdate.setUserLens({
       ...hookLensProfileUpdate?.userLens,
       [val]: e,
     });
-    console.log(hookLensProfileUpdate?.userLens, "hookLensProfileUpdate");
   };
 
-  console.log("USerEdit reporting ser");
 
   const data = [
     {
@@ -54,8 +51,6 @@ const UserEdit = () => {
       disabled: true,
     },
   ];
-
-  console.log("DATA", hookLensProfileUpdate.userLens);
 
   return (
     <LayoutCardPannel

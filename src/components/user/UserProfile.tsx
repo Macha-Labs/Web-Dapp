@@ -24,8 +24,7 @@ import { AuthContext } from "@/providers/AuthProvider";
 import IconImage from "../icons/IconImage";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 
-
-const UserProfile = ({user}) => {
+const UserProfile = ({ user }) => {
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
   const hookLensFollow = useLensFollows(user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(user?.lens?.id);
@@ -33,24 +32,32 @@ const UserProfile = ({user}) => {
 
   useEffect(() => {
     getOwnedProfiles(user?.lens?.ownedBy);
+    console.log(user?.lens?.ownedBy, "user?.lens?.ownedBy");
   }, [user?.lens?.ownedBy]);
 
   const hookLensConnections = useLensConnections(
     userLens?.ownedBy,
     userLens?.id
   );
+  console.log("userLens", userLens);
 
   const authContext = useContext(AuthContext);
-
-  
 
   const templatePosts = () => {
     return (
       <Col>
-        <LayoutPostList
-          list={hookLensPostsForUser.posts}
-          isLoading={hookLensPostsForUser.isLoading}
-        />
+        {
+          <>
+            {user?.lens?.ownedBy === undefined ? (
+              "User has not connected Lens to their profile"
+            ) : (
+              <LayoutPostList
+                list={hookLensPostsForUser.posts}
+                isLoading={hookLensPostsForUser.isLoading}
+              />
+            )}
+          </>
+        }
       </Col>
     );
   };
@@ -87,14 +94,19 @@ const UserProfile = ({user}) => {
   const TemplateFollowing = () => {
     return (
       <>
-        {hookLensConnections.following?.length ? (
+        {hookLensConnections.following?.length &&
+        user?.lens?.ownedBy != undefined ? (
           <Wrap className="m-b-2">
             {hookLensConnections.following.map((item: any, index: any) => {
-                  return <UserFollowersCard user={item} key={index} />;
+              return <UserFollowersCard user={item} key={index} />;
             })}
           </Wrap>
         ) : (
-          <></>
+          <>
+            {user?.lens?.ownedBy === undefined
+              ? "User has not connected Lens to their profile"
+              : "Zero Following"}
+          </>
         )}
       </>
     );
@@ -103,7 +115,8 @@ const UserProfile = ({user}) => {
   const TemplateFollowers = () => {
     return (
       <>
-        {hookLensConnections.followers?.length ? (
+        {hookLensConnections.followers?.length &&
+        user?.lens?.ownedBy != undefined ? (
           <Wrap className="m-b-2">
             {hookLensConnections.followers.length ? (
               <>
@@ -116,7 +129,11 @@ const UserProfile = ({user}) => {
             )}
           </Wrap>
         ) : (
-          <>Zero followers</>
+          <>
+            {user?.lens?.ownedBy === undefined
+              ? "User has not connected Lens to their profile"
+              : "Zero Followers"}
+          </>
         )}
       </>
     );

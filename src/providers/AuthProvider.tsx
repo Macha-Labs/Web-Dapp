@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { logger } from "../helpers/logger";
 import useLensAuth from "../hooks/lens/useLensAuth";
-import { UserDb$ } from "../schema/user";
+import { User$, UserDb$ } from "../schema/user";
 // import { removeAsyncData } from "../service/AsyncStorageService";
 import { useAccount, useDisconnect } from "wagmi";
 import { putStreamToken } from "../service/StreamService";
@@ -18,7 +18,6 @@ export type AuthContextType = {
   disconnectWallet: () => void;
   user: any | undefined;
   setUser: (param: any) => void;
-  updateUser: (...params: any) => void;
   isConnected: boolean | undefined;
 };
 
@@ -31,13 +30,12 @@ export const AuthContext = createContext<AuthContextType>({
   disconnectWallet: () => {},
   user: null,
   setUser: param => {},
-  updateUser: (...params) => {},
   isConnected: false,
 });
 
 const AuthProvider = ({ children }: any) => {
   const [signer, setSigner] = useState<any>("");
-  const [user, setUser] = useState<any>({});
+  const [user, setUser] = useState<any>(new User$(null, null, null));
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const [authenticated, setAuthenticated] = useState<any>();
@@ -94,7 +92,7 @@ const AuthProvider = ({ children }: any) => {
         const tokens: any | { accessToken: string; refreshToken: string } = hookLensAuth.getLensTokens();
         logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
         if (tokens?.accessToken) {
-          _updateUser("lens", {
+          user.setLensDirect({
             ...lensProfile,
             accessToken: tokens["accessToken"],
             refreshToken: tokens["refreshToken"],
@@ -115,7 +113,6 @@ const AuthProvider = ({ children }: any) => {
    * 
    **/
   const _fetchUserFromDB = async () => {
-    logger("auth", "useEffect[user.lens]", "User is", [user]);
     if (address) {
       // fetching the userData from the Database
       const promise = new Promise(async resolve => {
@@ -188,7 +185,6 @@ const AuthProvider = ({ children }: any) => {
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,
-        updateUser: _updateUser,
         isConnected: isConnected,
       }}
     >

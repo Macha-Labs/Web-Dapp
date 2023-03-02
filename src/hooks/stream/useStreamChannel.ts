@@ -1,9 +1,5 @@
 import { logger } from "./../../helpers/logger";
-import { useState, useEffect, useContext } from "react";
-import {
-  StreamContext,
-  StreamContextType,
-} from "../../providers/StreamProvider";
+import { useState, useEffect} from "react";
 import { ChannelStream$ } from "../../schema/channel";
 
 const useStreamChannel = (client: any) => {
@@ -37,8 +33,8 @@ const useStreamChannel = (client: any) => {
     if (channel)
       channel?.raw?.markRead()
       channel?.raw?.on((event: any) => {
-        logger("stream", "useEffect", "logging the channel events", [event]);
-        logger("stream", "useEffect", "logging the channel Messages", [channel?.raw?.state?.messageSets[0]?.messages]);
+        logger("stream", "useStreamChannel.useEffect", "logging the channel events", [event]);
+        logger("stream", "useStreamChannel.useEffect", "logging the channel Messages", [channel?.raw?.state?.messageSets[0]?.messages]);
         setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
       });
   }, [channel]);

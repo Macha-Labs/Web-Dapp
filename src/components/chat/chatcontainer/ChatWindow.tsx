@@ -15,6 +15,8 @@ const ChatWindow = (props: any) => {
 
   const templateMessages = ({ index, style }: any) => {
     const message = props.hookChannel.messages[index];
+    console.log("Message", message);
+    
     return (
       <div style={style} className="body">
         <ChatMessage

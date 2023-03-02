@@ -103,13 +103,13 @@ const ChatHeader = (props: any) => {
               <Heading as="h4" size="sm">
                 {props?.hookChannel?.channel?.name}
               </Heading>
-              {/* {props?.hookChannel?.channel?.raw.muteStatus().muted && (
+              {props?.hookChannel?.channel?.raw.muteStatus().muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}
                   size={15}
                 />
-              )} */}
+              )}
             </Row>
             <Heading as="h6" size="xs">
               {props.hookChat?.usersWhoAreTyping && (

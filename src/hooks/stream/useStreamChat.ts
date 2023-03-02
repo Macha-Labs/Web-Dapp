@@ -254,6 +254,7 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   };
 
   const keyDownMessage = async (event: any) => {
+  
     const keycode = event.which || event.keycode;
 
     //Logic for typing indicators begins
