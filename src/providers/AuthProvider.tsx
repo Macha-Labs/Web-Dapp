@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { logger } from "../helpers/logger";
 import useLensAuth from "../hooks/lens/useLensAuth";
-import { UserDb$ } from "../schema/user";
+import { User$, UserDb$ } from "../schema/user";
 // import { removeAsyncData } from "../service/AsyncStorageService";
 import { useAccount, useDisconnect } from "wagmi";
 import { putStreamToken } from "../service/StreamService";
@@ -17,7 +17,6 @@ export type AuthContextType = {
   disconnectWallet: () => void;
   user: any | undefined;
   setUser: (param: any) => void;
-  updateUser: (...params: any) => void;
   isConnected: boolean | undefined;
 };
 
@@ -29,13 +28,12 @@ export const AuthContext = createContext<AuthContextType>({
   disconnectWallet: () => {},
   user: null,
   setUser: param => {},
-  updateUser: (...params) => {},
   isConnected: false,
 });
 
 const AuthProvider = ({ children }: any) => {
   const [signer, setSigner] = useState<any>("");
-  const [user, setUser] = useState<any>({});
+  const [user, setUser] = useState<any>(new User$(null, null, null));
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
 
@@ -46,18 +44,6 @@ const AuthProvider = ({ children }: any) => {
    **/
   const hookLensProfile = useLensProfile();
   const hookLensAuth = useLensAuth();
-
-  /** 
-   * @description Internal function to store user in provider
-   * 
-   * 
-   **/
-  const _updateUser = (key: any, data: any) => {
-    logger("auth", "updateUser", "Updating user data", [key, data]);
-    const newData: any = {};
-    newData[key] = data;
-    setUser({ ...user, ...newData });
-  };
   
 
   /** 
@@ -72,20 +58,19 @@ const AuthProvider = ({ children }: any) => {
         const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
         logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
         if (tokens?.accessToken) {
-          _updateUser("lens", {
+          user.setLensDirect({
             ...lensProfile,
             accessToken: tokens["accessToken"],
             refreshToken: tokens["refreshToken"],
           });
         } else {
-          _updateUser("lens", lensProfile);
+          user.setLensDirect(lensProfile);
         }
       } else {
         throw Error(`Couldn't find Lens Profile with address ${address}`);
       }
     } catch (error) {
       logger("auth", "_fetchUserFromLens", "Error in fetching userData from Lens", [error]);
-
     }
     
   };
@@ -96,12 +81,10 @@ const AuthProvider = ({ children }: any) => {
    * 
    **/
   const _fetchUserFromDB = async () => {
-    logger("auth", "useEffect[user.lens]", "User is", [user]);
     if (address) {
       // fetching the userData from the Database
       findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
-        const userData = UserDb$(data);
-        _updateUser("db", userData);
+        user.setDb(data);
         putStreamToken({ userAddress: address.toLowerCase() }).then(
           (res: any) => {
             logger(
@@ -110,7 +93,7 @@ const AuthProvider = ({ children }: any) => {
               "response from putStreamToken api",
               [res]
             );
-            _updateUser("db", UserDb$(res));
+            user.setDb(res);
           }
         );
       });
@@ -168,7 +151,6 @@ const AuthProvider = ({ children }: any) => {
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,
-        updateUser: _updateUser,
         isConnected: isConnected,
       }}
     >

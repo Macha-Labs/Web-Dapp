@@ -2,6 +2,7 @@ import { PlusSquareIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Button,
+  Divider,
   Heading,
   Image,
   Text,
@@ -23,10 +24,12 @@ import IconImage from "@/components/icons/IconImage";
 import Pop from "@/components/pop/Pop";
 import ModalWindow from "@/components/modal/ModalWindow";
 import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
+import { useRef } from "react";
 
 const ChatInput = (props: any) => {
   const modalPost = useDisclosure();
   const hookCreateLensPost = useCreateLensPost();
+  const createPostRef = useRef<any>();
 
   const templateReply = () => {
     return (
@@ -35,16 +38,15 @@ const ChatInput = (props: any) => {
           <div className="reply">
             <Col className="w-100 vr-center">
               <Row className="vr-center">
-                <Text fontSize="xs" className="m-r-1">
-                  Replying to:
-                </Text>
-                <Avatar
+                <IconImage path="IconDarkReply.png" />
+                <Divider orientation="vertical" color={"#246BFD"} />
+                {/* <Avatar
                   size="xs"
                   src={props.hookChat?.actionMessage?.item?.user.lensImage}
                 />
                 <Text fontSize="xs">
                   @{props.hookChat?.actionMessage?.item?.user?.lensHandle}
-                </Text>
+                </Text> */}
               </Row>
               <Row>
                 <Text fontSize="xs">
@@ -76,24 +78,23 @@ const ChatInput = (props: any) => {
             className="m-b-1 m-t-1"
             size="xl"
             placeholder="Your Lens Post Content Here"
-            ref={null}
+            ref={createPostRef}
           ></Textarea>
           <Row className="m-b-1">
             <IconImage
               path="IconDarkFiles.png"
               style={{ className: "m-r-0-5" }}
             />
-            <IconImage path="IconDarkPhotos.png" />
+            <IconImage path="IconDarkPost.png" />
           </Row>
           <Button
             size="sm"
             variant="state_brand w-content"
             onClick={() => {
               hookCreateLensPost.validateMetadataAndPostOnLens({
-                profileId: "0x1",
-                postContent: "test",
+                profileId: props?.lensId,
+                postContent: createPostRef.current.value,
               });
-              console.log(props);
             }}
           >
             Create Post

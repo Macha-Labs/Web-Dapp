@@ -1,4 +1,3 @@
-import { StyledCard } from "@/styles/StyledComponents";
 import { Input } from "@chakra-ui/react";
 
 const LayoutInputs = (props: any) => {
@@ -10,7 +9,7 @@ const LayoutInputs = (props: any) => {
             key={index}
             placeholder={item?.label}
             value={item?.value}
-            onChange={(e) => item?.onChange(e.target.value)}
+            onChange={e => item?.onChange(e.target.value)}
             disabled={item.disabled}
             className="m-b-0-5"
           />

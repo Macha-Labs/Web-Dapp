@@ -1,7 +1,14 @@
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserList from "@/components/user/UserList";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Button, Avatar, Heading, Icon, useDisclosure, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Avatar,
+  Heading,
+  Icon,
+  useDisclosure,
+  Text,
+} from "@chakra-ui/react";
 import ChatMessageList from "./ChatMessageList";
 import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
@@ -12,11 +19,9 @@ import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
-  const modalPinned = useDisclosure();
   const modalSettings = useDisclosure();
+  const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext);
-  const chatContext = useContext(ChatContext)
-
 
   const TemplateMembers = () => {
     return (
@@ -24,17 +29,6 @@ const ChatHeader = (props: any) => {
         <UserList
           onlineUsers={props.hookMembers?.onlineUsers}
           offlineUsers={props.hookMembers?.offlineUsers}
-        />
-      </ModalSlider>
-    );
-  };
-
-  const TemplatePinnedMessages = () => {
-    return (
-      <ModalSlider event={modalPinned} size="md">
-        <ChatMessageList
-          pinnedMessageList={chatContext.hookChannel?.pinnedMessages}
-          hookChat={props.hookChat}
         />
       </ModalSlider>
     );
@@ -59,9 +53,16 @@ const ChatHeader = (props: any) => {
     return (
       <Row className="header w-100 vr-center hr-between">
         <ChatSearch />
-        <Button size="xs" variant="state_default_hover" className="m-l-1" onClick={props?.hookChat?.handleSearchClose}>Cancel</Button>
+        <Button
+          size="xs"
+          variant="state_default_hover"
+          className="m-l-1"
+          onClick={props?.hookChat?.handleSearchClose}
+        >
+          Cancel
+        </Button>
       </Row>
-    )
+    );
   };
 
   const TemplateMultiSelect = () => {
@@ -71,7 +72,9 @@ const ChatHeader = (props: any) => {
           variant="state_brand"
           size="sm"
           className="m-r-0-5"
-          onClick={() => {chatContext.hookChat?.setSelectedMessages([])}}
+          onClick={() => {
+            chatContext.hookChat?.setSelectedMessages([]);
+          }}
         >
           Clear
         </Button>
@@ -100,13 +103,13 @@ const ChatHeader = (props: any) => {
               <Heading as="h4" size="sm">
                 {props?.hookChannel?.channel?.name}
               </Heading>
-              {/* {props?.hookChannel?.channel?.raw.muteStatus().muted && (
+              {props?.hookChannel?.channel?.raw.muteStatus().muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}
                   size={15}
                 />
-              )} */}
+              )}
             </Row>
             <Heading as="h6" size="xs">
               {props.hookChat?.usersWhoAreTyping && (
@@ -137,12 +140,6 @@ const ChatHeader = (props: any) => {
             style={{ className: "m-r-0-5" }}
           />
 
-          <IconImage
-            path="IconDarkPinned.png"
-            onClick={modalPinned.onOpen}
-            style={{ className: "m-r-0-5" }}
-          />
-
           <IconImage path="IconDarkUsers.png" onClick={membersModal.onOpen} />
         </Row>
       </Row>
@@ -167,7 +164,7 @@ const ChatHeader = (props: any) => {
         </Row>
       </div>
       <TemplateMembers />
-      <TemplatePinnedMessages />
+      {/* <TemplatePinnedMessages /> */}
       <TemplateChannelSettings />
     </>
   );

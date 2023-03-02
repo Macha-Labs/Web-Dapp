@@ -66,11 +66,9 @@ const useLensAuth = () => {
     };
 
     const connectToLens = async (address: any) => {
-        // if (window.localStorage.getItem("accessToken")) {
-        //     return getLensTokens();
-        // } else {
-
-        // }
+        if (window.localStorage.getItem("accessToken")) {
+            return getLensTokens();
+        }
         return fetchLensToken(address);
     }
 

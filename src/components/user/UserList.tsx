@@ -8,84 +8,93 @@ import ModalSlider from "../modal/ModalSlider";
 import UserProfile from "./UserProfile";
 
 interface Props {
-    [key: string]: any
+  [key: string]: any;
 }
 
 const Container = styled.div`
-    .item {
-        padding: 5px;
-        cursor: pointer;
-        border-radius: 5px;
-        &:hover {
-            background: ${style.button.bg.default};
-        }
+  .item {
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover {
+      background: ${style.button.bg.default};
     }
-`
+  }
+`;
 
-const UserList: FC<Props> = (props) => {
-    const modalProfile = useDisclosure();
-    const [selectedUser, setSelectedUser] = useState<any>();
+const UserList: FC<Props> = props => {
+  const modalProfile = useDisclosure();
+  const [selectedUser, setSelectedUser] = useState<any>();
 
-    const handleSelectedUser = (user: any) => {
-        modalProfile.onOpen();
-        setSelectedUser(user)
-    }
+  const handleSelectedUser = (user: any) => {
+    modalProfile.onOpen();
+    setSelectedUser(user);
+  };
 
-    const template = (heading: any, users: any) => {
-        return (
-            <Col className="m-b-1"> 
-                {
-                users.length ?
-                (
-                    <>
-                        <Col className="m-b-1">
-                            <Heading as="h4" size="md">{heading}</Heading>
-                        </Col>
-                        <Container>
-                            {
-                                users.map((item: any, index: any) =>
-                                    <Row key={index} className="vr-center item m-b-0-5" onClick={() => {handleSelectedUser(item)}} >
-                                        <Avatar src={helperIPFS(item?.lens?.image)} className="m-r-0-5" size="sm" >
-                                        {
-                                            heading == 'Online' ? (<AvatarBadge boxSize='0.7em' bg='green.500' />) : (<></>)
-                                        }
-                                        </Avatar>
-                                        <h6>
-                                        {item?.lens?.name ? item?.lens?.name : (item?.lens?.handle ? item?.lens?.handle: truncateAddress(item?.lens?.ownedBy))}
-                                        </h6>
-                                    </Row>
-                                )
-                            }
-                        </Container>
-                    </>
-                )
-                :
-                (
-                    <></>
-                )
-            }
-            </Col>
-        )
-    }
-
-    const TemplateProfile = () => {
-        return (
-            <ModalSlider event={modalProfile} size="lg">
-                <UserProfile user={{lens: selectedUser}} />
-            </ModalSlider>
-        )
-    }
-
+  const template = (heading: any, users: any) => {
+    console.log("users", users);
     return (
-        <>
-            
-            {template('Online', props.onlineUsers)}
+      <Col className="m-b-1">
+        {users.length ? (
+          <>
+            <Col className="m-b-1">
+              <Heading as="h4" size="md">
+                {heading}
+              </Heading>
+            </Col>
+            <Container>
+              {users.map((item: any, index: any) => (
+                <Row
+                  key={index}
+                  className="vr-center item m-b-0-5"
+                  onClick={() => {
+                    console.log(item.lens, "itemmmmm");
+                    handleSelectedUser(item);
+                  }}
+                >
+                  <Avatar src={item?.lens?.image} className="m-r-0-5" size="sm">
+                    {heading == "Online" ? (
+                      <AvatarBadge boxSize="0.7em" bg="green.500" />
+                    ) : (
+                      <></>
+                    )}
+                  </Avatar>
+                  <h6>
+                    {item?.lens?.name
+                      ? item?.lens?.name
+                      : item?.lens?.handle
+                      ? item?.lens?.handle
+                      : truncateAddress(item?.lens?.ownedBy)}
+                  </h6>
+                </Row>
+              ))}
+            </Container>
+          </>
+        ) : (
+          <></>
+        )}
+      </Col>
+    );
+  };
 
-            {template('Ofline', props.offlineUsers)}
+  const TemplateProfile = () => {
+    console.log(selectedUser, "selectedUser");
+    return (
+      <ModalSlider event={modalProfile} size="lg">
+        <UserProfile user={selectedUser} />
+      </ModalSlider>
+    );
+  };
 
-            <TemplateProfile />
-        </>
-    )
-}
+  return (
+    <>
+      {template("Online", props.onlineUsers)}
+
+      {template("Ofline", props.offlineUsers)}
+
+      <TemplateProfile />
+    </>
+  );
+};
 
 export default UserList;

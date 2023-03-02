@@ -5,7 +5,6 @@ import LayoutProfileBanner from "@/layouts/LayoutProfileBanner";
 import { Col, Row, StyledCard, StyledIcon } from "@/styles/StyledComponents";
 import { ChatIcon } from "@chakra-ui/icons";
 import {
-  Avatar,
   Button,
   Heading,
   Tab,
@@ -20,88 +19,45 @@ import LayoutPostList from "../../layouts/post/LayoutPostList";
 import UserCard from "./UserCard";
 import UserFollowersCard from "./UserFollowersCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import IconImage from "../icons/IconImage";
+import useLensProfile from "@/hooks/lens/useLensProfile";
 
-interface Props {
-  [key: string]: any;
-}
-
-const UserProfile = (props: any) => {
+const UserProfile = ({ user }) => {
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
-  const hookLensFollow = useLensFollows(props.user?.lens?.id);
-  const hookLensPostsForUser = useLensPostsForUser(props?.user?.lens?.id);
+  const hookLensFollow = useLensFollows(user?.lens?.id);
+  const hookLensPostsForUser = useLensPostsForUser(user?.lens?.id);
+  const { getOwnedProfiles, userLens } = useLensProfile();
+
+  useEffect(() => {
+    getOwnedProfiles(user?.lens?.ownedBy);
+    console.log(user?.lens?.ownedBy, "user?.lens?.ownedBy");
+  }, [user?.lens?.ownedBy]);
+
   const hookLensConnections = useLensConnections(
-    props.user?.lens?.ownedBy,
-    props?.user?.lens?.id
+    userLens?.ownedBy,
+    userLens?.id
   );
+  console.log("userLens", userLens);
+
   const authContext = useContext(AuthContext);
-
-  const templateConnections = () => {
-    return (
-      <>
-        {hookLensConnections.following?.length ? (
-          <Wrap className="m-b-2">
-            {hookLensConnections.following.length ? (
-              <>
-                {hookLensConnections.following.map((item: any, index: any) => {
-                  return <UserCard user={item} key={index} />;
-                })}
-              </>
-            ) : (
-              <></>
-            )}
-          </Wrap>
-        ) : (
-          <></>
-        )}
-      </>
-    );
-  };
-
-  const templateSocial = () => {
-    return (
-      <>
-        <Row className="m-t-0-5">
-          {props.profile?.attributesObj?.website?.value ? (
-            <a
-              href={props.profile?.attributesObj?.website?.value}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <StyledIcon className="state-1-2">
-                {/* <GlobeIcon width="24" height="24" fill="#e8e8e8" /> */}
-              </StyledIcon>
-            </a>
-          ) : (
-            <></>
-          )}
-          {props.profile?.attributesObj?.twitter?.value ? (
-            <a
-              href={props.profile?.attributesObj?.twitter?.value}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <StyledIcon className="state-1-2">
-                {/* <TwitterIcon width="24" height="24" fill="#e8e8e8" /> */}
-              </StyledIcon>
-            </a>
-          ) : (
-            <></>
-          )}
-        </Row>
-      </>
-    );
-  };
 
   const templatePosts = () => {
     return (
       <Col>
-        <LayoutPostList
-          list={hookLensPostsForUser.posts}
-          isLoading={hookLensPostsForUser.isLoading}
-        />
+        {
+          <>
+            {user?.lens?.ownedBy === undefined ? (
+              "User has not connected Lens to their profile"
+            ) : (
+              <LayoutPostList
+                list={hookLensPostsForUser.posts}
+                isLoading={hookLensPostsForUser.isLoading}
+              />
+            )}
+          </>
+        }
       </Col>
     );
   };
@@ -135,10 +91,32 @@ const UserProfile = (props: any) => {
     );
   };
 
+  const TemplateFollowing = () => {
+    return (
+      <>
+        {hookLensConnections.following?.length &&
+        user?.lens?.ownedBy != undefined ? (
+          <Wrap className="m-b-2">
+            {hookLensConnections.following.map((item: any, index: any) => {
+              return <UserFollowersCard user={item} key={index} />;
+            })}
+          </Wrap>
+        ) : (
+          <>
+            {user?.lens?.ownedBy === undefined
+              ? "User has not connected Lens to their profile"
+              : "Zero Following"}
+          </>
+        )}
+      </>
+    );
+  };
+
   const TemplateFollowers = () => {
     return (
       <>
-        {hookLensConnections.followers?.length ? (
+        {hookLensConnections.followers?.length &&
+        user?.lens?.ownedBy != undefined ? (
           <Wrap className="m-b-2">
             {hookLensConnections.followers.length ? (
               <>
@@ -151,7 +129,11 @@ const UserProfile = (props: any) => {
             )}
           </Wrap>
         ) : (
-          <>Zero followers</>
+          <>
+            {user?.lens?.ownedBy === undefined
+              ? "User has not connected Lens to their profile"
+              : "Zero Followers"}
+          </>
         )}
       </>
     );
@@ -160,33 +142,31 @@ const UserProfile = (props: any) => {
   const TemplateProfile = () => {
     return (
       <StyledCard>
-        <LayoutProfileBanner profile={props.user?.lens} />
+        <LayoutProfileBanner profile={user?.lens} />
 
         <Row>
           <Col className="m-v-1 w-100 hr-center">
             <Heading as="h3" size="lg">
-              {props.user?.lens?.name
-                ? props.user?.lens?.name
-                : props.user?.lens?.handle}
+              {user?.lens?.name ? user?.lens?.name : user?.lens?.handle}
             </Heading>
-            <h6>@{props.user?.lens?.handle}</h6>
+            <h6>@{user?.lens?.handle}</h6>
           </Col>
         </Row>
 
         <Row className="vr-center hr-center">
-          {props.user?.lens?.bio ? (
+          {user?.lens?.bio ? (
             <Col className="m-v-1">
-              <Text className="bioText">{props?.user?.lens?.bio}</Text>
+              <Text className="bioText">{user?.lens?.bio}</Text>
             </Col>
           ) : (
             <></>
           )}
         </Row>
 
-        {props.user?.lens?.ownedBy?.toLowerCase() !==
+        {user?.lens?.ownedBy?.toLowerCase() !==
           authContext?.address?.toLowerCase() && (
           <Row className="m-v-1 vr-center hr-center">
-            {props.user?.lens?.isFollowedByMe || isFollowed ? (
+            {user?.lens?.isFollowedByMe || isFollowed ? (
               <Button
                 variant="state_lens_unfollow"
                 size="md"
@@ -234,19 +214,19 @@ const UserProfile = (props: any) => {
               <Row className="m-v-1 w-100 vr-center hr-center">
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage path="IconDarkPost.png" size="15"/>
+                    <IconImage path="IconDarkPost.png" size="15" />
                     <Text className="m-l-0-5">Posts</Text>
                   </Button>
                 </Tab>
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage path="IconDarkFollowers.png" size="15"/>
+                    <IconImage path="IconDarkFollowers.png" size="15" />
                     <Text className="m-l-0-5">Followers</Text>
                   </Button>
                 </Tab>
                 <Tab>
-                <Button variant="state_default_hover">
-                    <IconImage path="IconDarkFollowing.png" size="15"/>
+                  <Button variant="state_default_hover">
+                    <IconImage path="IconDarkFollowing.png" size="15" />
                     <Text className="m-l-0-5">Following</Text>
                   </Button>
                 </Tab>
@@ -261,7 +241,9 @@ const UserProfile = (props: any) => {
               <TemplateFollowers />
             </TabPanel>
 
-            <TabPanel>{templateConnections()}</TabPanel>
+            <TabPanel>
+              <TemplateFollowing />
+            </TabPanel>
           </TabPanels>
         </LayoutCardPannel>
       </Tabs>
@@ -270,7 +252,7 @@ const UserProfile = (props: any) => {
 
   return (
     <div>
-      {props.user ? (
+      {user ? (
         <>
           <TemplateProfile />
           <TemplateTabs />

@@ -9,33 +9,34 @@ import ChatNonDisplay from "./ChatNonDisplay";
 import ChatWindow from "./ChatWindow";
 
 const ChatContainer = (channel: any) => {
-    const chatProvider = useContext(ChatContext);
-    const authContext = useContext(AuthContext) as AuthContextType;
-    return (
+  const chatProvider = useContext(ChatContext);
+  const authContext = useContext(AuthContext) as AuthContextType;
+
+  return (
+    <>
+      {chatProvider?.hookChannel?.channel ? (
         <>
-            {chatProvider?.hookChannel?.channel ? 
-                <>
-                    <ChatHeader
-                    hookChat={chatProvider.hookChat}
-                    hookChannel={chatProvider.hookChannel}
-                    hookMembers={chatProvider.hookMembers}
-                    />
-                    <ChatWindow
-                        hookChat={chatProvider.hookChat}
-                        hookChannel={chatProvider.hookChannel}
-                        authContext={authContext}
-                        address={authContext.address}
-                    />
-                    <ChatInput
-                        hookChat={chatProvider.hookChat}
-                    />
-                </>
-            :
-                <ChatNonDisplay></ChatNonDisplay>
-            }
-                
+          <ChatHeader
+            hookChat={chatProvider.hookChat}
+            hookChannel={chatProvider.hookChannel}
+            hookMembers={chatProvider.hookMembers}
+          />
+          <ChatWindow
+            hookChat={chatProvider.hookChat}
+            hookChannel={chatProvider.hookChannel}
+            authContext={authContext}
+            address={authContext.address}
+          />
+          <ChatInput
+            hookChat={chatProvider.hookChat}
+            lensId={authContext.user.lens.id}
+          />
         </>
-    )
-}
+      ) : (
+        <ChatNonDisplay></ChatNonDisplay>
+      )}
+    </>
+  );
+};
 
 export default ChatContainer;
