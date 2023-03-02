@@ -14,15 +14,10 @@ function ChatComponent() {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    if (!authContext?.address || !authContext?.user?.lens?.id) {
-      const modal: any = window.localStorage.getItem("accessToken");
-      console.log("auth card modal", modal);
-      if (modal == null) 
-        modalAuth.onOpen(); 
-      else {
-        authContext.connectLens();
-        modalAuth.onClose();
-      }
+    if (authContext.authenticated) {      
+        modalAuth.onClose(); 
+    } else {
+      modalAuth.onOpen();
     }
   }, [authContext?.user?.lens?.id])
 
