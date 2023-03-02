@@ -1,4 +1,5 @@
 import IconEmoji from "@/components/icons/IconEmoji";
+import { marked } from 'marked';
 import IconImage from "@/components/icons/IconImage";
 import InputAction from "@/components/input/InputAction";
 import Pop from "@/components/pop/Pop";
@@ -234,10 +235,10 @@ const ChatMessage = (props: any) => {
             {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
               <Checkbox
                 defaultChecked={props?.hookChat?.selectedMessages?.includes(
-                  props.messages?.id
+                  props?.message?.id
                 )}
-                value={props?.hookChat?.selectedMessages?.includes(
-                  props.messages?.id
+                isChecked={props?.hookChat?.selectedMessages?.includes(
+                  props?.message?.id
                 )}
                 onChange={() => {
                   props?.hookChat?.handleSelect(props?.message);

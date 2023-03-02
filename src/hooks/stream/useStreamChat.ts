@@ -45,6 +45,11 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   const [slashCmd, setSlashCmd] = useState<any>();
   const [slashCmdValue, setSlashCmdValue] = useState<any>();
 
+  useEffect(() => {
+console.log("selectedMessages", selectedMessages);
+
+  }, [selectedMessages])
+
   const slashRun = (command: any) => {
     setSlashCmdValue(command.name);
     setSlashCmd(false);
@@ -254,6 +259,7 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   };
 
   const keyDownMessage = async (event: any) => {
+  
     const keycode = event.which || event.keycode;
 
     //Logic for typing indicators begins
