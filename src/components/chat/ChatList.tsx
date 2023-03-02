@@ -54,7 +54,6 @@ const ChatList = (props: any) => {
   }, []);
 
   const TemplateChatNew = () => {
-    console.log("modalChatNew", modalChatNew);
     return (
       <ModalSlider event={modalChatNew} size="md">
         <ChatNew modal={modalChatNew} />
@@ -63,7 +62,6 @@ const ChatList = (props: any) => {
   };
 
   const TemplateActions = (props: any) => {
-    console.log("props", props);
     return (
       <Pop
         trigger={<IconImage path="IconDarkMenu.png" />}

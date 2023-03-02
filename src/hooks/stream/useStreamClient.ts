@@ -12,24 +12,15 @@ const useStreamClient = () => {
   const unsubscribeTokenRefreshListenerRef = useRef<() => void>();
 
   const connectToStream = async () => {
-    if (!authContext?.user?.lens?.id) {
-      logger("stream", "connecttostream", "user.lens error", [
-        authContext?.user,
-      ]);
-      return;
-    } else if (!authContext?.user?.db?.tokens?.stream) {
-      logger("stream", "connecttostream", "user.db error", [authContext?.user]);
+    if (!authContext?.isConnected) {
+      logger("stream", "useStreamClient.connecttostream", "user not connected", [authContext?.user]);
       return;
     }
     try {
-      if (client?.user) {
+      if (client?.user.id) {
         client.disconnect();
       }
       const newClient = StreamChat.getInstance(`${config.STREAM_APIKEY}`);
-      logger("stream", "connectToStream", "StreamAuth Step 1", [
-        newClient,
-        authContext?.user,
-      ]);
 
       await newClient.connectUser(
         {
@@ -43,7 +34,7 @@ const useStreamClient = () => {
         },
         authContext?.user?.db?.tokens?.stream
       );
-      logger("stream", "connectToStream", "StreamAuth Step 2", [
+      logger("stream", "useStreamClient.connectToStream", "Connection made", [
         newClient.user,
         authContext?.user,
       ]);
@@ -51,7 +42,7 @@ const useStreamClient = () => {
     } catch (e) {
       logger(
         "stream",
-        "connectToStream",
+        "useStreamClient.connectToStream",
         "Error in setting the stream client",
         [e]
       );

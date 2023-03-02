@@ -52,27 +52,33 @@ const AuthProvider = ({ children }: any) => {
    * 
    **/
   const _fetchUserFromLens = async () => {
-    const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
-    try {
-      if (lensProfile) {
-        const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
-        logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
-        if (tokens?.accessToken) {
-          user.setLensDirect({
-            ...lensProfile,
-            accessToken: tokens["accessToken"],
-            refreshToken: tokens["refreshToken"],
-          });
-        } else {
-          user.setLensDirect(lensProfile);
-        }
-      } else {
-        throw Error(`Couldn't find Lens Profile with address ${address}`);
-      }
-    } catch (error) {
-      logger("auth", "_fetchUserFromLens", "Error in fetching userData from Lens", [error]);
+    if (!address) {
+      logger("auth", "_fetchUserFromLens", "Address not found", [user]);
+      return;
     }
-    
+    if (address != user.lens.ownedBy) {
+      const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
+      try {
+        if (lensProfile) {
+          const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
+          logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
+          if (tokens?.accessToken) {
+            user.setLensDirect({
+              ...lensProfile,
+              accessToken: tokens["accessToken"],
+              refreshToken: tokens["refreshToken"],
+            });
+          } else {
+            user.setLensDirect(lensProfile);
+          }
+        } else {
+          throw Error(`Couldn't find Lens Profile with address ${address}`);
+        }
+      } catch (error) {
+        logger("auth", "_fetchUserFromLens", "Error in fetching userData from Lens", [error]);
+      }
+      return;
+    }
   };
 
   /** 
@@ -85,6 +91,7 @@ const AuthProvider = ({ children }: any) => {
       // fetching the userData from the Database
       findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
         user.setDb(data);
+        logger('auth', 'AuthProvider._fetchUserFromDB', 'Response from findOrCreateUser', [data]);
         putStreamToken({ userAddress: address.toLowerCase() }).then(
           (res: any) => {
             logger(
@@ -151,7 +158,7 @@ const AuthProvider = ({ children }: any) => {
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,
-        isConnected: isConnected,
+        isConnected: address && user?.lens?.id && user?.db?.id
       }}
     >
       {children}
