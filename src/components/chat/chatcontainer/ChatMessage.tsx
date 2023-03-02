@@ -102,7 +102,7 @@ const ChatMessage = (props: any) => {
   const TemplateActions = () => {
     return (
       <Pop
-        placement={"top-end"}
+        placement={"botton-left"}
         trigger={<IconImage path="IconDarkMenu.png" />}
       >
         <Col className="text-start">

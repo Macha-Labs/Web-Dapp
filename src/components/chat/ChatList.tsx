@@ -96,7 +96,7 @@ const ChatList = (props: any) => {
           <Col className="body verticlescroll hidescroll">
             {chatProvider?.hookChannels?.channels?.length ? (
               <ul>
-                <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button>
+                {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
                 {chatProvider?.hookChannels?.channels.map(
                   (item: any, index: number) => (
                     <StyledChatItem key={item?.index}>

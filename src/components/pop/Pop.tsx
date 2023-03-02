@@ -8,16 +8,17 @@ import { useState } from "react";
 
 const Pop = (props: any) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const handlePopover = () => {
-    
+  const handlePopover = (e: void) => {
      setIsOpen(!isOpen);
+     console.log("Event", e);
+     
   };
   return (
     <Popover
       isOpen={isOpen}
       onOpen={handlePopover}
       onClose={handlePopover}
-      placement={props?.placement ? props?.placement : "top-start"}
+      // placement={props?.placement ? props?.placement : "top-start"}
     >
       <PopoverTrigger>{props?.trigger}</PopoverTrigger>
       <PopoverContent className="m-b-1">
