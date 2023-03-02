@@ -18,6 +18,7 @@ export type AuthContextType = {
   user: any | undefined;
   setUser: (param: any) => void;
   isConnected: boolean | undefined;
+  isLoadingLens: boolean | undefined;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -29,6 +30,7 @@ export const AuthContext = createContext<AuthContextType>({
   user: null,
   setUser: param => {},
   isConnected: false,
+  isLoadingLens: false
 });
 
 const AuthProvider = ({ children }: any) => {
@@ -36,6 +38,7 @@ const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<any>(new User$(null, null, null));
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
+  const [isLoadingLens, setLoadingLens] = useState<any>(false);
 
   /** 
    * @description Initiating Hooks
@@ -57,11 +60,13 @@ const AuthProvider = ({ children }: any) => {
       return;
     }
     if (address != user.lens.ownedBy) {
+      setLoadingLens(true);
       const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
       try {
         if (lensProfile) {
           const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
           logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
+          setLoadingLens(false);
           if (tokens?.accessToken) {
             user.setLensDirect({
               ...lensProfile,
@@ -158,7 +163,8 @@ const AuthProvider = ({ children }: any) => {
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,
-        isConnected: address && user?.lens?.id && user?.db?.id
+        isConnected: address && user?.lens?.id && user?.db?.id,
+        isLoadingLens: isLoadingLens
       }}
     >
       {children}
