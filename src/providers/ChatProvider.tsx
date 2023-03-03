@@ -1,8 +1,4 @@
-import { logger } from "@/helpers/logger";
-import React, { createContext, useContext, useState } from "react";
-import useStreamChannel from "../hooks/stream/useStreamChannel";
-import useStreamChannelMembers from "../hooks/stream/useStreamChannelMembers";
-import useStreamChat from "../hooks/stream/useStreamChat";
+import { createContext, useContext } from "react";
 import { StreamContext, StreamContextType } from "./StreamProvider";
 
 export type ChatContextType = {
@@ -13,7 +9,6 @@ export type ChatContextType = {
   streamClient: any | undefined;
   streamContext: any | undefined;
   initiate: (channel: any, userAddress: any) => void;
-  fetchMessages: () => void;
 };
 
 export const ChatContext = createContext<ChatContextType>({
@@ -24,7 +19,6 @@ export const ChatContext = createContext<ChatContextType>({
   streamClient: null,
   streamContext: null,
   initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
-  fetchMessages: () => {}
 });
 
 export const ChatProvider = ({ children }: any) => {

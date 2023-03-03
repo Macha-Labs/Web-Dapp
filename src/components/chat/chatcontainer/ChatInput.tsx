@@ -1,31 +1,26 @@
+import IconImage from "@/components/icons/IconImage";
+import ModalWindow from "@/components/modal/ModalWindow";
+import Pop from "@/components/pop/Pop";
+import PortalLoader from "@/components/PortalLoader";
+import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
+import { AuthContext } from "@/providers/AuthProvider";
+import {
+  Col, Row, StyledChatInput, StyledChatInputContainer,
+  StyledChatPreview, StyledIcon
+} from "@/styles/StyledComponents";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import {
-  Avatar,
   Button,
   Divider,
   Heading,
   Image,
   Text,
   Textarea,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
-import {
-  Row,
-  Col,
-  StyledIcon,
-  StyledChatInputContainer,
-  StyledChatPreview,
-  StyledChatInput,
-} from "@/styles/StyledComponents";
+import { useContext, useRef } from "react";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
 import ChatMention from "../ChatMention";
-import PortalLoader from "@/components/PortalLoader";
-import IconImage from "@/components/icons/IconImage";
-import Pop from "@/components/pop/Pop";
-import ModalWindow from "@/components/modal/ModalWindow";
-import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
-import { useContext, useRef } from "react";
-import { AuthContext } from "@/providers/AuthProvider";
 
 const ChatInput = (props: any) => {
   const modalPost = useDisclosure();

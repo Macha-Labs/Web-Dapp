@@ -1,7 +1,7 @@
+import { useContext, useRef, useState } from "react";
+import { StreamChat } from "stream-chat";
 import { config } from "../../config";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import { useContext, useEffect, useRef, useState } from "react";
-import { StreamChat } from "stream-chat";
 // import {storeAsyncData, getAsyncData} from "../../service/AsyncStorageService";
 // import messaging from "@react-native-firebase/messaging";
 import { logger } from "../../helpers/logger";

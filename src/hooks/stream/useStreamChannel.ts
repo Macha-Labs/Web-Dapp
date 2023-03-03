@@ -1,6 +1,6 @@
-import { logger } from "./../../helpers/logger";
-import { useState, useEffect} from "react";
+import { useState } from "react";
 import { ChannelStream$ } from "../../schema/channel";
+import { logger } from "./../../helpers/logger";
 
 const useStreamChannel = (client: any) => {
   console.log("Checking for useStreamChannel re-rendering");
