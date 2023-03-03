@@ -33,6 +33,65 @@ const ChatMessage = (props: any) => {
   const time = `${hours}:${minutes}`;
 
 
+  const actionsData = [
+    {
+      name: 'Edit Message',
+      key: `c-${props?.message?.id}`,
+      icon: <IconImage path="IconDarkFiles.png" />,
+      onClick: () => {
+        props.hookChat.handleEdit(props.message);
+      },
+      condition: props.message?.user?.id == props?.authContext?.address
+    },
+    {
+      name: 'Reply Message',
+      key: `c-${props?.message?.id}`,
+      icon: <IconImage path="IconDarkFiles.png" />,
+      onClick: () => {
+        props.hookChat.handleReply(props.message);
+      },
+      condition: true,
+    },
+    {
+      name: 'Copy Message',
+      key: `c-${props?.message?.id}`,
+      icon: <IconImage path="IconDarkFiles.png" />,
+      onClick: () => {
+        navigator.clipboard.writeText(props.message?.text);
+        toast({
+          title: "Copied to clipboard",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      },
+      condition: true
+    },
+    {
+      name: props?.message?.pinned ? "Unpin Message" : "Pin Message",
+      key: `c-${props?.message?.id}`,
+      icon: <IconImage path="IconDarkFiles.png" />,
+      onClick: () => {
+        if (props.message?.pinned) {
+          props.hookChat.unPinMessage(props.message);
+        } else {
+          props.hookChat.pinMessage(props.message);
+        }
+      },
+      condition: true
+    },
+    {
+      name: "Delete Message",
+      key: `c-${props?.message?.id}`,
+      icon: <IconImage path="IconDarkFiles.png" />,
+      onClick: () => {
+        props.hookChat.deleteMessage(props.message);
+      },
+      condition: props.message?.user?.id == props?.authContext?.address
+    },
+  ]
+
+
   const templateAttachment = (attachment: any) => {
     if (attachment?.og_scrape_url) {
       return <LayoutLinkPreview key={attachment?.id} attachment={attachment} />;
@@ -104,98 +163,27 @@ const ChatMessage = (props: any) => {
     return (
       <Pop
         size="sm"
-        placement={"botton-left"}
+        placement={"botton-right"}
         trigger={<IconImage path="IconDarkMenu.png" />}
       >
         <Col className="text-start">
-          {props.message?.user?.id == props?.authContext?.address && (
-            <Button
-              variant="transparent"
-              size="xs"
-              className="text-start"
-              rightIcon={<IconImage path="IconDarkFiles.png" />}
-              key={`c-${props?.message?.id}`}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  props.hookChat.handleEdit(props.message);
-                }}
-                key={`d-${props?.message?.id}`}
-              >
-                Edit
-              </Row>
-            </Button>
-          )}
-
-          <Button
-            variant="transparent"
-            size="xs"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
-          >
-            <Row
-              className="hr-between w-100"
-              onClick={() => {
-                props.hookChat.handleReply(props.message);
-              }}
-            >
-              Reply
-            </Row>
-          </Button>
-          <Button
-            variant="transparent"
-            size="xs"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
-          >
-            <Row
-              className="hr-between w-100"
-              onClick={() => {
-                navigator.clipboard.writeText(props.message?.text);
-                toast({
-                  title: "Copied to clipboard",
-                  status: "success",
-                  duration: 3000,
-                  position: "bottom-right",
-                });
-              }}
-            >
-              Copy
-            </Row>
-          </Button>
-          <Button
-            variant="transparent"
-            size="xs"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
-          >
-            <Row
-              className="hr-between w-100"
-              onClick={() => {
-                if (props.message?.pinned) {
-                  props.hookChat.unPinMessage(props.message);
-                } else {
-                  props.hookChat.pinMessage(props.message);
-                }
-              }}
-            >
-              {props.message?.pinned ? "Unpin Message" : "Pin Message"}
-            </Row>
-          </Button>
-          {props.message?.user?.id == props?.authContext?.address && (
-            <Button
-              variant="transparent"
-              size="xs"
-              className="text-start"
-              rightIcon={<IconImage path="IconDarkFiles.png" />}
-              onClick={() => {
-                props.hookChat.deleteMessage(props.message);
-              }}
-            >
-              <Row className="hr-between w-100">Delete Message</Row>
-            </Button>
-          )}
+          {actionsData.map((item) => {
+            return (
+              <>
+                {item.condition &&
+                <Button
+                  variant="transparent"
+                  size="sm"
+                  className="text-start"
+                  rightIcon={item.icon}
+                  key={item.key}
+                  onClick={item.onClick}
+                >
+                  {item.name}
+                </Button>}
+              </>
+            )
+          })}
         </Col>
       </Pop>
     );
