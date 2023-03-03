@@ -8,6 +8,7 @@ const useStreamChannelMessages = (channel: any) => {
         logger("channel", "useEffect[channel]", "channel is ", [channel]);
         if (channel) {
             channel?.raw?.markRead();
+            setMessages(null)
         }
         channel?.raw?.on("message.new", (event: any) => {
             logger("stream", "useStreamChannel.useEffect", "logging the channel events", [event]);
