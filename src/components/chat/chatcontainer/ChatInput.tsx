@@ -2,6 +2,7 @@ import { PlusSquareIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Button,
+  Divider,
   Heading,
   Image,
   Text,
@@ -22,10 +23,15 @@ import PortalLoader from "@/components/PortalLoader";
 import IconImage from "@/components/icons/IconImage";
 import Pop from "@/components/pop/Pop";
 import ModalWindow from "@/components/modal/ModalWindow";
-
+import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
+import { useContext, useRef } from "react";
+import { AuthContext } from "@/providers/AuthProvider";
 
 const ChatInput = (props: any) => {
   const modalPost = useDisclosure();
+  const hookCreateLensPost = useCreateLensPost();
+  const createPostRef = useRef<any>();
+  const authContext = useContext(AuthContext);
 
   const templateReply = () => {
     return (
@@ -34,16 +40,15 @@ const ChatInput = (props: any) => {
           <div className="reply">
             <Col className="w-100 vr-center">
               <Row className="vr-center">
-                <Text fontSize="xs" className="m-r-1">
-                  Replying to:
-                </Text>
-                <Avatar
+                <IconImage path="IconDarkReply.png" />
+                <Divider orientation="vertical" color={"#246BFD"} />
+                {/* <Avatar
                   size="xs"
                   src={props.hookChat?.actionMessage?.item?.user.lensImage}
                 />
                 <Text fontSize="xs">
                   @{props.hookChat?.actionMessage?.item?.user?.lensHandle}
-                </Text>
+                </Text> */}
               </Row>
               <Row>
                 <Text fontSize="xs">
@@ -75,20 +80,23 @@ const ChatInput = (props: any) => {
             className="m-b-1 m-t-1"
             size="xl"
             placeholder="Your Lens Post Content Here"
-            ref={null}
+            ref={createPostRef}
           ></Textarea>
           <Row className="m-b-1">
             <IconImage
               path="IconDarkFiles.png"
               style={{ className: "m-r-0-5" }}
             />
-            <IconImage path="IconDarkPhotos.png" />
+            <IconImage path="IconDarkPost.png" />
           </Row>
           <Button
             size="sm"
             variant="state_brand w-content"
             onClick={() => {
-              
+              hookCreateLensPost.validateMetadataAndPostOnLens({
+                profileId: authContext?.user?.lens?.id,
+                postContent: createPostRef.current.value,
+              });
             }}
           >
             Create Post
@@ -277,7 +285,9 @@ const ChatInput = (props: any) => {
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
-                onKeyDown={event => props.hookChat?.keyDownMessage(event)}
+                onKeyDown={event => {
+                  props.hookChat?.keyDownMessage(event);
+                }}
                 placeholder="Message..."
                 height="auto"
                 rows={1}
@@ -328,20 +338,13 @@ const ChatInput = (props: any) => {
   };
 
   const TemplateMultiselect = () => {
-    return <Row className="vr-center hr-between w-100">
-      <IconImage
-            path="IconDarkReply.png"
-            style={{ className: "m-r-0-5" }}
-          />
-          <IconImage
-            path="IconDarkDelete.png"
-            style={{ className: "m-r-0-5" }}
-          />
-          <IconImage
-            path="IconDarkForward.png"
-            style={{ className: "m-r-0-5" }}
-          />
-    </Row>;
+    return (
+      <Row className="vr-center hr-between w-100">
+        <IconImage path="IconDarkReply.png" style={{ className: "m-r-0-5" }} />
+        <IconImage path="IconDarkDelete.png" style={{ className: "m-r-0-5" }} />
+        <IconImage path="IconDarkForward.png" style={{ className: "m-r-0-5" }} />
+      </Row>
+    );
   };
 
   const previewCloseHandler = () => {

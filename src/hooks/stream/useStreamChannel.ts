@@ -1,14 +1,11 @@
 import { logger } from "./../../helpers/logger";
-import { useState, useEffect, useContext } from "react";
-import {
-  StreamContext,
-  StreamContextType,
-} from "../../providers/StreamProvider";
+import { useState, useEffect} from "react";
 import { ChannelStream$ } from "../../schema/channel";
 
 const useStreamChannel = (client: any) => {
+  console.log("Checking for useStreamChannel re-rendering");
+
   const [channel, setChannel] = useState<any>();
-  const [messages, setMessages] = useState<any>();
 
   /** 
    * @description Function to setup channel
@@ -32,21 +29,11 @@ const useStreamChannel = (client: any) => {
    * @description Watching Channel
    * 
    **/
-  useEffect(() => {
-    logger("channel", "useEffect[channel]", "channel is ", [channel]);
-    if (channel)
-      channel?.raw?.markRead()
-      channel?.raw?.on((event: any) => {
-        logger("stream", "useEffect", "logging the channel events", [event]);
-        logger("stream", "useEffect", "logging the channel Messages", [channel?.raw?.state?.messageSets[0]?.messages]);
-        setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
-      });
-  }, [channel]);
+  
 
   return {
     setUpChannel: setUpChannel,
     channel: channel,
-    messages: messages || channel?.raw?.state?.messageSets[0]?.messages,
     pinnedMessages: channel?.raw?.state?.pinnedMessages,
   };
 };

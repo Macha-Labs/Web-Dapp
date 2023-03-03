@@ -20,14 +20,16 @@ export const StyledWindow = styled.div`
     margin: auto;
     margin-top: 10%;
   }
-
-
 `;
 
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
   text-align: left;
+
+  &.flex-wrap {
+    flex-wrap: wrap !important;
+  }
 
   &.vr-start {
     align-items: start;
@@ -485,6 +487,9 @@ export const StyledIcon = styled.i`
   }
   &.state_active {
     background: ${style.icon.bg.active};
+    transform: scale(1.1);
+
+    box-shadow: ${style.icon.shadow.hover};
   }
 
   &.scale {
@@ -563,10 +568,10 @@ export const StyledChatList = styled.div`
     padding: ${style.body.padding};
     background: ${style.body.bg};
     overflow-y: scroll;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none;
-    &::-webkit-scrollbar { 
-      display: none;  /* Safari and Chrome */
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
     }
 
     .menu-heading {
@@ -640,10 +645,16 @@ export const StyledChat = styled.div`
     overflow: inherit;
     padding: 20px 0px;
     height: calc(100vh - 100px);
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none;
-    &::-webkit-scrollbar { 
-      display: none;  /* Safari and Chrome */
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+    &.hidden {
+      visibility: hidden !important;
+      position: absolute;
+      top: 0;
     }
   }
 `;
@@ -652,12 +663,12 @@ export const StyledChatItem = styled(Row)`
   align-items: center;
   justify-content: flex-start;
   .settingsIcon {
-    display: none;
+    visibility: hidden;
   }
 
   &:hover {
     .settingsIcon {
-      display: inline;
+      visibility: visible;
     }
   }
 `;
@@ -754,9 +765,6 @@ export const StyledConversationView = styled.div`
   -ms-overflow-style: none;
   padding-bottom: 3rem;
 
-  <<<<<<< HEAD ::-webkit-scrollbar {
-    display: none;
-  }
   .emogiPicker {
     background-color: black;
   }
@@ -774,7 +782,7 @@ export const StyledConversation = styled(Col)`
   position: relative;
   opacity: 0.75;
   cursor: pointer;
-
+  overflow: hidden;
   &:hover {
     opacity: 1;
     .action {
@@ -790,12 +798,9 @@ export const StyledConversation = styled(Col)`
 
   .action {
     display: none;
-    position: absolute;
-    top: -10px;
-    right: 0;
-    padding: 5px;
-    border: ${style.borderInput};
-    background: #01041f;
+    padding-left: 10px;
+    /* border: ${style.borderInput}; */
+    /* background: #01041f; */
     border-radius: 5px;
     width: fit-content;
   }
@@ -957,7 +962,7 @@ export const StyledProfileBanner = styled.div`
   .bannerAvatar {
     position: absolute;
     top: 5rem;
-    left: 45%;
+    left: 0;
   }
 
   .bioText {

@@ -46,7 +46,7 @@ export enum PublicationContentWarning {
 //   EMBED = 'EMBED',
 // }
 
-export const PublicationMainFocus = {
+export const PublicationMainFocus: any = {
   'TEXT_ONLY': 'TEXT_ONLY',
   'video/mp4': 'VIDEO',
   'video/webm': 'VIDEO',

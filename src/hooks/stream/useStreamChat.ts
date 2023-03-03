@@ -6,18 +6,11 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import {
-  StreamContext,
-  StreamContextType,
-} from "../../providers/StreamProvider";
-// import useChatFilters from "../useChatFilters";
 import useMention from "./useMention";
-// import useCommand from "./useCommand";
 
-const useStreamChat = (client :any,channel: any, callback?: any) => {
+const useStreamChat = (client :any, channel: any) => {
+  console.log("Checking for useStreamChat re-rendering");
   const authContext = useContext(AuthContext) as AuthContextType;
-  const streamContext = useContext(StreamContext) as StreamContextType;
-
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
   const [streamLoading, setStreamLoading] = useState<any>(false);
@@ -30,8 +23,6 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   });
   const [selectedMessages, setSelectedMessages] = useState<any>([]);
   const [userObjTyping, setUserObjTyping] = useState<any>();
-  const [searchActive, setSearchActive] = useState<any>();
-  const [searchQuery, setSearchQuery] = useState<any>();
   const [usersWhoAreTyping, setUsersWhoAreTyping] = useState<any>();
   const [typingMessage, setTypingMessage] = useState<any>();
 
@@ -166,7 +157,7 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
     if (actionMessage?.action !== "EDIT") {
       return;
     }
-    await streamContext.client
+    await client
       .updateMessage({
         id: actionMessage.item?.id,
         text: editMessageRef.current.value,
@@ -232,7 +223,7 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   };
 
   const unPinMessage = async (message: any) => {
-    await streamContext.client
+    await client
       .unpinMessage(message)
       .then(() => {
         toast({
@@ -250,10 +241,10 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
           position: "bottom-right",
         });
       });
-    // callback();
   };
 
   const keyDownMessage = async (event: any) => {
+  
     const keycode = event.which || event.keycode;
 
     //Logic for typing indicators begins
@@ -283,7 +274,7 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
         setSlashCmdValue(textareaRef.current?.value);
         setSlashCmd(false);
         // widgetDrawer.onOpen();
-      } else {
+      } else if (textareaRef.current?.value.length > 0) {
         await addMessage();
       }
     } else if (event.key == "/") {
@@ -292,6 +283,7 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   };
 
   const handleEdit = (message: any) => {
+    console.log("Editing message body ", message);
     setActionMessage({ action: "EDIT", item: message });
   };
 
@@ -329,7 +321,11 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   };
 
   const handleMultiSelect = () => {
-    setActionMessage({ action: "MULTISELECT", item: null, data: { query: "" } });
+    setActionMessage({
+      action: "MULTISELECT",
+      item: null,
+      data: { query: "" },
+    });
   };
   const handleMultiSelectClose = () => {
     logger(
@@ -400,7 +396,6 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
       // setSlashCmd(false);
       // hookMention.setMentionActive(true);
       // hookMention.onTrigger(value, users);
-
     }
 
     if (slashCmd) {

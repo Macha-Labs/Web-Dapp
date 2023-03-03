@@ -1,4 +1,5 @@
 import IconEmoji from "@/components/icons/IconEmoji";
+import { marked } from 'marked';
 import IconImage from "@/components/icons/IconImage";
 import InputAction from "@/components/input/InputAction";
 import Pop from "@/components/pop/Pop";
@@ -26,6 +27,70 @@ import emoji from "../../../data/emoji.json";
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
   const toast = useToast();
+  const date = new Date(props.message.created_at);
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const time = `${hours}:${minutes}`;
+
+
+  const actionsData = [
+    {
+      name: 'Edit Message',
+      key: `c-${props?.message?.id}`,
+      icon: <IconImage path="IconDarkFiles.png" />,
+      onClick: () => {
+        props.hookChat.handleEdit(props.message);
+      },
+      condition: props.message?.user?.id == props?.authContext?.address
+    },
+    {
+      name: 'Reply Message',
+      key: `c-${props?.message?.id}`,
+      icon: <IconImage path="IconDarkFiles.png" />,
+      onClick: () => {
+        props.hookChat.handleReply(props.message);
+      },
+      condition: true,
+    },
+    {
+      name: 'Copy Message',
+      key: `c-${props?.message?.id}`,
+      icon: <IconImage path="IconDarkFiles.png" />,
+      onClick: () => {
+        navigator.clipboard.writeText(props.message?.text);
+        toast({
+          title: "Copied to clipboard",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      },
+      condition: true
+    },
+    {
+      name: props?.message?.pinned ? "Unpin Message" : "Pin Message",
+      key: `c-${props?.message?.id}`,
+      icon: <IconImage path="IconDarkFiles.png" />,
+      onClick: () => {
+        if (props.message?.pinned) {
+          props.hookChat.unPinMessage(props.message);
+        } else {
+          props.hookChat.pinMessage(props.message);
+        }
+      },
+      condition: true
+    },
+    {
+      name: "Delete Message",
+      key: `c-${props?.message?.id}`,
+      icon: <IconImage path="IconDarkFiles.png" />,
+      onClick: () => {
+        props.hookChat.deleteMessage(props.message);
+      },
+      condition: props.message?.user?.id == props?.authContext?.address
+    },
+  ]
+
 
   const templateAttachment = (attachment: any) => {
     if (attachment?.og_scrape_url) {
@@ -97,98 +162,28 @@ const ChatMessage = (props: any) => {
   const TemplateActions = () => {
     return (
       <Pop
-        placement={"top-end"}
+        size="sm"
+        placement={"botton-right"}
         trigger={<IconImage path="IconDarkMenu.png" />}
       >
         <Col className="text-start">
-          {props.message?.user?.id == props?.authContext?.address && (
-            <Button
-              variant="transparent"
-              size="md"
-              className="text-start"
-              rightIcon={<IconImage path="IconDarkFiles.png" />}
-              key={`c-${props?.message?.id}`}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  props.hookChat.handleEdit(props.message);
-                }}
-                key={`d-${props?.message?.id}`}
-              >
-                Edit
-              </Row>
-            </Button>
-          )}
-
-          <Button
-            variant="transparent"
-            size="md"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
-          >
-            <Row
-              className="hr-between w-100"
-              onClick={() => {
-                props.hookChat.handleReply(props.message);
-              }}
-            >
-              Reply
-            </Row>
-          </Button>
-          <Button
-            variant="transparent"
-            size="md"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
-          >
-            <Row
-              className="hr-between w-100"
-              onClick={() => {
-                navigator.clipboard.writeText(props.message?.text);
-                toast({
-                  title: "Copied to clipboard",
-                  status: "success",
-                  duration: 3000,
-                  position: "bottom-right",
-                });
-              }}
-            >
-              Copy
-            </Row>
-          </Button>
-          <Button
-            variant="transparent"
-            size="md"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
-          >
-            <Row
-              className="hr-between w-100"
-              onClick={() => {
-                if (props.message?.pinned) {
-                  props.hookChat.unPinMessage(props.message);
-                } else {
-                  props.hookChat.pinMessage(props.message);
-                }
-              }}
-            >
-              {props.message?.pinned ? "Unpin Message" : "Pin Message"}
-            </Row>
-          </Button>
-          {props.message?.user?.id == props?.authContext?.address && (
-            <Button
-              variant="transparent"
-              size="md"
-              className="text-start"
-              rightIcon={<IconImage path="IconDarkFiles.png" />}
-              onClick={() => {
-                props.hookChat.deleteMessage(props.message);
-              }}
-            >
-              <Row className="hr-between w-100">Delete Message</Row>
-            </Button>
-          )}
+          {actionsData.map((item) => {
+            return (
+              <>
+                {item.condition &&
+                <Button
+                  variant="transparent"
+                  size="sm"
+                  className="text-start"
+                  rightIcon={item.icon}
+                  key={item.key}
+                  onClick={item.onClick}
+                >
+                  {item.name}
+                </Button>}
+              </>
+            )
+          })}
         </Col>
       </Pop>
     );
@@ -228,7 +223,18 @@ const ChatMessage = (props: any) => {
         <Col>
           <Row>
             {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
-              <Checkbox defaultChecked={props?.hookChat?.selectedMessages?.includes(props.messages?.id)} value={props?.hookChat?.selectedMessages?.includes(props.messages?.id)} onChange={() => {props?.hookChat?.handleSelect(props?.message)}} className="m-r-0-5" />
+              <Checkbox
+                defaultChecked={props?.hookChat?.selectedMessages?.includes(
+                  props?.message?.id
+                )}
+                isChecked={props?.hookChat?.selectedMessages?.includes(
+                  props?.message?.id
+                )}
+                onChange={() => {
+                  props?.hookChat?.handleSelect(props?.message);
+                }}
+                className="m-r-0-5"
+              />
             )}
 
             <Avatar
@@ -260,17 +266,17 @@ const ChatMessage = (props: any) => {
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
-                  onClick={props.hookChat?.editMessage}
-                  key={`g-${props?.message?.id}`}
+                  onClick={() => props.hookChat?.editMessage()}
+                  key={`e-${props?.message?.id}`}
                 >
                   Update
                 </Button>,
                 <Button
+                  key={`e-${props?.message?.id}`}
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
                   onClick={props.hookChat?.handleEditClose}
-                  key={`h-${props?.message?.id}`}
                 >
                   Cancel
                 </Button>,
@@ -287,14 +293,21 @@ const ChatMessage = (props: any) => {
               />
             </InputAction>
           ) : (
+            // The text message is being set here. TextareaDiv is directly setting the html to the div.
             <TextareaDiv
               dangerouslySetInnerHTML={{ __html: props.message?.html }}
             />
           )}
-
-          {props?.message?.attachments ? (props?.message?.attachments?.map((item: any, index: number) => {
-            return templateAttachment(item);
-          })) : (<></>)}
+          <Col>
+            <span style={{ alignSelf: "flex-end" }}>{time}</span>
+          </Col>
+          {props?.message?.attachments ? (
+            props?.message?.attachments?.map((item: any, index: number) => {
+              return templateAttachment(item);
+            })
+          ) : (
+            <></>
+          )}
 
           {props?.message?.reaction_scores && (
             <Row className="vr-center">

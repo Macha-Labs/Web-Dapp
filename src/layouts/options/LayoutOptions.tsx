@@ -17,16 +17,25 @@ const LayoutOptions = (props: any) => {
             ) {
               return null;
             }
+            if (
+              (item.name === "Delete Channel" ||
+                item.name === "Permissions" ||
+                item.name === "Members" ||
+                item.name === "Edit Channel") &&
+              props.channelAdmin !== props.userId
+            ) {
+              return null;
+            }
             // console.log("channelrawdata", props.channelRawData);
             if (
               item.name === "Mute Chat" &&
-              props.channelRawData.muteStatus().muted
+              props.channelRawData?.muteStatus().muted
             ) {
               return null;
             }
             if (
               item.name === "UnMute Chat" &&
-              !props.channelRawData.muteStatus().muted
+              !props.channelRawData?.muteStatus().muted
             ) {
               return null;
             }
@@ -34,10 +43,12 @@ const LayoutOptions = (props: any) => {
               <Row
                 className="item m-b-0-5 hr-between"
                 key={index}
-                onClick={item.onPress}
+                onClick={() => {
+                  item.onPress();
+                }}
               >
                 <Row className="vr-center">
-                  <IconImage path={item.icon} size={item?.size}/>
+                  <IconImage path={item.icon} size={item?.size} />
                   <Text fontSize="md" className="m-l-0-5">
                     {item.name}
                   </Text>

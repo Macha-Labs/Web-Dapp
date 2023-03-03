@@ -50,7 +50,12 @@ export const authenticate_user = async (address: any, signature: any) => {
     });
     return data.authenticate;
   } catch (error: any) {
-    logger("lens", "lens.authenticate_user", "Error in authenticating user with Lens", [error]);
+    logger(
+      "lens",
+      "lens.authenticate_user",
+      "Error in authenticating user with Lens",
+      [error]
+    );
   }
 };
 
@@ -155,12 +160,8 @@ export const explorePublications = (explorePublicationQueryRequest: any) => {
   });
 };
 
-export const setMetaData = async (
-  profileId: string,
-  metadata: any,
-  accessToken: string
-) => {
-  const result = await apolloClient.mutate({
+export const setMetaData = async (profileId: string, metadata: any) => {
+  return apolloClient.mutate({
     mutation: gql(SET_METADATA),
     variables: {
       request: {
@@ -199,6 +200,7 @@ export const createNewPost = async (request: CreatePublicPostRequest) => {
     });
     return result;
   } catch (error: any) {
+    console.log("Error in creaing new Lens Post ", error);
     throw new Error("Error in creaing new Lens Post ", error);
   }
 };
