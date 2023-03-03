@@ -21,7 +21,7 @@ const ChatWindow = (props: any) => {
     const message = props.hookChannel.messages[index];
     
     return (
-      <div ref={el => itemsRef.current[index] = el}  style={style} key={`message-${index}`}>
+      <div style={style}>
         <ChatMessage
           message={message}
           hookChat={props.hookChat}
@@ -34,20 +34,37 @@ const ChatWindow = (props: any) => {
 
 
   return (
-    <div className="body">
-    <AutoSizer>
-    {({ height, width }) => (
-      <VariableSizeList
-        ref={messageListRef}
-        height={height}
-        itemCount={props.hookChannel.messages.length}
-        itemSize={(index: number) => messageAreaHeight[index]}
-        width={width}>
-        {templateMessages}
-      </VariableSizeList>
-    )}
-    </AutoSizer>
+    <>
+      <div className="body">
+        <AutoSizer>
+        {({ height, width }) => (
+          <VariableSizeList
+            ref={messageListRef}
+            height={height}
+            itemCount={props.hookChannel.messages.length}
+            itemSize={(index: number) => messageAreaHeight[index]}
+            width={width}>
+            {templateMessages}
+          </VariableSizeList>
+        )}
+        </AutoSizer>
+        </div>
+
+    <div className="body hidden">
+          {props?.hookChannel?.messages?.map((message: any, index: any) => {
+            return (
+              <div ref={el => itemsRef.current[index] = el}  key={`message-${index}`}>
+                <ChatMessage
+                  message={message}
+                  hookChat={props.hookChat}
+                  authContext={props.authContext}
+                  key={`a-${message.id}`}
+                />
+              </div>
+            )
+          })}
     </div>
+    </>
 
   );
 };

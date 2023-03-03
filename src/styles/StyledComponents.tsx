@@ -650,6 +650,9 @@ export const StyledChat = styled.div`
     &::-webkit-scrollbar {
       display: none; /* Safari and Chrome */
     }
+    &.hidden {
+      visibility: hidden !important;
+    }
   }
 `;
 export const StyledChatItem = styled(Row)`
