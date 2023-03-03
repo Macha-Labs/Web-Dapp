@@ -7,7 +7,7 @@ import {
 
 const Pop = (props: any) => {
   return (
-    <Popover placement={props?.placement ? props?.placement : "bottom"}>
+    <Popover placement={props?.placement ? props?.placement : "bottom"} size={props.size || 'md'}>
       <PopoverTrigger>{props?.trigger}</PopoverTrigger>
       <PopoverContent className="m-b-1">
         <PopoverBody>{props?.children}</PopoverBody>

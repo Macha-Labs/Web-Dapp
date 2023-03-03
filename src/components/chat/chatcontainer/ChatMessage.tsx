@@ -23,7 +23,6 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import emoji from "../../../data/emoji.json";
-import { useEffect, useRef } from "react";
 
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
@@ -104,6 +103,7 @@ const ChatMessage = (props: any) => {
   const TemplateActions = () => {
     return (
       <Pop
+        size="sm"
         placement={"botton-left"}
         trigger={<IconImage path="IconDarkMenu.png" />}
       >
@@ -111,7 +111,7 @@ const ChatMessage = (props: any) => {
           {props.message?.user?.id == props?.authContext?.address && (
             <Button
               variant="transparent"
-              size="md"
+              size="xs"
               className="text-start"
               rightIcon={<IconImage path="IconDarkFiles.png" />}
               key={`c-${props?.message?.id}`}
@@ -130,7 +130,7 @@ const ChatMessage = (props: any) => {
 
           <Button
             variant="transparent"
-            size="md"
+            size="xs"
             className="text-start"
             rightIcon={<IconImage path="IconDarkFiles.png" />}
           >
@@ -145,7 +145,7 @@ const ChatMessage = (props: any) => {
           </Button>
           <Button
             variant="transparent"
-            size="md"
+            size="xs"
             className="text-start"
             rightIcon={<IconImage path="IconDarkFiles.png" />}
           >
@@ -166,7 +166,7 @@ const ChatMessage = (props: any) => {
           </Button>
           <Button
             variant="transparent"
-            size="md"
+            size="xs"
             className="text-start"
             rightIcon={<IconImage path="IconDarkFiles.png" />}
           >
@@ -186,7 +186,7 @@ const ChatMessage = (props: any) => {
           {props.message?.user?.id == props?.authContext?.address && (
             <Button
               variant="transparent"
-              size="md"
+              size="xs"
               className="text-start"
               rightIcon={<IconImage path="IconDarkFiles.png" />}
               onClick={() => {

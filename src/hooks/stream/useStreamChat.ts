@@ -6,18 +6,10 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import {
-  StreamContext,
-  StreamContextType,
-} from "../../providers/StreamProvider";
-// import useChatFilters from "../useChatFilters";
 import useMention from "./useMention";
-// import useCommand from "./useCommand";
 
 const useStreamChat = (client :any,channel: any, callback?: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
-  const streamContext = useContext(StreamContext) as StreamContextType;
-
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
   const [streamLoading, setStreamLoading] = useState<any>(false);
@@ -166,7 +158,8 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
     if (actionMessage?.action !== "EDIT") {
       return;
     }
-    await streamContext.client?.updateMessage({
+    await client
+      .updateMessage({
         id: actionMessage.item?.id,
         text: editMessageRef.current.value,
       })
@@ -231,7 +224,7 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   };
 
   const unPinMessage = async (message: any) => {
-    await streamContext.client
+    await client
       .unpinMessage(message)
       .then(() => {
         toast({
