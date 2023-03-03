@@ -22,8 +22,7 @@ const ChatContainer = (channel: any) => {
             hookMembers={chatProvider.hookMembers}
           />
           <ChatWindow
-            hookChat={chatProvider.hookChat}
-            hookMessages={chatProvider.hookMessages}
+            chatProvider={chatProvider}
             authContext={authContext}
           />
           <ChatInput
