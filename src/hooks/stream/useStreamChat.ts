@@ -8,7 +8,8 @@ import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import useMention from "./useMention";
 
-const useStreamChat = (client :any,channel: any, callback?: any) => {
+const useStreamChat = (client :any, channel: any) => {
+  console.log("Checking for useStreamChat re-rendering");
   const authContext = useContext(AuthContext) as AuthContextType;
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
@@ -240,7 +241,6 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
           position: "bottom-right",
         });
       });
-    // callback();
   };
 
   const keyDownMessage = async (event: any) => {
