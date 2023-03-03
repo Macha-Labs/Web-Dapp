@@ -40,7 +40,6 @@ export const ChatProvider = ({ children }: any) => {
         streamClient: streamContext?.client,
         streamContext: streamContext,
         initiate: streamContext?.initiate,
-        fetchMessages: streamContext?.fetchMessages
       }}
     >
       {children}
