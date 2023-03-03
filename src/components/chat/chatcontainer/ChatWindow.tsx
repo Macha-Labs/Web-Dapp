@@ -14,7 +14,7 @@ const ChatWindow = (props: any) => {
 
   const messageAreaHeight = props.hookChannel.messages.map((message: any, index: any) => {
     console.log(itemsRef?.current[index], itemsRef?.current[index]?.offsetHeight, itemsRef?.current[index]?.clientHeight);
-    return itemsRef?.current[index]?.clientHeight || 100;
+    return (itemsRef?.current[index]?.offsetHeight ) || 100;
   });
 
   const templateMessages = ({ index, style }: any) => {
@@ -35,20 +35,7 @@ const ChatWindow = (props: any) => {
 
   return (
     <>
-      <div className="body">
-        <AutoSizer>
-        {({ height, width }) => (
-          <VariableSizeList
-            ref={messageListRef}
-            height={height}
-            itemCount={props.hookChannel.messages.length}
-            itemSize={(index: number) => messageAreaHeight[index]}
-            width={width}>
-            {templateMessages}
-          </VariableSizeList>
-        )}
-        </AutoSizer>
-        </div>
+      
 
     <div className="body hidden">
           {props?.hookChannel?.messages?.map((message: any, index: any) => {
@@ -64,6 +51,23 @@ const ChatWindow = (props: any) => {
             )
           })}
     </div>
+    
+   {(itemsRef.current.length == props?.hookChannel?.messages?.length) && 
+    <div className="body">
+        <AutoSizer>
+        {({ height, width }) => (
+          <VariableSizeList
+            ref={messageListRef}
+            height={height}
+            itemCount={props.hookChannel.messages.length}
+            itemSize={(index: number) => messageAreaHeight[index]}
+            width={width}>
+            {templateMessages}
+          </VariableSizeList>
+        )}
+        </AutoSizer>
+      </div>
+    }
     </>
 
   );

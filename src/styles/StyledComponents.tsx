@@ -652,6 +652,8 @@ export const StyledChat = styled.div`
     }
     &.hidden {
       visibility: hidden !important;
+      position: absolute;
+      top: 0;
     }
   }
 `;
