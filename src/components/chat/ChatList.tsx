@@ -51,6 +51,8 @@ const ChatList = (props: any) => {
 
   useEffect(() => {
     chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient);
+    console.log("Channels", chatProvider?.hookChannels?.channels);
+    
   }, []);
 
   const TemplateChatNew = () => {
