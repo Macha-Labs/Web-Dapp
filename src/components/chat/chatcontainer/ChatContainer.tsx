@@ -1,6 +1,5 @@
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
-import { StreamContext } from "@/providers/StreamProvider";
 import { useContext } from "react";
 
 import ChatHeader from "./ChatHeader";
