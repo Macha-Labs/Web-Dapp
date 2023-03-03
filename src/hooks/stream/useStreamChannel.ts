@@ -17,9 +17,11 @@ const useStreamChannel = (client: any) => {
       logger("channel", "setupChannel", "channel data from stream ", [
         newChannel,
       ]);
+      setMessages(null)
       setChannel(ChannelStream$(newChannel?.data, newChannel));
     } else {
       setChannel(null);
+      setMessages(null)
     }
   };
 
