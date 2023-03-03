@@ -9,24 +9,24 @@ import ChatNonDisplay from "./ChatNonDisplay";
 import ChatWindow from "./ChatWindow";
 
 const ChatContainer = (channel: any) => {
-  const chatProvider = useContext(ChatContext);
+  const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
 
   return (
     <>
-      {chatProvider?.hookChannel?.channel ? (
+      {chatContext?.hookChannel?.channel ? (
         <>
           <ChatHeader
-            hookChat={chatProvider.hookChat}
-            hookChannel={chatProvider.hookChannel}
-            hookMembers={chatProvider.hookMembers}
+            hookChat={chatContext.hookChat}
+            hookChannel={chatContext.hookChannel}
+            hookMembers={chatContext.hookMembers}
           />
           <ChatWindow
-            chatProvider={chatProvider}
+            chatContext={chatContext}
             authContext={authContext}
           />
           <ChatInput
-            hookChat={chatProvider.hookChat}
+            hookChat={chatContext.hookChat}
           />
         </>
       ) : (

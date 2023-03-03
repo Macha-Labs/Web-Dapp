@@ -2,8 +2,10 @@ import { useEffect, useRef } from 'react';
 import { VariableSizeList } from 'react-window';
 import ChatMessage from "./ChatMessage";
 import AutoSizer from "react-virtualized-auto-sizer";
+import useStreamChannelMessages from '@/hooks/stream/useStreamChannelMessages';
 
 const ChatWindow = (props: any) => {
+  const hookStreamChannelMessages = useStreamChannelMessages(props.chatContext?.hookChannel?.channel);
   const messageListRef = useRef<any>();
   const itemsRef = useRef<any>([]);
 
@@ -38,7 +40,7 @@ const ChatWindow = (props: any) => {
       
 
     <div className="body">
-          {props?.chatProvider?.fetchMessages()?.map((message: any, index: any) => {
+          {hookStreamChannelMessages?.messages.map((message: any, index: any) => {
             return (
               <div ref={el => itemsRef.current[index] = el}  key={`message-${index}`}>
                 <ChatMessage
