@@ -22,14 +22,11 @@ const ChatContainer = (channel: any) => {
             hookMembers={chatProvider.hookMembers}
           />
           <ChatWindow
-            hookChat={chatProvider.hookChat}
-            hookMessages={chatProvider.hookMessages}
+            chatProvider={chatProvider}
             authContext={authContext}
-            address={authContext.address}
           />
           <ChatInput
             hookChat={chatProvider.hookChat}
-            lensId={authContext.user.lens.id}
           />
         </>
       ) : (

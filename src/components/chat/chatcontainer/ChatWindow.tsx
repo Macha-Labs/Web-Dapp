@@ -38,7 +38,7 @@ const ChatWindow = (props: any) => {
       
 
     <div className="body">
-          {props?.hookMessages?.messages?.map((message: any, index: any) => {
+          {props?.chatProvider?.fetchMessages()?.map((message: any, index: any) => {
             return (
               <div ref={el => itemsRef.current[index] = el}  key={`message-${index}`}>
                 <ChatMessage

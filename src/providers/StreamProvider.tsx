@@ -14,7 +14,7 @@ export type StreamContextType = {
     hookChannel: any | undefined;
     hookMembers: any | undefined;
     hookChat: any | undefined;
-    hookMessages: any | undefined;
+    fetchMessages: () => void;
     reloadMembers: () => void;
     reloadChannel: () => void;
     reloadChannelList: () => void;
@@ -27,7 +27,7 @@ export const StreamContext = createContext<StreamContextType>({
     hookChannel: {},
     hookMembers: {},
     hookChat: {},
-    hookMessages: {},
+    fetchMessages: () => {},
     reloadMembers: () => {},
     reloadChannel: () => {},
     reloadChannelList: () => {},
@@ -57,6 +57,11 @@ const StreamProvider = ({children}: any) => {
             hookStreamChannels.fetchUserChannels();
         }
     }, [hookStreamClient.client?.user?.id]);
+
+
+    const _fetchMessages = () => {
+        return [];
+    }
 
     
     const reloadMembers = () => {
@@ -90,11 +95,11 @@ const StreamProvider = ({children}: any) => {
                 hookChannel: hookStreamChannel,
                 hookMembers: hookStreamChannelMembers,
                 hookChat: hookStreamChat,
-                hookMessages: hookStreamChannelMessages,
+                fetchMessages: _fetchMessages,
                 reloadMembers: reloadMembers,
                 reloadChannel:  reloadChannel,
                 reloadChannelList: reloadChannelList,
-                initiate: initiate
+                initiate: initiate,
             }}
         >
             {children}
