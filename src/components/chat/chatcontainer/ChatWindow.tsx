@@ -13,7 +13,7 @@ const ChatWindow = (props: any) => {
   }, [props.hookChannel.messages]);
 
   const messageAreaHeight = props.hookChannel.messages.map((message: any, index: any) => {
-    console.log(itemsRef?.current[index]?.clientHeight);
+    console.log(itemsRef?.current[index]);
     return itemsRef?.current[index]?.clientHeight || 100;
   });
 
@@ -21,7 +21,7 @@ const ChatWindow = (props: any) => {
     const message = props.hookChannel.messages[index];
     
     return (
-      <div ref={el => itemsRef.current[index] = el}  style={style}>
+      <div ref={el => itemsRef.current[index] = el}  style={style} key={`message-${index}`}>
         <ChatMessage
           message={message}
           hookChat={props.hookChat}
