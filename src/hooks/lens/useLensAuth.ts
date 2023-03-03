@@ -42,9 +42,6 @@ const useLensAuth = () => {
           logger("auth", "fetchLensToken", "Calling authenticate_user", [data]);
           setToken(data["accessToken"]);
           setRefreshToken(data["refreshToken"]);
-
-          // storing in async data
-        //   window.localStorage.setItem("accessToken", data["accessToken"]);
           addTokenCookie("accessToken", data["accessToken"], 30);
           window.localStorage.setItem("refreshToken", data["refreshToken"]);
 

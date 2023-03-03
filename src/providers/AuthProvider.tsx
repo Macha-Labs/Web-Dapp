@@ -14,10 +14,8 @@ export type AuthContextType = {
   address: any | undefined;
   connectWallet: () => void;
   connectLens: (param?: any) => void;
-  authenticateWithLens: (param?: any) => void;
   disconnectWallet: () => void;
   user: any | undefined;
-  authenticated: any | undefined;
   setUser: (param: any) => void;
   isConnected: boolean | undefined;
   isLoadingLens: boolean | undefined;
@@ -28,10 +26,8 @@ export const AuthContext = createContext<AuthContextType>({
   address: "",
   connectWallet: () => {},
   connectLens: param => {},
-  authenticateWithLens: param => {},
   disconnectWallet: () => {},
   user: null,
-  authenticated: null,
   setUser: param => {},
   isConnected: false,
   isLoadingLens: false
@@ -51,19 +47,6 @@ const AuthProvider = ({ children }: any) => {
    **/
   const hookLensProfile = useLensProfile();
   const hookLensAuth = useLensAuth();
-
-  /** 
-   * @description Internal function to store user in provider
-   * 
-   * 
-   **/
-  const _updateUser = (key: any, data: any) => {
-    logger("auth", "updateUser", "Updating user data", [key, data]);
-    const newData: any = {};
-    newData[key] = data;
-    setUser({ ...user, ...newData });
-  };
-  
 
   /** 
    * @description Internal Function to get user from lens
@@ -101,31 +84,6 @@ const AuthProvider = ({ children }: any) => {
       return;
     }
   };
-
-  const _authenticateUserWithLens = async() => {
-    const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
-    console.log("auth card lensprofile ", lensProfile);
-    try {
-      if (lensProfile) {
-        const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.fetchLensToken(address);
-        logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
-        if (tokens?.accessToken) {
-          user.setLensDirect({
-            ...lensProfile,
-            accessToken: tokens["accessToken"],
-            refreshToken: tokens["refreshToken"],
-          });
-          const userDbData: any = await _fetchUserFromDB();
-          console.log("Logging the userDbData ",userDbData);
-          user.setDb(userDbData);
-        }
-      } else {
-        throw Error(`Couldn't find Lens Profile with address ${address}`);
-      }
-    } catch (error) {
-      logger("auth", "_fetchUserFromLens", "Error in fetching userData from Lens", [error]);
-    }
-  }
 
   /** 
    * @description Internal Function to get user from DB
@@ -182,6 +140,15 @@ const AuthProvider = ({ children }: any) => {
   };
 
   useEffect(() => {
+    logger("auth", "useEffect", "Portal 1: Current user address", [address]);
+    if (address) {
+      _fetchSignerFromWagmi();
+      _fetchUserFromDB();
+    }
+  }, [address]);
+
+
+  useEffect(() => {
     if (user) 
       logger("auth", "useEffect", "Logging user object", [user]);
   }, [user]);
@@ -193,7 +160,6 @@ const AuthProvider = ({ children }: any) => {
         address: address?.toLowerCase(),
         connectWallet: connectWallet,
         connectLens: _fetchUserFromLens,
-        authenticateWithLens: _authenticateUserWithLens,
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,
