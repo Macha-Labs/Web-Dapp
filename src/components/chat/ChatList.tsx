@@ -157,15 +157,6 @@ const ChatList = (props: any) => {
                       onChange={() => chatProvider.hookChannels?.handleSelectChannel(item) }
                       />}
                       <Button
-                        onClick={(e) => {
-                          e.preventDefault()
-                          e.stopPropagation()
-                          chatProvider.initiate(item, authContext?.address);
-                          setIsClicked((prevState: any) => [
-                            ...prevState,
-                            index,
-                          ]);
-                        }}
                         className="menu-item w-100 m-b-0-5"
                         size="xl"
                         variant={
