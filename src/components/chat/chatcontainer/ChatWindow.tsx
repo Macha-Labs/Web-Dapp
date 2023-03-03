@@ -13,7 +13,7 @@ const ChatWindow = (props: any) => {
   }, [props.hookChannel.messages]);
 
   const messageAreaHeight = props.hookChannel.messages.map((message: any, index: any) => {
-    console.log(itemsRef?.current[index]);
+    console.log(itemsRef?.current[index], itemsRef?.current[index]?.offsetHeight, itemsRef?.current[index]?.clientHeight);
     return itemsRef?.current[index]?.clientHeight || 100;
   });
 
