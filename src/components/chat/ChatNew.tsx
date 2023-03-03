@@ -7,13 +7,14 @@ import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch } from "@chakra-ui/react";
-import { useState } from "react";
+import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 
 const ChatNew = (props: any) => {
   const chatContext = useContext(ChatContext);
   const [tab, setTab] = useState("members");
+  const [inputFocus, setInputFocus] = useState(0)
 
   /**
    *
@@ -132,8 +133,9 @@ const ChatNew = (props: any) => {
             <Row className="hr-center w-100 m-b-1">
               <Avatar size="2xl" name={data[0].value} />
             </Row>
-            <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-
+            {/* <LayoutInputs data={data} style={{ class: "m-b-1" }} /> */}
+            <Input ref={ inputFocus == 0 ? input => input && input.focus(): null} onFocus={() => setInputFocus(0)} placeholder={data[0].label} value={data[0].value} onChange={(e) => data[0].onChange(e.target.value)} className="m-b-0-5"/>
+            <Input ref={ inputFocus == 1 ? input => input && input.focus(): null} onFocus={() => setInputFocus(1)} placeholder={data[1].label} value={data[1].value} onChange={(e) => data[1].onChange(e.target.value)} className="m-b-0-5"/>
             {hookPortalChannelMembership?.users?.length ? (<Col className="flex-wrap m-b-1">
             <Heading as="h6" fontSize="md" className="m-b-0-5">Add Members</Heading>
             <Row className="flex-wrap">

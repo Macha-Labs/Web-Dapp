@@ -55,7 +55,7 @@ const StreamProvider = ({children}: any) => {
     useEffect(() => {
         if (hookStreamClient.client?.user?.id) {
             setClient(hookStreamClient.client);
-            hookStreamChannels.fetchUserChannels();
+            hookStreamChannels.fetchUserChannels(client);
         }
     }, [hookStreamClient.client?.user?.id]);
 
