@@ -21,8 +21,6 @@ const ChatList = (props: any) => {
   const modalChatNew = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
-  const [channel, setChannel] = useState<any>();
-
   const hookPortalChannel = usePortalChannel(
     {},
     {
