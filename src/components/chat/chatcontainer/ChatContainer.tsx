@@ -25,11 +25,9 @@ const ChatContainer = (channel: any) => {
             hookChat={chatProvider.hookChat}
             hookChannel={chatProvider.hookChannel}
             authContext={authContext}
-            address={authContext.address}
           />
           <ChatInput
             hookChat={chatProvider.hookChat}
-            lensId={authContext.user.lens.id}
           />
         </>
       ) : (

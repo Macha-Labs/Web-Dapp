@@ -24,12 +24,14 @@ import IconImage from "@/components/icons/IconImage";
 import Pop from "@/components/pop/Pop";
 import ModalWindow from "@/components/modal/ModalWindow";
 import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import { AuthContext } from "@/providers/AuthProvider";
 
 const ChatInput = (props: any) => {
   const modalPost = useDisclosure();
   const hookCreateLensPost = useCreateLensPost();
   const createPostRef = useRef<any>();
+  const authContext = useContext(AuthContext);
 
   const templateReply = () => {
     return (
@@ -92,7 +94,7 @@ const ChatInput = (props: any) => {
             variant="state_brand w-content"
             onClick={() => {
               hookCreateLensPost.validateMetadataAndPostOnLens({
-                profileId: props?.lensId,
+                profileId: authContext?.user?.lens?.id,
                 postContent: createPostRef.current.value,
               });
             }}
