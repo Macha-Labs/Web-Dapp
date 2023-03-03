@@ -2,7 +2,7 @@ import { helperIPFS, truncateAddress } from "@/helpers";
 import { Row, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, AvatarBadge, useDisclosure } from "@chakra-ui/react";
 
-const UserCard = ({user}) => {
+const UserCard = ({user}: any) => {
   
   return (
     <StyledCard

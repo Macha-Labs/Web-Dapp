@@ -24,7 +24,7 @@ import { AuthContext } from "@/providers/AuthProvider";
 import IconImage from "../icons/IconImage";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 
-const UserProfile = ({ user }) => {
+const UserProfile = ({ user }: any) => {
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
   const hookLensFollow = useLensFollows(user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(user?.lens?.id);

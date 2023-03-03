@@ -19,10 +19,12 @@ export const signedTypeData = async (
     value: value,
   };
   console.log("Getting typed Data in service ", typedData);
+
+  //@ts-ignore
   const result = signTypedData({
-    domain: omit(domain, '__typename'),
-    types: omit(types, '__typename'),
-    value: omit(value, '__typename')
+    domain: domain,
+    types: types,
+    value: value,
   }
   );
   return result;
