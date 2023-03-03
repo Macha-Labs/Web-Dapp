@@ -1,12 +1,11 @@
 import { logger } from "@/helpers/logger";
 import useStreamChannel from "@/hooks/stream/useStreamChannel";
 import useStreamChannelMembers from "@/hooks/stream/useStreamChannelMembers";
-import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
 import useStreamChat from "@/hooks/stream/useStreamChat";
-import {createContext, useContext, useEffect, useState} from "react";
+import { createContext, useContext, useEffect } from "react";
 import useStreamClient from "../hooks/stream/useStreamClient";
 import useStreamUserChannels from "../hooks/stream/useStreamUserChannels";
-import {AuthContext, AuthContextType} from "./AuthProvider";
+import { AuthContext, AuthContextType } from "./AuthProvider";
 
 export type StreamContextType = {
     client: any | undefined;
