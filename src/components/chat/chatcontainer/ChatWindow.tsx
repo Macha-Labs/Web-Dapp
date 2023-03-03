@@ -5,20 +5,20 @@ import AutoSizer from "react-virtualized-auto-sizer";
 
 const ChatWindow = (props: any) => {
   const messageListRef = useRef<any>();
+  const itemsRef = useRef<any>([]);
 
   useEffect(() => {
     // Scroll to the bottom of the list when new items are added
     messageListRef.current?.scrollToItem(props.hookChannel.messages.length - 1);
   }, [props.hookChannel.messages]);
 
-  const messageAreaHeight = props.hookChannel.messages.map((message: any) => 100 + message.text.length);
+  const messageAreaHeight = props.hookChannel.messages.map((message: any, index: any) => {return itemsRef.current[index]?.clientHeight});
 
   const templateMessages = ({ index, style }: any) => {
     const message = props.hookChannel.messages[index];
-    console.log("Message", message);
     
     return (
-      <div style={style} className="body">
+      <div ref={el => itemsRef.current[index] = el}  style={style}>
         <ChatMessage
           message={message}
           hookChat={props.hookChat}
@@ -28,6 +28,7 @@ const ChatWindow = (props: any) => {
       </div>
     )
   }
+
 
   return (
     <div className="body">
