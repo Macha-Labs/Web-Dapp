@@ -45,7 +45,7 @@ const ChatWindow = (props: any) => {
               <div ref={el => itemsRef.current[index] = el}  key={`message-${index}`}>
                 <ChatMessage
                   message={message}
-                  hookChat={{}}
+                  hookChat={props?.chatContext?.hookChat}
                   authContext={props.authContext}
                   key={`a-${message.id}`}
                 />

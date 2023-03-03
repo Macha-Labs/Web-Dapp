@@ -1,5 +1,4 @@
 import IconEmoji from "@/components/icons/IconEmoji";
-import { marked } from 'marked';
 import IconImage from "@/components/icons/IconImage";
 import InputAction from "@/components/input/InputAction";
 import Pop from "@/components/pop/Pop";
