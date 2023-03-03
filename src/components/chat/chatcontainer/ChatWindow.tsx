@@ -12,7 +12,10 @@ const ChatWindow = (props: any) => {
     messageListRef.current?.scrollToItem(props.hookChannel.messages.length - 1);
   }, [props.hookChannel.messages]);
 
-  const messageAreaHeight = props.hookChannel.messages.map((message: any, index: any) => {return itemsRef.current[index]?.clientHeight});
+  const messageAreaHeight = props.hookChannel.messages.map((message: any, index: any) => {
+    console.log(itemsRef?.current[index]?.clientHeight);
+    return itemsRef?.current[index]?.clientHeight || 100;
+  });
 
   const templateMessages = ({ index, style }: any) => {
     const message = props.hookChannel.messages[index];
