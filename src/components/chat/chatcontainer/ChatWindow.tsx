@@ -9,16 +9,16 @@ const ChatWindow = (props: any) => {
 
   useEffect(() => {
     // Scroll to the bottom of the list when new items are added
-    messageListRef.current?.scrollToItem(props.hookChannel.messages.length - 1);
-  }, [props.hookChannel.messages]);
+    messageListRef.current?.scrollToItem(props.hookMessages?.messages.length - 1);
+  }, [props.hookMessages?.messages]);
 
-  const messageAreaHeight = props.hookChannel.messages.map((message: any, index: any) => {
+  const messageAreaHeight = props.hookMessages?.messages.map((message: any, index: any) => {
     console.log(itemsRef?.current[index], itemsRef?.current[index]?.offsetHeight, itemsRef?.current[index]?.clientHeight);
     return (itemsRef?.current[index]?.offsetHeight ) || 100;
   });
 
   const templateMessages = ({ index, style }: any) => {
-    const message = props.hookChannel.messages[index];
+    const message = props.hookMessages?.messages[index];
     
     return (
       <div style={style}>
@@ -38,7 +38,7 @@ const ChatWindow = (props: any) => {
       
 
     <div className="body">
-          {props?.hookChannel?.messages?.map((message: any, index: any) => {
+          {props?.hookMessages?.messages?.map((message: any, index: any) => {
             return (
               <div ref={el => itemsRef.current[index] = el}  key={`message-${index}`}>
                 <ChatMessage
@@ -52,14 +52,14 @@ const ChatWindow = (props: any) => {
           })}
     </div>
 
-   {/* {(itemsRef.current.length == props?.hookChannel?.messages?.length) && 
+   {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 
     <div className="body">
         <AutoSizer>
         {({ height, width }) => (
           <VariableSizeList
             ref={messageListRef}
             height={height}
-            itemCount={props.hookChannel.messages.length}
+            itemCount={props.hookMessages.messages.length}
             itemSize={(index: number) => messageAreaHeight[index]}
             width={width}>
             {templateMessages}
