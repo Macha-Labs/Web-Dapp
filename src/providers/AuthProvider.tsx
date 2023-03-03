@@ -47,7 +47,6 @@ const AuthProvider = ({ children }: any) => {
    **/
   const hookLensProfile = useLensProfile();
   const hookLensAuth = useLensAuth();
-  
 
   /** 
    * @description Internal Function to get user from lens
@@ -147,6 +146,7 @@ const AuthProvider = ({ children }: any) => {
       _fetchUserFromDB();
     }
   }, [address]);
+
 
   useEffect(() => {
     if (user) 
