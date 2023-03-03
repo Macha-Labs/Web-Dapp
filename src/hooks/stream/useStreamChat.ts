@@ -166,8 +166,7 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
     if (actionMessage?.action !== "EDIT") {
       return;
     }
-    await streamContext.client
-      .updateMessage({
+    await streamContext.client?.updateMessage({
         id: actionMessage.item?.id,
         text: editMessageRef.current.value,
       })
@@ -293,6 +292,7 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   };
 
   const handleEdit = (message: any) => {
+    console.log("Editing message body ", message);
     setActionMessage({ action: "EDIT", item: message });
   };
 

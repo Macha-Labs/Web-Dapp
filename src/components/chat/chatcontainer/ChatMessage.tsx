@@ -278,7 +278,7 @@ const ChatMessage = (props: any) => {
                   size="xs"
                   className="m-l-0-5"
                   variant="state_brand"
-                  onClick={props.hookChat?.editMessage}
+                  onClick={() => props.hookChat?.editMessage()}
                   key={`e-${props?.message?.id}`}
                 >
                   Update
