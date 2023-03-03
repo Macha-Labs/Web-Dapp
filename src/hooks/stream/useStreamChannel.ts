@@ -3,6 +3,8 @@ import { useState, useEffect} from "react";
 import { ChannelStream$ } from "../../schema/channel";
 
 const useStreamChannel = (client: any) => {
+  console.log("Checking for useStreamChannel re-rendering");
+
   const [channel, setChannel] = useState<any>();
 
   /** 

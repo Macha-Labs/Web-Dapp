@@ -35,6 +35,7 @@ export const StreamContext = createContext<StreamContextType>({
 });
 
 const StreamProvider = ({children}: any) => {
+    console.log("Checking for StreamProvider re-rendering")
     const authContext = useContext(AuthContext) as AuthContextType;
 
     const hookStreamClient = useStreamClient();

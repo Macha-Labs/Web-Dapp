@@ -7,6 +7,8 @@ import { StreamChat } from "stream-chat";
 import { logger } from "../../helpers/logger";
 
 const useStreamClient = () => {
+  console.log("Checking for useStreamClient re-rendering");
+
   const authContext = useContext(AuthContext) as AuthContextType;
   const [client, setClient] = useState<any>();
   const unsubscribeTokenRefreshListenerRef = useRef<() => void>();
