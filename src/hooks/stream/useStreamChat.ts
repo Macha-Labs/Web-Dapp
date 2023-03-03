@@ -22,8 +22,6 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   });
   const [selectedMessages, setSelectedMessages] = useState<any>([]);
   const [userObjTyping, setUserObjTyping] = useState<any>();
-  const [searchActive, setSearchActive] = useState<any>();
-  const [searchQuery, setSearchQuery] = useState<any>();
   const [usersWhoAreTyping, setUsersWhoAreTyping] = useState<any>();
   const [typingMessage, setTypingMessage] = useState<any>();
 
