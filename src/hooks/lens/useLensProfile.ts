@@ -19,7 +19,6 @@ const useLensProfile = () => {
         ownedBy: [address],
         limit: 1,
       });
-      console.log(userProfile, "userProfile");
       if (userProfile) {
         setLensProfile(userProfile?.data?.profiles?.items[0]);
         // await updatePluginLens('wallet', address, userProfile?.data?.profiles?.items[0]);
@@ -28,7 +27,6 @@ const useLensProfile = () => {
       return UserLens$(userProfile?.data?.profiles?.items[0]);
     } catch (error: any) {
       setIsLoading(false);
-      console.log("Error in fetching lens profile ", error);
       return null;
     }
   };
