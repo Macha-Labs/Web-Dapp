@@ -1,6 +1,7 @@
 import { logger } from "@/helpers/logger";
 import useStreamChannel from "@/hooks/stream/useStreamChannel";
 import useStreamChannelMembers from "@/hooks/stream/useStreamChannelMembers";
+import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
 import useStreamChat from "@/hooks/stream/useStreamChat";
 import {createContext, useContext, useEffect, useState} from "react";
 import useStreamClient from "../hooks/stream/useStreamClient";
@@ -13,6 +14,7 @@ export type StreamContextType = {
     hookChannel: any | undefined;
     hookMembers: any | undefined;
     hookChat: any | undefined;
+    hookMessages: any | undefined;
     reloadMembers: () => void;
     reloadChannel: () => void;
     reloadChannelList: () => void;
@@ -25,6 +27,7 @@ export const StreamContext = createContext<StreamContextType>({
     hookChannel: {},
     hookMembers: {},
     hookChat: {},
+    hookMessages: {},
     reloadMembers: () => {},
     reloadChannel: () => {},
     reloadChannelList: () => {},
@@ -37,6 +40,7 @@ const StreamProvider = ({children}: any) => {
     const hookStreamClient = useStreamClient();
     const hookStreamChannels = useStreamUserChannels(hookStreamClient.client);
     const hookStreamChannel = useStreamChannel(hookStreamClient.client);
+    const hookStreamChannelMessages = useStreamChannelMessages(hookStreamChannel?.channel);
     const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel);
     const hookStreamChat = useStreamChat(hookStreamClient.client, hookStreamChannel?.channel);
 
@@ -85,6 +89,7 @@ const StreamProvider = ({children}: any) => {
                 hookChannel: hookStreamChannel,
                 hookMembers: hookStreamChannelMembers,
                 hookChat: hookStreamChat,
+                hookMessages: hookStreamChannelMessages,
                 reloadMembers: reloadMembers,
                 reloadChannel:  reloadChannel,
                 reloadChannelList: reloadChannelList,

@@ -10,6 +10,7 @@ export type ChatContextType = {
   hookChat: any | undefined;
   hookMembers: any | undefined;
   hookChannels: any | undefined;
+  hookMessages: any | undefined;
   streamClient: any | undefined;
   streamContext: any | undefined;
   initiate: (channel: any, userAddress: any) => void;
@@ -20,6 +21,7 @@ export const ChatContext = createContext<ChatContextType>({
   hookChat: null,
   hookMembers: null,
   hookChannels: [],
+  hookMessages: {},
   streamClient: null,
   streamContext: null,
   initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
@@ -35,6 +37,7 @@ export const ChatProvider = ({ children }: any) => {
         hookChat: streamContext?.hookChat,
         hookMembers: streamContext?.hookMembers,
         hookChannels: streamContext?.hookChannels,
+        hookMessages: streamContext?.hookMessages,
         streamClient: streamContext?.client,
         streamContext: streamContext,
         initiate: streamContext?.initiate,

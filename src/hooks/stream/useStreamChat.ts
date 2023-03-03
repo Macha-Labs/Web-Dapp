@@ -285,6 +285,7 @@ const useStreamChat = (client :any,channel: any, callback?: any) => {
   };
 
   const handleEdit = (message: any) => {
+    console.log("Editing message body ", message);
     setActionMessage({ action: "EDIT", item: message });
   };
 
