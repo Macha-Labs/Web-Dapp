@@ -284,9 +284,9 @@ const ChatMessage = (props: any) => {
               <Textarea
                 ref={props.hookChat?.editMessageRef}
                 className="inputElement"
+                defaultValue={props.message?.text}
                 variant="unstyled"
                 style={{ minHeight: min_textarea_height }}
-                placeholder={props.message?.text}
                 height="auto"
                 rows={1}
               />
