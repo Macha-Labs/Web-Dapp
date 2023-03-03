@@ -37,7 +37,7 @@ const ChatWindow = (props: any) => {
     <>
       
 
-    <div className="body hidden">
+    <div className="body">
           {props?.hookChannel?.messages?.map((message: any, index: any) => {
             return (
               <div ref={el => itemsRef.current[index] = el}  key={`message-${index}`}>
@@ -51,8 +51,8 @@ const ChatWindow = (props: any) => {
             )
           })}
     </div>
-    
-   {(itemsRef.current.length == props?.hookChannel?.messages?.length) && 
+
+   {/* {(itemsRef.current.length == props?.hookChannel?.messages?.length) && 
     <div className="body">
         <AutoSizer>
         {({ height, width }) => (
@@ -67,7 +67,7 @@ const ChatWindow = (props: any) => {
         )}
         </AutoSizer>
       </div>
-    }
+    } */}
     </>
 
   );

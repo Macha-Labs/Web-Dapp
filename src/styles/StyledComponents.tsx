@@ -647,6 +647,7 @@ export const StyledChat = styled.div`
     height: calc(100vh - 100px);
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none;
+    overflow-y: scroll;
     &::-webkit-scrollbar {
       display: none; /* Safari and Chrome */
     }
