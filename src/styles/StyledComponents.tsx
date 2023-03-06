@@ -1,5 +1,53 @@
 import { style } from "./StyledConstants";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+
+
+export const StyledImageView = styled.div<{ viewMode: boolean }>`
+  ${({viewMode}: any) => {
+    switch (viewMode) {
+      case true:
+        return css`
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100% !important;
+        background-color: #000000cf;
+        display: grid;
+        place-items: center;
+        z-index: 99;
+        img{
+          height: 90vh;
+          width: fit-content !important;
+        }
+        `;
+      default:
+        return css`
+        /* position: relative; */
+        `;
+    }
+  }}
+`;
+
+
+export const StyledIframeView = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  background-color: #000000cf; 
+   z-index: 9999;
+  iframe{
+    height: 90vh;
+    width: 80%;
+    z-index: 100 !important;
+    opacity: 1 !important;
+  }
+`
 
 export const StyledWindow = styled.div`
   position: fixed;
@@ -370,20 +418,20 @@ export const Pannel = styled.div`
 `;
 
 export const Banner = styled.div`
-    padding: ${style.paddingBanner};
-    border-radius: 5px;
-    height: ${style.heightCover};
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position relative;
+  padding: ${style.paddingBanner};
+  border-radius: 5px;
+  height: ${style.heightCover};
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 
-    @media screen and (max-width: 480px) {
-        padding: ${style.mob.paddingBanner};
-        height: ${style.mob.heightBanner};
-    }
+  @media screen and (max-width: 480px) {
+    padding: ${style.mob.paddingBanner};
+    height: ${style.mob.heightBanner};
+  }
 `;
 
 export const Logo = styled.img`
