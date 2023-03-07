@@ -44,6 +44,26 @@ const ChatList = (props: any) => {
         chatProvider?.streamContext?.reloadChannelList();
         chatProvider?.streamContext?.reloadChannel();
       },
+      leave: () => {
+        toast({
+          title: "Channel Left",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+        chatProvider?.streamContext?.reloadChannelList();
+        chatProvider?.streamContext?.reloadChannel();
+      },
+      delete: () => {
+        toast({
+          title: "Channel Deleted",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+        chatProvider?.streamContext?.reloadChannelList();
+        chatProvider?.streamContext?.reloadChannel();
+      }
     }
   );
 
@@ -62,6 +82,8 @@ const ChatList = (props: any) => {
   };
 
   const TemplateActions = (props: any) => {
+    console.log("TemplateActions", props);
+    
     return (
       <Pop
         trigger={<IconImage path="IconDarkMenu.png" />}
@@ -117,10 +139,30 @@ const ChatList = (props: any) => {
             className="text-start"
             rightIcon={<IconImage path="IconRedDelete.png" />}
           >
-            <Row className="hr-between w-100" onClick={() => {}}>
+            <Row className="hr-between w-100" 
+              onClick={() => {
+                // hookPortalChannel.deleteChannel(props.item);
+              }}
+            >
               Clear Chat
             </Row>
           </Button>
+          { !props?.item?.isAdmin && <Button
+            variant="transparent"
+            size="md"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkLeave.png" />}
+          >
+            <Row
+              className="hr-between w-100"
+              onClick={() => {
+                hookPortalChannel.leaveChannel(props.item);
+              }}
+            >
+              Leave Channel
+            </Row>
+          </Button>
+  }
         </Col>
       </Pop>
     );
