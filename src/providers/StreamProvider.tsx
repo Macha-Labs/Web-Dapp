@@ -50,7 +50,7 @@ const StreamProvider = ({children}: any) => {
 
     useEffect(() => {
         if (authContext?.isConnected && hookStreamClient.client?.user?.id) {
-            hookStreamChannels.fetchUserChannels();
+            hookStreamChannels.fetchUserChannels(hookStreamClient.client);
         }
     }, [hookStreamClient.client?.user?.id]);
 
@@ -69,7 +69,7 @@ const StreamProvider = ({children}: any) => {
     }
 
     const reloadChannelList = () => {
-        hookStreamChannels.fetchUserChannels();
+        hookStreamChannels.fetchUserChannels(hookStreamClient.client);
     }
 
     const initiate = async (channel: any, userAddress?: any) => {
