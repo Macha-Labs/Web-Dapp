@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import Image from "next/image";
 
 const Landing = () => {
@@ -66,9 +66,9 @@ const Landing = () => {
                   </a>
                 </div>
               </div>
-              <button className="btn btn-dark-blue py-2 px-4 hideOnMobile">
-                Connect Wallet
-              </button>
+              <Button variant="state_brand">
+                Beta Soon
+              </Button>
             </div>
           </div>
         </nav>
@@ -113,7 +113,7 @@ const Landing = () => {
               and Guilds
             </p>
           </div>
-          <div>
+          {/* <div>
             <button className="btn btn-dark-blue ps-4 pe-2 d-flex justify-content-between align-items-center">
               <Text> Download App</Text>
               <img
@@ -122,7 +122,7 @@ const Landing = () => {
                 alt="asdf"
               />
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="platform py-md-4 py-2 d-flex flex-wrap flex-row justify-content-between align-items-center sectionSpacing paddingBox">
           <div className="d-flex flex-wrap flex-row justify-content-between align-items-center stripSection flex-grow-1">
@@ -702,7 +702,7 @@ const Landing = () => {
               <h1 className="helpHeading">How can we help you?</h1>
               <p className="alignLeftText helpPara mt-4">
                 Schedule a meeting with our team and ask anything about creating
-                your own Communities and HQs on Portal
+                your own Communities and HQs on MetaWork.
               </p>
               <button className="btn btn-dark-blue mt-4 px-4  d-flex">
                 Schedule Meeting
