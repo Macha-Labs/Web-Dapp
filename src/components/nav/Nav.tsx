@@ -10,10 +10,12 @@ import { Tooltip, useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
 import IconImage from "../icons/IconImage";
+import { AuthContext } from "@/providers/AuthProvider";
 
 const Nav = (props: any) => {
   const orgsDrawer = useDisclosure();
   const userDrawer = useDisclosure();
+  const authContext = React.useContext(AuthContext);
   const [active, setActive] = React.useState(
     window.location.href.split("/")[3]
   );

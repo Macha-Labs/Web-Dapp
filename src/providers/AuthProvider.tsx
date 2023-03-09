@@ -8,6 +8,7 @@ import { putStreamToken } from "../service/StreamService";
 import { findOrCreateUser } from "../service/UserService";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 import { fetchSigner } from "@wagmi/core";
+import { Client } from "@xmtp/xmtp-js";
 
 export type AuthContextType = {
   signer: any | undefined;
@@ -30,7 +31,7 @@ export const AuthContext = createContext<AuthContextType>({
   user: null,
   setUser: param => {},
   isConnected: false,
-  isLoadingLens: false
+  isLoadingLens: false,
 });
 
 const AuthProvider = ({ children }: any) => {
@@ -40,18 +41,18 @@ const AuthProvider = ({ children }: any) => {
   const { disconnect } = useDisconnect();
   const [isLoadingLens, setLoadingLens] = useState<any>(false);
 
-  /** 
+  /**
    * @description Initiating Hooks
-   * 
-   * 
+   *
+   *
    **/
   const hookLensProfile = useLensProfile();
   const hookLensAuth = useLensAuth();
 
-  /** 
+  /**
    * @description Internal Function to get user from lens
-   * 
-   * 
+   *
+   *
    **/
   const _fetchUserFromLens = async () => {
     if (!address) {
@@ -63,8 +64,11 @@ const AuthProvider = ({ children }: any) => {
       const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
       try {
         if (lensProfile) {
-          const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
-          logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
+          const tokens: any | { accessToken: string; refreshToken: string } =
+            await hookLensAuth.connectToLens(address);
+          logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [
+            tokens,
+          ]);
           setLoadingLens(false);
           if (tokens?.accessToken) {
             user.setLensDirect({
@@ -79,23 +83,32 @@ const AuthProvider = ({ children }: any) => {
           throw Error(`Couldn't find Lens Profile with address ${address}`);
         }
       } catch (error) {
-        logger("auth", "_fetchUserFromLens", "Error in fetching userData from Lens", [error]);
+        logger(
+          "auth",
+          "_fetchUserFromLens",
+          "Error in fetching userData from Lens",
+          [error]
+        );
       }
-      return;
     }
   };
 
-  /** 
+  /**
    * @description Internal Function to get user from DB
-   * 
-   * 
+   *
+   *
    **/
   const _fetchUserFromDB = async () => {
     if (address) {
       // fetching the userData from the Database
       findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
         user.setDb(data);
-        logger('auth', 'AuthProvider._fetchUserFromDB', 'Response from findOrCreateUser', [data]);
+        logger(
+          "auth",
+          "AuthProvider._fetchUserFromDB",
+          "Response from findOrCreateUser",
+          [data]
+        );
         putStreamToken({ userAddress: address.toLowerCase() }).then(
           (res: any) => {
             logger(
@@ -111,33 +124,38 @@ const AuthProvider = ({ children }: any) => {
     }
   };
 
-  /** 
+  /**
    * @description Internal Function to get address from WAGMI
-   * 
-   * 
+   *
+   *
    **/
   const _fetchSignerFromWagmi = async () => {
-    setSigner(await fetchSigner())
-  } 
+    setSigner(await fetchSigner());
+  };
 
-  
-  /** 
+  /**
    * @description Function to connect to wallet
-   * 
-   * 
+   *
+   *
    **/
   const connectWallet = async () => {
     logger("auth", "connectWallet", "Trigger connectWallet", []);
   };
 
-  /** 
+  /**
    * @description Function to disconnect from wallet
-   * 
-   * 
+   *
+   *
    **/
   const disconnectWallet = async () => {
     disconnect();
   };
+
+  /**
+   * @description Function to connect to XMTP to enable messaging
+   *
+   *
+   **/
 
   useEffect(() => {
     logger("auth", "useEffect", "Portal 1: Current user address", [address]);
@@ -147,10 +165,8 @@ const AuthProvider = ({ children }: any) => {
     }
   }, [address]);
 
-
   useEffect(() => {
-    if (user) 
-      logger("auth", "useEffect", "Logging user object", [user]);
+    if (user) logger("auth", "useEffect", "Logging user object", [user]);
   }, [user]);
 
   return (
@@ -164,7 +180,7 @@ const AuthProvider = ({ children }: any) => {
         user: user,
         setUser: setUser,
         isConnected: address && user?.lens?.id && user?.db?.id,
-        isLoadingLens: isLoadingLens
+        isLoadingLens: isLoadingLens,
       }}
     >
       {children}
