@@ -162,7 +162,7 @@ const ChatMessage = (props: any) => {
     return (
       <Pop
         size="sm"
-        placement={"botton-right"}
+        placement={"right"}
         trigger={<IconImage path="IconDarkMenu.png" />}
       >
         <Col className="text-start">
@@ -333,9 +333,8 @@ const ChatMessage = (props: any) => {
             </Row>
           )}
         </Col>
-        <Row className="w-100 action">
+        <Row className="w-100 positionPop">
           <TemplateReactions />
-
           <TemplateActions />
         </Row>
       </Row>

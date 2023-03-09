@@ -1,14 +1,16 @@
 import { DownloadIcon } from "@chakra-ui/icons";
 import { Text } from "@chakra-ui/react";
-import { Col, StyledIcon, Row, StyledFileCard } from "@/styles/StyledComponents";
+import { Col, StyledIcon, Row, StyledFileCard, StyledIframeView } from "@/styles/StyledComponents";
 import { truncateString } from "@/helpers";
 import IconImage from "@/components/icons/IconImage";
+import { useState } from "react";
 
 const LayoutFilePreview = (props: any) => {
+    const [showMedia, setShowMedia] = useState(false)
     return (
         <>
             <StyledFileCard className="hr-between vr-center">
-                <Row className="vr-center">
+                <Row onClick={() => setShowMedia(!showMedia)} className="vr-center">
                     <Col className="w-100">
                         <Row>
                         <IconImage
@@ -20,7 +22,13 @@ const LayoutFilePreview = (props: any) => {
                             </Text>
                         </Row>
                     </Col>
-                    <Col>
+                    <Col >
+
+                     {
+                       showMedia &&  <StyledIframeView onClick={() => setShowMedia(!showMedia)} >
+                        <iframe onClick={() => setShowMedia(!showMedia)} src={props.attachment?.thumb_url} allowTransparency={false} allowFullScreen  />
+                         </StyledIframeView>
+                     } 
                         <a href={props.attachment?.thumb_url} target="_blank" rel='noreferrer' download>
                                 <StyledIcon className="state-2-3">
                                     <DownloadIcon width="15" height="15" fill="#efefef" />

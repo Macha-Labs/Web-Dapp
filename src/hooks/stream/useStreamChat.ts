@@ -106,8 +106,8 @@ const useStreamChat = (client :any, channel: any) => {
           attachments: [
             {
               type: attachItem.type.split("/")[0],
-              asset_url: `https://ipfs.io/ipfs/${fileCid}`,
-              thumb_url: `https://ipfs.io/ipfs/${fileCid}`,
+              asset_url: `https://dweb.link/ipfs/${fileCid}`,
+              thumb_url: `https://dweb.link/ipfs/${fileCid}`,
               name: attachItem?.name,
             },
           ],

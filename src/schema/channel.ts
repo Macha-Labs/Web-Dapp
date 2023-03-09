@@ -18,7 +18,7 @@ export const Channel$ = (data: any) => {
     };
 };
 
-export const ChannelStream$ = (data: any, raw?: any) => {
+export const ChannelStream$ = (data: any, raw?: any, owner?: any ) => {
     return {
         id: data?.id,
         type: data?.type,
@@ -28,6 +28,7 @@ export const ChannelStream$ = (data: any, raw?: any) => {
         private: data?.private,
         users: data?.users,
         admins: data?.admins,
+        isAdmin: String(data?.created_by?.id).toLowerCase() == String(owner).toLowerCase(),
         createdBy: data?.created_by?.id,
         createdAt: data?.created_at,
         updatedAt: data?.updated_at,

@@ -39,6 +39,9 @@ const LayoutOptions = (props: any) => {
             ) {
               return null;
             }
+            if(item.name === "Leave Channel" && props.channelAdmin == props.userId){
+              return null
+            }
             return (
               <Row
                 className="item m-b-0-5 hr-between"
