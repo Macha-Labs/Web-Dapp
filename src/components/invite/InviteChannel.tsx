@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
 
 
-const AuthCard = () => {
+const InviteChannel = (props: any) => {
     const authContext = useContext(AuthContext);
     return (
         <div className="middle">
@@ -15,12 +15,13 @@ const AuthCard = () => {
                 <Col className="m-b-2 hr-center">
                     <IconImage path="Logo.png" size="90" style={{className: 'm-b-1'}}/>
                     <Heading as="h5" size="lg">
-                        Log in to Portal
+                        {props?.channel?.name}
                     </Heading>
                 </Col>
                 <Col className="w-60">
                     {!authContext.address && <ConnectWalletButton />}
                     {(authContext.address && !authContext?.user?.lens?.id) && <Button className="" size="md" variant="state_lens" isLoading={authContext?.isLoadingLens} onClick={() => {authContext.connectLens()}}>Sign In With Lens</Button>}
+                    {authContext?.isConnected && <Button className="" size="md" variant="state_brand" >Join Channel</Button>}
                 </Col>
             </Col>
         </StyledCard>
@@ -28,4 +29,4 @@ const AuthCard = () => {
     )
 }
 
-export default AuthCard;
+export default InviteChannel;
