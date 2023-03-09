@@ -82,7 +82,6 @@ const ChatList = (props: any) => {
   };
 
   const TemplateActions = (props: any) => {
-    console.log("TemplateActions", props);
     
     return (
       <Pop

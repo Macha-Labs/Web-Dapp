@@ -323,7 +323,6 @@ export const StyledFileCard = styled(StyledCard)`
   background: ${style.card.bg.default};
   opacity: 0.8;
   border-radius: 5px;
-  width: 50vh;
 
   .name {
     width: 40vh;
@@ -830,7 +829,7 @@ export const StyledConversation = styled(Col)`
   position: relative;
   opacity: 0.75;
   cursor: pointer;
-  overflow: hidden;
+  /* overflow: hidden; */
   &:hover {
     opacity: 1;
     .action {
@@ -893,6 +892,9 @@ export const StyledConversation = styled(Col)`
       box-shadow: ${style.message.shadow.hover};
     }
   }
+  .positionPop > .chakra-popover__popper {
+ inset: 0px auto auto 55% !important;
+}
 `;
 
 //
