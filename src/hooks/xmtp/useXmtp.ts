@@ -24,9 +24,9 @@ function useXmtp(PEER_ADDRESS: any) {
     }
   }, [client, xmtpClientAddress]);
 
-  const onSendMessage = async () => {
+  const onSendMessage = async (address: any) => {
     console.log("message sent");
-    const message = "gm XMTP bot!";
+    const message = `gm ${address}`;
     await client.send(message);
   };
 

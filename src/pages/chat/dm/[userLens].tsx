@@ -60,7 +60,12 @@ function DirectMessage() {
           {hookXmtp.messages?.map((item, index) => {
             return <div key={index}>{item.content}</div>;
           })}
-          <button onClick={() => hookXmtp.onSendMessage()}> Send GM</button>
+          <button
+            onClick={() => hookXmtp.onSendMessage(hookXmtp.xmtpClientAddress)}
+          >
+            {" "}
+            Send GM
+          </button>
         </StyledChat>
       </div>
     </StyledWindow>
