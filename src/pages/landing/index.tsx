@@ -300,7 +300,7 @@ const LandingPage = () => {
             </div>
           </div>
 
-          <div className="d-flex justify-content-md-between mt-md-5 mt-3 mb-3 flex-column flex-md-row  ">
+          <div className="d-flex justify-content-md-between mt-md-5 mt-3 mb-3 flex-column flex-md-row ">
             <div className="col-md-6 d-flex justify-content-md-start justify-content-center mb-2">
               <div className="overflow-hidden cardGlass position-relative m-0 py-3 px-4 ">
                 <h1 className="highlight mt-3 glassCardHeading">

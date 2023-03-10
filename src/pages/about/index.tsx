@@ -294,11 +294,11 @@ function about() {
         <div className="paddingBox">
           <h1 className="mb-1 sectionSpacing display-3 heading alignLeftText">
             <strong>
-              <span className="highlight ">We're Hiring</span>
+              <span className="highlight ">We are Hiring</span>
             </strong>
           </h1>
           <h2 className="platformsubheading">
-            Be Link part of our team and let's build together
+            Be Link part of our team and lets build together
           </h2>
           <img
             src="./assets/ecosystem bottom img.png"
