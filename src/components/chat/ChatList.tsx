@@ -3,7 +3,6 @@ import { Avatar, Button, Checkbox, Text, useDisclosure, useToast } from "@chakra
 import { useContext, useEffect } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
-import useOrgChannels from "@/hooks/portal/useOrgChannels";
 import ModalSlider from "../modal/ModalSlider";
 import ChatNew from "./ChatNew";
 import IconImage from "../icons/IconImage";
@@ -17,7 +16,6 @@ import usePortalChannel from "@/hooks/portal/usePortalChannel";
 const ChatList = (props: any) => {
   const chatProvider = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
-  const hookOrgChannels = useOrgChannels("6246c7045cc31c36781d668e");
   const modalChatNew = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
