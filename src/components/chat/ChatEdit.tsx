@@ -9,26 +9,32 @@ import {
   Switch,
   useDisclosure,
   useToast,
+  Heading,
 } from "@chakra-ui/react";
 import { Col, Row } from "@/styles/StyledComponents";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatEdit = (props: any) => {
-  /** 
-   * @description 
-   * 
-   * 
+  /**
+   * @description
+   *
+   *
    **/
   const toast = useToast();
-  const chatContext = useContext(ChatContext)
-
-  /** 
+  const chatContext = useContext(ChatContext);
+  const handleToggle = () => {
+    hookPortalChannel?.setChannel({
+      ...hookPortalChannel?.channel,
+      private: !hookPortalChannel?.channel?.private,
+    });
+  };
+  /**
    * @description callbacks
-   * 
-   * 
+   *
+   *
    **/
-  const callBack=()=>{
+  const callBack = () => {
     toast({
       title: "Channel Details updated successfully",
       status: "success",
@@ -39,7 +45,7 @@ const ChatEdit = (props: any) => {
     chatContext?.streamContext?.reloadChannel();
     chatContext?.streamContext?.reloadChannelList();
     props.modal.onClose();
-  }
+  };
 
   const callBackPrompt = (message: any) => {
     toast({
@@ -48,40 +54,37 @@ const ChatEdit = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-  }
-  
-  /** 
-   * @description 
-   * 
-   * 
+  };
+
+  /**
+   * @description
+   *
+   *
    **/
   const [profileImage, setProfileImage] = useState(null);
 
-  /** 
-   * @description 
-   * 
-   * 
+  /**
+   * @description
+   *
+   *
    **/
   const hookPortalChannel = usePortalChannel(
     chatContext?.hookChannel?.channel,
-    {edit:callBack, prompt: callBackPrompt}
+    { edit: callBack, prompt: callBackPrompt }
   );
 
-  /** 
-   * @description 
-   * 
-   * 
+  /**
+   * @description
+   *
+   *
    **/
-  const handleSelectClick = () => {
-
-  };
+  const handleSelectClick = () => {};
   const modalAddMembers = useDisclosure();
 
-
-  /** 
-   * @description 
-   * 
-   * 
+  /**
+   * @description
+   *
+   *
    **/
   const data = [
     {
@@ -106,16 +109,20 @@ const ChatEdit = (props: any) => {
     },
   ];
 
-  /** 
-   * @description 
-   * 
-   * 
+  /**
+   * @description
+   *
+   *
    **/
   return (
     <LayoutCardPannel
       header={
         <Row className="hr-between w-full">
-          <Button size="sm" onClick={modalAddMembers.onClose} variant="state_default_hover">
+          <Button
+            size="sm"
+            onClick={modalAddMembers.onClose}
+            variant="state_default_hover"
+          >
             Cancel
           </Button>
           <Text size={"sm"}>Edit Channel</Text>
@@ -133,52 +140,63 @@ const ChatEdit = (props: any) => {
       }
     >
       <Col className="p-3">
-      <Col className="hr-center w-full">
-        {profileImage ? (
-          <Avatar
-            size="2xl"
-            className="m-v-1"
-            name={hookPortalChannel?.channel?.name}
-            src={URL.createObjectURL(profileImage)}
+        <Col className="hr-center w-full">
+          {profileImage ? (
+            <Avatar
+              size="2xl"
+              className="m-v-1"
+              name={hookPortalChannel?.channel?.name}
+              src={URL.createObjectURL(profileImage)}
+            />
+          ) : (
+            <Avatar
+              size="2xl"
+              className="m-v-1"
+              name={hookPortalChannel?.channel?.name}
+            />
+          )}
+          <input
+            type="file"
+            id="galleryInput"
+            accept="image/*"
+            onChange={(e) => {}}
+            style={{ display: "none" }}
           />
-        ) : (
-          <Avatar
-            size="2xl"
-            className="m-v-1"
-            name={hookPortalChannel?.channel?.name}
-          />
-        )}
-        <input
-          type="file"
-          id="galleryInput"
-          accept="image/*"
-          onChange={(e) => {}}
-          style={{ display: "none" }}
-        />
-        <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
-          Set New Profile Photo
-        </Text>
-      </Col>
+          <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
+            Set New Profile Photo
+          </Text>
+        </Col>
 
-      <Col className="hr-center w-full m-v-1">
-        <Row>
-          <Icon></Icon>
-          <Text fontSize={16} fontWeight={800}>
-            Select From Gallery
-          </Text>
+        <Col className="hr-center w-full m-v-1">
+          <Row>
+            <Icon></Icon>
+            <Text fontSize={16} fontWeight={800}>
+              Select From Gallery
+            </Text>
+          </Row>
+          <Row>
+            <Icon></Icon>
+            <Text fontSize={16} fontWeight={800}>
+              Select From Wallet
+            </Text>
+          </Row>
+        </Col>
+        <LayoutInputs data={data} style={{ class: "m-b-1" }} />
+        <Row className="hr-between">
+          <Col>
+            <Heading size="sm">Allow channel to be public</Heading>
+            <Text>
+              Please note public channels can be joined by anyone with the link
+              and should not be used for a small group conversation.
+            </Text>
+          </Col>
+          <Switch
+            colorScheme="emerald"
+            className="m-l-1"
+            isChecked={hookPortalChannel?.channel?.private}
+            onChange={handleToggle}
+          />
         </Row>
-        <Row>
-          <Icon></Icon>
-          <Text fontSize={16} fontWeight={800}>
-            Select From Wallet
-          </Text>
-        </Row>
-      </Col>
-      <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-      <Row>
-        <Text>Allow Gating</Text>
-        <Switch colorScheme="emerald" />
-      </Row>
       </Col>
     </LayoutCardPannel>
   );

@@ -22,7 +22,7 @@ function about() {
                   />
                 </Link>
               </div>
-              <ul className="navbar-nav me-auto d-flex align-items-center flex-row mt-2 mt-md-0">
+              <ul className="navbar-nav d-flex justify-content-center align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
                   <Link
                     className="nav-link  d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
