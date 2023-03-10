@@ -28,6 +28,7 @@ const ChatNew = (props: any) => {
       position: "bottom-right",
     });
     chatContext?.streamContext?.reloadChannelList();
+    
     props.modal.onClose();
   };
 
