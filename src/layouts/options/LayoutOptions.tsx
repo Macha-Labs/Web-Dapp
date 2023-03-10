@@ -4,7 +4,7 @@ import { Heading, Text } from "@chakra-ui/react";
 
 const LayoutOptions = (props: any) => {
   return (
-    <StyledOptionsCard className={props.style?.className + " border"}>
+    <StyledOptionsCard className={props.style?.className}>
       {props.options.length ? (
         <>
           {props.options?.map((item: any, index: any) => {
