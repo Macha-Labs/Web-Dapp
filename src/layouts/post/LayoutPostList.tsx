@@ -9,7 +9,7 @@ interface Props {
 const LayoutPostList = ({ ...props }) => {
   const template = () => {
     if (props?.isLoading) {
-      return <LayoutPostLoading />;
+      return <></>;
     } else if (props?.list?.length) {
       return (
         <>
@@ -20,12 +20,7 @@ const LayoutPostList = ({ ...props }) => {
       );
     } else {
       return (
-        <LayoutCard
-          size="lg"
-          hr="center"
-          vr="center"
-          text={"No Posts Yet"}
-        />
+        <></>
       );
     }
   };

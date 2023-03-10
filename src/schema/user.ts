@@ -100,6 +100,7 @@ export class User$ {
 
   setLensFromStream() {
     this.lens = UserLens$({ 
+        id: this.stream.lensId,
         handle: this.stream.lensHandle,
         ownedBy: this.stream.lensOwnedBy,
         name:this.stream.lensName, 
