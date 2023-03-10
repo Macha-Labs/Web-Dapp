@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 import Image from "next/image";
 
 function about() {
@@ -52,9 +53,7 @@ function about() {
                   </a>
                 </div>
               </div>
-              <button className="btn btn-dark-blue py-2 px-4 hideOnMobile">
-                Connect Wallet
-              </button>
+              <Button variant="state_brand">Beta Soon</Button>
             </div>
           </div>
         </nav>
@@ -334,23 +333,35 @@ function about() {
           </div>
         </div>
         <div className="d-flex justify-content-between  flex-column flex-md-row paddingBox">
-          <div className="d-flex justify-content-between borderBox py-4 px-5 backgroundDarkCard mt-3 mt-md-5">
+          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
             <div className="d-flex align-items-center ">
-              <img src="./assets/base-twitter.svg" alt="twitterlogo" />
+              <img
+                src="./assets/base-twitter.svg"
+                className="footerlogoos"
+                alt="twitterlogo"
+              />
               <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
             </div>
             <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
           </div>
-          <div className="d-flex justify-content-between borderBox py-4 px-5 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
             <div className="d-flex align-items-center ">
-              <img src="./assets/base-medium.svg" alt="twitterlogo" />
+              <img
+                src="./assets/base-medium.svg"
+                className="footerlogoos"
+                alt="twitterlogo"
+              />
               <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
             </div>
             <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
           </div>
-          <div className="d-flex justify-content-between borderBox py-4 px-5 backgroundDarkCard mt-3 mt-md-5">
+          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
             <div className="d-flex align-items-center ">
-              <img src="./assets/base-github.svg" alt="twitterlogo" />
+              <img
+                src="./assets/base-github.svg"
+                className="footerlogoos"
+                alt="twitterlogo"
+              />
               <h2 className="bottomLinks mt-1 ps-4">Github</h2>
             </div>
             <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
@@ -883,6 +894,7 @@ function about() {
           justify-content: center;
         }
         .bottomSocialLinks {
+          cursor: pointer;
           width: 30%;
         }
         .footerText {
@@ -895,6 +907,9 @@ function about() {
         .aboutPara {
           font-size: 30px;
           text-align: left;
+        }
+        .footerlogoos {
+          width: 30px;
         }
         /* Media queries */
         /* breakpoints to use
@@ -1008,6 +1023,7 @@ function about() {
             text-align: center;
           }
           .bottomSocialLinks {
+            cursor: pointer;
             width: 100%;
           }
           .footerLogoMetaworks {

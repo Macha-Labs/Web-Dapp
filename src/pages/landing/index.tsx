@@ -26,7 +26,7 @@ const Landing = () => {
                     className="headerLogo"
                     src="/assets/metawork-image-text logo.svg"
                     alt="logo"
-                    width={158}
+                    width={170}
                     height={62}
                     // width={246}
                   />
@@ -65,20 +65,25 @@ const Landing = () => {
                   </a>
                 </div>
               </div>
-              <Button variant="state_brand">
-                Beta Soon
-              </Button>
+              <Button variant="state_brand">Beta Soon</Button>
             </div>
           </div>
         </nav>
 
         <div className="container-fluid g-0 d-flex w-100 h-100 mt-5 mt-md-0 flex-column paddingBox2">
-          <div className="d-flex justify-content-center align-items-center mt-5">
+          <div className="d-flex justify-content-center align-items-center">
             <div className="desktopHero ">
               <div className="col">
                 <h1 className="heroHeading highlight alignLeftText">
-                  Web3 HQ For Teams & Guilds{" "}
+                  Web3 HQ <br /> For Teams & Guilds{" "}
                 </h1>
+                <div className="heroPara mt-5">
+                  <p className=" mb-4 mb-md-0">
+                    Private and Secured Decentralized - Workspace Suit inbuilt
+                    with encryption and token gating technologies for teams,
+                    enterprises, and Guilds
+                  </p>
+                </div>
               </div>
               <div className="column d-flex justify-content-end">
                 <img
@@ -89,8 +94,8 @@ const Landing = () => {
               </div>
             </div>
             <div className="mobileHero">
-              <div className="col">
-                <h1 className="heroHeading highlight ">
+              <div className="col mt-5">
+                <h1 className="heroHeading highlight mt-5">
                   Web3 HQ <br /> For Teams & Guilds{" "}
                 </h1>
               </div>
@@ -105,7 +110,7 @@ const Landing = () => {
           </div>
         </div>
         <div className="d-flex flex-column flex-md-row paddingBox justify-content-between align-items-center mt-md-5 w-100">
-          <div className="heroPara">
+          <div className="heroPara hideOnDesktop">
             <p className=" mb-4 mb-md-0">
               Private and Secured Decentralized - Workspace Suit inbuilt with
               encryption and token gating technologies for teams, enterprises,
@@ -178,7 +183,13 @@ const Landing = () => {
               <h1 className="subHeading">Secured Decentralized</h1>
             </div>
           </div>
-
+          {/* <div className="mb-md-5 mb-4">
+            <h1 className="m-0 display-3 heading">
+              <strong>
+                <span className="highlight">Web3 Collaboration</span>
+              </strong>
+            </h1>
+          </div> */}
           <div className="mb-md-5">
             <h1 className="m-0 sectionWorkspaceHeading">
               <strong>
@@ -229,11 +240,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="pt-3 chatBanner borderBox">
-            <img
-              className=""
-              src="/assets/workspace suit web.png"
-              alt="metawork_chat"
-            />
+            <img className="" src="/assets/docs-card.png" alt="metawork_chat" />
           </div>
 
           <div className="sectionSpacing">
@@ -271,7 +278,7 @@ const Landing = () => {
                   Web3 login with Wallet and Decentralized Identity
                 </h1>
                 <img
-                  src="/assets/loginmetamask.png"
+                  src="/assets/Frame 4477.png"
                   alt="LoginMetaMask"
                   className="LoginMetaMask p-md-4 pt-2 mt-md-5"
                 />
@@ -338,7 +345,8 @@ const Landing = () => {
                   alt="metawork_chat"
                 />
                 <h3 className="mt-md-3 mt-2 cardHeading">
-                  NFT Profiles & Avatars
+                  NFT Profiles
+                  <br /> & Avatars
                 </h3>
               </div>
               <div className="d-flex flex-column align-items-md-start align-items-center divCard mt-4 mt-md-0">
@@ -418,7 +426,7 @@ const Landing = () => {
               </div>
             </div>
             <div className="mb-md-5 mb-4">
-              <h1 className="m-0 display-3 heading">
+              <h1 className="m-0 sectionWorkspaceHeading">
                 <strong>
                   <span className="highlight">Web3 Collaboration</span>
                 </strong>
@@ -698,7 +706,7 @@ const Landing = () => {
           </div>
           <div className="borderBox p-5 sectionSpacing d-flex backgroundDarkCard">
             <div className="d-flex align-items-start justify-content-center flex-column">
-              <h1 className="helpHeading">How can we help you?</h1>
+              <h1 className="helpHeading">Want to know more?</h1>
               <p className="alignLeftText helpPara mt-4">
                 Schedule a meeting with our team and ask anything about creating
                 your own Communities and HQs on MetaWork.
@@ -714,23 +722,35 @@ const Landing = () => {
           </div>
 
           <div className="d-flex justify-content-between  flex-column flex-md-row">
-            <div className="d-flex justify-content-between borderBox py-4 px-5 backgroundDarkCard mt-3 mt-md-5">
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
               <div className="d-flex align-items-center ">
-                <img src="./assets/base-twitter.svg" alt="twitterlogo" />
+                <img
+                  src="./assets/base-twitter.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
                 <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
               </div>
               <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
             </div>
-            <div className="d-flex justify-content-between borderBox py-4 px-5 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
               <div className="d-flex align-items-center ">
-                <img src="./assets/base-medium.svg" alt="twitterlogo" />
+                <img
+                  src="./assets/base-medium.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
                 <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
               </div>
               <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
             </div>
-            <div className="d-flex justify-content-between borderBox py-4 px-5 backgroundDarkCard mt-3 mt-md-5">
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
               <div className="d-flex align-items-center ">
-                <img src="./assets/base-github.svg" alt="twitterlogo" />
+                <img
+                  src="./assets/base-github.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
                 <h2 className="bottomLinks mt-1 ps-4">Github</h2>
               </div>
               <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
@@ -947,7 +967,7 @@ const Landing = () => {
           bottom: 0;
         }
         .sectionWorkspaceHeading {
-          font-size: 34px;
+          font-size: 72px;
         }
 
         .highlight {
@@ -1012,9 +1032,9 @@ const Landing = () => {
           font-weight: 600;
         }
         .heroHeading {
-          font-size: 116px;
+          font-size: 126px;
           font-weight: 600;
-          line-height: 100px;
+          line-height: 125px;
         }
         .platform {
           background: linear-gradient(
@@ -1212,7 +1232,7 @@ const Landing = () => {
           color: rgb(255, 255, 255, 0.7);
         }
         .heroPara {
-          width: 60%;
+          // width: 60%;
           font-size: 24px;
           text-align: left;
         }
@@ -1267,6 +1287,7 @@ const Landing = () => {
           justify-content: center;
         }
         .bottomSocialLinks {
+          cursor: pointer;
           width: 30%;
         }
         .footerText {
@@ -1278,6 +1299,9 @@ const Landing = () => {
 
         .aboutPara {
           font-size: 30px;
+        }
+        .footerlogoos {
+          width: 30px;
         }
         /* Media queries */
         /* breakpoints to use
@@ -1368,6 +1392,9 @@ const Landing = () => {
         }
 
         @media screen and (max-width: 770px) {
+          .sectionWorkspaceHeading {
+            font-size: 40px;
+          }
           .hideOnDesktop {
             display: block;
           }
@@ -1375,7 +1402,7 @@ const Landing = () => {
             width: 320px;
           }
           .heroHeading {
-            font-size: 40px;
+            font-size: 50px;
             font-weight: 700;
             line-height: 50px;
           }
@@ -1394,6 +1421,7 @@ const Landing = () => {
             text-align: center;
           }
           .bottomSocialLinks {
+            cursor: pointer;
             width: 100%;
           }
           .footerLogoMetaworks {
