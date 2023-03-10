@@ -1,43 +1,44 @@
 import { Button } from "@chakra-ui/react";
 import Image from "next/image";
+import Link from "next/link";
 import {Landing} from "../../components/icons/IconImage";
 
 function about() {
   return (
     <>
       <div className="d-flex flex-column h-100 text-center bodyBackground">
-        <nav className="navbar navbar-expand-md navbar-dark fixed-top py-3 navBar py-md-2">
+        <nav className="navbar navbar-expand-md navbar-dark fixed-top py-3 navBar pt-md-4 p-md-2">
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
             <div className=" d-flex flex-column flex-md-row">
               <div className="col">
-                <a href="/landing">
+                <Link href="/landing">
                   <Image
                     className="headerLogo"
                     src="/assets/metawork-image-text logo.svg"
                     alt="logo"
-                    width={158}
+                    width={170}
                     height={62}
                     // width={246}
                   />
-                </a>
+                </Link>
               </div>
               <ul className="navbar-nav me-auto d-flex align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
-                  <a
+                  <Link
                     className="nav-link  d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/landing"
                   >
                     Platform
-                  </a>
+                  </Link>
                 </li>
 
                 <li className="nav-item">
-                  <a
+                  <Link
                     className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/about"
                   >
                     About Us
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -45,13 +46,13 @@ function about() {
             <div className="d-flex align-items-center" id="">
               <div className="row overflow-hidden flex-md-row position-relative mx-2 hideOnMobile">
                 <div className="column align-items-center">
-                  <a className="text-muted" href="#">
+                  <Link className="text-muted" href="#">
                     <img
                       className="twitterLogo"
                       src="/assets/brand-twitter.svg"
                       alt="twitter"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <Button variant="state_brand">Beta Soon</Button>
@@ -79,7 +80,7 @@ function about() {
             src="/assets/docs.png"
             alt="metawork_chat"
           /> */}
-          <Landing path="aboutUs.png" className="px-3 px-md-0 mb-2 mb-md-0"/>
+          <Landing path="aboutUs.png" className="px-3 px-md-0 mb-2 mb-md-0" />
           {/* <img
             className="backedByImg"
             src="/assets/docs.png"
@@ -90,8 +91,8 @@ function about() {
           <p className="aboutPara">
             <strong>MetaWork Labs</strong> began with the simple idea of
             empowering people and society, and thus we have come together to
-            co-create products and infras with Web3 technology. As a part of our
-            journey, we have built a web3 native workspace suit and made its
+            co-create products and infras with Web3 technology. As Link part of our
+            journey, we have built Link web3 native workspace suit and made its
             first product live. Stay tuned, for other interesting projects to be
             released this year.
           </p>
@@ -297,7 +298,7 @@ function about() {
             </strong>
           </h1>
           <h2 className="platformsubheading">
-            Be a part of our team and let's build together
+            Be Link part of our team and let's build together
           </h2>
           <img
             src="./assets/ecosystem bottom img.png"
@@ -329,7 +330,7 @@ function about() {
             />
             <h3 className="highlight ecosystemCardHeading">Open Positions</h3>
             <p className="ecosystemCardPara my-3 alignLeftText">
-              Be a part of Web3 Ecosystem Let’s come together and create an
+              Be Link part of Web3 Ecosystem Let’s come together and create an
               Enterprise Grade Decentralized Workspace suit.
             </p>
           </div>

@@ -1,5 +1,6 @@
 import { Button, Text } from "@chakra-ui/react";
 import Image from "next/image";
+import Link from "next/link";
 import {Landing} from "../../components/icons/IconImage";
 
 const LandingPage = () => {
@@ -18,11 +19,11 @@ const LandingPage = () => {
   return (
     <>
       <div className="d-flex flex-column h-100 text-center bodyBackground">
-        <nav className="navbar navbar-expand-md navbar-dark fixed-top py-3 navBar py-md-2">
+        <nav className="navbar navbar-expand-md navbar-dark fixed-top py-3 mt-2 navBar pt-md-4 p-md-2">
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
             <div className=" d-flex flex-column flex-md-row">
               <div className="col">
-                <a href="/landing">
+                <Link href="/landing">
                   <Image
                     className="headerLogo"
                     src="/assets/metawork-image-text logo.svg"
@@ -31,25 +32,25 @@ const LandingPage = () => {
                     height={62}
                     // width={246}
                   />
-                </a>
+                </Link>
               </div>
               <ul className="navbar-nav me-auto d-flex align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
-                  <a
+                  <Link
                     className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/landing"
                   >
                     Platform
-                  </a>
+                  </Link>
                 </li>
 
                 <li className="nav-item">
-                  <a
+                  <Link
                     className="nav-link  d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/about"
                   >
                     About Us
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -57,13 +58,13 @@ const LandingPage = () => {
             <div className="d-flex align-items-center" id="">
               <div className="row overflow-hidden flex-md-row position-relative mx-2 hideOnMobile">
                 <div className="column align-items-center">
-                  <a className="text-muted" href="#">
+                  <Link className="text-muted" href="#">
                     <img
                       className="twitterLogo"
                       src="/assets/brand-twitter.svg"
                       alt="twitter"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <Button variant="state_brand">Beta Soon</Button>
@@ -262,7 +263,7 @@ const LandingPage = () => {
           </div>
           <div className="row d-flex justify-content-center">
             <p className="movePara">
-              Become a part of new Decentralized workspace with your Social
+              Become Link part of new Decentralized workspace with your Social
               Identity, to utilize more private and encrypted chats with secured
               token gating channels and spaces accessed with specific utilities
               assigned in your wallets.
@@ -708,8 +709,8 @@ const LandingPage = () => {
             <div className="d-flex align-items-start justify-content-center flex-column">
               <h1 className="helpHeading">Want to know more?</h1>
               <p className="alignLeftText helpPara mt-4">
-                Schedule a meeting with our team and ask anything about creating
-                your own Communities and HQs on MetaWork.
+                Schedule Link meeting with our team and ask anything about
+                creating your own Communities and HQs on MetaWork.
               </p>
               <button className="btn btn-dark-blue mt-4 px-4  d-flex">
                 Schedule Meeting
