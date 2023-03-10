@@ -5,7 +5,6 @@ import { Col, StyledCard} from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
-import { redirect } from 'next/navigation';
 import { useRouter } from "next/router";
 
 

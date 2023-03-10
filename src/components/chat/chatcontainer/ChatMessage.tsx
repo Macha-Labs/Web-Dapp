@@ -242,8 +242,8 @@ const ChatMessage = (props: any) => {
         <Col
           className={
             props.authContext?.address == props?.message?.user?.id
-              ? "active message w-100"
-              : "message w-100"
+              ? "active message"
+              : "message"
           }
           style={{ color: "#ffffff" }}
         >
@@ -331,10 +331,9 @@ const ChatMessage = (props: any) => {
             </Row>
           )}
         </Col>
-        <Row className="w-100 positionPop action">
+        <Row className="positionPop action">
           <TemplateReactions />
           <TemplateActions />
-          {/* <TemplateAction/> */}
         </Row>
       </Row>
     </StyledConversation>

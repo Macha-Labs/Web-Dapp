@@ -894,8 +894,8 @@ export const StyledConversation = styled(Col)`
     }
   }
   .positionPop > .chakra-popover__popper {
- inset: 0px auto auto 55% !important;
-}
+    inset: 0px auto auto 55% !important;
+  }
 `;
 
 //
