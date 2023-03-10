@@ -840,8 +840,8 @@ export const StyledConversation = styled(Col)`
   }
 
   .replyTo {
-    margin-left: 60px;
-    margin-bottom: 0.5rem;
+    border-left: 2px solid #246bfd;
+    padding-left: 8px;
   }
 
   .action {

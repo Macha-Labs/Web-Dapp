@@ -192,13 +192,11 @@ const ChatMessage = (props: any) => {
     return (
       <>
         {props?.message?.quoted_message && (
-          <Col className="m-b-1 m-l-1">
-            <Heading as="h6" size="xs" className="m-b-0-5">
-              Reply To
-            </Heading>
+          <Col className="m-b-1 replyTo">
             <Row>
+              <Text className="m-r-0-5" fontSize="sm">Replying</Text>
               <Avatar
-                size="sm"
+                size="xs"
                 src={props?.message?.quoted_message?.user?.lensImage}
                 className="m-r-0-5"
               />
@@ -217,7 +215,6 @@ const ChatMessage = (props: any) => {
 
   return (
     <StyledConversation key={`b-${props?.message?.id}`}>
-      <TemplateReply />
       <Row className="w-100">
         <Col>
           <Row>
@@ -250,6 +247,7 @@ const ChatMessage = (props: any) => {
           }
           style={{ color: "#ffffff" }}
         >
+          <TemplateReply />
           <Row className="hr-between">
             <Text fontSize="sm" className="heading">
               {props.message?.user?.lensUsername ||
