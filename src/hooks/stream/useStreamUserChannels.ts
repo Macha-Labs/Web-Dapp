@@ -24,7 +24,7 @@ const useStreamUserChannels = (client: any) => {
           limit: 15
         });
         let newResult = result?.map((item: any) => {
-          return ChannelStream$(item.data, item);
+          return ChannelStream$(item.data, item, client?.user?.id);
         })
         setChannels(newResult)
 
