@@ -1,7 +1,9 @@
 import IconEmoji from "@/components/icons/IconEmoji";
 import IconImage from "@/components/icons/IconImage";
 import InputAction from "@/components/input/InputAction";
+import ModalSlider from "@/components/modal/ModalSlider";
 import Pop from "@/components/pop/Pop";
+import UserProfile from "@/components/user/UserProfile";
 import { truncateAddress } from "@/helpers";
 import LayoutFilePreview from "@/layouts/chat/LayoutFilePreview";
 import LayoutImagePreview from "@/layouts/chat/LayoutImagePreview";
@@ -20,11 +22,15 @@ import {
   Text,
   Textarea,
   useToast,
+  useDisclosure
 } from "@chakra-ui/react";
+import { useState } from "react";
 import emoji from "../../../data/emoji.json";
 
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
+  const modalProfile = useDisclosure();
+  const [selectedUser, setSelectedUser] = useState<any>();
   const toast = useToast();
   const date = new Date(props.message.created_at);
   const hours = date.getHours().toString().padStart(2, "0");
@@ -104,6 +110,23 @@ const ChatMessage = (props: any) => {
     ) {
       return <LayoutFilePreview key={attachment?.id} attachment={attachment} />;
     }
+  };
+
+
+  const handleSelectedUser = (user: any) => {
+    const channelUsers = props.hookMembers.allUsers;
+    const userProfile =  channelUsers.filter((profile: any) =>  String(profile.address).toLowerCase() == String(user.lensOwnedBy).toLowerCase())[0];
+     modalProfile.onOpen();
+    setSelectedUser(userProfile);
+  };
+
+  const TemplateProfile = () => {
+    console.log(selectedUser, "selectedUser");
+    return (
+      <ModalSlider event={modalProfile} size="lg">
+        <UserProfile user={selectedUser} />
+      </ModalSlider>
+    );
   };
 
   const TemplateReactions = () => {
@@ -214,6 +237,7 @@ const ChatMessage = (props: any) => {
   };
 
   return (
+    <>
     <StyledConversation key={`b-${props?.message?.id}`}>
       <Row className="w-100">
         <Col>
@@ -234,6 +258,7 @@ const ChatMessage = (props: any) => {
             )}
 
             <Avatar
+              onClick={() => handleSelectedUser(props.message?.user)}
               src={props.message?.user?.lensImage}
               className="m-r-0-5"
             ></Avatar>
@@ -337,6 +362,8 @@ const ChatMessage = (props: any) => {
         </Row>
       </Row>
     </StyledConversation>
+     <TemplateProfile />
+   </>
   );
 };
 

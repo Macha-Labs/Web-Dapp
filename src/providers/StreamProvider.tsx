@@ -69,7 +69,9 @@ const StreamProvider = ({children}: any) => {
     }
 
     const reloadChannelList = () => {
-        hookStreamChannels.fetchUserChannels(hookStreamClient.client);
+        setTimeout(() => {
+            hookStreamChannels.fetchUserChannels(hookStreamClient.client);
+        }, 100);
     }
 
     const initiate = async (channel: any, userAddress?: any) => {
