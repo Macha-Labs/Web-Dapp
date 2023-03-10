@@ -25,6 +25,7 @@ import IconImage from "../icons/IconImage";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 
 const UserProfile = ({ user }: any) => {
+  console.log('User Profile', user)
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
   const hookLensFollow = useLensFollows(user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(user?.lens?.id);
@@ -211,7 +212,7 @@ const UserProfile = ({ user }: any) => {
           style={{ className: "m-t-1" }}
           header={
             <TabList className="w-100">
-              <Row className="m-v-1 w-100 vr-center hr-center">
+              <Row className="w-100 vr-center hr-center">
                 <Tab>
                   <Button variant="state_default_hover">
                     <IconImage path="IconDarkPost.png" size="15" />
