@@ -12,8 +12,8 @@ const ChatWindow = (props: any) => {
   useEffect(() => {
     // Scroll to the bottom of the list when new items are added
    // messageListRef.current?.scrollToItem(props.hookMessages?.messages.length - 1);
-   const lastMsg = hookStreamChannelMessages?.messages[hookStreamChannelMessages?.messages.length - 1]
-   if(String(props.authContext.address).toLowerCase() == String(lastMsg.user.id).toLowerCase()){
+   const lastMsg = hookStreamChannelMessages?.messages[hookStreamChannelMessages?.messages?.length - 1]
+   if(String(props.authContext.address).toLowerCase() == String(lastMsg?.user?.id).toLowerCase()){
      messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight
    }
   }, [hookStreamChannelMessages?.messages]);
