@@ -89,9 +89,9 @@ const ChatList = (props: any) => {
         <Col className="text-start">
           <Button
             variant="transparent"
-            size="md"
+            size="sm"
             className="text-start"
-            rightIcon={<IconImage path="IconDarkPinned.png" />}
+            rightIcon={<IconImage path="IconDarkPinned.png" size="18" />}
           >
             <Row className="hr-between w-100" onClick={() => {}}>
               Pin Channel
@@ -100,9 +100,9 @@ const ChatList = (props: any) => {
           {!props.item.raw?.muteStatus()?.muted ? (
             <Button
               variant="transparent"
-              size="md"
+              size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkMute.png" />}
+              rightIcon={<IconImage path="IconDarkMute.png" size="18" />}
             >
               <Row
                 className="hr-between w-100"
@@ -116,9 +116,9 @@ const ChatList = (props: any) => {
           ) : (
             <Button
               variant="transparent"
-              size="md"
+              size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkUnMute.png" />}
+              rightIcon={<IconImage path="IconDarkUnMute.png" size="18" />}
             >
               <Row
                 className="hr-between w-100"
@@ -132,9 +132,9 @@ const ChatList = (props: any) => {
           )}
           <Button
             variant="transparent"
-            size="md"
+            size="sm"
             className="text-start"
-            rightIcon={<IconImage path="IconRedDelete.png" />}
+            rightIcon={<IconImage path="IconRedDelete.png" size="18" />}
           >
             <Row className="hr-between w-100" 
               onClick={() => {
@@ -146,9 +146,9 @@ const ChatList = (props: any) => {
           </Button>
           { !props?.item?.isAdmin && <Button
             variant="transparent"
-            size="md"
+            size="sm"
             className="text-start"
-            rightIcon={<IconImage path="IconDarkLeave.png" />}
+            rightIcon={<IconImage path="IconDarkLeave.png" size="18"/>}
           >
             <Row
               className="hr-between w-100"

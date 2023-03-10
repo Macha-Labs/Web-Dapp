@@ -36,7 +36,7 @@ const ChatMessage = (props: any) => {
     {
       name: 'Edit Message',
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage path="IconDarkEdit.png" size="18" />,
       onClick: () => {
         props.hookChat.handleEdit(props.message);
       },
@@ -45,7 +45,7 @@ const ChatMessage = (props: any) => {
     {
       name: 'Reply Message',
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage path="IconDarkReply.png" size="18" />,
       onClick: () => {
         props.hookChat.handleReply(props.message);
       },
@@ -54,7 +54,7 @@ const ChatMessage = (props: any) => {
     {
       name: 'Copy Message',
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage path="IconDarkFiles.png" size="18" />,
       onClick: () => {
         navigator.clipboard.writeText(props.message?.text);
         toast({
@@ -69,7 +69,7 @@ const ChatMessage = (props: any) => {
     {
       name: props?.message?.pinned ? "Unpin Message" : "Pin Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage path="IconDarkPinned.png" size="18" />,
       onClick: () => {
         if (props.message?.pinned) {
           props.hookChat.unPinMessage(props.message);
@@ -82,7 +82,7 @@ const ChatMessage = (props: any) => {
     {
       name: "Delete Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage path="IconRedDelete.png" size="18" />,
       onClick: () => {
         props.hookChat.deleteMessage(props.message);
       },
