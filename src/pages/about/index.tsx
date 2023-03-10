@@ -60,7 +60,7 @@ function about() {
         </nav>
         <div className="row justify-content-center sectionSpacing paddingBox">
           <div className="col mt-5">
-            <h1 className="subHeading mt-5">Portal is built at</h1>
+            <h1 className="subHeading mt-5">Building Web3 At</h1>
           </div>
         </div>
 
