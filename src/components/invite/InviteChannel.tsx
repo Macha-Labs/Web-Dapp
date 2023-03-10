@@ -2,7 +2,7 @@ import useStreamChannelMembership from "@/hooks/stream/useStreamChannelMembershi
 import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
 import { Col, StyledCard} from "@/styles/StyledComponents";
-import { Avatar, Button, Heading, Text } from "@chakra-ui/react";
+import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
 import { redirect } from 'next/navigation';
@@ -14,6 +14,7 @@ const InviteChannel = (props: any) => {
     const hookStreamChannelMembership = useStreamChannelMembership();
     const chatContext = useContext(ChatContext);
     const router = useRouter();
+    const toast = useToast();
 
 
     useEffect(() => {
@@ -30,6 +31,17 @@ const InviteChannel = (props: any) => {
         router.push('/chat');
     }
 
+    const callBacks = {
+        noLensProfile: async() => {
+            toast({
+                title: "Lens Profile not found",
+                status: "error",
+                duration: 3000,
+                position: "bottom-right",
+              });
+        }
+    }
+
     return (
         <div className="middle">
         <StyledCard className="w-100 p-4">
@@ -43,7 +55,15 @@ const InviteChannel = (props: any) => {
                 </Col>
                 <Col className="w-60 m-b-1">
                     {!authContext.address && <ConnectWalletButton />}
-                    {(authContext.address && !authContext?.user?.lens?.id) && <Button className="" size="md" variant="state_lens" isLoading={authContext?.isLoadingLens} onClick={() => {authContext.connectLens()}}>Sign In With Lens</Button>}
+                    {(authContext.address && !authContext?.user?.lens?.id) && 
+                    <Button 
+                    className="" 
+                    size="md" 
+                    variant="state_lens" 
+                    isLoading={authContext?.isLoadingLens} 
+                    onClick={() => {authContext.connectLens(callBacks)}}>
+                        Sign In With Lens
+                    </Button>}
                     {authContext?.isConnected && 
                     <Button 
                     onClick={() => {

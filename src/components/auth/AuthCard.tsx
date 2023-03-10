@@ -4,11 +4,15 @@ import { Col, StyledCard} from "@/styles/StyledComponents";
 import { Button, Heading, Toast, useToast } from "@chakra-ui/react";
 import { useContext } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
+import {useState} from "react";
 
 const AuthCard = () => {
     const authContext = useContext(AuthContext);
     const toast = useToast();
-
+    const [lensBtnState, setLensBtnState] = useState<any>({
+        text: "Sign in with Lens",
+        disabled: false
+    });
     const callBacks = {
         noLensProfile: async() => {
             toast({
@@ -17,6 +21,7 @@ const AuthCard = () => {
                 duration: 3000,
                 position: "bottom-right",
               });
+            setLensBtnState({text: "Switch your account", disabled: true});
         }
     }
 
@@ -38,8 +43,9 @@ const AuthCard = () => {
                     size="md" 
                     variant="state_lens" 
                     isLoading={authContext?.isLoadingLens} 
+                    isDisabled = {lensBtnState.disabled}
                     onClick={() => {authContext.connectLens(callBacks)}}>
-                        Sign In With Lens
+                        {lensBtnState.text}
                     </Button>
                     }
                 </Col>
