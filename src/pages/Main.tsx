@@ -1,11 +1,10 @@
 import "@rainbow-me/rainbowkit/styles.css";
-import ChatComponent from "./chat";
+import LandingPage from "./landing";
 
 function Main() {
   return (
     <>
-      <ChatComponent />
-      {/* <User /> */}
+      <LandingPage />
     </>
   );
 }
