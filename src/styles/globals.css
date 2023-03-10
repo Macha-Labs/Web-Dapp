@@ -118,6 +118,10 @@ a {
   align-items: center;
 }
 
+.text-center {
+  text-align: center;
+}
+
 /* WIDTH */
 .w-100 {
   width: 100%;

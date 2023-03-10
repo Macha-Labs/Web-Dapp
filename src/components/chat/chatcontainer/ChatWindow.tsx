@@ -40,7 +40,7 @@ const ChatWindow = (props: any) => {
       
 
     <div className="body">
-          {hookStreamChannelMessages?.messages.map((message: any, index: any) => {
+          {hookStreamChannelMessages?.messages?.map((message: any, index: any) => {
             return (
               <div ref={el => itemsRef.current[index] = el}  key={`message-${index}`}>
                 <ChatMessage

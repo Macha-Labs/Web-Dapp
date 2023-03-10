@@ -16,10 +16,11 @@ const useStreamChannelMembership = () => {
         })
     }
 
-    const triggerMembership = (userAddress: any, channelId: any) => {
+    const triggerMembership = (userAddress: any, channelId: any, callback: any) => {
         setIsLoading(true);
         joinStreamChannel({userAddress: userAddress, channelId: channelId}).then(res => {
             setIsLoading(false);
+            callback();
         })
     }
 
