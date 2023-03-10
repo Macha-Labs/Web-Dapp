@@ -38,6 +38,8 @@ const useLensProfile = () => {
   }, [address]);
 
   return {
+    userLens: UserLens$(lensProfile),
+    setLensProfile: setLensProfile,
     isLoading: isLoading,
     loadingText: loadingText,
     getOwnedProfiles: getOwnedProfiles,
