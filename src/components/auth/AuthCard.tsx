@@ -36,6 +36,20 @@ const AuthCard = () => {
                 Sign In With Lens
               </Button>
             )}
+            {authContext.address &&
+              authContext?.user?.lens?.id &&
+              !authContext.xmtpClientAddress && (
+                <Button
+                  className=""
+                  size="md"
+                  variant="state_xmtp"
+                  onClick={() => {
+                    authContext.connectXmtp();
+                  }}
+                >
+                  Connect to XMTP
+                </Button>
+              )}
           </Col>
         </Col>
       </StyledCard>

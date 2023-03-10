@@ -35,7 +35,9 @@ const Nav = (props: any) => {
           <div className="header m-b-0-5">
             <Col className="hr-center vr-center h-100">
               <Tooltip label="Metawork">
-                <IconImage path="Logo.png" size="42" />
+                <Link href="chat/dm">
+                  <IconImage path="Logo.png" size="42" />
+                </Link>
               </Tooltip>
             </Col>
           </div>

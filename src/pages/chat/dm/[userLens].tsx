@@ -15,7 +15,7 @@ import Link from "next/link";
 function DirectMessage() {
   const address =
     typeof window !== "undefined" && window?.location?.href.split("#")[1];
-  const hookXmtp = useXmtp(address);
+  const hookXmtp = useXmtp();
   const { isConnected } = useAccount();
   console.log(address, "address");
   useEffect(() => {

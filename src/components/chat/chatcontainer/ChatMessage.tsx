@@ -31,19 +31,18 @@ const ChatMessage = (props: any) => {
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const time = `${hours}:${minutes}`;
 
-
   const actionsData = [
     {
-      name: 'Edit Message',
+      name: "Edit Message",
       key: `c-${props?.message?.id}`,
       icon: <IconImage path="IconDarkFiles.png" />,
       onClick: () => {
         props.hookChat.handleEdit(props.message);
       },
-      condition: props.message?.user?.id == props?.authContext?.address
+      condition: props.message?.user?.id == props?.authContext?.address,
     },
     {
-      name: 'Reply Message',
+      name: "Reply Message",
       key: `c-${props?.message?.id}`,
       icon: <IconImage path="IconDarkFiles.png" />,
       onClick: () => {
@@ -52,7 +51,7 @@ const ChatMessage = (props: any) => {
       condition: true,
     },
     {
-      name: 'Copy Message',
+      name: "Copy Message",
       key: `c-${props?.message?.id}`,
       icon: <IconImage path="IconDarkFiles.png" />,
       onClick: () => {
@@ -64,7 +63,7 @@ const ChatMessage = (props: any) => {
           position: "bottom-right",
         });
       },
-      condition: true
+      condition: true,
     },
     {
       name: props?.message?.pinned ? "Unpin Message" : "Pin Message",
@@ -77,7 +76,7 @@ const ChatMessage = (props: any) => {
           props.hookChat.pinMessage(props.message);
         }
       },
-      condition: true
+      condition: true,
     },
     {
       name: "Delete Message",
@@ -86,10 +85,9 @@ const ChatMessage = (props: any) => {
       onClick: () => {
         props.hookChat.deleteMessage(props.message);
       },
-      condition: props.message?.user?.id == props?.authContext?.address
+      condition: props.message?.user?.id == props?.authContext?.address,
     },
-  ]
-
+  ];
 
   const templateAttachment = (attachment: any) => {
     if (attachment?.og_scrape_url) {
@@ -166,22 +164,23 @@ const ChatMessage = (props: any) => {
         trigger={<IconImage path="IconDarkMenu.png" />}
       >
         <Col className="text-start">
-          {actionsData.map((item) => {
+          {actionsData.map(item => {
             return (
               <>
-                {item.condition &&
-                <Button
-                  variant="transparent"
-                  size="sm"
-                  className="text-start"
-                  rightIcon={item.icon}
-                  key={item.key}
-                  onClick={item.onClick}
-                >
-                  {item.name}
-                </Button>}
+                {item.condition && (
+                  <Button
+                    variant="transparent"
+                    size="sm"
+                    className="text-start"
+                    rightIcon={item.icon}
+                    key={item.key}
+                    onClick={item.onClick}
+                  >
+                    {item.name}
+                  </Button>
+                )}
               </>
-            )
+            );
           })}
         </Col>
       </Pop>
@@ -244,7 +243,8 @@ const ChatMessage = (props: any) => {
         </Col>
         <Col
           className={
-            props.authContext?.address == props?.message?.user?.id
+            props.authContext?.address.toLowerCase() ==
+            props?.message?.user?.id.toLowerCase()
               ? "active message w-100"
               : "message w-100"
           }

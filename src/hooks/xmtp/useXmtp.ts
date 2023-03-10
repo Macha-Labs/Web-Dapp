@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Client, DecodedMessage, SortDirection } from "@xmtp/xmtp-js";
 import { fetchSigner } from "@wagmi/core";
-function useXmtp(PEER_ADDRESS: any) {
+function useXmtp() {
   const [messages, setMessages] = useState<DecodedMessage[]>([]);
   const [client, setClient] = useState<any>();
   const [allConversations, setAllConversations] = useState<any>();
   const [xmtpClientAddress, setXmtpClientAddress] = useState<any>();
-  //   const PEER_ADDRESS = "0x937C0d4a6294cdfa575de17382c7076b579DC176"; //bot address
+  const PEER_ADDRESS = "0x937C0d4a6294cdfa575de17382c7076b579DC176"; //bot address
 
   useEffect(() => {
     if (xmtpClientAddress) {
