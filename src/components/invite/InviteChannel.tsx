@@ -5,7 +5,6 @@ import { Col, StyledCard} from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
-import { redirect } from 'next/navigation';
 import { useRouter } from "next/router";
 
 
@@ -54,7 +53,7 @@ const InviteChannel = (props: any) => {
                             )}}
                         isLoading={hookStreamChannelMembership.isLoading} className="" size="md" variant="state_brand" >Join Channel</Button>}
                 </Col>
-                <Text fontSize={12}>By registering you agree to MetaWork's Terms and Conditions</Text>
+                <Text fontSize={12}>By registering you agree to MetaWork Terms and Conditions</Text>
             </Col>
         </StyledCard>
     </div>

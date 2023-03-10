@@ -151,8 +151,10 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
 
   const leaveChannel = (channel: any) => {
     logger("channel", "usePortalChannelLeave", "Leaving Channel", [channel]);
-    channel.raw.removeMembers([authProvider.address]);
-    callback.leave();
+    channel.raw.removeMembers([authProvider.address]).then((res: any) => {
+      callback.leave();
+    });
+    
   };
   return {
     update,

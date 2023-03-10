@@ -46,7 +46,7 @@ const Nav = (props: any) => {
                       path="IconDarkHash.png"
                       style={{
                         className: `m-b-1 ${
-                          active === "chat" ? "state_active" : ""
+                          active === "chat" ? "state_active state_hover scale" : ""
                         } `,
                       }}
                       onClick={() => setActive("chat")}
@@ -58,7 +58,7 @@ const Nav = (props: any) => {
                     path="IconBrandProfile.png"
                     style={{
                       className: `m-b-1 ${
-                        active === "user" ? "state_active" : ""
+                        active === "user" ? "state_active state_hover scale" : ""
                       } `,
                     }}
                     onClick={() => setActive("user")}
@@ -68,7 +68,7 @@ const Nav = (props: any) => {
                   path="IconBrandDiscover.png"
                   style={{
                     className: `m-b-1 ${
-                      active === "discover" ? "state_active" : ""
+                      active === "discover" ? "state_active state_hover scale" : ""
                     } `,
                   }}
                   onClick={() => setActive("discover")}

@@ -42,7 +42,7 @@ const ChatMessage = (props: any) => {
     {
       name: 'Edit Message',
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage path="IconDarkEdit.png" size="18" />,
       onClick: () => {
         props.hookChat.handleEdit(props.message);
       },
@@ -51,7 +51,7 @@ const ChatMessage = (props: any) => {
     {
       name: 'Reply Message',
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage path="IconDarkReply.png" size="18" />,
       onClick: () => {
         props.hookChat.handleReply(props.message);
       },
@@ -60,7 +60,7 @@ const ChatMessage = (props: any) => {
     {
       name: 'Copy Message',
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage path="IconDarkFiles.png" size="18" />,
       onClick: () => {
         navigator.clipboard.writeText(props.message?.text);
         toast({
@@ -75,7 +75,7 @@ const ChatMessage = (props: any) => {
     {
       name: props?.message?.pinned ? "Unpin Message" : "Pin Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage path="IconDarkPinned.png" size="18" />,
       onClick: () => {
         if (props.message?.pinned) {
           props.hookChat.unPinMessage(props.message);
@@ -88,7 +88,7 @@ const ChatMessage = (props: any) => {
     {
       name: "Delete Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage path="IconRedDelete.png" size="18" />,
       onClick: () => {
         props.hookChat.deleteMessage(props.message);
       },
@@ -215,13 +215,11 @@ const ChatMessage = (props: any) => {
     return (
       <>
         {props?.message?.quoted_message && (
-          <Col className="m-b-1 m-l-1">
-            <Heading as="h6" size="xs" className="m-b-0-5">
-              Reply To
-            </Heading>
+          <Col className="m-b-1 replyTo">
             <Row>
+              <Text className="m-r-0-5" fontSize="sm">Replying</Text>
               <Avatar
-                size="sm"
+                size="xs"
                 src={props?.message?.quoted_message?.user?.lensImage}
                 className="m-r-0-5"
               />
@@ -241,7 +239,6 @@ const ChatMessage = (props: any) => {
   return (
     <>
     <StyledConversation key={`b-${props?.message?.id}`}>
-      <TemplateReply />
       <Row className="w-100">
         <Col>
           <Row>
@@ -270,16 +267,20 @@ const ChatMessage = (props: any) => {
         <Col
           className={
             props.authContext?.address == props?.message?.user?.id
-              ? "active message w-100"
-              : "message w-100"
+              ? "active message"
+              : "message"
           }
           style={{ color: "#ffffff" }}
         >
-          <Text fontSize="sm" className="heading">
-            {props.message?.user?.lensUsername ||
-              props.message?.user?.lensHandle ||
-              truncateAddress(props.message?.user?.id)}
-          </Text>
+          <TemplateReply />
+          <Row className="hr-between">
+            <Text fontSize="sm" className="heading">
+              {props.message?.user?.lensUsername ||
+                props.message?.user?.lensHandle ||
+                truncateAddress(props.message?.user?.id)}
+            </Text>
+            <Text style={{ alignSelf: "flex-end" }} fontSize="12">{time}</Text>
+          </Row>
 
           {props?.hookChat?.actionMessage?.action == "EDIT" &&
           props?.hookChat?.actionMessage?.item?.id == props?.message?.id ? (
@@ -322,9 +323,6 @@ const ChatMessage = (props: any) => {
               dangerouslySetInnerHTML={{ __html: props.message?.html }}
             />
           )}
-          <Col>
-            <span style={{ alignSelf: "flex-end" }}>{time}</span>
-          </Col>
           {props?.message?.attachments ? (
             props?.message?.attachments?.map((item: any, index: number) => {
               return templateAttachment(item);
@@ -333,7 +331,7 @@ const ChatMessage = (props: any) => {
             <></>
           )}
 
-          {props?.message?.reaction_scores && (
+          {props?.message?.reaction_scores && ( 
             <Row className="vr-center">
               {Object.keys(props?.message.reaction_scores).length > 0 &&
                 Object.keys(props.message.reaction_scores).map((item: any) => {
@@ -358,10 +356,9 @@ const ChatMessage = (props: any) => {
             </Row>
           )}
         </Col>
-        <Row className="w-100 positionPop action">
+        <Row className="positionPop action">
           <TemplateReactions />
           <TemplateActions />
-          {/* <TemplateAction/> */}
         </Row>
       </Row>
     </StyledConversation>

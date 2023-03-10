@@ -840,8 +840,8 @@ export const StyledConversation = styled(Col)`
   }
 
   .replyTo {
-    margin-left: 60px;
-    margin-bottom: 0.5rem;
+    border-left: 2px solid #246bfd;
+    padding-left: 8px;
   }
 
   .action {
@@ -894,8 +894,8 @@ export const StyledConversation = styled(Col)`
     }
   }
   .positionPop > .chakra-popover__popper {
- inset: 0px auto auto 55% !important;
-}
+    inset: 0px auto auto 55% !important;
+  }
 `;
 
 //

@@ -15,7 +15,7 @@ const AuthCard = () => {
                 <Col className="m-b-2 hr-center">
                     <IconImage path="Logo.png" size="90" style={{className: 'm-b-1'}}/>
                     <Heading as="h5" size="lg">
-                        Log in to Portal
+                        Log in to MetaWork
                     </Heading>
                 </Col>
                 <Col className="w-60">
