@@ -30,6 +30,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
           name: channel.name,
           description: channel.description,
           image: channel.image,
+          private: channel?.private,
         },
         channel.id
       )
@@ -59,6 +60,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
         userAddress: authProvider.address,
         image: channel.image,
         members: usersIds.concat([authProvider.address]),
+        private: channel?.private || true,
       })
         .then(res => {
           logger(
