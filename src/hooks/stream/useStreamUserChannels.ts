@@ -11,7 +11,7 @@ const useStreamUserChannels = (client: any) => {
   const fetchUserChannels = async ( passClient?: any ,callback?: any) => {
  
     if (client || passClient) {
-      console.log("fetchUserChannels", true);
+      
       const filter = {
         type: "team",
         members: { $in: [`${client?.user?.id}`] },
@@ -26,6 +26,7 @@ const useStreamUserChannels = (client: any) => {
         let newResult = result?.map((item: any) => {
           return ChannelStream$(item.data, item, client?.user?.id);
         })
+        console.log("fetchUserChannels", true, newResult);
         setChannels(newResult)
 
         logger('channelTest', 'useStreamUserChannels.fetchUserChannels', 'The channel Data was just updated', [result])

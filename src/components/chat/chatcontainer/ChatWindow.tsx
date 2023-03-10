@@ -49,6 +49,7 @@ const ChatWindow = (props: any) => {
                   message={message}
                   hookChat={props?.chatContext?.hookChat}
                   authContext={props.authContext}
+                  hookMembers={props.chatContext.hookMembers}
                   key={`a-${message.id}`}
                 />
               </div>
