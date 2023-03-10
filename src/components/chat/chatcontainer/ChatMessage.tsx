@@ -333,7 +333,7 @@ const ChatMessage = (props: any) => {
             </Row>
           )}
         </Col>
-        <Row className="w-100 positionPop">
+        <Row className="w-100 positionPop action">
           <TemplateReactions />
           <TemplateActions />
           {/* <TemplateAction/> */}

@@ -615,6 +615,7 @@ export const StyledChatList = styled.div`
     padding: ${style.body.padding};
     background: ${style.body.bg};
     overflow-y: scroll;
+    scroll-behavior: smooth;
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none;
     &::-webkit-scrollbar {
