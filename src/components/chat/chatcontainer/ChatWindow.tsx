@@ -41,8 +41,6 @@ const ChatWindow = (props: any) => {
 
   return (
     <>
-      
-
     <div ref={messageListRef} className="body">
           {hookStreamChannelMessages?.messages.map((message: any, index: any) => {
             return (
