@@ -190,6 +190,21 @@ function ChatSetting(props: any) {
   const chatOptions3 = [
     {
       //   icon: IconBrandClearChat,
+      name: "Copy Invite Link",
+      icon: "IconDarkFiles.png",
+      onPress: () => {
+        const inviteLink = `${window.location.origin}/invite/c/${props.chatContext.hookChannel.channel.id}`
+        navigator.clipboard.writeText(inviteLink);
+        toast({
+          title: "Copied to clipboard",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      },
+    },
+    {
+      //   icon: IconBrandClearChat,
       name: "Clear Chat",
       icon: "IconRedDelete.png",
       onPress: () => {},
@@ -211,6 +226,8 @@ function ChatSetting(props: any) {
       },
     },
   ];
+
+
 
   const modalChatPermission = useDisclosure();
   const modalChatMembers = useDisclosure();

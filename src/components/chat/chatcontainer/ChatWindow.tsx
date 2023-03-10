@@ -11,8 +11,12 @@ const ChatWindow = (props: any) => {
 
   useEffect(() => {
     // Scroll to the bottom of the list when new items are added
-    messageListRef.current?.scrollToItem(props.hookMessages?.messages.length - 1);
-  }, [props.hookMessages?.messages]);
+   // messageListRef.current?.scrollToItem(props.hookMessages?.messages.length - 1);
+   const lastMsg = hookStreamChannelMessages?.messages[hookStreamChannelMessages?.messages.length - 1]
+   if(String(props.authContext.address).toLowerCase() == String(lastMsg?.user.id).toLowerCase()){
+     messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight
+   }
+  }, [hookStreamChannelMessages?.messages]);
 
   const messageAreaHeight = props.hookMessages?.messages.map((message: any, index: any) => {
     console.log(itemsRef?.current[index], itemsRef?.current[index]?.offsetHeight, itemsRef?.current[index]?.clientHeight);
@@ -23,7 +27,7 @@ const ChatWindow = (props: any) => {
     const message = props.hookMessages?.messages[index];
     
     return (
-      <div style={style}>
+      <div  style={style}>
         <ChatMessage
           message={message}
           hookChat={{}}
@@ -37,9 +41,7 @@ const ChatWindow = (props: any) => {
 
   return (
     <>
-      
-
-    <div className="body">
+    <div ref={messageListRef} className="body">
           {hookStreamChannelMessages?.messages.map((message: any, index: any) => {
             return (
               <div ref={el => itemsRef.current[index] = el}  key={`message-${index}`}>
