@@ -160,28 +160,28 @@ const ChatMessage = (props: any) => {
 
   const TemplateActions = () => {
     return (
-      <Pop
-        size="sm"
-        placement={"right"}
-        trigger={<IconImage path="IconDarkMenu.png" />}
-      >
+      <Pop size="sm" trigger={<IconImage path="IconDarkMenu.png" />}>
         <Col className="text-start">
           {actionsData.map((item) => {
             return (
               <>
-                {item.condition &&
-                <Button
-                  variant="transparent"
-                  size="sm"
-                  className="text-start"
-                  rightIcon={item.icon}
-                  key={item.key}
-                  onClick={item.onClick}
-                >
-                  {item.name}
-                </Button>}
+                {item.condition && (
+                  <Button
+                    variant="transparent"
+                    size="sm"
+                    className="text-start"
+                    rightIcon={item.icon}
+                    onClick={item.onClick}
+                  >
+                    <label  className="w-100">
+                      <Row className="vr-center hr-between w-100">
+                        {item.name}{" "}
+                      </Row>
+                    </label>
+                  </Button>
+                )}
               </>
-            )
+            );
           })}
         </Col>
       </Pop>
@@ -336,6 +336,7 @@ const ChatMessage = (props: any) => {
         <Row className="w-100 positionPop">
           <TemplateReactions />
           <TemplateActions />
+          {/* <TemplateAction/> */}
         </Row>
       </Row>
     </StyledConversation>
