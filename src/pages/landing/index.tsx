@@ -81,7 +81,7 @@ const LandingPage = () => {
                 </h1>
                 <div className="heroPara mt-5">
                   <p className=" mb-4 mb-md-0">
-                    Private and Secured Decentralized - Workspace Suit inbuilt
+                    Private and Secured Decentralized - Workspace Suite inbuilt
                     with encryption and token gating technologies for teams,
                     enterprises, and Guilds
                   </p>

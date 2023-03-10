@@ -91,10 +91,10 @@ function about() {
           <p className="aboutPara">
             <strong>MetaWork Labs</strong> began with the simple idea of
             empowering people and society, and thus we have come together to
-            co-create products and infras with Web3 technology. As Link part of our
-            journey, we have built Link web3 native workspace suit and made its
-            first product live. Stay tuned, for other interesting projects to be
-            released this year.
+            co-create products and infras with Web3 technology. As Link part of
+            our journey, we have built Link web3 native workspace suit and made
+            its first product live. Stay tuned, for other interesting projects
+            to be released this year.
           </p>
         </div>
         <div className="mt-5 d-flex  flex-column align-items-center align-items-md-start paddingBox">
@@ -199,6 +199,14 @@ function about() {
                 <div className="d-flex flex-column ms-3 align-items-start">
                   <h4 className="teamMembersHeading mb-1">Harshil Airen</h4>
                   <h5 className="teamMembersSubHeading">Business</h5>
+                </div>
+              </div>
+              <div className="d-flex align-items-center teamMembers  mt-3 me-md-3 ">
+                {/* <img src="./assets/nikhil.png" alt="avatar" /> */}
+                <Landing path="nikhil.png" />
+                <div className="d-flex flex-column ms-3 align-items-start">
+                  <h4 className="teamMembersHeading mb-1">Nikhil Bhintade</h4>
+                  <h5 className="teamMembersSubHeading">Product Manager</h5>
                 </div>
               </div>
             </div>
