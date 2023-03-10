@@ -9,7 +9,6 @@ import {
   useDisclosure,
   Text,
 } from "@chakra-ui/react";
-import ChatMessageList from "./ChatMessageList";
 import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
 import { useContext } from "react";
