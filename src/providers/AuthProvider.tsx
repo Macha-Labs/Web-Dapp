@@ -33,6 +33,7 @@ export type AuthContextType = {
   setPeerAddress: Dispatch<SetStateAction<string>>;
   messages: DecodedMessage[];
   fetchXmtpConversation: () => void;
+  sendXmtpMessage: () => void;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -52,6 +53,7 @@ export const AuthContext = createContext<AuthContextType>({
   setPeerAddress: () => {},
   messages: [],
   fetchXmtpConversation: () => {},
+  sendXmtpMessage: () => {},
 });
 
 const AuthProvider = ({ children }: any) => {
@@ -229,6 +231,9 @@ const AuthProvider = ({ children }: any) => {
     });
     setMessages(messages);
   };
+  const sendXmtpMessage = async () => {
+    await client.send("gm ser");
+  };
 
   useEffect(() => {
     logger("auth", "useEffect", "Portal 1: Current user address", [address]);
@@ -261,6 +266,7 @@ const AuthProvider = ({ children }: any) => {
         setPeerAddress,
         messages,
         fetchXmtpConversation,
+        sendXmtpMessage,
       }}
     >
       {children}

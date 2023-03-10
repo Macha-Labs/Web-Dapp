@@ -1,5 +1,6 @@
 import AuthCard from "@/components/auth/AuthCard";
 import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
+import ChatInput from "@/components/chat/chatcontainer/ChatInput";
 import ChatMembers from "@/components/chat/chatcontainer/ChatMembers";
 import ChatMessage from "@/components/chat/chatcontainer/ChatMessage";
 import ChatList from "@/components/chat/ChatList";
@@ -7,6 +8,7 @@ import IconImage from "@/components/icons/IconImage";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Nav from "@/components/nav/Nav";
 import { truncateAddress } from "@/helpers";
+import useLensProfile from "@/hooks/lens/useLensProfile";
 import useXmtp from "@/hooks/xmtp/useXmtp";
 import AuthProvider, { AuthContext } from "@/providers/AuthProvider";
 import {
@@ -25,14 +27,18 @@ import {
   useDisclosure,
   Text,
 } from "@chakra-ui/react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
 function IndexDM() {
-  const modalXmtpAuth = useDisclosure();
   const { isConnected, address } = useAccount();
   const authContext = useContext(AuthContext);
-  const [isClicked, setIsClicked] = useState<any>();
+  const hookLens = useLensProfile();
+
+  useEffect(() => {
+    hookLens.getOwnedProfiles(address).then(res => console.log(res, "res"));
+  }, [address]);
+
   return (
     <div>
       {isConnected && authContext.xmtpClientAddress ? (
@@ -60,9 +66,7 @@ function IndexDM() {
                               <Row
                                 className="vr-center w-11-12"
                                 onClick={() => {
-                                  authContext.fetchXmtpConversation(
-                                    item.peerAddress
-                                  );
+                                  authContext.fetchXmtpConversation();
                                 }}
                               >
                                 {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
@@ -124,9 +128,9 @@ function IndexDM() {
                 )}
               </Col>
             </StyledChatList>
+            <div onClick={() => authContext.sendXmtpMessage()}>Send GM</div>
             <StyledChat>
               {authContext.messages.map(item => {
-                console.log(item, "item");
                 return (
                   <>
                     <ChatMessage
@@ -140,6 +144,7 @@ function IndexDM() {
                   </>
                 );
               })}
+              {/* <ChatInput hookChat={{}} /> */}
             </StyledChat>
           </div>
         </StyledWindow>
