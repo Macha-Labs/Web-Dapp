@@ -16,7 +16,6 @@ const ChatWindow = (props: any) => {
    if(String(props.authContext.address).toLowerCase() == String(lastMsg.user.id).toLowerCase()){
      messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight
    }
-   console.log("messageListRef", messageListRef, props.authContext.address, lastMsg.user.id);
   }, [hookStreamChannelMessages?.messages]);
 
   const messageAreaHeight = props.hookMessages?.messages.map((message: any, index: any) => {

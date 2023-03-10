@@ -2,7 +2,6 @@ import IconImage from "@/components/icons/IconImage";
 import { AuthContext } from "@/providers/AuthProvider";
 import { Col, StyledCard} from "@/styles/StyledComponents";
 import { Button, Heading } from "@chakra-ui/react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useContext } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
 

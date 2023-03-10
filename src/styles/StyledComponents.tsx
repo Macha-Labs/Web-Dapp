@@ -64,9 +64,9 @@ export const StyledWindow = styled.div`
   }
 
   .middle {
-    width: 50%;
+    width: 40%;
     margin: auto;
-    margin-top: 10%;
+    margin-top: 15%;
   }
 `;
 
