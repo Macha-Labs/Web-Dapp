@@ -1,185 +1,176 @@
+import { useToast } from "@chakra-ui/react";
+import { logger } from "@/helpers/logger";
+import { uploadAtIpfsRoot } from "@/helpers/storage/web3storage";
 import { newMessageNotification } from "@/service/NotificationService";
-import { useContext, useState, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import {
-  StreamContext,
-  StreamContextType,
-} from "../../providers/StreamProvider";
-// import { newMessageNotification } from "../../service/NotificationService";
-// import useChatFilters from "../useChatFilters";
 import useMention from "./useMention";
-// import useCommand from "./useCommand";
 
-const useStreamChat = (channel: any, users?: any, callback?: any) => {
-    const authContext = useContext(AuthContext) as AuthContextType;
-    const streamContext = useContext(StreamContext) as StreamContextType;
-    const [chatMeta, setChatMeta] = useState<any>({});
-    const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
-    const [attachLoading, setAttachLoading] = useState<any>();
-    const [attachItem, setAttachItem] = useState<any>();
-    const [reactions, setReactions] = useState<any>({});
-    const [actionMessage, setActionMessage] = useState<any>({
-        action: "",
-        item: {},
-    });
-    const [selectedMessages, setSelectedMessages] = useState<any>([]);
-    const [userObjTyping, setUserObjTyping] = useState<any>();
-    const [searchActive, setSearchActive] = useState<any>();
-    const [searchQuery, setSearchQuery] = useState<any>();
+const useStreamChat = (client :any, channel: any) => {
+  console.log("Checking for useStreamChat re-rendering");
+  const authContext = useContext(AuthContext) as AuthContextType;
+  const [chatMeta, setChatMeta] = useState<any>({});
+  const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
+  const [streamLoading, setStreamLoading] = useState<any>(false);
+  const [attachItem, setAttachItem] = useState<any>();
+  const [reactions, setReactions] = useState<any>({});
+  const [actionMessage, setActionMessage] = useState<any>({
+    action: "",
+    item: {},
+    data: {},
+  });
+  const [selectedMessages, setSelectedMessages] = useState<any>([]);
+  const [userObjTyping, setUserObjTyping] = useState<any>();
+  const [usersWhoAreTyping, setUsersWhoAreTyping] = useState<any>();
+  const [typingMessage, setTypingMessage] = useState<any>();
 
-    const textareaRef = useRef<any>(null);
+  const textareaRef = useRef<any>();
+  const editMessageRef = useRef<any>(null);
 
-  // custom hooks
-  // const chatFilterHook = useChatFilters(users);
   const hookMention = useMention();
+  const toast = useToast();
 
   // Slash & Widget
   const [slashCmd, setSlashCmd] = useState<any>();
   const [slashCmdValue, setSlashCmdValue] = useState<any>();
 
-    const slashRun = (command: any) => {
-        setSlashCmdValue(command.name);
-        setSlashCmd(false);
-        textareaRef.current = "";
-    };
+  const slashRun = (command: any) => {
+    setSlashCmdValue(command.name);
+    setSlashCmd(false);
+  };
 
-  const searchMessage = () => {};
-
-  // channel?.raw.on('typing.start', event => {
-  //   console.log("User is typing");
-  //     setUserObjTyping(event?.user?.handle);
-  // });
-
-  // channel?.raw.on('typing.stop', event => {
-  //   console.log("User has stopped typing");
-  //     setUserObjTyping(null);
-  // });
-
-    const addMessage = async () => {
-        if (!authContext?.address) {
-            console.log("Didn't find user address");
-            return;
-        }
-        if (slashCmdValue) {
-            console.log("Logic to run a slash command");
-            // console.log("Called slash cmd", slashCmdValue);
-            // const response = await commandHook.run(slashCmdValue, chatMeta?.meta);
-            // console.log(response);
-            // addMessageToStream({...chatMeta, meta: {...chatMeta.meta, response: response }});
-            // setSlashCmdValue("");
-        } else {
-            if (!textareaRef.current.value) {
-                alert("The Message input shouldn't be empty");
-                return;
-            }
+  const addMessage = async () => {
+    setStreamLoading(true);
+    if (!authContext?.address) {
+      setStreamLoading(false);
+      throw new Error("Couldn't find a user address");
+      return;
+    }
+    if (slashCmdValue) {
+      // const response = await commandHook.run(slashCmdValue, chatMeta?.meta);
+      // addMessageToStream({...chatMeta, meta: {...chatMeta.meta, response: response }});
+      // setSlashCmdValue("");
+    } else {
+      if (!textareaRef.current.value && !attachItem) {
+        alert("You are not sending anything");
+        setStreamLoading(false);
+        return;
+      }
 
       addMessageToStream(chatMeta);
     }
   };
 
-  // useEffect(() => {
-  //     if (attachItem) {
-  //         console.log("Message from useStreamChat ", attachItem);
-  //     }
-  // }, [attachItem]);
-
-    const addMessageToStream = async (msgData?: any) => {
-        try {
-            let messageData: any = {};
-            if (actionMessage?.action == "FORWARD") {
-                messageData = {
-                    text: actionMessage?.item?.text,
-                    mentioned_users: actionMessage?.item.mentioned_users,
-                    message_custom_data: {
-                        ...msgData,
-                        forwarded: true,
-                        fromChannel: actionMessage?.item?.cid,
-                        ownerId: actionMessage?.item?.user?.id,
-                    },
-                };
-            } else {
-                messageData = {
-                    text: textareaRef.current?.value,
-                    mentioned_users: hookMention.mentionList.map((user: any, index: number) => {
-                        console.log("MessageData", user);
-                        return user?.ownedBy;
-                    }),
-                    message_custom_data: msgData,
-                };
+  const addMessageToStream = async (msgData?: any) => {
+    try {
+      let messageData: any = {};
+      if (actionMessage?.action == "FORWARD") {
+        messageData = {
+          text: actionMessage?.item?.text,
+          mentioned_users: actionMessage?.item.mentioned_users,
+          message_custom_data: {
+            ...msgData,
+            forwarded: true,
+            fromChannel: actionMessage?.item?.cid,
+            ownerId: actionMessage?.item?.user?.id,
+          },
+        };
+      } else {
+        messageData = {
+          text: textareaRef.current?.value,
+          mentioned_users: hookMention.mentionList.map(
+            (user: any, index: number) => {
+              return user?.ownedBy;
             }
-
-      console.log("The messageData is ", messageData);
+          ),
+          message_custom_data: msgData,
+        };
+      }
 
       if (actionMessage?.action == "REPLY" && actionMessage?.item) {
         messageData = {
           ...messageData,
           ...{
-            parent_id: actionMessage.item.id,
+            quoted_message_id: actionMessage.item.id,
             show_in_channel: true,
           },
         };
       }
 
-            if (attachItem) {
-                // const fileCid = await storeFiles([attachItem]);
-                console.log(attachItem);
-                messageData = {
-                    ...messageData,
-                    attachments: [
-                        {
-                            type: attachItem.type.split("/")[0],
-                            asset_url: `https://ipfs.io/ipfs/${attachItem?.cid}`,
-                            thumb_url: `https://ipfs.io/ipfs/${attachItem?.cid}`,
-                            name: attachItem?.name,
-                        },
-                    ],
-                };
-            }
-            console.log("connected channel", channel);
-            console.log("Sending messsageData is ", messageData);
-            await channel.raw.sendMessage(messageData); // sending a new message
-            setRerenderSwitch(!rerenderSwitch);
-            const notificationPayload = {
-                topic: "newMessage",
-                notification: {
-                    title: channel.name,
-                    body: `${authContext.user?.lens?.name || authContext.user?.lens?.handle || authContext.user?.lens?.id || truncateAddress(authContext.user?.lens?.ownedBy)}: ${messageData.text}`
-                },
-                data: {
-                    type: "channelMessage",
-                    name: "Portal New Message",
-                    channelId: channel.id
-                },
-                android: {
-                    ttl: 4500,
-                    priority: "normal"
-                }
-            }
-            hookMention.onRefresh();
-            setChatMeta(null);
-            await newMessageNotification(notificationPayload); // sending new message notification
-        } catch (error) {
-            console.log("Could not send message", error);
-        }
-        textareaRef.current.value = ""
-        setAttachItem(null);
-        setActionMessage(null);
-    };
+      if (attachItem) {
+        const fileCid = await uploadAtIpfsRoot([attachItem]);
+        messageData = {
+          ...messageData,
+          attachments: [
+            {
+              type: attachItem.type.split("/")[0],
+              asset_url: `https://dweb.link/ipfs/${fileCid}`,
+              thumb_url: `https://dweb.link/ipfs/${fileCid}`,
+              name: attachItem?.name,
+            },
+          ],
+        };
+      }
+      await channel.raw.sendMessage(messageData); // sending a new message
+
+      setRerenderSwitch(!rerenderSwitch);
+      setStreamLoading(false);
+      setAttachItem(null);
+      setActionMessage(null);
+
+      const notificationPayload = {
+        topic: "newMessage",
+        notification: {
+          title: channel.name,
+          body: `${
+            authContext.user?.lens?.name ||
+            authContext.user?.lens?.handle ||
+            authContext.user?.lens?.id ||
+            truncateAddress(authContext.user?.lens?.ownedBy)
+          }: ${messageData.text}`,
+        },
+        data: {
+          type: "channelMessage",
+          name: "Portal New Message",
+          channelId: channel.id,
+        },
+        android: {
+          ttl: 4500,
+          priority: "normal",
+        },
+      };
+      hookMention.onRefresh();
+      setChatMeta(null);
+      await newMessageNotification(notificationPayload); // sending new message notification
+    } catch (error: any) {
+      setStreamLoading(false);
+      throw new Error("Sending message failed ", error);
+    }
+  };
 
   const editMessage = async () => {
     if (!authContext?.address) {
-      console.log("Wallet is not connected");
-      return;
+      throw new Error("Couldn't find the user address");
     }
     if (actionMessage?.action !== "EDIT") {
       return;
     }
-    await streamContext.client.updateMessage({
-      id: actionMessage.item?.id,
-      text: textareaRef,
-    });
+    await client
+      .updateMessage({
+        id: actionMessage.item?.id,
+        text: editMessageRef.current.value,
+      })
+      .then(() => {
+        toast({
+          title: "Message Updated",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+        setActionMessage(null);
+      });
   };
 
   const deleteMessage = async (message: any) => {
@@ -190,44 +181,109 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
       });
     }
 
-    streamContext.client.deleteMessage(message?.id, true);
-    // callback();
-    console.log("Message deleted");
+    client
+      .deleteMessage(message?.id, true)
+      .then(() => {
+        toast({
+          title: "Message deleted",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      })
+      .catch((err: any) => {
+        toast({
+          title: "Message could not be deleted",
+          status: "error",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      });
   };
 
   const pinMessage = async (message: any) => {
-    await streamContext.client.pinMessage(message, null);
-    // callback();
-    console.log("Pinned a message");
+    await client
+      .pinMessage(message, null)
+      .then(() => {
+        toast({
+          title: "Message Pinned Successfully",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      })
+      .catch((err: any) => {
+        toast({
+          title: "Message could not be pinned",
+          status: "error",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      });
   };
 
   const unPinMessage = async (message: any) => {
-    await streamContext.client.unpinMessage(message);
-    // callback();
-    console.log("Un-Pinned a message");
+    await client
+      .unpinMessage(message)
+      .then(() => {
+        toast({
+          title: "Message Unpinned Successfully",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      })
+      .catch((err: any) => {
+        toast({
+          title: "Message could not be unpinned",
+          status: "error",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      });
   };
 
-    const keyDownMessage = async (event: any) => {
-        const keycode = event.which || event.keycode;
-        if (keycode == 13 && !event.shiftKey) {
-            event.preventDefault();
+  const keyDownMessage = async (event: any) => {
+  
+    const keycode = event.which || event.keycode;
 
-            if (textareaRef.current.value.substring(0, 1) == '/') {
-                setSlashCmdValue(textareaRef.current.value);
-                setSlashCmd(false);
-                textareaRef.current.value = "";
-                // widgetDrawer.onOpen();
-            } else {
-                await addMessage();
-            }
-        }
-        else if (event.key == "/") {
-            console.log("slash key was pressed");
-            setSlashCmd(true);
-        }
-    };
+    //Logic for typing indicators begins
+    // let typingTimeout;
+    // if (typingTimeout !== undefined) clearTimeout(typingTimeout);
+
+    // await channel.raw.keystroke();
+
+    // typingTimeout = setTimeout(async () => {
+    //   await channel.raw.stopTyping();
+    // }, 3000);
+
+    // channel.raw.on("typing.start", (event: any) => {
+    //   let typingUser = Object.keys(channel.raw.state.typing);
+    //   setUsersWhoAreTyping(typingUser);
+    // });
+    // channel.raw.on("typing.stop", (event: any) => {
+    //   setUsersWhoAreTyping(null);
+    // });
+
+    //Logic for typing indicators ends
+
+    if (keycode == 13 && !event.shiftKey) {
+      event.preventDefault();
+
+      if (textareaRef.current?.value.substring(0, 1) == "/") {
+        setSlashCmdValue(textareaRef.current?.value);
+        setSlashCmd(false);
+        // widgetDrawer.onOpen();
+      } else if (textareaRef.current?.value.length > 0) {
+        await addMessage();
+      }
+    } else if (event.key == "/") {
+      setSlashCmd(true);
+    }
+  };
 
   const handleEdit = (message: any) => {
+    console.log("Editing message body ", message);
     setActionMessage({ action: "EDIT", item: message });
   };
 
@@ -237,10 +293,7 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
 
   const handleAttachment = async (attachment: any) => {
     const filePicked = attachment.target.files[0];
-    console.log(filePicked);
-    setAttachLoading(true);
     setAttachItem(filePicked);
-    setAttachLoading(false);
   };
 
   const deleteAttachment = () => {
@@ -248,13 +301,11 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleSearch = (e: any) => {
-    setSearchActive(true);
-    setSearchQuery("");
+    setActionMessage({ action: "SEARCH", data: { query: "" } });
   };
 
   const handleSearchClose = () => {
-    setSearchActive(false);
-    setSearchQuery("");
+    setActionMessage(null);
   };
 
   const handleSelect = (message: any) => {
@@ -270,13 +321,22 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   };
 
   const handleMultiSelect = () => {
-    setActionMessage({ action: "MULTISELECT", item: null });
+    setActionMessage({
+      action: "MULTISELECT",
+      item: null,
+      data: { query: "" },
+    });
   };
   const handleMultiSelectClose = () => {
+    logger(
+      "channel",
+      "useStreamChat.handleMultiSelect",
+      "Trigger MultiSelectClose",
+      []
+    );
     setActionMessage(null);
   };
   const handleLongPressSelect = (message: any) => {
-    console.log("Pressed long press button");
     setActionMessage({ action: "LONGPRESS", item: message });
   };
   const handleLongPressSelectClose = () => {
@@ -302,53 +362,41 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
   const sendReaction = async (reaction: any, message: any) => {
     return await channel.raw.sendReaction(message?.id, {
       type: reaction?.type,
-      score: message.reaction_scores[reaction.type]
-        ? message.reaction_scores[reaction?.type] + 1
-        : 1,
+      score: 1
     });
   };
 
   const handleReaction = async (reaction: any, message: any) => {
-    console.log(reaction);
-    console.log(message);
     let result;
     if (message.own_reactions.length) {
       let available = false;
       message.own_reactions.filter(async (item: any) => {
         if (item.type == reaction.type) {
           available = true;
-          console.log("Got existing reaction");
           result = await channel.raw.deleteReaction(message?.id, reaction.type);
-          console.log("Reactions ", result);
         }
       });
       if (!available) {
         result = sendReaction(reaction, message);
-        console.log("Reactions ", result);
       }
     } else {
       result = sendReaction(reaction, message);
-      console.log("Reactions ", result);
     }
   };
 
-    const onChange = async (event: any, users?: any) => {
-        const value = event.target.value;
-        console.log("Typing value is ", textareaRef.current.value);
-        const lastChar = value.split("")[value.length - 1];
-        if (lastChar == " " || value == "") {
-            console.log("set isTyping to false");
-            hookMention.setIsActive(false);
-            setSlashCmd(false);
-        }
-        if (lastChar == "@") {
-            console.log("set isTyping to true");
-            setSlashCmd(false);
-            hookMention.setIsActive(true);
-        }
-        if (hookMention.isActive) {
-            hookMention.onTrigger(value, users);
-        }
+  const onChange = async (event: any, users?: any) => {
+    const value = event.target.value;
+    setTypingMessage(value);
+    const lastChar = value.split("")[value.length - 1];
+    if (lastChar == " " || value == "") {
+      hookMention.setMentionActive(false);
+      setSlashCmd(false);
+    }
+    if (lastChar == "@") {
+      // setSlashCmd(false);
+      // hookMention.setMentionActive(true);
+      // hookMention.onTrigger(value, users);
+    }
 
     if (slashCmd) {
       const cmds = value.split(" ");
@@ -359,75 +407,84 @@ const useStreamChat = (channel: any, users?: any, callback?: any) => {
     // await channel.keystroke();
   };
 
-    const mentionSelect = (user: any) => {
-        console.log("The cliked value ", user);
-        const msg = textareaRef.current.value;
-        const result =
-            textareaRef.current.value.substr(
-                0,
-                msg.length - hookMention.mention.length
-                // msg.length
-            ) + user.name;
-        textareaRef.current = result;
-        hookMention.onSelect(user);
-    };
+  const mentionSelect = (user: any) => {
+    const msg = textareaRef.current.value;
+    const result =
+      textareaRef.current.value.substr(
+        0,
+        msg.length - hookMention.mention.length
+        // msg.length
+      ) + user.name;
+    textareaRef.current = result;
+    hookMention.onSelect(user);
+  };
 
-    return {
-        // REACTIONS
-        reactions: reactions,
-        setReactions: setReactions,
-        handleReaction: handleReaction,
-        rerenderSwitch: rerenderSwitch,
-        // MENTIONS
-        mentionActive: hookMention.isActive,
-        mentionList: hookMention.mentionList,
-        mentionSelect: mentionSelect,
-        //
-        userObjTyping: userObjTyping,
-        onChange: onChange,
-        addMessage: addMessage,
-        editMessage: editMessage,
-        deleteMessage: deleteMessage,
-        // PINS
-        pinMessage: pinMessage,
-        unPinMessage: unPinMessage,
-        //
-        keyDownMessage: keyDownMessage,
-        textareaRef: textareaRef,
-        attachItem: attachItem,
-        attachLoading: attachLoading,
-        handleAttachment: handleAttachment,
-        deleteAttachment: deleteAttachment,
-        actionMessage: actionMessage,
-        setActionMessage: setActionMessage,
-        setSelectedMessages:setSelectedMessages,
-        // transactionModal: transactionModal,
-        chatMeta: chatMeta,
-        setChatMeta: setChatMeta,
-        slashCmd: slashCmd,
-        setSlashCmd: setSlashCmd,
-        // slashCmds: chatFilterHook.slashCmds,
-        slashCmdValue: slashCmdValue,
-        setSlashCmdValue: setSlashCmdValue,
-        slashRun: slashRun,
-        handleSearch: handleSearch,
-        handleSearchClose: handleSearchClose,
-        searchActive: searchActive,
-        searchQuery: searchQuery,
-        setSearchQuery: setSearchQuery,
-        handleMultiSelect: handleMultiSelect,
-        handleMultiSelectClose: handleMultiSelectClose,
-        handleLongPressSelect: handleLongPressSelect,
-        handleLongPressSelectClose: handleLongPressSelectClose,
-        handleReply: handleReply,
-        handleReplyClose: handleReplyClose,
-        handleCopy: handleCopy,
-        handleEdit: handleEdit,
-        handleEditClose: handleEditClose,
-        handleSelect: handleSelect,
-        selectedMessages: selectedMessages,
-        // widgetDrawer: widgetDrawer
-    };
+  useEffect(() => {
+    logger(
+      "channel",
+      "useStreamChat.useEffect[actionMessage]",
+      "actionMessage is",
+      [actionMessage]
+    );
+  }, [actionMessage]);
+
+  return {
+    // REACTIONS
+    reactions: reactions,
+    setReactions: setReactions,
+    handleReaction: handleReaction,
+    rerenderSwitch: rerenderSwitch,
+    // MENTIONS
+    mentionActive: hookMention.mentionActive,
+    mentionList: hookMention.mentionList,
+    mentionSelect: mentionSelect,
+    //
+    userObjTyping: userObjTyping,
+    onChange: onChange,
+    addMessage: addMessage,
+    editMessage: editMessage,
+    deleteMessage: deleteMessage,
+    // PINS
+    pinMessage: pinMessage,
+    unPinMessage: unPinMessage,
+    //
+    keyDownMessage: keyDownMessage,
+    textareaRef: textareaRef,
+    editMessageRef: editMessageRef,
+    attachItem: attachItem,
+    streamLoading: streamLoading,
+    handleAttachment: handleAttachment,
+    deleteAttachment: deleteAttachment,
+    actionMessage: actionMessage,
+    setActionMessage: setActionMessage,
+    setSelectedMessages: setSelectedMessages,
+    // transactionModal: transactionModal,
+    chatMeta: chatMeta,
+    setChatMeta: setChatMeta,
+    slashCmd: slashCmd,
+    setSlashCmd: setSlashCmd,
+    // slashCmds: chatFilterHook.slashCmds,
+    slashCmdValue: slashCmdValue,
+    setSlashCmdValue: setSlashCmdValue,
+    slashRun: slashRun,
+    handleSearch: handleSearch,
+    handleSearchClose: handleSearchClose,
+    handleMultiSelect: handleMultiSelect,
+    handleMultiSelectClose: handleMultiSelectClose,
+    handleLongPressSelect: handleLongPressSelect,
+    handleLongPressSelectClose: handleLongPressSelectClose,
+    handleReply: handleReply,
+    handleReplyClose: handleReplyClose,
+    handleCopy: handleCopy,
+    handleEdit: handleEdit,
+    handleEditClose: handleEditClose,
+    handleSelect: handleSelect,
+    selectedMessages: selectedMessages,
+    usersWhoAreTyping: usersWhoAreTyping,
+    typingMessage: typingMessage,
+    setTypingMessage: setTypingMessage,
+    // widgetDrawer: widgetDrawer
+  };
 };
 
 export default useStreamChat;

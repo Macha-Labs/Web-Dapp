@@ -1,121 +1,95 @@
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import {
-    authenticate_user,
-    generateChallenge,
-    newRefreshToken,
+  authenticate_user,
+  generateChallenge,
+  newRefreshToken,
 } from "../../helpers/lens/lens";
-import {ethers} from "ethers";
-import useLensProfile from "./useLensProfile";
-import { useSignMessage } from 'wagmi'
+import { ethers } from "ethers";
+import { signMessage } from "@wagmi/core";
+import { logger } from "@/helpers/logger";
+import { addTokenCookie, getCookie } from "@/helpers/storage/browserStorage";
 
-const useLensAuth = (address: any, updateUser: any) => {
-    const hookLensProfile = useLensProfile(address);
-    const [token, setToken] = useState<any>(null);
-    const [refreshToken, setRefreshToken] = useState<any>(null);
-    const [isLoading, setIsLoading] = useState<any>();
-    const [signButtonText, setSignButtonText] =
-        useState<any>("Sign-In with Lens");
+const useLensAuth = () => {
+  const [token, setToken] = useState<any>(null);
+  const [refreshToken, setRefreshToken] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<any>();
+  const [signButtonText, setSignButtonText] =
+    useState<any>("Sign-In with Lens");
 
-    const signText = async (text: any) => {
-        console.log("Signing the message");
-        var message = ethers.utils.toUtf8Bytes(
-            "\x19Ethereum Signed Message:\n" + text.length + text
-        );
-        let msg = ethers.utils.keccak256(message);
-        // const params = [address, msg];
-        const {data, isError, isLoading, isSuccess, signMessage} = useSignMessage({
-            message: msg
+  const signText = async (text: any) => {
+    var message = ethers.utils.toUtf8Bytes(text);
+    const signature = await signMessage({ message: message });
+    return signature;
+  };
+
+  
+
+  const fetchLensToken = async (address: any) => {
+    logger(
+      "lens",
+      "useLensAuth.fetchLensToken",
+      "Getting Lens Token from Lens and updating user lens data",
+      []
+    );
+    setIsLoading(true);
+    const promise = new Promise(async (resolve) => {
+      try {
+        const challenge = await generateChallenge(address);
+        const signature = await signText(challenge);
+        // const authRequest = await authenticate_user(signerAddress, signature);
+
+        authenticate_user(address, signature).then((data) => {
+          logger("auth", "fetchLensToken", "Calling authenticate_user", [data]);
+          setToken(data["accessToken"]);
+          setRefreshToken(data["refreshToken"]);
+          addTokenCookie("accessToken", data["accessToken"], 30);
+          window.localStorage.setItem("refreshToken", data["refreshToken"]);
+
+          resolve({
+            accessToken: data["accessToken"],
+            refreshToken: data["refreshToken"],
+          });
         });
-        return data;
-    };
+      } catch (error) {
+        setSignButtonText("Couldn't sign request");
+        setIsLoading(false);
+      }
+    });
+    return promise;
 
-    const fetchLensToken = async () => {
-        console.log("signerAddress", address);
-        setIsLoading(true);
-        if (hookLensProfile?.lensData) {
-            try {
-                console.log("enter try");
-                const challenge = await generateChallenge(address);
-                console.log("Challenge generated ", challenge);
-                const signature = await signText(challenge);
-                // const authRequest = await authenticate_user(signerAddress, signature);
-                console.log("Got signature", signature);
+    // setIsLoading(false);
+  };
 
-                authenticate_user(address, signature).then((data) => {
-                    console.log("Lens Tokens", data);
-                    setToken(data["accessToken"]);
-                    setRefreshToken(data["refreshToken"]);
-                    // storing in async data
-                    //
-                    updateUser("lens", {
-                        ...hookLensProfile.lensData,
-                        accessToken: data["accessToken"],
-                        refreshToken: data["refreshToken"],
-                    });
-                });
-            } catch (error) {
-                console.log("Couldn't Sign request");
-                console.log(error);
-                setSignButtonText("Couldn't sign request");
-                setIsLoading(false);
-            }
-        } else {
-            console.log("Couldn't find any Lens profile with this address");
-        }
-        // setIsLoading(false);
-    };
+  // Get lens tokens from local storage
+  const getLensTokens = () => {
+    const accessToken = getCookie("accessToken");
+    const refreshToken = window.localStorage.getItem("refreshToken");
+    if (accessToken)
+        return { accessToken: accessToken, refreshToken: refreshToken };
+    return false;
+  };
 
-    // Get lens tokens from local storage or new tokens
-    const getLensTokens = async () => {
-        let refreshToken;
-        console.log("Getting the lens data ", hookLensProfile.lensData);
-        // const accessToken = await getAsyncData("accessToken");
-        const accessToken = "";
-        console.log("accessToken from Async storage ", accessToken);
-        updateUser("lens", {
-                ...hookLensProfile.lensData,
-                accessToken: accessToken,
-                refreshToken: refreshToken,
-            });
-        if (accessToken) {
-            console.log("Executing if block");
-            
-        } else {
-            console.log("Calling fetchLensToken function");
-            // will call this function in a later build
-            // fetchLensToken(); 
-        }
-        // getAsyncData("refreshToken").then((result) => {
-        //     refreshToken = result;
-        //     console.log("refreshToken from Async storage ", refreshToken);
-        // });
-    };
+  const getNewAccessToken = () => {
+    newRefreshToken(refreshToken).then((data) => {
+      setRefreshToken(data["refreshToken"]);
+    });
+  };
 
-    const connect = () => {
-        fetchLensToken();
-    };
+  const connectToLens = async (address: any) => {
+    let tokens = getLensTokens();
+    console.log("logging tokens ", tokens);
+    if (tokens)
+        return tokens;
+    return fetchLensToken(address);
+  };
 
-    const getNewAccessToken = () => {
-        newRefreshToken(refreshToken).then((data) => {
-            setRefreshToken(data["refreshToken"]);
-        });
-    };
-
-    useEffect(() => {
-        if (address) {
-            console.log("Checking connected address", address);
-            getLensTokens();
-        }
-    }, [hookLensProfile.lensData?.id]);
-
-    return {
-        accessToken: token,
-        refreshToken: refreshToken,
-        isLoading: isLoading,
-        signButtonText: signButtonText,
-        connect: connect,
-        setLensProfile: hookLensProfile.setLensProfile
-    };
+  return {
+    accessToken: token,
+    refreshToken: refreshToken,
+    isLoading: isLoading,
+    signButtonText: signButtonText,
+    connectToLens: connectToLens,
+  };
 };
 
 export default useLensAuth;

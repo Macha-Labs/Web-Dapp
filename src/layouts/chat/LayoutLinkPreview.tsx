@@ -1,7 +1,7 @@
 import { StyledFileCard } from "@/styles/StyledComponents";
 import { Image, Text } from "@chakra-ui/react";
 
-const LayoutLinkPreview = (props) => {
+const LayoutLinkPreview = (props: any) => {
     return (
         <>
             <StyledFileCard className="hr-between vr-center link">

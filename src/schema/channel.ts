@@ -1,9 +1,3 @@
-import omitDeep from "omit-deep";
-
-const omit = (object: any, name: string) => {
-    return omitDeep(object, name);
-};
-
 export const Channel$ = (data: any) => {
     return {
         id: data?._id,
@@ -24,7 +18,7 @@ export const Channel$ = (data: any) => {
     };
 };
 
-export const ChannelStream$ = (data: any, raw?: any) => {
+export const ChannelStream$ = (data: any, raw?: any, owner?: any ) => {
     return {
         id: data?.id,
         type: data?.type,
@@ -34,15 +28,16 @@ export const ChannelStream$ = (data: any, raw?: any) => {
         private: data?.private,
         users: data?.users,
         admins: data?.admins,
+        isAdmin: String(data?.created_by?.id).toLowerCase() == String(owner).toLowerCase(),
         createdBy: data?.created_by?.id,
         createdAt: data?.created_at,
         updatedAt: data?.updated_at,
         permissions: data?.own_capabilities,
         image: "",
         unreadCountObject: raw?.state?.read ? raw?.state?.read : 0,
-        lastMessage: raw?.state?.messageSets[0]?.messages[raw.state.messageSets[0]?.messages.length - 1],
+        lastMessage: raw?.state?.messageSets[0]?.messages[raw?.state?.messageSets[0]?.messages?.length - 1],
         membersCount: data?.member_count,
         notificationCount: 0,
-        raw: omit(raw, "data"),
+        raw: raw,
     };
 };

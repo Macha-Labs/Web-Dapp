@@ -1,29 +1,77 @@
-import LayoutChatConversation from "@/layouts/chat/LayoutChatConversation";
-import LayoutChatEmpty from "@/layouts/chat/LayoutChatEmpty";
-import {
-  StyledConversationContainer,
-  StyledConversationView,
-} from "@/styles/StyledComponents";
+import { useEffect, useRef } from 'react';
+import { VariableSizeList } from 'react-window';
 import ChatMessage from "./ChatMessage";
+import AutoSizer from "react-virtualized-auto-sizer";
+import useStreamChannelMessages from '@/hooks/stream/useStreamChannelMessages';
 
 const ChatWindow = (props: any) => {
+  const hookStreamChannelMessages = useStreamChannelMessages(props.chatContext?.hookChannel?.channel);
+  const messageListRef = useRef<any>();
+  const itemsRef = useRef<any>([]);
+
+  useEffect(() => {
+    // Scroll to the bottom of the list when new items are added
+    messageListRef.current?.scrollToItem(props.hookMessages?.messages.length - 1);
+  }, [props.hookMessages?.messages]);
+
+  const messageAreaHeight = props.hookMessages?.messages.map((message: any, index: any) => {
+    console.log(itemsRef?.current[index], itemsRef?.current[index]?.offsetHeight, itemsRef?.current[index]?.clientHeight);
+    return (itemsRef?.current[index]?.offsetHeight ) || 100;
+  });
+
+  const templateMessages = ({ index, style }: any) => {
+    const message = props.hookMessages?.messages[index];
+    
+    return (
+      <div style={style}>
+        <ChatMessage
+          message={message}
+          hookChat={{}}
+          authContext={props.authContext}
+          key={`a-${message.id}`}
+        />
+      </div>
+    )
+  }
+
+
   return (
-    <StyledConversationContainer>
-      <StyledConversationView>
-        {props.hookChannel?.messages?.length ? (
-          <>
-            {props.hookChannel?.messages?.map(
-              (item: any, index: number) => (
-                <ChatMessage message={item} key={index} />
-              )
-              // {item.text}
-            )}
-          </>
-        ) : (
-          <LayoutChatEmpty channel={props.channel} />
+    <>
+      
+
+    <div className="body">
+          {hookStreamChannelMessages?.messages.map((message: any, index: any) => {
+            return (
+              <div ref={el => itemsRef.current[index] = el}  key={`message-${index}`}>
+                <ChatMessage
+                  message={message}
+                  hookChat={props?.chatContext?.hookChat}
+                  authContext={props.authContext}
+                  key={`a-${message.id}`}
+                />
+              </div>
+            )
+          })}
+    </div>
+
+   {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 
+    <div className="body">
+        <AutoSizer>
+        {({ height, width }) => (
+          <VariableSizeList
+            ref={messageListRef}
+            height={height}
+            itemCount={props.hookMessages.messages.length}
+            itemSize={(index: number) => messageAreaHeight[index]}
+            width={width}>
+            {templateMessages}
+          </VariableSizeList>
         )}
-      </StyledConversationView>
-    </StyledConversationContainer>
+        </AutoSizer>
+      </div>
+    } */}
+    </>
+
   );
 };
 

@@ -1,9 +1,9 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -83,8 +83,13 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -106,9 +111,22 @@ a {
   }
 }
 
+/* FLEX */
+.flex-hr-vr-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* WIDTH */
 .w-100 {
   width: 100%;
+}
+.w-90 {
+  width: 90%;
+}
+.w-80 {
+  width: 80% !important;
 }
 .w-70 {
   width: 70%;
@@ -213,6 +231,9 @@ a {
 .w-screen {
   width: 100vw;
 }
+.w-content {
+  width: fit-content;
+}
 
 /* HEIGHT */
 .h-100 {
@@ -221,7 +242,7 @@ a {
 .h-parent {
   height: -webkit-fill-available;
 }
-.h-content{
+.h-content {
   height: fit-content;
 }
 .h-full {
@@ -326,7 +347,6 @@ a {
   margin-right: 6rem;
 }
 
-
 /* PADDINGs */
 
 .p-0 {
@@ -334,6 +354,18 @@ a {
 }
 .p-1 {
   padding: 1rem;
+}
+.p-2 {
+  padding: 2rem;
+}
+.p-3 {
+  padding: 3rem !important;
+}
+.p-4 {
+  padding: 4rem !important;
+}
+.p-5 {
+  padding: 5rem;
 }
 .p-v-2 {
   padding: 3rem 0 rem;

@@ -1,5 +1,53 @@
 import { style } from "./StyledConstants";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+
+
+export const StyledImageView = styled.div<{ viewMode: boolean }>`
+  ${({viewMode}: any) => {
+    switch (viewMode) {
+      case true:
+        return css`
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100% !important;
+        background-color: #000000cf;
+        display: grid;
+        place-items: center;
+        z-index: 99;
+        img{
+          height: 90vh;
+          width: fit-content !important;
+        }
+        `;
+      default:
+        return css`
+        /* position: relative; */
+        `;
+    }
+  }}
+`;
+
+
+export const StyledIframeView = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  background-color: #000000cf; 
+   z-index: 9999;
+  iframe{
+    height: 90vh;
+    width: 80%;
+    z-index: 100 !important;
+    opacity: 1 !important;
+  }
+`
 
 export const StyledWindow = styled.div`
   position: fixed;
@@ -11,7 +59,14 @@ export const StyledWindow = styled.div`
   .right {
     width: calc(100vw - ${style.nav.width});
     position: fixed;
-    left: ${style.nav.width};
+    left: calc(${style.nav.width});
+    display: flex !important;
+  }
+
+  .middle {
+    width: 50%;
+    margin: auto;
+    margin-top: 10%;
   }
 `;
 
@@ -19,6 +74,10 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   text-align: left;
+
+  &.flex-wrap {
+    flex-wrap: wrap !important;
+  }
 
   &.vr-start {
     align-items: start;
@@ -180,14 +239,16 @@ export const List = styled.div`
   }
 `;
 
-// StyledCard
+//////////////////////////////// Card ////////////////////////////////
 
 export const StyledCard = styled.div`
-  border-radius: ${style.borderRadiusCard};
+  border-radius: ${style.card.borderRadius};
+  border: ${style.card.border.default};
   background: ${style.card.bg.default};
-  padding: ${style.paddingCard};
+  padding: ${style.card.padding.default};
   box-shadow: ${style.card.shadow.default};
   cursor: pointer;
+  width: 100%;
 
   .card-body {
     padding: 0px 20px;
@@ -200,9 +261,6 @@ export const StyledCard = styled.div`
 
   &.border {
     border: ${style.card.border.default};
-    &:hover {
-      border: ${style.card.border.default};
-    }
   }
 
   &.border-with-hover {
@@ -216,19 +274,36 @@ export const StyledCard = styled.div`
     opacity: 0.4 !important;
   }
 
-  &.outline-brand {
-    background: transparent;
-    border: 1px solid #1c2150;
-  }
-  .card-hr-center {
-    align-items: center;
-  }
-  .card-vr-center {
-    justify-content: center;
+  &.state_hover {
+    &:hover {
+      background: ${style.card.bg.hover};
+      border: 1px solid ${style.card.border.hover};
+      box-shadow: ${style.card.shadow.hover};
+    }
   }
 `;
 
-//
+export const StyledCardPannel = styled.div`
+  border-radius: ${style.card.borderRadius};
+  border: ${style.card.border.default};
+  background: ${style.card.bg.default};
+  box-shadow: ${style.card.shadow.default};
+  cursor: pointer;
+  width: 100%;
+
+  .header {
+    border-bottom: ${style.card.border.default};
+    padding: ${style.paddingCard};
+  }
+
+  .body {
+  }
+  .footer {
+    border-top: ${style.card.border.default};
+    padding: ${style.paddingCard};
+  }
+`;
+
 export const StyledNFTCard = styled(StyledCard)`
   width: 250px;
   cursor: pointer;
@@ -248,7 +323,6 @@ export const StyledFileCard = styled(StyledCard)`
   background: ${style.card.bg.default};
   opacity: 0.8;
   border-radius: 5px;
-  width: 50vh;
 
   .name {
     width: 40vh;
@@ -270,20 +344,43 @@ export const StyledTransactionCard = styled(StyledCard)`
 `;
 
 export const StyledPostCard = styled(StyledCard)`
-    cursor: pointer;
-    padding: 10px 0px;
-    img {
-        border-radius: ${style.borderRadius};
-    }
+  cursor: pointer;
+  padding: 10px 0px;
+  img {
+    border-radius: ${style.borderRadius};
+  }
 
-    .actions {
-      width: 100%;
+  .actions {
+    width: 100%;
 
-      .buttonCol {
-          background: transparent;
-      }
+    .buttonCol {
+      background: transparent;
     }
-`
+  }
+`;
+export const StyledOptionsCard = styled(StyledCard)`
+  padding: ${style.list.padding};
+  background: transparent;
+  .item {
+    padding: 10px;
+    background: ${style.list.bg.default};
+    &:hover {
+      background: ${style.list.bg.hover};
+      box-shadow: ${style.list.shadow.hover};
+      border-radius: 5px;
+    }
+  }
+`;
+
+//////////////////////////////// Input ////////////////////////////////
+export const StyledInput = styled.div`
+  width: 100%;
+  border-radius: 5px;
+  background: ${style.card.bg.default};
+  border: ${style.card.border.default};
+  margin-bottom: 5px;
+  padding: 0.5rem;
+`;
 
 //
 
@@ -320,20 +417,20 @@ export const Pannel = styled.div`
 `;
 
 export const Banner = styled.div`
-    padding: ${style.paddingBanner};
-    border-radius: 5px;
-    height: ${style.heightCover};
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position relative;
+  padding: ${style.paddingBanner};
+  border-radius: 5px;
+  height: ${style.heightCover};
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 
-    @media screen and (max-width: 480px) {
-        padding: ${style.mob.paddingBanner};
-        height: ${style.mob.heightBanner};
-    }
+  @media screen and (max-width: 480px) {
+    padding: ${style.mob.paddingBanner};
+    height: ${style.mob.heightBanner};
+  }
 `;
 
 export const Logo = styled.img`
@@ -417,21 +514,29 @@ export const Cover = styled.div`
     }
   }
 `;
-export const Icon = styled.i`
+export const StyledIcon = styled.i`
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5px;
   cursor: pointer;
   width: fit-content;
+  height: fit-content;
   background: ${style.icon.bg.default};
   border-radius: ${style.icon.borderRadius};
+  box-shadow: ${style.icon.shadow.default};
 
-  &:hover {
+  &.state_hover {
     background: ${style.icon.bg.hover};
+    &:hover {
+      box-shadow: ${style.icon.shadow.hover};
+    }
   }
-  &.active {
+  &.state_active {
     background: ${style.icon.bg.active};
+    transform: scale(1.1);
+
+    box-shadow: ${style.icon.shadow.hover};
   }
 
   &.scale {
@@ -470,9 +575,10 @@ export const LinkContainer = styled.div`
 export const StyledNav = styled.div`
   width: ${style.nav.width};
   height: 100vh;
-  background: ${style.nav.bg.default};
   position: fixed;
   left: 0;
+  padding: 10px 5px;
+  background: ${style.nav.bg.default};
   border-right: ${style.nav.border.default};
 
   .header {
@@ -490,7 +596,12 @@ export const StyledNav = styled.div`
   }
 `;
 
-//
+//////////////////////////////// Chat ////////////////////////////////
+
+// export const StyledUl = styled.ul`
+//   border:"1px solid red";
+// `
+
 export const StyledChatList = styled.div`
   width: 25%;
   height: 100vh;
@@ -498,11 +609,17 @@ export const StyledChatList = styled.div`
   border-right: ${style.header.border.default};
 
   .body {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 55px);
     width: 100%;
     margin: auto;
-    padding: 20px 10px;
-    background: ${style.card.bg.default};
+    padding: ${style.body.padding};
+    background: ${style.body.bg};
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
 
     .menu-heading {
       padding-left: 10px;
@@ -532,8 +649,6 @@ export const StyledChatList = styled.div`
     width: 100%;
     margin: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
   }
 `;
 
@@ -542,6 +657,7 @@ export const StyledChat = styled.div`
   height: 100vh;
   background: ${style.body.bg.default};
   position: relative;
+  flex-direction: column;
 
   &.full {
     width: calc(75% + 20px);
@@ -575,21 +691,31 @@ export const StyledChat = styled.div`
   .body {
     overflow: inherit;
     padding: 20px 0px;
-    height: calc(100vh - 55px);
+    height: calc(100vh - 100px);
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+    &.hidden {
+      visibility: hidden !important;
+      position: absolute;
+      top: 0;
+    }
   }
 `;
 export const StyledChatItem = styled(Row)`
   text-align: start;
   align-items: center;
   justify-content: flex-start;
-
   .settingsIcon {
-    display: none;
+    visibility: hidden;
   }
 
   &:hover {
     .settingsIcon {
-      display: inline;
+      visibility: visible;
     }
   }
 `;
@@ -611,8 +737,8 @@ export const ChatPreviewCard = styled(StyledCard)`
   }
 `;
 export const StyledChatPreview = styled.div`
-  background: ${style.bgLayout.primary};
-  border: ${style.borderInput};
+  background: ${style.card.bg.default};
+  border: ${style.card.border.default};
   border-radius: 2px 2px 0px 0px;
   padding: 0.5rem 0.5rem;
 
@@ -634,7 +760,7 @@ export const StyledChatInputContainer = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0;
-  padding: 0px 10px;
+  padding: 5px 10px;
 `;
 
 export const StyledChatInput = styled(Row)`
@@ -643,7 +769,8 @@ export const StyledChatInput = styled(Row)`
   background: ${style.card.bg.default};
   border: ${style.card.border.default};
   margin-bottom: 5px;
-  padding: 0.3rem 0;
+  padding: 0.3rem;
+  min-height: 55px;
 
   .inputElement {
     resize: none;
@@ -685,9 +812,6 @@ export const StyledConversationView = styled.div`
   -ms-overflow-style: none;
   padding-bottom: 3rem;
 
-  <<<<<<< HEAD ::-webkit-scrollbar {
-    display: none;
-  }
   .emogiPicker {
     background-color: black;
   }
@@ -705,10 +829,9 @@ export const StyledConversation = styled(Col)`
   position: relative;
   opacity: 0.75;
   cursor: pointer;
-
+  /* overflow: hidden; */
   &:hover {
     opacity: 1;
-    background: ${style.bg4};
     .action {
       display: block;
       color: red;
@@ -720,24 +843,35 @@ export const StyledConversation = styled(Col)`
     margin-bottom: 0.5rem;
   }
 
-  .message {
+  .action {
+    display: none;
+    padding-left: 10px;
+    /* border: ${style.borderInput}; */
+    /* background: #01041f; */
+    border-radius: 5px;
+    width: fit-content;
+  }
+
+  &:hover {
     .action {
-      display: none;
-      position: absolute;
-      top: -10px;
-      right: 0;
-      padding: 5px;
-      border: ${style.borderInput};
-      background: #01041f;
-      border-radius: 5px;
+      display: flex;
     }
+  }
 
-    // &:hover {
-    //     .action {
-    //         display: block;
-    //     }
-    // }
+  .message {
+    color: ${style.message.color.default};
+    background: ${style.message.bg.default};
+    width: fit-content;
+    min-width: 40%;
+    max-width: 70%;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: ${style.message.shadow.default};
 
+    .heading {
+      color: ${style.message.color.heading.color.default};
+      font-weight: 700;
+    }
     .inputElement {
       resize: none;
       width: 100%;
@@ -745,9 +879,23 @@ export const StyledConversation = styled(Col)`
       background-color: transparent;
       outline: none;
     }
-  }
-`;
 
+    &.active {
+      background: ${style.message.bg.active};
+
+      .heading {
+        color: ${style.message.color.heading.color.active};
+      }
+    }
+
+    &:hover {
+      box-shadow: ${style.message.shadow.hover};
+    }
+  }
+  .positionPop > .chakra-popover__popper {
+ inset: 0px auto auto 55% !important;
+}
+`;
 
 //
 export const StyledPageList = styled.div`
@@ -757,11 +905,12 @@ export const StyledPageList = styled.div`
   border-right: ${style.header.border.default};
 
   .body {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 55px);
     width: 100%;
     margin: auto;
     padding: 20px 10px;
-    background: ${style.card.bg.default};
+    background: ${style.body.bg};
+    overflow-y: scroll;
 
     .menu-heading {
       padding-left: 10px;
@@ -829,10 +978,12 @@ export const StyledPageContainer = styled.div`
     padding: 0px 10px;
     background: ${style.header.bg.default};
     border-bottom: ${style.header.border.default};
+    display: flex;
+    align-items: center;
   }
 
   .body {
-    overflow: inherit;
+    overflow-y: scroll;
     padding: 20px 0px;
     height: calc(100vh - 55px);
     padding: 25px 10%;
@@ -845,29 +996,27 @@ export const TextareaDiv = styled.div`
   padding: 5px;
 `;
 
-
-
 // Profile
 export const StyledProfileBanner = styled.div`
-    position: relative;
-    margin-bottom: 3rem;
+  position: relative;
+  margin-bottom: 3rem;
 
-    .bannerImage {
-        background-color: #121533;
-        border-radius: 10px;
-        height: 150px;
-        width: 100%;
-        text-align: center;
-    }
+  .bannerImage {
+    background-color: #121533;
+    border-radius: 10px;
+    height: 150px;
+    width: 100%;
+    text-align: center;
+  }
 
-    .bannerAvatar {
-        position: absolute;
-        top: 5rem;
-        left: 45%;
-    }
+  .bannerAvatar {
+    position: absolute;
+    top: 5rem;
+    left: 0;
+  }
 
-    .bioText {
-        font-weight: 500;
-        color: #6F767E;
-    }
-`
+  .bioText {
+    font-weight: 500;
+    color: #6f767e;
+  }
+`;

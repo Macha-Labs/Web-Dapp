@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const useMention = () => {
-    const [isActive, setIsActive] = useState<Boolean>(false);
+    const [mentionActive, setMentionActive] = useState<Boolean>(false);
     const [mention, setMention] = useState<any>();
     const [mentionList, setMentionList] = useState<any>([]);
 
@@ -10,18 +10,15 @@ const useMention = () => {
         setMentionList([]);
     }
 
-    const onTrigger = (value, users) => {
-        console.log("Users ", users);
+    const onTrigger = (value: any, users: any) => {
         const words = value.split(" ");
         const mentionWord = words[words.length - 1].substring(1);
-        console.log("Mentionword ", mentionWord);
         setMention(mentionWord);
 
         const mentions = !mentionWord
             ? users
             : users.filter(
-                (user) => {
-                    console.log("Mention filter", user);
+                (user: any) => {
                     return (user?.name?.toLowerCase().includes(mentionWord) ||
                         user?.handle?.toLowerCase().includes(mentionWord))
 
@@ -32,14 +29,14 @@ const useMention = () => {
         setMentionList(mentions);
     }
 
-    const onSelect = (user) => {
+    const onSelect = (user: any) => {
         setMentionList([...mentionList, user])
-        setIsActive(false);
+        setMentionActive(false);
     }
 
     return {
-        isActive: isActive,
-        setIsActive: setIsActive,
+        mentionActive: mentionActive,
+        setMentionActive: setMentionActive,
         mention: mention,
         mentionList: mentionList,
         onRefresh: onRefresh,

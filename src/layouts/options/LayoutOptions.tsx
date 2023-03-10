@@ -1,31 +1,71 @@
-import { Icon, Row, StyledCard } from "@/styles/StyledComponents";
+import IconImage from "@/components/icons/IconImage";
+import { StyledIcon, Row, StyledOptionsCard } from "@/styles/StyledComponents";
 import { Heading, Text } from "@chakra-ui/react";
 
 const LayoutOptions = (props: any) => {
-    return (
-        <StyledCard className="border">
-            {props.options.length ? (
-                <>
-                    {props.options?.map((item:any) => {
-                        return (
-                            <Row className="m-b-0-5 hr-between">
-                                <Row>
-                                    <Icon></Icon>
-                                    <Text fontSize="md" className="m-l-0-5">{item.name}</Text>
-                                </Row>
-                                <Row>
-                                    <Icon></Icon>
-                                </Row>
-                            </Row>
-                        )
-                    })}
-                </>
-            ) : (
-                <></>
-            )}
-            
-        </StyledCard>
-    )
-}
+  return (
+    <StyledOptionsCard className={props.style?.className + " border"}>
+      {props.options.length ? (
+        <>
+          {props.options?.map((item: any, index: any) => {
+            if (
+              (item.name === "Delete Channel" ||
+                item.name === "Permissions" ||
+                item.name === "Members" ||
+                item.name === "Edit Channel") &&
+              props.channelAdmin !== props.userId
+            ) {
+              return null;
+            }
+            if (
+              (item.name === "Delete Channel" ||
+                item.name === "Permissions" ||
+                item.name === "Members" ||
+                item.name === "Edit Channel") &&
+              props.channelAdmin !== props.userId
+            ) {
+              return null;
+            }
+            // console.log("channelrawdata", props.channelRawData);
+            if (
+              item.name === "Mute Chat" &&
+              props.channelRawData?.muteStatus().muted
+            ) {
+              return null;
+            }
+            if (
+              item.name === "UnMute Chat" &&
+              !props.channelRawData?.muteStatus().muted
+            ) {
+              return null;
+            }
+            if(item.name === "Leave Channel" && props.channelAdmin == props.userId){
+              return null
+            }
+            return (
+              <Row
+                className="item m-b-0-5 hr-between"
+                key={index}
+                onClick={() => {
+                  item.onPress();
+                }}
+              >
+                <Row className="vr-center">
+                  <IconImage path={item.icon} size={item?.size} />
+                  <Text fontSize="md" className="m-l-0-5">
+                    {item.name}
+                  </Text>
+                </Row>
+                <Row></Row>
+              </Row>
+            );
+          })}
+        </>
+      ) : (
+        <></>
+      )}
+    </StyledOptionsCard>
+  );
+};
 
 export default LayoutOptions;

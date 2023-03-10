@@ -1,69 +1,40 @@
 import { useContext, useEffect, useState } from "react";
-import { getProfiles } from "../../helpers/lens/lens";
-import { UserLens$ } from "../../schema/user";
+import { User$ } from "../../schema/user";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
+import { logger } from "@/helpers/logger";
 
 const useStreamChannelMembers = (channel: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
+  const [allUsersIds, setAllUsersIds] = useState<any>([]);
   const [onlineUsers, setOnlineUsers] = useState<any>([]);
   const [offlineUsers, setOfflineUsers] = useState<any>([]);
   const [userIsMember, setUserIsMember] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>();
 
   const fetchChannelMembers = async () => {
-    console.log("Called fetchChannelMembers");
     const response = await channel?.raw?.queryMembers({});
-    console.log("Fetched channel members ", response);
     let onlineIds: any[] = [];
     let offlineIds: any[] = [];
     response?.members.map((item: any, index: number) => {
-      if (item.user?.lensId) {
-        if (item.user?.online) onlineIds.push(item.user?.lensId);
-        else offlineIds.push(item?.user?.lensId);
-      }
+      const user = new User$(null, null, item.user);
+      user.setLensFromStream();
+      if (item.user?.online) {
+        onlineIds.push(user);
+      } else offlineIds.push(user);
+    });
+    const result = [...onlineIds, ...offlineIds].map((item: any) => {
+      return item.address;
     });
 
-    console.log("Online lens ids array", onlineIds);
-    console.log("Offline lens ids array", offlineIds);
+    logger('stream', 'useStreamChannelMembers?.fetchChannelMembers', 'Loading channel members', [onlineIds, offlineIds])
 
-    // getting online lens profiles
-    if (onlineIds.length > 0) {
-      getProfiles({ profileIds: onlineIds, limit: 50 }).then(data => {
-        try {
-          const usersList = data.data?.profiles?.items.map(
-            (item: any, index: number) => {
-              return UserLens$(item);
-            }
-          );
+    setOnlineUsers(onlineIds);
+    setOfflineUsers(offlineIds);
+    setAllUsersIds(result);
+  };
 
-          setOnlineUsers(usersList);
-        } catch (error) {
-          setOnlineUsers([]);
-        }
-      });
-    } else {
-      setOnlineUsers([]);
-    }
-
-    // getting offline lens profiles
-    if (offlineIds.length > 0) {
-      getProfiles({ profileIds: offlineIds, limit: 50 }).then(data => {
-        try {
-          const usersList = data.data?.profiles?.items.map(
-            (item: any, index: number) => {
-              return UserLens$(item);
-            }
-          );
-          setOfflineUsers(usersList);
-        } catch (error) {
-          setOfflineUsers([]);
-        }
-      });
-    } else {
-      setOfflineUsers([]);
-    }
-
-    // checking if current user is a member of this channel
+  // checking if current user is a member of this channel
+  const checkUserIsAMember = async () => {
     try {
       const result = await channel?.raw?.queryMembers({
         id: authContext?.user.lens?.id,
@@ -79,7 +50,6 @@ const useStreamChannelMembers = (channel: any) => {
       return false;
     }
   };
-
   useEffect(() => {
     if (channel) fetchChannelMembers();
   }, [channel]);
@@ -91,6 +61,8 @@ const useStreamChannelMembers = (channel: any) => {
   return {
     fetchChannelMembers: fetchChannelMembers,
     checkOnline: checkOnline,
+    allUsers: onlineUsers.concat(offlineUsers),
+    allUsersIds: allUsersIds,
     onlineUsers: onlineUsers,
     offlineUsers: offlineUsers,
     userIsMember: userIsMember,
