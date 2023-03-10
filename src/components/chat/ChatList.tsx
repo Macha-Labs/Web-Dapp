@@ -97,7 +97,7 @@ const ChatList = (props: any) => {
               Pin Channel
             </Row>
           </Button>
-          {!props.item.raw?.muteStatus()?.muted ? (
+          {(props?.item?.raw && !props.item.raw?.muteStatus()?.muted )? (
             <Button
               variant="transparent"
               size="sm"
@@ -231,7 +231,7 @@ const ChatList = (props: any) => {
                               {item?.raw && (
                                 <>
                                   {" "}
-                                  {item.raw?.muteStatus()?.muted && (
+                                  {(props?.item?.raw && item.raw?.muteStatus()?.muted) && (
                                     <IconImage
                                       path="IconDarkMute.png"
                                       style={{ className: "m-l-0-5" }}
