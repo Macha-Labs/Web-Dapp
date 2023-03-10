@@ -19,7 +19,7 @@ const Landing = () => {
       <div className="d-flex flex-column h-100 text-center bodyBackground">
         <nav className="navbar navbar-expand-md navbar-dark fixed-top py-3 navBar py-md-2">
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
-            <div className=" ">
+            <div className=" d-flex flex-column flex-md-row">
               <div className="col">
                 <a href="/landing">
                   <Image
@@ -32,9 +32,6 @@ const Landing = () => {
                   />
                 </a>
               </div>
-            </div>
-
-            <div className="d-flex align-items-center" id="">
               <ul className="navbar-nav me-auto d-flex align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
                   <a
@@ -54,7 +51,9 @@ const Landing = () => {
                   </a>
                 </li>
               </ul>
+            </div>
 
+            <div className="d-flex align-items-center" id="">
               <div className="row overflow-hidden flex-md-row position-relative mx-2 hideOnMobile">
                 <div className="column align-items-center">
                   <a className="text-muted" href="#">
@@ -282,7 +281,7 @@ const Landing = () => {
             <div className="col-md-6 d-flex justify-content-md-end justify-content-center mb-2 mt-3 mt-md-0">
               <div className="overflow-hidden cardGlass position-relative m-0 py-3 px-4 d-flex flex-column justify-content-start">
                 <h1 className="highlight mt-3 glassCardHeading">
-                  Showcase the web3 profile on Lens Protocol
+                  Showcase the web3 profile with Lens Protocol
                 </h1>
                 <img
                   src="/assets/lens profile img.png"
