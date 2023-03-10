@@ -21,4 +21,33 @@ function IconImage(props: any) {
   );
 }
 
+export function Landing(props: any) {
+  return (
+    <>
+      <IKImage
+        path={`/landingPage/${props.path}`}
+        // transformation={[
+        //   {
+        //     height: props?.height ? props?.height : "25",
+        //     width: props?.width ? props?.width : "25",
+        //   },
+        // ]}
+        className={props?.className}
+        // style={{ borderRadius: 23 }}
+      />
+      {/* {console.log("lessgoo",props?.className)} */}
+      {/* <style jsx>{`
+        @media screen and (max-width: 770px) {
+          .aboutUs{
+            height:{props.height}
+          }
+          .aboutUs {
+            height:100px;
+          }
+        }
+      `}</style> */}
+    </>
+  );
+}
+
 export default IconImage;

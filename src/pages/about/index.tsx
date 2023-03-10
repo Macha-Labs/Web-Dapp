@@ -1,5 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import Image from "next/image";
+import {Landing} from "../../components/icons/IconImage";
 
 function about() {
   return (
@@ -58,12 +59,12 @@ function about() {
           </div>
         </nav>
         <div className="row justify-content-center sectionSpacing paddingBox">
-          <div className="col mt-3">
+          <div className="col mt-5">
             <h1 className="subHeading mt-5">Portal is built at</h1>
           </div>
         </div>
 
-        <div className="mb-5 paddingBox">
+        <div className="mb-md-5 mb-2 paddingBox">
           <h1 className="m-0 display-3 heading">
             <strong>
               <span className="highlight">MetaWork Labs</span>
@@ -78,11 +79,12 @@ function about() {
             src="/assets/docs.png"
             alt="metawork_chat"
           /> */}
-          <img
+          <Landing path="aboutUs.png" className="px-3 px-md-0 mb-2 mb-md-0"/>
+          {/* <img
             className="backedByImg"
             src="/assets/docs.png"
             alt="protocolLabs"
-          />
+          /> */}
         </div>
         <div className="row d-flex justify-content-center mt-md-5 paddingBox">
           <p className="aboutPara">

@@ -1,7 +1,8 @@
 import { Button, Text } from "@chakra-ui/react";
 import Image from "next/image";
+import {Landing} from "../../components/icons/IconImage";
 
-const Landing = () => {
+const LandingPage = () => {
   const sliderText = [
     "Lens Protocol: 76K Users",
     "Lens Protocol: 76K Users",
@@ -240,7 +241,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="pt-3 chatBanner borderBox">
-            <img className="" src="/assets/docs-card.png" alt="metawork_chat" />
+            <Landing path="docsCard.png" />
           </div>
 
           <div className="sectionSpacing">
@@ -277,9 +278,8 @@ const Landing = () => {
                 <h1 className="highlight mt-3 glassCardHeading">
                   Web3 login with Wallet and Decentralized Identity
                 </h1>
-                <img
-                  src="/assets/Frame 4477.png"
-                  alt="LoginMetaMask"
+                <Landing
+                  path="loginImage.png"
                   className="LoginMetaMask p-md-4 pt-2 mt-md-5"
                 />
               </div>
@@ -1587,4 +1587,4 @@ const Landing = () => {
     </>
   );
 };
-export default Landing;
+export default LandingPage;
