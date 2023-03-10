@@ -14,7 +14,77 @@ import ChatPermissions from "./ChatPermissions";
 function ChatSetting(props: any) {
   const toast = useToast();
   const modalPinned = useDisclosure();
+  /**
+   * @description
+   **/
+   const callbackDelete = () => {
+    toast({
+      title: "Channel Deleted",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.chatContext?.streamContext?.reloadChannelList();
+    props.chatContext?.initiate(null);
+    props.modalSettings.onClose();
+  };
 
+  /**
+   * @description
+   **/
+  const callbackMute = () => {
+    toast({
+      title: "Channel Muted",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.chatContext?.streamContext?.reloadChannelList();
+    props.chatContext?.streamContext?.reloadChannel();
+    props.modalSettings.onClose();
+  };
+
+  /**
+   * @description
+   **/
+  const callbackUnmute = () => {
+    toast({
+      title: "Channel Unmuted",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.chatContext?.streamContext?.reloadChannel();
+    props.chatContext?.streamContext?.reloadChannelList();
+    props.modalSettings.onClose();
+  };
+  /**
+   * @description
+   **/
+  const callbackLeave = () => {
+    toast({
+      title: "Channel Left",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.chatContext?.streamContext?.reloadChannelList();
+    props.chatContext?.initiate(null);
+    props.modalSettings.onClose();
+  };
+
+  /**
+   * @description
+   **/
+  const hookPortalChannel = usePortalChannel(
+    props.chatContext.hookChannel.channel.id,
+    {
+      delete: callbackDelete,
+      mute: callbackMute,
+      unmute: callbackUnmute,
+      leave: callbackLeave,
+    }
+  );
   /**
    * @description Setting options
    *
@@ -120,6 +190,21 @@ function ChatSetting(props: any) {
   const chatOptions3 = [
     {
       //   icon: IconBrandClearChat,
+      name: "Copy Invite Link",
+      icon: "IconDarkFiles.png",
+      onPress: () => {
+        const inviteLink = `${window.location.origin}/invite/c/${props.chatContext.hookChannel.channel.id}`
+        navigator.clipboard.writeText(inviteLink);
+        toast({
+          title: "Copied to clipboard",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      },
+    },
+    {
+      //   icon: IconBrandClearChat,
       name: "Clear Chat",
       icon: "IconRedDelete.png",
       onPress: () => {},
@@ -141,77 +226,9 @@ function ChatSetting(props: any) {
       },
     },
   ];
-  /**
-   * @description
-   **/
-  const callbackDelete = () => {
-    toast({
-      title: "Channel Deleted",
-      status: "success",
-      duration: 3000,
-      position: "bottom-right",
-    });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.initiate(null);
-    props.modalSettings.onClose();
-  };
 
-  /**
-   * @description
-   **/
-  const callbackMute = () => {
-    toast({
-      title: "Channel Muted",
-      status: "success",
-      duration: 3000,
-      position: "bottom-right",
-    });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.streamContext?.reloadChannel();
-    props.modalSettings.onClose();
-  };
 
-  /**
-   * @description
-   **/
-  const callbackUnmute = () => {
-    toast({
-      title: "Channel Unmuted",
-      status: "success",
-      duration: 3000,
-      position: "bottom-right",
-    });
-    props.chatContext?.streamContext?.reloadChannel();
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.modalSettings.onClose();
-  };
-  /**
-   * @description
-   **/
-  const callbackLeave = () => {
-    toast({
-      title: "Channel Left",
-      status: "success",
-      duration: 3000,
-      position: "bottom-right",
-    });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.initiate(null);
-    props.modalSettings.onClose();
-  };
 
-  /**
-   * @description
-   **/
-  const hookPortalChannel = usePortalChannel(
-    props.chatContext.hookChannel.channel.id,
-    {
-      delete: callbackDelete,
-      mute: callbackMute,
-      unmute: callbackUnmute,
-      leave: callbackLeave,
-    }
-  );
   const modalChatPermission = useDisclosure();
   const modalChatMembers = useDisclosure();
   const modalAddMembers = useDisclosure();

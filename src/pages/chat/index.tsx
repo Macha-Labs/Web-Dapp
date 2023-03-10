@@ -8,10 +8,13 @@ import AuthCard from "@/components/auth/AuthCard";
 import { useDisclosure } from "@chakra-ui/react";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
+import { useRouter } from "next/router";
+import { ChatContext } from "@/providers/ChatProvider";
 
 function ChatComponent() {
   const modalAuth = useDisclosure();
   const authContext = useContext(AuthContext);
+  
 
   useEffect(() => {
     if (authContext?.isConnected) {

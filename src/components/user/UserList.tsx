@@ -48,7 +48,7 @@ const UserList: FC<Props> = props => {
                   key={index}
                   className="vr-center item m-b-0-5"
                   onClick={() => {
-                    console.log(item.lens, "itemmmmm");
+                    console.log(item, "itemmmmm");
                     handleSelectedUser(item);
                   }}
                 >

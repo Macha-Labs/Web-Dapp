@@ -11,6 +11,7 @@ import type { AppProps } from 'next/app';
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const { chains, provider } = configureChains(
   [polygonMumbai],
@@ -18,7 +19,7 @@ const { chains, provider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "Portal",
+  appName: "MetaWork",
   chains,
 });
 
