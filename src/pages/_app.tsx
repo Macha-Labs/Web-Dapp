@@ -18,7 +18,7 @@ const { chains, provider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "Portal",
+  appName: "MetaWork",
   chains,
 });
 
