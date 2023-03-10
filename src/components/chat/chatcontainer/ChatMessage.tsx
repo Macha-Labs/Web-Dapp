@@ -306,7 +306,7 @@ const ChatMessage = (props: any) => {
             <></>
           )}
 
-          {props?.message?.reaction_scores && (
+          {props?.message?.reaction_scores && ( 
             <Row className="vr-center">
               {Object.keys(props?.message.reaction_scores).length > 0 &&
                 Object.keys(props.message.reaction_scores).map((item: any) => {

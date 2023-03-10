@@ -22,6 +22,18 @@ const useStreamChannelMessages = (channel: any) => {
             logger("stream", "useStreamChannel.useEffect", "logging the channel events", [event]);
             setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
           });
+          channel?.raw?.on("reaction.new", (event: any) => {
+            logger("stream", "useStreamChannel.useEffect", "logging the message reaction events", [event]);
+            setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
+          });
+          channel?.raw?.on("reaction.updated", (event: any) => {
+            logger("stream", "useStreamChannel.useEffect", "logging the message reaction events", [event]);
+            setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
+          });
+          channel?.raw?.on("reaction.deleted", (event: any) => {
+            logger("stream", "useStreamChannel.useEffect", "logging the message reaction events", [event]);
+            setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
+          });
       }, [channel]);
 
       return {
