@@ -6,7 +6,7 @@ function about() {
       <div className="d-flex flex-column h-100 text-center bodyBackground">
         <nav className="navbar navbar-expand-md navbar-dark fixed-top py-3 navBar py-md-2">
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
-            <div className=" ">
+            <div className=" d-flex flex-column flex-md-row">
               <div className="col">
                 <a href="/landing">
                   <Image
@@ -19,9 +19,6 @@ function about() {
                   />
                 </a>
               </div>
-            </div>
-
-            <div className="d-flex align-items-center" id="">
               <ul className="navbar-nav me-auto d-flex align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
                   <a
@@ -41,7 +38,9 @@ function about() {
                   </a>
                 </li>
               </ul>
+            </div>
 
+            <div className="d-flex align-items-center" id="">
               <div className="row overflow-hidden flex-md-row position-relative mx-2 hideOnMobile">
                 <div className="column align-items-center">
                   <a className="text-muted" href="#">
