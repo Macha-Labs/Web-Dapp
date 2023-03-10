@@ -250,11 +250,14 @@ const ChatMessage = (props: any) => {
           }
           style={{ color: "#ffffff" }}
         >
-          <Text fontSize="sm" className="heading">
-            {props.message?.user?.lensUsername ||
-              props.message?.user?.lensHandle ||
-              truncateAddress(props.message?.user?.id)}
-          </Text>
+          <Row className="hr-between">
+            <Text fontSize="sm" className="heading">
+              {props.message?.user?.lensUsername ||
+                props.message?.user?.lensHandle ||
+                truncateAddress(props.message?.user?.id)}
+            </Text>
+            <Text style={{ alignSelf: "flex-end" }} fontSize="12">{time}</Text>
+          </Row>
 
           {props?.hookChat?.actionMessage?.action == "EDIT" &&
           props?.hookChat?.actionMessage?.item?.id == props?.message?.id ? (
@@ -297,9 +300,6 @@ const ChatMessage = (props: any) => {
               dangerouslySetInnerHTML={{ __html: props.message?.html }}
             />
           )}
-          <Col>
-            <span style={{ alignSelf: "flex-end" }}>{time}</span>
-          </Col>
           {props?.message?.attachments ? (
             props?.message?.attachments?.map((item: any, index: number) => {
               return templateAttachment(item);
