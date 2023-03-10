@@ -7,7 +7,7 @@ function about() {
   return (
     <>
       <div className="d-flex flex-column h-100 text-center bodyBackground">
-        <nav className="navbar navbar-expand-md navbar-dark fixed-top py-3 navBar pt-md-4 p-md-2">
+        <nav className="navbar navbar-expand-md navbar-dark fixed-top py-3 navBar pt-md-4 pb-md-2">
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
             <div className=" d-flex flex-column flex-md-row">
               <div className="col">
