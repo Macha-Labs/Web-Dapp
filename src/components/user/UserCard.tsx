@@ -6,7 +6,7 @@ const UserCard = ({user}: any) => {
   
   return (
     <StyledCard
-      className="border state_hover"
+      className="state_hover"
     >
       <Row className="vr-center item m-b-0-5">
         <Avatar
