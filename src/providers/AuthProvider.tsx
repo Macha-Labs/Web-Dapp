@@ -1,11 +1,7 @@
-import {
-  createContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useEffect, useState } from "react";
 import { logger } from "../helpers/logger";
 import useLensAuth from "../hooks/lens/useLensAuth";
-import { User$} from "../schema/user";
+import { User$ } from "../schema/user";
 // import { removeAsyncData } from "../service/AsyncStorageService";
 import { useAccount, useDisconnect } from "wagmi";
 import { putStreamToken } from "../service/StreamService";
@@ -46,7 +42,6 @@ const AuthProvider = ({ children }: any) => {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const [isLoadingLens, setLoadingLens] = useState<any>(false);
- 
 
   /**
    * @description Initiating Hooks
@@ -159,9 +154,6 @@ const AuthProvider = ({ children }: any) => {
     disconnect();
   };
 
- 
-  
-
   useEffect(() => {
     logger("auth", "useEffect", "Portal 1: Current user address", [address]);
     if (address) {
@@ -185,7 +177,11 @@ const AuthProvider = ({ children }: any) => {
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,
-        isConnected: address && user?.lens?.id && user?.db?.id && hookXmtp.xmtpClientAddress,
+        isConnected:
+          address &&
+          user?.lens?.id &&
+          user?.db?.id &&
+          hookXmtp.xmtpClientAddress,
         isLoadingLens: isLoadingLens,
       }}
     >
