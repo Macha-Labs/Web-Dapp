@@ -1,10 +1,14 @@
 export const StreamMessage$ = (data: any) => {
   return {
-    id: data.id,
-    text: data.text,
-    createdAt: data.createdAt,
-    createdBy: data.createdBy,
+    id: data?.id,
+    text: data?.text,
+    createdAt: data?.created_at,
+    createdBy: data?.createdBy,
     peerAddress: undefined,
+    attachments: data?.attachments,
+    pinned: data?.pinned,
+    reactionScores: data?.reaction_scores,
+    reactionCount: data?.reaction_count,
   };
 };
 export const XmtpMessage$ = (data: any) => {
@@ -14,5 +18,6 @@ export const XmtpMessage$ = (data: any) => {
     createdAt: data.sent,
     createdBy: data.senderAddress,
     peerAddress: data.conversation.peerAddress,
+    attachments: data?.attachments,
   };
 };

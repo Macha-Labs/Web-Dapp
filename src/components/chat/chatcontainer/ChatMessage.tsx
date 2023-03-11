@@ -32,7 +32,7 @@ const ChatMessage = (props: any) => {
   const modalProfile = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<any>();
   const toast = useToast();
-  const date = new Date(props.message.created_at);
+  const date = new Date(props.message.createdAt);
   const hours = date.getHours().toString().padStart(2, "0");
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const time = `${hours}:${minutes}`;
@@ -277,7 +277,7 @@ const ChatMessage = (props: any) => {
               <Text fontSize="sm" className="heading">
                 {props.message?.user?.lensUsername ||
                   props.message?.user?.lensHandle ||
-                  truncateAddress(props.message?.user?.id)}
+                  truncateAddress(props.message?.createdBy)}
               </Text>
               <Text style={{ alignSelf: "flex-end" }} fontSize="12">
                 {time}
@@ -322,7 +322,7 @@ const ChatMessage = (props: any) => {
             ) : (
               // The text message is being set here. TextareaDiv is directly setting the html to the div.
               <TextareaDiv
-                dangerouslySetInnerHTML={{ __html: props.message?.html }}
+                dangerouslySetInnerHTML={{ __html: props.message?.text }}
               />
             )}
             {props?.message?.attachments ? (
