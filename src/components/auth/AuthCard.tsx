@@ -18,7 +18,7 @@ const AuthCard = () => {
               style={{ className: "m-b-1" }}
             />
             <Heading as="h5" size="lg">
-              Log in to Portal
+              Log in to MetaWork
             </Heading>
           </Col>
           <Col className="w-60">
