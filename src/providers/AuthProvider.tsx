@@ -257,7 +257,8 @@ const AuthProvider = ({ children }: any) => {
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,
-        isConnected: address && user?.lens?.id && user?.db?.id,
+        isConnected:
+          address && user?.lens?.id && user?.db?.id && xmtpClientAddress,
         isLoadingLens: isLoadingLens,
         connectXmtp,
         client,
