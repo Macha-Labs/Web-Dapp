@@ -260,7 +260,7 @@ export const StyledCard = styled.div`
   }
 
   &.border {
-    border: ${style.card.border.default};
+    // border: ${style.card.border.default};
   }
 
   &.border-with-hover {

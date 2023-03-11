@@ -22,7 +22,7 @@ function about() {
                   />
                 </Link>
               </div>
-              <ul className="navbar-nav me-auto d-flex align-items-center flex-row mt-2 mt-md-0">
+              <ul className="navbar-nav d-flex justify-content-center align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
                   <Link
                     className="nav-link  d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
@@ -199,6 +199,14 @@ function about() {
                 <div className="d-flex flex-column ms-3 align-items-start">
                   <h4 className="teamMembersHeading mb-1">Harshil Airen</h4>
                   <h5 className="teamMembersSubHeading">Business</h5>
+                </div>
+              </div>
+              <div className="d-flex align-items-center teamMembers  mt-3 me-md-3 ">
+                {/* <img src="./assets/nikhil.png" alt="avatar" /> */}
+                <Landing path="nikhil.png" />
+                <div className="d-flex flex-column ms-3 align-items-start">
+                  <h4 className="teamMembersHeading mb-1">Nikhil Bhintade</h4>
+                  <h5 className="teamMembersSubHeading">Product Manager</h5>
                 </div>
               </div>
             </div>
