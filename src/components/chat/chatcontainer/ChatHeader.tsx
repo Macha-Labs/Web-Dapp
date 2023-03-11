@@ -95,14 +95,14 @@ const ChatHeader = (props: any) => {
           <Avatar
             size="sm"
             className="m-r-0-5"
-            name={props?.hookChannel?.channel?.name}
+            name={chatContext?.channel?.name}
           />
           <Col>
             <Row>
               <Heading as="h4" size="sm">
-                {props?.hookChannel?.channel?.name}
+                {chatContext?.channel?.name}
               </Heading>
-              {props?.hookChannel?.channel?.raw?.muteStatus()?.muted && (
+              {chatContext?.channel?.raw?.muteStatus()?.muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}
