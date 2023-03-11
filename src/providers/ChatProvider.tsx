@@ -1,4 +1,5 @@
 import useXmtp from "@/hooks/xmtp/useXmtp";
+import { useRouter } from "next/router";
 import { createContext, useContext } from "react";
 import { AuthContext } from "./AuthProvider";
 import { StreamContext, StreamContextType } from "./StreamProvider";
@@ -31,31 +32,32 @@ export const ChatContext = createContext<ChatContextType>({
 export const ChatProvider = ({ children }: any) => {
   const streamContext = useContext(StreamContext) as StreamContextType;
   const xmtpContext = useContext(XmtpContext);
+  const router = useRouter();
 
-  const _fetchChannels = (val: any) => {
-    switch (val) {
-      case "stream":
+  const _fetchChannels = () => {
+    switch (router.pathname) {
+      case "/chat":
         return streamContext?.hookChannels.channels;
-      case "xmtp":
+      case "/chat/dm":
         console.log("all conversations", xmtpContext.allConversations);
         return xmtpContext.allConversations;
     }
   };
 
-  const _fetchChannel = (val: any) => {
-    switch (val) {
-      case "stream":
+  const _fetchChannel = () => {
+    switch (router.pathname) {
+      case "/chat":
         return streamContext?.hookChannel.channel;
-      case "xmtp":
+      case "/chat/dm":
         return xmtpContext?.conversation;
     }
   };
 
-  const _initiateChannel = (val: any) => {
-    switch (val) {
-      case "stream":
+  const _initiateChannel = () => {
+    switch (router.pathname) {
+      case "/chat":
         return streamContext?.initiate;
-      case "xmtp":
+      case "/chat/dm":
         return xmtpContext.fetchXmtpConversation;
     }
   };
@@ -69,9 +71,9 @@ export const ChatProvider = ({ children }: any) => {
         hookChannels: streamContext?.hookChannels,
         streamClient: streamContext?.client,
         streamContext: streamContext,
-        channels: _fetchChannels("xmtp"),
-        channel: _fetchChannel("xmtp"),
-        initiate: _initiateChannel("xmtp"),
+        channels: _fetchChannels(),
+        channel: _fetchChannel(),
+        initiate: _initiateChannel(),
       }}
     >
       {children}

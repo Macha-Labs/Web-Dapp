@@ -70,9 +70,13 @@ export const XmtpProvider = ({ children }: any) => {
     const messages = await conversation.messages({
       direction: SortDirection.SORT_DIRECTION_DESCENDING,
     });
-    setMessages(messages);
-    setConversation(conversation);
-    console.log("messages", messages);
+    const messagesData = messages.map(item => {
+      return {};
+    });
+    console.log("conversation", conversation);
+    console.log("messages", messagesData);
+    setMessages(messagesData);
+    setConversation(ChannelXMTP$(conversation));
   };
   const fetchXmtpConversationList = async () => {
     const conversationList = await xmtpClient.conversations.list();
