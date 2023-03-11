@@ -1,3 +1,4 @@
+import useXmtp from "@/hooks/xmtp/useXmtp";
 import { createContext, useContext } from "react";
 import { AuthContext } from "./AuthProvider";
 import { StreamContext, StreamContextType } from "./StreamProvider";
@@ -26,15 +27,15 @@ export const ChatContext = createContext<ChatContextType>({
 
 export const ChatProvider = ({ children }: any) => {
   const streamContext = useContext(StreamContext) as StreamContextType;
-  const authContext = useContext(AuthContext);
+  const xmtpContext = useXmtp();
   
   const _fetchChannels = (val: any) => {
     switch (val) {
       case 'stream':
         return streamContext?.hookChannels.channels;
       case 'xmtp':
-        console.log('all conversations', authContext.allConversations)
-        return authContext.allConversations;
+        console.log('all conversations', xmtpContext.allConversations)
+        return xmtpContext.allConversations;
     }
   }
 

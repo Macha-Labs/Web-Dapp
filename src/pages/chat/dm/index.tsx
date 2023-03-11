@@ -20,9 +20,11 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
+import { ChatContext } from "stream-chat-react";
 
 function IndexDM() {
   const authContext = useContext(AuthContext);
+  const chatContext = useContext(ChatContext);
   const hookLens = useLensProfile();
   const modalAuth = useDisclosure();
 
@@ -52,7 +54,7 @@ function IndexDM() {
 
   return (
     <>
-      {authContext.isConnected && authContext.xmtpClientAddress &&  <StyledWindow>
+      {authContext.isConnected && <StyledWindow>
           <div className="left">
             <Nav />
           </div>
@@ -60,10 +62,10 @@ function IndexDM() {
           <div className="right">
             <StyledChatList>
               <Col className="body verticlescroll hidescroll">
-                {authContext.allConversations?.length ? (
+                {chatContext?.channels?.length ? (
                   <ul>
                     {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                    {authContext.allConversations?.map(
+                    {chatContext?.channels?.map(
                       (item: any, index: number) => {
                         return (
                           <StyledChatItem key={index}>
