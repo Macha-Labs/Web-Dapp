@@ -1,7 +1,7 @@
 import { Button, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import {Landing} from "../../components/icons/IconImage";
+import { Landing } from "../../components/icons/IconImage";
 
 const LandingPage = () => {
   const sliderText = [
@@ -34,7 +34,7 @@ const LandingPage = () => {
                   />
                 </Link>
               </div>
-              <ul className="navbar-nav me-auto d-flex align-items-center flex-row mt-2 mt-md-0">
+              <ul className="navbar-nav justify-content-center d-flex align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
                   <Link
                     className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
@@ -81,7 +81,7 @@ const LandingPage = () => {
                 </h1>
                 <div className="heroPara mt-5">
                   <p className=" mb-4 mb-md-0">
-                    Private and Secured Decentralized - Workspace Suit inbuilt
+                    Private and Secured Decentralized - Workspace Suite inbuilt
                     with encryption and token gating technologies for teams,
                     enterprises, and Guilds
                   </p>
@@ -712,9 +712,11 @@ const LandingPage = () => {
                 Schedule Link meeting with our team and ask anything about
                 creating your own Communities and HQs on MetaWork.
               </p>
-              <button className="btn btn-dark-blue mt-4 px-4  d-flex">
-                Schedule Meeting
-              </button>
+              <Link href="https://cal.com/metaworklabs">
+                <button className="btn btn-dark-blue mt-4 px-4  d-flex">
+                  Schedule Meeting
+                </button>
+              </Link>
             </div>
 
             <div className=" me-5 hideOnMobile">
@@ -723,39 +725,45 @@ const LandingPage = () => {
           </div>
 
           <div className="d-flex justify-content-between  flex-column flex-md-row">
-            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-              <div className="d-flex align-items-center ">
-                <img
-                  src="./assets/base-twitter.svg"
-                  className="footerlogoos"
-                  alt="twitterlogo"
-                />
-                <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
+            <Link href="https://twitter.com/metaworklabs">
+              <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+                <div className="d-flex align-items-center ">
+                  <img
+                    src="./assets/base-twitter.svg"
+                    className="footerlogoos"
+                    alt="twitterlogo"
+                  />
+                  <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
+                </div>
+                <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
               </div>
-              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
-            </div>
-            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-              <div className="d-flex align-items-center ">
-                <img
-                  src="./assets/base-medium.svg"
-                  className="footerlogoos"
-                  alt="twitterlogo"
-                />
-                <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
+            </Link>
+            <Link href="https://medium.com/@metaworklabs">
+              <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+                <div className="d-flex align-items-center ">
+                  <img
+                    src="./assets/base-medium.svg"
+                    className="footerlogoos"
+                    alt="twitterlogo"
+                  />
+                  <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
+                </div>
+                <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
               </div>
-              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
-            </div>
-            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-              <div className="d-flex align-items-center ">
-                <img
-                  src="./assets/base-github.svg"
-                  className="footerlogoos"
-                  alt="twitterlogo"
-                />
-                <h2 className="bottomLinks mt-1 ps-4">Github</h2>
+            </Link>
+            <Link href="https://github.com/metaworklabs">
+              <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+                <div className="d-flex align-items-center ">
+                  <img
+                    src="./assets/base-github.svg"
+                    className="footerlogoos"
+                    alt="twitterlogo"
+                  />
+                  <h2 className="bottomLinks mt-1 ps-4">Github</h2>
+                </div>
+                <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
               </div>
-              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
-            </div>
+            </Link>
           </div>
           <footer className="d-flex justify-content-between align-items-center sectionSpacing">
             <img

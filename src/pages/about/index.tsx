@@ -91,10 +91,10 @@ function about() {
           <p className="aboutPara">
             <strong>MetaWork Labs</strong> began with the simple idea of
             empowering people and society, and thus we have come together to
-            co-create products and infras with Web3 technology. As Link part of our
-            journey, we have built Link web3 native workspace suit and made its
-            first product live. Stay tuned, for other interesting projects to be
-            released this year.
+            co-create products and infras with Web3 technology. As Link part of
+            our journey, we have built Link web3 native workspace suit and made
+            its first product live. Stay tuned, for other interesting projects
+            to be released this year.
           </p>
         </div>
         <div className="mt-5 d-flex  flex-column align-items-center align-items-md-start paddingBox">
@@ -335,40 +335,46 @@ function about() {
             </p>
           </div>
         </div>
-        <div className="d-flex justify-content-between  flex-column flex-md-row paddingBox">
-          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-            <div className="d-flex align-items-center ">
-              <img
-                src="./assets/base-twitter.svg"
-                className="footerlogoos"
-                alt="twitterlogo"
-              />
-              <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
+        <div className="d-flex justify-content-between  flex-column flex-md-row">
+          <Link href="https://twitter.com/metaworklabs">
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+              <div className="d-flex align-items-center ">
+                <img
+                  src="./assets/base-twitter.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
+                <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
+              </div>
+              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
             </div>
-            <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
-          </div>
-          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-            <div className="d-flex align-items-center ">
-              <img
-                src="./assets/base-medium.svg"
-                className="footerlogoos"
-                alt="twitterlogo"
-              />
-              <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
+          </Link>
+          <Link href="https://medium.com/@metaworklabs">
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+              <div className="d-flex align-items-center ">
+                <img
+                  src="./assets/base-medium.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
+                <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
+              </div>
+              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
             </div>
-            <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
-          </div>
-          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-            <div className="d-flex align-items-center ">
-              <img
-                src="./assets/base-github.svg"
-                className="footerlogoos"
-                alt="twitterlogo"
-              />
-              <h2 className="bottomLinks mt-1 ps-4">Github</h2>
+          </Link>
+          <Link href="https://github.com/metaworklabs">
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+              <div className="d-flex align-items-center ">
+                <img
+                  src="./assets/base-github.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
+                <h2 className="bottomLinks mt-1 ps-4">Github</h2>
+              </div>
+              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
             </div>
-            <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
-          </div>
+          </Link>
         </div>
         <footer className="d-flex justify-content-between align-items-center sectionSpacing paddingBox">
           <img
