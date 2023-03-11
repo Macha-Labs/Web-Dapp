@@ -78,7 +78,7 @@ function IndexDM() {
                               <Row
                                 className="vr-center w-11-12"
                                 onClick={() => {
-                                  authContext.fetchXmtpConversation();
+                                  chatContext.initiate();
                                 }}
                               >
                                 {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
@@ -142,7 +142,7 @@ function IndexDM() {
             </StyledChatList>
             <div onClick={() => authContext.sendXmtpMessage()}>Send GM</div>
             <StyledChat>
-              {authContext.messages.map(item => {
+              {/* {authContext.messages.map(item => {
                 return (
                   <>
                     <ChatMessage
@@ -155,7 +155,7 @@ function IndexDM() {
                     />
                   </>
                 );
-              })}
+              })} */}
               {/* <ChatInput hookChat={{}} /> */}
             </StyledChat>
           </div>
