@@ -24,11 +24,7 @@ function IndexDM() {
   const hookLens = useLensProfile();
   const modalAuth = useDisclosure();
 
-  useEffect(() => {
-    hookLens
-      .getOwnedProfiles(authContext.address)
-      .then(res => console.log(res, "res"));
-  }, [authContext.address]);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     if (authContext?.isConnected) {

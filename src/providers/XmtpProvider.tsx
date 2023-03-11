@@ -55,6 +55,8 @@ export const XmtpProvider = ({ children }: any) => {
   }, [conversation, xmtpClientAddress, peerAddress]);
 
   useEffect(() => {
+    console.log("fetching");
+    console.log(xmtpClientAddress, "client address");
     if (xmtpClientAddress) {
       fetchXmtpConversationList();
     }

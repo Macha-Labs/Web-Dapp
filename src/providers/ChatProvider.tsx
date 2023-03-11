@@ -31,34 +31,34 @@ export const ChatContext = createContext<ChatContextType>({
 export const ChatProvider = ({ children }: any) => {
   const streamContext = useContext(StreamContext) as StreamContextType;
   const xmtpContext = useContext(XmtpContext);
-  
+
   const _fetchChannels = (val: any) => {
     switch (val) {
-      case 'stream':
+      case "stream":
         return streamContext?.hookChannels.channels;
-      case 'xmtp':
-        console.log('all conversations', xmtpContext.allConversations)
+      case "xmtp":
+        console.log("all conversations", xmtpContext.allConversations);
         return xmtpContext.allConversations;
     }
-  }
+  };
 
   const _fetchChannel = (val: any) => {
     switch (val) {
-      case 'stream':
+      case "stream":
         return streamContext?.hookChannel.channel;
-      case 'xmtp':
+      case "xmtp":
         return xmtpContext?.conversation;
     }
-  }
+  };
 
   const _initiateChannel = (val: any) => {
     switch (val) {
-      case 'stream':
+      case "stream":
         return streamContext?.initiate;
-      case 'xmtp':
+      case "xmtp":
         return xmtpContext.fetchXmtpConversation;
     }
-  }
+  };
 
   return (
     <ChatContext.Provider
@@ -69,8 +69,8 @@ export const ChatProvider = ({ children }: any) => {
         hookChannels: streamContext?.hookChannels,
         streamClient: streamContext?.client,
         streamContext: streamContext,
-        channels: _fetchChannels('xmtp'),
-        channel: _fetchChannel('xmtp'),
+        channels: _fetchChannels("xmtp"),
+        channel: _fetchChannel("xmtp"),
         initiate: streamContext?.initiate,
       }}
     >
