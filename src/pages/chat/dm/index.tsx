@@ -1,16 +1,10 @@
 import AuthCard from "@/components/auth/AuthCard";
-import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
-import ChatInput from "@/components/chat/chatcontainer/ChatInput";
-import ChatMembers from "@/components/chat/chatcontainer/ChatMembers";
 import ChatMessage from "@/components/chat/chatcontainer/ChatMessage";
-import ChatList from "@/components/chat/ChatList";
-import IconImage from "@/components/icons/IconImage";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Nav from "@/components/nav/Nav";
 import { truncateAddress } from "@/helpers";
 import useLensProfile from "@/hooks/lens/useLensProfile";
-import useXmtp from "@/hooks/xmtp/useXmtp";
-import AuthProvider, { AuthContext } from "@/providers/AuthProvider";
+import { AuthContext } from "@/providers/AuthProvider";
 import {
   StyledWindow,
   StyledChatList,
@@ -19,30 +13,46 @@ import {
   Row,
   StyledChatItem,
 } from "@/styles/StyledComponents";
-import { darkStyle } from "@/styles/StyledConstants";
 import {
   Avatar,
   Button,
-  Checkbox,
-  useDisclosure,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
-import { useAccount } from "wagmi";
 
 function IndexDM() {
-  const { isConnected, address } = useAccount();
   const authContext = useContext(AuthContext);
   const hookLens = useLensProfile();
+  const modalAuth = useDisclosure();
 
   useEffect(() => {
-    hookLens.getOwnedProfiles(address).then(res => console.log(res, "res"));
-  }, [address]);
+    hookLens.getOwnedProfiles(authContext.address).then(res => console.log(res, "res"));
+  }, [authContext.address]);
+
+  useEffect(() => {
+    if (authContext?.isConnected) {
+      modalAuth.onClose()
+    }
+    else {
+      modalAuth.onOpen();
+    }
+
+  }, [authContext?.isConnected])
+
+  const TemplateAuth = () => {
+    return (
+      <>
+        <ModalWindow event={modalAuth}>
+          <AuthCard/>
+        </ModalWindow>
+      </>
+    )
+  }
 
   return (
-    <div>
-      {isConnected && authContext.xmtpClientAddress ? (
-        <StyledWindow>
+    <>
+      {authContext.isConnected && authContext.xmtpClientAddress &&  <StyledWindow>
           <div className="left">
             <Nav />
           </div>
@@ -148,12 +158,9 @@ function IndexDM() {
             </StyledChat>
           </div>
         </StyledWindow>
-      ) : (
-        <>
-          <AuthCard />
-        </>
-      )}
-    </div>
+      }
+      <TemplateAuth />
+    </>
   );
 }
 

@@ -65,10 +65,10 @@ const Nav = (props: any) => {
                     path="IconBrandChat.png"
                     style={{
                       className: `m-b-1 ${
-                        active === "user" ? "state_active state_hover scale" : ""
+                        active === "dm" ? "state_active state_hover scale" : ""
                       } `,
                     }}
-                    onClick={() => setActive("user")}
+                    onClick={() => setActive("dm")}
                   />
                 </Link>
                 <Link href="/user">
