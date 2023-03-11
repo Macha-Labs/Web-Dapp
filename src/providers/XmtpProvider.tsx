@@ -3,9 +3,25 @@ import { DecodedMessage, SortDirection } from "@xmtp/xmtp-js";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Client } from "@xmtp/xmtp-js";
 import { AuthContext } from "./AuthProvider";
-export type XmtpContextType = {};
+export type XmtpContextType = {
+  fetchXmtpConversation: any | undefined,
+  sendXmtpMessage:  any | undefined,
+  fetchXmtpConversationList:  any | undefined,
+  allConversations:  any | undefined,
+  conversation:  any | undefined,
+  messages:  any | undefined,
+  xmtpClientAddress:  any | undefined,
+};
 
-export const XmtpContext = createContext<XmtpContextType>({});
+export const XmtpContext = createContext<XmtpContextType>({
+  fetchXmtpConversation: null,
+  sendXmtpMessage: null,
+  fetchXmtpConversationList: null,
+  allConversations: [],
+  conversation: null,
+  messages: [],
+  xmtpClientAddress: null,
+});
 
 export const XmtpProvider = ({ children }: any) => {
   const authContext = useContext(AuthContext);
