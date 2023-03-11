@@ -2,28 +2,12 @@ import AuthCard from "@/components/auth/AuthCard";
 import ChatList from "@/components/chat/ChatList";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Nav from "@/components/nav/Nav";
-import { truncateAddress } from "@/helpers";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 import { AuthContext } from "@/providers/AuthProvider";
-<<<<<<< HEAD
 import { ChatContext } from "@/providers/ChatProvider";
-=======
-import { XmtpContext } from "@/providers/XmtpProvider";
->>>>>>> f947f102ec69783f4a5c98162addecd9daba68ef
-import {
-  StyledWindow,
-  StyledChatList,
-  StyledChat,
-  Col,
-  Row,
-  StyledChatItem,
-} from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useDisclosure } from "@chakra-ui/react";
+import { StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledComponents";
+import { useDisclosure } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
-<<<<<<< HEAD
-=======
-import { ChatContext } from "../../../providers/ChatProvider";
->>>>>>> f947f102ec69783f4a5c98162addecd9daba68ef
 
 function IndexDM() {
   const authContext = useContext(AuthContext);
