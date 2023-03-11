@@ -4,13 +4,13 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Client } from "@xmtp/xmtp-js";
 import { AuthContext } from "./AuthProvider";
 export type XmtpContextType = {
-  fetchXmtpConversation: any | undefined,
-  sendXmtpMessage:  any | undefined,
-  fetchXmtpConversationList:  any | undefined,
-  allConversations:  any | undefined,
-  conversation:  any | undefined,
-  messages:  any | undefined,
-  xmtpClientAddress:  any | undefined,
+  fetchXmtpConversation: any | undefined;
+  sendXmtpMessage: any | undefined;
+  fetchXmtpConversationList: any | undefined;
+  allConversations: any | undefined;
+  conversation: any | undefined;
+  messages: any | undefined;
+  xmtpClientAddress: any | undefined;
 };
 
 export const XmtpContext = createContext<XmtpContextType>({
@@ -38,7 +38,7 @@ export const XmtpProvider = ({ children }: any) => {
    *
    **/
   useEffect(() => {
-    if (xmtpClientAddress) {
+    if (xmtpClientAddress && conversation) {
       const streamMessages = async () => {
         const newStream = await conversation.streamMessages();
         for await (const msg of newStream) {
