@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Client } from "@xmtp/xmtp-js";
 import { AuthContext } from "./AuthProvider";
 import { ChannelXMTP$ } from "@/schema/channel";
+import { XmtpMessage$ } from "@/schema/message";
 export type XmtpContextType = {
   fetchXmtpConversation: any | undefined;
   sendXmtpMessage: any | undefined;
@@ -70,18 +71,18 @@ export const XmtpProvider = ({ children }: any) => {
     const messages = await conversation.messages({
       direction: SortDirection.SORT_DIRECTION_DESCENDING,
     });
-    const messagesData = messages.map(item => {
-      return {};
-    })
-    console.log('conversation', conversation);
-    console.log('messages', messagesData);
+    const messagesData = messages.map((item: any) => {
+      return XmtpMessage$(item);
+    });
+    console.log("conversation", conversation);
+    console.log("messages", messagesData);
     setMessages(messagesData);
     setConversation(ChannelXMTP$(conversation));
   };
   const fetchXmtpConversationList = async () => {
-    const conversationList = await xmtpClient.conversations.list()
+    const conversationList = await xmtpClient.conversations.list();
     const data = conversationList.map((item: any) => {
-      return ChannelXMTP$(item)
+      return ChannelXMTP$(item);
     });
     setAllConversations(data);
   };
