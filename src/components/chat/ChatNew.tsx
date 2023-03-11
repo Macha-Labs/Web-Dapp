@@ -169,7 +169,7 @@ const ChatNew = (props: any) => {
             <Col>
               <Heading as="h6" fontSize="md" className="m-b-0-5">Public</Heading>
               <Row>
-                <Text>Allow channel to be joined and discoverable by anyone on Portal irrespective of your network</Text>
+                <Text>Allow channel to be joined and discoverable by anyone on platform irrespective of your network</Text>
                 <Switch></Switch>
               </Row>
             </Col>

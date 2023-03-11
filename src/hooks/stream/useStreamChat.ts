@@ -243,10 +243,11 @@ const useStreamChat = (client :any, channel: any) => {
       });
   };
 
-  const keyDownMessage = async (event: any) => {
+  const keyDownMessage = async (event: any, onSend?: any) => {
   
     const keycode = event.which || event.keycode;
-
+   console.log("Keycode", keycode, onSend);
+   
     //Logic for typing indicators begins
     // let typingTimeout;
     // if (typingTimeout !== undefined) clearTimeout(typingTimeout);
@@ -267,14 +268,14 @@ const useStreamChat = (client :any, channel: any) => {
 
     //Logic for typing indicators ends
 
-    if (keycode == 13 && !event.shiftKey) {
+    if (keycode == 13 && !event.shiftKey || onSend) {
       event.preventDefault();
 
       if (textareaRef.current?.value.substring(0, 1) == "/") {
         setSlashCmdValue(textareaRef.current?.value);
         setSlashCmd(false);
         // widgetDrawer.onOpen();
-      } else if (textareaRef.current?.value.length > 0) {
+      } else if (textareaRef.current?.value.length > 0||attachItem) {
         await addMessage();
       }
     } else if (event.key == "/") {

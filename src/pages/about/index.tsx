@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import {Landing} from "../../components/icons/IconImage";
+import { Landing } from "../../components/icons/IconImage";
 
 function about() {
   return (
@@ -60,8 +60,10 @@ function about() {
           </div>
         </nav>
         <div className="row justify-content-center sectionSpacing paddingBox">
-          <div className="col mt-5">
-            <h1 className="subHeading mt-5">Building Web3 At</h1>
+          <div className="col mt-5 mt-md-0">
+            <h1 className="subHeading mt-5">
+              Building Web3 Workspace Suite At
+            </h1>
           </div>
         </div>
 
@@ -72,7 +74,7 @@ function about() {
             </strong>
           </h1>
         </div>
-        <div className="pt-md-3 d-flex justify-content-center">
+        <div className="d-flex justify-content-center paddingBox">
           {/* <Image
             // className="asdf"
             height={123}
@@ -80,7 +82,7 @@ function about() {
             src="/assets/docs.png"
             alt="metawork_chat"
           /> */}
-          <Landing path="aboutUs.png" className="px-3 px-md-0 mb-2 mb-md-0" />
+          <Landing path="aboutUsPage.png" className="mb-2 mb-md-0 pt-md-3 " />
           {/* <img
             className="backedByImg"
             src="/assets/docs.png"
@@ -91,16 +93,16 @@ function about() {
           <p className="aboutPara">
             <strong>MetaWork Labs</strong> began with the simple idea of
             empowering people and society, and thus we have come together to
-            co-create products and infras with Web3 technology. As Link part of
-            our journey, we have built Link web3 native workspace suit and made
-            its first product live. Stay tuned, for other interesting projects
-            to be released this year.
+            co-create products and infras with Web3 technology. As a part of our
+            journey, we have built a web3 native workspace suit and made its
+            first product live. Stay tuned, for other interesting projects to be
+            released this year.
           </p>
         </div>
         <div className="mt-5 d-flex  flex-column align-items-center align-items-md-start paddingBox">
           <div className="d-flex flex-column align-items-center align-items-md-start mb-3">
-            <h1 className="h4 ">Backed By</h1>
-            <h3 className="h4 ">Leading Accelerator & Protocol</h3>
+            <h1 className="h4 weightBold">Backed By</h1>
+            <h3 className="h4 weightBold">Leading Accelerator & Protocol</h3>
           </div>
 
           <div className="d-flex flex-column flex-md-row">
@@ -129,7 +131,7 @@ function about() {
           </h3>
           <div>
             <div className="d-flex flex-wrap justify-content-center justify-content-md-start">
-              <div className="d-flex align-items-center teamMembers me-md-3  mt-3 ">
+              <div className="d-flex align-items-center teamMembers me-md-3  mt-3 mt-md-1 ">
                 <img src="./assets/avatar_saksham.png" alt="avatar" />
                 <div className="d-flex flex-column ms-3 align-items-start">
                   <h4 className="teamMembersHeading mb-1">Saksham Jain </h4>
@@ -306,7 +308,7 @@ function about() {
             </strong>
           </h1>
           <h2 className="platformsubheading">
-            Be Link part of our team and lets build together
+            Be a part of our team and lets build together
           </h2>
           <img
             src="./assets/ecosystem bottom img.png"
@@ -338,47 +340,65 @@ function about() {
             />
             <h3 className="highlight ecosystemCardHeading">Open Positions</h3>
             <p className="ecosystemCardPara my-3 alignLeftText">
-              Be Link part of Web3 Ecosystem Let’s come together and create an
-              Enterprise Grade Decentralized Workspace suit.
+              Be a part of Web3 Ecosystem. Let’s come together and create an
+              Enterprise Grade Decentralized Workspace suite.
             </p>
           </div>
         </div>
         <div className="d-flex justify-content-between  flex-column flex-md-row paddingBox">
-          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-            <div className="d-flex align-items-center ">
-              <img
-                src="./assets/base-twitter.svg"
-                className="footerlogoos"
-                alt="twitterlogo"
-              />
-              <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
-            </div>
-            <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+            <Link
+              target="_blank"
+              href="https://twitter.com/metaworklabs"
+              className=" d-flex flex-grow-1 justify-content-between"
+            >
+              <div className="d-flex align-items-center ">
+                <img
+                  src="./assets/base-twitter.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
+                <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
+              </div>
+              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+            </Link>
           </div>
-          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-            <div className="d-flex align-items-center ">
-              <img
-                src="./assets/base-medium.svg"
-                className="footerlogoos"
-                alt="twitterlogo"
-              />
-              <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
-            </div>
-            <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+            <Link
+              target="_blank"
+              href="https://medium.com/@metaworklabs"
+              className=" d-flex flex-grow-1 justify-content-between"
+            >
+              <div className="d-flex align-items-center ">
+                <img
+                  src="./assets/base-medium.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
+                <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
+              </div>
+              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+            </Link>
           </div>
-          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-            <div className="d-flex align-items-center ">
-              <img
-                src="./assets/base-github.svg"
-                className="footerlogoos"
-                alt="twitterlogo"
-              />
-              <h2 className="bottomLinks mt-1 ps-4">Github</h2>
-            </div>
-            <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+            <Link
+              target="_blank"
+              href="https://github.com/metaworklabs"
+              className=" d-flex flex-grow-1 justify-content-between"
+            >
+              <div className="d-flex align-items-center ">
+                <img
+                  src="./assets/base-github.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
+                <h2 className="bottomLinks mt-1 ps-4">Github</h2>
+              </div>
+              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+            </Link>
           </div>
         </div>
-        <footer className="d-flex justify-content-between align-items-center sectionSpacing paddingBox">
+        <footer className="d-flex justify-content-between align-items-center sectionSpacing paddingBox mb-md-5">
           <img
             src="./assets/metawork-image-text logo.svg"
             alt="MetaworkImg"
@@ -388,6 +408,9 @@ function about() {
         </footer>
       </div>
       <style jsx>{`
+        .weightBold {
+          font-weight: 600;
+        }
         .container-fluid {
           padding-right: 0px;
           padding-left: 0px;
@@ -607,7 +630,7 @@ function about() {
           font-size: 20px;
         }
         .ecosystemCard {
-          width: 45%;
+          width: 48%;
         }
         .borderBox {
           border: 1px solid #246bfd;
@@ -904,8 +927,8 @@ function about() {
           align-items: center;
           justify-content: center;
         }
-        .bottomSocialLinks {
-          cursor: pointer;
+
+        .bottomSocialLinksWidth {
           width: 30%;
         }
         .footerText {
@@ -1033,8 +1056,7 @@ function about() {
             font-size: 14px;
             text-align: center;
           }
-          .bottomSocialLinks {
-            cursor: pointer;
+          .bottomSocialLinksWidth {
             width: 100%;
           }
           .footerLogoMetaworks {
