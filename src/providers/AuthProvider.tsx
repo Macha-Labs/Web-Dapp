@@ -32,7 +32,7 @@ export type AuthContextType = {
   xmtpClientAddress: any;
   setPeerAddress: Dispatch<SetStateAction<string>>;
   messages: DecodedMessage[];
-  fetchXmtpConversation: () => void;
+  fetchXmtpConversation: (peerAddress: any) => void;
   sendXmtpMessage: () => void;
 };
 
@@ -52,7 +52,7 @@ export const AuthContext = createContext<AuthContextType>({
   xmtpClientAddress: undefined,
   setPeerAddress: () => {},
   messages: [],
-  fetchXmtpConversation: () => {},
+  fetchXmtpConversation: (peerAddress: any) => {},
   sendXmtpMessage: () => {},
 });
 
