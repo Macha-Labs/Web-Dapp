@@ -63,9 +63,9 @@ export const XmtpProvider = ({ children }: any) => {
     }
   }, [xmtpClientAddress]);
 
-  const fetchXmtpConversation = async (peerAddress: any) => {
+  const fetchXmtpConversation = async (channel: any) => {
     const conversation = await xmtpClient.conversations.newConversation(
-      peerAddress
+      channel?.id
     );
     const messages = await conversation.messages({
       direction: SortDirection.SORT_DIRECTION_DESCENDING,

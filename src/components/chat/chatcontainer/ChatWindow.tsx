@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
 import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
 import { XmtpContext } from "@/providers/XmtpProvider";
+import { useRouter } from "next/router";
 
 const ChatWindow = (props: any) => {
   const hookStreamChannelMessages = useStreamChannelMessages(
@@ -13,25 +14,37 @@ const ChatWindow = (props: any) => {
     hookStreamChannelMessages.messages
   );
   const itemsRef = useRef<any>([]);
+  const router = useRouter();
+  console.log('router query', router)
 
   useEffect(() => {
     // Scroll to the bottom of the list when new items are added
     // messageListRef.current?.scrollToItem(props.hookMessages?.messages.length - 1);
-    const lastMsg = messages[messages.length - 1];
-    if (
-      String(props.authContext.address).toLowerCase() ==
-      String(lastMsg?.user.id).toLowerCase()
-    ) {
-      messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
+    if (messages) {
+      const lastMsg = messages[messages?.length - 1];
+      if (
+        String(props.authContext.address).toLowerCase() ==
+        String(lastMsg?.user?.id).toLowerCase()
+      ) {
+        messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
+      }
     }
   }, [messages]);
 
 
   useEffect(() => {
-    setMessages(hookStreamChannelMessages.messages);
+    if (router.pathname == '/chat') {
+      setMessages(hookStreamChannelMessages.messages || []);
+    }
   }, [hookStreamChannelMessages.messages])
 
-  const messageAreaHeight = props.hookMessages?.messages.map(
+  useEffect(() => {
+    if (router.pathname == '/chat/dm') {
+      setMessages(xmtpContext.messages || []);
+    }
+  }, [xmtpContext.messages])
+
+  const messageAreaHeight = props.hookMessages?.messages?.map(
     (message: any, index: any) => {
       console.log(
         itemsRef?.current[index],
@@ -60,7 +73,7 @@ const ChatWindow = (props: any) => {
   return (
     <>
       <div ref={messageListRef} className="body">
-        {messages.map((message: any, index: any) => {
+        {messages?.map((message: any, index: any) => {
           return (
             <div
               ref={el => (itemsRef.current[index] = el)}
