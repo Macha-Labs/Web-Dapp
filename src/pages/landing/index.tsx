@@ -242,7 +242,9 @@ const LandingPage = () => {
             </div>
           </div>
           <div className="pt-3 chatBanner borderBox">
-            <Landing path="docsCard.png" />
+            <Landing
+              path="workspaceSuitWeb.png"
+            />
           </div>
 
           <div className="sectionSpacing">
