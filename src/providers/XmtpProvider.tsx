@@ -90,6 +90,8 @@ export const XmtpProvider = ({ children }: any) => {
         messages,
         xmtpClientAddress,
       }}
-    ></XmtpContext.Provider>
+    >
+      {children}
+    </XmtpContext.Provider>
   );
 };
