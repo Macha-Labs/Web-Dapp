@@ -11,6 +11,7 @@ function useXmtp() {
     const xmtp = await Client.create(signer, { env: "production" });
     setXmtpClient(xmtp);
     setXmtpClientAddress(xmtp.address);
+    console.log("connected to XMTP");
   };
 
   return {

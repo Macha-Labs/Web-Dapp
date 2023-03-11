@@ -5,13 +5,13 @@ import { Client } from "@xmtp/xmtp-js";
 import { AuthContext } from "./AuthProvider";
 import { ChannelXMTP$ } from "@/schema/channel";
 export type XmtpContextType = {
-  fetchXmtpConversation: any | undefined,
-  sendXmtpMessage:  any | undefined,
-  fetchXmtpConversationList:  any | undefined,
-  allConversations:  any | undefined,
-  conversation:  any | undefined,
-  messages:  any | undefined,
-  xmtpClientAddress:  any | undefined,
+  fetchXmtpConversation: any | undefined;
+  sendXmtpMessage: any | undefined;
+  fetchXmtpConversationList: any | undefined;
+  allConversations: any | undefined;
+  conversation: any | undefined;
+  messages: any | undefined;
+  xmtpClientAddress: any | undefined;
 };
 
 export const XmtpContext = createContext<XmtpContextType>({
@@ -56,6 +56,8 @@ export const XmtpProvider = ({ children }: any) => {
   }, [conversation, xmtpClientAddress, peerAddress]);
 
   useEffect(() => {
+    console.log("fetching");
+    console.log(xmtpClientAddress, "client address");
     if (xmtpClientAddress) {
       fetchXmtpConversationList();
     }

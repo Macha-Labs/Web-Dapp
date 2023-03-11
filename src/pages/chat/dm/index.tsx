@@ -5,7 +5,11 @@ import Nav from "@/components/nav/Nav";
 import { truncateAddress } from "@/helpers";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 import { AuthContext } from "@/providers/AuthProvider";
+<<<<<<< HEAD
 import { ChatContext } from "@/providers/ChatProvider";
+=======
+import { XmtpContext } from "@/providers/XmtpProvider";
+>>>>>>> f947f102ec69783f4a5c98162addecd9daba68ef
 import {
   StyledWindow,
   StyledChatList,
@@ -14,13 +18,12 @@ import {
   Row,
   StyledChatItem,
 } from "@/styles/StyledComponents";
-import {
-  Avatar,
-  Button,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Avatar, Button, Text, useDisclosure } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
+<<<<<<< HEAD
+=======
+import { ChatContext } from "../../../providers/ChatProvider";
+>>>>>>> f947f102ec69783f4a5c98162addecd9daba68ef
 
 function IndexDM() {
   const authContext = useContext(AuthContext);
@@ -28,33 +31,30 @@ function IndexDM() {
   const hookLens = useLensProfile();
   const modalAuth = useDisclosure();
 
-  useEffect(() => {
-    hookLens.getOwnedProfiles(authContext.address).then(res => console.log(res, "res"));
-  }, [authContext.address]);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     if (authContext?.isConnected) {
-      modalAuth.onClose()
-    }
-    else {
+      modalAuth.onClose();
+    } else {
       modalAuth.onOpen();
     }
-
-  }, [authContext?.isConnected])
+  }, [authContext?.isConnected]);
 
   const TemplateAuth = () => {
     return (
       <>
         <ModalWindow event={modalAuth}>
-          <AuthCard/>
+          <AuthCard />
         </ModalWindow>
       </>
-    )
-  }
+    );
+  };
 
   return (
     <>
-      {authContext.isConnected && <StyledWindow>
+      {authContext.isConnected && (
+        <StyledWindow>
           <div className="left">
             <Nav />
           </div>
@@ -83,7 +83,7 @@ function IndexDM() {
             </StyledChat>
           </div>
         </StyledWindow>
-      }
+      )}
       <TemplateAuth />
     </>
   );
