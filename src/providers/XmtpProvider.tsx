@@ -72,11 +72,12 @@ export const XmtpProvider = ({ children }: any) => {
     });
     setMessages(messages);
     setConversation(conversation);
+    console.log("messages", messages);
   };
   const fetchXmtpConversationList = async () => {
-    const conversationList = await xmtpClient.conversations.list()
+    const conversationList = await xmtpClient.conversations.list();
     const data = conversationList.map((item: any) => {
-      return ChannelXMTP$(item)
+      return ChannelXMTP$(item);
     });
     setAllConversations(data);
   };
