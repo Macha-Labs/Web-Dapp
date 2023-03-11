@@ -1,11 +1,16 @@
 import AuthCard from "@/components/auth/AuthCard";
+import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import ChatList from "@/components/chat/ChatList";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Nav from "@/components/nav/Nav";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
-import { StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledComponents";
+import {
+  StyledChat,
+  StyledChatList,
+  StyledWindow,
+} from "@/styles/StyledComponents";
 import { useDisclosure } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -47,23 +52,9 @@ function IndexDM() {
             <StyledChatList>
               <ChatList />
             </StyledChatList>
-            <div onClick={() => authContext.sendXmtpMessage()}>Send GM</div>
+
             <StyledChat>
-              {/* {authContext.messages.map(item => {
-                return (
-                  <>
-                    <ChatMessage
-                      message={{
-                        html: item.content,
-                        user: { id: item.senderAddress },
-                        created_at: item.sent,
-                      }}
-                      authContext={authContext}
-                    />
-                  </>
-                );
-              })} */}
-              {/* <ChatInput hookChat={{}} /> */}
+              <ChatContainer />
             </StyledChat>
           </div>
         </StyledWindow>

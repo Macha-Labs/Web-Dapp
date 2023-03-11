@@ -13,20 +13,15 @@ const ChatContainer = (channel: any) => {
 
   return (
     <>
-      {chatContext?.hookChannel?.channel ? (
+      {chatContext?.channel ? (
         <>
           <ChatHeader
             hookChat={chatContext.hookChat}
             hookChannel={chatContext.hookChannel}
             hookMembers={chatContext.hookMembers}
           />
-          <ChatWindow
-            chatContext={chatContext}
-            authContext={authContext}
-          />
-          <ChatInput
-            hookChat={chatContext.hookChat}
-          />
+          <ChatWindow chatContext={chatContext} authContext={authContext} />
+          <ChatInput hookChat={chatContext.hookChat} />
         </>
       ) : (
         <ChatNonDisplay></ChatNonDisplay>
