@@ -712,7 +712,7 @@ const LandingPage = () => {
                 Schedule Link meeting with our team and ask anything about
                 creating your own Communities and HQs on MetaWork.
               </p>
-              <Link href="https://cal.com/metaworklabs">
+              <Link target="_blank" href="https://cal.com/metaworklabs">
                 <button className="btn btn-dark-blue mt-4 px-4  d-flex">
                   Schedule Meeting
                 </button>
@@ -725,8 +725,12 @@ const LandingPage = () => {
           </div>
 
           <div className="d-flex justify-content-between  flex-column flex-md-row">
-            <Link href="https://twitter.com/metaworklabs">
-              <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+              <Link
+                target="_blank"
+                href="https://twitter.com/metaworklabs"
+                className=" d-flex flex-grow-1 justify-content-between"
+              >
                 <div className="d-flex align-items-center ">
                   <img
                     src="./assets/base-twitter.svg"
@@ -736,10 +740,14 @@ const LandingPage = () => {
                   <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
                 </div>
                 <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
-              </div>
-            </Link>
-            <Link href="https://medium.com/@metaworklabs">
-              <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+              </Link>
+            </div>
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+              <Link
+                target="_blank"
+                href="https://medium.com/@metaworklabs"
+                className=" d-flex flex-grow-1 justify-content-between"
+              >
                 <div className="d-flex align-items-center ">
                   <img
                     src="./assets/base-medium.svg"
@@ -749,10 +757,14 @@ const LandingPage = () => {
                   <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
                 </div>
                 <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
-              </div>
-            </Link>
-            <Link href="https://github.com/metaworklabs">
-              <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
+              </Link>
+            </div>
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+              <Link
+                target="_blank"
+                href="https://github.com/metaworklabs"
+                className=" d-flex flex-grow-1 justify-content-between"
+              >
                 <div className="d-flex align-items-center ">
                   <img
                     src="./assets/base-github.svg"
@@ -762,8 +774,8 @@ const LandingPage = () => {
                   <h2 className="bottomLinks mt-1 ps-4">Github</h2>
                 </div>
                 <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
-              </div>
-            </Link>
+              </Link>
+            </div>
           </div>
           <footer className="d-flex justify-content-between align-items-center sectionSpacing">
             <img
@@ -1297,6 +1309,8 @@ const LandingPage = () => {
         }
         .bottomSocialLinks {
           cursor: pointer;
+        }
+        .bottomSocialLinksWidth {
           width: 30%;
         }
         .footerText {
@@ -1431,6 +1445,8 @@ const LandingPage = () => {
           }
           .bottomSocialLinks {
             cursor: pointer;
+          }
+          .bottomSocialLinksWidth {
             width: 100%;
           }
           .footerLogoMetaworks {
