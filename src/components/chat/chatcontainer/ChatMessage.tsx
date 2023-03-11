@@ -238,7 +238,7 @@ const ChatMessage = (props: any) => {
   return (
     <>
       <StyledConversation key={`b-${props?.message?.id}`}>
-        <Row className="w-100">
+        <Row className="">
           <Col>
             <Row>
               {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
@@ -267,8 +267,8 @@ const ChatMessage = (props: any) => {
             className={
               props.authContext?.address.toLowerCase() ==
               props?.message?.user?.id.toLowerCase()
-                ? "active message w-100"
-                : "message w-100"
+                ? "active message"
+                : "message"
             }
             style={{ color: "#ffffff" }}
           >

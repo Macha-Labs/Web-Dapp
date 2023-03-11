@@ -11,14 +11,10 @@ import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
 import IconImage from "../icons/IconImage";
 import { AuthContext } from "@/providers/AuthProvider";
+import { useRouter } from "next/router";
 
 const Nav = (props: any) => {
-  const orgsDrawer = useDisclosure();
-  const userDrawer = useDisclosure();
-  const authContext = React.useContext(AuthContext);
-  const [active, setActive] = React.useState(
-    window.location.href.split("/")[3]
-  );
+  const router = useRouter();
 
   const templateOrgs = () => {
     return <ModalPage></ModalPage>;
@@ -48,10 +44,9 @@ const Nav = (props: any) => {
                       path="IconDarkHash.png"
                       style={{
                         className: `m-b-1 ${
-                          active === "chat" ? "state_active state_hover scale" : ""
+                          router.pathname === "/chat" ? "state_active state_hover scale" : ""
                         } `,
                       }}
-                      onClick={() => setActive("chat")}
                     />
                   </Tooltip>
                 </Link>
@@ -63,10 +58,9 @@ const Nav = (props: any) => {
                     path="IconBrandChat.png"
                     style={{
                       className: `m-b-1 ${
-                        active === "dm" ? "state_active state_hover scale" : ""
+                        router.pathname === "/chat/dm" ? "state_active state_hover scale" : ""
                       } `,
                     }}
-                    onClick={() => setActive("dm")}
                   />
                 </Link>
                 <Link href="/user">
@@ -74,10 +68,9 @@ const Nav = (props: any) => {
                     path="IconBrandProfile.png"
                     style={{
                       className: `m-b-1 ${
-                        active === "user" ? "state_active state_hover scale" : ""
+                        router.pathname === "/user" ? "state_active state_hover scale" : ""
                       } `,
                     }}
-                    onClick={() => setActive("user")}
                   />
                 </Link>
                 <IconImage
