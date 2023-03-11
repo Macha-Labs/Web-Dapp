@@ -9,7 +9,6 @@ import {
   useDisclosure,
   Text,
 } from "@chakra-ui/react";
-import ChatMessageList from "./ChatMessageList";
 import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
 import { useContext } from "react";
@@ -103,7 +102,7 @@ const ChatHeader = (props: any) => {
               <Heading as="h4" size="sm">
                 {props?.hookChannel?.channel?.name}
               </Heading>
-              {props?.hookChannel?.channel?.raw.muteStatus().muted && (
+              {props?.hookChannel?.channel?.raw?.muteStatus()?.muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}

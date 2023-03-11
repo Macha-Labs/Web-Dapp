@@ -4,7 +4,7 @@ import { Heading, Text } from "@chakra-ui/react";
 
 const LayoutOptions = (props: any) => {
   return (
-    <StyledOptionsCard className={props.style?.className + " border"}>
+    <StyledOptionsCard className={props.style?.className}>
       {props.options.length ? (
         <>
           {props.options?.map((item: any, index: any) => {
@@ -12,21 +12,12 @@ const LayoutOptions = (props: any) => {
               (item.name === "Delete Channel" ||
                 item.name === "Permissions" ||
                 item.name === "Members" ||
-                item.name === "Edit Channel") &&
+                item.name === "Edit Channel" ||
+                item.name === "Manage Members" ) &&
               props.channelAdmin !== props.userId
             ) {
               return null;
             }
-            if (
-              (item.name === "Delete Channel" ||
-                item.name === "Permissions" ||
-                item.name === "Members" ||
-                item.name === "Edit Channel") &&
-              props.channelAdmin !== props.userId
-            ) {
-              return null;
-            }
-            // console.log("channelrawdata", props.channelRawData);
             if (
               item.name === "Mute Chat" &&
               props.channelRawData?.muteStatus().muted
@@ -38,6 +29,9 @@ const LayoutOptions = (props: any) => {
               !props.channelRawData?.muteStatus().muted
             ) {
               return null;
+            }
+            if(item.name === "Leave Channel" && props.channelAdmin == props.userId){
+              return null
             }
             return (
               <Row

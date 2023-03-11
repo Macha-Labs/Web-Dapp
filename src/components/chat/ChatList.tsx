@@ -3,7 +3,6 @@ import { Avatar, Button, Checkbox, Text, useDisclosure, useToast } from "@chakra
 import { useContext, useEffect } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
-import useOrgChannels from "@/hooks/portal/useOrgChannels";
 import ModalSlider from "../modal/ModalSlider";
 import ChatNew from "./ChatNew";
 import IconImage from "../icons/IconImage";
@@ -17,7 +16,6 @@ import usePortalChannel from "@/hooks/portal/usePortalChannel";
 const ChatList = (props: any) => {
   const chatProvider = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
-  const hookOrgChannels = useOrgChannels("6246c7045cc31c36781d668e");
   const modalChatNew = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
@@ -44,14 +42,34 @@ const ChatList = (props: any) => {
         chatProvider?.streamContext?.reloadChannelList();
         chatProvider?.streamContext?.reloadChannel();
       },
+      leave: () => {
+        toast({
+          title: "Channel Left",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+        chatProvider?.streamContext?.reloadChannelList();
+        chatProvider?.streamContext?.reloadChannel();
+      },
+      delete: () => {
+        toast({
+          title: "Channel Deleted",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+        chatProvider?.streamContext?.reloadChannelList();
+        chatProvider?.streamContext?.reloadChannel();
+      }
     }
   );
 
   useEffect(() => {
-    chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient);
+    // chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient);
     console.log("Channels", chatProvider?.hookChannels?.channels);
     
-  }, []);
+  }, [chatProvider?.hookChannels?.channels]);
 
   const TemplateChatNew = () => {
     return (
@@ -62,6 +80,7 @@ const ChatList = (props: any) => {
   };
 
   const TemplateActions = (props: any) => {
+    
     return (
       <Pop
         trigger={<IconImage path="IconDarkMenu.png" />}
@@ -70,20 +89,20 @@ const ChatList = (props: any) => {
         <Col className="text-start">
           <Button
             variant="transparent"
-            size="md"
+            size="sm"
             className="text-start"
-            rightIcon={<IconImage path="IconDarkPinned.png" />}
+            rightIcon={<IconImage path="IconDarkPinned.png" size="18" />}
           >
             <Row className="hr-between w-100" onClick={() => {}}>
               Pin Channel
             </Row>
           </Button>
-          {!props.item.raw?.muteStatus()?.muted ? (
+          {(props?.item?.raw && !props.item.raw?.muteStatus()?.muted )? (
             <Button
               variant="transparent"
-              size="md"
+              size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkMute.png" />}
+              rightIcon={<IconImage path="IconDarkMute.png" size="18" />}
             >
               <Row
                 className="hr-between w-100"
@@ -97,9 +116,9 @@ const ChatList = (props: any) => {
           ) : (
             <Button
               variant="transparent"
-              size="md"
+              size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkUnMute.png" />}
+              rightIcon={<IconImage path="IconDarkUnMute.png" size="18" />}
             >
               <Row
                 className="hr-between w-100"
@@ -113,14 +132,34 @@ const ChatList = (props: any) => {
           )}
           <Button
             variant="transparent"
-            size="md"
+            size="sm"
             className="text-start"
-            rightIcon={<IconImage path="IconRedDelete.png" />}
+            rightIcon={<IconImage path="IconRedDelete.png" size="18" />}
           >
-            <Row className="hr-between w-100" onClick={() => {}}>
+            <Row className="hr-between w-100" 
+              onClick={() => {
+                // hookPortalChannel.deleteChannel(props.item);
+              }}
+            >
               Clear Chat
             </Row>
           </Button>
+          { !props?.item?.isAdmin && <Button
+            variant="transparent"
+            size="sm"
+            className="text-start"
+            rightIcon={<IconImage path="IconDarkLeave.png" size="18"/>}
+          >
+            <Row
+              className="hr-between w-100"
+              onClick={() => {
+                hookPortalChannel.leaveChannel(props.item);
+              }}
+            >
+              Leave Channel
+            </Row>
+          </Button>
+  }
         </Col>
       </Pop>
     );
@@ -192,7 +231,7 @@ const ChatList = (props: any) => {
                               {item?.raw && (
                                 <>
                                   {" "}
-                                  {item.raw?.muteStatus()?.muted && (
+                                  {(props?.item?.raw && item.raw?.muteStatus()?.muted) && (
                                     <IconImage
                                       path="IconDarkMute.png"
                                       style={{ className: "m-l-0-5" }}

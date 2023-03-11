@@ -26,7 +26,6 @@ const UserFollowersCard = (props: any) => {
   return (
     <StyledCard
       onClick={() => handleSelectedUser(props.user)}
-      className="border"
     >
       <Row className="vr-center item m-b-0-5">
         <Avatar src={props.user?.lens?.image} className="m-r-0-5" size="sm">
