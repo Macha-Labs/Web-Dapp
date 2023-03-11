@@ -1,4 +1,5 @@
 import AuthCard from "@/components/auth/AuthCard";
+import ChatList from "@/components/chat/ChatList";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Nav from "@/components/nav/Nav";
 import { truncateAddress } from "@/helpers";
@@ -60,84 +61,7 @@ function IndexDM() {
 
           <div className="right">
             <StyledChatList>
-              <Col className="body verticlescroll hidescroll">
-                {chatContext?.channels?.length ? (
-                  <ul>
-                    {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                    {chatContext?.channels?.map(
-                      (item: any, index: number) => {
-                        return (
-                          <StyledChatItem key={index}>
-                            <Button
-                              className="menu-item w-100 m-b-0-5"
-                              size="xl"
-                              variant={"state_brand"}
-                              // overflow="hidden"
-                            >
-                              <Row
-                                className="vr-center w-11-12"
-                                onClick={() => {
-                                  chatContext.initiate();
-                                }}
-                              >
-                                {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                                <Avatar
-                                  size="md"
-                                  className="m-r-0-5"
-                                  name={item?.peerAddress}
-                                />
-                                <Col className="w-100 d-flex flex-col vr-center">
-                                  <Row>
-                                    <Text>
-                                      {truncateAddress(item?.peerAddress)}
-                                    </Text>
-                                  </Row>
-                                  {item?.createdAt && (
-                                    <Col>
-                                      <Text fontSize={"xs"}>
-                                        {new Date(
-                                          item?.createdAt
-                                        ).toLocaleString()}
-                                      </Text>
-                                    </Col>
-                                  )}
-
-                                  {item?.lastMessage && (
-                                    <Col
-                                      style={{ paddingRight: "5px" }}
-                                      className="m-t-0-5"
-                                    >
-                                      <Text fontSize={"xs"}>
-                                        {item?.lastMessage?.user
-                                          ?.lensUsername ||
-                                          item?.lastMessage?.user?.lensHandle ||
-                                          truncateAddress(
-                                            item?.lastMessage?.user?.id
-                                          )}
-                                        :{" "}
-                                        {item?.lastMessage?.text.length > 14
-                                          ? `${item?.lastMessage?.text.slice(
-                                              0,
-                                              14
-                                            )}...`
-                                          : item?.lastMessage?.text}
-                                      </Text>
-                                    </Col>
-                                  )}
-                                </Col>
-                              </Row>
-                            </Button>
-                          </StyledChatItem>
-                        );
-                      }
-                    )}
-                  </ul>
-                ) : (
-                  <>
-                    <Button variant="state_brand">Create a DM</Button>
-                  </>
-                )}
-              </Col>
+              <ChatList />
             </StyledChatList>
             <div onClick={() => authContext.sendXmtpMessage()}>Send GM</div>
             <StyledChat>

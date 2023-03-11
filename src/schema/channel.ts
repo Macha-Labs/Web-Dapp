@@ -41,3 +41,25 @@ export const ChannelStream$ = (data: any, raw?: any, owner?: any ) => {
         raw: raw,
     };
 };
+
+
+export const ChannelXMTP$ = (data: any) => {
+    return {
+        id: data?.peerAddress,
+        type: data?.type,
+        name: data?.peerAddress,
+        orgId: data?.orgId,
+        private: data?.private,
+        users: data?.users,
+        admins: data?.admins,
+        createdBy: data?.createdBy,
+        createdAt: data?.createdAt,
+        updatedAt: data?.updatedAt,
+        permissions: data?.permissions,
+        image: "",
+        lastMessage: "",
+        membersCount: 0,
+        notificationCount: 0,
+        unreadCountObject: {}
+    };
+};

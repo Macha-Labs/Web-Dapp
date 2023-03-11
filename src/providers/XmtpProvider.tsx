@@ -3,6 +3,7 @@ import { DecodedMessage, SortDirection } from "@xmtp/xmtp-js";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Client } from "@xmtp/xmtp-js";
 import { AuthContext } from "./AuthProvider";
+import { ChannelXMTP$ } from "@/schema/channel";
 export type XmtpContextType = {
   fetchXmtpConversation: any | undefined,
   sendXmtpMessage:  any | undefined,
@@ -39,17 +40,17 @@ export const XmtpProvider = ({ children }: any) => {
    **/
   useEffect(() => {
     if (xmtpClientAddress) {
-      const streamMessages = async () => {
-        const newStream = await conversation.streamMessages();
-        for await (const msg of newStream) {
-          setMessages(prevMessages => {
-            const messages = [...prevMessages];
-            messages.unshift(msg);
-            return messages;
-          });
-        }
-      };
-      streamMessages();
+      // const streamMessages = async () => {
+      //   const newStream = await conversation.streamMessages();
+      //   for await (const msg of newStream) {
+      //     setMessages(prevMessages => {
+      //       const messages = [...prevMessages];
+      //       messages.unshift(msg);
+      //       return messages;
+      //     });
+      //   }
+      // };
+      // streamMessages();
     }
     console.log("first");
   }, [conversation, xmtpClientAddress, peerAddress]);
@@ -71,7 +72,11 @@ export const XmtpProvider = ({ children }: any) => {
     setConversation(conversation);
   };
   const fetchXmtpConversationList = async () => {
-    const conversationList = await xmtpClient.conversations.list();
+    const conversationList = await xmtpClient.conversations.list()
+    conversationList.map((item: any) => {
+      console.log('item', ChannelXMTP$(item))
+      return ChannelXMTP$(item)
+    });
     setAllConversations(conversationList);
   };
 

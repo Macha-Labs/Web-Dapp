@@ -176,7 +176,7 @@ const ChatList = (props: any) => {
             styled={{ className: "m-l-1" }}
           />
         </Row>
-        {!chatProvider?.hookChannels?.channels ? (
+        {!chatProvider?.channels ? (
           <Col className="body">
             Create your first channel
             <Button size="sm" onClick={props.channelNew}>
@@ -199,7 +199,7 @@ const ChatList = (props: any) => {
                         className="menu-item w-100 m-b-0-5"
                         size="xl"
                         variant={
-                          chatProvider.hookChannel?.channel?.id == item?.id
+                          chatProvider.channel?.id == item?.id
                             ? "state_brand"
                             : "state_card_hover"
                         }
@@ -224,14 +224,14 @@ const ChatList = (props: any) => {
                           <Col className="w-100 d-flex flex-col vr-center">
                             <Row>
                               <Text>
-                                {item?.name.length > 12
-                                  ? `${item?.name.slice(0, 12)}...`
+                                {item?.name?.length > 12
+                                  ? `${item?.name?.slice(0, 12)}...`
                                   : item?.name}
                               </Text>
                               {item?.raw && (
                                 <>
                                   {" "}
-                                  {(props?.item?.raw && item.raw?.muteStatus()?.muted) && (
+                                  {(props?.item?.raw && item?.raw?.muteStatus()?.muted) && (
                                     <IconImage
                                       path="IconDarkMute.png"
                                       style={{ className: "m-l-0-5" }}
@@ -271,7 +271,7 @@ const ChatList = (props: any) => {
                               </Col>
                             )}
                           </Col>
-                          {item?.unreadCountObject[authContext?.address]
+                          {item?.unreadCountObject && item?.unreadCountObject[authContext?.address]
                             ?.unread_messages > 0 &&
                             !isClicked.includes(index) && (
                               <Col>
