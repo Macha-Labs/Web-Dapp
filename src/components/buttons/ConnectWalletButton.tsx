@@ -37,7 +37,11 @@ export const ConnectWalletButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <Button className="m-b-0-5 w-100 GIT" size="md" variant="state_brand" onClick={openConnectModal}>Connect Wallet</Button>
+                  <Button 
+                  className="m-b-0-5 w-100 GIT" 
+                  size="md" 
+                  variant="state_brand" 
+                  onClick={openConnectModal}>Connect Wallet</Button>
                 );
               }
               if (chain.unsupported) {
