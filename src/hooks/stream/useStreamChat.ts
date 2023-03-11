@@ -275,7 +275,7 @@ const useStreamChat = (client :any, channel: any) => {
         setSlashCmdValue(textareaRef.current?.value);
         setSlashCmd(false);
         // widgetDrawer.onOpen();
-      } else if (textareaRef.current?.value.length > 0) {
+      } else if (textareaRef.current?.value.length > 0||attachItem) {
         await addMessage();
       }
     } else if (event.key == "/") {
