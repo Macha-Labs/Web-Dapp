@@ -9,6 +9,7 @@ export type ChatContextType = {
   hookMembers: any | undefined;
   hookChannels: any | undefined;
   channels: any | undefined;
+  channel: any | undefined;
   streamClient: any | undefined;
   streamContext: any | undefined;
   initiate: (channel: any, userAddress: any) => void;
@@ -20,6 +21,7 @@ export const ChatContext = createContext<ChatContextType>({
   hookMembers: null,
   hookChannels: [],
   channels: [],
+  channel: null,
   streamClient: null,
   streamContext: null,
   initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
@@ -27,12 +29,32 @@ export const ChatContext = createContext<ChatContextType>({
 
 export const ChatProvider = ({ children }: any) => {
   const streamContext = useContext(StreamContext) as StreamContextType;
-  const xmtpContext = useXmtp();
+  const xmtpContext = useContext();
   
   const _fetchChannels = (val: any) => {
     switch (val) {
       case 'stream':
         return streamContext?.hookChannels.channels;
+      case 'xmtp':
+        console.log('all conversations', xmtpContext.allConversations)
+        return xmtpContext.allConversations;
+    }
+  }
+
+  const _fetchChannel = (val: any) => {
+    switch (val) {
+      case 'stream':
+        return streamContext?.hookChannel.channel;
+      case 'xmtp':
+        console.log('all conversations', xmtpContext.allConversations)
+        return xmtpContext.allConversations;
+    }
+  }
+
+  const _initiateChannel = (val: any) => {
+    switch (val) {
+      case 'stream':
+        return streamContext?.initiate;
       case 'xmtp':
         console.log('all conversations', xmtpContext.allConversations)
         return xmtpContext.allConversations;
@@ -49,6 +71,7 @@ export const ChatProvider = ({ children }: any) => {
         streamClient: streamContext?.client,
         streamContext: streamContext,
         channels: _fetchChannels('xmtp'),
+        channel: _fetchChannel('xmtp'),
         initiate: streamContext?.initiate,
       }}
     >
