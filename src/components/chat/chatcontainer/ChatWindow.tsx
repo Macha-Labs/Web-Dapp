@@ -10,12 +10,10 @@ const ChatWindow = (props: any) => {
   );
   const xmtpContext = useContext(XmtpContext);
   const messageListRef = useRef<any>();
-  const [messages, setMessages] = useState<any>(
-    hookStreamChannelMessages.messages
-  );
+  const [messages, setMessages] = useState<any>(xmtpContext.messages);
   const itemsRef = useRef<any>([]);
   const router = useRouter();
-  console.log('router query', router)
+  console.log("router query", router, messages, "messages");
 
   useEffect(() => {
     // Scroll to the bottom of the list when new items are added
@@ -26,23 +24,23 @@ const ChatWindow = (props: any) => {
         String(props.authContext.address).toLowerCase() ==
         String(lastMsg?.user?.id).toLowerCase()
       ) {
-        messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
+        messageListRef.current.scrollTop =
+          messageListRef?.current?.scrollHeight;
       }
     }
   }, [messages]);
 
-
   useEffect(() => {
-    if (router.pathname == '/chat') {
+    if (router.pathname == "/chat") {
       setMessages(hookStreamChannelMessages.messages || []);
     }
-  }, [hookStreamChannelMessages.messages])
+  }, [hookStreamChannelMessages.messages]);
 
   useEffect(() => {
-    if (router.pathname == '/chat/dm') {
+    if (router.pathname == "/chat/dm") {
       setMessages(xmtpContext.messages || []);
     }
-  }, [xmtpContext.messages])
+  }, [xmtpContext.messages]);
 
   const messageAreaHeight = props.hookMessages?.messages?.map(
     (message: any, index: any) => {

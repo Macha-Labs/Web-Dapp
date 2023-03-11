@@ -11,7 +11,7 @@ export type XmtpContextType = {
   fetchXmtpConversationList: any | undefined;
   allConversations: any | undefined;
   conversation: any | undefined;
-  messages: any | undefined;
+  messages: any[] | undefined;
   xmtpClientAddress: any | undefined;
 };
 
@@ -75,7 +75,13 @@ export const XmtpProvider = ({ children }: any) => {
       return XmtpMessage$(item);
     });
     console.log("conversation", conversation);
-    console.log("messages", messagesData);
+    console.log(
+      "messages",
+      messages,
+      typeof messages,
+      messagesData,
+      typeof messagesData
+    );
     setMessages(messagesData);
     setConversation(ChannelXMTP$(conversation));
   };
