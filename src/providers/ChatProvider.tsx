@@ -69,9 +69,9 @@ export const ChatProvider = ({ children }: any) => {
         hookChannels: streamContext?.hookChannels,
         streamClient: streamContext?.client,
         streamContext: streamContext,
-        channels: _fetchChannels('xmtp'),
-        channel: _fetchChannel('xmtp'),
-        initiate: _initiateChannel('xmtp'),
+        channels: _fetchChannels("stream"),
+        channel: _fetchChannel("stream"),
+        initiate: _initiateChannel("stream"),
       }}
     >
       {children}
