@@ -1,10 +1,10 @@
 import AuthCard from "@/components/auth/AuthCard";
-import ChatMessage from "@/components/chat/chatcontainer/ChatMessage";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Nav from "@/components/nav/Nav";
 import { truncateAddress } from "@/helpers";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 import { AuthContext } from "@/providers/AuthProvider";
+import { ChatContext } from "@/providers/ChatProvider";
 import {
   StyledWindow,
   StyledChatList,
@@ -20,7 +20,6 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
-import { ChatContext } from "stream-chat-react";
 
 function IndexDM() {
   const authContext = useContext(AuthContext);
