@@ -21,6 +21,8 @@ export type AuthContextType = {
   setUser: (param: any) => void;
   isConnected: boolean | undefined;
   isLoadingLens: boolean | undefined;
+  xmtpClient: any;
+  xmtpClientAddress: string;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -34,6 +36,8 @@ export const AuthContext = createContext<AuthContextType>({
   setUser: param => {},
   isConnected: false,
   isLoadingLens: false,
+  xmtpClient: undefined,
+  xmtpClientAddress: "",
 });
 
 const AuthProvider = ({ children }: any) => {
@@ -183,6 +187,8 @@ const AuthProvider = ({ children }: any) => {
           user?.db?.id &&
           hookXmtp.xmtpClientAddress,
         isLoadingLens: isLoadingLens,
+        xmtpClient: hookXmtp.xmtpClient,
+        xmtpClientAddress: hookXmtp.xmtpClientAddress,
       }}
     >
       {children}

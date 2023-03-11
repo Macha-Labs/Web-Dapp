@@ -1,17 +1,18 @@
 import AuthProvider from "@/providers/AuthProvider";
 import { ChatProvider } from "@/providers/ChatProvider";
 import StreamProvider from "@/providers/StreamProvider";
-import '@/styles/globals.css';
+import "@/styles/globals.css";
 import theme from "@/styles/StyledChakraTheme";
 import { ChakraProvider } from "@chakra-ui/react";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import { IKContext } from "imagekitio-react";
-import type { AppProps } from 'next/app';
+import type { AppProps } from "next/app";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { XmtpProvider } from "@/providers/XmtpProvider";
 
 const { chains, provider } = configureChains(
   [polygonMumbai],
@@ -37,16 +38,18 @@ export default function App({ Component, pageProps }: AppProps) {
           <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">
             <AuthProvider>
               <StreamProvider>
-                <ChatProvider>
-                  <ChakraProvider theme={theme}>
-                    <Component {...pageProps} />
-                  </ChakraProvider>
-                </ChatProvider>
+                <XmtpProvider>
+                  <ChatProvider>
+                    <ChakraProvider theme={theme}>
+                      <Component {...pageProps} />
+                    </ChakraProvider>
+                  </ChatProvider>
+                </XmtpProvider>
               </StreamProvider>
             </AuthProvider>
           </IKContext>
         </RainbowKitProvider>
       </WagmiConfig>
     </>
-  )
+  );
 }

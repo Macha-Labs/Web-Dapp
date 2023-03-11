@@ -1,18 +1,20 @@
 import { fetchSigner } from "@wagmi/core";
 import { DecodedMessage, SortDirection } from "@xmtp/xmtp-js";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Client } from "@xmtp/xmtp-js";
+import { AuthContext } from "./AuthProvider";
 export type XmtpContextType = {};
 
 export const XmtpContext = createContext<XmtpContextType>({});
 
 export const XmtpProvider = ({ children }: any) => {
+  const authContext = useContext(AuthContext);
+  const xmtpClient = authContext.xmtpClient;
+  const xmtpClientAddress = authContext.xmtpClientAddress;
   const [messages, setMessages] = useState<DecodedMessage[]>([]);
   const [conversation, setConversation] = useState<any>();
-  const [xmtpClientAddress, setXmtpClientAddress] = useState<any>();
   const [allConversations, setAllConversations] = useState<any>();
   const [peerAddress, setPeerAddress] = useState<string>("");
-  const [xmtpClient, setXmtpClient] = useState<any>();
 
   /**
    * @description Function to connect to XMTP to enable messaging
@@ -36,12 +38,11 @@ export const XmtpProvider = ({ children }: any) => {
     console.log("first");
   }, [conversation, xmtpClientAddress, peerAddress]);
 
-  const connectXmtp = async () => {
-    const signer = await fetchSigner();
-    const xmtp = await Client.create(signer, { env: "production" });
-    setXmtpClient(xmtp);
-    setXmtpClientAddress(xmtp.address);
-  };
+  useEffect(() => {
+    if (xmtpClientAddress) {
+      fetchXmtpConversationList();
+    }
+  }, [xmtpClientAddress]);
 
   const fetchXmtpConversation = async (peerAddress: any) => {
     const conversation = await xmtpClient.conversations.newConversation(
@@ -65,7 +66,6 @@ export const XmtpProvider = ({ children }: any) => {
   return (
     <XmtpContext.Provider
       value={{
-        connectXmtp,
         fetchXmtpConversation,
         sendXmtpMessage,
         fetchXmtpConversationList,
