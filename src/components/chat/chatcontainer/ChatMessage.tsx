@@ -122,7 +122,6 @@ const ChatMessage = (props: any) => {
   };
 
   const TemplateProfile = () => {
-    console.log(selectedUser, "selectedUser");
     return (
       <ModalSlider event={modalProfile} size="lg">
         <UserProfile user={selectedUser} />

@@ -5,7 +5,7 @@ const useStreamChannelMessages = (channel: any) => {
     const [messages, setMessages] = useState<any>();
 
     useEffect(() => {
-        logger("channel", "useEffect[channel]", "channel is ", [channel]);
+        logger("channel", "useStreamChannelMessages.useEffect[channel]", "channel is ", [channel]);
         if (channel) {
             channel?.raw?.markRead();
             setMessages(null);

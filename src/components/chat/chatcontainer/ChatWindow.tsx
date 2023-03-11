@@ -1,7 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { VariableSizeList } from "react-window";
 import ChatMessage from "./ChatMessage";
-import AutoSizer from "react-virtualized-auto-sizer";
 import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
 import { XmtpContext } from "@/providers/XmtpProvider";
 
@@ -27,6 +25,11 @@ const ChatWindow = (props: any) => {
       messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
     }
   }, [messages]);
+
+
+  useEffect(() => {
+    setMessages(hookStreamChannelMessages.messages);
+  }, [hookStreamChannelMessages.messages])
 
   const messageAreaHeight = props.hookMessages?.messages.map(
     (message: any, index: any) => {
