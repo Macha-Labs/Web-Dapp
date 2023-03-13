@@ -289,9 +289,7 @@ const ChatInput = (props: any) => {
               />
             </Col>
             <Col className="vr-center hr-center sideIcons">
-              <StyledIcon onClick={(e) =>  props.hookChat?.keyDownMessage(e, true)} className="circled">
-              <IconImage path="IconDarkFiles.png" size="30" />
-              </StyledIcon>
+              <IconImage onClick={(e: any) =>  props.hookChat?.keyDownMessage(e, true)} path="IconDarkSend.png" size="30" />
             </Col>
           </StyledChatInput>
         </Col>
