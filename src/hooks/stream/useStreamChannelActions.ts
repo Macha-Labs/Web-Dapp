@@ -1,7 +1,7 @@
 import { logger } from "@/helpers/logger";
 import { useEffect, useState } from "react";
 
-const useStreamChannelMessages = (channel: any) => {
+const useStreamChannelActions = (channel: any) => {
     const [messages, setMessages] = useState<any>();
 
     useEffect(() => {
@@ -40,4 +40,4 @@ const useStreamChannelMessages = (channel: any) => {
         messages: messages || channel?.raw?.state?.messageSets[0]?.messages,
       }
 }
-export default useStreamChannelMessages;
+export default useStreamChannelActions;
