@@ -34,10 +34,10 @@ const LandingPage = () => {
                   />
                 </Link>
               </div>
-              <ul className="navbar-nav me-auto d-flex align-items-center flex-row mt-2 mt-md-0">
-                <li className="nav-item">
+              <ul className="navbar-nav justify-content-center d-flex align-items-center flex-row mt-2 mt-md-0">
+                <li className="nav-item hiring ms-2">
                   <Link
-                    className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
+                    className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/"
                   >
                     Product
@@ -58,7 +58,11 @@ const LandingPage = () => {
             <div className="d-flex align-items-center" id="">
               <div className="row overflow-hidden flex-md-row position-relative mx-2 hideOnMobile">
                 <div className="column align-items-center">
-                  <Link className="text-muted" href="#">
+                  <Link
+                    className="text-muted"
+                    href="https://twitter.com/metaworklabs"
+                    target="_blank"
+                  >
                     <img
                       className="twitterLogo"
                       src="/assets/brand-twitter.svg"
@@ -74,16 +78,16 @@ const LandingPage = () => {
 
         <div className="container-fluid g-0 d-flex w-100 h-100 mt-5 mt-md-0 flex-column paddingBox2">
           <div className="d-flex justify-content-center align-items-center">
-            <div className="desktopHero ">
+            <div className="desktopHero mt-md-4">
               <div className="col">
                 <h1 className="heroHeading highlight alignLeftText">
                   Web3 HQ <br /> For Teams & Guilds{" "}
                 </h1>
                 <div className="heroPara mt-5">
                   <p className=" mb-4 mb-md-0">
-                    Private and Secured Decentralized - Workspace Suit inbuilt
-                    with encryption and token gating technologies for teams,
-                    enterprises, and Guilds
+                    Private and Secured Decentralized - Workspace Suite inbuilt
+                    with encryption and token gating technologies for Teams,
+                    Enterprises, and Guilds
                   </p>
                 </div>
               </div>
@@ -114,7 +118,7 @@ const LandingPage = () => {
         <div className="d-flex flex-column flex-md-row paddingBox justify-content-between align-items-center mt-md-5 w-100">
           <div className="heroPara hideOnDesktop">
             <p className=" mb-4 mb-md-0">
-              Private and Secured Decentralized - Workspace Suit inbuilt with
+              Private and Secured Decentralized - Workspace Suite inbuilt with
               encryption and token gating technologies for teams, enterprises,
               and Guilds
             </p>
@@ -195,7 +199,7 @@ const LandingPage = () => {
           <div className="mb-md-5">
             <h1 className="m-0 sectionWorkspaceHeading">
               <strong>
-                <span className="highlight">Workspace Suit</span>
+                <span className="highlight">Workspace Suite</span>
               </strong>
             </h1>
           </div>
@@ -242,7 +246,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className="pt-3 chatBanner borderBox">
-            <Landing path="docsCard.png" />
+            <Landing path="workspaceSuitWeb.png" />
           </div>
 
           <div className="sectionSpacing">
@@ -263,7 +267,7 @@ const LandingPage = () => {
           </div>
           <div className="row d-flex justify-content-center">
             <p className="movePara">
-              Become Link part of new Decentralized workspace with your Social
+              Become a part of new Decentralized workspace with your Social
               Identity, to utilize more private and encrypted chats with secured
               token gating channels and spaces accessed with specific utilities
               assigned in your wallets.
@@ -709,12 +713,18 @@ const LandingPage = () => {
             <div className="d-flex align-items-start justify-content-center flex-column">
               <h1 className="helpHeading">Want to know more?</h1>
               <p className="alignLeftText helpPara mt-4">
-                Schedule Link meeting with our team and ask anything about
-                creating your own Communities and HQs on MetaWork.
+                Schedule a meeting with our team and ask anything about creating
+                your own Communities and HQs on MetaWork.
               </p>
-              <button className="btn btn-dark-blue mt-4 px-4  d-flex">
-                Schedule Meeting
-              </button>
+              <Link
+                target="_blank"
+                href="https://cal.com/metaworklabs "
+                className=""
+              >
+                <button className="btn btn-dark-blue mt-4 px-4  d-flex">
+                  Schedule Meeting
+                </button>
+              </Link>
             </div>
 
             <div className=" me-5 hideOnMobile">
@@ -723,27 +733,39 @@ const LandingPage = () => {
           </div>
 
           <div className="d-flex justify-content-between  flex-column flex-md-row">
-            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-              <div className="d-flex align-items-center ">
-                <img
-                  src="./assets/base-twitter.svg"
-                  className="footerlogoos"
-                  alt="twitterlogo"
-                />
-                <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
-              </div>
-              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+              <Link
+                target="_blank"
+                href="https://twitter.com/metaworklabs"
+                className=" d-flex flex-grow-1 justify-content-between"
+              >
+                <div className="d-flex align-items-center ">
+                  <img
+                    src="./assets/base-twitter.svg"
+                    className="footerlogoos"
+                    alt="twitterlogo"
+                  />
+                  <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
+                </div>
+                <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+              </Link>
             </div>
-            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-              <div className="d-flex align-items-center ">
-                <img
-                  src="./assets/base-medium.svg"
-                  className="footerlogoos"
-                  alt="twitterlogo"
-                />
-                <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
-              </div>
-              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+            <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+              <Link
+                target="_blank"
+                href="https://medium.com/@metaworklabs"
+                className=" d-flex flex-grow-1 justify-content-between"
+              >
+                <div className="d-flex align-items-center ">
+                  <img
+                    src="./assets/base-medium.svg"
+                    className="footerlogoos"
+                    alt="twitterlogo"
+                  />
+                  <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
+                </div>
+                <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+              </Link>
             </div>
             <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
               <Link
@@ -752,18 +774,16 @@ const LandingPage = () => {
                 className=" d-flex flex-grow-1 justify-content-between"
               >
                 <div className="d-flex align-items-center ">
-                  <img
-                    src="./assets/base-github.svg"
-                    className="footerlogoos"
-                    alt="twitterlogo"
-                  />
+                  <div className="footerlogoos">
+                    <Landing path="IconLinkedin.svg" />
+                  </div>
                   <h2 className="bottomLinks mt-1 ps-4">LinkedIn</h2>
                 </div>
                 <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
               </Link>
             </div>
           </div>
-          <footer className="d-flex justify-content-between align-items-center sectionSpacing">
+          <footer className="d-flex justify-content-between align-items-center sectionSpacing mb-md-5">
             <img
               src="./assets/metawork-image-text logo.svg"
               alt="MetaworkImg"
@@ -999,7 +1019,7 @@ const LandingPage = () => {
           width: 45%;
         }
         .borderBox {
-          border: 1px solid #246bfd;
+          border: 1px solid rgba(32, 108, 255, 0.38);
           border-radius: 20px;
         }
         .sectionHeading {
@@ -1031,7 +1051,7 @@ const LandingPage = () => {
         }
 
         .hiring {
-          color: #348ac7;
+          color: #348ac7 !important;
         }
 
         .subHeading {
@@ -1150,11 +1170,11 @@ const LandingPage = () => {
           /* border-image-slice: 1;
   border-width: 2px; */
           border-radius: 16px;
-          padding: 25px 20px;
-          width: 300px;
+          padding: 15px 10px;
+          width: 230px;
         }
         .partnersImg {
-          height: 62px;
+          height: 48px;
         }
         .partnersContainer {
           width: 75%;
@@ -1297,6 +1317,9 @@ const LandingPage = () => {
           cursor: pointer;
           width: 30%;
         }
+        .bottomSocialLinksWidth {
+          width: 30%;
+        }
         .footerText {
           font-size: 20px;
         }
@@ -1421,6 +1444,9 @@ const LandingPage = () => {
           }
           .desktopHero {
             display: none;
+          }
+          .bottomSocialLinksWidth {
+            width: 100%;
           }
           .heroPara {
             width: 100%;

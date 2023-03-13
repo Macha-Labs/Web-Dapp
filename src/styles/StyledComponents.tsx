@@ -1022,3 +1022,22 @@ export const StyledProfileBanner = styled.div`
     color: #6f767e;
   }
 `;
+
+
+// Show Current message showing date on chat window
+export const StyledDateTag = styled.p<{visible: any}>`
+  background: linear-gradient(95.63deg, #243B9B -36.26%, rgba(36, 59, 155, 0.6) 161.79%);
+  width: max-content;
+  border-radius: 25px;
+  padding: 3px 15px;
+  color: white;
+  position: absolute;
+  left: 45%;
+  top: 70px;
+  z-index: 99;
+  font-weight: 600;
+  opacity: 1;
+  transition: all 1s ease-out;
+  visibility:${(props: any) => props.visible || "hidden"};
+  font-size: 13px;
+`
