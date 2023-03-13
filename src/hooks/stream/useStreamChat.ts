@@ -159,6 +159,7 @@ const useStreamChat = (client :any, channel: any) => {
     }
     await client
       .updateMessage({
+        ...actionMessage.item,
         id: actionMessage.item?.id,
         text: editMessageRef.current.value,
       })
