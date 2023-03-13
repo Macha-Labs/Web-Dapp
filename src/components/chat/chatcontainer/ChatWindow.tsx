@@ -4,6 +4,7 @@ import { StyledDateTag } from "@/styles/StyledComponents";
 import useStreamChannelActions from "@/hooks/stream/useStreamChannelActions";
 import { XmtpContext } from "@/providers/XmtpProvider";
 import { useRouter } from "next/router";
+import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
 
 const ChatWindow = (props: any) => {
   const hookStreamChannelMessages = useStreamChannelMessages(
@@ -16,7 +17,7 @@ const ChatWindow = (props: any) => {
   const router = useRouter();
   console.log(hookStreamChannelMessages.messages, "messages");
   const [isScrollAtBottom, setIsScrollAtBottom] = useState(false);
-  const [dataTag, setDateTag] = useState("");
+  const [dateTag, setDateTag] = useState("");
   const [dateTagVisible, setDateTagVisible] = useState(false);
   const [scrollTo, setScrollTo] = useState("");
 
@@ -129,10 +130,10 @@ const ChatWindow = (props: any) => {
   return (
     <>
       <StyledDateTag visible={`${dateTagVisible ? "visible" : "hidden"} `}>
-        {dataTag}
+        {dateTag}
       </StyledDateTag>
       <div ref={messageListRef} className="body">
-        {hookStreamChannelMessages?.messages.map((message: any, index: any) => {
+        {messages.map((message: any, index: any) => {
           return (
             <div
               ref={el => (itemsRef.current[message.id] = el)}
