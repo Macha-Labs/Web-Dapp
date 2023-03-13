@@ -231,6 +231,7 @@ const ChatList = (props: any) => {
                               {item?.raw && (
                                 <>
                                   {" "}
+                                  {console.log(item.raw?.muteStatus()?.muted)}
                                   {(props?.item?.raw && item.raw?.muteStatus()?.muted) && (
                                     <IconImage
                                       path="IconDarkMute.png"
