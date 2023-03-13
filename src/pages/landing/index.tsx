@@ -769,7 +769,7 @@ For Teafy-content-between  flex-column flex-md-row"
             <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
               <Link
                 target="_blank"
-                href="https://github.com/metaworklabs"
+                href="https://www.linkedin.com/company/metaworklabs/"
                 className=" d-flex flex-grow-1 justify-content-between"
               >
                 <div className="d-flex align-items-center ">
@@ -778,7 +778,7 @@ For Teafy-content-between  flex-column flex-md-row"
                     className="footerlogoos"
                     alt="twitterlogo"
                   />
-                  <h2 className="bottomLinks mt-1 ps-4">Github</h2>
+                  <h2 className="bottomLinks mt-1 ps-4">LinkedIn</h2>
                 </div>
                 <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
               </Link>
