@@ -98,7 +98,7 @@ function about() {
             <strong>MetaWork Labs</strong> began with the simple idea of
             empowering people and society, and thus we have come together to
             co-create products and infras with Web3 technology. As a part of our
-            journey, we have built a web3 native workspace suit and made its
+            journey, we have built a web3 native workspace suite and made its
             first product live. Stay tuned, for other interesting projects to be
             released this year.
           </p>
@@ -335,18 +335,24 @@ function about() {
               and other things that we are building at MetaWork Labs
             </p>
           </div>
-
           <div className="borderBox d-flex flex-column align-items-start py-3 px-5 backgroundDarkCard ecosystemCard mt-3 mt-md-0">
-            <img
-              src="./assets/dark-laptop.svg"
-              className="fileLogo my-3"
-              alt="File Icon"
-            />
-            <h3 className="highlight ecosystemCardHeading">Open Positions</h3>
-            <p className="ecosystemCardPara my-3 alignLeftText">
-              Be a part of Web3 Ecosystem. Let’s come together and create an
-              Enterprise Grade Decentralized Workspace suite.
-            </p>
+            <Link
+              target="_blank"
+              href="https://bit.ly/metawork-hiring"
+              className=""
+            >
+              <img
+                src="./assets/dark-laptop.svg"
+                className="fileLogo my-3"
+                alt="File Icon"
+              />
+
+              <h3 className="highlight ecosystemCardHeading">Open Positions</h3>
+              <p className="ecosystemCardPara my-3 alignLeftText">
+                Be a part of Web3 Ecosystem. Let’s come together and create an
+                Enterprise Grade Decentralized Workspace suite.
+              </p>
+            </Link>
           </div>
         </div>
         <div className="d-flex justify-content-between  flex-column flex-md-row paddingBox">
@@ -387,16 +393,14 @@ function about() {
           <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
             <Link
               target="_blank"
-              href="https://github.com/metaworklabs"
+              href="https://www.linkedin.com/company/metaworklabs/"
               className=" d-flex flex-grow-1 justify-content-between"
             >
               <div className="d-flex align-items-center ">
-                <img
-                  src="./assets/base-github.svg"
-                  className="footerlogoos"
-                  alt="twitterlogo"
-                />
-                <h2 className="bottomLinks mt-1 ps-4">Github</h2>
+                <div className="footerlogoos">
+                  <Landing path="IconLinkedin.svg" />
+                </div>
+                <h2 className="bottomLinks mt-1 ps-4">LinkedIn</h2>
               </div>
               <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
             </Link>
