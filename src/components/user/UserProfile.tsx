@@ -26,7 +26,7 @@ import useLensProfile from "@/hooks/lens/useLensProfile";
 import Link from "next/link";
 
 const UserProfile = ({ user }: any) => {
-  console.log('User Profile', user)
+  console.log("User Profile", user);
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
   const hookLensFollow = useLensFollows(user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(user?.lens?.id);
@@ -197,8 +197,13 @@ const UserProfile = ({ user }: any) => {
                 Follow on Lens
               </Button>
             )}
-            <Link href={`chat/dm/address=#${userLens.ownedBy}`}>
-              <Button leftIcon={<ChatIcon />} variant="state_brand" size="md">
+            <Link href={`chat/dm`}>
+              <Button
+                leftIcon={<ChatIcon />}
+                onClick={() => {}}
+                variant="state_brand"
+                size="md"
+              >
                 Message
               </Button>
             </Link>

@@ -9,6 +9,7 @@ export const StreamMessage$ = (data: any) => {
     pinned: data?.pinned,
     reactionScores: data?.reaction_scores,
     reactionCount: data?.reaction_count,
+    user: data?.user,
   };
 };
 export const XmtpMessage$ = (data: any) => {
@@ -19,5 +20,6 @@ export const XmtpMessage$ = (data: any) => {
     createdBy: data.senderAddress,
     peerAddress: data.conversation.peerAddress,
     attachments: data?.attachments,
+    user: undefined,
   };
 };

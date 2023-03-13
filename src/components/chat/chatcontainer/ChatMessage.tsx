@@ -260,6 +260,11 @@ const ChatMessage = (props: any) => {
                 onClick={() => handleSelectedUser(props.message?.user)}
                 src={props.message?.user?.lensImage}
                 className="m-r-0-5"
+                name={
+                  props.message?.user?.lensUsername ||
+                  props.message?.user?.lensHandle ||
+                  truncateAddress(props.message?.createdBy)
+                }
               ></Avatar>
             </Row>
           </Col>
@@ -275,7 +280,8 @@ const ChatMessage = (props: any) => {
             <TemplateReply />
             <Row className="hr-between">
               <Text fontSize="sm" className="heading">
-                {props.message?.user?.lensUsername ||
+                {props.message?.user?.lensName ||
+                  props.message?.user?.lensUsername ||
                   props.message?.user?.lensHandle ||
                   truncateAddress(props.message?.createdBy)}
               </Text>

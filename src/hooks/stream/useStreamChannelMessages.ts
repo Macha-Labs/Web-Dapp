@@ -72,20 +72,16 @@ const useStreamChannelMessages = (channel: any) => {
     });
   }, [channel]);
 
-
   const _setMessages = () => {
     if (channel?.raw?.state?.messageSets[0]?.messages) {
-      const messageData = channel?.raw?.state?.messageSets[0]?.messages?.slice(0).map(
-        (item: any) => {
-          console.log("if", item, StreamMessage$(item));
-
+      const messageData = channel?.raw?.state?.messageSets[0]?.messages
+        ?.slice(0)
+        .map((item: any) => {
           return StreamMessage$(item);
-        }
-      );
+        });
       setMessages(messageData);
     }
   };
-
 
   return {
     messages: messages,
