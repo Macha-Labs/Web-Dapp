@@ -1019,7 +1019,7 @@ const LandingPage = () => {
           width: 45%;
         }
         .borderBox {
-          border: 1px solid #246bfd;
+          border: 1px solid rgba(32, 108, 255, 0.38);
           border-radius: 20px;
         }
         .sectionHeading {

@@ -136,7 +136,7 @@ function about() {
           </h3>
           <div>
             <div className="d-flex flex-wrap justify-content-center justify-content-md-start">
-              <div className="d-flex align-items-center teamMembers me-md-3  mt-3 mt-md-1 ">
+              <div className="d-flex align-items-center teamMembers me-md-3  mt-3 ">
                 <img src="./assets/avatar_saksham.png" alt="avatar" />
                 <div className="d-flex flex-column ms-3 align-items-start">
                   <h4 className="teamMembersHeading mb-1">Saksham Jain </h4>
@@ -642,7 +642,7 @@ function about() {
           width: 48%;
         }
         .borderBox {
-          border: 1px solid #246bfd;
+          border: 1px solid rgba(32, 108, 255, 0.38);
           border-radius: 20px;
         }
         .sectionHeading {
