@@ -21,7 +21,7 @@ const LandingPage = () => {
       <div className="d-flex flex-column h-100 text-center bodyBackground">
         <nav className="navbar navbar-expand-md navbar-dark fixed-top py-3 navBar pt-md-4 pb-md-2">
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
-            <div className=" d-flex flex-column flex-md-row ">
+            <div className=" d-flex flex-column flex-md-row">
               <div className="col">
                 <Link href="/">
                   <Image
@@ -34,7 +34,7 @@ const LandingPage = () => {
                   />
                 </Link>
               </div>
-              <ul className="navbar-nav me-auto d-flex align-items-center flex-row mt-2 mt-md-0">
+              <ul className="navbar-nav justify-content-center d-flex align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
                   <Link
                     className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
@@ -60,8 +60,8 @@ const LandingPage = () => {
                 <div className="column align-items-center">
                   <Link
                     className="text-muted"
-                    target="_blank"
                     href="https://twitter.com/metaworklabs"
+                    target="_blank"
                   >
                     <img
                       className="twitterLogo"
@@ -118,7 +118,7 @@ const LandingPage = () => {
         <div className="d-flex flex-column flex-md-row paddingBox justify-content-between align-items-center mt-md-5 w-100">
           <div className="heroPara hideOnDesktop">
             <p className=" mb-4 mb-md-0">
-              Private and Secured Decentralized - Workspace Suit inbuilt with
+              Private and Secured Decentralized - Workspace Suite inbuilt with
               encryption and token gating technologies for teams, enterprises,
               and Guilds
             </p>

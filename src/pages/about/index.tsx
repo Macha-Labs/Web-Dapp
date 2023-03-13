@@ -99,7 +99,8 @@ function about() {
             empowering people and society, and thus we have come together to
             co-create products and infras with Web3 technology. As a part of our
             journey, we have built a web3 native workspace suite and made its
-            first product live. Stay tuned, for other interesting projects to be
+            first product live. 
+            <br/>Stay tuned, for other interesting projects to be
             released this year.
           </p>
         </div>
