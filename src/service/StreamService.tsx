@@ -26,7 +26,7 @@ export const postStreamChannel = async(data: any) => {
 }
 
 export const addStreamMembers = async (data: any) => {
-    const response = await fetch (`${config.url}/api/stream/addmember`, {
+    const response = await fetch (`${config.url}/api/stream/join-channel`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -51,17 +51,6 @@ export const viewStreamMembers = async (channelId: string) => {
     const response = await fetch (`${config.url}/api/stream/viewmembers/${channelId}`);
     const data = await response.json();
     return data;
-}
-
-export const joinStreamChannel = async (data: any) => {
-    const response = await fetch (`${config.url}/api/stream/join-channel/`, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
-    return response;
 }
 
 export const listenPresence = async(channelId: string) => {

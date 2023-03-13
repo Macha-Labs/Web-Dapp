@@ -140,6 +140,12 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
       callback.delete();
     });
   };
+  const clearChat = (channel: any) => {
+    logger("channel", "usePortalChannelclarChat", "Chat Clear", [channel]);
+    channel.raw.truncate().then((res: any) => {
+      callback.clear();
+    });
+  };
   const muteChannel = (channel: any) => {
     logger("channel", "usePortalChannelmute", "Muting Channel", [channel]);
     channel.raw.mute();
@@ -167,6 +173,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
     togglePermission,
     updatePermissions,
     deleteChannel,
+    clearChat,
     muteChannel,
     unMuteChannel,
     leaveChannel,
