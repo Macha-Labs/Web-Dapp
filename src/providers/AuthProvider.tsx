@@ -61,7 +61,7 @@ const AuthProvider = ({ children }: any) => {
    *
    *
    **/
-  const _fetchUserFromLens = async () => {
+  const _fetchUserFromLens = async (callBacks?: any) => {
     if (!address) {
       logger("auth", "_fetchUserFromLens", "Address not found", [user]);
       return;
@@ -69,14 +69,12 @@ const AuthProvider = ({ children }: any) => {
     if (address != user.lens.ownedBy) {
       setLoadingLens(true);
       const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
+      console.log("lensProfile", lensProfile);
       try {
-        if (lensProfile) {
-          const tokens: any | { accessToken: string; refreshToken: string } =
-            await hookLensAuth.connectToLens(address);
-          logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [
-            tokens,
-          ]);
-          setLoadingLens(false);
+        if (lensProfile?.id) {
+          const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
+          logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
+          
           if (tokens?.accessToken) {
             user.setLensDirect({
               ...lensProfile,
@@ -86,8 +84,10 @@ const AuthProvider = ({ children }: any) => {
           } else {
             user.setLensDirect(lensProfile);
           }
+          setLoadingLens(false);
         } else {
-          throw Error(`Couldn't find Lens Profile with address ${address}`);
+          callBacks.noLensProfile();
+          setLoadingLens(false);
         }
       } catch (error) {
         logger(

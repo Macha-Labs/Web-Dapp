@@ -28,6 +28,18 @@ function ChatSetting(props: any) {
     props.chatContext?.initiate(null);
     props.modalSettings.onClose();
   };
+  const callbackClear = () => {
+    toast({
+      title: "Chat Cleared",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+    props.chatContext?.streamContext?.reloadChannelList();
+    props.chatContext?.streamContext?.reloadChannel();
+    // props.chatContext?.initiate(null);
+    props.modalSettings.onClose();
+  };
 
   /**
    * @description
@@ -83,6 +95,7 @@ function ChatSetting(props: any) {
       mute: callbackMute,
       unmute: callbackUnmute,
       leave: callbackLeave,
+      clear:callbackClear,
     }
   );
   /**
@@ -207,7 +220,9 @@ function ChatSetting(props: any) {
       //   icon: IconBrandClearChat,
       name: "Clear Chat",
       icon: "IconRedDelete.png",
-      onPress: () => {},
+      onPress: () => {
+        hookPortalChannel?.clearChat(props.chatContext.hookChannel.channel);
+      },
     },
     {
       //   icon: IconBrandClearChat,
