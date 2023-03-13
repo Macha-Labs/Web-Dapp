@@ -25,16 +25,16 @@ function about() {
               <ul className="navbar-nav justify-content-center d-flex align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
                   <Link
-                    className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
+                    className="nav-link  d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/"
                   >
                     Product
                   </Link>
                 </li>
 
-                <li className="nav-item">
+                <li className="nav-item hiring">
                   <Link
-                    className="nav-link  d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
+                    className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/about"
                   >
                     About Us
@@ -99,9 +99,9 @@ function about() {
             empowering people and society, and thus we have come together to
             co-create products and infras with Web3 technology. As a part of our
             journey, we have built a web3 native workspace suite and made its
-            first product live. 
-            <br/>Stay tuned, for other interesting projects to be
-            released this year.
+            first product live.
+            <br />
+            Stay tuned, for other interesting projects to be released this year.
           </p>
         </div>
         <div className="mt-5 d-flex  flex-column align-items-center align-items-md-start paddingBox">
