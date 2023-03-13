@@ -64,7 +64,7 @@ const Nav = (props: any) => {
                     onClick={() => setActive("user")}
                   />
                 </Link>
-                <IconImage
+                {/* <IconImage
                   path="IconBrandDiscover.png"
                   style={{
                     className: `m-b-1 ${
@@ -72,7 +72,7 @@ const Nav = (props: any) => {
                     } `,
                   }}
                   onClick={() => setActive("discover")}
-                />
+                /> */}
               </Col>
 
               <Col className="hr-center">
