@@ -42,7 +42,7 @@ const ChatMessage = (props: any) => {
 
   useEffect(() => {
     if (isIntersecting) {
-      props.handleDateTag(props?.message.created_at);
+      props.handleDateTag(props?.message.createdAt);
     }
   }, [isIntersecting]);
 

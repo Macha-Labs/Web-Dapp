@@ -15,6 +15,7 @@ import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import ChatSearch from "./ChatSearch";
 import { ChatContext } from "@/providers/ChatProvider";
+import { channel } from "diagnostics_channel";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
@@ -95,12 +96,15 @@ const ChatHeader = (props: any) => {
           <Avatar
             size="sm"
             className="m-r-0-5"
-            name={chatContext?.channel?.name}
+            name={
+              chatContext?.channel?.name || chatContext?.channel?.peerAddress
+            }
           />
           <Col>
             <Row>
               <Heading as="h4" size="sm">
-                {chatContext?.channel?.name}
+                {chatContext?.channel?.name ||
+                  chatContext?.channel?.peerAddress}
               </Heading>
               {chatContext?.channel?.raw?.muteStatus()?.muted && (
                 <IconImage

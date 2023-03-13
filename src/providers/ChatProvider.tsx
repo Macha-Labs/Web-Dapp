@@ -1,7 +1,6 @@
 import useXmtp from "@/hooks/xmtp/useXmtp";
 import { useRouter } from "next/router";
 import { createContext, useContext } from "react";
-import { AuthContext } from "./AuthProvider";
 import { StreamContext, StreamContextType } from "./StreamProvider";
 import { XmtpContext } from "./XmtpProvider";
 

@@ -33,29 +33,30 @@ export const XmtpProvider = ({ children }: any) => {
   const [conversation, setConversation] = useState<any>();
   const [allConversations, setAllConversations] = useState<any>();
   const [peerAddress, setPeerAddress] = useState<string>("");
-  const [state, setState] = useState<boolean>(false);
 
   /**
    * @description Function to connect to XMTP to enable messaging
    *
    *
    **/
-  useEffect(() => {
-    if (xmtpClientAddress) {
-      // const streamMessages = async () => {
-      //   const newStream = await conversation.streamMessages();
-      //   for await (const msg of newStream) {
-      //     setMessages(prevMessages => {
-      //       const messages = [...prevMessages];
-      //       messages.unshift(msg);
-      //       return messages;
-      //     });
-      //   }
-      // };
-      // streamMessages();
-    }
-    console.log("first");
-  }, [conversation, xmtpClientAddress, peerAddress]);
+  // useEffect(() => {
+  //   if (xmtpClientAddress) {
+  //     const streamMessages = async () => {
+
+  //       const newStream = await conversation.streamMessages();
+  //       console.log("newStream", newStream);
+  //       for await (const msg of newStream) {
+  //         setMessages(prevMessages => {
+  //           const messages = [...prevMessages];
+  //           messages.unshift(msg);
+  //           return messages;
+  //         });
+  //       }
+  //     };
+  //     streamMessages();
+  //   }
+  //   console.log("first");
+  // }, [conversation, xmtpClientAddress, peerAddress]);
 
   useEffect(() => {
     console.log("fetching");
@@ -70,7 +71,7 @@ export const XmtpProvider = ({ children }: any) => {
       channel?.id
     );
     const messages = await conversation.messages({
-      direction: SortDirection.SORT_DIRECTION_DESCENDING,
+      direction: SortDirection.SORT_DIRECTION_ASCENDING,
     });
     const messagesData = messages.map((item: any) => {
       return XmtpMessage$(item);
@@ -90,16 +91,8 @@ export const XmtpProvider = ({ children }: any) => {
 
   const sendXmtpMessage = async (text: string) => {
     console.log("sent");
-
-    // if (conversation) {
-    //   console.log("inside if sendXmtp");
-    //   return await conversation.send(text);
-    // } else {
-    //   return console.log("inside else sendXmtp");
-    // }
-    conversation.send(text).then((res: any) => {
-      console.log(res);
-    });
+    const response = await conversation.send(text);
+    setConversation(response.conversation);
   };
 
   return (

@@ -286,7 +286,17 @@ const ChatInput = (props: any) => {
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
-                onKeyDown={event => {
+                onKeyDown={(event: any) => {
+                  const keycode = event.which || event.keycode;
+                  if (keycode == 13 && !event.shiftKey) {
+                    event.preventDefault();
+
+                    if (props.hookChat.textareaRef.current?.value.length > 0) {
+                      xmtpContext.sendXmtpMessage(
+                        props.hookChat.textareaRef.current.value
+                      );
+                    }
+                  }
                   props.hookChat?.keyDownMessage(event);
                 }}
                 placeholder="Message..."
