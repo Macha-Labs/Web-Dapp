@@ -20,6 +20,8 @@ export const XmtpMessage$ = (data: any) => {
     createdBy: data.senderAddress,
     peerAddress: data.conversation.peerAddress,
     attachments: data?.attachments,
-    user: undefined,
+    user: {
+      id: data.senderAddress
+    }
   };
 };
