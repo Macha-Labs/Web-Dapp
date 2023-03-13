@@ -1,3 +1,4 @@
+import { XmtpContext } from "@/providers/XmtpProvider";
 import { useToast } from "@chakra-ui/react";
 import { logger } from "@/helpers/logger";
 import { uploadAtIpfsRoot } from "@/helpers/storage/web3storage";
@@ -9,10 +10,11 @@ import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import useMention from "./useMention";
 import { ChatContext } from "stream-chat-react";
 
-const useStreamChat = (client :any, channel: any) => {
+const useStreamChat = (client: any, channel: any) => {
   console.log("Checking for useStreamChat re-rendering");
   const authContext = useContext(AuthContext) as AuthContextType;
   const chatContext = useContext(ChatContext);
+  const xmtpContext = useContext(XmtpContext);
   //
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
@@ -62,7 +64,8 @@ const useStreamChat = (client :any, channel: any) => {
         return;
       }
 
-      addMessageToStream(chatMeta);
+      // addMessageToStream(chatMeta);
+      addMessageToXMTP(textareaRef.current.value);
     }
   };
 
@@ -153,9 +156,10 @@ const useStreamChat = (client :any, channel: any) => {
     }
   };
 
-  const addMessageToXMTP = async(msgData: any) => {
-
-  }
+  const addMessageToXMTP = async (msgData: any) => {
+    console.log("addXmtp", msgData);
+    xmtpContext.sendXmtpMessage();
+  };
 
   const editMessage = async () => {
     if (!authContext?.address) {
@@ -252,10 +256,9 @@ const useStreamChat = (client :any, channel: any) => {
   };
 
   const keyDownMessage = async (event: any, onSend?: any) => {
-  
     const keycode = event.which || event.keycode;
-   console.log("Keycode", keycode, onSend);
-   
+    console.log("Keycode", keycode, onSend);
+
     //Logic for typing indicators begins
     // let typingTimeout;
     // if (typingTimeout !== undefined) clearTimeout(typingTimeout);
@@ -276,14 +279,14 @@ const useStreamChat = (client :any, channel: any) => {
 
     //Logic for typing indicators ends
 
-    if (keycode == 13 && !event.shiftKey || onSend) {
+    if ((keycode == 13 && !event.shiftKey) || onSend) {
       event.preventDefault();
 
       if (textareaRef.current?.value.substring(0, 1) == "/") {
         setSlashCmdValue(textareaRef.current?.value);
         setSlashCmd(false);
         // widgetDrawer.onOpen();
-      } else if (textareaRef.current?.value.length > 0||attachItem) {
+      } else if (textareaRef.current?.value.length > 0 || attachItem) {
         await addMessage();
       }
     } else if (event.key == "/") {
@@ -371,7 +374,7 @@ const useStreamChat = (client :any, channel: any) => {
   const sendReaction = async (reaction: any, message: any) => {
     return await channel.raw.sendReaction(message?.id, {
       type: reaction?.type,
-      score: 1
+      score: 1,
     });
   };
 
@@ -492,6 +495,7 @@ const useStreamChat = (client :any, channel: any) => {
     usersWhoAreTyping: usersWhoAreTyping,
     typingMessage: typingMessage,
     setTypingMessage: setTypingMessage,
+
     // widgetDrawer: widgetDrawer
   };
 };

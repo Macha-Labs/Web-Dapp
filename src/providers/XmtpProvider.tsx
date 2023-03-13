@@ -6,8 +6,8 @@ import { AuthContext } from "./AuthProvider";
 import { ChannelXMTP$ } from "@/schema/channel";
 import { XmtpMessage$ } from "@/schema/message";
 export type XmtpContextType = {
-  fetchXmtpConversation: any | undefined;
-  sendXmtpMessage: any | undefined;
+  fetchXmtpConversation: (text: string) => void;
+  sendXmtpMessage: () => void;
   fetchXmtpConversationList: any | undefined;
   allConversations: any | undefined;
   conversation: any | undefined;
@@ -16,8 +16,8 @@ export type XmtpContextType = {
 };
 
 export const XmtpContext = createContext<XmtpContextType>({
-  fetchXmtpConversation: null,
-  sendXmtpMessage: null,
+  fetchXmtpConversation: () => {},
+  sendXmtpMessage: () => {},
   fetchXmtpConversationList: null,
   allConversations: [],
   conversation: null,
@@ -33,6 +33,7 @@ export const XmtpProvider = ({ children }: any) => {
   const [conversation, setConversation] = useState<any>();
   const [allConversations, setAllConversations] = useState<any>();
   const [peerAddress, setPeerAddress] = useState<string>("");
+  const [state, setState] = useState<boolean>(false);
 
   /**
    * @description Function to connect to XMTP to enable messaging
@@ -74,16 +75,10 @@ export const XmtpProvider = ({ children }: any) => {
     const messagesData = messages.map((item: any) => {
       return XmtpMessage$(item);
     });
-    console.log("conversation", conversation);
-    console.log(
-      "messages",
-      messages,
-      typeof messages,
-      messagesData,
-      typeof messagesData
-    );
+    // console.log("conversation", conversation.send("hulle hula le hula"));
+
     setMessages(messagesData);
-    setConversation(ChannelXMTP$(conversation));
+    setConversation(conversation);
   };
   const fetchXmtpConversationList = async () => {
     const conversationList = await xmtpClient.conversations.list();
@@ -93,8 +88,18 @@ export const XmtpProvider = ({ children }: any) => {
     setAllConversations(data);
   };
 
-  const sendXmtpMessage = async () => {
-    await conversation.send("gm ser");
+  const sendXmtpMessage = async (text: string) => {
+    console.log("sent");
+
+    // if (conversation) {
+    //   console.log("inside if sendXmtp");
+    //   return await conversation.send(text);
+    // } else {
+    //   return console.log("inside else sendXmtp");
+    // }
+    conversation.send(text).then((res: any) => {
+      console.log(res);
+    });
   };
 
   return (

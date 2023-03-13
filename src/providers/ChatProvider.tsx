@@ -64,14 +64,6 @@ export const ChatProvider = ({ children }: any) => {
         return xmtpContext.fetchXmtpConversation;
     }
   };
-  const _sendMessage = (message: string) => {
-    switch (router.pathname) {
-      case "/chat":
-        return streamContext?.initiate;
-      case "/chat/dm":
-        return xmtpContext.sendXmtpMessage();
-    }
-  };
 
   return (
     <ChatContext.Provider

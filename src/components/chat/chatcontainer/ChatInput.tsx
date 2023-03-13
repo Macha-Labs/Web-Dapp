@@ -24,6 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useRef } from "react";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
+import { XmtpContext } from "../../../providers/XmtpProvider";
 import ChatMention from "../ChatMention";
 
 const ChatInput = (props: any) => {
@@ -31,7 +32,7 @@ const ChatInput = (props: any) => {
   const hookCreateLensPost = useCreateLensPost();
   const createPostRef = useRef<any>();
   const authContext = useContext(AuthContext);
-
+  const xmtpContext = useContext(XmtpContext);
   const templateReply = () => {
     return (
       <>
@@ -294,7 +295,12 @@ const ChatInput = (props: any) => {
             </Col>
             <Col className="vr-center hr-center sideIcons">
               <span
-                onClick={(e: any) => props.hookChat?.keyDownMessage(e, true)}
+                onClick={(e: any) => {
+                  // props.hookChat?.keyDownMessage(e, true)
+                  xmtpContext.sendXmtpMessage(
+                    props.hookChat.textareaRef.current.value
+                  );
+                }}
               >
                 <IconImage path="IconDarkSend.svg" size="30" />
               </span>
