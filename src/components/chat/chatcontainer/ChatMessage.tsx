@@ -37,12 +37,12 @@ const ChatMessage = (props: any) => {
   const hours = date.getHours().toString().padStart(2, "0");
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const time = `${hours}:${minutes}`;
-  const chatRef = useRef(null)
+  const chatRef = useRef<HTMLDivElement>(null)
   const isIntersecting = useOnScreen(chatRef)
 
 
   useEffect(() => {
-  if(isIntersecting){
+    if(isIntersecting){
     props.handleDateTag(props?.message.created_at)
   }
   },[isIntersecting])
@@ -121,6 +121,9 @@ const ChatMessage = (props: any) => {
     }
   };
 
+  const handleReplyToView = (id: any) => {
+    props.executeScroll(id);
+  };
 
   const handleSelectedUser = (user: any) => {
     const channelUsers = props.hookMembers.allUsers;
@@ -223,7 +226,7 @@ const ChatMessage = (props: any) => {
     return (
       <>
         {props?.message?.quoted_message && (
-          <Col className="m-b-1 replyTo">
+          <Col onClick={() => handleReplyToView(props.message.quoted_message_id)} className="m-b-1 replyTo">
             <Row>
               <Text className="m-r-0-5" fontSize="sm">Replying</Text>
               <Avatar
@@ -246,7 +249,7 @@ const ChatMessage = (props: any) => {
 
   return (
     <>
-    <StyledConversation key={`b-${props?.message?.id}`} ref={chatRef}>
+    <StyledConversation style={props.scrollToId == props.message.id ?{opacity: 1}:{}} key={`b-${props?.message?.id}`} ref={chatRef}>
       <Row className="w-100">
         <Col>
           <Row>
@@ -273,6 +276,7 @@ const ChatMessage = (props: any) => {
           </Row>
         </Col>
         <Col
+        onClick={() => handleReplyToView(props.message.quoted_message_id)}
           className={
             props.authContext?.address == props?.message?.user?.id
               ? "active message"
@@ -364,7 +368,7 @@ const ChatMessage = (props: any) => {
             </Row>
           )}
         </Col>
-        <Row className="positionPop action">
+        <Row className={`positionPop ${props.scrollToId == props.message.id ? '': 'action'}`}>
           <TemplateReactions />
           <TemplateActions />
         </Row>
