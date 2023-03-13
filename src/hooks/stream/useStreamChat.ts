@@ -8,13 +8,13 @@ import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import useMention from "./useMention";
-import { ChatContext } from "stream-chat-react";
+import { ChatContext } from "../../providers/ChatProvider";
 
 const useStreamChat = (client: any, channel: any) => {
   console.log("Checking for useStreamChat re-rendering");
   const authContext = useContext(AuthContext) as AuthContextType;
   const chatContext = useContext(ChatContext);
-  const xmtpContext = useContext(XmtpContext);
+
   //
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
@@ -158,7 +158,7 @@ const useStreamChat = (client: any, channel: any) => {
 
   const addMessageToXMTP = async (msgData: any) => {
     console.log("addXmtp", msgData);
-    xmtpContext.sendXmtpMessage();
+    chatContext.sendXmtpMessage();
   };
 
   const editMessage = async () => {
