@@ -12,6 +12,7 @@ const ChatWindow = (props: any) => {
   const [isScrollAtBottom, setIsScrollAtBottom] = useState(false)
   const [dataTag, setDateTag] = useState('')
   const [dateTagVisible, setDateTagVisible] = useState(false)
+  const [scrollTo, setScrollTo] = useState('')
 
 
   const handleDateTag = (date: any) => {
@@ -84,6 +85,10 @@ const ChatWindow = (props: any) => {
     }
   }, []);
 
+  const executeScroll = (id: any) => {
+    itemsRef.current[id].scrollIntoView() 
+    setScrollTo(id)
+  }
   // const messageAreaHeight = props.hookMessages?.messages.map((message: any, index: any) => {
   //   console.log(itemsRef?.current[index], itemsRef?.current[index]?.offsetHeight, itemsRef?.current[index]?.clientHeight);
   //   return (itemsRef?.current[index]?.offsetHeight ) || 100;
@@ -112,7 +117,7 @@ const ChatWindow = (props: any) => {
     <div ref={messageListRef} className="body">
           {hookStreamChannelMessages?.messages.map((message: any, index: any) => {
             return (
-              <div ref={el => itemsRef.current[index] = el}  key={`message-${index}`}>
+              <div ref={el => itemsRef.current[message.id] = el}  key={`message-${index}`}>
                 <ChatMessage
                   message={message}
                   hookChat={props?.chatContext?.hookChat}
@@ -120,6 +125,8 @@ const ChatWindow = (props: any) => {
                   hookMembers={props.chatContext.hookMembers}
                   key={`a-${message.id}`}
                   handleDateTag={handleDateTag}
+                  executeScroll={executeScroll}
+                  scrollToId={scrollTo}
                 />
               </div>
             )
