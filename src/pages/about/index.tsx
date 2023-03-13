@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import {Landing} from "../../components/icons/IconImage";
+import { Landing } from "../../components/icons/IconImage";
 
 function about() {
   return (
@@ -11,7 +11,7 @@ function about() {
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
             <div className=" d-flex flex-column flex-md-row">
               <div className="col">
-                <Link href="/landing">
+                <Link href="/">
                   <Image
                     className="headerLogo"
                     src="/assets/metawork-image-text logo.svg"
@@ -22,19 +22,19 @@ function about() {
                   />
                 </Link>
               </div>
-              <ul className="navbar-nav me-auto d-flex align-items-center flex-row mt-2 mt-md-0">
+              <ul className="navbar-nav justify-content-center d-flex align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
                   <Link
                     className="nav-link  d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
-                    href="/landing"
+                    href="/"
                   >
-                    Platform
+                    Product
                   </Link>
                 </li>
 
-                <li className="nav-item">
+                <li className="nav-item hiring">
                   <Link
-                    className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
+                    className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/about"
                   >
                     About Us
@@ -46,7 +46,11 @@ function about() {
             <div className="d-flex align-items-center" id="">
               <div className="row overflow-hidden flex-md-row position-relative mx-2 hideOnMobile">
                 <div className="column align-items-center">
-                  <Link className="text-muted" href="#">
+                  <Link
+                    className="text-muted"
+                    href="https://twitter.com/metaworklabs"
+                    target="_blank"
+                  >
                     <img
                       className="twitterLogo"
                       src="/assets/brand-twitter.svg"
@@ -60,8 +64,10 @@ function about() {
           </div>
         </nav>
         <div className="row justify-content-center sectionSpacing paddingBox">
-          <div className="col mt-5">
-            <h1 className="subHeading mt-5">Building Web3 At</h1>
+          <div className="col mt-5 mt-md-0">
+            <h1 className="subHeading mt-5">
+              Building Web3 Workspace Suite At
+            </h1>
           </div>
         </div>
 
@@ -72,7 +78,7 @@ function about() {
             </strong>
           </h1>
         </div>
-        <div className="pt-md-3 d-flex justify-content-center">
+        <div className="d-flex justify-content-center paddingBox">
           {/* <Image
             // className="asdf"
             height={123}
@@ -80,7 +86,7 @@ function about() {
             src="/assets/docs.png"
             alt="metawork_chat"
           /> */}
-          <Landing path="aboutUs.png" className="px-3 px-md-0 mb-2 mb-md-0" />
+          <Landing path="aboutUsPage.png" className="mb-2 mb-md-0 pt-md-3 " />
           {/* <img
             className="backedByImg"
             src="/assets/docs.png"
@@ -91,16 +97,17 @@ function about() {
           <p className="aboutPara">
             <strong>MetaWork Labs</strong> began with the simple idea of
             empowering people and society, and thus we have come together to
-            co-create products and infras with Web3 technology. As Link part of our
-            journey, we have built Link web3 native workspace suit and made its
-            first product live. Stay tuned, for other interesting projects to be
-            released this year.
+            co-create products and infras with Web3 technology. As a part of our
+            journey, we have built a web3 native workspace suite and made its
+            first product live.
+            <br />
+            Stay tuned, for other interesting projects to be released this year.
           </p>
         </div>
         <div className="mt-5 d-flex  flex-column align-items-center align-items-md-start paddingBox">
           <div className="d-flex flex-column align-items-center align-items-md-start mb-3">
-            <h1 className="h4 ">Backed By</h1>
-            <h3 className="h4 ">Leading Accelerator & Protocol</h3>
+            <h1 className="h4 weightBold">Backed By</h1>
+            <h3 className="h4 weightBold">Leading Accelerator & Protocol</h3>
           </div>
 
           <div className="d-flex flex-column flex-md-row">
@@ -201,6 +208,14 @@ function about() {
                   <h5 className="teamMembersSubHeading">Business</h5>
                 </div>
               </div>
+              <div className="d-flex align-items-center teamMembers  mt-3 me-md-3 ">
+                {/* <img src="./assets/nikhil.png" alt="avatar" /> */}
+                <Landing path="nikhil.png" />
+                <div className="d-flex flex-column ms-3 align-items-start">
+                  <h4 className="teamMembersHeading mb-1">Nikhil Bhintade</h4>
+                  <h5 className="teamMembersSubHeading">Product Manager</h5>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -298,7 +313,7 @@ function about() {
             </strong>
           </h1>
           <h2 className="platformsubheading">
-            Be Link part of our team and lets build together
+            Be a part of our team and lets build together
           </h2>
           <img
             src="./assets/ecosystem bottom img.png"
@@ -321,56 +336,78 @@ function about() {
               and other things that we are building at MetaWork Labs
             </p>
           </div>
-
           <div className="borderBox d-flex flex-column align-items-start py-3 px-5 backgroundDarkCard ecosystemCard mt-3 mt-md-0">
-            <img
-              src="./assets/dark-laptop.svg"
-              className="fileLogo my-3"
-              alt="File Icon"
-            />
-            <h3 className="highlight ecosystemCardHeading">Open Positions</h3>
-            <p className="ecosystemCardPara my-3 alignLeftText">
-              Be Link part of Web3 Ecosystem Let’s come together and create an
-              Enterprise Grade Decentralized Workspace suit.
-            </p>
+            <Link
+              target="_blank"
+              href="https://bit.ly/metawork-hiring"
+              className=""
+            >
+              <img
+                src="./assets/dark-laptop.svg"
+                className="fileLogo my-3"
+                alt="File Icon"
+              />
+
+              <h3 className="highlight ecosystemCardHeading">Open Positions</h3>
+              <p className="ecosystemCardPara my-3 alignLeftText">
+                Be a part of Web3 Ecosystem. Let’s come together and create an
+                Enterprise Grade Decentralized Workspace suite.
+              </p>
+            </Link>
           </div>
         </div>
         <div className="d-flex justify-content-between  flex-column flex-md-row paddingBox">
-          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-            <div className="d-flex align-items-center ">
-              <img
-                src="./assets/base-twitter.svg"
-                className="footerlogoos"
-                alt="twitterlogo"
-              />
-              <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
-            </div>
-            <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+            <Link
+              target="_blank"
+              href="https://twitter.com/metaworklabs"
+              className=" d-flex flex-grow-1 justify-content-between"
+            >
+              <div className="d-flex align-items-center ">
+                <img
+                  src="./assets/base-twitter.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
+                <h2 className="bottomLinks mt-1 ps-4">Twitter</h2>
+              </div>
+              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+            </Link>
           </div>
-          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-            <div className="d-flex align-items-center ">
-              <img
-                src="./assets/base-medium.svg"
-                className="footerlogoos"
-                alt="twitterlogo"
-              />
-              <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
-            </div>
-            <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+            <Link
+              target="_blank"
+              href="https://medium.com/@metaworklabs"
+              className=" d-flex flex-grow-1 justify-content-between"
+            >
+              <div className="d-flex align-items-center ">
+                <img
+                  src="./assets/base-medium.svg"
+                  className="footerlogoos"
+                  alt="twitterlogo"
+                />
+                <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
+              </div>
+              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+            </Link>
           </div>
-          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5 bottomSocialLinks">
-            <div className="d-flex align-items-center ">
-              <img
-                src="./assets/base-github.svg"
-                className="footerlogoos"
-                alt="twitterlogo"
-              />
-              <h2 className="bottomLinks mt-1 ps-4">Github</h2>
-            </div>
-            <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+          <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
+            <Link
+              target="_blank"
+              href="https://www.linkedin.com/company/metaworklabs/"
+              className=" d-flex flex-grow-1 justify-content-between"
+            >
+              <div className="d-flex align-items-center ">
+                <div className="footerlogoos">
+                  <Landing path="IconLinkedin.svg" />
+                </div>
+                <h2 className="bottomLinks mt-1 ps-4">LinkedIn</h2>
+              </div>
+              <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
+            </Link>
           </div>
         </div>
-        <footer className="d-flex justify-content-between align-items-center sectionSpacing paddingBox">
+        <footer className="d-flex justify-content-between align-items-center sectionSpacing paddingBox mb-md-5">
           <img
             src="./assets/metawork-image-text logo.svg"
             alt="MetaworkImg"
@@ -380,6 +417,9 @@ function about() {
         </footer>
       </div>
       <style jsx>{`
+        .weightBold {
+          font-weight: 600;
+        }
         .container-fluid {
           padding-right: 0px;
           padding-left: 0px;
@@ -599,10 +639,10 @@ function about() {
           font-size: 20px;
         }
         .ecosystemCard {
-          width: 45%;
+          width: 48%;
         }
         .borderBox {
-          border: 1px solid #246bfd;
+          border: 1px solid rgba(32, 108, 255, 0.38);
           border-radius: 20px;
         }
         .sectionHeading {
@@ -896,8 +936,8 @@ function about() {
           align-items: center;
           justify-content: center;
         }
-        .bottomSocialLinks {
-          cursor: pointer;
+
+        .bottomSocialLinksWidth {
           width: 30%;
         }
         .footerText {
@@ -1025,8 +1065,7 @@ function about() {
             font-size: 14px;
             text-align: center;
           }
-          .bottomSocialLinks {
-            cursor: pointer;
+          .bottomSocialLinksWidth {
             width: 100%;
           }
           .footerLogoMetaworks {

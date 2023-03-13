@@ -87,7 +87,7 @@ const ChatList = (props: any) => {
         placement="bottom-end"
       >
         <Col className="text-start">
-          <Button
+          {/* <Button
             variant="transparent"
             size="sm"
             className="text-start"
@@ -96,7 +96,7 @@ const ChatList = (props: any) => {
             <Row className="hr-between w-100" onClick={() => {}}>
               Pin Channel
             </Row>
-          </Button>
+          </Button> */}
           {(props?.item?.raw && !props.item.raw?.muteStatus()?.muted )? (
             <Button
               variant="transparent"
@@ -130,7 +130,7 @@ const ChatList = (props: any) => {
               </Row>
             </Button>
           )}
-          <Button
+          {/* <Button
             variant="transparent"
             size="sm"
             className="text-start"
@@ -143,7 +143,7 @@ const ChatList = (props: any) => {
             >
               Clear Chat
             </Row>
-          </Button>
+          </Button> */}
           { !props?.item?.isAdmin && <Button
             variant="transparent"
             size="sm"
@@ -230,8 +230,8 @@ const ChatList = (props: any) => {
                               </Text>
                               {item?.raw && (
                                 <>
-                                  {" "}
-                                  {(props?.item?.raw && item.raw?.muteStatus()?.muted) && (
+                                  {/* {console.log(item.raw?.muteStatus()?.muted)} */}
+                                  {(item.raw?.muteStatus()?.muted) && (
                                     <IconImage
                                       path="IconDarkMute.png"
                                       style={{ className: "m-l-0-5" }}
