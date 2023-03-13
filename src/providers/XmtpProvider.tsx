@@ -42,7 +42,6 @@ export const XmtpProvider = ({ children }: any) => {
   // useEffect(() => {
   //   if (xmtpClientAddress) {
   //     const streamMessages = async () => {
-
   //       const newStream = await conversation.streamMessages();
   //       console.log("newStream", newStream);
   //       for await (const msg of newStream) {
@@ -89,10 +88,10 @@ export const XmtpProvider = ({ children }: any) => {
     setAllConversations(data);
   };
 
-  const sendXmtpMessage = async (text: string) => {
+  const sendXmtpMessage = async () => {
     console.log("sent");
-    const response = await conversation.send(text);
-    setConversation(response.conversation);
+    await conversation.send("gm");
+    // setConversation(response.conversation);
   };
 
   return (

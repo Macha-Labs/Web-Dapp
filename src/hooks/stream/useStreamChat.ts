@@ -1,4 +1,3 @@
-import { XmtpContext } from "@/providers/XmtpProvider";
 import { useToast } from "@chakra-ui/react";
 import { logger } from "@/helpers/logger";
 import { uploadAtIpfsRoot } from "@/helpers/storage/web3storage";
@@ -14,7 +13,7 @@ const useStreamChat = (client: any, channel: any) => {
   console.log("Checking for useStreamChat re-rendering");
   const authContext = useContext(AuthContext) as AuthContextType;
   const chatContext = useContext(ChatContext);
-  const xmtpContext = useContext(XmtpContext);
+
   //
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
@@ -158,7 +157,7 @@ const useStreamChat = (client: any, channel: any) => {
 
   const addMessageToXMTP = async (msgData: any) => {
     console.log("addXmtp", msgData);
-    xmtpContext.sendXmtpMessage();
+    chatContext.sendXmtpMessage();
   };
 
   const editMessage = async () => {
