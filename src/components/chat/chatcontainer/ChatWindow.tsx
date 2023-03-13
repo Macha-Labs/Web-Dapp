@@ -1,27 +1,65 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { VariableSizeList } from 'react-window';
 import ChatMessage from "./ChatMessage";
 import AutoSizer from "react-virtualized-auto-sizer";
-import useStreamChannelMessages from '@/hooks/stream/useStreamChannelMessages';
+import useStreamChannelActions from '@/hooks/stream/useStreamChannelActions';
 
 const ChatWindow = (props: any) => {
-  const hookStreamChannelMessages = useStreamChannelMessages(props.chatContext?.hookChannel?.channel);
+  const hookStreamChannelMessages = useStreamChannelActions(props.chatContext?.hookChannel?.channel);
   const messageListRef = useRef<any>();
   const itemsRef = useRef<any>([]);
+  const [isScrollAtBottom, setIsScrollAtBottom] = useState(false)
 
   useEffect(() => {
     // Scroll to the bottom of the list when new items are added
-   // messageListRef.current?.scrollToItem(props.hookMessages?.messages.length - 1);
-   const lastMsg = hookStreamChannelMessages?.messages[hookStreamChannelMessages?.messages.length - 1]
-   if(String(props.authContext.address).toLowerCase() == String(lastMsg?.user.id).toLowerCase()){
-     messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight
-   }
+    if (messageListRef && messageListRef.current) {
+      const lastMsg =
+        hookStreamChannelMessages?.messages[
+          hookStreamChannelMessages?.messages.length - 1
+        ];
+      if (
+        String(props.authContext.address).toLowerCase() ==
+        String(lastMsg?.user.id).toLowerCase()
+      ) {
+        messageListRef.current.scrollTop =
+          messageListRef?.current?.scrollHeight;
+      } else if (isScrollAtBottom) {
+        messageListRef.current.scrollTop =
+          messageListRef?.current?.scrollHeight;
+      }
+
+      messageListRef.current.addEventListener(
+        "scroll",
+        (event: any) => {
+          const { scrollHeight, scrollTop, clientHeight } = event.target;
+          if (Math.abs(scrollHeight - clientHeight - scrollTop) < 1) {
+            setIsScrollAtBottom(true);
+          } else {
+            setIsScrollAtBottom(false);
+          }
+        },
+        false
+      );
+      return function cleanup() {
+        if (messageListRef && messageListRef.current) {
+          messageListRef.current.removeEventListener("scroll", () => {}, false);
+        }
+      };
+    }
   }, [hookStreamChannelMessages?.messages]);
 
-  const messageAreaHeight = props.hookMessages?.messages.map((message: any, index: any) => {
-    console.log(itemsRef?.current[index], itemsRef?.current[index]?.offsetHeight, itemsRef?.current[index]?.clientHeight);
-    return (itemsRef?.current[index]?.offsetHeight ) || 100;
-  });
+  useEffect(() => {
+    if (messageListRef && messageListRef.current && !isScrollAtBottom)  {
+      messageListRef.current.scrollTop =
+          messageListRef?.current?.scrollHeight;
+          setIsScrollAtBottom(true)
+    }
+  }, [])
+
+  // const messageAreaHeight = props.hookMessages?.messages.map((message: any, index: any) => {
+  //   console.log(itemsRef?.current[index], itemsRef?.current[index]?.offsetHeight, itemsRef?.current[index]?.clientHeight);
+  //   return (itemsRef?.current[index]?.offsetHeight ) || 100;
+  // });
 
   const templateMessages = ({ index, style }: any) => {
     const message = props.hookMessages?.messages[index];
