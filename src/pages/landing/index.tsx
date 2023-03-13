@@ -23,7 +23,7 @@ const LandingPage = () => {
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
             <div className=" d-flex flex-column flex-md-row">
               <div className="col">
-                <Link href="/landing">
+                <Link href="/">
                   <Image
                     className="headerLogo"
                     src="/assets/metawork-image-text logo.svg"
@@ -38,9 +38,9 @@ const LandingPage = () => {
                 <li className="nav-item">
                   <Link
                     className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
-                    href="/landing"
+                    href="/"
                   >
-                    Platform
+                    Product
                   </Link>
                 </li>
 
@@ -728,7 +728,10 @@ const LandingPage = () => {
             </div>
           </div>
 
-          <div className="d-flex justify-content-between  flex-column flex-md-row">
+          <div
+            className="d-flex justiWeb3 HQ
+For Teafy-content-between  flex-column flex-md-row"
+          >
             <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
               <Link
                 target="_blank"

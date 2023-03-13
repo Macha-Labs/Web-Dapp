@@ -11,7 +11,7 @@ function about() {
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
             <div className=" d-flex flex-column flex-md-row">
               <div className="col">
-                <Link href="/landing">
+                <Link href="/">
                   <Image
                     className="headerLogo"
                     src="/assets/metawork-image-text logo.svg"
@@ -22,19 +22,19 @@ function about() {
                   />
                 </Link>
               </div>
-              <ul className="navbar-nav d-flex justify-content-center align-items-center flex-row mt-2 mt-md-0">
+              <ul className="navbar-nav justify-content-center d-flex align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
                   <Link
-                    className="nav-link  d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
-                    href="/landing"
+                    className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
+                    href="/"
                   >
-                    Platform
+                    Product
                   </Link>
                 </li>
 
                 <li className="nav-item">
                   <Link
-                    className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
+                    className="nav-link  d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/about"
                   >
                     About Us
@@ -46,7 +46,11 @@ function about() {
             <div className="d-flex align-items-center" id="">
               <div className="row overflow-hidden flex-md-row position-relative mx-2 hideOnMobile">
                 <div className="column align-items-center">
-                  <Link className="text-muted" href="#">
+                  <Link
+                    className="text-muted"
+                    href="https://twitter.com/metaworklabs"
+                    target="_blank"
+                  >
                     <img
                       className="twitterLogo"
                       src="/assets/brand-twitter.svg"
