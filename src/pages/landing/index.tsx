@@ -199,7 +199,7 @@ const LandingPage = () => {
           <div className="mb-md-5">
             <h1 className="m-0 sectionWorkspaceHeading">
               <strong>
-                <span className="highlight">Workspace Suit</span>
+                <span className="highlight">Workspace Suite</span>
               </strong>
             </h1>
           </div>
