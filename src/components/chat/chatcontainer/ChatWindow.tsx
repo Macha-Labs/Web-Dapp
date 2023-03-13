@@ -13,7 +13,7 @@ const ChatWindow = (props: any) => {
   const [messages, setMessages] = useState<any>(xmtpContext.messages);
   const itemsRef = useRef<any>([]);
   const router = useRouter();
-  console.log("router query", router, messages, "messages");
+  console.log(hookStreamChannelMessages.messages, "messages");
 
   useEffect(() => {
     // Scroll to the bottom of the list when new items are added
@@ -34,13 +34,13 @@ const ChatWindow = (props: any) => {
     if (router.pathname == "/chat") {
       setMessages(hookStreamChannelMessages.messages || []);
     }
-  }, [hookStreamChannelMessages.messages]);
+  }, [hookStreamChannelMessages.messages, router.pathname]);
 
   useEffect(() => {
     if (router.pathname == "/chat/dm") {
       setMessages(xmtpContext.messages || []);
     }
-  }, [xmtpContext.messages]);
+  }, [router.pathname, xmtpContext.messages]);
 
   const messageAreaHeight = props.hookMessages?.messages?.map(
     (message: any, index: any) => {

@@ -5,8 +5,12 @@ import PortalLoader from "@/components/PortalLoader";
 import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
 import { AuthContext } from "@/providers/AuthProvider";
 import {
-  Col, Row, StyledChatInput, StyledChatInputContainer,
-  StyledChatPreview, StyledIcon
+  Col,
+  Row,
+  StyledChatInput,
+  StyledChatInputContainer,
+  StyledChatPreview,
+  StyledIcon,
 } from "@/styles/StyledComponents";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import {
@@ -16,7 +20,7 @@ import {
   Image,
   Text,
   Textarea,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useContext, useRef } from "react";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
@@ -281,7 +285,7 @@ const ChatInput = (props: any) => {
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
                 onKeyDown={event => {
-                  props.hookChat?.keyDownMessage(event);
+                  props.chatContext?.keyDownMessage(event);
                 }}
                 placeholder="Message..."
                 height="auto"
@@ -337,7 +341,10 @@ const ChatInput = (props: any) => {
       <Row className="vr-center hr-between w-100">
         <IconImage path="IconDarkReply.png" style={{ className: "m-r-0-5" }} />
         <IconImage path="IconDarkDelete.png" style={{ className: "m-r-0-5" }} />
-        <IconImage path="IconDarkForward.png" style={{ className: "m-r-0-5" }} />
+        <IconImage
+          path="IconDarkForward.png"
+          style={{ className: "m-r-0-5" }}
+        />
       </Row>
     );
   };

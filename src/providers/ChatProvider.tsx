@@ -15,6 +15,7 @@ export type ChatContextType = {
   streamClient: any | undefined;
   streamContext: any | undefined;
   initiate: (channel: any, userAddress: any) => void;
+  // sendMessage: () => void;
 };
 
 export const ChatContext = createContext<ChatContextType>({
@@ -26,6 +27,7 @@ export const ChatContext = createContext<ChatContextType>({
   channel: null,
   streamClient: null,
   streamContext: null,
+  // sendMessage: () => {},
   initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
 });
 
@@ -33,6 +35,7 @@ export const ChatProvider = ({ children }: any) => {
   const streamContext = useContext(StreamContext) as StreamContextType;
   const xmtpContext = useContext(XmtpContext);
   const router = useRouter();
+  console.log("streamContext from chatContext", streamContext);
 
   const _fetchChannels = () => {
     switch (router.pathname) {
@@ -61,6 +64,14 @@ export const ChatProvider = ({ children }: any) => {
         return xmtpContext.fetchXmtpConversation;
     }
   };
+  const _sendMessage = (message: string) => {
+    switch (router.pathname) {
+      case "/chat":
+        return streamContext?.initiate;
+      case "/chat/dm":
+        return xmtpContext.sendXmtpMessage();
+    }
+  };
 
   return (
     <ChatContext.Provider
@@ -74,6 +85,7 @@ export const ChatProvider = ({ children }: any) => {
         channels: _fetchChannels(),
         channel: _fetchChannel(),
         initiate: _initiateChannel(),
+        // sendMessage: _sendMessage(),
       }}
     >
       {children}
