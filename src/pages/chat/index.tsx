@@ -24,7 +24,7 @@ function ChatComponent() {
       modalAuth.onOpen();
     }
 
-  }, [authContext?.isConnected])
+  }, [authContext?.isConnected, modalAuth.isOpen])
 
   const TemplateAuth = () => {
     return (

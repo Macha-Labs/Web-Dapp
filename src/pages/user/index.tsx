@@ -78,7 +78,7 @@ const User = () => {
     else {
       modalAuth.onClose();
     }
-  }, [authContext?.user?.lens?.id]);
+  }, [authContext?.isConnected, modalAuth.isOpen]);
 
   const TemplateRight = () => {
     console.log(window, "WINDOW");
