@@ -8,7 +8,7 @@ const ChatWindow = (props: any) => {
   const hookStreamChannelMessages = useStreamChannelMessages(props.chatContext?.hookChannel?.channel);
   const messageListRef = useRef<any>();
   const itemsRef = useRef<any>([]);
-  const [isScrollAtBottom, setScrollAtBottom] = useState(true)
+  const [isScrollAtBottom, setIsScrollAtBottom] = useState(false)
 
   useEffect(() => {
     // Scroll to the bottom of the list when new items are added
@@ -33,9 +33,9 @@ const ChatWindow = (props: any) => {
         (event: any) => {
           const { scrollHeight, scrollTop, clientHeight } = event.target;
           if (Math.abs(scrollHeight - clientHeight - scrollTop) < 1) {
-            setScrollAtBottom(true);
+            setIsScrollAtBottom(true);
           } else {
-            setScrollAtBottom(false);
+            setIsScrollAtBottom(false);
           }
         },
         false
@@ -47,6 +47,14 @@ const ChatWindow = (props: any) => {
       };
     }
   }, [hookStreamChannelMessages?.messages]);
+
+  useEffect(() => {
+    if (messageListRef && messageListRef.current && !isScrollAtBottom)  {
+      messageListRef.current.scrollTop =
+          messageListRef?.current?.scrollHeight;
+          setIsScrollAtBottom(true)
+    }
+  }, [])
 
   // const messageAreaHeight = props.hookMessages?.messages.map((message: any, index: any) => {
   //   console.log(itemsRef?.current[index], itemsRef?.current[index]?.offsetHeight, itemsRef?.current[index]?.clientHeight);
