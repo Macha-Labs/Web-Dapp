@@ -2,10 +2,10 @@ import { useEffect, useRef } from 'react';
 import { VariableSizeList } from 'react-window';
 import ChatMessage from "./ChatMessage";
 import AutoSizer from "react-virtualized-auto-sizer";
-import useStreamChannelMessages from '@/hooks/stream/useStreamChannelMessages';
+import useStreamChannelActions from '@/hooks/stream/useStreamChannelActions';
 
 const ChatWindow = (props: any) => {
-  const hookStreamChannelMessages = useStreamChannelMessages(props.chatContext?.hookChannel?.channel);
+  const hookStreamChannelMessages = useStreamChannelActions(props.chatContext?.hookChannel?.channel);
   const messageListRef = useRef<any>();
   const itemsRef = useRef<any>([]);
 
