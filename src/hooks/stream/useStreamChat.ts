@@ -8,7 +8,7 @@ import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import useMention from "./useMention";
-import { ChatContext } from "stream-chat-react";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const useStreamChat = (client: any, channel: any) => {
   console.log("Checking for useStreamChat re-rendering");

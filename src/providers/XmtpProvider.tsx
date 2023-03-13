@@ -7,7 +7,7 @@ import { ChannelXMTP$ } from "@/schema/channel";
 import { XmtpMessage$ } from "@/schema/message";
 export type XmtpContextType = {
   fetchXmtpConversation: (text: string) => void;
-  sendXmtpMessage: () => void;
+  sendXmtpMessage: any | undefined;
   fetchXmtpConversationList: any | undefined;
   allConversations: any | undefined;
   conversation: any | undefined;
