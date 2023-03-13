@@ -10,7 +10,7 @@ const ChatWindow = (props: any) => {
   );
   const xmtpContext = useContext(XmtpContext);
   const messageListRef = useRef<any>();
-  const [messages, setMessages] = useState<any>(xmtpContext.messages);
+  const [messages, setMessages] = useState<any>([]);
   const itemsRef = useRef<any>([]);
   const router = useRouter();
   console.log(hookStreamChannelMessages.messages, "messages");
@@ -34,7 +34,7 @@ const ChatWindow = (props: any) => {
     if (router.pathname == "/chat") {
       setMessages(hookStreamChannelMessages.messages || []);
     }
-  }, [hookStreamChannelMessages.messages, router.pathname]);
+  }, [router.pathname, hookStreamChannelMessages.messages]);
 
   useEffect(() => {
     if (router.pathname == "/chat/dm") {
@@ -53,20 +53,6 @@ const ChatWindow = (props: any) => {
     }
   );
 
-  const templateMessages = ({ index, style }: any) => {
-    const message = props.hookMessages?.messages[index];
-
-    return (
-      <div style={style}>
-        <ChatMessage
-          message={message}
-          hookChat={{}}
-          authContext={props.authContext}
-          key={`a-${message.id}`}
-        />
-      </div>
-    );
-  };
 
   return (
     <>
