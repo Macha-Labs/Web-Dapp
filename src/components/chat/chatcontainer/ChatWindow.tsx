@@ -1,9 +1,9 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
 import { StyledDateTag } from "@/styles/StyledComponents";
-import useStreamChannelActions from "@/hooks/stream/useStreamChannelActions";
 import { XmtpContext } from "@/providers/XmtpProvider";
 import { useRouter } from "next/router";
+import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
 
 const ChatWindow = (props: any) => {
   const hookStreamChannelMessages = useStreamChannelMessages(
