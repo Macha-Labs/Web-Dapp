@@ -285,7 +285,7 @@ const ChatInput = (props: any) => {
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
                 onKeyDown={event => {
-                  props.chatContext?.keyDownMessage(event);
+                  props.hookChat?.keyDownMessage(event);
                 }}
                 placeholder="Message..."
                 height="auto"
@@ -293,8 +293,10 @@ const ChatInput = (props: any) => {
               />
             </Col>
             <Col className="vr-center hr-center sideIcons">
-              <span onClick={(e: any) =>  props.hookChat?.keyDownMessage(e, true)}>
-                <IconImage  path="IconDarkFiles.png" size="30" />
+              <span
+                onClick={(e: any) => props.hookChat?.keyDownMessage(e, true)}
+              >
+                <IconImage path="IconDarkFiles.png" size="30" />
               </span>
             </Col>
           </StyledChatInput>
