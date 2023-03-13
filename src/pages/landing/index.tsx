@@ -35,9 +35,9 @@ const LandingPage = () => {
                 </Link>
               </div>
               <ul className="navbar-nav justify-content-center d-flex align-items-center flex-row mt-2 mt-md-0">
-                <li className="nav-item">
+                <li className="nav-item hiring ms-2">
                   <Link
-                    className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
+                    className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/"
                   >
                     Product
@@ -1051,7 +1051,7 @@ const LandingPage = () => {
         }
 
         .hiring {
-          color: #348ac7;
+          color: #348ac7 !important;
         }
 
         .subHeading {
