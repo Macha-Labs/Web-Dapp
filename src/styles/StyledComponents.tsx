@@ -1039,4 +1039,5 @@ export const StyledDateTag = styled.p<{visible: any}>`
   opacity: 1;
   transition: all 1s ease-out;
   visibility:${(props: any) => props.visible || "hidden"};
+  font-size: 13px;
 `
