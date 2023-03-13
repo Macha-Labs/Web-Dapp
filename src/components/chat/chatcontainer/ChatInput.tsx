@@ -296,7 +296,7 @@ const ChatInput = (props: any) => {
               <span
                 onClick={(e: any) => props.hookChat?.keyDownMessage(e, true)}
               >
-                <IconImage path="IconDarkFiles.png" size="30" />
+                <IconImage path="IconDarkSend.svg" size="30" />
               </span>
             </Col>
           </StyledChatInput>
