@@ -53,17 +53,6 @@ const Nav = (props: any) => {
                     />
                   </Tooltip>
                 </Link>
-                <Link href="/user">
-                  <IconImage
-                    path="IconBrandProfile.png"
-                    style={{
-                      className: `m-b-1 ${
-                        active === "user" ? "state_active state_hover scale" : ""
-                      } `,
-                    }}
-                    onClick={() => setActive("user")}
-                  />
-                </Link>
                 {/* <IconImage
                   path="IconBrandDiscover.png"
                   style={{
@@ -76,6 +65,17 @@ const Nav = (props: any) => {
               </Col>
 
               <Col className="hr-center">
+                <Link href="/user">
+                  <IconImage
+                    path="IconBrandProfile.png"
+                    style={{
+                      className: `m-b-1 ${
+                        active === "user" ? "state_active state_hover scale" : ""
+                      } `,
+                    }}
+                    onClick={() => setActive("user")}
+                  />
+                </Link>
                 <IconImage
                   path="IconDarkBell.png"
                   style={{ className: "m-b-1" }}
