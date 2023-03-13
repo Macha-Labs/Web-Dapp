@@ -44,7 +44,9 @@ const Nav = (props: any) => {
                       path="IconDarkHash.png"
                       style={{
                         className: `m-b-1 ${
-                          router.pathname === "/chat" ? "state_active state_hover scale" : ""
+                          router.pathname === "/chat"
+                            ? "state_active state_hover scale"
+                            : ""
                         } `,
                       }}
                     />
@@ -58,7 +60,9 @@ const Nav = (props: any) => {
                     path="IconBrandChat.png"
                     style={{
                       className: `m-b-1 ${
-                        router.pathname === "/chat/dm" ? "state_active state_hover scale" : ""
+                        router.pathname === "/chat/dm"
+                          ? "state_active state_hover scale"
+                          : ""
                       } `,
                     }}
                   />
@@ -68,7 +72,9 @@ const Nav = (props: any) => {
                     path="IconBrandProfile.png"
                     style={{
                       className: `m-b-1 ${
-                        router.pathname === "/user" ? "state_active state_hover scale" : ""
+                        router.pathname === "/user"
+                          ? "state_active state_hover scale"
+                          : ""
                       } `,
                     }}
                   />

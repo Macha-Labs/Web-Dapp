@@ -5,6 +5,7 @@ import ModalSlider from "@/components/modal/ModalSlider";
 import Pop from "@/components/pop/Pop";
 import UserProfile from "@/components/user/UserProfile";
 import { truncateAddress } from "@/helpers";
+import useOnScreen from "@/hooks/other/useOnScreen";
 import LayoutFilePreview from "@/layouts/chat/LayoutFilePreview";
 import LayoutImagePreview from "@/layouts/chat/LayoutImagePreview";
 import LayoutLinkPreview from "@/layouts/chat/LayoutLinkPreview";
@@ -24,7 +25,7 @@ import {
   useToast,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import emoji from "../../../data/emoji.json";
 
 const ChatMessage = (props: any) => {
@@ -36,6 +37,14 @@ const ChatMessage = (props: any) => {
   const hours = date.getHours().toString().padStart(2, "0");
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const time = `${hours}:${minutes}`;
+  const chatRef = useRef<HTMLDivElement>(null);
+  const isIntersecting = useOnScreen(chatRef);
+
+  useEffect(() => {
+    if (isIntersecting) {
+      props.handleDateTag(props?.message.created_at);
+    }
+  }, [isIntersecting]);
 
   const actionsData = [
     {
@@ -108,6 +117,10 @@ const ChatMessage = (props: any) => {
     ) {
       return <LayoutFilePreview key={attachment?.id} attachment={attachment} />;
     }
+  };
+
+  const handleReplyToView = (id: any) => {
+    props.executeScroll(id);
   };
 
   const handleSelectedUser = (user: any) => {
@@ -212,7 +225,10 @@ const ChatMessage = (props: any) => {
     return (
       <>
         {props?.message?.quoted_message && (
-          <Col className="m-b-1 replyTo">
+          <Col
+            onClick={() => handleReplyToView(props.message.quoted_message_id)}
+            className="m-b-1 replyTo"
+          >
             <Row>
               <Text className="m-r-0-5" fontSize="sm">
                 Replying
@@ -237,8 +253,12 @@ const ChatMessage = (props: any) => {
 
   return (
     <>
-      <StyledConversation key={`b-${props?.message?.id}`}>
-        <Row className="">
+      <StyledConversation
+        style={props.scrollToId == props.message.id ? { opacity: 1 } : {}}
+        key={`b-${props?.message?.id}`}
+        ref={chatRef}
+      >
+        <Row className="w-100">
           <Col>
             <Row>
               {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
@@ -343,7 +363,7 @@ const ChatMessage = (props: any) => {
               <Row className="vr-center">
                 {Object.keys(props?.message.reaction_scores).length > 0 &&
                   Object.keys(props.message.reaction_scores).map(
-                    (item: any) => {
+                    (item: any, i: any) => {
                       return (
                         <Button
                           className="w-content m-r-0-5"
@@ -355,7 +375,7 @@ const ChatMessage = (props: any) => {
                               props?.message
                             );
                           }}
-                          key={`f-${props?.message?.id}`}
+                          key={`f-${props?.message?.id}-${i}`}
                         >
                           {emoji[item as keyof typeof emoji]}{" "}
                           {props?.message?.reaction_scores[item]}
@@ -366,7 +386,11 @@ const ChatMessage = (props: any) => {
               </Row>
             )}
           </Col>
-          <Row className="positionPop action">
+          <Row
+            className={`positionPop ${
+              props.scrollToId == props.message.id ? "" : "action"
+            }`}
+          >
             <TemplateReactions />
             <TemplateActions />
           </Row>

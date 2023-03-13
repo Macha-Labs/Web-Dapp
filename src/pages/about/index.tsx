@@ -11,7 +11,7 @@ function about() {
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
             <div className=" d-flex flex-column flex-md-row">
               <div className="col">
-                <Link href="/landing">
+                <Link href="/">
                   <Image
                     className="headerLogo"
                     src="/assets/metawork-image-text logo.svg"
@@ -22,19 +22,19 @@ function about() {
                   />
                 </Link>
               </div>
-              <ul className="navbar-nav d-flex justify-content-center align-items-center flex-row mt-2 mt-md-0">
+              <ul className="navbar-nav justify-content-center d-flex align-items-center flex-row mt-2 mt-md-0">
                 <li className="nav-item">
                   <Link
                     className="nav-link  d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
-                    href="/landing"
+                    href="/"
                   >
-                    Platform
+                    Product
                   </Link>
                 </li>
 
-                <li className="nav-item">
+                <li className="nav-item hiring">
                   <Link
-                    className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
+                    className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
                     href="/about"
                   >
                     About Us
@@ -46,7 +46,11 @@ function about() {
             <div className="d-flex align-items-center" id="">
               <div className="row overflow-hidden flex-md-row position-relative mx-2 hideOnMobile">
                 <div className="column align-items-center">
-                  <Link className="text-muted" href="#">
+                  <Link
+                    className="text-muted"
+                    href="https://twitter.com/metaworklabs"
+                    target="_blank"
+                  >
                     <img
                       className="twitterLogo"
                       src="/assets/brand-twitter.svg"
@@ -94,9 +98,10 @@ function about() {
             <strong>MetaWork Labs</strong> began with the simple idea of
             empowering people and society, and thus we have come together to
             co-create products and infras with Web3 technology. As a part of our
-            journey, we have built a web3 native workspace suit and made its
-            first product live. Stay tuned, for other interesting projects to be
-            released this year.
+            journey, we have built a web3 native workspace suite and made its
+            first product live.
+            <br />
+            Stay tuned, for other interesting projects to be released this year.
           </p>
         </div>
         <div className="mt-5 d-flex  flex-column align-items-center align-items-md-start paddingBox">
@@ -131,7 +136,7 @@ function about() {
           </h3>
           <div>
             <div className="d-flex flex-wrap justify-content-center justify-content-md-start">
-              <div className="d-flex align-items-center teamMembers me-md-3  mt-3 mt-md-1 ">
+              <div className="d-flex align-items-center teamMembers me-md-3  mt-3 ">
                 <img src="./assets/avatar_saksham.png" alt="avatar" />
                 <div className="d-flex flex-column ms-3 align-items-start">
                   <h4 className="teamMembersHeading mb-1">Saksham Jain </h4>
@@ -331,18 +336,24 @@ function about() {
               and other things that we are building at MetaWork Labs
             </p>
           </div>
-
           <div className="borderBox d-flex flex-column align-items-start py-3 px-5 backgroundDarkCard ecosystemCard mt-3 mt-md-0">
-            <img
-              src="./assets/dark-laptop.svg"
-              className="fileLogo my-3"
-              alt="File Icon"
-            />
-            <h3 className="highlight ecosystemCardHeading">Open Positions</h3>
-            <p className="ecosystemCardPara my-3 alignLeftText">
-              Be a part of Web3 Ecosystem. Let’s come together and create an
-              Enterprise Grade Decentralized Workspace suite.
-            </p>
+            <Link
+              target="_blank"
+              href="https://bit.ly/metawork-hiring"
+              className=""
+            >
+              <img
+                src="./assets/dark-laptop.svg"
+                className="fileLogo my-3"
+                alt="File Icon"
+              />
+
+              <h3 className="highlight ecosystemCardHeading">Open Positions</h3>
+              <p className="ecosystemCardPara my-3 alignLeftText">
+                Be a part of Web3 Ecosystem. Let’s come together and create an
+                Enterprise Grade Decentralized Workspace suite.
+              </p>
+            </Link>
           </div>
         </div>
         <div className="d-flex justify-content-between  flex-column flex-md-row paddingBox">
@@ -383,16 +394,14 @@ function about() {
           <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
             <Link
               target="_blank"
-              href="https://github.com/metaworklabs"
+              href="https://www.linkedin.com/company/metaworklabs/"
               className=" d-flex flex-grow-1 justify-content-between"
             >
               <div className="d-flex align-items-center ">
-                <img
-                  src="./assets/base-github.svg"
-                  className="footerlogoos"
-                  alt="twitterlogo"
-                />
-                <h2 className="bottomLinks mt-1 ps-4">Github</h2>
+                <div className="footerlogoos">
+                  <Landing path="IconLinkedin.svg" />
+                </div>
+                <h2 className="bottomLinks mt-1 ps-4">LinkedIn</h2>
               </div>
               <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
             </Link>
@@ -633,7 +642,7 @@ function about() {
           width: 48%;
         }
         .borderBox {
-          border: 1px solid #246bfd;
+          border: 1px solid rgba(32, 108, 255, 0.38);
           border-radius: 20px;
         }
         .sectionHeading {

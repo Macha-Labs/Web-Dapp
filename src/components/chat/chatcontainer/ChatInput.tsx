@@ -235,15 +235,16 @@ const ChatInput = (props: any) => {
             type="file"
             hidden
           />
-          <Button
+          {/* TODO */}
+          {/* <Button
             variant="transparent"
             size="md"
             className="text-start"
             rightIcon={<IconImage path="IconDarkFiles.png" />}
           >
             <Row className="hr-between w-100">Create Poll</Row>
-          </Button>
-          <Button
+          </Button> */}
+          {/* <Button
             variant="transparent"
             size="md"
             className="text-start"
@@ -259,7 +260,7 @@ const ChatInput = (props: any) => {
             rightIcon={<IconImage path="IconDarkWallet.png" />}
           >
             <Row className="hr-between w-100">Send Payment</Row>
-          </Button>
+          </Button> */}
         </Col>
       </Pop>
     );
