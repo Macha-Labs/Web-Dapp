@@ -1,10 +1,9 @@
 import IconImage from "@/components/icons/IconImage";
 import { AuthContext } from "@/providers/AuthProvider";
-import { Col, StyledCard} from "@/styles/StyledComponents";
-import { Button, Heading, Toast, useToast } from "@chakra-ui/react";
-import { useContext } from "react";
+import { Col, StyledCard } from "@/styles/StyledComponents";
+import { Button, Heading, useToast } from "@chakra-ui/react";
+import { useContext, useState } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
-import {useState} from "react";
 
 const AuthCard = () => {
     const authContext = useContext(AuthContext);

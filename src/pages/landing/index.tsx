@@ -38,7 +38,7 @@ const LandingPage = () => {
                 <li className="nav-item">
                   <Link
                     className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
-                    href="/landing"
+                    href="/chat"
                   >
                     Platform
                   </Link>

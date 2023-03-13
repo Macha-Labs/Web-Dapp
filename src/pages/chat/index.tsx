@@ -1,15 +1,12 @@
-import ChatList from "@/components/chat/ChatList";
-import { StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledComponents";
-import React, { useEffect} from "react";
-import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
-import Nav from "@/components/nav/Nav";
-import ModalWindow from "@/components/modal/ModalWindow";
 import AuthCard from "@/components/auth/AuthCard";
-import { useDisclosure } from "@chakra-ui/react";
-import { useContext } from "react";
+import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
+import ChatList from "@/components/chat/ChatList";
+import ModalWindow from "@/components/modal/ModalWindow";
+import Nav from "@/components/nav/Nav";
 import { AuthContext } from "@/providers/AuthProvider";
-import { useRouter } from "next/router";
-import { ChatContext } from "@/providers/ChatProvider";
+import { StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledComponents";
+import { useDisclosure } from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
 
 function ChatComponent() {
   const modalAuth = useDisclosure();
