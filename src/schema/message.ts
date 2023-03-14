@@ -10,6 +10,7 @@ export const StreamMessage$ = (data: any) => {
     reactionScores: data?.reaction_scores,
     reactionCount: data?.reaction_count,
     user: data?.user,
+    own_reactions: data?.own_reactions
   };
 };
 export const XmtpMessage$ = (data: any) => {
