@@ -1,7 +1,7 @@
 import { Button, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { Landing } from "../../components/icons/IconImage";
+import {Landing} from "../../components/icons/IconImage";
 
 const LandingPage = () => {
   const sliderText = [
@@ -23,7 +23,7 @@ const LandingPage = () => {
           <div className="container-fluid d-flex flex-column flex-md-row align-items-center">
             <div className=" d-flex flex-column flex-md-row">
               <div className="col">
-                <Link href="/landing">
+                <Link href="/">
                   <Image
                     className="headerLogo"
                     src="/assets/metawork-image-text logo.svg"
@@ -35,12 +35,12 @@ const LandingPage = () => {
                 </Link>
               </div>
               <ul className="navbar-nav justify-content-center d-flex align-items-center flex-row mt-2 mt-md-0">
-                <li className="nav-item">
+                <li className="nav-item hiring ms-2">
                   <Link
-                    className="nav-link hiring d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
-                    href="/chat"
+                    className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 navigationBold"
+                    href="/"
                   >
-                    Platform
+                    Product
                   </Link>
                 </li>
 
@@ -78,8 +78,8 @@ const LandingPage = () => {
 
         <div className="container-fluid g-0 d-flex w-100 h-100 mt-5 mt-md-0 flex-column paddingBox2">
           <div className="d-flex justify-content-center align-items-center">
-            <div className="desktopHero ">
-              <div className="col mt-md-5">
+            <div className="desktopHero mt-md-4">
+              <div className="col">
                 <h1 className="heroHeading highlight alignLeftText">
                   Web3 HQ <br /> For Teams & Guilds{" "}
                 </h1>
@@ -118,8 +118,8 @@ const LandingPage = () => {
         <div className="d-flex flex-column flex-md-row paddingBox justify-content-between align-items-center mt-md-5 w-100">
           <div className="heroPara hideOnDesktop">
             <p className=" mb-4 mb-md-0">
-              Private and Secured Decentralized - Workspace Suit inbuilt with
-              encryption and token gating technologies for Teams, Enterprises,
+              Private and Secured Decentralized - Workspace Suite inbuilt with
+              encryption and token gating technologies for teams, enterprises,
               and Guilds
             </p>
           </div>
@@ -199,7 +199,7 @@ const LandingPage = () => {
           <div className="mb-md-5">
             <h1 className="m-0 sectionWorkspaceHeading">
               <strong>
-                <span className="highlight">Workspace Suit</span>
+                <span className="highlight">Workspace Suite</span>
               </strong>
             </h1>
           </div>
@@ -716,14 +716,18 @@ const LandingPage = () => {
                 Schedule a meeting with our team and ask anything about creating
                 your own Communities and HQs on MetaWork.
               </p>
-              <Link target="_blank" href="https://cal.com/metaworklabs">
+              <Link
+                target="_blank"
+                href="https://cal.com/metaworklabs "
+                className=""
+              >
                 <button className="btn btn-dark-blue mt-4 px-4  d-flex">
                   Schedule Meeting
                 </button>
               </Link>
             </div>
 
-            <div className=" me-5 hideOnMobile d-md-flex align-items-md-center">
+            <div className=" me-5 hideOnMobile">
               <img src="./assets/schedule meeting.png" alt="calender" />
             </div>
           </div>
@@ -766,16 +770,14 @@ const LandingPage = () => {
             <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
               <Link
                 target="_blank"
-                href="https://github.com/metaworklabs"
+                href="https://www.linkedin.com/company/metaworklabs/"
                 className=" d-flex flex-grow-1 justify-content-between"
               >
                 <div className="d-flex align-items-center ">
-                  <img
-                    src="./assets/base-github.svg"
-                    className="footerlogoos"
-                    alt="twitterlogo"
-                  />
-                  <h2 className="bottomLinks mt-1 ps-4">Github</h2>
+                  <div className="footerlogoos">
+                    <Landing path="IconLinkedin.svg" />
+                  </div>
+                  <h2 className="bottomLinks mt-1 ps-4">LinkedIn</h2>
                 </div>
                 <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
               </Link>
@@ -1049,7 +1051,7 @@ const LandingPage = () => {
         }
 
         .hiring {
-          color: #348ac7;
+          color: #348ac7 !important;
         }
 
         .subHeading {
@@ -1168,8 +1170,8 @@ const LandingPage = () => {
           /* border-image-slice: 1;
   border-width: 2px; */
           border-radius: 16px;
-          padding: 15px 5px;
-          width: 250px;
+          padding: 15px 10px;
+          width: 230px;
         }
         .partnersImg {
           height: 48px;
@@ -1313,6 +1315,7 @@ const LandingPage = () => {
         }
         .bottomSocialLinks {
           cursor: pointer;
+          width: 30%;
         }
         .bottomSocialLinksWidth {
           width: 30%;
@@ -1442,6 +1445,9 @@ const LandingPage = () => {
           .desktopHero {
             display: none;
           }
+          .bottomSocialLinksWidth {
+            width: 100%;
+          }
           .heroPara {
             width: 100%;
             font-size: 14px;
@@ -1449,8 +1455,6 @@ const LandingPage = () => {
           }
           .bottomSocialLinks {
             cursor: pointer;
-          }
-          .bottomSocialLinksWidth {
             width: 100%;
           }
           .footerLogoMetaworks {

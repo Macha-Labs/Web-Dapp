@@ -28,6 +28,7 @@ const ChatInput = (props: any) => {
   const createPostRef = useRef<any>();
   const authContext = useContext(AuthContext);
 
+
   const templateReply = () => {
     return (
       <>
@@ -230,15 +231,16 @@ const ChatInput = (props: any) => {
             type="file"
             hidden
           />
-          <Button
+          {/* TODO */}
+          {/* <Button
             variant="transparent"
             size="md"
             className="text-start"
             rightIcon={<IconImage path="IconDarkFiles.png" />}
           >
             <Row className="hr-between w-100">Create Poll</Row>
-          </Button>
-          <Button
+          </Button> */}
+          {/* <Button
             variant="transparent"
             size="md"
             className="text-start"
@@ -254,7 +256,7 @@ const ChatInput = (props: any) => {
             rightIcon={<IconImage path="IconDarkWallet.png" />}
           >
             <Row className="hr-between w-100">Send Payment</Row>
-          </Button>
+          </Button> */}
         </Col>
       </Pop>
     );
@@ -289,9 +291,7 @@ const ChatInput = (props: any) => {
               />
             </Col>
             <Col className="vr-center hr-center sideIcons">
-              <StyledIcon onClick={(e) =>  props.hookChat?.keyDownMessage(e, true)} className="circled">
-              <IconImage path="IconDarkFiles.png" size="30" />
-              </StyledIcon>
+              <IconImage onClick={(e: any) =>  props.hookChat?.keyDownMessage(e, true)} path="IconDarkSend.svg" size="30" />
             </Col>
           </StyledChatInput>
         </Col>
