@@ -65,20 +65,25 @@ export const XmtpProvider = ({ children }: any) => {
     }
   }, [xmtpClientAddress]);
 
-  const fetchXmtpConversation = async (channel: any) => {
-    const conversation = await xmtpClient.conversations.newConversation(
-      channel?.id
-    );
-    const messages = await conversation.messages({
+
+  const _loadMessages = async(convData: any) => {
+    const messages = await convData?.messages({
       direction: SortDirection.SORT_DIRECTION_ASCENDING,
     });
-    const messagesData = messages.map((item: any) => {
+    const messagesData = messages?.map((item: any) => {
       return XmtpMessage$(item);
     });
     // console.log("conversation", conversation.send("hulle hula le hula"));
 
     setMessages(messagesData);
-    setConversation(conversation);
+  }
+
+  const fetchXmtpConversation = async (channel: any) => {
+    const result = await xmtpClient.conversations.newConversation(
+      channel?.id
+    );
+    _loadMessages(result)
+    setConversation(result);
   };
   const fetchXmtpConversationList = async () => {
     const conversationList = await xmtpClient.conversations.list();
@@ -89,10 +94,13 @@ export const XmtpProvider = ({ children }: any) => {
   };
 
   const sendXmtpMessage = async (data: any) => {
-    console.log("sent");
     return await conversation.send(data.text);
-    // setConversation(response.conversation);
   };
+
+  useEffect(() => {
+    console.log('useEffect[conversation]')
+    _loadMessages();
+  }, [conversation != (undefined || null)])
 
   return (
     <XmtpContext.Provider
