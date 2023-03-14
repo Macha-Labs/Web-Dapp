@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { VariableSizeList } from 'react-window';
 import ChatMessage from "./ChatMessage";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { StyledDateTag } from '@/styles/StyledComponents';
+import { StyledDateTag, StyledMoveToBottom } from '@/styles/StyledComponents';
 import useStreamChannelActions from '@/hooks/stream/useStreamChannelActions';
+import IconImage from '@/components/icons/IconImage';
 
 const ChatWindow = (props: any) => {
   const hookStreamChannelMessages = useStreamChannelActions(props.chatContext?.hookChannel?.channel);
@@ -33,6 +34,19 @@ const ChatWindow = (props: any) => {
     setDateTag(dateTagString);
   };
 
+  const scrollToBottom = () => {
+    if (messageListRef && messageListRef.current && !isScrollAtBottom) {
+      messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
+      setIsScrollAtBottom(true);
+    }
+  }
+
+  useEffect(() => {
+
+   // console.log('isScrollAtBottom', isScrollAtBottom);
+    
+  }, [isScrollAtBottom])
+
   useEffect(() => {
     // Scroll to the bottom of the list when new items are added
     if (messageListRef && messageListRef.current) {
@@ -56,9 +70,9 @@ const ChatWindow = (props: any) => {
         (event: any) => {
           setDateTagVisible(true);
           const { scrollHeight, scrollTop, clientHeight } = event.target;
-          if (Math.abs(scrollHeight - clientHeight - scrollTop) < 1) {
+          if (Math.abs(scrollHeight - clientHeight - scrollTop) < 10) {
             setIsScrollAtBottom(true);
-          } else {
+          } else {        
             setIsScrollAtBottom(false);
           }
 
@@ -79,10 +93,7 @@ const ChatWindow = (props: any) => {
   }, [hookStreamChannelMessages?.messages]);
 
   useEffect(() => {
-    if (messageListRef && messageListRef.current && !isScrollAtBottom) {
-      messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
-      setIsScrollAtBottom(true);
-    }
+    scrollToBottom()
   }, []);
 
   const executeScroll = (id: any) => {
@@ -132,7 +143,9 @@ const ChatWindow = (props: any) => {
             )
           })}
     </div>
-
+  <StyledMoveToBottom onClick={scrollToBottom} visible={`${!isScrollAtBottom ? 'visible': 'hidden'} `} >
+   <IconImage path="IconDarkFiles.png" size="30" />
+   </StyledMoveToBottom>
    {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 
     <div className="body">
         <AutoSizer>

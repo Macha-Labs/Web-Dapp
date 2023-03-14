@@ -30,6 +30,12 @@ export const StyledImageView = styled.div<{ viewMode: boolean }>`
   }}
 `;
 
+export const StyledMoveToBottom = styled.div<{visible: any}>`
+  position: absolute;
+  bottom: 100px;
+  right: 50px;
+  visibility: ${props => props.visible || 'hidden'};
+`
 
 export const StyledIframeView = styled.div`
   position: fixed;

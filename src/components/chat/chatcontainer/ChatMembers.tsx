@@ -29,10 +29,6 @@ const ChatMembers = (props: any) => {
     chatContext?.streamContext.reloadMembers();
   }
 
-  useEffect(() => {
-console.log("chatContext.hookMembers", chatContext, authContext.address);
-
-  }, [])
 
   return (
     <>
