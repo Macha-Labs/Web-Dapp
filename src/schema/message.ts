@@ -7,8 +7,8 @@ export const StreamMessage$ = (data: any) => {
     peerAddress: undefined,
     attachments: data?.attachments,
     pinned: data?.pinned,
-    reactionScores: data?.reaction_scores,
-    reactionCount: data?.reaction_count,
+    reaction_scores: data?.reaction_scores,
+    reaction_count: data?.reaction_count,
     user: data?.user,
     own_reactions: data?.own_reactions
   };
