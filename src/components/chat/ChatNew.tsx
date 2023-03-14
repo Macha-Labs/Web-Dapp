@@ -1,20 +1,20 @@
 import { helperIPFS, truncateAddress } from "@/helpers";
+import useChatChannels from "@/hooks/chat/useChatChannels";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import LayoutCard from "@/layouts/LayoutCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
 import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useContext } from "react";
 
 const ChatNew = (props: any) => {
   const chatContext = useContext(ChatContext);
   const [tab, setTab] = useState("members");
   const [inputFocus, setInputFocus] = useState(0)
+  const hookChatChannels = useChatChannels();
 
   /**
    *
@@ -27,8 +27,7 @@ const ChatNew = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    chatContext?.streamContext?.reloadChannelList();
-    
+    hookChatChannels.reloadChannels();
     props.modal.onClose();
   };
 

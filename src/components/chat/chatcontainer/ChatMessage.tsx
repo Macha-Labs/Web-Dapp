@@ -291,7 +291,7 @@ const ChatMessage = (props: any) => {
           <Col
             className={
               props.authContext?.address.toLowerCase() ==
-              props?.message?.user?.id.toLowerCase()
+              props?.message?.user?.id
                 ? "active message"
                 : "message"
             }

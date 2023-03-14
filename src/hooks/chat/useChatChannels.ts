@@ -20,10 +20,18 @@ const useChatChannels = () => {
         }
       };
 
+    const _reloadChannels = () => {
+      streamContext.reloadChannelList();
+    }
+
     useEffect(() => {
-        const result = _fetchChannels();
-        setChannels(result)
-    }, [streamContext?.hookChannels.channels != (undefined || null)])
+        console.log('Reading channels from stream');
+        if (streamContext?.hookChannels.channels != (undefined || null)) {
+          const result = _fetchChannels();
+          setChannels(result)
+        }
+        
+    }, [streamContext?.hookChannels.channels])
 
     useEffect(() => {
         const result = _fetchChannels();
@@ -33,7 +41,8 @@ const useChatChannels = () => {
       
     return (
         {
-            channels: channels
+            channels: channels,
+            reloadChannels: _reloadChannels
         }
     )
 }
