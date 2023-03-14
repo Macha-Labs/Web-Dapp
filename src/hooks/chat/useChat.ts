@@ -6,11 +6,11 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import useMention from "./useMention";
+import useMention from "../stream/useMention";
 import { ChatContext } from "@/providers/ChatProvider";
 
-const useStreamChat = (client: any, channel: any) => {
-  console.log("Checking for useStreamChat re-rendering");
+const useChat = (client: any, channel: any) => {
+  console.log("Checking for useChat re-rendering");
   const authContext = useContext(AuthContext) as AuthContextType;
   const chatContext = useContext(ChatContext);
 
@@ -46,6 +46,7 @@ const useStreamChat = (client: any, channel: any) => {
   };
 
   const addMessage = async () => {
+    console.log('inside add message');
     setStreamLoading(true);
     if (!authContext?.address) {
       setStreamLoading(false);
@@ -62,7 +63,6 @@ const useStreamChat = (client: any, channel: any) => {
         setStreamLoading(false);
         return;
       }
-
       // addMessageToStream(chatMeta);
       addMessageToXMTP(textareaRef.current.value);
     }
@@ -499,4 +499,4 @@ const useStreamChat = (client: any, channel: any) => {
   };
 };
 
-export default useStreamChat;
+export default useChat;

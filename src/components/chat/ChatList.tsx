@@ -19,13 +19,18 @@ import React, { useState } from "react";
 import Pop from "../pop/Pop";
 import { darkStyle } from "@/styles/StyledConstants";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
+import useChatSelect from "@/hooks/chat/useChatSelect";
+import useChatChannels from "@/hooks/chat/useChatChannels";
 
 const ChatList = (props: any) => {
   const chatProvider = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
+  const hookChatSelect = useChatSelect();
+  const hookChatChannels = useChatChannels();
   const modalChatNew = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
+  console.log('chat list');
   const hookPortalChannel = usePortalChannel(
     {},
     {
@@ -182,7 +187,7 @@ const ChatList = (props: any) => {
             styled={{ className: "m-l-1" }}
           />
         </Row>
-        {!chatProvider?.channels ? (
+        {!hookChatChannels?.channels ? (
           <Col className="body">
             Create your first channel
             <Button size="sm" onClick={props.channelNew}>
@@ -191,10 +196,10 @@ const ChatList = (props: any) => {
           </Col>
         ) : (
           <Col className="body verticlescroll hidescroll">
-            {chatProvider?.channels?.length ? (
+            {hookChatChannels?.channels?.length ? (
               <ul>
                 {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                {chatProvider?.channels.map((item: any, index: number) => (
+                {hookChatChannels?.channels.map((item: any, index: number) => (
                   <StyledChatItem key={item?.index}>
                     {chatProvider?.hookChannels?.actionMessage ==
                       "MULTISELECT" && (
@@ -221,11 +226,7 @@ const ChatList = (props: any) => {
                       <Row
                         className="vr-center w-11-12"
                         onClick={() => {
-                          chatProvider.initiate(item, authContext?.address);
-                          setIsClicked((prevState: any) => [
-                            ...prevState,
-                            index,
-                          ]);
+                          hookChatSelect?.initiate(item, authContext?.address);
                         }}
                       >
                         {/* <Checkbox defaultChecked className="m-r-0-5" /> */}

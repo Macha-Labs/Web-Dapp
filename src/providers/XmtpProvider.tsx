@@ -26,6 +26,7 @@ export const XmtpContext = createContext<XmtpContextType>({
 });
 
 export const XmtpProvider = ({ children }: any) => {
+  console.log("Checking for XMTPProvider re-rendering")
   const authContext = useContext(AuthContext);
   const xmtpClient = authContext.xmtpClient;
   const xmtpClientAddress = authContext.xmtpClientAddress;
