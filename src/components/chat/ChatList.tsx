@@ -77,10 +77,6 @@ const ChatList = (props: any) => {
     }
   );
 
-  useEffect(() => {
-    // chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient);
-    console.log("Channels", chatProvider?.hookChannels?.channels);
-  }, [chatProvider?.hookChannels?.channels]);
 
   const TemplateChatNew = () => {
     return (
@@ -201,7 +197,7 @@ const ChatList = (props: any) => {
                 {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
                 {hookChatChannels?.channels.map((item: any, index: number) => (
                   <StyledChatItem key={item?.index}>
-                    {chatProvider?.hookChannels?.actionMessage ==
+                    {/* {chatProvider?.hookChannels?.actionMessage ==
                       "MULTISELECT" && (
                       <Checkbox
                         className="m-r-0-5"
@@ -212,7 +208,7 @@ const ChatList = (props: any) => {
                           chatProvider.hookChannels?.handleSelectChannel(item)
                         }
                       />
-                    )}
+                    )} */}
                     <Button
                       className="menu-item w-100 m-b-0-5"
                       size="xl"
