@@ -3,7 +3,7 @@ export const StreamMessage$ = (data: any) => {
     id: data?.id,
     text: data?.text,
     createdAt: data?.created_at,
-    createdBy: data?.createdBy.toLowerCase(),
+    createdBy: data?.createdBy?.toLowerCase(),
     peerAddress: undefined,
     attachments: data?.attachments,
     pinned: data?.pinned,

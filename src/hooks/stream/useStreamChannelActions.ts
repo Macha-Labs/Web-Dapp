@@ -92,6 +92,13 @@ const useStreamChannelActions = (channel: any) => {
       chatContext?.streamContext.reloadMembers();
       _setMessages();
     });
+
+    chatContext.streamClient?.on((event: any) => {
+      logger("stream",
+      "useStreamChannel.useEffect",
+      "logging remove member event",
+      [event]);
+    })
   }, [channel]);
 
   const _setMessages = () => {
