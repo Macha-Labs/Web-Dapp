@@ -9,13 +9,13 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { IKContext } from "imagekitio-react";
 import type { AppProps } from "next/app";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { polygonMumbai } from "wagmi/chains";
+import { polygon, polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { XmtpProvider } from "@/providers/XmtpProvider";
 
 const { chains, provider } = configureChains(
-  [polygonMumbai],
+  [polygon],
   [publicProvider()]
 );
 
