@@ -32,7 +32,6 @@ export const XmtpProvider = ({ children }: any) => {
   const [messages, setMessages] = useState<DecodedMessage[]>([]);
   const [conversation, setConversation] = useState<any>();
   const [allConversations, setAllConversations] = useState<any>();
-  const [peerAddress, setPeerAddress] = useState<string>("");
 
   /**
    * @description Function to connect to XMTP to enable messaging
@@ -97,13 +96,13 @@ export const XmtpProvider = ({ children }: any) => {
   return (
     <XmtpContext.Provider
       value={{
-        fetchXmtpConversation,
-        sendXmtpMessage,
+        fetchXmtpConversation: fetchXmtpConversation,
+        sendXmtpMessage: sendXmtpMessage,
         fetchXmtpConversationList,
-        allConversations,
-        conversation,
-        messages,
-        xmtpClientAddress,
+        allConversations: allConversations,
+        conversation: conversation,
+        messages: messages,
+        xmtpClientAddress: xmtpClientAddress,
       }}
     >
       {children}

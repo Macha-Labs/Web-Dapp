@@ -14,7 +14,6 @@ const ChatWindow = (props: any) => {
   const [messages, setMessages] = useState<any>([]);
   const itemsRef = useRef<any>([]);
   const router = useRouter();
-  console.log(hookStreamChannelMessages.messages, "messages");
   const [isScrollAtBottom, setIsScrollAtBottom] = useState(false);
   const [dateTag, setDateTag] = useState("");
   const [dateTagVisible, setDateTagVisible] = useState(false);

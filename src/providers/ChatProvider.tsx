@@ -35,7 +35,6 @@ export const ChatProvider = ({ children }: any) => {
   const streamContext = useContext(StreamContext) as StreamContextType;
   const xmtpContext = useContext(XmtpContext);
   const router = useRouter();
-  console.log("streamContext from chatContext", streamContext);
 
   const _fetchChannels = () => {
     switch (router.pathname) {
