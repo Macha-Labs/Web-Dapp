@@ -99,7 +99,7 @@ export const XmtpProvider = ({ children }: any) => {
 
   useEffect(() => {
     console.log('useEffect[conversation]')
-    _loadMessages();
+    _loadMessages(conversation);
   }, [conversation != (undefined || null)])
 
   return (

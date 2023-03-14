@@ -14,6 +14,7 @@ import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import ChatSearch from "./ChatSearch";
 import { useRouter } from "next/router";
+import { truncateAddress } from "@/helpers";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
@@ -102,7 +103,7 @@ const ChatHeader = (props: any) => {
             <Row>
               <Heading as="h4" size="sm">
                 {props?.chatContext?.channel?.name ||
-                  props?.chatContext?.channel?.peerAddress}
+                  truncateAddress(props?.chatContext?.channel?.peerAddress)}
               </Heading>
               {props?.chatContext?.channel?.raw?.muteStatus()?.muted && (
                 <IconImage

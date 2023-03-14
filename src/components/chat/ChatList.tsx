@@ -2,7 +2,6 @@ import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
 import {
   Avatar,
   Button,
-  Checkbox,
   Text,
   useDisclosure,
   useToast,
@@ -30,7 +29,6 @@ const ChatList = (props: any) => {
   const modalChatNew = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
-  console.log('chat list');
   const hookPortalChannel = usePortalChannel(
     {},
     {
@@ -77,10 +75,6 @@ const ChatList = (props: any) => {
     }
   );
 
-  useEffect(() => {
-    // chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient);
-    console.log("Channels", chatProvider?.hookChannels?.channels);
-  }, [chatProvider?.hookChannels?.channels]);
 
   const TemplateChatNew = () => {
     return (
@@ -201,7 +195,7 @@ const ChatList = (props: any) => {
                 {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
                 {hookChatChannels?.channels.map((item: any, index: number) => (
                   <StyledChatItem key={item?.index}>
-                    {chatProvider?.hookChannels?.actionMessage ==
+                    {/* {chatProvider?.hookChannels?.actionMessage ==
                       "MULTISELECT" && (
                       <Checkbox
                         className="m-r-0-5"
@@ -212,7 +206,7 @@ const ChatList = (props: any) => {
                           chatProvider.hookChannels?.handleSelectChannel(item)
                         }
                       />
-                    )}
+                    )} */}
                     <Button
                       className="menu-item w-100 m-b-0-5"
                       size="xl"
@@ -233,7 +227,7 @@ const ChatList = (props: any) => {
                         <Avatar
                           size="md"
                           className="m-r-0-5"
-                          name={item?.name}
+                          name={truncateAddress(item?.name)}
                         />
                         <Col className="w-100 d-flex flex-col vr-center">
                           <Row>

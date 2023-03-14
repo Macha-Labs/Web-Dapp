@@ -1,4 +1,5 @@
 import ModalSlider from "@/components/modal/ModalSlider";
+import useChatChannels from "@/hooks/chat/useChatChannels";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { ChatContext } from "@/providers/ChatProvider";
@@ -14,6 +15,7 @@ import ChatPermissions from "./ChatPermissions";
 function ChatSetting(props: any) {
   const toast = useToast();
   const modalPinned = useDisclosure();
+  const hookChatChannels = useChatChannels();
   /**
    * @description
    **/
@@ -24,8 +26,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.initiate(null);
+    hookChatChannels.reloadChannels();
     props.modalSettings.onClose();
   };
   const callbackClear = () => {
