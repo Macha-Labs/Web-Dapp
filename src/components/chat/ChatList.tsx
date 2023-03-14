@@ -1,6 +1,6 @@
 import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
 import { Avatar, Button, Checkbox, Text, useDisclosure, useToast } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import ModalSlider from "../modal/ModalSlider";
@@ -65,10 +65,10 @@ const ChatList = (props: any) => {
     }
   );
 
+  const unreadCountRef = useRef<any>([]);
+
   useEffect(() => {
-    // chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient);
-    console.log("Channels", chatProvider?.hookChannels?.channels);
-    
+    // chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient);    
   }, [chatProvider?.hookChannels?.channels]);
 
   const TemplateChatNew = () => {
@@ -176,6 +176,7 @@ const ChatList = (props: any) => {
             styled={{ className: "m-l-1" }}
           />
         </Row>
+        <Button onClick={() => {console.log("Logging unreadCountRef ", unreadCountRef)}}>Log</Button>
         {!chatProvider?.hookChannels?.channels ? (
           <Col className="body">
             Create your first channel
@@ -188,10 +189,9 @@ const ChatList = (props: any) => {
             {chatProvider?.hookChannels?.channels?.length ? (
               <ul>
                 {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                {chatProvider?.hookChannels?.channels.map(
-                  (item: any, index: number) => (
+                {chatProvider?.hookChannels?.channels.map((item: any, index: number) => (
                     <StyledChatItem key={item?.index}>
-                 {  chatProvider?.hookChannels?.actionMessage == 'MULTISELECT' &&   <Checkbox className="m-r-0-5" 
+                 {  chatProvider?.hookChannels?.actionMessage == 'MULTISELECT' && <Checkbox className="m-r-0-5" 
                       isChecked={chatProvider.hookChannels?.selectedChannels.includes(item?.id)}
                       onChange={() => chatProvider.hookChannels?.handleSelectChannel(item) }
                       />}
