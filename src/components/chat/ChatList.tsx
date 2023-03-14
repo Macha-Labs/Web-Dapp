@@ -227,7 +227,7 @@ const ChatList = (props: any) => {
                         <Avatar
                           size="md"
                           className="m-r-0-5"
-                          name={item?.name}
+                          name={truncateAddress(item?.name)}
                         />
                         <Col className="w-100 d-flex flex-col vr-center">
                           <Row>

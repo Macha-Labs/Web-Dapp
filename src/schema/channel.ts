@@ -48,14 +48,14 @@ export const ChannelStream$ = (data: any, raw?: any, owner?: any) => {
 
 export const ChannelXMTP$ = (data: any) => {
   return {
-    id: data?.peerAddress,
+    id: data?.peerAddress.toLowerCase(),
     type: data?.type,
-    name: data?.peerAddress,
+    name: data?.peerAddress.toLowerCase(),
     orgId: data?.orgId,
     private: data?.private,
     users: data?.users,
     admins: data?.admins,
-    createdBy: data?.createdBy,
+    createdBy: data?.createdBy.toLowerCase(),
     createdAt: data?.createdAt,
     updatedAt: data?.updatedAt,
     permissions: data?.permissions,
