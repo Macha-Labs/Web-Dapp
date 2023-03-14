@@ -14,6 +14,8 @@ const ChatWindow = (props: any) => {
   const [dataTag, setDateTag] = useState('')
   const [dateTagVisible, setDateTagVisible] = useState(false)
   const [scrollTo, setScrollTo] = useState('')
+  const [prevMsgCount, setPrevMsgCount]= useState(0)
+  const [unReadMsg, setUnReadMsg] = useState(0)
 
 
   const handleDateTag = (date: any) => {
@@ -38,16 +40,22 @@ const ChatWindow = (props: any) => {
     if (messageListRef && messageListRef.current && !isScrollAtBottom) {
       messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
       setIsScrollAtBottom(true);
+      setUnReadMsg(0)
+      setPrevMsgCount(hookStreamChannelMessages?.messages.length)
     }
   }
 
   useEffect(() => {
-
-   // console.log('isScrollAtBottom', isScrollAtBottom);
-    
-  }, [isScrollAtBottom])
+   setPrevMsgCount(hookStreamChannelMessages?.messages.length)
+  }, [])
 
   useEffect(() => {
+   if(!isScrollAtBottom){
+      setUnReadMsg(hookStreamChannelMessages?.messages.length - prevMsgCount)
+    }else{
+      setUnReadMsg(0)
+      setPrevMsgCount(hookStreamChannelMessages?.messages.length)
+    }
     // Scroll to the bottom of the list when new items are added
     if (messageListRef && messageListRef.current) {
       const lastMsg =
@@ -72,6 +80,8 @@ const ChatWindow = (props: any) => {
           const { scrollHeight, scrollTop, clientHeight } = event.target;
           if (Math.abs(scrollHeight - clientHeight - scrollTop) < 10) {
             setIsScrollAtBottom(true);
+            setUnReadMsg(0)
+            setPrevMsgCount(hookStreamChannelMessages?.messages.length)
           } else {        
             setIsScrollAtBottom(false);
           }
@@ -144,6 +154,7 @@ const ChatWindow = (props: any) => {
           })}
     </div>
   <StyledMoveToBottom onClick={scrollToBottom} visible={`${!isScrollAtBottom ? 'visible': 'hidden'} `} >
+   { unReadMsg != 0 && <span>{unReadMsg}</span> }
    <IconImage path="IconDarkFiles.png" size="30" />
    </StyledMoveToBottom>
    {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 
