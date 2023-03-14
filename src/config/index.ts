@@ -7,8 +7,8 @@ export const config = {
   STREAM_SECRET:"rgvd9g2c3z5mecz2bz9qysncwvrd997d96mupu8bgss7zkumxq2pp82yjyu9yvbk",
 
   // Backend
-  url: "https://metawork-server.herokuapp.com",
-  // url: "http://localhost:3080",
+  // url: "https://metawork-server.herokuapp.com",
+  url: "http://localhost:3080",
 
   // Discord
   DISCORD_API_ENDPOINT: "https://discord.com/api/v10",
