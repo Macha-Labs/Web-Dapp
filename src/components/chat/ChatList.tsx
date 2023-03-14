@@ -2,7 +2,6 @@ import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
 import {
   Avatar,
   Button,
-  Checkbox,
   Text,
   useDisclosure,
   useToast,
@@ -30,7 +29,6 @@ const ChatList = (props: any) => {
   const modalChatNew = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
-  console.log('chat list');
   const hookPortalChannel = usePortalChannel(
     {},
     {
