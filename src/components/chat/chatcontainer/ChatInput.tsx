@@ -2,6 +2,7 @@ import IconImage from "@/components/icons/IconImage";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Pop from "@/components/pop/Pop";
 import PortalLoader from "@/components/PortalLoader";
+import useChatMessage from "@/hooks/chat/useChatMessage";
 import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
 import {
   Col,
@@ -21,15 +22,20 @@ import {
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useContext, useRef } from "react";
-import { ChatContext } from "stream-chat-react";
+import { useRef } from "react";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
 import ChatMention from "../ChatMention";
 
 const ChatInput = (props: any) => {
   const modalPost = useDisclosure();
   const hookCreateLensPost = useCreateLensPost();
+  const hookChatMessage = useChatMessage();
   const createPostRef = useRef<any>();
+
+
+  const sendMessage = () => {
+    return hookChatMessage.send({text: props?.chatContext?.hookChat.textareaRef.current?.value})
+  }
 
   const templateReply = () => {
     return (
@@ -285,7 +291,7 @@ const ChatInput = (props: any) => {
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
                 onKeyDown={(event: any) => {
-                  props?.chatContext?.hookChat?.keyDownMessage(event);
+                  props?.chatContext?.hookChat?.keyDownMessage(event, sendMessage);
                 }}
                 placeholder="Message..."
                 height="auto"

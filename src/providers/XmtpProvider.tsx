@@ -88,9 +88,9 @@ export const XmtpProvider = ({ children }: any) => {
     setAllConversations(data);
   };
 
-  const sendXmtpMessage = async () => {
+  const sendXmtpMessage = async (data: any) => {
     console.log("sent");
-    await conversation.send("gm");
+    return await conversation.send(data.text);
     // setConversation(response.conversation);
   };
 

@@ -45,7 +45,7 @@ const useChat = (client: any, channel: any) => {
     setSlashCmd(false);
   };
 
-  const addMessage = async () => {
+  const addMessage = async (callback?: any) => {
     console.log('inside add message');
     setStreamLoading(true);
     if (!authContext?.address) {
@@ -63,14 +63,11 @@ const useChat = (client: any, channel: any) => {
         setStreamLoading(false);
         return;
       }
-      // addMessageToStream(chatMeta);
-      addMessageToXMTP(textareaRef.current.value);
-    }
-  };
 
-  const addMessageToStream = async (msgData?: any) => {
-    try {
       let messageData: any = {};
+      let msgData: {};
+
+
       if (actionMessage?.action == "FORWARD") {
         messageData = {
           text: actionMessage?.item?.text,
@@ -118,47 +115,48 @@ const useChat = (client: any, channel: any) => {
           ],
         };
       }
-      await channel.raw.sendMessage(messageData); // sending a new message
 
-      setRerenderSwitch(!rerenderSwitch);
-      setStreamLoading(false);
-      setAttachItem(null);
-      setActionMessage(null);
+      callback().then(() => {
+        console.log('message sent');
+        setRerenderSwitch(!rerenderSwitch);
+        setStreamLoading(false);
+        setAttachItem(null);
+        setActionMessage(null);
 
-      const notificationPayload = {
-        topic: "newMessage",
-        notification: {
-          title: channel.name,
-          body: `${
-            authContext.user?.lens?.name ||
-            authContext.user?.lens?.handle ||
-            authContext.user?.lens?.id ||
-            truncateAddress(authContext.user?.lens?.ownedBy)
-          }: ${messageData.text}`,
-        },
-        data: {
-          type: "channelMessage",
-          name: "Portal New Message",
-          channelId: channel.id,
-        },
-        android: {
-          ttl: 4500,
-          priority: "normal",
-        },
-      };
-      hookMention.onRefresh();
-      setChatMeta(null);
-      await newMessageNotification(notificationPayload); // sending new message notification
-    } catch (error: any) {
-      setStreamLoading(false);
-      throw new Error("Sending message failed ", error);
+        
+        hookMention.onRefresh();
+        setChatMeta(null);
+        
+      });
+      // addMessageToStream(chatMeta);
     }
   };
 
-  const addMessageToXMTP = async (msgData: any) => {
-    console.log("addXmtp", msgData);
-    chatContext.sendXmtpMessage();
-  };
+  const notify = async (messageData: any) => {
+    const notificationPayload = {
+      topic: "newMessage",
+      notification: {
+        title: channel.name,
+        body: `${
+          authContext.user?.lens?.name ||
+          authContext.user?.lens?.handle ||
+          authContext.user?.lens?.id ||
+          truncateAddress(authContext.user?.lens?.ownedBy)
+        }: ${messageData.text}`,
+      },
+      data: {
+        type: "channelMessage",
+        name: "Portal New Message",
+        channelId: channel.id,
+      },
+      android: {
+        ttl: 4500,
+        priority: "normal",
+      },
+    };
+
+    await newMessageNotification(notificationPayload); // sending new message notification
+  }
 
   const editMessage = async () => {
     if (!authContext?.address) {
@@ -254,9 +252,9 @@ const useChat = (client: any, channel: any) => {
       });
   };
 
-  const keyDownMessage = async (event: any, onSend?: any) => {
+  const keyDownMessage = async (event: any, callback?: any) => {
     const keycode = event.which || event.keycode;
-    console.log("Keycode", keycode, onSend);
+    console.log("Keycode", keycode, callback);
 
     //Logic for typing indicators begins
     // let typingTimeout;
@@ -278,7 +276,7 @@ const useChat = (client: any, channel: any) => {
 
     //Logic for typing indicators ends
 
-    if ((keycode == 13 && !event.shiftKey) || onSend) {
+    if ((keycode == 13 && !event.shiftKey)) {
       event.preventDefault();
 
       if (textareaRef.current?.value.substring(0, 1) == "/") {
@@ -286,7 +284,7 @@ const useChat = (client: any, channel: any) => {
         setSlashCmd(false);
         // widgetDrawer.onOpen();
       } else if (textareaRef.current?.value.length > 0 || attachItem) {
-        await addMessage();
+        await addMessage(callback);
       }
     } else if (event.key == "/") {
       setSlashCmd(true);
