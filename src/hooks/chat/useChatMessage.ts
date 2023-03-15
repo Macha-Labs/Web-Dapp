@@ -13,7 +13,7 @@ const useChatMessage = () => {
             case '/chat':
                 return await streamContext?.hookChannel?.channel.raw.sendMessage(data);
             case '/chat/dm':
-                return await xmtpContext.conversation?.send(data.text);
+                return await xmtpContext.conversation?.xmtpRaw?.send(data.text);
         }
     }
 

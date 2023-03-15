@@ -8,11 +8,12 @@ import { useContext, useState } from "react";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { ChannelStream$ } from "../../schema/channel";
 import { Toast, useToast } from "@chakra-ui/react";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
-const usePortalChannel = (channelData: any, callback: any = null) => {
-  const toast = useToast();
+const usePortalChannel = (callback: any = null) => {
+  const storeChannel = useChatChannelStore((state: any) => state.channel)
   const [channel, setChannel] = useState(
-    channelData ? channelData : ChannelStream$({})
+    storeChannel ? storeChannel : ChannelStream$({})
   );
   const [isLoading, setIsLoading] = useState(false);
   const authProvider = useContext(AuthContext) as AuthContextType;

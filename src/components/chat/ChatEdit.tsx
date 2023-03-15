@@ -5,7 +5,6 @@ import {
   Avatar,
   Button,
   Text,
-  Icon,
   Switch,
   useDisclosure,
   useToast,
@@ -14,7 +13,7 @@ import {
 import { Col, Row } from "@/styles/StyledComponents";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { ChatContext } from "@/providers/ChatProvider";
-import useChatChannels from "@/hooks/chat/useChatChannels";
+import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 
 const ChatEdit = (props: any) => {
   /**
@@ -24,7 +23,8 @@ const ChatEdit = (props: any) => {
    **/
   const toast = useToast();
   const chatContext = useContext(ChatContext);
-  const hookChatChannels = useChatChannels();
+  const hookChatChannels = useChatChannelsReload();
+
   const handleToggle = () => {
     hookPortalChannel?.setChannel({
       ...hookPortalChannel?.channel,
@@ -45,7 +45,7 @@ const ChatEdit = (props: any) => {
     });
 
     chatContext?.streamContext?.reloadChannel();
-    hookChatChannels.reload();
+    hookChatChannels.load();
     props.modal.onClose();
   };
 
@@ -71,7 +71,6 @@ const ChatEdit = (props: any) => {
    *
    **/
   const hookPortalChannel = usePortalChannel(
-    chatContext?.hookChannel?.channel,
     { edit: callBack, prompt: callBackPrompt }
   );
 

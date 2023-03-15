@@ -88,7 +88,6 @@ function ChatSetting(props: any) {
    * @description
    **/
   const hookPortalChannel = usePortalChannel(
-    props.chatContext.channel.id,
     {
       delete: callbackDelete,
       mute: callbackMute,
@@ -220,7 +219,7 @@ function ChatSetting(props: any) {
       name: "Clear Chat",
       icon: "IconRedDelete.png",
       onPress: () => {
-        hookPortalChannel?.clearChat(props.chatContext.hookChannel.channel);
+        hookPortalChannel?.clearChat(props.chatContext?.channel);
       },
     },
     {
