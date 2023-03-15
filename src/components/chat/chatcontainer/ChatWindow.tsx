@@ -1,13 +1,18 @@
 import useChatMessages from "@/hooks/chat/useChatMessages";
+import { AuthContext } from "@/providers/AuthProvider";
+import { ChatContext } from "@/providers/ChatProvider";
 import { DataContext } from "@/providers/DataProvider";
 import { StyledDateTag } from "@/styles/StyledComponents";
 import { useContext, useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
 
 const ChatWindow = (props: any) => {
+  const dataContext = useContext(DataContext);
+  const authContext = useContext(AuthContext);
+  const chatContext = useContext(ChatContext);
+  // 
   const messageListRef = useRef<any>();
   const hookChatMessages = useChatMessages();
-  const dataContext = useContext(DataContext);
   const itemsRef = useRef<any>([]);
   const [isScrollAtBottom, setIsScrollAtBottom] = useState(false);
   const [dateTag, setDateTag] = useState("");
@@ -40,7 +45,7 @@ const ChatWindow = (props: any) => {
         hookChatMessages?.messages?.length - 1
         ];
       if (
-        String(props.authContext.address).toLowerCase() ==
+        String(authContext.address).toLowerCase() ==
         String(lastMsg?.user.id).toLowerCase()
       ) {
         messageListRef.current.scrollTop =
@@ -101,7 +106,7 @@ const ChatWindow = (props: any) => {
   //       <ChatMessage
   //         message={message}
   //         hookChat={{}}
-  //         authContext={props.authContext}
+  //         authContext={authContext}
   //         key={`a-${message.id}`}
 
   //       />
@@ -124,9 +129,9 @@ const ChatWindow = (props: any) => {
             >
               <ChatMessage
                 message={message}
-                hookChat={props?.chatContext?.hookChat}
-                authContext={props.authContext}
-                hookMembers={props.chatContext.hookMembers}
+                hookChat={chatContext?.hookChat}
+                authContext={authContext}
+                hookMembers={chatContext?.hookMembers}
                 key={`a-${message.id}`}
                 handleDateTag={handleDateTag}
                 executeScroll={executeScroll}

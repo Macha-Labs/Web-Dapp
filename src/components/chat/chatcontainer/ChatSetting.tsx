@@ -3,6 +3,8 @@ import useChatChannel from "@/hooks/chat/useChatChannel";
 import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
+import { AuthContext } from "@/providers/AuthProvider";
+import { ChatContext } from "@/providers/ChatProvider";
 import { DataContext } from "@/providers/DataProvider";
 import { Col } from "@/styles/StyledComponents";
 import { Heading, useDisclosure, useToast } from "@chakra-ui/react";
@@ -14,7 +16,9 @@ import ChatMessageList from "./ChatMessageList";
 import ChatPermissions from "./ChatPermissions";
 
 function ChatSetting(props: any) {
+  const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
+  const chatContext = useContext(ChatContext);
   const toast = useToast();
   const modalPinned = useDisclosure();
   const hookChatChannels = useChatChannelsReload();
@@ -40,7 +44,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannel();
+    hookChatChannel.reload();
     props.modalSettings.onClose();
   };
 
@@ -111,7 +115,7 @@ function ChatSetting(props: any) {
       icon: "IconDarkSearch.png",
       name: "Search Chat",
       onPress: () => {
-        props.hookChat.handleSearch();
+        chatContext.hookChat.handleSearch();
         props?.event?.onClose();
       },
     },
@@ -133,7 +137,7 @@ function ChatSetting(props: any) {
       icon: "IconDarkMultiselect.png",
       name: "Select Chat",
       onPress: () => {
-        props.hookChat.handleMultiSelect();
+        chatContext.hookChat.handleMultiSelect();
         props?.event?.onClose();
       },
     },
@@ -147,7 +151,7 @@ function ChatSetting(props: any) {
         enabled: true,
         check:
           dataContext?.channel?.createdBy ===
-          props.authContext.address,
+          authContext.address,
       },
     },
     {
@@ -160,7 +164,7 @@ function ChatSetting(props: any) {
         enabled: true,
         check:
           dataContext?.channel?.createdBy ===
-          props.authContext.address,
+          authContext.address,
       },
     },
     {
@@ -173,7 +177,7 @@ function ChatSetting(props: any) {
         enabled: true,
         check:
           dataContext?.channel?.createdBy ===
-          props.authContext.address,
+          authContext.address,
       },
     },
   ];
@@ -291,8 +295,8 @@ function ChatSetting(props: any) {
     return (
       <ModalSlider event={modalPinned} size="md">
         <ChatMessageList
-          pinnedMessageList={props.chatContext.hookChannel?.pinnedMessages}
-          hookChat={props.hookChat}
+          pinnedMessageList={dataContext?.channel?.pinnedMessages}
+          hookChat={chatContext.hookChat}
         />
       </ModalSlider>
     );
@@ -309,20 +313,20 @@ function ChatSetting(props: any) {
             style={{ className: "m-b-1" }}
             channelAdmin={dataContext?.channel.createdBy}
             channelRawData={dataContext?.channel.raw}
-            userId={props.authContext.address}
+            userId={authContext.address}
           />
           <LayoutOptions
             options={chatOptions2}
             style={{ className: "m-b-1" }}
             channelAdmin={dataContext?.channel.createdBy}
             channelRawData={dataContext?.channel.raw}
-            userId={props.authContext.address}
+            userId={authContext.address}
           />
           <LayoutOptions
             options={chatOptions3}
             channelAdmin={dataContext?.channel.createdBy}
             channelRawData={dataContext?.channel.raw}
-            userId={props.authContext.address}
+            userId={authContext.address}
           />
         </Col>
       </div>

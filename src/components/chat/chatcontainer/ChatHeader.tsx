@@ -17,12 +17,14 @@ import { useRouter } from "next/router";
 import { truncateAddress } from "@/helpers";
 import useChatMembers from "@/hooks/chat/useChatMembers";
 import { DataContext } from "@/providers/DataProvider";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
   const modalSettings = useDisclosure();
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
+  const chatContext = useContext(ChatContext);
   const hookChatMembers = useChatMembers();
 
   const router = useRouter();
@@ -43,10 +45,7 @@ const ChatHeader = (props: any) => {
       <ModalSlider event={modalSettings} size="sm">
         <ChatSetting
           event={modalSettings}
-          chatContext={props?.chatContext}
           authContext={authContext}
-          hookChannel={props?.chatContext.hookChannel}
-          hookChat={props?.chatContext.hookChat}
           modalSettings={modalSettings}
         />
       </ModalSlider>
@@ -61,7 +60,7 @@ const ChatHeader = (props: any) => {
           size="xs"
           variant="state_default_hover"
           className="m-l-1"
-          onClick={props?.chatContext?.hookChat?.handleSearchClose}
+          onClick={chatContext?.hookChat?.handleSearchClose}
         >
           Cancel
         </Button>
@@ -77,7 +76,7 @@ const ChatHeader = (props: any) => {
           size="sm"
           className="m-r-0-5"
           onClick={() => {
-            props?.chatContext.hookChat?.setSelectedMessages([]);
+            chatContext.hookChat?.setSelectedMessages([]);
           }}
         >
           Clear
@@ -85,7 +84,7 @@ const ChatHeader = (props: any) => {
         <Button
           variant="state_default_hover"
           size="xs"
-          onClick={props?.chatContext.hookChat.handleMultiSelectClose}
+          onClick={chatContext.hookChat.handleMultiSelectClose}
         >
           Cancel
         </Button>
@@ -119,15 +118,15 @@ const ChatHeader = (props: any) => {
               )}
             </Row>
             <Heading as="h6" size="xs">
-              {props?.chatContext?.hookChat?.usersWhoAreTyping && (
+              {chatContext?.hookChat?.usersWhoAreTyping && (
                 <>
-                  {props?.chatContext?.hookChat?.usersWhoAreTyping?.map(
+                  {chatContext?.hookChat?.usersWhoAreTyping?.map(
                     (user: any, index: number) => {
                       return (
                         <Text key={user?.id} fontSize="12">
                           {`${user}${
                             index! ==
-                              props?.chatContext?.hookChat?.usersWhoAreTyping.length - 1 &&
+                              chatContext?.hookChat?.usersWhoAreTyping.length - 1 &&
                             ","
                           } is typing...`}
                         </Text>
@@ -156,9 +155,9 @@ const ChatHeader = (props: any) => {
   };
 
   const Template = () => {
-    if (props?.chatContext?.hookChat.actionMessage?.action === "SEARCH")
+    if (chatContext?.hookChat.actionMessage?.action === "SEARCH")
       return <TemplateSearch />;
-    else if (props?.chatContext?.hookChat.actionMessage?.action === "MULTISELECT")
+    else if (chatContext?.hookChat.actionMessage?.action === "MULTISELECT")
       return <TemplateMultiSelect />;
     else {
       return <TemplateProfile />;

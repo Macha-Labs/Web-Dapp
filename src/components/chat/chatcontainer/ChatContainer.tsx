@@ -17,12 +17,8 @@ const ChatContainer = (channel: any) => {
     <>
       {dataContext?.channel ? (
         <>
-          <ChatHeader
-            chatContext={chatContext}
-          />
-          <ChatWindow
-            chatContext={chatContext}
-            authContext={authContext} />
+          <ChatHeader/>
+          <ChatWindow/>
           <ChatInput
             chatContext={chatContext}
             authContext={authContext}
