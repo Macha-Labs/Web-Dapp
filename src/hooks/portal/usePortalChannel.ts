@@ -135,7 +135,7 @@ const usePortalChannel = (channelData: any, callback: any = null) => {
       });
   };
   const deleteChannel = (channel: any) => {
-    logger("channel", "usePortalChanneldelete", "Deleting Channel", [channel]);
+    logger("channel", "deleteChannel", "Deleting Channel", [channel]);
     channel.raw.delete().then((res: any) => {
       callback.delete();
     });

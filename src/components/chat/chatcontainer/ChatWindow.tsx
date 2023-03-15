@@ -1,10 +1,7 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import ChatMessage from "./ChatMessage";
-import { StyledDateTag } from "@/styles/StyledComponents";
-import { XmtpContext } from "@/providers/XmtpProvider";
-import { useRouter } from "next/router";
-import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
 import useChatMessages from "@/hooks/chat/useChatMessages";
+import { StyledDateTag } from "@/styles/StyledComponents";
+import { useEffect, useRef, useState } from "react";
+import ChatMessage from "./ChatMessage";
 
 const ChatWindow = (props: any) => {
   const messageListRef = useRef<any>();

@@ -1,4 +1,6 @@
 import useChat from "@/hooks/chat/useChat";
+import useChatChannel from "@/hooks/chat/useChatChannel";
+import useChatChannelStore from "@/store/useChatChannelStore";
 import { useRouter } from "next/router";
 import { createContext, useContext } from "react";
 import { StreamContext, StreamContextType } from "./StreamProvider";
@@ -17,25 +19,14 @@ export const ChatContext = createContext<ChatContextType>({
   channel: null,
   streamClient: null,
   streamContext: null,
-  // sendMessage: () => {},
 });
 
 export const ChatProvider = ({ children }: any) => {
   console.log('Rendering >>>>> ChatProvider');
   const streamContext = useContext(StreamContext) as StreamContextType;
-  const xmtpContext = useContext(XmtpContext);
-  const router = useRouter();
   const hookChat = useChat(streamContext.client, streamContext.hookChannel.channel);
+  const storeChannel = useChatChannelStore((state: any) => state.channel)
 
-  const _fetchChannel = () => {
-    console.log('fetch channel');
-    switch (router.pathname) {
-      case "/chat":
-        return streamContext?.hookChannel.channel;
-      case "/chat/dm":
-        return xmtpContext?.conversation;
-    }
-  };
 
   return (
     <ChatContext.Provider
@@ -43,8 +34,7 @@ export const ChatProvider = ({ children }: any) => {
         hookChat: hookChat,
         streamClient: streamContext?.client,
         streamContext: streamContext,
-        channel: _fetchChannel(),
-        // sendMessage: _sendMessage(),
+        channel: storeChannel
       }}
     >
       {children}

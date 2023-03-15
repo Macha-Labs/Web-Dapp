@@ -23,11 +23,12 @@ import { ChatContext } from "@/providers/ChatProvider";
 import LoadChannels from "../load/LoadChannels";
 import useChatChannelsStore from "@/store/useChatChannelsStore";
 import { useRouter } from "next/router";
+import useChatChannel from "@/hooks/chat/useChatChannel";
 
 const ChatList = (props: any) => {
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
-  const hookChatSelect = useChatSelect();
+  const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannels();
   const router = useRouter();
   const storeChannels = useChatChannelsStore((state: any) => state.channels)
@@ -35,6 +36,7 @@ const ChatList = (props: any) => {
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
 
+  // TODO: Fix bandaging
   useEffect(() => {
     hookChatChannels.load();
   }, [router.pathname, chatContext.streamContext?.client?.user?.id])
@@ -245,7 +247,7 @@ const ChatList = (props: any) => {
                       <Row
                         className="vr-center w-11-12"
                         onClick={() => {
-                          hookChatSelect?.initiate(item, authContext?.address);
+                          hookChatChannel?.fetch(item, authContext?.address);
                         }}
                       >
                         {/* <Checkbox defaultChecked className="m-r-0-5" /> */}

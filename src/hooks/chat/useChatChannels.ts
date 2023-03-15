@@ -1,4 +1,5 @@
 import useChatChannelsStore from "@/store/useChatChannelsStore";
+import useChatChannelStore from "@/store/useChatChannelStore";
 import { useRouter } from "next/router";
 import { useEffect} from "react";
 import useStreamUserChannels from "../stream/useStreamUserChannels";
@@ -10,13 +11,16 @@ const useChatChannels = () => {
     const hookStreamChannels = useStreamUserChannels();
     const hookXmtpChannels = useXmtpChannels();
     const storeChannels = useChatChannelsStore((state: any) => state.channels)
+    const storeChannelLoad = useChatChannelStore((state: any) => state.load)
     const storeLoad = useChatChannelsStore(((state: any) => state.load))
 
     useEffect(() => {
       if (router.pathname == '/chat')
         storeLoad(hookStreamChannels.channels);
+        storeChannelLoad(null)
       if (router.pathname == '/chat/dm')
         storeLoad(hookXmtpChannels.channels);
+        storeChannelLoad(null);
     }, [hookStreamChannels.channels, hookXmtpChannels.channels])
     
     const _load = async () => {

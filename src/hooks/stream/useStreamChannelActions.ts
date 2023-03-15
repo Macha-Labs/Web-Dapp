@@ -6,6 +6,7 @@ import { StreamMessage$ } from "@/schema/message";
 const useStreamChannelActions = (channel: any) => {
   const [messages, setMessages] = useState<any>();
   const chatContext = useContext(ChatContext);
+  
   useEffect(() => {
     logger("channel", "useEffect[channel]", "channel is ", [channel]);
     if (channel) {
