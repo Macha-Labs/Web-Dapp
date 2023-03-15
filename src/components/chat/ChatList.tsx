@@ -22,16 +22,24 @@ import useChatChannels from "@/hooks/chat/useChatChannels";
 import { ChatContext } from "@/providers/ChatProvider";
 import LoadChannels from "../load/LoadChannels";
 import useChatChannelsStore from "@/store/useChatChannelsStore";
+import { useRouter } from "next/router";
 
 const ChatList = (props: any) => {
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
   const hookChatSelect = useChatSelect();
   const hookChatChannels = useChatChannels();
+  const router = useRouter();
   const storeChannels = useChatChannelsStore((state: any) => state.channels)
   const modalChatNew = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
+
+  useEffect(() => {
+    hookChatChannels.reload()
+  }, [router.pathname])
+
+  
   const hookPortalChannel = usePortalChannel(
     {},
     {
@@ -42,7 +50,7 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        hookChatChannels?.reload();
+        // hookChatChannels?.reload();
         chatContext?.streamContext?.reloadChannel();
       },
       unmute: () => {
@@ -52,7 +60,7 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        hookChatChannels?.reload();
+        // hookChatChannels?.reload();
         chatContext?.streamContext?.reloadChannel();
       },
       leave: () => {
@@ -62,7 +70,7 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        hookChatChannels?.reload();
+        // hookChatChannels?.reload();
         chatContext?.streamContext?.reloadChannel();
       },
       delete: () => {
@@ -72,7 +80,7 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        hookChatChannels?.reload();
+        // hookChatChannels?.reload();
         chatContext?.streamContext?.reloadChannel();
       },
     }

@@ -11,11 +11,6 @@ const useChatChannels = () => {
     const hookXmtpChannels = useXmtpChannels();
     const storeChannels = useChatChannelsStore((state: any) => state.channels)
     const storeLoad = useChatChannelsStore(((state: any) => state.load))
-    
-    useEffect(() => {
-      _load();
-      console.log(router.pathname)
-    }, [router.pathname]);
 
     useEffect(() => {
       if (router.pathname == '/chat')

@@ -1,5 +1,5 @@
 import ModalSlider from "@/components/modal/ModalSlider";
-import useChatChannels from "@/hooks/chat/useChatChannels";
+import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { Col } from "@/styles/StyledComponents";
@@ -14,6 +14,7 @@ import ChatPermissions from "./ChatPermissions";
 function ChatSetting(props: any) {
   const toast = useToast();
   const modalPinned = useDisclosure();
+  const hookChatChannels = useChatChannelsReload();
   /**
    * @description
    **/
@@ -24,6 +25,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
+    hookChatChannels.load();
     // props.chatContext?.initiate(null);
     props.modalSettings.onClose();
   };
@@ -48,7 +50,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannels.reload();
+    hookChatChannels.load();
     props.chatContext?.streamContext?.reloadChannel();
     props.modalSettings.onClose();
   };
@@ -63,7 +65,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannels.reload();
+    hookChatChannels.load();
     props.modalSettings.onClose();
   };
   /**
@@ -76,7 +78,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannels.reload();
+    hookChatChannels.load();
     props.chatContext?.initiate(null);
     props.modalSettings.onClose();
   };
