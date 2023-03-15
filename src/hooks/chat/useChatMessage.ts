@@ -1,19 +1,16 @@
-import { StreamContext } from "@/providers/StreamProvider";
-import { XmtpContext } from "@/providers/XmtpProvider";
+import useChatChannelStore from "@/store/useChatChannelStore";
 import { useRouter } from "next/router";
-import { useContext } from "react";
 
 const useChatMessage = () => {
-    const streamContext = useContext(StreamContext);
-    const xmtpContext = useContext(XmtpContext);
+    const storeChannel = useChatChannelStore((state: any) => state.channel)
     const router = useRouter();
 
     const _send = async (data: any) => {
         switch(router.pathname) {
             case '/chat':
-                return await streamContext?.hookChannel?.channel.raw.sendMessage(data);
+                return await storeChannel.raw.sendMessage(data);
             case '/chat/dm':
-                return await xmtpContext.conversation?.xmtpRaw?.send(data.text);
+                return await storeChannel?.xmtpRaw?.send(data.text);
         }
     }
 
