@@ -41,7 +41,7 @@ const useChatChannel = () => {
                 streamContext?.hookChannel.removeChannel();
                 break;
             case "/chat/dm":
-                xmtpContext.reload();
+                xmtpContext.remove();
         }
     }
 
