@@ -8,31 +8,23 @@ import { logger, loggerInit } from "@/helpers/logger";
 export type XmtpContextType = {
   fetchXmtpConversation: (text: string) => void;
   sendXmtpMessage: any | undefined;
-  fetchXmtpConversationList: any | undefined;
-  allConversations: any | undefined;
   conversation: any | undefined;
   messages: any[] | undefined;
-  xmtpClientAddress: any | undefined;
 };
 
 export const XmtpContext = createContext<XmtpContextType>({
   fetchXmtpConversation: () => {},
   sendXmtpMessage: () => {},
-  fetchXmtpConversationList: null,
-  allConversations: [],
   conversation: null,
   messages: [],
-  xmtpClientAddress: null,
 });
 
 export const XmtpProvider = ({ children }: any) => {
   console.log('Rendering >>>>> XmtpProvider');
   const authContext = useContext(AuthContext);
-  const xmtpClient = authContext.xmtpClient;
-  const xmtpClientAddress = authContext.xmtpClientAddress;
   const [messages, setMessages] = useState<DecodedMessage[]>([]);
   const [conversation, setConversation] = useState<any>();
-  const [allConversations, setAllConversations] = useState<any>();
+  
 
   /**
    * @description Function to connect to XMTP to enable messaging
@@ -57,14 +49,6 @@ export const XmtpProvider = ({ children }: any) => {
   //   console.log("first");
   // }, [conversation, xmtpClientAddress, peerAddress]);
 
-  useEffect(() => {
-    console.log("fetching");
-    console.log(xmtpClientAddress, "client address");
-    if (xmtpClientAddress) {
-      fetchXmtpConversationList();
-    }
-  }, [xmtpClientAddress]);
-
 
   const _loadMessages = async(convData: any) => {
     const messages = await convData?.messages({
@@ -81,7 +65,7 @@ export const XmtpProvider = ({ children }: any) => {
 
   const fetchXmtpConversation = async (channel: any) => {
     loggerInit('XMTPProvider.fetchXmtpConversation');
-    const result = await xmtpClient.conversations.newConversation(
+    const result = await authContext?.xmtpClient.conversations.newConversation(
       channel?.id
     );
     logger('xmtp', 'XMTPProvider.fetchXmtpConversation', 'Conversation is', [result])
@@ -89,13 +73,7 @@ export const XmtpProvider = ({ children }: any) => {
     setConversation(result);
   };
 
-  const fetchXmtpConversationList = async () => {
-    const conversationList = await xmtpClient.conversations.list();
-    const data = conversationList.map((item: any) => {
-      return ChannelXMTP$(item);
-    });
-    setAllConversations(data);
-  };
+  
 
   const sendXmtpMessage = async (data: any) => {
     return await conversation.send(data.text);
@@ -111,11 +89,8 @@ export const XmtpProvider = ({ children }: any) => {
       value={{
         fetchXmtpConversation: fetchXmtpConversation,
         sendXmtpMessage: sendXmtpMessage,
-        fetchXmtpConversationList,
-        allConversations: allConversations,
         conversation: conversation,
         messages: messages,
-        xmtpClientAddress: xmtpClientAddress,
       }}
     >
       {children}
