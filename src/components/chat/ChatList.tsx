@@ -36,10 +36,10 @@ const ChatList = (props: any) => {
   const [isClicked, setIsClicked] = useState<any>([]);
 
   useEffect(() => {
-    hookChatChannels.reload()
+    hookChatChannels.load();
   }, [router.pathname])
 
-  
+
   const hookPortalChannel = usePortalChannel(
     {},
     {

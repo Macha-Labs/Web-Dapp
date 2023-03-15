@@ -12,7 +12,7 @@ const useStreamUserChannels = () => {
   const [actionMessage, setActionMessage] = useState<String>('')
 
   const fetchUserChannels = async () => {
-    if (streamContext.client) {
+    if (streamContext?.client?.user?.id) {
       
       const filter = {
         type: "team",
@@ -28,7 +28,7 @@ const useStreamUserChannels = () => {
           return ChannelStream$(item.data, item, streamContext.client?.user?.id);
         })
         setChannels(newResult);
-        logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The channel Data was just updated', [result]);
+        logger('channel', 'useStreamUserChannels.fetchUserChannels', 'channels from stream', [result]);
       } catch (error: any) {
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The error is', [error]);
       }

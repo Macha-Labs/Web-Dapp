@@ -12,7 +12,7 @@ const useXmtpChannels = () => {
         const data = conversationList?.map((item: any) => {
           return ChannelXMTP$(item);
         });
-        logger('xmtp', 'useXmtpChannels._fetch', 'channels', [data])
+        logger('xmtp', 'useXmtpChannels._fetch', 'channels from xmtp', [data])
         setAllConversations(data);
       };
 

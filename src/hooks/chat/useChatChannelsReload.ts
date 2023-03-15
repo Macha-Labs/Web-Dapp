@@ -12,6 +12,7 @@ const useChatChannelsReload = () => {
     const [loading, setLoading] = useState<any>(false);
 
     useEffect(() => {
+        console.log('update');
         if (loading) {
             setLoading(false);
             if (router.pathname == '/chat')

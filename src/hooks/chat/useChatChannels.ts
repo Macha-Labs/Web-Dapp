@@ -31,7 +31,7 @@ const useChatChannels = () => {
     return (
         {
             channels: storeChannels,
-            reload: _load
+            load: _load
         }
     )
 }
