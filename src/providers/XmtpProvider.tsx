@@ -1,8 +1,6 @@
-import { DecodedMessage} from "@xmtp/xmtp-js";
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { AuthContext } from "./AuthProvider";
 import { logger, loggerInit } from "@/helpers/logger";
-import useXmtp from "@/hooks/xmtp/useXmtp";
+import { createContext, useContext, useState } from "react";
+import { AuthContext } from "./AuthProvider";
 
 export type XmtpContextType = {
   fetchXmtpConversation: (text: string) => void;
@@ -21,31 +19,7 @@ export const XmtpContext = createContext<XmtpContextType>({
 export const XmtpProvider = ({ children }: any) => {
   console.log('Rendering >>>>> XmtpProvider');
   const authContext = useContext(AuthContext);
-  const [conversation, setConversation] = useState<any>();
-
-  /**
-   * @description Function to connect to XMTP to enable messaging
-   *
-   *
-   **/
-  // useEffect(() => {
-  //   if (xmtpClientAddress) {
-  //     const streamMessages = async () => {
-  //       const newStream = await conversation.streamMessages();
-  //       console.log("newStream", newStream);
-  //       for await (const msg of newStream) {
-  //         setMessages(prevMessages => {
-  //           const messages = [...prevMessages];
-  //           messages.unshift(msg);
-  //           return messages;
-  //         });
-  //       }
-  //     };
-  //     streamMessages();
-  //   }
-  //   console.log("first");
-  // }, [conversation, xmtpClientAddress, peerAddress]);
-
+  const [conversation, setConversation] = useState<any>();  
 
   const _initiate = (conversation: any) => {
     setConversation(conversation)
