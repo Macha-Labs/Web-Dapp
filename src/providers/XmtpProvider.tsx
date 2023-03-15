@@ -5,13 +5,11 @@ import { logger, loggerInit } from "@/helpers/logger";
 
 export type XmtpContextType = {
   fetchXmtpConversation: (text: string) => void;
-  sendXmtpMessage: any | undefined;
   conversation: any | undefined;
 };
 
 export const XmtpContext = createContext<XmtpContextType>({
   fetchXmtpConversation: () => {},
-  sendXmtpMessage: () => {},
   conversation: null,
 });
 
@@ -19,7 +17,6 @@ export const XmtpProvider = ({ children }: any) => {
   console.log('Rendering >>>>> XmtpProvider');
   const authContext = useContext(AuthContext);
   const [conversation, setConversation] = useState<any>();
-  
 
   /**
    * @description Function to connect to XMTP to enable messaging
@@ -56,17 +53,12 @@ export const XmtpProvider = ({ children }: any) => {
     setConversation(result);
   };
 
-  
 
-  const sendXmtpMessage = async (data: any) => {
-    return await conversation.send(data.text);
-  };
 
   return (
     <XmtpContext.Provider
       value={{
         fetchXmtpConversation: fetchXmtpConversation,
-        sendXmtpMessage: sendXmtpMessage,
         conversation: conversation,
       }}
     >

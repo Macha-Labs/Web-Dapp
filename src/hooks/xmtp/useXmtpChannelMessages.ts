@@ -15,13 +15,12 @@ const useXmtpChannelMessages = () => {
         const messagesData = messages?.map((item: any) => {
           return XmtpMessage$(item);
         });
-        logger('xmtp', 'XMTPProvider._loadMessages', 'Messages is', [messagesData])
-        // console.log("conversation", conversation.send("hulle hula le hula"));
-    
+        logger('xmtp', 'XMTPProvider._loadMessages', 'Messages is', [messagesData])    
         setMessages(messagesData);
     }
 
     useEffect(() => {
+      logger('xmtp', 'XmtpProvider.useEffect[xmtpContext.conversation]', 'channel', [xmtpContext.conversation])
       _fetch(xmtpContext.conversation)
     }, [xmtpContext.conversation])
 
