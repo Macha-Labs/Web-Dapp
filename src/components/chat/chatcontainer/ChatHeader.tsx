@@ -18,6 +18,8 @@ import { truncateAddress } from "@/helpers";
 import useChatMembers from "@/hooks/chat/useChatMembers";
 import { DataContext } from "@/providers/DataProvider";
 import { ChatContext } from "@/providers/ChatProvider";
+import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
+import useChatChannel from "@/hooks/chat/useChatChannel";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
@@ -26,6 +28,8 @@ const ChatHeader = (props: any) => {
   const dataContext = useContext(DataContext);
   const chatContext = useContext(ChatContext);
   const hookChatMembers = useChatMembers();
+  const hookChatChannels = useChatChannelsReload();
+  const hookChatChannel = useChatChannel();
 
   const router = useRouter();
 
@@ -47,6 +51,8 @@ const ChatHeader = (props: any) => {
           event={modalSettings}
           authContext={authContext}
           modalSettings={modalSettings}
+          hookChatChannels={hookChatChannels}
+          hookChatChannel={hookChatChannel}
         />
       </ModalSlider>
     );

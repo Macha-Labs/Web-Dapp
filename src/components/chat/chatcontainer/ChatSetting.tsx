@@ -1,6 +1,4 @@
 import ModalSlider from "@/components/modal/ModalSlider";
-import useChatChannel from "@/hooks/chat/useChatChannel";
-import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { AuthContext } from "@/providers/AuthProvider";
@@ -21,8 +19,7 @@ function ChatSetting(props: any) {
   const chatContext = useContext(ChatContext);
   const toast = useToast();
   const modalPinned = useDisclosure();
-  const hookChatChannels = useChatChannelsReload();
-  const hookChatChannel = useChatChannel();
+
   /**
    * @description
    **/
@@ -33,9 +30,9 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannels.load();
-    hookChatChannel.remove();
-    props.modalSettings.onClose();
+    props?.hookChatChannels.load();
+    props?.hookChatChannel.remove();
+    // props.modalSettings.onClose();
   };
   const callbackClear = () => {
     toast({
@@ -44,8 +41,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannel.reload();
-    props.modalSettings.onClose();
+    props?.hookChatChannel.reload();
+    // props.modalSettings.onClose();
   };
 
   /**
@@ -58,8 +55,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannels.load();
-    hookChatChannel.reload();
+    props?.hookChatChannels.load();
+    props?.hookChatChannel.reload();
     props.modalSettings.onClose();
   };
 
@@ -73,8 +70,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannels.load();
-    hookChatChannel.reload();
+    props?.hookChatChannels.load();
+    props?.hookChatChannel.reload();
     props.modalSettings.onClose();
   };
   /**
@@ -87,8 +84,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannels.load();
-    hookChatChannel.remove();
+    props?.props?.hookChatChannels.load();
+    props?.hookChatChannel.remove();
     props.modalSettings.onClose();
   };
 

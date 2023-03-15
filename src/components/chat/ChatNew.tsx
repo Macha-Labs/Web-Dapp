@@ -1,6 +1,4 @@
 import { helperIPFS, truncateAddress } from "@/helpers";
-import useChatChannel from "@/hooks/chat/useChatChannel";
-import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
@@ -12,8 +10,6 @@ import { useState } from "react";
 const ChatNew = (props: any) => {
   const [tab, setTab] = useState("members");
   const [inputFocus, setInputFocus] = useState(0);
-  const hookChatChannels = useChatChannelsReload();
-  const hookChatChannel = useChatChannel();
 
   /**
    *
@@ -26,9 +22,10 @@ const ChatNew = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannels.load();
-    hookChatChannel.remove();
+    props?.hookChatChannel.remove();
+    props?.hookChatChannels.load();
     props.modal.onClose();
+    
   };
 
   const callbackPrompt = (message: any) => {
