@@ -13,19 +13,15 @@ const useChatMessages = () => {
         hookStreamChannelMessages = useStreamChannelMessages();
 
         useEffect(() => {
-        if (router.pathname == "/chat") {
             setMessages(hookStreamChannelMessages?.messages || []);
-        }
         }, [router.pathname, hookStreamChannelMessages?.messages]);
     }
     
     if (router.pathname == '/chat/dm') {
         hookXmtpChannelMessages = useXmtpChannelMessages();
         useEffect(() => {
-            if (router.pathname == "/chat/dm") {
-                setMessages(hookXmtpChannelMessages?.messages || []);
-            }
-            }, [router.pathname, hookXmtpChannelMessages?.messages]);
+            setMessages(hookXmtpChannelMessages?.messages || []);
+        }, [router.pathname, hookXmtpChannelMessages?.messages]);
     }
 
     return (
