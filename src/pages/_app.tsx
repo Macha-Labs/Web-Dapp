@@ -15,7 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { XmtpProvider } from "@/providers/XmtpProvider";
 
 const { chains, provider } = configureChains(
-  [polygonMumbai],
+  [polygon],
   [publicProvider()]
 );
 
