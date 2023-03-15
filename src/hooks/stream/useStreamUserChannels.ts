@@ -12,7 +12,7 @@ const useStreamUserChannels = () => {
   const [actionMessage, setActionMessage] = useState<String>('')
 
   const fetchUserChannels = async () => {
-    loggerInit('useStreamUserChannels.fetchUserChannels', streamContext?.client?.user);
+    loggerInit('useStreamUserChannels.fetchUserChannels');
     if (streamContext?.client?.user?.id) {
       
       const filter = {
