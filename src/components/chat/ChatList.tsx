@@ -17,7 +17,6 @@ import React, { useState } from "react";
 import Pop from "../pop/Pop";
 import { darkStyle } from "@/styles/StyledConstants";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
-import useChatSelect from "@/hooks/chat/useChatSelect";
 import useChatChannels from "@/hooks/chat/useChatChannels";
 import { ChatContext } from "@/providers/ChatProvider";
 import LoadChannels from "../load/LoadChannels";
@@ -31,7 +30,7 @@ const ChatList = (props: any) => {
   const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannels();
   const router = useRouter();
-  const storeChannels = useChatChannelsStore((state: any) => state.channels)
+  const $channels = useChatChannelsStore((state: any) => state.channels)
   const modalChatNew = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
@@ -43,7 +42,6 @@ const ChatList = (props: any) => {
 
 
   const hookPortalChannel = usePortalChannel(
-    {},
     {
       mute: () => {
         toast({
@@ -209,14 +207,14 @@ const ChatList = (props: any) => {
           />
         </Row>
         <Col className="body verticlescroll hidescroll">
-        {!storeChannels ? (
+        {!$channels ? (
             <TemplateLoading />
         ) : (
           <>
-            {storeChannels?.length ? (
+            {$channels?.length ? (
               <ul>
                 {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                {storeChannels.map((item: any, index: number) => (
+                {$channels.map((item: any, index: number) => (
                   <StyledChatItem key={item?.index}>
                     {/* {chatContext?.hookChannels?.actionMessage ==
                       "MULTISELECT" && (
