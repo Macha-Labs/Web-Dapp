@@ -37,7 +37,7 @@ const ChatList = (props: any) => {
 
   useEffect(() => {
     hookChatChannels.load();
-  }, [router.pathname])
+  }, [router.pathname, chatContext.streamContext?.client?.user?.id])
 
 
   const hookPortalChannel = usePortalChannel(

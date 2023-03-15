@@ -1,4 +1,4 @@
-import { logger } from "@/helpers/logger";
+import { logger, loggerInit } from "@/helpers/logger";
 import { StreamContext } from "@/providers/StreamProvider";
 import { useContext, useEffect, useState } from "react";
 import { Channel$, ChannelStream$ } from "../../schema/channel";
@@ -12,6 +12,7 @@ const useStreamUserChannels = () => {
   const [actionMessage, setActionMessage] = useState<String>('')
 
   const fetchUserChannels = async () => {
+    loggerInit('useStreamUserChannels.fetchUserChannels', streamContext?.client?.user);
     if (streamContext?.client?.user?.id) {
       
       const filter = {
