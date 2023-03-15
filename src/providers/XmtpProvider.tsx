@@ -1,28 +1,23 @@
-import { DecodedMessage, SortDirection } from "@xmtp/xmtp-js";
+import { DecodedMessage} from "@xmtp/xmtp-js";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthProvider";
-import { ChannelXMTP$ } from "@/schema/channel";
-import { XmtpMessage$ } from "@/schema/message";
 import { logger, loggerInit } from "@/helpers/logger";
 
 export type XmtpContextType = {
   fetchXmtpConversation: (text: string) => void;
   sendXmtpMessage: any | undefined;
   conversation: any | undefined;
-  messages: any[] | undefined;
 };
 
 export const XmtpContext = createContext<XmtpContextType>({
   fetchXmtpConversation: () => {},
   sendXmtpMessage: () => {},
   conversation: null,
-  messages: [],
 });
 
 export const XmtpProvider = ({ children }: any) => {
   console.log('Rendering >>>>> XmtpProvider');
   const authContext = useContext(AuthContext);
-  const [messages, setMessages] = useState<DecodedMessage[]>([]);
   const [conversation, setConversation] = useState<any>();
   
 
@@ -50,18 +45,7 @@ export const XmtpProvider = ({ children }: any) => {
   // }, [conversation, xmtpClientAddress, peerAddress]);
 
 
-  const _loadMessages = async(convData: any) => {
-    const messages = await convData?.messages({
-      direction: SortDirection.SORT_DIRECTION_ASCENDING,
-    });
-    const messagesData = messages?.map((item: any) => {
-      return XmtpMessage$(item);
-    });
-    logger('xmtp', 'XMTPProvider._loadMessages', 'Messages is', [messagesData])
-    // console.log("conversation", conversation.send("hulle hula le hula"));
-
-    setMessages(messagesData);
-  }
+  
 
   const fetchXmtpConversation = async (channel: any) => {
     loggerInit('XMTPProvider.fetchXmtpConversation');
@@ -69,7 +53,6 @@ export const XmtpProvider = ({ children }: any) => {
       channel?.id
     );
     logger('xmtp', 'XMTPProvider.fetchXmtpConversation', 'Conversation is', [result])
-    _loadMessages(result)
     setConversation(result);
   };
 
@@ -79,18 +62,12 @@ export const XmtpProvider = ({ children }: any) => {
     return await conversation.send(data.text);
   };
 
-  useEffect(() => {
-    console.log('useEffect[conversation]')
-    _loadMessages(conversation);
-  }, [conversation != (undefined || null)])
-
   return (
     <XmtpContext.Provider
       value={{
         fetchXmtpConversation: fetchXmtpConversation,
         sendXmtpMessage: sendXmtpMessage,
         conversation: conversation,
-        messages: messages,
       }}
     >
       {children}
