@@ -68,7 +68,7 @@ function ChatSetting(props: any) {
       position: "bottom-right",
     });
     hookChatChannels.reload();
-    props.chatContext?.streamContext?.reloadChannelList();
+    // props.chatContext?.streamContext?.reloadChannelList();
     props.modalSettings.onClose();
   };
   /**

@@ -43,7 +43,7 @@ const ChatEdit = (props: any) => {
     });
 
     chatContext?.streamContext?.reloadChannel();
-    chatContext?.streamContext?.reloadChannelList();
+    // chatContext?.streamContext?.reloadChannelList();
     props.modal.onClose();
   };
 
@@ -120,7 +120,7 @@ const ChatEdit = (props: any) => {
         <Row className="hr-between w-full">
           <Button
             size="sm"
-            onClick={modalAddMembers.onClose}
+            onClick={props.modal.onClose}
             variant="state_default_hover"
           >
             Cancel
@@ -162,25 +162,11 @@ const ChatEdit = (props: any) => {
             onChange={(e) => {}}
             style={{ display: "none" }}
           />
-          <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
+          {/* <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
             Set New Profile Photo
-          </Text>
+          </Text> */}
         </Col>
 
-        <Col className="hr-center w-full m-v-1">
-          <Row>
-            <Icon></Icon>
-            <Text fontSize={16} fontWeight={800}>
-              Select From Gallery
-            </Text>
-          </Row>
-          <Row>
-            <Icon></Icon>
-            <Text fontSize={16} fontWeight={800}>
-              Select From Wallet
-            </Text>
-          </Row>
-        </Col>
         <LayoutInputs data={data} style={{ class: "m-b-1" }} />
         <Row className="hr-between">
           <Col>

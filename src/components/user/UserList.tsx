@@ -34,7 +34,7 @@ const UserList: FC<Props> = props => {
   const template = (heading: any, users: any) => {
     return (
       <Col className="m-b-1">
-        {users.length ? (
+        {users?.length ? (
           <>
             <Col className="m-b-1">
               <Heading as="h4" size="md">
@@ -42,7 +42,7 @@ const UserList: FC<Props> = props => {
               </Heading>
             </Col>
             <Container>
-              {users.map((item: any, index: any) => (
+              {users?.map((item: any, index: any) => (
                 <Row
                   key={index}
                   className="vr-center item m-b-0-5"

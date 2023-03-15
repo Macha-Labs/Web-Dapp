@@ -40,8 +40,6 @@ const useChatChannels = () => {
     };
 
   const _reload = () => {
-    const result = hookStreamChannels.fetchUserChannels();
-    setChannels(result);
   }
       
   return (

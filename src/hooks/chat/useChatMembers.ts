@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import useStreamChannelMembers from "../stream/useStreamChannelMembers";
 
 const useChatMembers = () => {
-    const hookStreamChannelMembers = useStreamChannelMembers();
+    let hookStreamChannelMembers: any;
     const [users, setUsers] = useState<any>();
+    const router = useRouter();
 
-    const reloadMembers = () => {
-        hookStreamChannelMembers.fetchChannelMembers()
+    if (router.pathname == '/chat') {
+        hookStreamChannelMembers = useStreamChannelMembers();
+
+        // useEffect(() => {
+        //     setUsers(hookStreamChannelMembers?.users || []);
+        // }, [router.pathname, hookStreamChannelMembers?.users]);
     }
 
     return (
