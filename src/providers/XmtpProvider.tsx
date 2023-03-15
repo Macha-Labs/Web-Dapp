@@ -1,10 +1,10 @@
-import { fetchSigner } from "@wagmi/core";
 import { DecodedMessage, SortDirection } from "@xmtp/xmtp-js";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Client } from "@xmtp/xmtp-js";
 import { AuthContext } from "./AuthProvider";
 import { ChannelXMTP$ } from "@/schema/channel";
 import { XmtpMessage$ } from "@/schema/message";
+import { logger, loggerInit } from "@/helpers/logger";
+
 export type XmtpContextType = {
   fetchXmtpConversation: (text: string) => void;
   sendXmtpMessage: any | undefined;
@@ -26,7 +26,7 @@ export const XmtpContext = createContext<XmtpContextType>({
 });
 
 export const XmtpProvider = ({ children }: any) => {
-  console.log("Checking for XMTPProvider re-rendering")
+  console.log('Rendering >>>>> XmtpProvider');
   const authContext = useContext(AuthContext);
   const xmtpClient = authContext.xmtpClient;
   const xmtpClientAddress = authContext.xmtpClientAddress;
@@ -73,18 +73,22 @@ export const XmtpProvider = ({ children }: any) => {
     const messagesData = messages?.map((item: any) => {
       return XmtpMessage$(item);
     });
+    logger('xmtp', 'XMTPProvider._loadMessages', 'Messages is', [messagesData])
     // console.log("conversation", conversation.send("hulle hula le hula"));
 
     setMessages(messagesData);
   }
 
   const fetchXmtpConversation = async (channel: any) => {
+    loggerInit('XMTPProvider.fetchXmtpConversation');
     const result = await xmtpClient.conversations.newConversation(
       channel?.id
     );
+    logger('xmtp', 'XMTPProvider.fetchXmtpConversation', 'Conversation is', [result])
     _loadMessages(result)
     setConversation(result);
   };
+
   const fetchXmtpConversationList = async () => {
     const conversationList = await xmtpClient.conversations.list();
     const data = conversationList.map((item: any) => {

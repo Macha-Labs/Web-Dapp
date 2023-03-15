@@ -15,19 +15,21 @@ import { AuthContext } from "@/providers/AuthProvider";
 import ChatSearch from "./ChatSearch";
 import { useRouter } from "next/router";
 import { truncateAddress } from "@/helpers";
+import useChatMembers from "@/hooks/chat/useChatMembers";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
   const modalSettings = useDisclosure();
   const authContext = useContext(AuthContext);
+  const hookMembers = useChatMembers();
   const router = useRouter();
 
   const TemplateMembers = () => {
     return (
       <ModalSlider event={membersModal}>
         <UserList
-          onlineUsers={props.hookMembers?.onlineUsers}
-          offlineUsers={props.hookMembers?.offlineUsers}
+          onlineUsers={hookMembers?.users?.onlineUsers}
+          offlineUsers={hookMembers?.users?.offlineUsers}
         />
       </ModalSlider>
     );
@@ -105,7 +107,7 @@ const ChatHeader = (props: any) => {
                 {props?.chatContext?.channel?.name ||
                   truncateAddress(props?.chatContext?.channel?.peerAddress)}
               </Heading>
-              {props?.chatContext?.channel?.raw?.muteStatus()?.muted && (
+              {!props?.chatContext?.channel?.raw?.disconnected && props?.chatContext?.channel?.raw?.muteStatus()?.muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}

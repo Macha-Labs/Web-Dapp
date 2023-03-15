@@ -7,7 +7,6 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
-import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import ModalSlider from "../modal/ModalSlider";
 import ChatNew from "./ChatNew";
@@ -20,9 +19,10 @@ import { darkStyle } from "@/styles/StyledConstants";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import useChatSelect from "@/hooks/chat/useChatSelect";
 import useChatChannels from "@/hooks/chat/useChatChannels";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatList = (props: any) => {
-  const chatProvider = useContext(ChatContext);
+  const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
   const hookChatSelect = useChatSelect();
   const hookChatChannels = useChatChannels();
@@ -39,8 +39,8 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        chatProvider?.streamContext?.reloadChannelList();
-        chatProvider?.streamContext?.reloadChannel();
+        hookChatChannels?.reload();
+        chatContext?.streamContext?.reloadChannel();
       },
       unmute: () => {
         toast({
@@ -49,8 +49,8 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        chatProvider?.streamContext?.reloadChannelList();
-        chatProvider?.streamContext?.reloadChannel();
+        hookChatChannels?.reload();
+        chatContext?.streamContext?.reloadChannel();
       },
       leave: () => {
         toast({
@@ -59,8 +59,8 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        chatProvider?.streamContext?.reloadChannelList();
-        chatProvider?.streamContext?.reloadChannel();
+        hookChatChannels?.reload();
+        chatContext?.streamContext?.reloadChannel();
       },
       delete: () => {
         toast({
@@ -69,8 +69,8 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        chatProvider?.streamContext?.reloadChannelList();
-        chatProvider?.streamContext?.reloadChannel();
+        hookChatChannels?.reload();
+        chatContext?.streamContext?.reloadChannel();
       },
     }
   );
@@ -103,7 +103,7 @@ const ChatList = (props: any) => {
               Pin Channel
             </Row>
           </Button> */}
-          {props?.item?.raw && !props.item.raw?.muteStatus()?.muted ? (
+          {!props?.item?.raw?.disconnected && props?.item?.raw && !props.item.raw?.muteStatus()?.muted ? (
             <Button
               variant="transparent"
               size="sm"
@@ -194,18 +194,18 @@ const ChatList = (props: any) => {
           <Col className="body verticlescroll hidescroll">
             {hookChatChannels?.channels?.length ? (
               <ul>
-                {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
+                {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
                 {hookChatChannels?.channels.map((item: any, index: number) => (
                   <StyledChatItem key={item?.index}>
-                    {/* {chatProvider?.hookChannels?.actionMessage ==
+                    {/* {chatContext?.hookChannels?.actionMessage ==
                       "MULTISELECT" && (
                       <Checkbox
                         className="m-r-0-5"
-                        isChecked={chatProvider.hookChannels?.selectedChannels.includes(
+                        isChecked={chatContext.hookChannels?.selectedChannels.includes(
                           item?.id
                         )}
                         onChange={() =>
-                          chatProvider.hookChannels?.handleSelectChannel(item)
+                          chatContext.hookChannels?.handleSelectChannel(item)
                         }
                       />
                     )} */}
@@ -213,12 +213,16 @@ const ChatList = (props: any) => {
                       className="menu-item w-100 m-b-0-5"
                       size="xl"
                       variant={
-                        chatProvider.channel?.id == item?.id
+                        chatContext.channel?.id == item?.id
                           ? "state_brand"
                           : "state_card_hover"
                       }
                       // overflow="hidden"
                     >
+                      <Col>
+                      {props?.chatContext?.channel?.id}
+                      {/* {item?.name} */}
+                      </Col>
                       <Row
                         className="vr-center w-11-12"
                         onClick={() => {
@@ -229,7 +233,7 @@ const ChatList = (props: any) => {
                         <Avatar
                           size="md"
                           className="m-r-0-5"
-                          name={truncateAddress(item?.name)}
+                          name={item?.name}
                         />
                         <Col className="w-100 d-flex flex-col vr-center">
                           <Row>
@@ -240,8 +244,7 @@ const ChatList = (props: any) => {
                             </Text>
                             {item?.raw && (
                               <>
-                                {/* {console.log(item.raw?.muteStatus()?.muted)} */}
-                                {item.raw?.muteStatus()?.muted && (
+                                {!item?.raw?.disconnected && item?.raw?.muteStatus()?.muted && (
                                   <IconImage
                                     path="IconDarkMute.png"
                                     style={{ className: "m-l-0-5" }}

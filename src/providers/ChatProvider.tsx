@@ -6,18 +6,14 @@ import { XmtpContext } from "./XmtpProvider";
 
 
 export type ChatContextType = {
-  hookChannel: any | undefined;
   hookChat: any | undefined;
-  hookMembers: any | undefined;
   channel: any | undefined;
   streamClient: any | undefined;
   streamContext: any | undefined;
 };
 
 export const ChatContext = createContext<ChatContextType>({
-  hookChannel: null,
   hookChat: null,
-  hookMembers: null,
   channel: null,
   streamClient: null,
   streamContext: null,
@@ -25,7 +21,7 @@ export const ChatContext = createContext<ChatContextType>({
 });
 
 export const ChatProvider = ({ children }: any) => {
-  console.log('Checking for ChatProvider re-rendering');
+  console.log('Rendering >>>>> ChatProvider');
   const streamContext = useContext(StreamContext) as StreamContextType;
   const xmtpContext = useContext(XmtpContext);
   const router = useRouter();
@@ -44,9 +40,7 @@ export const ChatProvider = ({ children }: any) => {
   return (
     <ChatContext.Provider
       value={{
-        hookChannel: streamContext?.hookChannel,
         hookChat: hookChat,
-        hookMembers: streamContext?.hookMembers,
         streamClient: streamContext?.client,
         streamContext: streamContext,
         channel: _fetchChannel(),

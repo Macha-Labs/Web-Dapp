@@ -4,16 +4,12 @@ import { StyledDateTag } from "@/styles/StyledComponents";
 import { XmtpContext } from "@/providers/XmtpProvider";
 import { useRouter } from "next/router";
 import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
+import useChatMessages from "@/hooks/chat/useChatMessages";
 
 const ChatWindow = (props: any) => {
-  const hookStreamChannelMessages = useStreamChannelMessages(
-    props.chatContext?.hookChannel?.channel
-  );
-  const xmtpContext = useContext(XmtpContext);
   const messageListRef = useRef<any>();
-  const [messages, setMessages] = useState<any>([]);
+  const hookChatMessages = useChatMessages();
   const itemsRef = useRef<any>([]);
-  const router = useRouter();
   const [isScrollAtBottom, setIsScrollAtBottom] = useState(false);
   const [dateTag, setDateTag] = useState("");
   const [dateTagVisible, setDateTagVisible] = useState(false);
@@ -41,8 +37,8 @@ const ChatWindow = (props: any) => {
     // Scroll to the bottom of the list when new items are added
     if (messageListRef && messageListRef.current) {
       const lastMsg =
-        hookStreamChannelMessages?.messages[
-          hookStreamChannelMessages?.messages.length - 1
+      hookChatMessages?.messages[
+        hookChatMessages?.messages.length - 1
         ];
       if (
         String(props.authContext.address).toLowerCase() ==
@@ -80,7 +76,7 @@ const ChatWindow = (props: any) => {
         }
       };
     }
-  }, [hookStreamChannelMessages?.messages]);
+  }, [hookChatMessages?.messages]);
 
   useEffect(() => {
     if (messageListRef && messageListRef.current && !isScrollAtBottom) {
@@ -114,24 +110,14 @@ const ChatWindow = (props: any) => {
   //   )
   // }
 
-  useEffect(() => {
-    if (router.pathname == "/chat") {
-      setMessages(hookStreamChannelMessages.messages || []);
-    }
-  }, [router.pathname, hookStreamChannelMessages.messages]);
-
-  useEffect(() => {
-    if (router.pathname == "/chat/dm") {
-      setMessages(xmtpContext.messages || []);
-    }
-  }, [router.pathname, xmtpContext.messages]);
+  
   return (
     <>
       <StyledDateTag visible={`${dateTagVisible ? "visible" : "hidden"} `}>
         {dateTag}
       </StyledDateTag>
       <div ref={messageListRef} className="body">
-        {messages.map((message: any, index: any) => {
+        {hookChatMessages?.messages?.map((message: any, index: any) => {
           return (
             <div
               ref={el => (itemsRef.current[message.id] = el)}

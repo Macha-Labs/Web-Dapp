@@ -7,7 +7,7 @@ import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { logger } from "../../helpers/logger";
 
 const useStreamClient = () => {
-  console.log("Checking for useStreamClient re-rendering");
+  console.log('Rendering >>>>> useStreamClient');
 
   const authContext = useContext(AuthContext) as AuthContextType;
   const [client, setClient] = useState<any>();

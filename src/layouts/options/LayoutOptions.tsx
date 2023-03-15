@@ -20,13 +20,13 @@ const LayoutOptions = (props: any) => {
               return null;
             }
             if (
-              item.name === "Mute Chat" &&
+              item.name === "Mute Chat" && !props?.channelRawData?.disconnected &&
               props.channelRawData?.muteStatus().muted
             ) {
               return null;
             }
             if (
-              item.name === "UnMute Chat" &&
+              item.name === "UnMute Chat" && !props?.channelRawData?.disconnected &&
               !props.channelRawData?.muteStatus().muted
             ) {
               return null;
