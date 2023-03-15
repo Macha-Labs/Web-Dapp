@@ -12,7 +12,7 @@ const useStreamChannelMessages = (channel: any) => {
       "channel is ",
       [channel]
     );
-    if (channel) {
+    if (channel && !channel?.raw?.disconnected) {
       channel?.raw?.markRead();
       _setMessages();
     }

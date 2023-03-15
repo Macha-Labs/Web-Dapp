@@ -105,7 +105,7 @@ const ChatHeader = (props: any) => {
                 {props?.chatContext?.channel?.name ||
                   truncateAddress(props?.chatContext?.channel?.peerAddress)}
               </Heading>
-              {props?.chatContext?.channel?.raw?.muteStatus()?.muted && (
+              {!props?.chatContext?.channel?.raw?.disconnected && props?.chatContext?.channel?.raw?.muteStatus()?.muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}

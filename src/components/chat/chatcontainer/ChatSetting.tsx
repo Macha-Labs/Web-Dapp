@@ -26,7 +26,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannels.reloadChannels();
+    hookChatChannels.reload();
+    // props.chatContext?.initiate(null);
     props.modalSettings.onClose();
   };
   const callbackClear = () => {
@@ -36,9 +37,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
+    hookChatChannels.reload();
     props.chatContext?.streamContext?.reloadChannel();
-    // props.chatContext?.initiate(null);
     props.modalSettings.onClose();
   };
 
@@ -52,7 +52,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
+    hookChatChannels.reload();
     props.chatContext?.streamContext?.reloadChannel();
     props.modalSettings.onClose();
   };
@@ -67,7 +67,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannel();
+    hookChatChannels.reload();
     props.chatContext?.streamContext?.reloadChannelList();
     props.modalSettings.onClose();
   };
@@ -81,7 +81,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
+    hookChatChannels.reload();
     props.chatContext?.initiate(null);
     props.modalSettings.onClose();
   };

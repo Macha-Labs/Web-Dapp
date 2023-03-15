@@ -41,7 +41,7 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 const AuthProvider = ({ children }: any) => {
-  console.log('re rending auth context');
+  console.log('Rendering >>>>> AuthProvider');
   const [signer, setSigner] = useState<any>("");
   const [user, setUser] = useState<any>(new User$(null, null, null));
   const { address, isConnected } = useAccount();

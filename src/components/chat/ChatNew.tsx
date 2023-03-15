@@ -27,7 +27,7 @@ const ChatNew = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatChannels.reloadChannels();
+    hookChatChannels.reload();
     props.modal.onClose();
   };
 

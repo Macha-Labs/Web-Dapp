@@ -1,50 +1,54 @@
-import { StreamContext } from "@/providers/StreamProvider";
+import { logger } from "@/helpers/logger";
 import { XmtpContext } from "@/providers/XmtpProvider";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import useStreamUserChannels from "../stream/useStreamUserChannels";
 
 const useChatChannels = () => {
+    console.log('Rendering >>>>> useChatChannels');
     const router = useRouter();
-    const streamContext = useContext(StreamContext);
     const xmtpContext = useContext(XmtpContext);
+    const hookStreamChannels = useStreamUserChannels();
     const [channels, setChannels] = useState<any>();
 
-    const _fetchChannels = () => {
-        switch (router.pathname) {
-          case "/chat":
-            console.log("all conversations", streamContext?.hookChannels.channels);
-            return streamContext?.hookChannels.channels;
-          case "/chat/dm":
-            console.log("all conversations", xmtpContext.allConversations);
-            return xmtpContext.allConversations;
-        }
-      };
-
-    const _reloadChannels = () => {
-      streamContext.reloadChannelList();
-    }
-
     useEffect(() => {
-        console.log('Reading channels from stream');
-        if (streamContext?.hookChannels.channels != (undefined || null)) {
-          const result = _fetchChannels();
-          setChannels(result)
-        }
-        
-    }, [streamContext?.hookChannels.channels])
-
-    useEffect(() => {
+      logger('channel', 'useEffect[hookStreamChannels.channels]', 'data', [hookStreamChannels.channels]);
+      if (hookStreamChannels.channels != (undefined || null)) {
         const result = _fetchChannels();
         setChannels(result)
-    }, [xmtpContext.allConversations != (undefined || null)])
-
+      }
       
-    return (
-        {
-            channels: channels,
-            reloadChannels: _reloadChannels
-        }
-    )
+    }, [hookStreamChannels.channels]);
+
+    if (router.pathname == '/chat/dm') {
+      useEffect(() => {
+        const result = _fetchChannels();
+        setChannels(result)
+      }, [xmtpContext.allConversations != (undefined || null)])
+    }
+
+    
+
+  const _fetchChannels = () => {
+      switch (router.pathname) {
+        case "/chat":
+          return hookStreamChannels.channels;
+        case "/chat/dm":
+          return xmtpContext.allConversations;
+      }
+    };
+
+  const _reloadChannels = () => {
+    const result = hookStreamChannels.fetchUserChannels();
+    setChannels(result);
+  }
+      
+  return (
+      {
+          channels: channels,
+          reload: _reloadChannels
+      }
+  )
 }
 
 export default useChatChannels;

@@ -29,7 +29,7 @@ export const ChannelStream$ = (data: any, raw?: any, owner?: any) => {
     users: data?.users,
     admins: data?.admins,
     isAdmin:
-      String(data?.created_by?.id).toLowerCase() == String(owner).toLowerCase(),
+      String(data?.created_by?.id)?.toLowerCase() == String(owner)?.toLowerCase(),
     createdBy: data?.created_by?.id,
     createdAt: data?.created_at,
     updatedAt: data?.updated_at,
@@ -48,14 +48,14 @@ export const ChannelStream$ = (data: any, raw?: any, owner?: any) => {
 
 export const ChannelXMTP$ = (data: any) => {
   return {
-    id: data?.peerAddress.toLowerCase(),
+    id: data?.peerAddress?.toLowerCase(),
     type: data?.type,
-    name: data?.peerAddress.toLowerCase(),
+    name: data?.peerAddress?.toLowerCase(),
     orgId: data?.orgId,
     private: data?.private,
     users: data?.users,
     admins: data?.admins,
-    createdBy: data?.createdBy.toLowerCase(),
+    createdBy: data?.createdBy?.toLowerCase(),
     createdAt: data?.createdAt,
     updatedAt: data?.updatedAt,
     permissions: data?.permissions,

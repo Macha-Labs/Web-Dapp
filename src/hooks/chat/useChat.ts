@@ -7,12 +7,10 @@ import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import useMention from "../stream/useMention";
-import { ChatContext } from "@/providers/ChatProvider";
 
 const useChat = (client: any, channel: any) => {
-  console.log("Checking for useChat re-rendering");
+  console.log('Rendering >>>>> useChat');
   const authContext = useContext(AuthContext) as AuthContextType;
-  const chatContext = useContext(ChatContext);
 
   //
   const [chatMeta, setChatMeta] = useState<any>({});

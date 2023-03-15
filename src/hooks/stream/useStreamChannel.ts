@@ -5,7 +5,7 @@ import { logger } from "./../../helpers/logger";
 import { config } from "../../config";
 
 const useStreamChannel = (client: any) => {
-  console.log("Checking for useStreamChannel re-rendering");
+  console.log('Rendering >>>>> useStreamChannel');
 
   const [channel, setChannel] = useState<any>();
 
