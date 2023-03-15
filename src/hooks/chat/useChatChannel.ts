@@ -35,9 +35,20 @@ const useChatChannel = () => {
         }
     };
 
+    const _reload = () => {
+        switch (router.pathname) {
+            case "/chat":
+                streamContext?.hookChannel.removeChannel();
+                break;
+            case "/chat/dm":
+                xmtpContext.reload();
+        }
+    }
+
     return {
         channel: storeChannel,
-        fetch: _fetch()
+        fetch: _fetch(),
+        remove: _reload
     }
 }
 export default useChatChannel;

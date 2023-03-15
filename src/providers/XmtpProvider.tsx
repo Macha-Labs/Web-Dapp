@@ -6,12 +6,14 @@ import { logger, loggerInit } from "@/helpers/logger";
 export type XmtpContextType = {
   fetchXmtpConversation: (text: string) => void;
   initiate: (text: string) => void;
+  remove: () => void;
   conversation: any | undefined;
 };
 
 export const XmtpContext = createContext<XmtpContextType>({
   fetchXmtpConversation: () => {},
   initiate: () => {},
+  remove: () => {},
   conversation: null,
 });
 
@@ -47,6 +49,10 @@ export const XmtpProvider = ({ children }: any) => {
   const _initiate = (conversation: any) => {
     setConversation(conversation)
   }
+
+  const _remove = () => {
+    setConversation(null)
+  }
   
 
   const _newConversation = async (channel: any) => {
@@ -65,6 +71,7 @@ export const XmtpProvider = ({ children }: any) => {
       value={{
         fetchXmtpConversation: _newConversation,
         initiate: _initiate,
+        remove: _remove,
         conversation: conversation,
       }}
     >

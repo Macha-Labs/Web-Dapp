@@ -1,4 +1,5 @@
 import ModalSlider from "@/components/modal/ModalSlider";
+import useChatChannel from "@/hooks/chat/useChatChannel";
 import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
@@ -15,6 +16,7 @@ function ChatSetting(props: any) {
   const toast = useToast();
   const modalPinned = useDisclosure();
   const hookChatChannels = useChatChannelsReload();
+  const hookChatChannel = useChatChannel();
   /**
    * @description
    **/
@@ -26,7 +28,7 @@ function ChatSetting(props: any) {
       position: "bottom-right",
     });
     hookChatChannels.load();
-    // props.chatContext?.initiate(null);
+    hookChatChannel.remove();
     props.modalSettings.onClose();
   };
   const callbackClear = () => {
@@ -51,7 +53,6 @@ function ChatSetting(props: any) {
       position: "bottom-right",
     });
     hookChatChannels.load();
-    props.chatContext?.streamContext?.reloadChannel();
     props.modalSettings.onClose();
   };
 
@@ -79,7 +80,7 @@ function ChatSetting(props: any) {
       position: "bottom-right",
     });
     hookChatChannels.load();
-    props.chatContext?.initiate(null);
+    hookChatChannel.remove();
     props.modalSettings.onClose();
   };
 

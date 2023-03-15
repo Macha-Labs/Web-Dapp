@@ -43,10 +43,14 @@ const useStreamChannel = (client: any) => {
     }
   }
   
-
+  const removeChannel = () => {
+    setChannel(null);
+  }
+ 
   return {
     setUpChannel: setUpChannel,
     getChannel: getChannel,
+    removeChannel: removeChannel,
     channel: channel,
     pinnedMessages: channel?.raw?.state?.pinnedMessages,
   };
