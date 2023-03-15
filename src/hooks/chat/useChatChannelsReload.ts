@@ -1,3 +1,4 @@
+import { loggerInit } from "@/helpers/logger";
 import useChatChannelsStore from "@/store/useChatChannelsStore";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -12,7 +13,7 @@ const useChatChannelsReload = () => {
     const [loading, setLoading] = useState<any>(false);
 
     useEffect(() => {
-        console.log('update');
+        loggerInit('useChatChannelsReload.useEffect');
         if (loading) {
             setLoading(false);
             if (router.pathname == '/chat')
@@ -23,6 +24,7 @@ const useChatChannelsReload = () => {
     }, [hookStreamChannels.channels, hookXmtpChannels.channels])
 
     const _load = async () => {
+        loggerInit('useChatChannelsReload._load');
         setLoading(true);
         switch (router.pathname) {
           case "/chat":

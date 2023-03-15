@@ -4,7 +4,7 @@ import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { Col } from "@/styles/StyledComponents";
 import { Heading, useDisclosure, useToast } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React from "react";
 import ChatEdit from "../ChatEdit";
 import ChatMembers from "./ChatMembers";
 import ChatMembersAdd from "./ChatMembersAdd";
