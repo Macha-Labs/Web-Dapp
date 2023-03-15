@@ -63,7 +63,7 @@ const useChat = (client: any, channel: any) => {
       }
 
       let messageData: any = {};
-      let msgData: {};
+      let msgData: any = {};
 
 
       if (actionMessage?.action == "FORWARD") {
