@@ -2,6 +2,7 @@ import { DecodedMessage} from "@xmtp/xmtp-js";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthProvider";
 import { logger, loggerInit } from "@/helpers/logger";
+import useXmtp from "@/hooks/xmtp/useXmtp";
 
 export type XmtpContextType = {
   fetchXmtpConversation: (text: string) => void;
@@ -14,7 +15,7 @@ export const XmtpContext = createContext<XmtpContextType>({
   fetchXmtpConversation: () => {},
   initiate: () => {},
   remove: () => {},
-  conversation: null,
+  conversation: null,  
 });
 
 export const XmtpProvider = ({ children }: any) => {

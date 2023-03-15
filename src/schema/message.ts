@@ -1,3 +1,5 @@
+import { DecodedMessage } from "@xmtp/xmtp-js";
+
 export const StreamMessage$ = (data: any) => {
   return {
     id: data?.id,
@@ -15,14 +17,18 @@ export const StreamMessage$ = (data: any) => {
 };
 export const XmtpMessage$ = (data: any) => {
   return {
-    id: data.topic,
-    text: data.content,
-    createdAt: data.sent,
-    createdBy: data.senderAddress.toLowerCase(),
-    peerAddress: data.conversation.peerAddress,
+    id: data?.topic,
+    text: data?.content,
+    createdAt: data?.sent,
+    createdBy: data?.senderAddress.toLowerCase(),
+    peerAddress: data?.conversation.peerAddress,
     attachments: data?.attachments,
     user: {
       id: data.senderAddress.toLowerCase()
-    }
+    },
+    contentTopic: data.contentTopic,
+    conversation: data?.conversation,
+    sent: data?.sent,
+    messageVersion: data?.messageVersion
   };
 };
