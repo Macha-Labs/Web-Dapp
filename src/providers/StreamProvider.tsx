@@ -9,8 +9,6 @@ import { AuthContext, AuthContextType } from "./AuthProvider";
 export type StreamContextType = {
     client: any | undefined;
     hookChannel: any | undefined;
-    hookMembers: any | undefined;
-    reloadMembers: () => void;
     reloadChannel: () => void;
     initiate: (channel: any, userAddress: any) => void;
 };
@@ -18,8 +16,6 @@ export type StreamContextType = {
 export const StreamContext = createContext<StreamContextType>({
     client: null,
     hookChannel: {},
-    hookMembers: {},
-    reloadMembers: () => {},
     reloadChannel: () => {},
     initiate: (channel: any, userAddress: any) => {}
 });
@@ -28,9 +24,7 @@ const StreamProvider = ({children}: any) => {
     console.log('Rendering >>>>> StreamProvider');
     const authContext = useContext(AuthContext) as AuthContextType;
     const hookStreamClient = useStreamClient();
-    
     const hookStreamChannel = useStreamChannel(hookStreamClient.client);
-    const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel);
    
 
     useEffect(() => {
@@ -45,11 +39,6 @@ const StreamProvider = ({children}: any) => {
     //         hookStreamChannels.fetchUserChannels(hookStreamClient.client);
     //     }
     // }, [hookStreamClient.client?.user?.id]);
-
-    
-    const reloadMembers = () => {
-        hookStreamChannelMembers.fetchChannelMembers()
-    }
 
     const reloadChannel = () => {
         hookStreamChannel.setUpChannel(hookStreamChannel?.channel?.id)
@@ -71,8 +60,6 @@ const StreamProvider = ({children}: any) => {
             value={{
                 client: hookStreamClient.client,
                 hookChannel: hookStreamChannel,
-                hookMembers: hookStreamChannelMembers,
-                reloadMembers: reloadMembers,
                 reloadChannel:  reloadChannel,
                 initiate: initiate,
             }}

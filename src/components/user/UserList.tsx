@@ -32,7 +32,6 @@ const UserList: FC<Props> = props => {
   };
 
   const template = (heading: any, users: any) => {
-    console.log("users", users);
     return (
       <Col className="m-b-1">
         {users.length ? (

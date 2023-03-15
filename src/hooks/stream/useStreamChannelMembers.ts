@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { User$ } from "../../schema/user";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { logger } from "@/helpers/logger";
+import { StreamContext } from "@/providers/StreamProvider";
 
-const useStreamChannelMembers = (channel: any) => {
+const useStreamChannelMembers = () => {
   const authContext = useContext(AuthContext) as AuthContextType;
+  const streamContext = useContext(StreamContext);
   const [allUsersIds, setAllUsersIds] = useState<any>([]);
   const [onlineUsers, setOnlineUsers] = useState<any>([]);
   const [offlineUsers, setOfflineUsers] = useState<any>([]);
@@ -12,7 +14,10 @@ const useStreamChannelMembers = (channel: any) => {
   const [isLoading, setIsLoading] = useState<any>();
 
   const fetchChannelMembers = async () => {
-    const response = await channel?.raw?.queryMembers({});
+    if (streamContext?.hookChannel?.channel?.raw?.disconnected)
+      return;
+
+    const response = await streamContext?.hookChannel?.channel?.raw?.queryMembers({});
     let onlineIds: any[] = [];
     let offlineIds: any[] = [];
     response?.members.map((item: any, index: number) => {
@@ -36,7 +41,7 @@ const useStreamChannelMembers = (channel: any) => {
   // checking if current user is a member of this channel
   const checkUserIsAMember = async () => {
     try {
-      const result = await channel?.raw?.queryMembers({
+      const result = await streamContext?.hookChannel?.raw?.queryMembers({
         id: authContext?.user.lens?.id,
       });
 
@@ -51,8 +56,8 @@ const useStreamChannelMembers = (channel: any) => {
     }
   };
   useEffect(() => {
-    if (channel) fetchChannelMembers();
-  }, [channel]);
+    if (streamContext?.hookChannel?.channel) fetchChannelMembers();
+  }, [streamContext?.hookChannel?.channel]);
 
   const checkOnline = (user: any) => {
     return user.online == true;
