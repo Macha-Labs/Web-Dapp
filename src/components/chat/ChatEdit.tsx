@@ -47,7 +47,7 @@ const ChatEdit = (props: any) => {
     });
 
     hookChatChannel.reload();
-    // hookChatChannels.load();
+    hookChatChannels.load();
     props.modal.onClose();
   };
 
@@ -144,7 +144,7 @@ const ChatEdit = (props: any) => {
       }
     >
       <Col className="p-3">
-        <Col className="hr-center w-full">
+        <Col className="hr-center w-full mb-2">
           {profileImage ? (
             <Avatar
               size="2xl"
@@ -174,7 +174,7 @@ const ChatEdit = (props: any) => {
         <LayoutInputs data={data} style={{ class: "m-b-1" }} />
         <Row className="hr-between">
           <Col>
-            <Heading size="sm">Allow channel to be public</Heading>
+            <Heading size="sm">Make channel private</Heading>
             <Text>
               Please note public channels can be joined by anyone with the link
               and should not be used for a small group conversation.

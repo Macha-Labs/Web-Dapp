@@ -6,7 +6,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
@@ -28,6 +28,7 @@ const ChatMembers = (props: any) => {
     });
     chatContext?.streamContext.reloadMembers();
   }
+
 
   return (
     <>
