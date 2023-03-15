@@ -6,7 +6,7 @@ import { Channel$, ChannelStream$ } from "../../schema/channel";
 const useStreamUserChannels = () => {
   console.log('Rendering >>>>> useStreamUserChannels');
   const streamContext = useContext(StreamContext);
-  const [channels, setChannels] = useState<any>([]);
+  const [channels, setChannels] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>(false);
   const [selectedChannels, setSelectedChannels] = useState<any>([]) 
   const [actionMessage, setActionMessage] = useState<String>('')

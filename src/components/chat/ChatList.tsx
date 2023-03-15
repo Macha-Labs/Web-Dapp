@@ -20,6 +20,7 @@ import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import useChatSelect from "@/hooks/chat/useChatSelect";
 import useChatChannels from "@/hooks/chat/useChatChannels";
 import { ChatContext } from "@/providers/ChatProvider";
+import LoadChannels from "../load/LoadChannels";
 
 const ChatList = (props: any) => {
   const chatContext = useContext(ChatContext);
@@ -170,6 +171,20 @@ const ChatList = (props: any) => {
     );
   };
 
+  const TemplateNewHolder = () => {
+    return (
+      <Button onClick={modalChatNew.onOpen} variant="state_brand">
+                  Create Channel
+                </Button>
+    )
+  }
+
+  const TemplateLoading = () => {
+    return (
+      <LoadChannels/>
+    )
+  }
+
   const TemplateChatList = () => {
     return (
       <>
@@ -181,15 +196,11 @@ const ChatList = (props: any) => {
             styled={{ className: "m-l-1" }}
           />
         </Row>
+        <Col className="body verticlescroll hidescroll">
         {!hookChatChannels?.channels ? (
-          <Col className="body">
-            Create your first channel
-            <Button size="sm" onClick={props.channelNew}>
-              First Channel
-            </Button>
-          </Col>
+            <TemplateLoading />
         ) : (
-          <Col className="body verticlescroll hidescroll">
+          <>
             {hookChatChannels?.channels?.length ? (
               <ul>
                 {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
@@ -307,13 +318,12 @@ const ChatList = (props: any) => {
               </ul>
             ) : (
               <>
-                <Button onClick={modalChatNew.onOpen} variant="state_brand">
-                  Create Channel
-                </Button>
+                <TemplateNewHolder />
               </>
             )}
-          </Col>
+          </>
         )}
+        </Col>
       </>
     );
   };
