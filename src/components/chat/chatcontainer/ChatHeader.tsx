@@ -5,7 +5,6 @@ import {
   Button,
   Avatar,
   Heading,
-  Icon,
   useDisclosure,
   Text,
 } from "@chakra-ui/react";
@@ -14,13 +13,14 @@ import ChatSetting from "./ChatSetting";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import ChatSearch from "./ChatSearch";
-import { ChatContext } from "@/providers/ChatProvider";
+import { useRouter } from "next/router";
+import { truncateAddress } from "@/helpers";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
   const modalSettings = useDisclosure();
-  const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext);
+  const router = useRouter();
 
   const TemplateMembers = () => {
     return (
@@ -38,10 +38,10 @@ const ChatHeader = (props: any) => {
       <ModalSlider event={modalSettings} size="sm">
         <ChatSetting
           event={modalSettings}
-          chatContext={chatContext}
+          chatContext={props?.chatContext}
           authContext={authContext}
-          hookChannel={chatContext.hookChannel}
-          hookChat={chatContext.hookChat}
+          hookChannel={props?.chatContext.hookChannel}
+          hookChat={props?.chatContext.hookChat}
           modalSettings={modalSettings}
         />
       </ModalSlider>
@@ -56,7 +56,7 @@ const ChatHeader = (props: any) => {
           size="xs"
           variant="state_default_hover"
           className="m-l-1"
-          onClick={props?.hookChat?.handleSearchClose}
+          onClick={props?.chatContext?.hookChat?.handleSearchClose}
         >
           Cancel
         </Button>
@@ -72,7 +72,7 @@ const ChatHeader = (props: any) => {
           size="sm"
           className="m-r-0-5"
           onClick={() => {
-            chatContext.hookChat?.setSelectedMessages([]);
+            props?.chatContext.hookChat?.setSelectedMessages([]);
           }}
         >
           Clear
@@ -80,7 +80,7 @@ const ChatHeader = (props: any) => {
         <Button
           variant="state_default_hover"
           size="xs"
-          onClick={chatContext.hookChat.handleMultiSelectClose}
+          onClick={props?.chatContext.hookChat.handleMultiSelectClose}
         >
           Cancel
         </Button>
@@ -95,14 +95,17 @@ const ChatHeader = (props: any) => {
           <Avatar
             size="sm"
             className="m-r-0-5"
-            name={props?.hookChannel?.channel?.name}
+            name={
+              props?.chatContext?.channel?.name || props?.chatContext?.channel?.peerAddress
+            }
           />
           <Col>
             <Row>
               <Heading as="h4" size="sm">
-                {props?.hookChannel?.channel?.name}
+                {props?.chatContext?.channel?.name ||
+                  truncateAddress(props?.chatContext?.channel?.peerAddress)}
               </Heading>
-              {props?.hookChannel?.channel?.raw?.muteStatus()?.muted && (
+              {props?.chatContext?.channel?.raw?.muteStatus()?.muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}
@@ -111,15 +114,15 @@ const ChatHeader = (props: any) => {
               )}
             </Row>
             <Heading as="h6" size="xs">
-              {props.hookChat?.usersWhoAreTyping && (
+              {props?.chatContext?.hookChat?.usersWhoAreTyping && (
                 <>
-                  {props.hookChat?.usersWhoAreTyping?.map(
+                  {props?.chatContext?.hookChat?.usersWhoAreTyping?.map(
                     (user: any, index: number) => {
                       return (
                         <Text key={user?.id} fontSize="12">
                           {`${user}${
                             index! ==
-                              props.hookChat?.usersWhoAreTyping.length - 1 &&
+                              props?.chatContext?.hookChat?.usersWhoAreTyping.length - 1 &&
                             ","
                           } is typing...`}
                         </Text>
@@ -132,7 +135,7 @@ const ChatHeader = (props: any) => {
           </Col>
         </Row>
 
-        <Row className="vr-center">
+        {router.pathname == '/chat' && <Row className="vr-center">
           <IconImage
             path="IconDarkMenu.png"
             onClick={modalSettings.onOpen}
@@ -140,15 +143,17 @@ const ChatHeader = (props: any) => {
           />
 
           <IconImage path="IconDarkUsers.png" onClick={membersModal.onOpen} />
-        </Row>
+        </Row>}
+
+        
       </Row>
     );
   };
 
   const Template = () => {
-    if (props.hookChat.actionMessage?.action === "SEARCH")
+    if (props?.chatContext?.hookChat.actionMessage?.action === "SEARCH")
       return <TemplateSearch />;
-    else if (props.hookChat.actionMessage?.action === "MULTISELECT")
+    else if (props?.chatContext?.hookChat.actionMessage?.action === "MULTISELECT")
       return <TemplateMultiSelect />;
     else {
       return <TemplateProfile />;

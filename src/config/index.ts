@@ -1,16 +1,13 @@
 export const config = {
-  WEB3STORAGE_TOKEN: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDUwMkRmQzQyODIwZWM1RDhFOTEwRjgxYzI3Mjk5NzcxZjk3Q2Q2MjEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjA4OTk0MzU4NTQsIm5hbWUiOiJUZXN0VG9rZW4ifQ.z3E0zHpfF1xSibdvLC35sH8JY9xf3rYiY_l_MkUgjDM",
-
-  // GetStream
-  STREAM_APPID: "1235460",
-  STREAM_APIKEY: "bpm3zjatbqj3",
-  STREAM_SECRET:"rgvd9g2c3z5mecz2bz9qysncwvrd997d96mupu8bgss7zkumxq2pp82yjyu9yvbk",
-
-  // Backend
-  url: "https://metawork-server.herokuapp.com",
+  WEB3STORAGE_TOKEN:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDUwMkRmQzQyODIwZWM1RDhFOTEwRjgxYzI3Mjk5NzcxZjk3Q2Q2MjEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjA4OTk0MzU4NTQsIm5hbWUiOiJUZXN0VG9rZW4ifQ.z3E0zHpfF1xSibdvLC35sH8JY9xf3rYiY_l_MkUgjDM",
+  STREAM_APPID: "1239221",
+  STREAM_APIKEY: "s7k8yarexp9g",
+  STREAM_SECRET:
+    "czw7rguj3bcpzetr5e2fcx366rq26g38rg6taj9x4gr6h8my3sk25msrx7bcr4we",
+  // url: "https://metawork-server.herokuapp.com",
   // url: "http://localhost:3080",
-
-  // Discord
+  url: "https://metawork-server-staging.herokuapp.com/",
   DISCORD_API_ENDPOINT: "https://discord.com/api/v10",
   DISCORD_REDIRECT_URL: "http://localhost:3000/app",
   DISCORD_CLIENT_ID: "1019347765395996804",

@@ -1,13 +1,17 @@
 import { logger } from "@/helpers/logger";
-import { useContext, useEffect, useState } from "react";
-import { ChatContext } from "@/providers/ChatProvider";
 import { StreamMessage$ } from "@/schema/message";
+import { useEffect, useState } from "react";
 
-const useStreamChannelActions = (channel: any) => {
-  const [messages, setMessages] = useState<any>();
-  const chatContext = useContext(ChatContext);
+const useStreamChannelMessages = (channel: any) => {
+  const [messages, setMessages] = useState<any>([]);
+
   useEffect(() => {
-    logger("channel", "useEffect[channel]", "channel is ", [channel]);
+    logger(
+      "channel",
+      "useStreamChannelMessages.useEffect[channel]",
+      "channel is ",
+      [channel]
+    );
     if (channel) {
       channel?.raw?.markRead();
       _setMessages();
@@ -20,7 +24,6 @@ const useStreamChannelActions = (channel: any) => {
         [event]
       );
       _setMessages();
-      //   setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
     });
     channel?.raw?.on("message.updated", (event: any) => {
       logger(
@@ -30,7 +33,6 @@ const useStreamChannelActions = (channel: any) => {
         [event]
       );
       _setMessages();
-      //   setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
     });
     channel?.raw?.on("message.deleted", (event: any) => {
       logger(
@@ -40,7 +42,6 @@ const useStreamChannelActions = (channel: any) => {
         [event]
       );
       _setMessages();
-      //   setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
     });
     channel?.raw?.on("reaction.new", (event: any) => {
       logger(
@@ -50,7 +51,6 @@ const useStreamChannelActions = (channel: any) => {
         [event]
       );
       _setMessages();
-      //   setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
     });
     channel?.raw?.on("reaction.updated", (event: any) => {
       logger(
@@ -59,7 +59,6 @@ const useStreamChannelActions = (channel: any) => {
         "logging the message reaction events",
         [event]
       );
-      //   setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
       _setMessages();
     });
     channel?.raw?.on("reaction.deleted", (event: any) => {
@@ -70,35 +69,7 @@ const useStreamChannelActions = (channel: any) => {
         [event]
       );
       _setMessages();
-      //   setMessages(channel?.raw?.state?.messageSets[0]?.messages.slice(0));
     });
-    channel?.raw?.on("member.added", (event: any) => {
-      logger(
-        "stream",
-        "useStreamChannel.useEffect",
-        "logging added member event",
-        [event]
-      );
-      chatContext?.streamContext.reloadMembers();
-      _setMessages();
-    });
-    channel?.raw?.on("member.removed", (event: any) => {
-      logger(
-        "stream",
-        "useStreamChannel.useEffect",
-        "logging remove member event",
-        [event]
-      );
-      chatContext?.streamContext.reloadMembers();
-      _setMessages();
-    });
-
-    chatContext.streamClient?.on((event: any) => {
-      logger("stream",
-      "useStreamChannel.useEffect",
-      "logging remove member event",
-      [event]);
-    })
   }, [channel]);
 
   const _setMessages = () => {
@@ -116,4 +87,4 @@ const useStreamChannelActions = (channel: any) => {
     messages: messages,
   };
 };
-export default useStreamChannelActions;
+export default useStreamChannelMessages;

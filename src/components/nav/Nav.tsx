@@ -10,13 +10,11 @@ import { Tooltip, useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
 import IconImage from "../icons/IconImage";
+import { AuthContext } from "@/providers/AuthProvider";
+import { useRouter } from "next/router";
 
 const Nav = (props: any) => {
-  const orgsDrawer = useDisclosure();
-  const userDrawer = useDisclosure();
-  const [active, setActive] = React.useState(
-    window.location.href.split("/")[3]
-  );
+  const router = useRouter();
 
   const templateOrgs = () => {
     return <ModalPage></ModalPage>;
@@ -46,34 +44,39 @@ const Nav = (props: any) => {
                       path="IconDarkHash.png"
                       style={{
                         className: `m-b-1 ${
-                          active === "chat" ? "state_active state_hover scale" : ""
+                          router.pathname === "/chat"
+                            ? "state_active state_hover scale"
+                            : ""
                         } `,
                       }}
-                      onClick={() => setActive("chat")}
                     />
                   </Tooltip>
                 </Link>
-                {/* <IconImage
-                  path="IconBrandDiscover.png"
-                  style={{
-                    className: `m-b-1 ${
-                      active === "discover" ? "state_active state_hover scale" : ""
-                    } `,
-                  }}
-                  onClick={() => setActive("discover")}
-                /> */}
               </Col>
 
               <Col className="hr-center">
+                <Link href="/chat/dm">
+                  <IconImage
+                    path="IconBrandChat.png"
+                    style={{
+                      className: `m-b-1 ${
+                        router.pathname === "/chat/dm"
+                          ? "state_active state_hover scale"
+                          : ""
+                      } `,
+                    }}
+                  />
+                </Link>
                 <Link href="/user">
                   <IconImage
                     path="IconBrandProfile.png"
                     style={{
                       className: `m-b-1 ${
-                        active === "user" ? "state_active state_hover scale" : ""
+                        router.pathname === "/user"
+                          ? "state_active state_hover scale"
+                          : ""
                       } `,
                     }}
-                    onClick={() => setActive("user")}
                   />
                 </Link>
                 <IconImage

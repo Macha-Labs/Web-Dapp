@@ -23,9 +23,10 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import IconImage from "../icons/IconImage";
 import useLensProfile from "@/hooks/lens/useLensProfile";
+import Link from "next/link";
 
 const UserProfile = ({ user }: any) => {
-  console.log('User Profile', user)
+  console.log("User Profile", user);
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
   const hookLensFollow = useLensFollows(user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(user?.lens?.id);
@@ -196,9 +197,16 @@ const UserProfile = ({ user }: any) => {
                 Follow on Lens
               </Button>
             )}
-            <Button leftIcon={<ChatIcon />} variant="state_brand" size="md">
-              Message
-            </Button>
+            <Link href={`chat/dm`}>
+              <Button
+                leftIcon={<ChatIcon />}
+                onClick={() => {}}
+                variant="state_brand"
+                size="md"
+              >
+                Message
+              </Button>
+            </Link>
           </Row>
         )}
       </StyledCard>

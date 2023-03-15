@@ -46,7 +46,7 @@ const OrgControl = (props:any) => {
           className="sm m-r-0-5"
         /> */}
         <Heading as="h4" size="sm">
-          Portal
+          MetaWork
         </Heading>
       </Row>
       {props.context?.user?._id == props?.org?.owner ? (

@@ -1,7 +1,7 @@
 import { logger } from "@/helpers/logger";
 import useStreamChannel from "@/hooks/stream/useStreamChannel";
 import useStreamChannelMembers from "@/hooks/stream/useStreamChannelMembers";
-import useStreamChat from "@/hooks/stream/useStreamChat";
+import useChat from "@/hooks/chat/useChat";
 import { createContext, useContext, useEffect } from "react";
 import useStreamClient from "../hooks/stream/useStreamClient";
 import useStreamUserChannels from "../hooks/stream/useStreamUserChannels";
@@ -12,7 +12,6 @@ export type StreamContextType = {
     hookChannels: any | undefined;
     hookChannel: any | undefined;
     hookMembers: any | undefined;
-    hookChat: any | undefined;
     reloadMembers: () => void;
     reloadChannel: () => void;
     reloadChannelList: () => void;
@@ -24,7 +23,6 @@ export const StreamContext = createContext<StreamContextType>({
     hookChannels: [],
     hookChannel: {},
     hookMembers: {},
-    hookChat: {},
     reloadMembers: () => {},
     reloadChannel: () => {},
     reloadChannelList: () => {},
@@ -34,12 +32,11 @@ export const StreamContext = createContext<StreamContextType>({
 const StreamProvider = ({children}: any) => {
     console.log("Checking for StreamProvider re-rendering")
     const authContext = useContext(AuthContext) as AuthContextType;
-
     const hookStreamClient = useStreamClient();
     const hookStreamChannels = useStreamUserChannels(hookStreamClient.client);
     const hookStreamChannel = useStreamChannel(hookStreamClient.client);
     const hookStreamChannelMembers = useStreamChannelMembers(hookStreamChannel?.channel);
-    const hookStreamChat = useStreamChat(hookStreamClient.client, hookStreamChannel?.channel);
+   
 
     useEffect(() => {
         if (authContext?.isConnected && !hookStreamClient?.client) {
@@ -92,7 +89,6 @@ const StreamProvider = ({children}: any) => {
                 hookChannels: hookStreamChannels,
                 hookChannel: hookStreamChannel,
                 hookMembers: hookStreamChannelMembers,
-                hookChat: hookStreamChat,
                 reloadMembers: reloadMembers,
                 reloadChannel:  reloadChannel,
                 reloadChannelList: reloadChannelList,

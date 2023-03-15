@@ -864,8 +864,8 @@ export const StyledConversation = styled(Col)`
     color: ${style.message.color.default};
     background: ${style.message.bg.default};
     width: fit-content;
-    min-width: 40%;
-    max-width: 70%;
+    min-width: 30%;
+    max-width: 50%;
     border-radius: 10px;
     padding: 10px;
     box-shadow: ${style.message.shadow.default};
