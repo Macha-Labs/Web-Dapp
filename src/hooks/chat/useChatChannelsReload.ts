@@ -28,8 +28,9 @@ const useChatChannelsReload = () => {
         setLoading(true);
         switch (router.pathname) {
           case "/chat":
-            hookStreamChannels.fetchUserChannels()
+            hookStreamChannels.fetchUserChannels();
           case "/chat/dm":
+            loggerInit('for xmtp');
             hookXmtpChannels.fetch()
         }
       }
