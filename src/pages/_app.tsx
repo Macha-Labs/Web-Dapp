@@ -13,6 +13,7 @@ import { polygon, polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { XmtpProvider } from "@/providers/XmtpProvider";
+import { DataProvider } from "@/providers/DataProvider";
 
 const { chains, provider } = configureChains(
   [polygonMumbai],
@@ -40,9 +41,11 @@ export default function App({ Component, pageProps }: AppProps) {
               <StreamProvider>
                 <XmtpProvider>
                   <ChatProvider>
-                    <ChakraProvider theme={theme}>
-                      <Component {...pageProps} />
-                    </ChakraProvider>
+                    <DataProvider>
+                      <ChakraProvider theme={theme}>
+                        <Component {...pageProps} />
+                      </ChakraProvider>
+                    </DataProvider>
                   </ChatProvider>
                 </XmtpProvider>
               </StreamProvider>

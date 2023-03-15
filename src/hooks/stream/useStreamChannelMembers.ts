@@ -13,7 +13,7 @@ const useStreamChannelMembers = () => {
   const [userIsMember, setUserIsMember] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>();
 
-  const fetchChannelMembers = async () => {
+  const _fetch = async () => {
     if (streamContext?.hookChannel?.channel?.raw?.disconnected)
       return;
 
@@ -55,16 +55,17 @@ const useStreamChannelMembers = () => {
       return false;
     }
   };
-  useEffect(() => {
-    if (streamContext?.hookChannel?.channel) fetchChannelMembers();
-  }, [streamContext?.hookChannel?.channel]);
 
   const checkOnline = (user: any) => {
     return user.online == true;
   };
 
+  useEffect(() => {
+    _fetch();
+  }, [streamContext?.hookChannel?.channel?.id])
+
   return {
-    fetchChannelMembers: fetchChannelMembers,
+    fetch: _fetch,
     checkOnline: checkOnline,
     users: {onlineUsers: onlineUsers, offlineUsers: offlineUsers},
     allUsers: onlineUsers.concat(offlineUsers),

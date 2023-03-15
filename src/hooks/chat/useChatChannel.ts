@@ -1,3 +1,4 @@
+import { DataContext } from "@/providers/DataProvider";
 import { StreamContext, StreamContextType } from "@/providers/StreamProvider";
 import { XmtpContext } from "@/providers/XmtpProvider";
 import useChatChannelStore from "@/store/useChatChannelStore";
@@ -8,8 +9,7 @@ const useChatChannel = () => {
     const streamContext = useContext(StreamContext) as StreamContextType;
     const xmtpContext = useContext(XmtpContext);
     const router = useRouter();
-    const storeChannel = useChatChannelStore((state: any) => state.channel)
-    const storeLoad = useChatChannelStore(((state: any) => state.load))
+    const dataContext = useContext(DataContext)
 
     useEffect(() => {
         console.log('fetch channel');
@@ -17,11 +17,11 @@ const useChatChannel = () => {
         switch (router.pathname) {
             case "/chat":
                 console.log('for stream')
-                storeLoad(streamContext?.hookChannel.channel);
+                dataContext.loadChannel(streamContext?.hookChannel.channel);
                 break;
             case "/chat/dm":
                 console.log('for XMTP')
-                storeLoad(xmtpContext?.conversation);
+                dataContext.loadChannel(xmtpContext?.conversation);
                 break;
         }
     }, [streamContext?.hookChannel.channel, xmtpContext?.conversation]);
@@ -30,25 +30,40 @@ const useChatChannel = () => {
         switch (router.pathname) {
             case "/chat":
                 return streamContext?.initiate;
+                break;
             case "/chat/dm":
                 return xmtpContext.initiate;
+                break;
         }
     };
 
-    const _reload = () => {
+    const _remove = () => {
         switch (router.pathname) {
             case "/chat":
                 streamContext?.hookChannel.removeChannel();
                 break;
             case "/chat/dm":
                 xmtpContext.remove();
+                break;
         }
     }
 
+    const _reload = () => {
+        switch (router.pathname) {
+            case "/chat":
+                streamContext?.reloadChannel();
+                break;
+            case "/chat/dm":
+                // xmtpContext.remove();
+                break;
+        }   
+    }
+
     return {
-        channel: storeChannel,
+        channel: dataContext.channel,
         fetch: _fetch(),
-        remove: _reload
+        remove: _remove,
+        reload: _reload
     }
 }
 export default useChatChannel;

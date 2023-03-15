@@ -16,20 +16,23 @@ import ChatSearch from "./ChatSearch";
 import { useRouter } from "next/router";
 import { truncateAddress } from "@/helpers";
 import useChatMembers from "@/hooks/chat/useChatMembers";
+import { DataContext } from "@/providers/DataProvider";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
   const modalSettings = useDisclosure();
   const authContext = useContext(AuthContext);
-  const hookMembers = useChatMembers();
+  const dataContext = useContext(DataContext);
+  const hookChatMembers = useChatMembers();
+
   const router = useRouter();
 
   const TemplateMembers = () => {
     return (
       <ModalSlider event={membersModal}>
         <UserList
-          onlineUsers={hookMembers?.users?.onlineUsers}
-          offlineUsers={hookMembers?.users?.offlineUsers}
+          onlineUsers={[]}
+          offlineUsers={[]}
         />
       </ModalSlider>
     );
@@ -98,16 +101,16 @@ const ChatHeader = (props: any) => {
             size="sm"
             className="m-r-0-5"
             name={
-              props?.chatContext?.channel?.name || props?.chatContext?.channel?.peerAddress
+              dataContext?.channel?.name || dataContext?.channel?.peerAddress
             }
           />
           <Col>
             <Row>
               <Heading as="h4" size="sm">
-                {props?.chatContext?.channel?.name ||
-                  truncateAddress(props?.chatContext?.channel?.peerAddress)}
+                {dataContext?.channel?.name ||
+                  truncateAddress(dataContext?.channel?.peerAddress)}
               </Heading>
-              {!props?.chatContext?.channel?.raw?.disconnected && props?.chatContext?.channel?.raw?.muteStatus()?.muted && (
+              {!dataContext?.channel?.raw?.disconnected && dataContext?.channel?.raw?.muteStatus()?.muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}
@@ -170,7 +173,6 @@ const ChatHeader = (props: any) => {
         </Row>
       </div>
       <TemplateMembers />
-      {/* <TemplatePinnedMessages /> */}
       <TemplateChannelSettings />
     </>
   );

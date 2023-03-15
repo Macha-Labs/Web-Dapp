@@ -160,7 +160,7 @@ const AuthProvider = ({ children }: any) => {
   };
 
   useEffect(() => {
-    logger("auth", "useEffect", "Portal 1: Current user address", [address]);
+    logger("auth", "useEffect[address]", "address", [address]);
     if (address) {
       _fetchSignerFromWagmi();
       _fetchUserFromDB();
@@ -171,6 +171,11 @@ const AuthProvider = ({ children }: any) => {
     if (user) logger("auth", "useEffect", "Logging user object", [user]);
   }, [user]);
 
+  useEffect(() => {
+    logger("auth", "useEffect[address]", 'address', [address])
+  }, [address])
+
+  
   return (
     <AuthContext.Provider
       value={{

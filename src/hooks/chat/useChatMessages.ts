@@ -1,5 +1,6 @@
+import { DataContext } from "@/providers/DataProvider";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useStreamChannelMessages from "../stream/useStreamChannelMessages";
 import useXmtpChannelMessages from "../xmtp/useXmtpChannelMessages";
 
@@ -7,26 +8,26 @@ const useChatMessages = () => {
     const router = useRouter();
     let hookStreamChannelMessages: any;
     let hookXmtpChannelMessages: any;
-    const [messages, setMessages] = useState<any>([]);
+    const dataContext = useContext(DataContext);
 
     if (router.pathname == '/chat') {
         hookStreamChannelMessages = useStreamChannelMessages();
 
         useEffect(() => {
-            setMessages(hookStreamChannelMessages?.messages || []);
+            dataContext.loadMessages(hookStreamChannelMessages?.messages || []);
         }, [router.pathname, hookStreamChannelMessages?.messages]);
     }
     
     if (router.pathname == '/chat/dm') {
         hookXmtpChannelMessages = useXmtpChannelMessages();
         useEffect(() => {
-            setMessages(hookXmtpChannelMessages?.messages || []);
+            dataContext.loadMessages(hookXmtpChannelMessages?.messages || []);
         }, [router.pathname, hookXmtpChannelMessages?.messages]);
     }
 
     return (
         {
-            messages: messages
+            messages: dataContext.messages
         }
     )
 

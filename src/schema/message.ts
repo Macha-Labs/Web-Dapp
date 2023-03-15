@@ -12,7 +12,8 @@ export const StreamMessage$ = (data: any) => {
     reaction_scores: data?.reaction_scores,
     reaction_count: data?.reaction_count,
     user: data?.user,
-    own_reactions: data?.own_reactions
+    own_reactions: data?.own_reactions,
+    quoted_message: data?.quoted_message
   };
 };
 export const XmtpMessage$ = (data: any) => {
@@ -29,6 +30,7 @@ export const XmtpMessage$ = (data: any) => {
     contentTopic: data.contentTopic,
     conversation: data?.conversation,
     sent: data?.sent,
-    messageVersion: data?.messageVersion
+    messageVersion: data?.messageVersion,
+    quoted_message: data?.quoted_message
   };
 };

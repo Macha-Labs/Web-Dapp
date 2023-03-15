@@ -1,19 +1,20 @@
-import useChatMembersStore from "@/store/useChatMembersStore";
+import { DataContext } from "@/providers/DataProvider";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useStreamChannelMembers from "../stream/useStreamChannelMembers";
 
 const useChatMembers = () => {
-    let hookStreamChannelMembers: any;
     const router = useRouter();
-    const $loadMembers = useChatMembersStore(((state: any) => state.load));
+    const dataContext = useContext(DataContext);
+    let hookStreamChannelMembers: any;
 
     if (router.pathname == '/chat') {
         hookStreamChannelMembers = useStreamChannelMembers();
 
         useEffect(() => {
-            $loadMembers(hookStreamChannelMembers?.users);
-        }, [hookStreamChannelMembers?.users]);
+            console.log('users', hookStreamChannelMembers?.users, dataContext.members)
+            // dataContext.loadMembers(hookStreamChannelMembers?.users);
+        }, [router.pathname, hookStreamChannelMembers?.users]);
     }
 }
 

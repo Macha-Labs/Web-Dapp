@@ -12,8 +12,9 @@ import {
 } from "@chakra-ui/react";
 import { Col, Row } from "@/styles/StyledComponents";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import { ChatContext } from "@/providers/ChatProvider";
 import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
+import useChatChannel from "@/hooks/chat/useChatChannel";
+import { DataContext } from "@/providers/DataProvider";
 
 const ChatEdit = (props: any) => {
   /**
@@ -21,8 +22,9 @@ const ChatEdit = (props: any) => {
    *
    *
    **/
+  const dataContext = useContext(DataContext);
   const toast = useToast();
-  const chatContext = useContext(ChatContext);
+  const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannelsReload();
 
   const handleToggle = () => {
@@ -44,8 +46,8 @@ const ChatEdit = (props: any) => {
       position: "bottom-right",
     });
 
-    chatContext?.streamContext?.reloadChannel();
-    hookChatChannels.load();
+    hookChatChannel.reload();
+    // hookChatChannels.load();
     props.modal.onClose();
   };
 
@@ -71,6 +73,7 @@ const ChatEdit = (props: any) => {
    *
    **/
   const hookPortalChannel = usePortalChannel(
+    dataContext.channel,
     { edit: callBack, prompt: callBackPrompt }
   );
 

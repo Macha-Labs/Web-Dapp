@@ -72,7 +72,7 @@ const useStreamChannelMessages = () => {
       );
       _setMessages();
     });
-  }, [streamContext?.hookChannel?.channel]);
+  }, [streamContext?.hookChannel?.channel?.id]);
 
   const _setMessages = () => {
     if (streamContext?.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages) {

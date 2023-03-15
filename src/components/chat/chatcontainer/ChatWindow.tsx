@@ -1,11 +1,13 @@
 import useChatMessages from "@/hooks/chat/useChatMessages";
+import { DataContext } from "@/providers/DataProvider";
 import { StyledDateTag } from "@/styles/StyledComponents";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
 
 const ChatWindow = (props: any) => {
   const messageListRef = useRef<any>();
   const hookChatMessages = useChatMessages();
+  const dataContext = useContext(DataContext);
   const itemsRef = useRef<any>([]);
   const [isScrollAtBottom, setIsScrollAtBottom] = useState(false);
   const [dateTag, setDateTag] = useState("");
@@ -35,7 +37,7 @@ const ChatWindow = (props: any) => {
     if (messageListRef && messageListRef.current) {
       const lastMsg =
       hookChatMessages?.messages[
-        hookChatMessages?.messages.length - 1
+        hookChatMessages?.messages?.length - 1
         ];
       if (
         String(props.authContext.address).toLowerCase() ==
@@ -114,7 +116,7 @@ const ChatWindow = (props: any) => {
         {dateTag}
       </StyledDateTag>
       <div ref={messageListRef} className="body">
-        {hookChatMessages?.messages?.map((message: any, index: any) => {
+        {dataContext?.messages?.map((message: any, index: any) => {
           return (
             <div
               ref={el => (itemsRef.current[message.id] = el)}

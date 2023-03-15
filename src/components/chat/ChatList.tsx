@@ -20,17 +20,18 @@ import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import useChatChannels from "@/hooks/chat/useChatChannels";
 import { ChatContext } from "@/providers/ChatProvider";
 import LoadChannels from "../load/LoadChannels";
-import useChatChannelsStore from "@/store/useChatChannelsStore";
 import { useRouter } from "next/router";
 import useChatChannel from "@/hooks/chat/useChatChannel";
+import { DataContext } from "@/providers/DataProvider";
 
 const ChatList = (props: any) => {
+  console.log('Rendering >>>>> ChatList');
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
+  const dataContext= useContext(DataContext);
   const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannels();
   const router = useRouter();
-  const $channels = useChatChannelsStore((state: any) => state.channels)
   const modalChatNew = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
@@ -42,6 +43,7 @@ const ChatList = (props: any) => {
 
 
   const hookPortalChannel = usePortalChannel(
+    null,
     {
       mute: () => {
         toast({
@@ -50,8 +52,8 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        // hookChatChannels?.reload();
-        chatContext?.streamContext?.reloadChannel();
+        hookChatChannels?.load();
+        hookChatChannel.reload();
       },
       unmute: () => {
         toast({
@@ -60,8 +62,8 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        // hookChatChannels?.reload();
-        chatContext?.streamContext?.reloadChannel();
+        hookChatChannels?.load();
+        hookChatChannel.reload();
       },
       leave: () => {
         toast({
@@ -70,8 +72,8 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        // hookChatChannels?.reload();
-        chatContext?.streamContext?.reloadChannel();
+        hookChatChannels?.load();
+        hookChatChannel.remove();
       },
       delete: () => {
         toast({
@@ -80,8 +82,8 @@ const ChatList = (props: any) => {
           duration: 3000,
           position: "bottom-right",
         });
-        // hookChatChannels?.reload();
-        chatContext?.streamContext?.reloadChannel();
+        hookChatChannels?.load();
+        hookChatChannel.remove();
       },
     }
   );
@@ -145,7 +147,8 @@ const ChatList = (props: any) => {
               </Row>
             </Button>
           )}
-          {/* <Button
+          {props?.item?.isAdmin && 
+            <Button
             variant="transparent"
             size="sm"
             className="text-start"
@@ -153,12 +156,14 @@ const ChatList = (props: any) => {
           >
             <Row className="hr-between w-100"
               onClick={() => {
-                // hookPortalChannel.deleteChannel(props.item);
+                hookPortalChannel.deleteChannel(props.item);
               }}
             >
-              Clear Chat
+              Delete Channel
             </Row>
-          </Button> */}
+          </Button>
+        }
+          
           {!props?.item?.isAdmin && (
             <Button
               variant="transparent"
@@ -207,14 +212,14 @@ const ChatList = (props: any) => {
           />
         </Row>
         <Col className="body verticlescroll hidescroll">
-        {!$channels ? (
+        {!dataContext?.channels ? (
             <TemplateLoading />
         ) : (
           <>
-            {$channels?.length ? (
+            {dataContext?.channels?.length ? (
               <ul>
                 {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                {$channels.map((item: any, index: number) => (
+                {dataContext?.channels.map((item: any, index: number) => (
                   <StyledChatItem key={item?.index}>
                     {/* {chatContext?.hookChannels?.actionMessage ==
                       "MULTISELECT" && (
@@ -232,16 +237,12 @@ const ChatList = (props: any) => {
                       className="menu-item w-100 m-b-0-5"
                       size="xl"
                       variant={
-                        chatContext.channel?.id == item?.id
+                        dataContext.channel?.id == item?.id
                           ? "state_brand"
                           : "state_card_hover"
                       }
                       // overflow="hidden"
                     >
-                      <Col>
-                      {props?.chatContext?.channel?.id}
-                      {/* {item?.name} */}
-                      </Col>
                       <Row
                         className="vr-center w-11-12"
                         onClick={() => {

@@ -1,23 +1,17 @@
 import { permissionsChannel } from "./../../service/ChannelService";
-// import {useNavigation} from "@react-navigation/native";
 import { putChannelForUser } from "../../service/ChannelService";
 import { logger } from "../../helpers/logger";
 import { editChannel } from "../../service/ChannelService";
 import { useContext, useState } from "react";
-// import {useToast} from "native-base";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { ChannelStream$ } from "../../schema/channel";
-import { Toast, useToast } from "@chakra-ui/react";
-import useChatChannelStore from "@/store/useChatChannelStore";
 
-const usePortalChannel = (callback: any = null) => {
-  const storeChannel = useChatChannelStore((state: any) => state.channel)
+const usePortalChannel = (channelObj: any, callback: any = null) => {
   const [channel, setChannel] = useState(
-    storeChannel ? storeChannel : ChannelStream$({})
+    channelObj ? channelObj : ChannelStream$({})
   );
   const [isLoading, setIsLoading] = useState(false);
   const authProvider = useContext(AuthContext) as AuthContextType;
-  // const navigation = useNavigation<any>();
 
   const update = (usersIds: any = []) => {
     if (!channel?.name) {
@@ -149,13 +143,15 @@ const usePortalChannel = (callback: any = null) => {
   };
   const muteChannel = (channel: any) => {
     logger("channel", "usePortalChannelmute", "Muting Channel", [channel]);
-    channel.raw.mute();
-    callback.mute();
+    channel.raw.mute().then(() => {
+      callback.mute();
+    });
   };
   const unMuteChannel = (channel: any) => {
     logger("channel", "usePortalChannelUnmute", "UnMuting Channel", [channel]);
-    channel.raw.unmute();
-    callback.unmute();
+    channel.raw.unmute().then(() => {
+      callback.unmute();
+    });
   };
 
   const leaveChannel = (channel: any) => {

@@ -42,7 +42,7 @@ const StreamProvider = ({children}: any) => {
         hookStreamChannel.setUpChannel(hookStreamChannel?.channel?.id)
     }
 
-    const initiate = async (channel: any, userAddress?: any) => {
+    const initiate = async (channel: any) => {
         logger(
           "channel",
           "ChatProvider.initiate",
