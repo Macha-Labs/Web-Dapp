@@ -28,9 +28,7 @@ const useStreamUserChannels = () => {
         let newResult = result?.map((item: any) => {
           return ChannelStream$(item.data, item, streamContext.client?.user?.id);
         })
-        const slicedList = newResult.slice(1)
-        console.log("fetchuserChannel sliced list ", slicedList);
-        setChannels(slicedList);
+        setChannels(newResult);
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'channels from stream', [result]);
       } catch (error: any) {
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The error is', [error]);
