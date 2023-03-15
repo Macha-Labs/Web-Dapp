@@ -6,14 +6,16 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
+import { AuthContext } from "@/providers/AuthProvider";
 
 const ChatMembers = (props: any) => {
   const chatContext = useContext(ChatContext);
+  const authContext = useContext(AuthContext);
   const hookPortalChannelMembership = usePortalChannelMembership(chatContext?.hookChannel?.channel);
   const toast = useToast();
 
@@ -26,6 +28,7 @@ const ChatMembers = (props: any) => {
     });
     chatContext?.streamContext.reloadMembers();
   }
+
 
   return (
     <>
@@ -54,8 +57,8 @@ const ChatMembers = (props: any) => {
           </>
         }
       >
-        {chatContext.hookMembers.onlineUsers
-          .concat(chatContext.hookMembers.offlineUsers)
+        {chatContext.hookMembers.allUsers
+        .filter((user: any) => String(user.address).toLowerCase() != String(authContext.address).toLowerCase())
           ?.map((item: any, index: any) => {
             return (
               <>

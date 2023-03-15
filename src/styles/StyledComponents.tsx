@@ -30,6 +30,25 @@ export const StyledImageView = styled.div<{ viewMode: boolean }>`
   }}
 `;
 
+export const StyledMoveToBottom = styled.div<{visible: any}>`
+  position: absolute;
+  bottom: 100px;
+  right: 50px;
+  visibility: ${props => props.visible || 'hidden'};
+  span{
+    position: absolute;
+    right: 0px;
+    top: -15px;
+    background: ${style.button.bg.default};
+  // padding: 1px 8px;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 50%;
+    text-align: center;
+  }
+`
 
 export const StyledIframeView = styled.div`
   position: fixed;
