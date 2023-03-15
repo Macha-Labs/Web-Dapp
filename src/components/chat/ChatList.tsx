@@ -21,12 +21,14 @@ import useChatSelect from "@/hooks/chat/useChatSelect";
 import useChatChannels from "@/hooks/chat/useChatChannels";
 import { ChatContext } from "@/providers/ChatProvider";
 import LoadChannels from "../load/LoadChannels";
+import useChatChannelsStore from "@/store/useChatChannelsStore";
 
 const ChatList = (props: any) => {
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
   const hookChatSelect = useChatSelect();
   const hookChatChannels = useChatChannels();
+  const storeChannels = useChatChannelsStore((state: any) => state.channels)
   const modalChatNew = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
@@ -197,14 +199,14 @@ const ChatList = (props: any) => {
           />
         </Row>
         <Col className="body verticlescroll hidescroll">
-        {!hookChatChannels?.channels ? (
+        {!storeChannels ? (
             <TemplateLoading />
         ) : (
           <>
-            {hookChatChannels?.channels?.length ? (
+            {storeChannels?.length ? (
               <ul>
                 {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                {hookChatChannels?.channels.map((item: any, index: number) => (
+                {storeChannels.map((item: any, index: number) => (
                   <StyledChatItem key={item?.index}>
                     {/* {chatContext?.hookChannels?.actionMessage ==
                       "MULTISELECT" && (

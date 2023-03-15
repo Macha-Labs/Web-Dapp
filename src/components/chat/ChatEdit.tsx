@@ -14,6 +14,7 @@ import {
 import { Col, Row } from "@/styles/StyledComponents";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { ChatContext } from "@/providers/ChatProvider";
+import useChatChannels from "@/hooks/chat/useChatChannels";
 
 const ChatEdit = (props: any) => {
   /**
@@ -23,6 +24,7 @@ const ChatEdit = (props: any) => {
    **/
   const toast = useToast();
   const chatContext = useContext(ChatContext);
+  const hookChatChannels = useChatChannels();
   const handleToggle = () => {
     hookPortalChannel?.setChannel({
       ...hookPortalChannel?.channel,
@@ -43,7 +45,7 @@ const ChatEdit = (props: any) => {
     });
 
     chatContext?.streamContext?.reloadChannel();
-    // chatContext?.streamContext?.reloadChannelList();
+    hookChatChannels.reload();
     props.modal.onClose();
   };
 

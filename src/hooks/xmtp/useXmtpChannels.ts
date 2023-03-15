@@ -7,15 +7,9 @@ const useXmtpChannels = () => {
     const authContext = useContext(AuthContext);
     const [allConversations, setAllConversations] = useState<any>();
 
-    useEffect(() => {
-        if (authContext?.xmtpClientAddress) {
-          _fetch();
-        }
-      }, [authContext?.xmtpClientAddress]);
-
     const _fetch = async () => {
-        const conversationList = await authContext?.xmtpClient.conversations.list();
-        const data = conversationList.map((item: any) => {
+        const conversationList = await authContext?.xmtpClient?.conversations?.list();
+        const data = conversationList?.map((item: any) => {
           return ChannelXMTP$(item);
         });
         logger('xmtp', 'useXmtpChannels._fetch', 'channels', [data])

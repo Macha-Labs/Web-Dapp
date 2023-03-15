@@ -1,7 +1,6 @@
-import { logger } from "@/helpers/logger";
-import { XmtpContext } from "@/providers/XmtpProvider";
+import useChatChannelsStore from "@/store/useChatChannelsStore";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useEffect} from "react";
 import useStreamUserChannels from "../stream/useStreamUserChannels";
 import useXmtpChannels from "../xmtp/useXmtpChannels";
 
@@ -10,44 +9,36 @@ const useChatChannels = () => {
     const router = useRouter();
     const hookStreamChannels = useStreamUserChannels();
     const hookXmtpChannels = useXmtpChannels();
-    const [channels, setChannels] = useState<any>();
+    const storeChannels = useChatChannelsStore((state: any) => state.channels)
+    const storeLoad = useChatChannelsStore(((state: any) => state.load))
+    
+    useEffect(() => {
+      _load();
+      console.log(router.pathname)
+    }, [router.pathname]);
 
     useEffect(() => {
-      logger('channel', 'useEffect[hookStreamChannels.channels]', 'data', [hookStreamChannels.channels]);
-      if (hookStreamChannels.channels != (undefined || null)) {
-        const result = _fetch();
-        setChannels(result)
-      }
-      
-    }, [hookStreamChannels.channels]);
-
-    if (router.pathname == '/chat/dm') {
-      useEffect(() => {
-        const result = _fetch();
-        setChannels(result)
-      }, [hookXmtpChannels.channels != (undefined || null)])
-    }
-
+      if (router.pathname == '/chat')
+        storeLoad(hookStreamChannels.channels);
+      if (router.pathname == '/chat/dm')
+        storeLoad(hookXmtpChannels.channels);
+    }, [hookStreamChannels.channels, hookXmtpChannels.channels])
     
-
-  const _fetch = () => {
+    const _load = async () => {
       switch (router.pathname) {
         case "/chat":
-          return hookStreamChannels.channels;
+          hookStreamChannels.fetchUserChannels()
         case "/chat/dm":
-          return hookXmtpChannels.channels;
+          hookXmtpChannels.fetch()
       }
-    };
-
-  const _reload = () => {
-  }
-      
-  return (
-      {
-          channels: channels,
-          reload: _reload
-      }
-  )
+    }
+        
+    return (
+        {
+            channels: storeChannels,
+            reload: _load
+        }
+    )
 }
 
 export default useChatChannels;

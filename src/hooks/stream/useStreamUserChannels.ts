@@ -20,7 +20,6 @@ const useStreamUserChannels = () => {
       };
       const sort = [{ last_message_at: -1 }];
       setIsLoading(true);
-      let result: any;
       try {
         let result = await streamContext.client.queryChannels(filter, sort, {
           limit: 30
@@ -28,7 +27,7 @@ const useStreamUserChannels = () => {
         let newResult = result?.map((item: any) => {
           return ChannelStream$(item.data, item, streamContext.client?.user?.id);
         })
-        setChannels([...newResult]);
+        setChannels(newResult);
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The channel Data was just updated', [result]);
       } catch (error: any) {
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The error is', [error]);
@@ -39,10 +38,6 @@ const useStreamUserChannels = () => {
   useEffect(() => {
     logger('channel', 'useStreamUserChannels.useEffect[channels]', 'The channel Data was just updated', [channels]);
   },[channels])
-
-  useEffect(() => {
-    fetchUserChannels()
-  },[streamContext.client])
 
   const handleChannelAction = (action: String) => {
     setActionMessage(action)
