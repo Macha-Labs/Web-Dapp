@@ -65,5 +65,6 @@ export const ChannelXMTP$ = (data: any) => {
     notificationCount: 0,
     unreadCountObject: {},
     send: data.send,
+    xmtpRaw: data
   };
 };

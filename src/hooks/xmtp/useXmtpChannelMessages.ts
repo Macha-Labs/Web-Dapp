@@ -9,7 +9,8 @@ const useXmtpChannelMessages = () => {
     const xmtpContext = useContext(XmtpContext);
 
     const _fetch = async() => {
-        const messages = await xmtpContext.conversation?.messages({
+        logger('xmtp', 'useXmtpChannelMessages._fetch', 'channel of xmtp', [xmtpContext.conversation]);
+        const messages = await xmtpContext.conversation?.xmtpRaw?.messages({
           direction: SortDirection.SORT_DIRECTION_ASCENDING,
         });
         const messagesData = messages?.map((item: any) => {
