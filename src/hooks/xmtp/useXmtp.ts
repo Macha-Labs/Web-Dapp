@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Client, DecodedMessage, SortDirection } from "@xmtp/xmtp-js";
 import { fetchSigner } from "@wagmi/core";
+import { Client } from "@xmtp/xmtp-js";
+import { useState } from "react";
 
 function useXmtp() {
   const [xmtpClientAddress, setXmtpClientAddress] = useState<any>();

@@ -75,8 +75,6 @@ const ChatList = (props: any) => {
     }
   );
 
-  const unreadCountRef = useRef<any>([]);
-
 
   const TemplateChatNew = () => {
     return (
