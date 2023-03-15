@@ -1,20 +1,16 @@
-import { StreamContext } from "@/providers/StreamProvider";
-import { XmtpContext } from "@/providers/XmtpProvider";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useStreamChannelMessages from "../stream/useStreamChannelMessages";
+import useXmtpChannelMessages from "../xmtp/useXmtpChannelMessages";
 
 const useChatMessages = () => {
     const router = useRouter();
-    const xmtpContext = useContext(XmtpContext);
-    const streamContext = useContext(StreamContext);
     let hookStreamChannelMessages: any;
+    let hookXmtpChannelMessages: any;
     const [messages, setMessages] = useState<any>([]);
 
     if (router.pathname == '/chat') {
-        hookStreamChannelMessages = useStreamChannelMessages(
-            streamContext?.hookChannel?.channel
-        );
+        hookStreamChannelMessages = useStreamChannelMessages();
 
         useEffect(() => {
         if (router.pathname == "/chat") {
@@ -24,11 +20,12 @@ const useChatMessages = () => {
     }
     
     if (router.pathname == '/chat/dm') {
+        hookXmtpChannelMessages = useXmtpChannelMessages();
         useEffect(() => {
             if (router.pathname == "/chat/dm") {
-                setMessages(xmtpContext?.messages || []);
+                setMessages(hookXmtpChannelMessages?.messages || []);
             }
-            }, [router.pathname, xmtpContext?.messages]);
+            }, [router.pathname, hookXmtpChannelMessages?.messages]);
     }
 
     return (

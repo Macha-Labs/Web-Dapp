@@ -1,3 +1,4 @@
+import { logger, loggerInit } from "@/helpers/logger";
 import { AuthContext } from "@/providers/AuthProvider";
 import { ChannelXMTP$ } from "@/schema/channel";
 import { useContext, useEffect, useState } from "react";
@@ -17,6 +18,7 @@ const useXmtpChannels = () => {
         const data = conversationList.map((item: any) => {
           return ChannelXMTP$(item);
         });
+        logger('xmtp', 'useXmtpChannels._fetch', 'channels', [data])
         setAllConversations(data);
       };
 
