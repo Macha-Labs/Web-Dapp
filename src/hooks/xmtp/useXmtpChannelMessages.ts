@@ -8,8 +8,8 @@ const useXmtpChannelMessages = () => {
     const [messages, setMessages] = useState<DecodedMessage[]>([]);
     const xmtpContext = useContext(XmtpContext);
 
-    const _fetch = async(convData: any) => {
-        const messages = await convData?.messages({
+    const _fetch = async() => {
+        const messages = await xmtpContext.conversation?.messages({
           direction: SortDirection.SORT_DIRECTION_ASCENDING,
         });
         const messagesData = messages?.map((item: any) => {
@@ -21,7 +21,7 @@ const useXmtpChannelMessages = () => {
 
     useEffect(() => {
       logger('xmtp', 'XmtpProvider.useEffect[xmtpContext.conversation]', 'channel', [xmtpContext.conversation])
-      _fetch(xmtpContext.conversation)
+      _fetch()
     }, [xmtpContext.conversation])
 
     return (

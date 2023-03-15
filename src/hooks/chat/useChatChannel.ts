@@ -13,11 +13,16 @@ const useChatChannel = () => {
 
     useEffect(() => {
         console.log('fetch channel');
+        console.log('pathname', router.pathname);
         switch (router.pathname) {
             case "/chat":
+                console.log('for stream')
                 storeLoad(streamContext?.hookChannel.channel);
+                break;
             case "/chat/dm":
+                console.log('for XMTP')
                 storeLoad(xmtpContext?.conversation);
+                break;
         }
     }, [streamContext?.hookChannel.channel, xmtpContext?.conversation]);
 
@@ -26,7 +31,7 @@ const useChatChannel = () => {
             case "/chat":
                 return streamContext?.initiate;
             case "/chat/dm":
-                return xmtpContext.fetchXmtpConversation;
+                return xmtpContext.initiate;
         }
     };
 
