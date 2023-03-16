@@ -4,9 +4,7 @@ import { ChatContext } from "@/providers/ChatProvider";
 import { DataContext } from "@/providers/DataProvider";
 import { useContext, useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
-import AutoSizer from "react-virtualized-auto-sizer";
 import { StyledDateTag, StyledMoveToBottom } from '@/styles/StyledComponents';
-import useStreamChannelActions from '@/hooks/stream/useStreamChannelActions';
 import IconImage from '@/components/icons/IconImage';
 
 const ChatWindow = (props: any) => {
