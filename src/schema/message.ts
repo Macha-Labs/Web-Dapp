@@ -27,10 +27,13 @@ export const XmtpMessage$ = (data: any) => {
     user: {
       id: data.senderAddress.toLowerCase()
     },
-    contentTopic: data.contentTopic,
+    content: data?.content,
+    contentTopic: data?.contentTopic,
+    contentType: data?.contentType,
     conversation: data?.conversation,
     sent: data?.sent,
     messageVersion: data?.messageVersion,
-    quoted_message: data?.quoted_message
+    quoted_message: data?.quoted_message,
+    senderAddress: data?.quoted_message,
   };
 };

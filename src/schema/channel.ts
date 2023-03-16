@@ -58,8 +58,8 @@ export class Channel$ {
     this.permissions = data?.permissions ; 
     this.image = "" ; 
     this.lastMessage = "" ; 
-    this.membersCount = 0 ; 
-    this.notificationCount = 0 ; 
+    this.membersCount = null ; 
+    this.notificationCount = null ; 
     this.pinnedMessages = data?.state?.pinnedMessages
   }
 
@@ -81,7 +81,7 @@ export class Channel$ {
     this.unreadCountObject = data.data?.state?.read ? data?.state?.read : 0,
     this.lastMessage = data.data?.state?.messageSets[0]?.messages[data?.state?.messageSets[0]?.messages?.length - 1],
     this.membersCount = data.data?.member_count,
-    this.notificationCount = 0,
+    this.notificationCount = null,
     this.pinnedMessages = data.data?.state?.pinnedMessages,
     this.raw = data
   }
