@@ -90,14 +90,19 @@ export class Channel$ {
   isAdmin: any;
   admins: any;
   users: any;
+  orgId: any;
   permissions: any;
   lastMessage: any;
+  membersCount: any;
   notificationCount: any;
   unreadCountObject: any;
+  createdBy: any;
   created_at: any;
   updated_at: any;
   pinnedMessages: any;
   send: any;
+  peer: any;
+  peerAddress: any;
 
   constructor(
     source: string = "",
@@ -119,8 +124,27 @@ export class Channel$ {
   }
 
   setFromXmtp (data: any) {
-    this.id = data?.peerAddress?.toLowerCase();
-    this.type = data?.type;
+    this.id= data?.peerAddress?.toLowerCase();
+    this.type= data?.type;
+    this.name= data?.peerAddress?.toLowerCase();
+    this.orgId= data?.orgId;
+    this.private= data?.private;
+    this.users= data?.users;
+    this.admins= data?.admins;
+    this.createdBy= data?.createdBy?.toLowerCase();
+    this.created_at= data?.createdAt;
+    this.updated_at= data?.updatedAt;
+    this.permissions= data?.permissions;
+    this.image= "";
+    this.lastMessage= "";
+    this.membersCount= 0;
+    this.notificationCount= 0;
+    this.unreadCountObject= {};
+    this.send= data.send;
+    this.xmtpRaw= data;
+    this.pinnedMessages= data?.state?.pinnedMessages,
+    this.peer= data?.peer,
+    this.peerAddress= data?.peerAddress
   }
 
   updatePeerLens (user: any) {

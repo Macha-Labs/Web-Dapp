@@ -40,7 +40,7 @@ const useXmtpChannels = () => {
     useEffect(() => {
       if (allConversations?.length) {
         allConversations.map(async (item: any) => {
-          const peer = await hookLensProfileList.fetch(item.data.name);
+          const peer = await hookLensProfileList.fetch(item.peerAddres);
           item.updatePeerLens(peer);
           console.log("Useeffect xmtp lens ", peer, item);
         })
