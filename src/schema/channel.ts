@@ -51,30 +51,6 @@ export const ChannelStream$ = (data: any, raw?: any, owner?: any) => {
   };
 };
 
-export const ChannelXMTP$ = (data: any) => {
-  return {
-    id: data?.peerAddress?.toLowerCase(),
-    type: data?.type,
-    name: data?.peerAddress?.toLowerCase(),
-    orgId: data?.orgId,
-    private: data?.private,
-    users: data?.users,
-    admins: data?.admins,
-    createdBy: data?.createdBy?.toLowerCase(),
-    created_at: data?.createdAt,
-    updated_at: data?.updatedAt,
-    permissions: data?.permissions,
-    image: "",
-    lastMessage: "",
-    membersCount: 0,
-    notificationCount: 0,
-    unreadCountObject: {},
-    send: data.send,
-    xmtpRaw: data,
-    pinnedMessages: data?.state?.pinnedMessages,
-    peer: data?.peer
-  };
-};
 
 export class Channel$ {
   source: String;
