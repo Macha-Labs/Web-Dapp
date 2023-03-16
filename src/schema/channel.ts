@@ -118,7 +118,7 @@ export class Channel$ {
   setFromXmtp (data: any) {
     this.id= data?.peerAddress?.toLowerCase();
     this.type= data?.type;
-    this.name= data?.peerAddress?.toLowerCase();
+    this.name= this.peer?.lens?.name || this.peer?.lens?.handle || this.peer?.lens?.ownedBy || this?.peerAddress;
     this.orgId= data?.orgId;
     this.private= data?.private;
     this.users= data?.users;
