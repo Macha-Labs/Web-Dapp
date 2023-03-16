@@ -21,7 +21,7 @@ const useXmtpChannels = () => {
 
     useEffect(() => {
       const streamConversations = async() => {
-        const xmtpNew = await authContext.xmtpClient.conversations.stream();
+        const xmtpNew = await authContext?.xmtpClient?.conversations?.stream();
         console.log("New xmtpConvo ", xmtpNew);
         setXmtpConvo(xmtpNew);
       }
