@@ -122,6 +122,6 @@ export class Channel$ {
   }
 
   updatePeerLens (user: any) {
-    this.data = {...this.data,  peer: user}
+    this.peer = user;
   }
 }
