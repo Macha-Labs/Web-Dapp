@@ -1,9 +1,12 @@
 import { create } from 'zustand'
 
-const useChatMembersStore = create((set) => ({
+export const useChatMembersStore = create((set) => ({
     members: null,
     load: (data: any) => set((state: any) => ({ members: data})),
     unload: () => set({ members: null }),
-})) 
 
-export default useChatMembersStore;
+    memberIds: null,
+    loadIds: (data: any) => set((state: any) => ({ memberIds: data})),
+    unloadIds: () => set({ memberIds: null }),
+    
+}))

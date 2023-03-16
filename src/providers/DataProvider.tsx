@@ -1,6 +1,6 @@
 import useChatChannelsStore from "@/store/useChatChannelsStore";
 import useChatChannelStore from "@/store/useChatChannelStore";
-import useChatMembersStore from "@/store/useChatMembersStore";
+import {useChatMembersStore} from "@/store/useChatMembersStore";
 import useChatMessagesStore from "@/store/useChatMessagesStore";
 import { createContext, useEffect} from "react";
 
@@ -14,6 +14,8 @@ export type DataContextType = {
   loadMembers: any | undefined;
   messages: any | undefined;
   loadMessages: any | undefined;
+  memberIds: any | undefined;
+  loadMemberIds: any | undefined;
 };
 
 export const DataContext = createContext<DataContextType>({
@@ -24,7 +26,9 @@ export const DataContext = createContext<DataContextType>({
   members: null,
   loadMembers: () => {},
   messages: null,
-  loadMessages: () => {}
+  loadMessages: () => {},
+  memberIds: null,
+  loadMemberIds: () => {}
 });
 
 export const DataProvider = ({ children }: any) => {
@@ -37,6 +41,8 @@ export const DataProvider = ({ children }: any) => {
     const $loadMessages = useChatMessagesStore(((state: any) => state.load));
     const $members = useChatMembersStore((state: any) => state.members);
     const $loadMembers = useChatMembersStore(((state: any) => state.load));
+    const $memberIds = useChatMembersStore((state: any) => state.memberIds);
+    const $loadMemberIds = useChatMembersStore(((state: any) => state.loadIds));
 
 
     
@@ -48,6 +54,9 @@ export const DataProvider = ({ children }: any) => {
 
     useEffect(() => {console.log('DataProvider ===> members', $members)}, [$members]);
 
+    useEffect(() => {console.log('DataProvider ===> memberIds', $memberIds)}, [$memberIds]);
+
+
     return (
         <DataContext.Provider
         value={{
@@ -58,7 +67,9 @@ export const DataProvider = ({ children }: any) => {
             members: $members,
             loadMembers: $loadMembers,
             messages: $messages,
-            loadMessages: $loadMessages
+            loadMessages: $loadMessages,
+            memberIds: $memberIds,
+            loadMemberIds: $loadMemberIds
         }}
         >
         {children}

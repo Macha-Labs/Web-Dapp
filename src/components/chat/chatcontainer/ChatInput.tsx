@@ -33,7 +33,7 @@ const ChatInput = (props: any) => {
   const createPostRef = useRef<any>();
 
 
-  const callbackSendMessage = (data) => {
+  const callbackSendMessage = (data: any) => {
     return hookChatMessage.send(data)
   }
 

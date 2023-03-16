@@ -12,6 +12,7 @@ const useChatMembers = () => {
         if (router.pathname == '/chat') {
             console.log('users', hookStreamChannelMembers?.users);
             dataContext.loadMembers({ onlineUsers: hookStreamChannelMembers?.onlineUsers, offlineUsers: hookStreamChannelMembers?.offlineUsers});
+            dataContext.loadMemberIds(hookStreamChannelMembers?.allUsersIds);
         }
         
     }, [hookStreamChannelMembers?.users]);

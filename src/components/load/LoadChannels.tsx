@@ -8,9 +8,10 @@ const LoadChannels = () => {
 
         <>
              {
-                items.map((item: any) => {
+                items.map((item: any, index: number) => {
                     return (
                         <Button
+                        key={index}
                         className="menu-item w-100 m-b-0-5"
                         size="xl"
                         variant="state_card_hover"
