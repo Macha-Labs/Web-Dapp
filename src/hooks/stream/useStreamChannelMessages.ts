@@ -76,6 +76,7 @@ const useStreamChannelMessages = () => {
 
   const _setMessages = () => {
     if (streamContext?.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages) {
+      logger('stream', 'useStreamChannelMessages._setMessages', 'messages are', streamContext?.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages)
       const messageData = streamContext?.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages
         ?.slice(0)
         .map((item: any) => {

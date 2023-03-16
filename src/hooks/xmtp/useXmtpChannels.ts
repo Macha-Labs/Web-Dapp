@@ -14,7 +14,7 @@ const useXmtpChannels = () => {
     const _listen = async() => {
       for await (const conversation of xmtpConvo) {
         console.log("New conversation started with ", conversation);
-        setAllConversations(prevConversations => {
+        setAllConversations((prevConversations: any) => {
           const conversations = [...prevConversations];
           conversations.push(ChannelXMTP$(conversation));
           return conversations;
