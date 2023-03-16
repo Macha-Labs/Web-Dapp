@@ -1,3 +1,4 @@
+import { Data } from "aws-sdk/clients/firehose";
 import { AnyAaaaRecord } from "dns";
 
 export const ChannelDb$ = (data: any) => {
@@ -77,17 +78,26 @@ export const ChannelXMTP$ = (data: any) => {
 
 export class Channel$ {
   source: String;
+  data: any;
+  raw: any;
+  xmtpRaw: any;
   type: any;
   id: any;
   name: any;
-  data: any;
   description: any;
+  image: any;
   private: any;
+  isAdmin: any;
+  admins: any;
+  users: any;
+  permissions: any;
+  lastMessage: any;
+  notificationCount: any;
+  unreadCountObject: any;
   created_at: any;
   updated_at: any;
-  raw: any;
-  xmtpRaw: any;
   pinnedMessages: any;
+  send: any;
 
   constructor(
     source: string = "",
