@@ -16,7 +16,7 @@ const useXmtpChannels = () => {
         console.log("New conversation started with ", conversation);
         setAllConversations((prevConversations: any) => {
           const conversations = [...prevConversations];
-          conversations.push(new Channel$(conversation));
+          conversations.push(new Channel$('xmtp', conversation));
           return conversations;
         })
       }
