@@ -16,7 +16,6 @@ import {
   Wrap,
 } from "@chakra-ui/react";
 import LayoutPostList from "../../layouts/post/LayoutPostList";
-import UserCard from "./UserCard";
 import UserFollowersCard from "./UserFollowersCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { useContext, useEffect, useState } from "react";
@@ -223,19 +222,19 @@ const UserProfile = ({ user }: any) => {
               <Row className="w-100 vr-center hr-center">
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage path="IconDarkPost.png" size="15" />
+                    <IconImage path="IconDarkPost.png"/>
                     <Text className="m-l-0-5">Posts</Text>
                   </Button>
                 </Tab>
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage path="IconDarkFollowers.png" size="15" />
+                    <IconImage path="IconDarkFollowers.png" />
                     <Text className="m-l-0-5">Followers</Text>
                   </Button>
                 </Tab>
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage path="IconDarkFollowing.png" size="15" />
+                    <IconImage path="IconDarkFollowing.png" />
                     <Text className="m-l-0-5">Following</Text>
                   </Button>
                 </Tab>

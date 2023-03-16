@@ -86,13 +86,11 @@ const ChatList = (props: any) => {
 
   const TemplateChatNew = () => {
     return (
-      <ModalSlider event={modalChatNew} size="md">
-        <ChatNew
+      <ChatNew
           modal={modalChatNew}
           hookChatChannels={hookChatChannels}
           hookChatChannel={hookChatChannel}
         />
-      </ModalSlider>
     );
   };
 
@@ -120,7 +118,7 @@ const ChatList = (props: any) => {
               variant="transparent"
               size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkMute.png" size="18" />}
+              rightIcon={<IconImage path="IconDarkMute.png" size="xs"/>}
             >
               <Row
                 className="hr-between w-100"
@@ -136,7 +134,7 @@ const ChatList = (props: any) => {
               variant="transparent"
               size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkUnMute.png" size="18" />}
+              rightIcon={<IconImage path="IconDarkUnMute.png" />}
             >
               <Row
                 className="hr-between w-100"
@@ -153,7 +151,7 @@ const ChatList = (props: any) => {
               variant="transparent"
               size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconRedDelete.png" size="18" />}
+              rightIcon={<IconImage path="IconRedDelete.png"  />}
             >
               <Row
                 className="hr-between w-100"
@@ -171,7 +169,7 @@ const ChatList = (props: any) => {
               variant="transparent"
               size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkLeave.png" size="18" />}
+              rightIcon={<IconImage path="IconDarkLeave.png" />}
             >
               <Row
                 className="hr-between w-100"
@@ -267,22 +265,15 @@ const ChatList = (props: any) => {
                                 {!item?.raw?.disconnected && item?.raw?.muteStatus()?.muted && (
                                   <IconImage
                                     path="IconDarkMute.png"
+                                    size="2xs"
                                     style={{ className: "m-l-0-5" }}
-                                    size={10}
                                   />
                                 )}
                               </>
                             )}
                           </Row>
-                          {item?.lastMessage?.created_at && (
-                            <Col>
-                              <Text fontSize={"xs"}>
-                                {new Date(
-                                  item?.lastMessage?.created_at
-                                ).toLocaleString()}
-                              </Text>
-                            </Col>
-                          )}
+
+                          
 
                             {item?.lastMessage && (
                               <Col
@@ -305,6 +296,16 @@ const ChatList = (props: any) => {
                                 </Text>
                               </Col>
                             )}
+                            {item?.lastMessage?.created_at && (
+                            <Col>
+                              <Text fontSize={"xs"}>
+                                {new Date(
+                                  item?.lastMessage?.created_at
+                                ).toLocaleString()}
+                              </Text>
+                            </Col>
+                          )}
+                          
                           </Col>
                           {item?.unreadCountObject &&
                             item?.unreadCountObject[authContext?.address]

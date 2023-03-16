@@ -6,6 +6,7 @@ import { Channel$} from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
 import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input } from "@chakra-ui/react";
 import { useState } from "react";
+import ModalSlider from "../modal/ModalSlider";
 
 const ChatNew = (props: any) => {
   const [tab, setTab] = useState("members");
@@ -175,20 +176,15 @@ const ChatNew = (props: any) => {
     );
   };
 
-  const TemplateMembers = () => {
-    return (
-      <>
-        <LayoutCardPannel
-          header={
-            <Row className="hr-between v-center">
-              <Text>New Channel</Text>
-              <Button onClick={handleTabs} variant="state-brand" size="sm">
-                Next
-              </Button>
-            </Row>
-          }
-        >
-          {hookPortalChannelMembership?.followers?.map(
+  const templateMembers = () => {
+    const header = <ChatNew
+    modal={props?.modalChatNew}
+    hookChatChannels={props?.hookChatChannels}
+    hookChatChannel={props?.hookChatChannel}
+  />
+
+  const body = <>
+     {hookPortalChannelMembership?.followers?.map(
             (item: any, index: any) => {
               return (
                 <Row key={`key-${item?.id}`} className="hr-between p-2">
@@ -218,11 +214,18 @@ const ChatNew = (props: any) => {
               );
             }
           )}
-        </LayoutCardPannel>
-      </>
-    );
+  </>
+
+    return {body: body, header: header}
   };
 
-  return <>{tab == "members" ? <TemplateMembers /> : <TemplateDetails />}</>;
+
+  return (
+    <>
+      <ModalSlider event={props.modal} size="sm" >
+      {tab == 'members' ? templateMembers().body : <></>}
+    </ModalSlider>
+    </>
+  );
 };
 export default ChatNew;

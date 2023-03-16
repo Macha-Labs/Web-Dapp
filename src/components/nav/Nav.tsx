@@ -42,6 +42,7 @@ const Nav = (props: any) => {
                   <Tooltip label="Chat">
                     <IconImage
                       path="IconDarkHash.png"
+                      size="lg"
                       style={{
                         className: `m-b-1 ${
                           router.pathname === "/chat"
@@ -58,6 +59,7 @@ const Nav = (props: any) => {
                 <Link href="/chat/dm">
                   <IconImage
                     path="IconBrandChat.png"
+                    size="lg"
                     style={{
                       className: `m-b-1 ${
                         router.pathname === "/chat/dm"
@@ -70,6 +72,7 @@ const Nav = (props: any) => {
                 <Link href="/user">
                   <IconImage
                     path="IconBrandProfile.png"
+                    size="lg"
                     style={{
                       className: `m-b-1 ${
                         router.pathname === "/user"

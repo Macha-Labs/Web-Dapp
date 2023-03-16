@@ -255,71 +255,67 @@ function ChatSetting(props: any) {
 
   const TemplatePermission = () => {
     return (
-      <ModalSlider size={"md"} event={modalChatPermission}>
-        <ChatPermissions />
-      </ModalSlider>
+      <ChatPermissions modalChatPermission={modalChatPermission} />
     );
   };
   const TemplateMembers = () => {
     return (
-      <ModalSlider size={"md"} event={modalChatMembers}>
-        <ChatMembers
+      <ChatMembers
           modalChatMembers={modalChatMembers}
           modalAddMembers={modalAddMembers}
         />
-      </ModalSlider>
     );
   };
   const TemplateMembersAdd = () => {
     return (
-      <ModalSlider size={"md"} event={modalAddMembers}>
-        <ChatMembersAdd
+      <ChatMembersAdd
           modalAddMembers={modalAddMembers}
           modalChatMembers={modalChatMembers}
         />
-      </ModalSlider>
     );
   };
   const TemplateEditChannel = () => {
     return (
-      <ModalSlider size={"lg"} event={modalChatEdit}>
         <ChatEdit modal={modalChatEdit} />
-      </ModalSlider>
     );
   };
 
   const TemplatePinnedMessages = () => {
     return (
-      <ModalSlider event={modalPinned} size="md">
-        <ChatMessageList
-          pinnedMessageList={dataContext?.channel?.pinnedMessages}
-          hookChat={chatContext.hookChat}
-        />
-      </ModalSlider>
+      <ChatMessageList
+        modal={modalPinned}
+        pinnedMessageList={dataContext?.channel?.pinnedMessages}
+        hookChat={chatContext.hookChat}
+      />
     );
   };
   return (
     <>
+      <ModalSlider size="sm" 
+      event={props.modalSettings}
+      header={<Heading as="h6" size="sm">
+      Channel Settings
+    </Heading>}
+    
+    >
       <div>
-        <Heading as="h4" size="md" className="m-b-1">
-          Channel Settings
-        </Heading>
         <Col>
           <LayoutOptions
             options={chatOptions}
-            style={{ className: "m-b-1" }}
+            style={{ className: "m-b-1 p-2" }}
             channelAdmin={dataContext?.channel.createdBy}
             channelRawData={dataContext?.channel.raw}
             userId={authContext.address}
           />
           <LayoutOptions
             options={chatOptions2}
-            style={{ className: "m-b-1" }}
+            style={{ className: "m-b-1 p-2" }}
             channelAdmin={dataContext?.channel.createdBy}
             channelRawData={dataContext?.channel.raw}
             userId={authContext.address}
           />
           <LayoutOptions
+            style={{ className: "m-b-1 p-2" }}
             options={chatOptions3}
             channelAdmin={dataContext?.channel.createdBy}
             channelRawData={dataContext?.channel.raw}
@@ -327,13 +323,15 @@ function ChatSetting(props: any) {
           />
         </Col>
       </div>
-      <TemplatePermission />
-      <TemplateMembers />
-      <TemplateMembersAdd />
-      <TemplateEditChannel />
-      <TemplatePinnedMessages />
+      
+    </ModalSlider>
+    <TemplatePermission />
+    <TemplateMembers />
+    <TemplateMembersAdd />
+    <TemplateEditChannel />
+    <TemplatePinnedMessages />
     </>
-  );
+  )
 }
 
 export default ChatSetting;

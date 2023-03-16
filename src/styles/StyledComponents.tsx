@@ -316,6 +316,7 @@ export const StyledCardPannel = styled.div`
   }
 
   .body {
+    padding: 1rem;
   }
   .footer {
     border-top: ${style.card.border.default};

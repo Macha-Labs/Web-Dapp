@@ -31,7 +31,7 @@ const AuthCard = () => {
           <Col className="m-b-2 hr-center">
             <IconImage
               path="Logo.png"
-              size="90"
+              size="3xl"
               style={{ className: "m-b-1" }}
             />
             <Heading as="h5" size="lg">

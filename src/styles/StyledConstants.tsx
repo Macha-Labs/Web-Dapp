@@ -132,14 +132,14 @@ export const darkStyle = {
   focusInput: "0",
   header: {
     bg: { default: "#00040d" },
-    border: { default: "1px solid #070b17" },
+    border: { default: "1px solid #0F172E" },
   },
   body: { bg: { default: "#00040d" }, padding: "20px 10px" },
   nav: {
     width: "5%",
     height: "90%",
     bg: { default: "#00040d" },
-    border: { default: "2px solid #070b17" },
+    border: { default: "2px solid #0F172E" },
   },
   list: {
     padding: '5px',
@@ -155,14 +155,14 @@ export const darkStyle = {
   },
   card: {
     bg: {
-      default: "#000416",
+      default: "#00040d",
       highlight: "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
       hover:
         "linear-gradient(141.09deg, rgba(13, 25, 65, 0.5) 11.08%, rgba(0, 20, 60, 0.38) 89.68%)",
     },
     border: {
-      default: "1px solid rgba(15,23,46,1)",
-      hover: "1px solid #001E57",
+      default: "1px solid #0a1020",
+      hover: "1px solid rgba(15,23,46,1)",
     },
     borderRadius: "5px",
     shadow: {

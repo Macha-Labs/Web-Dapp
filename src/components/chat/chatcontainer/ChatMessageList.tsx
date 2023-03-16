@@ -1,3 +1,4 @@
+import ModalSlider from "@/components/modal/ModalSlider";
 import { truncateAddress } from "@/helpers";
 import {
   Col,
@@ -12,16 +13,19 @@ import ChatMessage from "./ChatMessage";
 function ChatMessageList(props: any) {
 
   return (
-    <div>
-      <Heading as="h4" size="md" className="m-b-1">
-        Pinned Messages
-      </Heading>
+    <ModalSlider event={props.modal} size="sm" 
+    
+    header={<Heading as="h6" size="sm" className="m-b-1">
+    Pinned Messages
+    </Heading>
+    }>
+      
       {props.pinnedMessageList?.map((message: any, index: number) => {
         return (
           <ChatMessage key={message?.id} message={message} hookChat={props.hookChat} />
         );
       })}
-    </div>
+    </ModalSlider>
   );
 }
 

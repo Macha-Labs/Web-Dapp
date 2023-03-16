@@ -10,11 +10,13 @@ import {
   useToast,
   Heading,
 } from "@chakra-ui/react";
-import { Col, Row } from "@/styles/StyledComponents";
+import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 import useChatChannel from "@/hooks/chat/useChatChannel";
 import { DataContext } from "@/providers/DataProvider";
+import LayoutCard from "@/layouts/LayoutCard";
+import ModalSlider from "../modal/ModalSlider";
 
 const ChatEdit = (props: any) => {
   /**
@@ -119,31 +121,32 @@ const ChatEdit = (props: any) => {
    *
    **/
   return (
-    <LayoutCardPannel
-      header={
-        <Row className="hr-between w-full">
-          <Button
-            size="sm"
-            onClick={props.modal.onClose}
-            variant="state_default_hover"
-          >
-            Cancel
-          </Button>
-          <Text size={"sm"}>Edit Channel</Text>
-          <Button
-            variant="state_brand"
-            size="sm"
-            onClick={() => {
-              hookPortalChannel?.update();
-            }}
-            isLoading={hookPortalChannel?.isLoading}
-          >
-            Save
-          </Button>
-        </Row>
-      }
+    <ModalSlider size="sm" event={props.modal}
+    header={
+      <Row className="hr-between vr-center w-full">
+        <Button
+          size="sm"
+          onClick={props.modal.onClose}
+          variant="state_default_hover"
+        >
+          Cancel
+        </Button>
+        <Heading as="h6" size="sm">Edit Channel</Heading>
+        <Button
+          variant="state_brand"
+          size="sm"
+          onClick={() => {
+            hookPortalChannel?.update();
+          }}
+          isLoading={hookPortalChannel?.isLoading}
+        >
+          Save
+        </Button>
+      </Row>
+    }
     >
-      <Col className="p-3">
+      <>
+      <Col className="">
         <Col className="hr-center w-full mb-2">
           {profileImage ? (
             <Avatar
@@ -171,24 +174,29 @@ const ChatEdit = (props: any) => {
           </Text> */}
         </Col>
 
-        <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-        <Row className="hr-between">
-          <Col>
-            <Heading size="sm">Make channel private</Heading>
-            <Text>
-              Please note public channels can be joined by anyone with the link
-              and should not be used for a small group conversation.
-            </Text>
-          </Col>
-          <Switch
-            colorScheme="emerald"
-            className="m-l-1"
-            isChecked={hookPortalChannel?.channel?.private}
-            onChange={handleToggle}
-          />
-        </Row>
+        <StyledCard className="m-b-1">
+          <LayoutInputs data={data} style={{ class: "m-b-1" }} />
+        </StyledCard>
+        <StyledCard>
+          <Row className="hr-between">
+            <Col>
+              <Heading size="sm">Make channel private</Heading>
+              <Text>
+                Please note public channels can be joined by anyone with the link
+                and should not be used for a small group conversation.
+              </Text>
+            </Col>
+            <Switch
+              colorScheme="emerald"
+              className="m-l-1"
+              isChecked={hookPortalChannel?.channel?.private}
+              onChange={handleToggle}
+            />
+          </Row>
+        </StyledCard>
       </Col>
-    </LayoutCardPannel>
+    </>
+    </ModalSlider>
   );
 };
 

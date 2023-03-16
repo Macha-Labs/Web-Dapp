@@ -1,5 +1,4 @@
-import ModalSlider from "@/components/modal/ModalSlider";
-import UserList from "@/components/user/UserList";
+import ChatMembersList from "@/components/chat/chatcontainer/ChatMembersList";
 import { Col, Row } from "@/styles/StyledComponents";
 import {
   Button,
@@ -36,26 +35,23 @@ const ChatHeader = (props: any) => {
   console.log("Re-rendering >>>>> ChatHeader", dataContext.members);
   const TemplateMembers = () => {
     return (
-      <ModalSlider event={membersModal}>
-        <UserList
+      <ChatMembersList
+        membersModal={membersModal}
           onlineUsers={dataContext.members?.onlineUsers}
           offlineUsers={dataContext.members?.offlineUsers}
         />
-      </ModalSlider>
     );
   };
 
   const TemplateChannelSettings = () => {
     return (
-      <ModalSlider event={modalSettings} size="sm">
-        <ChatSetting
+      <ChatSetting
           event={modalSettings}
           authContext={authContext}
           modalSettings={modalSettings}
           hookChatChannels={hookChatChannels}
           hookChatChannel={hookChatChannel}
         />
-      </ModalSlider>
     );
   };
 
@@ -120,7 +116,7 @@ const ChatHeader = (props: any) => {
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}
-                  size={15}
+                  size="2xs"
                 />
               )}
             </Row>

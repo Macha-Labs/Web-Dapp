@@ -18,12 +18,15 @@ const theme = extendTheme({
       "*::placeholder": {
         color: `${style.colorPlaceholder}`,
       },
-      "input, textarea": {
+      "textarea": {
         border: `${style.input.border.default} !important`,
         color: `${style.colorInput} !important`,
         background: `${style.input.bg.default} !important`,
         paddingLeft: "0.5rem !important",
         paddingRight: "0.5rem !important",
+      },
+      "input:focus": {
+        background: '#000'
       },
       ".chakra-modal": {
         border: `${style.modal.border.default} !important`,
@@ -60,6 +63,7 @@ const theme = extendTheme({
           },
           _focusVisible: {
             borderColor: `${style.input.border.active}`,
+            bg: '#000',
           },
         },
       },

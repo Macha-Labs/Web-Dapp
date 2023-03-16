@@ -21,25 +21,22 @@ const ModalSlider = (props: any) => {
             onClose={props.event.onClose}
             size={props.size ? props.size : 'xs'}
         >
-            <DrawerOverlay />
+            <DrawerOverlay overflow='scroll' />
             <DrawerContent>
                 
-                {props.header ? <DrawerHeader>
+                {props.header && <DrawerHeader>
                     <Row className="vr-center">
-                        <Row className="vr-center">
-                            <Heading as="h5" fontSize={18}>{props?.header?.title}</Heading>
-                        </Row>
-                        
-                        <DrawerCloseButton />
+                       {props.header}
                     </Row>
-                </DrawerHeader>
-                :
-                <></>
-                }
+                </DrawerHeader>}
                 
-                <DrawerBody>
+                <DrawerBody className="overflow-y">
                         {props.children}
                 </DrawerBody>
+
+                {props.footer && <DrawerFooter>
+                    {props.footer}
+                </DrawerFooter>}
             </DrawerContent>
         </Drawer>
     )
