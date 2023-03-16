@@ -1,6 +1,6 @@
-import { logger, loggerInit } from "@/helpers/logger";
+import { logger} from "@/helpers/logger";
 import { AuthContext } from "@/providers/AuthProvider";
-import { Channel$, ChannelXMTP$ } from "@/schema/channel";
+import { Channel$ } from "@/schema/channel";
 import { useContext, useEffect, useState } from "react";
 import useLensProfileList from "../lens/useLensProfileList";
 
@@ -16,7 +16,7 @@ const useXmtpChannels = () => {
         console.log("New conversation started with ", conversation);
         setAllConversations((prevConversations: any) => {
           const conversations = [...prevConversations];
-          conversations.push(ChannelXMTP$(conversation));
+          conversations.push(new Channel$(conversation));
           return conversations;
         })
       }
