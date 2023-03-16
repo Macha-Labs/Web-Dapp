@@ -120,7 +120,7 @@ export class Channel$ {
     this.peerAddress= data?.peerAddress
     this.id= data?.peerAddress?.toLowerCase();
     this.type= data?.type;
-    this.name= this.peer?.lens?.name || this.peer?.lens?.handle || this.peer?.lens?.ownedBy || this?.peerAddress;
+    this.name= data.peer?.lens?.name || data.peer?.lens?.handle || data.peer?.lens?.ownedBy || data?.peerAddress;
     this.orgId= data?.orgId;
     this.private= data?.private;
     this.users= data?.users;
