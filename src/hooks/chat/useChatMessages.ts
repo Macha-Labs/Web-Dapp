@@ -6,24 +6,18 @@ import useXmtpChannelMessages from "../xmtp/useXmtpChannelMessages";
 
 const useChatMessages = () => {
     const router = useRouter();
-    let hookStreamChannelMessages: any;
-    let hookXmtpChannelMessages: any;
+    let hookStreamChannelMessages = useStreamChannelMessages();
+    let hookXmtpChannelMessages = useXmtpChannelMessages();
     const dataContext = useContext(DataContext);
 
-    if (router.pathname == '/chat') {
-        hookStreamChannelMessages = useStreamChannelMessages();
+    useEffect(() => {
+        dataContext.loadMessages(hookStreamChannelMessages?.messages || []);
+    }, [router.pathname, hookStreamChannelMessages?.messages]);
 
-        useEffect(() => {
-            dataContext.loadMessages(hookStreamChannelMessages?.messages || []);
-        }, [router.pathname, hookStreamChannelMessages?.messages]);
-    }
-    
-    if (router.pathname == '/chat/dm') {
-        hookXmtpChannelMessages = useXmtpChannelMessages();
-        useEffect(() => {
-            dataContext.loadMessages(hookXmtpChannelMessages?.messages || []);
-        }, [router.pathname, hookXmtpChannelMessages?.messages]);
-    }
+    useEffect(() => {
+        dataContext.loadMessages(hookXmtpChannelMessages?.messages || []);
+    }, [router.pathname, hookXmtpChannelMessages?.messages]);
+
 
     return (
         {
