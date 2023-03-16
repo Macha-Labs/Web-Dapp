@@ -5,12 +5,12 @@ import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { ChatContext } from "@/providers/ChatProvider";
+import { DataContext } from "@/providers/DataProvider";
 
 const ChatMembersAdd = (props: any) => {
   const chatContext=useContext(ChatContext);  
-  const hookPortalChannelMembership = usePortalChannelMembership(
-    chatContext?.hookChannel?.channel
-  );
+  const dataContext = useContext(DataContext);
+  const hookPortalChannelMembership = usePortalChannelMembership(dataContext.channel);
   const toast = useToast();
 
   const callbackAdd = () => {
@@ -53,8 +53,8 @@ const ChatMembersAdd = (props: any) => {
       {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
         return (
           <>
-            {!chatContext?.hookMembers?.allUsersIds.includes(
-              item?.lens?.ownedBy.toLowerCase()
+            {!dataContext?.memberIds?.includes(
+              item?.lens?.ownedBy?.toLowerCase()
             ) && (
               <>
                 <Row key={item?.id} className="hr-between p-1">

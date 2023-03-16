@@ -1,5 +1,5 @@
 import { logger } from "@/helpers/logger";
-import { ChannelDb$ } from "@/schema/channel";
+import { Channel$ } from "@/schema/channel";
 import { getChannel } from "@/service/ChannelService";
 import { addStreamMembers } from "@/service/StreamService";
 import { useState } from "react";
@@ -11,7 +11,7 @@ const useStreamChannelMembership = () => {
     const fetchChannel = (channelId: any) => {
         getChannel(channelId).then(res => {
             logger('channel', 'useStreamChannelMembership.fetchChannel', 'getting channel from db', [res]);
-            setChannel(ChannelDb$(res));
+            setChannel(new Channel$("db", res));
         })
     }
 

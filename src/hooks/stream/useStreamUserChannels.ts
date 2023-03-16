@@ -26,7 +26,7 @@ const useStreamUserChannels = () => {
           limit: 30
         });
         let newResult = result?.map((item: any) => {
-          return new Channel$('getstream', item.data);
+          return new Channel$('getstream', item);
         })
         setChannels(newResult);
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'channels from stream', [result]);

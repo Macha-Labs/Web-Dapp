@@ -130,7 +130,7 @@ const ChatWindow = (props: any) => {
                 message={message}
                 hookChat={chatContext?.hookChat}
                 authContext={authContext}
-                hookMembers={chatContext?.hookMembers}
+                hookMembers={dataContext.members}
                 key={`a-${message.id}`}
                 handleDateTag={handleDateTag}
                 executeScroll={executeScroll}
