@@ -2,7 +2,7 @@ import { fetchSigner } from "@wagmi/core";
 import { Client } from "@xmtp/xmtp-js";
 import { useState } from "react";
 
-function useXmtp() {
+function useXmtpAuth() {
   const [xmtpClientAddress, setXmtpClientAddress] = useState<any>();
   const [xmtpClient, setXmtpClient] = useState<any>();
 
@@ -21,4 +21,4 @@ function useXmtp() {
   };
 }
 
-export default useXmtp;
+export default useXmtpAuth;

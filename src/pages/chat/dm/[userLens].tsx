@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import useXmtp from "@/hooks/xmtp/useXmtp";
+import useXmtpAuth from "@/hooks/xmtp/useXmtpAuth";
 import { useAccount } from "wagmi";
 import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import ChatList from "@/components/chat/ChatList";
@@ -15,7 +15,7 @@ import Link from "next/link";
 function DirectMessage() {
   const address =
     typeof window !== "undefined" && window?.location?.href.split("#")[1];
-  const hookXmtp = useXmtp();
+  const hookXmtp = useXmtpAuth();
   const { isConnected } = useAccount();
   console.log(address, "address");
   useEffect(() => {

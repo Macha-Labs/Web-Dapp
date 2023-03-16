@@ -8,8 +8,8 @@ export const Channel$ = (data: any) => {
     users: data?.users,
     admins: data?.admins,
     createdBy: data?.createdBy,
-    createdAt: data?.createdAt,
-    updatedAt: data?.updatedAt,
+    created_at: data?.createdAt,
+    updated_at: data?.updatedAt,
     permissions: data?.permissions,
     image: "",
     lastMessage: "",
@@ -32,8 +32,8 @@ export const ChannelStream$ = (data: any, raw?: any, owner?: any) => {
     isAdmin:
       String(data?.created_by?.id)?.toLowerCase() == String(owner)?.toLowerCase(),
     createdBy: data?.created_by?.id,
-    createdAt: data?.created_at,
-    updatedAt: data?.updated_at,
+    created_at: data?.created_at,
+    updated_at: data?.updated_at,
     permissions: data?.own_capabilities,
     image: "",
     unreadCountObject: raw?.state?.read ? raw?.state?.read : 0,
@@ -44,7 +44,7 @@ export const ChannelStream$ = (data: any, raw?: any, owner?: any) => {
     membersCount: data?.member_count,
     notificationCount: 0,
     raw: raw,
-    pinnedMessages: data?.state?.pinnedMessages
+    pinnedMessages: raw?.state?.pinnedMessages
   };
 };
 
@@ -58,8 +58,8 @@ export const ChannelXMTP$ = (data: any) => {
     users: data?.users,
     admins: data?.admins,
     createdBy: data?.createdBy?.toLowerCase(),
-    createdAt: data?.createdAt,
-    updatedAt: data?.updatedAt,
+    created_at: data?.createdAt,
+    updated_at: data?.updatedAt,
     permissions: data?.permissions,
     image: "",
     lastMessage: "",

@@ -26,13 +26,13 @@ const useChatChannel = () => {
         }
     }, [streamContext?.hookChannel.channel, xmtpContext?.conversation]);
 
-    const _fetch = () => {
+    const _fetch = (data: any) => {
         switch (router.pathname) {
             case "/chat":
-                return streamContext?.initiate;
+                return streamContext?.initiate(data);
                 break;
             case "/chat/dm":
-                return xmtpContext.initiate;
+                return xmtpContext.initiate(data);
                 break;
         }
     };
@@ -61,7 +61,7 @@ const useChatChannel = () => {
 
     return {
         channel: dataContext.channel,
-        fetch: _fetch(),
+        fetch: _fetch,
         remove: _remove,
         reload: _reload
     }

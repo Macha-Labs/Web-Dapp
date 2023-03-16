@@ -35,22 +35,22 @@ function ChatComponent() {
 
   return (
     <>
-      {authContext?.user?.lens?.id && 
-      <StyledWindow>
-      <div className="left">
-        <Nav />
-      </div>
+      {authContext?.isConnected && 
+        <StyledWindow>
+        <div className="left">
+          <Nav />
+        </div>
 
-      <div className="right">
-          <StyledChatList>
-            <ChatList />
-          </StyledChatList>
-          <StyledChat>
-            <ChatContainer />
-          </StyledChat>
+        <div className="right">
+            <StyledChatList>
+              <ChatList />
+            </StyledChatList>
+            <StyledChat>
+              <ChatContainer />
+            </StyledChat>
 
-      </div>
-    </StyledWindow>
+        </div>
+      </StyledWindow>
     } 
       <TemplateAuth />
     </>

@@ -8,7 +8,7 @@ import { putStreamToken } from "../service/StreamService";
 import { findOrCreateUser } from "../service/UserService";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 import { fetchSigner } from "@wagmi/core";
-import useXmtp from "@/hooks/xmtp/useXmtp";
+import useXmtpAuth from "@/hooks/xmtp/useXmtpAuth";
 
 export type AuthContextType = {
   signer: any | undefined;
@@ -55,7 +55,7 @@ const AuthProvider = ({ children }: any) => {
    **/
   const hookLensProfile = useLensProfile();
   const hookLensAuth = useLensAuth();
-  const hookXmtp = useXmtp();
+  const hookXmtpAuth = useXmtpAuth();
 
   /**
    * @description Internal Function to get user from lens
@@ -183,7 +183,7 @@ const AuthProvider = ({ children }: any) => {
         address: address?.toLowerCase(),
         connectWallet: connectWallet,
         connectLens: _fetchUserFromLens,
-        connectXmtp: hookXmtp.connectXmtp,
+        connectXmtp: hookXmtpAuth.connectXmtp,
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,
@@ -191,10 +191,10 @@ const AuthProvider = ({ children }: any) => {
           address &&
           user?.lens?.id &&
           user?.db?.id &&
-          hookXmtp.xmtpClientAddress,
+          hookXmtpAuth.xmtpClientAddress,
         isLoadingLens: isLoadingLens,
-        xmtpClient: hookXmtp.xmtpClient,
-        xmtpClientAddress: hookXmtp.xmtpClientAddress,
+        xmtpClient: hookXmtpAuth.xmtpClient,
+        xmtpClientAddress: hookXmtpAuth.xmtpClientAddress,
       }}
     >
       {children}

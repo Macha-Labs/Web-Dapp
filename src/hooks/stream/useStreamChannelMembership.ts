@@ -2,14 +2,11 @@ import { logger } from "@/helpers/logger";
 import { Channel$ } from "@/schema/channel";
 import { getChannel } from "@/service/ChannelService";
 import { addStreamMembers } from "@/service/StreamService";
-import { useContext, useState } from "react";
-
-import { ChatContext } from "@/providers/ChatProvider";
+import { useState } from "react";
 
 const useStreamChannelMembership = () => {
     const [isLoading, setIsLoading] = useState<any>();
     const [channel, setChannel] = useState<any>();
-    const chatContext = useContext(ChatContext);
 
     const fetchChannel = (channelId: any) => {
         getChannel(channelId).then(res => {
@@ -24,7 +21,6 @@ const useStreamChannelMembership = () => {
             console.log("response of join stream channel ", res);
             setIsLoading(false);
             callback();
-            chatContext.hookChannels.fetchUserChannels(chatContext.streamClient);
         })
     }
 

@@ -33,7 +33,7 @@ const ChatMessage = (props: any) => {
   const modalProfile = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<any>();
   const toast = useToast();
-  const date = new Date(props.message.createdAt);
+  const date = new Date(props.message.created_at);
   const hours = date.getHours().toString().padStart(2, "0");
   const minutes = date.getMinutes().toString().padStart(2, "0");
   const time = `${hours}:${minutes}`;
@@ -41,8 +41,8 @@ const ChatMessage = (props: any) => {
   const isIntersecting = useOnScreen(chatRef);
 
   useEffect(() => {
-    if (isIntersecting) {
-      props.handleDateTag(props?.message.createdAt);
+    if (isIntersecting && props?.handleDateTag) {
+      props?.handleDateTag(props?.message.created_at);
     }
   }, [isIntersecting]);
 
