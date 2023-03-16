@@ -1,27 +1,3 @@
-import { Data } from "aws-sdk/clients/firehose";
-import { AnyAaaaRecord } from "dns";
-
-export const ChannelDb$ = (data: any) => {
-  return {
-    id: data?._id,
-    type: data?.type,
-    name: data?.name,
-    orgId: data?.orgId,
-    private: data?.private,
-    users: data?.users,
-    admins: data?.admins,
-    createdBy: data?.createdBy,
-    created_at: data?.createdAt,
-    updated_at: data?.updatedAt,
-    permissions: data?.permissions,
-    image: "",
-    lastMessage: "",
-    membersCount: 0,
-    notificationCount: 0,
-    pinnedMessages: data?.state?.pinnedMessages
-  };
-};
-
 export const ChannelStream$ = (data: any, raw?: any, owner?: any) => {
   return {
     id: data?.id,
@@ -164,6 +140,7 @@ export class Channel$ {
   }
 
   updatePeerLens (user: any) {
-    this.data = {...this.data,  peer: user}
+    this.peer = user;
+    this.name = this.peer?.lens?.name || this.peer?.lens?.handle || this.peer?.lens?.ownedBy || this?.peerAddress
   }
 }
