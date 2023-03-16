@@ -1,10 +1,6 @@
 import { DataContext } from "@/providers/DataProvider";
 import { useRouter } from "next/router";
-<<<<<<< HEAD
-import { useEffect} from "react";
-=======
 import { useContext, useEffect } from "react";
->>>>>>> 59a69faeecbd1a0d6aa5af0f37cd706ae69409d6
 import useStreamChannelMembers from "../stream/useStreamChannelMembers";
 
 const useChatMembers = () => {
