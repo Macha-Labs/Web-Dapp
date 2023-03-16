@@ -118,7 +118,25 @@ export class Channel$ {
   }
 
   setFromStream (data: any) {
-
+    this.id = data?.id;
+    this.type = data?.type,
+    this.name = data?.name,
+    this.description = data?.description,
+    this.orgId = data?.orgId,
+    this.private = data?.private,
+    this.users = data?.users,
+    this.admins = data?.admins,
+    // this.isAdmin = String(data?.created_by?.id)?.toLowerCase() == String(owner)?.toLowerCase(),
+    this.createdBy = data?.created_by?.id,
+    this.created_at = data?.created_at,
+    this.updated_at = data?.updated_at,
+    this.permissions = data?.own_capabilities,
+    this.image = data?.image,
+    this.unreadCountObject = data?.state?.read ? data?.state?.read : 0,
+    this.lastMessage = data?.state?.messageSets[0]?.messages[data?.state?.messageSets[0]?.messages?.length - 1],
+    this.membersCount = data?.member_count,
+    this.notificationCount = 0,
+    this.pinnedMessages = data?.state?.pinnedMessages
   }
 
   setFromXmtp (data: any) {
