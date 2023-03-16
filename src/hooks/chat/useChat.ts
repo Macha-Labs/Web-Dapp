@@ -44,7 +44,7 @@ const useChat = (client: any, channel: any) => {
   };
 
   const addMessage = async (callback?: any) => {
-    console.log('inside add message');
+    console.log('inside add message', actionMessage);
     setStreamLoading(true);
     if (!authContext?.address) {
       setStreamLoading(false);
@@ -114,7 +114,7 @@ const useChat = (client: any, channel: any) => {
         };
       }
 
-      callback().then(() => {
+      callback(messageData).then(() => {
         console.log('message sent');
         setRerenderSwitch(!rerenderSwitch);
         setStreamLoading(false);

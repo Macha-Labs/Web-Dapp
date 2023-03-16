@@ -33,8 +33,8 @@ const ChatInput = (props: any) => {
   const createPostRef = useRef<any>();
 
 
-  const sendMessage = () => {
-    return hookChatMessage.send({text: props?.chatContext?.hookChat.textareaRef.current?.value})
+  const callbackSendMessage = (data) => {
+    return hookChatMessage.send(data)
   }
 
   const templateReply = () => {
@@ -291,7 +291,7 @@ const ChatInput = (props: any) => {
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
                 onKeyDown={(event: any) => {
-                  props?.chatContext?.hookChat?.keyDownMessage(event, sendMessage);
+                  props?.chatContext?.hookChat?.keyDownMessage(event, callbackSendMessage);
                 }}
                 placeholder="Message..."
                 height="auto"
