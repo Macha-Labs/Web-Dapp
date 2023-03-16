@@ -14,6 +14,8 @@ function useXmtp() {
     console.log("connected to XMTP");
   };
 
+  
+
   return {
     connectXmtp,
     xmtpClient,

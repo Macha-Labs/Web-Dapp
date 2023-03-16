@@ -58,7 +58,6 @@ const useXmtpChannelMessages = () => {
     }
   }, [xmtpLogs]);
 
-
   return (
     {
       fetch: _fetch,

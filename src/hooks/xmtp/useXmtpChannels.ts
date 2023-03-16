@@ -6,6 +6,33 @@ import { useContext, useEffect, useState } from "react";
 const useXmtpChannels = () => {
     const authContext = useContext(AuthContext);
     const [allConversations, setAllConversations] = useState<any>();
+    const [xmtpConvo, setXmtpConvo] = useState<any>();
+
+    const fetchAllConversations = async() => {
+      for await (const conversation of xmtpConvo) {
+        console.log("New conversation started with ", conversation);
+        setAllConversations(prevConversations => {
+          const conversations = [...prevConversations];
+          conversations.push(ChannelXMTP$(conversation));
+          return conversations;
+        })
+      }
+    }
+
+    useEffect(() => {
+      const streamConversations = async() => {
+        const xmtpNew = await authContext.xmtpClient.conversations.stream();
+        console.log("New xmtpConvo ", xmtpNew);
+        setXmtpConvo(xmtpNew);
+      }
+      streamConversations();
+    }, [])
+
+    useEffect(() => {
+      if (xmtpConvo) {
+        fetchAllConversations();
+      }
+    }, [xmtpConvo]);
 
     const _fetch = async () => {
         const conversationList = await authContext?.xmtpClient?.conversations?.list();

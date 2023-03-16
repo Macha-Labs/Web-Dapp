@@ -25,10 +25,10 @@ import useChatChannel from "@/hooks/chat/useChatChannel";
 import { DataContext } from "@/providers/DataProvider";
 
 const ChatList = (props: any) => {
-  console.log('Rendering >>>>> ChatList');
+  console.log("Rendering >>>>> ChatList");
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
-  const dataContext= useContext(DataContext);
+  const dataContext = useContext(DataContext);
   const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannels();
   const router = useRouter();
@@ -39,60 +39,59 @@ const ChatList = (props: any) => {
   // TODO: Fix bandaging
   useEffect(() => {
     hookChatChannels.load();
-  }, [router.pathname, chatContext.streamContext?.client?.user?.id])
+  }, [router.pathname, chatContext.streamContext?.client?.user?.id]);
 
-
-  const hookPortalChannel = usePortalChannel(
-    null,
-    {
-      mute: () => {
-        toast({
-          title: "Channel Muted",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-        hookChatChannels?.load();
-        hookChatChannel.reload();
-      },
-      unmute: () => {
-        toast({
-          title: "Channel Unmuted",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-        hookChatChannels?.load();
-        hookChatChannel.reload();
-      },
-      leave: () => {
-        toast({
-          title: "Channel Left",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-        hookChatChannels?.load();
-        hookChatChannel.remove();
-      },
-      delete: () => {
-        toast({
-          title: "Channel Deleted",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-        hookChatChannels?.load();
-        hookChatChannel.remove();
-      },
-    }
-  );
-
+  const hookPortalChannel = usePortalChannel(null, {
+    mute: () => {
+      toast({
+        title: "Channel Muted",
+        status: "success",
+        duration: 3000,
+        position: "bottom-right",
+      });
+      hookChatChannels?.load();
+      hookChatChannel.reload();
+    },
+    unmute: () => {
+      toast({
+        title: "Channel Unmuted",
+        status: "success",
+        duration: 3000,
+        position: "bottom-right",
+      });
+      hookChatChannels?.load();
+      hookChatChannel.reload();
+    },
+    leave: () => {
+      toast({
+        title: "Channel Left",
+        status: "success",
+        duration: 3000,
+        position: "bottom-right",
+      });
+      hookChatChannels?.load();
+      hookChatChannel.remove();
+    },
+    delete: () => {
+      toast({
+        title: "Channel Deleted",
+        status: "success",
+        duration: 3000,
+        position: "bottom-right",
+      });
+      hookChatChannels?.load();
+      hookChatChannel.remove();
+    },
+  });
 
   const TemplateChatNew = () => {
     return (
       <ModalSlider event={modalChatNew} size="md">
-        <ChatNew modal={modalChatNew} hookChatChannels={hookChatChannels} hookChatChannel={hookChatChannel}/>
+        <ChatNew
+          modal={modalChatNew}
+          hookChatChannels={hookChatChannels}
+          hookChatChannel={hookChatChannel}
+        />
       </ModalSlider>
     );
   };
@@ -114,7 +113,9 @@ const ChatList = (props: any) => {
               Pin Channel
             </Row>
           </Button> */}
-          {!props?.item?.raw?.disconnected && props?.item?.raw && !props.item.raw?.muteStatus()?.muted ? (
+          {!props?.item?.raw?.disconnected &&
+          props?.item?.raw &&
+          !props.item.raw?.muteStatus()?.muted ? (
             <Button
               variant="transparent"
               size="sm"
@@ -147,23 +148,24 @@ const ChatList = (props: any) => {
               </Row>
             </Button>
           )}
-          {props?.item?.isAdmin && 
+          {props?.item?.isAdmin && (
             <Button
-            variant="transparent"
-            size="sm"
-            className="text-start"
-            rightIcon={<IconImage path="IconRedDelete.png" size="18" />}
-          >
-            <Row className="hr-between w-100"
-              onClick={() => {
-                hookPortalChannel.deleteChannel(props.item);
-              }}
+              variant="transparent"
+              size="sm"
+              className="text-start"
+              rightIcon={<IconImage path="IconRedDelete.png" size="18" />}
             >
-              Delete Channel
-            </Row>
-          </Button>
-        }
-          
+              <Row
+                className="hr-between w-100"
+                onClick={() => {
+                  hookPortalChannel.deleteChannel(props.item);
+                }}
+              >
+                Delete Channel
+              </Row>
+            </Button>
+          )}
+
           {!props?.item?.isAdmin && (
             <Button
               variant="transparent"
@@ -189,16 +191,14 @@ const ChatList = (props: any) => {
   const TemplateNewHolder = () => {
     return (
       <Button onClick={modalChatNew.onOpen} variant="state_brand">
-                  Create Channel
-                </Button>
-    )
-  }
+        Create Channel
+      </Button>
+    );
+  };
 
   const TemplateLoading = () => {
-    return (
-      <LoadChannels/>
-    )
-  }
+    return <LoadChannels />;
+  };
 
   const TemplateChatList = () => {
     return (
@@ -212,16 +212,16 @@ const ChatList = (props: any) => {
           />
         </Row>
         <Col className="body verticlescroll hidescroll">
-        {!dataContext?.channels ? (
+          {!dataContext?.channels ? (
             <TemplateLoading />
-        ) : (
-          <>
-            {dataContext?.channels?.length ? (
-              <ul>
-                {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                {dataContext?.channels.map((item: any, index: number) => (
-                  <StyledChatItem key={item?.index}>
-                    {/* {chatContext?.hookChannels?.actionMessage ==
+          ) : (
+            <>
+              {dataContext?.channels?.length ? (
+                <ul>
+                  {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
+                  {dataContext?.channels.map((item: any, index: number) => (
+                    <StyledChatItem key={item?.index}>
+                      {/* {chatContext?.hookChannels?.actionMessage ==
                       "MULTISELECT" && (
                       <Checkbox
                         className="m-r-0-5"
@@ -233,107 +233,114 @@ const ChatList = (props: any) => {
                         }
                       />
                     )} */}
-                    <Button
-                      className="menu-item w-100 m-b-0-5"
-                      size="xl"
-                      variant={
-                        dataContext.channel?.id == item?.id
-                          ? "state_brand"
-                          : "state_card_hover"
-                      }
-                      // overflow="hidden"
-                    >
-                      <Row
-                        className="vr-center w-11-12"
-                        onClick={() => {
-                          hookChatChannel?.fetch(item, authContext?.address);
-                        }}
+                      <Button
+                        className="menu-item w-100 m-b-0-5"
+                        size="xl"
+                        variant={
+                          dataContext.channel?.id == item?.id
+                            ? "state_brand"
+                            : "state_card_hover"
+                        }
+                        // overflow="hidden"
                       >
-                        {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                        <Avatar
-                          size="md"
-                          className="m-r-0-5"
-                          name={item?.name}
-                        />
-                        <Col className="w-100 d-flex flex-col vr-center">
-                          <Row>
-                            <Text>
-                              {item?.name?.length > 12
-                                ? `${item?.name?.slice(0, 12)}...`
-                                : item?.name}
-                            </Text>
-                            {item?.raw && (
-                              <>
-                                {!item?.raw?.disconnected && item?.raw?.muteStatus()?.muted && (
-                                  <IconImage
-                                    path="IconDarkMute.png"
-                                    style={{ className: "m-l-0-5" }}
-                                    size={10}
-                                  />
-                                )}
-                              </>
+                        <Row
+                          className="vr-center w-11-12"
+                          onClick={() => {
+                            hookChatChannel?.fetch(item, authContext?.address);
+                          }}
+                        >
+                          {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
+                          <Avatar
+                            size="md"
+                            className="m-r-0-5"
+                            name={item?.name}
+                          />
+                          <Col className="w-100 d-flex flex-col vr-center">
+                            <Row>
+                              <Text>
+                                {item?.name?.length > 12
+                                  ? `${item?.name?.slice(0, 12)}...`
+                                  : item?.name}
+                              </Text>
+                              {item?.raw && (
+                                <>
+                                  {!item?.raw?.disconnected &&
+                                    item?.raw?.muteStatus()?.muted && (
+                                      <IconImage
+                                        path="IconDarkMute.png"
+                                        style={{ className: "m-l-0-5" }}
+                                        size={10}
+                                      />
+                                    )}
+                                </>
+                              )}
+                            </Row>
+                            {item?.lastMessage?.created_at && (
+                              <Col>
+                                <Text fontSize={"xs"}>
+                                  {new Date(
+                                    item?.lastMessage?.created_at
+                                  ).toLocaleString()}
+                                </Text>
+                              </Col>
                             )}
-                          </Row>
-                          {item?.lastMessage?.created_at && (
-                            <Col>
-                              <Text fontSize={"xs"}>
-                                {new Date(
-                                  item?.lastMessage?.created_at
-                                ).toLocaleString()}
-                              </Text>
-                            </Col>
-                          )}
 
-                          {item?.lastMessage && (
-                            <Col
-                              style={{ paddingRight: "5px" }}
-                              className="m-t-0-5"
-                            >
-                              <Text fontSize={"xs"}>
-                                {item?.lastMessage?.user?.lensUsername ||
-                                  item?.lastMessage?.user?.lensHandle ||
-                                  truncateAddress(item?.lastMessage?.user?.id)}
-                                :{" "}
-                                {item?.lastMessage?.text.length > 14
-                                  ? `${item?.lastMessage?.text.slice(0, 14)}...`
-                                  : item?.lastMessage?.text}
-                              </Text>
-                            </Col>
-                          )}
-                        </Col>
-                        {item?.unreadCountObject &&
-                          item?.unreadCountObject[authContext?.address]
-                            ?.unread_messages > 0 &&
-                          !isClicked.includes(index) && (
-                            <Col>
-                              <Text
-                                padding={1}
-                                background={darkStyle.color5}
-                                borderRadius="full"
+                            {item?.lastMessage && (
+                              <Col
+                                style={{ paddingRight: "5px" }}
+                                className="m-t-0-5"
                               >
-                                {
-                                  item?.unreadCountObject[authContext?.address]
-                                    ?.unread_messages
-                                }
-                              </Text>
-                            </Col>
-                          )}
-                      </Row>
+                                <Text fontSize={"xs"}>
+                                  {item?.lastMessage?.user?.lensUsername ||
+                                    item?.lastMessage?.user?.lensHandle ||
+                                    truncateAddress(
+                                      item?.lastMessage?.user?.id
+                                    )}
+                                  :{" "}
+                                  {item?.lastMessage?.text.length > 14
+                                    ? `${item?.lastMessage?.text.slice(
+                                        0,
+                                        14
+                                      )}...`
+                                    : item?.lastMessage?.text}
+                                </Text>
+                              </Col>
+                            )}
+                          </Col>
+                          {item?.unreadCountObject &&
+                            item?.unreadCountObject[authContext?.address]
+                              ?.unread_messages > 0 &&
+                            !isClicked.includes(index) && (
+                              <Col>
+                                <Text
+                                  padding={1}
+                                  background={darkStyle.color5}
+                                  borderRadius="full"
+                                >
+                                  {
+                                    item?.unreadCountObject[
+                                      authContext?.address
+                                    ]?.unread_messages
+                                  }
+                                </Text>
+                              </Col>
+                            )}
+                        </Row>
 
-                      <Col className="hr-center w-1-12 settingsIcon">
-                        <TemplateActions item={item} />
-                      </Col>
-                    </Button>
-                  </StyledChatItem>
-                ))}
-              </ul>
-            ) : (
-              <>
-                <TemplateNewHolder />
-              </>
-            )}
-          </>
-        )}
+                        <Col className="hr-center w-1-12 settingsIcon">
+                          <TemplateActions item={item} />
+                        </Col>
+                      </Button>
+                    </StyledChatItem>
+                  ))}
+                </ul>
+              ) : (
+                <>
+                  <TemplateNewHolder />
+                </>
+              )}
+            </>
+          )}
         </Col>
       </>
     );
