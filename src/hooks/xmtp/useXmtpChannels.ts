@@ -53,7 +53,7 @@ const useXmtpChannels = () => {
     const conversationMap = await conversationList
       .map(async (item: any) => {
         const peer = await hookLensProfileList.fetch(item.peerAddress);
-        const channelData = new Channel$("xmtp", { ...item, peer: peer });
+        const channelData = new Channel$("xmtp", {...item, peer: peer, raw: item});
         console.log("Useeffect xmtp lens ", peer, item);
         return channelData;
       })

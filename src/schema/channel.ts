@@ -135,7 +135,7 @@ export class Channel$ {
     this.notificationCount= 0;
     this.unreadCountObject= {};
     this.send= data.send;
-    this.xmtpRaw= data;
+    this.xmtpRaw= data.raw;
     this.pinnedMessages= data?.state?.pinnedMessages ; 
   }
 
