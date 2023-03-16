@@ -920,7 +920,8 @@ export const StyledConversation = styled(Col)`
 
 //
 export const StyledPageList = styled.div`
-  width: 25%;
+  min-width: 25%;
+  max-width: 25%;
   height: 100vh;
   background: ${style.bgMain};
   border-right: ${style.header.border.default};

@@ -1,3 +1,5 @@
+import { AnyAaaaRecord } from "dns";
+
 export const ChannelDb$ = (data: any) => {
   return {
     id: data?._id,
@@ -75,7 +77,17 @@ export const ChannelXMTP$ = (data: any) => {
 
 export class Channel$ {
   source: String;
+  type: any;
+  id: any;
+  name: any;
   data: any;
+  description: any;
+  private: any;
+  created_at: any;
+  updated_at: any;
+  raw: any;
+  xmtpRaw: any;
+  pinnedMessages: any;
 
   constructor(
     source: string = "",
@@ -84,12 +96,21 @@ export class Channel$ {
     this.source = source;
     switch(this.source) {
       case "xmtp": 
-        this.data = ChannelXMTP$(data)
+        this.setFromXmtp(data)
         break;
       case "getstream":
-        this.data = ChannelStream$(data);
+        this.setFromStream(data);
         break;
     }
+  }
+
+  setFromStream (data: AnyAaaaRecord) {
+
+  }
+
+  setFromXmtp (data: any) {
+    this.id = data?.peerAddress?.toLowerCase();
+    this.type = data?.type;
   }
 
   updatePeerLens (user: any) {
