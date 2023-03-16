@@ -1,6 +1,6 @@
 import { DataContext } from "@/providers/DataProvider";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useEffect} from "react";
 import useStreamChannelMembers from "../stream/useStreamChannelMembers";
 import useChatMembersStore from "@/store/useChatMembersStore";
 

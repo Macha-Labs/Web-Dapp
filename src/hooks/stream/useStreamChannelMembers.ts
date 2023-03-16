@@ -61,7 +61,7 @@ const useStreamChannelMembers = () => {
   };
 
   useEffect(() => {
-    _fetch();
+    // _fetch();
   }, [streamContext?.hookChannel?.channel?.id])
 
   return {

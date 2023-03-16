@@ -20,7 +20,6 @@ import { DataContext } from "@/providers/DataProvider";
 import { ChatContext } from "@/providers/ChatProvider";
 import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 import useChatChannel from "@/hooks/chat/useChatChannel";
-import useChatMembersStore from "@/store/useChatMembersStore";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
@@ -32,7 +31,6 @@ const ChatHeader = (props: any) => {
   const hookChatChannels = useChatChannelsReload();
   const hookChatChannel = useChatChannel();
 
-  // const $members = useChatMembersStore((state: any) => state.members);
   const $members: any[] = [];
 
   const router = useRouter();
