@@ -246,7 +246,7 @@ const ChatList = (props: any) => {
                       <Row
                         className="vr-center w-11-12"
                         onClick={() => {
-                          hookChatChannel?.fetch(item, authContext?.address);
+                          hookChatChannel?.fetch(item);
                         }}
                       >
                         {/* <Checkbox defaultChecked className="m-r-0-5" /> */}

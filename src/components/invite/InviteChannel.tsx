@@ -6,12 +6,13 @@ import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
 import { useRouter } from "next/router";
+import useChatChannel from "@/hooks/chat/useChatChannel";
 
 
 const InviteChannel = (props: any) => {
     const authContext = useContext(AuthContext);
+    const hookChatChannel = useChatChannel();
     const hookStreamChannelMembership = useStreamChannelMembership();
-    const chatContext = useContext(ChatContext);
     const router = useRouter();
     const toast = useToast();
 
@@ -25,7 +26,7 @@ const InviteChannel = (props: any) => {
     }, [props?.channelId])
 
     const callBackMembership = () => {
-        chatContext.initiate({id: props?.channelId}, authContext?.address);
+        hookChatChannel.fetch({id: props?.channelId});
         console.log('called');
         router.push('/chat');
     }
@@ -63,6 +64,20 @@ const InviteChannel = (props: any) => {
                     onClick={() => {authContext.connectLens(callBacks)}}>
                         Sign In With Lens
                     </Button>}
+                    {authContext.address &&
+                    authContext?.user?.lens?.id &&
+                    !authContext.xmtpClientAddress && (
+                        <Button
+                        className=""
+                        size="md"
+                        variant="state_xmtp"
+                        onClick={() => {
+                            authContext.connectXmtp();
+                        }}
+                        >
+                        Connect to XMTP
+                        </Button>
+                    )}
                     {authContext?.isConnected && 
                     <Button 
                     onClick={() => {

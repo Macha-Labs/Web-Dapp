@@ -15,7 +15,7 @@ export const Channel$ = (data: any) => {
     lastMessage: "",
     membersCount: 0,
     notificationCount: 0,
-    pinnedMessages: data?.raw?.state?.pinnedMessages
+    pinnedMessages: data?.state?.pinnedMessages
   };
 };
 
@@ -44,7 +44,7 @@ export const ChannelStream$ = (data: any, raw?: any, owner?: any) => {
     membersCount: data?.member_count,
     notificationCount: 0,
     raw: raw,
-    pinnedMessages: data?.raw?.state?.pinnedMessages
+    pinnedMessages: data?.state?.pinnedMessages
   };
 };
 
@@ -68,6 +68,6 @@ export const ChannelXMTP$ = (data: any) => {
     unreadCountObject: {},
     send: data.send,
     xmtpRaw: data,
-    pinnedMessages: data?.raw?.state?.pinnedMessages
+    pinnedMessages: data?.state?.pinnedMessages
   };
 };
