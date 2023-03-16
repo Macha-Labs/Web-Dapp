@@ -28,8 +28,8 @@ const theme = extendTheme({
       "input:focus": {
         background: '#000'
       },
-      ".chakra-modal": {
-        border: `${style.modal.border.default} !important`,
+      ".chakra-modal__content": {
+        borderLeft: `${style.modal.border.default} !important`,
       },
       ".chakra-modal__body": {
         background: `${style.modal.bg.default}`,
@@ -43,9 +43,9 @@ const theme = extendTheme({
         background: `${style.modal.bg.default}`,
         borderTop: `${style.modal.border.default} !important`,
       },
-      "chakra-modal__overlay": {
-        opacity: "0.9",
-        background: "#000511 !important",
+      ".chakra-modal__overlay": {
+        opacity: "0.65 !important",
+        background: `${style.modal.bg.default} !important`,
       },
       ".alert": {
         background: `${style.bgPannelHeader}`,
@@ -58,12 +58,15 @@ const theme = extendTheme({
       baseStyle: {
         field: {
           bg: `${style.input.bg.default}`,
+          border: `${style.input.border.default}`,
           _hover: {
-            borderColor: `${style.input.border.active}`,
+            border: `${style.input.border.active}`,
+            bg: `${style.input.bg.active}`,
           },
           _focusVisible: {
-            borderColor: `${style.input.border.active}`,
-            bg: '#000',
+            border: `${style.input.border.active}`,
+            bg: `${style.input.bg.active}`,
+            shadow: `${style.input.shadow.hover}`
           },
         },
       },
@@ -80,9 +83,32 @@ const theme = extendTheme({
       },
     },
     TextArea: {
-      baseStyle: {
-        field: {
-          bg: `${style.input.bg.default}`,
+      Input: {
+        baseStyle: {
+          field: {
+            bg: `${style.input.bg.default}`,
+            border: `${style.input.border.default}`,
+            _hover: {
+              border: `${style.input.border.active}`,
+              bg: `${style.input.bg.active}`,
+            },
+            _focusVisible: {
+              border: `${style.input.border.active}`,
+              bg: `${style.input.bg.active}`,
+              shadow: `${style.input.shadow.hover}`
+            },
+          },
+        },
+        variants: {
+          normal: {
+            field: {
+              bg: `${style.input.bg.default}`,
+            },
+          },
+        },
+        defaultProps: {
+          size: "md",
+          variant: "normal",
         },
       },
       variants: {
@@ -238,8 +264,8 @@ const theme = extendTheme({
     Modal: {
       baseStyle: {
         overlay: {
-          background: "#000511",
-          opacity: "0.9",
+          background: `${style.modal.bg.default}`,
+          opacity: "1",
         },
         dialogContainer: {
           alignItems: "center",

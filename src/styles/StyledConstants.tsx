@@ -176,14 +176,20 @@ export const darkStyle = {
   input: {
     bg: { 
       default: "#000511",
-      active: "linear-gradient(141.09deg, rgba(15, 28, 72, 0.5) 11.08%, rgba(0, 26, 78, 0.38) 89.68%);"
+      active: "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);"
     },
-    border: { default: "1px solid #14244B", active: "1px solid linear-gradient(102.47deg, #197CEC 1.3%, #004AD9 59.9%)" },
+    shadow: {
+      hover:
+        "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
+    },
+    border: { 
+        default: "1px solid #14244B", 
+        active: "1px solid rgba(15,23,46,1)" },
   },
   message: {
     bg: {
-      default: "#000C29",
-      active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
+      default: "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);",
+      active: "#246BFD",
     },
     color: {
       default: "rgb(255, 255, 255)",
@@ -196,9 +202,9 @@ export const darkStyle = {
     },
     shadow: {
       default:
-        "0px -2px 8px rgba(19, 112, 231, 0.15), 0px 2px 8px rgba(19, 112, 231, 0.15)",
+        "0px -2px 8px rgba(19, 112, 231, 0.05), 0px 2px 8px rgba(19, 112, 231, 0.05)",
       hover:
-        "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
+        "0px -2px 8px rgba(19, 112, 231, 0.15), 0px 2px 8px rgba(19, 112, 231, 0.15)",
     },
   },
   modal: {

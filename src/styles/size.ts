@@ -9,6 +9,7 @@ export const _sizes: any = {
         lg: '25px',
         xl: '35px',
         '2xl': '50px',
-        '3xl': '100px',
+        '3xl': '75px',
+        '4xl': '100px',
     }
 }

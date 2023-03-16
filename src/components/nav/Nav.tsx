@@ -1,16 +1,13 @@
 import React from "react";
 import {
   Col,
-  StyledIcon,
-  Logo,
   Row,
   StyledNav,
 } from "../../styles/StyledComponents";
-import { Tooltip, useDisclosure } from "@chakra-ui/react";
+import { Tooltip } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
 import IconImage from "../icons/IconImage";
-import { AuthContext } from "@/providers/AuthProvider";
 import { useRouter } from "next/router";
 
 const Nav = (props: any) => {
@@ -31,7 +28,7 @@ const Nav = (props: any) => {
           <div className="header m-b-0-5">
             <Col className="hr-center vr-center h-100">
               <Tooltip label="Metawork">
-                <IconImage path="Logo.png" size="42" />
+                <IconImage path="Logo.png" size="xl" />
               </Tooltip>
             </Col>
           </div>

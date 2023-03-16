@@ -143,7 +143,7 @@ const ChatWindow = (props: any) => {
 
     <StyledMoveToBottom onClick={scrollToBottom} visible={`${!isScrollAtBottom ? 'visible': 'hidden'} `} >
         { unReadMsg != 0 && <span>{unReadMsg}</span> }
-        <IconImage path="IconDarkArrowDown.png" />
+        <IconImage path="IconDarkArrowDown.png" size="xl" />
    </StyledMoveToBottom>
 
    {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 

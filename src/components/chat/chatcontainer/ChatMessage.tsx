@@ -50,7 +50,7 @@ const ChatMessage = (props: any) => {
     {
       name: "Edit Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkEdit.png" size="18" />,
+      icon: <IconImage path="IconDarkEdit.png"/>,
       onClick: () => {
         props.hookChat.handleEdit(props.message);
       },
@@ -59,7 +59,7 @@ const ChatMessage = (props: any) => {
     {
       name: "Reply Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkReply.png" size="18" />,
+      icon: <IconImage path="IconDarkReply.png" />,
       onClick: () => {
         props.hookChat.handleReply(props.message);
       },
@@ -68,7 +68,7 @@ const ChatMessage = (props: any) => {
     {
       name: "Copy Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" size="18" />,
+      icon: <IconImage path="IconDarkFiles.png" />,
       onClick: () => {
         navigator.clipboard.writeText(props.message?.text);
         toast({
@@ -83,7 +83,7 @@ const ChatMessage = (props: any) => {
     {
       name: props?.message?.pinned ? "Unpin Message" : "Pin Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkPinned.png" size="18" />,
+      icon: <IconImage path="IconDarkPinned.png" />,
       onClick: () => {
         if (props.message?.pinned) {
           props.hookChat.unPinMessage(props.message);
@@ -96,7 +96,7 @@ const ChatMessage = (props: any) => {
     {
       name: "Delete Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconRedDelete.png" size="18" />,
+      icon: <IconImage path="IconRedDelete.png"  />,
       onClick: () => {
         props.hookChat.deleteMessage(props.message);
       },
@@ -280,6 +280,7 @@ const ChatMessage = (props: any) => {
                 onClick={() => handleSelectedUser(props.message?.user)}
                 src={props.message?.user?.lensImage}
                 className="m-r-0-5"
+                size="sm"
                 name={
                   props.message?.user?.lensUsername ||
                   props.message?.user?.lensHandle ||
@@ -328,7 +329,7 @@ const ChatMessage = (props: any) => {
                     key={`e-${props?.message?.id}`}
                     size="xs"
                     className="m-l-0-5"
-                    variant="state_brand"
+                    variant="state_default_hover"
                     onClick={props.hookChat?.handleEditClose}
                   >
                     Cancel
