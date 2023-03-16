@@ -92,10 +92,32 @@ export class Channel$ {
       case "getstream":
         this.setFromStream(data);
         break;
+      case "db":
+        this.setFromDb(data);
+        break;
     }
   }
 
-  setFromStream (data: AnyAaaaRecord) {
+  setFromDb (data: any) {
+    this.id =data?._id
+    this.type =data?.type ; 
+    this.name = data?.name ; 
+    this.orgId = data?.orgId ; 
+    this.private = data?.private ; 
+    this.users = data?.users ; 
+    this.admins = data?.admins ; 
+    this.createdBy = data?.createdBy ; 
+    this.created_at = data?.createdAt ; 
+    this.updated_at = data?.updatedAt ; 
+    this.permissions = data?.permissions ; 
+    this.image = "" ; 
+    this.lastMessage = "" ; 
+    this.membersCount = 0 ; 
+    this.notificationCount = 0 ; 
+    this.pinnedMessages = data?.state?.pinnedMessages
+  }
+
+  setFromStream (data: any) {
 
   }
 
@@ -118,12 +140,12 @@ export class Channel$ {
     this.unreadCountObject= {};
     this.send= data.send;
     this.xmtpRaw= data;
-    this.pinnedMessages= data?.state?.pinnedMessages,
-    this.peer= data?.peer,
+    this.pinnedMessages= data?.state?.pinnedMessages ; 
+    this.peer= data?.peer ; 
     this.peerAddress= data?.peerAddress
   }
 
   updatePeerLens (user: any) {
-    this.data = {...this.data, peer: user}
+    this.data = {...this.data,  peer: user}
   }
 }
