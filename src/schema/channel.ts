@@ -123,5 +123,6 @@ export class Channel$ {
 
   updatePeerLens (user: any) {
     this.peer = user;
+    this.name = this.peer?.lens?.name || this.peer?.lens?.handle || this.peer?.lens?.ownedBy || this?.peerAddress
   }
 }
