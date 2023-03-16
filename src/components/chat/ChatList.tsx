@@ -1,5 +1,5 @@
 import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
-import { Avatar, Button, Checkbox, Text, useDisclosure, useToast } from "@chakra-ui/react";
+import { Avatar, Button, Checkbox, Heading, Text, useDisclosure, useToast } from "@chakra-ui/react";
 import { useContext, useEffect, useRef } from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
@@ -176,7 +176,13 @@ const ChatList = (props: any) => {
             styled={{ className: "m-l-1" }}
           />
         </Row>
-        <Button onClick={() => {console.log("Logging unreadCountRef ", unreadCountRef)}}>Log</Button>
+        <Button
+          onClick={() => {
+            console.log("Logging unreadCountRef ", unreadCountRef);
+          }}
+        >
+          Log
+        </Button>
         {!chatProvider?.hookChannels?.channels ? (
           <Col className="body">
             Create your first channel
@@ -189,12 +195,21 @@ const ChatList = (props: any) => {
             {chatProvider?.hookChannels?.channels?.length ? (
               <ul>
                 {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                {chatProvider?.hookChannels?.channels.map((item: any, index: number) => (
+                {chatProvider?.hookChannels?.channels.map(
+                  (item: any, index: number) => (
                     <StyledChatItem key={item?.index}>
-                 {  chatProvider?.hookChannels?.actionMessage == 'MULTISELECT' && <Checkbox className="m-r-0-5" 
-                      isChecked={chatProvider.hookChannels?.selectedChannels.includes(item?.id)}
-                      onChange={() => chatProvider.hookChannels?.handleSelectChannel(item) }
-                      />}
+                      {chatProvider?.hookChannels?.actionMessage ==
+                        "MULTISELECT" && (
+                        <Checkbox
+                          className="m-r-0-5"
+                          isChecked={chatProvider.hookChannels?.selectedChannels.includes(
+                            item?.id
+                          )}
+                          onChange={() =>
+                            chatProvider.hookChannels?.handleSelectChannel(item)
+                          }
+                        />
+                      )}
                       <Button
                         className="menu-item w-100 m-b-0-5"
                         size="xl"
@@ -231,7 +246,7 @@ const ChatList = (props: any) => {
                               {item?.raw && (
                                 <>
                                   {/* {console.log(item.raw?.muteStatus()?.muted)} */}
-                                  {(item.raw?.muteStatus()?.muted) && (
+                                  {item.raw?.muteStatus()?.muted && (
                                     <IconImage
                                       path="IconDarkMute.png"
                                       style={{ className: "m-l-0-5" }}
@@ -241,14 +256,16 @@ const ChatList = (props: any) => {
                                 </>
                               )}
                             </Row>
-                            {item?.lastMessage?.created_at && <Col>
-                              <Text fontSize={"xs"}>
-                                 {new Date(
-                                      item?.lastMessage?.created_at
-                                    ).toLocaleString()}
-                              </Text>
-                            </Col>}
-                            
+                            {item?.lastMessage?.created_at && (
+                              <Col>
+                                <Text fontSize={"xs"}>
+                                  {new Date(
+                                    item?.lastMessage?.created_at
+                                  ).toLocaleString()}
+                                </Text>
+                              </Col>
+                            )}
+
                             {item?.lastMessage && (
                               <Col
                                 style={{ paddingRight: "5px" }}
@@ -300,9 +317,19 @@ const ChatList = (props: any) => {
               </ul>
             ) : (
               <>
-                <Button onClick={modalChatNew.onOpen} variant="state_brand">
+                {/* <Button onClick={modalChatNew.onOpen} variant="state_brand">
                   Create Channel
-                </Button>
+                </Button> */}
+                <>
+                  <Col className="flex-hr-vr-center">                    
+                    <Heading className="m-b-1" size="lg">
+                      No channels yet
+                    </Heading>  
+                    <Heading className="" size="xs">
+                      Channels you are a member of will appear here
+                    </Heading>
+                  </Col>
+                </>
               </>
             )}
           </Col>

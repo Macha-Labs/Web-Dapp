@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { VariableSizeList } from 'react-window';
 import ChatMessage from "./ChatMessage";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { StyledDateTag } from '@/styles/StyledComponents';
+import { Col, StyledDateTag } from '@/styles/StyledComponents';
 import useStreamChannelActions from '@/hooks/stream/useStreamChannelActions';
+import { Heading, Image } from '@chakra-ui/react';
 
 const ChatWindow = (props: any) => {
   const hookStreamChannelMessages = useStreamChannelActions(props.chatContext?.hookChannel?.channel);
@@ -113,27 +114,46 @@ const ChatWindow = (props: any) => {
 
   return (
     <>
-    <StyledDateTag visible={`${dateTagVisible ? 'visible': 'hidden'} `} >{dataTag}</StyledDateTag> 
-    <div ref={messageListRef} className="body">
-          {hookStreamChannelMessages?.messages.map((message: any, index: any) => {
-            return (
-              <div ref={el => itemsRef.current[message.id] = el}  key={`message-${index}`}>
-                <ChatMessage
-                  message={message}
-                  hookChat={props?.chatContext?.hookChat}
-                  authContext={props.authContext}
-                  hookMembers={props.chatContext.hookMembers}
-                  key={`a-${message.id}`}
-                  handleDateTag={handleDateTag}
-                  executeScroll={executeScroll}
-                  scrollToId={scrollTo}
-                />
-              </div>
-            )
-          })}
-    </div>
+      <StyledDateTag visible={`${dateTagVisible ? "visible" : "hidden"} `}>
+        {dataTag}
+      </StyledDateTag>
+      <div ref={messageListRef} className="body">
+        {/* {console.log("asdfasdf",hookStreamChannelMessages?.messages.length)} */}
+        {hookStreamChannelMessages?.messages.length ? (
+          hookStreamChannelMessages?.messages.map(
+            (message: any, index: any) => {
+              return (
+                <div
+                  ref={(el) => (itemsRef.current[message.id] = el)}
+                  key={`message-${index}`}
+                >
+                  <ChatMessage
+                    message={message}
+                    hookChat={props?.chatContext?.hookChat}
+                    authContext={props.authContext}
+                    hookMembers={props.chatContext.hookMembers}
+                    key={`a-${message.id}`}
+                    handleDateTag={handleDateTag}
+                    executeScroll={executeScroll}
+                    scrollToId={scrollTo}
+                  />
+                </div>
+              );
+            }
+          )
+        ) : (
+          <>
+            <Col className="flex-hr-vr-center h-100">
+              <Image src="/assets/nomessage.png" className="w-30 m-b-2" />
+              <Heading className="" size="xs">
+                No Message in this chat
+              </Heading>
+            </Col>
+          </>
+        )}
+      </div>
 
-   {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 
+      {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 
     <div className="body">
         <AutoSizer>
         {({ height, width }) => (
@@ -150,7 +170,6 @@ const ChatWindow = (props: any) => {
       </div>
     } */}
     </>
-
   );
 };
 

@@ -7,7 +7,7 @@ import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input } from "@chakra-ui/react";
+import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 
@@ -192,35 +192,44 @@ const ChatNew = (props: any) => {
             </Row>
           }
         >
-          {hookPortalChannelMembership?.followers?.map(
-            (item: any, index: any) => {
-              return (
-                <Row key={`key-${item?.id}`} className="hr-between p-1">
-                  <Row className="vr-center">
-                    <Avatar
-                      src={helperIPFS(item?.lens?.image)}
-                      className="m-r-0-5"
-                    />
-                    <Text>
-                      {item?.lens?.name
-                        ? item?.lens?.name
-                        : item?.lens?.handle
-                        ? item?.lens?.handle
-                        : truncateAddress(item?.lens?.ownedBy)}
-                    </Text>
-                  </Row>
+          {hookPortalChannelMembership?.followers.length ? (
+            hookPortalChannelMembership?.followers?.map(
+              (item: any, index: any) => {
+                return (
+                  <Row key={`key-${item?.id}`} className="hr-between p-1">
+                    <Row className="vr-center">
+                      <Avatar
+                        src={helperIPFS(item?.lens?.image)}
+                        className="m-r-0-5"
+                      />
+                      <Text>
+                        {item?.lens?.name
+                          ? item?.lens?.name
+                          : item?.lens?.handle
+                          ? item?.lens?.handle
+                          : truncateAddress(item?.lens?.ownedBy)}
+                      </Text>
+                    </Row>
 
-                  <Checkbox
-                    isChecked={hookPortalChannelMembership?.userIds?.includes(
-                      String(item?.lens?.ownedBy?.toLowerCase())
-                    )}
-                    onChange={() =>
-                      hookPortalChannelMembership.handleCheckedUsers(item)
-                    }
-                  />
-                </Row>
-              );
-            }
+                    <Checkbox
+                      isChecked={hookPortalChannelMembership?.userIds?.includes(
+                        String(item?.lens?.ownedBy?.toLowerCase())
+                      )}
+                      onChange={() =>
+                        hookPortalChannelMembership.handleCheckedUsers(item)
+                      }
+                    />
+                  </Row>
+                );
+              }
+            )
+          ) : (
+            <Col className="flex-hr-vr-center h-100">
+              <Image  src="/assets/nopost.png" className="w-40" />
+              <Heading className="" size="xs">
+                You do not have any followers to add
+              </Heading>
+            </Col>
           )}
         </LayoutCardPannel>
       </>
