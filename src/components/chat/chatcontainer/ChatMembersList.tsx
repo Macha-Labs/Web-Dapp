@@ -49,9 +49,9 @@ const ChatMembersList: FC<Props> = props => {
           <>
              <div>
                 {users?.map((item: any, index: any) => (
-                  <StyledCard className="state_hover m-b-0-5">
+                  <StyledCard key={index} className="state_hover m-b-0-5">
                     <Row
-                  key={index}
+                  
                   className="hr-between vr-center"
                   onClick={() => {
                     console.log(item, "itemmmmm");

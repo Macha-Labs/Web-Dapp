@@ -189,8 +189,8 @@ const ChatNew = (props: any) => {
      {hookPortalChannelMembership?.followers?.map(
             (item: any, index: any) => {
               return (
-                <StyledCard className="state_hover m-b-0-5">
-                  <Row key={`key-${item?.id}`} className="hr-between">
+                <StyledCard className="state_hover m-b-0-5" key={`key-${item?.id}`}>
+                  <Row className="hr-between">
                   <Row className="vr-center">
                     <Avatar
                       src={helperIPFS(item?.lens?.image)}

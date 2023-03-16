@@ -60,7 +60,7 @@ const ChatMembers = (props: any) => {
           .concat(dataContext?.members?.offlineUsers)
           ?.map((item: any, index: any) => {
             return (
-              <StyledCard className="state_hover m-b-0-5">
+              <StyledCard className="state_hover m-b-0-5"  key={`key-${index}`}>
                 <Row className="hr-between p-1">
                   <Row className="hr-between vr-center">
                     <div>

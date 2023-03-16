@@ -102,9 +102,9 @@ const ChatPermissions = (props: any) => {
         <>
         {permissionOptions.map((permission: any, index: any) => {
           return (
-            <StyledCard className="m-b-0-5 state_hover">
+            <StyledCard key={permission.value} className="m-b-0-5 state_hover">
               
-              <Row key={permission.value} className="p-1 hr-between">
+              <Row className="p-1 hr-between">
                 <Text fontSize="sm">{permission.text}</Text>
                 <Switch
                   defaultChecked={hookPortalChannel?.channel?.permissions?.includes(
