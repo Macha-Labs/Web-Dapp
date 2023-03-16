@@ -116,6 +116,8 @@ export class Channel$ {
   }
 
   setFromXmtp (data: any) {
+    this.peer= data?.peer ; 
+    this.peerAddress= data?.peerAddress
     this.id= data?.peerAddress?.toLowerCase();
     this.type= data?.type;
     this.name= data?.peerAddress?.toLowerCase();
@@ -135,8 +137,6 @@ export class Channel$ {
     this.send= data.send;
     this.xmtpRaw= data;
     this.pinnedMessages= data?.state?.pinnedMessages ; 
-    this.peer= data?.peer ; 
-    this.peerAddress= data?.peerAddress
   }
 
   updatePeerLens (user: any) {
