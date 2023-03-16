@@ -74,30 +74,25 @@ export const ChannelXMTP$ = (data: any) => {
 };
 
 export class Channel$ {
-  db: any;
-  stream: any;
-  xmtp: any;
+  source: String;
+  data: any;
 
   constructor(
-    dbData: any = null,
-    streamData: any = null,
-    xmtpData: any = null
+    source: string = "",
+    data: any = null
   ) {
-    this.db = ChannelDb$(dbData);
-    this.stream = ChannelStream$(streamData);
-    this.xmtp = ChannelXMTP$(xmtpData);
+    this.source = source;
+    switch(this.source) {
+      case "xmtp": 
+        this.data = ChannelXMTP$(data)
+        break;
+      case "getstream":
+        this.data = ChannelStream$(data);
+        break;
+    }
   }
 
-  setDb(dbData: any) {
-    this.db = ChannelDb$(dbData);
+  updatePeerLens (user: any) {
+    this.data = {...this.data, peer: user}
   }
-
-  setStream(streamData: any) {
-    this.stream = ChannelStream$(streamData);
-  }
-
-  setXmtp(xmtpData: any) {
-    this.xmtp = ChannelXMTP$(xmtpData);
-  }
-
 }

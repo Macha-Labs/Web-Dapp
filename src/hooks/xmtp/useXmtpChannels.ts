@@ -1,6 +1,6 @@
 import { logger, loggerInit } from "@/helpers/logger";
 import { AuthContext } from "@/providers/AuthProvider";
-import { ChannelXMTP$ } from "@/schema/channel";
+import { Channel$, ChannelXMTP$ } from "@/schema/channel";
 import { useContext, useEffect, useState } from "react";
 import useLensProfileList from "../lens/useLensProfileList";
 
@@ -37,16 +37,28 @@ const useXmtpChannels = () => {
       }
     }, [xmtpConvo]);
 
+    useEffect(() => {
+      if (allConversations?.length) {
+        allConversations.map(async (item: any) => {
+          const peer = await hookLensProfileList.fetch(item.data.name);
+          item.updatePeerLens(peer);
+          console.log("Useeffect xmtp lens ", peer, item);
+        })
+      }
+    }, [allConversations])
+
     const _fetch = async () => {
         const conversationList = await authContext?.xmtpClient?.conversations?.list();
         const data = conversationList?.map((item: any) => {
           // const peer = hookLensProfileList.fetch(item.peerAddress);
           // console.log("useXmtpChannels peer", ChannelXMTP$({...item, peer: peer}));
-          return ChannelXMTP$(item);
+          return new Channel$("xmtp", item);
         });
         logger('xmtp', 'useXmtpChannels._fetch', 'channels from xmtp', [data])
         setAllConversations(data);
       };
+
+
 
     return (
         {
