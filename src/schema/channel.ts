@@ -1,4 +1,4 @@
-export const Channel$ = (data: any) => {
+export const ChannelDb$ = (data: any) => {
   return {
     id: data?._id,
     type: data?.type,
@@ -68,6 +68,36 @@ export const ChannelXMTP$ = (data: any) => {
     unreadCountObject: {},
     send: data.send,
     xmtpRaw: data,
-    pinnedMessages: data?.state?.pinnedMessages
+    pinnedMessages: data?.state?.pinnedMessages,
+    peer: data?.peer
   };
 };
+
+export class Channel$ {
+  db: any;
+  stream: any;
+  xmtp: any;
+
+  constructor(
+    dbData: any = null,
+    streamData: any = null,
+    xmtpData: any = null
+  ) {
+    this.db = ChannelDb$(dbData);
+    this.stream = ChannelStream$(streamData);
+    this.xmtp = ChannelXMTP$(xmtpData);
+  }
+
+  setDb(dbData: any) {
+    this.db = ChannelDb$(dbData);
+  }
+
+  setStream(streamData: any) {
+    this.stream = ChannelStream$(streamData);
+  }
+
+  setXmtp(xmtpData: any) {
+    this.xmtp = ChannelXMTP$(xmtpData);
+  }
+
+}

@@ -2,7 +2,7 @@ import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import { Channel$ } from "@/schema/channel";
+import { ChannelDb$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
 import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input } from "@chakra-ui/react";
 import { useState } from "react";
@@ -49,7 +49,7 @@ const ChatNew = (props: any) => {
    *
    **/
 
-  const hookPortalChannelMembership = usePortalChannelMembership(Channel$({}));
+  const hookPortalChannelMembership = usePortalChannelMembership(ChannelDb$({}));
 
   /**
    *

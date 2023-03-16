@@ -1,6 +1,6 @@
 import { fetchChannelsForOrg } from "../../service/ChannelService";
 import { useState, useEffect } from "react";
-import { Channel$ } from "../../schema/channel";
+import { ChannelDb$ } from "../../schema/channel";
 import { logger } from "@/helpers/logger";
 
 const useOrgChannels = (orgId: any) => {
@@ -11,7 +11,7 @@ const useOrgChannels = (orgId: any) => {
     setIsLoading(true);
     fetchChannelsForOrg(orgId).then((data) => {
       const result = data.map((item: any) => {
-        return Channel$(item);
+        return ChannelDb$(item);
       });
       logger('channel', 'useOrgChannels.getChannels', 'org channels are', [result])
       setChannels(result);

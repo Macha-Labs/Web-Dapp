@@ -1,7 +1,7 @@
 import { logger, loggerInit } from "@/helpers/logger";
 import { StreamContext } from "@/providers/StreamProvider";
 import { useContext, useEffect, useState } from "react";
-import { Channel$, ChannelStream$ } from "../../schema/channel";
+import { ChannelDb$, ChannelStream$ } from "../../schema/channel";
 
 const useStreamUserChannels = () => {
   console.log('Rendering >>>>> useStreamUserChannels');
