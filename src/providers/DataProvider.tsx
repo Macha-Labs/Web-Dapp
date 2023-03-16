@@ -35,7 +35,7 @@ export const DataProvider = ({ children }: any) => {
     const $loadChannels = useChatChannelsStore(((state: any) => state.load))
     const $messages = useChatMessagesStore((state: any) => state.messages);
     const $loadMessages = useChatMessagesStore(((state: any) => state.load));
-    // const $members = useChatMembersStore((state: any) => state.members);
+    const $members = useChatMembersStore((state: any) => state.members);
     const $loadMembers = useChatMembersStore(((state: any) => state.load));
 
 
@@ -46,7 +46,7 @@ export const DataProvider = ({ children }: any) => {
 
     useEffect(() => {console.log('DataProvider ===> messages', $messages)}, [$messages]);
 
-    // useEffect(() => {console.log('DataProvider ===> members', $members)}, [$members]);
+    useEffect(() => {console.log('DataProvider ===> members', $members)}, [$members]);
 
     return (
         <DataContext.Provider
@@ -55,7 +55,7 @@ export const DataProvider = ({ children }: any) => {
             loadChannel: $loadChannel,
             channels: $channels,
             loadChannels: $loadChannels,
-            members: [],
+            members: $members,
             loadMembers: $loadMembers,
             messages: $messages,
             loadMessages: $loadMessages

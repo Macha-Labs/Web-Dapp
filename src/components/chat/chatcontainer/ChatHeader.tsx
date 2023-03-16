@@ -32,19 +32,15 @@ const ChatHeader = (props: any) => {
   const hookChatChannels = useChatChannelsReload();
   const hookChatChannel = useChatChannel();
 
-  // const $members = useChatMembersStore((state: any) => state.members);
-  const $members: any[] = [];
-
   const router = useRouter();
 
-  console.log("Re-rendering >>>>> ChatHeader");
-
+  console.log("Re-rendering >>>>> ChatHeader", dataContext.members);
   const TemplateMembers = () => {
     return (
       <ModalSlider event={membersModal}>
         <UserList
-          onlineUsers={$members?.onlineUsers}
-          offlineUsers={$members?.offlineUsers}
+          onlineUsers={dataContext.members?.onlineUsers}
+          offlineUsers={dataContext.members?.offlineUsers}
         />
       </ModalSlider>
     );
