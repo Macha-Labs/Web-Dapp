@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { StreamChat } from "stream-chat";
-import { ChannelStream$ } from "../../schema/channel";
 import { logger } from "./../../helpers/logger";
 import { config } from "../../config";
+import { Channel$ } from "@/schema/channel";
 
 const useStreamChannel = (client: any) => {
   console.log('Rendering >>>>> useStreamChannel');
@@ -20,7 +20,7 @@ const useStreamChannel = (client: any) => {
       logger("channel", "setupChannel", "channel data from stream ", [
         newChannel,
       ]);
-      setChannel(ChannelStream$(newChannel?.data, newChannel));
+      setChannel(new Channel$('getstream', newChannel));
     } else {
       setChannel(null);
     }
@@ -36,7 +36,6 @@ const useStreamChannel = (client: any) => {
       const newClient = StreamChat.getInstance(`${config.STREAM_APIKEY}`)
       await newClient.connectAnonymousUser();
       const newChannel = await newClient?.queryChannels({id: {$eq: channelId}});
-      // setChannel(ChannelStream$(newChannel?.data, newChannel));
       logger("channel", "getChannel", "channel data from stream ", [
         newChannel,
       ]);

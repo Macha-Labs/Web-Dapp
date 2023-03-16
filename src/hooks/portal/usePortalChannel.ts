@@ -4,11 +4,11 @@ import { logger } from "../../helpers/logger";
 import { editChannel } from "../../service/ChannelService";
 import { useContext, useState } from "react";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import { ChannelStream$ } from "../../schema/channel";
+import { Channel$ } from "@/schema/channel";
 
 const usePortalChannel = (channelObj: any, callback: any = null) => {
   const [channel, setChannel] = useState(
-    channelObj ? channelObj : ChannelStream$({})
+    channelObj ? channelObj : new Channel$('getstream', {})
   );
   const [isLoading, setIsLoading] = useState(false);
   const authProvider = useContext(AuthContext) as AuthContextType;

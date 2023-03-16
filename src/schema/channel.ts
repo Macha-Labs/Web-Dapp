@@ -1,33 +1,3 @@
-export const ChannelStream$ = (data: any, raw?: any, owner?: any) => {
-  return {
-    id: data?.id,
-    type: data?.type,
-    name: data?.name,
-    description: data?.description,
-    orgId: data?.orgId,
-    private: data?.private,
-    users: data?.users,
-    admins: data?.admins,
-    isAdmin:
-      String(data?.created_by?.id)?.toLowerCase() == String(owner)?.toLowerCase(),
-    createdBy: data?.created_by?.id,
-    created_at: data?.created_at,
-    updated_at: data?.updated_at,
-    permissions: data?.own_capabilities,
-    image: "",
-    unreadCountObject: raw?.state?.read ? raw?.state?.read : 0,
-    lastMessage:
-      raw?.state?.messageSets[0]?.messages[
-        raw?.state?.messageSets[0]?.messages?.length - 1
-      ],
-    membersCount: data?.member_count,
-    notificationCount: 0,
-    raw: raw,
-    pinnedMessages: raw?.state?.pinnedMessages
-  };
-};
-
-
 export class Channel$ {
   source: String;
   data: any;
@@ -94,25 +64,26 @@ export class Channel$ {
   }
 
   setFromStream (data: any) {
-    this.id = data?.id;
-    this.type = data?.type,
-    this.name = data?.name,
-    this.description = data?.description,
-    this.orgId = data?.orgId,
-    this.private = data?.private,
-    this.users = data?.users,
-    this.admins = data?.admins,
+    this.id = data.data?.id;
+    this.type = data.data?.type,
+    this.name = data.data?.name,
+    this.description = data.data?.description,
+    this.orgId = data.data?.orgId,
+    this.private = data.data?.private,
+    this.users = data.data?.users,
+    this.admins = data.data?.admins,
     // this.isAdmin = String(data?.created_by?.id)?.toLowerCase() == String(owner)?.toLowerCase(),
-    this.createdBy = data?.created_by?.id,
-    this.created_at = data?.created_at,
-    this.updated_at = data?.updated_at,
-    this.permissions = data?.own_capabilities,
-    this.image = data?.image,
-    this.unreadCountObject = data?.state?.read ? data?.state?.read : 0,
-    this.lastMessage = data?.state?.messageSets[0]?.messages[data?.state?.messageSets[0]?.messages?.length - 1],
-    this.membersCount = data?.member_count,
+    this.createdBy = data.data?.created_by?.id,
+    this.created_at = data.data?.created_at,
+    this.updated_at = data.data?.updated_at,
+    this.permissions = data.data?.own_capabilities,
+    this.image = data.data?.image,
+    this.unreadCountObject = data.data?.state?.read ? data?.state?.read : 0,
+    this.lastMessage = data.data?.state?.messageSets[0]?.messages[data?.state?.messageSets[0]?.messages?.length - 1],
+    this.membersCount = data.data?.member_count,
     this.notificationCount = 0,
-    this.pinnedMessages = data?.state?.pinnedMessages
+    this.pinnedMessages = data.data?.state?.pinnedMessages,
+    this.raw = data
   }
 
   setFromXmtp (data: any) {

@@ -1,7 +1,7 @@
 import { logger, loggerInit } from "@/helpers/logger";
 import { StreamContext } from "@/providers/StreamProvider";
+import { Channel$ } from "@/schema/channel";
 import { useContext, useEffect, useState } from "react";
-import { ChannelDb$, ChannelStream$ } from "../../schema/channel";
 
 const useStreamUserChannels = () => {
   console.log('Rendering >>>>> useStreamUserChannels');
@@ -26,7 +26,7 @@ const useStreamUserChannels = () => {
           limit: 30
         });
         let newResult = result?.map((item: any) => {
-          return ChannelStream$(item.data, item, streamContext.client?.user?.id);
+          return new Channel$('getstream', item.data);
         })
         setChannels(newResult);
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'channels from stream', [result]);
