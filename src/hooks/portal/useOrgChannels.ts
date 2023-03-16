@@ -11,7 +11,7 @@ const useOrgChannels = (orgId: any) => {
     setIsLoading(true);
     fetchChannelsForOrg(orgId).then((data) => {
       const result = data.map((item: any) => {
-        return Channel$(item);
+        return new Channel$("db", item);
       });
       logger('channel', 'useOrgChannels.getChannels', 'org channels are', [result])
       setChannels(result);

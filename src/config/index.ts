@@ -4,9 +4,10 @@ export const config = {
   STREAM_APPID: "1239221",
   STREAM_APIKEY: "s7k8yarexp9g",
   STREAM_SECRET:
-    "rgvd9g2c3z5mecz2bz9qysncwvrd997d96mupu8bgss7zkumxq2pp82yjyu9yvbk",
-  //url: "https://metawork-server.herokuapp.com",
-   url: "http://localhost:3080",
+    "czw7rguj3bcpzetr5e2fcx366rq26g38rg6taj9x4gr6h8my3sk25msrx7bcr4we",
+  url: "https://metawork-server.herokuapp.com",
+  // url: "http://localhost:3080",
+  // url: "https://metawork-server-staging.herokuapp.com/",
   DISCORD_API_ENDPOINT: "https://discord.com/api/v10",
   DISCORD_REDIRECT_URL: "http://localhost:3000/app",
   DISCORD_CLIENT_ID: "1019347765395996804",
@@ -14,8 +15,11 @@ export const config = {
   DISCORD_BOT_TOKEN:
     "MTAxOTM0Nzc2NTM5NTk5NjgwNA.GtzYAD.zPzVHFzJZUCmVFEL0oY1canp4GtQTfoGnXe6Qc",
   DISCORD_IMAGE_URL: "https://cdn.discordapp.com",
+
+  // Infura
   INFURA_PROJECT_ID: "2G872KumLlSMQ2eh6KNYAd9lVVB",
   INFURA_SECRET: "2e7547acd6f575090ce78e44dd6a8f1b",
+
   // LENS CONTRACTS
   LENS_HUB_CONTRACT: "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d",
   LENS_PERIPHERY_CONTRACT: "0xeff187b4190E551FC25a7fA4dFC6cf7fDeF7194f",

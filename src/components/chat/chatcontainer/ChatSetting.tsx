@@ -1,7 +1,9 @@
 import ModalSlider from "@/components/modal/ModalSlider";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
+import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
+import { DataContext } from "@/providers/DataProvider";
 import { Col } from "@/styles/StyledComponents";
 import { Heading, useDisclosure, useToast } from "@chakra-ui/react";
 import React, { useContext } from "react";
@@ -12,8 +14,12 @@ import ChatMessageList from "./ChatMessageList";
 import ChatPermissions from "./ChatPermissions";
 
 function ChatSetting(props: any) {
+  const authContext = useContext(AuthContext);
+  const dataContext = useContext(DataContext);
+  const chatContext = useContext(ChatContext);
   const toast = useToast();
   const modalPinned = useDisclosure();
+
   /**
    * @description
    **/
@@ -24,9 +30,9 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.initiate(null);
-    props.modalSettings.onClose();
+    props?.hookChatChannels.load();
+    props?.hookChatChannel.remove();
+    // props.modalSettings.onClose();
   };
   const callbackClear = () => {
     toast({
@@ -35,10 +41,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.streamContext?.reloadChannel();
-    // props.chatContext?.initiate(null);
-    props.modalSettings.onClose();
+    props?.hookChatChannel.reload();
+    // props.modalSettings.onClose();
   };
 
   /**
@@ -51,8 +55,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.streamContext?.reloadChannel();
+    props?.hookChatChannels.load();
+    props?.hookChatChannel.reload();
     props.modalSettings.onClose();
   };
 
@@ -66,8 +70,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannel();
-    props.chatContext?.streamContext?.reloadChannelList();
+    props?.hookChatChannels.load();
+    props?.hookChatChannel.reload();
     props.modalSettings.onClose();
   };
   /**
@@ -80,8 +84,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.initiate(null);
+    props?.props?.hookChatChannels.load();
+    props?.hookChatChannel.remove();
     props.modalSettings.onClose();
   };
 
@@ -89,7 +93,7 @@ function ChatSetting(props: any) {
    * @description
    **/
   const hookPortalChannel = usePortalChannel(
-    props.chatContext.hookChannel.channel.id,
+    dataContext?.channel,
     {
       delete: callbackDelete,
       mute: callbackMute,
@@ -108,7 +112,7 @@ function ChatSetting(props: any) {
       icon: "IconDarkSearch.png",
       name: "Search Chat",
       onPress: () => {
-        props.hookChat.handleSearch();
+        chatContext.hookChat.handleSearch();
         props?.event?.onClose();
       },
     },
@@ -116,21 +120,21 @@ function ChatSetting(props: any) {
       icon: "IconDarkMute.png",
       name: "Mute Chat",
       onPress: () => {
-        hookPortalChannel?.muteChannel(props.chatContext.hookChannel.channel);
+        hookPortalChannel?.muteChannel(dataContext?.channel);
       },
     },
     {
       icon: "IconDarkUnMute.png",
       name: "UnMute Chat",
       onPress: () => {
-        hookPortalChannel?.unMuteChannel(props.chatContext.hookChannel.channel);
+        hookPortalChannel?.unMuteChannel(dataContext?.channel);
       },
     },
     {
       icon: "IconDarkMultiselect.png",
       name: "Select Chat",
       onPress: () => {
-        props.hookChat.handleMultiSelect();
+        chatContext.hookChat.handleMultiSelect();
         props?.event?.onClose();
       },
     },
@@ -143,8 +147,8 @@ function ChatSetting(props: any) {
       condition: {
         enabled: true,
         check:
-          props.chatContext.hookChannel?.channel?.createdBy ===
-          props.authContext.address,
+          dataContext?.channel?.createdBy ===
+          authContext.address,
       },
     },
     {
@@ -156,8 +160,8 @@ function ChatSetting(props: any) {
       condition: {
         enabled: true,
         check:
-          props.chatContext.hookChannel?.channel?.createdBy ===
-          props.authContext.address,
+          dataContext?.channel?.createdBy ===
+          authContext.address,
       },
     },
     {
@@ -169,8 +173,8 @@ function ChatSetting(props: any) {
       condition: {
         enabled: true,
         check:
-          props.chatContext.hookChannel?.channel?.createdBy ===
-          props.authContext.address,
+          dataContext?.channel?.createdBy ===
+          authContext.address,
       },
     },
   ];
@@ -206,7 +210,7 @@ function ChatSetting(props: any) {
       name: "Copy Invite Link",
       icon: "IconDarkFiles.png",
       onPress: () => {
-        const inviteLink = `${window.location.origin}/invite/c/${props.chatContext.hookChannel.channel.id}`
+        const inviteLink = `${window.location.origin}/invite/c/${dataContext?.channel.id}`
         navigator.clipboard.writeText(inviteLink);
         toast({
           title: "Copied to clipboard",
@@ -221,7 +225,7 @@ function ChatSetting(props: any) {
       name: "Clear Chat",
       icon: "IconRedDelete.png",
       onPress: () => {
-        hookPortalChannel?.clearChat(props.chatContext.hookChannel.channel);
+        hookPortalChannel?.clearChat(dataContext?.channel);
       },
     },
     {
@@ -229,7 +233,7 @@ function ChatSetting(props: any) {
       name: "Delete Channel",
       icon: "IconRedDelete.png",
       onPress: () => {
-        hookPortalChannel?.deleteChannel(props.chatContext.hookChannel.channel);
+        hookPortalChannel?.deleteChannel(dataContext?.channel);
       },
     },
     {
@@ -237,7 +241,7 @@ function ChatSetting(props: any) {
       name: "Leave Channel",
       icon: "IconDarkLeave.png",
       onPress: () => {
-        hookPortalChannel?.leaveChannel(props.chatContext.hookChannel.channel);
+        hookPortalChannel?.leaveChannel(dataContext?.channel);
       },
     },
   ];
@@ -288,8 +292,8 @@ function ChatSetting(props: any) {
     return (
       <ModalSlider event={modalPinned} size="md">
         <ChatMessageList
-          pinnedMessageList={props.chatContext.hookChannel?.pinnedMessages}
-          hookChat={props.hookChat}
+          pinnedMessageList={dataContext?.channel?.pinnedMessages}
+          hookChat={chatContext.hookChat}
         />
       </ModalSlider>
     );
@@ -304,22 +308,22 @@ function ChatSetting(props: any) {
           <LayoutOptions
             options={chatOptions}
             style={{ className: "m-b-1" }}
-            channelAdmin={props.chatContext.hookChannel.channel.createdBy}
-            channelRawData={props.chatContext.hookChannel.channel.raw}
-            userId={props.authContext.address}
+            channelAdmin={dataContext?.channel.createdBy}
+            channelRawData={dataContext?.channel.raw}
+            userId={authContext.address}
           />
           <LayoutOptions
             options={chatOptions2}
             style={{ className: "m-b-1" }}
-            channelAdmin={props.chatContext.hookChannel.channel.createdBy}
-            channelRawData={props.chatContext.hookChannel.channel.raw}
-            userId={props.authContext.address}
+            channelAdmin={dataContext?.channel.createdBy}
+            channelRawData={dataContext?.channel.raw}
+            userId={authContext.address}
           />
           <LayoutOptions
             options={chatOptions3}
-            channelAdmin={props.chatContext.hookChannel.channel.createdBy}
-            channelRawData={props.chatContext.hookChannel.channel.raw}
-            userId={props.authContext.address}
+            channelAdmin={dataContext?.channel.createdBy}
+            channelRawData={dataContext?.channel.raw}
+            userId={authContext.address}
           />
         </Col>
       </div>

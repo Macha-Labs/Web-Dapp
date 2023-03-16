@@ -80,7 +80,7 @@ export const darkStyle = {
   bg2: "#181A20",
   bg3: "#16191B",
   bg4: "#111315",
-  bg: "#000511",
+  bg: "#00040d",
   bgLayout: { primary: "#181A20", secondry: "#111315" },
   //
   brCard: {
@@ -92,7 +92,7 @@ export const darkStyle = {
   brButton: { active: "#2A85FF" },
   //
   color5: "#3182CE",
-  bgMain: "#000511",
+  bgMain: "#00040d",
   bgModalOverlay: "#000320",
   bgOverlay:
     "linear-gradient(90deg, rgba(246,246,246,0.6) 0%, rgba(234,238,246,0.8) 44%, rgba(231,235,242,0.8) 100%)",
@@ -131,15 +131,15 @@ export const darkStyle = {
   colorIconActive: "#333",
   focusInput: "0",
   header: {
-    bg: { default: "#000511" },
-    border: { default: "1px solid #0F172E" },
+    bg: { default: "#00040d" },
+    border: { default: "1px solid #070b17" },
   },
-  body: { bg: { default: "#000511" }, padding: "20px 10px" },
+  body: { bg: { default: "#00040d" }, padding: "20px 10px" },
   nav: {
     width: "5%",
     height: "90%",
-    bg: { default: "#000511" },
-    border: { default: "1px solid #0F172E" },
+    bg: { default: "#00040d" },
+    border: { default: "2px solid #070b17" },
   },
   list: {
     padding: '5px',
@@ -175,7 +175,7 @@ export const darkStyle = {
   pannel: { bg: { default: "" }, shadow: { default: "" } },
   input: {
     bg: { 
-      default: "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);",
+      default: "#000511",
       active: "linear-gradient(141.09deg, rgba(15, 28, 72, 0.5) 11.08%, rgba(0, 26, 78, 0.38) 89.68%);"
     },
     border: { default: "1px solid #14244B", active: "1px solid linear-gradient(102.47deg, #197CEC 1.3%, #004AD9 59.9%)" },
@@ -202,7 +202,7 @@ export const darkStyle = {
     },
   },
   modal: {
-    bg: { default: "#000511" },
+    bg: { default: "#00040d" },
     border: { default: "1px solid #0F172E" },
     shadow: { default: "" },
   },
@@ -239,7 +239,12 @@ export const darkStyle = {
       disabled: "",
     },
   },
-
+  loader: {
+    bg: {
+      start: '#000416',
+      end: '#001E57'
+    }
+  },
   shadowDropdown:
     "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",
 };

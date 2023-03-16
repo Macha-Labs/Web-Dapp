@@ -2,7 +2,7 @@ import { Avatar, AvatarBadge, Heading, useDisclosure } from "@chakra-ui/react";
 import { FC, useState } from "react";
 import { Col, Row } from "@/styles/StyledComponents";
 import styled from "styled-components";
-import { helperIPFS, truncateAddress } from "@/helpers";
+import { truncateAddress } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
 import ModalSlider from "../modal/ModalSlider";
 import UserProfile from "./UserProfile";
@@ -32,10 +32,9 @@ const UserList: FC<Props> = props => {
   };
 
   const template = (heading: any, users: any) => {
-    console.log("users", users);
     return (
       <Col className="m-b-1">
-        {users.length ? (
+        {users?.length ? (
           <>
             <Col className="m-b-1">
               <Heading as="h4" size="md">
@@ -43,7 +42,7 @@ const UserList: FC<Props> = props => {
               </Heading>
             </Col>
             <Container>
-              {users.map((item: any, index: any) => (
+              {users?.map((item: any, index: any) => (
                 <Row
                   key={index}
                   className="vr-center item m-b-0-5"

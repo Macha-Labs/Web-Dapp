@@ -1,20 +1,15 @@
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import LayoutCard from "@/layouts/LayoutCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import LayoutInputs from "@/layouts/options/LayoutInputs";
-import { ChatContext } from "@/providers/ChatProvider";
-import { Channel$ } from "@/schema/channel";
+import { Channel$} from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
 import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import { useState } from "react";
 
 const ChatNew = (props: any) => {
-  const chatContext = useContext(ChatContext);
   const [tab, setTab] = useState("members");
-  const [inputFocus, setInputFocus] = useState(0)
+  const [inputFocus, setInputFocus] = useState(0);
 
   /**
    *
@@ -27,9 +22,10 @@ const ChatNew = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    chatContext?.streamContext?.reloadChannelList();
-    
+    props?.hookChatChannel.remove();
+    props?.hookChatChannels.load();
     props.modal.onClose();
+    
   };
 
   const callbackPrompt = (message: any) => {
@@ -44,7 +40,7 @@ const ChatNew = (props: any) => {
   /**
    *
    **/
-  const hookPortalChannel = usePortalChannel(Channel$({}), {
+  const hookPortalChannel = usePortalChannel(null, {
     new: callbackNew,
     prompt: callbackPrompt,
   });
@@ -53,7 +49,7 @@ const ChatNew = (props: any) => {
    *
    **/
 
-  const hookPortalChannelMembership = usePortalChannelMembership(Channel$({}));
+  const hookPortalChannelMembership = usePortalChannelMembership(new Channel$('db', {}));
 
   /**
    *
@@ -195,7 +191,7 @@ const ChatNew = (props: any) => {
           {hookPortalChannelMembership?.followers?.map(
             (item: any, index: any) => {
               return (
-                <Row key={`key-${item?.id}`} className="hr-between p-1">
+                <Row key={`key-${item?.id}`} className="hr-between p-2">
                   <Row className="vr-center">
                     <Avatar
                       src={helperIPFS(item?.lens?.image)}

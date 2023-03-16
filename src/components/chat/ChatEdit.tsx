@@ -5,7 +5,6 @@ import {
   Avatar,
   Button,
   Text,
-  Icon,
   Switch,
   useDisclosure,
   useToast,
@@ -13,7 +12,9 @@ import {
 } from "@chakra-ui/react";
 import { Col, Row } from "@/styles/StyledComponents";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import { ChatContext } from "@/providers/ChatProvider";
+import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
+import useChatChannel from "@/hooks/chat/useChatChannel";
+import { DataContext } from "@/providers/DataProvider";
 
 const ChatEdit = (props: any) => {
   /**
@@ -21,8 +22,11 @@ const ChatEdit = (props: any) => {
    *
    *
    **/
+  const dataContext = useContext(DataContext);
   const toast = useToast();
-  const chatContext = useContext(ChatContext);
+  const hookChatChannel = useChatChannel();
+  const hookChatChannels = useChatChannelsReload();
+
   const handleToggle = () => {
     hookPortalChannel?.setChannel({
       ...hookPortalChannel?.channel,
@@ -42,8 +46,8 @@ const ChatEdit = (props: any) => {
       position: "bottom-right",
     });
 
-    chatContext?.streamContext?.reloadChannel();
-    chatContext?.streamContext?.reloadChannelList();
+    hookChatChannel.reload();
+    hookChatChannels.load();
     props.modal.onClose();
   };
 
@@ -69,7 +73,7 @@ const ChatEdit = (props: any) => {
    *
    **/
   const hookPortalChannel = usePortalChannel(
-    chatContext?.hookChannel?.channel,
+    dataContext.channel,
     { edit: callBack, prompt: callBackPrompt }
   );
 
@@ -120,7 +124,7 @@ const ChatEdit = (props: any) => {
         <Row className="hr-between w-full">
           <Button
             size="sm"
-            onClick={modalAddMembers.onClose}
+            onClick={props.modal.onClose}
             variant="state_default_hover"
           >
             Cancel
@@ -162,25 +166,11 @@ const ChatEdit = (props: any) => {
             onChange={(e) => {}}
             style={{ display: "none" }}
           />
-          <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
+          {/* <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
             Set New Profile Photo
-          </Text>
+          </Text> */}
         </Col>
 
-        {/* <Col className="hr-center w-full m-v-1">
-          <Row>
-            <Icon></Icon>
-            <Text fontSize={16} fontWeight={800}>
-              Select From Gallery
-            </Text>
-          </Row>
-          <Row>
-            <Icon></Icon>
-            <Text fontSize={16} fontWeight={800}>
-              Select From Wallet
-            </Text>
-          </Row>
-        </Col> */}
         <LayoutInputs data={data} style={{ class: "m-b-1" }} />
         <Row className="hr-between">
           <Col>

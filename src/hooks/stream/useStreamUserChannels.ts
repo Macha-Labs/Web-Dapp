@@ -1,52 +1,44 @@
-import { logger } from "@/helpers/logger";
-import { useEffect, useState } from "react";
-import { Channel$, ChannelStream$ } from "../../schema/channel";
+import { logger, loggerInit } from "@/helpers/logger";
+import { StreamContext } from "@/providers/StreamProvider";
+import { Channel$ } from "@/schema/channel";
+import { useContext, useEffect, useState } from "react";
 
-const useStreamUserChannels = (client: any) => {
-  const [channels, setChannels] = useState<any>([]);
+const useStreamUserChannels = () => {
+  console.log('Rendering >>>>> useStreamUserChannels');
+  const streamContext = useContext(StreamContext);
+  const [channels, setChannels] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>(false);
   const [selectedChannels, setSelectedChannels] = useState<any>([]) 
   const [actionMessage, setActionMessage] = useState<String>('')
 
-  const fetchUserChannels = async ( passClient?: any ,callback?: any) => {
- 
-    if (client || passClient) {
+  const fetchUserChannels = async () => {
+    loggerInit('useStreamUserChannels.fetchUserChannels');
+    if (streamContext?.client?.user?.id) {
       
       const filter = {
         type: "team",
-        members: { $in: [`${client?.user?.id}`] },
+        members: { $in: [`${streamContext.client?.user?.id}`] },
       };
       const sort = [{ last_message_at: -1 }];
       setIsLoading(true);
-      let result: any;
       try {
-        let result = await client.queryChannels(filter, sort, {
-          limit: 15
+        let result = await streamContext.client.queryChannels(filter, sort, {
+          limit: 30
         });
         let newResult = result?.map((item: any) => {
-          return ChannelStream$(item.data, item, client?.user?.id);
+          return new Channel$('getstream', item);
         })
-        console.log("fetchUserChannels", true, newResult);
-        setChannels(newResult)
-
-        logger('channelTest', 'useStreamUserChannels.fetchUserChannels', 'The channel Data was just updated', [result])
+        setChannels(newResult);
+        logger('channel', 'useStreamUserChannels.fetchUserChannels', 'channels from stream', [result]);
       } catch (error: any) {
         logger('channel', 'useStreamUserChannels.fetchUserChannels', 'The error is', [error]);
       }
-      
-    } else {
-      console.log("fetchUserChannels", false);
-      
     }
   };
 
-  // useEffect(() => {
-  //   fetchUserChannels()
-  // },[])
-
   useEffect(() => {
-    console.log("Channels", "hook",channels);
-  }, [channels])
+    logger('channel', 'useStreamUserChannels.useEffect[channels]', 'The channels list Data was just updated', [channels]);
+  },[channels])
 
   const handleChannelAction = (action: String) => {
     setActionMessage(action)

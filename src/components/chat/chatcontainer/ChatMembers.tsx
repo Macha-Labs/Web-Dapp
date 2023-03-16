@@ -11,12 +11,12 @@ import { ChatContext } from "@/providers/ChatProvider";
 import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import { AuthContext } from "@/providers/AuthProvider";
+import { DataContext } from "@/providers/DataProvider";
 
 const ChatMembers = (props: any) => {
   const chatContext = useContext(ChatContext);
-  const authContext = useContext(AuthContext);
-  const hookPortalChannelMembership = usePortalChannelMembership(chatContext?.hookChannel?.channel);
+  const dataContext = useContext(DataContext);
+  const hookPortalChannelMembership = usePortalChannelMembership(dataContext?.channel);
   const toast = useToast();
 
   const callbackRemove = () => {
@@ -57,8 +57,8 @@ const ChatMembers = (props: any) => {
           </>
         }
       >
-        {chatContext.hookMembers.allUsers
-        .filter((user: any) => String(user.address).toLowerCase() != String(authContext.address).toLowerCase())
+        {dataContext.members.onlineUsers
+          .concat(dataContext.members.offlineUsers)
           ?.map((item: any, index: any) => {
             return (
               <>
