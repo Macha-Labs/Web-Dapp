@@ -11,11 +11,13 @@ const useChatMessages = () => {
     const dataContext = useContext(DataContext);
 
     useEffect(() => {
-        dataContext.loadMessages(hookStreamChannelMessages?.messages || []);
+        if (router.pathname == '/chat')
+            dataContext.loadMessages(hookStreamChannelMessages?.messages || []);
     }, [router.pathname, hookStreamChannelMessages?.messages]);
 
     useEffect(() => {
-        dataContext.loadMessages(hookXmtpChannelMessages?.messages || []);
+        if (router.pathname == '/chat/dm')
+            dataContext.loadMessages(hookXmtpChannelMessages?.messages || []);
     }, [router.pathname, hookXmtpChannelMessages?.messages]);
 
 
