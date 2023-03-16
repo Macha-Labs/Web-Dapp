@@ -4,7 +4,7 @@ export const StreamMessage$ = (data: any) => {
   return {
     id: data?.id,
     text: data?.text,
-    createdAt: data?.created_at,
+    created_at: data?.created_at,
     createdBy: data?.createdBy?.toLowerCase(),
     peerAddress: undefined,
     attachments: data?.attachments,
@@ -20,7 +20,7 @@ export const XmtpMessage$ = (data: any) => {
   return {
     id: data?.topic,
     text: data?.content,
-    createdAt: data?.sent,
+    created_at: data?.sent,
     createdBy: data?.senderAddress.toLowerCase(),
     peerAddress: data?.conversation.peerAddress,
     attachments: data?.attachments,

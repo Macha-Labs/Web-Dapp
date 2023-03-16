@@ -1,17 +1,20 @@
 import useStreamChannelMembership from "@/hooks/stream/useStreamChannelMembership";
 import { AuthContext } from "@/providers/AuthProvider";
-import { ChatContext } from "@/providers/ChatProvider";
 import { Col, StyledCard} from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
 import { useRouter } from "next/router";
+import useChatChannel from "@/hooks/chat/useChatChannel";
+import { StreamContext } from "@/providers/StreamProvider";
+import { DataContext } from "@/providers/DataProvider";
 
 
 const InviteChannel = (props: any) => {
     const authContext = useContext(AuthContext);
+    const dataContext = useContext(DataContext);
+    const streamContext = useContext(StreamContext);
     const hookStreamChannelMembership = useStreamChannelMembership();
-    const chatContext = useContext(ChatContext);
     const router = useRouter();
     const toast = useToast();
 
@@ -24,10 +27,18 @@ const InviteChannel = (props: any) => {
         }
     }, [props?.channelId])
 
+    useEffect(() => {
+        // if (dataContext?.channel?.id == props?.channelId) {
+        // router.push('/chat');
+        // }
+    }, [dataContext.channel?.id])
+
     const callBackMembership = () => {
-        chatContext.initiate({id: props?.channelId}, authContext?.address);
+        // TODO: Cannot access hookchatchannel.fetch since router.pathname is different here
+        streamContext?.initiate({id: props?.channelId});
+        console.log(streamContext.hookChannel.channel);
+        dataContext.loadChannel(streamContext.hookChannel.channel);
         console.log('called');
-        router.push('/chat');
     }
 
     const callBacks = {
@@ -41,9 +52,9 @@ const InviteChannel = (props: any) => {
         }
     }
 
-    return (
-        <div className="middle">
-        <StyledCard className="w-100 p-4">
+    const TemplateLoaded = () => {
+        return (
+            <StyledCard className="w-100 p-4">
             <Col className="hr-center">
                 <Col className="m-b-2 hr-center text-center">
                     <Avatar size="xl" name={hookStreamChannelMembership?.channel?.name} />
@@ -63,6 +74,20 @@ const InviteChannel = (props: any) => {
                     onClick={() => {authContext.connectLens(callBacks)}}>
                         Sign In With Lens
                     </Button>}
+                    {authContext.address &&
+                    authContext?.user?.lens?.id &&
+                    !authContext.xmtpClientAddress && (
+                        <Button
+                        className=""
+                        size="md"
+                        variant="state_xmtp"
+                        onClick={() => {
+                            authContext.connectXmtp();
+                        }}
+                        >
+                        Connect to XMTP
+                        </Button>
+                    )}
                     {authContext?.isConnected && 
                     <Button 
                     onClick={() => {
@@ -75,8 +100,18 @@ const InviteChannel = (props: any) => {
                 </Col>
                 <Text fontSize={12}>By registering you agree to MetaWork Terms and Conditions</Text>
             </Col>
-        </StyledCard>
-    </div>
+            </StyledCard>
+        )
+    }
+
+    return (
+        <>
+            <div className="middle">
+                
+                    <TemplateLoaded />
+                </div>
+        
+        </>
     )
 }
 

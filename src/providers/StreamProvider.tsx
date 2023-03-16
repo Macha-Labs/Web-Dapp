@@ -8,14 +8,14 @@ export type StreamContextType = {
     client: any | undefined;
     hookChannel: any | undefined;
     reloadChannel: () => void;
-    initiate: (channel: any, userAddress: any) => void;
+    initiate: (channel: any) => void;
 };
 
 export const StreamContext = createContext<StreamContextType>({
     client: null,
     hookChannel: {},
     reloadChannel: () => {},
-    initiate: (channel: any, userAddress: any) => {}
+    initiate: (channel: any) => {}
 });
 
 const StreamProvider = ({children}: any) => {

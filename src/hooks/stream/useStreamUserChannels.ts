@@ -37,7 +37,7 @@ const useStreamUserChannels = () => {
   };
 
   useEffect(() => {
-    logger('channel', 'useStreamUserChannels.useEffect[channels]', 'The channel Data was just updated', [channels]);
+    logger('channel', 'useStreamUserChannels.useEffect[channels]', 'The channels list Data was just updated', [channels]);
   },[channels])
 
   const handleChannelAction = (action: String) => {

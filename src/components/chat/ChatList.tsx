@@ -233,57 +233,56 @@ const ChatList = (props: any) => {
                         }
                       />
                     )} */}
-                      <Button
-                        className="menu-item w-100 m-b-0-5"
-                        size="xl"
-                        variant={
-                          dataContext.channel?.id == item?.id
-                            ? "state_brand"
-                            : "state_card_hover"
-                        }
-                        // overflow="hidden"
+                    <Button
+                      className="menu-item w-100 m-b-0-5"
+                      size="xl"
+                      variant={
+                        dataContext.channel?.id == item?.id
+                          ? "state_brand"
+                          : "state_card_hover"
+                      }
+                      // overflow="hidden"
+                    >
+                      <Row
+                        className="vr-center w-11-12"
+                        onClick={() => {
+                          hookChatChannel?.fetch(item);
+                        }}
                       >
-                        <Row
-                          className="vr-center w-11-12"
-                          onClick={() => {
-                            hookChatChannel?.fetch(item, authContext?.address);
-                          }}
-                        >
-                          {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                          <Avatar
-                            size="md"
-                            className="m-r-0-5"
-                            name={item?.name}
-                          />
-                          <Col className="w-100 d-flex flex-col vr-center">
-                            <Row>
-                              <Text>
-                                {item?.name?.length > 12
-                                  ? `${item?.name?.slice(0, 12)}...`
-                                  : item?.name}
-                              </Text>
-                              {item?.raw && (
-                                <>
-                                  {!item?.raw?.disconnected &&
-                                    item?.raw?.muteStatus()?.muted && (
-                                      <IconImage
-                                        path="IconDarkMute.png"
-                                        style={{ className: "m-l-0-5" }}
-                                        size={10}
-                                      />
-                                    )}
-                                </>
-                              )}
-                            </Row>
-                            {item?.lastMessage?.created_at && (
-                              <Col>
-                                <Text fontSize={"xs"}>
-                                  {new Date(
-                                    item?.lastMessage?.created_at
-                                  ).toLocaleString()}
-                                </Text>
-                              </Col>
+                        {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
+                        <Avatar
+                          size="md"
+                          className="m-r-0-5"
+                          name={item?.name}
+                        />
+                        <Col className="w-100 d-flex flex-col vr-center">
+                          <Row>
+                            <Text>
+                              {item?.name?.length > 12
+                                ? `${item?.name?.slice(0, 12)}...`
+                                : item?.name}
+                            </Text>
+                            {item?.raw && (
+                              <>
+                                {!item?.raw?.disconnected && item?.raw?.muteStatus()?.muted && (
+                                  <IconImage
+                                    path="IconDarkMute.png"
+                                    style={{ className: "m-l-0-5" }}
+                                    size={10}
+                                  />
+                                )}
+                              </>
                             )}
+                          </Row>
+                          {item?.lastMessage?.created_at && (
+                            <Col>
+                              <Text fontSize={"xs"}>
+                                {new Date(
+                                  item?.lastMessage?.created_at
+                                ).toLocaleString()}
+                              </Text>
+                            </Col>
+                          )}
 
                             {item?.lastMessage && (
                               <Col

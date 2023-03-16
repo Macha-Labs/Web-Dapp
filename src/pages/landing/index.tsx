@@ -253,7 +253,7 @@ const LandingPage = () => {
             <h1 className="m-0 display-3 heading">
               <strong>
                 <span className="subHeading">
-                  Move From Curent Workspace For
+                  Move From Current Workspace For
                 </span>
               </strong>
             </h1>
