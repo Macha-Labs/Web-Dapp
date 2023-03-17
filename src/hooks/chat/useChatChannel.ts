@@ -21,11 +21,18 @@ const useChatChannel = () => {
                 console.log("Stopped watching the channel ", result);
             }
         }
+        const markChannelAsRead = async() => {
+            if (dataContext?.channel) {
+                const result =  await dataContext?.channel?.raw?.markRead();
+                console.log("Channel marked as Read ", result);
+            }
+        }
         switch (router.pathname) {
             case "/chat":
                 console.log('for stream')
                 stopWatchingChannlel();
                 dataContext.loadChannel(streamContext?.hookChannel.channel);
+                markChannelAsRead();
                 break;
             case "/chat/dm":
                 console.log('for XMTP')
