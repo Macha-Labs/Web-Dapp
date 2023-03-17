@@ -17,11 +17,6 @@ const useStreamChannelMessages = () => {
       "channel is ",
       [streamContext?.hookChannel?.channel]
     );
-    // streamContext?.hookChannel?.channel?.raw?.stopWatching();
-    if (streamContext?.hookChannel?.channel && !streamContext?.hookChannel?.channel?.raw?.disconnected) {
-      streamContext?.hookChannel?.channel?.raw?.markRead();
-      _setMessages();
-    }
     streamContext?.hookChannel?.channel?.raw?.on("message.new", (event: any) => {
       logger(
         "stream",
