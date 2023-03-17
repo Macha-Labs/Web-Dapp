@@ -106,9 +106,9 @@ const ChatMembersList: FC<Props> = props => {
           <Heading as="h6" size="sm">Members</Heading>
         </>            
       }>
-         {template("Online", dataContext?.members.onlineUsers)}
+         {template("Online", dataContext?.members?.onlineUsers)}
 
-          {template("Offline", dataContext?.members.offlineUsers)}
+          {template("Offline", dataContext?.members?.offlineUsers)}
 
       </ModalSlider>
      
