@@ -8,7 +8,7 @@ const useStreamChannelMessages = () => {
   const streamContext = useContext(StreamContext);
 
   useEffect(() => {
-    streamContext?.hookChannel?.channel?.stopWatching();
+    streamContext?.hookChannel?.channel?.raw?.stopWatching();
   }, [])
 
   useEffect(() => {
