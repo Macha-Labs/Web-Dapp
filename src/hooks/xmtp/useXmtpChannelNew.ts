@@ -22,8 +22,8 @@ const useXmtpChannelNew = () => {
         await authContext?.xmtpClient?.conversations.newConversation(
             input.current.value,
         ).then((res: any) => {
-            console.log(res);
-            dataContext.loadChannel(new Channel$('xmtp', res));
+            console.log();
+            dataContext.loadChannel(new Channel$("xmtp", {...res, peer: {}, raw: res}));
             callback();
         })
     }
