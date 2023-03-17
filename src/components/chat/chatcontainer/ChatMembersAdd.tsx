@@ -76,7 +76,7 @@ const ChatMembersAdd = (props: any) => {
                       <Text color="#6FC62A">@{item?.lens?.handle}</Text>
                     </Col>
                   </Row>
-
+                  
                   <Checkbox
                     value=""
                     onChange={() =>
