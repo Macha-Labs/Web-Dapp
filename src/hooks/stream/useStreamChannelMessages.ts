@@ -76,7 +76,7 @@ const useStreamChannelMessages = () => {
       );
       _setMessages();
     });
-  }, [streamContext?.hookChannel?.channel?.id]);
+  }, [dataContext?.channel?.id]);
 
   const _setMessages = () => {
     console.log(streamContext, dataContext, 'EVENT LOG');

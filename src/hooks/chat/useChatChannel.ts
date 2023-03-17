@@ -11,12 +11,20 @@ const useChatChannel = () => {
     const router = useRouter();
     const dataContext = useContext(DataContext)
 
+
     useEffect(() => {
         console.log('fetch channel');
         console.log('pathname', router.pathname);
+        const stopWatchingChannlel = async() => {
+            if (dataContext?.channel) {
+                const result =  await dataContext?.channel?.raw?.stopWatching();
+                console.log("Stopped watching the channel ", result);
+            }
+        }
         switch (router.pathname) {
             case "/chat":
                 console.log('for stream')
+                stopWatchingChannlel();
                 dataContext.loadChannel(streamContext?.hookChannel.channel);
                 break;
             case "/chat/dm":
