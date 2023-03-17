@@ -7,9 +7,9 @@ import { StreamContext } from "@/providers/StreamProvider";
 const useStreamChannelMembers = (isAsync: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const streamContext = useContext(StreamContext);
-  const [allUsersIds, setAllUsersIds] = useState<any>([]);
-  const [onlineUsers, setOnlineUsers] = useState<any>([]);
-  const [offlineUsers, setOfflineUsers] = useState<any>([]);
+  const [allUsersIds, setAllUsersIds] = useState<any>(null);
+  const [onlineUsers, setOnlineUsers] = useState<any>(null);
+  const [offlineUsers, setOfflineUsers] = useState<any>(null);
   const [userIsMember, setUserIsMember] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>();
 
@@ -65,7 +65,7 @@ const useStreamChannelMembers = (isAsync: any) => {
     fetch: _fetch,
     checkOnline: checkOnline,
     users: onlineUsers,
-    allUsers: onlineUsers.concat(offlineUsers),
+    allUsers: onlineUsers?.concat(offlineUsers),
     allUsersIds: allUsersIds,
     onlineUsers: onlineUsers,
     offlineUsers: offlineUsers,

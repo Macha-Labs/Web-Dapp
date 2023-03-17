@@ -22,9 +22,9 @@ const useChatMessages = () => {
 
     const _load = () => {
         if (router.pathname == '/chat') {
-            useStreamChannelMessages.fetch()
+            hookStreamChannelMessages.fetch()
         } else if (router.pathname == '/chat/dn') {
-            useXmtpChannelMessages.fetch()
+            hookXmtpChannelMessages.fetch()
         }
     }
 
