@@ -14,6 +14,7 @@ import ChatMessageList from "./ChatMessageList";
 import ChatPermissions from "./ChatPermissions";
 
 function ChatSetting(props: any) {
+  console.log('Rendering >>>>> ChatSetting');
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
   const chatContext = useContext(ChatContext);
@@ -280,7 +281,6 @@ function ChatSetting(props: any) {
         <ChatEdit modal={modalChatEdit} />
     );
   };
-  console.log("Pinned message ", dataContext)
   const TemplatePinnedMessages = () => {
     return (
       <ChatMessageList
