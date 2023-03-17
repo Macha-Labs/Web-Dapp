@@ -88,18 +88,17 @@ const ChatList = (props: any) => {
   const TemplateChatNew = () => {
     return (
       <ChatNew
-          modal={modalChatNew}
-          hookChatChannels={hookChatChannels}
-          hookChatChannel={hookChatChannel}
-        />
+        modal={modalChatNew}
+        hookChatChannels={hookChatChannels}
+        hookChatChannel={hookChatChannel}
+      />
     );
   };
 
   const TemplateChatNewDm = () => {
-    return (
-      <ChatNewDm modal={modalChatNewDm}></ChatNewDm>
-    )
-  }
+    return <ChatNewDm modal={modalChatNewDm}></ChatNewDm>;
+  };
+
 
   const TemplateActions = (props: any) => {
     return (
@@ -125,7 +124,7 @@ const ChatList = (props: any) => {
               variant="transparent"
               size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkMute.png" size="xs"/>}
+              rightIcon={<IconImage path="IconDarkMute.png" size="xs" />}
             >
               <Row
                 className="hr-between w-100"
@@ -158,7 +157,7 @@ const ChatList = (props: any) => {
               variant="transparent"
               size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconRedDelete.png"  />}
+              rightIcon={<IconImage path="IconRedDelete.png" />}
             >
               <Row
                 className="hr-between w-100"
@@ -171,7 +170,23 @@ const ChatList = (props: any) => {
             </Button>
           )}
 
-          {!props?.item?.isAdmin && (
+          {props.item.createdBy == authContext?.address ? (
+            <Button
+              variant="transparent"
+              size="sm"
+              className="text-start"
+              rightIcon={<IconImage path="IconRedDelete.png" />}
+            >
+              <Row
+                className="hr-between w-100"
+                onClick={() => {
+                  hookPortalChannel.deleteChannel(props.item);
+                }}
+              >
+                Delete Channel
+              </Row>
+            </Button>
+          ) : (
             <Button
               variant="transparent"
               size="sm"
@@ -238,49 +253,48 @@ const ChatList = (props: any) => {
                         }
                       />
                     )} */}
-                    <Button
-                      className="menu-item w-100 m-b-0-5"
-                      size="xl"
-                      variant={
-                        dataContext.channel?.id == item?.id
-                          ? "state_brand"
-                          : "state_card_hover"
-                      }
-                      // overflow="hidden"
-                    >
-                      <Row
-                        className="vr-center w-11-12"
-                        onClick={() => {
-                          hookChatChannel?.fetch(item);
-                        }}
+                      <Button
+                        className="menu-item w-100 m-b-0-5"
+                        size="xl"
+                        variant={
+                          dataContext.channel?.id == item?.id
+                            ? "state_brand"
+                            : "state_card_hover"
+                        }
+                        // overflow="hidden"
                       >
-                        {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                        <Avatar
-                          size="md"
-                          className="m-r-0-5"
-                          name={item?.name}
-                        />
-                        <Col className="w-100 d-flex flex-col vr-center">
-                          <Row>
-                            <Text>
-                              {item?.name?.length > 12
-                                ? `${item?.name?.slice(0, 12)}...`
-                                : item?.name}
-                            </Text>
-                            {item?.raw && (
-                              <>
-                                {!item?.raw?.disconnected && item?.raw?.muteStatus()?.muted && (
-                                  <IconImage
-                                    path="IconDarkMute.png"
-                                    size="2xs"
-                                    style={{ className: "m-l-0-5" }}
-                                  />
-                                )}
-                              </>
-                            )}
-                          </Row>
-
-                          
+                        <Row
+                          className="vr-center w-11-12"
+                          onClick={() => {
+                            hookChatChannel?.fetch(item);
+                          }}
+                        >
+                          {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
+                          <Avatar
+                            size="md"
+                            className="m-r-0-5"
+                            name={item?.name}
+                          />
+                          <Col className="w-100 d-flex flex-col vr-center">
+                            <Row>
+                              <Text>
+                                {item?.name?.length > 12
+                                  ? `${item?.name?.slice(0, 12)}...`
+                                  : item?.name}
+                              </Text>
+                              {item?.raw && (
+                                <>
+                                  {!item?.raw?.disconnected &&
+                                    item?.raw?.muteStatus()?.muted && (
+                                      <IconImage
+                                        path="IconDarkMute.png"
+                                        size="2xs"
+                                        style={{ className: "m-l-0-5" }}
+                                      />
+                                    )}
+                                </>
+                              )}
+                            </Row>
 
                             {item?.lastMessage && (
                               <Col
@@ -304,15 +318,14 @@ const ChatList = (props: any) => {
                               </Col>
                             )}
                             {item?.lastMessage?.created_at && (
-                            <Col>
-                              <Text fontSize={"xs"}>
-                                {new Date(
-                                  item?.lastMessage?.created_at
-                                ).toLocaleString()}
-                              </Text>
-                            </Col>
-                          )}
-                          
+                              <Col>
+                                <Text fontSize={"xs"}>
+                                  {new Date(
+                                    item?.lastMessage?.created_at
+                                  ).toLocaleString()}
+                                </Text>
+                              </Col>
+                            )}
                           </Col>
                           {item?.unreadCountObject &&
                             item?.unreadCountObject[authContext?.address]
@@ -354,23 +367,21 @@ const ChatList = (props: any) => {
   };
 
   const triggerNew = () => {
-   if (router.pathname == '/chat') {
-    modalChatNew.onOpen();
+    if (router.pathname == "/chat") {
+      modalChatNew.onOpen();
     }
-    if (router.pathname == '/chat/dm') {
-      modalChatNewDm.onOpen()
+    if (router.pathname == "/chat/dm") {
+      modalChatNewDm.onOpen();
     }
-  }
+  };
 
   return (
     <>
       <TemplateChatList />
 
       {modalChatNew.isOpen && <TemplateChatNew />}
-      
-      {
-        modalChatNewDm.isOpen && <TemplateChatNewDm />
-      }
+
+      {modalChatNewDm.isOpen && <TemplateChatNewDm />}
     </>
   );
 };
