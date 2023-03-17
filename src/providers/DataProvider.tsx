@@ -14,6 +14,8 @@ export type DataContextType = {
   loadMembers: any | undefined;
   messages: any | undefined;
   loadMessages: any | undefined;
+  memberAll: any | undefined;
+  loadMemberAll: any | undefined;
   memberIds: any | undefined;
   loadMemberIds: any | undefined;
 };
@@ -27,6 +29,8 @@ export const DataContext = createContext<DataContextType>({
   loadMembers: () => {},
   messages: null,
   loadMessages: () => {},
+  memberAll: null,
+  loadMemberAll: () => {},
   memberIds: null,
   loadMemberIds: () => {}
 });
@@ -41,6 +45,8 @@ export const DataProvider = ({ children }: any) => {
     const $loadMessages = useChatMessagesStore(((state: any) => state.load));
     const $members = useChatMembersStore((state: any) => state.members);
     const $loadMembers = useChatMembersStore(((state: any) => state.load));
+    const $memberAll = useChatMembersStore((state: any) => state.memberAll);
+    const $loadMemberAll = useChatMembersStore(((state: any) => state.loadAll));
     const $memberIds = useChatMembersStore((state: any) => state.memberIds);
     const $loadMemberIds = useChatMembersStore(((state: any) => state.loadIds));
 
@@ -56,6 +62,8 @@ export const DataProvider = ({ children }: any) => {
 
     useEffect(() => {console.log('DataProvider ===> memberIds', $memberIds)}, [$memberIds]);
 
+    useEffect(() => {console.log('DataProvider ===> memberAll', $memberAll)}, [$memberAll]);
+
 
     return (
         <DataContext.Provider
@@ -64,10 +72,12 @@ export const DataProvider = ({ children }: any) => {
             loadChannel: $loadChannel,
             channels: $channels,
             loadChannels: $loadChannels,
-            members: $members,
-            loadMembers: $loadMembers,
             messages: $messages,
             loadMessages: $loadMessages,
+            members: $members,
+            loadMembers: $loadMembers,
+            memberAll: $memberAll,
+            loadMemberAll: $loadMemberAll,
             memberIds: $memberIds,
             loadMemberIds: $loadMemberIds
         }}

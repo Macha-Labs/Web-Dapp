@@ -41,7 +41,8 @@ const UserFollowersCard = (props: any) => {
           </h6>
         )}
       </Row>
-      <TemplateProfile />
+      
+      {selectedUser && <TemplateProfile />}
     </StyledCard>
   );
 };

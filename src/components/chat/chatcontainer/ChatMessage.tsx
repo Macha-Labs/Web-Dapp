@@ -30,8 +30,7 @@ import emoji from "../../../data/emoji.json";
 
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
-  const modalProfile = useDisclosure();
-  const [selectedUser, setSelectedUser] = useState<any>();
+
   const toast = useToast();
   const date = new Date(props.message.created_at);
   const hours = date.getHours().toString().padStart(2, "0");
@@ -123,24 +122,8 @@ const ChatMessage = (props: any) => {
     props.executeScroll(id);
   };
 
-  const handleSelectedUser = (user: any) => {
-    const channelUsers = props.hookMembers.allUsers;
-    const userProfile = channelUsers.filter(
-      (profile: any) =>
-        String(profile.address).toLowerCase() ==
-        String(user.lensOwnedBy).toLowerCase()
-    )[0];
-    modalProfile.onOpen();
-    setSelectedUser(userProfile);
-  };
-
-  const TemplateProfile = () => {
-    return (
-      <ModalSlider event={modalProfile} size="lg">
-        <UserProfile user={selectedUser} />
-      </ModalSlider>
-    );
-  };
+  
+  
 
   const TemplateReactions = () => {
     return (
@@ -277,7 +260,7 @@ const ChatMessage = (props: any) => {
               )}
 
               <Avatar
-                onClick={() => handleSelectedUser(props.message?.user)}
+                onClick={() => props?.handleSelectedUser(props.message?.user)}
                 src={props.message?.user?.lensImage}
                 className="m-r-0-5"
                 size="sm"
@@ -397,7 +380,8 @@ const ChatMessage = (props: any) => {
           </Row>
         </Row>
       </StyledConversation>
-      <TemplateProfile />
+      
+      
     </>
   );
 };

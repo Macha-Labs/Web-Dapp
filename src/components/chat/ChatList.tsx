@@ -1,9 +1,7 @@
 import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
-import { Avatar, Button, Checkbox, Heading, Text, useDisclosure, useToast } from "@chakra-ui/react";
-import { useContext, useEffect, useRef } from "react";
-// import { ChatContext } from "@/providers/ChatProvider";
+import { Avatar, Button, Tag, Text, useDisclosure, useToast } from "@chakra-ui/react";
+import { useContext, useEffect} from "react";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
-import ModalSlider from "../modal/ModalSlider";
 import ChatNew from "./ChatNew";
 import IconImage from "../icons/IconImage";
 import { truncateAddress } from "@/helpers";
@@ -18,6 +16,7 @@ import LoadChannels from "../load/LoadChannels";
 import { useRouter } from "next/router";
 import useChatChannel from "@/hooks/chat/useChatChannel";
 import { DataContext } from "@/providers/DataProvider";
+import ChatNewDm from "./ChatNewDm";
 
 const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
@@ -28,6 +27,7 @@ const ChatList = (props: any) => {
   const hookChatChannels = useChatChannels();
   const router = useRouter();
   const modalChatNew = useDisclosure();
+  const modalChatNewDm = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
 
@@ -88,6 +88,12 @@ const ChatList = (props: any) => {
         />
     );
   };
+
+  const TemplateChatNewDm = () => {
+    return (
+      <ChatNewDm modal={modalChatNewDm}></ChatNewDm>
+    )
+  }
 
   const TemplateActions = (props: any) => {
     return (
@@ -199,8 +205,8 @@ const ChatList = (props: any) => {
         <Row className="header vr-center hr-between">
           <ChatSearch style={{ className: "w-80" }} />
           <IconImage
-            path="IconDarkNewChannel.svg"
-            onClick={modalChatNew.onOpen}
+            path="IconDarkPlus.png"
+            onClick={triggerNew}
             styled={{ className: "m-l-1" }}
           />
         </Row>
@@ -255,6 +261,7 @@ const ChatList = (props: any) => {
                                 ? `${item?.name?.slice(0, 12)}...`
                                 : item?.name}
                             </Text>
+
                             {item?.raw && (
                               <>
                                 {!item?.raw?.disconnected && item?.raw?.muteStatus()?.muted && (
@@ -266,9 +273,7 @@ const ChatList = (props: any) => {
                                 )}
                               </>
                             )}
-                          </Row>
-
-                          
+                          </Row>                          
 
                             {item?.lastMessage && (
                               <Col
@@ -341,10 +346,24 @@ const ChatList = (props: any) => {
     );
   };
 
+  const triggerNew = () => {
+   if (router.pathname == '/chat') {
+    modalChatNew.onOpen();
+    }
+    if (router.pathname == '/chat/dm') {
+      modalChatNewDm.onOpen()
+    }
+  }
+
   return (
     <>
       <TemplateChatList />
-      <TemplateChatNew />
+
+      {modalChatNew.isOpen && <TemplateChatNew />}
+      
+      {
+        modalChatNewDm.isOpen && <TemplateChatNewDm />
+      }
     </>
   );
 };

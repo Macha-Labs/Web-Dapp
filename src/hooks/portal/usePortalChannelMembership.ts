@@ -4,6 +4,7 @@ import { serviceAddMembers, serviceRemoveMembers } from "../../service/ChannelSe
 import useLensConnections from "../lens/useLensConnections";
 
 const usePortalChannelMembership = (channel: any) => {
+  
   const authContext = useContext(AuthContext) as AuthContextType;
   const hookLensConnections = useLensConnections(authContext?.address, authContext?.user?.lens?.id);
   const [isLoading, setIsLoading] = useState<any>();
