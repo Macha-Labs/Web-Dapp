@@ -112,7 +112,7 @@ const UserProfile = ({ user }: any) => {
                 <Col className="flex-hr-vr-center">
                   <Image src="/assets/nofollow.png" className="w-40 m-b-2 m-t-1" />
                   <Heading className="m-b-1" size="lg">
-                    There's nobody here, yet.
+                    There is Nobody here, yet.
                   </Heading>
                   <Heading className="" size="xs">
                     People you follow on lens will be displayed here
@@ -154,7 +154,7 @@ const UserProfile = ({ user }: any) => {
                     className="w-40 m-b-2 m-t-1"
                   />
                   <Heading className="m-b-1" size="lg">
-                    There's nobody here, yet.
+                    There is nobody here, yet.
                   </Heading>
                   <Heading className="" size="xs">
                     Your lens followers will be displayed here
