@@ -289,9 +289,12 @@ const ChatMessage = (props: any) => {
                   props.message?.user?.lensHandle ||
                   truncateAddress(props.message?.createdBy)}
               </Text>
-              <Text style={{ alignSelf: "flex-end" }} fontSize="12">
-                {time}
-              </Text>
+              <Row className="vr-center">
+                {props?.message.pinned && <IconImage path="IconDarkPinned.png" size="2xs" />}
+                <Text style={{ alignSelf: "flex-end" }} fontSize="12" className="m-l-0-5">
+                  {time}
+                </Text>
+              </Row>
             </Row>
 
             {props?.hookChat?.actionMessage?.action == "EDIT" &&
