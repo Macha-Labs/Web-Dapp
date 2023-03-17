@@ -6,7 +6,7 @@ const ChatNewDm = (props: any) => {
     const hookXmtpChannelNew = useXmtpChannelNew();
 
     const callback = () => {
-
+        props.modal.onClose();
     }
 
     return (

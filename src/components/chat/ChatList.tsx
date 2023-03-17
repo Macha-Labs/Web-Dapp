@@ -95,7 +95,7 @@ const ChatList = (props: any) => {
     );
   };
 
-  const TemplateChatNewDm = () => {
+  const TemplateChatNewDm = (props: any) => {
     return <ChatNewDm modal={modalChatNewDm}></ChatNewDm>;
   };
 
@@ -381,7 +381,7 @@ const ChatList = (props: any) => {
 
       {modalChatNew.isOpen && <TemplateChatNew />}
 
-      {modalChatNewDm.isOpen && <TemplateChatNewDm />}
+      {modalChatNewDm.isOpen && <TemplateChatNewDm modal={modalChatNewDm} />}
     </>
   );
 };
