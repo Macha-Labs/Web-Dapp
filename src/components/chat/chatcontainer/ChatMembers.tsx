@@ -56,8 +56,7 @@ const ChatMembers = (props: any) => {
       </>
     }>
       <>
-        {dataContext?.members?.onlineUsers
-          .concat(dataContext?.members?.offlineUsers)
+        {dataContext?.members?.onlineUsers?.concat(dataContext?.members?.offlineUsers)
           ?.map((item: any, index: any) => {
             return (
               <StyledCard className="state_hover m-b-0-5"  key={`key-${index}`}>

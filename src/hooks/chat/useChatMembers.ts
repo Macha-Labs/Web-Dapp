@@ -10,7 +10,7 @@ const useChatMembers = (isAsync?: any) => {
 
 
     useEffect(() => {
-        if (router.pathname == '/chat') {
+        if (router.pathname == '/chat' && hookStreamChannelMembers?.users) {
             console.log('users', hookStreamChannelMembers?.users);
             dataContext.loadMembers({ onlineUsers: hookStreamChannelMembers?.onlineUsers, offlineUsers: hookStreamChannelMembers?.offlineUsers});
             dataContext.loadMemberAll(hookStreamChannelMembers.allUsers)
