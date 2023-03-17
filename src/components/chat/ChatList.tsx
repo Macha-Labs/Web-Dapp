@@ -1,6 +1,12 @@
 import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
-import { Avatar, Button, Tag, Text, useDisclosure, useToast } from "@chakra-ui/react";
-import { useContext, useEffect} from "react";
+import {
+  Avatar,
+  Button,
+  Text,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import ChatNew from "./ChatNew";
 import IconImage from "../icons/IconImage";
@@ -257,7 +263,6 @@ const ChatList = (props: any) => {
                         }
                         // overflow="hidden"
                       >
-<<<<<<< HEAD
                         <Row
                           className="vr-center w-11-12"
                           onClick={() => {
@@ -290,34 +295,6 @@ const ChatList = (props: any) => {
                                 </>
                               )}
                             </Row>
-=======
-                        {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                        <Avatar
-                          size="md"
-                          className="m-r-0-5"
-                          name={item?.name}
-                        />
-                        <Col className="w-100 d-flex flex-col vr-center">
-                          <Row>
-                            <Text>
-                              {item?.name?.length > 12
-                                ? `${item?.name?.slice(0, 12)}...`
-                                : item?.name}
-                            </Text>
-
-                            {item?.raw && (
-                              <>
-                                {!item?.raw?.disconnected && item?.raw?.muteStatus()?.muted && (
-                                  <IconImage
-                                    path="IconDarkMute.png"
-                                    size="2xs"
-                                    style={{ className: "m-l-0-5" }}
-                                  />
-                                )}
-                              </>
-                            )}
-                          </Row>                          
->>>>>>> staging-testnet
 
                             {item?.lastMessage && (
                               <Col
