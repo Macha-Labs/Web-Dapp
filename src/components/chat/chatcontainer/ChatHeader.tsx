@@ -1,11 +1,9 @@
-import ModalSlider from "@/components/modal/ModalSlider";
-import UserList from "@/components/user/UserList";
+import ChatMembersList from "@/components/chat/chatcontainer/ChatMembersList";
 import { Col, Row } from "@/styles/StyledComponents";
 import {
   Button,
   Avatar,
   Heading,
-  Icon,
   useDisclosure,
   Text,
 } from "@chakra-ui/react";
@@ -14,37 +12,46 @@ import ChatSetting from "./ChatSetting";
 import { useContext } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import ChatSearch from "./ChatSearch";
+import { useRouter } from "next/router";
+import { truncateAddress } from "@/helpers";
+import useChatMembers from "@/hooks/chat/useChatMembers";
+import { DataContext } from "@/providers/DataProvider";
 import { ChatContext } from "@/providers/ChatProvider";
+import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
+import useChatChannel from "@/hooks/chat/useChatChannel";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
   const modalSettings = useDisclosure();
-  const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext);
+  const dataContext = useContext(DataContext);
+  const chatContext = useContext(ChatContext);
+  const hookChatMembers = useChatMembers();
+  const hookChatChannels = useChatChannelsReload();
+  const hookChatChannel = useChatChannel();
 
+  const router = useRouter();
+
+  console.log("Re-rendering >>>>> ChatHeader", dataContext.members);
   const TemplateMembers = () => {
     return (
-      <ModalSlider event={membersModal}>
-        <UserList
-          onlineUsers={props.hookMembers?.onlineUsers}
-          offlineUsers={props.hookMembers?.offlineUsers}
+      <ChatMembersList
+        membersModal={membersModal}
+          onlineUsers={dataContext.members?.onlineUsers}
+          offlineUsers={dataContext.members?.offlineUsers}
         />
-      </ModalSlider>
     );
   };
 
   const TemplateChannelSettings = () => {
     return (
-      <ModalSlider event={modalSettings} size="sm">
-        <ChatSetting
+      <ChatSetting
           event={modalSettings}
-          chatContext={chatContext}
           authContext={authContext}
-          hookChannel={chatContext.hookChannel}
-          hookChat={chatContext.hookChat}
           modalSettings={modalSettings}
+          hookChatChannels={hookChatChannels}
+          hookChatChannel={hookChatChannel}
         />
-      </ModalSlider>
     );
   };
 
@@ -56,7 +63,7 @@ const ChatHeader = (props: any) => {
           size="xs"
           variant="state_default_hover"
           className="m-l-1"
-          onClick={props?.hookChat?.handleSearchClose}
+          onClick={chatContext?.hookChat?.handleSearchClose}
         >
           Cancel
         </Button>
@@ -95,31 +102,34 @@ const ChatHeader = (props: any) => {
           <Avatar
             size="sm"
             className="m-r-0-5"
-            name={props?.hookChannel?.channel?.name}
+            name={
+              dataContext?.channel?.name || dataContext?.channel?.peerAddress
+            }
           />
           <Col>
             <Row>
               <Heading as="h4" size="sm">
-                {props?.hookChannel?.channel?.name}
+                {dataContext?.channel?.name ||
+                  truncateAddress(dataContext?.channel?.peerAddress)}
               </Heading>
-              {props?.hookChannel?.channel?.raw?.muteStatus()?.muted && (
+              {!dataContext?.channel?.raw?.disconnected && dataContext?.channel?.raw?.muteStatus()?.muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}
-                  size={15}
+                  size="2xs"
                 />
               )}
             </Row>
             <Heading as="h6" size="xs">
-              {props.hookChat?.usersWhoAreTyping && (
+              {chatContext?.hookChat?.usersWhoAreTyping && (
                 <>
-                  {props.hookChat?.usersWhoAreTyping?.map(
+                  {chatContext?.hookChat?.usersWhoAreTyping?.map(
                     (user: any, index: number) => {
                       return (
                         <Text key={user?.id} fontSize="12">
                           {`${user}${
                             index! ==
-                              props.hookChat?.usersWhoAreTyping.length - 1 &&
+                              chatContext?.hookChat?.usersWhoAreTyping.length - 1 &&
                             ","
                           } is typing...`}
                         </Text>
@@ -132,7 +142,7 @@ const ChatHeader = (props: any) => {
           </Col>
         </Row>
 
-        <Row className="vr-center">
+        {router.pathname == '/chat' && <Row className="vr-center">
           <IconImage
             path="IconDarkMenu.png"
             onClick={modalSettings.onOpen}
@@ -140,15 +150,17 @@ const ChatHeader = (props: any) => {
           />
 
           <IconImage path="IconDarkUsers.png" onClick={membersModal.onOpen} />
-        </Row>
+        </Row>}
+
+        
       </Row>
     );
   };
 
   const Template = () => {
-    if (props.hookChat.actionMessage?.action === "SEARCH")
+    if (chatContext?.hookChat.actionMessage?.action === "SEARCH")
       return <TemplateSearch />;
-    else if (props.hookChat.actionMessage?.action === "MULTISELECT")
+    else if (chatContext?.hookChat.actionMessage?.action === "MULTISELECT")
       return <TemplateMultiSelect />;
     else {
       return <TemplateProfile />;
@@ -163,7 +175,6 @@ const ChatHeader = (props: any) => {
         </Row>
       </div>
       <TemplateMembers />
-      {/* <TemplatePinnedMessages /> */}
       <TemplateChannelSettings />
     </>
   );

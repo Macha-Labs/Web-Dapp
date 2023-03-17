@@ -1,5 +1,5 @@
-import { extendTheme } from '@chakra-ui/react'
-import { style } from './StyledConstants';
+import { extendTheme } from "@chakra-ui/react";
+import { style } from "./StyledConstants";
 
 const theme = extendTheme({
   initialColorMode: "light",
@@ -18,15 +18,18 @@ const theme = extendTheme({
       "*::placeholder": {
         color: `${style.colorPlaceholder}`,
       },
-      "input, textarea": {
+      "textarea": {
         border: `${style.input.border.default} !important`,
         color: `${style.colorInput} !important`,
         background: `${style.input.bg.default} !important`,
         paddingLeft: "0.5rem !important",
         paddingRight: "0.5rem !important",
       },
-      ".chakra-modal": {
-        border: `${style.modal.border.default} !important`,
+      "input:focus": {
+        background: '#000'
+      },
+      ".chakra-modal__content": {
+        borderLeft: `${style.modal.border.default} !important`,
       },
       ".chakra-modal__body": {
         background: `${style.modal.bg.default}`,
@@ -40,9 +43,9 @@ const theme = extendTheme({
         background: `${style.modal.bg.default}`,
         borderTop: `${style.modal.border.default} !important`,
       },
-      "chakra-modal__overlay": {
-        opacity: '0.9',
-        background: '#000511 !important',
+      ".chakra-modal__overlay": {
+        opacity: "0.65 !important",
+        background: `${style.modal.bg.default} !important`,
       },
       ".alert": {
         background: `${style.bgPannelHeader}`,
@@ -55,11 +58,15 @@ const theme = extendTheme({
       baseStyle: {
         field: {
           bg: `${style.input.bg.default}`,
+          border: `${style.input.border.default}`,
           _hover: {
-            borderColor: `${style.input.border.active}`,
+            border: `${style.input.border.active}`,
+            bg: `${style.input.bg.active}`,
           },
           _focusVisible: {
-            borderColor: `${style.input.border.active}`,
+            border: `${style.input.border.active}`,
+            bg: `${style.input.bg.active}`,
+            shadow: `${style.input.shadow.hover}`
           },
         },
       },
@@ -76,9 +83,32 @@ const theme = extendTheme({
       },
     },
     TextArea: {
-      baseStyle: {
-        field: {
-          bg: `${style.input.bg.default}`
+      Input: {
+        baseStyle: {
+          field: {
+            bg: `${style.input.bg.default}`,
+            border: `${style.input.border.default}`,
+            _hover: {
+              border: `${style.input.border.active}`,
+              bg: `${style.input.bg.active}`,
+            },
+            _focusVisible: {
+              border: `${style.input.border.active}`,
+              bg: `${style.input.bg.active}`,
+              shadow: `${style.input.shadow.hover}`
+            },
+          },
+        },
+        variants: {
+          normal: {
+            field: {
+              bg: `${style.input.bg.default}`,
+            },
+          },
+        },
+        defaultProps: {
+          size: "md",
+          variant: "normal",
         },
       },
       variants: {
@@ -110,7 +140,7 @@ const theme = extendTheme({
             background: `${style.card.bg.hover}`,
             border: `1px solid ${style.card.border.hover}`,
             shadow: `${style.card.shadow.hover}`,
-          }
+          },
         },
         state_default_to_brand: {
           background: `${style.button.bg.default}`,
@@ -119,7 +149,7 @@ const theme = extendTheme({
             color: "#FF",
           },
         },
-        
+
         state_transparent_to_brand_hover: {
           background: "transparent",
           border: `1px solid transparent`,
@@ -156,15 +186,15 @@ const theme = extendTheme({
         },
         state_list: {
           background: `${style.card.bg.default}`,
-          borderRadius:"5px",
+          borderRadius: "5px",
           borderBottom: `${style.card.border.default}`,
           shadow: `${style.card.shadow.default}`,
         },
         state_list_hover: {
-            background: `${style.card.bg.default}`,
-            borderBottom: `${style.card.border.default}`,
-            shadow: `${style.card.shadow.default}`,
-            borderRadius:"10px",
+          background: `${style.card.bg.default}`,
+          borderBottom: `${style.card.border.default}`,
+          shadow: `${style.card.shadow.default}`,
+          borderRadius: "10px",
           _hover: {
             background: `${style.card.bg.hover}`,
             borderBottom: `10px solid ${style.card.border.hover}`,
@@ -172,11 +202,11 @@ const theme = extendTheme({
           },
         },
         state_list_active: {
-            background: `${style.button.bg.active}`,
-            color: "#FF",
-            borderRadius:"10px",
-            borderBottom: `${style.card.border.default}`,
-            shadow: `${style.card.shadow.default}`,
+          background: `${style.button.bg.active}`,
+          color: "#FF",
+          borderRadius: "10px",
+          borderBottom: `${style.card.border.default}`,
+          shadow: `${style.card.shadow.default}`,
         },
         state_lens: {
           opacity: "0.95",
@@ -190,6 +220,14 @@ const theme = extendTheme({
           opacity: "0.95",
           background: "#C22D3F",
           color: "#FFFFFF",
+          _hover: {
+            opacity: "1",
+          },
+        },
+        state_xmtp: {
+          opacity: "0.95",
+          background: "#ef4444",
+          color: "#1A202C",
           _hover: {
             opacity: "1",
           },
@@ -226,12 +264,12 @@ const theme = extendTheme({
     Modal: {
       baseStyle: {
         overlay: {
-          background: '#000511',
-          opacity: '0.9'
+          background: `${style.modal.bg.default}`,
+          opacity: "1",
         },
         dialogContainer: {
-          alignItems: 'center'
-        }
+          alignItems: "center",
+        },
       },
       sizes: {},
     },
@@ -253,4 +291,4 @@ const theme = extendTheme({
   },
 });
 
-export default theme
+export default theme;

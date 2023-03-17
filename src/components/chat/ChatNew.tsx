@@ -1,12 +1,9 @@
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import LayoutCard from "@/layouts/LayoutCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import LayoutInputs from "@/layouts/options/LayoutInputs";
-import { ChatContext } from "@/providers/ChatProvider";
-import { Channel$ } from "@/schema/channel";
-import { Col, Row } from "@/styles/StyledComponents";
+import { Channel$} from "@/schema/channel";
+import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import {
   Avatar,
   Button,
@@ -25,14 +22,13 @@ import {
   CheckboxGroup,
   Box,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import { useState } from "react";
+import ModalSlider from "../modal/ModalSlider";
 import IconImage from "../icons/IconImage";
 
 const ChatNew = (props: any) => {
-  const chatContext = useContext(ChatContext);
   const [tab, setTab] = useState("details");
-  const [inputFocus, setInputFocus] = useState(0);
+  const [inputFocus, setInputFocus] = useState(0);;
   const [access, setAccess] = useState("Public");
   /**
    *
@@ -45,9 +41,10 @@ const ChatNew = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    chatContext?.streamContext?.reloadChannelList();
-
-    // props.modal.onClose();
+    props?.hookChatChannel.remove();
+    props?.hookChatChannels.load();
+    props.modal.onClose();
+    
   };
 
   const callbackPrompt = (message: any) => {
@@ -62,7 +59,7 @@ const ChatNew = (props: any) => {
   /**
    *
    **/
-  const hookPortalChannel = usePortalChannel(Channel$({}), {
+  const hookPortalChannel = usePortalChannel(null, {
     new: callbackNew,
     prompt: callbackPrompt,
   });
@@ -71,7 +68,7 @@ const ChatNew = (props: any) => {
    *
    **/
 
-  const hookPortalChannelMembership = usePortalChannelMembership(Channel$({}));
+  const hookPortalChannelMembership = usePortalChannelMembership(new Channel$('db', {}));
 
   /**
    *
@@ -443,6 +440,18 @@ const ChatNew = (props: any) => {
                       </Text>
                     </Row>
 
+                  <Checkbox
+                    isChecked={hookPortalChannelMembership?.userIds?.includes(
+                      String(item?.lens?.ownedBy?.toLowerCase())
+                    )}
+                    onChange={() =>
+                      hookPortalChannelMembership.handleCheckedUsers(item)
+                    }
+                  />
+                </Row>
+                </StyledCard>
+              );
+            }
                     <Checkbox
                       isChecked={hookPortalChannelMembership?.userIds?.includes(
                         String(item?.lens?.ownedBy?.toLowerCase())
@@ -463,23 +472,17 @@ const ChatNew = (props: any) => {
               </Heading>
             </Col>
           )}
-        </LayoutCardPannel>
-      </>
-    );
+  </>
+
+    return {body: body, header: header}
   };
 
-  // return <>{tab == "members" ? <TemplateMembers /> : <TemplateDetails />}</>;
+
   return (
     <>
-      {tab == "details" ? (
-        <TemplateDetails />
-      ) : tab == "share" ? (
-        <TemplateShare />
-      ) : tab == "private" ? (
-        <TemplateAccess />
-      ) : (
-        <></>
-      )}
+      <ModalSlider event={props.modal} size="sm" header={tab == 'members' ? templateMembers().header : templateDetails().header}>
+      {tab == 'members' ? templateMembers().body : templateDetails().body}
+    </ModalSlider>
     </>
   );
 };

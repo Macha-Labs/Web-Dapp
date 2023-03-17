@@ -117,7 +117,7 @@ const User = () => {
             />
             <LayoutOptions
               options={userSettings}
-              style={{ className: "m-t-1" }}
+              style={{ className: "m-t-1 p-2" }}
             />
           </div>
         </StyledPageList>

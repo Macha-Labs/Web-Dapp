@@ -6,11 +6,13 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
-import useMention from "./useMention";
+import useMention from "../stream/useMention";
 
-const useStreamChat = (client :any, channel: any) => {
-  console.log("Checking for useStreamChat re-rendering");
+const useChat = (client: any, channel: any) => {
+  console.log('Rendering >>>>> useChat');
   const authContext = useContext(AuthContext) as AuthContextType;
+
+  //
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
   const [streamLoading, setStreamLoading] = useState<any>(false);
@@ -41,7 +43,8 @@ const useStreamChat = (client :any, channel: any) => {
     setSlashCmd(false);
   };
 
-  const addMessage = async () => {
+  const addMessage = async (callback?: any) => {
+    console.log('inside add message', actionMessage);
     setStreamLoading(true);
     if (!authContext?.address) {
       setStreamLoading(false);
@@ -59,13 +62,10 @@ const useStreamChat = (client :any, channel: any) => {
         return;
       }
 
-      addMessageToStream(chatMeta);
-    }
-  };
-
-  const addMessageToStream = async (msgData?: any) => {
-    try {
       let messageData: any = {};
+      let msgData: any = {};
+
+
       if (actionMessage?.action == "FORWARD") {
         messageData = {
           text: actionMessage?.item?.text,
@@ -113,42 +113,48 @@ const useStreamChat = (client :any, channel: any) => {
           ],
         };
       }
-      await channel.raw.sendMessage(messageData); // sending a new message
 
-      setRerenderSwitch(!rerenderSwitch);
-      setStreamLoading(false);
-      setAttachItem(null);
-      setActionMessage(null);
+      callback(messageData).then(() => {
+        console.log('message sent');
+        setRerenderSwitch(!rerenderSwitch);
+        setStreamLoading(false);
+        setAttachItem(null);
+        setActionMessage(null);
 
-      const notificationPayload = {
-        topic: "newMessage",
-        notification: {
-          title: channel.name,
-          body: `${
-            authContext.user?.lens?.name ||
-            authContext.user?.lens?.handle ||
-            authContext.user?.lens?.id ||
-            truncateAddress(authContext.user?.lens?.ownedBy)
-          }: ${messageData.text}`,
-        },
-        data: {
-          type: "channelMessage",
-          name: "Portal New Message",
-          channelId: channel.id,
-        },
-        android: {
-          ttl: 4500,
-          priority: "normal",
-        },
-      };
-      hookMention.onRefresh();
-      setChatMeta(null);
-      await newMessageNotification(notificationPayload); // sending new message notification
-    } catch (error: any) {
-      setStreamLoading(false);
-      throw new Error("Sending message failed ", error);
+        
+        hookMention.onRefresh();
+        setChatMeta(null);
+        
+      });
+      // addMessageToStream(chatMeta);
     }
   };
+
+  const notify = async (messageData: any) => {
+    const notificationPayload = {
+      topic: "newMessage",
+      notification: {
+        title: channel.name,
+        body: `${
+          authContext.user?.lens?.name ||
+          authContext.user?.lens?.handle ||
+          authContext.user?.lens?.id ||
+          truncateAddress(authContext.user?.lens?.ownedBy)
+        }: ${messageData.text}`,
+      },
+      data: {
+        type: "channelMessage",
+        name: "Portal New Message",
+        channelId: channel.id,
+      },
+      android: {
+        ttl: 4500,
+        priority: "normal",
+      },
+    };
+
+    await newMessageNotification(notificationPayload); // sending new message notification
+  }
 
   const editMessage = async () => {
     if (!authContext?.address) {
@@ -244,11 +250,10 @@ const useStreamChat = (client :any, channel: any) => {
       });
   };
 
-  const keyDownMessage = async (event: any, onSend?: any) => {
-  
+  const keyDownMessage = async (event: any, callback?: any) => {
     const keycode = event.which || event.keycode;
-   console.log("Keycode", keycode, onSend);
-   
+    console.log("Keycode", keycode, callback);
+
     //Logic for typing indicators begins
     // let typingTimeout;
     // if (typingTimeout !== undefined) clearTimeout(typingTimeout);
@@ -269,15 +274,15 @@ const useStreamChat = (client :any, channel: any) => {
 
     //Logic for typing indicators ends
 
-    if (keycode == 13 && !event.shiftKey || onSend) {
+    if ((keycode == 13 && !event.shiftKey)) {
       event.preventDefault();
 
       if (textareaRef.current?.value.substring(0, 1) == "/") {
         setSlashCmdValue(textareaRef.current?.value);
         setSlashCmd(false);
         // widgetDrawer.onOpen();
-      } else if (textareaRef.current?.value.length > 0||attachItem) {
-        await addMessage();
+      } else if (textareaRef.current?.value.length > 0 || attachItem) {
+        await addMessage(callback);
       }
     } else if (event.key == "/") {
       setSlashCmd(true);
@@ -364,7 +369,7 @@ const useStreamChat = (client :any, channel: any) => {
   const sendReaction = async (reaction: any, message: any) => {
     return await channel.raw.sendReaction(message?.id, {
       type: reaction?.type,
-      score: 1
+      score: 1,
     });
   };
 
@@ -485,8 +490,9 @@ const useStreamChat = (client :any, channel: any) => {
     usersWhoAreTyping: usersWhoAreTyping,
     typingMessage: typingMessage,
     setTypingMessage: setTypingMessage,
+
     // widgetDrawer: widgetDrawer
   };
 };
 
-export default useStreamChat;
+export default useChat;

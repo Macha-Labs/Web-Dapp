@@ -1,5 +1,6 @@
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
+import { DataContext } from "@/providers/DataProvider";
 import { useContext } from "react";
 
 import ChatHeader from "./ChatHeader";
@@ -9,23 +10,18 @@ import ChatWindow from "./ChatWindow";
 
 const ChatContainer = (channel: any) => {
   const chatContext = useContext(ChatContext);
+  const dataContext = useContext(DataContext);
   const authContext = useContext(AuthContext) as AuthContextType;
 
   return (
     <>
-      {chatContext?.hookChannel?.channel ? (
+      {dataContext?.channel ? (
         <>
-          <ChatHeader
-            hookChat={chatContext.hookChat}
-            hookChannel={chatContext.hookChannel}
-            hookMembers={chatContext.hookMembers}
-          />
-          <ChatWindow
+          <ChatHeader/>
+          <ChatWindow/>
+          <ChatInput
             chatContext={chatContext}
             authContext={authContext}
-          />
-          <ChatInput
-            hookChat={chatContext.hookChat}
           />
         </>
       ) : (

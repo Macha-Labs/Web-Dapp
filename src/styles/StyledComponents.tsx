@@ -30,6 +30,25 @@ export const StyledImageView = styled.div<{ viewMode: boolean }>`
   }}
 `;
 
+export const StyledMoveToBottom = styled.div<{visible: any}>`
+  position: absolute;
+  bottom: 100px;
+  right: 50px;
+  visibility: ${props => props.visible || 'hidden'};
+  span{
+    position: absolute;
+    right: 0px;
+    top: -15px;
+    background: ${style.button.bg.default};
+  // padding: 1px 8px;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 50%;
+    text-align: center;
+  }
+`
 
 export const StyledIframeView = styled.div`
   position: fixed;
@@ -297,6 +316,7 @@ export const StyledCardPannel = styled.div`
   }
 
   .body {
+    padding: 1rem;
   }
   .footer {
     border-top: ${style.card.border.default};
@@ -864,8 +884,8 @@ export const StyledConversation = styled(Col)`
     color: ${style.message.color.default};
     background: ${style.message.bg.default};
     width: fit-content;
-    min-width: 40%;
-    max-width: 70%;
+    min-width: 30%;
+    max-width: 50%;
     border-radius: 10px;
     padding: 10px;
     box-shadow: ${style.message.shadow.default};
@@ -901,7 +921,8 @@ export const StyledConversation = styled(Col)`
 
 //
 export const StyledPageList = styled.div`
-  width: 25%;
+  min-width: 25%;
+  max-width: 25%;
   height: 100vh;
   background: ${style.bgMain};
   border-right: ${style.header.border.default};

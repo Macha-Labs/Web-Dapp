@@ -1,3 +1,4 @@
+import IconImage from "@/components/icons/IconImage";
 import { helperIPFS } from "@/helpers";
 import { likePost, unlikePost } from "@/helpers/lens/lens";
 import useLensPosts from "@/hooks/lens/useLensPosts";
@@ -102,12 +103,8 @@ const LayoutPostCard = (props: any) => {
             </Col>
             <Col className="card-footer">
               <Row className="w-100 vr-center">
-                <Avatar
-                  src="https://0xmetame-assets.s3.ap-south-1.amazonaws.com/lens.png"
-                  size="xs"
-                  className="m-r-0-5"
-                />
-                <Heading className="h6 m-b-0" size="xs">
+                <IconImage path="IconLensColor.png" />
+                <Heading className="h6 m-l-0-5" size="xs">
                   From Lens Protocol
                 </Heading>
               </Row>

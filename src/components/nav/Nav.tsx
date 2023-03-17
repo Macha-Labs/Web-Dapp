@@ -1,22 +1,17 @@
 import React from "react";
 import {
   Col,
-  StyledIcon,
-  Logo,
   Row,
   StyledNav,
 } from "../../styles/StyledComponents";
-import { Tooltip, useDisclosure } from "@chakra-ui/react";
+import { Tooltip } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
 import IconImage from "../icons/IconImage";
+import { useRouter } from "next/router";
 
 const Nav = (props: any) => {
-  const orgsDrawer = useDisclosure();
-  const userDrawer = useDisclosure();
-  const [active, setActive] = React.useState(
-    window.location.href.split("/")[3]
-  );
+  const router = useRouter();
 
   const templateOrgs = () => {
     return <ModalPage></ModalPage>;
@@ -33,7 +28,7 @@ const Nav = (props: any) => {
           <div className="header m-b-0-5">
             <Col className="hr-center vr-center h-100">
               <Tooltip label="Metawork">
-                <IconImage path="Logo.png" size="42" />
+                <IconImage path="Logo.png" size="xl" />
               </Tooltip>
             </Col>
           </div>
@@ -44,36 +39,44 @@ const Nav = (props: any) => {
                   <Tooltip label="Chat">
                     <IconImage
                       path="IconDarkHash.png"
+                      size="lg"
                       style={{
                         className: `m-b-1 ${
-                          active === "chat" ? "state_active state_hover scale" : ""
+                          router.pathname === "/chat"
+                            ? "state_active state_hover scale"
+                            : ""
                         } `,
                       }}
-                      onClick={() => setActive("chat")}
                     />
                   </Tooltip>
                 </Link>
-                {/* <IconImage
-                  path="IconBrandDiscover.png"
-                  style={{
-                    className: `m-b-1 ${
-                      active === "discover" ? "state_active state_hover scale" : ""
-                    } `,
-                  }}
-                  onClick={() => setActive("discover")}
-                /> */}
               </Col>
 
               <Col className="hr-center">
+                <Link href="/chat/dm">
+                  <IconImage
+                    path="IconBrandChat.png"
+                    size="lg"
+                    style={{
+                      className: `m-b-1 ${
+                        router.pathname === "/chat/dm"
+                          ? "state_active state_hover scale"
+                          : ""
+                      } `,
+                    }}
+                  />
+                </Link>
                 <Link href="/user">
                   <IconImage
                     path="IconBrandProfile.png"
+                    size="lg"
                     style={{
                       className: `m-b-1 ${
-                        active === "user" ? "state_active state_hover scale" : ""
+                        router.pathname === "/user"
+                          ? "state_active state_hover scale"
+                          : ""
                       } `,
                     }}
-                    onClick={() => setActive("user")}
                   />
                 </Link>
                 <IconImage
