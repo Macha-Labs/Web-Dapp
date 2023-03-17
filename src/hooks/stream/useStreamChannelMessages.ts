@@ -1,4 +1,5 @@
 import { logger } from "@/helpers/logger";
+import { DataContext } from "@/providers/DataProvider";
 import { StreamContext } from "@/providers/StreamProvider";
 import { StreamMessage$ } from "@/schema/message";
 import { useContext, useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 const useStreamChannelMessages = () => {
   const [messages, setMessages] = useState<any>([]);
   const streamContext = useContext(StreamContext);
+  const dataContext = useContext(DataContext);
 
 
   useEffect(() => {
@@ -77,6 +79,7 @@ const useStreamChannelMessages = () => {
   }, [streamContext?.hookChannel?.channel?.id]);
 
   const _setMessages = () => {
+    console.log(streamContext, dataContext, 'EVENT LOG');
     if (streamContext?.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages) {
       logger('stream', 'useStreamChannelMessages._setMessages', 'messages are', streamContext?.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages)
       const messageData = streamContext?.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages
