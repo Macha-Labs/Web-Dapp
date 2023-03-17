@@ -44,7 +44,11 @@ const ChatNew = (props: any) => {
     props?.hookChatChannel.remove();
     props?.hookChatChannels.load();
     // props.modal.onClose();
-    setTab("share");
+    if (tab == "details" && access == "Public") {
+      setTab("share");
+    } else if (tab == "details" && access == "Private") {
+      setTab("private");
+    }
   };
 
   const callbackPrompt = (message: any) => {
@@ -570,25 +574,31 @@ const ChatNew = (props: any) => {
     return { body: body, header: header };
   };
 
-  const Template = () => {
-    let temp;
-    switch (tab) {
-      case "share":
-        temp = templateShare();
-        break;
-      case "access":
-        temp = templateAccess();
-        break;
-      case "details":
-        temp = templateDetails();
-        break;
-    }
-    return (
-      <ModalSlider event={props.modal} size="sm" header={temp?.header}>
+  // const Template = () => {
+  //   let temp;
+  //   switch (tab) {
+  //     case "share":
+  //       temp = templateShare();
+  //       break;
+  //     case "access":
+  //       temp = templateAccess();
+  //       break;
+  //     case "details":
+  //       temp = templateDetails();
+  //       break;
+  //   }
+  //   return (
+  //     <ModalSlider event={props.modal} size="sm" header={temp?.header}>
+  //       {temp?.body}
+  //     </ModalSlider>
+  //   );
+  // };
+  
+  let temp=(tab=="details")? templateDetails():tab=="share"?templateShare():templateAccess() ;
+  return(
+    <ModalSlider event={props.modal} size="sm" header={temp?.header}>
         {temp?.body}
       </ModalSlider>
-    );
-  };
-  return <Template/>
+  )
 };
 export default ChatNew;
