@@ -7,6 +7,7 @@ import { ChatIcon } from "@chakra-ui/icons";
 import {
   Button,
   Heading,
+  Image,
   Tab,
   TabList,
   TabPanel,
@@ -104,9 +105,21 @@ const UserProfile = ({ user }: any) => {
           </Wrap>
         ) : (
           <>
-            {user?.lens?.ownedBy === undefined
-              ? "User has not connected Lens to their profile"
-              : "Zero Following"}
+            {user?.lens?.ownedBy === undefined ? (
+              "User has not connected Lens to their profile"
+            ) : (
+              <>
+                <Col className="flex-hr-vr-center">
+                  <Image src="/assets/nofollow.png" className="w-40 m-b-2 m-t-1" />
+                  <Heading className="m-b-1" size="lg">
+                    There's nobody here, yet.
+                  </Heading>
+                  <Heading className="" size="xs">
+                    People you follow on lens will be displayed here
+                  </Heading>
+                </Col>
+              </>
+            )}
           </>
         )}
       </>
@@ -131,9 +144,24 @@ const UserProfile = ({ user }: any) => {
           </Wrap>
         ) : (
           <>
-            {user?.lens?.ownedBy === undefined
-              ? "User has not connected Lens to their profile"
-              : "Zero Followers"}
+            {user?.lens?.ownedBy === undefined ? (
+              "User has not connected Lens to their profile"
+            ) : (
+              <>
+                <Col className="flex-hr-vr-center">
+                  <Image
+                    src="/assets/nofollow.png"
+                    className="w-40 m-b-2 m-t-1"
+                  />
+                  <Heading className="m-b-1" size="lg">
+                    There's nobody here, yet.
+                  </Heading>
+                  <Heading className="" size="xs">
+                    Your lens followers will be displayed here
+                  </Heading>
+                </Col>
+              </>
+            )}
           </>
         )}
       </>

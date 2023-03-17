@@ -6,6 +6,7 @@ import {
   Heading,
   useDisclosure,
   Text,
+  Tag,
 } from "@chakra-ui/react";
 import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
@@ -141,7 +142,11 @@ const ChatHeader = (props: any) => {
           </Col>
         </Row>
 
-        {router.pathname == '/chat' && <Row className="vr-center">
+        <Row>
+         <Tag className="m-r-1" variant={dataContext?.channel?.source == 'xmtp' ? 'state_xmtp' : ''}>{dataContext?.channel?.source}</Tag> 
+
+         {router.pathname == '/chat' && <Row className="vr-center">
+          
           <IconImage
             path="IconDarkMenu.png"
             onClick={modalSettings.onOpen}
@@ -150,8 +155,8 @@ const ChatHeader = (props: any) => {
 
           <IconImage path="IconDarkUsers.png" onClick={membersModal.onOpen} />
         </Row>}
-
-        
+        </Row>
+                
       </Row>
     );
   };
