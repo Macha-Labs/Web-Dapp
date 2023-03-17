@@ -1,8 +1,7 @@
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import { Channel$ } from "@/schema/channel";
+import { Channel$} from "@/schema/channel";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import {
   Avatar,
@@ -27,6 +26,7 @@ import ModalSlider from "../modal/ModalSlider";
 import IconImage from "../icons/IconImage";
 
 const ChatNew = (props: any) => {
+  console.log('Rendering >>>>> ChatNew');
   const [tab, setTab] = useState("details");
   const [inputFocus, setInputFocus] = useState(0);
   const [access, setAccess] = useState("Public");
@@ -343,15 +343,7 @@ const ChatNew = (props: any) => {
               irrespective of your network
             </Text>
           </Col>
-          {/* <Col>
-             <Heading as="h6" fontSize="md" className="m-b-0-5">
-               Public
-             </Heading>
-             <Row>
-               
-               <Switch></Switch>
-             </Row>
-           </Col> */}
+          
         </StyledCard>
       </div>
     );
@@ -584,8 +576,8 @@ const ChatNew = (props: any) => {
         break;
     }
     return (
-      <ModalSlider event={props.modal} size="sm" header={temp?.header}>
-        {temp?.body}
+      <ModalSlider event={props.modal} size="sm" header={templateDetails()?.header}>
+        {templateDetails()?.body}
       </ModalSlider>
     );
   };

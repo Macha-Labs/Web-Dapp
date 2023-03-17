@@ -94,11 +94,12 @@ const ChatMembersList: FC<Props> = props => {
   };
 
   const TemplateProfile = () => {
-    console.log(selectedUser, "selectedUser");
     return (
-      <ModalSlider event={modalProfile} size="lg">
-        <UserProfile user={selectedUser} />
-      </ModalSlider>
+     <>
+       {selectedUser && <ModalSlider event={modalProfile} size="lg">
+          <UserProfile user={selectedUser} />
+        </ModalSlider>}
+     </>
     );
   };
 
