@@ -18,7 +18,7 @@ const ChatMembers = (props: any) => {
   const chatContext = useContext(ChatContext);
   const dataContext = useContext(DataContext);
   const hookPortalChannelMembership = usePortalChannelMembership(dataContext?.channel);
-  const hookChatMembers = useChatMembers();
+  // const hookChatMembers = useChatMembers();
   const toast = useToast();
 
   const callbackRemove = () => {
@@ -28,7 +28,7 @@ const ChatMembers = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatMembers.load();
+    // hookChatMembers.load();
   }
 
 
