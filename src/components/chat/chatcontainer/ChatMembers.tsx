@@ -12,11 +12,13 @@ import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
+import useChatMembers from "@/hooks/chat/useChatMembers";
 
 const ChatMembers = (props: any) => {
   const chatContext = useContext(ChatContext);
   const dataContext = useContext(DataContext);
   const hookPortalChannelMembership = usePortalChannelMembership(dataContext?.channel);
+  const hookChatMembers = useChatMembers();
   const toast = useToast();
 
   const callbackRemove = () => {
@@ -26,6 +28,7 @@ const ChatMembers = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
+    hookChatMembers.load();
   }
 
 
