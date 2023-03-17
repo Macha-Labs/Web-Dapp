@@ -6,7 +6,6 @@ import { truncateAddress } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import IconImage from "@/components/icons/IconImage";
 
 interface Props {
@@ -105,9 +104,10 @@ const ChatMembersList: FC<Props> = props => {
 
   return (
     <>
-      {template("Online", props.onlineUsers)}
+      {template("Online", props.allUsers)}
 
       {template("Offline", props.offlineUsers)}
+      
 
       <TemplateProfile />
     </>

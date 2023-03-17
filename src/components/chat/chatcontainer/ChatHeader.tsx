@@ -40,6 +40,7 @@ const ChatHeader = (props: any) => {
     return (
       <ChatMembersList
         membersModal={membersModal}
+          allUsers = {dataContext?.memberAll}
           onlineUsers={dataContext.members?.onlineUsers}
           offlineUsers={dataContext.members?.offlineUsers}
         />

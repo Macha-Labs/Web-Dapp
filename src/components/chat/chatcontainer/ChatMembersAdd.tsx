@@ -22,8 +22,8 @@ const ChatMembersAdd = (props: any) => {
       position: "bottom-right",
     });
     hookChatMembers.load()
-    props?.modalAddMembers.onClose();
-    props?.modalChatMembers.onOpen();
+    // props?.modalAddMembers.onClose();
+    // props?.modalChatMembers.onOpen();
   };
 
   return (
