@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import useStreamChannelMembers from "../stream/useStreamChannelMembers";
 
-const useChatMembers = () => {
+const useChatMembers = (isAsync?: any) => {
     const router = useRouter();
     const dataContext = useContext(DataContext);
-    let hookStreamChannelMembers = useStreamChannelMembers()
+    let hookStreamChannelMembers = useStreamChannelMembers(isAsync)
 
 
     useEffect(() => {

@@ -4,7 +4,7 @@ import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { logger } from "@/helpers/logger";
 import { StreamContext } from "@/providers/StreamProvider";
 
-const useStreamChannelMembers = () => {
+const useStreamChannelMembers = (isAsync: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const streamContext = useContext(StreamContext);
   const [allUsersIds, setAllUsersIds] = useState<any>([]);
@@ -60,9 +60,6 @@ const useStreamChannelMembers = () => {
     return user.online == true;
   };
 
-  useEffect(() => {
-    _fetch();
-  }, [streamContext?.hookChannel?.channel?.id])
 
   return {
     fetch: _fetch,

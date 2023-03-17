@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import ChatSearch from "./ChatSearch";
 import { useRouter } from "next/router";
@@ -29,8 +29,11 @@ const ChatHeader = (props: any) => {
   const hookChatMembers = useChatMembers();
   const hookChatChannels = useChatChannelsReload();
   const hookChatChannel = useChatChannel();
-
   const router = useRouter();
+
+  useEffect(() => {
+    hookChatMembers.load();
+  }, [dataContext?.channel?.id])
 
   console.log("Re-rendering >>>>> ChatHeader", dataContext.members);
   const TemplateMembers = () => {
