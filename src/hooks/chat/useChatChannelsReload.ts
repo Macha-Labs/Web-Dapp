@@ -1,12 +1,12 @@
 import { loggerInit } from "@/helpers/logger";
-import useChatChannelsStore from "@/store/useChatChannelsStore";
+import { DataContext } from "@/providers/DataProvider";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useStreamUserChannels from "../stream/useStreamUserChannels";
 import useXmtpChannels from "../xmtp/useXmtpChannels";
 
 const useChatChannelsReload = () => {
-    const storeLoad = useChatChannelsStore(((state: any) => state.load))
+    const dataContext = useContext(DataContext);
     const hookStreamChannels = useStreamUserChannels();
     const hookXmtpChannels = useXmtpChannels();
     const router = useRouter();
@@ -17,9 +17,9 @@ const useChatChannelsReload = () => {
         if (loading) {
             setLoading(false);
             if (router.pathname == '/chat')
-                storeLoad(hookStreamChannels.channels);
+                dataContext.loadChannels(hookStreamChannels.channels);
             if (router.pathname == '/chat/dm')
-                storeLoad(hookXmtpChannels.channels);
+                dataContext.loadChannels(hookXmtpChannels.channels);
         }
     }, [hookStreamChannels.channels, hookXmtpChannels.channels])
 
@@ -29,9 +29,11 @@ const useChatChannelsReload = () => {
         switch (router.pathname) {
           case "/chat":
             hookStreamChannels.fetchUserChannels();
+            break;
           case "/chat/dm":
             loggerInit('for xmtp');
             hookXmtpChannels.fetch()
+            break;
         }
       }
     

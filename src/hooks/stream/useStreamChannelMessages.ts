@@ -7,7 +7,7 @@ const useStreamChannelMessages = () => {
   const [messages, setMessages] = useState<any>([]);
   const streamContext = useContext(StreamContext);
 
-  
+
   useEffect(() => {
     logger(
       "channel",
@@ -15,7 +15,7 @@ const useStreamChannelMessages = () => {
       "channel is ",
       [streamContext?.hookChannel?.channel]
     );
-    streamContext?.hookChannel?.channel?.raw?.stopWatching();
+    // streamContext?.hookChannel?.channel?.raw?.stopWatching();
     if (streamContext?.hookChannel?.channel && !streamContext?.hookChannel?.channel?.raw?.disconnected) {
       streamContext?.hookChannel?.channel?.raw?.markRead();
       _setMessages();
