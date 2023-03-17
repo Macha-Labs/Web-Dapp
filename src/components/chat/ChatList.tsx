@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
-import ModalSlider from "../modal/ModalSlider";
 import ChatNew from "./ChatNew";
 import IconImage from "../icons/IconImage";
 import { truncateAddress } from "@/helpers";
@@ -23,6 +22,7 @@ import LoadChannels from "../load/LoadChannels";
 import { useRouter } from "next/router";
 import useChatChannel from "@/hooks/chat/useChatChannel";
 import { DataContext } from "@/providers/DataProvider";
+import ChatNewDm from "./ChatNewDm";
 
 const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
@@ -33,6 +33,7 @@ const ChatList = (props: any) => {
   const hookChatChannels = useChatChannels();
   const router = useRouter();
   const modalChatNew = useDisclosure();
+  const modalChatNewDm = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
 
@@ -93,6 +94,12 @@ const ChatList = (props: any) => {
         />
     );
   };
+
+  const TemplateChatNewDm = () => {
+    return (
+      <ChatNewDm modal={modalChatNewDm}></ChatNewDm>
+    )
+  }
 
   const TemplateActions = (props: any) => {
     return (
@@ -205,7 +212,7 @@ const ChatList = (props: any) => {
           <ChatSearch style={{ className: "w-80" }} />
           <IconImage
             path="IconDarkPlus.png"
-            onClick={modalChatNew.onOpen}
+            onClick={triggerNew}
             styled={{ className: "m-l-1" }}
           />
         </Row>
@@ -346,10 +353,24 @@ const ChatList = (props: any) => {
     );
   };
 
+  const triggerNew = () => {
+   if (router.pathname == '/chat') {
+    modalChatNew.onOpen();
+    }
+    if (router.pathname == '/chat/dm') {
+      modalChatNewDm.onOpen()
+    }
+  }
+
   return (
     <>
       <TemplateChatList />
-      <TemplateChatNew />
+
+      {modalChatNew.isOpen && <TemplateChatNew />}
+      
+      {
+        modalChatNewDm.isOpen && <TemplateChatNewDm />
+      }
     </>
   );
 };

@@ -325,11 +325,11 @@ function ChatSetting(props: any) {
       </div>
       
     </ModalSlider>
-    <TemplatePermission />
-    <TemplateMembers />
-    <TemplateMembersAdd />
-    <TemplateEditChannel />
-    <TemplatePinnedMessages />
+     {modalChatPermission.isOpen &&  <TemplatePermission />}
+    {modalChatMembers.isOpen && <TemplateMembers />}
+    {modalAddMembers.isOpen && <TemplateMembersAdd />}
+    {modalChatEdit.isOpen && <TemplateEditChannel />}
+    {modalPinned.isOpen && <TemplatePinnedMessages />}
     </>
   )
 }

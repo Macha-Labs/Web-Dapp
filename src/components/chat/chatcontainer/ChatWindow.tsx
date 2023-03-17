@@ -6,6 +6,9 @@ import { useContext, useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
 import { StyledDateTag, StyledMoveToBottom } from '@/styles/StyledComponents';
 import IconImage from '@/components/icons/IconImage';
+import ModalSlider from "@/components/modal/ModalSlider";
+import UserProfile from "@/components/user/UserProfile";
+import { useDisclosure } from "@chakra-ui/react";
 
 const ChatWindow = (props: any) => {
   const dataContext = useContext(DataContext);
@@ -21,6 +24,8 @@ const ChatWindow = (props: any) => {
   const [scrollTo, setScrollTo] = useState('')
   const [prevMsgCount, setPrevMsgCount]= useState(0)
   const [unReadMsg, setUnReadMsg] = useState(0)
+  const [selectedUser, setSelectedUser] = useState<any>();
+  const modalProfile = useDisclosure();
 
 
   const handleDateTag = (date: any) => {
@@ -115,6 +120,29 @@ const ChatWindow = (props: any) => {
     itemsRef.current[id].scrollIntoView();
     setScrollTo(id);
   };
+
+  const handleSelectedUser = (user: any) => {
+    console.log(dataContext.memberAll)
+    if (dataContext.memberAll) {
+      console.log(dataContext.memberAll)
+      const userProfile = dataContext?.memberAll?.filter(
+        (profile: any) =>
+          String(profile.address).toLowerCase() ==
+          String(user.lensOwnedBy).toLowerCase()
+      )[0];
+      modalProfile.onOpen();
+      setSelectedUser(userProfile);
+    }
+  };
+
+
+  const TemplateProfile = () => {
+    return (
+      <ModalSlider event={modalProfile} size="lg">
+        <UserProfile user={selectedUser} />
+      </ModalSlider>
+    );
+  };
   
   return (
     <>
@@ -135,11 +163,16 @@ const ChatWindow = (props: any) => {
                 handleDateTag={handleDateTag}
                 executeScroll={executeScroll}
                 scrollToId={scrollTo}
+                handleSelectedUser={handleSelectedUser}
               />
             </div>
           );
         })}
     </div>
+
+    {
+        selectedUser && <TemplateProfile />
+    }
 
     <StyledMoveToBottom onClick={scrollToBottom} visible={`${!isScrollAtBottom ? 'visible': 'hidden'} `} >
         { unReadMsg != 0 && <span>{unReadMsg}</span> }
