@@ -6,11 +6,10 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect } from "react";
+import React, { useContext} from "react";
 import { ChatContext } from "@/providers/ChatProvider";
 import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
 
@@ -27,7 +26,6 @@ const ChatMembers = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    chatContext?.streamContext.reloadMembers();
   }
 
 

@@ -3,19 +3,16 @@ import { Avatar, Button, Checkbox, Heading, Text, useToast } from "@chakra-ui/re
 import React, { useContext } from "react";
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { ChatContext } from "@/providers/ChatProvider";
 import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
 
 const ChatMembersAdd = (props: any) => {
-  const chatContext=useContext(ChatContext);  
   const dataContext = useContext(DataContext);
   const hookPortalChannelMembership = usePortalChannelMembership(dataContext.channel);
   const toast = useToast();
 
   const callbackAdd = () => {
-    chatContext?.streamContext.reloadMembers();
     toast({
       title: "Channel Members Added",
       status: "success",
