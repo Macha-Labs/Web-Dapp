@@ -37,14 +37,7 @@ const ChatMembersList: FC<Props> = props => {
   const template = (heading: any, users: any) => {
     return (
       
-      <ModalSlider
-      size="sm"
-      event={props?.membersModal} 
-      header={
-        <>
-          <Heading as="h6" size="sm">Members</Heading>
-        </>            
-      }>
+      
         <Col className="m-b-1">
         {users?.length ? (
           <>
@@ -90,7 +83,6 @@ const ChatMembersList: FC<Props> = props => {
           <></>
         )}
       </Col>
-      </ModalSlider>
     );
   };
 
@@ -106,9 +98,20 @@ const ChatMembersList: FC<Props> = props => {
 
   return (
     <>
-      {template("Online", dataContext?.members.onlineUsers)}
+    <ModalSlider
+      size="sm"
+      event={props?.membersModal} 
+      header={
+        <>
+          <Heading as="h6" size="sm">Members</Heading>
+        </>            
+      }>
+         {template("Online", dataContext?.members.onlineUsers)}
 
-      {template("Offline", dataContext?.members.offlineUsers)}
+          {template("Offline", dataContext?.members.offlineUsers)}
+
+      </ModalSlider>
+     
       
 
       <TemplateProfile />
