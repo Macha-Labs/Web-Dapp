@@ -1,7 +1,7 @@
 import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
 import { Avatar, Button, Checkbox, Heading, Text, useDisclosure, useToast } from "@chakra-ui/react";
 import { useContext, useEffect, useRef } from "react";
-import { ChatContext } from "@/providers/ChatProvider";
+// import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import ModalSlider from "../modal/ModalSlider";
 import ChatNew from "./ChatNew";

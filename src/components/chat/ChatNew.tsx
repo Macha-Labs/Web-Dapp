@@ -449,18 +449,18 @@ const ChatNew = (props: any) => {
                     }
                   />
                 </Row>
-                </StyledCard>
-              );
-            }
-                    <Checkbox
-                      isChecked={hookPortalChannelMembership?.userIds?.includes(
-                        String(item?.lens?.ownedBy?.toLowerCase())
-                      )}
-                      onChange={() =>
-                        hookPortalChannelMembership.handleCheckedUsers(item)
-                      }
-                    />
-                  </Row>
+                // </StyledCard>
+            //   );
+            // }
+            //         <Checkbox
+            //           isChecked={hookPortalChannelMembership?.userIds?.includes(
+            //             String(item?.lens?.ownedBy?.toLowerCase())
+            //           )}
+            //           onChange={() =>
+            //             hookPortalChannelMembership.handleCheckedUsers(item)
+            //           }
+            //         />
+                  // </Row>
                 );
               }
             )
@@ -472,9 +472,10 @@ const ChatNew = (props: any) => {
               </Heading>
             </Col>
           )}
+          </LayoutCardPannel>
   </>
-
-    return {body: body, header: header}
+)
+    {/* return {body: body, header: header} */}
   };
 
 
