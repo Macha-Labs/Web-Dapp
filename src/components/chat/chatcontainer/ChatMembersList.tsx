@@ -1,5 +1,5 @@
 import { Avatar, AvatarBadge, Heading, useDisclosure } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { Col, Row, StyledCard, StyledCardPannel } from "@/styles/StyledComponents";
 import styled from "styled-components";
 import { truncateAddress } from "@/helpers";
@@ -7,6 +7,7 @@ import { style } from "@/styles/StyledConstants";
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
 import IconImage from "@/components/icons/IconImage";
+import { DataContext } from "@/providers/DataProvider";
 
 interface Props {
   [key: string]: any;
@@ -26,6 +27,7 @@ const Container = styled.div`
 const ChatMembersList: FC<Props> = props => {
   const modalProfile = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<any>();
+  const dataContext = useContext(DataContext)
 
   const handleSelectedUser = (user: any) => {
     modalProfile.onOpen();
@@ -104,9 +106,9 @@ const ChatMembersList: FC<Props> = props => {
 
   return (
     <>
-      {template("Online", props.allUsers)}
+      {template("Online", dataContext?.members.onlineUsers)}
 
-      {template("Offline", props.offlineUsers)}
+      {template("Offline", dataContext?.members.offlineUsers)}
       
 
       <TemplateProfile />

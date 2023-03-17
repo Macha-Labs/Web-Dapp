@@ -38,12 +38,7 @@ const ChatHeader = (props: any) => {
   console.log("Re-rendering >>>>> ChatHeader", dataContext.members);
   const TemplateMembers = () => {
     return (
-      <ChatMembersList
-        membersModal={membersModal}
-          allUsers = {dataContext?.memberAll}
-          onlineUsers={dataContext.members?.onlineUsers}
-          offlineUsers={dataContext.members?.offlineUsers}
-        />
+      <ChatMembersList membersModal={membersModal}/>
     );
   };
 
