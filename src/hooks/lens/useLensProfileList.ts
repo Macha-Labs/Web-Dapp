@@ -1,7 +1,6 @@
-import { AuthContext } from "@/providers/AuthProvider";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { getProfiles } from "../../helpers/lens/lens";
-import { User$, UserLens$ } from "../../schema/user";
+import { User$} from "../../schema/user";
 
 const useLensProfileList = () => {
   const [isLoading, setIsLoading] = useState<any>(false);
@@ -18,7 +17,6 @@ const useLensProfileList = () => {
       });
 
       setIsLoading(false);
-      console.log("Userprofile xmtp ", userProfile);
       const result = new User$(null, userProfile?.data?.profiles?.items[0], null);
       console.log("Userprofile xmtp schema", result);
       return result;

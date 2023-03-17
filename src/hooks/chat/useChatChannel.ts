@@ -1,7 +1,7 @@
 import { DataContext } from "@/providers/DataProvider";
 import { StreamContext, StreamContextType } from "@/providers/StreamProvider";
 import { XmtpContext } from "@/providers/XmtpProvider";
-import useChatChannelStore from "@/store/useChatChannelStore";
+
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 
