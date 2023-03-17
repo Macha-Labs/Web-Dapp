@@ -123,28 +123,26 @@ const ChatNew = (props: any) => {
   /**
    *
    **/
-  const TemplateDetails = () => {
-    return (
-      <>
-        <LayoutCardPannel
-          header={
-            <Row className="hr-between v-center">
-              {/* <Button
+  const templateDetails = () => {
+     
+        const header =        
+          <Row className="hr-between v-center">
+            {/* <Button
                 onClick={handleTabs}
                 variant="state_default_hover"
                 size="sm"
               >
                 Back
               </Button> */}
-              <Text>Create New Channel</Text>
-              {/* <Button variant="state_default_hover" size="sm"> */}
-              <IconImage
-                onClick={handleTabs}
-                path="IconDarkCross.png"
-                // styled={{ className: "m-l-1" }}
-              />
-              {/* </Button> */}
-              {/* <Button
+            <Text>Create New Channel</Text>
+            {/* <Button variant="state_default_hover" size="sm"> */}
+            <IconImage
+              onClick={handleTabs}
+              path="IconDarkCross.png"
+              // styled={{ className: "m-l-1" }}
+            />
+            {/* </Button> */}
+            {/* <Button
                 onClick={() => {
                   hookPortalChannel?.update(
                     hookPortalChannelMembership?.userIds
@@ -156,9 +154,8 @@ const ChatNew = (props: any) => {
               >
                 Create New
               </Button> */}
-            </Row>
-          }
-        >
+          </Row>      
+        const body = 
           <Col className="p-2">
             <Row className="hr-center w-100 m-b-1">
               <Avatar size="2xl" name={data[0].value} />
@@ -241,10 +238,8 @@ const ChatNew = (props: any) => {
                 <Switch></Switch>
               </Row>
             </Col> */}
-          </Col>
-        </LayoutCardPannel>
-      </>
-    );
+          </Col>        
+    return ({header:header , body:body});
   };
   const TemplateShare = () => {
     return (
@@ -292,11 +287,8 @@ const ChatNew = (props: any) => {
       </>
     );
   };
-  const TemplateAccess = () => {
-    return (
-      <>
-        <LayoutCardPannel
-          header={
+  const templateAccess = () => {
+    const header=
             <Row className="d-flex justify-content-between align-items-center">
               <Text>Manage Access </Text>
               <IconImage
@@ -305,123 +297,117 @@ const ChatNew = (props: any) => {
                 style={{ className: "" }}
               />
             </Row>
-          }
-          style={{ className: "px-3" }}
-        >
-          <Text>Who can join the channel?</Text>
-          <CheckboxGroup colorScheme="blue">
-            <Stack spacing={[5]} direction={"column"} className=" mt-2">
-              <Box
-                className="d-flex justify-content-between p-2"
-                border="1px"
-                borderRadius="md"
-                borderColor="gray.700"
-              >
-                <label htmlFor="checkbox1">
-                  <Row className="align-items-center">
-                    <IconImage
-                      onClick={handleTabs}
-                      path="IconDarkCross.png"
-                      style={{ className: "m-r-1" }}
-                    />
-                    <Text>Only my followers</Text>
-                  </Row>
-                </label>
-                <Checkbox
-                  id="checkbox1"
-                  value=""
-                  
-                />
-              </Box>
-              <Box
-                className="d-flex justify-content-between p-2"
-                border="1px"
-                borderRadius="md"
-                borderColor="gray.700"
-              >
-                <label htmlFor="checkbox2">
-                  <Row className="align-items-center">
-                    <IconImage
-                      onClick={handleTabs}
-                      path="IconDarkCross.png"
-                      style={{ className: "m-r-1" }}
-                    />
-                    <Text>Address I will add</Text>
-                  </Row>
-                </label>
-                <Checkbox id="checkbox2" value="" />
-              </Box>
-              <Box
-                className="d-flex justify-content-between p-2"
-                border="1px"
-                borderRadius="md"
-                borderColor="gray.700"
-              >
-                <label htmlFor="checkbox3">
-                  <Row className="align-items-center">
-                    <IconImage
-                      onClick={handleTabs}
-                      path="IconDarkCross.png"
-                      style={{ className: "m-r-1" }}
-                    />
-                    <Text>Lens Profile I will add</Text>
-                  </Row>
-                </label>
-                <Checkbox id="checkbox3" value="" />
-              </Box>
-              <Box
-                className="d-flex justify-content-between p-2"
-                border="1px"
-                borderRadius="md"
-                borderColor="gray.700"
-              >
-                <label htmlFor="checkbox4">
-                  <Row className="align-items-center">
-                    <IconImage
-                      onClick={handleTabs}
-                      path="IconDarkCross.png"
-                      style={{ className: "m-r-1" }}
-                    />
-                    <Text>Who own an NFT</Text>
-                  </Row>
-                </label>
-                <Checkbox id="checkbox4" value="" />
-              </Box>
-            </Stack>
-          </CheckboxGroup>
-          <Row className="mt-3">
-            <Text>
-              Do you want all these conditions to be satisfied to join the
-              channel
-            </Text>
-            <Switch />
-          </Row>
-          <Row className="justify-content-around">
-            <Button width="150px" size="lg">
-              Skip
-            </Button>
-            <Button width="150px" size="lg" variant="state_brand">
-              Continue
-            </Button>
-          </Row>
-        </LayoutCardPannel>
-      </>
+          
+          const body = (
+            <>
+              <Text>Who can join the channel?</Text>
+              <CheckboxGroup colorScheme="blue">
+                <Stack spacing={[5]} direction={"column"} className=" mt-2">
+                  <Box
+                    className="d-flex justify-content-between p-2"
+                    border="1px"
+                    borderRadius="md"
+                    borderColor="gray.700"
+                  >
+                    <label htmlFor="checkbox1">
+                      <Row className="align-items-center">
+                        <IconImage
+                          onClick={handleTabs}
+                          path="IconDarkCross.png"
+                          style={{ className: "m-r-1" }}
+                        />
+                        <Text>Only my followers</Text>
+                      </Row>
+                    </label>
+                    <Checkbox id="checkbox1" value="" />
+                  </Box>
+                  <Box
+                    className="d-flex justify-content-between p-2"
+                    border="1px"
+                    borderRadius="md"
+                    borderColor="gray.700"
+                  >
+                    <label htmlFor="checkbox2">
+                      <Row className="align-items-center">
+                        <IconImage
+                          onClick={handleTabs}
+                          path="IconDarkCross.png"
+                          style={{ className: "m-r-1" }}
+                        />
+                        <Text>Address I will add</Text>
+                      </Row>
+                    </label>
+                    <Checkbox id="checkbox2" value="" />
+                  </Box>
+                  <Box
+                    className="d-flex justify-content-between p-2"
+                    border="1px"
+                    borderRadius="md"
+                    borderColor="gray.700"
+                  >
+                    <label htmlFor="checkbox3">
+                      <Row className="align-items-center">
+                        <IconImage
+                          onClick={handleTabs}
+                          path="IconDarkCross.png"
+                          style={{ className: "m-r-1" }}
+                        />
+                        <Text>Lens Profile I will add</Text>
+                      </Row>
+                    </label>
+                    <Checkbox id="checkbox3" value="" />
+                  </Box>
+                  <Box
+                    className="d-flex justify-content-between p-2"
+                    border="1px"
+                    borderRadius="md"
+                    borderColor="gray.700"
+                  >
+                    <label htmlFor="checkbox4">
+                      <Row className="align-items-center">
+                        <IconImage
+                          onClick={handleTabs}
+                          path="IconDarkCross.png"
+                          style={{ className: "m-r-1" }}
+                        />
+                        <Text>Who own an NFT</Text>
+                      </Row>
+                    </label>
+                    <Checkbox id="checkbox4" value="" />
+                  </Box>
+                </Stack>
+              </CheckboxGroup>
+              <Row className="mt-3">
+                <Text>
+                  Do you want all these conditions to be satisfied to join the
+                  channel
+                </Text>
+                <Switch />
+              </Row>
+              <Row className="justify-content-around">
+                <Button width="150px" size="lg">
+                  Skip
+                </Button>
+                <Button width="150px" size="lg" variant="state_brand">
+                  Continue
+                </Button>
+              </Row>
+            </>
+          );
+            
+    return ({header:header,body:body}
     );
   };
-  const TemplateMembers = () => {
-    return (
-      <>
-        <LayoutCardPannel
-          header={
+  const templateMembers = () => {
+     const header=
             <Row className="hr-between v-center">
               <Text>New Channel</Text>
               <Button onClick={handleTabs} variant="state-brand" size="sm">
-                Next
+               Next
               </Button>
             </Row>
-          }
-        >
-          {hookPortalChannelMembership?.followers.length ? (
+    const body=
+          hookPortalChannelMembership?.followers.length ? (
             hookPortalChannelMembership?.followers?.map(
               (item: any, index: any) => {
                 return (
@@ -471,11 +457,9 @@ const ChatNew = (props: any) => {
                 You do not have any followers to add
               </Heading>
             </Col>
-          )}
-          </LayoutCardPannel>
-  </>
-)
-    {/* return {body: body, header: header} */}
+          )
+
+    return {body: body, header: header}
   };
 
 
