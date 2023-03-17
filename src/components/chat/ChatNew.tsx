@@ -7,15 +7,33 @@ import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$ } from "@/schema/channel";
 import { Col, Row } from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input, Image } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  Text,
+  useToast,
+  Checkbox,
+  Tag,
+  TagCloseButton,
+  Heading,
+  Switch,
+  Input,
+  Image,
+  RadioGroup,
+  Stack,
+  Radio,
+  CheckboxGroup,
+  Box,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
+import IconImage from "../icons/IconImage";
 
 const ChatNew = (props: any) => {
   const chatContext = useContext(ChatContext);
-  const [tab, setTab] = useState("members");
-  const [inputFocus, setInputFocus] = useState(0)
-
+  const [tab, setTab] = useState("details");
+  const [inputFocus, setInputFocus] = useState(0);
+  const [access, setAccess] = useState("Public");
   /**
    *
    **/
@@ -28,8 +46,8 @@ const ChatNew = (props: any) => {
       position: "bottom-right",
     });
     chatContext?.streamContext?.reloadChannelList();
-    
-    props.modal.onClose();
+
+    // props.modal.onClose();
   };
 
   const callbackPrompt = (message: any) => {
@@ -59,20 +77,27 @@ const ChatNew = (props: any) => {
    *
    **/
   const handleTabs = () => {
-    if (tab == "members") {
-      if (hookPortalChannelMembership?.users?.length) {
-        setTab("details");
-      } else {
-        toast({
-          title: "Add atleast one member",
-          status: "error",
-          duration: 3000,
-          position: "bottom-right",
-        });
-      }
-    } else {
-      setTab("members");
+    if (tab == "details" && access == "Public") {
+      setTab("share");
+      hookPortalChannel?.update(hookPortalChannelMembership?.userIds);
+    } else if (tab == "details" && access == "Private") {
+      setTab("private");
     }
+
+    // if (tab == "members") {
+    //   if (hookPortalChannelMembership?.users?.length) {
+    //     setTab("details");
+    //   } else {
+    //     toast({
+    //       title: "Add atleast one member",
+    //       status: "error",
+    //       duration: 3000,
+    //       position: "bottom-right",
+    //     });
+    //   }
+    // } else {
+    //   setTab("members");
+    // }
   };
 
   const data = [
@@ -107,15 +132,22 @@ const ChatNew = (props: any) => {
         <LayoutCardPannel
           header={
             <Row className="hr-between v-center">
-              <Button
+              {/* <Button
                 onClick={handleTabs}
                 variant="state_default_hover"
                 size="sm"
               >
                 Back
-              </Button>
-              <Text>New Channel</Text>
-              <Button
+              </Button> */}
+              <Text>Create New Channel</Text>
+              {/* <Button variant="state_default_hover" size="sm"> */}
+              <IconImage
+                onClick={handleTabs}
+                path="IconDarkCross.png"
+                // styled={{ className: "m-l-1" }}
+              />
+              {/* </Button> */}
+              {/* <Button
                 onClick={() => {
                   hookPortalChannel?.update(
                     hookPortalChannelMembership?.userIds
@@ -126,7 +158,7 @@ const ChatNew = (props: any) => {
                 isLoading={hookPortalChannel?.isLoading}
               >
                 Create New
-              </Button>
+              </Button> */}
             </Row>
           }
         >
@@ -134,51 +166,251 @@ const ChatNew = (props: any) => {
             <Row className="hr-center w-100 m-b-1">
               <Avatar size="2xl" name={data[0].value} />
             </Row>
-            <Input ref={ inputFocus == 0 ? input => input && input.focus(): null} onFocus={() => setInputFocus(0)} placeholder={data[0].label} value={data[0].value} onChange={(e) => data[0].onChange(e.target.value)} className="m-b-0-5"/>
-            <Input ref={ inputFocus == 1 ? input => input && input.focus(): null} onFocus={() => setInputFocus(1)} placeholder={data[1].label} value={data[1].value} onChange={(e) => data[1].onChange(e.target.value)} className="m-b-0-5"/>
-            {hookPortalChannelMembership?.users?.length ? (<Col className="flex-wrap m-b-1">
-            <Heading as="h6" fontSize="md" className="m-b-0-5">Add Members</Heading>
-            <Row className="flex-wrap">
-            {
-              hookPortalChannelMembership?.users?.map((item: any) => { return (
-                <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
-                          <Row className="vr-center p-0-5">
-                  <Avatar
-                    src={helperIPFS(item?.lens?.image)}
-                    className="m-r-0-5"
-                    size="sm"
-                  />
-                  <Text>
-                    {item?.lens?.name
-                      ? item?.lens?.name
-                      : item?.lens?.handle
-                      ? item?.lens?.handle
-                      : truncateAddress(item?.lens?.ownedBy)}
-                  </Text>
+            <Input
+              ref={inputFocus == 0 ? (input) => input && input.focus() : null}
+              onFocus={() => setInputFocus(0)}
+              placeholder={data[0].label}
+              value={data[0].value}
+              onChange={(e) => data[0].onChange(e.target.value)}
+              className="m-b-0-5"
+            />
+            <Input
+              ref={inputFocus == 1 ? (input) => input && input.focus() : null}
+              onFocus={() => setInputFocus(1)}
+              placeholder={data[1].label}
+              value={data[1].value}
+              onChange={(e) => data[1].onChange(e.target.value)}
+              className="m-b-0-5"
+            />
+            {hookPortalChannelMembership?.users?.length ? (
+              <Col className="flex-wrap m-b-1">
+                <Heading as="h6" fontSize="md" className="m-b-0-5">
+                  Add Members
+                </Heading>
+                <Row className="flex-wrap">
+                  {hookPortalChannelMembership?.users?.map((item: any) => {
+                    return (
+                      <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
+                        <Row className="vr-center p-0-5">
+                          <Avatar
+                            src={helperIPFS(item?.lens?.image)}
+                            className="m-r-0-5"
+                            size="sm"
+                          />
+                          <Text>
+                            {item?.lens?.name
+                              ? item?.lens?.name
+                              : item?.lens?.handle
+                              ? item?.lens?.handle
+                              : truncateAddress(item?.lens?.ownedBy)}
+                          </Text>
+                        </Row>
+                        <TagCloseButton
+                          onClick={() => {
+                            hookPortalChannelMembership.handleCheckedUsers(
+                              item
+                            );
+                          }}
+                        />
+                      </Tag>
+                    );
+                  })}
                 </Row>
-                <TagCloseButton onClick={() => {hookPortalChannelMembership.handleCheckedUsers(item)}}/>
-                 </Tag> 
-              )})
-            }
-            </Row>
-          </Col>) : (<></>)
-            
-            }
-            
-
+              </Col>
+            ) : (
+              <></>
+            )}
             <Col>
-              <Heading as="h6" fontSize="md" className="m-b-0-5">Public</Heading>
+              <Heading as="h6" fontSize="md" className="m-b-0-5">
+                Channel Access
+              </Heading>
+              <RadioGroup onChange={setAccess} value={access}>
+                <Stack direction="column">
+                  <Radio value="Public">Public</Radio>
+                  <Radio value="Private">Private</Radio>
+                </Stack>
+              </RadioGroup>
+              <Button onClick={handleTabs}>Next</Button>
+            </Col>
+            {/* <Col>
+              <Heading as="h6" fontSize="md" className="m-b-0-5">
+                Public
+              </Heading>
               <Row>
-                <Text>Allow channel to be joined and discoverable by anyone on platform irrespective of your network</Text>
+                <Text>
+                  Allow channel to be joined and discoverable by anyone on
+                  platform irrespective of your network
+                </Text>
                 <Switch></Switch>
               </Row>
-            </Col>
+            </Col> */}
           </Col>
         </LayoutCardPannel>
       </>
     );
   };
-
+  const TemplateShare = () => {
+    return (
+      <>
+        <LayoutCardPannel
+          header={
+            <Row className="d-flex justify-content-center align-items-center">
+              <IconImage
+                onClick={handleTabs}
+                path="IconDarkCross.png"
+                style={{ className: "m-r-1" }}
+              />
+              <Text>Channel Created </Text>
+            </Row>
+          }
+        >
+          <Col className="d-flex align-items-center flex-column">
+            <Text>Share Channel</Text>
+            <Row>
+              <IconImage
+                onClick={handleTabs}
+                path="IconDarkCross.png"
+                style={{ className: "m-r-1" }}
+              />
+              <IconImage
+                onClick={handleTabs}
+                path="IconDarkCross.png"
+                style={{ className: "m-r-1" }}
+              />
+              <IconImage
+                onClick={handleTabs}
+                path="IconDarkCross.png"
+                style={{ className: "m-r-1" }}
+              />
+              <IconImage
+                onClick={handleTabs}
+                path="IconDarkCross.png"
+                style={{ className: "" }}
+              />
+            </Row>
+            <Text>or</Text>
+            <Text>Copy and share link to invite people</Text>            
+          </Col>
+        </LayoutCardPannel>
+      </>
+    );
+  };
+  const TemplateAccess = () => {
+    return (
+      <>
+        <LayoutCardPannel
+          header={
+            <Row className="d-flex justify-content-between align-items-center">
+              <Text>Manage Access </Text>
+              <IconImage
+                onClick={handleTabs}
+                path="IconDarkCross.png"
+                style={{ className: "" }}
+              />
+            </Row>
+          }
+          style={{ className: "px-3" }}
+        >
+          <Text>Who can join the channel?</Text>
+          <CheckboxGroup colorScheme="blue">
+            <Stack spacing={[5]} direction={"column"} className=" mt-2">
+              <Box
+                className="d-flex justify-content-between p-2"
+                border="1px"
+                borderRadius="md"
+                borderColor="gray.700"
+              >
+                <label htmlFor="checkbox1">
+                  <Row className="align-items-center">
+                    <IconImage
+                      onClick={handleTabs}
+                      path="IconDarkCross.png"
+                      style={{ className: "m-r-1" }}
+                    />
+                    <Text>Only my followers</Text>
+                  </Row>
+                </label>
+                <Checkbox
+                  id="checkbox1"
+                  value=""
+                  
+                />
+              </Box>
+              <Box
+                className="d-flex justify-content-between p-2"
+                border="1px"
+                borderRadius="md"
+                borderColor="gray.700"
+              >
+                <label htmlFor="checkbox2">
+                  <Row className="align-items-center">
+                    <IconImage
+                      onClick={handleTabs}
+                      path="IconDarkCross.png"
+                      style={{ className: "m-r-1" }}
+                    />
+                    <Text>Address I will add</Text>
+                  </Row>
+                </label>
+                <Checkbox id="checkbox2" value="" />
+              </Box>
+              <Box
+                className="d-flex justify-content-between p-2"
+                border="1px"
+                borderRadius="md"
+                borderColor="gray.700"
+              >
+                <label htmlFor="checkbox3">
+                  <Row className="align-items-center">
+                    <IconImage
+                      onClick={handleTabs}
+                      path="IconDarkCross.png"
+                      style={{ className: "m-r-1" }}
+                    />
+                    <Text>Lens Profile I will add</Text>
+                  </Row>
+                </label>
+                <Checkbox id="checkbox3" value="" />
+              </Box>
+              <Box
+                className="d-flex justify-content-between p-2"
+                border="1px"
+                borderRadius="md"
+                borderColor="gray.700"
+              >
+                <label htmlFor="checkbox4">
+                  <Row className="align-items-center">
+                    <IconImage
+                      onClick={handleTabs}
+                      path="IconDarkCross.png"
+                      style={{ className: "m-r-1" }}
+                    />
+                    <Text>Who own an NFT</Text>
+                  </Row>
+                </label>
+                <Checkbox id="checkbox4" value="" />
+              </Box>
+            </Stack>
+          </CheckboxGroup>
+          <Row className="mt-3">
+            <Text>
+              Do you want all these conditions to be satisfied to join the
+              channel
+            </Text>
+            <Switch />
+          </Row>
+          <Row className="justify-content-around">
+            <Button width="150px" size="lg">
+              Skip
+            </Button>
+            <Button width="150px" size="lg" variant="state_brand">
+              Continue
+            </Button>
+          </Row>
+        </LayoutCardPannel>
+      </>
+    );
+  };
   const TemplateMembers = () => {
     return (
       <>
@@ -225,7 +457,7 @@ const ChatNew = (props: any) => {
             )
           ) : (
             <Col className="flex-hr-vr-center h-100">
-              <Image  src="/assets/nopost.png" className="w-40" />
+              <Image src="/assets/nopost.png" className="w-40" />
               <Heading className="" size="xs">
                 You do not have any followers to add
               </Heading>
@@ -236,6 +468,19 @@ const ChatNew = (props: any) => {
     );
   };
 
-  return <>{tab == "members" ? <TemplateMembers /> : <TemplateDetails />}</>;
+  // return <>{tab == "members" ? <TemplateMembers /> : <TemplateDetails />}</>;
+  return (
+    <>
+      {tab == "details" ? (
+        <TemplateDetails />
+      ) : tab == "share" ? (
+        <TemplateShare />
+      ) : tab == "private" ? (
+        <TemplateAccess />
+      ) : (
+        <></>
+      )}
+    </>
+  );
 };
 export default ChatNew;

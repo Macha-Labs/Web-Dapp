@@ -171,7 +171,7 @@ const ChatList = (props: any) => {
         <Row className="header vr-center hr-between">
           <ChatSearch style={{ className: "w-80" }} />
           <IconImage
-            path="IconDarkPlus.png"
+            path="IconDarkNewChannel.svg"
             onClick={modalChatNew.onOpen}
             styled={{ className: "m-l-1" }}
           />
@@ -321,10 +321,10 @@ const ChatList = (props: any) => {
                   Create Channel
                 </Button> */}
                 <>
-                  <Col className="flex-hr-vr-center">                    
+                  <Col className="flex-hr-vr-center">
                     <Heading className="m-b-1" size="lg">
                       No channels yet
-                    </Heading>  
+                    </Heading>
                     <Heading className="" size="xs">
                       Channels you are a member of will appear here
                     </Heading>
