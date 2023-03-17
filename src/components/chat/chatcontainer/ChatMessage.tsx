@@ -1,9 +1,7 @@
 import IconEmoji from "@/components/icons/IconEmoji";
 import IconImage from "@/components/icons/IconImage";
 import InputAction from "@/components/input/InputAction";
-import ModalSlider from "@/components/modal/ModalSlider";
 import Pop from "@/components/pop/Pop";
-import UserProfile from "@/components/user/UserProfile";
 import { truncateAddress } from "@/helpers";
 import useOnScreen from "@/hooks/other/useOnScreen";
 import LayoutFilePreview from "@/layouts/chat/LayoutFilePreview";
@@ -19,16 +17,12 @@ import {
   Avatar,
   Button,
   Checkbox,
-  Heading,
   Text,
   Textarea,
-  useToast,
-  useDisclosure,
+  useToast
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import emoji from "../../../data/emoji.json";
-import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
-import { ChannelEvents } from "@/data/types";
 
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
@@ -40,8 +34,6 @@ const ChatMessage = (props: any) => {
   const time = `${hours}:${minutes}`;
   const chatRef = useRef<HTMLDivElement>(null);
   const isIntersecting = useOnScreen(chatRef);
-
-  const hookStreamChannemMessages = useStreamChannelMessages();
 
   useEffect(() => {
     if (isIntersecting && props?.handleDateTag) {
@@ -90,10 +82,10 @@ const ChatMessage = (props: any) => {
       onClick: () => {
         if (props.message?.pinned) {
           props.hookChat.unPinMessage(props.message);
-          hookStreamChannemMessages.customChannelEventTrigger(ChannelEvents.unpinMessage, props.message);
+          // hookStreamChannemMessages.customChannelEventTrigger(ChannelEvents.unpinMessage, props.message);
         } else {
           props.hookChat.pinMessage(props.message);
-          hookStreamChannemMessages.customChannelEventTrigger(ChannelEvents.pinMessage, props.message);
+          // hookStreamChannemMessages.customChannelEventTrigger(ChannelEvents.pinMessage, props.message);
         }
       },
       condition: true,

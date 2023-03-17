@@ -14,7 +14,7 @@ const useStreamChannelMessages = () => {
     const channelEvent = await dataContext?.channel?.raw?.sendEvent({
       type: JSON.stringify(eventType),
       text: text
-    });
+    }); 
     console.log("Custom channel event triggered ", channelEvent);
   }
 
@@ -81,9 +81,6 @@ const useStreamChannelMessages = () => {
     });
 
     // custom channel events
-    dataContext?.channel?.raw?.on("pinMessage", (event: any) => {
-      logger("stream", "useStreamChannel.useEffect", "logging a custom event for pinning", [event]);
-    });
 
 
   }, [dataContext?.channel?.id]);
