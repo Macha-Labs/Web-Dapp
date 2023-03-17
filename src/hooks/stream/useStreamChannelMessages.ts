@@ -1,3 +1,4 @@
+import { ChannelEvents } from "@/data/types";
 import { logger } from "@/helpers/logger";
 import { DataContext } from "@/providers/DataProvider";
 import { StreamContext } from "@/providers/StreamProvider";
@@ -9,6 +10,13 @@ const useStreamChannelMessages = () => {
   const streamContext = useContext(StreamContext);
   const dataContext = useContext(DataContext);
 
+  const customChannelEventTrigger = async(eventType: ChannelEvents, text: any = "") => {
+    const channelEvent = await dataContext?.channel?.raw?.sendEvent({
+      type: JSON.stringify(eventType),
+      text: text
+    });
+    console.log("Custom channel event triggered ", channelEvent);
+  }
 
   useEffect(() => {
     logger(
@@ -71,7 +79,14 @@ const useStreamChannelMessages = () => {
       );
       _setMessages();
     });
-  }, [streamContext?.hookChannel?.channel?.id]);
+
+    // custom channel events
+    dataContext?.channel?.raw?.on("pinMessage", (event: any) => {
+      logger("stream", "useStreamChannel.useEffect", "logging a custom event for pinning", [event]);
+    });
+
+
+  }, [dataContext?.channel?.id]);
 
   const _setMessages = () => {
     console.log(streamContext, dataContext, 'EVENT LOG');
@@ -88,7 +103,8 @@ const useStreamChannelMessages = () => {
 
   return {
     messages: messages,
-    fetch: _setMessages
+    fetch: _setMessages,
+    customChannelEventTrigger: customChannelEventTrigger
   };
 };
 export default useStreamChannelMessages;
