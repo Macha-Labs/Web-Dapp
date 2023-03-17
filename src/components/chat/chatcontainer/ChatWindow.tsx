@@ -73,8 +73,8 @@ const ChatWindow = (props: any) => {
     // Scroll to the bottom of the list when new items are added
     if (messageListRef && messageListRef.current) {
       const lastMsg =
-      hookChatMessages?.messages[
-        hookChatMessages?.messages?.length - 1
+      dataContext?.messages[
+        dataContext?.messages?.length - 1
         ];
       if (
         String(authContext.address).toLowerCase() ==
@@ -114,7 +114,7 @@ const ChatWindow = (props: any) => {
         }
       };
     }
-  }, [hookChatMessages?.messages]);
+  }, [dataContext?.messages]);
 
   useEffect(() => {
     scrollToBottom()

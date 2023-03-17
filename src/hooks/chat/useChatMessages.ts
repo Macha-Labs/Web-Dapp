@@ -31,7 +31,6 @@ const useChatMessages = () => {
 
     return (
         {
-            messages: dataContext.messages,
             load: _load
         }
     )
