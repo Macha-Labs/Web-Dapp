@@ -27,6 +27,10 @@ const ChatWindow = (props: any) => {
   const [selectedUser, setSelectedUser] = useState<any>();
   const modalProfile = useDisclosure();
 
+  useEffect(() => {
+    hookChatMessages.load();
+  }, [dataContext?.channel?.id])
+
 
   const handleDateTag = (date: any) => {
     const todayIn = new Date();

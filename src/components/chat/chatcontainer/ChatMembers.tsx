@@ -6,8 +6,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect} from "react";
-import { ChatContext } from "@/providers/ChatProvider";
+import React, { useContext} from "react";
 import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import { DataContext } from "@/providers/DataProvider";

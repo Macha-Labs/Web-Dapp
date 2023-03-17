@@ -88,6 +88,7 @@ const useStreamChannelMessages = () => {
 
   return {
     messages: messages,
+    fetch: _setMessages
   };
 };
 export default useStreamChannelMessages;

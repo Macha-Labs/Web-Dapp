@@ -35,11 +35,6 @@ const useXmtpChannelMessages = () => {
   }
 
   useEffect(() => {
-    logger('xmtp', 'XmtpProvider.useEffect[xmtpContext.conversation]', 'channel', [xmtpContext.conversation])
-    _fetch()
-  }, [xmtpContext.conversation]);
-
-  useEffect(() => {
     if (authContext.xmtpClientAddress) {
       console.log("useEffect to stream messages");
       const streamMessages = async () => {
