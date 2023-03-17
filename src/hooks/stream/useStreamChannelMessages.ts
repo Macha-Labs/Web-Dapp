@@ -6,6 +6,7 @@ import { StreamMessage$ } from "@/schema/message";
 import { useContext, useEffect, useState } from "react";
 
 const useStreamChannelMessages = () => {
+  console.log('Rendering >>>>> useStreamChannelMessages');
   const [messages, setMessages] = useState<any>([]);
   const streamContext = useContext(StreamContext);
   const dataContext = useContext(DataContext);
@@ -19,6 +20,8 @@ const useStreamChannelMessages = () => {
   }
 
   useEffect(() => {
+    if (dataContext?.channel?.source != 'getstream')
+      return;
     logger(
       "channel",
       "useStreamChannelMessages.useEffect[channel]",
