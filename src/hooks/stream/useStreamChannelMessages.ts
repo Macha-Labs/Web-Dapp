@@ -80,9 +80,9 @@ const useStreamChannelMessages = () => {
 
   const _setMessages = () => {
     console.log(streamContext, dataContext, 'EVENT LOG');
-    if (streamContext?.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages) {
-      logger('stream', 'useStreamChannelMessages._setMessages', 'messages are', streamContext?.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages)
-      const messageData = streamContext?.hookChannel?.channel?.raw?.state?.messageSets[0]?.messages
+    if (dataContext?.channel?.raw?.state?.messageSets[0]?.messages) {
+      logger('stream', 'useStreamChannelMessages._setMessages', 'messages are', dataContext?.channel?.raw?.state?.messageSets[0]?.messages)
+      const messageData = dataContext?.channel?.raw?.state?.messageSets[0]?.messages
         ?.slice(0)
         .map((item: any) => {
           return StreamMessage$(item);
