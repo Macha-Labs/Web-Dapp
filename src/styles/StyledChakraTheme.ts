@@ -245,6 +245,11 @@ const theme = extendTheme({
       defaultProps: {
         colorScheme: "whiteAlpha",
       },
+      variants: {
+        state_xmtp: {
+          background: "#ef4444"
+        }
+      }
     },
     Menu: {
       baseStyle: {

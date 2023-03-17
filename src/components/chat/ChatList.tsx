@@ -1,5 +1,5 @@
 import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
-import { Avatar, Button, Text, useDisclosure, useToast } from "@chakra-ui/react";
+import { Avatar, Button, Tag, Text, useDisclosure, useToast } from "@chakra-ui/react";
 import { useContext, useEffect} from "react";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import ChatNew from "./ChatNew";
@@ -261,6 +261,7 @@ const ChatList = (props: any) => {
                                 ? `${item?.name?.slice(0, 12)}...`
                                 : item?.name}
                             </Text>
+
                             {item?.raw && (
                               <>
                                 {!item?.raw?.disconnected && item?.raw?.muteStatus()?.muted && (
@@ -272,9 +273,7 @@ const ChatList = (props: any) => {
                                 )}
                               </>
                             )}
-                          </Row>
-
-                          
+                          </Row>                          
 
                             {item?.lastMessage && (
                               <Col

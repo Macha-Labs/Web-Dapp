@@ -13,8 +13,11 @@ const ChatNonDisplay = () => {
       {dataContext?.channels?.length ? (
         <Col className="flex-hr-vr-center h-100">
           <Image src="/assets/nochatselected.png" className="w-30 m-b-2" />
+          <Heading className="m-b-1" size="lg">
+            Select Channel
+          </Heading>
           <Heading className="" size="xs">
-            Select a chat to start messaging
+            No chat selected, select from the pannel
           </Heading>
         </Col>
       ) : (
