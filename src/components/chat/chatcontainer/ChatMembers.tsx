@@ -12,8 +12,10 @@ import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembershi
 import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
 import useChatMembers from "@/hooks/chat/useChatMembers";
+import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 
 const ChatMembers = (props: any) => {
+  const authContext = useContext(AuthContext) as AuthContextType;
   const dataContext = useContext(DataContext);
   const hookPortalChannelMembership = usePortalChannelMembership(dataContext?.channel);
   const hookChatMembers = useChatMembers();
@@ -72,14 +74,16 @@ const ChatMembers = (props: any) => {
                       <Text color="#6FC62A">@{item?.lens?.handle}</Text>
                     </Col>
                   </Row>
-                  <Checkbox
+
+                  {item?.lens?.ownedBy != authContext?.address && <Checkbox
                     value=""
                     onChange={() =>
                       hookPortalChannelMembership.handleCheckedUsers(
                         item
                       )
                     }
-                  />
+                  />}
+                  
                 </Row>
               </StyledCard>
             );
