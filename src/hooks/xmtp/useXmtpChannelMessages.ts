@@ -6,6 +6,7 @@ import { DecodedMessage, SortDirection } from "@xmtp/xmtp-js";
 import { useContext, useEffect, useState } from "react";
 
 const useXmtpChannelMessages = () => {
+  console.log('Rendering >>>>> useXmtpChannelMessages');
   const [messages, setMessages] = useState<DecodedMessage[]>([]);
   const [xmtpLogs, setXmtpLogs] = useState<any>();
   const xmtpContext = useContext(XmtpContext);

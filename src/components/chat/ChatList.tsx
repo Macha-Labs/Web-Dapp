@@ -39,6 +39,7 @@ const ChatList = (props: any) => {
 
   // TODO: Fix bandaging
   useEffect(() => {
+    console.log('Rendering >>>>> useChatChannels.load');
     hookChatChannels.load();
   }, [router.pathname, chatContext.streamContext?.client?.user?.id]);
 
