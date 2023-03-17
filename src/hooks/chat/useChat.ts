@@ -284,8 +284,6 @@ const useChat = (client: any, channel: any) => {
       } else if (textareaRef.current?.value.length > 0 || attachItem) {
         await addMessage(callback);
       }
-    } else if (event.key == "/") {
-      setSlashCmd(true);
     }
   };
 
