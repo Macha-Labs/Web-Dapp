@@ -82,7 +82,7 @@ export class Channel$ {
     this.lastMessage = data?.state?.messageSets[0]?.messages[data?.state?.messageSets[0]?.messages?.length - 1],
     this.membersCount = data.data?.member_count,
     this.notificationCount = null,
-    this.pinnedMessages = data.data?.state?.pinnedMessages,
+    this.pinnedMessages = data?.state?.pinnedMessages,
     this.raw = data
   }
 

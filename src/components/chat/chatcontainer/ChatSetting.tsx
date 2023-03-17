@@ -280,7 +280,7 @@ function ChatSetting(props: any) {
         <ChatEdit modal={modalChatEdit} />
     );
   };
-
+  console.log("Pinned message ", dataContext)
   const TemplatePinnedMessages = () => {
     return (
       <ChatMessageList
