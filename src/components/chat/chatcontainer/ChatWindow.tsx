@@ -33,6 +33,7 @@ const ChatWindow = (props: any) => {
 
   useEffect(() => {
     hookChatMessages.load();
+    hookChatMessages.watch();
   }, [$channel?.id])
 
 
@@ -59,24 +60,24 @@ const ChatWindow = (props: any) => {
       messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
       setIsScrollAtBottom(true);
       setUnReadMsg(0)
-      setPrevMsgCount($messages.length)
+      setPrevMsgCount($messages?.length)
     }
   }
 
   useEffect(() => {
-   setPrevMsgCount($messages.length)
+   setPrevMsgCount($messages?.length)
    scrollToBottom()
   }, [])
 
   useEffect(() => {
    if(!isScrollAtBottom){
-      setUnReadMsg($messages.length - prevMsgCount)
+      setUnReadMsg($messages?.length - prevMsgCount)
     }else{
       setUnReadMsg(0)
-      setPrevMsgCount($messages.length)
+      setPrevMsgCount($messages?.length)
     }
     // Scroll to the bottom of the list when new items are added
-    if (messageListRef && messageListRef.current) {
+    if (messageListRef && messageListRef.current && $messages) {
       const lastMsg =
       $messages[
         $messages?.length - 1
@@ -100,7 +101,7 @@ const ChatWindow = (props: any) => {
           if (Math.abs(scrollHeight - clientHeight - scrollTop) < 10) {
             setIsScrollAtBottom(true);
             setUnReadMsg(0)
-            setPrevMsgCount($messages.length)
+            setPrevMsgCount($messages?.length)
           } else {        
             setIsScrollAtBottom(false);
           }

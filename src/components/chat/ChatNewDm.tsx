@@ -12,7 +12,7 @@ const ChatNewDm = (props: any) => {
     
     const callback = {
         success: () => {
-            // props.modal.onClose()
+            props.modal.onClose();
         },
         error: () => {
             toast({

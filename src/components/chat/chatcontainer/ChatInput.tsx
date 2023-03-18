@@ -4,6 +4,8 @@ import Pop from "@/components/pop/Pop";
 import PortalLoader from "@/components/PortalLoader";
 import useChatMessage from "@/hooks/chat/useChatMessage";
 import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
+import { AuthContext } from "@/providers/AuthProvider";
+import { ChatContext } from "@/providers/ChatProvider";
 import {
   Col,
   Row,
@@ -22,11 +24,13 @@ import {
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
 import ChatMention from "../ChatMention";
 
 const ChatInput = (props: any) => {
+  const authContext = useContext(AuthContext);
+  const chatContext = useContext(ChatContext);
   const modalPost = useDisclosure();
   const hookCreateLensPost = useCreateLensPost();
   const hookChatMessage = useChatMessage();
@@ -40,7 +44,7 @@ const ChatInput = (props: any) => {
   const templateReply = () => {
     return (
       <>
-        {props?.chatContext?.hookChat?.actionMessage?.action === "REPLY" ? (
+        {chatContext?.hookChat?.actionMessage?.action === "REPLY" ? (
           <div className="reply">
             <Col className="w-100 vr-center">
               <Row className="vr-center">
@@ -48,15 +52,15 @@ const ChatInput = (props: any) => {
                 <Divider orientation="vertical" color={"#246BFD"} />
                 {/* <Avatar
                   size="xs"
-                  src={props?.chatContext?.hookChat?.actionMessage?.item?.user.lensImage}
+                  src={chatContext?.hookChat?.actionMessage?.item?.user.lensImage}
                 />
                 <Text fontSize="xs">
-                  @{props?.chatContext?.hookChat?.actionMessage?.item?.user?.lensHandle}
+                  @{chatContext?.hookChat?.actionMessage?.item?.user?.lensHandle}
                 </Text> */}
               </Row>
               <Row>
                 <Text fontSize="xs">
-                  {props?.chatContext?.hookChat?.actionMessage?.item?.text}
+                  {chatContext?.hookChat?.actionMessage?.item?.text}
                 </Text>
               </Row>
             </Col>
@@ -98,7 +102,7 @@ const ChatInput = (props: any) => {
             variant="state_brand w-content"
             onClick={() => {
               hookCreateLensPost.validateMetadataAndPostOnLens({
-                profileId: props?.authContext?.user?.lens?.id,
+                profileId: authContext?.user?.lens?.id,
                 postContent: createPostRef.current.value,
               });
             }}
@@ -111,19 +115,19 @@ const ChatInput = (props: any) => {
   };
   const templateAttachment = () => {
     let type;
-    if (props?.chatContext?.hookChat?.attachItem) {
-      type = props?.chatContext?.hookChat?.attachItem.type.split("/")[0];
+    if (chatContext?.hookChat?.attachItem) {
+      type = chatContext?.hookChat?.attachItem.type.split("/")[0];
     }
     return (
       <>
-        {props?.chatContext?.hookChat?.attachItem ? (
+        {chatContext?.hookChat?.attachItem ? (
           <div className="attachment show">
             <Row className="vr-start hr-between">
               <Col className="w-100">
                 {type == "image" ? (
                   <Image
-                    src={URL.createObjectURL(props?.chatContext?.hookChat.attachItem)}
-                    alt={props?.chatContext?.hookChat.attachItem?.name}
+                    src={URL.createObjectURL(chatContext?.hookChat.attachItem)}
+                    alt={chatContext?.hookChat.attachItem?.name}
                     width="300px"
                   />
                 ) : (
@@ -133,10 +137,10 @@ const ChatInput = (props: any) => {
                   />
                 )}
                 <Text className="m-t-0-5">
-                  {props?.chatContext?.hookChat?.attachItem?.name}
+                  {chatContext?.hookChat?.attachItem?.name}
                 </Text>
               </Col>
-              {props?.chatContext?.hookChat.streamLoading ? (
+              {chatContext?.hookChat.streamLoading ? (
                 <PortalLoader size="xs" />
               ) : (
                 <></>
@@ -152,23 +156,23 @@ const ChatInput = (props: any) => {
 
   const templateSlashPreview = () => {
     const objs: any = {
-      // 'post': <LayoutPostCard item={props?.chatContext?.hookChat?.chatMeta?.meta} />,
-      // 'proposal': <LayoutProposalCard item={props?.chatContext?.hookChat?.chatMeta?.meta} />,
-      nft: <LayoutNFTCard nft={props?.chatContext?.hookChat?.chatMeta?.meta} />,
-      // '/send-payment': <LayoutTransactionCard meta={props?.chatContext?.hookChat?.chatMeta?.meta} />,
-      // 'poll': <LayoutPollCard poll={props?.chatContext?.hookChat?.chatMeta?.meta} />
+      // 'post': <LayoutPostCard item={chatContext?.hookChat?.chatMeta?.meta} />,
+      // 'proposal': <LayoutProposalCard item={chatContext?.hookChat?.chatMeta?.meta} />,
+      nft: <LayoutNFTCard nft={chatContext?.hookChat?.chatMeta?.meta} />,
+      // '/send-payment': <LayoutTransactionCard meta={chatContext?.hookChat?.chatMeta?.meta} />,
+      // 'poll': <LayoutPollCard poll={chatContext?.hookChat?.chatMeta?.meta} />
     };
-    return objs[props?.chatContext?.hookChat?.chatMeta?.type];
+    return objs[chatContext?.hookChat?.chatMeta?.type];
   };
 
   const TemplatePreview = () => {
     return (
       <>
-        {props?.chatContext?.hookChat?.actionMessage?.action == "REPLY" ||
-        props?.chatContext?.hookChat?.attachItem ||
-        props?.chatContext?.hookChat?.chatMeta?.type ||
-        props?.chatContext?.hookChat?.slashCmd ||
-        props?.chatContext?.hookChat?.mentionActive ? (
+        {chatContext?.hookChat?.actionMessage?.action == "REPLY" ||
+        chatContext?.hookChat?.attachItem ||
+        chatContext?.hookChat?.chatMeta?.type ||
+        chatContext?.hookChat?.slashCmd ||
+        chatContext?.hookChat?.mentionActive ? (
           <StyledChatPreview>
             <Row className="vr-center w-100 hr-between">
               <Heading as="h6" size="sm">
@@ -183,10 +187,10 @@ const ChatInput = (props: any) => {
             {templateReply()}
             {templateAttachment()}
             {templateSlashPreview()}
-            {props?.chatContext?.hookChat?.mentionActive ? templateMention() : <></>}
-            {/* {props?.chatContext?.hookChat.slashCmd ? (
+            {chatContext?.hookChat?.mentionActive ? templateMention() : <></>}
+            {/* {chatContext?.hookChat.slashCmd ? (
                                 <LayoutSlashPreview
-                                    hookChat={props?.chatContext?.hookChat}
+                                    hookChat={chatContext?.hookChat}
                                     handleTask={props.handleTask}
                                     txnModalOpen={props.txnModalOpen}
                                     slashCmds={props.slashCmds}
@@ -204,10 +208,10 @@ const ChatInput = (props: any) => {
   const templateMention = () => {
     return (
       <ChatMention
-        setMentionList={props?.chatContext?.hookChat.setMentionList}
-        mentionList={props?.chatContext?.hookChat.mentionList}
-        mention={props?.chatContext?.hookChat.mention}
-        selectedText={props?.chatContext?.hookChat.selectedText}
+        setMentionList={chatContext?.hookChat.setMentionList}
+        mentionList={chatContext?.hookChat.mentionList}
+        mention={chatContext?.hookChat.mention}
+        selectedText={chatContext?.hookChat.selectedText}
       />
     );
   };
@@ -235,7 +239,7 @@ const ChatInput = (props: any) => {
           </Button>
           <input
             id="upload-file"
-            onChange={props?.chatContext?.hookChat.handleAttachment}
+            onChange={chatContext?.hookChat.handleAttachment}
             type="file"
             hidden
           />
@@ -286,12 +290,12 @@ const ChatInput = (props: any) => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
                 }}
-                ref={props?.chatContext?.hookChat.textareaRef}
+                ref={chatContext?.hookChat.textareaRef}
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
                 onKeyDown={(event: any) => {
-                  props?.chatContext?.hookChat?.keyDownMessage(event, callbackSendMessage);
+                  chatContext?.hookChat?.keyDownMessage(event, callbackSendMessage);
                 }}
                 placeholder="Message..."
                 height="auto"
@@ -301,7 +305,7 @@ const ChatInput = (props: any) => {
             <Col className="vr-center hr-center sideIcons">
               <span
                 onClick={(e: any) => {
-                  props?.chatContext?.hookChat?.addMessage(callbackSendMessage);
+                  chatContext?.hookChat?.addMessage(callbackSendMessage);
                 }}
               >
                 <IconImage path="IconDarkSend.svg" size="30" />
@@ -360,15 +364,15 @@ const ChatInput = (props: any) => {
   };
 
   const previewCloseHandler = () => {
-    if (props?.chatContext?.hookChat?.actionMessage?.action == "REPLY") {
-      props?.chatContext?.hookChat?.handleReplyClose();
-    } else if (props?.chatContext?.hookChat?.attachItem) {
-      props?.chatContext?.hookChat?.deleteAttachment();
+    if (chatContext?.hookChat?.actionMessage?.action == "REPLY") {
+      chatContext?.hookChat?.handleReplyClose();
+    } else if (chatContext?.hookChat?.attachItem) {
+      chatContext?.hookChat?.deleteAttachment();
     }
   };
 
   const Template = () => {
-    if (props?.chatContext?.hookChat.actionMessage?.action === "SEARCH")
+    if (chatContext?.hookChat.actionMessage?.action === "SEARCH")
       return (
         <StyledChatInputContainer>
           <StyledChatInput>
@@ -376,7 +380,7 @@ const ChatInput = (props: any) => {
           </StyledChatInput>
         </StyledChatInputContainer>
       );
-    else if (props?.chatContext?.hookChat.actionMessage?.action === "MULTISELECT")
+    else if (chatContext?.hookChat.actionMessage?.action === "MULTISELECT")
       return (
         <StyledChatInputContainer>
           <StyledChatInput>

@@ -1,4 +1,4 @@
-import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
+import { Col, Row, StyledCard, StyledChatItem } from "@/styles/StyledComponents";
 import {
   Avatar,
   Button,
@@ -16,21 +16,19 @@ import React, { useState } from "react";
 import Pop from "../pop/Pop";
 import { darkStyle } from "@/styles/StyledConstants";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
-import useChatChannels from "@/hooks/chat/useChatChannels";
+
 import { ChatContext } from "@/providers/ChatProvider";
 import LoadChannels from "../load/LoadChannels";
 import { useRouter } from "next/router";
-import useChatChannel from "@/hooks/chat/useChatChannel";
 import ChatNewDm from "./ChatNewDm";
 import useChatChannelsStore from "@/store/useChatChannelsStore";
 import useChatChannelStore from "@/store/useChatChannelStore";
+import useChatChannel from "@/hooks/chat/useChatChannel";
 
 const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
-  const hookChatChannel = useChatChannel();
-  const hookChatChannels = useChatChannels();
   const router = useRouter();
   const modalChatNew = useDisclosure();
   const modalChatNewDm = useDisclosure();
@@ -38,15 +36,13 @@ const ChatList = (props: any) => {
   const [isClicked, setIsClicked] = useState<any>([]);
   const $channels = useChatChannelsStore((state: any) => state.channels);
   const $channel = useChatChannelStore((state: any) => state.channel);
-  // const $channel = {id: 'hi'}
-
 
 
   // TODO: Fix bandaging
   useEffect(() => {
-    console.log('Rendering >>>>> useChatChannels.load');
-    hookChatChannels.load();
-  }, [router.pathname, chatContext.streamContext?.client?.user?.id]);
+    chatContext?.hookChannelList.load();
+    chatContext?.hookChannel?.unload();
+  }, [router.pathname]);
 
   const hookPortalChannel = usePortalChannel(null, {
     mute: () => {
@@ -56,8 +52,7 @@ const ChatList = (props: any) => {
         duration: 3000,
         position: "bottom-right",
       });
-      hookChatChannels?.load();
-      // hookChatChannel.reload();
+      chatContext?.hookChannelList.load();
     },
     unmute: () => {
       toast({
@@ -66,8 +61,7 @@ const ChatList = (props: any) => {
         duration: 3000,
         position: "bottom-right",
       });
-      hookChatChannels?.load();
-      // hookChatChannel.reload();
+      chatContext?.hookChannelList?.load();
     },
     leave: () => {
       toast({
@@ -76,8 +70,8 @@ const ChatList = (props: any) => {
         duration: 3000,
         position: "bottom-right",
       });
-      hookChatChannels?.load();
-      // hookChatChannel.remove();
+      chatContext?.hookChannelList?.load();
+      chatContext?.hookChannel?.remove();
     },
     delete: () => {
       toast({
@@ -86,8 +80,8 @@ const ChatList = (props: any) => {
         duration: 3000,
         position: "bottom-right",
       });
-      hookChatChannels?.load();
-      // hookChatChannel.remove();
+      chatContext?.hookChannelList?.load();
+      chatContext?.hookChannel?.remove();
     },
   });
 
@@ -95,8 +89,6 @@ const ChatList = (props: any) => {
     return (
       <ChatNew
         modal={modalChatNew}
-        hookChatChannels={hookChatChannels}
-        // hookChatChannel={hookChatChannel}
       />
     );
   };
@@ -259,20 +251,19 @@ const ChatList = (props: any) => {
                         }
                       />
                     )} */}
-                      <Button
-                        className="menu-item w-100 m-b-0-5"
-                        size="xl"
-                        variant={
+                      <StyledCard
+                        className= {
                           $channel?.id == item?.id
-                            ? "state_brand"
-                            : "state_card_hover"
+                            ? "state_brand menu-item w-100 m-b-0-5"
+                            : "state_card_hover menu-item w-100 m-b-0-5"
                         }
-                        // overflow="hidden"
+                        
                       >
+                        <Row className="vr-center">
                         <Row
                           className="vr-center w-11-12"
                           onClick={() => {
-                            hookChatChannel?.fetch(item);
+                            chatContext?.hookChannel?.fetch(item);
                           }}
                         >
                           {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
@@ -356,7 +347,8 @@ const ChatList = (props: any) => {
                         <Col className="hr-center w-1-12 settingsIcon">
                           <TemplateActions item={item} />
                         </Col>
-                      </Button>
+                        </Row>
+                      </StyledCard>
                     </StyledChatItem>
                   ))}
                 </ul>

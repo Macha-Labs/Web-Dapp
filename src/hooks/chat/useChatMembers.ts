@@ -1,10 +1,11 @@
+import { logger } from "@/helpers/logger";
 import { useChatMembersStore } from "@/store/useChatMembersStore";
 import { useRouter } from "next/router";
 import {useEffect } from "react";
 import useStreamChannelMembers from "../stream/useStreamChannelMembers";
 
 const useChatMembers = () => {
-    console.log("Rendering >>>>> useChatMemberst");
+    console.log("Rendering >>>>> useChatMembers");
     const router = useRouter();
     let hookStreamChannelMembers = useStreamChannelMembers();
     const $loadMembers = useChatMembersStore(((state: any) => state.load));
@@ -13,17 +14,21 @@ const useChatMembers = () => {
 
 
     useEffect(() => {
-        if (router.pathname == '/chat' && hookStreamChannelMembers?.users) {
+        logger("channel", "useChatMembers.useEffect[hookStreamChannelMembers?.users]", "members data from stream ", [
+            hookStreamChannelMembers?.users,
+        ]);
+        if (router.pathname == '/chat' && hookStreamChannelMembers?.allUsersIds) {
             $loadMembers({ onlineUsers: hookStreamChannelMembers?.onlineUsers, offlineUsers: hookStreamChannelMembers?.offlineUsers});
             $loadMemberAll(hookStreamChannelMembers.allUsers)
             $loadMemberIds(hookStreamChannelMembers?.allUsersIds);
         }
         
-    }, [hookStreamChannelMembers?.users]);
+    }, [hookStreamChannelMembers?.allUsersIds]);
 
-    const _load = () => {
+    const _load = (channel: any) => {
+        console.log('Rendering >>>>> useChatMembers.load');
         if (router.pathname == '/chat') {
-            return hookStreamChannelMembers.fetch
+            hookStreamChannelMembers.fetch(channel)
         }
     }
 

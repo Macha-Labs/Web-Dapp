@@ -11,33 +11,21 @@ import {
 import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
 import { useContext, useEffect } from "react";
-import { AuthContext } from "@/providers/AuthProvider";
 import ChatSearch from "./ChatSearch";
 import { useRouter } from "next/router";
 import { truncateAddress } from "@/helpers";
-import useChatMembers from "@/hooks/chat/useChatMembers";
 import { ChatContext } from "@/providers/ChatProvider";
-import useChatChannel from "@/hooks/chat/useChatChannel";
 import useChatChannelStore from "@/store/useChatChannelStore";
-import useChatChannels from "@/hooks/chat/useChatChannels";
 
 const ChatHeader = (props: any) => {
   console.log("Rendering >>>>> ChatHeader");
   const membersModal = useDisclosure();
   const modalSettings = useDisclosure();
-  const authContext = useContext(AuthContext);
-  const chatContext = useContext(ChatContext);
-  const hookChatMembers = useChatMembers();
-  const hookChatChannels = useChatChannels();
-  const hookChatChannel = useChatChannel();
   const router = useRouter();
-  // const $channel = useChatChannelStore((state: any) => state.channel);
-  const $channel = {id: 'hi'}
+  const chatContext = useContext(ChatContext);
+  const $channel = useChatChannelStore((state: any) => state.channel);
 
-  useEffect(() => {
-    hookChatMembers.load();
-  }, [$channel?.id])
-
+ 
 
   const TemplateSearch = () => {
     return (
@@ -162,14 +150,14 @@ const ChatHeader = (props: any) => {
           <Template />
         </Row>
       </div>
+      
       {membersModal.isOpen && <ChatMembersList modal={membersModal}/>}
       
-      {/* <ChatSetting
-          authContext={authContext}
+      <ChatSetting
           modalSettings={modalSettings}
-          hookChatChannels={hookChatChannels}
-          hookChatChannel={hookChatChannel}
-         /> */}
+          hookChatChannels={props.hookChatChannels}
+          hookChatChannel={props.hookChatChannel}
+         />
     </>
   );
 };

@@ -1,16 +1,18 @@
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
+import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$} from "@/schema/channel";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ModalSlider from "../modal/ModalSlider";
 
 const ChatNew = (props: any) => {
   console.log('Rendering >>>>> ChatNew');
   const [tab, setTab] = useState("members");
   const [inputFocus, setInputFocus] = useState(0);
+  const chatContext = useContext(ChatContext)
 
   /**
    *
@@ -23,9 +25,9 @@ const ChatNew = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    props?.hookChatChannel.remove();
-    props?.hookChatChannels.load();
-    // props.modal.onClose();
+    // chatContext?.hookChannel?.remove();
+    chatContext?.hookChannelList?.load();
+    props.modal.onClose();
     
   };
 

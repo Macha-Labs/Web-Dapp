@@ -1,29 +1,21 @@
-import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
-import { ChatContext } from "@/providers/ChatProvider";
+import useChatChannel from "@/hooks/chat/useChatChannel";
+import useChatChannels from "@/hooks/chat/useChatChannels";
 import useChatChannelStore from "@/store/useChatChannelStore";
-import { useContext } from "react";
-
 import ChatHeader from "./ChatHeader";
 import ChatInput from "./ChatInput";
 import ChatNonDisplay from "./ChatNonDisplay";
 import ChatWindow from "./ChatWindow";
 
-const ChatContainer = (channel: any) => {
+const ChatContainer = () => {
   console.log("Rendering >>>>> ChatContainer");
-  const chatContext = useContext(ChatContext);
-  const authContext = useContext(AuthContext) as AuthContextType;
   const $channel = useChatChannelStore((state: any) => state.channel);
-
   return (
     <>
       {$channel ? (
         <>
-          {/* <ChatHeader/> */}
-          {/* <ChatWindow/> */}
-          {/* <ChatInput
-            chatContext={chatContext}
-            authContext={authContext}
-          /> */}
+          <ChatHeader />
+          <ChatWindow/>
+          <ChatInput/>
         </>
       ) : (
         <ChatNonDisplay></ChatNonDisplay>

@@ -18,12 +18,9 @@ export const StreamContext = createContext<StreamContextType>({
 });
 
 const StreamProvider = ({children}: any) => {
+    console.log('Rendering >>>>> StreamProvider');
     const authContext = useContext(AuthContext)    
-    const hookStreamChannel = useStreamChannel(authContext.streamClient);   
-
-    const reloadChannel = () => {
-        hookStreamChannel.setUpChannel(hookStreamChannel?.channel?.id)
-    }
+    const hookStreamChannel = useStreamChannel();   
 
     const initiate = async (channel: any) => {
         logger(
@@ -32,7 +29,7 @@ const StreamProvider = ({children}: any) => {
           "Getting Channel from Stream",
           [channel]
         );
-        hookStreamChannel?.setUpChannel(channel?.id)
+        hookStreamChannel?._fetch(channel?.id)
       };
 
 
@@ -41,7 +38,7 @@ const StreamProvider = ({children}: any) => {
             value={{
                 client: authContext?.streamClient,
                 hookChannel: hookStreamChannel,
-                reloadChannel:  reloadChannel,
+                reloadChannel:  hookStreamChannel._reload,
                 initiate: initiate,
             }}
         >

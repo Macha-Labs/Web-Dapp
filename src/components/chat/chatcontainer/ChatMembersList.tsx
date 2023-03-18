@@ -1,6 +1,6 @@
 import { Avatar, AvatarBadge, Heading, useDisclosure } from "@chakra-ui/react";
-import { FC, useContext, useState } from "react";
-import { Col, Row, StyledCard, StyledCardPannel } from "@/styles/StyledComponents";
+import { FC, useContext, useEffect, useState } from "react";
+import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import styled from "styled-components";
 import { truncateAddress } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
@@ -8,6 +8,8 @@ import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
 import IconImage from "@/components/icons/IconImage";
 import { useChatMembersStore } from "@/store/useChatMembersStore";
+import { ChatContext } from "@/providers/ChatProvider";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
 interface Props {
   [key: string]: any;
@@ -25,9 +27,17 @@ const Container = styled.div`
 `;
 
 const ChatMembersList = (props: any) => {
+  console.log("Rendering >>>>> ChatMembersList");
   const modalProfile = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<any>();
   const $members = useChatMembersStore((state: any) => state.members);
+  const chatContext = useContext(ChatContext);
+  const $channel = useChatChannelStore((state: any) => state.channel);
+
+  useEffect(() => {
+    chatContext?.hookMembers.load($channel);
+  }, [])
+
 
   const handleSelectedUser = (user: any) => {
     modalProfile.onOpen();

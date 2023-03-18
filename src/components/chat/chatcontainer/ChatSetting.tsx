@@ -17,8 +17,8 @@ function ChatSetting(props: any) {
   console.log('Rendering >>>>> ChatSetting');
   const authContext = useContext(AuthContext);
   const chatContext = useContext(ChatContext);
-  // const $channel = useChatChannelStore((state: any) => state.channel);
-  const $channel = {id: 'hi', createdBy: '', raw: '', pinnedMessages: []}
+  const $channel = useChatChannelStore((state: any) => state.channel);
+  // const $channel = {id: 'hi', createdBy: '', raw: '', pinnedMessages: []}
   const toast = useToast();
   const modalPinned = useDisclosure();
 
@@ -32,9 +32,9 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props?.hookChatChannels.load();
-    // props?.hookChatChannel.remove();
-    // props.modalSettings.onClose();
+    chatContext?.hookChannel?.remove();
+    chatContext?.hookChannelList?.load();
+    props.modalSettings.onClose();
   };
   const callbackClear = () => {
     toast({
@@ -43,9 +43,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props?.hookChatChannel.reload();
-    props?.hookChatChannels.load();
-    // props.modalSettings.onClose();
+    chatContext?.hookChannelList?.load();
+    props.modalSettings.onClose();
   };
 
   /**
@@ -58,9 +57,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props?.hookChatChannels.load();
-    props?.hookChatChannel.reload();
-    props.modalSettings.onClose();
+    chatContext?.hookChannelList?.load();
+    props?.modalSettings.onClose();
   };
 
   /**
@@ -73,8 +71,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props?.hookChatChannels.load();
-    props?.hookChatChannel.reload();
+    chatContext?.hookChannelList?.load();
     props.modalSettings.onClose();
   };
   /**
@@ -87,8 +84,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props?.props?.hookChatChannels.load();
-    props?.hookChatChannel.remove();
+    chatContext?.hookChannel?.remove();
+    chatContext?.hookChannelList?.load();
     props.modalSettings.onClose();
   };
 
@@ -116,7 +113,7 @@ function ChatSetting(props: any) {
       name: "Search Chat",
       onPress: () => {
         chatContext.hookChat.handleSearch();
-        props?.event?.onClose();
+        props?.modalSettings?.onClose();
       },
     },
     {
@@ -138,7 +135,7 @@ function ChatSetting(props: any) {
       name: "Select Chat",
       onPress: () => {
         chatContext.hookChat.handleMultiSelect();
-        props?.event?.onClose();
+        props?.modalSettings?.onClose();
       },
     },
     {
@@ -328,6 +325,7 @@ function ChatSetting(props: any) {
       </div>
       
     </ModalSlider>}
+    
      {modalChatPermission.isOpen &&  <TemplatePermission />}
     {modalChatMembers.isOpen && <TemplateMembers />}
     {modalAddMembers.isOpen && <TemplateMembersAdd />}

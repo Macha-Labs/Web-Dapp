@@ -1,10 +1,11 @@
 import { logger, loggerInit } from "@/helpers/logger";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthProvider";
 
 export type XmtpContextType = {
-  fetchXmtpConversation: (text: string) => void;
-  initiate: (text: string) => void;
+  fetchXmtpConversation: any | undefined;
+  initiate: any | undefined;
+  logs: any | undefined;
   remove: () => void;
   conversation: any | undefined;
 };
@@ -12,6 +13,7 @@ export type XmtpContextType = {
 export const XmtpContext = createContext<XmtpContextType>({
   fetchXmtpConversation: () => {},
   initiate: () => {},
+  logs: null,
   remove: () => {},
   conversation: null,  
 });
@@ -20,13 +22,29 @@ export const XmtpProvider = ({ children }: any) => {
   console.log('Rendering >>>>> XmtpProvider');
   const authContext = useContext(AuthContext);
   const [conversation, setConversation] = useState<any>();  
+  const [logs, setLogs] = useState<any>();
 
   const _initiate = (conversation: any) => {
-    setConversation(conversation)
+    setConversation(conversation);
   }
 
   const _remove = () => {
     setConversation(null)
+  }
+
+  const _watch = () => {
+    // Breaking logs loop
+    logs?.return();
+    // Reading new logs
+    if (authContext.xmtpClientAddress && conversation) {
+      const streamMessages = async () => {
+        const newLog = await conversation?.xmtpRaw?.streamMessages();
+        console.log('Logs for conversations', conversation, newLog)
+        setLogs(newLog);
+      };
+      streamMessages();
+    }
+    console.log("first");
   }
   
 
@@ -39,6 +57,8 @@ export const XmtpProvider = ({ children }: any) => {
     setConversation(result);
   };
 
+  useEffect(() => {console.log('useEffect >>>>>>> Logs for conversations', conversation, logs); _watch()}, [conversation])
+
 
 
   return (
@@ -47,6 +67,7 @@ export const XmtpProvider = ({ children }: any) => {
         fetchXmtpConversation: _newConversation,
         initiate: _initiate,
         remove: _remove,
+        logs: logs,
         conversation: conversation,
       }}
     >

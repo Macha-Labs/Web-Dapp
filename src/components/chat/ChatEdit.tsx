@@ -11,10 +11,9 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
-import useChatChannel from "@/hooks/chat/useChatChannel";
 import ModalSlider from "../modal/ModalSlider";
 import useChatChannelStore from "@/store/useChatChannelStore";
-import useChatChannels from "@/hooks/chat/useChatChannels";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatEdit = (props: any) => {
   /**
@@ -22,10 +21,9 @@ const ChatEdit = (props: any) => {
    *
    *
    **/
-   const $channel = useChatChannelStore((state: any) => state.channel);
+  const chatContext = useContext(ChatContext)
+  const $channel = useChatChannelStore((state: any) => state.channel);
   const toast = useToast();
-  const hookChatChannel = useChatChannel();
-  const hookChatChannels = useChatChannels();
 
   const handleToggle = () => {
     hookPortalChannel?.setChannel({
@@ -46,8 +44,8 @@ const ChatEdit = (props: any) => {
       position: "bottom-right",
     });
 
-    hookChatChannel.reload();
-    hookChatChannels.load();
+    chatContext?.hookChannel?.reload();
+    chatContext?.hookChannelList?.load();
     props.modal.onClose();
   };
 

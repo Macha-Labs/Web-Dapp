@@ -1,25 +1,25 @@
-import { StreamContext, StreamContextType } from "@/providers/StreamProvider";
-import { XmtpContext } from "@/providers/XmtpProvider";
+import { logger } from "@/helpers/logger";
 import useChatChannelStore from "@/store/useChatChannelStore";
-
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+import useStreamChannel from "../stream/useStreamChannel";
+import useXmtpChannel from "../xmtp/useXmtpChannel";
 
 const useChatChannel = () => {
     console.log('Rendering >>>>> useChatChannel');
-    const streamContext = useContext(StreamContext) as StreamContextType;
-    const xmtpContext = useContext(XmtpContext);
+    const hookXmtpChannel = useXmtpChannel();
+    const hookStreamChannel = useStreamChannel();
     const router = useRouter();
     const $channel = useChatChannelStore((state: any) => state.channel);
     const $loadChannel = useChatChannelStore(((state: any) => state.load))
 
-    const stopWatchingChannel = async() => {
+    const _unwatch = async() => {
         if ($channel) {
             const result =  await $channel?.raw?.stopWatching();
             console.log("Stopped watching the channel ", result, $channel);
         }
     }
-    const markChannelAsRead = async() => {
+    const _read = async() => {
         if ($channel) {
             const result =  await $channel?.raw?.markRead();
             console.log("Channel marked as Read ", result);
@@ -28,43 +28,51 @@ const useChatChannel = () => {
 
     // stream
     useEffect(() => {
-        console.log('fetch channel');
-        console.log('pathname', router.pathname);
+        logger("channel", "useChatChannel.useEffect[hookStreamChannel?.channel]", "channel data from stream ", [
+            hookStreamChannel?.channel,
+        ]);
+
+        if (router.pathname == "/chat/dm")
+            $loadChannel(null);
+
         if (router.pathname == "/chat") {
-            console.log('for stream', $channel?.id, streamContext?.hookChannel?.channel?.id);
-            if ($channel?.id != streamContext.hookChannel?.channel?.id)
-                stopWatchingChannel();
-            $loadChannel(streamContext?.hookChannel.channel);
-            markChannelAsRead();
+            console.log('for stream', $channel?.id, hookStreamChannel?.channel?.id);
+            if ($channel?.id != hookStreamChannel?.channel?.id)
+                _unwatch();
+            $loadChannel(hookStreamChannel?.channel);
+            _read();
         }
-    }, [streamContext?.hookChannel?.channel?.id]);
+    }, [hookStreamChannel?.channel]);
 
     // xmtp
     useEffect(() => {
+        logger("channel", "useChatChannel.useEffect[hookStreamChannel?.channel]", "channel data from xmtp ", [
+            hookXmtpChannel.channel,
+        ]);
+        if (router.pathname == "/chat")
+            $loadChannel(null);
         if (router.pathname == "/chat/dm") {
             console.log('for XMTP')
-            // $loadChannel(xmtpContext?.conversation);
+            $loadChannel(hookXmtpChannel.channel);
         }
-    }, [xmtpContext?.conversation])
+    }, [hookXmtpChannel.channel])
 
     const _fetch = (data: any) => {
         switch (router.pathname) {
             case "/chat":
-                return streamContext?.initiate(data);
-                break;
+                return hookStreamChannel._fetch(data?.id);
             case "/chat/dm":
-                return xmtpContext.initiate(data);
-                break;
+                return hookXmtpChannel._fetch(data)
         }
     };
 
     const _remove = () => {
         switch (router.pathname) {
             case "/chat":
-                streamContext?.hookChannel.removeChannel();
+                hookStreamChannel._remove();
                 break;
             case "/chat/dm":
-                xmtpContext.remove();
+                hookXmtpChannel._remove()
                 break;
         }
     }
@@ -72,18 +80,22 @@ const useChatChannel = () => {
     const _reload = () => {
         switch (router.pathname) {
             case "/chat":
-                streamContext?.reloadChannel();
+                hookStreamChannel._reload();
                 break;
             case "/chat/dm":
-                // xmtpContext.remove();
                 break;
         }   
+    }
+
+    const _unload = () => {
+        $loadChannel(null)
     }
 
     return {
         fetch: _fetch,
         remove: _remove,
-        reload: _reload
+        reload: _reload,
+        unload: _unload
     }
 }
 export default useChatChannel;
