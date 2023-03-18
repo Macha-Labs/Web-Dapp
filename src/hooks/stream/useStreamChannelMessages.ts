@@ -26,8 +26,8 @@ const useStreamChannelMessages = () => {
     );
     if ($channel.source != 'getstream')
       return;
-    // custom channel events
-
+    
+    _watch();
 
   }, [$channel?.id]);
 
