@@ -6,10 +6,11 @@ import useStreamChannelMembers from "../stream/useStreamChannelMembers";
 const useChatMembers = () => {
     const router = useRouter();
     const dataContext = useContext(DataContext);
-    const hookStreamChannelMembers = useStreamChannelMembers();
+    let hookStreamChannelMembers = useStreamChannelMembers()
+
 
     useEffect(() => {
-        if (router.pathname == '/chat') {
+        if (router.pathname == '/chat' && hookStreamChannelMembers?.users) {
             console.log('users', hookStreamChannelMembers?.users);
             dataContext.loadMembers({ onlineUsers: hookStreamChannelMembers?.onlineUsers, offlineUsers: hookStreamChannelMembers?.offlineUsers});
             dataContext.loadMemberAll(hookStreamChannelMembers.allUsers)
@@ -17,6 +18,12 @@ const useChatMembers = () => {
         }
         
     }, [hookStreamChannelMembers?.users]);
+
+    return (
+        {
+            load: hookStreamChannelMembers.fetch
+        }
+    )
     
 }
 

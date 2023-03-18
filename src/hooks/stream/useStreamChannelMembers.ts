@@ -7,9 +7,9 @@ import { StreamContext } from "@/providers/StreamProvider";
 const useStreamChannelMembers = () => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const streamContext = useContext(StreamContext);
-  const [allUsersIds, setAllUsersIds] = useState<any>([]);
-  const [onlineUsers, setOnlineUsers] = useState<any>([]);
-  const [offlineUsers, setOfflineUsers] = useState<any>([]);
+  const [allUsersIds, setAllUsersIds] = useState<any>(null);
+  const [onlineUsers, setOnlineUsers] = useState<any>(null);
+  const [offlineUsers, setOfflineUsers] = useState<any>(null);
   const [userIsMember, setUserIsMember] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>();
 
@@ -60,15 +60,12 @@ const useStreamChannelMembers = () => {
     return user.online == true;
   };
 
-  useEffect(() => {
-    _fetch();
-  }, [streamContext?.hookChannel?.channel?.id])
 
   return {
     fetch: _fetch,
     checkOnline: checkOnline,
     users: onlineUsers,
-    allUsers: onlineUsers.concat(offlineUsers),
+    allUsers: onlineUsers?.concat(offlineUsers),
     allUsersIds: allUsersIds,
     onlineUsers: onlineUsers,
     offlineUsers: offlineUsers,

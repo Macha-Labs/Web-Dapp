@@ -6,12 +6,12 @@ import {
   Row,
   StyledMessageCard,
 } from "@/styles/StyledComponents";
-import { Avatar, Heading, Text } from "@chakra-ui/react";
+import { Avatar, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import ChatMessage from "./ChatMessage";
 
 function ChatMessageList(props: any) {
-
+  
   return (
     <ModalSlider event={props.modal} size="sm" 
     

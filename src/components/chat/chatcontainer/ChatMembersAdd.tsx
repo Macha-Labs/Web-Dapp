@@ -3,27 +3,27 @@ import { Avatar, Button, Checkbox, Heading, Text, useToast } from "@chakra-ui/re
 import React, { useContext } from "react";
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { ChatContext } from "@/providers/ChatProvider";
 import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
+import useChatMembers from "@/hooks/chat/useChatMembers";
 
 const ChatMembersAdd = (props: any) => {
-  const chatContext=useContext(ChatContext);  
   const dataContext = useContext(DataContext);
   const hookPortalChannelMembership = usePortalChannelMembership(dataContext.channel);
+  const hookChatMembers = useChatMembers()
   const toast = useToast();
 
   const callbackAdd = () => {
-    chatContext?.streamContext.reloadMembers();
     toast({
       title: "Channel Members Added",
       status: "success",
       duration: 3000,
       position: "bottom-right",
     });
-    props?.modalAddMembers.onClose();
-    props?.modalChatMembers.onOpen();
+    hookChatMembers.load()
+    // props?.modalAddMembers.onClose();
+    // props?.modalChatMembers.onOpen();
   };
 
   return (
@@ -76,7 +76,7 @@ const ChatMembersAdd = (props: any) => {
                       <Text color="#6FC62A">@{item?.lens?.handle}</Text>
                     </Col>
                   </Row>
-
+                  
                   <Checkbox
                     value=""
                     onChange={() =>

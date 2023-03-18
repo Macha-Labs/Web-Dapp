@@ -25,7 +25,7 @@ const ChatNew = (props: any) => {
     });
     props?.hookChatChannel.remove();
     props?.hookChatChannels.load();
-    props.modal.onClose();
+    // props.modal.onClose();
     
   };
 

@@ -14,6 +14,7 @@ import ChatMessageList from "./ChatMessageList";
 import ChatPermissions from "./ChatPermissions";
 
 function ChatSetting(props: any) {
+  console.log('Rendering >>>>> ChatSetting');
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
   const chatContext = useContext(ChatContext);
@@ -31,7 +32,7 @@ function ChatSetting(props: any) {
       position: "bottom-right",
     });
     props?.hookChatChannels.load();
-    props?.hookChatChannel.remove();
+    // props?.hookChatChannel.remove();
     // props.modalSettings.onClose();
   };
   const callbackClear = () => {
@@ -42,6 +43,7 @@ function ChatSetting(props: any) {
       position: "bottom-right",
     });
     props?.hookChatChannel.reload();
+    props?.hookChatChannels.load();
     // props.modalSettings.onClose();
   };
 
@@ -279,7 +281,6 @@ function ChatSetting(props: any) {
         <ChatEdit modal={modalChatEdit} />
     );
   };
-
   const TemplatePinnedMessages = () => {
     return (
       <ChatMessageList

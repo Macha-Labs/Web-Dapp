@@ -27,6 +27,11 @@ const ChatWindow = (props: any) => {
   const [selectedUser, setSelectedUser] = useState<any>();
   const modalProfile = useDisclosure();
 
+  useEffect(() => {
+    console.log('1ffff fkdfdfd')
+    hookChatMessages.load();
+  }, [dataContext?.channel?.id])
+
 
   const handleDateTag = (date: any) => {
     const todayIn = new Date();
@@ -57,6 +62,7 @@ const ChatWindow = (props: any) => {
 
   useEffect(() => {
    setPrevMsgCount(dataContext?.messages.length)
+   scrollToBottom()
   }, [])
 
   useEffect(() => {
@@ -69,8 +75,8 @@ const ChatWindow = (props: any) => {
     // Scroll to the bottom of the list when new items are added
     if (messageListRef && messageListRef.current) {
       const lastMsg =
-      hookChatMessages?.messages[
-        hookChatMessages?.messages?.length - 1
+      dataContext?.messages[
+        dataContext?.messages?.length - 1
         ];
       if (
         String(authContext.address).toLowerCase() ==
@@ -110,11 +116,8 @@ const ChatWindow = (props: any) => {
         }
       };
     }
-  }, [hookChatMessages?.messages]);
+  }, [dataContext?.messages]);
 
-  useEffect(() => {
-    scrollToBottom()
-  }, []);
 
   const executeScroll = (id: any) => {
     itemsRef.current[id].scrollIntoView();

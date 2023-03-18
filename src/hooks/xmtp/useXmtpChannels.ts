@@ -1,11 +1,14 @@
 import { logger } from "@/helpers/logger";
 import { AuthContext } from "@/providers/AuthProvider";
+import { DataContext } from "@/providers/DataProvider";
 import { Channel$ } from "@/schema/channel";
 import { useContext, useEffect, useState } from "react";
 import useLensProfileList from "../lens/useLensProfileList";
 
 const useXmtpChannels = () => {
+  console.log('Rendering >>>>> useXmtpChannels');
   const authContext = useContext(AuthContext);
+  const dataContext = useContext(DataContext);
   const [allConversations, setAllConversations] = useState<any>();
   const [xmtpConvo, setXmtpConvo] = useState<any>();
 
@@ -16,20 +19,23 @@ const useXmtpChannels = () => {
       console.log("New conversation started with ", conversation);
       setAllConversations((prevConversations: any) => {
         const conversations = [...prevConversations];
-        conversations.push(new Channel$("xmtp", conversation));
+        conversations.unshift(new Channel$("xmtp", conversation));
         return conversations;
       });
     }
   };
 
   useEffect(() => {
+    if (dataContext?.channel?.source != 'xmtp')
+      return;
+
     const streamConversations = async () => {
       const xmtpNew = await authContext?.xmtpClient?.conversations?.stream();
       console.log("New xmtpConvo ", xmtpNew);
       setXmtpConvo(xmtpNew);
     };
     streamConversations();
-  }, []);
+  }, [dataContext?.channel?.id]);
 
   useEffect(() => {
     if (xmtpConvo) {
@@ -54,7 +60,6 @@ const useXmtpChannels = () => {
       .map(async (item: any) => {
         const peer = await hookLensProfileList.fetch(item.peerAddress);
         const channelData = new Channel$("xmtp", {...item, peer: peer, raw: item});
-        console.log("Useeffect xmtp lens ", peer, item);
         return channelData;
       })
       Promise.all(conversationMap).then((result: any) => {

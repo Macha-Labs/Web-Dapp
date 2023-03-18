@@ -27,6 +27,8 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import emoji from "../../../data/emoji.json";
+import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
+import { ChannelEvents } from "@/data/types";
 
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
@@ -38,6 +40,8 @@ const ChatMessage = (props: any) => {
   const time = `${hours}:${minutes}`;
   const chatRef = useRef<HTMLDivElement>(null);
   const isIntersecting = useOnScreen(chatRef);
+
+  const hookStreamChannemMessages = useStreamChannelMessages();
 
   useEffect(() => {
     if (isIntersecting && props?.handleDateTag) {
@@ -86,8 +90,10 @@ const ChatMessage = (props: any) => {
       onClick: () => {
         if (props.message?.pinned) {
           props.hookChat.unPinMessage(props.message);
+          hookStreamChannemMessages.customChannelEventTrigger(ChannelEvents.unpinMessage, props.message);
         } else {
           props.hookChat.pinMessage(props.message);
+          hookStreamChannemMessages.customChannelEventTrigger(ChannelEvents.pinMessage, props.message);
         }
       },
       condition: true,
@@ -289,9 +295,12 @@ const ChatMessage = (props: any) => {
                   props.message?.user?.lensHandle ||
                   truncateAddress(props.message?.createdBy)}
               </Text>
-              <Text style={{ alignSelf: "flex-end" }} fontSize="12">
-                {time}
-              </Text>
+              <Row className="vr-center">
+                {props?.message.pinned && <IconImage path="IconDarkPinned.png" size="2xs" />}
+                <Text style={{ alignSelf: "flex-end" }} fontSize="12" className="m-l-0-5">
+                  {time}
+                </Text>
+              </Row>
             </Row>
 
             {props?.hookChat?.actionMessage?.action == "EDIT" &&

@@ -1,6 +1,6 @@
 import { DataContext } from "@/providers/DataProvider";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect} from "react";
 import useStreamChannelMessages from "../stream/useStreamChannelMessages";
 import useXmtpChannelMessages from "../xmtp/useXmtpChannelMessages";
 
@@ -20,10 +20,18 @@ const useChatMessages = () => {
             dataContext.loadMessages(hookXmtpChannelMessages?.messages || []);
     }, [router.pathname, hookXmtpChannelMessages?.messages]);
 
+    const _load = () => {
+        if (router.pathname == '/chat') {
+            hookStreamChannelMessages.fetch()
+        } else if (router.pathname == '/chat/dm') {
+            hookXmtpChannelMessages.fetch()
+        }
+    }
+
 
     return (
         {
-            messages: dataContext.messages
+            load: _load
         }
     )
 

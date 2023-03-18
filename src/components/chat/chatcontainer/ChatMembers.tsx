@@ -6,19 +6,21 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect } from "react";
-import { ChatContext } from "@/providers/ChatProvider";
+import React, { useContext} from "react";
 import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
+import useChatMembers from "@/hooks/chat/useChatMembers";
+import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 
 const ChatMembers = (props: any) => {
-  const chatContext = useContext(ChatContext);
+  const authContext = useContext(AuthContext) as AuthContextType;
   const dataContext = useContext(DataContext);
   const hookPortalChannelMembership = usePortalChannelMembership(dataContext?.channel);
+  const hookChatMembers = useChatMembers();
   const toast = useToast();
+
 
   const callbackRemove = () => {
     toast({
@@ -27,7 +29,7 @@ const ChatMembers = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    chatContext?.streamContext.reloadMembers();
+    hookChatMembers.load();
   }
 
 
@@ -56,8 +58,7 @@ const ChatMembers = (props: any) => {
       </>
     }>
       <>
-        {dataContext?.members?.onlineUsers
-          .concat(dataContext?.members?.offlineUsers)
+        {dataContext?.members?.onlineUsers?.concat(dataContext?.members?.offlineUsers)
           ?.map((item: any, index: any) => {
             return (
               <StyledCard className="state_hover m-b-0-5"  key={`key-${index}`}>
@@ -73,14 +74,16 @@ const ChatMembers = (props: any) => {
                       <Text color="#6FC62A">@{item?.lens?.handle}</Text>
                     </Col>
                   </Row>
-                  <Checkbox
+
+                  {item?.lens?.ownedBy != authContext?.address && <Checkbox
                     value=""
                     onChange={() =>
                       hookPortalChannelMembership.handleCheckedUsers(
                         item
                       )
                     }
-                  />
+                  />}
+                  
                 </Row>
               </StyledCard>
             );
