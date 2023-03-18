@@ -93,6 +93,7 @@ const AuthProvider = ({ children }: any) => {
               accessToken: tokens["accessToken"],
               refreshToken: tokens["refreshToken"],
             });
+            logger("auth", "_fetchUserFromLens", "Lens user data set", [user]);
           } else {
             user.setLensDirect(lensProfile);
           }
@@ -188,10 +189,11 @@ const AuthProvider = ({ children }: any) => {
     if (user?.lens?.id && user?.db?.tokens?.stream) {
       hookStreamClient.connectToStream();
     }
-  }, [user]);
+  }, [user?.lens]);
 
 
   useEffect(() => {
+    logger('auth', 'useEffect[connected]', 'values', [address, isConnected, user?.lens?.id, user?.db?.id, hookXmtpAuth.xmtpClientAddress, hookStreamClient.client])
     $loadConnected(isConnected && address && user?.lens?.id && user?.db?.id && hookXmtpAuth.xmtpClientAddress && hookStreamClient.client ? true : false)
   }, [address, isConnected, user?.lens?.id, user?.db?.id, hookXmtpAuth.xmtpClientAddress, hookStreamClient.client])
 

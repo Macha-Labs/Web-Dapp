@@ -14,10 +14,6 @@ const useStreamClient = () => {
   const unsubscribeTokenRefreshListenerRef = useRef<() => void>();
 
   const connectToStream = async () => {
-    if (!authContext?.isConnected) {
-      logger("stream", "useStreamClient.connecttostream", "user not connected", [authContext?.user]);
-      return;
-    }
     try {
       if (client?.user.id) {
         client.disconnect();
