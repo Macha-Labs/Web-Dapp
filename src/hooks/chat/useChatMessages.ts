@@ -13,12 +13,12 @@ const useChatMessages = () => {
     useEffect(() => {
         if (router.pathname == '/chat')
             $loadMessages(hookStreamChannelMessages?.messages || []);
-    }, [router.pathname, hookStreamChannelMessages?.messages]);
+    }, [hookStreamChannelMessages?.messages]);
 
     useEffect(() => {
         if (router.pathname == '/chat/dm')
             $loadMessages(hookXmtpChannelMessages?.messages || []);
-    }, [router.pathname, hookXmtpChannelMessages?.messages]);
+    }, [hookXmtpChannelMessages?.messages]);
 
     const _load = () => {
         if (router.pathname == '/chat') {
