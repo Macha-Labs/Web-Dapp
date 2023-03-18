@@ -10,6 +10,7 @@ const ChatNewDm = (props: any) => {
     const toast = useToast();
     const $followers = useUserStore((state: any) => state.followers);
     
+    
     const callback = {
         success: () => {
             props.modal.onClose();
@@ -33,7 +34,7 @@ const ChatNewDm = (props: any) => {
                 ?
                 <>
                     {$followers?.map((item: any, index: any) => {
-                        return <div className="m-b-1"><UserFollowersCard user={item} key={index} /></div>;
+                        return <div className="m-b-1"><UserFollowersCard user={item} key={index} triggerMessage={() => {hookXmtpChannelNew?.initiateDirect(item?.lens?.ownedBy, callback)}} /></div>;
                     })}
                 </>
              : (
@@ -62,7 +63,7 @@ const ChatNewDm = (props: any) => {
                 ref={hookXmtpChannelNew.input}
             />
             <InputRightElement width='4.5rem'>
-                <Button variant="state_brand" size='xs' onClick={() => {hookXmtpChannelNew.validate(callback)}}>
+                <Button variant="state_brand" size='xs' onClick={() => {hookXmtpChannelNew.initiateSearch(callback)}} isLoading={hookXmtpChannelNew?.isLoading}>
                     Search
                 </Button>
             </InputRightElement>

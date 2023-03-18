@@ -1,5 +1,3 @@
-import useChatChannel from "@/hooks/chat/useChatChannel";
-import useChatChannels from "@/hooks/chat/useChatChannels";
 import useChatChannelStore from "@/store/useChatChannelStore";
 import ChatHeader from "./ChatHeader";
 import ChatInput from "./ChatInput";

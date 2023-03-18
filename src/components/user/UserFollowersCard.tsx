@@ -1,4 +1,3 @@
-import { helperIPFS, truncateAddress } from "@/helpers";
 import { Row, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, AvatarBadge, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
@@ -26,7 +25,7 @@ const UserFollowersCard = (props: any) => {
 
   return (
     <StyledCard
-      onClick={() => handleSelectedUser(props.user)}
+      // onClick={() => handleSelectedUser(props.user)}
     >
       <Row className="vr-center hr-between item w-full m-b-0-5">
         <Row className="vr-center">
@@ -47,6 +46,7 @@ const UserFollowersCard = (props: any) => {
                   path="IconBrandChat.png"
                   style={{ className: "m-l-0-5" }}
                   size="xs"
+                  onClick={props.triggerMessage}
                 />
       </Row>
       

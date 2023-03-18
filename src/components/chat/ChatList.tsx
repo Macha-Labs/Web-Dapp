@@ -23,7 +23,7 @@ import { useRouter } from "next/router";
 import ChatNewDm from "./ChatNewDm";
 import useChatChannelsStore from "@/store/useChatChannelsStore";
 import useChatChannelStore from "@/store/useChatChannelStore";
-import useChatChannel from "@/hooks/chat/useChatChannel";
+
 
 const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
