@@ -1,9 +1,7 @@
 import IconEmoji from "@/components/icons/IconEmoji";
 import IconImage from "@/components/icons/IconImage";
 import InputAction from "@/components/input/InputAction";
-import ModalSlider from "@/components/modal/ModalSlider";
 import Pop from "@/components/pop/Pop";
-import UserProfile from "@/components/user/UserProfile";
 import { truncateAddress } from "@/helpers";
 import useOnScreen from "@/hooks/other/useOnScreen";
 import LayoutFilePreview from "@/layouts/chat/LayoutFilePreview";
@@ -19,13 +17,11 @@ import {
   Avatar,
   Button,
   Checkbox,
-  Heading,
   Text,
   Textarea,
-  useToast,
-  useDisclosure,
+  useToast
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import emoji from "../../../data/emoji.json";
 import { ChannelEvents } from "@/data/types";
 
