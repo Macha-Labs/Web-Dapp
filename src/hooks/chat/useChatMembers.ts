@@ -4,6 +4,7 @@ import {useEffect } from "react";
 import useStreamChannelMembers from "../stream/useStreamChannelMembers";
 
 const useChatMembers = () => {
+    console.log("Rendering >>>>> useChatMemberst");
     const router = useRouter();
     let hookStreamChannelMembers = useStreamChannelMembers();
     const $loadMembers = useChatMembersStore(((state: any) => state.load));

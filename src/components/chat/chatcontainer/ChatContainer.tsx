@@ -9,6 +9,7 @@ import ChatNonDisplay from "./ChatNonDisplay";
 import ChatWindow from "./ChatWindow";
 
 const ChatContainer = (channel: any) => {
+  console.log("Rendering >>>>> ChatContainer");
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
   const $channel = useChatChannelStore((state: any) => state.channel);
