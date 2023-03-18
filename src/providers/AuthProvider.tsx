@@ -31,7 +31,7 @@ export type AuthContextType = {
 
 export const AuthContext = createContext<AuthContextType>({
   signer: null,
-  address: "",
+  address: null,
   connectWallet: () => {},
   connectLens: param => {},
   connectXmtp: param => {},
@@ -183,11 +183,12 @@ const AuthProvider = ({ children }: any) => {
   useEffect(() => {
    logger("auth", "useEffect", "Logging user object", [user]);
     if (user?.lens?.id) {
-      console.log('heyyaaaaa')
+      logger("auth", "useEffect", "Inside user.lens.id", [user.lens.id]);
       hookLensConnections.fetch(user?.lens)
     }
     if (user?.lens?.id && user?.db?.tokens?.stream) {
-      hookStreamClient.connectToStream();
+      console.log("Logging user object Calling the connectToStream", address)
+      hookStreamClient.connectToStream($address, user);
     }
   }, [user?.lens]);
 
@@ -202,7 +203,7 @@ const AuthProvider = ({ children }: any) => {
     <AuthContext.Provider
       value={{
         signer: signer,
-        address: $address,
+        address: address,
         connectWallet: connectWallet,
         connectLens: _fetchUserFromLens,
         connectXmtp: hookXmtpAuth.connectXmtp,

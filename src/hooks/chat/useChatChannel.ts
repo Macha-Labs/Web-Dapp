@@ -18,10 +18,10 @@ const useChatChannel = () => {
     useEffect(() => {
         console.log('fetch channel');
         console.log('pathname', router.pathname);
-        const stopWatchingChannlel = async() => {
+        const stopWatchingChannel = async() => {
             if ($channel) {
                 const result =  await $channel?.raw?.stopWatching();
-                console.log("Stopped watching the channel ", result);
+                console.log("Stopped watching the channel ", result, $channel);
             }
         }
         const markChannelAsRead = async() => {
@@ -32,8 +32,8 @@ const useChatChannel = () => {
         }
         switch (router.pathname) {
             case "/chat":
-                console.log('for stream')
-                stopWatchingChannlel();
+                console.log('for stream', $channel);
+                stopWatchingChannel();
                 $loadChannel(streamContext?.hookChannel.channel);
                 markChannelAsRead();
                 break;

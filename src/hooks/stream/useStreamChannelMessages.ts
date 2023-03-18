@@ -18,14 +18,15 @@ const useStreamChannelMessages = () => {
   }
 
   useEffect(() => {
-    if ($channel.source != 'getstream')
-      return;
     logger(
       "channel",
       "useStreamChannelMessages.useEffect[channel]",
       "channel is ",
       [$channel]
     );
+    if ($channel.source != 'getstream')
+      return;
+    
     $channel.raw?.on("message.new", (event: any) => {
       logger(
         "stream",
