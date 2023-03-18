@@ -31,12 +31,13 @@ const useChatChannel = () => {
         console.log('fetch channel');
         console.log('pathname', router.pathname);
         if (router.pathname == "/chat") {
-            console.log('for stream', $channel);
-            stopWatchingChannel();
+            console.log('for stream', $channel?.id, streamContext?.hookChannel?.channel?.id);
+            if ($channel?.id != streamContext.hookChannel?.channel?.id)
+                stopWatchingChannel();
             $loadChannel(streamContext?.hookChannel.channel);
             markChannelAsRead();
         }
-    }, [streamContext?.hookChannel.channel]);
+    }, [streamContext?.hookChannel?.channel?.id]);
 
     // xmtp
     useEffect(() => {

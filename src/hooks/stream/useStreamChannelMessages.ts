@@ -29,7 +29,7 @@ const useStreamChannelMessages = () => {
     
     _watch();
 
-  }, [$channel?.id]);
+  }, [$channel]);
 
   const _watch = () => {
     $channel.raw?.on("message.new", (event: any) => {
