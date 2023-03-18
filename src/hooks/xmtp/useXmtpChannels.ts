@@ -10,7 +10,6 @@ const useXmtpChannels = () => {
   const authContext = useContext(AuthContext);
   const [allConversations, setAllConversations] = useState<any>();
   const [xmtpConvo, setXmtpConvo] = useState<any>();
-  const $channel = useChatChannelStore((state: any) => state.channel);
   const hookLensProfileList = useLensProfileList();
 
   const _listen = async () => {
@@ -24,17 +23,17 @@ const useXmtpChannels = () => {
     }
   };
 
-  useEffect(() => {
-    if ($channel?.source != 'xmtp')
-      return;
+  // useEffect(() => {
+  //   if ($channel?.source != 'xmtp')
+  //     return;
 
-    const streamConversations = async () => {
-      const xmtpNew = await authContext?.xmtpClient?.conversations?.stream();
-      console.log("New xmtpConvo ", xmtpNew);
-      setXmtpConvo(xmtpNew);
-    };
-    streamConversations();
-  }, [$channel?.id]);
+  //   const streamConversations = async () => {
+  //     const xmtpNew = await authContext?.xmtpClient?.conversations?.stream();
+  //     console.log("New xmtpConvo ", xmtpNew);
+  //     setXmtpConvo(xmtpNew);
+  //   };
+  //   streamConversations();
+  // }, [$channel?.id]);
 
   useEffect(() => {
     if (xmtpConvo) {

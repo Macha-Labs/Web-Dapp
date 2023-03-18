@@ -14,6 +14,8 @@ const useXmtpChannelNew = () => {
         ).then((res: any) => {
             if (res) {
                 _fetch(callback);
+            } else {
+                callback.error();
             }
         })
     }
@@ -22,9 +24,9 @@ const useXmtpChannelNew = () => {
         await authContext?.xmtpClient?.conversations.newConversation(
             input.current.value,
         ).then((res: any) => {
-            console.log();
+            console.log(res);
             $loadChannel(new Channel$("xmtp", {...res, peer: {}, raw: res}));
-            callback();
+            // callback.success();
         })
     }
 

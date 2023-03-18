@@ -9,7 +9,6 @@ import {
 import React, { useContext} from "react";
 import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
 import useChatMembers from "@/hooks/chat/useChatMembers";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";

@@ -10,22 +10,24 @@ const useChatChannels = () => {
     const router = useRouter();
     const hookStreamChannels = useStreamUserChannels();
     const hookXmtpChannels = useXmtpChannels();
-    const $loadChannel = useChatChannelStore(((state: any) => state.load))
+    // const $loadChannel = useChatChannelStore(((state: any) => state.load))
     const $loadChannels = useChatChannelsStore(((state: any) => state.load))
 
     // stream
     useEffect(() => {
+      console.log('Rendering >>>>> useChatChannels >>>>>> for stream', hookStreamChannels.channels);
       if (router.pathname == '/chat') {
         $loadChannels(hookStreamChannels.channels);
-        $loadChannel(null)
+        // $loadChannel(null)
       }
     }, [hookStreamChannels.channels]);
 
     // xmtp
     useEffect(() => {
+      console.log('Rendering >>>>> useChatChannels >>>>>> for xmtp', hookXmtpChannels.channels);
       if (router.pathname == '/chat/dm') {
         $loadChannels(hookXmtpChannels.channels);
-        $loadChannel(null);
+        // $loadChannel(null);
       }
     }, [hookXmtpChannels.channels])
     

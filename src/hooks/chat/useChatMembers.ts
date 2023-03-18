@@ -20,9 +20,15 @@ const useChatMembers = () => {
         
     }, [hookStreamChannelMembers?.users]);
 
+    const _load = () => {
+        if (router.pathname == '/chat') {
+            return hookStreamChannelMembers.fetch
+        }
+    }
+
     return (
         {
-            load: hookStreamChannelMembers.fetch
+            load: _load
         }
     )
     

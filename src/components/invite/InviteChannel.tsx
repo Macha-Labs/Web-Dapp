@@ -26,9 +26,7 @@ const InviteChannel = (props: any) => {
     }, [props?.channelId])
 
     useEffect(() => {
-        // if (dataContext?.channel?.id == props?.channelId) {
-        // router.push('/chat');
-        // }
+
     }, [$channel?.id])
 
     const callBackMembership = () => {

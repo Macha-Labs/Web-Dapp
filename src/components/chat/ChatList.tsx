@@ -29,7 +29,7 @@ const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
-  const hookChatChannel = useChatChannel();
+  // const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannels();
   const router = useRouter();
   const modalChatNew = useDisclosure();
@@ -38,6 +38,7 @@ const ChatList = (props: any) => {
   const [isClicked, setIsClicked] = useState<any>([]);
   const $channels = useChatChannelsStore((state: any) => state.channels);
   const $channel = useChatChannelStore((state: any) => state.channel);
+  // const $channel = {id: 'hi'}
 
 
 
@@ -56,7 +57,7 @@ const ChatList = (props: any) => {
         position: "bottom-right",
       });
       hookChatChannels?.load();
-      hookChatChannel.reload();
+      // hookChatChannel.reload();
     },
     unmute: () => {
       toast({
@@ -66,7 +67,7 @@ const ChatList = (props: any) => {
         position: "bottom-right",
       });
       hookChatChannels?.load();
-      hookChatChannel.reload();
+      // hookChatChannel.reload();
     },
     leave: () => {
       toast({
@@ -76,7 +77,7 @@ const ChatList = (props: any) => {
         position: "bottom-right",
       });
       hookChatChannels?.load();
-      hookChatChannel.remove();
+      // hookChatChannel.remove();
     },
     delete: () => {
       toast({
@@ -86,7 +87,7 @@ const ChatList = (props: any) => {
         position: "bottom-right",
       });
       hookChatChannels?.load();
-      hookChatChannel.remove();
+      // hookChatChannel.remove();
     },
   });
 
@@ -95,7 +96,7 @@ const ChatList = (props: any) => {
       <ChatNew
         modal={modalChatNew}
         hookChatChannels={hookChatChannels}
-        hookChatChannel={hookChatChannel}
+        // hookChatChannel={hookChatChannel}
       />
     );
   };

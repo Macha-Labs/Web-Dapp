@@ -43,7 +43,7 @@ const useChatChannel = () => {
     useEffect(() => {
         if (router.pathname == "/chat/dm") {
             console.log('for XMTP')
-            $loadChannel(xmtpContext?.conversation);
+            // $loadChannel(xmtpContext?.conversation);
         }
     }, [xmtpContext?.conversation])
 

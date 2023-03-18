@@ -17,20 +17,22 @@ import { useRouter } from "next/router";
 import { truncateAddress } from "@/helpers";
 import useChatMembers from "@/hooks/chat/useChatMembers";
 import { ChatContext } from "@/providers/ChatProvider";
-import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 import useChatChannel from "@/hooks/chat/useChatChannel";
 import useChatChannelStore from "@/store/useChatChannelStore";
+import useChatChannels from "@/hooks/chat/useChatChannels";
 
 const ChatHeader = (props: any) => {
+  console.log("Rendering >>>>> ChatHeader");
   const membersModal = useDisclosure();
   const modalSettings = useDisclosure();
   const authContext = useContext(AuthContext);
   const chatContext = useContext(ChatContext);
   const hookChatMembers = useChatMembers();
-  const hookChatChannels = useChatChannelsReload();
+  const hookChatChannels = useChatChannels();
   const hookChatChannel = useChatChannel();
   const router = useRouter();
-  const $channel = useChatChannelStore((state: any) => state.channel);
+  // const $channel = useChatChannelStore((state: any) => state.channel);
+  const $channel = {id: 'hi'}
 
   useEffect(() => {
     hookChatMembers.load();
@@ -160,7 +162,7 @@ const ChatHeader = (props: any) => {
           <Template />
         </Row>
       </div>
-      <ChatMembersList modal={membersModal}/>
+      {membersModal.isOpen && <ChatMembersList modal={membersModal}/>}
       
       <ChatSetting
           authContext={authContext}

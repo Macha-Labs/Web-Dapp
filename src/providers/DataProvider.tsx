@@ -5,8 +5,6 @@ import { createContext, useEffect} from "react";
 
 
 export type DataContextType = {
-  channel: any | undefined;
-  loadChannel: any | undefined;
   members: any | undefined;
   loadMembers: any | undefined;
   messages: any | undefined;
@@ -18,8 +16,6 @@ export type DataContextType = {
 };
 
 export const DataContext = createContext<DataContextType>({
-  channel: null,
-  loadChannel: () => {},
   members: null,
   loadMembers: () => {},
   messages: null,
@@ -32,8 +28,7 @@ export const DataContext = createContext<DataContextType>({
 
 export const DataProvider = ({ children }: any) => {
     console.log('Rendering >>>>> DataProvider');
-    const $channel = useChatChannelStore((state: any) => state.channel);
-    const $loadChannel = useChatChannelStore(((state: any) => state.load))
+
 
     const $messages = useChatMessagesStore((state: any) => state.messages);
     const $loadMessages = useChatMessagesStore(((state: any) => state.load));
@@ -45,10 +40,6 @@ export const DataProvider = ({ children }: any) => {
     const $loadMembers = useChatMembersStore(((state: any) => state.load));
     const $loadMemberAll = useChatMembersStore(((state: any) => state.loadAll));
     const $loadMemberIds = useChatMembersStore(((state: any) => state.loadIds));
-
-
-    
-    useEffect(() => {console.log('DataProvider ===> channel', $channel)}, [$channel]);
 
     useEffect(() => {console.log('DataProvider ===> messages', $messages)}, [$messages]);
 
@@ -62,8 +53,6 @@ export const DataProvider = ({ children }: any) => {
     return (
         <DataContext.Provider
         value={{
-            channel: $channel,
-            loadChannel: $loadChannel,
             messages: $messages,
             loadMessages: $loadMessages,
             members: $members,

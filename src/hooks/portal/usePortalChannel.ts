@@ -7,6 +7,7 @@ import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { Channel$ } from "@/schema/channel";
 
 const usePortalChannel = (channelObj: any, callback: any = null) => {
+  console.log('Rendering >>>>> usePortalChannel');
   const [channel, setChannel] = useState(
     channelObj ? channelObj : new Channel$('getstream', {})
   );

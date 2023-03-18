@@ -1,18 +1,29 @@
 import useXmtpChannelNew from "@/hooks/xmtp/useXmtpChannelNew";
 import useUserStore from "@/store/useUserStore";
 import { Col } from "@/styles/StyledComponents";
-import { Button, Heading, Image, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Button, Heading, Image, Input, InputGroup, InputRightElement, useToast } from "@chakra-ui/react";
 import ModalSlider from "../modal/ModalSlider";
 import UserFollowersCard from "../user/UserFollowersCard";
 
 const ChatNewDm = (props: any) => {
     const hookXmtpChannelNew = useXmtpChannelNew();
+    const toast = useToast();
     const $followers = useUserStore((state: any) => state.followers);
     
-
-    const callback = () => {
-        props.modal.onClose();
+    const callback = {
+        success: () => {
+            // props.modal.onClose()
+        },
+        error: () => {
+            toast({
+                title: "Copied to clipboard",
+                status: "success",
+                duration: 3000,
+                position: "bottom-right",
+              });
+        }
     }
+
 
     const TemplateFollowers = () => {
         return (

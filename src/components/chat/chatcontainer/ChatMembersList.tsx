@@ -7,7 +7,7 @@ import { style } from "@/styles/StyledConstants";
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
 import IconImage from "@/components/icons/IconImage";
-import { DataContext } from "@/providers/DataProvider";
+import { useChatMembersStore } from "@/store/useChatMembersStore";
 
 interface Props {
   [key: string]: any;
@@ -27,7 +27,7 @@ const Container = styled.div`
 const ChatMembersList = (props: any) => {
   const modalProfile = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<any>();
-  const dataContext = useContext(DataContext)
+  const $members = useChatMembersStore((state: any) => state.members);
 
   const handleSelectedUser = (user: any) => {
     modalProfile.onOpen();
@@ -108,9 +108,9 @@ const ChatMembersList = (props: any) => {
           <Heading as="h6" size="sm">Members</Heading>
         </>            
       }>
-         {template("Online", dataContext?.members?.onlineUsers)}
+         {template("Online", $members?.onlineUsers)}
 
-          {template("Offline", dataContext?.members?.offlineUsers)}
+          {template("Offline", $members?.offlineUsers)}
 
       </ModalSlider>
      

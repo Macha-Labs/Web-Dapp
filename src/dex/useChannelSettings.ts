@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { ChatContext } from "../providers/ChatProvider";
-import { DataContext } from "@/providers/DataProvider";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
 export const useChannelSettings = () => {
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
+  const $channel = useChatChannelStore((state: any) => state.channel);
 
   const chatOptions = [
     {
@@ -36,7 +36,7 @@ export const useChannelSettings = () => {
       condition: {
         enabled: true,
         check:
-        dataContext.channel?.createdBy === authContext.address,
+        $channel?.createdBy === authContext.address,
       },
     },
     {
@@ -46,7 +46,7 @@ export const useChannelSettings = () => {
       condition: {
         enabled: true,
         check:
-        dataContext.channel?.createdBy === authContext.address,
+        $channel?.createdBy === authContext.address,
       },
     },
     {
@@ -56,7 +56,7 @@ export const useChannelSettings = () => {
       condition: {
         enabled: true,
         check:
-        dataContext.channel?.createdBy === authContext.address,
+        $channel?.createdBy === authContext.address,
       },
     },
   ];
