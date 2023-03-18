@@ -26,7 +26,12 @@ const useStreamChannelMessages = () => {
     );
     if ($channel.source != 'getstream')
       return;
-    
+    // custom channel events
+
+
+  }, [$channel?.id]);
+
+  const _watch = () => {
     $channel.raw?.on("message.new", (event: any) => {
       logger(
         "stream",
@@ -81,11 +86,7 @@ const useStreamChannelMessages = () => {
       );
       _setMessages();
     });
-
-    // custom channel events
-
-
-  }, [$channel?.id]);
+  }
 
   const _setMessages = () => {
     if ($channel.raw?.state?.messageSets[0]?.messages) {
