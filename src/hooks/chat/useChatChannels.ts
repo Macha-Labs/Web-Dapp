@@ -13,14 +13,21 @@ const useChatChannels = () => {
     const $loadChannel = useChatChannelStore(((state: any) => state.load))
     const $loadChannels = useChatChannelsStore(((state: any) => state.load))
 
+    // stream
     useEffect(() => {
-      if (router.pathname == '/chat')
-      $loadChannels(hookStreamChannels.channels);
-      $loadChannel(null)
-      if (router.pathname == '/chat/dm')
-      $loadChannels(hookXmtpChannels.channels);
-      $loadChannel(null);
-    }, [hookStreamChannels.channels, hookXmtpChannels.channels])
+      if (router.pathname == '/chat') {
+        $loadChannels(hookStreamChannels.channels);
+        $loadChannel(null)
+      }
+    }, [hookStreamChannels.channels]);
+
+    // xmtp
+    useEffect(() => {
+      if (router.pathname == '/chat/dm') {
+        $loadChannels(hookXmtpChannels.channels);
+        $loadChannel(null);
+      }
+    }, [hookXmtpChannels.channels])
     
     const _load = async () => {
       switch (router.pathname) {
