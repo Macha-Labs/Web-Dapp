@@ -45,10 +45,15 @@ const useLensConnections = (account?: any, lensId?: any) => {
     }
   }, [lensId]);
 
+  const _fetch = (userLens: any) => {
+    getFollowing(userLens.ownedBy);
+    getFollowers(userLens.id)
+  }
+
   return {
     following: following,
     followers: followers,
-    getFollowers: getFollowers,
+    fetch: _fetch
   };
 };
 

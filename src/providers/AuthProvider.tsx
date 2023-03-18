@@ -10,6 +10,7 @@ import useLensProfile from "@/hooks/lens/useLensProfile";
 import { fetchSigner } from "@wagmi/core";
 import useXmtpAuth from "@/hooks/xmtp/useXmtpAuth";
 import useUserStore from "@/store/useUserStore";
+import useLensConnections from "@/hooks/lens/useLensConnections";
 
 export type AuthContextType = {
   signer: any | undefined;
@@ -60,6 +61,7 @@ const AuthProvider = ({ children }: any) => {
    *
    **/
   const hookLensProfile = useLensProfile();
+  const hookLensConnections = useLensConnections(address)
   const hookLensAuth = useLensAuth();
   const hookXmtpAuth = useXmtpAuth();
 
@@ -175,6 +177,9 @@ const AuthProvider = ({ children }: any) => {
 
   useEffect(() => {
     if (user) logger("auth", "useEffect", "Logging user object", [user]);
+    if (user?.lens?.id) {
+      hookLensConnections.fetch(user?.lens)
+    }
   }, [user]);
 
 

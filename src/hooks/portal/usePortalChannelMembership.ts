@@ -59,7 +59,7 @@ const usePortalChannelMembership = (channel: any) => {
   // fetching my lens followers
   useEffect(() => {
     if (authContext.address) {
-      hookLensConnections.getFollowers(authContext.user?.lens?.id);
+      hookLensConnections.fetch(authContext.user?.lens);
     }
   }, [authContext.address]);
 
