@@ -1,8 +1,8 @@
 import { logger } from "@/helpers/logger";
 import useStreamChannel from "@/hooks/stream/useStreamChannel";
 import useUserStore from "@/store/useUserStore";
-import { createContext, useEffect } from "react";
-import useStreamClient from "../hooks/stream/useStreamClient";
+import { createContext, useContext, useEffect } from "react";
+import { AuthContext } from "./AuthProvider";
 
 export type StreamContextType = {
     client: any | undefined;
@@ -19,25 +19,10 @@ export const StreamContext = createContext<StreamContextType>({
 });
 
 const StreamProvider = ({children}: any) => {
-    console.log('Rendering >>>>> StreamProvider');
-    const hookStreamClient = useStreamClient();
-    const hookStreamChannel = useStreamChannel(hookStreamClient.client);
+    const authContext = useContext(AuthContext)    
+    const hookStreamChannel = useStreamChannel(authContext.streamClient);
     const $connected = useUserStore((state: any) => state.connected);
    
-
-    useEffect(() => {
-        logger("stream", "useEffect.connectToStream", "checking if connnected & client", [$connected, hookStreamClient?.client])
-        if ($connected && !hookStreamClient?.client) {
-            hookStreamClient.connectToStream();
-        }
-    }, [$connected]);
-
-
-    // useEffect(() => {
-    //     if ($connected && hookStreamClient.client?.user?.id) {
-    //         hookStreamChannels.fetchUserChannels(hookStreamClient.client);
-    //     }
-    // }, [hookStreamClient.client?.user?.id]);
 
     const reloadChannel = () => {
         hookStreamChannel.setUpChannel(hookStreamChannel?.channel?.id)
@@ -57,7 +42,7 @@ const StreamProvider = ({children}: any) => {
     return (
         <StreamContext.Provider
             value={{
-                client: hookStreamClient.client,
+                client: authContext?.streamClient,
                 hookChannel: hookStreamChannel,
                 reloadChannel:  reloadChannel,
                 initiate: initiate,

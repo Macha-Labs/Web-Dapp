@@ -1,7 +1,6 @@
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { StreamChat } from "stream-chat";
 import { config } from "../../config";
-import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 // import {storeAsyncData, getAsyncData} from "../../service/AsyncStorageService";
 // import messaging from "@react-native-firebase/messaging";
 import { logger } from "../../helpers/logger";
@@ -9,15 +8,15 @@ import { logger } from "../../helpers/logger";
 const useStreamClient = () => {
   console.log('Rendering >>>>> useStreamClient');
 
-  const authContext = useContext(AuthContext) as AuthContextType;
   const [client, setClient] = useState<any>();
   const unsubscribeTokenRefreshListenerRef = useRef<() => void>();
 
-  const connectToStream = async () => {
-    if (!authContext?.isConnected) {
-      logger("stream", "useStreamClient.connecttostream", "user not connected", [authContext?.user]);
-      return;
-    }
+  const connectToStream = async (address: any, user: any) => {
+    // if (!?.isConnected) {
+    //   logger("stream", "useStreamClient.connecttostream", "user not connected", [?.user]);
+    //   return;
+    // }
+    console.log("Logging user object calling connectToStream", address);
     try {
       if (client?.user.id) {
         client.disconnect();
@@ -26,19 +25,19 @@ const useStreamClient = () => {
 
       await newClient.connectUser(
         {
-          id: authContext.address.toLowerCase(),
-          lensId: authContext?.user?.lens?.id,
-          lensImage: authContext?.user?.lens?.image,
-          lensName: authContext.user?.lens?.name,
-          lensHandle: authContext?.user?.lens?.handle,
-          lensOwnedBy: authContext?.user?.lens?.ownedBy,
-          dbId: authContext?.user?.db?.id,
+          id: address.toLowerCase(),
+          lensId: user?.lens?.id,
+          lensImage: user?.lens?.image,
+          lensName: user?.lens?.name,
+          lensHandle: user?.lens?.handle,
+          lensOwnedBy: user?.lens?.ownedBy,
+          dbId: user?.db?.id,
         },
-        authContext?.user?.db?.tokens?.stream
+        user?.db?.tokens?.stream
       );
-      logger("stream", "useStreamClient.connectToStream", "Connection made", [
+      logger("stream", "Logging user object useStreamClient.connectToStream", "Connection made", [
         newClient.user,
-        authContext?.user,
+        user,
       ]);
       setClient(newClient);
     } catch (e) {
