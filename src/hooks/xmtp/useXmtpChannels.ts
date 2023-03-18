@@ -57,8 +57,7 @@ const useXmtpChannels = () => {
     // });
     const conversationMap = await conversationList
       ?.map(async (item: any) => {
-        // const peer = await hookLensProfileList.fetch(item.peerAddress);
-        const peer = {}
+        const peer = await hookLensProfileList.fetch(item.peerAddress);
         const channelData = new Channel$("xmtp", {...item, peer: peer, raw: item});
         return channelData;
       })

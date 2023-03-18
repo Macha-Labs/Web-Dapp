@@ -187,9 +187,6 @@ const AuthProvider = ({ children }: any) => {
     $loadConnected(isConnected && address && user?.lens?.id && user?.db?.id && hookXmtpAuth.xmtpClientAddress ? true : false)
   }, [address, isConnected, user?.lens?.id, user?.db?.id, hookXmtpAuth.xmtpClientAddress])
 
-  const _connected = () => {
-    return $connected;
-  }
 
   return (
     <AuthContext.Provider
