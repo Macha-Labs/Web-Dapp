@@ -1,16 +1,16 @@
+import useChatChannelsStore from "@/store/useChatChannelsStore";
 import { Col } from "@/styles/StyledComponents";
-import { useContext } from "react";
 import { Button, Heading, Image } from "@chakra-ui/react";
-import { DataContext } from "@/providers/DataProvider";
 
 const ChatNonDisplay = () => {
-  const dataContext = useContext(DataContext);
+  const $channels = useChatChannelsStore((state: any) => state.channels);
+
   return (
     <>
       {/* <StyledChat className="flex-hr-vr-center">
         Select Channel from list
       </StyledChat> */}
-      {dataContext?.channels?.length ? (
+      {$channels?.length ? (
         <Col className="flex-hr-vr-center h-100">
           <Image src="/assets/nochatselected.png" className="w-30 m-b-2" />
           <Heading className="m-b-1" size="lg">

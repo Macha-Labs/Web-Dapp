@@ -1,8 +1,8 @@
 import { logger } from "@/helpers/logger";
 import useStreamChannel from "@/hooks/stream/useStreamChannel";
-import { createContext, useContext, useEffect } from "react";
+import useUserStore from "@/store/useUserStore";
+import { createContext, useEffect } from "react";
 import useStreamClient from "../hooks/stream/useStreamClient";
-import { AuthContext, AuthContextType } from "./AuthProvider";
 
 export type StreamContextType = {
     client: any | undefined;
@@ -20,20 +20,20 @@ export const StreamContext = createContext<StreamContextType>({
 
 const StreamProvider = ({children}: any) => {
     console.log('Rendering >>>>> StreamProvider');
-    const authContext = useContext(AuthContext) as AuthContextType;
     const hookStreamClient = useStreamClient();
     const hookStreamChannel = useStreamChannel(hookStreamClient.client);
+    const $connected = useUserStore((state: any) => state.connected);
    
 
     useEffect(() => {
-        if (authContext?.isConnected && !hookStreamClient?.client) {
+        if ($connected && !hookStreamClient?.client) {
             hookStreamClient.connectToStream();
         }
-    }, [authContext?.isConnected]);
+    }, [$connected]);
 
 
     // useEffect(() => {
-    //     if (authContext?.isConnected && hookStreamClient.client?.user?.id) {
+    //     if ($connected && hookStreamClient.client?.user?.id) {
     //         hookStreamChannels.fetchUserChannels(hookStreamClient.client);
     //     }
     // }, [hookStreamClient.client?.user?.id]);
@@ -45,7 +45,7 @@ const StreamProvider = ({children}: any) => {
     const initiate = async (channel: any) => {
         logger(
           "channel",
-          "ChatProvider.initiate",
+          "StreamProvider.initiate",
           "Getting Channel from Stream",
           [channel]
         );

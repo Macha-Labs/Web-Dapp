@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import emoji from "../../../data/emoji.json";
+import { ChannelEvents } from "@/data/types";
 
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
@@ -82,10 +83,8 @@ const ChatMessage = (props: any) => {
       onClick: () => {
         if (props.message?.pinned) {
           props.hookChat.unPinMessage(props.message);
-          // hookStreamChannemMessages.customChannelEventTrigger(ChannelEvents.unpinMessage, props.message);
         } else {
           props.hookChat.pinMessage(props.message);
-          // hookStreamChannemMessages.customChannelEventTrigger(ChannelEvents.pinMessage, props.message);
         }
       },
       condition: true,

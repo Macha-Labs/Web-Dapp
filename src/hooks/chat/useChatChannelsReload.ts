@@ -1,25 +1,26 @@
 import { loggerInit } from "@/helpers/logger";
-import { DataContext } from "@/providers/DataProvider";
+import useChatChannelsStore from "@/store/useChatChannelsStore";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useStreamUserChannels from "../stream/useStreamUserChannels";
 import useXmtpChannels from "../xmtp/useXmtpChannels";
 
 const useChatChannelsReload = () => {
-    const dataContext = useContext(DataContext);
+    console.log('Rendering >>>>> useChatChannelsReload');
     const hookStreamChannels = useStreamUserChannels();
     const hookXmtpChannels = useXmtpChannels();
     const router = useRouter();
     const [loading, setLoading] = useState<any>(false);
+    const $loadChannels = useChatChannelsStore(((state: any) => state.load))
 
     useEffect(() => {
         loggerInit('useChatChannelsReload.useEffect');
         if (loading) {
             setLoading(false);
             if (router.pathname == '/chat')
-                dataContext.loadChannels(hookStreamChannels.channels);
+                $loadChannels(hookStreamChannels.channels);
             if (router.pathname == '/chat/dm')
-                dataContext.loadChannels(hookXmtpChannels.channels);
+                $loadChannels(hookXmtpChannels.channels);
         }
     }, [hookStreamChannels.channels, hookXmtpChannels.channels])
 

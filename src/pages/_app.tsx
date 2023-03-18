@@ -32,6 +32,7 @@ const wagmiClient = createClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  console.log('Rendering >>>>> APP');
   return (
     <>
       <WagmiConfig client={wagmiClient}>

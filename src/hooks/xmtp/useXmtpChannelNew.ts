@@ -1,12 +1,12 @@
 import { AuthContext } from "@/providers/AuthProvider"
-import { DataContext } from "@/providers/DataProvider";
 import { Channel$ } from "@/schema/channel";
+import useChatChannelStore from "@/store/useChatChannelStore";
 import { useContext, useRef } from "react"
 
 const useXmtpChannelNew = () => {
     const authContext = useContext(AuthContext);
-    const dataContext = useContext(DataContext);
     const input = useRef<any>();
+    const $loadChannel = useChatChannelStore(((state: any) => state.load))
 
     const _validate = async (callback?: any) => {
         await authContext?.xmtpClient?.canMessage(
@@ -23,7 +23,7 @@ const useXmtpChannelNew = () => {
             input.current.value,
         ).then((res: any) => {
             console.log();
-            dataContext.loadChannel(new Channel$("xmtp", {...res, peer: {}, raw: res}));
+            $loadChannel(new Channel$("xmtp", {...res, peer: {}, raw: res}));
             callback();
         })
     }

@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { ChatContext } from "../providers/ChatProvider";
-import IconImage from "@/components/icons/IconImage";
 import { DataContext } from "@/providers/DataProvider";
 
 export const useChannelSettings = () => {

@@ -3,25 +3,26 @@ import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import ChatList from "@/components/chat/ChatList";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Nav from "@/components/nav/Nav";
-import { AuthContext } from "@/providers/AuthProvider";
+import useUserStore from "@/store/useUserStore";
 import { StyledChat, StyledChatList, StyledWindow } from "@/styles/StyledComponents";
 import { useDisclosure } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
 function ChatComponent() {
+  console.log('Rendering >>>>> ChatComponent');
   const modalAuth = useDisclosure();
-  const authContext = useContext(AuthContext);
+  const $connected = useUserStore((state: any) => state.connected);
   
 
   useEffect(() => {
-    if (authContext?.isConnected) {
+    if ($connected && modalAuth.isOpen) {
       modalAuth.onClose()
     }
-    else {
+    else if (!$connected && !modalAuth.isOpen) {
       modalAuth.onOpen();
     }
 
-  }, [authContext?.isConnected, modalAuth.isOpen])
+  }, [$connected, modalAuth.isOpen])
 
   const TemplateAuth = () => {
     return (
@@ -35,7 +36,7 @@ function ChatComponent() {
 
   return (
     <>
-      {authContext?.isConnected && 
+      {$connected && 
         <StyledWindow>
         <div className="left">
           <Nav />
@@ -52,7 +53,7 @@ function ChatComponent() {
         </div>
       </StyledWindow>
     } 
-      <TemplateAuth />
+      {modalAuth.isOpen && <TemplateAuth />}
     </>
   );
 }

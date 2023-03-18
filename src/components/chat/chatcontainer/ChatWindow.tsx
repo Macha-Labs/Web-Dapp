@@ -1,7 +1,6 @@
 import useChatMessages from "@/hooks/chat/useChatMessages";
 import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
-import { DataContext } from "@/providers/DataProvider";
 import { useContext, useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
 import { StyledDateTag, StyledMoveToBottom } from '@/styles/StyledComponents';
@@ -9,9 +8,11 @@ import IconImage from '@/components/icons/IconImage';
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
 import { useDisclosure } from "@chakra-ui/react";
+import { useChatMembersStore } from "@/store/useChatMembersStore";
+import useChatChannelStore from "@/store/useChatChannelStore";
+import useChatMessagesStore from "@/store/useChatMessagesStore";
 
 const ChatWindow = (props: any) => {
-  const dataContext = useContext(DataContext);
   const authContext = useContext(AuthContext);
   const chatContext = useContext(ChatContext);
   // 
@@ -26,11 +27,13 @@ const ChatWindow = (props: any) => {
   const [unReadMsg, setUnReadMsg] = useState(0)
   const [selectedUser, setSelectedUser] = useState<any>();
   const modalProfile = useDisclosure();
+  const $memberAll = useChatMembersStore((state: any) => state.memberAll);
+  const $channel = useChatChannelStore((state: any) => state.channel);
+  const $messages = useChatMessagesStore((state: any) => state.messages);
 
   useEffect(() => {
-    console.log('1ffff fkdfdfd')
     hookChatMessages.load();
-  }, [dataContext?.channel?.id])
+  }, [$channel?.id])
 
 
   const handleDateTag = (date: any) => {
@@ -56,27 +59,27 @@ const ChatWindow = (props: any) => {
       messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
       setIsScrollAtBottom(true);
       setUnReadMsg(0)
-      setPrevMsgCount(dataContext?.messages.length)
+      setPrevMsgCount($messages.length)
     }
   }
 
   useEffect(() => {
-   setPrevMsgCount(dataContext?.messages.length)
+   setPrevMsgCount($messages.length)
    scrollToBottom()
   }, [])
 
   useEffect(() => {
    if(!isScrollAtBottom){
-      setUnReadMsg(dataContext?.messages.length - prevMsgCount)
+      setUnReadMsg($messages.length - prevMsgCount)
     }else{
       setUnReadMsg(0)
-      setPrevMsgCount(dataContext?.messages.length)
+      setPrevMsgCount($messages.length)
     }
     // Scroll to the bottom of the list when new items are added
     if (messageListRef && messageListRef.current) {
       const lastMsg =
-      dataContext?.messages[
-        dataContext?.messages?.length - 1
+      $messages[
+        $messages?.length - 1
         ];
       if (
         String(authContext.address).toLowerCase() ==
@@ -97,7 +100,7 @@ const ChatWindow = (props: any) => {
           if (Math.abs(scrollHeight - clientHeight - scrollTop) < 10) {
             setIsScrollAtBottom(true);
             setUnReadMsg(0)
-            setPrevMsgCount(dataContext?.messages.length)
+            setPrevMsgCount($messages.length)
           } else {        
             setIsScrollAtBottom(false);
           }
@@ -116,7 +119,7 @@ const ChatWindow = (props: any) => {
         }
       };
     }
-  }, [dataContext?.messages]);
+  }, [$messages]);
 
 
   const executeScroll = (id: any) => {
@@ -125,10 +128,10 @@ const ChatWindow = (props: any) => {
   };
 
   const handleSelectedUser = (user: any) => {
-    console.log(dataContext.memberAll)
-    if (dataContext.memberAll) {
-      console.log(dataContext.memberAll)
-      const userProfile = dataContext?.memberAll?.filter(
+    console.log($memberAll)
+    if ($memberAll) {
+      console.log($memberAll)
+      const userProfile = $memberAll?.filter(
         (profile: any) =>
           String(profile.address).toLowerCase() ==
           String(user.lensOwnedBy).toLowerCase()
@@ -151,7 +154,7 @@ const ChatWindow = (props: any) => {
     <>
     <StyledDateTag visible={`${dateTagVisible ? 'visible': 'hidden'} `} >{dataTag}</StyledDateTag> 
     <div ref={messageListRef} className="body">
-          {dataContext?.messages?.map((message: any, index: any) => {
+          {$messages?.map((message: any, index: any) => {
           return (
             <div
               ref={el => (itemsRef.current[message.id] = el)}
@@ -161,7 +164,6 @@ const ChatWindow = (props: any) => {
                 message={message}
                 hookChat={chatContext?.hookChat}
                 authContext={authContext}
-                hookMembers={dataContext.members}
                 key={`a-${message.id}`}
                 handleDateTag={handleDateTag}
                 executeScroll={executeScroll}
