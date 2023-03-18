@@ -56,13 +56,13 @@ const useXmtpChannels = () => {
     //   return new Channel$("xmtp", item);
     // });
     const conversationMap = await conversationList
-      .map(async (item: any) => {
+      ?.map(async (item: any) => {
         // const peer = await hookLensProfileList.fetch(item.peerAddress);
         const peer = {}
         const channelData = new Channel$("xmtp", {...item, peer: peer, raw: item});
         return channelData;
       })
-      Promise.all(conversationMap).then((result: any) => {
+      Promise?.all(conversationMap).then((result: any) => {
         logger("xmtp", "useXmtpChannels._fetch", "channels from xmtp", [
           result,
         ]);
