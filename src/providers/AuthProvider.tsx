@@ -11,7 +11,7 @@ import { fetchSigner } from "@wagmi/core";
 import useXmtpAuth from "@/hooks/xmtp/useXmtpAuth";
 import useUserStore from "@/store/useUserStore";
 import useLensConnections from "@/hooks/lens/useLensConnections";
-import useStreamClient from "@/hooks/stream/useStreamClient";
+import useStreamAuth from "@/hooks/stream/useStreamAuth";
 
 export type AuthContextType = {
   signer: any | undefined;
@@ -67,7 +67,7 @@ const AuthProvider = ({ children }: any) => {
   const hookLensConnections = useLensConnections(address)
   const hookLensAuth = useLensAuth();
   const hookXmtpAuth = useXmtpAuth();
-  const hookStreamClient = useStreamClient();
+  const hookStreamAuth = useStreamAuth();
 
   /**
    * @description Internal Function to get user from lens
@@ -188,22 +188,22 @@ const AuthProvider = ({ children }: any) => {
     }
     if (user?.lens?.id && user?.db?.tokens?.stream) {
       console.log("Logging user object Calling the connectToStream", address)
-      hookStreamClient.connectToStream($address, user);
+      hookStreamAuth.connectToStream($address, user);
     }
   }, [user?.lens]);
 
 
   useEffect(() => {
-    logger('auth', 'useEffect[connected]', 'values', [address, isConnected, user?.lens?.id, user?.db?.id, hookXmtpAuth.xmtpClientAddress, hookStreamClient.client])
-    $loadConnected(isConnected && address && user?.lens?.id && user?.db?.id && hookXmtpAuth.xmtpClientAddress && hookStreamClient.client ? true : false)
-  }, [address, isConnected, user?.lens?.id, user?.db?.id, hookXmtpAuth.xmtpClientAddress, hookStreamClient.client])
+    logger('auth', 'useEffect[connected]', 'values', [address, isConnected, user?.lens?.id, user?.db?.id, hookXmtpAuth.xmtpClientAddress, hookStreamAuth.client])
+    $loadConnected(isConnected && address && user?.lens?.id && user?.db?.id && hookXmtpAuth.xmtpClientAddress && hookStreamAuth.client ? true : false)
+  }, [address, isConnected, user?.lens?.id, user?.db?.id, hookXmtpAuth.xmtpClientAddress, hookStreamAuth.client])
 
 
   return (
     <AuthContext.Provider
       value={{
         signer: signer,
-        address: address,
+        address: $address,
         connectWallet: connectWallet,
         connectLens: _fetchUserFromLens,
         connectXmtp: hookXmtpAuth.connectXmtp,
@@ -212,7 +212,7 @@ const AuthProvider = ({ children }: any) => {
         setUser: setUser,
         isConnected: $connected,
         isLoadingLens: isLoadingLens,
-        streamClient: hookStreamClient.client,
+        streamClient: hookStreamAuth.client,
         xmtpClient: hookXmtpAuth.xmtpClient,
         xmtpClientAddress: hookXmtpAuth.xmtpClientAddress,
       }}
