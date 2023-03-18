@@ -35,6 +35,11 @@ const ChatMembers = (props: any) => {
     hookChatMembers.load();
   }
 
+  const onClickAddMembers = () => {
+    props.modalAddMembers.onOpen()
+    props.modalChatMembers.onClose();
+    props?.modalSettings.onClose()
+  }
 
   return (
     <ModalSlider size="sm" event={props.modalChatMembers} header={
@@ -51,7 +56,7 @@ const ChatMembers = (props: any) => {
             Remove
           </Button>
           <Button
-            onClick={() => props.modalAddMembers.onOpen()}
+            onClick={onClickAddMembers}
             size="sm"
             variant="state_brand"
           >

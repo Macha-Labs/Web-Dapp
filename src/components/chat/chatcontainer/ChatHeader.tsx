@@ -36,23 +36,6 @@ const ChatHeader = (props: any) => {
     hookChatMembers.load();
   }, [$channel?.id])
 
-  const TemplateMembers = () => {
-    return (
-      <ChatMembersList membersModal={membersModal}/>
-    );
-  };
-
-  const TemplateChannelSettings = () => {
-    return (
-      <ChatSetting
-          event={modalSettings}
-          authContext={authContext}
-          modalSettings={modalSettings}
-          hookChatChannels={hookChatChannels}
-          hookChatChannel={hookChatChannel}
-        />
-    );
-  };
 
   const TemplateSearch = () => {
     return (
@@ -177,9 +160,14 @@ const ChatHeader = (props: any) => {
           <Template />
         </Row>
       </div>
-      {membersModal.isOpen && <TemplateMembers />}
-      {modalSettings.isOpen && <TemplateChannelSettings />}
+      <ChatMembersList modal={membersModal}/>
       
+      <ChatSetting
+          authContext={authContext}
+          modalSettings={modalSettings}
+          hookChatChannels={hookChatChannels}
+          hookChatChannel={hookChatChannel}
+         />
     </>
   );
 };

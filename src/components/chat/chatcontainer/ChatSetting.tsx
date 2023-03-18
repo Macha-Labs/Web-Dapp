@@ -265,6 +265,7 @@ function ChatSetting(props: any) {
       <ChatMembers
           modalChatMembers={modalChatMembers}
           modalAddMembers={modalAddMembers}
+          modalSettings={props.modalSettings}
         />
     );
   };
@@ -292,7 +293,7 @@ function ChatSetting(props: any) {
   };
   return (
     <>
-      <ModalSlider size="sm" 
+      {props.modalSettings && <ModalSlider size="sm" 
       event={props.modalSettings}
       header={<Heading as="h6" size="sm">
       Channel Settings
@@ -325,7 +326,7 @@ function ChatSetting(props: any) {
         </Col>
       </div>
       
-    </ModalSlider>
+    </ModalSlider>}
      {modalChatPermission.isOpen &&  <TemplatePermission />}
     {modalChatMembers.isOpen && <TemplateMembers />}
     {modalAddMembers.isOpen && <TemplateMembersAdd />}
