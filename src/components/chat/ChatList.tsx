@@ -29,7 +29,7 @@ const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
-  // const hookChatChannel = useChatChannel();
+  const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannels();
   const router = useRouter();
   const modalChatNew = useDisclosure();

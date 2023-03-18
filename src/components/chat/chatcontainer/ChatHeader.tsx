@@ -164,12 +164,12 @@ const ChatHeader = (props: any) => {
       </div>
       {membersModal.isOpen && <ChatMembersList modal={membersModal}/>}
       
-      <ChatSetting
+      {/* <ChatSetting
           authContext={authContext}
           modalSettings={modalSettings}
           hookChatChannels={hookChatChannels}
           hookChatChannel={hookChatChannel}
-         />
+         /> */}
     </>
   );
 };
