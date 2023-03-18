@@ -28,6 +28,7 @@ const ChatWindow = (props: any) => {
   const modalProfile = useDisclosure();
 
   useEffect(() => {
+    console.log('1ffff fkdfdfd')
     hookChatMessages.load();
   }, [dataContext?.channel?.id])
 
@@ -61,6 +62,7 @@ const ChatWindow = (props: any) => {
 
   useEffect(() => {
    setPrevMsgCount(dataContext?.messages.length)
+   scrollToBottom()
   }, [])
 
   useEffect(() => {
@@ -116,9 +118,6 @@ const ChatWindow = (props: any) => {
     }
   }, [dataContext?.messages]);
 
-  useEffect(() => {
-    scrollToBottom()
-  }, []);
 
   const executeScroll = (id: any) => {
     itemsRef.current[id].scrollIntoView();

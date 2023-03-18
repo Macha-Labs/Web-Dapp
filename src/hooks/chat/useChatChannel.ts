@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 
 const useChatChannel = () => {
+    console.log('Rendering >>>>> useChatChannel');
     const streamContext = useContext(StreamContext) as StreamContextType;
     const xmtpContext = useContext(XmtpContext);
     const router = useRouter();
@@ -75,7 +76,6 @@ const useChatChannel = () => {
     }
 
     return {
-        channel: dataContext.channel,
         fetch: _fetch,
         remove: _remove,
         reload: _reload
