@@ -18,7 +18,7 @@ const ChatContainer = (channel: any) => {
     <>
       {$channel ? (
         <>
-          <ChatHeader/>
+          {/* <ChatHeader/> */}
           {/* <ChatWindow/> */}
           {/* <ChatInput
             chatContext={chatContext}
