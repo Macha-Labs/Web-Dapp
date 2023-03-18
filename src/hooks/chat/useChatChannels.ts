@@ -1,6 +1,7 @@
-import { DataContext } from "@/providers/DataProvider";
+import useChatChannelsStore from "@/store/useChatChannelsStore";
+import useChatChannelStore from "@/store/useChatChannelStore";
 import { useRouter } from "next/router";
-import { useContext, useEffect} from "react";
+import { useEffect} from "react";
 import useStreamUserChannels from "../stream/useStreamUserChannels";
 import useXmtpChannels from "../xmtp/useXmtpChannels";
 
@@ -9,15 +10,16 @@ const useChatChannels = () => {
     const router = useRouter();
     const hookStreamChannels = useStreamUserChannels();
     const hookXmtpChannels = useXmtpChannels();
-    const dataContext = useContext(DataContext);
+    const $loadChannel = useChatChannelStore(((state: any) => state.load))
+    const $loadChannels = useChatChannelsStore(((state: any) => state.load))
 
     useEffect(() => {
       if (router.pathname == '/chat')
-        dataContext?.loadChannels(hookStreamChannels.channels);
-        dataContext?.loadChannel(null)
+      $loadChannels(hookStreamChannels.channels);
+      $loadChannel(null)
       if (router.pathname == '/chat/dm')
-        dataContext?.loadChannels(hookXmtpChannels.channels);
-        dataContext?.loadChannel(null);
+      $loadChannels(hookXmtpChannels.channels);
+      $loadChannel(null);
     }, [hookStreamChannels.channels, hookXmtpChannels.channels])
     
     const _load = async () => {
@@ -33,7 +35,6 @@ const useChatChannels = () => {
         
     return (
         {
-            channels: dataContext.channels,
             load: _load
         }
     )

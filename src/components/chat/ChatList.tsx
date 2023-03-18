@@ -21,14 +21,14 @@ import { ChatContext } from "@/providers/ChatProvider";
 import LoadChannels from "../load/LoadChannels";
 import { useRouter } from "next/router";
 import useChatChannel from "@/hooks/chat/useChatChannel";
-import { DataContext } from "@/providers/DataProvider";
 import ChatNewDm from "./ChatNewDm";
+import useChatChannelsStore from "@/store/useChatChannelsStore";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
 const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
   const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
-  const dataContext = useContext(DataContext);
   const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannels();
   const router = useRouter();
@@ -36,6 +36,10 @@ const ChatList = (props: any) => {
   const modalChatNewDm = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
+  const $channels = useChatChannelsStore((state: any) => state.channels);
+  const $channel = useChatChannelStore((state: any) => state.channel);
+
+
 
   // TODO: Fix bandaging
   useEffect(() => {
@@ -233,14 +237,14 @@ const ChatList = (props: any) => {
           />
         </Row>
         <Col className="body verticlescroll hidescroll">
-          {!dataContext?.channels ? (
+          {!$channels ? (
             <TemplateLoading />
           ) : (
             <>
-              {dataContext?.channels?.length ? (
+              {$channels?.length ? (
                 <ul>
                   {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                  {dataContext?.channels.map((item: any, index: number) => (
+                  {$channels.map((item: any, index: number) => (
                     <StyledChatItem key={item?.index}>
                       {/* {chatContext?.hookChannels?.actionMessage ==
                       "MULTISELECT" && (
@@ -258,7 +262,7 @@ const ChatList = (props: any) => {
                         className="menu-item w-100 m-b-0-5"
                         size="xl"
                         variant={
-                          dataContext.channel?.id == item?.id
+                          $channel?.id == item?.id
                             ? "state_brand"
                             : "state_card_hover"
                         }

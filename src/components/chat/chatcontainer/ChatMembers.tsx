@@ -13,12 +13,15 @@ import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
 import useChatMembers from "@/hooks/chat/useChatMembers";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
+import useChatChannelStore from "@/store/useChatChannelStore";
+import { useChatMembersStore } from "@/store/useChatMembersStore";
 
 const ChatMembers = (props: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
-  const dataContext = useContext(DataContext);
-  const hookPortalChannelMembership = usePortalChannelMembership(dataContext?.channel);
+  const $channel = useChatChannelStore((state: any) => state.channel);
+  const hookPortalChannelMembership = usePortalChannelMembership($channel);
   const hookChatMembers = useChatMembers();
+  const $members = useChatMembersStore((state: any) => state.members);
   const toast = useToast();
 
 
@@ -58,7 +61,7 @@ const ChatMembers = (props: any) => {
       </>
     }>
       <>
-        {dataContext?.members?.onlineUsers?.concat(dataContext?.members?.offlineUsers)
+        {$members?.onlineUsers?.concat($members?.offlineUsers)
           ?.map((item: any, index: any) => {
             return (
               <StyledCard className="state_hover m-b-0-5"  key={`key-${index}`}>

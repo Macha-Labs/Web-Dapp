@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
 
 const AuthCard = () => {
+  console.log('Rendering >>>>> AuthCard');
   const authContext = useContext(AuthContext);
   const toast = useToast();
   const [lensBtnState, setLensBtnState] = useState<any>({

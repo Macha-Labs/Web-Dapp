@@ -15,6 +15,7 @@ import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 import useChatChannel from "@/hooks/chat/useChatChannel";
 import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "../modal/ModalSlider";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
 const ChatEdit = (props: any) => {
   /**
@@ -22,7 +23,7 @@ const ChatEdit = (props: any) => {
    *
    *
    **/
-  const dataContext = useContext(DataContext);
+   const $channel = useChatChannelStore((state: any) => state.channel);
   const toast = useToast();
   const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannelsReload();
@@ -73,7 +74,7 @@ const ChatEdit = (props: any) => {
    *
    **/
   const hookPortalChannel = usePortalChannel(
-    dataContext.channel,
+    $channel,
     { edit: callBack, prompt: callBackPrompt }
   );
 

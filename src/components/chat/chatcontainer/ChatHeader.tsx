@@ -16,27 +16,26 @@ import ChatSearch from "./ChatSearch";
 import { useRouter } from "next/router";
 import { truncateAddress } from "@/helpers";
 import useChatMembers from "@/hooks/chat/useChatMembers";
-import { DataContext } from "@/providers/DataProvider";
 import { ChatContext } from "@/providers/ChatProvider";
 import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
 import useChatChannel from "@/hooks/chat/useChatChannel";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
 const ChatHeader = (props: any) => {
   const membersModal = useDisclosure();
   const modalSettings = useDisclosure();
   const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
   const chatContext = useContext(ChatContext);
   const hookChatMembers = useChatMembers();
   const hookChatChannels = useChatChannelsReload();
   const hookChatChannel = useChatChannel();
   const router = useRouter();
+  const $channel = useChatChannelStore((state: any) => state.channel);
 
   useEffect(() => {
     hookChatMembers.load();
-  }, [dataContext?.channel?.id])
+  }, [$channel?.id])
 
-  console.log("Re-rendering >>>>> ChatHeader", dataContext.members);
   const TemplateMembers = () => {
     return (
       <ChatMembersList membersModal={membersModal}/>
@@ -103,16 +102,16 @@ const ChatHeader = (props: any) => {
             size="sm"
             className="m-r-0-5"
             name={
-              dataContext?.channel?.name || dataContext?.channel?.peerAddress
+              $channel?.name || $channel?.peerAddress
             }
           />
           <Col>
             <Row>
               <Heading as="h4" size="sm">
-                {dataContext?.channel?.name ||
-                  truncateAddress(dataContext?.channel?.peerAddress)}
+                {$channel?.name ||
+                  truncateAddress($channel?.peerAddress)}
               </Heading>
-              {!dataContext?.channel?.raw?.disconnected && dataContext?.channel?.raw?.muteStatus()?.muted && (
+              {!$channel?.raw?.disconnected && $channel?.raw?.muteStatus()?.muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}
@@ -143,7 +142,7 @@ const ChatHeader = (props: any) => {
         </Row>
 
         <Row>
-         <Tag className="m-r-1" variant={dataContext?.channel?.source == 'xmtp' ? 'state_xmtp' : ''}>{dataContext?.channel?.source}</Tag> 
+         <Tag className="m-r-1" variant={$channel?.source == 'xmtp' ? 'state_xmtp' : ''}>{$channel?.source}</Tag> 
 
          {router.pathname == '/chat' && <Row className="vr-center">
           
@@ -178,8 +177,9 @@ const ChatHeader = (props: any) => {
           <Template />
         </Row>
       </div>
-      <TemplateMembers />
-      <TemplateChannelSettings />
+      {membersModal.isOpen && <TemplateMembers />}
+      {modalSettings.isOpen && <TemplateChannelSettings />}
+      
     </>
   );
 };

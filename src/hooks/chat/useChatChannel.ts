@@ -1,6 +1,6 @@
-import { DataContext } from "@/providers/DataProvider";
 import { StreamContext, StreamContextType } from "@/providers/StreamProvider";
 import { XmtpContext } from "@/providers/XmtpProvider";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
@@ -10,21 +10,23 @@ const useChatChannel = () => {
     const streamContext = useContext(StreamContext) as StreamContextType;
     const xmtpContext = useContext(XmtpContext);
     const router = useRouter();
-    const dataContext = useContext(DataContext)
+    const $channel = useChatChannelStore((state: any) => state.channel);
+    const $loadChannel = useChatChannelStore(((state: any) => state.load))
+
 
 
     useEffect(() => {
         console.log('fetch channel');
         console.log('pathname', router.pathname);
         const stopWatchingChannlel = async() => {
-            if (dataContext?.channel) {
-                const result =  await dataContext?.channel?.raw?.stopWatching();
+            if ($channel) {
+                const result =  await $channel?.raw?.stopWatching();
                 console.log("Stopped watching the channel ", result);
             }
         }
         const markChannelAsRead = async() => {
-            if (dataContext?.channel) {
-                const result =  await dataContext?.channel?.raw?.markRead();
+            if ($channel) {
+                const result =  await $channel?.raw?.markRead();
                 console.log("Channel marked as Read ", result);
             }
         }
@@ -32,12 +34,12 @@ const useChatChannel = () => {
             case "/chat":
                 console.log('for stream')
                 stopWatchingChannlel();
-                dataContext.loadChannel(streamContext?.hookChannel.channel);
+                $loadChannel(streamContext?.hookChannel.channel);
                 markChannelAsRead();
                 break;
             case "/chat/dm":
                 console.log('for XMTP')
-                dataContext.loadChannel(xmtpContext?.conversation);
+                $loadChannel(xmtpContext?.conversation);
                 break;
         }
     }, [streamContext?.hookChannel.channel, xmtpContext?.conversation]);

@@ -1,18 +1,16 @@
 import { ChannelEvents } from "@/data/types";
 import { logger } from "@/helpers/logger";
-import { DataContext } from "@/providers/DataProvider";
-import { StreamContext } from "@/providers/StreamProvider";
 import { StreamMessage$ } from "@/schema/message";
-import { useContext, useEffect, useState } from "react";
+import useChatChannelStore from "@/store/useChatChannelStore";
+import { useEffect, useState } from "react";
 
 const useStreamChannelMessages = () => {
   console.log('Rendering >>>>> useStreamChannelMessages');
   const [messages, setMessages] = useState<any>([]);
-  const streamContext = useContext(StreamContext);
-  const dataContext = useContext(DataContext);
+  const $channel = useChatChannelStore((state: any) => state.channel);
 
   const customChannelEventTrigger = async(eventType: ChannelEvents, text: any = "") => {
-    const channelEvent = await dataContext?.channel?.raw?.sendEvent({
+    const channelEvent = await $channel.raw?.sendEvent({
       type: JSON.stringify(eventType),
       text: text
     });
@@ -20,63 +18,63 @@ const useStreamChannelMessages = () => {
   }
 
   useEffect(() => {
-    if (dataContext?.channel?.source != 'getstream')
+    if ($channel.source != 'getstream')
       return;
     logger(
       "channel",
       "useStreamChannelMessages.useEffect[channel]",
       "channel is ",
-      [streamContext?.hookChannel?.channel]
+      [$channel]
     );
-    streamContext?.hookChannel?.channel?.raw?.on("message.new", (event: any) => {
+    $channel.raw?.on("message.new", (event: any) => {
       logger(
         "stream",
-        "useStreamChannel.useEffect",
+        "useStreamChannel.useEffect >>> new",
         "logging the channel events",
         [event]
       );
       _setMessages();
     });
-    streamContext?.hookChannel?.channel?.raw?.on("message.updated", (event: any) => {
+    $channel.raw?.on("message.updated", (event: any) => {
       logger(
         "stream",
-        "useStreamChannel.useEffect",
+        "useStreamChannel.useEffect >>>> updated",
         "logging the channel events",
         [event]
       );
       _setMessages();
     });
-    streamContext?.hookChannel?.channel?.raw?.on("message.deleted", (event: any) => {
+    $channel.raw?.on("message.deleted", (event: any) => {
       logger(
         "stream",
-        "useStreamChannel.useEffect",
+        "useStreamChannel.useEffect >>>> deleted",
         "logging the channel events",
         [event]
       );
       _setMessages();
     });
-    streamContext?.hookChannel?.channel?.raw?.on("reaction.new", (event: any) => {
+    $channel.raw?.on("reaction.new", (event: any) => {
       logger(
         "stream",
-        "useStreamChannel.useEffect",
+        "useStreamChannel.useEffect >>> reaction new",
         "logging the message reaction events",
         [event]
       );
       _setMessages();
     });
-    streamContext?.hookChannel?.channel?.raw?.on("reaction.updated", (event: any) => {
+    $channel.raw?.on("reaction.updated", (event: any) => {
       logger(
         "stream",
-        "useStreamChannel.useEffect",
+        "useStreamChannel.useEffect >>>> reaction updated",
         "logging the message reaction events",
         [event]
       );
       _setMessages();
     });
-    streamContext?.hookChannel?.channel?.raw?.on("reaction.deleted", (event: any) => {
+    $channel.raw?.on("reaction.deleted", (event: any) => {
       logger(
         "stream",
-        "useStreamChannel.useEffect",
+        "useStreamChannel.useEffect >>>>> reaction deleted",
         "logging the message reaction events",
         [event]
       );
@@ -84,18 +82,17 @@ const useStreamChannelMessages = () => {
     });
 
     // custom channel events
-    dataContext?.channel?.raw?.on("pinMessage", (event: any) => {
-      logger("stream", "useStreamChannel.useEffect", "logging a custom event for pinning", [event]);
+    $channel.raw?.on("pinMessage", (event: any) => {
+      logger("stream", "useStreamChannel.useEffect >>>> pinMessage", "logging a custom event for pinning", [event]);
     });
 
 
-  }, [dataContext?.channel?.id]);
+  }, [$channel?.id]);
 
   const _setMessages = () => {
-    console.log(streamContext, dataContext, 'EVENT LOG');
-    if (dataContext?.channel?.raw?.state?.messageSets[0]?.messages) {
-      logger('stream', 'useStreamChannelMessages._setMessages', 'messages are', dataContext?.channel?.raw?.state?.messageSets[0]?.messages)
-      const messageData = dataContext?.channel?.raw?.state?.messageSets[0]?.messages
+    if ($channel.raw?.state?.messageSets[0]?.messages) {
+      logger('stream', 'useStreamChannelMessages._setMessages', 'messages are', $channel.raw?.state?.messageSets[0]?.messages)
+      const messageData = $channel.raw?.state?.messageSets[0]?.messages
         ?.slice(0)
         .map((item: any) => {
           return StreamMessage$(item);

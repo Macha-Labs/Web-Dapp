@@ -9,6 +9,7 @@ import { findOrCreateUser } from "../service/UserService";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 import { fetchSigner } from "@wagmi/core";
 import useXmtpAuth from "@/hooks/xmtp/useXmtpAuth";
+import useUserStore from "@/store/useUserStore";
 
 export type AuthContextType = {
   signer: any | undefined;
@@ -19,7 +20,7 @@ export type AuthContextType = {
   disconnectWallet: () => void;
   user: any | undefined;
   setUser: (param: any) => void;
-  isConnected: boolean | undefined;
+  isConnected: any | undefined;
   isLoadingLens: boolean | undefined;
   xmtpClient: any;
   xmtpClientAddress: string;
@@ -34,7 +35,7 @@ export const AuthContext = createContext<AuthContextType>({
   disconnectWallet: () => {},
   user: null,
   setUser: param => {},
-  isConnected: false,
+  isConnected: () => {},
   isLoadingLens: false,
   xmtpClient: undefined,
   xmtpClientAddress: "",
@@ -47,6 +48,11 @@ const AuthProvider = ({ children }: any) => {
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const [isLoadingLens, setLoadingLens] = useState<any>(false);
+  //
+  const $address = useUserStore((state: any) => state.address);
+  const $loadAddress = useUserStore(((state: any) => state.loadAddress))
+  const $connected = useUserStore((state: any) => state.connected);
+  const $loadConnected = useUserStore(((state: any) => state.loadConnected))
 
   /**
    * @description Initiating Hooks
@@ -69,8 +75,7 @@ const AuthProvider = ({ children }: any) => {
     }
     if (address != user.lens.ownedBy) {
       setLoadingLens(true);
-      const lensProfile = await hookLensProfile.getOwnedProfiles(address); // getting user lens profile
-      console.log("lensProfile", lensProfile);
+      const lensProfile = await hookLensProfile.getOwnedProfiles(address);
       try {
         if (lensProfile?.id) {
           const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
@@ -162,6 +167,7 @@ const AuthProvider = ({ children }: any) => {
   useEffect(() => {
     logger("auth", "useEffect[address]", "address", [address]);
     if (address) {
+      $loadAddress(address.toLowerCase());
       _fetchSignerFromWagmi();
       _fetchUserFromDB();
     }
@@ -171,27 +177,27 @@ const AuthProvider = ({ children }: any) => {
     if (user) logger("auth", "useEffect", "Logging user object", [user]);
   }, [user]);
 
-  useEffect(() => {
-    logger("auth", "useEffect[address]", 'address', [address])
-  }, [address])
 
-  
+  useEffect(() => {
+    $loadConnected(isConnected && address && user?.lens?.id && user?.db?.id && hookXmtpAuth.xmtpClientAddress ? true : false)
+  }, [address, isConnected, user?.lens?.id, user?.db?.id, hookXmtpAuth.xmtpClientAddress])
+
+  const _connected = () => {
+    return $connected;
+  }
+
   return (
     <AuthContext.Provider
       value={{
         signer: signer,
-        address: address?.toLowerCase(),
+        address: $address,
         connectWallet: connectWallet,
         connectLens: _fetchUserFromLens,
         connectXmtp: hookXmtpAuth.connectXmtp,
         disconnectWallet: disconnectWallet,
         user: user,
         setUser: setUser,
-        isConnected:
-          address &&
-          user?.lens?.id &&
-          user?.db?.id &&
-          hookXmtpAuth.xmtpClientAddress,
+        isConnected: $connected,
         isLoadingLens: isLoadingLens,
         xmtpClient: hookXmtpAuth.xmtpClient,
         xmtpClientAddress: hookXmtpAuth.xmtpClientAddress,

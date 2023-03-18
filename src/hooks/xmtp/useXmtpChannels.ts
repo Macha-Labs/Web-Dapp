@@ -1,17 +1,16 @@
 import { logger } from "@/helpers/logger";
 import { AuthContext } from "@/providers/AuthProvider";
-import { DataContext } from "@/providers/DataProvider";
 import { Channel$ } from "@/schema/channel";
+import useChatChannelStore from "@/store/useChatChannelStore";
 import { useContext, useEffect, useState } from "react";
 import useLensProfileList from "../lens/useLensProfileList";
 
 const useXmtpChannels = () => {
   console.log('Rendering >>>>> useXmtpChannels');
   const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
   const [allConversations, setAllConversations] = useState<any>();
   const [xmtpConvo, setXmtpConvo] = useState<any>();
-
+  const $channel = useChatChannelStore((state: any) => state.channel);
   const hookLensProfileList = useLensProfileList();
 
   const _listen = async () => {
@@ -26,7 +25,7 @@ const useXmtpChannels = () => {
   };
 
   useEffect(() => {
-    if (dataContext?.channel?.source != 'xmtp')
+    if ($channel?.source != 'xmtp')
       return;
 
     const streamConversations = async () => {
@@ -35,7 +34,7 @@ const useXmtpChannels = () => {
       setXmtpConvo(xmtpNew);
     };
     streamConversations();
-  }, [dataContext?.channel?.id]);
+  }, [$channel?.id]);
 
   useEffect(() => {
     if (xmtpConvo) {
@@ -58,7 +57,8 @@ const useXmtpChannels = () => {
     // });
     const conversationMap = await conversationList
       .map(async (item: any) => {
-        const peer = await hookLensProfileList.fetch(item.peerAddress);
+        // const peer = await hookLensProfileList.fetch(item.peerAddress);
+        const peer = {}
         const channelData = new Channel$("xmtp", {...item, peer: peer, raw: item});
         return channelData;
       })
