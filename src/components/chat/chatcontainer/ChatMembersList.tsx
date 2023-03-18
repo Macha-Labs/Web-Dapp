@@ -24,13 +24,14 @@ const Container = styled.div`
   }
 `;
 
-const ChatMembersList: FC<Props> = props => {
+const ChatMembersList = (props: any) => {
   const modalProfile = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<any>();
   const dataContext = useContext(DataContext)
 
   const handleSelectedUser = (user: any) => {
     modalProfile.onOpen();
+    props.modal.onClose();
     setSelectedUser(user);
   };
 
@@ -98,9 +99,10 @@ const ChatMembersList: FC<Props> = props => {
 
   return (
     <>
-    <ModalSlider
+    {props.modal?.isOpen && 
+      <ModalSlider
       size="sm"
-      event={props?.membersModal} 
+      event={props?.modal} 
       header={
         <>
           <Heading as="h6" size="sm">Members</Heading>
@@ -112,9 +114,11 @@ const ChatMembersList: FC<Props> = props => {
 
       </ModalSlider>
      
+    
+    }
       
-
-      <TemplateProfile />
+    {modalProfile?.isOpen && <TemplateProfile />}
+      
     </>
   );
 };
