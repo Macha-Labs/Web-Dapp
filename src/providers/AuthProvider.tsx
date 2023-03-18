@@ -178,6 +178,7 @@ const AuthProvider = ({ children }: any) => {
   useEffect(() => {
     if (user) logger("auth", "useEffect", "Logging user object", [user]);
     if (user?.lens?.id) {
+      logger("auth", "useEffect", "Inside user.lens.id", [user.lens.id]);
       hookLensConnections.fetch(user?.lens)
     }
   }, [user]);

@@ -13,7 +13,7 @@ const useUserStore = create((set) => ({
     following: null,
     loadFollowing: (data: any) => set((state: any) => ({ following: data})),
     unloadFollowing: () => set({ following: null }),
-    connected: 'connected',
+    connected: null,
     loadConnected: (data: any) => set((state: any) => ({ connected: data})),
 })) 
 

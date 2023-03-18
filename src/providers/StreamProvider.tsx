@@ -26,6 +26,7 @@ const StreamProvider = ({children}: any) => {
    
 
     useEffect(() => {
+        logger("stream", "useEffect.connectToStream", "checking if connnected & client", [$connected, hookStreamClient?.client])
         if ($connected && !hookStreamClient?.client) {
             hookStreamClient.connectToStream();
         }
