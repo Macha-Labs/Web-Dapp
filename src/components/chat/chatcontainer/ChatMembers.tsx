@@ -38,6 +38,7 @@ const ChatMembers = (props: any) => {
   const onClickAddMembers = () => {
     props.modalAddMembers.onOpen()
     props.modalChatMembers.onClose();
+    props?.modalSettings.onClose()
   }
 
   return (
