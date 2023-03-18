@@ -57,6 +57,7 @@ const AuthProvider = ({ children }: any) => {
   const $loadAddress = useUserStore(((state: any) => state.loadAddress))
   const $connected = useUserStore((state: any) => state.connected);
   const $loadConnected = useUserStore(((state: any) => state.loadConnected))
+  const $loadFollowers = useUserStore(((state: any) => state.loadFollowers))
 
   /**
    * @description Initiating Hooks
@@ -191,6 +192,10 @@ const AuthProvider = ({ children }: any) => {
       hookStreamAuth.connectToStream($address, user);
     }
   }, [user?.lens]);
+
+  useEffect(() => {
+    $loadFollowers(hookLensConnections.followers)
+  }, [hookLensConnections.followers])
 
 
   useEffect(() => {
