@@ -13,36 +13,38 @@ const useChatChannel = () => {
     const $channel = useChatChannelStore((state: any) => state.channel);
     const $loadChannel = useChatChannelStore(((state: any) => state.load))
 
+    const stopWatchingChannel = async() => {
+        if ($channel) {
+            const result =  await $channel?.raw?.stopWatching();
+            console.log("Stopped watching the channel ", result, $channel);
+        }
+    }
+    const markChannelAsRead = async() => {
+        if ($channel) {
+            const result =  await $channel?.raw?.markRead();
+            console.log("Channel marked as Read ", result);
+        }
+    }
 
-
+    // stream
     useEffect(() => {
         console.log('fetch channel');
         console.log('pathname', router.pathname);
-        const stopWatchingChannel = async() => {
-            if ($channel) {
-                const result =  await $channel?.raw?.stopWatching();
-                console.log("Stopped watching the channel ", result, $channel);
-            }
+        if (router.pathname == "/chat") {
+            console.log('for stream', $channel);
+            stopWatchingChannel();
+            $loadChannel(streamContext?.hookChannel.channel);
+            markChannelAsRead();
         }
-        const markChannelAsRead = async() => {
-            if ($channel) {
-                const result =  await $channel?.raw?.markRead();
-                console.log("Channel marked as Read ", result);
-            }
+    }, [streamContext?.hookChannel.channel]);
+
+    // xmtp
+    useEffect(() => {
+        if (router.pathname == "/chat/dm") {
+            console.log('for XMTP')
+            $loadChannel(xmtpContext?.conversation);
         }
-        switch (router.pathname) {
-            case "/chat":
-                console.log('for stream', $channel);
-                stopWatchingChannel();
-                $loadChannel(streamContext?.hookChannel.channel);
-                markChannelAsRead();
-                break;
-            case "/chat/dm":
-                console.log('for XMTP')
-                $loadChannel(xmtpContext?.conversation);
-                break;
-        }
-    }, [streamContext?.hookChannel.channel, xmtpContext?.conversation]);
+    }, [xmtpContext?.conversation])
 
     const _fetch = (data: any) => {
         switch (router.pathname) {
