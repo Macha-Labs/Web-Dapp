@@ -18,14 +18,14 @@ const ChatNew = (props: any) => {
    *
    **/
   const toast = useToast();
-  const callbackNew = () => {
+  const callbackNew = (channelId: any) => {
     toast({
       title: "Channel Created Successfully",
       status: "success",
       duration: 3000,
       position: "bottom-right",
     });
-    // chatContext?.hookChannel?.remove();
+    chatContext?.hookChannel?.fetch({id: channelId});
     chatContext?.hookChannelList?.load();
     props.modal.onClose();
     

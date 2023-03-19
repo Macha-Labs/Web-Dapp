@@ -63,7 +63,7 @@ const ChatList = (props: any) => {
       });
       chatContext?.hookChannelList?.load();
     },
-    leave: () => {
+    leave: (channelId: any) => {
       toast({
         title: "Channel Left",
         status: "success",
@@ -71,9 +71,10 @@ const ChatList = (props: any) => {
         position: "bottom-right",
       });
       chatContext?.hookChannelList?.load();
-      chatContext?.hookChannel?.remove();
+      if (channelId == $channel.id)
+        chatContext?.hookChannel?.remove();
     },
-    delete: () => {
+    delete: (channelId: any) => {
       toast({
         title: "Channel Deleted",
         status: "success",
@@ -81,7 +82,8 @@ const ChatList = (props: any) => {
         position: "bottom-right",
       });
       chatContext?.hookChannelList?.load();
-      chatContext?.hookChannel?.remove();
+      if (channelId == $channel.id)
+        chatContext?.hookChannel?.remove();
     },
   });
 
