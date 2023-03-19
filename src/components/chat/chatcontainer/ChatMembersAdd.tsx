@@ -1,15 +1,17 @@
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, Button, Checkbox, Heading, Text, useToast } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import ModalSlider from "@/components/modal/ModalSlider";
 import useChatMembers from "@/hooks/chat/useChatMembers";
 import useChatChannelStore from "@/store/useChatChannelStore";
 import { useChatMembersStore } from "@/store/useChatMembersStore";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatMembersAdd = (props: any) => {
   const $channel = useChatChannelStore((state: any) => state.channel);
+  const chatContext = useContext(ChatContext)
   const hookPortalChannelMembership = usePortalChannelMembership($channel);
   const hookChatMembers = useChatMembers()
   const $memberIds = useChatMembersStore((state: any) => state.memberIds);
@@ -22,7 +24,7 @@ const ChatMembersAdd = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatMembers.load()
+    chatContext?.hookMembers?.load($channel)
     // props?.modalAddMembers.onClose();
     // props?.modalChatMembers.onOpen();
   };

@@ -6,23 +6,22 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import React, { useContext} from "react";
+import React, { useContext, useEffect} from "react";
 import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import ModalSlider from "@/components/modal/ModalSlider";
-import useChatMembers from "@/hooks/chat/useChatMembers";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import useChatChannelStore from "@/store/useChatChannelStore";
 import { useChatMembersStore } from "@/store/useChatMembersStore";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatMembers = (props: any) => {
   const authContext = useContext(AuthContext) as AuthContextType;
+  const chatContext = useContext(ChatContext)
   const $channel = useChatChannelStore((state: any) => state.channel);
   const hookPortalChannelMembership = usePortalChannelMembership($channel);
-  const hookChatMembers = useChatMembers();
-  const $members = useChatMembersStore((state: any) => state.members);
+  const $memberAll = useChatMembersStore((state: any) => state.memberAll);
   const toast = useToast();
-
 
   const callbackRemove = () => {
     toast({
@@ -31,7 +30,8 @@ const ChatMembers = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatMembers.load();
+    chatContext?.hookMembers?.load($channel
+      );
   }
 
   const onClickAddMembers = () => {
@@ -65,7 +65,7 @@ const ChatMembers = (props: any) => {
       </>
     }>
       <>
-        {$members?.onlineUsers?.concat($members?.offlineUsers)
+        {$memberAll
           ?.map((item: any, index: any) => {
             return (
               <StyledCard className="state_hover m-b-0-5"  key={`key-${index}`}>
