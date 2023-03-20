@@ -207,22 +207,7 @@ function ChatSetting(props: any) {
   const chatOptions3 = [
     {
       //   icon: IconBrandClearChat,
-      name: "Copy Invite Link",
-      icon: "IconDarkFiles.png",
-      onPress: () => {
-        const inviteLink = `${window.location.origin}/invite/c/${$channel.id}`
-        navigator.clipboard.writeText(inviteLink);
-        toast({
-          title: "Copied to clipboard",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-      },
-    },
-    {
-      //   icon: IconBrandClearChat,
-      name: "Clear Chat",
+      name: "Clear Chat History",
       icon: "IconRedDelete.png",
       onPress: () => {
         hookPortalChannel?.clearChat($channel);
@@ -245,6 +230,24 @@ function ChatSetting(props: any) {
       },
     },
   ];
+
+  const chatOptions4 = [
+    {
+      //   icon: IconBrandClearChat,
+      name: "Copy Invite Link",
+      icon: "IconDarkFiles.png",
+      onPress: () => {
+        const inviteLink = `${window.location.origin}/invite/c/${$channel.id}`
+        navigator.clipboard.writeText(inviteLink);
+        toast({
+          title: "Copied to clipboard",
+          status: "success",
+          duration: 3000,
+          position: "bottom-right",
+        });
+      },
+    },
+  ]
 
 
 
@@ -300,6 +303,13 @@ function ChatSetting(props: any) {
     >
       <div>
         <Col>
+          <LayoutOptions
+            options={chatOptions4}
+            style={{ className: "m-b-1 p-2" }}
+            channelAdmin={$channel.createdBy}
+            channelRawData={$channel.raw}
+            userId={authContext.address}
+          />
           <LayoutOptions
             options={chatOptions}
             style={{ className: "m-b-1 p-2" }}
