@@ -29,7 +29,7 @@ const useChatChannel = () => {
             console.log('for stream', $channel?.id, hookStreamChannel?.channel?.id);
             if ($channel?.id != hookStreamChannel?.channel?.id)
                 _unwatch($channel);
-            _read(hookStreamChannel?.channel?.id);
+            _read(hookStreamChannel?.channel);
             $loadChannel(hookStreamChannel?.channel);
         }
     }, [hookStreamChannel?.channel]);
