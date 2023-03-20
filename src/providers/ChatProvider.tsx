@@ -1,39 +1,48 @@
-import { createContext, useContext } from "react";
-import { StreamContext, StreamContextType } from "./StreamProvider";
+import useChat from "@/hooks/chat/useChat";
+import useChatChannel from "@/hooks/chat/useChatChannel";
+import useChatChannels from "@/hooks/chat/useChatChannels";
+import useChatMembers from "@/hooks/chat/useChatMembers";
+import useChatMessage from "@/hooks/chat/useChatMessage";
+import useChatMessages from "@/hooks/chat/useChatMessages";
+import { createContext} from "react";
+
 
 export type ChatContextType = {
-  hookChannel: any | undefined;
   hookChat: any | undefined;
+  hookChannel: any | undefined;
+  hookChannelList: any | undefined;
   hookMembers: any | undefined;
-  hookChannels: any | undefined;
-  streamClient: any | undefined;
-  streamContext: any | undefined;
-  initiate: (channel: any, userAddress: any) => void;
+  hookMessages: any | undefined;
+  hookMessage: any | undefined;
 };
 
 export const ChatContext = createContext<ChatContextType>({
-  hookChannel: null,
   hookChat: null,
+  hookChannel: null,
+  hookChannelList: null,
   hookMembers: null,
-  hookChannels: [],
-  streamClient: null,
-  streamContext: null,
-  initiate: (channel: any, userAddress?: any, appChannelIndex?: any) => {},
+  hookMessages: null,
+  hookMessage: null,
 });
 
 export const ChatProvider = ({ children }: any) => {
-  const streamContext = useContext(StreamContext) as StreamContextType;  
+  console.log('Rendering >>>>> ChatProvider');
+  const hookChat = useChat();
+  const hookChatChannel = useChatChannel();
+  const hookChatChannels = useChatChannels();
+  const hookMessages = useChatMessages();
+  const hookMessage = useChatMessage();
+  const hookMembers = useChatMembers();
 
   return (
     <ChatContext.Provider
       value={{
-        hookChannel: streamContext?.hookChannel,
-        hookChat: streamContext?.hookChat,
-        hookMembers: streamContext?.hookMembers,
-        hookChannels: streamContext?.hookChannels,
-        streamClient: streamContext?.client,
-        streamContext: streamContext,
-        initiate: streamContext?.initiate,
+        hookChat: hookChat,
+        hookChannel: hookChatChannel,
+        hookChannelList: hookChatChannels,
+        hookMembers: hookMembers,
+        hookMessages: hookMessages,
+        hookMessage: hookMessage,
       }}
     >
       {children}

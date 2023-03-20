@@ -1,7 +1,9 @@
 import ModalSlider from "@/components/modal/ModalSlider";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
+import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
+import useChatChannelStore from "@/store/useChatChannelStore";
 import { Col } from "@/styles/StyledComponents";
 import { Heading, useDisclosure, useToast } from "@chakra-ui/react";
 import React, { useContext } from "react";
@@ -12,8 +14,14 @@ import ChatMessageList from "./ChatMessageList";
 import ChatPermissions from "./ChatPermissions";
 
 function ChatSetting(props: any) {
+  console.log('Rendering >>>>> ChatSetting');
+  const authContext = useContext(AuthContext);
+  const chatContext = useContext(ChatContext);
+  const $channel = useChatChannelStore((state: any) => state.channel);
+  // const $channel = {id: 'hi', createdBy: '', raw: '', pinnedMessages: []}
   const toast = useToast();
   const modalPinned = useDisclosure();
+
   /**
    * @description
    **/
@@ -24,8 +32,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.initiate(null);
+    chatContext?.hookChannel?.remove();
+    chatContext?.hookChannelList?.load();
     props.modalSettings.onClose();
   };
   const callbackClear = () => {
@@ -35,9 +43,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.streamContext?.reloadChannel();
-    // props.chatContext?.initiate(null);
+    chatContext?.hookChannelList?.load();
     props.modalSettings.onClose();
   };
 
@@ -51,9 +57,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.streamContext?.reloadChannel();
-    props.modalSettings.onClose();
+    chatContext?.hookChannelList?.load();
+    props?.modalSettings.onClose();
   };
 
   /**
@@ -66,8 +71,7 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannel();
-    props.chatContext?.streamContext?.reloadChannelList();
+    chatContext?.hookChannelList?.load();
     props.modalSettings.onClose();
   };
   /**
@@ -80,8 +84,8 @@ function ChatSetting(props: any) {
       duration: 3000,
       position: "bottom-right",
     });
-    props.chatContext?.streamContext?.reloadChannelList();
-    props.chatContext?.initiate(null);
+    chatContext?.hookChannel?.remove();
+    chatContext?.hookChannelList?.load();
     props.modalSettings.onClose();
   };
 
@@ -89,7 +93,7 @@ function ChatSetting(props: any) {
    * @description
    **/
   const hookPortalChannel = usePortalChannel(
-    props.chatContext.hookChannel.channel.id,
+    $channel,
     {
       delete: callbackDelete,
       mute: callbackMute,
@@ -108,30 +112,30 @@ function ChatSetting(props: any) {
       icon: "IconDarkSearch.png",
       name: "Search Chat",
       onPress: () => {
-        props.hookChat.handleSearch();
-        props?.event?.onClose();
+        chatContext.hookChat.handleSearch();
+        props?.modalSettings?.onClose();
       },
     },
     {
       icon: "IconDarkMute.png",
       name: "Mute Chat",
       onPress: () => {
-        hookPortalChannel?.muteChannel(props.chatContext.hookChannel.channel);
+        hookPortalChannel?.muteChannel($channel);
       },
     },
     {
       icon: "IconDarkUnMute.png",
       name: "UnMute Chat",
       onPress: () => {
-        hookPortalChannel?.unMuteChannel(props.chatContext.hookChannel.channel);
+        hookPortalChannel?.unMuteChannel($channel);
       },
     },
     {
       icon: "IconDarkMultiselect.png",
       name: "Select Chat",
       onPress: () => {
-        props.hookChat.handleMultiSelect();
-        props?.event?.onClose();
+        chatContext.hookChat.handleMultiSelect();
+        props?.modalSettings?.onClose();
       },
     },
     {
@@ -143,8 +147,8 @@ function ChatSetting(props: any) {
       condition: {
         enabled: true,
         check:
-          props.chatContext.hookChannel?.channel?.createdBy ===
-          props.authContext.address,
+          $channel?.createdBy ===
+          authContext.address,
       },
     },
     {
@@ -156,8 +160,8 @@ function ChatSetting(props: any) {
       condition: {
         enabled: true,
         check:
-          props.chatContext.hookChannel?.channel?.createdBy ===
-          props.authContext.address,
+          $channel?.createdBy ===
+          authContext.address,
       },
     },
     {
@@ -169,8 +173,8 @@ function ChatSetting(props: any) {
       condition: {
         enabled: true,
         check:
-          props.chatContext.hookChannel?.channel?.createdBy ===
-          props.authContext.address,
+          $channel?.createdBy ===
+          authContext.address,
       },
     },
   ];
@@ -203,10 +207,37 @@ function ChatSetting(props: any) {
   const chatOptions3 = [
     {
       //   icon: IconBrandClearChat,
+      name: "Clear Chat History",
+      icon: "IconRedDelete.png",
+      onPress: () => {
+        hookPortalChannel?.clearChat($channel);
+      },
+    },
+    {
+      //   icon: IconBrandClearChat,
+      name: "Delete Channel",
+      icon: "IconRedDelete.png",
+      onPress: () => {
+        hookPortalChannel?.deleteChannel($channel);
+      },
+    },
+    {
+      //   icon: IconBrandClearChat,
+      name: "Leave Channel",
+      icon: "IconDarkLeave.png",
+      onPress: () => {
+        hookPortalChannel?.leaveChannel($channel);
+      },
+    },
+  ];
+
+  const chatOptions4 = [
+    {
+      //   icon: IconBrandClearChat,
       name: "Copy Invite Link",
       icon: "IconDarkFiles.png",
       onPress: () => {
-        const inviteLink = `${window.location.origin}/invite/c/${props.chatContext.hookChannel.channel.id}`
+        const inviteLink = `${window.location.origin}/invite/c/${$channel.id}`
         navigator.clipboard.writeText(inviteLink);
         toast({
           title: "Copied to clipboard",
@@ -216,31 +247,7 @@ function ChatSetting(props: any) {
         });
       },
     },
-    {
-      //   icon: IconBrandClearChat,
-      name: "Clear Chat",
-      icon: "IconRedDelete.png",
-      onPress: () => {
-        hookPortalChannel?.clearChat(props.chatContext.hookChannel.channel);
-      },
-    },
-    {
-      //   icon: IconBrandClearChat,
-      name: "Delete Channel",
-      icon: "IconRedDelete.png",
-      onPress: () => {
-        hookPortalChannel?.deleteChannel(props.chatContext.hookChannel.channel);
-      },
-    },
-    {
-      //   icon: IconBrandClearChat,
-      name: "Leave Channel",
-      icon: "IconDarkLeave.png",
-      onPress: () => {
-        hookPortalChannel?.leaveChannel(props.chatContext.hookChannel.channel);
-      },
-    },
-  ];
+  ]
 
 
 
@@ -251,85 +258,91 @@ function ChatSetting(props: any) {
 
   const TemplatePermission = () => {
     return (
-      <ModalSlider size={"md"} event={modalChatPermission}>
-        <ChatPermissions />
-      </ModalSlider>
+      <ChatPermissions modalChatPermission={modalChatPermission} />
     );
   };
   const TemplateMembers = () => {
     return (
-      <ModalSlider size={"md"} event={modalChatMembers}>
-        <ChatMembers
+      <ChatMembers
           modalChatMembers={modalChatMembers}
           modalAddMembers={modalAddMembers}
+          modalSettings={props.modalSettings}
         />
-      </ModalSlider>
     );
   };
   const TemplateMembersAdd = () => {
     return (
-      <ModalSlider size={"md"} event={modalAddMembers}>
-        <ChatMembersAdd
+      <ChatMembersAdd
           modalAddMembers={modalAddMembers}
           modalChatMembers={modalChatMembers}
         />
-      </ModalSlider>
     );
   };
   const TemplateEditChannel = () => {
     return (
-      <ModalSlider size={"lg"} event={modalChatEdit}>
         <ChatEdit modal={modalChatEdit} />
-      </ModalSlider>
     );
   };
-
   const TemplatePinnedMessages = () => {
     return (
-      <ModalSlider event={modalPinned} size="md">
-        <ChatMessageList
-          pinnedMessageList={props.chatContext.hookChannel?.pinnedMessages}
-          hookChat={props.hookChat}
-        />
-      </ModalSlider>
+      <ChatMessageList
+        modal={modalPinned}
+        pinnedMessageList={$channel?.pinnedMessages}
+        hookChat={chatContext.hookChat}
+      />
     );
   };
   return (
     <>
+      {props.modalSettings && <ModalSlider size="sm" 
+      event={props.modalSettings}
+      header={<Heading as="h6" size="sm">
+      Channel Settings
+    </Heading>}
+    
+    >
       <div>
-        <Heading as="h4" size="md" className="m-b-1">
-          Channel Settings
-        </Heading>
         <Col>
           <LayoutOptions
+            options={chatOptions4}
+            style={{ className: "m-b-1 p-2" }}
+            channelAdmin={$channel.createdBy}
+            channelRawData={$channel.raw}
+            userId={authContext.address}
+          />
+          <LayoutOptions
             options={chatOptions}
-            style={{ className: "m-b-1" }}
-            channelAdmin={props.chatContext.hookChannel.channel.createdBy}
-            channelRawData={props.chatContext.hookChannel.channel.raw}
-            userId={props.authContext.address}
+            style={{ className: "m-b-1 p-2" }}
+            channelAdmin={$channel.createdBy}
+            channelRawData={$channel.raw}
+            userId={authContext.address}
           />
           <LayoutOptions
             options={chatOptions2}
-            style={{ className: "m-b-1" }}
-            channelAdmin={props.chatContext.hookChannel.channel.createdBy}
-            channelRawData={props.chatContext.hookChannel.channel.raw}
-            userId={props.authContext.address}
+            style={{ className: "m-b-1 p-2" }}
+            channelAdmin={$channel.createdBy}
+            channelRawData={$channel.raw}
+            userId={authContext.address}
           />
           <LayoutOptions
+            style={{ className: "m-b-1 p-2" }}
             options={chatOptions3}
-            channelAdmin={props.chatContext.hookChannel.channel.createdBy}
-            channelRawData={props.chatContext.hookChannel.channel.raw}
-            userId={props.authContext.address}
+            channelAdmin={$channel.createdBy}
+            channelRawData={$channel.raw}
+            userId={authContext.address}
           />
         </Col>
       </div>
-      <TemplatePermission />
-      <TemplateMembers />
-      <TemplateMembersAdd />
-      <TemplateEditChannel />
-      <TemplatePinnedMessages />
+      
+    </ModalSlider>}
+    
+     {modalChatPermission.isOpen &&  <TemplatePermission />}
+    {modalChatMembers.isOpen && <TemplateMembers />}
+    {modalAddMembers.isOpen && <TemplateMembersAdd />}
+    {modalChatEdit.isOpen && <TemplateEditChannel />}
+    {modalPinned.isOpen && <TemplatePinnedMessages />}
     </>
-  );
+  )
 }
 
 export default ChatSetting;

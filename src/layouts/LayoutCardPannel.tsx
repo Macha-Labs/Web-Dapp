@@ -4,7 +4,7 @@ const LayoutCardPannel = (props: any) => {
     return (
         <StyledCardPannel className={props.style?.className}>
             <div className="header">
-                    {props.header}
+                    {props?.header}
             </div>
             <div className="body">
                     {props.children}

@@ -1,14 +1,13 @@
-import React, { useContext, useMemo } from "react";
-
-import { ChatContext } from "@/providers/ChatProvider";
+import React from "react";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
-import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import { Row, StyledCard } from "@/styles/StyledComponents";
 import { Button, Heading, Switch, Text } from "@chakra-ui/react";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
+import ModalSlider from "@/components/modal/ModalSlider";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
-const ChatPermissions = () => {
-  const chatProvider = useContext(ChatContext);
-  const hookPortalChannel = usePortalChannel(chatProvider.hookChannel?.channel);
+const ChatPermissions = (props: any) => {
+  const $channel = useChatChannelStore((state: any) => state.channel);
+  const hookPortalChannel = usePortalChannel($channel);
 
   const permissionOptions = [
     {
@@ -77,16 +76,33 @@ const ChatPermissions = () => {
   ];
 
 
-  const TemplateUserPermissions = () => {
+  return (
+    <ModalSlider event={props.modalChatPermission} size="sm" 
     
+    header={
+      <Row className="hr-between vr-center w-100">
+        <Heading as="h6" size="sm">Permissions</Heading>
+        <Button
+          size="sm"
+          variant="state_brand"
+          onClick={() => {
+            hookPortalChannel.updatePermissions();
+          }}
+        >
+          Save
+        </Button>
+      </Row>
+    }
+
+    footer={<Text>Changes done will be reflected for all the members of the channel</Text>}
     
-    return (
-      <StyledCard>
+    >
+        <>
         {permissionOptions.map((permission: any, index: any) => {
           return (
-            <>
+            <StyledCard key={permission.value} className="m-b-0-5 state_hover">
               
-              <Row key={permission.value} className="p-1 hr-between">
+              <Row className="p-1 hr-between">
                 <Text fontSize="sm">{permission.text}</Text>
                 <Switch
                   defaultChecked={hookPortalChannel?.channel?.permissions?.includes(
@@ -100,33 +116,12 @@ const ChatPermissions = () => {
                   )}
                 />
               </Row>
-            </>
+            </StyledCard>
           );
         })}
-      </StyledCard>
-    );
-  };
-
-  return (
-    <LayoutCardPannel
-      header={
-        <Row className="hr-between vr-center">
-          <Heading as="h6" size="sm">Permissions</Heading>
-          <Button
-            size="sm"
-            variant="state_brand"
-            onClick={() => {
-              hookPortalChannel.updatePermissions();
-            }}
-          >
-            Save
-          </Button>
-        </Row>
-      }
-      footer={<Text>Changes done will be reflected for all the members of the channel</Text>}
-    >
-      <TemplateUserPermissions />      
-    </LayoutCardPannel>
+      </>
+    </ModalSlider>
+    
   );
 };
 

@@ -101,6 +101,13 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.overflow-y {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -372,8 +379,11 @@ a {
 .p-5 {
   padding: 5rem;
 }
+.p-v-1 {
+  padding: 1rem 0rem;
+}
 .p-v-2 {
-  padding: 3rem 0 rem;
+  padding: 3rem 0rem;
 }
 .p-h-2 {
   padding: 0rem 3rem;

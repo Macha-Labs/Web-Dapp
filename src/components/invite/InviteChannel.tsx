@@ -1,19 +1,19 @@
 import useStreamChannelMembership from "@/hooks/stream/useStreamChannelMembership";
 import { AuthContext } from "@/providers/AuthProvider";
-import { ChatContext } from "@/providers/ChatProvider";
 import { Col, StyledCard} from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
+import { ChatContext } from "@/providers/ChatProvider";
 import { useRouter } from "next/router";
 
 
 const InviteChannel = (props: any) => {
     const authContext = useContext(AuthContext);
-    const hookStreamChannelMembership = useStreamChannelMembership();
     const chatContext = useContext(ChatContext);
-    const router = useRouter();
+    const hookStreamChannelMembership = useStreamChannelMembership();
     const toast = useToast();
+    const router = useRouter();
 
 
     useEffect(() => {
@@ -24,9 +24,9 @@ const InviteChannel = (props: any) => {
         }
     }, [props?.channelId])
 
+
     const callBackMembership = () => {
-        chatContext.initiate({id: props?.channelId}, authContext?.address);
-        console.log('called');
+        chatContext?.hookChannel?.fetch({id: props?.channelId});
         router.push('/chat');
     }
 
@@ -41,9 +41,9 @@ const InviteChannel = (props: any) => {
         }
     }
 
-    return (
-        <div className="middle">
-        <StyledCard className="w-100 p-4">
+    const TemplateLoaded = () => {
+        return (
+            <StyledCard className="w-100 p-4">
             <Col className="hr-center">
                 <Col className="m-b-2 hr-center text-center">
                     <Avatar size="xl" name={hookStreamChannelMembership?.channel?.name} />
@@ -63,6 +63,20 @@ const InviteChannel = (props: any) => {
                     onClick={() => {authContext.connectLens(callBacks)}}>
                         Sign In With Lens
                     </Button>}
+                    {authContext.address &&
+                    authContext?.user?.lens?.id &&
+                    !authContext.xmtpClientAddress && (
+                        <Button
+                        className=""
+                        size="md"
+                        variant="state_xmtp"
+                        onClick={() => {
+                            authContext.connectXmtp();
+                        }}
+                        >
+                        Connect to XMTP
+                        </Button>
+                    )}
                     {authContext?.isConnected && 
                     <Button 
                     onClick={() => {
@@ -75,8 +89,18 @@ const InviteChannel = (props: any) => {
                 </Col>
                 <Text fontSize={12}>By registering you agree to MetaWork Terms and Conditions</Text>
             </Col>
-        </StyledCard>
-    </div>
+            </StyledCard>
+        )
+    }
+
+    return (
+        <>
+            <div className="middle">
+                
+                    <TemplateLoaded />
+                </div>
+        
+        </>
     )
 }
 

@@ -1,18 +1,37 @@
-import { useEffect, useRef, useState } from 'react';
-import { VariableSizeList } from 'react-window';
+import IconImage from '@/components/icons/IconImage';
+import ModalSlider from "@/components/modal/ModalSlider";
+import UserProfile from "@/components/user/UserProfile";
+import { AuthContext } from "@/providers/AuthProvider";
+import { ChatContext } from "@/providers/ChatProvider";
+import useChatChannelStore from "@/store/useChatChannelStore";
+import { useChatMembersStore } from "@/store/useChatMembersStore";
+import useChatMessagesStore from "@/store/useChatMessagesStore";
+import { StyledDateTag, StyledMoveToBottom } from '@/styles/StyledComponents';
+import { useDisclosure } from "@chakra-ui/react";
+import { useContext, useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
-import AutoSizer from "react-virtualized-auto-sizer";
-import { StyledDateTag } from '@/styles/StyledComponents';
-import useStreamChannelActions from '@/hooks/stream/useStreamChannelActions';
 
 const ChatWindow = (props: any) => {
-  const hookStreamChannelMessages = useStreamChannelActions(props.chatContext?.hookChannel?.channel);
+  const authContext = useContext(AuthContext);
+  const chatContext = useContext(ChatContext);
+  // 
   const messageListRef = useRef<any>();
   const itemsRef = useRef<any>([]);
   const [isScrollAtBottom, setIsScrollAtBottom] = useState(false)
   const [dataTag, setDateTag] = useState('')
   const [dateTagVisible, setDateTagVisible] = useState(false)
   const [scrollTo, setScrollTo] = useState('')
+  const [prevMsgCount, setPrevMsgCount]= useState(0)
+  const [unReadMsg, setUnReadMsg] = useState(0)
+  const [selectedUser, setSelectedUser] = useState<any>();
+  const modalProfile = useDisclosure();
+  const $memberAll = useChatMembersStore((state: any) => state.memberAll);
+  const $channel = useChatChannelStore((state: any) => state.channel);
+  const $messages = useChatMessagesStore((state: any) => state.messages);
+
+  useEffect(() => {
+    chatContext?.hookMessages.load();
+  }, [$channel])
 
 
   const handleDateTag = (date: any) => {
@@ -33,15 +52,35 @@ const ChatWindow = (props: any) => {
     setDateTag(dateTagString);
   };
 
+  const scrollToBottom = () => {
+    if (messageListRef && messageListRef.current && !isScrollAtBottom) {
+      messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
+      setIsScrollAtBottom(true);
+      setUnReadMsg(0)
+      setPrevMsgCount($messages?.length)
+    }
+  }
+
   useEffect(() => {
+   setPrevMsgCount($messages?.length)
+   scrollToBottom()
+  }, [])
+
+  useEffect(() => {
+   if(!isScrollAtBottom){
+      setUnReadMsg($messages?.length - prevMsgCount)
+    }else{
+      setUnReadMsg(0)
+      setPrevMsgCount($messages?.length)
+    }
     // Scroll to the bottom of the list when new items are added
-    if (messageListRef && messageListRef.current) {
+    if (messageListRef && messageListRef.current && $messages) {
       const lastMsg =
-        hookStreamChannelMessages?.messages[
-          hookStreamChannelMessages?.messages.length - 1
+      $messages[
+        $messages?.length - 1
         ];
       if (
-        String(props.authContext.address).toLowerCase() ==
+        String(authContext.address).toLowerCase() ==
         String(lastMsg?.user.id).toLowerCase()
       ) {
         messageListRef.current.scrollTop =
@@ -56,9 +95,11 @@ const ChatWindow = (props: any) => {
         (event: any) => {
           setDateTagVisible(true);
           const { scrollHeight, scrollTop, clientHeight } = event.target;
-          if (Math.abs(scrollHeight - clientHeight - scrollTop) < 1) {
+          if (Math.abs(scrollHeight - clientHeight - scrollTop) < 10) {
             setIsScrollAtBottom(true);
-          } else {
+            setUnReadMsg(0)
+            setPrevMsgCount($messages?.length)
+          } else {        
             setIsScrollAtBottom(false);
           }
 
@@ -76,62 +117,70 @@ const ChatWindow = (props: any) => {
         }
       };
     }
-  }, [hookStreamChannelMessages?.messages]);
+  }, [$messages]);
 
-  useEffect(() => {
-    if (messageListRef && messageListRef.current && !isScrollAtBottom) {
-      messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
-      setIsScrollAtBottom(true);
-    }
-  }, []);
 
   const executeScroll = (id: any) => {
-    itemsRef.current[id].scrollIntoView() 
-    setScrollTo(id)
-  }
-  // const messageAreaHeight = props.hookMessages?.messages.map((message: any, index: any) => {
-  //   console.log(itemsRef?.current[index], itemsRef?.current[index]?.offsetHeight, itemsRef?.current[index]?.clientHeight);
-  //   return (itemsRef?.current[index]?.offsetHeight ) || 100;
-  // });
+    itemsRef.current[id].scrollIntoView();
+    setScrollTo(id);
+  };
 
-  // const templateMessages = ({ index, style }: any) => {
-  //   const message = props.hookMessages?.messages[index];
-    
-  //   return (
-  //     <div  style={style}>
-  //       <ChatMessage
-  //         message={message}
-  //         hookChat={{}}
-  //         authContext={props.authContext}
-  //         key={`a-${message.id}`}
-         
-  //       />
-  //     </div>
-  //   )
-  // }
+  const handleSelectedUser = (user: any) => {
+    console.log($memberAll)
+    if ($memberAll) {
+      console.log($memberAll)
+      const userProfile = $memberAll?.filter(
+        (profile: any) =>
+          String(profile.address).toLowerCase() ==
+          String(user.lensOwnedBy).toLowerCase()
+      )[0];
+      modalProfile.onOpen();
+      setSelectedUser(userProfile);
+    }
+  };
 
 
+  const TemplateProfile = () => {
+    return (
+      <ModalSlider event={modalProfile} size="lg">
+        <UserProfile user={selectedUser} />
+      </ModalSlider>
+    );
+  };
+  
   return (
     <>
     <StyledDateTag visible={`${dateTagVisible ? 'visible': 'hidden'} `} >{dataTag}</StyledDateTag> 
     <div ref={messageListRef} className="body">
-          {hookStreamChannelMessages?.messages.map((message: any, index: any) => {
-            return (
-              <div ref={el => itemsRef.current[message.id] = el}  key={`message-${index}`}>
-                <ChatMessage
-                  message={message}
-                  hookChat={props?.chatContext?.hookChat}
-                  authContext={props.authContext}
-                  hookMembers={props.chatContext.hookMembers}
-                  key={`a-${message.id}`}
-                  handleDateTag={handleDateTag}
-                  executeScroll={executeScroll}
-                  scrollToId={scrollTo}
-                />
-              </div>
-            )
-          })}
+          {$messages?.map((message: any, index: any) => {
+          return (
+            <div
+              ref={el => (itemsRef.current[message.id] = el)}
+              key={`message-${index}`}
+            >
+              <ChatMessage
+                message={message}
+                hookChat={chatContext?.hookChat}
+                authContext={authContext}
+                key={`a-${message.id}`}
+                handleDateTag={handleDateTag}
+                executeScroll={executeScroll}
+                scrollToId={scrollTo}
+                handleSelectedUser={handleSelectedUser}
+              />
+            </div>
+          );
+        })}
     </div>
+
+    {
+        selectedUser && <TemplateProfile />
+    }
+
+    <StyledMoveToBottom onClick={scrollToBottom} visible={`${!isScrollAtBottom ? 'visible': 'hidden'} `} >
+        { unReadMsg != 0 && <span>{unReadMsg}</span> }
+        <IconImage path="IconDarkArrowDown.png" size="xl" />
+   </StyledMoveToBottom>
 
    {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 
     <div className="body">
@@ -150,7 +199,6 @@ const ChatWindow = (props: any) => {
       </div>
     } */}
     </>
-
   );
 };
 

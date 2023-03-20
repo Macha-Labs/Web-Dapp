@@ -1,3 +1,5 @@
+import { Col } from "@/styles/StyledComponents";
+import { Heading, Image } from "@chakra-ui/react";
 import LayoutCard from "../LayoutCard";
 import LayoutPostCard from "./LayoutPostCard";
 import LayoutPostLoading from "./LayoutPostLoading";
@@ -20,7 +22,17 @@ const LayoutPostList = ({ ...props }) => {
       );
     } else {
       return (
-        <></>
+        <>
+          <Col className="flex-hr-vr-center">
+            <Image src="/assets/nopost.png" className="w-40" />
+            <Heading className="m-b-1" size="lg">
+              You have no posts yet
+            </Heading>
+            <Heading className="" size="xs">
+              All posts from your lens feed will be displayed here
+            </Heading>
+          </Col>
+        </>
       );
     }
   };

@@ -42,7 +42,7 @@ export const UserLens$ = (lensData: any) => {
   return {
     id: lensData?.id,
     handle: lensData?.handle,
-    ownedBy: lensData?.ownedBy,
+    ownedBy: lensData?.ownedBy.toLowerCase(),
     isDefault: lensData?.isDefault,
     name: lensData?.name,
     bio: lensData?.bio,

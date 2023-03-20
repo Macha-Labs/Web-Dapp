@@ -1,17 +1,20 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { User$ } from "../../schema/user";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { logger } from "@/helpers/logger";
 
-const useStreamChannelMembers = (channel: any) => {
+const useStreamChannelMembers = () => {
   const authContext = useContext(AuthContext) as AuthContextType;
-  const [allUsersIds, setAllUsersIds] = useState<any>([]);
-  const [onlineUsers, setOnlineUsers] = useState<any>([]);
-  const [offlineUsers, setOfflineUsers] = useState<any>([]);
+  const [allUsersIds, setAllUsersIds] = useState<any>(null);
+  const [onlineUsers, setOnlineUsers] = useState<any>(null);
+  const [offlineUsers, setOfflineUsers] = useState<any>(null);
   const [userIsMember, setUserIsMember] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>();
 
-  const fetchChannelMembers = async () => {
+  const _fetch = async (channel: any) => {
+    if (channel?.raw?.disconnected)
+      return;
+
     const response = await channel?.raw?.queryMembers({});
     let onlineIds: any[] = [];
     let offlineIds: any[] = [];
@@ -34,9 +37,9 @@ const useStreamChannelMembers = (channel: any) => {
   };
 
   // checking if current user is a member of this channel
-  const checkUserIsAMember = async () => {
+  const checkUserIsAMember = async (channel: any) => {
     try {
-      const result = await channel?.raw?.queryMembers({
+      const result = await channel.raw?.queryMembers({
         id: authContext?.user.lens?.id,
       });
 
@@ -50,18 +53,17 @@ const useStreamChannelMembers = (channel: any) => {
       return false;
     }
   };
-  useEffect(() => {
-    if (channel) fetchChannelMembers();
-  }, [channel]);
 
   const checkOnline = (user: any) => {
     return user.online == true;
   };
 
+
   return {
-    fetchChannelMembers: fetchChannelMembers,
+    fetch: _fetch,
     checkOnline: checkOnline,
-    allUsers: onlineUsers.concat(offlineUsers),
+    users: onlineUsers,
+    allUsers: onlineUsers?.concat(offlineUsers),
     allUsersIds: allUsersIds,
     onlineUsers: onlineUsers,
     offlineUsers: offlineUsers,

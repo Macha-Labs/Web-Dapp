@@ -1,18 +1,19 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { ChatContext } from "../providers/ChatProvider";
-import IconImage from "@/components/icons/IconImage";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
 export const useChannelSettings = () => {
-  const chatProvider = useContext(ChatContext);
-  const authProvider = useContext(AuthContext);
+  const chatContext = useContext(ChatContext);
+  const authContext = useContext(AuthContext);
+  const $channel = useChatChannelStore((state: any) => state.channel);
 
   const chatOptions = [
     {
       icon: "IconDarkSearch.png",
       name: "Search Chat",
       onPress: () => {
-        chatProvider.hookChat.handleSearch();
+        chatContext.hookChat.handleSearch();
       },
     },
     {
@@ -25,7 +26,7 @@ export const useChannelSettings = () => {
       icon: "IconDarkMultiselect.png",
       name: "Select Chat",
       onPress: () => {
-        chatProvider.hookChat.handleMultiSelect();
+        chatContext.hookChat.handleMultiSelect();
       },
     },
     {
@@ -35,7 +36,7 @@ export const useChannelSettings = () => {
       condition: {
         enabled: true,
         check:
-          chatProvider.hookChannel?.channel?.createdBy === authProvider.address,
+        $channel?.createdBy === authContext.address,
       },
     },
     {
@@ -45,7 +46,7 @@ export const useChannelSettings = () => {
       condition: {
         enabled: true,
         check:
-          chatProvider.hookChannel?.channel?.createdBy === authProvider.address,
+        $channel?.createdBy === authContext.address,
       },
     },
     {
@@ -55,7 +56,7 @@ export const useChannelSettings = () => {
       condition: {
         enabled: true,
         check:
-          chatProvider.hookChannel?.channel?.createdBy === authProvider.address,
+        $channel?.createdBy === authContext.address,
       },
     },
   ];

@@ -1,35 +1,34 @@
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import LayoutCard from "@/layouts/LayoutCard";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { ChatContext } from "@/providers/ChatProvider";
-import { Channel$ } from "@/schema/channel";
-import { Col, Row } from "@/styles/StyledComponents";
+import { Channel$} from "@/schema/channel";
+import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import ModalSlider from "../modal/ModalSlider";
 
 const ChatNew = (props: any) => {
-  const chatContext = useContext(ChatContext);
+  console.log('Rendering >>>>> ChatNew');
   const [tab, setTab] = useState("members");
-  const [inputFocus, setInputFocus] = useState(0)
+  const [inputFocus, setInputFocus] = useState(0);
+  const chatContext = useContext(ChatContext)
 
   /**
    *
    **/
   const toast = useToast();
-  const callbackNew = () => {
+  const callbackNew = (channelId: any) => {
     toast({
       title: "Channel Created Successfully",
       status: "success",
       duration: 3000,
       position: "bottom-right",
     });
-    chatContext?.streamContext?.reloadChannelList();
-    
+    chatContext?.hookChannel?.fetch({id: channelId});
+    chatContext?.hookChannelList?.load();
     props.modal.onClose();
+    
   };
 
   const callbackPrompt = (message: any) => {
@@ -41,10 +40,17 @@ const ChatNew = (props: any) => {
     });
   };
 
+  const handleToggle = () => {
+    hookPortalChannel?.setChannel({
+      ...hookPortalChannel?.channel,
+      private: !hookPortalChannel?.channel?.private,
+    });
+  };
+
   /**
    *
    **/
-  const hookPortalChannel = usePortalChannel(Channel$({}), {
+  const hookPortalChannel = usePortalChannel(null, {
     new: callbackNew,
     prompt: callbackPrompt,
   });
@@ -53,7 +59,7 @@ const ChatNew = (props: any) => {
    *
    **/
 
-  const hookPortalChannelMembership = usePortalChannelMembership(Channel$({}));
+  const hookPortalChannelMembership = usePortalChannelMembership(new Channel$('db', {}));
 
   /**
    *
@@ -101,42 +107,43 @@ const ChatNew = (props: any) => {
   /**
    *
    **/
-  const TemplateDetails = () => {
-    return (
-      <>
-        <LayoutCardPannel
-          header={
-            <Row className="hr-between v-center">
-              <Button
-                onClick={handleTabs}
-                variant="state_default_hover"
-                size="sm"
-              >
-                Back
-              </Button>
-              <Text>New Channel</Text>
-              <Button
-                onClick={() => {
-                  hookPortalChannel?.update(
-                    hookPortalChannelMembership?.userIds
-                  );
-                }}
-                variant="state-brand"
-                size="sm"
-                isLoading={hookPortalChannel?.isLoading}
-              >
-                Create New
-              </Button>
-            </Row>
-          }
+  const templateDetails = () => {
+    const header = 
+      <Row className="hr-between vr-center w-full">
+        <Button
+          onClick={handleTabs}
+          variant="state_default_hover"
+          size="sm"
         >
-          <Col className="p-2">
-            <Row className="hr-center w-100 m-b-1">
+          Back
+        </Button>
+        <Heading as="h6" size="sm">New Channel</Heading>
+        <Button
+          onClick={() => {
+            hookPortalChannel?.update(
+              hookPortalChannelMembership?.userIds
+            );
+          }}
+          variant="state-brand"
+          size="sm"
+          isLoading={hookPortalChannel?.isLoading}
+        >
+          Create New
+        </Button>
+      </Row>
+    
+    const body = <div>
+      
+          <Row className="hr-center w-100 m-b-1">
               <Avatar size="2xl" name={data[0].value} />
-            </Row>
-            <Input ref={ inputFocus == 0 ? input => input && input.focus(): null} onFocus={() => setInputFocus(0)} placeholder={data[0].label} value={data[0].value} onChange={(e) => data[0].onChange(e.target.value)} className="m-b-0-5"/>
-            <Input ref={ inputFocus == 1 ? input => input && input.focus(): null} onFocus={() => setInputFocus(1)} placeholder={data[1].label} value={data[1].value} onChange={(e) => data[1].onChange(e.target.value)} className="m-b-0-5"/>
-            {hookPortalChannelMembership?.users?.length ? (<Col className="flex-wrap m-b-1">
+          </Row>
+          <StyledCard className="m-b-1">
+              <Input ref={ inputFocus == 0 ? input => input && input.focus(): null} onFocus={() => setInputFocus(0)} placeholder={data[0].label} value={data[0].value} onChange={(e) => data[0].onChange(e.target.value)} className="m-b-0-5"/>
+              <Input ref={ inputFocus == 1 ? input => input && input.focus(): null} onFocus={() => setInputFocus(1)} placeholder={data[1].label} value={data[1].value} onChange={(e) => data[1].onChange(e.target.value)} className="m-b-0-5"/>
+          </StyledCard>
+         
+          <StyledCard className="m-b-1">
+          {hookPortalChannelMembership?.users?.length && <Col className="flex-wrap m-b-1">
             <Heading as="h6" fontSize="md" className="m-b-0-5">Add Members</Heading>
             <Row className="flex-wrap">
             {
@@ -161,45 +168,47 @@ const ChatNew = (props: any) => {
               )})
             }
             </Row>
-          </Col>) : (<></>)
-            
-            }
-            
+          </Col>}
+          </StyledCard>
 
-            <Col>
-              <Heading as="h6" fontSize="md" className="m-b-0-5">Public</Heading>
-              <Row>
-                <Text>Allow channel to be joined and discoverable by anyone on platform irrespective of your network</Text>
-                <Switch></Switch>
+            <StyledCard>
+              <Row className="hr-between">
+                <Col>
+                  <Heading size="sm">Private</Heading>
+                  <Text fontSize={14}>
+                    Can only be accessed by members added.
+                  </Text>
+                </Col>
+                <Col>
+                  <Switch isChecked={hookPortalChannel?.channel?.private} onChange={handleToggle}></Switch>
+                </Col>
               </Row>
-            </Col>
-          </Col>
-        </LayoutCardPannel>
-      </>
-    );
+            </StyledCard>
+            
+    </div>
+
+  return {body: body, header: header}
   };
 
-  const TemplateMembers = () => {
-    return (
-      <>
-        <LayoutCardPannel
-          header={
-            <Row className="hr-between v-center">
-              <Text>New Channel</Text>
-              <Button onClick={handleTabs} variant="state-brand" size="sm">
-                Next
-              </Button>
-            </Row>
-          }
-        >
-          {hookPortalChannelMembership?.followers?.map(
+  const templateMembers = () => {
+    const header = <Row className="hr-between vr-center w-full">
+    <Heading as="h6" size="sm">New Channel</Heading>
+    <Button onClick={handleTabs} variant="state-brand" size="sm">
+      Next
+    </Button>
+  </Row>
+
+  const body = <>
+     {hookPortalChannelMembership?.followers?.map(
             (item: any, index: any) => {
               return (
-                <Row key={`key-${item?.id}`} className="hr-between p-1">
+                <StyledCard className="state_hover m-b-0-5" key={`key-${item?.id}`}>
+                  <Row className="hr-between">
                   <Row className="vr-center">
                     <Avatar
                       src={helperIPFS(item?.lens?.image)}
                       className="m-r-0-5"
+                      size="sm"
                     />
                     <Text>
                       {item?.lens?.name
@@ -219,14 +228,22 @@ const ChatNew = (props: any) => {
                     }
                   />
                 </Row>
+                </StyledCard>
               );
             }
           )}
-        </LayoutCardPannel>
-      </>
-    );
+  </>
+
+    return {body: body, header: header}
   };
 
-  return <>{tab == "members" ? <TemplateMembers /> : <TemplateDetails />}</>;
+
+  return (
+    <>
+      <ModalSlider event={props.modal} size="sm" header={tab == 'members' ? templateMembers().header : templateDetails().header}>
+      {tab == 'members' ? templateMembers().body : templateDetails().body}
+    </ModalSlider>
+    </>
+  );
 };
 export default ChatNew;

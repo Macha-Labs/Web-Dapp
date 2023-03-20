@@ -1,9 +1,15 @@
-import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
-import { Avatar, Button, Checkbox, Text, useDisclosure, useToast } from "@chakra-ui/react";
+import { Col, Row, StyledCard, StyledChatItem } from "@/styles/StyledComponents";
+import {
+  Avatar,
+  Button,
+  Spinner,
+  Tag,
+  Text,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
-import { ChatContext } from "@/providers/ChatProvider";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
-import ModalSlider from "../modal/ModalSlider";
 import ChatNew from "./ChatNew";
 import IconImage from "../icons/IconImage";
 import { truncateAddress } from "@/helpers";
@@ -13,74 +19,97 @@ import Pop from "../pop/Pop";
 import { darkStyle } from "@/styles/StyledConstants";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 
+import { ChatContext } from "@/providers/ChatProvider";
+import LoadChannels from "../load/LoadChannels";
+import { useRouter } from "next/router";
+import ChatNewDm from "./ChatNewDm";
+import useChatChannelsStore from "@/store/useChatChannelsStore";
+import useChatChannelStore from "@/store/useChatChannelStore";
+
+
 const ChatList = (props: any) => {
-  const chatProvider = useContext(ChatContext);
+  console.log("Rendering >>>>> ChatList");
+  const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
+  const router = useRouter();
   const modalChatNew = useDisclosure();
+  const modalChatNewDm = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
-  const hookPortalChannel = usePortalChannel(
-    {},
-    {
-      mute: () => {
-        toast({
-          title: "Channel Muted",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-        chatProvider?.streamContext?.reloadChannelList();
-        chatProvider?.streamContext?.reloadChannel();
-      },
-      unmute: () => {
-        toast({
-          title: "Channel Unmuted",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-        chatProvider?.streamContext?.reloadChannelList();
-        chatProvider?.streamContext?.reloadChannel();
-      },
-      leave: () => {
-        toast({
-          title: "Channel Left",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-        chatProvider?.streamContext?.reloadChannelList();
-        chatProvider?.streamContext?.reloadChannel();
-      },
-      delete: () => {
-        toast({
-          title: "Channel Deleted",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-        chatProvider?.streamContext?.reloadChannelList();
-        chatProvider?.streamContext?.reloadChannel();
-      }
-    }
-  );
+  const $channels = useChatChannelsStore((state: any) => state.channels);
+  const $channel = useChatChannelStore((state: any) => state.channel);
+  const $channelLoad = useChatChannelStore((state: any) => state.loading);
+  const [channelSelected, setChannelSelected] = useState<any>();
 
+
+  // TODO: Fix bandaging
   useEffect(() => {
-    // chatProvider.hookChannels.fetchUserChannels(chatProvider.streamClient);
-    console.log("Channels", chatProvider?.hookChannels?.channels);
-    
-  }, [chatProvider?.hookChannels?.channels]);
+    chatContext?.hookChannelList.load();
+    chatContext?.hookChannel?.unload();
+  }, [router.pathname]);
 
-  const TemplateChatNew = () => {
+  const handleSelectChannel = (channel: any) => {
+    setChannelSelected(channel);
+    chatContext?.hookChannel?.fetch(channel);
+  }
+
+  const hookPortalChannel = usePortalChannel(null, {
+    mute: () => {
+      toast({
+        title: "Channel Muted",
+        status: "success",
+        duration: 3000,
+        position: "bottom-right",
+      });
+      chatContext?.hookChannelList.load();
+    },
+    unmute: () => {
+      toast({
+        title: "Channel Unmuted",
+        status: "success",
+        duration: 3000,
+        position: "bottom-right",
+      });
+      chatContext?.hookChannelList?.load();
+    },
+    leave: (channelId: any) => {
+      toast({
+        title: "Channel Left",
+        status: "success",
+        duration: 3000,
+        position: "bottom-right",
+      });
+      chatContext?.hookChannelList?.load();
+      if (channelId == $channel.id)
+        chatContext?.hookChannel?.remove();
+    },
+    delete: (channelId: any) => {
+      toast({
+        title: "Channel Deleted",
+        status: "success",
+        duration: 3000,
+        position: "bottom-right",
+      });
+      chatContext?.hookChannelList?.load();
+      if (channelId == $channel.id)
+        chatContext?.hookChannel?.remove();
+    },
+  });
+
+  const templateChatNew = () => {
     return (
-      <ModalSlider event={modalChatNew} size="md">
-        <ChatNew modal={modalChatNew} />
-      </ModalSlider>
+      <ChatNew
+        modal={modalChatNew}
+      />
     );
   };
 
+  const TemplateChatNewDm = (props: any) => {
+    return <ChatNewDm modal={modalChatNewDm}></ChatNewDm>;
+  };
+
+
   const TemplateActions = (props: any) => {
-    
     return (
       <Pop
         trigger={<IconImage path="IconDarkMenu.png" />}
@@ -97,12 +126,14 @@ const ChatList = (props: any) => {
               Pin Channel
             </Row>
           </Button> */}
-          {(props?.item?.raw && !props.item.raw?.muteStatus()?.muted )? (
+          {!props?.item?.raw?.disconnected &&
+          props?.item?.raw &&
+          !props.item.raw?.muteStatus()?.muted ? (
             <Button
               variant="transparent"
               size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkMute.png" size="18" />}
+              rightIcon={<IconImage path="IconDarkMute.png" size="xs" />}
             >
               <Row
                 className="hr-between w-100"
@@ -118,7 +149,7 @@ const ChatList = (props: any) => {
               variant="transparent"
               size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkUnMute.png" size="18" />}
+              rightIcon={<IconImage path="IconDarkUnMute.png" />}
             >
               <Row
                 className="hr-between w-100"
@@ -130,89 +161,120 @@ const ChatList = (props: any) => {
               </Row>
             </Button>
           )}
-          {/* <Button
-            variant="transparent"
-            size="sm"
-            className="text-start"
-            rightIcon={<IconImage path="IconRedDelete.png" size="18" />}
-          >
-            <Row className="hr-between w-100" 
-              onClick={() => {
-                // hookPortalChannel.deleteChannel(props.item);
-              }}
+          {props?.item?.isAdmin && (
+            <Button
+              variant="transparent"
+              size="sm"
+              className="text-start"
+              rightIcon={<IconImage path="IconRedDelete.png" />}
             >
-              Clear Chat
-            </Row>
-          </Button> */}
-          { !props?.item?.isAdmin && <Button
-            variant="transparent"
-            size="sm"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkLeave.png" size="18"/>}
-          >
-            <Row
-              className="hr-between w-100"
-              onClick={() => {
-                hookPortalChannel.leaveChannel(props.item);
-              }}
+              <Row
+                className="hr-between w-100"
+                onClick={() => {
+                  hookPortalChannel.deleteChannel(props.item);
+                }}
+              >
+                Delete Channel
+              </Row>
+            </Button>
+          )}
+
+          {props.item.createdBy == authContext?.address ? (
+            <Button
+              variant="transparent"
+              size="sm"
+              className="text-start"
+              rightIcon={<IconImage path="IconRedDelete.png" />}
             >
-              Leave Channel
-            </Row>
-          </Button>
-  }
+              <Row
+                className="hr-between w-100"
+                onClick={() => {
+                  hookPortalChannel.deleteChannel(props.item);
+                }}
+              >
+                Delete Channel
+              </Row>
+            </Button>
+          ) : (
+            <Button
+              variant="transparent"
+              size="sm"
+              className="text-start"
+              rightIcon={<IconImage path="IconDarkLeave.png" />}
+            >
+              <Row
+                className="hr-between w-100"
+                onClick={() => {
+                  hookPortalChannel.leaveChannel(props.item);
+                }}
+              >
+                Leave Channel
+              </Row>
+            </Button>
+          )}
         </Col>
       </Pop>
     );
   };
 
-  const TemplateChatList = () => {
+  const TemplateNewHolder = () => {
+    return (
+      <Button onClick={modalChatNew.onOpen} variant="state_brand">
+        Create Channel
+      </Button>
+    );
+  };
+
+  const TemplateLoading = () => {
+    return <LoadChannels />;
+  };
+
+  const templateChatList = () => {
     return (
       <>
         <Row className="header vr-center hr-between">
           <ChatSearch style={{ className: "w-80" }} />
           <IconImage
             path="IconDarkPlus.png"
-            onClick={modalChatNew.onOpen}
+            onClick={triggerNew}
             styled={{ className: "m-l-1" }}
           />
         </Row>
-        {!chatProvider?.hookChannels?.channels ? (
-          <Col className="body">
-            Create your first channel
-            <Button size="sm" onClick={props.channelNew}>
-              First Channel
-            </Button>
-          </Col>
-        ) : (
-          <Col className="body verticlescroll hidescroll">
-            {chatProvider?.hookChannels?.channels?.length ? (
-              <ul>
-                {/* <button onClick={() => chatProvider?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
-                {chatProvider?.hookChannels?.channels.map(
-                  (item: any, index: number) => (
+        <Col className="body verticlescroll hidescroll">
+          {!$channels ? (
+            <TemplateLoading />
+          ) : (
+            <>
+              {$channels?.length ? (
+                <ul>
+                  {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
+                  {$channels.map((item: any, index: number) => (
                     <StyledChatItem key={item?.index}>
-                 {  chatProvider?.hookChannels?.actionMessage == 'MULTISELECT' &&   <Checkbox className="m-r-0-5" 
-                      isChecked={chatProvider.hookChannels?.selectedChannels.includes(item?.id)}
-                      onChange={() => chatProvider.hookChannels?.handleSelectChannel(item) }
-                      />}
-                      <Button
-                        className="menu-item w-100 m-b-0-5"
-                        size="xl"
-                        variant={
-                          chatProvider.hookChannel?.channel?.id == item?.id
-                            ? "state_brand"
-                            : "state_card_hover"
+                      {/* {chatContext?.hookChannels?.actionMessage ==
+                      "MULTISELECT" && (
+                      <Checkbox
+                        className="m-r-0-5"
+                        isChecked={chatContext.hookChannels?.selectedChannels.includes(
+                          item?.id
+                        )}
+                        onChange={() =>
+                          chatContext.hookChannels?.handleSelectChannel(item)
                         }
-                        // overflow="hidden"
+                      />
+                    )} */}
+                      <StyledCard
+                        className= {
+                          $channel?.id == item?.id
+                            ? "state_brand menu-item w-100 m-b-0-5"
+                            : "state_card_hover menu-item w-100 m-b-0-5"
+                        }
+                        
                       >
+                        <Row className="vr-center">
                         <Row
                           className="vr-center w-11-12"
                           onClick={() => {
-                            chatProvider.initiate(item, authContext?.address);
-                            setIsClicked((prevState: any) => [
-                              ...prevState,
-                              index,
-                            ]);
+                            handleSelectChannel(item)
                           }}
                         >
                           {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
@@ -224,31 +286,24 @@ const ChatList = (props: any) => {
                           <Col className="w-100 d-flex flex-col vr-center">
                             <Row>
                               <Text>
-                                {item?.name.length > 12
-                                  ? `${item?.name.slice(0, 12)}...`
+                                {item?.name?.length > 12
+                                  ? `${item?.name?.slice(0, 12)}...`
                                   : item?.name}
                               </Text>
                               {item?.raw && (
                                 <>
-                                  {/* {console.log(item.raw?.muteStatus()?.muted)} */}
-                                  {(item.raw?.muteStatus()?.muted) && (
-                                    <IconImage
-                                      path="IconDarkMute.png"
-                                      style={{ className: "m-l-0-5" }}
-                                      size={10}
-                                    />
-                                  )}
+                                  {!item?.raw?.disconnected &&
+                                    item?.raw?.muteStatus()?.muted && (
+                                      <IconImage
+                                        path="IconDarkMute.png"
+                                        size="2xs"
+                                        style={{ className: "m-l-0-5" }}
+                                      />
+                                    )}
                                 </>
                               )}
                             </Row>
-                            {item?.lastMessage?.created_at && <Col>
-                              <Text fontSize={"xs"}>
-                                 {new Date(
-                                      item?.lastMessage?.created_at
-                                    ).toLocaleString()}
-                              </Text>
-                            </Col>}
-                            
+
                             {item?.lastMessage && (
                               <Col
                                 style={{ paddingRight: "5px" }}
@@ -270,9 +325,22 @@ const ChatList = (props: any) => {
                                 </Text>
                               </Col>
                             )}
+                            {item?.lastMessage?.created_at && (
+                              <Col>
+                                <Text fontSize={"xs"}>
+                                  {new Date(
+                                    item?.lastMessage?.created_at
+                                  ).toLocaleString()}
+                                </Text>
+                              </Col>
+                            )}
+
+                          {(item?.private == false) && <Row className="m-t-0-5"><Tag size="sm">Public</Tag></Row>}
+
                           </Col>
-                          {item?.unreadCountObject[authContext?.address]
-                            ?.unread_messages > 0 &&
+                          {item?.unreadCountObject &&
+                            item?.unreadCountObject[authContext?.address]
+                              ?.unread_messages > 0 &&
                             !isClicked.includes(index) && (
                               <Col>
                                 <Text
@@ -290,31 +358,45 @@ const ChatList = (props: any) => {
                             )}
                         </Row>
 
-                        <Col className="hr-center w-1-12 settingsIcon">
+                        {($channelLoad && (channelSelected?.id == item?.id)) && <Spinner size='xs' />}
+
+                        <Col className="hr-center w-1-12 settingsIcon m-l-0-5">
                           <TemplateActions item={item} />
+                          
                         </Col>
-                      </Button>
+                        </Row>
+                      </StyledCard>
                     </StyledChatItem>
-                  )
-                )}
-              </ul>
-            ) : (
-              <>
-                <Button onClick={modalChatNew.onOpen} variant="state_brand">
-                  Create Channel
-                </Button>
-              </>
-            )}
-          </Col>
-        )}
+                  ))}
+                </ul>
+              ) : (
+                <>
+                  <TemplateNewHolder />
+                </>
+              )}
+            </>
+          )}
+        </Col>
       </>
     );
   };
 
+  const triggerNew = () => {
+    if (router.pathname == "/chat") {
+      modalChatNew.onOpen();
+    }
+    if (router.pathname == "/chat/dm") {
+      modalChatNewDm.onOpen();
+    }
+  };
+
   return (
     <>
-      <TemplateChatList />
-      <TemplateChatNew />
+      {templateChatList()}
+
+      {modalChatNew.isOpen && templateChatNew()}
+
+      {modalChatNewDm.isOpen && <TemplateChatNewDm modal={modalChatNewDm} />}
     </>
   );
 };

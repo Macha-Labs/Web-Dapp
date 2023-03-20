@@ -1,7 +1,7 @@
-import { helperIPFS, truncateAddress } from "@/helpers";
 import { Row, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, AvatarBadge, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
+import IconImage from "../icons/IconImage";
 import ModalSlider from "../modal/ModalSlider";
 import UserProfile from "./UserProfile";
 
@@ -25,9 +25,10 @@ const UserFollowersCard = (props: any) => {
 
   return (
     <StyledCard
-      onClick={() => handleSelectedUser(props.user)}
+      // onClick={() => handleSelectedUser(props.user)}
     >
-      <Row className="vr-center item m-b-0-5">
+      <Row className="vr-center hr-between item w-full m-b-0-5">
+        <Row className="vr-center">
         <Avatar src={props.user?.lens?.image} className="m-r-0-5" size="sm">
           <AvatarBadge boxSize="0.7em" bg="green.500" />
         </Avatar>
@@ -40,8 +41,16 @@ const UserFollowersCard = (props: any) => {
               : props.user?.lens?.handle}
           </h6>
         )}
+        </Row>
+        <IconImage
+                  path="IconBrandChat.png"
+                  style={{ className: "m-l-0-5" }}
+                  size="xs"
+                  onClick={props.triggerMessage}
+                />
       </Row>
-      <TemplateProfile />
+      
+      {selectedUser && <TemplateProfile />}
     </StyledCard>
   );
 };

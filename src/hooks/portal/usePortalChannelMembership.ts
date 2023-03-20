@@ -4,6 +4,7 @@ import { serviceAddMembers, serviceRemoveMembers } from "../../service/ChannelSe
 import useLensConnections from "../lens/useLensConnections";
 
 const usePortalChannelMembership = (channel: any) => {
+  
   const authContext = useContext(AuthContext) as AuthContextType;
   const hookLensConnections = useLensConnections(authContext?.address, authContext?.user?.lens?.id);
   const [isLoading, setIsLoading] = useState<any>();
@@ -26,6 +27,9 @@ const usePortalChannelMembership = (channel: any) => {
 
   // adding selected members to current channel
   const addMembersToChannel = (callback:any = null) => {
+    if (!usersIds.length)
+      return;
+      
     setIsLoading(true);
     if (users) {
       const data = {
@@ -42,6 +46,8 @@ const usePortalChannelMembership = (channel: any) => {
 
   // run when -> members selected -> clicked on remove
   const removeMembersFromChannel = async (callback:any = null) => {
+    if (!usersIds.length)
+      return;
     setIsLoading(true);
     if (users) {
       const data = {
@@ -58,7 +64,7 @@ const usePortalChannelMembership = (channel: any) => {
   // fetching my lens followers
   useEffect(() => {
     if (authContext.address) {
-      hookLensConnections.getFollowers(authContext.user?.lens?.id);
+      hookLensConnections.fetch(authContext.user?.lens);
     }
   }, [authContext.address]);
 

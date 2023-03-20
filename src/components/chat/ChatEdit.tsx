@@ -5,14 +5,15 @@ import {
   Avatar,
   Button,
   Text,
-  Icon,
   Switch,
   useDisclosure,
   useToast,
   Heading,
+  Radio,
 } from "@chakra-ui/react";
-import { Col, Row } from "@/styles/StyledComponents";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
+import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import ModalSlider from "../modal/ModalSlider";
+import useChatChannelStore from "@/store/useChatChannelStore";
 import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatEdit = (props: any) => {
@@ -21,8 +22,10 @@ const ChatEdit = (props: any) => {
    *
    *
    **/
+  const chatContext = useContext(ChatContext)
+  const $channel = useChatChannelStore((state: any) => state.channel);
   const toast = useToast();
-  const chatContext = useContext(ChatContext);
+
   const handleToggle = () => {
     hookPortalChannel?.setChannel({
       ...hookPortalChannel?.channel,
@@ -42,8 +45,8 @@ const ChatEdit = (props: any) => {
       position: "bottom-right",
     });
 
-    chatContext?.streamContext?.reloadChannel();
-    chatContext?.streamContext?.reloadChannelList();
+    chatContext?.hookChannel?.reload();
+    chatContext?.hookChannelList?.load();
     props.modal.onClose();
   };
 
@@ -69,7 +72,7 @@ const ChatEdit = (props: any) => {
    *
    **/
   const hookPortalChannel = usePortalChannel(
-    chatContext?.hookChannel?.channel,
+    $channel,
     { edit: callBack, prompt: callBackPrompt }
   );
 
@@ -115,32 +118,33 @@ const ChatEdit = (props: any) => {
    *
    **/
   return (
-    <LayoutCardPannel
-      header={
-        <Row className="hr-between w-full">
-          <Button
-            size="sm"
-            onClick={modalAddMembers.onClose}
-            variant="state_default_hover"
-          >
-            Cancel
-          </Button>
-          <Text size={"sm"}>Edit Channel</Text>
-          <Button
-            variant="state_brand"
-            size="sm"
-            onClick={() => {
-              hookPortalChannel?.update();
-            }}
-            isLoading={hookPortalChannel?.isLoading}
-          >
-            Save
-          </Button>
-        </Row>
-      }
+    <ModalSlider size="sm" event={props.modal}
+    header={
+      <Row className="hr-between vr-center w-full">
+        <Button
+          size="sm"
+          onClick={props.modal.onClose}
+          variant="state_default_hover"
+        >
+          Cancel
+        </Button>
+        <Heading as="h6" size="sm">Edit Channel</Heading>
+        <Button
+          variant="state_brand"
+          size="sm"
+          onClick={() => {
+            hookPortalChannel?.update();
+          }}
+          isLoading={hookPortalChannel?.isLoading}
+        >
+          Save
+        </Button>
+      </Row>
+    }
     >
-      <Col className="p-3">
-        <Col className="hr-center w-full">
+      <>
+      <Col className="">
+        <Col className="hr-center w-full mb-2">
           {profileImage ? (
             <Avatar
               size="2xl"
@@ -162,43 +166,38 @@ const ChatEdit = (props: any) => {
             onChange={(e) => {}}
             style={{ display: "none" }}
           />
-          <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
+          {/* <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
             Set New Profile Photo
-          </Text>
+          </Text> */}
         </Col>
-
-        <Col className="hr-center w-full m-v-1">
-          <Row>
-            <Icon></Icon>
-            <Text fontSize={16} fontWeight={800}>
-              Select From Gallery
-            </Text>
-          </Row>
-          <Row>
-            <Icon></Icon>
-            <Text fontSize={16} fontWeight={800}>
-              Select From Wallet
-            </Text>
-          </Row>
+        <Col>
+          <Heading as="h6" size="sm" className="m-b-1">Channel Details</Heading>
+          <StyledCard className="m-b-1">
+            <LayoutInputs data={data} style={{ class: "m-b-1" }} />
+          </StyledCard>
         </Col>
-        <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-        <Row className="hr-between">
-          <Col>
-            <Heading size="sm">Allow channel to be public</Heading>
-            <Text>
-              Please note public channels can be joined by anyone with the link
-              and should not be used for a small group conversation.
-            </Text>
-          </Col>
-          <Switch
-            colorScheme="emerald"
-            className="m-l-1"
-            isChecked={hookPortalChannel?.channel?.private}
-            onChange={handleToggle}
-          />
-        </Row>
+        <Col>
+          <Heading as="h6" size="sm" className="m-b-1">Channel Access</Heading>
+          <StyledCard>
+          <Row className="hr-between">
+            <Col>
+              <Heading size="sm">Private</Heading>
+              <Text fontSize={14}>
+                Can only be accessed by members added.
+              </Text>
+            </Col>
+            <Col>
+              <Switch
+                isChecked={hookPortalChannel?.channel?.private}                
+                onChange={handleToggle}
+              />
+            </Col>
+          </Row>
+        </StyledCard>
+        </Col>
       </Col>
-    </LayoutCardPannel>
+    </>
+    </ModalSlider>
   );
 };
 
