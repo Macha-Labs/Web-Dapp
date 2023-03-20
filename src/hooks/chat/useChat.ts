@@ -124,6 +124,7 @@ const useChat = () => {
         setStreamLoading(false);
         setAttachItem(null);
         setActionMessage(null);
+        textareaRef.current.value = null;
 
         
         hookMention.onRefresh();
