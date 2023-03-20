@@ -392,9 +392,8 @@ const ChatInput = (props: any) => {
 
   return (
     <>
-      {/* <Template /> */}
-      {/* <TemplatePostNew /> */}
-      <Input/>
+      <Template />
+      <TemplatePostNew />
     </>
   );
 };
