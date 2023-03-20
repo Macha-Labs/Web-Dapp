@@ -9,7 +9,7 @@ import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import useMention from "../stream/useMention";
 import useChatChannelStore from "@/store/useChatChannelStore";
 
-const useChat = (client: any) => {
+const useChat = () => {
   console.log('Rendering >>>>> useChat');
   const authContext = useContext(AuthContext) as AuthContextType;
   const $channel = useChatChannelStore((state: any) => state.channel);
@@ -164,7 +164,7 @@ const useChat = (client: any) => {
     if (actionMessage?.action !== "EDIT") {
       return;
     }
-    await client
+    await authContext?.streamClient
       .updateMessage({
         ...actionMessage.item,
         id: actionMessage.item?.id,
@@ -189,7 +189,7 @@ const useChat = (client: any) => {
       });
     }
 
-    client
+    authContext?.streamClient
       .deleteMessage(message?.id, true)
       .then(() => {
         toast({
@@ -210,7 +210,7 @@ const useChat = (client: any) => {
   };
 
   const pinMessage = async (message: any) => {
-    await client
+    await authContext?.streamClient
       .pinMessage(message, null)
       .then(() => {
         toast({
@@ -231,7 +231,7 @@ const useChat = (client: any) => {
   };
 
   const unPinMessage = async (message: any) => {
-    await client
+    await authContext?.streamClient
       .unpinMessage(message)
       .then(() => {
         toast({

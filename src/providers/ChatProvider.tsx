@@ -4,9 +4,7 @@ import useChatChannels from "@/hooks/chat/useChatChannels";
 import useChatMembers from "@/hooks/chat/useChatMembers";
 import useChatMessage from "@/hooks/chat/useChatMessage";
 import useChatMessages from "@/hooks/chat/useChatMessages";
-import { createContext, useContext } from "react";
-import { StreamContext, StreamContextType } from "./StreamProvider";
-
+import { createContext} from "react";
 
 
 export type ChatContextType = {
@@ -16,8 +14,6 @@ export type ChatContextType = {
   hookMembers: any | undefined;
   hookMessages: any | undefined;
   hookMessage: any | undefined;
-  streamClient: any | undefined;
-  streamContext: any | undefined;
 };
 
 export const ChatContext = createContext<ChatContextType>({
@@ -27,14 +23,11 @@ export const ChatContext = createContext<ChatContextType>({
   hookMembers: null,
   hookMessages: null,
   hookMessage: null,
-  streamClient: null,
-  streamContext: null,
 });
 
 export const ChatProvider = ({ children }: any) => {
   console.log('Rendering >>>>> ChatProvider');
-  const streamContext = useContext(StreamContext) as StreamContextType;
-  const hookChat = useChat(streamContext.client);
+  const hookChat = useChat();
   const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannels();
   const hookMessages = useChatMessages();
@@ -50,8 +43,6 @@ export const ChatProvider = ({ children }: any) => {
         hookMembers: hookMembers,
         hookMessages: hookMessages,
         hookMessage: hookMessage,
-        streamClient: streamContext?.client,
-        streamContext: streamContext,
       }}
     >
       {children}
