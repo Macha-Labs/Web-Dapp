@@ -34,7 +34,7 @@ const ChatWindow = (props: any) => {
   useEffect(() => {
     hookChatMessages.load();
     hookChatMessages.watch();
-  }, [$channel?.id])
+  }, [$channel])
 
 
   const handleDateTag = (date: any) => {

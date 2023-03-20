@@ -14,9 +14,12 @@ const useChatChannel = () => {
     const $loadChannel = useChatChannelStore(((state: any) => state.load))
 
     const _unwatch = async() => {
-        if ($channel) {
+        if ($channel && router.pathname == '/chat') {
             const result =  await $channel?.raw?.stopWatching();
             console.log("Stopped watching the channel ", result, $channel);
+        } else if ($channel && router.pathname == '/chat/dm') {
+
+            
         }
     }
     const _read = async() => {

@@ -21,17 +21,16 @@ const useXmtpChannelMessages = () => {
 
   
 
-  const _watch = async (logs: any) => {
-    if (logs) {
-      for await (const msg of logs) {
-        console.log("stream xmtp ", msg);
+  const _watch = async (channel: any) => {
+    console.log('Rendering >>>>>>> useXmtpChannelMessages._watch', channel?.xmtpRaw)
+      for await (const msg of await channel?.xmtpRaw?.streamMessages()) {
+        console.log(`New message from ${msg.senderAddress}: ${msg.content}`)
         setMessages(prevMessages => {
           const messages = [...prevMessages];
           messages.push(XmtpMessage$(msg));
           return messages;
         });
       }
-    }
   }
 
   return (

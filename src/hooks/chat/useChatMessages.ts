@@ -10,7 +10,6 @@ const useChatMessages = () => {
     const router = useRouter();
     let hookStreamChannelMessages = useStreamChannelMessages();
     let hookXmtpChannelMessages = useXmtpChannelMessages();
-    const xmtpContext = useContext(XmtpContext);
     const $channel = useChatChannelStore((state: any) => state.channel);
     const $loadMessages = useChatMessagesStore(((state: any) => state.load));
 
@@ -40,7 +39,7 @@ const useChatMessages = () => {
 
     const _watch = () => {
         if (router.pathname == '/chat/dm') {
-            hookXmtpChannelMessages.watch(xmtpContext.logs);
+            hookXmtpChannelMessages.watch($channel);
         }
     }
 
