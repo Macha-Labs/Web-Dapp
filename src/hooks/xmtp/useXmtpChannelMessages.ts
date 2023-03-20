@@ -24,10 +24,11 @@ const useXmtpChannelMessages = () => {
 
   const _watch = async (channel: any) => {
     console.log('Rendering >>>>>>> useXmtpChannelMessages._watch', channel?.xmtpRaw)
+    const logs = await channel?.xmtpRaw?.streamMessages();
     setMessagesLogs(await channel?.xmtpRaw?.streamMessages())
 
-    if (messagesLogs) {
-      for await (const msg of messagesLogs) {
+    if (logs) {
+      for await (const msg of logs) {
         console.log(`New message from ${msg.senderAddress}: ${msg.content}`)
         setMessages(prevMessages => {
           const messages = [...prevMessages];
@@ -40,12 +41,9 @@ const useXmtpChannelMessages = () => {
 
   useEffect(() => {
     if ($channel && $channel.source == 'xmtp') {
-      _watch($channel)
-    } else {
-      console.log('Store Rendering >>>>>>> useXmtpChannelMessages._watch', $channel)
       messagesLogs?.return();
-      setMessagesLogs(null);
-    }
+      _watch($channel)
+    } 
   }, [$channel])
 
   return (
