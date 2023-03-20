@@ -27,6 +27,7 @@ export type AuthContextType = {
   streamClient: any;
   xmtpClient: any;
   xmtpClientAddress: string;
+  xmtpLogs: any;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -43,6 +44,7 @@ export const AuthContext = createContext<AuthContextType>({
   streamClient: undefined,
   xmtpClient: undefined,
   xmtpClientAddress: "",
+  xmtpLogs: null,
 });
 
 const AuthProvider = ({ children }: any) => {
@@ -220,6 +222,7 @@ const AuthProvider = ({ children }: any) => {
         streamClient: hookStreamAuth.client,
         xmtpClient: hookXmtpAuth.xmtpClient,
         xmtpClientAddress: hookXmtpAuth.xmtpClientAddress,
+        xmtpLogs: hookXmtpAuth.xmtpLogs
       }}
     >
       {children}

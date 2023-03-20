@@ -9,6 +9,7 @@ const useXmtpChannels = () => {
   console.log('Rendering >>>>> useXmtpChannels');
   const authContext = useContext(AuthContext);
   const [allConversations, setAllConversations] = useState<any>();
+  const [rawConversations, setRawConversations] = useState<any>();
   const [xmtpConvo, setXmtpConvo] = useState<any>();
   const hookLensProfileList = useLensProfileList();
 
@@ -23,17 +24,21 @@ const useXmtpChannels = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if ($channel?.source != 'xmtp')
-  //     return;
+  const _unwatch = () => {
 
-  //   const streamConversations = async () => {
-  //     const xmtpNew = await authContext?.xmtpClient?.conversations?.stream();
-  //     console.log("New xmtpConvo ", xmtpNew);
-  //     setXmtpConvo(xmtpNew);
-  //   };
-  //   streamConversations();
-  // }, [$channel?.id]);
+  }
+
+  useEffect(() => {
+    if ($channel?.source != 'xmtp')
+      return;
+
+    const streamConversations = async () => {
+      const xmtpNew = await authContext?.xmtpClient?.conversations?.stream();
+      console.log("New xmtpConvo ", xmtpNew);
+      setXmtpConvo(xmtpNew);
+    };
+    streamConversations();
+  }, [$channel?.id]);
 
   useEffect(() => {
     if (xmtpConvo) {
@@ -47,8 +52,9 @@ const useXmtpChannels = () => {
   }, [allConversations]);
 
   const _fetch = async () => {
-    const conversationList =
-      await authContext?.xmtpClient?.conversations?.list();
+    const conversationList = await authContext?.xmtpClient?.conversations?.list();
+    setRawConversations(conversationList);
+
     // const data = conversationList?.map((item: any) => {
     //   // const peer = hookLensProfileList.fetch(item.peerAddress);
     //   // console.log("useXmtpChannels peer", ChannelXMTP$({...item, peer: peer}));
