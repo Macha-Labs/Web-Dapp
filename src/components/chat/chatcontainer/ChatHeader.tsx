@@ -27,7 +27,7 @@ const ChatHeader = (props: any) => {
 
  
 
-  const TemplateSearch = () => {
+  const templateSearch = () => {
     return (
       <Row className="header w-100 vr-center hr-between">
         <ChatSearch />
@@ -43,7 +43,7 @@ const ChatHeader = (props: any) => {
     );
   };
 
-  const TemplateMultiSelect = () => {
+  const templateMultiSelect = () => {
     return (
       <Row className="header w-100 hr-between vr-center">
         <Button
@@ -67,7 +67,7 @@ const ChatHeader = (props: any) => {
     );
   };
 
-  const TemplateProfile = () => {
+  const templateProfile = () => {
     return (
       <Row className="header w-100 hr-between vr-center">
         <Row className="vr-center">
@@ -133,13 +133,13 @@ const ChatHeader = (props: any) => {
     );
   };
 
-  const Template = () => {
+  const template = () => {
     if (chatContext?.hookChat.actionMessage?.action === "SEARCH")
-      return <TemplateSearch />;
+      return templateSearch();
     else if (chatContext?.hookChat.actionMessage?.action === "MULTISELECT")
-      return <TemplateMultiSelect />;
+      return templateMultiSelect();
     else {
-      return <TemplateProfile />;
+      return templateProfile();
     }
   };
 
@@ -147,7 +147,8 @@ const ChatHeader = (props: any) => {
     <>
       <div className="header hr-between vr-center">
         <Row className="w-100 h-100 hr-between vr-center">
-          <Template />
+          {/* <Template /> */}
+          {template()}
         </Row>
       </div>
       

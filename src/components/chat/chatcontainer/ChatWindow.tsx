@@ -1,16 +1,15 @@
-import useChatMessages from "@/hooks/chat/useChatMessages";
-import { AuthContext } from "@/providers/AuthProvider";
-import { ChatContext } from "@/providers/ChatProvider";
-import { useContext, useEffect, useRef, useState } from "react";
-import ChatMessage from "./ChatMessage";
-import { StyledDateTag, StyledMoveToBottom } from '@/styles/StyledComponents';
 import IconImage from '@/components/icons/IconImage';
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
-import { useDisclosure } from "@chakra-ui/react";
-import { useChatMembersStore } from "@/store/useChatMembersStore";
+import { AuthContext } from "@/providers/AuthProvider";
+import { ChatContext } from "@/providers/ChatProvider";
 import useChatChannelStore from "@/store/useChatChannelStore";
+import { useChatMembersStore } from "@/store/useChatMembersStore";
 import useChatMessagesStore from "@/store/useChatMessagesStore";
+import { StyledDateTag, StyledMoveToBottom } from '@/styles/StyledComponents';
+import { useDisclosure } from "@chakra-ui/react";
+import { useContext, useEffect, useRef, useState } from "react";
+import ChatMessage from "./ChatMessage";
 
 const ChatWindow = (props: any) => {
   const authContext = useContext(AuthContext);

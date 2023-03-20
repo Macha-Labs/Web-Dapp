@@ -2,10 +2,9 @@ import useChat from "@/hooks/chat/useChat";
 import useChatChannel from "@/hooks/chat/useChatChannel";
 import useChatChannels from "@/hooks/chat/useChatChannels";
 import useChatMembers from "@/hooks/chat/useChatMembers";
+import useChatMessage from "@/hooks/chat/useChatMessage";
 import useChatMessages from "@/hooks/chat/useChatMessages";
-import { createContext, useContext } from "react";
-import { StreamContext, StreamContextType } from "./StreamProvider";
-
+import { createContext} from "react";
 
 
 export type ChatContextType = {
@@ -14,8 +13,7 @@ export type ChatContextType = {
   hookChannelList: any | undefined;
   hookMembers: any | undefined;
   hookMessages: any | undefined;
-  streamClient: any | undefined;
-  streamContext: any | undefined;
+  hookMessage: any | undefined;
 };
 
 export const ChatContext = createContext<ChatContextType>({
@@ -24,17 +22,16 @@ export const ChatContext = createContext<ChatContextType>({
   hookChannelList: null,
   hookMembers: null,
   hookMessages: null,
-  streamClient: null,
-  streamContext: null,
+  hookMessage: null,
 });
 
 export const ChatProvider = ({ children }: any) => {
   console.log('Rendering >>>>> ChatProvider');
-  const streamContext = useContext(StreamContext) as StreamContextType;
-  const hookChat = useChat(streamContext.client);
+  const hookChat = useChat();
   const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannels();
   const hookMessages = useChatMessages();
+  const hookMessage = useChatMessage();
   const hookMembers = useChatMembers();
 
   return (
@@ -45,8 +42,7 @@ export const ChatProvider = ({ children }: any) => {
         hookChannelList: hookChatChannels,
         hookMembers: hookMembers,
         hookMessages: hookMessages,
-        streamClient: streamContext?.client,
-        streamContext: streamContext,
+        hookMessage: hookMessage,
       }}
     >
       {children}
