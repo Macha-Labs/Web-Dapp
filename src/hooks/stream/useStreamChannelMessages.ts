@@ -18,7 +18,7 @@ const useStreamChannelMessages = () => {
   }
 
   useEffect(() => {
-    if ($channel?.source != 'getstream')
+    if (!$channel || $channel?.source != 'getstream')
       return;
 
     logger(
