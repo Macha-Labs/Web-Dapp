@@ -17,7 +17,6 @@ const ChatWindow = (props: any) => {
   const chatContext = useContext(ChatContext);
   // 
   const messageListRef = useRef<any>();
-  const hookChatMessages = useChatMessages();
   const itemsRef = useRef<any>([]);
   const [isScrollAtBottom, setIsScrollAtBottom] = useState(false)
   const [dataTag, setDateTag] = useState('')
@@ -32,8 +31,7 @@ const ChatWindow = (props: any) => {
   const $messages = useChatMessagesStore((state: any) => state.messages);
 
   useEffect(() => {
-    hookChatMessages.load();
-    hookChatMessages.watch();
+    chatContext?.hookMessages.load();
   }, [$channel])
 
 

@@ -37,7 +37,6 @@ export const ChatProvider = ({ children }: any) => {
   const hookMessages = useChatMessages();
   const hookMembers = useChatMembers();
 
-
   return (
     <ChatContext.Provider
       value={{
