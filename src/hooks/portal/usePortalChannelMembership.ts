@@ -27,6 +27,9 @@ const usePortalChannelMembership = (channel: any) => {
 
   // adding selected members to current channel
   const addMembersToChannel = (callback:any = null) => {
+    if (!usersIds.length)
+      return;
+      
     setIsLoading(true);
     if (users) {
       const data = {
@@ -43,6 +46,8 @@ const usePortalChannelMembership = (channel: any) => {
 
   // run when -> members selected -> clicked on remove
   const removeMembersFromChannel = async (callback:any = null) => {
+    if (!usersIds.length)
+      return;
     setIsLoading(true);
     if (users) {
       const data = {

@@ -23,11 +23,9 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import emoji from "../../../data/emoji.json";
-import { ChannelEvents } from "@/data/types";
 
 const ChatMessage = (props: any) => {
   const min_textarea_height = 45;
-
   const toast = useToast();
   const date = new Date(props.message.created_at);
   const hours = date.getHours().toString().padStart(2, "0");
@@ -35,6 +33,12 @@ const ChatMessage = (props: any) => {
   const time = `${hours}:${minutes}`;
   const chatRef = useRef<HTMLDivElement>(null);
   const isIntersecting = useOnScreen(chatRef);
+
+  const callbacks = {
+    pin: () => {
+
+    }
+  }
 
   useEffect(() => {
     if (isIntersecting && props?.handleDateTag) {
