@@ -10,7 +10,6 @@ const useXmtpChannel = () => {
 
     const _fetch= async(channel: any) => {
         console.log('useXmtpChannel._fetch', channel?.xmtpRaw);
-        const convo = await authContext.xmtpClient.conversations.newConversation(channel?.xmtpRaw?.peerAddress);
         setChannel(channel);
     }
 
