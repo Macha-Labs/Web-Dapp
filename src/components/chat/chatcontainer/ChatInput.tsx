@@ -34,6 +34,8 @@ const ChatInput = (props: any) => {
   const hookCreateLensPost = useCreateLensPost();
   const createPostRef = useRef<any>();
 
+  const textAreaRef = useRef<any>();
+
 
   const callbackSendMessage = (data: any) => {
     return chatContext?.hookMessage.send(data);
@@ -288,7 +290,7 @@ const ChatInput = (props: any) => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
                 }}
-                ref={chatContext?.hookChat.textareaRef}
+                ref={textAreaRef}
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
