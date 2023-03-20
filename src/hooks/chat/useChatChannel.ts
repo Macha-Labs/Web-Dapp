@@ -12,6 +12,7 @@ const useChatChannel = () => {
     const router = useRouter();
     const $channel = useChatChannelStore((state: any) => state.channel);
     const $loadChannel = useChatChannelStore(((state: any) => state.load));
+    const $loadLoading = useChatChannelStore(((state: any) => state.loading));
 
     const _unwatch = async() => {
         if ($channel && router.pathname == '/chat') {
@@ -35,6 +36,8 @@ const useChatChannel = () => {
             hookStreamChannel?.channel,
         ]);
 
+        $loadLoading(false);
+
         if (router.pathname == "/chat/dm")
             $loadChannel(null);
 
@@ -52,6 +55,9 @@ const useChatChannel = () => {
         logger("channel", "useChatChannel.useEffect[hookStreamChannel?.channel]", "channel data from xmtp ", [
             hookXmtpChannel.channel,
         ]);
+
+        $loadLoading(false);
+
         if (router.pathname == "/chat")
             $loadChannel(null);
         if (router.pathname == "/chat/dm") {
@@ -62,6 +68,7 @@ const useChatChannel = () => {
 
     const _fetch = (data: any) => {
         console.log("Router pathname ", router.pathname);
+        $loadLoading(true);
         switch (router.pathname) {
             case "/chat":
                 return hookStreamChannel._fetch(data?.id);
@@ -84,6 +91,8 @@ const useChatChannel = () => {
     }
 
     const _reload = () => {
+        $loadLoading(true);
+        
         switch (router.pathname) {
             case "/chat":
                 hookStreamChannel._reload();

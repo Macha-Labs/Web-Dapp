@@ -2,6 +2,7 @@ import { Col, Row, StyledCard, StyledChatItem } from "@/styles/StyledComponents"
 import {
   Avatar,
   Button,
+  Spinner,
   Text,
   useDisclosure,
   useToast,
@@ -36,6 +37,7 @@ const ChatList = (props: any) => {
   const [isClicked, setIsClicked] = useState<any>([]);
   const $channels = useChatChannelsStore((state: any) => state.channels);
   const $channel = useChatChannelStore((state: any) => state.channel);
+  const $channelLoad = useChatChannelStore((state: any) => state.loading);
 
 
   // TODO: Fix bandaging
@@ -346,8 +348,11 @@ const ChatList = (props: any) => {
                             )}
                         </Row>
 
+                        {$channelLoad && <Spinner size='xs' />}
+
                         <Col className="hr-center w-1-12 settingsIcon">
                           <TemplateActions item={item} />
+                          
                         </Col>
                         </Row>
                       </StyledCard>
