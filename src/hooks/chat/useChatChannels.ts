@@ -6,7 +6,7 @@ import useStreamUserChannels from "../stream/useStreamUserChannels";
 import useXmtpChannels from "../xmtp/useXmtpChannels";
 
 const useChatChannels = (from?: any) => {
-    console.log(`Rendering >>>>> ${from} >>>>>>>>> useChatChannels`);
+    console.log(`Rendering >>>>> useChatChannels`);
     const router = useRouter();
     const hookStreamChannels = useStreamUserChannels();
     const hookXmtpChannels = useXmtpChannels();
