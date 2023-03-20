@@ -28,7 +28,7 @@ const InviteChannel = (props: any) => {
     const callBackMembership = () => {
         // TODO: Cannot access hookchatchannel.fetch since router.pathname is different here
         chatContext?.hookChannel?.fetch({id: props?.channelId});
-        router.push('/chat');
+        // router.push('/chat');
     }
 
     const callBacks = {
