@@ -1,9 +1,9 @@
 const loggingStates: any = {
-    auth: true,
-    channel: true,
-    lens: true,
-    stream: true,
-    xmtp: true
+    auth: false,
+    channel: false,
+    lens: false,
+    stream: false,
+    xmtp: false
 };
 
 export const loggerInit = (func: any) => {
