@@ -19,6 +19,7 @@ import {
   Divider,
   Heading,
   Image,
+  Input,
   Text,
   Textarea,
   useDisclosure,
@@ -391,8 +392,9 @@ const ChatInput = (props: any) => {
 
   return (
     <>
-      <Template />
-      <TemplatePostNew />
+      {/* <Template /> */}
+      {/* <TemplatePostNew /> */}
+      <Input/>
     </>
   );
 };
