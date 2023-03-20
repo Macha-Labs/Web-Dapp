@@ -335,7 +335,8 @@ const ChatList = (props: any) => {
                               </Col>
                             )}
 
-                          {!item?.private && <Row className="m-t-0-5"><Tag size="sm">Public</Tag></Row>}
+                          {(item?.private == false) && <Row className="m-t-0-5"><Tag size="sm">Public</Tag></Row>}
+
                           </Col>
                           {item?.unreadCountObject &&
                             item?.unreadCountObject[authContext?.address]
