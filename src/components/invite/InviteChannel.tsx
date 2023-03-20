@@ -4,17 +4,16 @@ import { Col, StyledCard} from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
-import { StreamContext } from "@/providers/StreamProvider";
-import useChatChannelStore from "@/store/useChatChannelStore";
+import { ChatContext } from "@/providers/ChatProvider";
+import { useRouter } from "next/router";
 
 
 const InviteChannel = (props: any) => {
     const authContext = useContext(AuthContext);
-    const streamContext = useContext(StreamContext);
+    const chatContext = useContext(ChatContext);
     const hookStreamChannelMembership = useStreamChannelMembership();
-    const $channel = useChatChannelStore((state: any) => state.channel);
-    const $loadChannel = useChatChannelStore(((state: any) => state.load))
     const toast = useToast();
+    const router = useRouter();
 
 
     useEffect(() => {
@@ -25,16 +24,11 @@ const InviteChannel = (props: any) => {
         }
     }, [props?.channelId])
 
-    useEffect(() => {
-
-    }, [$channel?.id])
 
     const callBackMembership = () => {
         // TODO: Cannot access hookchatchannel.fetch since router.pathname is different here
-        streamContext?.initiate({id: props?.channelId});
-        console.log(streamContext.hookChannel.channel);
-        $loadChannel(streamContext.hookChannel.channel);
-        console.log('called');
+        chatContext?.hookChannel?.fetch({id: props?.channelId});
+        router.push('/chat');
     }
 
     const callBacks = {

@@ -1,5 +1,5 @@
 import { Avatar, AvatarBadge, Heading, useDisclosure } from "@chakra-ui/react";
-import { FC, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import styled from "styled-components";
 import { truncateAddress } from "@/helpers";
