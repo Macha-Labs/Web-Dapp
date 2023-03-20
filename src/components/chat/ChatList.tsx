@@ -96,7 +96,7 @@ const ChatList = (props: any) => {
     },
   });
 
-  const TemplateChatNew = () => {
+  const templateChatNew = () => {
     return (
       <ChatNew
         modal={modalChatNew}
@@ -229,7 +229,7 @@ const ChatList = (props: any) => {
     return <LoadChannels />;
   };
 
-  const TemplateChatList = () => {
+  const templateChatList = () => {
     return (
       <>
         <Row className="header vr-center hr-between">
@@ -391,9 +391,9 @@ const ChatList = (props: any) => {
 
   return (
     <>
-      <TemplateChatList />
+      {templateChatList()}
 
-      {modalChatNew.isOpen && <TemplateChatNew />}
+      {modalChatNew.isOpen && templateChatNew()}
 
       {modalChatNewDm.isOpen && <TemplateChatNewDm modal={modalChatNewDm} />}
     </>
