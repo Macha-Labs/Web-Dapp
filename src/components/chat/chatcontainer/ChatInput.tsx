@@ -33,12 +33,11 @@ const ChatInput = (props: any) => {
   const chatContext = useContext(ChatContext);
   const modalPost = useDisclosure();
   const hookCreateLensPost = useCreateLensPost();
-  const hookChatMessage = useChatMessage();
   const createPostRef = useRef<any>();
 
 
   const callbackSendMessage = (data: any) => {
-    return hookChatMessage.send(data)
+    return chatContxt?.hookMessage.send(data)
   }
 
   const templateReply = () => {
