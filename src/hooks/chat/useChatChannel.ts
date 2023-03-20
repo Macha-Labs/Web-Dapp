@@ -14,22 +14,6 @@ const useChatChannel = () => {
     const $loadChannel = useChatChannelStore(((state: any) => state.load));
     const $loadLoading = useChatChannelStore(((state: any) => state.loadLoading));
 
-    const _unwatch = async() => {
-        if ($channel && router.pathname == '/chat') {
-            const result =  await $channel?.raw?.stopWatching();
-            console.log("Stopped watching the channel ", result, $channel);
-        } else if ($channel && router.pathname == '/chat/dm') {
-
-            
-        }
-    }
-    const _read = async() => {
-        if ($channel) {
-            const result =  await $channel?.raw?.markRead();
-            console.log("Channel marked as Read ", result);
-        }
-    }
-
     // stream
     useEffect(() => {
         logger("channel", "useChatChannel.useEffect[hookStreamChannel?.channel]", "channel data from stream ", [
@@ -44,9 +28,9 @@ const useChatChannel = () => {
         if (router.pathname == "/chat" || router.pathname == "/invite/c/[...channelId]") {
             console.log('for stream', $channel?.id, hookStreamChannel?.channel?.id);
             if ($channel?.id != hookStreamChannel?.channel?.id)
-                _unwatch();
+                _unwatch($channel);
+            _read(hookStreamChannel?.channel?.id);
             $loadChannel(hookStreamChannel?.channel);
-            _read();
         }
     }, [hookStreamChannel?.channel]);
 
@@ -106,6 +90,24 @@ const useChatChannel = () => {
     const _unload = () => {
         $loadChannel(null)
     }
+
+    const _read = async(channel: any) => {
+        if (channel && router.pathname == '/chat') {
+            const result =  await channel?.raw?.markRead();
+            console.log("Channel marked as Read ", result);
+        }
+    }
+
+    const _unwatch = async(oldChannel: any) => {
+        if (oldChannel && router.pathname == '/chat') {
+            const result =  await oldChannel?.raw?.stopWatching();
+            console.log("Stopped watching the channel ", result, oldChannel);
+        } else if (oldChannel && router.pathname == '/chat/dm') {
+
+            
+        }
+    }
+    
 
     return {
         fetch: _fetch,
