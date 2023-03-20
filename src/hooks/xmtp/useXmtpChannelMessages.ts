@@ -39,7 +39,7 @@ const useXmtpChannelMessages = () => {
   }
 
   useEffect(() => {
-    if ($channel) {
+    if ($channel && $channel.source == 'xmtp') {
       _watch($channel)
     } else {
       messagesLogs?.return();
