@@ -37,7 +37,7 @@ const useChatChannel = () => {
 
         if (router.pathname == "/chat/dm")
             $loadChannel(null);
-
+            
         if (router.pathname == "/chat") {
             console.log('for stream', $channel?.id, hookStreamChannel?.channel?.id);
             if ($channel?.id != hookStreamChannel?.channel?.id)
@@ -61,6 +61,7 @@ const useChatChannel = () => {
     }, [hookXmtpChannel.channel])
 
     const _fetch = (data: any) => {
+        console.log(router.pathname, 'router.pathname');
         switch (router.pathname) {
             case "/chat":
                 return hookStreamChannel._fetch(data?.id);

@@ -151,7 +151,7 @@ const ChatHeader = (props: any) => {
         </Row>
       </div>
       
-      {membersModal.isOpen && <ChatMembersList modal={membersModal}/>}
+      <ChatMembersList modal={membersModal}/>
       
       <ChatSetting
           modalSettings={modalSettings}
