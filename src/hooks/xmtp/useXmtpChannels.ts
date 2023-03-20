@@ -17,6 +17,11 @@ const useXmtpChannels = () => {
     }
   }, [authContext?.xmtpLogs]);
 
+
+  useEffect(() => {
+    
+  }, [allConversations])
+
   const _watch = async () => {
     for await (const conversation of authContext?.xmtpLogs) {
       console.log("New conversation started with ", conversation);
