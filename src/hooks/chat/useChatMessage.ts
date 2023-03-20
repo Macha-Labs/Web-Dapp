@@ -6,6 +6,7 @@ const useChatMessage = () => {
     const router = useRouter();
 
     const _send = async (data: any) => {
+        console.log("Reading SENDING MSG", data);
         switch(router.pathname) {
             case '/chat':
                 return await storeChannel.raw.sendMessage(data);
