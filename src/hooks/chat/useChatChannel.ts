@@ -11,7 +11,7 @@ const useChatChannel = () => {
     const hookStreamChannel = useStreamChannel();
     const router = useRouter();
     const $channel = useChatChannelStore((state: any) => state.channel);
-    const $loadChannel = useChatChannelStore(((state: any) => state.load))
+    const $loadChannel = useChatChannelStore(((state: any) => state.load));
 
     const _unwatch = async() => {
         if ($channel && router.pathname == '/chat') {
@@ -37,8 +37,8 @@ const useChatChannel = () => {
 
         if (router.pathname == "/chat/dm")
             $loadChannel(null);
-            
-        if (router.pathname == "/chat") {
+
+        if (router.pathname == "/chat" || router.pathname == "/invite/c/[...channelId]") {
             console.log('for stream', $channel?.id, hookStreamChannel?.channel?.id);
             if ($channel?.id != hookStreamChannel?.channel?.id)
                 _unwatch();
@@ -61,12 +61,14 @@ const useChatChannel = () => {
     }, [hookXmtpChannel.channel])
 
     const _fetch = (data: any) => {
-        console.log(router.pathname, 'router.pathname');
+        console.log("Router pathname ", router.pathname);
         switch (router.pathname) {
             case "/chat":
                 return hookStreamChannel._fetch(data?.id);
             case "/chat/dm":
-                return hookXmtpChannel._fetch(data)
+                return hookXmtpChannel._fetch(data);
+            case '/invite/c/[...channelId]':
+                return hookStreamChannel._fetch(data?.id);
         }
     };
 
