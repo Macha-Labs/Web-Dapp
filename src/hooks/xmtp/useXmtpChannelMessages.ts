@@ -42,6 +42,7 @@ const useXmtpChannelMessages = () => {
     if ($channel && $channel.source == 'xmtp') {
       _watch($channel)
     } else {
+      console.log('Store Rendering >>>>>>> useXmtpChannelMessages._watch', $channel)
       messagesLogs?.return();
       setMessagesLogs(null);
     }
