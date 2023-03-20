@@ -47,6 +47,11 @@ const ChatList = (props: any) => {
     chatContext?.hookChannel?.unload();
   }, [router.pathname]);
 
+  const handleSelectChannel = (channel: any) => {
+    setChannelSelected(channel);
+    chatContext?.hookChannel?.fetch(channel);
+  }
+
   const hookPortalChannel = usePortalChannel(null, {
     mute: () => {
       toast({
@@ -268,8 +273,7 @@ const ChatList = (props: any) => {
                         <Row
                           className="vr-center w-11-12"
                           onClick={() => {
-                            setChannelSelected(item)
-                            chatContext?.hookChannel?.fetch(item);
+                            handleSelectChannel(item)
                           }}
                         >
                           {/* <Checkbox defaultChecked className="m-r-0-5" /> */}

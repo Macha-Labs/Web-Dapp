@@ -69,6 +69,7 @@ const useChatChannel = () => {
     const _fetch = (data: any) => {
         console.log("Router pathname ", router.pathname);
         $loadLoading(true);
+        $loadChannel(null);
         switch (router.pathname) {
             case "/chat":
                 return hookStreamChannel._fetch(data?.id);
