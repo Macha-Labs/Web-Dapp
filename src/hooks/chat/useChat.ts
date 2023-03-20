@@ -10,7 +10,7 @@ import useMention from "../stream/useMention";
 import useChatChannelStore from "@/store/useChatChannelStore";
 
 const useChat = () => {
-  console.log('Rendering >>>>> useChat');
+  
   const authContext = useContext(AuthContext) as AuthContextType;
   const $channel = useChatChannelStore((state: any) => state.channel);
   //
@@ -38,6 +38,9 @@ const useChat = () => {
   // Slash & Widget
   const [slashCmd, setSlashCmd] = useState<any>();
   const [slashCmdValue, setSlashCmdValue] = useState<any>();
+
+
+  console.log('Rendering >>>>> useChat', textareaRef);
 
   const slashRun = (command: any) => {
     setSlashCmdValue(command.name);
