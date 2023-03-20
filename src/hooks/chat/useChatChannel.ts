@@ -99,6 +99,7 @@ const useChatChannel = () => {
     }
 
     const _unwatch = async(oldChannel: any) => {
+        console.log('Stopped watching the channel >>>>>>>>', oldChannel, router.pathname);
         if (oldChannel && router.pathname == '/chat') {
             const result =  await oldChannel?.raw?.stopWatching();
             console.log("Stopped watching the channel ", result, oldChannel);
