@@ -35,9 +35,6 @@ const ChatInput = (props: any) => {
   const hookCreateLensPost = useCreateLensPost();
   const createPostRef = useRef<any>();
 
-  const textAreaRef = useRef<any>();
-
-
   const callbackSendMessage = (data: any) => {
     return chatContext?.hookMessage.send(data);
   }
@@ -73,7 +70,7 @@ const ChatInput = (props: any) => {
     );
   };
 
-  const TemplatePostNew = () => {
+  const templatePostNew = () => {
     return (
       <ModalWindow
         event={modalPost}
@@ -275,7 +272,7 @@ const ChatInput = (props: any) => {
     );
   };
 
-  const TemplateInput = () => {
+  const templateInput = () => {
     return (
       <StyledChatInputContainer>
         <Col className="w-100">
@@ -291,7 +288,7 @@ const ChatInput = (props: any) => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
                 }}
-                ref={textAreaRef}
+                ref={chatContext?.hookChat?.textareaRef}
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
@@ -372,7 +369,7 @@ const ChatInput = (props: any) => {
     }
   };
 
-  const Template = () => {
+  const template = () => {
     if (chatContext?.hookChat.actionMessage?.action === "SEARCH")
       return (
         <StyledChatInputContainer>
@@ -389,14 +386,16 @@ const ChatInput = (props: any) => {
           </StyledChatInput>
         </StyledChatInputContainer>
       );
-    else return <TemplateInput />;
+    else return templateInput();
   };
 
   return (
     <>
       {/* <Template /> */}
+      {template()}
       {/* <TemplatePostNew /> */}
-      <Input/>
+      {templatePostNew()}
+      {/* <Input/> */}
     </>
   );
 };
