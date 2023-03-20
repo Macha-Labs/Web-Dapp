@@ -3,6 +3,7 @@ import {
   Avatar,
   Button,
   Spinner,
+  Tag,
   Text,
   useDisclosure,
   useToast,
@@ -333,6 +334,8 @@ const ChatList = (props: any) => {
                                 </Text>
                               </Col>
                             )}
+
+                          {!item?.private && <Row className="m-t-0-5"><Tag size="sm">Public</Tag></Row>}
                           </Col>
                           {item?.unreadCountObject &&
                             item?.unreadCountObject[authContext?.address]

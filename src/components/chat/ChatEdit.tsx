@@ -9,6 +9,7 @@ import {
   useDisclosure,
   useToast,
   Heading,
+  Radio,
 } from "@chakra-ui/react";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import ModalSlider from "../modal/ModalSlider";
@@ -169,27 +170,31 @@ const ChatEdit = (props: any) => {
             Set New Profile Photo
           </Text> */}
         </Col>
-
-        <StyledCard className="m-b-1">
-          <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-        </StyledCard>
-        <StyledCard>
+        <Col>
+          <Heading as="h6" size="sm" className="m-b-1">Channel Details</Heading>
+          <StyledCard className="m-b-1">
+            <LayoutInputs data={data} style={{ class: "m-b-1" }} />
+          </StyledCard>
+        </Col>
+        <Col>
+          <Heading as="h6" size="sm" className="m-b-1">Channel Access</Heading>
+          <StyledCard>
           <Row className="hr-between">
             <Col>
-              <Heading size="sm">Make channel private</Heading>
-              <Text>
-                Please note public channels can be joined by anyone with the link
-                and should not be used for a small group conversation.
+              <Heading size="sm">Private</Heading>
+              <Text fontSize={14}>
+                Can only be accessed by members added.
               </Text>
             </Col>
-            <Switch
-              colorScheme="emerald"
-              className="m-l-1"
-              isChecked={hookPortalChannel?.channel?.private}
-              onChange={handleToggle}
-            />
+            <Col>
+              <Switch
+                isChecked={hookPortalChannel?.channel?.private}                
+                onChange={handleToggle}
+              />
+            </Col>
           </Row>
         </StyledCard>
+        </Col>
       </Col>
     </>
     </ModalSlider>
