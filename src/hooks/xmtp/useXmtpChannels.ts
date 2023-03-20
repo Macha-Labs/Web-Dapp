@@ -12,7 +12,7 @@ const useXmtpChannels = () => {
   const [xmtpConvo, setXmtpConvo] = useState<any>();
   const hookLensProfileList = useLensProfileList();
 
-  const _listen = async () => {
+  const _watch = async () => {
     for await (const conversation of xmtpConvo) {
       console.log("New conversation started with ", conversation);
       setAllConversations((prevConversations: any) => {
@@ -37,7 +37,7 @@ const useXmtpChannels = () => {
 
   useEffect(() => {
     if (xmtpConvo) {
-      _listen();
+      _watch();
     }
   }, [xmtpConvo]);
 
