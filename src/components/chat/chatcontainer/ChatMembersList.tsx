@@ -21,7 +21,7 @@ const ChatMembersList = (props: any) => {
 
   useEffect(() => {
     chatContext?.hookMembers.load($channel);
-  }, [])
+  }, [$channel])
 
 
   const handleSelectedUser = (user: any) => {
