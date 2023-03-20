@@ -56,7 +56,7 @@ const useChatChannel = () => {
             hookXmtpChannel.channel,
         ]);
 
-        $loadLoading(false);
+        $loadLoading(false)
 
         if (router.pathname == "/chat")
             $loadChannel(null);

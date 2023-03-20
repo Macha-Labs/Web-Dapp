@@ -350,12 +350,12 @@ const ChatList = (props: any) => {
                             )}
                         </Row>
 
-                        {($channelLoad && (channelSelected?.id == item?.id)) ? <Spinner size='sm' />: <Col className="hr-center w-1-12 settingsIcon">
+                        {($channelLoad && (channelSelected?.id == item?.id)) && <Spinner size='xs' />}
+
+                        <Col className="hr-center w-1-12 settingsIcon m-l-0-5">
                           <TemplateActions item={item} />
                           
-                        </Col>}
-
-                        
+                        </Col>
                         </Row>
                       </StyledCard>
                     </StyledChatItem>
