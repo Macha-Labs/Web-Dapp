@@ -23,6 +23,7 @@ const useXmtpChannels = () => {
   }, [allConversations])
 
   const _watch = async () => {
+    console.log("Calling useXmtpChannels._watch", authContext?.xmtpLogs);
     for await (const conversation of authContext?.xmtpLogs) {
       console.log("New conversation started with ", conversation);
       setAllConversations((prevConversations: any) => {

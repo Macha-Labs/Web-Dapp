@@ -12,16 +12,17 @@ function useXmtpAuth() {
     const xmtp = await Client.create(signer, { env: "production" });
     setXmtpClient(xmtp);
     setXmtpClientAddress(xmtp.address);
-    setXmtpLogs(xmtp?.conversations?.stream())
+    const logs = await xmtp?.conversations?.stream();
+    setXmtpLogs(logs);
     console.log("connected to XMTP");
   };
 
 
   return {
-    connectXmtp,
-    xmtpClient,
-    xmtpClientAddress,
-    xmtpLogs,
+    connectXmtp: connectXmtp,
+    xmtpClient: xmtpClient,
+    xmtpClientAddress: xmtpClientAddress,
+    xmtpLogs: xmtpLogs,
   };
 }
 
