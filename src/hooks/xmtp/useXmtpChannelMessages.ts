@@ -23,6 +23,7 @@ const useXmtpChannelMessages = () => {
 
   const _watch = async (channel: any) => {
     console.log('Rendering >>>>>>> useXmtpChannelMessages._watch', channel?.xmtpRaw)
+    if (channel?.xmtpRaw) {
       for await (const msg of await channel?.xmtpRaw?.streamMessages()) {
         console.log(`New message from ${msg.senderAddress}: ${msg.content}`)
         setMessages(prevMessages => {
@@ -31,6 +32,8 @@ const useXmtpChannelMessages = () => {
           return messages;
         });
       }
+    }
+      
   }
 
   return (
