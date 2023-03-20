@@ -1,7 +1,6 @@
 import { utils } from "ethers";
 import { signTypedData } from "@wagmi/core";
-import omitDeep from 'omit-deep';
-
+import omitDeep from "omit-deep";
 
 const omit = (object: any, name: any) => {
   return omitDeep(object, name);
@@ -12,7 +11,6 @@ export const signedTypeData = async (
   types: Record<string, any>,
   value: Record<string, any>
 ) => {
-  
   let typedData = {
     domain: domain,
     types: types,
@@ -22,11 +20,10 @@ export const signedTypeData = async (
 
   //@ts-ignore
   const result = signTypedData({
-    domain: domain,
-    types: types,
-    value: value,
-  }
-  );
+    domain: omitDeep(domain, ["__typename"]),
+    types: omitDeep(types, ["__typename"]),
+    value: omitDeep(value, ["__typename"]),
+  });
   return result;
 };
 

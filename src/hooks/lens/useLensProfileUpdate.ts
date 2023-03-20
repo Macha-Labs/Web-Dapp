@@ -47,7 +47,7 @@ const useLensProfileUpdate = () => {
     const metadata = await setMetaData(userLens?.id, cid);
     const typedData =
       metadata.data!.createSetProfileMetadataTypedData.typedData;
-
+    console.log("typedData", typedData);
     const signature = await signedTypeData(
       typedData.domain,
       typedData.types,
@@ -63,9 +63,18 @@ const useLensProfileUpdate = () => {
       LensPheripheryAbi,
       signer
     );
+    console.log(
+      "here",
+      typedData.value.profileId,
+      typedData,
+      v,
+      r,
+      s,
+      typedData.value.deadline
+    );
     const tx = await lensHub.setProfileMetadataURIWithSig({
       profileId: typedData.value.profileId,
-      contentURI: typedData.value.contentURI,
+      metadata: typedData.value.metadata,
       sig: {
         v,
         r,
