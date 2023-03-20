@@ -2,7 +2,6 @@ import IconImage from "@/components/icons/IconImage";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Pop from "@/components/pop/Pop";
 import PortalLoader from "@/components/PortalLoader";
-import useChatMessage from "@/hooks/chat/useChatMessage";
 import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
 import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
@@ -37,7 +36,7 @@ const ChatInput = (props: any) => {
 
 
   const callbackSendMessage = (data: any) => {
-    return chatContxt?.hookMessage.send(data)
+    return chatContext?.hookMessages.send(data);
   }
 
   const templateReply = () => {
