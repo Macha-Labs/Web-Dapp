@@ -12,7 +12,7 @@ const useChatChannel = () => {
     const router = useRouter();
     const $channel = useChatChannelStore((state: any) => state.channel);
     const $loadChannel = useChatChannelStore(((state: any) => state.load));
-    const $loadLoading = useChatChannelStore(((state: any) => state.loading));
+    const $loadLoading = useChatChannelStore(((state: any) => state.loadLoading));
 
     const _unwatch = async() => {
         if ($channel && router.pathname == '/chat') {
@@ -92,7 +92,7 @@ const useChatChannel = () => {
 
     const _reload = () => {
         $loadLoading(true);
-        
+
         switch (router.pathname) {
             case "/chat":
                 hookStreamChannel._reload();

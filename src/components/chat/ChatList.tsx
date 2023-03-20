@@ -38,6 +38,7 @@ const ChatList = (props: any) => {
   const $channels = useChatChannelsStore((state: any) => state.channels);
   const $channel = useChatChannelStore((state: any) => state.channel);
   const $channelLoad = useChatChannelStore((state: any) => state.loading);
+  const [channelSelected, setChannelSelected] = useState<any>();
 
 
   // TODO: Fix bandaging
@@ -267,6 +268,7 @@ const ChatList = (props: any) => {
                         <Row
                           className="vr-center w-11-12"
                           onClick={() => {
+                            setChannelSelected(item)
                             chatContext?.hookChannel?.fetch(item);
                           }}
                         >
@@ -348,12 +350,12 @@ const ChatList = (props: any) => {
                             )}
                         </Row>
 
-                        {$channelLoad && <Spinner size='xs' />}
-
-                        <Col className="hr-center w-1-12 settingsIcon">
+                        {($channelLoad && (channelSelected?.id == item?.id)) ? <Spinner size='sm' />: <Col className="hr-center w-1-12 settingsIcon">
                           <TemplateActions item={item} />
                           
-                        </Col>
+                        </Col>}
+
+                        
                         </Row>
                       </StyledCard>
                     </StyledChatItem>
