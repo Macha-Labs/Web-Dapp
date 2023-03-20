@@ -36,7 +36,7 @@ const ChatInput = (props: any) => {
 
 
   const callbackSendMessage = (data: any) => {
-    return chatContext?.hookMessages.send(data);
+    return chatContext?.hookMessage.send(data);
   }
 
   const templateReply = () => {
