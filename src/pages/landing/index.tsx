@@ -71,7 +71,7 @@ const LandingPage = () => {
                   </Link>
                 </div>
               </div>
-              <Button variant="state_brand">Beta Soon</Button>
+              <Button variant="state_brand">Testnet</Button>
             </div>
           </div>
         </nav>
