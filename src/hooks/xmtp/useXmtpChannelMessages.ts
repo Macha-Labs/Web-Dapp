@@ -26,7 +26,7 @@ const useXmtpChannelMessages = () => {
     console.log('Rendering >>>>>>> useXmtpChannelMessages._watch', channel?.xmtpRaw)
     setMessagesLogs(await channel?.xmtpRaw?.streamMessages())
 
-    if (channel?.xmtpRaw) {
+    if (messagesLogs) {
       for await (const msg of messagesLogs) {
         console.log(`New message from ${msg.senderAddress}: ${msg.content}`)
         setMessages(prevMessages => {
