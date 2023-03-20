@@ -42,7 +42,7 @@ const useXmtpChannelMessages = () => {
     if ($channel) {
       _watch($channel)
     } else {
-      messagesLogs.return();
+      messagesLogs?.return();
       setMessagesLogs(null);
     }
   }, [$channel])
