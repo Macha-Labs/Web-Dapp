@@ -25,7 +25,7 @@ const useXmtpChannelMessages = () => {
   const _watch = async (channel: any) => {
     console.log('Rendering >>>>>>> useXmtpChannelMessages._watch', channel?.xmtpRaw)
     const logs = await channel?.xmtpRaw?.streamMessages();
-    setMessagesLogs(await channel?.xmtpRaw?.streamMessages())
+    setMessagesLogs(logs);
 
     if (logs) {
       for await (const msg of logs) {
