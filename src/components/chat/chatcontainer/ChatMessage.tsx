@@ -7,6 +7,7 @@ import useOnScreen from "@/hooks/other/useOnScreen";
 import LayoutFilePreview from "@/layouts/chat/LayoutFilePreview";
 import LayoutImagePreview from "@/layouts/chat/LayoutImagePreview";
 import LayoutLinkPreview from "@/layouts/chat/LayoutLinkPreview";
+import { AuthContext } from "@/providers/AuthProvider";
 import {
   Col,
   Row,
@@ -21,10 +22,11 @@ import {
   Textarea,
   useToast
 } from "@chakra-ui/react";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import emoji from "../../../data/emoji.json";
 
 const ChatMessage = (props: any) => {
+  const authContext = useContext(AuthContext)
   const min_textarea_height = 45;
   const toast = useToast();
   const date = new Date(props.message.created_at);
@@ -259,13 +261,14 @@ const ChatMessage = (props: any) => {
                   className="m-r-0-5"
                 />
               )}
+
               {props?.channel.source == 'xmtp' ? 
               <Avatar
                 onClick={() => props?.handleSelectedUser(props.message?.user)}
                 className="m-r-0-5"
                 size="sm"
-                name={props?.channel?.name}
-                src={props?.channel?.image ? props?.channel?.image : props?.channel?.name}
+                name={(props.message?.createdBy == authContext?.address)? props?.channel?.name: authContext?.user?.lens?.name}
+                src={(props.message?.createdBy == authContext?.address)? props?.channel?.image: authContext?.user?.lens?.image}
               ></Avatar> :
               <Avatar
                 onClick={() => props?.handleSelectedUser(props.message?.user)}
@@ -296,7 +299,7 @@ const ChatMessage = (props: any) => {
             <Row className="hr-between">
               {props?.channel?.source == 'xmtp' ?
               <Text fontSize="sm" className="heading">
-                {props?.channel?.name}
+                {(props.message?.createdBy == authContext?.address)? props?.channel?.name: authContext?.user?.lens?.name}
               </Text>
               : 
               <Text fontSize="sm" className="heading">
