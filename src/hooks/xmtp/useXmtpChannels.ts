@@ -39,7 +39,8 @@ const useXmtpChannels = () => {
   }
 
   const _fetch = async () => {
-    const conversationList = await authContext?.xmtpClient?.conversations?.list();
+    let conversationList = await authContext?.xmtpClient?.conversations?.list();
+    conversationList = conversationList.reverse()
     setRawConversations(conversationList);
 
     const conversationMap = await conversationList
