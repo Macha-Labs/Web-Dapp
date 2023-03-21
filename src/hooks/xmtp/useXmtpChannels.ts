@@ -26,11 +26,9 @@ const useXmtpChannels = () => {
     console.log("Calling useXmtpChannels._watch", authContext?.xmtpLogs);
     for await (const conversation of authContext?.xmtpLogs) {
       console.log("New conversation started with ", conversation);
-      setAllConversations((prevConversations: any) => {
-        const conversations = [...prevConversations];
-        conversations.unshift(new Channel$("xmtp", conversation));
-        return conversations;
-      });
+      const conversations = [...allConversations];
+      conversations.unshift(new Channel$("xmtp", conversation));
+      setAllConversations(conversations);
     }
   };
 
