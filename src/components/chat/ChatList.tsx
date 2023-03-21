@@ -44,6 +44,7 @@ const ChatList = (props: any) => {
 
   // TODO: Fix bandaging
   useEffect(() => {
+    console.log(router, 'router is here')
     chatContext?.hookChannelList.load();
     chatContext?.hookChannel?.unload();
   }, [router.pathname]);
@@ -282,6 +283,7 @@ const ChatList = (props: any) => {
                             size="md"
                             className="m-r-0-5"
                             name={item?.name}
+                            src={item?.image ? item?.image : item?.name}
                           />
                           <Col className="w-100 d-flex flex-col vr-center">
                             <Row>

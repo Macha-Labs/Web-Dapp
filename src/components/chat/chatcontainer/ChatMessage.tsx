@@ -259,7 +259,14 @@ const ChatMessage = (props: any) => {
                   className="m-r-0-5"
                 />
               )}
-
+              {props?.channel.source == 'xmtp' ? 
+              <Avatar
+                onClick={() => props?.handleSelectedUser(props.message?.user)}
+                className="m-r-0-5"
+                size="sm"
+                name={props?.channel?.name}
+                src={props?.channel?.image ? props?.channel?.image : props?.channel?.name}
+              ></Avatar> :
               <Avatar
                 onClick={() => props?.handleSelectedUser(props.message?.user)}
                 src={props.message?.user?.lensImage}
@@ -271,6 +278,9 @@ const ChatMessage = (props: any) => {
                   truncateAddress(props.message?.createdBy)
                 }
               ></Avatar>
+              }
+
+              
             </Row>
           </Col>
           <Col
@@ -284,12 +294,17 @@ const ChatMessage = (props: any) => {
           >
             <TemplateReply />
             <Row className="hr-between">
+              {props?.channel?.source == 'xmtp' ?
+              <Text fontSize="sm" className="heading">
+                {props?.channel?.name}
+              </Text>
+              : 
               <Text fontSize="sm" className="heading">
                 {props.message?.user?.lensName ||
                   props.message?.user?.lensUsername ||
                   props.message?.user?.lensHandle ||
                   truncateAddress(props.message?.createdBy)}
-              </Text>
+              </Text>}
               <Row className="vr-center">
                 {props?.message.pinned && <IconImage path="IconDarkPinned.png" size="2xs" />}
                 <Text style={{ alignSelf: "flex-end" }} fontSize="12" className="m-l-0-5">
@@ -379,8 +394,8 @@ const ChatMessage = (props: any) => {
               props.scrollToId == props.message.id ? "" : "action"
             }`}
           >
-            <TemplateReactions />
-            <TemplateActions />
+            {(props?.channel?.source == 'getstream') && <TemplateReactions />}
+            {(props?.channel?.source == 'getstream') && <TemplateActions />}
           </Row>
         </Row>
       </StyledConversation>

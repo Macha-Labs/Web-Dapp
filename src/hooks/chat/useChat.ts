@@ -378,12 +378,12 @@ const useChat = () => {
 
   const handleReaction = async (reaction: any, message: any) => {
     let result;
-    if (message.own_reactions.length) {
+    if (message?.own_reactions?.length) {
       let available = false;
-      message.own_reactions.filter(async (item: any) => {
+      message?.own_reactions?.filter(async (item: any) => {
         if (item.type == reaction.type) {
           available = true;
-          result = await $channel.raw.deleteReaction(message?.id, reaction.type);
+          result = await $channel?.raw?.deleteReaction(message?.id, reaction.type);
         }
       });
       if (!available) {

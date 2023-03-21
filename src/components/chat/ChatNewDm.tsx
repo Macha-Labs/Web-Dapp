@@ -16,13 +16,13 @@ const ChatNewDm = (props: any) => {
             props.modal.onClose();
         },
         error: () => {
-            toast({
-                title: "Copied to clipboard",
-                status: "success",
-                duration: 3000,
-                position: "bottom-right",
-              });
-        }
+          toast({
+              title: "User not on XMTP",
+              status: "error",
+              duration: 3000,
+              position: "bottom-right",
+            });
+      }
     }
 
 
