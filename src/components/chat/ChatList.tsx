@@ -282,6 +282,7 @@ const ChatList = (props: any) => {
                             size="md"
                             className="m-r-0-5"
                             name={item?.name}
+                            src={item?.image ? item?.image : item?.name}
                           />
                           <Col className="w-100 d-flex flex-col vr-center">
                             <Row>
