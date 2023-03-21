@@ -74,9 +74,8 @@ const ChatHeader = (props: any) => {
           <Avatar
             size="sm"
             className="m-r-0-5"
-            name={
-              $channel?.name || $channel?.peerAddress
-            }
+            name={$channel?.name}
+            src={$channel?.image ? $channel?.image : $channel?.name}
           />
           <Col>
             <Row>

@@ -20,17 +20,10 @@ const useChatChannel = () => {
             hookStreamChannel?.channel,
         ]);
 
-        if (router.pathname == "/chat/dm") {
-            $loadChannel(null);
-            $loadLoading(false);
-        }
+        _read(hookStreamChannel?.channel);
+        $loadChannel(hookStreamChannel?.channel);
+        $loadLoading(false);
 
-        else if (router.pathname == "/chat" || router.pathname == "/invite/c/[...channelId]") {
-            console.log('for stream', $channel?.id, hookStreamChannel?.channel?.id);                
-            _read(hookStreamChannel?.channel);
-            $loadChannel(hookStreamChannel?.channel);
-            $loadLoading(false);
-        }
     }, [hookStreamChannel?.channel]);
 
     // xmtp
@@ -39,17 +32,9 @@ const useChatChannel = () => {
             hookXmtpChannel.channel,
         ]);
 
-       
+        $loadChannel(hookXmtpChannel.channel);
+        $loadLoading(false)
 
-        if (router.pathname == "/chat") {
-            $loadChannel(null);
-            $loadLoading(false)
-        }
-        if (router.pathname == "/chat/dm") {
-            console.log('for XMTP')
-            $loadChannel(hookXmtpChannel.channel);
-            $loadLoading(false)
-        }
     }, [hookXmtpChannel.channel])
 
     const _fetch = (data: any) => {
@@ -93,6 +78,7 @@ const useChatChannel = () => {
 
     const _unload = () => {
         $loadChannel(null)
+        $loadLoading(false)
     }
 
     const _read = async(channel: any) => {
