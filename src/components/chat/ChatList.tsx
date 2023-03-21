@@ -44,6 +44,8 @@ const ChatList = (props: any) => {
 
   // TODO: Fix bandaging
   useEffect(() => {
+    console.log(router, 'router is here')
+    // if (router.query?.hasOwnPropery('u'))
     chatContext?.hookChannelList.load();
     // chatContext?.hookChannel?.unload();
   }, [router.pathname]);

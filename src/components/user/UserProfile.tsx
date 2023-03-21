@@ -254,6 +254,7 @@ const UserProfile = ({ user }: any) => {
                 onClick={handleMessage}
                 variant="state_brand"
                 size="md"
+                isLoading={hookXmtpChannelNew.isLoading}
               >
                 Message
               </Button>
