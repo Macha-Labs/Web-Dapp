@@ -1,6 +1,35 @@
-import { Col, Row, StyledChatItem } from "@/styles/StyledComponents";
-import { Avatar, Button, Tag, Text, useDisclosure, useToast } from "@chakra-ui/react";
-import { useContext, useEffect} from "react";
+import {
+  Col,
+  Row,
+  StyledCard,
+  StyledChatItem,
+} from "@/styles/StyledComponents";
+import {
+  Avatar,
+  Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
+  Heading,
+  Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Tag,
+  Text,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import ChatNew from "./ChatNew";
 import IconImage from "../icons/IconImage";
@@ -17,7 +46,7 @@ import { useRouter } from "next/router";
 import useChatChannel from "@/hooks/chat/useChatChannel";
 import { DataContext } from "@/providers/DataProvider";
 import ChatNewDm from "./ChatNewDm";
-
+import ModalWindow from "../modal/ModalWindow";
 const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
   const chatContext = useContext(ChatContext);
@@ -28,13 +57,21 @@ const ChatList = (props: any) => {
   const router = useRouter();
   const modalChatNew = useDisclosure();
   const modalChatNewDm = useDisclosure();
+  const modalXMTP = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
-
+  const [cross,setCross]=useState(false);
   // TODO: Fix bandaging
   useEffect(() => {
     hookChatChannels.load();
   }, [router.pathname, chatContext.streamContext?.client?.user?.id]);
+  useEffect(() => {
+    if (cross) {
+      modalXMTP.onClose();
+    } else {
+      modalXMTP.onOpen();
+    }
+  });
 
   const hookPortalChannel = usePortalChannel(null, {
     mute: () => {
@@ -82,18 +119,16 @@ const ChatList = (props: any) => {
   const TemplateChatNew = () => {
     return (
       <ChatNew
-          modal={modalChatNew}
-          hookChatChannels={hookChatChannels}
-          hookChatChannel={hookChatChannel}
-        />
+        modal={modalChatNew}
+        hookChatChannels={hookChatChannels}
+        hookChatChannel={hookChatChannel}
+      />
     );
   };
 
   const TemplateChatNewDm = () => {
-    return (
-      <ChatNewDm modal={modalChatNewDm}></ChatNewDm>
-    )
-  }
+    return <ChatNewDm modal={modalChatNewDm}></ChatNewDm>;
+  };
 
   const TemplateActions = (props: any) => {
     return (
@@ -119,7 +154,7 @@ const ChatList = (props: any) => {
               variant="transparent"
               size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconDarkMute.png" size="xs"/>}
+              rightIcon={<IconImage path="IconDarkMute.png" size="xs" />}
             >
               <Row
                 className="hr-between w-100"
@@ -152,7 +187,7 @@ const ChatList = (props: any) => {
               variant="transparent"
               size="sm"
               className="text-start"
-              rightIcon={<IconImage path="IconRedDelete.png"  />}
+              rightIcon={<IconImage path="IconRedDelete.png" />}
             >
               <Row
                 className="hr-between w-100"
@@ -198,7 +233,49 @@ const ChatList = (props: any) => {
   const TemplateLoading = () => {
     return <LoadChannels />;
   };
+  const XMTPpopup=()=>{
+    const [isOpen, setIsOpen] = useState(true);
 
+    const onClose = () => setIsOpen(false);
+
+    const handleButtonClick = () => {
+      // code to redirect to other page
+    };
+
+    return (
+      <>
+        <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+          isCentered={false}          
+        >
+          {/* <ModalOverlay /> */}
+          <ModalContent position="fixed" bottom="10" left="4">
+            <ModalHeader>
+              <Flex alignItems="center">
+                <Image src="" alt="Logo" mr={2} />
+              </Flex>
+            </ModalHeader>
+            <ModalCloseButton>
+              <IconImage path="IconDarkCross.png" />
+            </ModalCloseButton>
+            <ModalBody>
+              <Text fontSize="lg" mb={4}>
+                Popup Paragraph
+              </Text>
+              <Button
+                colorScheme="blue"
+                onClick={handleButtonClick}
+                width="100%"
+              >
+                Redirect to Other Page
+              </Button>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </>
+    );
+  }
   const TemplateChatList = () => {
     return (
       <>
@@ -232,48 +309,49 @@ const ChatList = (props: any) => {
                         }
                       />
                     )} */}
-                    <Button
-                      className="menu-item w-100 m-b-0-5"
-                      size="xl"
-                      variant={
-                        dataContext.channel?.id == item?.id
-                          ? "state_brand"
-                          : "state_card_hover"
-                      }
-                      // overflow="hidden"
-                    >
-                      <Row
-                        className="vr-center w-11-12"
-                        onClick={() => {
-                          hookChatChannel?.fetch(item);
-                        }}
+                      <Button
+                        className="menu-item w-100 m-b-0-5"
+                        size="xl"
+                        variant={
+                          dataContext.channel?.id == item?.id
+                            ? "state_brand"
+                            : "state_card_hover"
+                        }
+                        // overflow="hidden"
                       >
-                        {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                        <Avatar
-                          size="md"
-                          className="m-r-0-5"
-                          name={item?.name}
-                        />
-                        <Col className="w-100 d-flex flex-col vr-center">
-                          <Row>
-                            <Text>
-                              {item?.name?.length > 12
-                                ? `${item?.name?.slice(0, 12)}...`
-                                : item?.name}
-                            </Text>
+                        <Row
+                          className="vr-center w-11-12"
+                          onClick={() => {
+                            hookChatChannel?.fetch(item);
+                          }}
+                        >
+                          {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
+                          <Avatar
+                            size="md"
+                            className="m-r-0-5"
+                            name={item?.name}
+                          />
+                          <Col className="w-100 d-flex flex-col vr-center">
+                            <Row>
+                              <Text>
+                                {item?.name?.length > 12
+                                  ? `${item?.name?.slice(0, 12)}...`
+                                  : item?.name}
+                              </Text>
 
-                            {item?.raw && (
-                              <>
-                                {!item?.raw?.disconnected && item?.raw?.muteStatus()?.muted && (
-                                  <IconImage
-                                    path="IconDarkMute.png"
-                                    size="2xs"
-                                    style={{ className: "m-l-0-5" }}
-                                  />
-                                )}
-                              </>
-                            )}
-                          </Row>                          
+                              {item?.raw && (
+                                <>
+                                  {!item?.raw?.disconnected &&
+                                    item?.raw?.muteStatus()?.muted && (
+                                      <IconImage
+                                        path="IconDarkMute.png"
+                                        size="2xs"
+                                        style={{ className: "m-l-0-5" }}
+                                      />
+                                    )}
+                                </>
+                              )}
+                            </Row>
 
                             {item?.lastMessage && (
                               <Col
@@ -297,15 +375,14 @@ const ChatList = (props: any) => {
                               </Col>
                             )}
                             {item?.lastMessage?.created_at && (
-                            <Col>
-                              <Text fontSize={"xs"}>
-                                {new Date(
-                                  item?.lastMessage?.created_at
-                                ).toLocaleString()}
-                              </Text>
-                            </Col>
-                          )}
-                          
+                              <Col>
+                                <Text fontSize={"xs"}>
+                                  {new Date(
+                                    item?.lastMessage?.created_at
+                                  ).toLocaleString()}
+                                </Text>
+                              </Col>
+                            )}
                           </Col>
                           {item?.unreadCountObject &&
                             item?.unreadCountObject[authContext?.address]
@@ -341,29 +418,28 @@ const ChatList = (props: any) => {
               )}
             </>
           )}
+          <XMTPpopup/>
         </Col>
       </>
     );
   };
 
   const triggerNew = () => {
-   if (router.pathname == '/chat') {
-    modalChatNew.onOpen();
+    if (router.pathname == "/chat") {
+      modalChatNew.onOpen();
     }
-    if (router.pathname == '/chat/dm') {
-      modalChatNewDm.onOpen()
+    if (router.pathname == "/chat/dm") {
+      modalChatNewDm.onOpen();
     }
-  }
+  };
 
   return (
     <>
       <TemplateChatList />
 
       {modalChatNew.isOpen && <TemplateChatNew />}
-      
-      {
-        modalChatNewDm.isOpen && <TemplateChatNewDm />
-      }
+
+      {modalChatNewDm.isOpen && <TemplateChatNewDm />}
     </>
   );
 };

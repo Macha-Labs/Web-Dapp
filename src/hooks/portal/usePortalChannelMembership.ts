@@ -74,6 +74,8 @@ const usePortalChannelMembership = (channel: any) => {
     handleCheckedUsers: handleCheckedUsers,
     addMembersToChannel: addMembersToChannel,
     users: users,
+    setUsers:setUsers,
+    setUsersIds:setUsersIds,
     userIds: usersIds
   };
 };

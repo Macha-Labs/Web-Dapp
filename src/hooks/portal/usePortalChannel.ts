@@ -67,6 +67,7 @@ const usePortalChannel = (channelObj: any, callback: any = null) => {
 
           setIsLoading(false);
           callback.new();
+          // console.log()
         })
         .catch(err => {
           logger(
