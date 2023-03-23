@@ -2,12 +2,15 @@ import {
   Col,
   Row,
   StyledCard,
+  StyledCardPannel,
   StyledChatItem,
+  StyledXMTPCard,
 } from "@/styles/StyledComponents";
 import {
   Avatar,
   Box,
   Button,
+  CloseButton,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -60,18 +63,12 @@ const ChatList = (props: any) => {
   const modalXMTP = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
-  const [cross,setCross]=useState(false);
+  const [cross, setCross] = useState(false);
+  const [showCard, setShowCard] = useState(true);
   // TODO: Fix bandaging
   useEffect(() => {
     hookChatChannels.load();
   }, [router.pathname, chatContext.streamContext?.client?.user?.id]);
-  useEffect(() => {
-    if (cross) {
-      modalXMTP.onClose();
-    } else {
-      modalXMTP.onOpen();
-    }
-  });
 
   const hookPortalChannel = usePortalChannel(null, {
     mute: () => {
@@ -233,49 +230,43 @@ const ChatList = (props: any) => {
   const TemplateLoading = () => {
     return <LoadChannels />;
   };
-  const XMTPpopup=()=>{
-    const [isOpen, setIsOpen] = useState(true);
-
-    const onClose = () => setIsOpen(false);
+  const XMTPpopup = () => {
+    const handleClose = () => {
+      setShowCard(false);
+    };
 
     const handleButtonClick = () => {
       // code to redirect to other page
     };
-
     return (
       <>
-        <Modal
-          isOpen={isOpen}
-          onClose={onClose}
-          isCentered={false}          
-        >
-          {/* <ModalOverlay /> */}
-          <ModalContent position="fixed" bottom="10" left="4">
-            <ModalHeader>
-              <Flex alignItems="center">
-                <Image src="" alt="Logo" mr={2} />
-              </Flex>
-            </ModalHeader>
-            <ModalCloseButton>
-              <IconImage path="IconDarkCross.png" />
-            </ModalCloseButton>
-            <ModalBody>
-              <Text fontSize="lg" mb={4}>
-                Popup Paragraph
-              </Text>
-              <Button
-                colorScheme="blue"
-                onClick={handleButtonClick}
-                width="100%"
-              >
-                Redirect to Other Page
-              </Button>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
+        {showCard && (
+          <StyledXMTPCard>
+            <Flex alignItems="center" justifyContent="space-between">
+              <Image
+                src="/assets/xmtp-white.png"
+                alt="Logo"
+                mr={2}
+                width="100px"
+              />
+              <IconImage path="IconDarkCross.png" onClick={handleClose} />
+            </Flex>
+            <Text fontSize="md" my={4}>
+              Discover 1:1 encrypted DMs with your Lens frens powered by XMTP
+            </Text>
+            <Button
+              variant="state_xmtp"
+              onClick={handleButtonClick}
+              width="100%"
+              // mb={2}
+            >
+              Explore 1:1 Chats
+            </Button>
+          </StyledXMTPCard>
+        )}
       </>
     );
-  }
+  };
   const TemplateChatList = () => {
     return (
       <>
@@ -418,7 +409,7 @@ const ChatList = (props: any) => {
               )}
             </>
           )}
-          <XMTPpopup/>
+          <XMTPpopup />
         </Col>
       </>
     );

@@ -3,6 +3,7 @@ import {
   fetchFollowers,
   fetchFollowing,
   getProfileForHandle,
+  getProfiles,
 } from "../../helpers/lens/lens";
 import { useEffect, useState } from "react";
 import { User$, UserLens$ } from "../../schema/user";
@@ -44,8 +45,10 @@ const useLensConnections = (account?: any, lensId?: any) => {
   };
   const getLensProfile = (lensId: any) => {
     console.log("profilefromlens123", lensId);
-    getProfileForHandle({ profileId: lensId }).then((data: any) => {      
-      const lensProfile = data;
+    getProfiles({ handles: lensId }).then((data: any) => {      
+      const lensProfile = data.data.profiles.items.map((item: any) => {
+        return item.ownedBy;
+      });
       logger(
         "lens",
         "useLensConnections.getProfile",

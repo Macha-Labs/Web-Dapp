@@ -1,46 +1,44 @@
 import { style } from "./StyledConstants";
 import styled, { css } from "styled-components";
 
-
-
 export const StyledImageView = styled.div<{ viewMode: boolean }>`
-  ${({viewMode}: any) => {
+  ${({ viewMode }: any) => {
     switch (viewMode) {
       case true:
         return css`
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 100% !important;
-        background-color: #000000cf;
-        display: grid;
-        place-items: center;
-        z-index: 99;
-        img{
-          height: 90vh;
-          width: fit-content !important;
-        }
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100vh;
+          width: 100% !important;
+          background-color: #000000cf;
+          display: grid;
+          place-items: center;
+          z-index: 99;
+          img {
+            height: 90vh;
+            width: fit-content !important;
+          }
         `;
       default:
         return css`
-        /* position: relative; */
+          /* position: relative; */
         `;
     }
   }}
 `;
 
-export const StyledMoveToBottom = styled.div<{visible: any}>`
+export const StyledMoveToBottom = styled.div<{ visible: any }>`
   position: absolute;
   bottom: 100px;
   right: 50px;
-  visibility: ${props => props.visible || 'hidden'};
-  span{
+  visibility: ${(props) => props.visible || "hidden"};
+  span {
     position: absolute;
     right: 0px;
     top: -15px;
     background: ${style.button.bg.default};
-  // padding: 1px 8px;
+    // padding: 1px 8px;
     width: 25px;
     height: 25px;
     font-size: 15px;
@@ -48,7 +46,7 @@ export const StyledMoveToBottom = styled.div<{visible: any}>`
     border-radius: 50%;
     text-align: center;
   }
-`
+`;
 
 export const StyledIframeView = styled.div`
   position: fixed;
@@ -58,15 +56,15 @@ export const StyledIframeView = styled.div`
   width: 100%;
   display: grid;
   place-items: center;
-  background-color: #000000cf; 
-   z-index: 9999;
-  iframe{
+  background-color: #000000cf;
+  z-index: 9999;
+  iframe {
     height: 90vh;
     width: 80%;
     z-index: 100 !important;
     opacity: 1 !important;
   }
-`
+`;
 
 export const StyledWindow = styled.div`
   position: fixed;
@@ -300,6 +298,19 @@ export const StyledCard = styled.div`
       box-shadow: ${style.card.shadow.hover};
     }
   }
+`;
+export const StyledXMTPCard = styled.div`
+  border-radius: ${style.card.borderRadius};
+  border: ${style.card.border.default};
+  background: ${style.card.bg.default};
+  padding: ${style.card.padding.default};
+  box-shadow: ${style.card.shadow.default};
+  cursor: pointer;
+  width: 24.5%;
+  position:absolute;
+  bottom:10px;
+  left:3px;
+
 `;
 
 export const StyledCardPannel = styled.div`
@@ -1044,10 +1055,13 @@ export const StyledProfileBanner = styled.div`
   }
 `;
 
-
 // Show Current message showing date on chat window
-export const StyledDateTag = styled.p<{visible: any}>`
-  background: linear-gradient(95.63deg, #243B9B -36.26%, rgba(36, 59, 155, 0.6) 161.79%);
+export const StyledDateTag = styled.p<{ visible: any }>`
+  background: linear-gradient(
+    95.63deg,
+    #243b9b -36.26%,
+    rgba(36, 59, 155, 0.6) 161.79%
+  );
   width: max-content;
   border-radius: 25px;
   padding: 3px 15px;
@@ -1059,6 +1073,6 @@ export const StyledDateTag = styled.p<{visible: any}>`
   font-weight: 600;
   opacity: 1;
   transition: all 1s ease-out;
-  visibility:${(props: any) => props.visible || "hidden"};
+  visibility: ${(props: any) => props.visible || "hidden"};
   font-size: 13px;
-`
+`;

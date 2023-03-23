@@ -226,8 +226,8 @@ const theme = extendTheme({
         },
         state_xmtp: {
           opacity: "0.95",
-          background: "#ef4444",
-          color: "#1A202C",
+          background: `linear-gradient(91.55deg, #FC4F37 -5.05%, #31006E 105.58%)`,
+          color: "#fff",
           _hover: {
             opacity: "1",
           },

@@ -21,11 +21,12 @@ import {
   CheckboxGroup,
   Box,
 } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ModalSlider from "../modal/ModalSlider";
 import IconImage from "../icons/IconImage";
 import useLensConnections from "@/hooks/lens/useLensConnections";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
+import { Contract } from "ethers";
 
 const ChatNew = (props: any) => {
   console.log("Rendering >>>>> ChatNew");
@@ -42,6 +43,8 @@ const ChatNew = (props: any) => {
   const [inputAddress, setInputAddress] = useState("");
   const [lensUserId, setLensUserId] = useState("");
   const [lensProfiles, setLensProfiles] = useState<string[]>([]);
+  const [inputContractAddress,setInputContractAddress]=useState<string>();  
+  const [nftAddresses,setNtfAddresses]=useState([]);
   const authContext = useContext(AuthContext) as AuthContextType;
   const hookLensConnections = useLensConnections(
     authContext?.address,
@@ -76,7 +79,20 @@ const ChatNew = (props: any) => {
     // props.modal.onClose();
     handleTabs();
   };
-
+  const fetchNftHolders = () => {
+    const contractAddress = inputContractAddress;
+    fetch(
+      `https://polygon-mumbai.g.alchemy.com/nft/v2/pc4_OU49rShqcfTGX54ocbHYsJKI9mVA/getOwnersForCollection?contractAddress=${contractAddress}`
+    )
+      .then((response) => response.json())
+      .then((data) =>
+        setNtfAddresses(
+          data.ownerAddresses.slice(0, 10).map((item: any) => {
+            return item.toLowerCase();
+          })
+        )
+      );
+  };
   const callbackPrompt = (message: any) => {
     toast({
       title: message,
@@ -101,7 +117,9 @@ const ChatNew = (props: any) => {
   const hookPortalChannelMembership = usePortalChannelMembership(
     new Channel$("db", {})
   );
-
+    useEffect(() => {
+      hookLensConnections.getLensProfile(lensProfiles);
+    }, [lensProfiles]);
   /**
    *
    **/
@@ -392,6 +410,7 @@ const ChatNew = (props: any) => {
 
     return { body: body, header: header };
   };
+  
   const templateShare = () => {
     const header = (
       <Row className="d-flex justify-content-center align-items-center flex-grow-1">
@@ -528,15 +547,18 @@ const ChatNew = (props: any) => {
             </Box>
             {hookPortalChannelMembership?.users.length && (
               <Row className="flex-wrap">
-                <Tag className="m-r-0-5 m-b-0-5" style={{backgroundColor:"red",cursor:"pointer"}} key={`label-clearall `} onClick={()=>{
-                  hookPortalChannelMembership.setUsers([]);
-                  hookPortalChannelMembership.setUsersIds([]);
-                }}>
-                  <Row className="vr-center p-0-5">                    
-                    <Text>
-                      Clear All
-                    </Text>
-                  </Row>                  
+                <Tag
+                  className="m-r-0-5 m-b-0-5"
+                  style={{ backgroundColor: "red", cursor: "pointer" }}
+                  key={`label-clearall `}
+                  onClick={() => {
+                    hookPortalChannelMembership.setUsers([]);
+                    hookPortalChannelMembership.setUsersIds([]);
+                  }}
+                >
+                  <Row className="vr-center p-0-5">
+                    <Text>Clear All</Text>
+                  </Row>
                 </Tag>
                 {hookPortalChannelMembership?.users?.map((item: any) => {
                   return (
@@ -635,8 +657,13 @@ const ChatNew = (props: any) => {
                   <Text>Who own an NFT</Text>
                 </Row>
               </label>
-              <Checkbox id="checkbox4" value="" />
+              <Checkbox
+                id="checkbox4"
+                value=""
+                onChange={handleCheckboxChange}
+              />
             </Box>
+            {checkboxValues.checkbox4 && <TemplateNFT />}
           </Stack>
         </CheckboxGroup>
         <Row className="mt-3">
@@ -659,14 +686,21 @@ const ChatNew = (props: any) => {
                 ...hookPortalChannelMembership?.userIds,
               ]);
               // console.log("lmaoxd",lensUserId);
-              hookLensConnections.getLensProfile(lensProfiles[0]);
+
               console.log("profilefromlens", hookLensConnections.profile);
-              // const ownerAddress = await getLens(lensUserId);
-              hookPortalChannel?.update([
+              const lensAddress = hookLensConnections.profile.map(
+                (item: any) => {
+                  return item.toLowerCase();
+                }
+              );
+              const allAddresses = [
                 ...hookPortalChannelMembership?.userIds,
                 ...userAddresses,
-                ...lensProfiles,
-              ]);
+                ...lensAddress,
+                ...nftAddresses
+              ];
+              console.log("allAddresses", allAddresses);
+              hookPortalChannel?.update(allAddresses);
             }}
           >
             Continue
@@ -720,6 +754,7 @@ const ChatNew = (props: any) => {
       <></>
     );
   };
+
   const TemplateLens = () => {
     return (
       <Box
@@ -762,9 +797,13 @@ const ChatNew = (props: any) => {
             variant=""
             className="m-r-1"
             onClick={() => {
-              const lensProfileArray = [...lensProfiles, lensUserId];
+              let lenshandle=lensUserId;
+              if(!lensUserId.includes(".test")){
+                lenshandle = lensUserId.concat(".test")
+              }
+              const lensProfileArray = [...lensProfiles, lenshandle];
               setLensProfiles(lensProfileArray);
-              setLensUserId("");
+              setLensUserId("");              
             }}
           >
             Add Profile
@@ -832,7 +871,7 @@ const ChatNew = (props: any) => {
             variant=""
             className="m-r-1"
             onClick={() => {
-              const addressesArray = [...userAddresses, inputAddress];
+              const addressesArray = [...userAddresses, inputAddress.toLowerCase()];
               setUserAddresses(addressesArray);
               setInputAddress("");
             }}
@@ -845,7 +884,33 @@ const ChatNew = (props: any) => {
       </Box>
     );
   };
-
+const TemplateNFT=()=>{
+  return (
+    <Box className="p-3" border="1px" borderRadius="md" borderColor="gray.700">
+      <Text>Contract Address</Text>
+      <Input
+        placeholder="Enter address"
+        value={inputContractAddress}
+        autoFocus
+        onChange={(e) => {
+          const inputValue = e.target.value;
+          setInputContractAddress(inputValue);
+        }}
+        className="m-t-1 m-b-1"
+      />        
+      <Row className="align-items-center">
+        <Button
+          variant=""
+          className="m-r-1"
+          onClick={fetchNftHolders}
+        >
+          Add Users
+        </Button>
+        
+      </Row>
+    </Box>
+  );
+}
   let temp;
   switch (tab) {
     case "share":
