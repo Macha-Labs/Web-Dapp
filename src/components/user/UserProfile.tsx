@@ -219,7 +219,7 @@ const UserProfile = ({ user }: any) => {
         {user?.lens?.ownedBy?.toLowerCase() !==
           authContext?.address?.toLowerCase() && (
           <Row className="m-v-1 vr-center hr-center">
-            {user?.lens?.isFollowedByMe || isFollowed ? (
+            {userLens?.isFollowedByMe ? (
               <Button
                 variant="state_lens_unfollow"
                 size="md"
