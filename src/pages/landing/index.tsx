@@ -1,6 +1,7 @@
 import { Button, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {Landing} from "../../components/icons/IconImage";
 
 const LandingPage = () => {
@@ -15,6 +16,12 @@ const LandingPage = () => {
     "Lens Protocol: 76K Users",
     "Lens Protocol: 76K Users",
   ];
+
+  const router = useRouter();
+
+  const redirectChat = () => {
+    router.push("/chat");
+  }
 
   return (
     <>
@@ -71,7 +78,7 @@ const LandingPage = () => {
                   </Link>
                 </div>
               </div>
-              <Button variant="state_brand">Beta Soon</Button>
+              <Button onClick={() => redirectChat()} variant="state_brand">Login Testnet</Button>
             </div>
           </div>
         </nav>

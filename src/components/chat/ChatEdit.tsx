@@ -9,12 +9,12 @@ import {
   useDisclosure,
   useToast,
   Heading,
+  Radio,
 } from "@chakra-ui/react";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
-import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
-import useChatChannel from "@/hooks/chat/useChatChannel";
-import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "../modal/ModalSlider";
+import useChatChannelStore from "@/store/useChatChannelStore";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatEdit = (props: any) => {
   /**
@@ -22,10 +22,9 @@ const ChatEdit = (props: any) => {
    *
    *
    **/
-  const dataContext = useContext(DataContext);
+  const chatContext = useContext(ChatContext)
+  const $channel = useChatChannelStore((state: any) => state.channel);
   const toast = useToast();
-  const hookChatChannel = useChatChannel();
-  const hookChatChannels = useChatChannelsReload();
 
   const handleToggle = () => {
     hookPortalChannel?.setChannel({
@@ -46,8 +45,8 @@ const ChatEdit = (props: any) => {
       position: "bottom-right",
     });
 
-    hookChatChannel.reload();
-    hookChatChannels.load();
+    chatContext?.hookChannel?.reload();
+    chatContext?.hookChannelList?.load();
     props.modal.onClose();
   };
 
@@ -73,7 +72,7 @@ const ChatEdit = (props: any) => {
    *
    **/
   const hookPortalChannel = usePortalChannel(
-    dataContext.channel,
+    $channel,
     { edit: callBack, prompt: callBackPrompt }
   );
 
@@ -171,27 +170,31 @@ const ChatEdit = (props: any) => {
             Set New Profile Photo
           </Text> */}
         </Col>
-
-        <StyledCard className="m-b-1">
-          <LayoutInputs data={data} style={{ class: "m-b-1" }} />
-        </StyledCard>
-        <StyledCard>
+        <Col>
+          <Heading as="h6" size="sm" className="m-b-1">Channel Details</Heading>
+          <StyledCard className="m-b-1">
+            <LayoutInputs data={data} style={{ class: "m-b-1" }} />
+          </StyledCard>
+        </Col>
+        <Col>
+          <Heading as="h6" size="sm" className="m-b-1">Channel Access</Heading>
+          <StyledCard>
           <Row className="hr-between">
             <Col>
-              <Heading size="sm">Make channel private</Heading>
-              <Text>
-                Please note public channels can be joined by anyone with the link
-                and should not be used for a small group conversation.
+              <Heading size="sm">Private</Heading>
+              <Text fontSize={14}>
+                Can only be accessed by members added.
               </Text>
             </Col>
-            <Switch
-              colorScheme="emerald"
-              className="m-l-1"
-              isChecked={hookPortalChannel?.channel?.private}
-              onChange={handleToggle}
-            />
+            <Col>
+              <Switch
+                isChecked={hookPortalChannel?.channel?.private}                
+                onChange={handleToggle}
+              />
+            </Col>
           </Row>
         </StyledCard>
+        </Col>
       </Col>
     </>
     </ModalSlider>

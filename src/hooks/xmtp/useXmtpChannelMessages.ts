@@ -1,20 +1,18 @@
 import { logger } from "@/helpers/logger";
-import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
-import { XmtpContext } from "@/providers/XmtpProvider";
 import { XmtpMessage$ } from "@/schema/message";
+import useChatChannelStore from "@/store/useChatChannelStore";
 import { DecodedMessage, SortDirection } from "@xmtp/xmtp-js";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useXmtpChannelMessages = () => {
   console.log('Rendering >>>>> useXmtpChannelMessages');
   const [messages, setMessages] = useState<DecodedMessage[]>([]);
-  const [xmtpLogs, setXmtpLogs] = useState<any>();
-  const xmtpContext = useContext(XmtpContext);
-  const authContext = useContext(AuthContext) as AuthContextType;
+  const [messagesLogs, setMessagesLogs] = useState<any>();
+  const $channel = useChatChannelStore((state: any) => state.channel);
 
-  const _fetch = async () => {
-    logger('xmtp', 'useXmtpChannelMessages._fetch', 'channel of xmtp', [xmtpContext.conversation]);
-    const messages = await xmtpContext.conversation?.xmtpRaw?.messages({
+  const _fetch = async (channel: any) => {
+    logger('xmtp', 'useXmtpChannelMessages._fetch', 'channel of xmtp', [channel]);
+    const messages = await channel?.xmtpRaw?.messages({
       direction: SortDirection.SORT_DIRECTION_ASCENDING,
     });
     const messagesData = messages?.map((item: any) => {
@@ -24,35 +22,29 @@ const useXmtpChannelMessages = () => {
     setMessages(messagesData);
   }
 
-  const readXmtpLogs = async () => {
-    for await (const msg of xmtpLogs) {
-      console.log("stream xmtp ", msg);
-      setMessages(prevMessages => {
-        const messages = [...prevMessages];
-        messages.push(XmtpMessage$(msg));
-        return messages;
-      });
+  const _watch = async (channel: any) => {
+    console.log('Rendering >>>>>>> useXmtpChannelMessages._watch', channel?.xmtpRaw)
+    const logs = await channel?.xmtpRaw?.streamMessages();
+    setMessagesLogs(logs);
+
+    if (logs) {
+      for await (const msg of logs) {
+        console.log(`New message from ${msg.senderAddress}: ${msg.content}`)
+        setMessages(prevMessages => {
+          const messages = [...prevMessages];
+          messages.push(XmtpMessage$(msg));
+          return messages;
+        });
+      }
     }
   }
 
   useEffect(() => {
-    if (authContext.xmtpClientAddress) {
-      console.log("useEffect to stream messages");
-      const streamMessages = async () => {
-        const newStream = await xmtpContext?.conversation?.xmtpRaw.streamMessages();
-        console.log("newStream", newStream);
-        setXmtpLogs(newStream);
-      };
-      streamMessages();
-    }
-    console.log("first");
-  }, []);
-
-  useEffect(() => {
-    if (xmtpLogs) {
-      readXmtpLogs();
-    }
-  }, [xmtpLogs]);
+    if ($channel && $channel.source == 'xmtp') {
+      messagesLogs?.return();
+      _watch($channel)
+    } 
+  }, [$channel])
 
   return (
     {

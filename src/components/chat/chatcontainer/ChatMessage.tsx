@@ -1,14 +1,13 @@
 import IconEmoji from "@/components/icons/IconEmoji";
 import IconImage from "@/components/icons/IconImage";
 import InputAction from "@/components/input/InputAction";
-import ModalSlider from "@/components/modal/ModalSlider";
 import Pop from "@/components/pop/Pop";
-import UserProfile from "@/components/user/UserProfile";
 import { truncateAddress } from "@/helpers";
 import useOnScreen from "@/hooks/other/useOnScreen";
 import LayoutFilePreview from "@/layouts/chat/LayoutFilePreview";
 import LayoutImagePreview from "@/layouts/chat/LayoutImagePreview";
 import LayoutLinkPreview from "@/layouts/chat/LayoutLinkPreview";
+import { AuthContext } from "@/providers/AuthProvider";
 import {
   Col,
   Row,
@@ -19,20 +18,16 @@ import {
   Avatar,
   Button,
   Checkbox,
-  Heading,
   Text,
   Textarea,
-  useToast,
-  useDisclosure,
+  useToast
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import emoji from "../../../data/emoji.json";
-import useStreamChannelMessages from "@/hooks/stream/useStreamChannelMessages";
-import { ChannelEvents } from "@/data/types";
 
 const ChatMessage = (props: any) => {
+  const authContext = useContext(AuthContext)
   const min_textarea_height = 45;
-
   const toast = useToast();
   const date = new Date(props.message.created_at);
   const hours = date.getHours().toString().padStart(2, "0");
@@ -41,7 +36,11 @@ const ChatMessage = (props: any) => {
   const chatRef = useRef<HTMLDivElement>(null);
   const isIntersecting = useOnScreen(chatRef);
 
-  const hookStreamChannemMessages = useStreamChannelMessages();
+  const callbacks = {
+    pin: () => {
+
+    }
+  }
 
   useEffect(() => {
     if (isIntersecting && props?.handleDateTag) {
@@ -90,10 +89,8 @@ const ChatMessage = (props: any) => {
       onClick: () => {
         if (props.message?.pinned) {
           props.hookChat.unPinMessage(props.message);
-          hookStreamChannemMessages.customChannelEventTrigger(ChannelEvents.unpinMessage, props.message);
         } else {
           props.hookChat.pinMessage(props.message);
-          hookStreamChannemMessages.customChannelEventTrigger(ChannelEvents.pinMessage, props.message);
         }
       },
       condition: true,
@@ -129,6 +126,249 @@ const ChatMessage = (props: any) => {
   };
 
   
+
+  const templateMessageStream = () => {
+    return (
+      <>
+        <Avatar
+                onClick={() => props?.handleSelectedUser(props.message?.user)}
+                src={props.message?.user?.lensImage}
+                className="m-r-0-5"
+                size="sm"
+                name={
+                  props.message?.user?.lensUsername ||
+                  props.message?.user?.lensHandle ||
+                  truncateAddress(props.message?.createdBy)
+                }
+              ></Avatar>
+      <Col
+            className={
+              props.authContext?.address.toLowerCase() ==
+              props?.message?.user?.id
+                ? "active message"
+                : "message"
+            }
+            style={{ color: "#ffffff" }}
+          >
+            <TemplateReply />
+            <Row className="hr-between">
+              {props?.channel?.source == 'xmtp' ?
+              <Text fontSize="sm" className="heading">
+                {(props.message?.createdBy == authContext?.address)? props?.channel?.name: authContext?.user?.lens?.name}
+              </Text>
+              : 
+              <Text fontSize="sm" className="heading">
+                {props.message?.user?.lensName ||
+                  props.message?.user?.lensUsername ||
+                  props.message?.user?.lensHandle ||
+                  truncateAddress(props.message?.createdBy)}
+              </Text>}
+              <Row className="vr-center">
+                {props?.message.pinned && <IconImage path="IconDarkPinned.png" size="2xs" />}
+                <Text style={{ alignSelf: "flex-end" }} fontSize="12" className="m-l-0-5">
+                  {time}
+                </Text>
+              </Row>
+            </Row>
+
+            {props?.hookChat?.actionMessage?.action == "EDIT" &&
+            props?.hookChat?.actionMessage?.item?.id == props?.message?.id ? (
+              <InputAction
+                style={{ className: "w-100 vr-center m-t-0- 5" }}
+                actions={[
+                  <Button
+                    size="xs"
+                    className="m-l-0-5"
+                    variant="state_brand"
+                    onClick={() => props.hookChat?.editMessage()}
+                    key={`e-${props?.message?.id}`}
+                  >
+                    Update
+                  </Button>,
+                  <Button
+                    key={`e-${props?.message?.id}`}
+                    size="xs"
+                    className="m-l-0-5"
+                    variant="state_default_hover"
+                    onClick={props.hookChat?.handleEditClose}
+                  >
+                    Cancel
+                  </Button>,
+                ]}
+              >
+                <Textarea
+                  ref={props.hookChat?.editMessageRef}
+                  className="inputElement"
+                  defaultValue={props.message?.text}
+                  variant="unstyled"
+                  style={{ minHeight: min_textarea_height }}
+                  height="auto"
+                  rows={1}
+                />
+              </InputAction>
+            ) : (
+              // The text message is being set here. TextareaDiv is directly setting the html to the div.
+              <TextareaDiv
+                dangerouslySetInnerHTML={{ __html: props.message?.text }}
+              />
+            )}
+            {props?.message?.attachments ? (
+              props?.message?.attachments?.map((item: any, index: number) => {
+                return templateAttachment(item);
+              })
+            ) : (
+              <></>
+            )}
+
+            {props?.message?.reaction_scores && (
+              <Row className="vr-center">
+                {Object.keys(props?.message.reaction_scores).length > 0 &&
+                  Object.keys(props.message.reaction_scores).map(
+                    (item: any, i: any) => {
+                      return (
+                        <Button
+                          className="w-content m-r-0-5"
+                          size="xs"
+                          variant="state_brand"
+                          onClick={() => {
+                            props?.hookChat?.handleReaction(
+                              { type: item },
+                              props?.message
+                            );
+                          }}
+                          key={`f-${props?.message?.id}-${i}`}
+                        >
+                          {emoji[item as keyof typeof emoji]}{" "}
+                          {props?.message?.reaction_scores[item]}
+                        </Button>
+                      );
+                    }
+                  )}
+              </Row>
+            )}
+          </Col>
+      </>
+    )
+  }
+
+  const templateMessageXmtp = () => {
+    return (
+      <>
+        <Avatar
+                onClick={() => props?.handleSelectedUser(props.message?.user)}
+                className="m-r-0-5"
+                size="sm"
+                name={(props.message?.createdBy == authContext?.address)? authContext?.user?.lens?.name: props?.channel?.name}
+                src={(props.message?.createdBy == authContext?.address)? authContext?.user?.lens?.image: props?.channel?.image}
+              ></Avatar>
+        <Col
+            className={
+              (authContext?.address == props.message?.createdBy)
+                ? "message"
+                : "message active"
+            }
+            style={{ color: "#ffffff" }}
+          >
+            <TemplateReply />
+            <Row className="hr-between">
+              {props?.channel?.source == 'xmtp' ?
+              <Text fontSize="sm" className="heading">
+                {(props.message?.createdBy == authContext?.address)? authContext?.user?.lens?.name : props?.channel?.name}
+              </Text>
+              : 
+              <Text fontSize="sm" className="heading">
+                {props.message?.user?.lensName ||
+                  props.message?.user?.lensUsername ||
+                  props.message?.user?.lensHandle ||
+                  truncateAddress(props.message?.createdBy)}
+              </Text>}
+              <Row className="vr-center">
+                {props?.message.pinned && <IconImage path="IconDarkPinned.png" size="2xs" />}
+                <Text style={{ alignSelf: "flex-end" }} fontSize="12" className="m-l-0-5">
+                  {time}
+                </Text>
+              </Row>
+            </Row>
+
+            {props?.hookChat?.actionMessage?.action == "EDIT" &&
+            props?.hookChat?.actionMessage?.item?.id == props?.message?.id ? (
+              <InputAction
+                style={{ className: "w-100 vr-center m-t-0- 5" }}
+                actions={[
+                  <Button
+                    size="xs"
+                    className="m-l-0-5"
+                    variant="state_brand"
+                    onClick={() => props.hookChat?.editMessage()}
+                    key={`e-${props?.message?.id}`}
+                  >
+                    Update
+                  </Button>,
+                  <Button
+                    key={`e-${props?.message?.id}`}
+                    size="xs"
+                    className="m-l-0-5"
+                    variant="state_default_hover"
+                    onClick={props.hookChat?.handleEditClose}
+                  >
+                    Cancel
+                  </Button>,
+                ]}
+              >
+                <Textarea
+                  ref={props.hookChat?.editMessageRef}
+                  className="inputElement"
+                  defaultValue={props.message?.text}
+                  variant="unstyled"
+                  style={{ minHeight: min_textarea_height }}
+                  height="auto"
+                  rows={1}
+                />
+              </InputAction>
+            ) : (
+              // The text message is being set here. TextareaDiv is directly setting the html to the div.
+              <TextareaDiv
+                dangerouslySetInnerHTML={{ __html: props.message?.text }}
+              />
+            )}
+            {props?.message?.attachments ? (
+              props?.message?.attachments?.map((item: any, index: number) => {
+                return templateAttachment(item);
+              })
+            ) : (
+              <></>
+            )}
+
+            {props?.message?.reaction_scores && (
+              <Row className="vr-center">
+                {Object.keys(props?.message.reaction_scores).length > 0 &&
+                  Object.keys(props.message.reaction_scores).map(
+                    (item: any, i: any) => {
+                      return (
+                        <Button
+                          className="w-content m-r-0-5"
+                          size="xs"
+                          variant="state_brand"
+                          onClick={() => {
+                            props?.hookChat?.handleReaction(
+                              { type: item },
+                              props?.message
+                            );
+                          }}
+                          key={`f-${props?.message?.id}-${i}`}
+                        >
+                          {emoji[item as keyof typeof emoji]}{" "}
+                          {props?.message?.reaction_scores[item]}
+                        </Button>
+                      );
+                    }
+                  )}
+              </Row>
+            )}
+          </Col>
+      </>
+    )
+  }
   
 
   const TemplateReactions = () => {
@@ -250,7 +490,7 @@ const ChatMessage = (props: any) => {
         <Row className="w-100">
           <Col>
             <Row>
-              {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
+            {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
                 <Checkbox
                   defaultChecked={props?.hookChat?.selectedMessages?.includes(
                     props?.message?.id
@@ -265,127 +505,21 @@ const ChatMessage = (props: any) => {
                 />
               )}
 
-              <Avatar
-                onClick={() => props?.handleSelectedUser(props.message?.user)}
-                src={props.message?.user?.lensImage}
-                className="m-r-0-5"
-                size="sm"
-                name={
-                  props.message?.user?.lensUsername ||
-                  props.message?.user?.lensHandle ||
-                  truncateAddress(props.message?.createdBy)
-                }
-              ></Avatar>
+              
+
+              
             </Row>
           </Col>
-          <Col
-            className={
-              props.authContext?.address.toLowerCase() ==
-              props?.message?.user?.id
-                ? "active message"
-                : "message"
-            }
-            style={{ color: "#ffffff" }}
-          >
-            <TemplateReply />
-            <Row className="hr-between">
-              <Text fontSize="sm" className="heading">
-                {props.message?.user?.lensName ||
-                  props.message?.user?.lensUsername ||
-                  props.message?.user?.lensHandle ||
-                  truncateAddress(props.message?.createdBy)}
-              </Text>
-              <Row className="vr-center">
-                {props?.message.pinned && <IconImage path="IconDarkPinned.png" size="2xs" />}
-                <Text style={{ alignSelf: "flex-end" }} fontSize="12" className="m-l-0-5">
-                  {time}
-                </Text>
-              </Row>
-            </Row>
 
-            {props?.hookChat?.actionMessage?.action == "EDIT" &&
-            props?.hookChat?.actionMessage?.item?.id == props?.message?.id ? (
-              <InputAction
-                style={{ className: "w-100 vr-center m-t-0- 5" }}
-                actions={[
-                  <Button
-                    size="xs"
-                    className="m-l-0-5"
-                    variant="state_brand"
-                    onClick={() => props.hookChat?.editMessage()}
-                    key={`e-${props?.message?.id}`}
-                  >
-                    Update
-                  </Button>,
-                  <Button
-                    key={`e-${props?.message?.id}`}
-                    size="xs"
-                    className="m-l-0-5"
-                    variant="state_default_hover"
-                    onClick={props.hookChat?.handleEditClose}
-                  >
-                    Cancel
-                  </Button>,
-                ]}
-              >
-                <Textarea
-                  ref={props.hookChat?.editMessageRef}
-                  className="inputElement"
-                  defaultValue={props.message?.text}
-                  variant="unstyled"
-                  style={{ minHeight: min_textarea_height }}
-                  height="auto"
-                  rows={1}
-                />
-              </InputAction>
-            ) : (
-              // The text message is being set here. TextareaDiv is directly setting the html to the div.
-              <TextareaDiv
-                dangerouslySetInnerHTML={{ __html: props.message?.text }}
-              />
-            )}
-            {props?.message?.attachments ? (
-              props?.message?.attachments?.map((item: any, index: number) => {
-                return templateAttachment(item);
-              })
-            ) : (
-              <></>
-            )}
-
-            {props?.message?.reaction_scores && (
-              <Row className="vr-center">
-                {Object.keys(props?.message.reaction_scores).length > 0 &&
-                  Object.keys(props.message.reaction_scores).map(
-                    (item: any, i: any) => {
-                      return (
-                        <Button
-                          className="w-content m-r-0-5"
-                          size="xs"
-                          variant="state_brand"
-                          onClick={() => {
-                            props?.hookChat?.handleReaction(
-                              { type: item },
-                              props?.message
-                            );
-                          }}
-                          key={`f-${props?.message?.id}-${i}`}
-                        >
-                          {emoji[item as keyof typeof emoji]}{" "}
-                          {props?.message?.reaction_scores[item]}
-                        </Button>
-                      );
-                    }
-                  )}
-              </Row>
-            )}
-          </Col>
+          {props?.channel.source == 'xmtp' ? templateMessageXmtp() : templateMessageStream()}
+          
           <Row
             className={`positionPop ${
               props.scrollToId == props.message.id ? "" : "action"
             }`}
           >
-            <TemplateReactions />
-            <TemplateActions />
+            {(props?.channel?.source == 'getstream') && <TemplateReactions />}
+            {(props?.channel?.source == 'getstream') && <TemplateActions />}
           </Row>
         </Row>
       </StyledConversation>

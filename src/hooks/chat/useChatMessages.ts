@@ -1,4 +1,6 @@
-import { DataContext } from "@/providers/DataProvider";
+import { XmtpContext } from "@/providers/XmtpProvider";
+import useChatChannelStore from "@/store/useChatChannelStore";
+import useChatMessagesStore from "@/store/useChatMessagesStore";
 import { useRouter } from "next/router";
 import { useContext, useEffect} from "react";
 import useStreamChannelMessages from "../stream/useStreamChannelMessages";
@@ -8,30 +10,38 @@ const useChatMessages = () => {
     const router = useRouter();
     let hookStreamChannelMessages = useStreamChannelMessages();
     let hookXmtpChannelMessages = useXmtpChannelMessages();
-    const dataContext = useContext(DataContext);
+    const $channel = useChatChannelStore((state: any) => state.channel);
+    const $loadMessages = useChatMessagesStore(((state: any) => state.load));
 
     useEffect(() => {
         if (router.pathname == '/chat')
-            dataContext.loadMessages(hookStreamChannelMessages?.messages || []);
-    }, [router.pathname, hookStreamChannelMessages?.messages]);
+            $loadMessages(hookStreamChannelMessages?.messages || []);
+    }, [hookStreamChannelMessages?.messages]);
 
     useEffect(() => {
         if (router.pathname == '/chat/dm')
-            dataContext.loadMessages(hookXmtpChannelMessages?.messages || []);
-    }, [router.pathname, hookXmtpChannelMessages?.messages]);
+            $loadMessages(hookXmtpChannelMessages?.messages || []);
+    }, [hookXmtpChannelMessages?.messages]);
 
     const _load = () => {
+        $loadMessages(null);
         if (router.pathname == '/chat') {
             hookStreamChannelMessages.fetch()
         } else if (router.pathname == '/chat/dm') {
-            hookXmtpChannelMessages.fetch()
+            hookXmtpChannelMessages.fetch($channel);
+            
         }
+    }
+
+    const _unload = () => {
+        $loadMessages(null)
     }
 
 
     return (
         {
-            load: _load
+            load: _load,
+            _unload: _unload
         }
     )
 

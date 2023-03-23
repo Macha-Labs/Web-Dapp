@@ -1,36 +1,32 @@
 import { Avatar, AvatarBadge, Heading, useDisclosure } from "@chakra-ui/react";
-import { FC, useContext, useState } from "react";
-import { Col, Row, StyledCard, StyledCardPannel } from "@/styles/StyledComponents";
-import styled from "styled-components";
+import { useContext, useEffect, useState } from "react";
+import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import { truncateAddress } from "@/helpers";
-import { style } from "@/styles/StyledConstants";
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
 import IconImage from "@/components/icons/IconImage";
-import { DataContext } from "@/providers/DataProvider";
+import { useChatMembersStore } from "@/store/useChatMembersStore";
+import { ChatContext } from "@/providers/ChatProvider";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
-interface Props {
-  [key: string]: any;
-}
 
-const Container = styled.div`
-  .item {
-    padding: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    &:hover {
-      background: ${style.button.bg.default};
-    }
-  }
-`;
 
-const ChatMembersList: FC<Props> = props => {
+const ChatMembersList = (props: any) => {
+  console.log("Rendering >>>>> ChatMembersList");
   const modalProfile = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<any>();
-  const dataContext = useContext(DataContext)
+  const $members = useChatMembersStore((state: any) => state.members);
+  const chatContext = useContext(ChatContext);
+  const $channel = useChatChannelStore((state: any) => state.channel);
+
+  useEffect(() => {
+    chatContext?.hookMembers.load($channel);
+  }, [$channel])
+
 
   const handleSelectedUser = (user: any) => {
     modalProfile.onOpen();
+    props.modal.onClose();
     setSelectedUser(user);
   };
 
@@ -98,23 +94,26 @@ const ChatMembersList: FC<Props> = props => {
 
   return (
     <>
-    <ModalSlider
+    {props.modal?.isOpen && 
+      <ModalSlider
       size="sm"
-      event={props?.membersModal} 
+      event={props?.modal} 
       header={
         <>
           <Heading as="h6" size="sm">Members</Heading>
         </>            
       }>
-         {template("Online", dataContext?.members?.onlineUsers)}
+         {template("Online", $members?.onlineUsers)}
 
-          {template("Offline", dataContext?.members?.offlineUsers)}
+          {template("Offline", $members?.offlineUsers)}
 
       </ModalSlider>
      
+    
+    }
       
-
-      <TemplateProfile />
+    {modalProfile?.isOpen && <TemplateProfile />}
+      
     </>
   );
 };

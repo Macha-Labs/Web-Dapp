@@ -1,3 +1,5 @@
+import { helperIPFS } from "@/helpers";
+
 export class Channel$ {
   source: String;
   data: any;
@@ -100,7 +102,7 @@ export class Channel$ {
     this.created_at= data?.createdAt;
     this.updated_at= data?.updatedAt;
     this.permissions= data?.permissions;
-    this.image= "";
+    this.image= helperIPFS(data?.peer?.lens?.picture?.original?.url) || helperIPFS(data?.peer?.lens?.image);
     this.lastMessage= "";
     this.membersCount= 0;
     this.notificationCount= 0;

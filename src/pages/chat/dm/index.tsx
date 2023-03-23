@@ -3,9 +3,7 @@ import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import ChatList from "@/components/chat/ChatList";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Nav from "@/components/nav/Nav";
-import useLensProfile from "@/hooks/lens/useLensProfile";
 import { AuthContext } from "@/providers/AuthProvider";
-import { ChatContext } from "@/providers/ChatProvider";
 import {
   StyledChat,
   StyledChatList,
@@ -16,8 +14,6 @@ import React, { useContext, useEffect, useState } from "react";
 
 function IndexDM() {
   const authContext = useContext(AuthContext);
-  const chatContext = useContext(ChatContext);
-  const hookLens = useLensProfile();
   const modalAuth = useDisclosure();
 
   useEffect(() => {}, []);

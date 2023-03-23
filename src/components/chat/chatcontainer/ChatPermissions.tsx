@@ -1,15 +1,13 @@
-import React, { useContext, useMemo } from "react";
+import React from "react";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
-import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import { Row, StyledCard } from "@/styles/StyledComponents";
 import { Button, Heading, Switch, Text } from "@chakra-ui/react";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
-import LayoutCard from "@/layouts/LayoutCard";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
 const ChatPermissions = (props: any) => {
-  const dataContext = useContext(DataContext);
-  const hookPortalChannel = usePortalChannel(dataContext?.channel);
+  const $channel = useChatChannelStore((state: any) => state.channel);
+  const hookPortalChannel = usePortalChannel($channel);
 
   const permissionOptions = [
     {

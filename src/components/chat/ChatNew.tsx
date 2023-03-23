@@ -1,31 +1,33 @@
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
+import { ChatContext } from "@/providers/ChatProvider";
 import { Channel$} from "@/schema/channel";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, Button, Text, useToast, Checkbox, Tag, TagCloseButton, Heading, Switch, Input } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ModalSlider from "../modal/ModalSlider";
 
 const ChatNew = (props: any) => {
   console.log('Rendering >>>>> ChatNew');
   const [tab, setTab] = useState("members");
   const [inputFocus, setInputFocus] = useState(0);
+  const chatContext = useContext(ChatContext)
 
   /**
    *
    **/
   const toast = useToast();
-  const callbackNew = () => {
+  const callbackNew = (channelId: any) => {
     toast({
       title: "Channel Created Successfully",
       status: "success",
       duration: 3000,
       position: "bottom-right",
     });
-    props?.hookChatChannel.remove();
-    props?.hookChatChannels.load();
-    // props.modal.onClose();
+    chatContext?.hookChannel?.fetch({id: channelId});
+    chatContext?.hookChannelList?.load();
+    props.modal.onClose();
     
   };
 
@@ -35,6 +37,13 @@ const ChatNew = (props: any) => {
       status: "error",
       duration: 3000,
       position: "bottom-right",
+    });
+  };
+
+  const handleToggle = () => {
+    hookPortalChannel?.setChannel({
+      ...hookPortalChannel?.channel,
+      private: !hookPortalChannel?.channel?.private,
     });
   };
 
@@ -163,13 +172,17 @@ const ChatNew = (props: any) => {
           </StyledCard>
 
             <StyledCard>
-              <Col>
-                <Heading as="h6" fontSize="md" className="m-b-0-5">Public</Heading>
-                <Row>
-                  <Text>Allow channel to be joined and discoverable by anyone on platform irrespective of your network</Text>
-                  <Switch></Switch>
-                </Row>
-              </Col>
+              <Row className="hr-between">
+                <Col>
+                  <Heading size="sm">Private</Heading>
+                  <Text fontSize={14}>
+                    Can only be accessed by members added.
+                  </Text>
+                </Col>
+                <Col>
+                  <Switch isChecked={hookPortalChannel?.channel?.private} onChange={handleToggle}></Switch>
+                </Col>
+              </Row>
             </StyledCard>
             
     </div>

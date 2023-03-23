@@ -11,51 +11,23 @@ import {
 import IconImage from "@/components/icons/IconImage";
 import ChatSetting from "./ChatSetting";
 import { useContext, useEffect } from "react";
-import { AuthContext } from "@/providers/AuthProvider";
 import ChatSearch from "./ChatSearch";
 import { useRouter } from "next/router";
 import { truncateAddress } from "@/helpers";
-import useChatMembers from "@/hooks/chat/useChatMembers";
-import { DataContext } from "@/providers/DataProvider";
 import { ChatContext } from "@/providers/ChatProvider";
-import useChatChannelsReload from "@/hooks/chat/useChatChannelsReload";
-import useChatChannel from "@/hooks/chat/useChatChannel";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
 const ChatHeader = (props: any) => {
+  console.log("Rendering >>>>> ChatHeader");
   const membersModal = useDisclosure();
   const modalSettings = useDisclosure();
-  const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
-  const chatContext = useContext(ChatContext);
-  const hookChatMembers = useChatMembers();
-  const hookChatChannels = useChatChannelsReload();
-  const hookChatChannel = useChatChannel();
   const router = useRouter();
+  const chatContext = useContext(ChatContext);
+  const $channel = useChatChannelStore((state: any) => state.channel);
 
-  useEffect(() => {
-    hookChatMembers.load();
-  }, [dataContext?.channel?.id])
+ 
 
-  console.log("Re-rendering >>>>> ChatHeader", dataContext.members);
-  const TemplateMembers = () => {
-    return (
-      <ChatMembersList membersModal={membersModal}/>
-    );
-  };
-
-  const TemplateChannelSettings = () => {
-    return (
-      <ChatSetting
-          event={modalSettings}
-          authContext={authContext}
-          modalSettings={modalSettings}
-          hookChatChannels={hookChatChannels}
-          hookChatChannel={hookChatChannel}
-        />
-    );
-  };
-
-  const TemplateSearch = () => {
+  const templateSearch = () => {
     return (
       <Row className="header w-100 vr-center hr-between">
         <ChatSearch />
@@ -71,7 +43,7 @@ const ChatHeader = (props: any) => {
     );
   };
 
-  const TemplateMultiSelect = () => {
+  const templateMultiSelect = () => {
     return (
       <Row className="header w-100 hr-between vr-center">
         <Button
@@ -95,24 +67,23 @@ const ChatHeader = (props: any) => {
     );
   };
 
-  const TemplateProfile = () => {
+  const templateProfile = () => {
     return (
       <Row className="header w-100 hr-between vr-center">
         <Row className="vr-center">
           <Avatar
             size="sm"
             className="m-r-0-5"
-            name={
-              dataContext?.channel?.name || dataContext?.channel?.peerAddress
-            }
+            name={$channel?.name}
+            src={$channel?.image ? $channel?.image : $channel?.name}
           />
           <Col>
             <Row>
               <Heading as="h4" size="sm">
-                {dataContext?.channel?.name ||
-                  truncateAddress(dataContext?.channel?.peerAddress)}
+                {$channel?.name ||
+                  truncateAddress($channel?.peerAddress)}
               </Heading>
-              {!dataContext?.channel?.raw?.disconnected && dataContext?.channel?.raw?.muteStatus()?.muted && (
+              {!$channel?.raw?.disconnected && $channel?.raw?.muteStatus()?.muted && (
                 <IconImage
                   path="IconDarkMute.png"
                   style={{ className: "m-l-0-5" }}
@@ -143,7 +114,7 @@ const ChatHeader = (props: any) => {
         </Row>
 
         <Row>
-         <Tag className="m-r-1" variant={dataContext?.channel?.source == 'xmtp' ? 'state_xmtp' : ''}>{dataContext?.channel?.source}</Tag> 
+         <Tag className="m-r-1" variant={$channel?.source == 'xmtp' ? 'state_xmtp' : ''}>{$channel?.source}</Tag> 
 
          {router.pathname == '/chat' && <Row className="vr-center">
           
@@ -161,13 +132,13 @@ const ChatHeader = (props: any) => {
     );
   };
 
-  const Template = () => {
+  const template = () => {
     if (chatContext?.hookChat.actionMessage?.action === "SEARCH")
-      return <TemplateSearch />;
+      return templateSearch();
     else if (chatContext?.hookChat.actionMessage?.action === "MULTISELECT")
-      return <TemplateMultiSelect />;
+      return templateMultiSelect();
     else {
-      return <TemplateProfile />;
+      return templateProfile();
     }
   };
 
@@ -175,11 +146,18 @@ const ChatHeader = (props: any) => {
     <>
       <div className="header hr-between vr-center">
         <Row className="w-100 h-100 hr-between vr-center">
-          <Template />
+          {/* <Template /> */}
+          {template()}
         </Row>
       </div>
-      <TemplateMembers />
-      <TemplateChannelSettings />
+      
+      <ChatMembersList modal={membersModal}/>
+      
+      <ChatSetting
+          modalSettings={modalSettings}
+          hookChatChannels={props.hookChatChannels}
+          hookChatChannel={props.hookChatChannel}
+         />
     </>
   );
 };

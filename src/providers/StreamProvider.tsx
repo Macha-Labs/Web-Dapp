@@ -1,8 +1,7 @@
 import { logger } from "@/helpers/logger";
 import useStreamChannel from "@/hooks/stream/useStreamChannel";
-import { createContext, useContext, useEffect } from "react";
-import useStreamClient from "../hooks/stream/useStreamClient";
-import { AuthContext, AuthContextType } from "./AuthProvider";
+import { createContext, useContext } from "react";
+import { AuthContext } from "./AuthProvider";
 
 export type StreamContextType = {
     client: any | undefined;
@@ -20,45 +19,26 @@ export const StreamContext = createContext<StreamContextType>({
 
 const StreamProvider = ({children}: any) => {
     console.log('Rendering >>>>> StreamProvider');
-    const authContext = useContext(AuthContext) as AuthContextType;
-    const hookStreamClient = useStreamClient();
-    const hookStreamChannel = useStreamChannel(hookStreamClient.client);
-   
-
-    useEffect(() => {
-        if (authContext?.isConnected && !hookStreamClient?.client) {
-            hookStreamClient.connectToStream();
-        }
-    }, [authContext?.isConnected]);
-
-
-    // useEffect(() => {
-    //     if (authContext?.isConnected && hookStreamClient.client?.user?.id) {
-    //         hookStreamChannels.fetchUserChannels(hookStreamClient.client);
-    //     }
-    // }, [hookStreamClient.client?.user?.id]);
-
-    const reloadChannel = () => {
-        hookStreamChannel.setUpChannel(hookStreamChannel?.channel?.id)
-    }
+    const authContext = useContext(AuthContext)    
+    const hookStreamChannel = useStreamChannel();   
 
     const initiate = async (channel: any) => {
         logger(
           "channel",
-          "ChatProvider.initiate",
+          "StreamProvider.initiate",
           "Getting Channel from Stream",
           [channel]
         );
-        hookStreamChannel?.setUpChannel(channel?.id)
+        hookStreamChannel?._fetch(channel?.id)
       };
 
 
     return (
         <StreamContext.Provider
             value={{
-                client: hookStreamClient.client,
+                client: authContext?.streamClient,
                 hookChannel: hookStreamChannel,
-                reloadChannel:  reloadChannel,
+                reloadChannel:  hookStreamChannel._reload,
                 initiate: initiate,
             }}
         >

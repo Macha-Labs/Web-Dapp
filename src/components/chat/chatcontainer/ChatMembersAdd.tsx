@@ -3,15 +3,18 @@ import { Avatar, Button, Checkbox, Heading, Text, useToast } from "@chakra-ui/re
 import React, { useContext } from "react";
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import { ChatContext } from "@/providers/ChatProvider";
-import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
 import useChatMembers from "@/hooks/chat/useChatMembers";
+import useChatChannelStore from "@/store/useChatChannelStore";
+import { useChatMembersStore } from "@/store/useChatMembersStore";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatMembersAdd = (props: any) => {
-  const dataContext = useContext(DataContext);
-  const hookPortalChannelMembership = usePortalChannelMembership(dataContext.channel);
+  const $channel = useChatChannelStore((state: any) => state.channel);
+  const chatContext = useContext(ChatContext)
+  const hookPortalChannelMembership = usePortalChannelMembership($channel);
   const hookChatMembers = useChatMembers()
+  const $memberIds = useChatMembersStore((state: any) => state.memberIds);
   const toast = useToast();
 
   const callbackAdd = () => {
@@ -21,7 +24,7 @@ const ChatMembersAdd = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    hookChatMembers.load()
+    chatContext?.hookMembers?.load($channel)
     // props?.modalAddMembers.onClose();
     // props?.modalChatMembers.onOpen();
   };
@@ -55,7 +58,7 @@ const ChatMembersAdd = (props: any) => {
       {hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
         return (
           <>
-            {!dataContext?.memberIds?.includes(
+            {!$memberIds?.includes(
               item?.lens?.ownedBy?.toLowerCase()
             ) && (
               <StyledCard className="m-b-0-5 state_hover">
