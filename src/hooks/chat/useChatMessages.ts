@@ -37,17 +37,10 @@ const useChatMessages = () => {
         $loadMessages(null)
     }
 
-    const _watch = () => {
-        if (router.pathname == '/chat/dm') {
-            hookXmtpChannelMessages.watch($channel);
-        }
-    }
-
 
     return (
         {
             load: _load,
-            watch: _watch,
             _unload: _unload
         }
     )

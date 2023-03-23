@@ -11,23 +11,8 @@ const useChatChannel = () => {
     const hookStreamChannel = useStreamChannel();
     const router = useRouter();
     const $channel = useChatChannelStore((state: any) => state.channel);
-    const $loadChannel = useChatChannelStore(((state: any) => state.load))
-
-    const _unwatch = async() => {
-        if ($channel && router.pathname == '/chat') {
-            const result =  await $channel?.raw?.stopWatching();
-            console.log("Stopped watching the channel ", result, $channel);
-        } else if ($channel && router.pathname == '/chat/dm') {
-
-            
-        }
-    }
-    const _read = async() => {
-        if ($channel) {
-            const result =  await $channel?.raw?.markRead();
-            console.log("Channel marked as Read ", result);
-        }
-    }
+    const $loadChannel = useChatChannelStore(((state: any) => state.load));
+    const $loadLoading = useChatChannelStore(((state: any) => state.loadLoading));
 
     // stream
     useEffect(() => {
@@ -35,15 +20,16 @@ const useChatChannel = () => {
             hookStreamChannel?.channel,
         ]);
 
-        if (router.pathname == "/chat/dm")
+        if (router.pathname == "/chat/dm") {
             $loadChannel(null);
+            $loadLoading(false);
+        }
 
-        if (router.pathname == "/chat") {
-            console.log('for stream', $channel?.id, hookStreamChannel?.channel?.id);
-            if ($channel?.id != hookStreamChannel?.channel?.id)
-                _unwatch();
+        else if (router.pathname == "/chat" || router.pathname == "/invite/c/[...channelId]") {
+            console.log('for stream', $channel?.id, hookStreamChannel?.channel?.id);                
+            _read(hookStreamChannel?.channel);
             $loadChannel(hookStreamChannel?.channel);
-            _read();
+            $loadLoading(false);
         }
     }, [hookStreamChannel?.channel]);
 
@@ -52,20 +38,33 @@ const useChatChannel = () => {
         logger("channel", "useChatChannel.useEffect[hookStreamChannel?.channel]", "channel data from xmtp ", [
             hookXmtpChannel.channel,
         ]);
-        if (router.pathname == "/chat")
+
+       
+
+        if (router.pathname == "/chat") {
             $loadChannel(null);
+            $loadLoading(false)
+        }
         if (router.pathname == "/chat/dm") {
             console.log('for XMTP')
             $loadChannel(hookXmtpChannel.channel);
+            $loadLoading(false)
         }
     }, [hookXmtpChannel.channel])
 
     const _fetch = (data: any) => {
+        console.log("Router pathname ", router.pathname);
+        $loadLoading(true);
+        _unwatch($channel);
+        $loadChannel(null);
+
         switch (router.pathname) {
             case "/chat":
                 return hookStreamChannel._fetch(data?.id);
             case "/chat/dm":
-                return hookXmtpChannel._fetch(data)
+                return hookXmtpChannel._fetch(data);
+            case '/invite/c/[...channelId]':
+                return hookStreamChannel._fetch(data?.id);
         }
     };
 
@@ -81,6 +80,8 @@ const useChatChannel = () => {
     }
 
     const _reload = () => {
+        $loadLoading(true);
+
         switch (router.pathname) {
             case "/chat":
                 hookStreamChannel._reload();
@@ -93,6 +94,25 @@ const useChatChannel = () => {
     const _unload = () => {
         $loadChannel(null)
     }
+
+    const _read = async(channel: any) => {
+        if (channel && router.pathname == '/chat') {
+            const result =  await channel?.raw?.markRead();
+            console.log("Channel marked as Read ", result);
+        }
+    }
+
+    const _unwatch = async(oldChannel: any) => {
+        console.log('Stopped watching the channel >>>>>>>>', oldChannel, router.pathname);
+        if (oldChannel && router.pathname == '/chat') {
+            const result =  await oldChannel?.raw?.stopWatching();
+            console.log("Stopped watching the channel ", result, oldChannel);
+        } else if (oldChannel && router.pathname == '/chat/dm') {
+
+            
+        }
+    }
+    
 
     return {
         fetch: _fetch,

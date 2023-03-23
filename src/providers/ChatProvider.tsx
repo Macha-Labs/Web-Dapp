@@ -2,9 +2,9 @@ import useChat from "@/hooks/chat/useChat";
 import useChatChannel from "@/hooks/chat/useChatChannel";
 import useChatChannels from "@/hooks/chat/useChatChannels";
 import useChatMembers from "@/hooks/chat/useChatMembers";
-import { createContext, useContext } from "react";
-import { StreamContext, StreamContextType } from "./StreamProvider";
-
+import useChatMessage from "@/hooks/chat/useChatMessage";
+import useChatMessages from "@/hooks/chat/useChatMessages";
+import { createContext} from "react";
 
 
 export type ChatContextType = {
@@ -12,8 +12,8 @@ export type ChatContextType = {
   hookChannel: any | undefined;
   hookChannelList: any | undefined;
   hookMembers: any | undefined;
-  streamClient: any | undefined;
-  streamContext: any | undefined;
+  hookMessages: any | undefined;
+  hookMessage: any | undefined;
 };
 
 export const ChatContext = createContext<ChatContextType>({
@@ -21,18 +21,18 @@ export const ChatContext = createContext<ChatContextType>({
   hookChannel: null,
   hookChannelList: null,
   hookMembers: null,
-  streamClient: null,
-  streamContext: null,
+  hookMessages: null,
+  hookMessage: null,
 });
 
 export const ChatProvider = ({ children }: any) => {
   console.log('Rendering >>>>> ChatProvider');
-  const streamContext = useContext(StreamContext) as StreamContextType;
-  const hookChat = useChat(streamContext.client, streamContext.hookChannel.channel);
+  const hookChat = useChat();
   const hookChatChannel = useChatChannel();
   const hookChatChannels = useChatChannels();
+  const hookMessages = useChatMessages();
+  const hookMessage = useChatMessage();
   const hookMembers = useChatMembers();
-
 
   return (
     <ChatContext.Provider
@@ -41,8 +41,8 @@ export const ChatProvider = ({ children }: any) => {
         hookChannel: hookChatChannel,
         hookChannelList: hookChatChannels,
         hookMembers: hookMembers,
-        streamClient: streamContext?.client,
-        streamContext: streamContext,
+        hookMessages: hookMessages,
+        hookMessage: hookMessage,
       }}
     >
       {children}

@@ -2,6 +2,8 @@ import { Col, Row, StyledCard, StyledChatItem } from "@/styles/StyledComponents"
 import {
   Avatar,
   Button,
+  Spinner,
+  Tag,
   Text,
   useDisclosure,
   useToast,
@@ -36,13 +38,20 @@ const ChatList = (props: any) => {
   const [isClicked, setIsClicked] = useState<any>([]);
   const $channels = useChatChannelsStore((state: any) => state.channels);
   const $channel = useChatChannelStore((state: any) => state.channel);
+  const $channelLoad = useChatChannelStore((state: any) => state.loading);
+  const [channelSelected, setChannelSelected] = useState<any>();
 
 
   // TODO: Fix bandaging
   useEffect(() => {
     chatContext?.hookChannelList.load();
-    chatContext?.hookChannel?.unload();
+    // chatContext?.hookChannel?.unload();
   }, [router.pathname]);
+
+  const handleSelectChannel = (channel: any) => {
+    setChannelSelected(channel);
+    chatContext?.hookChannel?.fetch(channel);
+  }
 
   const hookPortalChannel = usePortalChannel(null, {
     mute: () => {
@@ -87,7 +96,7 @@ const ChatList = (props: any) => {
     },
   });
 
-  const TemplateChatNew = () => {
+  const templateChatNew = () => {
     return (
       <ChatNew
         modal={modalChatNew}
@@ -220,7 +229,7 @@ const ChatList = (props: any) => {
     return <LoadChannels />;
   };
 
-  const TemplateChatList = () => {
+  const templateChatList = () => {
     return (
       <>
         <Row className="header vr-center hr-between">
@@ -265,7 +274,7 @@ const ChatList = (props: any) => {
                         <Row
                           className="vr-center w-11-12"
                           onClick={() => {
-                            chatContext?.hookChannel?.fetch(item);
+                            handleSelectChannel(item)
                           }}
                         >
                           {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
@@ -273,6 +282,7 @@ const ChatList = (props: any) => {
                             size="md"
                             className="m-r-0-5"
                             name={item?.name}
+                            src={item?.image ? item?.image : item?.name}
                           />
                           <Col className="w-100 d-flex flex-col vr-center">
                             <Row>
@@ -325,6 +335,9 @@ const ChatList = (props: any) => {
                                 </Text>
                               </Col>
                             )}
+
+                          {(item?.private == false) && <Row className="m-t-0-5"><Tag size="sm">Public</Tag></Row>}
+
                           </Col>
                           {item?.unreadCountObject &&
                             item?.unreadCountObject[authContext?.address]
@@ -346,8 +359,11 @@ const ChatList = (props: any) => {
                             )}
                         </Row>
 
-                        <Col className="hr-center w-1-12 settingsIcon">
+                        {($channelLoad && (channelSelected?.id == item?.id)) && <Spinner size='xs' />}
+
+                        <Col className="hr-center w-1-12 settingsIcon m-l-0-5">
                           <TemplateActions item={item} />
+                          
                         </Col>
                         </Row>
                       </StyledCard>
@@ -377,9 +393,9 @@ const ChatList = (props: any) => {
 
   return (
     <>
-      <TemplateChatList />
+      {templateChatList()}
 
-      {modalChatNew.isOpen && <TemplateChatNew />}
+      {modalChatNew.isOpen && templateChatNew()}
 
       {modalChatNewDm.isOpen && <TemplateChatNewDm modal={modalChatNewDm} />}
     </>

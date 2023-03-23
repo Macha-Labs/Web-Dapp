@@ -2,7 +2,6 @@ import IconImage from "@/components/icons/IconImage";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Pop from "@/components/pop/Pop";
 import PortalLoader from "@/components/PortalLoader";
-import useChatMessage from "@/hooks/chat/useChatMessage";
 import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
 import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
@@ -20,6 +19,7 @@ import {
   Divider,
   Heading,
   Image,
+  Input,
   Text,
   Textarea,
   useDisclosure,
@@ -33,12 +33,10 @@ const ChatInput = (props: any) => {
   const chatContext = useContext(ChatContext);
   const modalPost = useDisclosure();
   const hookCreateLensPost = useCreateLensPost();
-  const hookChatMessage = useChatMessage();
   const createPostRef = useRef<any>();
 
-
   const callbackSendMessage = (data: any) => {
-    return hookChatMessage.send(data)
+    return chatContext?.hookMessage.send(data);
   }
 
   const templateReply = () => {
@@ -72,7 +70,7 @@ const ChatInput = (props: any) => {
     );
   };
 
-  const TemplatePostNew = () => {
+  const templatePostNew = () => {
     return (
       <ModalWindow
         event={modalPost}
@@ -274,7 +272,7 @@ const ChatInput = (props: any) => {
     );
   };
 
-  const TemplateInput = () => {
+  const templateInput = () => {
     return (
       <StyledChatInputContainer>
         <Col className="w-100">
@@ -290,7 +288,7 @@ const ChatInput = (props: any) => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
                 }}
-                ref={chatContext?.hookChat.textareaRef}
+                ref={chatContext?.hookChat?.textareaRef}
                 className="inputElement"
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
@@ -371,7 +369,7 @@ const ChatInput = (props: any) => {
     }
   };
 
-  const Template = () => {
+  const template = () => {
     if (chatContext?.hookChat.actionMessage?.action === "SEARCH")
       return (
         <StyledChatInputContainer>
@@ -388,13 +386,16 @@ const ChatInput = (props: any) => {
           </StyledChatInput>
         </StyledChatInputContainer>
       );
-    else return <TemplateInput />;
+    else return templateInput();
   };
 
   return (
     <>
-      <Template />
-      <TemplatePostNew />
+      {/* <Template /> */}
+      {template()}
+      {/* <TemplatePostNew /> */}
+      {templatePostNew()}
+      {/* <Input/> */}
     </>
   );
 };

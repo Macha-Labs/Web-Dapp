@@ -40,6 +40,13 @@ const ChatNew = (props: any) => {
     });
   };
 
+  const handleToggle = () => {
+    hookPortalChannel?.setChannel({
+      ...hookPortalChannel?.channel,
+      private: !hookPortalChannel?.channel?.private,
+    });
+  };
+
   /**
    *
    **/
@@ -165,13 +172,17 @@ const ChatNew = (props: any) => {
           </StyledCard>
 
             <StyledCard>
-              <Col>
-                <Heading as="h6" fontSize="md" className="m-b-0-5">Public</Heading>
-                <Row>
-                  <Text>Allow channel to be joined and discoverable by anyone on platform irrespective of your network</Text>
-                  <Switch></Switch>
-                </Row>
-              </Col>
+              <Row className="hr-between">
+                <Col>
+                  <Heading size="sm">Private</Heading>
+                  <Text fontSize={14}>
+                    Can only be accessed by members added.
+                  </Text>
+                </Col>
+                <Col>
+                  <Switch isChecked={hookPortalChannel?.channel?.private} onChange={handleToggle}></Switch>
+                </Col>
+              </Row>
             </StyledCard>
             
     </div>

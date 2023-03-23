@@ -7,11 +7,12 @@ import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import useMention from "../stream/useMention";
+import useChatChannelStore from "@/store/useChatChannelStore";
 
-const useChat = (client: any, channel: any) => {
-  console.log('Rendering >>>>> useChat');
+const useChat = () => {
+  
   const authContext = useContext(AuthContext) as AuthContextType;
-
+  const $channel = useChatChannelStore((state: any) => state.channel);
   //
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
@@ -37,6 +38,9 @@ const useChat = (client: any, channel: any) => {
   // Slash & Widget
   const [slashCmd, setSlashCmd] = useState<any>();
   const [slashCmdValue, setSlashCmdValue] = useState<any>();
+
+
+  console.log('Rendering >>>>> useChat', textareaRef);
 
   const slashRun = (command: any) => {
     setSlashCmdValue(command.name);
@@ -120,6 +124,7 @@ const useChat = (client: any, channel: any) => {
         setStreamLoading(false);
         setAttachItem(null);
         setActionMessage(null);
+        textareaRef.current.value = null;
 
         
         hookMention.onRefresh();
@@ -134,7 +139,7 @@ const useChat = (client: any, channel: any) => {
     const notificationPayload = {
       topic: "newMessage",
       notification: {
-        title: channel.name,
+        title: $channel.name,
         body: `${
           authContext.user?.lens?.name ||
           authContext.user?.lens?.handle ||
@@ -145,7 +150,7 @@ const useChat = (client: any, channel: any) => {
       data: {
         type: "channelMessage",
         name: "Portal New Message",
-        channelId: channel.id,
+        channelId: $channel.id,
       },
       android: {
         ttl: 4500,
@@ -163,7 +168,7 @@ const useChat = (client: any, channel: any) => {
     if (actionMessage?.action !== "EDIT") {
       return;
     }
-    await client
+    await authContext?.streamClient
       .updateMessage({
         ...actionMessage.item,
         id: actionMessage.item?.id,
@@ -188,7 +193,7 @@ const useChat = (client: any, channel: any) => {
       });
     }
 
-    client
+    authContext?.streamClient
       .deleteMessage(message?.id, true)
       .then(() => {
         toast({
@@ -209,7 +214,7 @@ const useChat = (client: any, channel: any) => {
   };
 
   const pinMessage = async (message: any) => {
-    await client
+    await authContext?.streamClient
       .pinMessage(message, null)
       .then(() => {
         toast({
@@ -230,7 +235,7 @@ const useChat = (client: any, channel: any) => {
   };
 
   const unPinMessage = async (message: any) => {
-    await client
+    await authContext?.streamClient
       .unpinMessage(message)
       .then(() => {
         toast({
@@ -258,17 +263,17 @@ const useChat = (client: any, channel: any) => {
     // let typingTimeout;
     // if (typingTimeout !== undefined) clearTimeout(typingTimeout);
 
-    // await channel.raw.keystroke();
+    // await $channelraw.keystroke();
 
     // typingTimeout = setTimeout(async () => {
-    //   await channel.raw.stopTyping();
+    //   await $channelraw.stopTyping();
     // }, 3000);
 
-    // channel.raw.on("typing.start", (event: any) => {
-    //   let typingUser = Object.keys(channel.raw.state.typing);
+    // $channelraw.on("typing.start", (event: any) => {
+    //   let typingUser = Object.keys($channelraw.state.typing);
     //   setUsersWhoAreTyping(typingUser);
     // });
-    // channel.raw.on("typing.stop", (event: any) => {
+    // $channelraw.on("typing.stop", (event: any) => {
     //   setUsersWhoAreTyping(null);
     // });
 
@@ -365,7 +370,7 @@ const useChat = (client: any, channel: any) => {
   };
 
   const sendReaction = async (reaction: any, message: any) => {
-    return await channel.raw.sendReaction(message?.id, {
+    return await $channel.raw.sendReaction(message?.id, {
       type: reaction?.type,
       score: 1,
     });
@@ -378,7 +383,7 @@ const useChat = (client: any, channel: any) => {
       message.own_reactions.filter(async (item: any) => {
         if (item.type == reaction.type) {
           available = true;
-          result = await channel.raw.deleteReaction(message?.id, reaction.type);
+          result = await $channel.raw.deleteReaction(message?.id, reaction.type);
         }
       });
       if (!available) {

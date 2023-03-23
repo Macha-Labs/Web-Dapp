@@ -16,13 +16,13 @@ const ChatNewDm = (props: any) => {
             props.modal.onClose();
         },
         error: () => {
-            toast({
-                title: "Copied to clipboard",
-                status: "success",
-                duration: 3000,
-                position: "bottom-right",
-              });
-        }
+          toast({
+              title: "User not on XMTP",
+              status: "error",
+              duration: 3000,
+              position: "bottom-right",
+            });
+      }
     }
 
 
@@ -33,8 +33,8 @@ const ChatNewDm = (props: any) => {
             { $followers?.length
                 ?
                 <>
-                    {$followers?.map((item: any, index: any) => {
-                        return <div className="m-b-1"><UserFollowersCard user={item} key={index} triggerMessage={() => {hookXmtpChannelNew?.initiateDirect(item?.lens?.ownedBy, callback)}} /></div>;
+                    {$followers?.map((item: any, index: number) => {
+                        return <div key={index} className="m-b-1"><UserFollowersCard user={item} key={index} triggerMessage={() => {hookXmtpChannelNew?.initiateDirect(item?.lens?.ownedBy, callback)}} /></div>;
                     })}
                 </>
              : (

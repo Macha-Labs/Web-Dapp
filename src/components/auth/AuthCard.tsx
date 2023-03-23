@@ -1,7 +1,8 @@
 import IconImage from "@/components/icons/IconImage";
 import { AuthContext } from "@/providers/AuthProvider";
-import { Col, StyledCard } from "@/styles/StyledComponents";
-import { Button, Heading, useToast } from "@chakra-ui/react";
+import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import { Button, Heading, Text, useToast } from "@chakra-ui/react";
+import Link from "next/link";
 import { useContext, useState } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
 
@@ -27,7 +28,7 @@ const AuthCard = () => {
 
   return (
     <div className="middle">
-      <StyledCard className="w-100 p-4">
+      <StyledCard className="w-100 p-4 state_highlight">
         <Col className="hr-center">
           <Col className="m-b-2 hr-center">
             <IconImage
@@ -68,6 +69,12 @@ const AuthCard = () => {
               )}
           </Col>
         </Col>
+      </StyledCard>
+      <StyledCard className="m-t-2 flex-center text-center state_lens">
+          <Col className="hr-center">
+          <Heading as="h5" size="sm" className="m-b-0-5">Claim a Lens Testnet Handle</Heading>
+          <Text className="text-center" fontSize="14">Visit <Link href="https://testnet.lenster.xyz/" target={'_blank'}>www.testnet.lenster.xyz</Link> to claim your lens handle.<br/>Please note this is for testing purpose only to access product on testnet.</Text>
+          </Col>
       </StyledCard>
     </div>
   );

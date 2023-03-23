@@ -5,8 +5,8 @@ import ChatNonDisplay from "./ChatNonDisplay";
 import ChatWindow from "./ChatWindow";
 
 const ChatContainer = () => {
-  console.log("Rendering >>>>> ChatContainer");
   const $channel = useChatChannelStore((state: any) => state.channel);
+  console.log("Rendering >>>>> ChatContainer", $channel);
   return (
     <>
       {$channel ? (

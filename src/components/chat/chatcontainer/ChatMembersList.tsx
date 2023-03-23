@@ -1,9 +1,7 @@
 import { Avatar, AvatarBadge, Heading, useDisclosure } from "@chakra-ui/react";
-import { FC, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
-import styled from "styled-components";
 import { truncateAddress } from "@/helpers";
-import { style } from "@/styles/StyledConstants";
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
 import IconImage from "@/components/icons/IconImage";
@@ -11,20 +9,7 @@ import { useChatMembersStore } from "@/store/useChatMembersStore";
 import { ChatContext } from "@/providers/ChatProvider";
 import useChatChannelStore from "@/store/useChatChannelStore";
 
-interface Props {
-  [key: string]: any;
-}
 
-const Container = styled.div`
-  .item {
-    padding: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    &:hover {
-      background: ${style.button.bg.default};
-    }
-  }
-`;
 
 const ChatMembersList = (props: any) => {
   console.log("Rendering >>>>> ChatMembersList");
@@ -36,7 +21,7 @@ const ChatMembersList = (props: any) => {
 
   useEffect(() => {
     chatContext?.hookMembers.load($channel);
-  }, [])
+  }, [$channel])
 
 
   const handleSelectedUser = (user: any) => {
