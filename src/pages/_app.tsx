@@ -16,7 +16,7 @@ import { XmtpProvider } from "@/providers/XmtpProvider";
 import { DataProvider } from "@/providers/DataProvider";
 
 const { chains, provider } = configureChains(
-  [polygonMumbai],
+  [polygon],
   [publicProvider()]
 );
 
