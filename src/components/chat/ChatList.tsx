@@ -44,8 +44,9 @@ const ChatList = (props: any) => {
 
   // TODO: Fix bandaging
   useEffect(() => {
+    console.log(router, 'router is here')
     chatContext?.hookChannelList.load();
-    // chatContext?.hookChannel?.unload();
+    chatContext?.hookChannel?.unload();
   }, [router.pathname]);
 
   const handleSelectChannel = (channel: any) => {

@@ -192,7 +192,7 @@ const UserProfile = ({ user }: any) => {
     );
   };
 
-  const TemplateProfile = () => {
+  const templateProfile = () => {
     return (
       <StyledCard>
         <LayoutProfileBanner profile={user?.lens} />
@@ -254,6 +254,7 @@ const UserProfile = ({ user }: any) => {
                 onClick={handleMessage}
                 variant="state_brand"
                 size="md"
+                isLoading={hookXmtpChannelNew.isLoading}
               >
                 Message
               </Button>
@@ -264,7 +265,7 @@ const UserProfile = ({ user }: any) => {
     );
   };
 
-  const TemplateTabs = () => {
+  const templateTabs = () => {
     return (
       <Tabs variant="unstyled">
         <LayoutCardPannel
@@ -314,8 +315,8 @@ const UserProfile = ({ user }: any) => {
     <div>
       {user ? (
         <>
-          <TemplateProfile />
-          <TemplateTabs />
+          {templateProfile()}
+          {templateTabs()}
         </>
       ) : (
         <></>
