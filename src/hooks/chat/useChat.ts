@@ -8,6 +8,7 @@ import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import useMention from "../stream/useMention";
 import useChatChannelStore from "@/store/useChatChannelStore";
+import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
 
 const useChat = () => {
   
@@ -18,6 +19,7 @@ const useChat = () => {
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
   const [streamLoading, setStreamLoading] = useState<any>(false);
   const [attachItem, setAttachItem] = useState<any>();
+  const [attachEvent, setAttachEvent] = useState<any>();
   const [reactions, setReactions] = useState<any>({});
   const [actionMessage, setActionMessage] = useState<any>({
     action: "",
@@ -104,7 +106,8 @@ const useChat = () => {
       }
 
       if (attachItem) {
-        const fileCid = await uploadAtIpfsRoot([attachItem]);
+        console.log("Here is the attach item", attachItem);
+        const fileCid = await deploytoLightHouse(attachEvent);
         messageData = {
           ...messageData,
           attachments: [
@@ -302,8 +305,11 @@ const useChat = () => {
   };
 
   const handleAttachment = async (attachment: any) => {
+    console.log("File event ", attachment);
+
     const filePicked = attachment.target.files[0];
     setAttachItem(filePicked);
+    setAttachEvent(attachment);
   };
 
   const deleteAttachment = () => {
