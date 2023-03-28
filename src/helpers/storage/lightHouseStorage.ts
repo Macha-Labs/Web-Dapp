@@ -22,4 +22,5 @@ export const deploytoLightHouse = async(e: any) =>{
     */
 
       console.log('Visit at https://gateway.lighthouse.storage/ipfs/' + output.data.Hash);
+      return output.data.Hash;
   }

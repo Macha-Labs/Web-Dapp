@@ -107,14 +107,15 @@ const useChat = () => {
 
       if (attachItem) {
         console.log("Here is the attach item", attachItem);
-        const fileCid = await deploytoLightHouse(attachEvent);
+        const fileCid: any = await deploytoLightHouse(attachEvent);
+        console.log("The uploaded filedata ", fileCid);
         messageData = {
           ...messageData,
           attachments: [
             {
               type: attachItem.type.split("/")[0],
-              asset_url: `https://dweb.link/ipfs/${fileCid}`,
-              thumb_url: `https://dweb.link/ipfs/${fileCid}`,
+              asset_url: `https://gateway.lighthouse.storage/ipfs/${fileCid}`,
+              thumb_url: `https://gateway.lighthouse.storage/ipfs/${fileCid}`,
               name: attachItem?.name,
             },
           ],
