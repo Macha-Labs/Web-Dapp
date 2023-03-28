@@ -79,7 +79,7 @@ const LandingPage = () => {
                 </div>
               </div>
               <Button onClick={() => redirectChat()} variant="state_brand">
-                Login Testnet
+                Login Beta
               </Button>
             </div>
           </div>
