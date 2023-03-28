@@ -66,20 +66,26 @@ const useLensAuth = () => {
     const refreshToken = window.localStorage.getItem("refreshToken");
     if (accessToken)
         return { accessToken: accessToken, refreshToken: refreshToken };
-    return false;
+    return {};
   };
 
   const getNewAccessToken = () => {
     newRefreshToken(refreshToken).then((data) => {
       setRefreshToken(data["refreshToken"]);
+      addTokenCookie("accessToken",data["accessToken"]);
     });
+    return true;
   };
 
   const connectToLens = async (address: any) => {
     let tokens = getLensTokens();
     console.log("logging tokens ", tokens);
-    if (tokens)
+    if (tokens?.accessToken)
         return tokens;
+    else if(tokens.refreshToken){
+      return getNewAccessToken();
+    }
+
     return fetchLensToken(address);
   };
 

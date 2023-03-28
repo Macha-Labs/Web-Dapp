@@ -180,6 +180,7 @@ const AuthProvider = ({ children }: any) => {
       $loadAddress(address.toLowerCase());
       _fetchSignerFromWagmi();
       _fetchUserFromDB();
+      _fetchUserFromLens();
     }
   }, [address]);
 
