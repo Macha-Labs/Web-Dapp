@@ -1,5 +1,7 @@
+import { AuthContext } from "@/providers/AuthProvider";
 import { Col } from "@/styles/StyledComponents";
 import { Heading, Image } from "@chakra-ui/react";
+import { useContext } from "react";
 import LayoutCard from "../LayoutCard";
 import LayoutPostCard from "./LayoutPostCard";
 import LayoutPostLoading from "./LayoutPostLoading";
@@ -9,6 +11,8 @@ interface Props {
 }
 
 const LayoutPostList = ({ ...props }) => {
+  const authContext = useContext(AuthContext);
+  console.log("User lens profile ", authContext?.user?.lens);
   const template = () => {
     if (props?.isLoading) {
       return <></>;
@@ -16,7 +20,7 @@ const LayoutPostList = ({ ...props }) => {
       return (
         <>
           {props.list.map((item: any, index: any) => (
-            <LayoutPostCard item={item} key={index} />
+            <LayoutPostCard myId={authContext?.user?.lens?.id} item={item} key={index} />
           ))}
         </>
       );

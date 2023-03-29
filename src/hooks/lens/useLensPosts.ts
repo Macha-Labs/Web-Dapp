@@ -25,6 +25,7 @@ const useLensPosts = () => {
     const res = await haveILikedPost({
       publicationId: postID,
     });
+    console.log("res of getHaveILikedPost ", res);
     const haveIliked = res.items.some(
       (item: any) =>
         item.profile.ownedBy.toLowerCase() == authContext.address.toLowerCase()

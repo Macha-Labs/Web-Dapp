@@ -11,6 +11,7 @@ const LayoutPostCard = (props: any) => {
   const [tempState, setTempState] = useState<boolean>(hookLensPosts.haveILiked);
 
   useEffect(() => {
+    console.log("Here it the publishing item ", props.item);
     hookLensPosts.getHaveILikedPost(props.item?.id);
   }, [props.item?.id]);
 
@@ -66,7 +67,7 @@ const LayoutPostCard = (props: any) => {
                           variant="state_transparent_to_brand_hover"
                           onClick={() => {
                             likePost({
-                              profileId: props.item?.profile?.id,
+                              profileId: props.myId,
                               reaction: "UPVOTE",
                               publicationId: props.item?.response
                                 ? props.item?.response
@@ -84,7 +85,7 @@ const LayoutPostCard = (props: any) => {
                           variant="state_transparent_to_brand_hover"
                           onClick={() => {
                             unlikePost({
-                              profileId: props.item?.profile?.id,
+                              profileId: props.myId,
                               reaction: "UPVOTE",
                               publicationId: props.item?.response
                                 ? props.item?.response
