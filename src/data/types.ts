@@ -9,3 +9,14 @@ export interface UserInterface {
   stream: {},
   address: any
 }
+
+interface LensTokens {
+  lens_access_token: null,
+  lens_refresh_token: null 
+}
+
+export interface LensTokensInterface {
+  lens_refresh_token: string,
+  lensTokens: LensTokens,
+  empty: null
+}

@@ -1,5 +1,5 @@
 const loggingStates: any = {
-    auth: false,
+    auth: true,
     channel: false,
     lens: true,
     stream: false,

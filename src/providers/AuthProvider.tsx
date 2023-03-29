@@ -87,14 +87,14 @@ const AuthProvider = ({ children }: any) => {
       const lensProfile = await hookLensProfile.getOwnedProfiles(address);
       try {
         if (lensProfile?.id) {
-          const tokens: any | { accessToken: string; refreshToken: string } = await hookLensAuth.connectToLens(address);
+          const tokens: any | { lens_access_token: string; lens_refresh_token: string } = await hookLensAuth.connectToLens(address);
           logger("auth", "_fetchUserFromLens", "Logging the lens auth tokens", [tokens]);
           
-          if (tokens?.accessToken) {
+          if (tokens?.lens_access_token) {
             user.setLensDirect({
               ...lensProfile,
-              accessToken: tokens["accessToken"],
-              refreshToken: tokens["refreshToken"],
+              accessToken: tokens["lens_access_token"],
+              refreshToken: tokens["lens_refresh_token"],
             });
             logger("auth", "_fetchUserFromLens", "Lens user data set", [user]);
           } else {
@@ -180,6 +180,8 @@ const AuthProvider = ({ children }: any) => {
       $loadAddress(address.toLowerCase());
       _fetchSignerFromWagmi();
       _fetchUserFromDB();
+      if (window.localStorage.getItem("lens_refresh_token"))
+        _fetchUserFromLens();
     }
   }, [address]);
 
