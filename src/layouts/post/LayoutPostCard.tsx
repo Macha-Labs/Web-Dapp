@@ -8,11 +8,12 @@ import { useState, useEffect } from "react";
 
 const LayoutPostCard = (props: any) => {
   const hookLensPosts = useLensPosts();
-  const [tempState, setTempState] = useState<boolean>(hookLensPosts.haveILiked);
+  const [tempState, setTempState] = useState<any>(hookLensPosts.haveILiked);
 
   useEffect(() => {
     console.log("Here it the publishing item ", props.item);
-    hookLensPosts.getHaveILikedPost(props.item?.id);
+    const result = hookLensPosts.getHaveILikedPost(props.item?.id);
+    setTempState(result);
   }, [props.item?.id]);
 
   return (
