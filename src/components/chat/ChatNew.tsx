@@ -27,6 +27,7 @@ import IconImage from "../icons/IconImage";
 import useLensConnections from "@/hooks/lens/useLensConnections";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import { Contract } from "ethers";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatNew = (props: any) => {
   console.log("Rendering >>>>> ChatNew");
@@ -46,6 +47,7 @@ const ChatNew = (props: any) => {
   const [inputContractAddress,setInputContractAddress]=useState<string>();  
   const [nftAddresses,setNtfAddresses]=useState([]);
   const authContext = useContext(AuthContext) as AuthContextType;
+  const chatContext = useContext(ChatContext);
   const hookLensConnections = useLensConnections(
     authContext?.address,
     authContext?.user?.lens?.id
@@ -67,16 +69,16 @@ const ChatNew = (props: any) => {
       setTab("access");
     }
   };
-  const callbackNew = () => {
+  const callbackNew = (channelId: any) => {
     toast({
-      title: "Channel Created Successfullyzzzz",
+      title: "Channel Created Successfully",
       status: "success",
       duration: 3000,
       position: "bottom-right",
     });
     console.log("Do the rest of the stuff");
-    props?.hookChatChannel.remove();
-    props?.hookChatChannels.load();
+    chatContext?.hookChannel?.fetch({id: channelId});
+    chatContext?.hookChannelList?.load();
     props.modal.onClose();
     handleTabs();
   };
