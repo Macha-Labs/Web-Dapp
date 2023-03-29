@@ -44,8 +44,8 @@ const ChatNew = (props: any) => {
   const [inputAddress, setInputAddress] = useState("");
   const [lensUserId, setLensUserId] = useState("");
   const [lensProfiles, setLensProfiles] = useState<string[]>([]);
-  const [inputContractAddress,setInputContractAddress]=useState<string>();  
-  const [nftAddresses,setNtfAddresses]=useState([]);
+  const [inputContractAddress, setInputContractAddress] = useState<string>();
+  const [nftAddresses, setNtfAddresses] = useState([]);
   const authContext = useContext(AuthContext) as AuthContextType;
   const chatContext = useContext(ChatContext);
   const hookLensConnections = useLensConnections(
@@ -61,6 +61,7 @@ const ChatNew = (props: any) => {
    *
    **/
   const toast = useToast();
+
   const handleTabs = () => {
     if (tab == "details" && access == "Public") {
       console.log("settin tab to public");
@@ -69,6 +70,7 @@ const ChatNew = (props: any) => {
       setTab("access");
     }
   };
+
   const callbackNew = (channelId: any) => {
     toast({
       title: "Channel Created Successfully",
@@ -77,7 +79,7 @@ const ChatNew = (props: any) => {
       position: "bottom-right",
     });
     console.log("Do the rest of the stuff");
-    chatContext?.hookChannel?.fetch({id: channelId});
+    chatContext?.hookChannel?.fetch({ id: channelId });
     chatContext?.hookChannelList?.load();
     props.modal.onClose();
     handleTabs();
@@ -120,10 +122,9 @@ const ChatNew = (props: any) => {
   const hookPortalChannelMembership = usePortalChannelMembership(
     new Channel$("db", {})
   );
-    useEffect(() => {
-      hookLensConnections.getLensProfile(lensProfiles);
-    }, [lensProfiles]);
-  
+  useEffect(() => {
+    hookLensConnections.getLensProfile(lensProfiles);
+  }, [lensProfiles]);
 
   const data = [
     {
@@ -148,133 +149,9 @@ const ChatNew = (props: any) => {
     },
   ];
 
-  /**
-   *
-   **/
-  // const templateDetails = () => {
-
-  //       const header =
-  //         <Row className="hr-between v-center">
-  //           {/* <Button
-  //               onClick={handleTabs}
-  //               variant="state_default_hover"
-  //               size="sm"
-  //             >
-  //               Back
-  //             </Button> */}
-  //           <Text>Create New Channel</Text>
-  //           {/* <Button variant="state_default_hover" size="sm"> */}
-  //           <IconImage
-  //             onClick={handleTabs}
-  //             path="IconDarkCross.png"
-  //             // styled={{ className: "m-l-1" }}
-  //           />
-  //           {/* </Button> */}
-  //           {/* <Button
-  //               onClick={() => {
-  //                 hookPortalChannel?.update(
-  //                   hookPortalChannelMembership?.userIds
-  //                 );
-  //               }}
-  //               variant="state-brand"
-  //               size="sm"
-  //               isLoading={hookPortalChannel?.isLoading}
-  //             >
-  //               Create New
-  //             </Button> */}
-  //         </Row>
-  //       const body =
-  //         <Col className="p-2">
-  //           <Row className="hr-center w-100 m-b-1">
-  //             <Avatar size="2xl" name={data[0].value} />
-  //           </Row>
-  //           <Input
-  //             ref={inputFocus == 0 ? (input) => input && input.focus() : null}
-  //             onFocus={() => setInputFocus(0)}
-  //             placeholder={data[0].label}
-  //             value={data[0].value}
-  //             onChange={(e) => data[0].onChange(e.target.value)}
-  //             className="m-b-0-5"
-  //           />
-  //           <Input
-  //             ref={inputFocus == 1 ? (input) => input && input.focus() : null}
-  //             onFocus={() => setInputFocus(1)}
-  //             placeholder={data[1].label}
-  //             value={data[1].value}
-  //             onChange={(e) => data[1].onChange(e.target.value)}
-  //             className="m-b-0-5"
-  //           />
-  //           {hookPortalChannelMembership?.users?.length ? (
-  //             <Col className="flex-wrap m-b-1">
-  //               <Heading as="h6" fontSize="md" className="m-b-0-5">
-  //                 Add Members
-  //               </Heading>
-  //               <Row className="flex-wrap">
-  //                 {hookPortalChannelMembership?.users?.map((item: any) => {
-  //                   return (
-  //                     <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
-  //                       <Row className="vr-center p-0-5">
-  //                         <Avatar
-  //                           src={helperIPFS(item?.lens?.image)}
-  //                           className="m-r-0-5"
-  //                           size="sm"
-  //                         />
-  //                         <Text>
-  //                           {item?.lens?.name
-  //                             ? item?.lens?.name
-  //                             : item?.lens?.handle
-  //                             ? item?.lens?.handle
-  //                             : truncateAddress(item?.lens?.ownedBy)}
-  //                         </Text>
-  //                       </Row>
-  //                       <TagCloseButton
-  //                         onClick={() => {
-  //                           hookPortalChannelMembership.handleCheckedUsers(
-  //                             item
-  //                           );
-  //                         }}
-  //                       />
-  //                     </Tag>
-  //                   );
-  //                 })}
-  //               </Row>
-  //             </Col>
-  //           ) : (
-  //             <></>
-  //           )}
-  //           <Col>
-  //             <Heading as="h6" fontSize="md" className="m-b-0-5">
-  //               Channel Access
-  //             </Heading>
-  //             <RadioGroup onChange={setAccess} value={access}>
-  //               <Stack direction="column">
-  //                 <Radio value="Public">Public</Radio>
-  //                 <Radio value="Private">Private</Radio>
-  //               </Stack>
-  //             </RadioGroup>
-  //             <Button onClick={handleTabs}>Next</Button>
-  //           </Col>
-  //           {/* <Col>
-  //             <Heading as="h6" fontSize="md" className="m-b-0-5">
-  //               Public
-  //             </Heading>
-  //             <Row>
-  //               <Text>
-  //                 Allow channel to be joined and discoverable by anyone on
-  //                 platform irrespective of your network
-  //               </Text>
-  //               <Switch></Switch>
-  //             </Row>
-  //           </Col> */}
-  //         </Col>
-  //   return ({header:header , body:body});
-  // };
   const templateDetails = () => {
     const header = (
       <Row className="hr-between vr-center w-full">
-        <Button onClick={handleTabs} variant="state_default_hover" size="sm">
-          Back
-        </Button>
         <Heading as="h6" size="sm">
           New Channel
         </Heading>
@@ -388,7 +265,7 @@ const ChatNew = (props: any) => {
 
     return { body: body, header: header };
   };
-  
+
   const templateShare = () => {
     const header = (
       <Row className="d-flex justify-content-center align-items-center flex-grow-1">
@@ -469,7 +346,9 @@ const ChatNew = (props: any) => {
         </Row>
         <Text>Copy and share link to invite people</Text>
         <Row className="d-flex align-items-center justify-content-center m-t-1">
-          <Text className="m-r-1 w-40 text-muted" style={{fontSize:14}}>{inviteLink}</Text>
+          <Text className="m-r-1 w-40 text-muted" style={{ fontSize: 14 }}>
+            {inviteLink}
+          </Text>
           <IconImage
             onClick={() => {
               navigator.clipboard.writeText(inviteLink);
@@ -490,9 +369,44 @@ const ChatNew = (props: any) => {
   };
   const templateAccess = () => {
     const header = (
-      <Row className="d-flex justify-content-between align-items-center">
-        <Text>Manage Access </Text>
-        
+      <Row className="hr-between vr-center w-full">
+        <Button
+          onClick={() => setTab("details")}
+          variant="state_default_hover"
+          size="sm"
+        >
+          Back
+        </Button>
+
+        <Heading as="h6" size="sm">
+          Manage Access
+        </Heading>
+
+        <Button
+          size="sm"
+          variant="state_brand"
+          onClick={() => {
+            console.log("useraddresses", [
+              ...userAddresses,
+              ...hookPortalChannelMembership?.userIds,
+            ]);
+
+            console.log("profilefromlens", hookLensConnections.profile);
+            const lensAddress = hookLensConnections.profile.map((item: any) => {
+              return item.toLowerCase();
+            });
+            const allAddresses = [
+              ...hookPortalChannelMembership?.userIds,
+              ...userAddresses,
+              ...lensAddress,
+              ...nftAddresses,
+            ];
+            console.log("allAddresses", allAddresses);
+            hookPortalChannel?.update(allAddresses);
+          }}
+        >
+          Continue
+        </Button>
       </Row>
     );
 
@@ -650,45 +564,12 @@ const ChatNew = (props: any) => {
           </Text>
           <Switch />
         </Row>
-        <Row className="justify-content-around">
-          <Button width="150px" size="lg">
-            Skip
-          </Button>
-          <Button
-            width="150px"
-            size="lg"
-            variant="state_brand"
-            onClick={() => {
-              console.log("useraddresses", [
-                ...userAddresses,
-                ...hookPortalChannelMembership?.userIds,
-              ]);
-              // console.log("lmaoxd",lensUserId);
-
-              console.log("profilefromlens", hookLensConnections.profile);
-              const lensAddress = hookLensConnections.profile.map(
-                (item: any) => {
-                  return item.toLowerCase();
-                }
-              );
-              const allAddresses = [
-                ...hookPortalChannelMembership?.userIds,
-                ...userAddresses,
-                ...lensAddress,
-                ...nftAddresses
-              ];
-              console.log("allAddresses", allAddresses);
-              hookPortalChannel?.update(allAddresses);
-            }}
-          >
-            Continue
-          </Button>
-        </Row>
       </>
     );
 
     return { header: header, body: body };
   };
+
   const TemplateFollowers = () => {
     return hookPortalChannelMembership?.followers.length ? (
       hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
@@ -714,18 +595,6 @@ const ChatNew = (props: any) => {
               }
             />
           </Row>
-          // </StyledCard>
-          //   );
-          // }
-          //         <Checkbox
-          //           isChecked={hookPortalChannelMembership?.userIds?.includes(
-          //             String(item?.lens?.ownedBy?.toLowerCase())
-          //           )}
-          //           onChange={() =>
-          //             hookPortalChannelMembership.handleCheckedUsers(item)
-          //           }
-          //         />
-          // </Row>
         );
       })
     ) : (
@@ -775,13 +644,13 @@ const ChatNew = (props: any) => {
             variant=""
             className="m-r-1"
             onClick={() => {
-              let lenshandle=lensUserId;
-              if(!lensUserId.includes(".test")){
-                lenshandle = lensUserId.concat(".test")
+              let lenshandle = lensUserId;
+              if (!lensUserId.includes(".test")) {
+                lenshandle = lensUserId.concat(".test");
               }
               const lensProfileArray = [...lensProfiles, lenshandle];
               setLensProfiles(lensProfileArray);
-              setLensUserId("");              
+              setLensUserId("");
             }}
           >
             Add Profile
@@ -818,14 +687,16 @@ const ChatNew = (props: any) => {
               style={{ backgroundColor: "red", cursor: "pointer" }}
               key={`label-clearall `}
               onClick={() => {
-                setUserAddresses([]);                
+                setUserAddresses([]);
               }}
             >
               <Row className="vr-center p-0-5">
                 <Text>Clear All</Text>
               </Row>
             </Tag>
-          ):<></>}
+          ) : (
+            <></>
+          )}
           {userAddresses.map((item: any) => {
             return (
               <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
@@ -849,7 +720,10 @@ const ChatNew = (props: any) => {
             variant=""
             className="m-r-1"
             onClick={() => {
-              const addressesArray = [...userAddresses, inputAddress.toLowerCase()];
+              const addressesArray = [
+                ...userAddresses,
+                inputAddress.toLowerCase(),
+              ];
               setUserAddresses(addressesArray);
               setInputAddress("");
             }}
@@ -862,33 +736,33 @@ const ChatNew = (props: any) => {
       </Box>
     );
   };
-const TemplateNFT=()=>{
-  return (
-    <Box className="p-3" border="1px" borderRadius="md" borderColor="gray.700">
-      <Text>Contract Address</Text>
-      <Input
-        placeholder="Enter address"
-        value={inputContractAddress}
-        autoFocus
-        onChange={(e) => {
-          const inputValue = e.target.value;
-          setInputContractAddress(inputValue);
-        }}
-        className="m-t-1 m-b-1"
-      />        
-      <Row className="align-items-center">
-        <Button
-          variant=""
-          className="m-r-1"
-          onClick={fetchNftHolders}
-        >
-          Add Users
-        </Button>
-        
-      </Row>
-    </Box>
-  );
-}
+  const TemplateNFT = () => {
+    return (
+      <Box
+        className="p-3"
+        border="1px"
+        borderRadius="md"
+        borderColor="gray.700"
+      >
+        <Text>Contract Address</Text>
+        <Input
+          placeholder="Enter address"
+          value={inputContractAddress}
+          autoFocus
+          onChange={(e) => {
+            const inputValue = e.target.value;
+            setInputContractAddress(inputValue);
+          }}
+          className="m-t-1 m-b-1"
+        />
+        <Row className="align-items-center">
+          <Button variant="" className="m-r-1" onClick={fetchNftHolders}>
+            Add Users
+          </Button>
+        </Row>
+      </Box>
+    );
+  };
   let temp;
   switch (tab) {
     case "share":

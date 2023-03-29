@@ -51,8 +51,8 @@ import ChatNewDm from "./ChatNewDm";
 import useChatChannelsStore from "@/store/useChatChannelsStore";
 import useChatChannelStore from "@/store/useChatChannelStore";
 
-
 import ModalWindow from "../modal/ModalWindow";
+import Link from "next/link";
 const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
   const chatContext = useContext(ChatContext);
@@ -72,7 +72,7 @@ const ChatList = (props: any) => {
   const [showCard, setShowCard] = useState(true);
   // TODO: Fix bandaging
   useEffect(() => {
-    console.log(router, 'router is here')
+    console.log(router, "router is here");
     chatContext?.hookChannelList.load();
     chatContext?.hookChannel?.unload();
   }, [router.pathname]);
@@ -80,7 +80,7 @@ const ChatList = (props: any) => {
   const handleSelectChannel = (channel: any) => {
     setChannelSelected(channel);
     chatContext?.hookChannel?.fetch(channel);
-  }
+  };
 
   const hookPortalChannel = usePortalChannel(null, {
     mute: () => {
@@ -109,8 +109,7 @@ const ChatList = (props: any) => {
         position: "bottom-right",
       });
       chatContext?.hookChannelList?.load();
-      if (channelId == $channel.id)
-        chatContext?.hookChannel?.remove();
+      if (channelId == $channel.id) chatContext?.hookChannel?.remove();
     },
     delete: (channelId: any) => {
       toast({
@@ -120,23 +119,17 @@ const ChatList = (props: any) => {
         position: "bottom-right",
       });
       chatContext?.hookChannelList?.load();
-      if (channelId == $channel.id)
-        chatContext?.hookChannel?.remove();
+      if (channelId == $channel.id) chatContext?.hookChannel?.remove();
     },
   });
 
   const templateChatNew = () => {
-    return (
-      <ChatNew
-        modal={modalChatNew}
-      />
-    );
+    return <ChatNew modal={modalChatNew} />;
   };
 
   const TemplateChatNewDm = (props: any) => {
     return <ChatNewDm modal={modalChatNewDm}></ChatNewDm>;
   };
-
 
   const TemplateActions = (props: any) => {
     return (
@@ -281,14 +274,18 @@ const ChatList = (props: any) => {
             <Text fontSize="md" my={4}>
               Discover 1:1 encrypted DMs with your Lens frens powered by XMTP
             </Text>
-            <Button
-              variant="state_xmtp"
-              onClick={handleButtonClick}
-              width="100%"
-              // mb={2}
-            >
-              Explore 1:1 Chats
-            </Button>
+            <Link href="/chat/dm">
+              <Button
+                variant="state_xmtp"
+                onClick={() => {
+                  handleButtonClick()
+                }}
+                width="100%"
+                // mb={2}
+              >
+                Explore 1:1 Chats
+              </Button>
+            </Link>
           </StyledXMTPCard>
         )}
       </>
@@ -328,108 +325,111 @@ const ChatList = (props: any) => {
                       />
                     )} */}
                       <StyledCard
-                        className= {
+                        className={
                           $channel?.id == item?.id
                             ? "state_brand menu-item w-100 m-b-0-5"
                             : "state_card_hover menu-item w-100 m-b-0-5"
                         }
-                        
                       >
                         <Row className="vr-center">
-                        <Row
-                          className="vr-center w-11-12"
-                          onClick={() => {
-                            handleSelectChannel(item)
-                          }}
-                        >
-                          {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
-                          <Avatar
-                            size="md"
-                            className="m-r-0-5"
-                            name={item?.name}
-                            src={item?.image ? item?.image : item?.name}
-                          />
-                          <Col className="w-100 d-flex flex-col vr-center">
-                            <Row>
-                              <Text>
-                                {item?.name?.length > 12
-                                  ? `${item?.name?.slice(0, 12)}...`
-                                  : item?.name}
-                              </Text>
-                              {item?.raw && (
-                                <>
-                                  {!item?.raw?.disconnected &&
-                                    item?.raw?.muteStatus()?.muted && (
-                                      <IconImage
-                                        path="IconDarkMute.png"
-                                        size="2xs"
-                                        style={{ className: "m-l-0-5" }}
-                                      />
-                                    )}
-                                </>
-                              )}
-                            </Row>
-
-                            {item?.lastMessage && (
-                              <Col
-                                style={{ paddingRight: "5px" }}
-                                className="m-t-0-5"
-                              >
-                                <Text fontSize={"xs"}>
-                                  {item?.lastMessage?.user?.lensUsername ||
-                                    item?.lastMessage?.user?.lensHandle ||
-                                    truncateAddress(
-                                      item?.lastMessage?.user?.id
-                                    )}
-                                  :{" "}
-                                  {item?.lastMessage?.text.length > 14
-                                    ? `${item?.lastMessage?.text.slice(
-                                        0,
-                                        14
-                                      )}...`
-                                    : item?.lastMessage?.text}
+                          <Row
+                            className="vr-center w-11-12"
+                            onClick={() => {
+                              handleSelectChannel(item);
+                            }}
+                          >
+                            {/* <Checkbox defaultChecked className="m-r-0-5" /> */}
+                            <Avatar
+                              size="md"
+                              className="m-r-0-5"
+                              name={item?.name}
+                              src={item?.image ? item?.image : item?.name}
+                            />
+                            <Col className="w-100 d-flex flex-col vr-center">
+                              <Row>
+                                <Text>
+                                  {item?.name?.length > 12
+                                    ? `${item?.name?.slice(0, 12)}...`
+                                    : item?.name}
                                 </Text>
-                              </Col>
-                            )}
-                            {item?.lastMessage?.created_at && (
-                              <Col>
-                                <Text fontSize={"xs"}>
-                                  {new Date(
-                                    item?.lastMessage?.created_at
-                                  ).toLocaleString()}
-                                </Text>
-                              </Col>
-                            )}
+                                {item?.raw && (
+                                  <>
+                                    {!item?.raw?.disconnected &&
+                                      item?.raw?.muteStatus()?.muted && (
+                                        <IconImage
+                                          path="IconDarkMute.png"
+                                          size="2xs"
+                                          style={{ className: "m-l-0-5" }}
+                                        />
+                                      )}
+                                  </>
+                                )}
+                              </Row>
 
-                          {(item?.private == false) && <Row className="m-t-0-5"><Tag size="sm">Public</Tag></Row>}
-
-                          </Col>
-                          {item?.unreadCountObject &&
-                            item?.unreadCountObject[authContext?.address]
-                              ?.unread_messages > 0 &&
-                            !isClicked.includes(index) && (
-                              <Col>
-                                <Text
-                                  padding={1}
-                                  background={darkStyle.color5}
-                                  borderRadius="full"
+                              {item?.lastMessage && (
+                                <Col
+                                  style={{ paddingRight: "5px" }}
+                                  className="m-t-0-5"
                                 >
-                                  {
-                                    item?.unreadCountObject[
-                                      authContext?.address
-                                    ]?.unread_messages
-                                  }
-                                </Text>
-                              </Col>
-                            )}
-                        </Row>
+                                  <Text fontSize={"xs"}>
+                                    {item?.lastMessage?.user?.lensUsername ||
+                                      item?.lastMessage?.user?.lensHandle ||
+                                      truncateAddress(
+                                        item?.lastMessage?.user?.id
+                                      )}
+                                    :{" "}
+                                    {item?.lastMessage?.text.length > 14
+                                      ? `${item?.lastMessage?.text.slice(
+                                          0,
+                                          14
+                                        )}...`
+                                      : item?.lastMessage?.text}
+                                  </Text>
+                                </Col>
+                              )}
+                              {item?.lastMessage?.created_at && (
+                                <Col>
+                                  <Text fontSize={"xs"}>
+                                    {new Date(
+                                      item?.lastMessage?.created_at
+                                    ).toLocaleString()}
+                                  </Text>
+                                </Col>
+                              )}
 
-                        {($channelLoad && (channelSelected?.id == item?.id)) && <Spinner size='xs' />}
+                              {item?.private == false && (
+                                <Row className="m-t-0-5">
+                                  <Tag size="sm">Public</Tag>
+                                </Row>
+                              )}
+                            </Col>
+                            {item?.unreadCountObject &&
+                              item?.unreadCountObject[authContext?.address]
+                                ?.unread_messages > 0 &&
+                              !isClicked.includes(index) && (
+                                <Col>
+                                  <Text
+                                    padding={1}
+                                    background={darkStyle.color5}
+                                    borderRadius="full"
+                                  >
+                                    {
+                                      item?.unreadCountObject[
+                                        authContext?.address
+                                      ]?.unread_messages
+                                    }
+                                  </Text>
+                                </Col>
+                              )}
+                          </Row>
 
-                        <Col className="hr-center w-1-12 settingsIcon m-l-0-5">
-                          <TemplateActions item={item} />
-                          
-                        </Col>
+                          {$channelLoad && channelSelected?.id == item?.id && (
+                            <Spinner size="xs" />
+                          )}
+
+                          <Col className="hr-center w-1-12 settingsIcon m-l-0-5">
+                            <TemplateActions item={item} />
+                          </Col>
                         </Row>
                       </StyledCard>
                     </StyledChatItem>

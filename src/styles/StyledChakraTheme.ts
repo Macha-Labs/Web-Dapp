@@ -247,7 +247,12 @@ const theme = extendTheme({
       },
       variants: {
         state_xmtp: {
-          background: "#ef4444"
+          opacity: "0.95",
+          background: `linear-gradient(91.55deg, #FC4F37 -5.05%, #31006E 105.58%)`,
+          color: "#fff",
+          _hover: {
+            opacity: "1",
+          },
         }
       }
     },
