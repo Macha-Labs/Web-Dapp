@@ -16,7 +16,7 @@ import { XmtpProvider } from "@/providers/XmtpProvider";
 import { DataProvider } from "@/providers/DataProvider";
 
 const { chains, provider } = configureChains(
-  [polygonMumbai],
+  [polygon],
   [publicProvider()]
 );
 
@@ -35,6 +35,18 @@ export default function App({ Component, pageProps }: AppProps) {
   console.log('Rendering >>>>> APP');
   return (
     <>
+      {/* <!-- Google tag (gtag.js) --> */}
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-BB33MHKGE1"
+      ></script>
+      <script>
+        {`window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-BB33MHKGE1');`}
+      </script>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">

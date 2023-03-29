@@ -237,7 +237,7 @@ const ChatInput = (props: any) => {
           </Button>
           <input
             id="upload-file"
-            onChange={chatContext?.hookChat.handleAttachment}
+            onChange={e => {chatContext?.hookChat.handleAttachment(e)}}
             type="file"
             hidden
           />

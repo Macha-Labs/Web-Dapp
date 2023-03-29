@@ -70,12 +70,12 @@ const AuthCard = () => {
           </Col>
         </Col>
       </StyledCard>
-      <StyledCard className="m-t-2 flex-center text-center state_lens">
+      {/* <StyledCard className="m-t-2 flex-center text-center state_lens">
           <Col className="hr-center">
           <Heading as="h5" size="sm" className="m-b-0-5">Claim a Lens Testnet Handle</Heading>
           <Text className="text-center" fontSize="14">Visit <Link href="https://testnet.lenster.xyz/" target={'_blank'}>www.testnet.lenster.xyz</Link> to claim your lens handle.<br/>Please note this is for testing purpose only to access product on testnet.</Text>
           </Col>
-      </StyledCard>
+      </StyledCard> */}
     </div>
   );
 };

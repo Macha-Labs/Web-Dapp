@@ -160,6 +160,7 @@ const ChatWindow = (props: any) => {
             >
               <ChatMessage
                 message={message}
+                channel={$channel}
                 hookChat={chatContext?.hookChat}
                 authContext={authContext}
                 key={`a-${message.id}`}

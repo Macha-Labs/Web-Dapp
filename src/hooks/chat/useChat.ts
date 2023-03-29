@@ -8,6 +8,7 @@ import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import useMention from "../stream/useMention";
 import useChatChannelStore from "@/store/useChatChannelStore";
+import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
 
 const useChat = () => {
   
@@ -18,6 +19,7 @@ const useChat = () => {
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
   const [streamLoading, setStreamLoading] = useState<any>(false);
   const [attachItem, setAttachItem] = useState<any>();
+  const [attachEvent, setAttachEvent] = useState<any>();
   const [reactions, setReactions] = useState<any>({});
   const [actionMessage, setActionMessage] = useState<any>({
     action: "",
@@ -104,14 +106,16 @@ const useChat = () => {
       }
 
       if (attachItem) {
-        const fileCid = await uploadAtIpfsRoot([attachItem]);
+        console.log("Here is the attach item", attachItem);
+        const fileCid: any = await deploytoLightHouse(attachEvent);
+        console.log("The uploaded filedata ", fileCid);
         messageData = {
           ...messageData,
           attachments: [
             {
               type: attachItem.type.split("/")[0],
-              asset_url: `https://dweb.link/ipfs/${fileCid}`,
-              thumb_url: `https://dweb.link/ipfs/${fileCid}`,
+              asset_url: `https://gateway.lighthouse.storage/ipfs/${fileCid}`,
+              thumb_url: `https://gateway.lighthouse.storage/ipfs/${fileCid}`,
               name: attachItem?.name,
             },
           ],
@@ -302,8 +306,11 @@ const useChat = () => {
   };
 
   const handleAttachment = async (attachment: any) => {
+    console.log("File event ", attachment);
+
     const filePicked = attachment.target.files[0];
     setAttachItem(filePicked);
+    setAttachEvent(attachment);
   };
 
   const deleteAttachment = () => {
@@ -378,12 +385,12 @@ const useChat = () => {
 
   const handleReaction = async (reaction: any, message: any) => {
     let result;
-    if (message.own_reactions.length) {
+    if (message?.own_reactions?.length) {
       let available = false;
-      message.own_reactions.filter(async (item: any) => {
+      message?.own_reactions?.filter(async (item: any) => {
         if (item.type == reaction.type) {
           available = true;
-          result = await $channel.raw.deleteReaction(message?.id, reaction.type);
+          result = await $channel?.raw?.deleteReaction(message?.id, reaction.type);
         }
       });
       if (!available) {
