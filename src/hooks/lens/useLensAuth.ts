@@ -24,7 +24,7 @@ const useLensAuth = () => {
 
   
 
-  const fetchLensToken = async (address: any) => {
+  const fetchLensToken = async (address: any) => {  
     logger(
       "lens",
       "useLensAuth.fetchLensToken",
@@ -66,11 +66,12 @@ const useLensAuth = () => {
     const refreshToken = window.localStorage.getItem("refreshToken");
     if (accessToken)
         return { accessToken: accessToken, refreshToken: refreshToken };
-    return {};
+    return { refreshToken: refreshToken };
   };
 
-  const getNewAccessToken = () => {
+  const getNewAccessToken = (refreshToken:any) => {
     newRefreshToken(refreshToken).then((data) => {
+      console.log("refreshtokens",data);
       setRefreshToken(data["refreshToken"]);
       addTokenCookie("accessToken",data["accessToken"]);
     });
@@ -82,8 +83,8 @@ const useLensAuth = () => {
     console.log("logging tokens ", tokens);
     if (tokens?.accessToken)
         return tokens;
-    else if(tokens.refreshToken){
-      return getNewAccessToken();
+    else if(tokens?.refreshToken){
+      return getNewAccessToken(tokens?.refreshToken);
     }
 
     return fetchLensToken(address);

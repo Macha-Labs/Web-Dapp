@@ -43,20 +43,21 @@ const AuthCard = () => {
           </Col>
           <Col className="w-60">
             {!authContext.address && <ConnectWalletButton />}
-            {authContext.address && getCookie("accessToken") == undefined && (
-              <Button
-                className=""
-                size="md"
-                variant="state_lens"
-                isLoading={authContext?.isLoadingLens}
-                isDisabled={lensBtnState.disabled}
-                onClick={() => {
-                  authContext.connectLens(callBacks);
-                }}
-              >
-                {lensBtnState.text}
-              </Button>
-            )}
+            {authContext.address &&
+              window.localStorage.getItem("refreshToken") == undefined && (
+                <Button
+                  className=""
+                  size="md"
+                  variant="state_lens"
+                  isLoading={authContext?.isLoadingLens}
+                  isDisabled={lensBtnState.disabled}
+                  onClick={() => {
+                    authContext.connectLens(callBacks);
+                  }}
+                >
+                  {lensBtnState.text}
+                </Button>
+              )}
             {authContext.address &&
               authContext?.user?.lens?.id &&
               !authContext.xmtpClientAddress && (

@@ -34,18 +34,15 @@ const wagmiClient = createClient({
 export default function App({ Component, pageProps }: AppProps) {
   console.log('Rendering >>>>> APP');
   return (
-    <>
+    <>     
       {/* <!-- Google tag (gtag.js) --> */}
-      <script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-BB33MHKGE1"
-      ></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-FCQZ64DYYZ"></script>
       <script>
         {`window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-BB33MHKGE1');`}
+        gtag('config', 'G-FCQZ64DYYZ');`}
       </script>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>

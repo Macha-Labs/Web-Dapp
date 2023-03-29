@@ -3,6 +3,7 @@ export const addTokenCookie = (
     tokenValue: string,
     expireMinutes: number = 30
   ) => {
+    console.log("tokenvalue",tokenValue)
     const expireDate = new Date();
     expireDate.setTime(expireDate.getTime() + expireMinutes * 60 * 1000);
     let expires = "expires=" + expireDate.toUTCString();
