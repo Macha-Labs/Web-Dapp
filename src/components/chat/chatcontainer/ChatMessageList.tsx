@@ -11,7 +11,7 @@ import React from "react";
 import ChatMessage from "./ChatMessage";
 
 function ChatMessageList(props: any) {
-
+  
   return (
     <ModalSlider event={props.modal} size="sm" 
     

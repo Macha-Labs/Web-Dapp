@@ -9,8 +9,6 @@ const useLensProfile = () => {
   const [loadingText, setLoadingText] = useState<any>(
     "Fetching profile from lens"
   );
-  const authContext = useContext(AuthContext);
-  const address = authContext.address;
 
   const getOwnedProfiles = async (address: any) => {
     setIsLoading(true);
@@ -30,12 +28,6 @@ const useLensProfile = () => {
       return null;
     }
   };
-
-  useEffect(() => {
-    if (address) {
-      getOwnedProfiles(address);
-    }
-  }, [address]);
 
   return {
     userLens: UserLens$(lensProfile),

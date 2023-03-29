@@ -1,6 +1,7 @@
 import { Button, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {Landing} from "../../components/icons/IconImage";
 
 const LandingPage = () => {
@@ -15,6 +16,12 @@ const LandingPage = () => {
     "Lens Protocol: 76K Users",
     "Lens Protocol: 76K Users",
   ];
+
+  const router = useRouter();
+
+  const redirectChat = () => {
+    router.push("/chat");
+  }
 
   return (
     <>
@@ -71,7 +78,9 @@ const LandingPage = () => {
                   </Link>
                 </div>
               </div>
-              <Button variant="state_brand">Beta Soon</Button>
+              <Button onClick={() => redirectChat()} variant="state_brand">
+                Login Beta
+              </Button>
             </div>
           </div>
         </nav>
@@ -753,16 +762,18 @@ const LandingPage = () => {
             <div className="d-flex justify-content-between borderBox py-4  px-4 backgroundDarkCard mt-3 mt-md-5  bottomSocialLinksWidth">
               <Link
                 target="_blank"
-                href="https://medium.com/@metaworklabs"
+                href="https://mirror.xyz/0xE5717ede08ba94e516b6706A6ccBE30D6DA5d80D"
                 className=" d-flex flex-grow-1 justify-content-between"
               >
                 <div className="d-flex align-items-center ">
-                  <img
-                    src="./assets/base-medium.svg"
+                  {/* <img
+                    src="./assets/base-mirror.svg"
                     className="footerlogoos"
                     alt="twitterlogo"
-                  />
-                  <h2 className="bottomLinks mt-1 ps-4">Medium</h2>
+                  /> */}
+                  <Landing path="base-mirror.svg" />
+                  {/* <Image src="./assets/base-mirror.svg" /> */}
+                  <h2 className="bottomLinks mt-1 ps-4">Mirror</h2>
                 </div>
                 <img src="./assets/base-blue-ArrowRight.svg" alt="arrow" />
               </Link>

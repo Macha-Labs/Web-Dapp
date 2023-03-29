@@ -2,7 +2,7 @@ import useLensConnections from "@/hooks/lens/useLensConnections";
 import useLensFollows from "@/hooks/lens/useLensFollow";
 import useLensPostsForUser from "@/hooks/lens/useLensPostsForUser";
 import LayoutProfileBanner from "@/layouts/LayoutProfileBanner";
-import { Col, Row, StyledCard, StyledIcon } from "@/styles/StyledComponents";
+import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import { ChatIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -14,6 +14,7 @@ import {
   TabPanels,
   Tabs,
   Text,
+  useToast,
   Wrap,
 } from "@chakra-ui/react";
 import LayoutPostList from "../../layouts/post/LayoutPostList";
@@ -24,13 +25,18 @@ import { AuthContext } from "@/providers/AuthProvider";
 import IconImage from "../icons/IconImage";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 import Link from "next/link";
+import useXmtpChannelNew from "@/hooks/xmtp/useXmtpChannelNew";
+import { useRouter } from "next/router";
 
 const UserProfile = ({ user }: any) => {
   console.log("User Profile", user);
   const [isFollowed, setIsFollowed] = useState<boolean>(false);
+  const hookXmtpChannelNew = useXmtpChannelNew();
   const hookLensFollow = useLensFollows(user?.lens?.id);
   const hookLensPostsForUser = useLensPostsForUser(user?.lens?.id);
   const { getOwnedProfiles, userLens } = useLensProfile();
+  const router = useRouter();
+  const toast = useToast();
 
   useEffect(() => {
     getOwnedProfiles(user?.lens?.ownedBy);
@@ -44,6 +50,24 @@ const UserProfile = ({ user }: any) => {
   console.log("userLens", userLens);
 
   const authContext = useContext(AuthContext);
+
+  const callbackMessage = {
+    success: () => {
+        router.push('/chat/dm');
+    },
+    error: () => {
+        toast({
+            title: "User not on XMTP",
+            status: "error",
+            duration: 3000,
+            position: "bottom-right",
+          });
+    }
+}
+
+  const handleMessage = () => {
+    hookXmtpChannelNew?.initiateDirect(user?.lens?.ownedBy, callbackMessage)
+  }
 
   const templatePosts = () => {
     return (
@@ -112,7 +136,7 @@ const UserProfile = ({ user }: any) => {
                 <Col className="flex-hr-vr-center">
                   <Image src="/assets/nofollow.png" className="w-40 m-b-2 m-t-1" />
                   <Heading className="m-b-1" size="lg">
-                    There is nobody here, yet.
+                    There is Nobody here, yet.
                   </Heading>
                   <Heading className="" size="xs">
                     People you follow on lens will be displayed here
@@ -168,7 +192,7 @@ const UserProfile = ({ user }: any) => {
     );
   };
 
-  const TemplateProfile = () => {
+  const templateProfile = () => {
     return (
       <StyledCard>
         <LayoutProfileBanner profile={user?.lens} />
@@ -227,9 +251,10 @@ const UserProfile = ({ user }: any) => {
             <Link href={`chat/dm`}>
               <Button
                 leftIcon={<ChatIcon />}
-                onClick={() => {}}
+                onClick={handleMessage}
                 variant="state_brand"
                 size="md"
+                isLoading={hookXmtpChannelNew.isLoading}
               >
                 Message
               </Button>
@@ -240,7 +265,7 @@ const UserProfile = ({ user }: any) => {
     );
   };
 
-  const TemplateTabs = () => {
+  const templateTabs = () => {
     return (
       <Tabs variant="unstyled">
         <LayoutCardPannel
@@ -290,8 +315,8 @@ const UserProfile = ({ user }: any) => {
     <div>
       {user ? (
         <>
-          <TemplateProfile />
-          <TemplateTabs />
+          {templateProfile()}
+          {templateTabs()}
         </>
       ) : (
         <></>

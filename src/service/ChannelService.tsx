@@ -102,5 +102,6 @@ export const serviceRemoveMembers  = async (data: any) => {
             "Content-Type": "application/json",
         },
     });
+    console.log("serviceRemoveMembers response", response);
     return response;
 };

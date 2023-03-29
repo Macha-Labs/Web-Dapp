@@ -6,18 +6,21 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect } from "react";
-import { ChatContext } from "@/providers/ChatProvider";
+import React, { useContext, useEffect} from "react";
 import { truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
-import { DataContext } from "@/providers/DataProvider";
 import ModalSlider from "@/components/modal/ModalSlider";
+import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
+import useChatChannelStore from "@/store/useChatChannelStore";
+import { useChatMembersStore } from "@/store/useChatMembersStore";
+import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatMembers = (props: any) => {
-  const chatContext = useContext(ChatContext);
-  const dataContext = useContext(DataContext);
-  const hookPortalChannelMembership = usePortalChannelMembership(dataContext?.channel);
+  const authContext = useContext(AuthContext) as AuthContextType;
+  const chatContext = useContext(ChatContext)
+  const $channel = useChatChannelStore((state: any) => state.channel);
+  const hookPortalChannelMembership = usePortalChannelMembership($channel);
+  const $memberAll = useChatMembersStore((state: any) => state.memberAll);
   const toast = useToast();
 
   const callbackRemove = () => {
@@ -27,9 +30,15 @@ const ChatMembers = (props: any) => {
       duration: 3000,
       position: "bottom-right",
     });
-    chatContext?.streamContext.reloadMembers();
+    chatContext?.hookMembers?.load($channel
+      );
   }
 
+  const onClickAddMembers = () => {
+    props.modalAddMembers.onOpen()
+    props.modalChatMembers.onClose();
+    props?.modalSettings.onClose()
+  }
 
   return (
     <ModalSlider size="sm" event={props.modalChatMembers} header={
@@ -46,7 +55,7 @@ const ChatMembers = (props: any) => {
             Remove
           </Button>
           <Button
-            onClick={() => props.modalAddMembers.onOpen()}
+            onClick={onClickAddMembers}
             size="sm"
             variant="state_brand"
           >
@@ -56,8 +65,7 @@ const ChatMembers = (props: any) => {
       </>
     }>
       <>
-        {dataContext?.members?.onlineUsers
-          .concat(dataContext?.members?.offlineUsers)
+        {$memberAll
           ?.map((item: any, index: any) => {
             return (
               <StyledCard className="state_hover m-b-0-5"  key={`key-${index}`}>
@@ -73,14 +81,16 @@ const ChatMembers = (props: any) => {
                       <Text color="#6FC62A">@{item?.lens?.handle}</Text>
                     </Col>
                   </Row>
-                  <Checkbox
+
+                  {item?.lens?.ownedBy != authContext?.address && <Checkbox
                     value=""
                     onChange={() =>
                       hookPortalChannelMembership.handleCheckedUsers(
                         item
                       )
                     }
-                  />
+                  />}
+                  
                 </Row>
               </StyledCard>
             );

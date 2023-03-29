@@ -29,7 +29,7 @@ const theme = extendTheme({
         background: '#000'
       },
       ".chakra-modal__content": {
-        borderLeft: `${style.modal.border.default} !important`,
+        // borderLeft: `${style.modal.border.default} !important`,
       },
       ".chakra-modal__body": {
         background: `${style.modal.bg.default}`,

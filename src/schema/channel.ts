@@ -1,3 +1,5 @@
+import { helperIPFS } from "@/helpers";
+
 export class Channel$ {
   source: String;
   data: any;
@@ -82,7 +84,7 @@ export class Channel$ {
     this.lastMessage = data?.state?.messageSets[0]?.messages[data?.state?.messageSets[0]?.messages?.length - 1],
     this.membersCount = data.data?.member_count,
     this.notificationCount = null,
-    this.pinnedMessages = data.data?.state?.pinnedMessages,
+    this.pinnedMessages = data?.state?.pinnedMessages,
     this.raw = data
   }
 
@@ -100,7 +102,7 @@ export class Channel$ {
     this.created_at= data?.createdAt;
     this.updated_at= data?.updatedAt;
     this.permissions= data?.permissions;
-    this.image= "";
+    this.image= helperIPFS(data?.peer?.lens?.picture?.original?.url) || helperIPFS(data?.peer?.lens?.image);
     this.lastMessage= "";
     this.membersCount= 0;
     this.notificationCount= 0;

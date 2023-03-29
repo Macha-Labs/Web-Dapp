@@ -5,7 +5,7 @@ import { getCookie } from "../storage/browserStorage";
 const TESTNETURL = "https://api-mumbai.lens.dev/";
 const MAINNETURL = "https://api.lens.dev";
 
-const APIURL = TESTNETURL;
+const APIURL = MAINNETURL;
 
 const httpLink = createHttpLink({
   uri: APIURL,

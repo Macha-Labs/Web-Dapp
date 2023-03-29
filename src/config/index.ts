@@ -5,8 +5,8 @@ export const config = {
   STREAM_APIKEY: "s7k8yarexp9g",
   STREAM_SECRET:
     "czw7rguj3bcpzetr5e2fcx366rq26g38rg6taj9x4gr6h8my3sk25msrx7bcr4we",
-  // url: "https://metawork-server.herokuapp.com",
-  url: "http://localhost:3080",
+  url: "https://metawork-server.herokuapp.com",
+  // url: "http://localhost:3080",
   // url: "https://metawork-server-staging.herokuapp.com/",
   DISCORD_API_ENDPOINT: "https://discord.com/api/v10",
   DISCORD_REDIRECT_URL: "http://localhost:3000/app",
@@ -26,4 +26,7 @@ export const config = {
   FOLLOW_NFT_CONTRACT: "0xb0298c5540f4cfb3840c25d290be3ef3fe09fa8c",
   TESTNET_LENS_HUB_CONTRACT: "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82",
   TESTNET_LENS_PERIPHERY_CONTRACT: "0xD5037d72877808cdE7F669563e9389930AF404E8",
+
+  // Lighthouse - Polygon Mainnet
+  LIGHTHOUSE_API_KEY: "369c0ebc-5307-4cad-aa3e-b8a3a7364c2c"
 };

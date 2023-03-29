@@ -6,7 +6,7 @@ import {
   getProfiles,
 } from "../../helpers/lens/lens";
 import { useEffect, useState } from "react";
-import { User$, UserLens$ } from "../../schema/user";
+import { User$} from "../../schema/user";
 
 const useLensConnections = (account?: any, lensId?: any) => {
   const [following, setFollowing] = useState<any>([]);
@@ -67,11 +67,17 @@ const useLensConnections = (account?: any, lensId?: any) => {
     }
   }, [lensId]);
 
+  const _fetch = (userLens: any) => {
+    console.log('fetching user followers and following');
+    getFollowing(userLens.ownedBy);
+    getFollowers(userLens.id)
+  }
+
   return {
     following: following,
     followers: followers,
     profile:profile,
-    getFollowers: getFollowers,
+    fetch: _fetch,
     getLensProfile: getLensProfile,
   };
 };

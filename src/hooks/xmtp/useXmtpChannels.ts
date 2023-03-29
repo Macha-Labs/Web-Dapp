@@ -5,59 +5,55 @@ import { useContext, useEffect, useState } from "react";
 import useLensProfileList from "../lens/useLensProfileList";
 
 const useXmtpChannels = () => {
+  console.log('Rendering >>>>> useXmtpChannels');
   const authContext = useContext(AuthContext);
   const [allConversations, setAllConversations] = useState<any>();
-  const [xmtpConvo, setXmtpConvo] = useState<any>();
-
+  const [rawConversations, setRawConversations] = useState<any>();
   const hookLensProfileList = useLensProfileList();
 
-  const _listen = async () => {
-    for await (const conversation of xmtpConvo) {
+  useEffect(() => {
+    if (authContext?.xmtpLogs) {
+      _watch();
+    }
+  }, [authContext?.xmtpLogs]);
+
+
+  useEffect(() => {
+    
+  }, [allConversations])
+
+  const _watch = async () => {
+    console.log("Calling useXmtpChannels._watch", authContext?.xmtpLogs);
+    for await (const conversation of authContext?.xmtpLogs) {
       console.log("New conversation started with ", conversation);
-      setAllConversations((prevConversations: any) => {
-        const conversations = [...prevConversations];
-        conversations.push(new Channel$("xmtp", conversation));
-        return conversations;
-      });
+      let conversations: any[] = [];
+      if (allConversations) {
+        conversations = [...allConversations];
+        conversations.unshift(new Channel$("xmtp", conversation));
+        setAllConversations(conversations);
+      } else {
+        console.log("No conversations");
+      }
+        
     }
   };
 
-  useEffect(() => {
-    const streamConversations = async () => {
-      const xmtpNew = await authContext?.xmtpClient?.conversations?.stream();
-      console.log("New xmtpConvo ", xmtpNew);
-      setXmtpConvo(xmtpNew);
-    };
-    streamConversations();
-  }, []);
-
-  useEffect(() => {
-    if (xmtpConvo) {
-      _listen();
-    }
-  }, [xmtpConvo]);
-
-  useEffect(() => {
-    if (allConversations?.length) {
-    }
-  }, [allConversations]);
+  const _unwatch = () => {
+    authContext?.xmtpLogs.return()
+  }
 
   const _fetch = async () => {
-    const conversationList =
-      await authContext?.xmtpClient?.conversations?.list();
-    // const data = conversationList?.map((item: any) => {
-    //   // const peer = hookLensProfileList.fetch(item.peerAddress);
-    //   // console.log("useXmtpChannels peer", ChannelXMTP$({...item, peer: peer}));
-    //   return new Channel$("xmtp", item);
-    // });
+    let conversationList = await authContext?.xmtpClient?.conversations?.list();
+    conversationList = conversationList.reverse()
+    setRawConversations(conversationList);
+
     const conversationMap = await conversationList
-      .map(async (item: any) => {
+      ?.map(async (item: any) => {
         const peer = await hookLensProfileList.fetch(item.peerAddress);
         const channelData = new Channel$("xmtp", {...item, peer: peer, raw: item});
-        console.log("Useeffect xmtp lens ", peer, item);
         return channelData;
       })
-      Promise.all(conversationMap).then((result: any) => {
+      Promise?.all(conversationMap).then((result: any) => {
         logger("xmtp", "useXmtpChannels._fetch", "channels from xmtp", [
           result,
         ]);

@@ -1,23 +1,21 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { User$ } from "../../schema/user";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { logger } from "@/helpers/logger";
-import { StreamContext } from "@/providers/StreamProvider";
 
 const useStreamChannelMembers = () => {
   const authContext = useContext(AuthContext) as AuthContextType;
-  const streamContext = useContext(StreamContext);
-  const [allUsersIds, setAllUsersIds] = useState<any>([]);
-  const [onlineUsers, setOnlineUsers] = useState<any>([]);
-  const [offlineUsers, setOfflineUsers] = useState<any>([]);
+  const [allUsersIds, setAllUsersIds] = useState<any>(null);
+  const [onlineUsers, setOnlineUsers] = useState<any>(null);
+  const [offlineUsers, setOfflineUsers] = useState<any>(null);
   const [userIsMember, setUserIsMember] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>();
 
-  const _fetch = async () => {
-    if (streamContext?.hookChannel?.channel?.raw?.disconnected)
+  const _fetch = async (channel: any) => {
+    if (channel?.raw?.disconnected)
       return;
 
-    const response = await streamContext?.hookChannel?.channel?.raw?.queryMembers({});
+    const response = await channel?.raw?.queryMembers({});
     let onlineIds: any[] = [];
     let offlineIds: any[] = [];
     response?.members.map((item: any, index: number) => {
@@ -39,9 +37,9 @@ const useStreamChannelMembers = () => {
   };
 
   // checking if current user is a member of this channel
-  const checkUserIsAMember = async () => {
+  const checkUserIsAMember = async (channel: any) => {
     try {
-      const result = await streamContext?.hookChannel?.raw?.queryMembers({
+      const result = await channel.raw?.queryMembers({
         id: authContext?.user.lens?.id,
       });
 
@@ -60,15 +58,12 @@ const useStreamChannelMembers = () => {
     return user.online == true;
   };
 
-  useEffect(() => {
-    _fetch();
-  }, [streamContext?.hookChannel?.channel?.id])
 
   return {
     fetch: _fetch,
     checkOnline: checkOnline,
     users: onlineUsers,
-    allUsers: onlineUsers.concat(offlineUsers),
+    allUsers: onlineUsers?.concat(offlineUsers),
     allUsersIds: allUsersIds,
     onlineUsers: onlineUsers,
     offlineUsers: offlineUsers,

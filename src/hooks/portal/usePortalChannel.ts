@@ -7,8 +7,9 @@ import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import { Channel$ } from "@/schema/channel";
 
 const usePortalChannel = (channelObj: any, callback: any = null) => {
+  console.log('Rendering >>>>> usePortalChannel');
   const [channel, setChannel] = useState(
-    channelObj ? channelObj : new Channel$('getstream', {})
+    channelObj ? channelObj : new Channel$('getstream', {private: true})
   );
   const [isLoading, setIsLoading] = useState(false);
   const authProvider = useContext(AuthContext) as AuthContextType;
@@ -66,8 +67,7 @@ const usePortalChannel = (channelObj: any, callback: any = null) => {
           );
 
           setIsLoading(false);
-          callback.new();
-          // console.log()
+          callback.new(res._id);
         })
         .catch(err => {
           logger(
@@ -133,7 +133,7 @@ const usePortalChannel = (channelObj: any, callback: any = null) => {
   const deleteChannel = (channel: any) => {
     logger("channel", "deleteChannel", "Deleting Channel", [channel]);
     channel.raw.delete().then((res: any) => {
-      callback.delete();
+      callback.delete(channel.id);
     });
   };
   const clearChat = (channel: any) => {
@@ -158,7 +158,7 @@ const usePortalChannel = (channelObj: any, callback: any = null) => {
   const leaveChannel = (channel: any) => {
     logger("channel", "usePortalChannelLeave", "Leaving Channel", [channel]);
     channel.raw.removeMembers([authProvider.address]).then((res: any) => {
-      callback.leave();
+      callback.leave(channel.id);
     });
     
   };

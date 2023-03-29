@@ -7,16 +7,19 @@ import { truncateAddress } from "../../helpers";
 import { deletePost } from "../../helpers/lens/lens";
 import { AuthContext, AuthContextType } from "../../providers/AuthProvider";
 import useMention from "../stream/useMention";
+import useChatChannelStore from "@/store/useChatChannelStore";
+import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
 
-const useChat = (client: any, channel: any) => {
-  console.log('Rendering >>>>> useChat');
+const useChat = () => {
+  
   const authContext = useContext(AuthContext) as AuthContextType;
-
+  const $channel = useChatChannelStore((state: any) => state.channel);
   //
   const [chatMeta, setChatMeta] = useState<any>({});
   const [rerenderSwitch, setRerenderSwitch] = useState<any>(false);
   const [streamLoading, setStreamLoading] = useState<any>(false);
   const [attachItem, setAttachItem] = useState<any>();
+  const [attachEvent, setAttachEvent] = useState<any>();
   const [reactions, setReactions] = useState<any>({});
   const [actionMessage, setActionMessage] = useState<any>({
     action: "",
@@ -37,6 +40,9 @@ const useChat = (client: any, channel: any) => {
   // Slash & Widget
   const [slashCmd, setSlashCmd] = useState<any>();
   const [slashCmdValue, setSlashCmdValue] = useState<any>();
+
+
+  console.log('Rendering >>>>> useChat', textareaRef);
 
   const slashRun = (command: any) => {
     setSlashCmdValue(command.name);
@@ -100,14 +106,16 @@ const useChat = (client: any, channel: any) => {
       }
 
       if (attachItem) {
-        const fileCid = await uploadAtIpfsRoot([attachItem]);
+        console.log("Here is the attach item", attachItem);
+        const fileCid: any = await deploytoLightHouse(attachEvent);
+        console.log("The uploaded filedata ", fileCid);
         messageData = {
           ...messageData,
           attachments: [
             {
               type: attachItem.type.split("/")[0],
-              asset_url: `https://dweb.link/ipfs/${fileCid}`,
-              thumb_url: `https://dweb.link/ipfs/${fileCid}`,
+              asset_url: `https://gateway.lighthouse.storage/ipfs/${fileCid}`,
+              thumb_url: `https://gateway.lighthouse.storage/ipfs/${fileCid}`,
               name: attachItem?.name,
             },
           ],
@@ -120,6 +128,7 @@ const useChat = (client: any, channel: any) => {
         setStreamLoading(false);
         setAttachItem(null);
         setActionMessage(null);
+        textareaRef.current.value = null;
 
         
         hookMention.onRefresh();
@@ -134,7 +143,7 @@ const useChat = (client: any, channel: any) => {
     const notificationPayload = {
       topic: "newMessage",
       notification: {
-        title: channel.name,
+        title: $channel.name,
         body: `${
           authContext.user?.lens?.name ||
           authContext.user?.lens?.handle ||
@@ -145,7 +154,7 @@ const useChat = (client: any, channel: any) => {
       data: {
         type: "channelMessage",
         name: "Portal New Message",
-        channelId: channel.id,
+        channelId: $channel.id,
       },
       android: {
         ttl: 4500,
@@ -163,7 +172,7 @@ const useChat = (client: any, channel: any) => {
     if (actionMessage?.action !== "EDIT") {
       return;
     }
-    await client
+    await authContext?.streamClient
       .updateMessage({
         ...actionMessage.item,
         id: actionMessage.item?.id,
@@ -188,7 +197,7 @@ const useChat = (client: any, channel: any) => {
       });
     }
 
-    client
+    authContext?.streamClient
       .deleteMessage(message?.id, true)
       .then(() => {
         toast({
@@ -209,7 +218,7 @@ const useChat = (client: any, channel: any) => {
   };
 
   const pinMessage = async (message: any) => {
-    await client
+    await authContext?.streamClient
       .pinMessage(message, null)
       .then(() => {
         toast({
@@ -230,7 +239,7 @@ const useChat = (client: any, channel: any) => {
   };
 
   const unPinMessage = async (message: any) => {
-    await client
+    await authContext?.streamClient
       .unpinMessage(message)
       .then(() => {
         toast({
@@ -258,17 +267,17 @@ const useChat = (client: any, channel: any) => {
     // let typingTimeout;
     // if (typingTimeout !== undefined) clearTimeout(typingTimeout);
 
-    // await channel.raw.keystroke();
+    // await $channelraw.keystroke();
 
     // typingTimeout = setTimeout(async () => {
-    //   await channel.raw.stopTyping();
+    //   await $channelraw.stopTyping();
     // }, 3000);
 
-    // channel.raw.on("typing.start", (event: any) => {
-    //   let typingUser = Object.keys(channel.raw.state.typing);
+    // $channelraw.on("typing.start", (event: any) => {
+    //   let typingUser = Object.keys($channelraw.state.typing);
     //   setUsersWhoAreTyping(typingUser);
     // });
-    // channel.raw.on("typing.stop", (event: any) => {
+    // $channelraw.on("typing.stop", (event: any) => {
     //   setUsersWhoAreTyping(null);
     // });
 
@@ -284,8 +293,6 @@ const useChat = (client: any, channel: any) => {
       } else if (textareaRef.current?.value.length > 0 || attachItem) {
         await addMessage(callback);
       }
-    } else if (event.key == "/") {
-      setSlashCmd(true);
     }
   };
 
@@ -299,8 +306,11 @@ const useChat = (client: any, channel: any) => {
   };
 
   const handleAttachment = async (attachment: any) => {
+    console.log("File event ", attachment);
+
     const filePicked = attachment.target.files[0];
     setAttachItem(filePicked);
+    setAttachEvent(attachment);
   };
 
   const deleteAttachment = () => {
@@ -367,7 +377,7 @@ const useChat = (client: any, channel: any) => {
   };
 
   const sendReaction = async (reaction: any, message: any) => {
-    return await channel.raw.sendReaction(message?.id, {
+    return await $channel.raw.sendReaction(message?.id, {
       type: reaction?.type,
       score: 1,
     });
@@ -375,12 +385,12 @@ const useChat = (client: any, channel: any) => {
 
   const handleReaction = async (reaction: any, message: any) => {
     let result;
-    if (message.own_reactions.length) {
+    if (message?.own_reactions?.length) {
       let available = false;
-      message.own_reactions.filter(async (item: any) => {
+      message?.own_reactions?.filter(async (item: any) => {
         if (item.type == reaction.type) {
           available = true;
-          result = await channel.raw.deleteReaction(message?.id, reaction.type);
+          result = await $channel?.raw?.deleteReaction(message?.id, reaction.type);
         }
       });
       if (!available) {
