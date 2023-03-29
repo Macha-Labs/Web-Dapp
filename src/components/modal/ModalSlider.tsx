@@ -25,7 +25,7 @@ const ModalSlider = (props: any) => {
             <DrawerContent>
                 
                 {props.header && <DrawerHeader>
-                    <Row className="vr-center">
+                    <Row className="vr-center justify-content-center">
                        {props.header}
                     </Row>
                 </DrawerHeader>}

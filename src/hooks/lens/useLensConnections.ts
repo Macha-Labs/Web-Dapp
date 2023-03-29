@@ -1,14 +1,20 @@
 import { logger } from "./../../helpers/logger";
-import { fetchFollowers, fetchFollowing } from "../../helpers/lens/lens";
+import {
+  fetchFollowers,
+  fetchFollowing,
+  getProfileForHandle,
+  getProfiles,
+} from "../../helpers/lens/lens";
 import { useEffect, useState } from "react";
 import { User$} from "../../schema/user";
 
 const useLensConnections = (account?: any, lensId?: any) => {
   const [following, setFollowing] = useState<any>([]);
   const [followers, setFollowers] = useState<any>([]);
+  const [profile, setProfile] = useState<any>([]);
 
   const getFollowing = (account: any) => {
-    fetchFollowing({ address: account }).then(data => {
+    fetchFollowing({ address: account }).then((data) => {
       const followingData = data.data.following.items.map((item: any) => {
         return new User$(null, item?.profile, null);
       });
@@ -24,7 +30,7 @@ const useLensConnections = (account?: any, lensId?: any) => {
 
   // @param: lens id
   const getFollowers = (lensId: any) => {
-    fetchFollowers({ profileId: lensId }).then(data => {
+    fetchFollowers({ profileId: lensId }).then((data) => {
       const followersData = data.data.followers.items.map((item: any) => {
         return new User$(null, item?.wallet?.defaultProfile, null);
       });
@@ -37,11 +43,27 @@ const useLensConnections = (account?: any, lensId?: any) => {
       setFollowers(followersData);
     });
   };
-
+  const getLensProfile = (lensId: any) => {
+    console.log("profilefromlens123", lensId);
+    getProfiles({ handles: lensId }).then((data: any) => {      
+      const lensProfile = data.data.profiles.items.map((item: any) => {
+        return item.ownedBy;
+      });
+      logger(
+        "lens",
+        "useLensConnections.getProfile",
+        "getting profile data",
+        [lensProfile]
+      );
+      // console.log("profilefromlens", data);
+      setProfile(lensProfile);
+    },()=>{console.log("notsetprofile")});
+  };
   useEffect(() => {
     if (lensId) {
       getFollowing(account);
       getFollowers(lensId);
+      // getLensProfile(lensId);
     }
   }, [lensId]);
 
@@ -54,7 +76,9 @@ const useLensConnections = (account?: any, lensId?: any) => {
   return {
     following: following,
     followers: followers,
-    fetch: _fetch
+    profile:profile,
+    fetch: _fetch,
+    getLensProfile: getLensProfile,
   };
 };
 
