@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 const LayoutPostCard = (props: any) => {
   const hookLensPosts = useLensPosts();
-  const [tempState, setTempState] = useState<any>(hookLensPosts.haveILiked);
+  const [tempState, setTempState] = useState<any>();
 
   useEffect(() => {
     console.log("Here it the publishing item ", props.item);
@@ -57,7 +57,9 @@ const LayoutPostCard = (props: any) => {
                   <></>
                 )}
               </Col>
-              <Col className="m-b-1">
+
+              {/* Like - Unlike logic */}
+              {/* <Col className="m-b-1">
                 <div className="actions">
                   <Flex>
                     <Row className="m-r-0-5">
@@ -101,7 +103,8 @@ const LayoutPostCard = (props: any) => {
                     </Row>
                   </Flex>
                 </div>
-              </Col>
+              </Col> */}
+              
             </Col>
             <Col className="card-footer">
               <Row className="w-100 vr-center">
