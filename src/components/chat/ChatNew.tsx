@@ -69,14 +69,15 @@ const ChatNew = (props: any) => {
   };
   const callbackNew = () => {
     toast({
-      title: "Channel Created Successfully",
+      title: "Channel Created Successfullyzzzz",
       status: "success",
       duration: 3000,
       position: "bottom-right",
     });
-    // props?.hookChatChannel.remove();
-    // props?.hookChatChannels.load();
-    // props.modal.onClose();
+    console.log("Do the rest of the stuff");
+    props?.hookChatChannel.remove();
+    props?.hookChatChannels.load();
+    props.modal.onClose();
     handleTabs();
   };
   const fetchNftHolders = () => {
@@ -120,32 +121,7 @@ const ChatNew = (props: any) => {
     useEffect(() => {
       hookLensConnections.getLensProfile(lensProfiles);
     }, [lensProfiles]);
-  /**
-   *
-   **/
-  // const handleTabs = () => {
-  //   if (tab == "details" && access == "Public") {
-  //     setTab("share");
-  //     hookPortalChannel?.update(hookPortalChannelMembership?.userIds);
-  //   } else if (tab == "details" && access == "Private") {
-  //     setTab("access");
-  //   }
-
-  //   // if (tab == "members") {
-  //   //   if (hookPortalChannelMembership?.users?.length) {
-  //   //     setTab("details");
-  //   //   } else {
-  //   //     toast({
-  //   //       title: "Add atleast one member",
-  //   //       status: "error",
-  //   //       duration: 3000,
-  //   //       position: "bottom-right",
-  //   //     });
-  //   //   }
-  //   // } else {
-  //   //   setTab("members");
-  //   // }
-  // };
+  
 
   const data = [
     {
