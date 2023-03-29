@@ -24,7 +24,7 @@ const useLensAuth = () => {
 
   
 
-  const fetchLensToken = async (address: any) => {
+  const fetchLensToken = async (address: any) => {  
     logger(
       "lens",
       "useLensAuth.fetchLensToken",
@@ -42,12 +42,12 @@ const useLensAuth = () => {
           logger("auth", "fetchLensToken", "Calling authenticate_user", [data]);
           setToken(data["accessToken"]);
           setRefreshToken(data["refreshToken"]);
-          addTokenCookie("accessToken", data["accessToken"], 30);
-          window.localStorage.setItem("refreshToken", data["refreshToken"]);
+          addTokenCookie("lens_access_token", data["accessToken"], 30);
+          window.localStorage.setItem("lens_refresh_token", data["refreshToken"]);
 
           resolve({
-            accessToken: data["accessToken"],
-            refreshToken: data["refreshToken"],
+            lens_access_token: data["accessToken"],
+            lens_refresh_token: data["refreshToken"],
           });
         });
       } catch (error) {
@@ -62,24 +62,30 @@ const useLensAuth = () => {
 
   // Get lens tokens from local storage
   const getLensTokens = () => {
-    const accessToken = getCookie("accessToken");
-    const refreshToken = window.localStorage.getItem("refreshToken");
-    if (accessToken)
-        return { accessToken: accessToken, refreshToken: refreshToken };
-    return false;
+    const lens_access_token = getCookie("lens_access_token");
+    const lens_refresh_token = window.localStorage.getItem("lens_refresh_token");
+    if (lens_access_token)
+        return { lens_access_token: lens_access_token, lens_refresh_token: lens_refresh_token };
+    return {lens_refresh_token: lens_refresh_token};
   };
 
-  const getNewAccessToken = () => {
-    newRefreshToken(refreshToken).then((data) => {
-      setRefreshToken(data["refreshToken"]);
+  const getNewAccessToken = (lens_refresh_token: string) => {
+    newRefreshToken(lens_refresh_token).then((data) => {
+      console.log("Data access token", data);
+      addTokenCookie("lens_access_token", data["accessToken"]);
+      window.localStorage.setItem("lens_refresh_token", data["refreshToken"]);
     });
+    return true;
   };
 
   const connectToLens = async (address: any) => {
-    let tokens = getLensTokens();
+    let tokens: any = getLensTokens();
     console.log("logging tokens ", tokens);
-    if (tokens)
+    if (tokens?.lens_access_token && tokens?.lens_refresh_token)
         return tokens;
+    else if(tokens?.lens_refresh_token) { // if no accessToken, but have refreshToken
+      return getNewAccessToken(tokens?.lens_refresh_token);
+    }
     return fetchLensToken(address);
   };
 
