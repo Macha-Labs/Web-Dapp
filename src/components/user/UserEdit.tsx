@@ -16,7 +16,6 @@ const UserEdit = () => {
     });
   };
 
-
   const data = [
     {
       label: "Name",

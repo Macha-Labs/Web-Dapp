@@ -242,8 +242,8 @@ export const likePost = async (requestParam: any) => {
     });
     return result.data!.addReaction;
   } catch (error: any) {
-    throw new Error(
-      "Error in Liking Lens post ",
+    console.log(
+      "Error in Liking Lens post ", error,
       error?.networkError?.result?.errors
     );
   }
@@ -259,8 +259,8 @@ export const unlikePost = async (requestParam: any) => {
     });
     return result.data!.removeReaction;
   } catch (error: any) {
-    throw new Error(
-      "Error in Unliking Lens post ",
+    console.log(
+      "Error in Unliking Lens post ", error, 
       error?.networkError?.result?.errors
     );
   }
