@@ -12,7 +12,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = getCookie("accessToken");
+  const token = getCookie("lens_access_token");
   return {
     headers: {
       ...headers,

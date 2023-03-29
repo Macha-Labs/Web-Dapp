@@ -59,16 +59,24 @@ export const authenticate_user = async (address: any, signature: any) => {
   }
 };
 
-export const newRefreshToken = async (refreshtoken: string) => {
-  const { data } = await apolloClient.mutate({
-    mutation: gql(REFRESH_TOKEN),
-    variables: {
-      request: {
-        refreshtoken,
+export const newRefreshToken = async (refreshToken: string) => {
+  console.log("Refresh token for accessToken", refreshToken);
+  try {
+    const { data } = await apolloClient.mutate({
+      mutation: gql(REFRESH_TOKEN),
+      variables: {
+        request: {
+          refreshToken,
+        },
       },
-    },
-  });
-  return data.refresh;
+    });
+    console.log("The response for the Refresh token ", data);
+    return data.refresh;
+  } catch (error: any) {
+    console.log("Error in re-generating lens_access_token", error);
+    console.log(error?.networkError?.result?.errors);
+  }
+  
 };
 
 /*
