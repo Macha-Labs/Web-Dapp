@@ -43,7 +43,7 @@ const AuthCard = () => {
           </Col>
           <Col className="w-60">
             {!authContext.address && <ConnectWalletButton />}
-            {authContext.address && getCookie("accessToken") == undefined && (
+            {authContext.address && window.localStorage.getItem("lens_refresh_token") == undefined && (
               <Button
                 className=""
                 size="md"
