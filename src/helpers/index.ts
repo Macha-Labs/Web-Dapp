@@ -18,6 +18,12 @@ export const truncateAddress = (address: any) => {
     }
     return '';
 };
+export const truncateLink= (address: any) => {
+  if (address) {
+    return address.slice(0, 10) + "..." + address.slice(-4);
+  }
+  return "";
+};
 
 const helperFile = async (e: any) => {
     const filePicked = e.target.files[0];

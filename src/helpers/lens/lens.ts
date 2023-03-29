@@ -59,16 +59,24 @@ export const authenticate_user = async (address: any, signature: any) => {
   }
 };
 
-export const newRefreshToken = async (refreshtoken: string) => {
-  const { data } = await apolloClient.mutate({
-    mutation: gql(REFRESH_TOKEN),
-    variables: {
-      request: {
-        refreshtoken,
+export const newRefreshToken = async (refreshToken: string) => {
+  console.log("Refresh token for accessToken", refreshToken);
+  try {
+    const { data } = await apolloClient.mutate({
+      mutation: gql(REFRESH_TOKEN),
+      variables: {
+        request: {
+          refreshToken,
+        },
       },
-    },
-  });
-  return data.refresh;
+    });
+    console.log("The response for the Refresh token ", data);
+    return data.refresh;
+  } catch (error: any) {
+    console.log("Error in re-generating lens_access_token", error);
+    console.log(error?.networkError?.result?.errors);
+  }
+  
 };
 
 /*
@@ -242,8 +250,8 @@ export const likePost = async (requestParam: any) => {
     });
     return result.data!.addReaction;
   } catch (error: any) {
-    throw new Error(
-      "Error in Liking Lens post ",
+    console.log(
+      "Error in Liking Lens post ", error,
       error?.networkError?.result?.errors
     );
   }
@@ -259,8 +267,8 @@ export const unlikePost = async (requestParam: any) => {
     });
     return result.data!.removeReaction;
   } catch (error: any) {
-    throw new Error(
-      "Error in Unliking Lens post ",
+    console.log(
+      "Error in Unliking Lens post ", error, 
       error?.networkError?.result?.errors
     );
   }

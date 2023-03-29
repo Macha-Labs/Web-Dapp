@@ -1,7 +1,32 @@
-import { Col, Row, StyledCard, StyledChatItem } from "@/styles/StyledComponents";
+import {
+  Col,
+  Row,
+  StyledCard,
+  StyledCardPannel,
+  StyledChatItem,
+  StyledXMTPCard,
+} from "@/styles/StyledComponents";
 import {
   Avatar,
+  Box,
   Button,
+  CloseButton,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
+  Heading,
+  Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Spinner,
   Tag,
   Text,
@@ -27,6 +52,7 @@ import useChatChannelsStore from "@/store/useChatChannelsStore";
 import useChatChannelStore from "@/store/useChatChannelStore";
 
 
+import ModalWindow from "../modal/ModalWindow";
 const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
   const chatContext = useContext(ChatContext);
@@ -34,6 +60,7 @@ const ChatList = (props: any) => {
   const router = useRouter();
   const modalChatNew = useDisclosure();
   const modalChatNewDm = useDisclosure();
+  const modalXMTP = useDisclosure();
   const toast = useToast();
   const [isClicked, setIsClicked] = useState<any>([]);
   const $channels = useChatChannelsStore((state: any) => state.channels);
@@ -41,7 +68,8 @@ const ChatList = (props: any) => {
   const $channelLoad = useChatChannelStore((state: any) => state.loading);
   const [channelSelected, setChannelSelected] = useState<any>();
 
-
+  const [cross, setCross] = useState(false);
+  const [showCard, setShowCard] = useState(true);
   // TODO: Fix bandaging
   useEffect(() => {
     console.log(router, 'router is here')
@@ -229,7 +257,43 @@ const ChatList = (props: any) => {
   const TemplateLoading = () => {
     return <LoadChannels />;
   };
+  const XMTPpopup = () => {
+    const handleClose = () => {
+      setShowCard(false);
+    };
 
+    const handleButtonClick = () => {
+      // code to redirect to other page
+    };
+    return (
+      <>
+        {showCard && (
+          <StyledXMTPCard>
+            <Flex alignItems="center" justifyContent="space-between">
+              <Image
+                src="/assets/xmtp-white.png"
+                alt="Logo"
+                mr={2}
+                width="100px"
+              />
+              <IconImage path="IconDarkCross.png" onClick={handleClose} />
+            </Flex>
+            <Text fontSize="md" my={4}>
+              Discover 1:1 encrypted DMs with your Lens frens powered by XMTP
+            </Text>
+            <Button
+              variant="state_xmtp"
+              onClick={handleButtonClick}
+              width="100%"
+              // mb={2}
+            >
+              Explore 1:1 Chats
+            </Button>
+          </StyledXMTPCard>
+        )}
+      </>
+    );
+  };
   const templateChatList = () => {
     return (
       <>
@@ -378,6 +442,7 @@ const ChatList = (props: any) => {
               )}
             </>
           )}
+          <XMTPpopup />
         </Col>
       </>
     );

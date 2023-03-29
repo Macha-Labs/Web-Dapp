@@ -34,6 +34,7 @@ const useChatChannels = (from?: any) => {
       $loadChannels(null);
       switch (router.pathname) {
         case "/chat":
+          console.log("Executing fetchUserChannels function");
           hookStreamChannels.fetchUserChannels()
           break;
         case "/chat/dm":

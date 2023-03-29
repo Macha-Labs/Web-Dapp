@@ -7,7 +7,7 @@ const useLensPosts = () => {
   const authContext = useContext(AuthContext) as AuthContextType;
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<any>([]);
-  const [haveILiked, setHaveILiked] = useState<boolean>(false);
+  // const [haveILiked, setHaveILiked] = useState<boolean>(false);
 
   const getPosts = async () => {
     setIsLoading(true);
@@ -25,13 +25,17 @@ const useLensPosts = () => {
     const res = await haveILikedPost({
       publicationId: postID,
     });
+    console.log("res of getHaveILikedPost ", res);
     const haveIliked = res.items.some(
       (item: any) =>
         item.profile.ownedBy.toLowerCase() == authContext.address.toLowerCase()
     );
+    console.log("Liked this post ", haveIliked);
     if (haveIliked) {
-      setHaveILiked(true);
+      // setHaveILiked(true);
+      return true;
     }
+    return false;
   };
 
   useEffect(() => {
@@ -41,7 +45,7 @@ const useLensPosts = () => {
   return {
     posts: posts,
     isLoading: isLoading,
-    haveILiked: haveILiked,
+    // haveILiked: haveILiked,
     getHaveILikedPost: getHaveILikedPost,
   };
 };

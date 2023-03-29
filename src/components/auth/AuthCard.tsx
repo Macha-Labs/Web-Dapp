@@ -1,4 +1,5 @@
 import IconImage from "@/components/icons/IconImage";
+import { getCookie } from "@/helpers/storage/browserStorage";
 import { AuthContext } from "@/providers/AuthProvider";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import { Button, Heading, Text, useToast } from "@chakra-ui/react";
@@ -42,17 +43,20 @@ const AuthCard = () => {
           </Col>
           <Col className="w-60">
             {!authContext.address && <ConnectWalletButton />}
-            {(authContext.address && !authContext?.user?.lens?.id) && 
-              <Button 
-              className="" 
-              size="md" 
-              variant="state_lens" 
-              isLoading={authContext?.isLoadingLens} 
-              isDisabled = {lensBtnState.disabled}
-              onClick={() => {authContext.connectLens(callBacks)}}>
-                  {lensBtnState.text}
+            {authContext.address && window.localStorage.getItem("lens_refresh_token") == undefined && (
+              <Button
+                className=""
+                size="md"
+                variant="state_lens"
+                isLoading={authContext?.isLoadingLens}
+                isDisabled={lensBtnState.disabled}
+                onClick={() => {
+                  authContext.connectLens(callBacks);
+                }}
+              >
+                {lensBtnState.text}
               </Button>
-              }
+            )}
             {authContext.address &&
               authContext?.user?.lens?.id &&
               !authContext.xmtpClientAddress && (

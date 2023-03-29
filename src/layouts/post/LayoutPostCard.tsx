@@ -8,10 +8,12 @@ import { useState, useEffect } from "react";
 
 const LayoutPostCard = (props: any) => {
   const hookLensPosts = useLensPosts();
-  const [tempState, setTempState] = useState<boolean>(hookLensPosts.haveILiked);
+  const [tempState, setTempState] = useState<any>();
 
   useEffect(() => {
-    hookLensPosts.getHaveILikedPost(props.item?.id);
+    console.log("Here it the publishing item ", props.item);
+    const result = hookLensPosts.getHaveILikedPost(props.item?.id);
+    setTempState(result);
   }, [props.item?.id]);
 
   return (
@@ -55,7 +57,9 @@ const LayoutPostCard = (props: any) => {
                   <></>
                 )}
               </Col>
-              <Col className="m-b-1">
+
+              {/* Like - Unlike logic */}
+              {/* <Col className="m-b-1">
                 <div className="actions">
                   <Flex>
                     <Row className="m-r-0-5">
@@ -66,7 +70,7 @@ const LayoutPostCard = (props: any) => {
                           variant="state_transparent_to_brand_hover"
                           onClick={() => {
                             likePost({
-                              profileId: props.item?.profile?.id,
+                              profileId: props.myId,
                               reaction: "UPVOTE",
                               publicationId: props.item?.response
                                 ? props.item?.response
@@ -84,7 +88,7 @@ const LayoutPostCard = (props: any) => {
                           variant="state_transparent_to_brand_hover"
                           onClick={() => {
                             unlikePost({
-                              profileId: props.item?.profile?.id,
+                              profileId: props.myId,
                               reaction: "UPVOTE",
                               publicationId: props.item?.response
                                 ? props.item?.response
@@ -99,7 +103,8 @@ const LayoutPostCard = (props: any) => {
                     </Row>
                   </Flex>
                 </div>
-              </Col>
+              </Col> */}
+              
             </Col>
             <Col className="card-footer">
               <Row className="w-100 vr-center">
