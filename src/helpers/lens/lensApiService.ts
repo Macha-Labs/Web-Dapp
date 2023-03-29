@@ -20,9 +20,9 @@ export const signedTypeData = async (
 
   //@ts-ignore
   const result = signTypedData({
-    domain: omitDeep(domain, ["__typename"]),
-    types: omitDeep(types, ["__typename"]),
-    value: omitDeep(value, ["__typename"]),
+    domain: omit(domain, ["__typename"]),
+    types: omit(types, ["__typename"]),
+    value: omit(value, ["__typename"]),
   });
   return result;
 };

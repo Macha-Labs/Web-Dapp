@@ -56,7 +56,7 @@ const useLensFollows = (profileID: any) => {
 
         const signer: any = await fetchSigner();
         const lensHub = new ethers.Contract(
-          config.LENS_HUB_CONTRACT,
+          config.TESTNET_LENS_HUB_CONTRACT,
           lensHubAbi,
           signer
         );
