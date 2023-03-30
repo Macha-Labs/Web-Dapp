@@ -250,47 +250,74 @@ const ChatList = (props: any) => {
   const TemplateLoading = () => {
     return <LoadChannels />;
   };
-  const XMTPpopup = () => {
-    const handleClose = () => {
-      setShowCard(false);
-    };
+ const XMTPpopup = () => {
+   const handleClose = () => {
+     setShowCard(false);
+   };
 
-    const handleButtonClick = () => {
-      // code to redirect to other page
-    };
-    return (
-      <>
-        {showCard && (
-          <StyledXMTPCard>
-            <Flex alignItems="center" justifyContent="space-between">
-              <Image
-                src="/assets/xmtp-white.png"
-                alt="Logo"
-                mr={2}
-                width="100px"
-              />
-              <IconImage path="IconDarkCross.png" onClick={handleClose} />
-            </Flex>
-            <Text fontSize="md" my={4}>
-              Discover 1:1 encrypted DMs with your Lens frens powered by XMTP
-            </Text>
-            <Link href="/chat/dm">
-              <Button
-                variant="state_xmtp"
-                onClick={() => {
-                  handleButtonClick()
-                }}
-                width="100%"
-                // mb={2}
-              >
-                Explore 1:1 Chats
-              </Button>
-            </Link>
-          </StyledXMTPCard>
-        )}
-      </>
-    );
-  };
+   const handleButtonClick = () => {
+     // code to redirect to other page
+   };
+   return (
+     <>
+       {showCard && (
+         <StyledXMTPCard>
+           <Flex alignItems="center" justifyContent="space-between">
+             {router.pathname == "/chat" ? (
+               <Image
+                 src="/assets/xmtp-white.png"
+                 alt="Logo"
+                 mr={2}
+                 width="100px"
+               />
+             ) : (
+               <Image
+                 src="/assets/getStream-white.png"
+                 alt="Logo"
+                 mr={2}
+                 width="100px"
+               />
+             )}
+             <IconImage path="IconDarkCross.png" onClick={handleClose} />
+           </Flex>
+           {router.pathname == "/chat" ? (
+             <Text fontSize="md" my={4}>
+               Discover 1:1 encrypted DMs with your Lens frens powered by XMTP
+             </Text>
+           ) : (
+             <Text fontSize="md" my={4}>
+               Discover Public and Token Gated communities to join decentralized
+               chats
+             </Text>
+           )}
+           {router.pathname == "/chat" ? (
+             <Link href="/chat/dm">
+               <Button
+                 variant="state_xmtp"
+                 onClick={handleButtonClick}
+                 width="100%"
+                 // mb={2}
+               >
+                 Explore 1:1 Chats
+               </Button>
+             </Link>
+           ) : (
+             <Link href="/chat">
+               <Button
+                 variant="state_brand"
+                 onClick={handleButtonClick}
+                 width="100%"
+                 // mb={2}
+               >
+                 Explore Channels
+               </Button>
+             </Link>
+           )}
+         </StyledXMTPCard>
+       )}
+     </>
+   );
+ };
   const templateChatList = () => {
     return (
       <>
