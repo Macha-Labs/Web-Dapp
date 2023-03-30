@@ -286,7 +286,7 @@ const ChatList = (props: any) => {
              </Text>
            ) : (
              <Text fontSize="md" my={4}>
-               Discover Public and Token Gated communities to join decentralized
+               Discover Public and Token Gated communities to join group
                chats
              </Text>
            )}
@@ -298,13 +298,13 @@ const ChatList = (props: any) => {
                  width="100%"
                  // mb={2}
                >
-                 Explore 1:1 Chats
+                 Explore 1:1 Inbox
                </Button>
              </Link>
            ) : (
              <Link href="/chat">
                <Button
-                 variant="state_brand"
+                 variant=""
                  onClick={handleButtonClick}
                  width="100%"
                  // mb={2}
