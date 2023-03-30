@@ -100,6 +100,7 @@ const AuthProvider = ({ children }: any) => {
           } else {
             user.setLensDirect(lensProfile);
           }
+          await hookStreamAuth.connectToStream(address, user);
           setLoadingLens(false);
         } else {
           callBacks.noLensProfile();
@@ -193,7 +194,7 @@ const AuthProvider = ({ children }: any) => {
     }
     if (user?.lens?.id && user?.db?.tokens?.stream) {
       console.log("Logging user object Calling the connectToStream", address)
-      hookStreamAuth.connectToStream($address, user);
+      
     }
   }, [user?.lens]);
 
