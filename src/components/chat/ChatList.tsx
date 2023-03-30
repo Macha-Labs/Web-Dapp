@@ -27,6 +27,9 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Spinner,
   Tag,
   Text,
@@ -133,109 +136,110 @@ const ChatList = (props: any) => {
 
   const TemplateActions = (props: any) => {
     return (
-      <Pop
-        trigger={<IconImage path="IconDarkMenu.png" />}
-        placement="bottom-end"
-      >
-        <Col className="text-start">
-          {/* <Button
-            variant="transparent"
-            size="sm"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkPinned.png" size="18" />}
-          >
-            <Row className="hr-between w-100" onClick={() => {}}>
-              Pin Channel
-            </Row>
-          </Button> */}
-          {!props?.item?.raw?.disconnected &&
-          props?.item?.raw &&
-          !props.item.raw?.muteStatus()?.muted ? (
-            <Button
-              variant="transparent"
-              size="sm"
-              className="text-start"
-              rightIcon={<IconImage path="IconDarkMute.png" size="xs" />}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  hookPortalChannel.muteChannel(props.item);
-                }}
+      // <Text>asdf</Text>
+      // <Popover placement="bottom" size="md">
+      //   <PopoverTrigger>
+      //     <IconImage path="IconDarkMenu.png" />
+      //   </PopoverTrigger>
+      //   <PopoverContent>
+      //     <Text>asdf</Text>
+      //   </PopoverContent>
+      // </Popover>
+      <div style={{position:'absolute' , marginTop:-14}}>
+        <Pop
+          trigger={<IconImage path="IconDarkMenu.png" />}
+          placement="bottom-end"
+        >
+          <Col className="text-start">
+            {!props?.item?.raw?.disconnected &&
+            props?.item?.raw &&
+            !props.item.raw?.muteStatus()?.muted ? (
+              <Button
+                variant="transparent"
+                size="sm"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkMute.png" size="xs" />}
               >
-                Mute Channel
-              </Row>
-            </Button>
-          ) : (
-            <Button
-              variant="transparent"
-              size="sm"
-              className="text-start"
-              rightIcon={<IconImage path="IconDarkUnMute.png" />}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  hookPortalChannel.unMuteChannel(props.item);
-                }}
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    hookPortalChannel.muteChannel(props.item);
+                  }}
+                >
+                  Mute Channel
+                </Row>
+              </Button>
+            ) : (
+              <Button
+                variant="transparent"
+                size="sm"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkUnMute.png" />}
               >
-                Unmute Channel
-              </Row>
-            </Button>
-          )}
-          {props?.item?.isAdmin && (
-            <Button
-              variant="transparent"
-              size="sm"
-              className="text-start"
-              rightIcon={<IconImage path="IconRedDelete.png" />}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  hookPortalChannel.deleteChannel(props.item);
-                }}
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    hookPortalChannel.unMuteChannel(props.item);
+                  }}
+                >
+                  Unmute Channel
+                </Row>
+              </Button>
+            )}
+            {props?.item?.isAdmin && (
+              <Button
+                variant="transparent"
+                size="sm"
+                className="text-start"
+                rightIcon={<IconImage path="IconRedDelete.png" />}
               >
-                Delete Channel
-              </Row>
-            </Button>
-          )}
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    hookPortalChannel.deleteChannel(props.item);
+                  }}
+                >
+                  Delete Channel
+                </Row>
+              </Button>
+            )}
 
-          {props.item.createdBy == authContext?.address ? (
-            <Button
-              variant="transparent"
-              size="sm"
-              className="text-start"
-              rightIcon={<IconImage path="IconRedDelete.png" />}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  hookPortalChannel.deleteChannel(props.item);
-                }}
+            {props.item.createdBy == authContext?.address ? (
+              <Button
+                variant="transparent"
+                size="sm"
+                className="text-start"
+                rightIcon={<IconImage path="IconRedDelete.png" />}
               >
-                Delete Channel
-              </Row>
-            </Button>
-          ) : (
-            <Button
-              variant="transparent"
-              size="sm"
-              className="text-start"
-              rightIcon={<IconImage path="IconDarkLeave.png" />}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  hookPortalChannel.leaveChannel(props.item);
-                }}
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    hookPortalChannel.deleteChannel(props.item);
+                  }}
+                >
+                  Delete Channel
+                </Row>
+              </Button>
+            ) : (
+              <Button
+                variant="transparent"
+                size="sm"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkLeave.png" />}
               >
-                Leave Channel
-              </Row>
-            </Button>
-          )}
-        </Col>
-      </Pop>
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    hookPortalChannel.leaveChannel(props.item);
+                  }}
+                >
+                  Leave Channel
+                </Row>
+              </Button>
+            )}
+          </Col>
+        </Pop>
+      </div>
     );
   };
 
@@ -250,74 +254,73 @@ const ChatList = (props: any) => {
   const TemplateLoading = () => {
     return <LoadChannels />;
   };
- const XMTPpopup = () => {
-   const handleClose = () => {
-     setShowCard(false);
-   };
+  const XMTPpopup = () => {
+    const handleClose = () => {
+      setShowCard(false);
+    };
 
-   const handleButtonClick = () => {
-     // code to redirect to other page
-   };
-   return (
-     <>
-       {showCard && (
-         <StyledXMTPCard>
-           <Flex alignItems="center" justifyContent="space-between">
-             {router.pathname == "/chat" ? (
-               <Image
-                 src="/assets/xmtp-white.png"
-                 alt="Logo"
-                 mr={2}
-                 width="100px"
-               />
-             ) : (
-               <Image
-                 src="/assets/getStream-white.png"
-                 alt="Logo"
-                 mr={2}
-                 width="100px"
-               />
-             )}
-             <IconImage path="IconDarkCross.png" onClick={handleClose} />
-           </Flex>
-           {router.pathname == "/chat" ? (
-             <Text fontSize="md" my={4}>
-               Discover 1:1 encrypted DMs with your Lens frens powered by XMTP
-             </Text>
-           ) : (
-             <Text fontSize="md" my={4}>
-               Discover Public and Token Gated communities to join group
-               chats
-             </Text>
-           )}
-           {router.pathname == "/chat" ? (
-             <Link href="/chat/dm">
-               <Button
-                 variant="state_xmtp"
-                 onClick={handleButtonClick}
-                 width="100%"
-                 // mb={2}
-               >
-                 Explore 1:1 Inbox
-               </Button>
-             </Link>
-           ) : (
-             <Link href="/chat">
-               <Button
-                 variant=""
-                 onClick={handleButtonClick}
-                 width="100%"
-                 // mb={2}
-               >
-                 Explore Channels
-               </Button>
-             </Link>
-           )}
-         </StyledXMTPCard>
-       )}
-     </>
-   );
- };
+    const handleButtonClick = () => {
+      // code to redirect to other page
+    };
+    return (
+      <>
+        {showCard && (
+          <StyledXMTPCard>
+            <Flex alignItems="center" justifyContent="space-between">
+              {router.pathname == "/chat" ? (
+                <Image
+                  src="/assets/xmtp-white.png"
+                  alt="Logo"
+                  mr={2}
+                  width="100px"
+                />
+              ) : (
+                <Image
+                  src="/assets/getStream-white.png"
+                  alt="Logo"
+                  mr={2}
+                  width="100px"
+                />
+              )}
+              <IconImage path="IconDarkCross.png" onClick={handleClose} />
+            </Flex>
+            {router.pathname == "/chat" ? (
+              <Text fontSize="md" my={4}>
+                Discover 1:1 encrypted DMs with your Lens frens powered by XMTP
+              </Text>
+            ) : (
+              <Text fontSize="md" my={4}>
+                Discover Public and Token Gated communities to join group chats
+              </Text>
+            )}
+            {router.pathname == "/chat" ? (
+              <Link href="/chat/dm">
+                <Button
+                  variant="state_xmtp"
+                  onClick={handleButtonClick}
+                  width="100%"
+                  // mb={2}
+                >
+                  Explore 1:1 Inbox
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/chat">
+                <Button
+                  variant=""
+                  onClick={handleButtonClick}
+                  width="100%"
+                  // mb={2}
+                >
+                  Explore Channels
+                </Button>
+              </Link>
+            )}
+          </StyledXMTPCard>
+        )}
+      </>
+    );
+  };
   const templateChatList = () => {
     return (
       <>
