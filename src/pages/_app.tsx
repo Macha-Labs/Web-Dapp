@@ -46,8 +46,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Script
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${config.GOOGLE_ANALYTICS_ID}`}
+        id="googleAnalytics"
       ></Script>
-      <Script>
+      <Script id="googleAnalyticsConfig">
         {`window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
