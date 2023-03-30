@@ -28,5 +28,8 @@ export const config = {
   TESTNET_LENS_PERIPHERY_CONTRACT: "0xD5037d72877808cdE7F669563e9389930AF404E8",
 
   // Lighthouse - Polygon Mainnet
-  LIGHTHOUSE_API_KEY: "369c0ebc-5307-4cad-aa3e-b8a3a7364c2c"
+  LIGHTHOUSE_API_KEY: "369c0ebc-5307-4cad-aa3e-b8a3a7364c2c",
+
+  // Google analytics
+  GOOGLE_ANALYTICS_ID: "G-BB33MHKGE1"
 };

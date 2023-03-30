@@ -3,6 +3,7 @@ import { ChatProvider } from "@/providers/ChatProvider";
 import StreamProvider from "@/providers/StreamProvider";
 import "@/styles/globals.css";
 import theme from "@/styles/StyledChakraTheme";
+import Script from "next/script";
 import { ChakraProvider } from "@chakra-ui/react";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -14,6 +15,8 @@ import { publicProvider } from "wagmi/providers/public";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { XmtpProvider } from "@/providers/XmtpProvider";
 import { DataProvider } from "@/providers/DataProvider";
+import { config } from "@/config/index";
+
 
 const { chains, provider } = configureChains(
   [polygon],
@@ -36,17 +39,17 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       {/* <!-- Google tag (gtag.js) --> */}
-      <script
+      <Script
         async
-        src="https://www.googletagmanager.com/gtag/js?id=G-BB33MHKGE1"
-      ></script>
-      <script>
+        src={`https://www.googletagmanager.com/gtag/js?id=${config.GOOGLE_ANALYTICS_ID}`}
+      ></Script>
+      <Script>
         {`window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-BB33MHKGE1');`}
-      </script>
+        gtag('config', '${config.GOOGLE_ANALYTICS_ID}');`}
+      </Script>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">
