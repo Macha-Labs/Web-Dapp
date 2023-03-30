@@ -59,7 +59,9 @@ function about() {
                   </Link>
                 </div>
               </div>
-              <Button variant="state_brand">Beta Soon</Button>
+              <Link href="/chat">
+                <Button variant="state_brand">Login Beta</Button>
+              </Link>
             </div>
           </div>
         </nav>

@@ -171,6 +171,7 @@ export const darkStyle = {
         "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
     padding: { default: "10px" },
+    
   },
   pannel: { bg: { default: "" }, shadow: { default: "" } },
   input: {

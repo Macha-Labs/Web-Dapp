@@ -114,7 +114,7 @@ const ChatHeader = (props: any) => {
         </Row>
 
         <Row>
-         <Tag className="m-r-1" variant={$channel?.source == 'xmtp' ? 'state_xmtp' : ''}>{$channel?.source}</Tag> 
+         <Button className="m-r-1" size="xs" variant={$channel?.source == 'xmtp' ? 'state_xmtp' : ''}>{$channel?.source}</Button> 
 
          {router.pathname == '/chat' && <Row className="vr-center">
           
