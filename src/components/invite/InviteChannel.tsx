@@ -115,10 +115,10 @@ const InviteChannel = (props: any) => {
 
     return (
         <>
+            <img src="/assets/metawork-image-text logo.svg" style={{margin:"auto", marginTop:"50px"}}/>              
             <div className="middle" >
-                
-                    <TemplateLoaded />
-                </div>
+              <TemplateLoaded />
+            </div>
         
         </>
     )

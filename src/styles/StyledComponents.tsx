@@ -83,7 +83,7 @@ export const StyledWindow = styled.div`
   .middle {
     width: 35%;
     margin: auto;
-    margin-top: 15%;
+    margin-top: 8%;
     height: 100vh;
   }
   
