@@ -1,7 +1,7 @@
-import { Button } from '@chakra-ui/react';
+import { Button, Text } from '@chakra-ui/react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-export const ConnectWalletButton = () => {
+export const ConnectWalletButton = (props:any) => {
   return (
     <ConnectButton.Custom>
       {({
@@ -37,11 +37,14 @@ export const ConnectWalletButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <Button 
-                  className="m-b-0-5 w-100 GIT" 
-                  size="md" 
-                  variant="state_brand" 
-                  onClick={openConnectModal}>Connect Wallet</Button>
+                  <Button
+                    className="m-b-0-5 w-100 GIT"
+                    size={props.size}
+                    variant="state_brand"
+                    onClick={openConnectModal}
+                  >
+                    <Text fontSize={props?.font}>Connect Wallet</Text>
+                  </Button>
                 );
               }
               if (chain.unsupported) {

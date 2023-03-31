@@ -29,7 +29,7 @@ const AuthCard = () => {
 
   return (
     <div className="middle">
-      <StyledCard className="w-100 p-4 state_highlight">
+      <StyledCard className="w-100 p-4 state_highlight invite">
         <Col className="hr-center">
           <Col className="m-b-2 hr-center">
             <IconImage
