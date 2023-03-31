@@ -31,5 +31,5 @@ export const config = {
   LIGHTHOUSE_API_KEY: "369c0ebc-5307-4cad-aa3e-b8a3a7364c2c",
 
   // Google analytics
-  GOOGLE_ANALYTICS_ID: "G-BB33MHKGE1"
+  GOOGLE_ANALYTICS_ID: "G-FCQZ64DYYZ",
 };
