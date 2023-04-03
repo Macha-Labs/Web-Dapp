@@ -35,7 +35,8 @@ function ChatComponent() {
       </>
     );
   };
-
+  // if(!window)
+  // console.log("mobile device detection",window?.navigator?.userAgent);
   return (
     <>
       {$connected && (
@@ -46,8 +47,8 @@ function ChatComponent() {
 
           <div className="right">
             <StyledChatList>
-              {/* <ChatList /> */}
-              <MobileEmptyState />
+              <ChatList />
+              {/* <MobileEmptyState /> */}
             </StyledChatList>
             <StyledChat>
               <ChatContainer />

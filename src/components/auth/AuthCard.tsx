@@ -66,6 +66,10 @@ const AuthCard = () => {
                   variant="state_xmtp"
                   onClick={() => {
                     authContext.connectXmtp();
+                    console.log(
+                      "mobile device detection",
+                      window.navigator.userAgent
+                    );
                   }}
                 >
                   Connect to XMTP
