@@ -68,7 +68,7 @@ const AuthCard = () => {
                     authContext.connectXmtp();
                     console.log(
                       "mobile device detection",
-                      window.navigator.userAgent
+                      window.navigator.platform
                     );
                   }}
                 >
