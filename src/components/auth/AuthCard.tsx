@@ -6,6 +6,7 @@ import { Button, Heading, Text, useToast } from "@chakra-ui/react";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
+import MobileEmptyState from "../MobileEmptyState";
 
 const AuthCard = () => {
   console.log('Rendering >>>>> AuthCard');
@@ -65,11 +66,20 @@ const AuthCard = () => {
                   size="md"
                   variant="state_xmtp"
                   onClick={() => {
-                    authContext.connectXmtp();
-                    console.log(
-                      "mobile device detection",
-                      window.navigator.platform
-                    );
+                    authContext.connectXmtp();                    
+                      if (
+                        window.navigator.platform
+                          .toLowerCase()
+                          .indexOf("linux") == -1
+                      )
+                      {
+                        // <MobileEmptyState/>
+                        document.write("hello");
+                      }
+                        console.log(
+                          "mobile device detection",
+                          window.navigator.platform
+                        );
                   }}
                 >
                   Connect to XMTP
