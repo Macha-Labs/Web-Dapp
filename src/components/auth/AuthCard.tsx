@@ -4,7 +4,7 @@ import { AuthContext } from "@/providers/AuthProvider";
 import { Col, Row, StyledCard } from "@/styles/StyledComponents";
 import { Button, Heading, Text, useToast } from "@chakra-ui/react";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
 import MobileEmptyState from "../MobileEmptyState";
 
@@ -12,6 +12,7 @@ const AuthCard = () => {
   console.log('Rendering >>>>> AuthCard');
   const authContext = useContext(AuthContext);
   const toast = useToast();
+  const [mobile,setMobile]=useState(false);
   const [lensBtnState, setLensBtnState] = useState<any>({
     text: "Sign in with Lens",
     disabled: false
@@ -26,12 +27,14 @@ const AuthCard = () => {
               });
             setLensBtnState({text: "Switch your account", disabled: true});
         }
-    }
-    if(window.innerWidth<1024){
-      return <MobileEmptyState/>
-    }
+    } 
+    useEffect(()=>{
+      if(window.innerWidth<1024){
+        setMobile(true);
+      }
+    },[])  
     return (
-    <div className="middle">
+    mobile==false?(<div className="middle">
       <StyledCard className="w-100 p-4 state_highlight invite">
         <Col className="hr-center">
           <Col className="m-b-2 hr-center">
@@ -96,7 +99,7 @@ const AuthCard = () => {
           <Text className="text-center" fontSize="14">Visit <Link href="https://testnet.lenster.xyz/" target={'_blank'}>www.testnet.lenster.xyz</Link> to claim your lens handle.<br/>Please note this is for testing purpose only to access product on testnet.</Text>
           </Col>
       </StyledCard> */}
-    </div>
+    </div>):<MobileEmptyState/>
   );
 };
 
