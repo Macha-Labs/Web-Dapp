@@ -2,6 +2,7 @@ import { Col } from "@/styles/StyledComponents";
 import { Button, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
+import { Landing } from "./icons/IconImage";
 
 export default function MobileEmptyState() {
   return (
@@ -27,7 +28,7 @@ export default function MobileEmptyState() {
         >
           Thanks For Visiting !
         </Text>
-        <img src="assets/emptyStateIllustration.svg"  style={{maxWidth:"150%",width:"400px"}} />
+        <Landing path="emptyStateIllustration.svg"/>
         <Text
           align={"center"}
           width="300px"
