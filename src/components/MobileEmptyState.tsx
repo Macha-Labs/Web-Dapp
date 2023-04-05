@@ -1,5 +1,6 @@
 import { Col } from "@/styles/StyledComponents";
 import { Button, Text } from "@chakra-ui/react";
+import Link from "next/link";
 import React from "react";
 
 export default function MobileEmptyState() {
@@ -26,7 +27,7 @@ export default function MobileEmptyState() {
         >
           Thanks For Visiting !
         </Text>
-        <img src="assets/emptyStateIllustration.svg" width="400px" style={{maxWidth:"150%"}} />
+        <img src="assets/emptyStateIllustration.svg"  style={{maxWidth:"150%",width:"400px"}} />
         <Text
           align={"center"}
           width="300px"
@@ -40,9 +41,11 @@ export default function MobileEmptyState() {
       <Text align={"center"} width="300px" marginTop={"25px"} as="b">
         Good news - our mobile app is in the works and will be available soon
       </Text>
+      <Link href="https://twitter.com/intent/follow?screen_name=metaworklabs">
       <Button variant="" marginTop={"15px"}>
         Follow on Twitter
       </Button>
+      </Link>
     </Col>
   );
 }
