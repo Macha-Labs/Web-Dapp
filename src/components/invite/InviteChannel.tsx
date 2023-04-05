@@ -2,10 +2,11 @@ import useStreamChannelMembership from "@/hooks/stream/useStreamChannelMembershi
 import { AuthContext } from "@/providers/AuthProvider";
 import { Col, StyledCard} from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
 import { ChatContext } from "@/providers/ChatProvider";
 import { useRouter } from "next/router";
+import MobileEmptyState from "../MobileEmptyState";
 
 
 const InviteChannel = (props: any) => {
@@ -14,6 +15,7 @@ const InviteChannel = (props: any) => {
     const hookStreamChannelMembership = useStreamChannelMembership();
     const toast = useToast();
     const router = useRouter();
+    const [mobile,setMobile]=useState(false);
 
 
     useEffect(() => {
@@ -112,15 +114,19 @@ const InviteChannel = (props: any) => {
           </StyledCard>
         );
     }
-
+    useEffect(()=>{
+      if(window.innerWidth<1024){
+        setMobile(true);
+      }
+    },[])
     return (
-        <>
+      mobile==false?(<>
             <div className="middle" >
               <TemplateLoaded />
               <img src="/assets/metawork-image-text logo.svg" style={{margin:"auto", marginTop:"50px", width:"200px"}}/>              
             </div>
         
-        </>
+        </>):<MobileEmptyState/>
     )
 }
 
