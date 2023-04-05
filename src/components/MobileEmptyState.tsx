@@ -26,7 +26,7 @@ export default function MobileEmptyState() {
         >
           Thanks For Visiting !
         </Text>
-        <img src="assets/emptyStateIllustration.svg" />
+        <img src="assets/emptyStateIllustration.svg" width="400px" style={{maxWidth:"150%"}} />
         <Text
           align={"center"}
           width="300px"
@@ -37,7 +37,7 @@ export default function MobileEmptyState() {
           This link is currently only accessile on desktop.
         </Text>
       </div>
-      <Text align={"center"} width="300px" marginTop={"15px"} as="b">
+      <Text align={"center"} width="300px" marginTop={"25px"} as="b">
         Good news - our mobile app is in the works and will be available soon
       </Text>
       <Button variant="" marginTop={"15px"}>
