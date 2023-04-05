@@ -126,7 +126,7 @@ const InviteChannel = (props: any) => {
               <img src="/assets/metawork-image-text logo.svg" style={{margin:"auto", marginTop:"50px", width:"200px"}}/>              
             </div>
         
-        </>):<MobileEmptyState/>
+        </>):<div style={{marginTop:"25%"}}><MobileEmptyState/></div>
     )
 }
 
