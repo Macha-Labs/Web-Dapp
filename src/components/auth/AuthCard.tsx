@@ -27,8 +27,10 @@ const AuthCard = () => {
             setLensBtnState({text: "Switch your account", disabled: true});
         }
     }
-
-  return (
+    if(window.innerWidth<1024){
+      return <MobileEmptyState/>
+    }
+    return (
     <div className="middle">
       <StyledCard className="w-100 p-4 state_highlight invite">
         <Col className="hr-center">
@@ -67,19 +69,19 @@ const AuthCard = () => {
                   variant="state_xmtp"
                   onClick={() => {
                     authContext.connectXmtp();                    
-                      if (
-                        window.navigator.platform
-                          .toLowerCase()
-                          .indexOf("linux") == -1
-                      )
-                      {
-                        // <MobileEmptyState/>
-                        document.write("hello");
-                      }
-                        console.log(
-                          "mobile device detection",
-                          window.navigator.platform
-                        );
+                      // if (
+                      //   window.navigator.platform
+                      //     .toLowerCase()
+                      //     .indexOf("linux") == -1
+                      // )
+                      // {
+                      //   <MobileEmptyState/>
+                      //   // document.write("hello");
+                      // }
+                      //   console.log(
+                      //     "mobile device detection",
+                      //     window.navigator.platform
+                      //   );
                   }}
                 >
                   Connect to XMTP
