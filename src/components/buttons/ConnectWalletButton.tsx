@@ -44,7 +44,7 @@ export const ConnectWalletButton = (props:any) => {
                     variant="state_brand"
                     onClick={openConnectModal}
                   >
-                    <Text fontSize={props?.font}>Connect Wallet</Text>
+                    <Text paddingBottom={"0px"} fontSize={props?.font}>Connect Wallet</Text>
                   </Button>
                 );
               }
