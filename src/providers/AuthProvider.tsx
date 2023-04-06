@@ -48,6 +48,8 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 const AuthProvider = ({ children }: any) => {
+  
+
   console.log('Rendering >>>>> AuthProvider');
   const [signer, setSigner] = useState<any>("");
   const [user, setUser] = useState<any>(new User$(null, null, null));
