@@ -72,7 +72,7 @@ const InviteChannel = (props: any) => {
                     }}
                     style={{}}
                   >
-                    <Text fontSize={22}>Sign In With Lens</Text>
+                    <Text fontSize={22} paddingBottom={"0px"} marginBottom="0px" style={{marginBottom:"0px", paddingBottom:"0px"}}>Sign In With Lens</Text>
                   </Button>
                 )}
                 {authContext.address &&
@@ -86,7 +86,7 @@ const InviteChannel = (props: any) => {
                         authContext.connectXmtp();
                       }}
                     >
-                      <Text fontSize={22}>Connect to XMTP</Text>
+                      <Text fontSize={22} paddingBottom={"0px"} marginBottom="0px" style={{marginBottom:"0px", paddingBottom:"0px"}}>Connect to XMTP</Text>
                     </Button>
                   )}
                 {authContext?.isConnected && (
