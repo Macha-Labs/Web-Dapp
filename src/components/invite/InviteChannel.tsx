@@ -103,7 +103,7 @@ const InviteChannel = (props: any) => {
                     size="lg"
                     variant="state_brand"
                   >
-                    <Text fontSize={22}>Join Channel</Text>
+                    <Text fontSize={22} paddingBottom={"0px"} marginBottom="0px" style={{marginBottom:"0px", paddingBottom:"0px"}}>Join Channel</Text>
                   </Button>
                 )}
               </Col>
