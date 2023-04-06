@@ -38,7 +38,7 @@ export const ConnectWalletButton = (props:any) => {
               if (!connected) {
                 return (
                   <Button
-                    className="m-b-0-5 w-100 GIT"
+                    className="w-100"
                     size={props.size}
                     variant="state_brand"
                     onClick={openConnectModal}
