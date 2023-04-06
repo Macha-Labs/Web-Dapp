@@ -2,6 +2,7 @@ import { Button, Text } from '@chakra-ui/react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export const ConnectWalletButton = (props:any) => {
+  // console.log("mobile device detection", window.navigator.userAgent);
   return (
     <ConnectButton.Custom>
       {({
