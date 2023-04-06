@@ -72,7 +72,7 @@ const InviteChannel = (props: any) => {
                     }}
                     style={{}}
                   >
-                    <Text fontSize={22} paddingBottom={"0px"} marginBottom="0px" style={{marginBottom:"0px", paddingBottom:"0px"}}>Sign In With Lens</Text>
+                    <Text fontSize={22} paddingBottom={"0px"} marginBottom="0px" style={{marginBottom:"0px", paddingBottom:"0px", color:"#000"}}  >Sign In With Lens</Text>
                   </Button>
                 )}
                 {authContext.address &&
