@@ -43,7 +43,7 @@ const LayoutOptions = (props: any) => {
                 }}
               >
                 <Row className="vr-center">
-                  <IconImage path={item.icon} size={item?.size} />
+                  <IconImage path={item.icon} size={item.size} />
                   <Text fontSize="md" className="m-l-0-5">
                     {item.name}
                   </Text>
