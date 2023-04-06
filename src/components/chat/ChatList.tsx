@@ -338,7 +338,7 @@ const ChatList = (props: any) => {
           ) : (
             <>
               {$channels?.length ? (
-                <ul>
+                <ul style={{padding:"0px  "}}>
                   {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
                   {$channels.map((item: any, index: number) => (
                     <StyledChatItem key={item?.index}>
@@ -377,7 +377,7 @@ const ChatList = (props: any) => {
                             />
                             <Col className="w-100 d-flex flex-col vr-center">
                               <Row>
-                                <Text>
+                                <Text paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
                                   {item?.name?.length > 12
                                     ? `${item?.name?.slice(0, 12)}...`
                                     : item?.name}
@@ -401,7 +401,7 @@ const ChatList = (props: any) => {
                                   style={{ paddingRight: "5px" }}
                                   className="m-t-0-5"
                                 >
-                                  <Text fontSize={"xs"}>
+                                  <Text fontSize={"xs"} paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
                                     {item?.lastMessage?.user?.lensUsername ||
                                       item?.lastMessage?.user?.lensHandle ||
                                       truncateAddress(
@@ -419,7 +419,7 @@ const ChatList = (props: any) => {
                               )}
                               {item?.lastMessage?.created_at && (
                                 <Col>
-                                  <Text fontSize={"xs"}>
+                                  <Text fontSize={"xs"}paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
                                     {new Date(
                                       item?.lastMessage?.created_at
                                     ).toLocaleString()}
