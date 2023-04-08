@@ -276,19 +276,19 @@ const UserProfile = ({ user }: any) => {
                 <Tab>
                   <Button variant="state_default_hover">
                     <IconImage path="IconDarkPost.png"/>
-                    <Text className="m-l-0-5">Posts</Text>
+                    <Text className="m-l-0-5" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>Posts</Text>
                   </Button>
                 </Tab>
                 <Tab>
                   <Button variant="state_default_hover">
                     <IconImage path="IconDarkFollowers.png" />
-                    <Text className="m-l-0-5">Followers</Text>
+                    <Text className="m-l-0-5" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>Followers</Text>
                   </Button>
                 </Tab>
                 <Tab>
                   <Button variant="state_default_hover">
                     <IconImage path="IconDarkFollowing.png" />
-                    <Text className="m-l-0-5">Following</Text>
+                    <Text className="m-l-0-5" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>Following</Text>
                   </Button>
                 </Tab>
               </Row>

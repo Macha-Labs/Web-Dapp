@@ -12,6 +12,7 @@ import useXmtpAuth from "@/hooks/xmtp/useXmtpAuth";
 import useUserStore from "@/store/useUserStore";
 import useLensConnections from "@/hooks/lens/useLensConnections";
 import useStreamAuth from "@/hooks/stream/useStreamAuth";
+import { watchAccount } from '@wagmi/core'
 
 export type AuthContextType = {
   signer: any | undefined;
@@ -49,6 +50,11 @@ export const AuthContext = createContext<AuthContextType>({
 
 const AuthProvider = ({ children }: any) => {
   
+  const unwatch = watchAccount((account) => {if($address!=account){
+    console.log(account, " . ", $address, "asdf")
+    // window.location.href="https://metaworkhq.com"
+  }})
+
 
   console.log('Rendering >>>>> AuthProvider');
   const [signer, setSigner] = useState<any>("");
