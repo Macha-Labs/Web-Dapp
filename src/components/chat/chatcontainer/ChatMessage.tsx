@@ -148,7 +148,7 @@ const ChatMessage = (props: any) => {
                 ? "active message"
                 : "message"
             }
-            style={{ color: "#ffffff" }}
+            style={{ color: "#ffffff",maxWidth:`${props.maxw=="100" ? "100%" : "50%"}` }  }
           >
             <TemplateReply />
             <Row className="hr-between">
@@ -495,7 +495,7 @@ const ChatMessage = (props: any) => {
                   defaultChecked={props?.hookChat?.selectedMessages?.includes(
                     props?.message?.id
                   )}
-                  isChecked={props?.hookChat?.selectedMessages?.includes(
+                  isChecked={props?.hookChat?.selectedMessages?.includes( 
                     props?.message?.id
                   )}
                   onChange={() => {
@@ -511,7 +511,7 @@ const ChatMessage = (props: any) => {
             </Row>
           </Col>
 
-          {props?.channel.source == 'xmtp' ? templateMessageXmtp() : templateMessageStream()}
+          {props?.channel?.source == 'xmtp' ? templateMessageXmtp() : templateMessageStream()}
           
           <Row
             className={`positionPop ${
