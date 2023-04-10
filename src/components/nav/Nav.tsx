@@ -35,14 +35,14 @@ const Nav = (props: any) => {
           <div className="body">
             <Col className="hr-center vr-between h-100">
               <Col className="hr-center">
-                <Link href="/chat">
+                <Link href="/">
                   <Tooltip label="Chat">
                     <IconImage
                       path="IconDarkHash.png"
                       size="md"
                       style={{
                         className: `m-b-1 ${
-                          router.pathname === "/chat"
+                          router.pathname === "/"
                             ? "state_active state_hover scale"
                             : ""
                         } `,

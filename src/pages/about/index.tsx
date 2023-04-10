@@ -59,7 +59,7 @@ function about() {
                   </Link>
                 </div>
               </div>
-              <Link href="/chat">
+              <Link href="/">
                 <Button variant="state_brand">Login Beta</Button>
               </Link>
             </div>
