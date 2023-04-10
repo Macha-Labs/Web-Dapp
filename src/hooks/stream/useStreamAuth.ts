@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StreamChat } from "stream-chat";
 import { config } from "../../config";
 // import {storeAsyncData, getAsyncData} from "../../service/AsyncStorageService";
@@ -10,34 +10,41 @@ const useStreamAuth = () => {
 
   const [client, setClient] = useState<any>();
   const unsubscribeTokenRefreshListenerRef = useRef<() => void>();
+  const [streamUser, setStreamUser] = useState<any>();
 
   const connectToStream = async (address: any, user: any) => {
     // if (!?.isConnected) {
     //   logger("stream", "useStreamClient.connecttostream", "user not connected", [?.user]);
     //   return;
     // }
-    console.log("Logging user object calling connectToStream", address);
+    setStreamUser(user);
+    console.log("Logging user object calling connectToStream", address, user, user?.db?.tokens?.stream);
+    
+  };
+
+  const createStreamClient = async() => {
     try {
       if (client?.user.id) {
         client.disconnect();
       }
       const newClient = StreamChat.getInstance(`${config.STREAM_APIKEY}`);
-
+      const streamToken = streamUser?.db?.tokens;
+      console.log("The stream token is ", streamToken.stream);
       await newClient.connectUser(
         {
-          id: address.toLowerCase(),
-          lensId: user?.lens?.id,
-          lensImage: user?.lens?.image,
-          lensName: user?.lens?.name,
-          lensHandle: user?.lens?.handle,
-          lensOwnedBy: user?.lens?.ownedBy,
-          dbId: user?.db?.id,
+          id: streamUser?.lens?.ownedBy.toLowerCase(),
+          lensId: streamUser?.lens?.id,
+          lensImage: streamUser?.lens?.image,
+          lensName: streamUser?.lens?.name,
+          lensHandle: streamUser?.lens?.handle,
+          lensOwnedBy: streamUser?.lens?.ownedBy,
+          dbId: streamUser?.db?.id,
         },
-        user?.db?.tokens?.stream
+        streamUser?.db?.tokens?.stream
       );
       logger("stream", "Logging user object useStreamClient.connectToStream", "Connection made", [
         newClient.user,
-        user,
+        streamUser,
       ]);
       setClient(newClient);
     } catch (e) {
@@ -48,7 +55,12 @@ const useStreamAuth = () => {
         [e]
       );
     }
-  };
+  }
+
+  useEffect(() => {
+    if (streamUser?.db?.tokens?.stream)
+      createStreamClient();
+  }, [streamUser?.db?.tokens?.stream])
 
   return {
     client: client,

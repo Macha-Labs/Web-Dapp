@@ -81,9 +81,12 @@ export const StyledWindow = styled.div`
   }
 
   .middle {
-    width: 40%;
+    width: 35%;
     margin: auto;
-    margin-top: 15%;
+    margin-top: 8%;
+    height: 100vh;
+  }
+  
   }
 `;
 
@@ -299,15 +302,29 @@ export const StyledCard = styled.div`
     }
   }
 
-  &.state_highlight{
+  &.state_highlight {
     background: ${style.card.bg.hover};
     border: 1px solid ${style.card.border.hover};
     box-shadow: ${style.card.shadow.hover};
   }
 
   &.state_lens {
-    background: linear-gradient(286.43deg, #0A1B0E -15.42%, #05501B 145.11%) !important;
-    border: 1px solid #05501B !important;
+    background: linear-gradient(
+      286.43deg,
+      #0a1b0e -15.42%,
+      #05501b 145.11%
+    ) !important;
+    border: 1px solid #05501b !important;
+  }
+  &.invite {
+    background: linear-gradient(
+      129.54deg,
+      rgba(13, 33, 71, 0.66) 9.17%,
+      rgba(11, 32, 73, 0.15) 94.25%
+    ) !important;
+    padding: 48px 0px !important;
+    border-radius: 10px;
+    border: 1px solid rgb(32,108,255,0.7);
   }
 `;
 export const StyledXMTPCard = styled.div`
@@ -318,10 +335,9 @@ export const StyledXMTPCard = styled.div`
   box-shadow: ${style.card.shadow.default};
   cursor: pointer;
   width: 24.5%;
-  position:absolute;
-  bottom:10px;
-  left:3px;
-
+  position: absolute;
+  bottom: 10px;
+  left: 3px;
 `;
 
 export const StyledCardPannel = styled.div`

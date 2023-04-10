@@ -27,6 +27,9 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Spinner,
   Tag,
   Text,
@@ -133,109 +136,110 @@ const ChatList = (props: any) => {
 
   const TemplateActions = (props: any) => {
     return (
-      <Pop
-        trigger={<IconImage path="IconDarkMenu.png" />}
-        placement="bottom-end"
-      >
-        <Col className="text-start">
-          {/* <Button
-            variant="transparent"
-            size="sm"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkPinned.png" size="18" />}
-          >
-            <Row className="hr-between w-100" onClick={() => {}}>
-              Pin Channel
-            </Row>
-          </Button> */}
-          {!props?.item?.raw?.disconnected &&
-          props?.item?.raw &&
-          !props.item.raw?.muteStatus()?.muted ? (
-            <Button
-              variant="transparent"
-              size="sm"
-              className="text-start"
-              rightIcon={<IconImage path="IconDarkMute.png" size="xs" />}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  hookPortalChannel.muteChannel(props.item);
-                }}
+      // <Text>asdf</Text>
+      // <Popover placement="bottom" size="md">
+      //   <PopoverTrigger>
+      //     <IconImage path="IconDarkMenu.png" />
+      //   </PopoverTrigger>
+      //   <PopoverContent>
+      //     <Text>asdf</Text>
+      //   </PopoverContent>
+      // </Popover>
+      <div style={{position:'absolute' , marginTop:-14}}>
+        <Pop
+          trigger={<IconImage path="IconDarkMenu.png" />}
+          placement="bottom-end"
+        >
+          <Col className="text-start">
+            {!props?.item?.raw?.disconnected &&
+            props?.item?.raw &&
+            !props.item.raw?.muteStatus()?.muted ? (
+              <Button
+                variant="transparent"
+                size="sm"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkMute.png" size="xs" />}
               >
-                Mute Channel
-              </Row>
-            </Button>
-          ) : (
-            <Button
-              variant="transparent"
-              size="sm"
-              className="text-start"
-              rightIcon={<IconImage path="IconDarkUnMute.png" />}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  hookPortalChannel.unMuteChannel(props.item);
-                }}
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    hookPortalChannel.muteChannel(props.item);
+                  }}
+                >
+                  Mute Channel
+                </Row>
+              </Button>
+            ) : (
+              <Button
+                variant="transparent"
+                size="sm"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkUnMute.png" />}
               >
-                Unmute Channel
-              </Row>
-            </Button>
-          )}
-          {props?.item?.isAdmin && (
-            <Button
-              variant="transparent"
-              size="sm"
-              className="text-start"
-              rightIcon={<IconImage path="IconRedDelete.png" />}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  hookPortalChannel.deleteChannel(props.item);
-                }}
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    hookPortalChannel.unMuteChannel(props.item);
+                  }}
+                >
+                  Unmute Channel
+                </Row>
+              </Button>
+            )}
+            {props?.item?.isAdmin && (
+              <Button
+                variant="transparent"
+                size="sm"
+                className="text-start"
+                rightIcon={<IconImage path="IconRedDelete.png" />}
               >
-                Delete Channel
-              </Row>
-            </Button>
-          )}
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    hookPortalChannel.deleteChannel(props.item);
+                  }}
+                >
+                  Delete Channel
+                </Row>
+              </Button>
+            )}
 
-          {props.item.createdBy == authContext?.address ? (
-            <Button
-              variant="transparent"
-              size="sm"
-              className="text-start"
-              rightIcon={<IconImage path="IconRedDelete.png" />}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  hookPortalChannel.deleteChannel(props.item);
-                }}
+            {props.item.createdBy == authContext?.address ? (
+              <Button
+                variant="transparent"
+                size="sm"
+                className="text-start"
+                rightIcon={<IconImage path="IconRedDelete.png" />}
               >
-                Delete Channel
-              </Row>
-            </Button>
-          ) : (
-            <Button
-              variant="transparent"
-              size="sm"
-              className="text-start"
-              rightIcon={<IconImage path="IconDarkLeave.png" />}
-            >
-              <Row
-                className="hr-between w-100"
-                onClick={() => {
-                  hookPortalChannel.leaveChannel(props.item);
-                }}
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    hookPortalChannel.deleteChannel(props.item);
+                  }}
+                >
+                  Delete Channel
+                </Row>
+              </Button>
+            ) : (
+              <Button
+                variant="transparent"
+                size="sm"
+                className="text-start"
+                rightIcon={<IconImage path="IconDarkLeave.png" />}
               >
-                Leave Channel
-              </Row>
-            </Button>
-          )}
-        </Col>
-      </Pop>
+                <Row
+                  className="hr-between w-100"
+                  onClick={() => {
+                    hookPortalChannel.leaveChannel(props.item);
+                  }}
+                >
+                  Leave Channel
+                </Row>
+              </Button>
+            )}
+          </Col>
+        </Pop>
+      </div>
     );
   };
 
@@ -263,29 +267,55 @@ const ChatList = (props: any) => {
         {showCard && (
           <StyledXMTPCard>
             <Flex alignItems="center" justifyContent="space-between">
-              <Image
-                src="/assets/xmtp-white.png"
-                alt="Logo"
-                mr={2}
-                width="100px"
-              />
+              {router.pathname == "/chat" ? (
+                <Image
+                  src="/assets/xmtp-white.png"
+                  alt="Logo"
+                  mr={2}
+                  width="100px"
+                />
+              ) : (
+                <Image
+                  src="/assets/getStream-white.png"
+                  alt="Logo"
+                  mr={2}
+                  width="100px"
+                />
+              )}
               <IconImage path="IconDarkCross.png" onClick={handleClose} />
             </Flex>
-            <Text fontSize="md" my={4}>
-              Discover 1:1 encrypted DMs with your Lens frens powered by XMTP
-            </Text>
-            <Link href="/chat/dm">
-              <Button
-                variant="state_xmtp"
-                onClick={() => {
-                  handleButtonClick()
-                }}
-                width="100%"
-                // mb={2}
-              >
-                Explore 1:1 Chats
-              </Button>
-            </Link>
+            {router.pathname == "/chat" ? (
+              <Text fontSize="md" my={4}>
+                Discover 1:1 encrypted DMs with your Lens frens powered by XMTP
+              </Text>
+            ) : (
+              <Text fontSize="md" my={4}>
+                Discover Public and Token Gated communities to join group chats
+              </Text>
+            )}
+            {router.pathname == "/chat" ? (
+              <Link href="/chat/dm">
+                <Button
+                  variant="state_xmtp"
+                  onClick={handleButtonClick}
+                  width="100%"
+                  // mb={2}
+                >
+                  Explore 1:1 Inbox
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/chat">
+                <Button
+                  variant=""
+                  onClick={handleButtonClick}
+                  width="100%"
+                  // mb={2}
+                >
+                  Explore Channels
+                </Button>
+              </Link>
+            )}
           </StyledXMTPCard>
         )}
       </>
@@ -308,7 +338,7 @@ const ChatList = (props: any) => {
           ) : (
             <>
               {$channels?.length ? (
-                <ul>
+                <ul style={{padding:"0px  "}}>
                   {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
                   {$channels.map((item: any, index: number) => (
                     <StyledChatItem key={item?.index}>
@@ -347,7 +377,7 @@ const ChatList = (props: any) => {
                             />
                             <Col className="w-100 d-flex flex-col vr-center">
                               <Row>
-                                <Text>
+                                <Text paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
                                   {item?.name?.length > 12
                                     ? `${item?.name?.slice(0, 12)}...`
                                     : item?.name}
@@ -371,7 +401,7 @@ const ChatList = (props: any) => {
                                   style={{ paddingRight: "5px" }}
                                   className="m-t-0-5"
                                 >
-                                  <Text fontSize={"xs"}>
+                                  <Text fontSize={"xs"} paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
                                     {item?.lastMessage?.user?.lensUsername ||
                                       item?.lastMessage?.user?.lensHandle ||
                                       truncateAddress(
@@ -389,7 +419,7 @@ const ChatList = (props: any) => {
                               )}
                               {item?.lastMessage?.created_at && (
                                 <Col>
-                                  <Text fontSize={"xs"}>
+                                  <Text fontSize={"xs"}paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
                                     {new Date(
                                       item?.lastMessage?.created_at
                                     ).toLocaleString()}

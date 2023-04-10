@@ -287,6 +287,7 @@ function ChatSetting(props: any) {
     return (
       <ChatMessageList
         modal={modalPinned}
+        modalSettings={props.modalSettings}
         pinnedMessageList={$channel?.pinnedMessages}
         hookChat={chatContext.hookChat}
       />

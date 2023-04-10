@@ -34,7 +34,7 @@ const ChatMembersList = (props: any) => {
     return (
       
       
-        <Col className="m-b-1">
+        <Col className="m-b-1" style={{}}>
         {users?.length ? (
           <>
              <div>

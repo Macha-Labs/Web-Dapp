@@ -8,7 +8,7 @@ const ModalWindow = (props: any) => {
                     {props?.header}
                     <ModalCloseButton></ModalCloseButton>
                 </ModalHeader>}
-                <ModalContent className="hidescroll">
+                <ModalContent >
                     <ModalBody className="hidescroll" style={{ padding: "0px" }}>
                         {props.children}
                     </ModalBody>

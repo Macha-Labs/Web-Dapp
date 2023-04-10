@@ -11,7 +11,7 @@ import React from "react";
 import ChatMessage from "./ChatMessage";
 
 function ChatMessageList(props: any) {
-  
+  props?.modalSettings.onClose()
   return (
     <ModalSlider event={props.modal} size="sm" 
     
@@ -22,7 +22,7 @@ function ChatMessageList(props: any) {
       
       {props.pinnedMessageList?.map((message: any, index: number) => {
         return (
-          <ChatMessage key={message?.id} message={message} hookChat={props.hookChat} />
+          <ChatMessage key={message?.id} message={message} hookChat={props.hookChat} maxw="100"/>
         );
       })}
     </ModalSlider>
