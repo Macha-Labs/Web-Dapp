@@ -267,7 +267,7 @@ const ChatList = (props: any) => {
         {showCard && (
           <StyledXMTPCard>
             <Flex alignItems="center" justifyContent="space-between">
-              {router.pathname == "/chat" ? (
+              {router.pathname == "/" ? (
                 <Image
                   src="/assets/xmtp-white.png"
                   alt="Logo"
@@ -284,7 +284,7 @@ const ChatList = (props: any) => {
               )}
               <IconImage path="IconDarkCross.png" onClick={handleClose} />
             </Flex>
-            {router.pathname == "/chat" ? (
+            {router.pathname == "/" ? (
               <Text fontSize="md" my={4}>
                 Discover 1:1 encrypted DMs with your Lens frens powered by XMTP
               </Text>
@@ -293,7 +293,7 @@ const ChatList = (props: any) => {
                 Discover Public and Token Gated communities to join group chats
               </Text>
             )}
-            {router.pathname == "/chat" ? (
+            {router.pathname == "/" ? (
               <Link href="/chat/dm">
                 <Button
                   variant="state_xmtp"
@@ -305,7 +305,7 @@ const ChatList = (props: any) => {
                 </Button>
               </Link>
             ) : (
-              <Link href="/chat">
+              <Link href="/">
                 <Button
                   variant=""
                   onClick={handleButtonClick}
@@ -479,7 +479,7 @@ const ChatList = (props: any) => {
   };
 
   const triggerNew = () => {
-    if (router.pathname == "/chat") {
+    if (router.pathname == "/") {
       modalChatNew.onOpen();
     }
     if (router.pathname == "/chat/dm") {

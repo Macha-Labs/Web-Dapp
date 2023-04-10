@@ -16,7 +16,7 @@ const useChatChannels = (from?: any) => {
     // stream
     useEffect(() => {
       console.log('Rendering >>>>> useChatChannels >>>>>> for stream', hookStreamChannels.channels);
-      if (router.pathname == '/chat') {
+      if (router.pathname == '/') {
         $loadChannels(hookStreamChannels.channels);
       }
     }, [hookStreamChannels.channels]);
@@ -32,8 +32,9 @@ const useChatChannels = (from?: any) => {
     const _load = async () => {
       console.log('Rendering >>>>> useChatChannels.load');
       $loadChannels(null);
+      console.log("routerpathname", router.pathname);
       switch (router.pathname) {
-        case "/chat":
+        case "/":
           console.log("Executing fetchUserChannels function");
           hookStreamChannels.fetchUserChannels()
           break;

@@ -8,7 +8,7 @@ const useChatMessage = () => {
     const _send = async (data: any) => {
         console.log("Reading SENDING MSG", data);
         switch(router.pathname) {
-            case '/chat':
+            case '/':
                 return await $channel.raw.sendMessage(data);
             case '/chat/dm':
                 return await $channel?.xmtpRaw?.send(data.text);

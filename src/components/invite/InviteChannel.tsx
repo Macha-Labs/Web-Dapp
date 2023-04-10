@@ -29,7 +29,7 @@ const InviteChannel = (props: any) => {
 
     const callBackMembership = () => {
         chatContext?.hookChannel?.fetch({id: props?.channelId});
-        router.push('/chat');
+        router.push('/');
     }
 
     const callBacks = {

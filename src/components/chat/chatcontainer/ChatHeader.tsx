@@ -116,7 +116,7 @@ const ChatHeader = (props: any) => {
         <Row>
          <Button className="m-r-1" size="xs" variant={$channel?.source == 'xmtp' ? 'state_xmtp' : ''}>{$channel?.source}</Button> 
 
-         {router.pathname == '/chat' && <Row className="vr-center">
+         {router.pathname == '/' && <Row className="vr-center">
           
           <IconImage
             path="IconDarkMenu.png"

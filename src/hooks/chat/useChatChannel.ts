@@ -44,7 +44,7 @@ const useChatChannel = () => {
         $loadChannel(null);
 
         switch (router.pathname) {
-            case "/chat":
+            case "/":
                 return hookStreamChannel._fetch(data?.id);
             case "/chat/dm":
                 return hookXmtpChannel._fetch(data);
@@ -55,7 +55,7 @@ const useChatChannel = () => {
 
     const _remove = () => {
         switch (router.pathname) {
-            case "/chat":
+            case "/":
                 hookStreamChannel._remove();
                 break;
             case "/chat/dm":
@@ -68,7 +68,7 @@ const useChatChannel = () => {
         $loadLoading(true);
 
         switch (router.pathname) {
-            case "/chat":
+            case "/":
                 hookStreamChannel._reload();
                 break;
             case "/chat/dm":
@@ -82,7 +82,7 @@ const useChatChannel = () => {
     }
 
     const _read = async(channel: any) => {
-        if (channel && router.pathname == '/chat') {
+        if (channel && router.pathname == '/') {
             const result =  await channel?.raw?.markRead();
             console.log("Channel marked as Read ", result);
         }
@@ -90,7 +90,7 @@ const useChatChannel = () => {
 
     const _unwatch = async(oldChannel: any) => {
         console.log('Stopped watching the channel >>>>>>>>', oldChannel, router.pathname);
-        if (oldChannel && router.pathname == '/chat') {
+        if (oldChannel && router.pathname == '/') {
             const result =  await oldChannel?.raw?.stopWatching();
             console.log("Stopped watching the channel ", result, oldChannel);
         } else if (oldChannel && router.pathname == '/chat/dm') {
