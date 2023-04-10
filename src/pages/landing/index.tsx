@@ -20,7 +20,7 @@ const LandingPage = () => {
   const router = useRouter();
 
   const redirectChat = () => {
-    router.push("/chat");
+    router.push("/");
   }
 
   return (

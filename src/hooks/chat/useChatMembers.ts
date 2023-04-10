@@ -17,7 +17,7 @@ const useChatMembers = () => {
         logger("channel", "useChatMembers.useEffect[hookStreamChannelMembers?.users]", "members data from stream ", [
             hookStreamChannelMembers?.users,
         ]);
-        if (router.pathname == '/chat' && hookStreamChannelMembers?.allUsersIds) {
+        if (router.pathname == '/' && hookStreamChannelMembers?.allUsersIds) {
             $loadMembers({ onlineUsers: hookStreamChannelMembers?.onlineUsers, offlineUsers: hookStreamChannelMembers?.offlineUsers});
             $loadMemberAll(hookStreamChannelMembers.allUsers)
             $loadMemberIds(hookStreamChannelMembers?.allUsersIds);
@@ -27,7 +27,7 @@ const useChatMembers = () => {
 
     const _load = (channel: any) => {
         console.log('Rendering >>>>> useChatMembers.load');
-        if (router.pathname == '/chat') {
+        if (router.pathname == '/') {
             hookStreamChannelMembers.fetch(channel)
         }
     }

@@ -14,7 +14,7 @@ const useChatMessages = () => {
     const $loadMessages = useChatMessagesStore(((state: any) => state.load));
 
     useEffect(() => {
-        if (router.pathname == '/chat')
+        if (router.pathname == '/')
             $loadMessages(hookStreamChannelMessages?.messages || []);
     }, [hookStreamChannelMessages?.messages]);
 
@@ -25,7 +25,7 @@ const useChatMessages = () => {
 
     const _load = () => {
         $loadMessages(null);
-        if (router.pathname == '/chat') {
+        if (router.pathname == '/') {
             hookStreamChannelMessages.fetch()
         } else if (router.pathname == '/chat/dm') {
             hookXmtpChannelMessages.fetch($channel);
