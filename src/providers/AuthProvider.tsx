@@ -12,6 +12,7 @@ import useXmtpAuth from "@/hooks/xmtp/useXmtpAuth";
 import useUserStore from "@/store/useUserStore";
 import useLensConnections from "@/hooks/lens/useLensConnections";
 import useStreamAuth from "@/hooks/stream/useStreamAuth";
+import { watchAccount } from '@wagmi/core'
 
 export type AuthContextType = {
   signer: any | undefined;
@@ -48,6 +49,13 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 const AuthProvider = ({ children }: any) => {
+  
+  const unwatch = watchAccount((account) => {if($address!=account){
+    console.log(account, " . ", $address, "asdf")
+    // window.location.href="https://metaworkhq.com"
+  }})
+
+
   console.log('Rendering >>>>> AuthProvider');
   const [signer, setSigner] = useState<any>("");
   const [user, setUser] = useState<any>(new User$(null, null, null));
@@ -100,6 +108,7 @@ const AuthProvider = ({ children }: any) => {
           } else {
             user.setLensDirect(lensProfile);
           }
+          await hookStreamAuth.connectToStream(address, user);
           setLoadingLens(false);
         } else {
           callBacks.noLensProfile();
@@ -193,7 +202,7 @@ const AuthProvider = ({ children }: any) => {
     }
     if (user?.lens?.id && user?.db?.tokens?.stream) {
       console.log("Logging user object Calling the connectToStream", address)
-      hookStreamAuth.connectToStream($address, user);
+      
     }
   }, [user?.lens]);
 

@@ -30,7 +30,7 @@ const ModalSlider = (props: any) => {
                     </Row>
                 </DrawerHeader>}
                 
-                <DrawerBody className="overflow-y">
+                <DrawerBody style={{overflowY:"scroll"}}>
                         {props.children}
                 </DrawerBody>
 

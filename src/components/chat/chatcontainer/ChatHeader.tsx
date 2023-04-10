@@ -79,7 +79,7 @@ const ChatHeader = (props: any) => {
           />
           <Col>
             <Row>
-              <Heading as="h4" size="sm">
+              <Heading as="h4" size="sm" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
                 {$channel?.name ||
                   truncateAddress($channel?.peerAddress)}
               </Heading>

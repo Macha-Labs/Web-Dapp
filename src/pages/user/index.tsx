@@ -15,10 +15,11 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import ModalWindow from "@/components/modal/ModalWindow";
 import AuthCard from "@/components/auth/AuthCard";
+import { disconnect } from "@wagmi/core";
 
 const User = () => {
   const authContext = useContext(AuthContext);
-  const [window, setWindow] = useState("UserProfile");
+  const [tabwindow, setTabwindow] = useState("UserProfile");
   const modalAuth = useDisclosure();
   const modalEdit = useDisclosure();
   const userSettings = [
@@ -26,7 +27,7 @@ const User = () => {
       icon: "IconDarkEdit.png",
       name: "Edit Profile",
       onPress: () => {
-        setWindow("UserEdit");
+        setTabwindow("UserEdit");
         console.log("Edit Profile");
       },
     },
@@ -34,41 +35,56 @@ const User = () => {
       icon: "IconDarkPrivacy.png",
       name: "Privacy and Security",
       route: "",
+      size:"md"
     },
     {
       icon: "IconDarkNotification.png",
       name: "Notifications and Sounds",
       route: "",
+      size:"lg"
     },
     {
       icon: "IconDarkCall.png",
       name: "Call and Video",
       route: "",
+      size:"md"
     },
     {
       icon: "IconDarkWallet.png",
       name: "Wallet and Payments",
       route: "",
+      size:"md"
     },
     {
       icon: "IconDarkDatabase.png",
       name: "Storage and Data",
       route: "",
+      size:"md"
     },
     {
       icon: "IconDarkLinkedDevices.png",
       name: "Linked Devices",
       route: "",
+      size:"lg"
     },
     {
       icon: "IconDarkLanguages.png",
       name: "Languages",
       route: "",
+      size:"md"
     },
     {
       icon: "IconDarkAppearance.png",
       name: "Appearance",
       route: "",
+      size:"md"
+    }, {
+      icon: "IconDarkEdit.png",
+      name: "Disconnect Wallet",
+      onPress: async () => {
+        await disconnect();
+        window.location.href="https://metaworkhq.com"
+      },
     },
   ];
 
@@ -81,10 +97,10 @@ const User = () => {
   }, [authContext?.isConnected, modalAuth.isOpen]);
 
   const TemplateRight = () => {
-    console.log(window, "WINDOW");
+    console.log(tabwindow, "WINDOW");
     return (
       <>
-        {window == "UserProfile" ? (
+        {tabwindow == "UserProfile" ? (
           <UserProfile user={authContext?.user} />
         ) : (
           <UserEdit />
@@ -113,7 +129,7 @@ const User = () => {
           <div className="body">
             <UserCard
               user={authContext?.user}
-              // onClick={setWindow("UserProfile")}
+              // onClick={setTabwindow("UserProfile")}
             />
             <LayoutOptions
               options={userSettings}
