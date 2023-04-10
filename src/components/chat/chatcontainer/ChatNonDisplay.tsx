@@ -37,7 +37,7 @@ const ChatNonDisplay = () => {
           <Heading className="" size="xs">
             Create a new channel or join with the invite link
           </Heading>
-          <Link href="https://www.metaworkhq.com/invite/c/6418713795d719dc3381cb44">
+          <Link href="https://app.metaworkhq.com/invite/c/6418713795d719dc3381cb44">
             <Button variant="state_brand" className=" m-t-1">
               Join Metawork Community
             </Button>
