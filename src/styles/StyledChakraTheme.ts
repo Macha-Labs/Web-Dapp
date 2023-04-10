@@ -47,6 +47,13 @@ const theme = extendTheme({
         opacity: "0.65 !important",
         background: `${style.modal.bg.default} !important`,
       },
+      ".css-wl0d9u ":{
+        backgroundImage: `url("/assets/invitebg.png")`,
+          backgroundRepeat:"no-repeat",
+          backgroundPosition:"center",
+          backgroundSize:"cover",
+          height:"100vh"
+      },
       ".alert": {
         background: `${style.bgPannelHeader}`,
       },
