@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>MetaWork: Web3 HQ For teams And Guilds</title>
+        <title>MetaWork: Chat Platform</title>
         <meta
           name="description"
           content="Building Private and Secured Decentralized Suite"
