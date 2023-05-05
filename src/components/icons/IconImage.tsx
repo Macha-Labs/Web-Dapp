@@ -3,18 +3,16 @@ import React from "react";
 import { IKImage } from "imagekitio-react";
 import { _sizes } from "@/styles/size";
 
-
 function IconImage(props: any) {
   return (
-    <StyledIcon
-      className={props.style?.className}
-      onClick={props.onClick}
-    >
+    <StyledIcon className={props.style?.className} onClick={props.onClick}>
       <IKImage
         path={`/icons/${props.path}`}
         transformation={[
           {
-            height: props?.size ? _sizes.icon[props?.size] : _sizes.icon.default,
+            height: props?.size
+              ? _sizes.icon[props?.size]
+              : _sizes.icon.default,
             width: props?.size ? _sizes.icon[props?.size] : _sizes.icon.default,
           },
         ]}

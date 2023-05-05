@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Col,
-  Row,
-  StyledNav,
-} from "../../styles/StyledComponents";
+import { Col, Row, StyledNav } from "../../styles/StyledComponents";
 import { Tooltip } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
