@@ -1,4 +1,4 @@
-import { Row, StyledCard } from "@/styles/StyledComponents";
+import { StyledRow, StyledCard } from "@/styles/StyledComponents";
 
 const LayoutCard = (props: any) => {
   return (

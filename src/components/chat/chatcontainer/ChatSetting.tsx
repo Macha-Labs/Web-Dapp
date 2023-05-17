@@ -4,7 +4,7 @@ import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
 import useChatChannelStore from "@/store/useChatChannelStore";
-import { Col } from "@/styles/StyledComponents";
+import { StyledCol } from "@/styles/StyledComponents";
 import { Heading, useDisclosure, useToast } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import ChatEdit from "../ChatEdit";
@@ -303,7 +303,7 @@ function ChatSetting(props: any) {
     
     >
       <div>
-        <Col>
+        <StyledCol>
           <LayoutOptions
             options={chatOptions4}
             style={{ className: "m-b-1 p-2" }}
@@ -332,7 +332,7 @@ function ChatSetting(props: any) {
             channelRawData={$channel.raw}
             userId={authContext.address}
           />
-        </Col>
+        </StyledCol>
       </div>
       
     </ModalSlider>}

@@ -1,6 +1,6 @@
 import React from "react";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
-import { Row, StyledCard } from "@/styles/StyledComponents";
+import { StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { Button, Heading, Switch, Text } from "@chakra-ui/react";
 import ModalSlider from "@/components/modal/ModalSlider";
 import useChatChannelStore from "@/store/useChatChannelStore";
@@ -80,7 +80,7 @@ const ChatPermissions = (props: any) => {
     <ModalSlider event={props.modalChatPermission} size="sm" 
     
     header={
-      <Row className="hr-between vr-center w-100">
+      <StyledRow className="hr-between vr-center w-100">
         <Heading as="h6" size="sm">Permissions</Heading>
         <Button
           size="sm"
@@ -91,7 +91,7 @@ const ChatPermissions = (props: any) => {
         >
           Save
         </Button>
-      </Row>
+      </StyledRow>
     }
 
     footer={<Text>Changes done will be reflected for all the members of the channel</Text>}
@@ -102,7 +102,7 @@ const ChatPermissions = (props: any) => {
           return (
             <StyledCard key={permission.value} className="m-b-0-5 state_hover">
               
-              <Row className="p-1 hr-between">
+              <StyledRow className="p-1 hr-between">
                 <Text fontSize="sm">{permission.text}</Text>
                 <Switch
                   defaultChecked={hookPortalChannel?.channel?.permissions?.includes(
@@ -115,7 +115,7 @@ const ChatPermissions = (props: any) => {
                     permission.value
                   )}
                 />
-              </Row>
+              </StyledRow>
             </StyledCard>
           );
         })}

@@ -1,18 +1,18 @@
-import { Row, StyledInput } from "@/styles/StyledComponents";
+import { StyledRow, StyledInput } from "@/styles/StyledComponents";
 
 const InputAction = (props: any) => {
     return (
         <StyledInput className={props?.style?.className}>
-            <Row className="vr-center">
+            <StyledRow className="vr-center">
                 {props.children}
-                <Row>
+                <StyledRow>
                     {props.actions.map((item: any) => {
                         return (
                             <>{item}</>
                         )
                     })}
-                </Row>
-            </Row>
+                </StyledRow>
+            </StyledRow>
         </StyledInput>
     )
 }

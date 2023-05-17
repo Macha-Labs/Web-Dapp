@@ -1,6 +1,6 @@
 import { Avatar, AvatarBadge, Heading, useDisclosure } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
-import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { truncateAddress } from "@/helpers";
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
@@ -34,13 +34,13 @@ const ChatMembersList = (props: any) => {
     return (
       
       
-        <Col className="m-b-1" style={{}}>
+        <StyledCol className="m-b-1" style={{}}>
         {users?.length ? (
           <>
              <div>
                 {users?.map((item: any, index: any) => (
                   <StyledCard key={index} className="state_hover m-b-0-5">
-                    <Row
+                    <StyledRow
                   
                   className="hr-between vr-center"
                   onClick={() => {
@@ -48,7 +48,7 @@ const ChatMembersList = (props: any) => {
                     handleSelectedUser(item);
                   }}
                 >
-                  <Row className="vr-center">
+                  <StyledRow className="vr-center">
                     <Avatar src={item?.lens?.image} className="m-r-0-5" size="sm">
                       {heading == "Online" ? (
                         <AvatarBadge boxSize="0.7em" bg="green.500" />
@@ -63,13 +63,13 @@ const ChatMembersList = (props: any) => {
                         ? item?.lens?.handle
                         : truncateAddress(item?.lens?.ownedBy)}
                     </h6>
-                  </Row>
+                  </StyledRow>
                   <IconImage
                   path="IconBrandChat.png"
                   style={{ className: "m-l-0-5" }}
                   size="xs"
                 />
-                </Row>
+                </StyledRow>
                   </StyledCard>
                 
               ))}
@@ -78,7 +78,7 @@ const ChatMembersList = (props: any) => {
         ) : (
           <></>
         )}
-      </Col>
+      </StyledCol>
     );
   };
 

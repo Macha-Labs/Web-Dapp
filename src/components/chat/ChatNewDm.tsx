@@ -1,6 +1,6 @@
 import useXmtpChannelNew from "@/hooks/xmtp/useXmtpChannelNew";
 import useUserStore from "@/store/useUserStore";
-import { Col } from "@/styles/StyledComponents";
+import { StyledCol } from "@/styles/StyledComponents";
 import { Button, Heading, Image, Input, InputGroup, InputRightElement, useToast } from "@chakra-ui/react";
 import ModalSlider from "../modal/ModalSlider";
 import UserFollowersCard from "../user/UserFollowersCard";
@@ -28,7 +28,7 @@ const ChatNewDm = (props: any) => {
 
     const TemplateFollowers = () => {
         return (
-          <Col className="p-v-1">
+          <StyledCol className="p-v-1">
             {/* <Heading as="h6" size="sm" className="m-b-1">Lens Followers</Heading> */}
             { $followers?.length
                 ?
@@ -39,7 +39,7 @@ const ChatNewDm = (props: any) => {
                 </>
              : (
               <>
-                <Col className="flex-hr-vr-center">
+                <StyledCol className="flex-hr-vr-center">
                       <Image
                         src="/assets/nofollow.png"
                         className="w-40 m-b-2 m-t-1"
@@ -47,10 +47,10 @@ const ChatNewDm = (props: any) => {
                       <Heading className="" size="xs">
                         Your lens followers will be displayed here
                       </Heading>
-                    </Col>
+                    </StyledCol>
               </>
             )}
-          </Col>
+          </StyledCol>
         );
       };
     

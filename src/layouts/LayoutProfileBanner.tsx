@@ -1,16 +1,16 @@
-import { StyledProfileBanner, Row, Col } from "@/styles/StyledComponents";
+import { StyledProfileBanner, StyledRow, StyledCol } from "@/styles/StyledComponents";
 import { Avatar } from "@chakra-ui/react";
 
 const LayoutProfileBanner = (props: any) => {
   return (
     <StyledProfileBanner>
-      <Row>
-        <Col className="w-100 bannerImage">{/* image banner */}</Col>
-      </Row>
+      <StyledRow>
+        <StyledCol className="w-100 bannerImage">{/* image banner */}</StyledCol>
+      </StyledRow>
       {/* This is the profile picture */}
-      <Row className="bannerAvatar hr-center w-100">
+      <StyledRow className="bannerAvatar hr-center w-100">
         <Avatar  src={props.profile?.image} size="2xl" />
-      </Row>
+      </StyledRow>
     </StyledProfileBanner>
   );
 };

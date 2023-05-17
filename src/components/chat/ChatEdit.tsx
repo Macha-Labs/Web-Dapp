@@ -11,7 +11,7 @@ import {
   Heading,
   Radio,
 } from "@chakra-ui/react";
-import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import ModalSlider from "../modal/ModalSlider";
 import useChatChannelStore from "@/store/useChatChannelStore";
 import { ChatContext } from "@/providers/ChatProvider";
@@ -120,7 +120,7 @@ const ChatEdit = (props: any) => {
   return (
     <ModalSlider size="sm" event={props.modal}
     header={
-      <Row className="hr-between vr-center w-full">
+      <StyledRow className="hr-between vr-center w-full">
         <Button
           size="sm"
           onClick={props.modal.onClose}
@@ -139,12 +139,12 @@ const ChatEdit = (props: any) => {
         >
           Save
         </Button>
-      </Row>
+      </StyledRow>
     }
     >
       <>
-      <Col className="">
-        <Col className="hr-center w-full mb-2">
+      <StyledCol className="">
+        <StyledCol className="hr-center w-full mb-2">
           {profileImage ? (
             <Avatar
               size="2xl"
@@ -169,33 +169,33 @@ const ChatEdit = (props: any) => {
           {/* <Text fontSize={14} fontWeight={800} onClick={handleSelectClick}>
             Set New Profile Photo
           </Text> */}
-        </Col>
-        <Col>
+        </StyledCol>
+        <StyledCol>
           <Heading as="h6" size="sm" className="m-b-1">Channel Details</Heading>
           <StyledCard className="m-b-1">
             <LayoutInputs data={data} style={{ class: "m-b-1" }} />
           </StyledCard>
-        </Col>
-        <Col>
+        </StyledCol>
+        <StyledCol>
           <Heading as="h6" size="sm" className="m-b-1">Channel Access</Heading>
           <StyledCard>
-          <Row className="hr-between">
-            <Col>
+          <StyledRow className="hr-between">
+            <StyledCol>
               <Heading size="sm">Private</Heading>
               <Text fontSize={14}>
                 Can only be accessed by members added.
               </Text>
-            </Col>
-            <Col>
+            </StyledCol>
+            <StyledCol>
               <Switch
                 isChecked={hookPortalChannel?.channel?.private}                
                 onChange={handleToggle}
               />
-            </Col>
-          </Row>
+            </StyledCol>
+          </StyledRow>
         </StyledCard>
-        </Col>
-      </Col>
+        </StyledCol>
+      </StyledCol>
     </>
     </ModalSlider>
   );

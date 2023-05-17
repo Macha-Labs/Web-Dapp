@@ -2,7 +2,7 @@ import useLensConnections from "@/hooks/lens/useLensConnections";
 import useLensFollows from "@/hooks/lens/useLensFollow";
 import useLensPostsForUser from "@/hooks/lens/useLensPostsForUser";
 import LayoutProfileBanner from "@/layouts/LayoutProfileBanner";
-import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { ChatIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -71,7 +71,7 @@ const UserProfile = ({ user }: any) => {
 
   const templatePosts = () => {
     return (
-      <Col>
+      <StyledCol>
         {
           <>
             {user?.lens?.ownedBy === undefined ? (
@@ -84,13 +84,13 @@ const UserProfile = ({ user }: any) => {
             )}
           </>
         }
-      </Col>
+      </StyledCol>
     );
   };
 
   const templateNfts = () => {
     return (
-      <Col>
+      <StyledCol>
         {/* {
                     nfts?.length
                         ?
@@ -113,7 +113,7 @@ const UserProfile = ({ user }: any) => {
                             <></>
                         )
                 } */}
-      </Col>
+      </StyledCol>
     );
   };
 
@@ -133,7 +133,7 @@ const UserProfile = ({ user }: any) => {
               "User has not connected Lens to their profile"
             ) : (
               <>
-                <Col className="flex-hr-vr-center">
+                <StyledCol className="flex-hr-vr-center">
                   <Image src="/assets/nofollow.png" className="w-40 m-b-2 m-t-1" />
                   <Heading className="m-b-1" size="lg">
                     There is Nobody here, yet.
@@ -141,7 +141,7 @@ const UserProfile = ({ user }: any) => {
                   <Heading className="" size="xs">
                     People you follow on lens will be displayed here
                   </Heading>
-                </Col>
+                </StyledCol>
               </>
             )}
           </>
@@ -172,7 +172,7 @@ const UserProfile = ({ user }: any) => {
               "User has not connected Lens to their profile"
             ) : (
               <>
-                <Col className="flex-hr-vr-center">
+                <StyledCol className="flex-hr-vr-center">
                   <Image
                     src="/assets/nofollow.png"
                     className="w-40 m-b-2 m-t-1"
@@ -183,7 +183,7 @@ const UserProfile = ({ user }: any) => {
                   <Heading className="" size="xs">
                     Your lens followers will be displayed here
                   </Heading>
-                </Col>
+                </StyledCol>
               </>
             )}
           </>
@@ -197,28 +197,28 @@ const UserProfile = ({ user }: any) => {
       <StyledCard>
         <LayoutProfileBanner profile={user?.lens} />
 
-        <Row>
-          <Col className="m-v-1 w-100 hr-center">
+        <StyledRow>
+          <StyledCol className="m-v-1 w-100 hr-center">
             <Heading as="h3" size="lg">
               {user?.lens?.name ? user?.lens?.name : user?.lens?.handle}
             </Heading>
             <h6>@{user?.lens?.handle}</h6>
-          </Col>
-        </Row>
+          </StyledCol>
+        </StyledRow>
 
-        <Row className="vr-center hr-center">
+        <StyledRow className="vr-center hr-center">
           {user?.lens?.bio ? (
-            <Col className="m-v-1">
+            <StyledCol className="m-v-1">
               <Text className="bioText">{user?.lens?.bio}</Text>
-            </Col>
+            </StyledCol>
           ) : (
             <></>
           )}
-        </Row>
+        </StyledRow>
 
         {user?.lens?.ownedBy?.toLowerCase() !==
           authContext?.address?.toLowerCase() && (
-          <Row className="m-v-1 vr-center hr-center">
+          <StyledRow className="m-v-1 vr-center hr-center">
             {userLens?.isFollowedByMe || isFollowed ? (
               <Button
                 variant="state_lens_unfollow"
@@ -259,7 +259,7 @@ const UserProfile = ({ user }: any) => {
                 Message
               </Button>
             </Link>
-          </Row>
+          </StyledRow>
         )}
       </StyledCard>
     );
@@ -272,7 +272,7 @@ const UserProfile = ({ user }: any) => {
           style={{ className: "m-t-1" }}
           header={
             <TabList className="w-100">
-              <Row className="w-100 vr-center hr-center">
+              <StyledRow className="w-100 vr-center hr-center">
                 <Tab>
                   <Button variant="state_default_hover">
                     <IconImage path="IconDarkPost.png"/>
@@ -291,7 +291,7 @@ const UserProfile = ({ user }: any) => {
                     <Text className="m-l-0-5" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>Following</Text>
                   </Button>
                 </Tab>
-              </Row>
+              </StyledRow>
             </TabList>
           }
         >

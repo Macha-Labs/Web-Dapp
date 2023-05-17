@@ -9,8 +9,8 @@ import LayoutImagePreview from "@/layouts/chat/LayoutImagePreview";
 import LayoutLinkPreview from "@/layouts/chat/LayoutLinkPreview";
 import { AuthContext } from "@/providers/AuthProvider";
 import {
-  Col,
-  Row,
+  StyledCol,
+  StyledRow,
   StyledConversation,
   TextareaDiv,
 } from "@/styles/StyledComponents";
@@ -141,7 +141,7 @@ const ChatMessage = (props: any) => {
                   truncateAddress(props.message?.createdBy)
                 }
               ></Avatar>
-      <Col
+      <StyledCol
             className={
               props.authContext?.address.toLowerCase() ==
               props?.message?.user?.id
@@ -151,7 +151,7 @@ const ChatMessage = (props: any) => {
             style={{ color: "#ffffff",maxWidth:`${props.maxw=="100" ? "100%" : "50%"}` }  }
           >
             <TemplateReply />
-            <Row className="hr-between">
+            <StyledRow className="hr-between">
               {props?.channel?.source == 'xmtp' ?
               <Text fontSize="sm" className="heading">
                 {(props.message?.createdBy == authContext?.address)? props?.channel?.name: authContext?.user?.lens?.name}
@@ -163,13 +163,13 @@ const ChatMessage = (props: any) => {
                   props.message?.user?.lensHandle ||
                   truncateAddress(props.message?.createdBy)}
               </Text>}
-              <Row className="vr-center">
+              <StyledRow className="vr-center">
                 {props?.message.pinned && <IconImage path="IconDarkPinned.png" size="2xs" />}
                 <Text style={{ alignSelf: "flex-end" }} fontSize="12" className="m-l-0-5">
                   {time}
                 </Text>
-              </Row>
-            </Row>
+              </StyledRow>
+            </StyledRow>
 
             {props?.hookChat?.actionMessage?.action == "EDIT" &&
             props?.hookChat?.actionMessage?.item?.id == props?.message?.id ? (
@@ -221,7 +221,7 @@ const ChatMessage = (props: any) => {
             )}
 
             {props?.message?.reaction_scores && (
-              <Row className="vr-center">
+              <StyledRow className="vr-center">
                 {Object.keys(props?.message.reaction_scores).length > 0 &&
                   Object.keys(props.message.reaction_scores).map(
                     (item: any, i: any) => {
@@ -244,9 +244,9 @@ const ChatMessage = (props: any) => {
                       );
                     }
                   )}
-              </Row>
+              </StyledRow>
             )}
-          </Col>
+          </StyledCol>
       </>
     )
   }
@@ -261,7 +261,7 @@ const ChatMessage = (props: any) => {
                 name={(props.message?.createdBy == authContext?.address)? authContext?.user?.lens?.name: props?.channel?.name}
                 src={(props.message?.createdBy == authContext?.address)? authContext?.user?.lens?.image: props?.channel?.image}
               ></Avatar>
-        <Col
+        <StyledCol
             className={
               (authContext?.address == props.message?.createdBy)
                 ? "message"
@@ -270,7 +270,7 @@ const ChatMessage = (props: any) => {
             style={{ color: "#ffffff" }}
           >
             <TemplateReply />
-            <Row className="hr-between">
+            <StyledRow className="hr-between">
               {props?.channel?.source == 'xmtp' ?
               <Text fontSize="sm" className="heading">
                 {(props.message?.createdBy == authContext?.address)? authContext?.user?.lens?.name : props?.channel?.name}
@@ -282,13 +282,13 @@ const ChatMessage = (props: any) => {
                   props.message?.user?.lensHandle ||
                   truncateAddress(props.message?.createdBy)}
               </Text>}
-              <Row className="vr-center">
+              <StyledRow className="vr-center">
                 {props?.message.pinned && <IconImage path="IconDarkPinned.png" size="2xs" />}
                 <Text style={{ alignSelf: "flex-end" }} fontSize="12" className="m-l-0-5">
                   {time}
                 </Text>
-              </Row>
-            </Row>
+              </StyledRow>
+            </StyledRow>
 
             {props?.hookChat?.actionMessage?.action == "EDIT" &&
             props?.hookChat?.actionMessage?.item?.id == props?.message?.id ? (
@@ -340,7 +340,7 @@ const ChatMessage = (props: any) => {
             )}
 
             {props?.message?.reaction_scores && (
-              <Row className="vr-center">
+              <StyledRow className="vr-center">
                 {Object.keys(props?.message.reaction_scores).length > 0 &&
                   Object.keys(props.message.reaction_scores).map(
                     (item: any, i: any) => {
@@ -363,9 +363,9 @@ const ChatMessage = (props: any) => {
                       );
                     }
                   )}
-              </Row>
+              </StyledRow>
             )}
-          </Col>
+          </StyledCol>
       </>
     )
   }
@@ -382,7 +382,7 @@ const ChatMessage = (props: any) => {
           />
         }
       >
-        <Row className="vr-center">
+        <StyledRow className="vr-center">
           <IconEmoji
             style={{ className: "m-r-0-5" }}
             onClick={() => {
@@ -418,7 +418,7 @@ const ChatMessage = (props: any) => {
           >
             👍
           </IconEmoji>
-        </Row>
+        </StyledRow>
       </Pop>
     );
   };
@@ -426,7 +426,7 @@ const ChatMessage = (props: any) => {
   const TemplateActions = () => {
     return (
       <Pop size="sm" trigger={<IconImage path="IconDarkMenu.png" />}>
-        <Col className="text-start">
+        <StyledCol className="text-start">
           {actionsData.map(item => {
             return (
               <>
@@ -445,7 +445,7 @@ const ChatMessage = (props: any) => {
               </>
             );
           })}
-        </Col>
+        </StyledCol>
       </Pop>
     );
   };
@@ -454,11 +454,11 @@ const ChatMessage = (props: any) => {
     return (
       <>
         {props?.message?.quoted_message && (
-          <Col
+          <StyledCol
             onClick={() => handleReplyToView(props.message.quoted_message_id)}
             className="m-b-1 replyTo"
           >
-            <Row>
+            <StyledRow>
               <Text className="m-r-0-5" fontSize="sm">
                 Replying
               </Text>
@@ -472,9 +472,9 @@ const ChatMessage = (props: any) => {
                   props.message?.quoted_message?.user?.lensHandle ||
                   truncateAddress(props.message?.quoted_message?.user?.id)}
               </Text>
-            </Row>
+            </StyledRow>
             <Text>{props?.message.quoted_message?.text}</Text>
-          </Col>
+          </StyledCol>
         )}
       </>
     );
@@ -487,9 +487,9 @@ const ChatMessage = (props: any) => {
         key={`b-${props?.message?.id}`}
         ref={chatRef}
       >
-        <Row className="w-100">
-          <Col>
-            <Row>
+        <StyledRow className="w-100">
+          <StyledCol>
+            <StyledRow>
             {props.hookChat?.actionMessage?.action === "MULTISELECT" && (
                 <Checkbox
                   defaultChecked={props?.hookChat?.selectedMessages?.includes(
@@ -508,20 +508,20 @@ const ChatMessage = (props: any) => {
               
 
               
-            </Row>
-          </Col>
+            </StyledRow>
+          </StyledCol>
 
           {props?.channel?.source == 'xmtp' ? templateMessageXmtp() : templateMessageStream()}
           
-          <Row
+          <StyledRow
             className={`positionPop ${
               props.scrollToId == props.message.id ? "" : "action"
             }`}
           >
             {(props?.channel?.source == 'getstream') && <TemplateReactions />}
             {(props?.channel?.source == 'getstream') && <TemplateActions />}
-          </Row>
-        </Row>
+          </StyledRow>
+        </StyledRow>
       </StyledConversation>
       
       

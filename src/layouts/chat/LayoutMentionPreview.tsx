@@ -1,4 +1,4 @@
-import { ChatPreviewCard, Col, Row, RowHover } from "@/styles/StyledComponents";
+import { ChatPreviewCard, StyledCol, StyledRow, RowHover } from "@/styles/StyledComponents";
 import { Avatar, Text } from "@chakra-ui/react";
 
 
@@ -18,21 +18,21 @@ const LayoutMentionPreview = (props: any) => {
                     (
                         <ChatPreviewCard>
                             <Text className="m-b-1">Members Matching @</Text>
-                            <Col className="w-100 template-body">
+                            <StyledCol className="w-100 template-body">
                                 {
                                     props.users.map((item: any, index: number) =>
                                         <RowHover key={index} className="hr-between vr-center w-100" onClick={() => onMemberClick(item)}>
-                                            <Row className="vr-center">
+                                            <StyledRow className="vr-center">
                                                 <Avatar src={item?.image} className="m-r-1" size="sm" />
                                                 <Text>{item?.name}</Text>
-                                            </Row>
-                                            <Row>
+                                            </StyledRow>
+                                            <StyledRow>
                                                 <Text>@{item.handle}</Text>
-                                            </Row>
+                                            </StyledRow>
                                         </RowHover>
                                     )
                                 }
-                            </Col>
+                            </StyledCol>
                         </ChatPreviewCard>
                     )
                     :

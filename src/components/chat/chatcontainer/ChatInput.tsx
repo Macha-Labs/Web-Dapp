@@ -6,8 +6,8 @@ import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
 import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
 import {
-  Col,
-  Row,
+  StyledCol,
+  StyledRow,
   StyledChatInput,
   StyledChatInputContainer,
   StyledChatPreview,
@@ -44,8 +44,8 @@ const ChatInput = (props: any) => {
       <>
         {chatContext?.hookChat?.actionMessage?.action === "REPLY" ? (
           <div className="reply">
-            <Col className="w-100 vr-center">
-              <Row className="vr-center">
+            <StyledCol className="w-100 vr-center">
+              <StyledRow className="vr-center">
                 <IconImage path="IconDarkReply.png" />
                 <Divider orientation="vertical" color={"#246BFD"} />
                 {/* <Avatar
@@ -55,13 +55,13 @@ const ChatInput = (props: any) => {
                 <Text fontSize="xs">
                   @{chatContext?.hookChat?.actionMessage?.item?.user?.lensHandle}
                 </Text> */}
-              </Row>
-              <Row>
+              </StyledRow>
+              <StyledRow>
                 <Text fontSize="xs">
                   {chatContext?.hookChat?.actionMessage?.item?.text}
                 </Text>
-              </Row>
-            </Col>
+              </StyledRow>
+            </StyledCol>
           </div>
         ) : (
           <></>
@@ -80,7 +80,7 @@ const ChatInput = (props: any) => {
           </Heading>
         }
       >
-        <Col className="p-1">
+        <StyledCol className="p-1">
           <Text fontSize={16}>Your Lens Post Heading Here</Text>
           <Textarea
             className="m-b-1 m-t-1"
@@ -88,13 +88,13 @@ const ChatInput = (props: any) => {
             placeholder="Your Lens Post Content Here"
             ref={createPostRef}
           ></Textarea>
-          <Row className="m-b-1">
+          <StyledRow className="m-b-1">
             <IconImage
               path="IconDarkFiles.png"
               style={{ className: "m-r-0-5" }}
             />
             <IconImage path="IconDarkPost.png" />
-          </Row>
+          </StyledRow>
           <Button
             size="sm"
             variant="state_brand w-content"
@@ -107,7 +107,7 @@ const ChatInput = (props: any) => {
           >
             Create Post
           </Button>
-        </Col>
+        </StyledCol>
       </ModalWindow>
     );
   };
@@ -120,8 +120,8 @@ const ChatInput = (props: any) => {
       <>
         {chatContext?.hookChat?.attachItem ? (
           <div className="attachment show">
-            <Row className="vr-start hr-between">
-              <Col className="w-100">
+            <StyledRow className="vr-start hr-between">
+              <StyledCol className="w-100">
                 {type == "image" ? (
                   <Image
                     src={URL.createObjectURL(chatContext?.hookChat.attachItem)}
@@ -137,13 +137,13 @@ const ChatInput = (props: any) => {
                 <Text className="m-t-0-5">
                   {chatContext?.hookChat?.attachItem?.name}
                 </Text>
-              </Col>
+              </StyledCol>
               {chatContext?.hookChat.streamLoading ? (
                 <PortalLoader size="xs" />
               ) : (
                 <></>
               )}
-            </Row>
+            </StyledRow>
           </div>
         ) : (
           <></>
@@ -172,7 +172,7 @@ const ChatInput = (props: any) => {
         chatContext?.hookChat?.slashCmd ||
         chatContext?.hookChat?.mentionActive ? (
           <StyledChatPreview>
-            <Row className="vr-center w-100 hr-between">
+            <StyledRow className="vr-center w-100 hr-between">
               <Heading as="h6" size="sm">
                 Preview
               </Heading>
@@ -181,7 +181,7 @@ const ChatInput = (props: any) => {
                 style={{ className: "m-r-0-5" }}
                 onClick={() => previewCloseHandler()}
               />
-            </Row>
+            </StyledRow>
             {templateReply()}
             {templateAttachment()}
             {templateSlashPreview()}
@@ -223,7 +223,7 @@ const ChatInput = (props: any) => {
           </StyledIcon>
         }
       >
-        <Col className="text-start">
+        <StyledCol className="text-start">
           <Button
             variant="transparent"
             size="md"
@@ -232,7 +232,7 @@ const ChatInput = (props: any) => {
             rightIcon={<IconImage path="IconDarkFiles.png" />}
           >
             <label htmlFor="upload-file" className="w-100">
-              <Row className="vr-center hr-between w-100">Upload File </Row>
+              <StyledRow className="vr-center hr-between w-100">Upload File </StyledRow>
             </label>
           </Button>
           <input
@@ -267,7 +267,7 @@ const ChatInput = (props: any) => {
           >
             <Row className="hr-between w-100">Send Payment</Row>
           </Button> */}
-        </Col>
+        </StyledCol>
       </Pop>
     );
   };
@@ -275,14 +275,14 @@ const ChatInput = (props: any) => {
   const templateInput = () => {
     return (
       <StyledChatInputContainer>
-        <Col className="w-100">
+        <StyledCol className="w-100">
           <TemplatePreview />
 
           <StyledChatInput>
-            <Col className="vr-center hr-center sideIcons">
+            <StyledCol className="vr-center hr-center sideIcons">
               <TemplateAction />
-            </Col>
-            <Col className="w-100 vr-center">
+            </StyledCol>
+            <StyledCol className="w-100 vr-center">
               <Textarea
                 onChange={event => {
                   event.target.style.height = "auto";
@@ -299,8 +299,8 @@ const ChatInput = (props: any) => {
                 height="auto"
                 rows={1}
               />
-            </Col>
-            <Col className="vr-center hr-center sideIcons">
+            </StyledCol>
+            <StyledCol className="vr-center hr-center sideIcons">
               <span
                 onClick={(e: any) => {
                   chatContext?.hookChat?.addMessage(callbackSendMessage);
@@ -308,9 +308,9 @@ const ChatInput = (props: any) => {
               >
                 <IconImage path="IconDarkSend.svg" size="30" />
               </span>
-            </Col>
+            </StyledCol>
           </StyledChatInput>
-        </Col>
+        </StyledCol>
       </StyledChatInputContainer>
     );
   };
@@ -318,46 +318,46 @@ const ChatInput = (props: any) => {
   const TemplateMembership = () => {
     return (
       <>
-        <Col className="w-100 vr-center m-l-0-5">
+        <StyledCol className="w-100 vr-center m-l-0-5">
           Join the Channel to Message
-        </Col>
-        <Col>
+        </StyledCol>
+        <StyledCol>
           <Button
             isLoading={props.isLoading}
             onClick={() => props.addMemberToChannel(props.channel?.id)}
           >
             Join
           </Button>
-        </Col>
+        </StyledCol>
       </>
     );
   };
 
   const TemplateSearch = () => {
     return (
-      <Row className="vr-center hr-between w-100">
+      <StyledRow className="vr-center hr-between w-100">
         <IconImage path="IconDarkCalendar.png" />
-        <Row className="vr-center">
+        <StyledRow className="vr-center">
           <IconImage
             path="IconDarkArrowUp.png"
             style={{ className: "m-r-0-5" }}
           />
           <IconImage path="IconDarkArrowDown.png" />
-        </Row>
-      </Row>
+        </StyledRow>
+      </StyledRow>
     );
   };
 
   const TemplateMultiselect = () => {
     return (
-      <Row className="vr-center hr-between w-100">
+      <StyledRow className="vr-center hr-between w-100">
         <IconImage path="IconDarkReply.png" style={{ className: "m-r-0-5" }} />
         <IconImage path="IconDarkDelete.png" style={{ className: "m-r-0-5" }} />
         <IconImage
           path="IconDarkForward.png"
           style={{ className: "m-r-0-5" }}
         />
-      </Row>
+      </StyledRow>
     );
   };
 

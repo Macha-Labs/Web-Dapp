@@ -1,4 +1,4 @@
-import { Row } from "@/styles/StyledComponents";
+import { StyledRow } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
 import { Button, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 
@@ -16,12 +16,12 @@ const LoadChannels = () => {
                         size="xl"
                         variant="state_card_hover"
                     >
-                        <Row className="w-100 vr-center">
+                        <StyledRow className="w-100 vr-center">
                             <span className="m-r-1" >
                                 <SkeletonCircle size='12' startColor={`${style.loader.bg.start}`} endColor={`${style.loader.bg.end}`} />
                             </span>
                             <SkeletonText className="w-90" noOfLines={2} spacing='2' skeletonHeight='2' startColor={`${style.loader.bg.start}`} endColor={`${style.loader.bg.end}`} />
-                        </Row>
+                        </StyledRow>
                     </Button>
                     )
                 })

@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { StyledIcon, Logo, Row } from "@/styles/StyledComponents";
+import { StyledIcon, Logo, StyledRow } from "@/styles/StyledComponents";
 import {
   Modal,
   ModalBody,
@@ -31,7 +31,7 @@ const OrgControl = (props:any) => {
 
   return (
     <>
-      <Row className="w-100 vr-center">
+      <StyledRow className="w-100 vr-center">
         {/* <Logo
           src={
             "https://meta-org-logos.s3.ap-south-1.amazonaws.com/" +
@@ -48,7 +48,7 @@ const OrgControl = (props:any) => {
         <Heading as="h4" size="sm">
           MetaWork
         </Heading>
-      </Row>
+      </StyledRow>
       {props.context?.user?._id == props?.org?.owner ? (
         <StyledIcon className="state_1_2" onClick={settingModal.onOpen}>
           <ChevronDownIcon />

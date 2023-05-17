@@ -1,6 +1,6 @@
 import {
-  Col,
-  Row,
+  StyledCol,
+  StyledRow,
   StyledCard,
   StyledCardPannel,
   StyledChatItem,
@@ -150,7 +150,7 @@ const ChatList = (props: any) => {
           trigger={<IconImage path="IconDarkMenu.png" />}
           placement="bottom-end"
         >
-          <Col className="text-start">
+          <StyledCol className="text-start">
             {!props?.item?.raw?.disconnected &&
             props?.item?.raw &&
             !props.item.raw?.muteStatus()?.muted ? (
@@ -160,14 +160,14 @@ const ChatList = (props: any) => {
                 className="text-start"
                 rightIcon={<IconImage path="IconDarkMute.png" size="xs" />}
               >
-                <Row
+                <StyledRow
                   className="hr-between w-100"
                   onClick={() => {
                     hookPortalChannel.muteChannel(props.item);
                   }}
                 >
                   Mute Channel
-                </Row>
+                </StyledRow>
               </Button>
             ) : (
               <Button
@@ -176,14 +176,14 @@ const ChatList = (props: any) => {
                 className="text-start"
                 rightIcon={<IconImage path="IconDarkUnMute.png" />}
               >
-                <Row
+                <StyledRow
                   className="hr-between w-100"
                   onClick={() => {
                     hookPortalChannel.unMuteChannel(props.item);
                   }}
                 >
                   Unmute Channel
-                </Row>
+                </StyledRow>
               </Button>
             )}
             {props?.item?.isAdmin && (
@@ -193,14 +193,14 @@ const ChatList = (props: any) => {
                 className="text-start"
                 rightIcon={<IconImage path="IconRedDelete.png" />}
               >
-                <Row
+                <StyledRow
                   className="hr-between w-100"
                   onClick={() => {
                     hookPortalChannel.deleteChannel(props.item);
                   }}
                 >
                   Delete Channel
-                </Row>
+                </StyledRow>
               </Button>
             )}
 
@@ -211,14 +211,14 @@ const ChatList = (props: any) => {
                 className="text-start"
                 rightIcon={<IconImage path="IconRedDelete.png" />}
               >
-                <Row
+                <StyledRow
                   className="hr-between w-100"
                   onClick={() => {
                     hookPortalChannel.deleteChannel(props.item);
                   }}
                 >
                   Delete Channel
-                </Row>
+                </StyledRow>
               </Button>
             ) : (
               <Button
@@ -227,17 +227,17 @@ const ChatList = (props: any) => {
                 className="text-start"
                 rightIcon={<IconImage path="IconDarkLeave.png" />}
               >
-                <Row
+                <StyledRow
                   className="hr-between w-100"
                   onClick={() => {
                     hookPortalChannel.leaveChannel(props.item);
                   }}
                 >
                   Leave Channel
-                </Row>
+                </StyledRow>
               </Button>
             )}
-          </Col>
+          </StyledCol>
         </Pop>
       </div>
     );
@@ -324,15 +324,15 @@ const ChatList = (props: any) => {
   const templateChatList = () => {
     return (
       <>
-        <Row className="header vr-center hr-between">
+        <StyledRow className="header vr-center hr-between">
           <ChatSearch style={{ className: "w-80" }} />
           <IconImage
             path="IconDarkPlus.png"
             onClick={triggerNew}
             styled={{ className: "m-l-1" }}
           />
-        </Row>
-        <Col className="body verticlescroll hidescroll">
+        </StyledRow>
+        <StyledCol className="body verticlescroll hidescroll">
           {!$channels ? (
             <TemplateLoading />
           ) : (
@@ -361,8 +361,8 @@ const ChatList = (props: any) => {
                             : "state_card_hover menu-item w-100 m-b-0-5"
                         }
                       >
-                        <Row className="vr-center">
-                          <Row
+                        <StyledRow className="vr-center">
+                          <StyledRow
                             className="vr-center w-11-12"
                             onClick={() => {
                               handleSelectChannel(item);
@@ -375,8 +375,8 @@ const ChatList = (props: any) => {
                               name={item?.name}
                               src={item?.image ? item?.image : item?.name}
                             />
-                            <Col className="w-100 d-flex flex-col vr-center">
-                              <Row>
+                            <StyledCol className="w-100 d-flex flex-col vr-center">
+                              <StyledRow>
                                 <Text paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
                                   {item?.name?.length > 12
                                     ? `${item?.name?.slice(0, 12)}...`
@@ -394,10 +394,10 @@ const ChatList = (props: any) => {
                                       )}
                                   </>
                                 )}
-                              </Row>
+                              </StyledRow>
 
                               {item?.lastMessage && (
-                                <Col
+                                <StyledCol
                                   style={{ paddingRight: "5px" }}
                                   className="m-t-0-5"
                                 >
@@ -415,29 +415,29 @@ const ChatList = (props: any) => {
                                         )}...`
                                       : item?.lastMessage?.text}
                                   </Text>
-                                </Col>
+                                </StyledCol>
                               )}
                               {item?.lastMessage?.created_at && (
-                                <Col>
+                                <StyledCol>
                                   <Text fontSize={"xs"}paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
                                     {new Date(
                                       item?.lastMessage?.created_at
                                     ).toLocaleString()}
                                   </Text>
-                                </Col>
+                                </StyledCol>
                               )}
 
                               {item?.private == false && (
-                                <Row className="m-t-0-5">
+                                <StyledRow className="m-t-0-5">
                                   <Tag size="sm">Public</Tag>
-                                </Row>
+                                </StyledRow>
                               )}
-                            </Col>
+                            </StyledCol>
                             {item?.unreadCountObject &&
                               item?.unreadCountObject[authContext?.address]
                                 ?.unread_messages > 0 &&
                               !isClicked.includes(index) && (
-                                <Col>
+                                <StyledCol>
                                   <Text
                                     padding={1}
                                     background={darkStyle.color5}
@@ -449,18 +449,18 @@ const ChatList = (props: any) => {
                                       ]?.unread_messages
                                     }
                                   </Text>
-                                </Col>
+                                </StyledCol>
                               )}
-                          </Row>
+                          </StyledRow>
 
                           {$channelLoad && channelSelected?.id == item?.id && (
                             <Spinner size="xs" />
                           )}
 
-                          <Col className="hr-center w-1-12 settingsIcon m-l-0-5">
+                          <StyledCol className="hr-center w-1-12 settingsIcon m-l-0-5">
                             <TemplateActions item={item} />
-                          </Col>
-                        </Row>
+                          </StyledCol>
+                        </StyledRow>
                       </StyledCard>
                     </StyledChatItem>
                   ))}
@@ -473,7 +473,7 @@ const ChatList = (props: any) => {
             </>
           )}
           <XMTPpopup />
-        </Col>
+        </StyledCol>
       </>
     );
   };

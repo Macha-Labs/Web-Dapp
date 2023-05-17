@@ -1,4 +1,4 @@
-import { Row, StyledCard } from "@/styles/StyledComponents";
+import { StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, AvatarBadge, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import IconImage from "../icons/IconImage";
@@ -27,8 +27,8 @@ const UserFollowersCard = (props: any) => {
     <StyledCard
       // onClick={() => handleSelectedUser(props.user)}
     >
-      <Row className="vr-center hr-between item w-full m-b-0-5">
-        <Row className="vr-center">
+      <StyledRow className="vr-center hr-between item w-full m-b-0-5">
+        <StyledRow className="vr-center">
         <Avatar src={props.user?.lens?.image} className="m-r-0-5" size="sm">
           <AvatarBadge boxSize="0.7em" bg="green.500" />
         </Avatar>
@@ -41,14 +41,14 @@ const UserFollowersCard = (props: any) => {
               : props.user?.lens?.handle}
           </h6>
         )}
-        </Row>
+        </StyledRow>
         <IconImage
                   path="IconBrandChat.png"
                   style={{ className: "m-l-0-5" }}
                   size="xs"
                   onClick={props.triggerMessage}
                 />
-      </Row>
+      </StyledRow>
       
       {selectedUser && <TemplateProfile />}
     </StyledCard>

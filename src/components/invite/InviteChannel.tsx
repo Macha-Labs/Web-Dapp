@@ -1,6 +1,6 @@
 import useStreamChannelMembership from "@/hooks/stream/useStreamChannelMembership";
 import { AuthContext } from "@/providers/AuthProvider";
-import { Col, StyledCard} from "@/styles/StyledComponents";
+import { StyledCol, StyledCard} from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
@@ -46,8 +46,8 @@ const InviteChannel = (props: any) => {
     const TemplateLoaded = () => {
         return (
           <StyledCard className="p-4 invite">
-            <Col className="hr-center">
-              <Col className="m-b-1-5 hr-center text-center">
+            <StyledCol className="hr-center">
+              <StyledCol className="m-b-1-5 hr-center text-center">
                 <Avatar
                   size="xl"
                   name={hookStreamChannelMembership?.channel?.name}
@@ -58,8 +58,8 @@ const InviteChannel = (props: any) => {
                 <Heading as="h5" size="lg">
                   {hookStreamChannelMembership?.channel?.name}
                 </Heading>
-              </Col>
-              <Col className="w-70 m-b-1">
+              </StyledCol>
+              <StyledCol className="w-70 m-b-1">
                 {!authContext.address && <ConnectWalletButton size="lg" font={22}/>}
                 {authContext.address && !authContext?.user?.lens?.id && (
                   <Button
@@ -106,11 +106,11 @@ const InviteChannel = (props: any) => {
                     <Text fontSize={22} paddingBottom={"0px"} marginBottom="0px" style={{marginBottom:"0px", paddingBottom:"0px"}}>Join Channel</Text>
                   </Button>
                 )}
-              </Col>
+              </StyledCol>
               <Text fontSize={12}>
                 By registering you agree to MetaWork Terms and Conditions
               </Text>
-            </Col>
+            </StyledCol>
           </StyledCard>
         );
     }

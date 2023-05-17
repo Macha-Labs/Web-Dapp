@@ -1,6 +1,6 @@
 import { DownloadIcon } from "@chakra-ui/icons";
 import { Text } from "@chakra-ui/react";
-import { Col, StyledIcon, Row, StyledFileCard, StyledIframeView } from "@/styles/StyledComponents";
+import { StyledCol, StyledIcon, StyledRow, StyledFileCard, StyledIframeView } from "@/styles/StyledComponents";
 import { truncateString } from "@/helpers";
 import IconImage from "@/components/icons/IconImage";
 import { useState } from "react";
@@ -10,9 +10,9 @@ const LayoutFilePreview = (props: any) => {
     return (
         <>
             <StyledFileCard className="hr-between vr-center">
-                <Row onClick={() => setShowMedia(!showMedia)} className="vr-center">
-                    <Col className="w-100">
-                        <Row>
+                <StyledRow onClick={() => setShowMedia(!showMedia)} className="vr-center">
+                    <StyledCol className="w-100">
+                        <StyledRow>
                         <IconImage
                                 path="IconDarkFiles.png"
                                 style={{ className: "m-r-0-5" }}
@@ -20,9 +20,9 @@ const LayoutFilePreview = (props: any) => {
                             <Text fontSize='md'>
                                 {props.attachment?.name?.length > 30 ? (truncateString(props.attachment?.name)) : (props.attachment?.name)}
                             </Text>
-                        </Row>
-                    </Col>
-                    <Col >
+                        </StyledRow>
+                    </StyledCol>
+                    <StyledCol >
 
                      {
                        showMedia &&  <StyledIframeView onClick={() => setShowMedia(!showMedia)} >
@@ -34,8 +34,8 @@ const LayoutFilePreview = (props: any) => {
                                     <DownloadIcon width="15" height="15" fill="#efefef" />
                                 </StyledIcon>
                         </a>
-                    </Col>
-                </Row>
+                    </StyledCol>
+                </StyledRow>
             </StyledFileCard>
         </>
     )

@@ -1,4 +1,4 @@
-import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, Button, Checkbox, Heading, Text, useToast } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { helperIPFS, truncateAddress } from "@/helpers";
@@ -32,7 +32,7 @@ const ChatMembersAdd = (props: any) => {
   return (
     <ModalSlider event={props.modalAddMembers} size="sm"
     header={
-      <Row className="hr-between vr-center w-full">
+      <StyledRow className="hr-between vr-center w-full">
         <Button
           size="xs"
           onClick={props?.modalAddMembers.onClose}
@@ -51,7 +51,7 @@ const ChatMembersAdd = (props: any) => {
         >
           Save
         </Button>
-      </Row>
+      </StyledRow>
     }
     >
     <div>
@@ -62,13 +62,13 @@ const ChatMembersAdd = (props: any) => {
               item?.lens?.ownedBy?.toLowerCase()
             ) && (
               <StyledCard className="m-b-0-5 state_hover">
-                <Row key={item?.id} className="hr-between p-1">
-                  <Row className="vr-center">
+                <StyledRow key={item?.id} className="hr-between p-1">
+                  <StyledRow className="vr-center">
                     <Avatar
                       src={helperIPFS(item?.lens?.image)}
                       className="m-r-0-5"
                     />
-                    <Col>
+                    <StyledCol>
                       <Text>
                         {item?.lens?.name
                           ? item?.lens?.name
@@ -77,8 +77,8 @@ const ChatMembersAdd = (props: any) => {
                           : truncateAddress(item?.lens?.ownedBy)}
                       </Text>
                       <Text color="#6FC62A">@{item?.lens?.handle}</Text>
-                    </Col>
-                  </Row>
+                    </StyledCol>
+                  </StyledRow>
                   
                   <Checkbox
                     value=""
@@ -86,7 +86,7 @@ const ChatMembersAdd = (props: any) => {
                       hookPortalChannelMembership.handleCheckedUsers(item)
                     }
                   />
-                </Row>
+                </StyledRow>
               </StyledCard>
             )}
           </>

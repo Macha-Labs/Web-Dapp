@@ -2,7 +2,7 @@ import { helperIPFS, truncateAddress, truncateLink } from "@/helpers";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import { Channel$ } from "@/schema/channel";
-import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import {
   Avatar,
   Button,
@@ -151,7 +151,7 @@ const ChatNew = (props: any) => {
 
   const templateDetails = () => {
     const header = (
-      <Row className="hr-between vr-center w-full">
+      <StyledRow className="hr-between vr-center w-full">
         <Heading as="h6" size="sm">
           New Channel
         </Heading>
@@ -178,14 +178,14 @@ const ChatNew = (props: any) => {
             Next
           </Button>
         )}
-      </Row>
+      </StyledRow>
     );
 
     const body = (
       <div>
-        <Row className="hr-center w-100 m-b-1">
+        <StyledRow className="hr-center w-100 m-b-1">
           <Avatar size="2xl" name={data[0].value} />
-        </Row>
+        </StyledRow>
         <StyledCard className="m-b-1">
           <Input
             ref={inputFocus == 0 ? (input) => input && input.focus() : null}
@@ -243,7 +243,7 @@ const ChatNew = (props: any) => {
          </StyledCard> */}
 
         <StyledCard>
-          <Col>
+          <StyledCol>
             <Heading as="h6" fontSize="md" className="m-b-0-5">
               Channel Access
             </Heading>
@@ -258,7 +258,7 @@ const ChatNew = (props: any) => {
               Allow channel to be joined and discoverable by anyone on platform
               irrespective of your network
             </Text>
-          </Col>
+          </StyledCol>
         </StyledCard>
       </div>
     );
@@ -268,21 +268,21 @@ const ChatNew = (props: any) => {
 
   const templateShare = () => {
     const header = (
-      <Row className="d-flex justify-content-center align-items-center flex-grow-1">
+      <StyledRow className="d-flex justify-content-center align-items-center flex-grow-1">
         {/* <IconImage
           onClick={handleTabs}
           path="IconDarkCross.png"
           style={{ className: "m-r-1" }}
         /> */}
         <Text>Channel Created </Text>
-      </Row>
+      </StyledRow>
     );
     const inviteLink = `${window.location.origin}/invite/c/6415b23b3b7d7f9068994e85`;
 
     const body = (
-      <Col className="d-flex align-items-center flex-column">
+      <StyledCol className="d-flex align-items-center flex-column">
         <Text className="m-b-1">Share Channel</Text>
-        <Row>
+        <StyledRow>
           <IconImage
             path="IconDarkDiscord.svg"
             style={{ className: "m-r-1" }}
@@ -338,14 +338,14 @@ const ChatNew = (props: any) => {
             path="IconDarkTwitter.svg"
             style={{ className: "" }}
           />
-        </Row>
-        <Row className="m-t-1 d-flex align-items-center">
+        </StyledRow>
+        <StyledRow className="m-t-1 d-flex align-items-center">
           <hr style={{ width: "100px" }} />
           <Text>{"  or  "}</Text>
           <hr style={{ width: "100px" }} />
-        </Row>
+        </StyledRow>
         <Text>Copy and share link to invite people</Text>
-        <Row className="d-flex align-items-center justify-content-center m-t-1">
+        <StyledRow className="d-flex align-items-center justify-content-center m-t-1">
           <Text className="m-r-1 w-40 text-muted" style={{ fontSize: 14 }}>
             {inviteLink}
           </Text>
@@ -362,14 +362,14 @@ const ChatNew = (props: any) => {
             path="IconDarkCopy.svg"
             style={{ className: "" }}
           />
-        </Row>
-      </Col>
+        </StyledRow>
+      </StyledCol>
     );
     return { header: header, body: body };
   };
   const templateAccess = () => {
     const header = (
-      <Row className="hr-between vr-center w-full">
+      <StyledRow className="hr-between vr-center w-full">
         <Button
           onClick={() => setTab("details")}
           variant="state_default_hover"
@@ -407,7 +407,7 @@ const ChatNew = (props: any) => {
         >
           Continue
         </Button>
-      </Row>
+      </StyledRow>
     );
 
     const body = (
@@ -422,14 +422,14 @@ const ChatNew = (props: any) => {
               borderColor="gray.700"
             >
               <label htmlFor="checkbox1">
-                <Row className="align-items-center">
+                <StyledRow className="align-items-center">
                   <IconImage
                     onClick={handleTabs}
                     path="IconDarkFollower.svg"
                     style={{ className: "m-r-1" }}
                   />
                   <Text>Only my followers</Text>
-                </Row>
+                </StyledRow>
               </label>
               <Checkbox
                 id="checkbox1"
@@ -438,7 +438,7 @@ const ChatNew = (props: any) => {
               />
             </Box>
             {hookPortalChannelMembership?.users.length && (
-              <Row className="flex-wrap">
+              <StyledRow className="flex-wrap">
                 <Tag
                   className="m-r-0-5 m-b-0-5"
                   style={{ backgroundColor: "red", cursor: "pointer" }}
@@ -448,14 +448,14 @@ const ChatNew = (props: any) => {
                     hookPortalChannelMembership.setUsersIds([]);
                   }}
                 >
-                  <Row className="vr-center p-0-5">
+                  <StyledRow className="vr-center p-0-5">
                     <Text>Clear All</Text>
-                  </Row>
+                  </StyledRow>
                 </Tag>
                 {hookPortalChannelMembership?.users?.map((item: any) => {
                   return (
                     <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
-                      <Row className="vr-center p-0-5">
+                      <StyledRow className="vr-center p-0-5">
                         <Avatar
                           src={helperIPFS(item?.lens?.image)}
                           className="m-r-0-5"
@@ -468,7 +468,7 @@ const ChatNew = (props: any) => {
                             ? item?.lens?.handle
                             : truncateAddress(item?.lens?.ownedBy)}
                         </Text>
-                      </Row>
+                      </StyledRow>
                       <TagCloseButton
                         onClick={() => {
                           hookPortalChannelMembership.handleCheckedUsers(item);
@@ -477,7 +477,7 @@ const ChatNew = (props: any) => {
                     </Tag>
                   );
                 })}
-              </Row>
+              </StyledRow>
             )}
             {checkboxValues.checkbox1 && (
               <Box
@@ -498,14 +498,14 @@ const ChatNew = (props: any) => {
               borderColor="gray.700"
             >
               <label htmlFor="checkbox2">
-                <Row className="align-items-center">
+                <StyledRow className="align-items-center">
                   <IconImage
                     onClick={handleTabs}
                     path="IconDarkChannel.svg"
                     style={{ className: "m-r-1" }}
                   />
                   <Text>Address I will add</Text>
-                </Row>
+                </StyledRow>
               </label>
               <Checkbox id="checkbox2" onChange={handleCheckboxChange} />
             </Box>
@@ -517,14 +517,14 @@ const ChatNew = (props: any) => {
               borderColor="gray.700"
             >
               <label htmlFor="checkbox3">
-                <Row className="align-items-center">
+                <StyledRow className="align-items-center">
                   <IconImage
                     onClick={handleTabs}
                     path="IconDarkUser.svg"
                     style={{ className: "m-r-1" }}
                   />
                   <Text>Lens Profile I will add</Text>
-                </Row>
+                </StyledRow>
               </label>
               <Checkbox
                 id="checkbox3"
@@ -540,14 +540,14 @@ const ChatNew = (props: any) => {
               borderColor="gray.700"
             >
               <label htmlFor="checkbox4">
-                <Row className="align-items-center">
+                <StyledRow className="align-items-center">
                   <IconImage
                     onClick={handleTabs}
                     path="IconDarkSheildUser.svg"
                     style={{ className: "m-r-1" }}
                   />
                   <Text>Who own an NFT</Text>
-                </Row>
+                </StyledRow>
               </label>
               <Checkbox
                 id="checkbox4"
@@ -558,12 +558,12 @@ const ChatNew = (props: any) => {
             {checkboxValues.checkbox4 && <TemplateNFT />}
           </Stack>
         </CheckboxGroup>
-        <Row className="mt-3">
+        <StyledRow className="mt-3">
           <Text>
             Do you want all these conditions to be satisfied to join the channel
           </Text>
           <Switch />
-        </Row>
+        </StyledRow>
       </>
     );
 
@@ -574,8 +574,8 @@ const ChatNew = (props: any) => {
     return hookPortalChannelMembership?.followers.length ? (
       hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
         return (
-          <Row key={`key-${item?.id}`} className="hr-between p-1 ">
-            <Row className="vr-center">
+          <StyledRow key={`key-${item?.id}`} className="hr-between p-1 ">
+            <StyledRow className="vr-center">
               <Avatar src={helperIPFS(item?.lens?.image)} className="m-r-0-5" />
               <Text>
                 {item?.lens?.name
@@ -584,7 +584,7 @@ const ChatNew = (props: any) => {
                   ? item?.lens?.handle
                   : truncateAddress(item?.lens?.ownedBy)}
               </Text>
-            </Row>
+            </StyledRow>
 
             <Checkbox
               isChecked={hookPortalChannelMembership?.userIds?.includes(
@@ -594,7 +594,7 @@ const ChatNew = (props: any) => {
                 hookPortalChannelMembership.handleCheckedUsers(item)
               }
             />
-          </Row>
+          </StyledRow>
         );
       })
     ) : (
@@ -620,13 +620,13 @@ const ChatNew = (props: any) => {
           }}
           className="m-t-1 m-b-1"
         />
-        <Row className="flex-wrap">
+        <StyledRow className="flex-wrap">
           {lensProfiles.map((item: any) => {
             return (
               <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
-                <Row className="vr-center p-0-5">
+                <StyledRow className="vr-center p-0-5">
                   <Text>{truncateAddress(item)}</Text>
-                </Row>
+                </StyledRow>
                 <TagCloseButton
                   onClick={() => {
                     const profileFilter = lensProfiles.filter(
@@ -638,8 +638,8 @@ const ChatNew = (props: any) => {
               </Tag>
             );
           })}
-        </Row>
-        <Row className="align-items-center">
+        </StyledRow>
+        <StyledRow className="align-items-center">
           <Button
             variant=""
             className="m-r-1"
@@ -657,7 +657,7 @@ const ChatNew = (props: any) => {
           </Button>
           or
           <Button className="m-l-1">Add CSV</Button>
-        </Row>
+        </StyledRow>
       </Box>
     );
   };
@@ -680,7 +680,7 @@ const ChatNew = (props: any) => {
           }}
           className="m-t-1 m-b-1"
         />
-        <Row className="flex-wrap">
+        <StyledRow className="flex-wrap">
           {userAddresses.length ? (
             <Tag
               className="m-r-0-5 m-b-0-5"
@@ -690,9 +690,9 @@ const ChatNew = (props: any) => {
                 setUserAddresses([]);
               }}
             >
-              <Row className="vr-center p-0-5">
+              <StyledRow className="vr-center p-0-5">
                 <Text>Clear All</Text>
-              </Row>
+              </StyledRow>
             </Tag>
           ) : (
             <></>
@@ -700,9 +700,9 @@ const ChatNew = (props: any) => {
           {userAddresses.map((item: any) => {
             return (
               <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
-                <Row className="vr-center p-0-5">
+                <StyledRow className="vr-center p-0-5">
                   <Text>{truncateAddress(item)}</Text>
-                </Row>
+                </StyledRow>
                 <TagCloseButton
                   onClick={() => {
                     const usersFilter = userAddresses.filter(
@@ -714,8 +714,8 @@ const ChatNew = (props: any) => {
               </Tag>
             );
           })}
-        </Row>
-        <Row className="align-items-center">
+        </StyledRow>
+        <StyledRow className="align-items-center">
           <Button
             variant=""
             className="m-r-1"
@@ -732,7 +732,7 @@ const ChatNew = (props: any) => {
           </Button>
           or
           <Button className="m-l-1">Add CSV</Button>
-        </Row>
+        </StyledRow>
       </Box>
     );
   };
@@ -755,11 +755,11 @@ const ChatNew = (props: any) => {
           }}
           className="m-t-1 m-b-1"
         />
-        <Row className="align-items-center">
+        <StyledRow className="align-items-center">
           <Button variant="" className="m-r-1" onClick={fetchNftHolders}>
             Add Users
           </Button>
-        </Row>
+        </StyledRow>
       </Box>
     );
   };

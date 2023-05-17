@@ -1,5 +1,5 @@
 import { helperIPFS, truncateAddress } from "@/helpers";
-import { Row, StyledCard } from "@/styles/StyledComponents";
+import { StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { Avatar, AvatarBadge, useDisclosure } from "@chakra-ui/react";
 
 const UserCard = ({user}: any) => {
@@ -8,7 +8,7 @@ const UserCard = ({user}: any) => {
     <StyledCard
       className="state_hover"
     >
-      <Row className="vr-center item m-b-0-5">
+      <StyledRow className="vr-center item m-b-0-5">
         <Avatar
           src={helperIPFS(user?.lens?.image)}
           className="m-r-0-5"
@@ -21,7 +21,7 @@ const UserCard = ({user}: any) => {
         ) : (
           <h6>{truncateAddress(user?.lens?.handle)}</h6>
         )}
-      </Row>
+      </StyledRow>
     </StyledCard>
   );
 };

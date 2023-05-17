@@ -1,9 +1,9 @@
 import ModalSlider from "@/components/modal/ModalSlider";
 import { truncateAddress } from "@/helpers";
 import {
-  Col,
+  StyledCol,
   StyledIcon,
-  Row,
+  StyledRow,
   StyledMessageCard,
 } from "@/styles/StyledComponents";
 import { Avatar, Heading, Image, Text } from "@chakra-ui/react";

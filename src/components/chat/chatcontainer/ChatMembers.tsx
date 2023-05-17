@@ -1,4 +1,4 @@
-import {Col, Row, StyledCard} from "@/styles/StyledComponents";
+import {StyledCol, StyledRow, StyledCard} from "@/styles/StyledComponents";
 import {
   Avatar,
   Button,
@@ -43,7 +43,7 @@ const ChatMembers = (props: any) => {
   return (
     <ModalSlider size="sm" event={props.modalChatMembers} header={
       <>
-        <Row className="hr-between vr-center w-full">
+        <StyledRow className="hr-between vr-center w-full">
           <Button
             onClick={function (): void {
               hookPortalChannelMembership.removeMembersFromChannel(callbackRemove);
@@ -61,7 +61,7 @@ const ChatMembers = (props: any) => {
           >
             Add New Members
           </Button>
-        </Row>
+        </StyledRow>
       </>
     }>
       <>
@@ -69,18 +69,18 @@ const ChatMembers = (props: any) => {
           ?.map((item: any, index: any) => {
             return (
               <StyledCard className="state_hover m-b-0-5"  key={`key-${index}`}>
-                <Row className="hr-between p-1">
-                  <Row className="hr-between vr-center">
+                <StyledRow className="hr-between p-1">
+                  <StyledRow className="hr-between vr-center">
                     <div>
                       <Avatar size="sm" src={item?.lens?.image} className="m-r-1"/>
                     </div>
-                    <Col>
+                    <StyledCol>
                       <Text>
                         {item?.lens?.name ? item?.lens?.name : truncateAddress(item?.lens?.id)}
                       </Text>
                       <Text color="#6FC62A">@{item?.lens?.handle}</Text>
-                    </Col>
-                  </Row>
+                    </StyledCol>
+                  </StyledRow>
 
                   {item?.lens?.ownedBy != authContext?.address && <Checkbox
                     value=""
@@ -91,7 +91,7 @@ const ChatMembers = (props: any) => {
                     }
                   />}
                   
-                </Row>
+                </StyledRow>
               </StyledCard>
             );
           })}

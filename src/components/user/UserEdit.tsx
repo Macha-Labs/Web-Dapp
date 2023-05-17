@@ -2,7 +2,7 @@ import { setMetaData } from "@/helpers/lens/lens";
 import useLensProfileUpdate from "@/hooks/lens/useLensProfileUpdate";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
-import { Row } from "@/styles/StyledComponents";
+import { StyledRow } from "@/styles/StyledComponents";
 import { Avatar, Button, Heading } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -54,7 +54,7 @@ const UserEdit = () => {
   return (
     <LayoutCardPannel
       header={
-        <Row className="w-100 vr-center hr-between">
+        <StyledRow className="w-100 vr-center hr-between">
           <Heading as="h6" size="sm">
             Edit Profile
           </Heading>
@@ -69,12 +69,12 @@ const UserEdit = () => {
           >
             Save Profile
           </Button>
-        </Row>
+        </StyledRow>
       }
     >
-      <Row className="hr-center w-100 m-b-1">
+      <StyledRow className="hr-center w-100 m-b-1">
         <Avatar size="2xl" src={hookLensProfileUpdate?.userLens?.image} />
-      </Row>
+      </StyledRow>
       <LayoutInputs data={data.slice(0, 2)} style={{ class: "m-b-1" }} />
       <LayoutInputs data={data.slice(2, 4)} style={{ class: "m-b-1" }} />
       <LayoutInputs data={data.slice(4)} style={{ class: "m-b-1" }} />

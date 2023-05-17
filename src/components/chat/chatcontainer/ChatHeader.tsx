@@ -1,5 +1,5 @@
 import ChatMembersList from "@/components/chat/chatcontainer/ChatMembersList";
-import { Col, Row } from "@/styles/StyledComponents";
+import { StyledCol, StyledRow } from "@/styles/StyledComponents";
 import {
   Button,
   Avatar,
@@ -29,7 +29,7 @@ const ChatHeader = (props: any) => {
 
   const templateSearch = () => {
     return (
-      <Row className="header w-100 vr-center hr-between">
+      <StyledRow className="header w-100 vr-center hr-between">
         <ChatSearch />
         <Button
           size="xs"
@@ -39,13 +39,13 @@ const ChatHeader = (props: any) => {
         >
           Cancel
         </Button>
-      </Row>
+      </StyledRow>
     );
   };
 
   const templateMultiSelect = () => {
     return (
-      <Row className="header w-100 hr-between vr-center">
+      <StyledRow className="header w-100 hr-between vr-center">
         <Button
           variant="state_brand"
           size="sm"
@@ -63,22 +63,22 @@ const ChatHeader = (props: any) => {
         >
           Cancel
         </Button>
-      </Row>
+      </StyledRow>
     );
   };
 
   const templateProfile = () => {
     return (
-      <Row className="header w-100 hr-between vr-center">
-        <Row className="vr-center">
+      <StyledRow className="header w-100 hr-between vr-center">
+        <StyledRow className="vr-center">
           <Avatar
             size="sm"
             className="m-r-0-5"
             name={$channel?.name}
             src={$channel?.image ? $channel?.image : $channel?.name}
           />
-          <Col>
-            <Row>
+          <StyledCol>
+            <StyledRow>
               <Heading as="h4" size="sm" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
                 {$channel?.name ||
                   truncateAddress($channel?.peerAddress)}
@@ -90,7 +90,7 @@ const ChatHeader = (props: any) => {
                   size="2xs"
                 />
               )}
-            </Row>
+            </StyledRow>
             <Heading as="h6" size="xs">
               {chatContext?.hookChat?.usersWhoAreTyping && (
                 <>
@@ -110,13 +110,13 @@ const ChatHeader = (props: any) => {
                 </>
               )}
             </Heading>
-          </Col>
-        </Row>
+          </StyledCol>
+        </StyledRow>
 
-        <Row>
+        <StyledRow>
          <Button className="m-r-1" size="xs" variant={$channel?.source == 'xmtp' ? 'state_xmtp' : ''}>{$channel?.source}</Button> 
 
-         {router.pathname == '/' && <Row className="vr-center">
+         {router.pathname == '/' && <StyledRow className="vr-center">
           
           <IconImage
             path="IconDarkMenu.png"
@@ -125,10 +125,10 @@ const ChatHeader = (props: any) => {
           />
 
           <IconImage path="IconDarkUsers.png" onClick={membersModal.onOpen} />
-        </Row>}
-        </Row>
+        </StyledRow>}
+        </StyledRow>
                 
-      </Row>
+      </StyledRow>
     );
   };
 
@@ -145,10 +145,10 @@ const ChatHeader = (props: any) => {
   return (
     <>
       <div className="header hr-between vr-center">
-        <Row className="w-100 h-100 hr-between vr-center">
+        <StyledRow className="w-100 h-100 hr-between vr-center">
           {/* <Template /> */}
           {template()}
-        </Row>
+        </StyledRow>
       </div>
       
       <ChatMembersList modal={membersModal}/>

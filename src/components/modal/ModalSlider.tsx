@@ -10,7 +10,7 @@ import {
     DrawerHeader,
     DrawerOverlay,
 } from '@chakra-ui/react';
-import { Row } from '@/styles/StyledComponents';
+import { StyledRow } from '@/styles/StyledComponents';
 
 const ModalSlider = (props: any) => {
 
@@ -25,9 +25,9 @@ const ModalSlider = (props: any) => {
             <DrawerContent>
                 
                 {props.header && <DrawerHeader>
-                    <Row className="vr-center justify-content-center">
+                    <StyledRow className="vr-center justify-content-center">
                        {props.header}
-                    </Row>
+                    </StyledRow>
                 </DrawerHeader>}
                 
                 <DrawerBody style={{overflowY:"scroll"}}>

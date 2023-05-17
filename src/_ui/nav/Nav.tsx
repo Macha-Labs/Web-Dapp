@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, StyledNav } from "../../styles/StyledComponents";
+import { StyledCol, StyledRow, StyledNav } from "../../styles/StyledComponents";
 import { Tooltip } from "@chakra-ui/react";
 import Link from "next/link";
 import ModalPage from "../modal/ModalPage";
@@ -19,18 +19,18 @@ const Nav = (props: any) => {
 
   return (
     <>
-      <Row>
+      <StyledRow>
         <StyledNav>
           <div className="header m-b-0-5">
-            <Col className="hr-center vr-center h-100">
+            <StyledCol className="hr-center vr-center h-100">
               <Tooltip label="Metawork">
                 <IconImage path="Logo.png" size="xl" />
               </Tooltip>
-            </Col>
+            </StyledCol>
           </div>
           <div className="body">
-            <Col className="hr-center vr-between h-100">
-              <Col className="hr-center">
+            <StyledCol className="hr-center vr-between h-100">
+              <StyledCol className="hr-center">
                 <Link href="/">
                   <Tooltip label="Chat">
                     <IconImage
@@ -46,9 +46,9 @@ const Nav = (props: any) => {
                     />
                   </Tooltip>
                 </Link>
-              </Col>
+              </StyledCol>
 
-              <Col className="hr-center">
+              <StyledCol className="hr-center">
                 <Link href="/chat/dm">
                   <IconImage
                     path="IconBrandChat.png"
@@ -79,11 +79,11 @@ const Nav = (props: any) => {
                   path="IconDarkBell.png"
                   style={{ className: "m-b-1" }}
                 />
-              </Col>
-            </Col>
+              </StyledCol>
+            </StyledCol>
           </div>
         </StyledNav>
-      </Row>
+      </StyledRow>
       {templateOrgs()}
     </>
   );

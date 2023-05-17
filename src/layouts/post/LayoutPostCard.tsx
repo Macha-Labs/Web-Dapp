@@ -2,7 +2,7 @@ import IconImage from "@/components/icons/IconImage";
 import { helperIPFS } from "@/helpers";
 import { likePost, unlikePost } from "@/helpers/lens/lens";
 import useLensPosts from "@/hooks/lens/useLensPosts";
-import { Col, Row, StyledPostCard } from "@/styles/StyledComponents";
+import { StyledCol, StyledRow, StyledPostCard } from "@/styles/StyledComponents";
 import { Avatar, Button, Flex, Heading, Text, Image } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 
@@ -21,29 +21,29 @@ const LayoutPostCard = (props: any) => {
       {props?.item ? (
         <>
           <StyledPostCard className="m-b-1 border-with-hover">
-            <Col className="card-body">
-              <Row>
-                <Col className="m-b-1">
+            <StyledCol className="card-body">
+              <StyledRow>
+                <StyledCol className="m-b-1">
                   <Avatar
                     src={helperIPFS(props?.item?.profile?.image)}
                     className="m-r-1"
                     size="md"
                     overflow={"hidden"}
                   />
-                </Col>
-                <Col>
-                  <Row>
+                </StyledCol>
+                <StyledCol>
+                  <StyledRow>
                     <Heading as="h6" size="sm">
                       {props?.item?.profile?.name}
                     </Heading>
-                  </Row>
-                  <Row className="m-t-0-5">
+                  </StyledRow>
+                  <StyledRow className="m-t-0-5">
                     <Text>@{props.item?.profile?.handle}</Text>
-                  </Row>
-                </Col>
-              </Row>
+                  </StyledRow>
+                </StyledCol>
+              </StyledRow>
 
-              <Col className="m-b-1">
+              <StyledCol className="m-b-1">
                 <div className="m-b-1">{props.item?.metadata?.content}</div>
                 {props?.item?.metadata?.media.length > 0 ? (
                   <Image
@@ -56,7 +56,7 @@ const LayoutPostCard = (props: any) => {
                 ) : (
                   <></>
                 )}
-              </Col>
+              </StyledCol>
 
               {/* Like - Unlike logic */}
               {/* <Col className="m-b-1">
@@ -105,15 +105,15 @@ const LayoutPostCard = (props: any) => {
                 </div>
               </Col> */}
               
-            </Col>
-            <Col className="card-footer">
-              <Row className="w-100 vr-center">
+            </StyledCol>
+            <StyledCol className="card-footer">
+              <StyledRow className="w-100 vr-center">
                 <IconImage path="IconLensColor.png" />
                 <Heading className="h6 m-l-0-5" size="xs">
                   From Lens Protocol
                 </Heading>
-              </Row>
-            </Col>
+              </StyledRow>
+            </StyledCol>
           </StyledPostCard>
         </>
       ) : (

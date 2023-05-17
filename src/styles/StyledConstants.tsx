@@ -5,8 +5,6 @@ export const commonStyle = {
   borderRadiusCard: "5px",
   borderRadiusInput: "5px",
   borderRadiusPallet: "5px",
-  borderRadiusModal: ".8rem",
-  borderRadiusIcon: "5px",
   fontInput: "1.6rem",
   fontSubHeading: "1.3rem",
   fontTag: "1.4rem",
@@ -16,9 +14,6 @@ export const commonStyle = {
   fontP: "1.6rem",
   fontPSmall: "1.6rem",
   fontPLarge: "2rem",
-  sizeIconSmall: "35px",
-  sizeIcon: "50px",
-  sizeIconLarge: "75px",
   sizeLogo: "50px",
   sizeLogoSmall: "40px",
   sizeLogoLarge: "80px",
@@ -35,9 +30,7 @@ export const commonStyle = {
   paddingDropdown: "1.3rem",
   paddingCover: "25px",
   paddingBanner: "0 35px",
-  paddingModal: "2rem",
-  paddingNav: "10px",
-  marginModal: "75px auto",
+
   marginMain: "0px",
   marginMainTop: "0px",
   heightInput: "5rem",
@@ -47,10 +40,8 @@ export const commonStyle = {
   widthSidebar: "300px",
   widthSidebarControl: "65px",
   widthMain: "calc(100%)",
-  widthNav: "100%",
   widthSection: "85%",
   widthCardList: "calc(20% - 10px)",
-  widthModal: "80%",
 
   mob: {
     fontH1: "2.6rem",
@@ -62,7 +53,7 @@ export const commonStyle = {
     sizeLogo: "60px",
     sizeLogoSmall: "30px",
     sizeLogoLarge: "70px",
-    marginModal: "15px auto",
+
     marginMain: "0px",
     paddingBanner: "0px 35px",
     paddingMain: "30px 0px 30px 0px",
@@ -71,7 +62,13 @@ export const commonStyle = {
     widthMain: "100%",
     widthSection: "90%",
     widthCardList: "calc(50% - 10px)",
-    widthModal: "100%",
+  },
+  padding: {
+    xs: "1rem",
+    sm: "",
+    md: "1rem",
+    lg: "",
+    xl: "",
   },
 };
 
@@ -93,7 +90,7 @@ export const darkStyle = {
   //
   color5: "#3182CE",
   bgMain: "#00040d",
-  bgModalOverlay: "#000320",
+
   bgOverlay:
     "linear-gradient(90deg, rgba(246,246,246,0.6) 0%, rgba(234,238,246,0.8) 44%, rgba(231,235,242,0.8) 100%)",
   bgSidebar: "#232323",
@@ -111,7 +108,7 @@ export const darkStyle = {
   borderLoaderLeft: "#3182ce",
   borderDropdown: "1px solid rgba(247,248,248,0.1)",
   borderPannel: "1px solid rgba(247,248,248,0.1)",
-  borderModal: "1px solid rgba(247,248,248,0.1)",
+
   borderPallet: "1px solid rgba(247,248,248,0.1)",
   borderPlaceholder: "1px solid rgba(247,248,248,0.1)",
   blurOverlay: "3px",
@@ -121,42 +118,50 @@ export const darkStyle = {
   colorText: "#EFEFEF",
   colorSubHeading: "rgb(var(--neutral700-rgb,102,102,102))",
   colorPlaceholder: "#babdbe",
-  colorButton: "#EFEFEF",
+
   colorButtonActive: "#333",
   colorButtonLight: "#F5F5F5",
   colorButtonLightHover: "#F5F5F5",
   colorButtonLightActive: "#333",
   colorInput: "#FFF",
-  colorIcon: "#888",
-  colorIconActive: "#333",
   focusInput: "0",
+  flex: {
+    justifyContent: {
+      hrCenter: "center",
+      hrBetween: "space-between",
+    },
+  },
   header: {
     bg: { default: "#00040d" },
     border: { default: "1px solid #0F172E" },
   },
-  body: { bg: { default: "#00040d" }, padding: "20px 10px" },
+  window: {},
+  body: { bg: { default: "#00040d" }, padding: "0% 8%" },
   nav: {
-    width: "5%",
+    width: "100vw",
     height: "90%",
     bg: { default: "#00040d" },
     border: { default: "2px solid #0F172E" },
+    padding: "0% 8%",
   },
   list: {
-    padding: '5px',
+    padding: "5px",
     bg: {
-      default: 'transparent',
+      default: "transparent",
       hover:
         "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
     },
     shadow: {
-      default: '',
-      hover: "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)"
-    }
+      default: "",
+      hover:
+        "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
+    },
   },
   card: {
     bg: {
       default: "#00040d",
-      highlight: "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
+      highlight:
+        "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
       hover:
         "linear-gradient(141.09deg, rgba(13, 25, 65, 0.5) 11.08%, rgba(0, 20, 60, 0.38) 89.68%)",
     },
@@ -171,25 +176,27 @@ export const darkStyle = {
         "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
     padding: { default: "10px" },
-    
   },
   pannel: { bg: { default: "" }, shadow: { default: "" } },
   input: {
-    bg: { 
+    bg: {
       default: "#000511",
-      active: "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);"
+      active:
+        "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);",
     },
     shadow: {
       hover:
         "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
-    border: { 
-        default: "1px solid #14244B", 
-        active: "1px solid rgba(15,23,46,1)" },
+    border: {
+      default: "1px solid #14244B",
+      active: "1px solid rgba(15,23,46,1)",
+    },
   },
   message: {
     bg: {
-      default: "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);",
+      default:
+        "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);",
       active: "#246BFD",
     },
     color: {
@@ -212,12 +219,17 @@ export const darkStyle = {
     bg: { default: "#00040d" },
     border: { default: "1px solid #0F172E" },
     shadow: { default: "" },
+    borderRadius: ".8rem",
+    padding: "2rem",
+    margin: "75px auto",
+    width: "80%",
+    bgOverlay: "#000320",
   },
   popover: { bg: { default: "#000416" } },
   sidebar: {},
   dropdown: {},
   avatar: {
-    border: '2px solid #246bfd',
+    border: "2px solid #246bfd",
   },
   icon: {
     bg: {
@@ -234,6 +246,19 @@ export const darkStyle = {
       hover:
         "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
+    sizes: {
+      default: "20",
+      "3xs": "10",
+      "2xs": "12",
+      xs: "16",
+      sm: "18",
+      md: "20",
+      lg: "25",
+      xl: "35",
+      "2xl": "50",
+      "3xl": "75",
+      "4xl": "100",
+    },
   },
   button: {
     bg: {
@@ -245,12 +270,13 @@ export const darkStyle = {
         "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);",
       disabled: "",
     },
+    color: "#EFEFEF",
   },
   loader: {
     bg: {
-      start: '#000416',
-      end: '#001E57'
-    }
+      start: "#000416",
+      end: "#001E57",
+    },
   },
   shadowDropdown:
     "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",

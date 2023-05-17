@@ -66,9 +66,20 @@ export const StyledIframeView = styled.div`
   }
 `;
 
+export const StyledWindowTabs = styled.div`
+  margin-top: 75px;
+`;
+export const BorderBox = styled.div`
+  border: ${style.card.border.default};
+  border-radius: ${style.card.borderRadius};
+  background: ${style.card.bg.default};
+  padding: ${style.card.padding.default};
+`;
 export const StyledWindow = styled.div`
-  position: fixed;
+  position: relative;
+  top:75px;
   width: 100vw;
+  margin-top:75px;
 
   .left {
   }
@@ -90,10 +101,11 @@ export const StyledWindow = styled.div`
   }
 `;
 
-export const Row = styled.div`
+export const StyledRow = styled.div`
   display: flex;
   flex-direction: row;
   text-align: left;
+  width: 100%;
 
   &.flex-wrap {
     flex-wrap: wrap !important;
@@ -123,8 +135,18 @@ export const Row = styled.div`
     flex-direction: column;
   }
 `;
-
-export const RowHover = styled(Row)`
+export const StyledLi = styled.li`
+  &.active {
+    background: -webkit-linear-gradient(
+      100.07deg,
+      #2a85ff 0.39%,
+      #2448c7 73.45%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+`;
+export const RowHover = styled(StyledRow)`
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 0.5rem;
@@ -138,7 +160,7 @@ export const RowHover = styled(Row)`
   }
 `;
 
-export const Col = styled.div`
+export const StyledCol = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -324,7 +346,7 @@ export const StyledCard = styled.div`
     ) !important;
     padding: 48px 0px !important;
     border-radius: 10px;
-    border: 1px solid rgb(32,108,255,0.7);
+    border: 1px solid rgb(32, 108, 255, 0.7);
   }
 `;
 export const StyledXMTPCard = styled.div`
@@ -614,11 +636,6 @@ export const StyledIcon = styled.i`
   &.circled {
     border-radius: 50%;
   }
-
-  &.sm {
-    width: ${style.sizeIconSmall};
-    height: ${style.sizeIconSmall};
-  }
 `;
 
 export const LinkContainer = styled.div`
@@ -765,7 +782,7 @@ export const StyledChat = styled.div`
     }
   }
 `;
-export const StyledChatItem = styled(Row)`
+export const StyledChatItem = styled(StyledRow)`
   text-align: start;
   align-items: center;
   justify-content: flex-start;
@@ -823,7 +840,7 @@ export const StyledChatInputContainer = styled.div`
   padding: 5px 10px;
 `;
 
-export const StyledChatInput = styled(Row)`
+export const StyledChatInput = styled(StyledRow)`
   width: 100%;
   border-radius: 5px;
   background: ${style.card.bg.default};
@@ -883,7 +900,7 @@ export const StyledConversationContainer = styled.div`
   width: 100%;
 `;
 
-export const StyledConversation = styled(Col)`
+export const StyledConversation = styled(StyledCol)`
   cursor: pointer;
   padding: 15px 15px;
   position: relative;

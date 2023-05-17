@@ -1,7 +1,7 @@
 import IconImage from "@/components/icons/IconImage";
 import { getCookie } from "@/helpers/storage/browserStorage";
 import { AuthContext } from "@/providers/AuthProvider";
-import { Col, Row, StyledCard } from "@/styles/StyledComponents";
+import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { Button, Heading, Text, useToast } from "@chakra-ui/react";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
@@ -36,8 +36,8 @@ const AuthCard = () => {
     return (
     mobile==false?(<div className="middle">
       <StyledCard className="w-100 p-4 state_highlight invite">
-        <Col className="hr-center">
-          <Col className="m-b-2 hr-center">
+        <StyledCol className="hr-center">
+          <StyledCol className="m-b-2 hr-center">
             <IconImage
               path="Logo.png"
               size="3xl"
@@ -46,8 +46,8 @@ const AuthCard = () => {
             <Heading as="h5" size="lg">
               Log in to MetaWork
             </Heading>
-          </Col>
-          <Col className="w-60">
+          </StyledCol>
+          <StyledCol className="w-60">
             {!authContext.address && <ConnectWalletButton />}
             {authContext.address && window.localStorage.getItem("lens_refresh_token") == undefined && (
               <Button
@@ -90,8 +90,8 @@ const AuthCard = () => {
                   Connect to XMTP
                 </Button>
               )}
-          </Col>
-        </Col>
+          </StyledCol>
+        </StyledCol>
       </StyledCard>
       {/* <StyledCard className="m-t-2 flex-center text-center state_lens">
           <Col className="hr-center">

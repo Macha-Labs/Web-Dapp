@@ -1,5 +1,5 @@
 import { AuthContext } from "@/providers/AuthProvider";
-import { Col } from "@/styles/StyledComponents";
+import { StyledCol } from "@/styles/StyledComponents";
 import { Heading, Image } from "@chakra-ui/react";
 import { useContext } from "react";
 import LayoutCard from "../LayoutCard";
@@ -27,7 +27,7 @@ const LayoutPostList = ({ ...props }) => {
     } else {
       return (
         <>
-          <Col className="flex-hr-vr-center">
+          <StyledCol className="flex-hr-vr-center">
             <Image src="/assets/nopost.png" className="w-40" />
             <Heading className="m-b-1" size="lg">
               You have no posts yet
@@ -35,7 +35,7 @@ const LayoutPostList = ({ ...props }) => {
             <Heading className="" size="xs">
               All posts from your lens feed will be displayed here
             </Heading>
-          </Col>
+          </StyledCol>
         </>
       );
     }

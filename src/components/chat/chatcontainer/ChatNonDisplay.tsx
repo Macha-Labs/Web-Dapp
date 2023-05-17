@@ -1,6 +1,6 @@
 import useChatChannelsStore from "@/store/useChatChannelsStore";
 import useChatChannelStore from "@/store/useChatChannelStore";
-import { Col } from "@/styles/StyledComponents";
+import { StyledCol } from "@/styles/StyledComponents";
 import { Button, Heading, Image, Spinner } from "@chakra-ui/react";
 import Link from "next/link";
 
@@ -11,13 +11,13 @@ const ChatNonDisplay = () => {
   return (
     <>
       {$channelLoad && (
-        <Col className="flex-hr-vr-center h-100">
+        <StyledCol className="flex-hr-vr-center h-100">
           <Spinner size="lg" />
-        </Col>
+        </StyledCol>
       )}
 
       {!$channelLoad && $channels?.length && (
-        <Col className="flex-hr-vr-center h-100">
+        <StyledCol className="flex-hr-vr-center h-100">
           <Image src="/assets/nochatselected.png" className="w-30 m-b-2" />
           <Heading className="m-b-1" size="lg">
             Select Channel
@@ -25,11 +25,11 @@ const ChatNonDisplay = () => {
           <Heading className="" size="xs">
             No chat selected, select from the pannel
           </Heading>
-        </Col>
+        </StyledCol>
       )}
 
       {!$channelLoad && !$channels?.length && (
-        <Col className="flex-hr-vr-center h-100">
+        <StyledCol className="flex-hr-vr-center h-100">
           <Image src="/assets/noChannels.png" className="w-30 m-b-1" />
           <Heading className="m-b-1" size="lg">
             Getting Started
@@ -42,7 +42,7 @@ const ChatNonDisplay = () => {
               Join Metawork Community
             </Button>
           </Link>
-        </Col>
+        </StyledCol>
       )}
     </>
   );

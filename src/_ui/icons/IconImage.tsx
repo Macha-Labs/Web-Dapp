@@ -1,7 +1,7 @@
 import { StyledIcon } from "@/styles/StyledComponents";
 import React from "react";
 import { IKImage } from "imagekitio-react";
-import { _sizes } from "@/styles/size";
+import {style} from "../../styles/StyledConstants";
 
 function IconImage(props: any) {
   return (
@@ -11,9 +11,9 @@ function IconImage(props: any) {
         transformation={[
           {
             height: props?.size
-              ? _sizes.icon[props?.size]
-              : _sizes.icon.default,
-            width: props?.size ? _sizes.icon[props?.size] : _sizes.icon.default,
+              ? style.icon.sizes[props?.size]
+              : style.icon.sizes.default,
+            width: props?.size ? style.icon.sizes[props?.size] : style.icon.sizes.default,
           },
         ]}
       />

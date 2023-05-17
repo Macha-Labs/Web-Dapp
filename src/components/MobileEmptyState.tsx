@@ -1,4 +1,4 @@
-import { Col } from "@/styles/StyledComponents";
+import { StyledCol } from "@/styles/StyledComponents";
 import { Button, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
@@ -6,7 +6,7 @@ import { Landing } from "./icons/IconImage";
 
 export default function MobileEmptyState() {
   return (
-    <Col className="hr-center">
+    <StyledCol className="hr-center">
       <div
         style={{
           backgroundImage: `url("assets/blurEmptyState.png")`,
@@ -47,6 +47,6 @@ export default function MobileEmptyState() {
         Follow on Twitter
       </Button>
       </Link>
-    </Col>
+    </StyledCol>
   );
 }
