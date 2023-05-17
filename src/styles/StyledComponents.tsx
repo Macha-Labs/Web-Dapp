@@ -66,14 +66,18 @@ export const StyledIframeView = styled.div`
   }
 `;
 
-export const StyledWindowTabs = styled.div`
-  margin-top: 75px;
-`;
 export const BorderBox = styled.div`
-  border: ${style.card.border.default};
+  border: ${style.card.border.hover};
   border-radius: ${style.card.borderRadius};
   background: ${style.card.bg.default};
   padding: ${style.card.padding.default};
+`;
+export const MetaBox = styled.div`
+  border: ${style.card.border.hover};
+  border-radius: ${style.card.borderRadius};
+  background: ${style.card.bg.default};
+  padding: ${style.card.padding.default};
+  width: ${style.card.width.meta};
 `;
 export const StyledWindow = styled.div`
   position: relative;
@@ -144,6 +148,7 @@ export const StyledLi = styled.li`
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-decoration: underline;
   }
 `;
 export const RowHover = styled(StyledRow)`

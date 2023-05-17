@@ -46,7 +46,7 @@ export default function Navigation() {
             <Link href="/">
               <Image
                 className="headerLogo"
-                src="/assets/metawork-image-text logo.svg"
+                src="/assets/Macha-logo-text.svg"
                 alt="logo"
                 width={170}
                 height={62}

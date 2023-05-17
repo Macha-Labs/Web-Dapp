@@ -6,8 +6,9 @@ import React from "react";
 import FlexRow from "@/_ui/flex/FlexRow";
 import NavTabs from "@/_ui/nav/NavTabs";
 import { Button } from "@chakra-ui/react";
-import { StyledWindowTabs } from "@/styles/StyledComponents";
+import { StyledWindow } from "@/styles/StyledComponents";
 import Sort from "@/components/studio/Sort";
+import MetaCard from "@/components/studio/MetaCard";
 
 export default function DashBoard() {
   const dashboardNav: any = [
@@ -26,21 +27,41 @@ export default function DashBoard() {
       {/*  */}
       <Navigation />
       {/*  */}
-      <StyledWindowTabs style={{ paddingTop: "73px" }}>
+      <StyledWindow>
         <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <NavTabs options={dashboardNav} />
             <Button>New Meta</Button>
           </FlexRow>
         </NavBlock>
-        <FlexRow>
+        <FlexRow width="100%" hrAlign="space-between">
           <FlexRow>
             <ChatSearch />
             <Filter />
           </FlexRow>
           <Sort />
         </FlexRow>
-      </StyledWindowTabs>
+        <FlexRow hrAlign="space-around" width="100%">
+          <MetaCard
+            image="icon-search"
+            heading="META_node"
+            description="There is a description here, please mind the gap, something like this and more ..."
+            tags={["tag1", "tag2"]}
+          />
+          <MetaCard
+            image="icon-search"
+            heading="META_node"
+            description="There is a description here, please mind the gap, something like this and more ..."
+            tags={["tag1", "tag2"]}
+          />
+          <MetaCard
+            image="icon-search"
+            heading="META_node"
+            description="There is a description here, please mind the gap, something like this and more ..."
+            tags={["tag1", "tag2"]}
+          />
+        </FlexRow>
+      </StyledWindow>
     </>
   );
 }
