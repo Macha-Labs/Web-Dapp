@@ -68,7 +68,10 @@ export default function DashBoard() {
       <FlexWindow>
         <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <NavTabs options={dashboardNav} />
+            <NavTabs
+              options={dashboardNav}
+              gstyle={{ fontSize: `${style.fontH5}`, fontWeight: "600" }}
+            />
             <ButtonNative text="Create Metas" variant="state_brand" />
           </FlexRow>
         </NavBlock>
@@ -97,10 +100,10 @@ export default function DashBoard() {
             </FlexRow>
             <ButtonMenu
               text="Sort By"
+              options={filterOptions}
               icon={{
                 slug: "icon-chevron-down",
               }}
-              options={filterOptions}
             />
           </FlexRow>
           <FlexRow

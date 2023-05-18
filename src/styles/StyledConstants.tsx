@@ -11,6 +11,8 @@ export const commonStyle = {
   fontH1: "4.2rem",
   fontH2: "3.6rem",
   fontH3: "2.8rem",
+  fontH4: "1.8rem",
+  fontH5: "1.4rem",
   fontP: "1.6rem",
   fontPSmall: "1.6rem",
   fontPLarge: "2rem",
@@ -170,6 +172,7 @@ export const darkStyle = {
     border: {
       default: "1px solid #0a1020",
       hover: "2px solid rgba(15,23,46,1)",
+      meta: "1px solid #197cec",
     },
     borderRadius: {
       default: "16px",
