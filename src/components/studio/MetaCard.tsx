@@ -14,8 +14,8 @@ export default function MetaCard({ image, heading, description, tags }: Props) {
     <div
       style={{
         border: `${style.card.border.hover}`,
-        borderRadius: `${style.card.borderRadius}`,
-        background: `${style.card.bg.default}`,
+        borderRadius: `${style.card.borderRadius.default}`,
+        background: `${style.card.bg.meta}`,
         padding: ` ${style.card.padding.default}`,
         width: ` ${style.card.width.meta}`,
       }}

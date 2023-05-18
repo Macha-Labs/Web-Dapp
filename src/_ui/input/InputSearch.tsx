@@ -11,6 +11,10 @@ type Props = {
   style?: any;
   onKeydown?: any;
   icon?: any;
+  marginLeft?: string;
+  marginTop?: string;
+  marginRight?: any;
+  marginBottom?: string;
 };
 
 const InputSearch = ({
@@ -22,9 +26,19 @@ const InputSearch = ({
   onChange,
   onKeydown,
   icon,
+  marginLeft,
+  marginTop,
+  marginRight,
+  marginBottom,
 }: Props) => {
   return (
-    <InputGroup className={style?.className}>
+    <InputGroup
+      className={style?.className}
+      marginTop={marginTop ? marginTop : "0px"}
+      marginBottom={marginBottom ? marginBottom : "0px"}
+      marginLeft={marginLeft ? marginLeft : "0px"}
+      marginRight={marginRight ? marginRight : "0px"}
+    >
       {icon && (
         <InputLeftElement pointerEvents="none">
           <IconImage slug={icon.slug} size={icon.size} />

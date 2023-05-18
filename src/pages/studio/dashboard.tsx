@@ -64,6 +64,7 @@ export default function DashBoard() {
                   size="lg"
                   placeholder="Search Studio"
                   icon={{ slug: "icon-search" }}
+                  marginRight={style.card.margin.default}
                 />
               </FlexRow>
               <ButtonMenu
