@@ -1,14 +1,17 @@
-import ChatSearch from "@/components/chat/chatcontainer/ChatSearch";
+import InputSearch from "@/_ui/input/InputSearch";
 import Navigation from "@/_ui/nav/Navigation";
 import NavBlock from "@/_ui/nav/NavBlock";
-import Filter from "../../components/studio/Filter";
 import React from "react";
 import FlexRow from "@/_ui/flex/FlexRow";
 import NavTabs from "@/_ui/nav/NavTabs";
 import { Button } from "@chakra-ui/react";
-import { StyledWindow } from "@/styles/StyledComponents";
-import Sort from "@/components/studio/Sort";
 import MetaCard from "@/components/studio/MetaCard";
+import { style } from "@/styles/StyledConstants";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
+import InputSelect from "@/_ui/input/InputSelect";
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
+import FlexBody from "@/_ui/flex/FlexBody";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 
 export default function DashBoard() {
   const dashboardNav: any = [
@@ -22,46 +25,80 @@ export default function DashBoard() {
     },
   ];
 
+  const filterOptions = [
+    {
+      value: "Contract",
+      onClick: () => {},
+    },
+    {
+      value: "Rest",
+      onClick: () => {},
+    },
+    {
+      value: "Graph",
+      onClick: () => {},
+    },
+  ];
+
   return (
     <>
       {/*  */}
       <Navigation />
       {/*  */}
-      <StyledWindow>
+      <FlexWindow>
         <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <NavTabs options={dashboardNav} />
-            <Button>New Meta</Button>
+            <ButtonNative text="Create Metas" variant="state_brand" />
           </FlexRow>
         </NavBlock>
-        <FlexRow width="100%" hrAlign="space-between">
-          <FlexRow>
-            <ChatSearch />
-            <Filter />
+        <FlexBody>
+          <FlexRow
+            width="100%"
+            hrAlign="space-between"
+            padding={`${style.padding.md} 0rem`}
+          >
+            <FlexRow width="100%" hrAlign="flex-start">
+              <FlexRow width="50%">
+                <InputSearch
+                  size="lg"
+                  placeholder="Search Studio"
+                  icon={{ slug: "icon-search" }}
+                />
+              </FlexRow>
+              <ButtonMenu
+                text="Filter By"
+                // icon={{ slug: "icon-search" }}
+                options={filterOptions}
+              />
+            </FlexRow>
           </FlexRow>
-          <Sort />
-        </FlexRow>
-        <FlexRow hrAlign="space-around" width="100%">
-          <MetaCard
-            image="icon-search"
-            heading="META_node"
-            description="There is a description here, please mind the gap, something like this and more ..."
-            tags={["tag1", "tag2"]}
-          />
-          <MetaCard
-            image="icon-search"
-            heading="META_node"
-            description="There is a description here, please mind the gap, something like this and more ..."
-            tags={["tag1", "tag2"]}
-          />
-          <MetaCard
-            image="icon-search"
-            heading="META_node"
-            description="There is a description here, please mind the gap, something like this and more ..."
-            tags={["tag1", "tag2"]}
-          />
-        </FlexRow>
-      </StyledWindow>
+          <FlexRow
+            hrAlign="space-between"
+            width="100%"
+            // padding={style.body.padding}
+          >
+            <MetaCard
+              image="../assets/MetaCard.png"
+              heading="META_node"
+              description="There is a description here, please mind the gap, something like this and more ..."
+              tags={["tag1", "tag2"]}
+            />
+            <MetaCard
+              image="../assets/MetaCard.png"
+              heading="META_node"
+              description="There is a description here, please mind the gap, something like this and more ..."
+              tags={["tag1", "tag2"]}
+            />
+            <MetaCard
+              image="../assets/MetaCard.png"
+              heading="META_node"
+              description="There is a description here, please mind the gap, something like this and more ..."
+              tags={["tag1", "tag2"]}
+            />
+          </FlexRow>
+        </FlexBody>
+      </FlexWindow>
     </>
   );
 }

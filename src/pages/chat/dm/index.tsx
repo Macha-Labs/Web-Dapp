@@ -1,14 +1,11 @@
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import AuthCard from "@/components/auth/AuthCard";
 import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import ChatList from "@/components/chat/ChatList";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Nav from "@/components/nav/Nav";
 import { AuthContext } from "@/providers/AuthProvider";
-import {
-  StyledChat,
-  StyledChatList,
-  StyledWindow,
-} from "@/styles/StyledComponents";
+import { StyledChat, StyledChatList } from "@/styles/StyledComponents";
 import { useDisclosure } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -39,7 +36,7 @@ function IndexDM() {
   return (
     <>
       {authContext.isConnected && (
-        <StyledWindow>
+        <FlexWindow>
           <div className="left">
             <Nav />
           </div>
@@ -53,7 +50,7 @@ function IndexDM() {
               <ChatContainer />
             </StyledChat>
           </div>
-        </StyledWindow>
+        </FlexWindow>
       )}
       <TemplateAuth />
     </>

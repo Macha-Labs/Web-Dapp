@@ -5,17 +5,14 @@ import UserEdit from "@/components/user/UserEdit";
 import { helperIPFS } from "@/helpers";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { AuthContext } from "@/providers/AuthProvider";
-import {
-  StyledPageContainer,
-  StyledPageList,
-  StyledWindow,
-} from "@/styles/StyledComponents";
+import { StyledPageContainer, StyledPageList } from "@/styles/StyledComponents";
 import { Avatar, Input, Text, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import ModalWindow from "@/components/modal/ModalWindow";
 import AuthCard from "@/components/auth/AuthCard";
 import { disconnect } from "@wagmi/core";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 
 const User = () => {
   const authContext = useContext(AuthContext);
@@ -35,55 +32,56 @@ const User = () => {
       icon: "IconDarkPrivacy.png",
       name: "Privacy and Security",
       route: "",
-      size:"md"
+      size: "md",
     },
     {
       icon: "IconDarkNotification.png",
       name: "Notifications and Sounds",
       route: "",
-      size:"lg"
+      size: "lg",
     },
     {
       icon: "IconDarkCall.png",
       name: "Call and Video",
       route: "",
-      size:"md"
+      size: "md",
     },
     {
       icon: "IconDarkWallet.png",
       name: "Wallet and Payments",
       route: "",
-      size:"md"
+      size: "md",
     },
     {
       icon: "IconDarkDatabase.png",
       name: "Storage and Data",
       route: "",
-      size:"md"
+      size: "md",
     },
     {
       icon: "IconDarkLinkedDevices.png",
       name: "Linked Devices",
       route: "",
-      size:"lg"
+      size: "lg",
     },
     {
       icon: "IconDarkLanguages.png",
       name: "Languages",
       route: "",
-      size:"md"
+      size: "md",
     },
     {
       icon: "IconDarkAppearance.png",
       name: "Appearance",
       route: "",
-      size:"md"
-    }, {
+      size: "md",
+    },
+    {
       icon: "IconDarkEdit.png",
       name: "Disconnect Wallet",
       onPress: async () => {
         await disconnect();
-        window.location.href="https://metaworkhq.com"
+        window.location.href = "https://metaworkhq.com";
       },
     },
   ];
@@ -157,14 +155,14 @@ const User = () => {
   return (
     <>
       {authContext?.user?.lens?.id && (
-        <StyledWindow>
+        <FlexWindow>
           <div className="left">
             <Nav />
           </div>
           <div className="right">
             <Template />
           </div>
-        </StyledWindow>
+        </FlexWindow>
       )}
 
       <TemplateAuth />

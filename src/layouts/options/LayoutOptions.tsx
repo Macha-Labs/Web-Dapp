@@ -1,5 +1,9 @@
-import IconImage from "@/components/icons/IconImage";
-import { StyledIcon, StyledRow, StyledOptionsCard } from "@/styles/StyledComponents";
+import IconImage from "@/_ui/icons/IconImage";
+import {
+  StyledIcon,
+  StyledRow,
+  StyledOptionsCard,
+} from "@/styles/StyledComponents";
 import { Heading, Text } from "@chakra-ui/react";
 
 const LayoutOptions = (props: any) => {
@@ -20,19 +24,24 @@ const LayoutOptions = (props: any) => {
               return null;
             }
             if (
-              item.name === "Mute Chat" && !props?.channelRawData?.disconnected &&
+              item.name === "Mute Chat" &&
+              !props?.channelRawData?.disconnected &&
               props.channelRawData?.muteStatus().muted
             ) {
               return null;
             }
             if (
-              item.name === "UnMute Chat" && !props?.channelRawData?.disconnected &&
+              item.name === "UnMute Chat" &&
+              !props?.channelRawData?.disconnected &&
               !props.channelRawData?.muteStatus().muted
             ) {
               return null;
             }
-            if(item.name === "Leave Channel" && props.channelAdmin == props.userId){
-              return null
+            if (
+              item.name === "Leave Channel" &&
+              props.channelAdmin == props.userId
+            ) {
+              return null;
             }
             return (
               <StyledRow

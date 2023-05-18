@@ -8,10 +8,10 @@ import {
   Text,
   Tag,
 } from "@chakra-ui/react";
-import IconImage from "@/components/icons/IconImage";
+import IconImage from "@/_ui/icons/IconImage";
 import ChatSetting from "./ChatSetting";
 import { useContext, useEffect } from "react";
-import ChatSearch from "./ChatSearch";
+import InputSearch from "../../../_ui/input/InputSearch";
 import { useRouter } from "next/router";
 import { truncateAddress } from "@/helpers";
 import { ChatContext } from "@/providers/ChatProvider";
@@ -25,12 +25,10 @@ const ChatHeader = (props: any) => {
   const chatContext = useContext(ChatContext);
   const $channel = useChatChannelStore((state: any) => state.channel);
 
- 
-
   const templateSearch = () => {
     return (
       <StyledRow className="header w-100 vr-center hr-between">
-        <ChatSearch />
+        <InputSearch />
         <Button
           size="xs"
           variant="state_default_hover"
@@ -79,17 +77,23 @@ const ChatHeader = (props: any) => {
           />
           <StyledCol>
             <StyledRow>
-              <Heading as="h4" size="sm" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
-                {$channel?.name ||
-                  truncateAddress($channel?.peerAddress)}
+              <Heading
+                as="h4"
+                size="sm"
+                paddingBottom="0px"
+                marginBottom="0px"
+                style={{ paddingBottom: "0px", marginBottom: "0px" }}
+              >
+                {$channel?.name || truncateAddress($channel?.peerAddress)}
               </Heading>
-              {!$channel?.raw?.disconnected && $channel?.raw?.muteStatus()?.muted && (
-                <IconImage
-                  path="IconDarkMute.png"
-                  style={{ className: "m-l-0-5" }}
-                  size="2xs"
-                />
-              )}
+              {!$channel?.raw?.disconnected &&
+                $channel?.raw?.muteStatus()?.muted && (
+                  <IconImage
+                    path="IconDarkMute.png"
+                    style={{ className: "m-l-0-5" }}
+                    size="2xs"
+                  />
+                )}
             </StyledRow>
             <Heading as="h6" size="xs">
               {chatContext?.hookChat?.usersWhoAreTyping && (
@@ -100,8 +104,8 @@ const ChatHeader = (props: any) => {
                         <Text key={user?.id} fontSize="12">
                           {`${user}${
                             index! ==
-                              chatContext?.hookChat?.usersWhoAreTyping.length - 1 &&
-                            ","
+                              chatContext?.hookChat?.usersWhoAreTyping.length -
+                                1 && ","
                           } is typing...`}
                         </Text>
                       );
@@ -114,20 +118,29 @@ const ChatHeader = (props: any) => {
         </StyledRow>
 
         <StyledRow>
-         <Button className="m-r-1" size="xs" variant={$channel?.source == 'xmtp' ? 'state_xmtp' : ''}>{$channel?.source}</Button> 
+          <Button
+            className="m-r-1"
+            size="xs"
+            variant={$channel?.source == "xmtp" ? "state_xmtp" : ""}
+          >
+            {$channel?.source}
+          </Button>
 
-         {router.pathname == '/' && <StyledRow className="vr-center">
-          
-          <IconImage
-            path="IconDarkMenu.png"
-            onClick={modalSettings.onOpen}
-            style={{ className: "m-r-0-5" }}
-          />
+          {router.pathname == "/" && (
+            <StyledRow className="vr-center">
+              <IconImage
+                path="IconDarkMenu.png"
+                onClick={modalSettings.onOpen}
+                style={{ className: "m-r-0-5" }}
+              />
 
-          <IconImage path="IconDarkUsers.png" onClick={membersModal.onOpen} />
-        </StyledRow>}
+              <IconImage
+                path="IconDarkUsers.png"
+                onClick={membersModal.onOpen}
+              />
+            </StyledRow>
+          )}
         </StyledRow>
-                
       </StyledRow>
     );
   };
@@ -150,14 +163,14 @@ const ChatHeader = (props: any) => {
           {template()}
         </StyledRow>
       </div>
-      
-      <ChatMembersList modal={membersModal}/>
-      
+
+      <ChatMembersList modal={membersModal} />
+
       <ChatSetting
-          modalSettings={modalSettings}
-          hookChatChannels={props.hookChatChannels}
-          hookChatChannel={props.hookChatChannel}
-         />
+        modalSettings={modalSettings}
+        hookChatChannels={props.hookChatChannels}
+        hookChatChannel={props.hookChatChannel}
+      />
     </>
   );
 };

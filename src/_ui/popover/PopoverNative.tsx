@@ -5,9 +5,12 @@ import {
   PopoverTrigger,
 } from "@chakra-ui/react";
 
-const Pop = (props: any) => {
+const PopoverNative = (props: any) => {
   return (
-    <Popover placement={props?.placement ? props?.placement : "left-start"} size={props.size || 'md'}>
+    <Popover
+      placement={props?.placement ? props?.placement : "left-start"}
+      size={props.size || "md"}
+    >
       <PopoverTrigger>{props?.trigger}</PopoverTrigger>
       <PopoverContent className="m-b-1">
         <PopoverBody>{props?.children}</PopoverBody>
@@ -15,4 +18,4 @@ const Pop = (props: any) => {
     </Popover>
   );
 };
-export default Pop;
+export default PopoverNative;

@@ -2,7 +2,6 @@ import { StyledCol } from "@/styles/StyledComponents";
 import { Button, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
-import { Landing } from "./icons/IconImage";
 
 export default function MobileEmptyState() {
   return (
@@ -24,11 +23,11 @@ export default function MobileEmptyState() {
         <Text
           align={"center"}
           as="b"
-          style={{ paddingTop: "25px", paddingBottom:"50px"}}
+          style={{ paddingTop: "25px", paddingBottom: "50px" }}
         >
           Thanks For Visiting !
         </Text>
-        <Landing path="emptyStateIllustration.svg"/>
+        <Landing path="emptyStateIllustration.svg" />
         <Text
           align={"center"}
           width="300px"
@@ -43,9 +42,9 @@ export default function MobileEmptyState() {
         Good news - our mobile app is in the works and will be available soon
       </Text>
       <Link href="https://twitter.com/intent/follow?screen_name=metaworklabs">
-      <Button variant="" marginTop={"15px"}>
-        Follow on Twitter
-      </Button>
+        <Button variant="" marginTop={"15px"}>
+          Follow on Twitter
+        </Button>
       </Link>
     </StyledCol>
   );

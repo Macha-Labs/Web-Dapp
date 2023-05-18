@@ -23,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import ModalSlider from "../modal/ModalSlider";
-import IconImage from "../icons/IconImage";
+import IconImage from "@/_ui/icons/IconImage";
 import useLensConnections from "@/hooks/lens/useLensConnections";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import { Contract } from "ethers";

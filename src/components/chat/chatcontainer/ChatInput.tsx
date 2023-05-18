@@ -1,6 +1,6 @@
-import IconImage from "@/components/icons/IconImage";
+import IconImage from "@/_ui/icons/IconImage";
 import ModalWindow from "@/components/modal/ModalWindow";
-import Pop from "@/components/pop/Pop";
+import PopoverNative from "@/components/pop/Pop";
 import PortalLoader from "@/components/PortalLoader";
 import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
 import { AuthContext } from "@/providers/AuthProvider";
@@ -37,7 +37,7 @@ const ChatInput = (props: any) => {
 
   const callbackSendMessage = (data: any) => {
     return chatContext?.hookMessage.send(data);
-  }
+  };
 
   const templateReply = () => {
     return (
@@ -216,7 +216,7 @@ const ChatInput = (props: any) => {
 
   const TemplateAction = () => {
     return (
-      <Pop
+      <PopoverNative
         trigger={
           <StyledIcon className="circled">
             <PlusSquareIcon color="gray.300" />
@@ -232,12 +232,16 @@ const ChatInput = (props: any) => {
             rightIcon={<IconImage path="IconDarkFiles.png" />}
           >
             <label htmlFor="upload-file" className="w-100">
-              <StyledRow className="vr-center hr-between w-100">Upload File </StyledRow>
+              <StyledRow className="vr-center hr-between w-100">
+                Upload File{" "}
+              </StyledRow>
             </label>
           </Button>
           <input
             id="upload-file"
-            onChange={e => {chatContext?.hookChat.handleAttachment(e)}}
+            onChange={(e) => {
+              chatContext?.hookChat.handleAttachment(e);
+            }}
             type="file"
             hidden
           />
@@ -268,7 +272,7 @@ const ChatInput = (props: any) => {
             <Row className="hr-between w-100">Send Payment</Row>
           </Button> */}
         </StyledCol>
-      </Pop>
+      </PopoverNative>
     );
   };
 
@@ -284,7 +288,7 @@ const ChatInput = (props: any) => {
             </StyledCol>
             <StyledCol className="w-100 vr-center">
               <Textarea
-                onChange={event => {
+                onChange={(event) => {
                   event.target.style.height = "auto";
                   event.target.style.height = `${event.target.scrollHeight}px`;
                 }}
@@ -293,7 +297,10 @@ const ChatInput = (props: any) => {
                 variant="unstyled"
                 style={{ minHeight: "45px" }}
                 onKeyDown={(event: any) => {
-                  chatContext?.hookChat?.keyDownMessage(event, callbackSendMessage);
+                  chatContext?.hookChat?.keyDownMessage(
+                    event,
+                    callbackSendMessage
+                  );
                 }}
                 placeholder="Message..."
                 height="auto"

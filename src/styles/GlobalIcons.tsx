@@ -48,7 +48,7 @@ const GlobalIcons: any = {
   "icon-device":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-volume.svg?updatedAt=1680783916154",
   "icon-notification":
-    "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-volume.svg?updatedAt=1680783916154",
+    "/icons/svg/Base-blue/base-blue-volume.svg?updatedAt=1680783916154",
   "icon-notification-off":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-volume.svg?updatedAt=1680783916154",
   "icon-language":

@@ -27,7 +27,7 @@ export const commonStyle = {
   paddingButtonSmall: "0.8rem 1rem",
   paddingButtonXSmall: "0.5rem",
   paddingButtonLarge: "1rem 1.3rem",
-  paddingDropdown: "1.3rem",
+
   paddingCover: "25px",
   paddingBanner: "0 35px",
 
@@ -95,7 +95,7 @@ export const darkStyle = {
     "linear-gradient(90deg, rgba(246,246,246,0.6) 0%, rgba(234,238,246,0.8) 44%, rgba(231,235,242,0.8) 100%)",
   bgSidebar: "#232323",
   bgSidebarMenu: "#232323",
-  bgDropdown: "#202124",
+
   bgPannelHeader: "#00042C",
   bgPlaceholder: "#1D224A",
   border: "1px solid #0F172E",
@@ -106,7 +106,7 @@ export const darkStyle = {
   borderTag: "1px solid #333233",
   borderTagActive: "1px solid #50A7EA",
   borderLoaderLeft: "#3182ce",
-  borderDropdown: "1px solid rgba(247,248,248,0.1)",
+
   borderPannel: "1px solid rgba(247,248,248,0.1)",
 
   borderPallet: "1px solid rgba(247,248,248,0.1)",
@@ -142,7 +142,7 @@ export const darkStyle = {
     height: "90%",
     bg: { default: "#00040d" },
     border: { default: "2px solid #0F172E" },
-    padding: "0% 8%",
+    padding: "1% 8%",
   },
   list: {
     padding: "5px",
@@ -176,6 +176,7 @@ export const darkStyle = {
         "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
     padding: { default: "10px" },
+    margin: { default: "20px" },
     width: {
       meta: "300px",
     },
@@ -230,7 +231,21 @@ export const darkStyle = {
   },
   popover: { bg: { default: "#000416" } },
   sidebar: {},
-  dropdown: {},
+  dropdown: {
+    bg: {
+      transparent: "transparent",
+      default: "#00040d",
+      hover: "#000C29",
+      active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
+      activeTranslucent:
+        "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);",
+      disabled: "",
+    },
+    border: "1px solid rgba(247,248,248,0.1)",
+    padding: "1.3rem",
+    shadowDropdown:
+      "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",
+  },
   avatar: {
     border: "2px solid #246bfd",
   },
@@ -266,7 +281,7 @@ export const darkStyle = {
   button: {
     bg: {
       transparent: "transparent",
-      default: "linear-gradient(100.07deg, #197CEC 0.39%, #004AD9 73.45%)",
+      default: "#00040d",
       hover: "#000C29",
       active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
       activeTranslucent:
@@ -281,8 +296,6 @@ export const darkStyle = {
       end: "#001E57",
     },
   },
-  shadowDropdown:
-    "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",
 };
 
 export const style = { ...commonStyle, ...darkStyle };

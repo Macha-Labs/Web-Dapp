@@ -66,43 +66,12 @@ export const StyledIframeView = styled.div`
   }
 `;
 
-export const BorderBox = styled.div`
-  border: ${style.card.border.hover};
-  border-radius: ${style.card.borderRadius};
-  background: ${style.card.bg.default};
-  padding: ${style.card.padding.default};
-`;
 export const MetaBox = styled.div`
   border: ${style.card.border.hover};
   border-radius: ${style.card.borderRadius};
   background: ${style.card.bg.default};
   padding: ${style.card.padding.default};
   width: ${style.card.width.meta};
-`;
-export const StyledWindow = styled.div`
-  position: relative;
-  top:75px;
-  width: 100vw;
-  margin-top:75px;
-
-  .left {
-  }
-
-  .right {
-    width: calc(100vw - ${style.nav.width});
-    position: fixed;
-    left: calc(${style.nav.width});
-    display: flex !important;
-  }
-
-  .middle {
-    width: 35%;
-    margin: auto;
-    margin-top: 8%;
-    height: 100vh;
-  }
-  
-  }
 `;
 
 export const StyledRow = styled.div`

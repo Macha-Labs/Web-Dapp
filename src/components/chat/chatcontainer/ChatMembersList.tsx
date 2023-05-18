@@ -4,12 +4,10 @@ import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { truncateAddress } from "@/helpers";
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
-import IconImage from "@/components/icons/IconImage";
+import IconImage from "@/_ui/icons/IconImage";
 import { useChatMembersStore } from "@/store/useChatMembersStore";
 import { ChatContext } from "@/providers/ChatProvider";
 import useChatChannelStore from "@/store/useChatChannelStore";
-
-
 
 const ChatMembersList = (props: any) => {
   console.log("Rendering >>>>> ChatMembersList");
@@ -21,8 +19,7 @@ const ChatMembersList = (props: any) => {
 
   useEffect(() => {
     chatContext?.hookMembers.load($channel);
-  }, [$channel])
-
+  }, [$channel]);
 
   const handleSelectedUser = (user: any) => {
     modalProfile.onOpen();
@@ -32,48 +29,48 @@ const ChatMembersList = (props: any) => {
 
   const template = (heading: any, users: any) => {
     return (
-      
-      
-        <StyledCol className="m-b-1" style={{}}>
+      <StyledCol className="m-b-1" style={{}}>
         {users?.length ? (
           <>
-             <div>
-                {users?.map((item: any, index: any) => (
-                  <StyledCard key={index} className="state_hover m-b-0-5">
-                    <StyledRow
-                  
-                  className="hr-between vr-center"
-                  onClick={() => {
-                    console.log(item, "itemmmmm");
-                    handleSelectedUser(item);
-                  }}
-                >
-                  <StyledRow className="vr-center">
-                    <Avatar src={item?.lens?.image} className="m-r-0-5" size="sm">
-                      {heading == "Online" ? (
-                        <AvatarBadge boxSize="0.7em" bg="green.500" />
-                      ) : (
-                        <></>
-                      )}
-                    </Avatar>
-                    <h6>
-                      {item?.lens?.name
-                        ? item?.lens?.name
-                        : item?.lens?.handle
-                        ? item?.lens?.handle
-                        : truncateAddress(item?.lens?.ownedBy)}
-                    </h6>
+            <div>
+              {users?.map((item: any, index: any) => (
+                <StyledCard key={index} className="state_hover m-b-0-5">
+                  <StyledRow
+                    className="hr-between vr-center"
+                    onClick={() => {
+                      console.log(item, "itemmmmm");
+                      handleSelectedUser(item);
+                    }}
+                  >
+                    <StyledRow className="vr-center">
+                      <Avatar
+                        src={item?.lens?.image}
+                        className="m-r-0-5"
+                        size="sm"
+                      >
+                        {heading == "Online" ? (
+                          <AvatarBadge boxSize="0.7em" bg="green.500" />
+                        ) : (
+                          <></>
+                        )}
+                      </Avatar>
+                      <h6>
+                        {item?.lens?.name
+                          ? item?.lens?.name
+                          : item?.lens?.handle
+                          ? item?.lens?.handle
+                          : truncateAddress(item?.lens?.ownedBy)}
+                      </h6>
+                    </StyledRow>
+                    <IconImage
+                      path="IconBrandChat.png"
+                      style={{ className: "m-l-0-5" }}
+                      size="xs"
+                    />
                   </StyledRow>
-                  <IconImage
-                  path="IconBrandChat.png"
-                  style={{ className: "m-l-0-5" }}
-                  size="xs"
-                />
-                </StyledRow>
-                  </StyledCard>
-                
+                </StyledCard>
               ))}
-                </div>
+            </div>
           </>
         ) : (
           <></>
@@ -84,36 +81,37 @@ const ChatMembersList = (props: any) => {
 
   const TemplateProfile = () => {
     return (
-     <>
-       {selectedUser && <ModalSlider event={modalProfile} size="lg">
-          <UserProfile user={selectedUser} />
-        </ModalSlider>}
-     </>
+      <>
+        {selectedUser && (
+          <ModalSlider event={modalProfile} size="lg">
+            <UserProfile user={selectedUser} />
+          </ModalSlider>
+        )}
+      </>
     );
   };
 
   return (
     <>
-    {props.modal?.isOpen && 
-      <ModalSlider
-      size="sm"
-      event={props?.modal} 
-      header={
-        <>
-          <Heading as="h6" size="sm">Members</Heading>
-        </>            
-      }>
-         {template("Online", $members?.onlineUsers)}
+      {props.modal?.isOpen && (
+        <ModalSlider
+          size="sm"
+          event={props?.modal}
+          header={
+            <>
+              <Heading as="h6" size="sm">
+                Members
+              </Heading>
+            </>
+          }
+        >
+          {template("Online", $members?.onlineUsers)}
 
           {template("Offline", $members?.offlineUsers)}
+        </ModalSlider>
+      )}
 
-      </ModalSlider>
-     
-    
-    }
-      
-    {modalProfile?.isOpen && <TemplateProfile />}
-      
+      {modalProfile?.isOpen && <TemplateProfile />}
     </>
   );
 };

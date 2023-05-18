@@ -1,52 +1,29 @@
 import { StyledIcon } from "@/styles/StyledComponents";
 import React from "react";
 import { IKImage } from "imagekitio-react";
-import {style} from "../../styles/StyledConstants";
+import { style as gStyle } from "../../styles/StyledConstants";
+import GlobalIcons from "@/styles/GlobalIcons";
 
-function IconImage(props: any) {
+type Props = {
+  slug?: string;
+  size?: string;
+  onClick?: any;
+  style?: any;
+};
+
+function IconImage({ slug, size, onClick, style }: Props) {
   return (
-    <StyledIcon className={props.style?.className} onClick={props.onClick}>
+    <StyledIcon className={style?.className} onClick={onClick}>
       <IKImage
-        path={`/icons/${props.path}`}
+        path={GlobalIcons[slug]}
         transformation={[
           {
-            height: props?.size
-              ? style.icon.sizes[props?.size]
-              : style.icon.sizes.default,
-            width: props?.size ? style.icon.sizes[props?.size] : style.icon.sizes.default,
+            height: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,
+            width: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,
           },
         ]}
       />
     </StyledIcon>
-  );
-}
-
-export function Landing(props: any) {
-  return (
-    <>
-      <IKImage
-        path={`/landingPage/${props.path}`}
-        // transformation={[
-        //   {
-        //     height: props?.height ? props?.height : "25",
-        //     width: props?.width ? props?.width : "25",
-        //   },
-        // ]}
-        className={props?.className}
-        // style={{ borderRadius: 23 }}
-      />
-      {/* {console.log("lessgoo",props?.className)} */}
-      {/* <style jsx>{`
-        @media screen and (max-width: 770px) {
-          .aboutUs{
-            height:{props.height}
-          }
-          .aboutUs {
-            height:100px;
-          }
-        }
-      `}</style> */}
-    </>
   );
 }
 

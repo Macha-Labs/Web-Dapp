@@ -1,8 +1,12 @@
-import IconImage from "@/components/icons/IconImage";
+import IconImage from "@/_ui/icons/IconImage";
 import { helperIPFS } from "@/helpers";
 import { likePost, unlikePost } from "@/helpers/lens/lens";
 import useLensPosts from "@/hooks/lens/useLensPosts";
-import { StyledCol, StyledRow, StyledPostCard } from "@/styles/StyledComponents";
+import {
+  StyledCol,
+  StyledRow,
+  StyledPostCard,
+} from "@/styles/StyledComponents";
 import { Avatar, Button, Flex, Heading, Text, Image } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 
@@ -104,7 +108,6 @@ const LayoutPostCard = (props: any) => {
                   </Flex>
                 </div>
               </Col> */}
-              
             </StyledCol>
             <StyledCol className="card-footer">
               <StyledRow className="w-100 vr-center">

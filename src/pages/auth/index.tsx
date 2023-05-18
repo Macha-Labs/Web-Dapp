@@ -1,13 +1,12 @@
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import AuthCard from "@/components/auth/AuthCard";
-import { StyledWindow } from "@/styles/StyledComponents";
-
 
 function Auth() {
-    return (
-        <StyledWindow>
-            <AuthCard />
-        </StyledWindow>
-    )
+  return (
+    <FlexWindow>
+      <AuthCard />
+    </FlexWindow>
+  );
 }
 
 export default Auth;

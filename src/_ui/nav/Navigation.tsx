@@ -3,10 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { style } from "../../styles/StyledConstants";
-import { StyledCol, StyledLi } from "@/styles/StyledComponents";
-import { StyledRow } from "@/styles/StyledComponents";
-import GlobalIcons from "../../styles/GlobalIcons";
-import { IconSVG } from "../icons/IconSVG";
+import IconImage from "../icons/IconImage";
 import FlexRow from "../flex/FlexRow";
 import NavTabs from "./NavTabs";
 
@@ -58,6 +55,7 @@ export default function Navigation() {
           </FlexRow>
 
           <FlexRow>
+            <IconImage slug="icon-notification" />
             <Button>Wallet</Button>
           </FlexRow>
         </FlexRow>

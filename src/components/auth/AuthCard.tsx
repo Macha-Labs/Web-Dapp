@@ -1,40 +1,40 @@
-import IconImage from "@/components/icons/IconImage";
+import IconImage from "@/_ui/icons/IconImage";
 import { getCookie } from "@/helpers/storage/browserStorage";
 import { AuthContext } from "@/providers/AuthProvider";
 import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { Button, Heading, Text, useToast } from "@chakra-ui/react";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
-import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import MobileEmptyState from "../MobileEmptyState";
 
 const AuthCard = () => {
-  console.log('Rendering >>>>> AuthCard');
+  console.log("Rendering >>>>> AuthCard");
   const authContext = useContext(AuthContext);
   const toast = useToast();
-  const [mobile,setMobile]=useState(false);
+  const [mobile, setMobile] = useState(false);
   const [lensBtnState, setLensBtnState] = useState<any>({
     text: "Sign in with Lens",
-    disabled: false
+    disabled: false,
   });
-    const callBacks = {
-        noLensProfile: async() => {
-            toast({
-                title: "Lens Profile not found",
-                status: "error",
-                duration: 3000,
-                position: "bottom-right",
-              });
-            setLensBtnState({text: "Switch your account", disabled: true});
-        }
-    } 
-    useEffect(()=>{
-      if(window.innerWidth<1024){
-        setMobile(true);
-      }
-    },[])  
-    return (
-    mobile==false?(<div className="middle">
+  const callBacks = {
+    noLensProfile: async () => {
+      toast({
+        title: "Lens Profile not found",
+        status: "error",
+        duration: 3000,
+        position: "bottom-right",
+      });
+      setLensBtnState({ text: "Switch your account", disabled: true });
+    },
+  };
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      setMobile(true);
+    }
+  }, []);
+  return mobile == false ? (
+    <div className="middle">
       <StyledCard className="w-100 p-4 state_highlight invite">
         <StyledCol className="hr-center">
           <StyledCol className="m-b-2 hr-center">
@@ -49,20 +49,22 @@ const AuthCard = () => {
           </StyledCol>
           <StyledCol className="w-60">
             {!authContext.address && <ConnectWalletButton />}
-            {authContext.address && window.localStorage.getItem("lens_refresh_token") == undefined && (
-              <Button
-                className=""
-                size="md"
-                variant="state_lens"
-                isLoading={authContext?.isLoadingLens}
-                isDisabled={lensBtnState.disabled}
-                onClick={() => {
-                  authContext.connectLens(callBacks);
-                }}
-              >
-                {lensBtnState.text}
-              </Button>
-            )}
+            {authContext.address &&
+              window.localStorage.getItem("lens_refresh_token") ==
+                undefined && (
+                <Button
+                  className=""
+                  size="md"
+                  variant="state_lens"
+                  isLoading={authContext?.isLoadingLens}
+                  isDisabled={lensBtnState.disabled}
+                  onClick={() => {
+                    authContext.connectLens(callBacks);
+                  }}
+                >
+                  {lensBtnState.text}
+                </Button>
+              )}
             {authContext.address &&
               authContext?.user?.lens?.id &&
               !authContext.xmtpClientAddress && (
@@ -71,20 +73,20 @@ const AuthCard = () => {
                   size="md"
                   variant="state_xmtp"
                   onClick={() => {
-                    authContext.connectXmtp();                    
-                      // if (
-                      //   window.navigator.platform
-                      //     .toLowerCase()
-                      //     .indexOf("linux") == -1
-                      // )
-                      // {
-                      //   <MobileEmptyState/>
-                      //   // document.write("hello");
-                      // }
-                      //   console.log(
-                      //     "mobile device detection",
-                      //     window.navigator.platform
-                      //   );
+                    authContext.connectXmtp();
+                    // if (
+                    //   window.navigator.platform
+                    //     .toLowerCase()
+                    //     .indexOf("linux") == -1
+                    // )
+                    // {
+                    //   <MobileEmptyState/>
+                    //   // document.write("hello");
+                    // }
+                    //   console.log(
+                    //     "mobile device detection",
+                    //     window.navigator.platform
+                    //   );
                   }}
                 >
                   Connect to XMTP
@@ -99,7 +101,9 @@ const AuthCard = () => {
           <Text className="text-center" fontSize="14">Visit <Link href="https://testnet.lenster.xyz/" target={'_blank'}>www.testnet.lenster.xyz</Link> to claim your lens handle.<br/>Please note this is for testing purpose only to access product on testnet.</Text>
           </Col>
       </StyledCard> */}
-    </div>):<MobileEmptyState/>
+    </div>
+  ) : (
+    <MobileEmptyState />
   );
 };
 

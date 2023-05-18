@@ -1,12 +1,12 @@
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InviteChannel from "@/components/invite/InviteChannel";
-import { StyledWindow } from "@/styles/StyledComponents";
 import { useRouter } from 'next/router';
 
 const Invite = () => {
     const router = useRouter();
 
     return (
-      <StyledWindow
+      <FlexWindow
         style={{
           backgroundImage: `url("/assets/invitebg.png")`,
           backgroundRepeat:"no-repeat",
@@ -20,7 +20,7 @@ const Invite = () => {
             router.query?.channelId ? router?.query?.channelId[0] : null
           }
         />
-      </StyledWindow>
+      </Flex>
     );
 }
 

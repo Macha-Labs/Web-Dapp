@@ -1,4 +1,4 @@
-import IconImage from '@/components/icons/IconImage';
+import IconImage from "@/_ui/icons/IconImage";
 import ModalSlider from "@/components/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
 import { AuthContext } from "@/providers/AuthProvider";
@@ -6,7 +6,7 @@ import { ChatContext } from "@/providers/ChatProvider";
 import useChatChannelStore from "@/store/useChatChannelStore";
 import { useChatMembersStore } from "@/store/useChatMembersStore";
 import useChatMessagesStore from "@/store/useChatMessagesStore";
-import { StyledDateTag, StyledMoveToBottom } from '@/styles/StyledComponents';
+import { StyledDateTag, StyledMoveToBottom } from "@/styles/StyledComponents";
 import { useDisclosure } from "@chakra-ui/react";
 import { useContext, useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
@@ -14,15 +14,15 @@ import ChatMessage from "./ChatMessage";
 const ChatWindow = (props: any) => {
   const authContext = useContext(AuthContext);
   const chatContext = useContext(ChatContext);
-  // 
+  //
   const messageListRef = useRef<any>();
   const itemsRef = useRef<any>([]);
-  const [isScrollAtBottom, setIsScrollAtBottom] = useState(false)
-  const [dataTag, setDateTag] = useState('')
-  const [dateTagVisible, setDateTagVisible] = useState(false)
-  const [scrollTo, setScrollTo] = useState('')
-  const [prevMsgCount, setPrevMsgCount]= useState(0)
-  const [unReadMsg, setUnReadMsg] = useState(0)
+  const [isScrollAtBottom, setIsScrollAtBottom] = useState(false);
+  const [dataTag, setDateTag] = useState("");
+  const [dateTagVisible, setDateTagVisible] = useState(false);
+  const [scrollTo, setScrollTo] = useState("");
+  const [prevMsgCount, setPrevMsgCount] = useState(0);
+  const [unReadMsg, setUnReadMsg] = useState(0);
   const [selectedUser, setSelectedUser] = useState<any>();
   const modalProfile = useDisclosure();
   const $memberAll = useChatMembersStore((state: any) => state.memberAll);
@@ -31,8 +31,7 @@ const ChatWindow = (props: any) => {
 
   useEffect(() => {
     chatContext?.hookMessages.load();
-  }, [$channel])
-
+  }, [$channel]);
 
   const handleDateTag = (date: any) => {
     const todayIn = new Date();
@@ -56,29 +55,26 @@ const ChatWindow = (props: any) => {
     if (messageListRef && messageListRef.current && !isScrollAtBottom) {
       messageListRef.current.scrollTop = messageListRef?.current?.scrollHeight;
       setIsScrollAtBottom(true);
-      setUnReadMsg(0)
-      setPrevMsgCount($messages?.length)
+      setUnReadMsg(0);
+      setPrevMsgCount($messages?.length);
     }
-  }
+  };
 
   useEffect(() => {
-   setPrevMsgCount($messages?.length)
-   scrollToBottom()
-  }, [])
+    setPrevMsgCount($messages?.length);
+    scrollToBottom();
+  }, []);
 
   useEffect(() => {
-   if(!isScrollAtBottom){
-      setUnReadMsg($messages?.length - prevMsgCount)
-    }else{
-      setUnReadMsg(0)
-      setPrevMsgCount($messages?.length)
+    if (!isScrollAtBottom) {
+      setUnReadMsg($messages?.length - prevMsgCount);
+    } else {
+      setUnReadMsg(0);
+      setPrevMsgCount($messages?.length);
     }
     // Scroll to the bottom of the list when new items are added
     if (messageListRef && messageListRef.current && $messages) {
-      const lastMsg =
-      $messages[
-        $messages?.length - 1
-        ];
+      const lastMsg = $messages[$messages?.length - 1];
       if (
         String(authContext.address).toLowerCase() ==
         String(lastMsg?.user.id).toLowerCase()
@@ -97,9 +93,9 @@ const ChatWindow = (props: any) => {
           const { scrollHeight, scrollTop, clientHeight } = event.target;
           if (Math.abs(scrollHeight - clientHeight - scrollTop) < 10) {
             setIsScrollAtBottom(true);
-            setUnReadMsg(0)
-            setPrevMsgCount($messages?.length)
-          } else {        
+            setUnReadMsg(0);
+            setPrevMsgCount($messages?.length);
+          } else {
             setIsScrollAtBottom(false);
           }
 
@@ -119,16 +115,15 @@ const ChatWindow = (props: any) => {
     }
   }, [$messages]);
 
-
   const executeScroll = (id: any) => {
     itemsRef.current[id].scrollIntoView();
     setScrollTo(id);
   };
 
   const handleSelectedUser = (user: any) => {
-    console.log($memberAll)
+    console.log($memberAll);
     if ($memberAll) {
-      console.log($memberAll)
+      console.log($memberAll);
       const userProfile = $memberAll?.filter(
         (profile: any) =>
           String(profile.address).toLowerCase() ==
@@ -139,7 +134,6 @@ const ChatWindow = (props: any) => {
     }
   };
 
-
   const TemplateProfile = () => {
     return (
       <ModalSlider event={modalProfile} size="lg">
@@ -147,15 +141,17 @@ const ChatWindow = (props: any) => {
       </ModalSlider>
     );
   };
-  
+
   return (
     <>
-    <StyledDateTag visible={`${dateTagVisible ? 'visible': 'hidden'} `} >{dataTag}</StyledDateTag> 
-    <div ref={messageListRef} className="body">
-          {$messages?.map((message: any, index: any) => {
+      <StyledDateTag visible={`${dateTagVisible ? "visible" : "hidden"} `}>
+        {dataTag}
+      </StyledDateTag>
+      <div ref={messageListRef} className="body">
+        {$messages?.map((message: any, index: any) => {
           return (
             <div
-              ref={el => (itemsRef.current[message.id] = el)}
+              ref={(el) => (itemsRef.current[message.id] = el)}
               key={`message-${index}`}
             >
               <ChatMessage
@@ -172,18 +168,19 @@ const ChatWindow = (props: any) => {
             </div>
           );
         })}
-    </div>
+      </div>
 
-    {
-        selectedUser && <TemplateProfile />
-    }
+      {selectedUser && <TemplateProfile />}
 
-    <StyledMoveToBottom onClick={scrollToBottom} visible={`${!isScrollAtBottom ? 'visible': 'hidden'} `} >
-        { unReadMsg != 0 && <span>{unReadMsg}</span> }
+      <StyledMoveToBottom
+        onClick={scrollToBottom}
+        visible={`${!isScrollAtBottom ? "visible" : "hidden"} `}
+      >
+        {unReadMsg != 0 && <span>{unReadMsg}</span>}
         <IconImage path="IconDarkArrowDown.png" size="xl" />
-   </StyledMoveToBottom>
+      </StyledMoveToBottom>
 
-   {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 
+      {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 
     <div className="body">
         <AutoSizer>
         {({ height, width }) => (

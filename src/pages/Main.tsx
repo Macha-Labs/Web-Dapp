@@ -7,13 +7,10 @@ import MobileEmptyState from "@/components/MobileEmptyState";
 import ModalWindow from "@/components/modal/ModalWindow";
 import Nav from "@/components/nav/Nav";
 import useUserStore from "@/store/useUserStore";
-import {
-  StyledChat,
-  StyledChatList,
-  StyledWindow,
-} from "@/styles/StyledComponents";
+import { StyledChat, StyledChatList } from "@/styles/StyledComponents";
 import { useDisclosure } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 function Main() {
   const modalAuth = useDisclosure();
   const $connected = useUserStore((state: any) => state.connected);
@@ -36,8 +33,8 @@ function Main() {
   };
   return (
     <>
-     {$connected && (
-        <StyledWindow>
+      {$connected && (
+        <FlexWindow>
           <div className="left">
             <Nav />
           </div>
@@ -51,7 +48,7 @@ function Main() {
               <ChatContainer />
             </StyledChat>
           </div>
-        </StyledWindow>
+        </FlexWindow>
       )}
       {modalAuth.isOpen && <TemplateAuth />}
     </>

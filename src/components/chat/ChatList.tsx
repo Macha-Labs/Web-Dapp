@@ -39,11 +39,11 @@ import {
 import { useContext, useEffect } from "react";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import ChatNew from "./ChatNew";
-import IconImage from "../icons/IconImage";
+import IconImage from "@/_ui/icons/IconImage";
 import { truncateAddress } from "@/helpers";
-import ChatSearch from "./chatcontainer/ChatSearch";
+import InputSearch from "../../_ui/input/InputSearch";
 import React, { useState } from "react";
-import Pop from "../pop/Pop";
+import PopoverNative from "../pop/Pop";
 import { darkStyle } from "@/styles/StyledConstants";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 
@@ -145,8 +145,8 @@ const ChatList = (props: any) => {
       //     <Text>asdf</Text>
       //   </PopoverContent>
       // </Popover>
-      <div style={{position:'absolute' , marginTop:-14}}>
-        <Pop
+      <div style={{ position: "absolute", marginTop: -14 }}>
+        <PopoverNative
           trigger={<IconImage path="IconDarkMenu.png" />}
           placement="bottom-end"
         >
@@ -238,7 +238,7 @@ const ChatList = (props: any) => {
               </Button>
             )}
           </StyledCol>
-        </Pop>
+        </PopoverNative>
       </div>
     );
   };
@@ -325,7 +325,7 @@ const ChatList = (props: any) => {
     return (
       <>
         <StyledRow className="header vr-center hr-between">
-          <ChatSearch style={{ className: "w-80" }} />
+          <InputSearch style={{ className: "w-80" }} />
           <IconImage
             path="IconDarkPlus.png"
             onClick={triggerNew}
@@ -338,7 +338,7 @@ const ChatList = (props: any) => {
           ) : (
             <>
               {$channels?.length ? (
-                <ul style={{padding:"0px  "}}>
+                <ul style={{ padding: "0px  " }}>
                   {/* <button onClick={() => chatContext?.hookChannels?.handleChannelAction('MULTISELECT')}>Multiselect</button> */}
                   {$channels.map((item: any, index: number) => (
                     <StyledChatItem key={item?.index}>
@@ -377,7 +377,14 @@ const ChatList = (props: any) => {
                             />
                             <StyledCol className="w-100 d-flex flex-col vr-center">
                               <StyledRow>
-                                <Text paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
+                                <Text
+                                  paddingBottom={"0px"}
+                                  marginBottom="0px"
+                                  style={{
+                                    paddingBottom: "0px",
+                                    marginBottom: "0px",
+                                  }}
+                                >
                                   {item?.name?.length > 12
                                     ? `${item?.name?.slice(0, 12)}...`
                                     : item?.name}
@@ -401,7 +408,15 @@ const ChatList = (props: any) => {
                                   style={{ paddingRight: "5px" }}
                                   className="m-t-0-5"
                                 >
-                                  <Text fontSize={"xs"} paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
+                                  <Text
+                                    fontSize={"xs"}
+                                    paddingBottom={"0px"}
+                                    marginBottom="0px"
+                                    style={{
+                                      paddingBottom: "0px",
+                                      marginBottom: "0px",
+                                    }}
+                                  >
                                     {item?.lastMessage?.user?.lensUsername ||
                                       item?.lastMessage?.user?.lensHandle ||
                                       truncateAddress(
@@ -419,7 +434,15 @@ const ChatList = (props: any) => {
                               )}
                               {item?.lastMessage?.created_at && (
                                 <StyledCol>
-                                  <Text fontSize={"xs"}paddingBottom={"0px"} marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>
+                                  <Text
+                                    fontSize={"xs"}
+                                    paddingBottom={"0px"}
+                                    marginBottom="0px"
+                                    style={{
+                                      paddingBottom: "0px",
+                                      marginBottom: "0px",
+                                    }}
+                                  >
                                     {new Date(
                                       item?.lastMessage?.created_at
                                     ).toLocaleString()}
