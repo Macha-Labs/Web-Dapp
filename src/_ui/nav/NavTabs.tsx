@@ -4,9 +4,10 @@ import { useRouter } from "next/router";
 
 type Props = {
   options: any;
+  gstyle?: any;
 };
 
-const NavTabs = ({ options }: Props) => {
+const NavTabs = ({ options, gstyle }: Props) => {
   const router = useRouter();
 
   return (
@@ -23,6 +24,7 @@ const NavTabs = ({ options }: Props) => {
                 <Link
                   className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 "
                   href={option.href}
+                  style={gstyle}
                 >
                   {option.value}
                 </Link>

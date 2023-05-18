@@ -1,17 +1,14 @@
-import InputSearch from "@/_ui/input/InputSearch";
-import Navigation from "@/_ui/nav/Navigation";
-import NavBlock from "@/_ui/nav/NavBlock";
-import React from "react";
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
+import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import InputSearch from "@/_ui/input/InputSearch";
+import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
-import { Button } from "@chakra-ui/react";
+import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
 import { style } from "@/styles/StyledConstants";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import InputSelect from "@/_ui/input/InputSelect";
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
-import FlexBody from "@/_ui/flex/FlexBody";
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
 
 export default function DashBoard() {
   const dashboardNav: any = [
@@ -48,7 +45,10 @@ export default function DashBoard() {
       <FlexWindow>
         <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <NavTabs options={dashboardNav} />
+            <NavTabs
+              options={dashboardNav}
+              gstyle={{ fontSize: `${style.fontH5}`, fontWeight: "600" }}
+            />
             <ButtonNative text="Create Metas" variant="state_brand" />
           </FlexRow>
         </NavBlock>
@@ -77,10 +77,10 @@ export default function DashBoard() {
             </FlexRow>
             <ButtonMenu
               text="Sort By"
+              options={filterOptions}
               icon={{
                 slug: "icon-chevron-down",
               }}
-              options={filterOptions}
             />
           </FlexRow>
           <FlexRow
