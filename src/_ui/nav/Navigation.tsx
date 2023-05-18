@@ -72,6 +72,7 @@ export default function Navigation() {
           <FlexRow>
             <IconImage slug="icon-notification" />
             <ButtonMenu
+              avatar="../assets/Avatar.svg"
               text="Wallet"
               icon={{
                 slug: "icon-chevron-down",

@@ -296,6 +296,7 @@ export const darkStyle = {
       disabled: "",
     },
     color: "#EFEFEF",
+    margin: { default: "5px" },
   },
   loader: {
     bg: {

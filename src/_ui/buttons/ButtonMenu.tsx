@@ -1,6 +1,15 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
 import IconImage from "../icons/IconImage";
+import FlexRow from "../flex/FlexRow";
+import { style } from "@/styles/StyledConstants";
 
 type Props = {
   text?: string;
@@ -10,9 +19,22 @@ type Props = {
   style?: any;
   options: any[];
   onClick?: any;
+  avatar?: string;
+  leftIcon?: string;
+  rightIcon?: string;
 };
 
-const ButtonMenu = ({ text, size, variant, icon, options, onClick }: Props) => {
+const ButtonMenu = ({
+  text,
+  size,
+  variant,
+  icon,
+  options,
+  onClick,
+  avatar,
+  leftIcon,
+  rightIcon,
+}: Props) => {
   return (
     <Menu>
       <MenuButton
@@ -26,13 +48,21 @@ const ButtonMenu = ({ text, size, variant, icon, options, onClick }: Props) => {
           )
         }
       >
-        {text}
+        <FlexRow>
+          {avatar && <img src={avatar} />}
+          <Text marginLeft={style.button.margin.default} className="mb-0">
+            {text}
+          </Text>
+        </FlexRow>
       </MenuButton>
       <MenuList>
         {options.map((item, index) => {
           return (
             <MenuItem onClick={item.onClick ? item.onClick : () => {}}>
+              {avatar && <img src={avatar} />}
+              {leftIcon && <IconImage slug={leftIcon} />}
               {item.value}
+              {rightIcon && <IconImage slug={rightIcon} />}
             </MenuItem>
           );
         })}
