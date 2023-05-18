@@ -22,7 +22,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
-import ModalSlider from "../modal/ModalSlider";
+import ModalSlider from "@/_ui/modal/ModalSlider";
 import IconImage from "@/_ui/icons/IconImage";
 import useLensConnections from "@/hooks/lens/useLensConnections";
 import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
@@ -269,11 +269,6 @@ const ChatNew = (props: any) => {
   const templateShare = () => {
     const header = (
       <StyledRow className="d-flex justify-content-center align-items-center flex-grow-1">
-        {/* <IconImage
-          onClick={handleTabs}
-          path="IconDarkCross.png"
-          style={{ className: "m-r-1" }}
-        /> */}
         <Text>Channel Created </Text>
       </StyledRow>
     );
@@ -284,7 +279,7 @@ const ChatNew = (props: any) => {
         <Text className="m-b-1">Share Channel</Text>
         <StyledRow>
           <IconImage
-            path="IconDarkDiscord.svg"
+            slug="IconDarkDiscord.svg"
             style={{ className: "m-r-1" }}
             onClick={() => {
               const discordUrl = `https://discord.com/api/webhooks/{webhook.id}/{webhook.token}`;
@@ -315,7 +310,7 @@ const ChatNew = (props: any) => {
               )}&text=${encodeURIComponent("text")}`;
               window.open(twitterUrl, "_blank");
             }}
-            path="IconDarkTwitter.svg"
+            slug="IconDarkTwitter.svg"
             style={{ className: "m-r-1" }}
           />
           <IconImage
@@ -325,7 +320,7 @@ const ChatNew = (props: any) => {
               )}&text=${encodeURIComponent("text")}`;
               window.open(telegramUrl, "_blank");
             }}
-            path="IconDarkTwitter.svg"
+            slug="IconDarkTwitter.svg"
             style={{ className: "m-r-1" }}
           />
           <IconImage
@@ -335,7 +330,7 @@ const ChatNew = (props: any) => {
               )}`;
               window.open(whatsappUrl, "_blank");
             }}
-            path="IconDarkTwitter.svg"
+            slug="IconDarkTwitter.svg"
             style={{ className: "" }}
           />
         </StyledRow>
@@ -359,7 +354,7 @@ const ChatNew = (props: any) => {
                 position: "bottom-right",
               });
             }}
-            path="IconDarkCopy.svg"
+            slug="IconDarkCopy.svg"
             style={{ className: "" }}
           />
         </StyledRow>
@@ -425,7 +420,7 @@ const ChatNew = (props: any) => {
                 <StyledRow className="align-items-center">
                   <IconImage
                     onClick={handleTabs}
-                    path="IconDarkFollower.svg"
+                    slug="IconDarkFollower.svg"
                     style={{ className: "m-r-1" }}
                   />
                   <Text>Only my followers</Text>
@@ -501,7 +496,7 @@ const ChatNew = (props: any) => {
                 <StyledRow className="align-items-center">
                   <IconImage
                     onClick={handleTabs}
-                    path="IconDarkChannel.svg"
+                    slug="IconDarkChannel.svg"
                     style={{ className: "m-r-1" }}
                   />
                   <Text>Address I will add</Text>
@@ -520,7 +515,7 @@ const ChatNew = (props: any) => {
                 <StyledRow className="align-items-center">
                   <IconImage
                     onClick={handleTabs}
-                    path="IconDarkUser.svg"
+                    slug="IconDarkUser.svg"
                     style={{ className: "m-r-1" }}
                   />
                   <Text>Lens Profile I will add</Text>
@@ -543,7 +538,7 @@ const ChatNew = (props: any) => {
                 <StyledRow className="align-items-center">
                   <IconImage
                     onClick={handleTabs}
-                    path="IconDarkSheildUser.svg"
+                    slug="IconDarkSheildUser.svg"
                     style={{ className: "m-r-1" }}
                   />
                   <Text>Who own an NFT</Text>

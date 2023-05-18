@@ -1,60 +1,38 @@
+import IconImage from "@/_ui/icons/IconImage";
+import PopoverNative from "@/_ui/popover/PopoverNative";
+import { truncateAddress } from "@/helpers";
+import usePortalChannel from "@/hooks/portal/usePortalChannel";
+import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
 import {
+  StyledCard,
+  StyledChatItem,
   StyledCol,
   StyledRow,
-  StyledCard,
-  StyledCardPannel,
-  StyledChatItem,
-  StyledXMTPCard,
+  StyledXMTPCard
 } from "@/styles/StyledComponents";
+import { darkStyle } from "@/styles/StyledConstants";
 import {
   Avatar,
-  Box,
   Button,
-  CloseButton,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
   Flex,
-  Heading,
   Image,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
   Spinner,
   Tag,
   Text,
   useDisclosure,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
-import { AuthContext, AuthContextType } from "@/providers/AuthProvider";
-import ChatNew from "./ChatNew";
-import IconImage from "@/_ui/icons/IconImage";
-import { truncateAddress } from "@/helpers";
+import { useContext, useEffect, useState } from "react";
 import InputSearch from "../../_ui/input/InputSearch";
-import React, { useState } from "react";
-import PopoverNative from "../pop/Pop";
-import { darkStyle } from "@/styles/StyledConstants";
-import usePortalChannel from "@/hooks/portal/usePortalChannel";
+import ChatNew from "./ChatNew";
 
 import { ChatContext } from "@/providers/ChatProvider";
-import LoadChannels from "../load/LoadChannels";
-import { useRouter } from "next/router";
-import ChatNewDm from "./ChatNewDm";
-import useChatChannelsStore from "@/store/useChatChannelsStore";
 import useChatChannelStore from "@/store/useChatChannelStore";
+import useChatChannelsStore from "@/store/useChatChannelsStore";
+import { useRouter } from "next/router";
+import LoadChannels from "../load/LoadChannels";
+import ChatNewDm from "./ChatNewDm";
 
-import ModalWindow from "../modal/ModalWindow";
 import Link from "next/link";
 const ChatList = (props: any) => {
   console.log("Rendering >>>>> ChatList");
@@ -136,18 +114,9 @@ const ChatList = (props: any) => {
 
   const TemplateActions = (props: any) => {
     return (
-      // <Text>asdf</Text>
-      // <Popover placement="bottom" size="md">
-      //   <PopoverTrigger>
-      //     <IconImage path="IconDarkMenu.png" />
-      //   </PopoverTrigger>
-      //   <PopoverContent>
-      //     <Text>asdf</Text>
-      //   </PopoverContent>
-      // </Popover>
       <div style={{ position: "absolute", marginTop: -14 }}>
         <PopoverNative
-          trigger={<IconImage path="IconDarkMenu.png" />}
+          trigger={<IconImage slug="IconDarkMenu.png" />}
           placement="bottom-end"
         >
           <StyledCol className="text-start">
@@ -158,7 +127,7 @@ const ChatList = (props: any) => {
                 variant="transparent"
                 size="sm"
                 className="text-start"
-                rightIcon={<IconImage path="IconDarkMute.png" size="xs" />}
+                rightIcon={<IconImage slug="IconDarkMute.png" size="xs" />}
               >
                 <StyledRow
                   className="hr-between w-100"
@@ -174,7 +143,7 @@ const ChatList = (props: any) => {
                 variant="transparent"
                 size="sm"
                 className="text-start"
-                rightIcon={<IconImage path="IconDarkUnMute.png" />}
+                rightIcon={<IconImage slug="IconDarkUnMute.png" />}
               >
                 <StyledRow
                   className="hr-between w-100"
@@ -191,7 +160,7 @@ const ChatList = (props: any) => {
                 variant="transparent"
                 size="sm"
                 className="text-start"
-                rightIcon={<IconImage path="IconRedDelete.png" />}
+                rightIcon={<IconImage slug="IconRedDelete.png" />}
               >
                 <StyledRow
                   className="hr-between w-100"
@@ -209,7 +178,7 @@ const ChatList = (props: any) => {
                 variant="transparent"
                 size="sm"
                 className="text-start"
-                rightIcon={<IconImage path="IconRedDelete.png" />}
+                rightIcon={<IconImage slug="IconRedDelete.png" />}
               >
                 <StyledRow
                   className="hr-between w-100"
@@ -225,7 +194,7 @@ const ChatList = (props: any) => {
                 variant="transparent"
                 size="sm"
                 className="text-start"
-                rightIcon={<IconImage path="IconDarkLeave.png" />}
+                rightIcon={<IconImage slug="IconDarkLeave.png" />}
               >
                 <StyledRow
                   className="hr-between w-100"
@@ -282,7 +251,7 @@ const ChatList = (props: any) => {
                   width="100px"
                 />
               )}
-              <IconImage path="IconDarkCross.png" onClick={handleClose} />
+              <IconImage slug="IconDarkCross.png" onClick={handleClose} />
             </Flex>
             {router.pathname == "/" ? (
               <Text fontSize="md" my={4}>
@@ -327,9 +296,9 @@ const ChatList = (props: any) => {
         <StyledRow className="header vr-center hr-between">
           <InputSearch style={{ className: "w-80" }} />
           <IconImage
-            path="IconDarkPlus.png"
+            slug="IconDarkPlus.png"
             onClick={triggerNew}
-            styled={{ className: "m-l-1" }}
+            style={{ className: "m-l-1" }}
           />
         </StyledRow>
         <StyledCol className="body verticlescroll hidescroll">
@@ -394,7 +363,7 @@ const ChatList = (props: any) => {
                                     {!item?.raw?.disconnected &&
                                       item?.raw?.muteStatus()?.muted && (
                                         <IconImage
-                                          path="IconDarkMute.png"
+                                          slug="IconDarkMute.png"
                                           size="2xs"
                                           style={{ className: "m-l-0-5" }}
                                         />

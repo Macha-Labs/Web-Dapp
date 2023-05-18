@@ -12,7 +12,7 @@ import {
   Radio,
 } from "@chakra-ui/react";
 import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
-import ModalSlider from "../modal/ModalSlider";
+import ModalSlider from "@/_ui/modal/ModalSlider";
 import useChatChannelStore from "@/store/useChatChannelStore";
 import { ChatContext } from "@/providers/ChatProvider";
 

@@ -1,17 +1,17 @@
 import IconImage from "@/_ui/icons/IconImage";
-import ModalWindow from "@/components/modal/ModalWindow";
-import PopoverNative from "@/components/pop/Pop";
+import ModalWindow from "@/_ui/modal/ModalWindow";
+import PopoverNative from "@/_ui/popover/PopoverNative";
 import PortalLoader from "@/components/PortalLoader";
 import useCreateLensPost from "@/hooks/lens/useCreateLensPosts";
 import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
 import {
-  StyledCol,
-  StyledRow,
   StyledChatInput,
   StyledChatInputContainer,
   StyledChatPreview,
+  StyledCol,
   StyledIcon,
+  StyledRow,
 } from "@/styles/StyledComponents";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import {
@@ -19,10 +19,9 @@ import {
   Divider,
   Heading,
   Image,
-  Input,
   Text,
   Textarea,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import { useContext, useRef } from "react";
 import LayoutNFTCard from "../../../layouts/nft/LayoutNFTCard";
@@ -46,7 +45,7 @@ const ChatInput = (props: any) => {
           <div className="reply">
             <StyledCol className="w-100 vr-center">
               <StyledRow className="vr-center">
-                <IconImage path="IconDarkReply.png" />
+                <IconImage slug="IconDarkReply.png" />
                 <Divider orientation="vertical" color={"#246BFD"} />
                 {/* <Avatar
                   size="xs"
@@ -90,10 +89,10 @@ const ChatInput = (props: any) => {
           ></Textarea>
           <StyledRow className="m-b-1">
             <IconImage
-              path="IconDarkFiles.png"
+              slug="IconDarkFiles.png"
               style={{ className: "m-r-0-5" }}
             />
-            <IconImage path="IconDarkPost.png" />
+            <IconImage slug="IconDarkPost.png" />
           </StyledRow>
           <Button
             size="sm"
@@ -130,7 +129,7 @@ const ChatInput = (props: any) => {
                   />
                 ) : (
                   <IconImage
-                    path="IconDarkFiles.png"
+                    slug="IconDarkFiles.png"
                     style={{ className: "m-r-0-5" }}
                   />
                 )}
@@ -177,7 +176,7 @@ const ChatInput = (props: any) => {
                 Preview
               </Heading>
               <IconImage
-                path="IconDarkCross.png"
+                slug="IconDarkCross.png"
                 style={{ className: "m-r-0-5" }}
                 onClick={() => previewCloseHandler()}
               />
@@ -229,7 +228,7 @@ const ChatInput = (props: any) => {
             size="md"
             className="text-start"
             isLoading={props.attachLoading}
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
+            rightIcon={<IconImage slug="IconDarkFiles.png" />}
           >
             <label htmlFor="upload-file" className="w-100">
               <StyledRow className="vr-center hr-between w-100">
@@ -313,7 +312,7 @@ const ChatInput = (props: any) => {
                   chatContext?.hookChat?.addMessage(callbackSendMessage);
                 }}
               >
-                <IconImage path="IconDarkSend.svg" size="30" />
+                <IconImage slug="IconDarkSend.svg" size="30" />
               </span>
             </StyledCol>
           </StyledChatInput>
@@ -343,13 +342,13 @@ const ChatInput = (props: any) => {
   const TemplateSearch = () => {
     return (
       <StyledRow className="vr-center hr-between w-100">
-        <IconImage path="IconDarkCalendar.png" />
+        <IconImage slug="IconDarkCalendar.png" />
         <StyledRow className="vr-center">
           <IconImage
-            path="IconDarkArrowUp.png"
+            slug="IconDarkArrowUp.png"
             style={{ className: "m-r-0-5" }}
           />
-          <IconImage path="IconDarkArrowDown.png" />
+          <IconImage slug="IconDarkArrowDown.png" />
         </StyledRow>
       </StyledRow>
     );
@@ -358,10 +357,10 @@ const ChatInput = (props: any) => {
   const TemplateMultiselect = () => {
     return (
       <StyledRow className="vr-center hr-between w-100">
-        <IconImage path="IconDarkReply.png" style={{ className: "m-r-0-5" }} />
-        <IconImage path="IconDarkDelete.png" style={{ className: "m-r-0-5" }} />
+        <IconImage slug="IconDarkReply.png" style={{ className: "m-r-0-5" }} />
+        <IconImage slug="IconDarkDelete.png" style={{ className: "m-r-0-5" }} />
         <IconImage
-          path="IconDarkForward.png"
+          slug="IconDarkForward.png"
           style={{ className: "m-r-0-5" }}
         />
       </StyledRow>

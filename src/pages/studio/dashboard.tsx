@@ -1,17 +1,14 @@
-import InputSearch from "@/_ui/input/InputSearch";
-import Navigation from "@/_ui/nav/Navigation";
-import NavBlock from "@/_ui/nav/NavBlock";
-import React from "react";
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
+import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import InputSearch from "@/_ui/input/InputSearch";
+import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
-import { Button } from "@chakra-ui/react";
+import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
 import { style } from "@/styles/StyledConstants";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import InputSelect from "@/_ui/input/InputSelect";
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
-import FlexBody from "@/_ui/flex/FlexBody";
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
 
 export default function DashBoard() {
   const dashboardNav: any = [
@@ -40,11 +37,34 @@ export default function DashBoard() {
     },
   ];
 
+  const metaCardOptions = [
+    {
+      image: "../assets/MetaCard.png",
+      heading: "META_node1",
+      description:
+        "There is a description here, please mind the gap, something like this and more ...",
+      tags: ["tag1", "tag2"],
+    },
+    {
+      image: "../assets/MetaCard.png",
+      heading: "META_node2",
+      description:
+        "There is a description here, please mind the gap, something like this and more ...",
+      tags: ["tag1", "tag2"],
+    },
+    {
+      image: "../assets/MetaCard.png",
+      heading: "META_node3",
+      description:
+        "There is a description here, please mind the gap, something like this and more ...",
+      tags: ["tag1", "tag2"],
+    },
+  ];
+
   return (
     <>
-      {/*  */}
       <Navigation />
-      {/*  */}
+
       <FlexWindow>
         <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
@@ -88,24 +108,16 @@ export default function DashBoard() {
             width="100%"
             // padding={style.body.padding}
           >
-            <MetaCard
-              image="../assets/MetaCard.png"
-              heading="META_node"
-              description="There is a description here, please mind the gap, something like this and more ..."
-              tags={["tag1", "tag2"]}
-            />
-            <MetaCard
-              image="../assets/MetaCard.png"
-              heading="META_node"
-              description="There is a description here, please mind the gap, something like this and more ..."
-              tags={["tag1", "tag2"]}
-            />
-            <MetaCard
-              image="../assets/MetaCard.png"
-              heading="META_node"
-              description="There is a description here, please mind the gap, something like this and more ..."
-              tags={["tag1", "tag2"]}
-            />
+            {metaCardOptions.map((item, index) => {
+              return (
+                <MetaCard
+                  image={item.image}
+                  heading={item.heading}
+                  description={item.description}
+                  tags={item.tags}
+                />
+              );
+            })}
           </FlexRow>
         </FlexBody>
       </FlexWindow>

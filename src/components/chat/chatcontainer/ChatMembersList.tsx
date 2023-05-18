@@ -2,7 +2,7 @@ import { Avatar, AvatarBadge, Heading, useDisclosure } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { truncateAddress } from "@/helpers";
-import ModalSlider from "@/components/modal/ModalSlider";
+import ModalSlider from "@/_ui/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
 import IconImage from "@/_ui/icons/IconImage";
 import { useChatMembersStore } from "@/store/useChatMembersStore";
@@ -63,7 +63,7 @@ const ChatMembersList = (props: any) => {
                       </h6>
                     </StyledRow>
                     <IconImage
-                      path="IconBrandChat.png"
+                      slug="IconBrandChat.png"
                       style={{ className: "m-l-0-5" }}
                       size="xs"
                     />
