@@ -25,18 +25,22 @@ export default function Navigation() {
       value: "Docs & Support",
     },
   ];
-  
+
   const walletOptions = [
     {
-      value: "wallet 1",
+      value: "0xc85554A...19a1e",
+      img: "../assets/Avatar.svg",
+      rightIcon: "icon-notification",
       onClick: () => {},
     },
     {
-      value: "wallet 2",
+      value: "Switch Wallet",
+      leftIcon: "icon-notification",
       onClick: () => {},
     },
     {
-      value: "wallet 3",
+      value: "Disconnect Wallet",
+      leftIcon: "icon-notification",
       onClick: () => {},
     },
   ];
@@ -72,7 +76,7 @@ export default function Navigation() {
             <IconImage slug="icon-notification" />
             <ButtonMenu
               avatar="../assets/Avatar.svg"
-              text="Wallet"
+              text="0xc85554A...19a1e"
               icon={{
                 slug: "icon-chevron-down",
                 style: ` marginLeft: "10px" `,

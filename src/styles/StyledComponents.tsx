@@ -130,7 +130,8 @@ export const StyledCol = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-
+  width: 100%;
+  padding: 20px;
   &.hr-center {
     align-items: center;
   }
@@ -251,8 +252,8 @@ export const List = styled.div`
 
 export const StyledCard = styled.div`
   border-radius: ${style.card.borderRadius};
-  border: ${style.card.border.default};
-  background: ${style.card.bg.default};
+  // border: ${style.card.border.default};
+  // background: ${style.card.bg.default};
   padding: ${style.card.padding.default};
   box-shadow: ${style.card.shadow.default};
   cursor: pointer;

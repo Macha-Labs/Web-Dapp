@@ -1,5 +1,12 @@
+import { style } from "@/styles/StyledConstants";
 import { AddIcon } from "@chakra-ui/icons";
-import { Tag, TagLabel, TagLeftIcon, TagRightIcon } from "@chakra-ui/react";
+import {
+  Tag,
+  TagCloseButton,
+  TagLabel,
+  TagLeftIcon,
+  TagRightIcon,
+} from "@chakra-ui/react";
 
 type Props = {
   size?: string;
@@ -8,14 +15,25 @@ type Props = {
   icon?: any;
   leftElement?: any;
   rightElement?: any;
+  close?: boolean;
+  margin?: string;
 };
 
-const TagNative = ({ size, variant, value, icon }: Props) => {
+const TagNative = ({
+  size,
+  variant,
+  value,
+  icon,
+  close = false,
+  margin = "0px",
+}: Props) => {
   return (
     <Tag
       size={size}
       key={size ? size : "md"}
       // variant={variant ? variant : "solid"}
+      bgGradient={style.dropdown.bg.active}
+      margin={margin}
     >
       {icon && icon.align == "left" && (
         <TagLeftIcon boxSize="12px" as={AddIcon} />
@@ -24,6 +42,7 @@ const TagNative = ({ size, variant, value, icon }: Props) => {
       {icon && icon.align == "right" && (
         <TagRightIcon boxSize="12px" as={AddIcon} />
       )}
+      {close && <TagCloseButton />}
     </Tag>
   );
 };

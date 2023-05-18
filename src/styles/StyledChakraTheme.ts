@@ -48,7 +48,7 @@ const theme = extendTheme({
         background: `${style.modal.bg.default} !important`,
       },
       ".css-wl0d9u ": {
-        backgroundImage: `url("/assets/invitebg.png")`,
+        // backgroundImage: `url("/assets/invitebg.png")`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",

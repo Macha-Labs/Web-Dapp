@@ -20,6 +20,7 @@ type Props = {
   options: any[];
   onClick?: any;
   avatar?: string;
+  img?: string;
   leftIcon?: string;
   rightIcon?: string;
 };
@@ -32,6 +33,7 @@ const ButtonMenu = ({
   options,
   onClick,
   avatar,
+  img,
   leftIcon,
   rightIcon,
 }: Props) => {
@@ -59,10 +61,10 @@ const ButtonMenu = ({
         {options.map((item, index) => {
           return (
             <MenuItem onClick={item.onClick ? item.onClick : () => {}}>
-              {avatar && <img src={avatar} />}
-              {leftIcon && <IconImage slug={leftIcon} />}
+              {item.img && <img src={item.img} />}
+              {item.leftIcon && <IconImage slug={item.leftIcon} />}
               {item.value}
-              {rightIcon && <IconImage slug={rightIcon} />}
+              {item.rightIcon && <IconImage slug={item.rightIcon} />}
             </MenuItem>
           );
         })}
