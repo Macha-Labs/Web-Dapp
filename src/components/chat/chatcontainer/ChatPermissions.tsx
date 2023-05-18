@@ -2,7 +2,7 @@ import React from "react";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import { StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { Button, Heading, Switch, Text } from "@chakra-ui/react";
-import ModalSlider from "@/components/modal/ModalSlider";
+import ModalSlider from "@/_ui/modal/ModalSlider";
 import useChatChannelStore from "@/store/useChatChannelStore";
 
 const ChatPermissions = (props: any) => {

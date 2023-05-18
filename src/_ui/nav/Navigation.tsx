@@ -1,12 +1,10 @@
-import { Button } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { style } from "../../styles/StyledConstants";
-import IconImage from "../icons/IconImage";
-import FlexRow from "../flex/FlexRow";
-import NavTabs from "./NavTabs";
 import ButtonMenu from "../buttons/ButtonMenu";
+import FlexRow from "../flex/FlexRow";
+import IconImage from "../icons/IconImage";
+import NavTabs from "./NavTabs";
 
 export default function Navigation() {
   const navOptions = [
@@ -27,6 +25,7 @@ export default function Navigation() {
       value: "Docs & Support",
     },
   ];
+  
   const walletOptions = [
     {
       value: "wallet 1",

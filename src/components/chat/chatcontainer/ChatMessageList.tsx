@@ -1,4 +1,4 @@
-import ModalSlider from "@/components/modal/ModalSlider";
+import ModalSlider from "@/_ui/modal/ModalSlider";
 import { truncateAddress } from "@/helpers";
 import {
   StyledCol,

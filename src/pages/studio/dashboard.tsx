@@ -37,11 +37,34 @@ export default function DashBoard() {
     },
   ];
 
+  const metaCardOptions = [
+    {
+      image: "../assets/MetaCard.png",
+      heading: "META_node1",
+      description:
+        "There is a description here, please mind the gap, something like this and more ...",
+      tags: ["tag1", "tag2"],
+    },
+    {
+      image: "../assets/MetaCard.png",
+      heading: "META_node2",
+      description:
+        "There is a description here, please mind the gap, something like this and more ...",
+      tags: ["tag1", "tag2"],
+    },
+    {
+      image: "../assets/MetaCard.png",
+      heading: "META_node3",
+      description:
+        "There is a description here, please mind the gap, something like this and more ...",
+      tags: ["tag1", "tag2"],
+    },
+  ];
+
   return (
     <>
-      {/*  */}
       <Navigation />
-      {/*  */}
+
       <FlexWindow>
         <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
@@ -88,24 +111,16 @@ export default function DashBoard() {
             width="100%"
             // padding={style.body.padding}
           >
-            <MetaCard
-              image="../assets/MetaCard.png"
-              heading="META_node"
-              description="There is a description here, please mind the gap, something like this and more ..."
-              tags={["tag1", "tag2"]}
-            />
-            <MetaCard
-              image="../assets/MetaCard.png"
-              heading="META_node"
-              description="There is a description here, please mind the gap, something like this and more ..."
-              tags={["tag1", "tag2"]}
-            />
-            <MetaCard
-              image="../assets/MetaCard.png"
-              heading="META_node"
-              description="There is a description here, please mind the gap, something like this and more ..."
-              tags={["tag1", "tag2"]}
-            />
+            {metaCardOptions.map((item, index) => {
+              return (
+                <MetaCard
+                  image={item.image}
+                  heading={item.heading}
+                  description={item.description}
+                  tags={item.tags}
+                />
+              );
+            })}
           </FlexRow>
         </FlexBody>
       </FlexWindow>

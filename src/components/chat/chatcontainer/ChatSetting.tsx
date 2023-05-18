@@ -1,4 +1,4 @@
-import ModalSlider from "@/components/modal/ModalSlider";
+import ModalSlider from "@/_ui/modal/ModalSlider";
 import usePortalChannel from "@/hooks/portal/usePortalChannel";
 import LayoutOptions from "@/layouts/options/LayoutOptions";
 import { AuthContext } from "@/providers/AuthProvider";

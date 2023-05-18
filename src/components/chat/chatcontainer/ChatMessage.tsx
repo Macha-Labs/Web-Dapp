@@ -1,7 +1,7 @@
-import IconEmoji from "@/components/icons/IconEmoji";
+import IconEmoji from "@/_ui/icons/IconEmoji";
 import IconImage from "@/_ui/icons/IconImage";
-import InputAction from "@/components/input/InputAction";
-import PopoverNative from "@/components/pop/Pop";
+import InputAction from "@/_ui/input/InputAction";
+import PopoverNative from "@/_ui/popover/PopoverNative";
 import { truncateAddress } from "@/helpers";
 import useOnScreen from "@/hooks/other/useOnScreen";
 import LayoutFilePreview from "@/layouts/chat/LayoutFilePreview";
@@ -50,7 +50,7 @@ const ChatMessage = (props: any) => {
     {
       name: "Edit Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkEdit.png" />,
+      icon: <IconImage slug="IconDarkEdit.png" />,
       onClick: () => {
         props.hookChat.handleEdit(props.message);
       },
@@ -59,7 +59,7 @@ const ChatMessage = (props: any) => {
     {
       name: "Reply Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkReply.png" />,
+      icon: <IconImage slug="IconDarkReply.png" />,
       onClick: () => {
         props.hookChat.handleReply(props.message);
       },
@@ -68,7 +68,7 @@ const ChatMessage = (props: any) => {
     {
       name: "Copy Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkFiles.png" />,
+      icon: <IconImage slug="IconDarkFiles.png" />,
       onClick: () => {
         navigator.clipboard.writeText(props.message?.text);
         toast({
@@ -83,7 +83,7 @@ const ChatMessage = (props: any) => {
     {
       name: props?.message?.pinned ? "Unpin Message" : "Pin Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconDarkPinned.png" />,
+      icon: <IconImage slug="IconDarkPinned.png" />,
       onClick: () => {
         if (props.message?.pinned) {
           props.hookChat.unPinMessage(props.message);
@@ -96,7 +96,7 @@ const ChatMessage = (props: any) => {
     {
       name: "Delete Message",
       key: `c-${props?.message?.id}`,
-      icon: <IconImage path="IconRedDelete.png" />,
+      icon: <IconImage slug="IconRedDelete.png" />,
       onClick: () => {
         props.hookChat.deleteMessage(props.message);
       },
@@ -166,7 +166,7 @@ const ChatMessage = (props: any) => {
             )}
             <StyledRow className="vr-center">
               {props?.message.pinned && (
-                <IconImage path="IconDarkPinned.png" size="2xs" />
+                <IconImage slug="IconDarkPinned.png" size="2xs" />
               )}
               <Text
                 style={{ alignSelf: "flex-end" }}
@@ -302,7 +302,7 @@ const ChatMessage = (props: any) => {
             )}
             <StyledRow className="vr-center">
               {props?.message.pinned && (
-                <IconImage path="IconDarkPinned.png" size="2xs" />
+                <IconImage slug="IconDarkPinned.png" size="2xs" />
               )}
               <Text
                 style={{ alignSelf: "flex-end" }}
@@ -400,7 +400,7 @@ const ChatMessage = (props: any) => {
         placement={"left-start"}
         trigger={
           <IconImage
-            path="IconDarkEmoji.png"
+            slug="IconDarkEmoji.png"
             style={{ className: "m-r-0-5" }}
           />
         }
@@ -448,7 +448,7 @@ const ChatMessage = (props: any) => {
 
   const TemplateActions = () => {
     return (
-      <PopoverNative size="sm" trigger={<IconImage path="IconDarkMenu.png" />}>
+      <PopoverNative size="sm" trigger={<IconImage slug="IconDarkMenu.png" />}>
         <StyledCol className="text-start">
           {actionsData.map((item) => {
             return (

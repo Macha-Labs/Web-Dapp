@@ -22,7 +22,7 @@ import UserFollowersCard from "./UserFollowersCard";
 import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
-import IconImage from "../icons/IconImage";
+import IconImage from "@/_ui/icons/IconImage";
 import useLensProfile from "@/hooks/lens/useLensProfile";
 import Link from "next/link";
 import useXmtpChannelNew from "@/hooks/xmtp/useXmtpChannelNew";
@@ -275,19 +275,19 @@ const UserProfile = ({ user }: any) => {
               <StyledRow className="w-100 vr-center hr-center">
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage path="IconDarkPost.png"/>
+                    <IconImage slug="IconDarkPost.png"/>
                     <Text className="m-l-0-5" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>Posts</Text>
                   </Button>
                 </Tab>
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage path="IconDarkFollowers.png" />
+                    <IconImage slug="IconDarkFollowers.png" />
                     <Text className="m-l-0-5" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>Followers</Text>
                   </Button>
                 </Tab>
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage path="IconDarkFollowing.png" />
+                    <IconImage slug="IconDarkFollowing.png" />
                     <Text className="m-l-0-5" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>Following</Text>
                   </Button>
                 </Tab>

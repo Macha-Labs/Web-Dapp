@@ -1,5 +1,5 @@
 import IconImage from "@/_ui/icons/IconImage";
-import ModalSlider from "@/components/modal/ModalSlider";
+import ModalSlider from "@/_ui/modal/ModalSlider";
 import UserProfile from "@/components/user/UserProfile";
 import { AuthContext } from "@/providers/AuthProvider";
 import { ChatContext } from "@/providers/ChatProvider";
@@ -177,7 +177,7 @@ const ChatWindow = (props: any) => {
         visible={`${!isScrollAtBottom ? "visible" : "hidden"} `}
       >
         {unReadMsg != 0 && <span>{unReadMsg}</span>}
-        <IconImage path="IconDarkArrowDown.png" size="xl" />
+        <IconImage slug="IconDarkArrowDown.png" size="xl" />
       </StyledMoveToBottom>
 
       {/* {(itemsRef.current.length == props?.hookMessages?.messages?.length) && 

@@ -3,7 +3,7 @@ import { Avatar, Button, Checkbox, Heading, Text, useToast } from "@chakra-ui/re
 import React, { useContext } from "react";
 import { helperIPFS, truncateAddress } from "@/helpers";
 import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
-import ModalSlider from "@/components/modal/ModalSlider";
+import ModalSlider from "@/_ui/modal/ModalSlider";
 import useChatMembers from "@/hooks/chat/useChatMembers";
 import useChatChannelStore from "@/store/useChatChannelStore";
 import { useChatMembersStore } from "@/store/useChatMembersStore";
