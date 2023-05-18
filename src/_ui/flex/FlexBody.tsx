@@ -9,7 +9,14 @@ type Props = {
 const FlexBody = ({ children, gstyle }: Props) => {
   return (
     <>
-      <div style={{ padding: `${style.body.padding}` }}>{children}</div>
+      <div
+        style={{
+          padding: `${style.body.padding}`,
+          background: `${style.input.bg.default}`,
+        }}
+      >
+        {children}
+      </div>
     </>
   );
 };

@@ -1,4 +1,5 @@
 const GlobalIcons: any = {
+  "icon-filter": "",
   "icon-compass":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-compass.svg?updatedAt=1680783858784",
   "icon-compass-white":
@@ -67,8 +68,7 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-chevronBack.svg",
   "icon-chevron-next":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-chevronNext.png?updatedAt=1680703639925",
-  "icon-chevron-down":
-    "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-chevronDown.svg",
+  "icon-chevron-down": "/icons/svg/Base-blue/base-blue-chevronDown.svg",
   "icon-reply":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-replyFilled.svg",
   "icon-close":

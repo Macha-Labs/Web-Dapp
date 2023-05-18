@@ -159,7 +159,8 @@ export const darkStyle = {
   },
   card: {
     bg: {
-      default: "#00040d",
+      default:
+        " linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%);",
       highlight:
         "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
       hover:

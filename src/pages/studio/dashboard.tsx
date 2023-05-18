@@ -68,10 +68,19 @@ export default function DashBoard() {
               </FlexRow>
               <ButtonMenu
                 text="Filter By"
-                // icon={{ slug: "icon-search" }}
                 options={filterOptions}
+                icon={{
+                  slug: "icon-chevron-down",
+                }}
               />
             </FlexRow>
+            <ButtonMenu
+              text="Sort By"
+              icon={{
+                slug: "icon-chevron-down",
+              }}
+              options={filterOptions}
+            />
           </FlexRow>
           <FlexRow
             hrAlign="space-between"

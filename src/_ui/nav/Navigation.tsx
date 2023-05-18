@@ -6,6 +6,7 @@ import { style } from "../../styles/StyledConstants";
 import IconImage from "../icons/IconImage";
 import FlexRow from "../flex/FlexRow";
 import NavTabs from "./NavTabs";
+import ButtonMenu from "../buttons/ButtonMenu";
 
 export default function Navigation() {
   const navOptions = [
@@ -24,6 +25,20 @@ export default function Navigation() {
     {
       href: "/studio/docs",
       value: "Docs & Support",
+    },
+  ];
+  const walletOptions = [
+    {
+      value: "wallet 1",
+      onClick: () => {},
+    },
+    {
+      value: "wallet 2",
+      onClick: () => {},
+    },
+    {
+      value: "wallet 3",
+      onClick: () => {},
     },
   ];
 
@@ -56,7 +71,14 @@ export default function Navigation() {
 
           <FlexRow>
             <IconImage slug="icon-notification" />
-            <Button>Wallet</Button>
+            <ButtonMenu
+              text="Wallet"
+              icon={{
+                slug: "icon-chevron-down",
+                style: ` marginLeft: "10px" `,
+              }}
+              options={walletOptions}
+            />
           </FlexRow>
         </FlexRow>
       </nav>

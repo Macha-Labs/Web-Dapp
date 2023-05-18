@@ -66,14 +66,6 @@ export const StyledIframeView = styled.div`
   }
 `;
 
-export const MetaBox = styled.div`
-  border: ${style.card.border.hover};
-  border-radius: ${style.card.borderRadius};
-  background: ${style.card.bg.default};
-  padding: ${style.card.padding.default};
-  width: ${style.card.width.meta};
-`;
-
 export const StyledRow = styled.div`
   display: flex;
   flex-direction: row;

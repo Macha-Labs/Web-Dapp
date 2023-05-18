@@ -136,6 +136,7 @@ const theme = extendTheme({
         },
       },
     },
+
     Button: {
       baseStyle: {
         background: `${style.button.bg.default}`,
@@ -263,6 +264,10 @@ const theme = extendTheme({
         colorScheme: "whiteAlpha",
       },
       variants: {
+        state_brand: {
+          background: `${style.button.bg.active}`,
+          color: "#FF",
+        },
         state_xmtp: {
           opacity: "0.95",
           background: `linear-gradient(91.55deg, #FC4F37 -5.05%, #31006E 105.58%)`,
