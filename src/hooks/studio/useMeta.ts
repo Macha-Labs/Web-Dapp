@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 
 const useMeta = () => {
-    const metaOverview = useRef<any>();
+    const metaOverview = useRef<any>({});
 
     return {
         metaOverview: metaOverview

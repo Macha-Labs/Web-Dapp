@@ -12,15 +12,13 @@ import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
 import SearchAndFilter from "@/components/studio/SearchAndFilter";
 import useMeta from "@/hooks/studio/useMeta";
-import LayoutInputs from "@/layouts/options/LayoutInputs";
-import { StyledCard, StyledCol } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
-import { Button, Heading, Text, useDisclosure } from "@chakra-ui/react";
+import { Button, Text, useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
-  const hookMetaOverview = useMeta();
+  const hookMeta = useMeta();
 
   const dashboardNav: any = [
     {
@@ -165,8 +163,8 @@ const DashBoard = () => {
         children={
           <FlexColumn width="100%">
 
-            <InputLabel inputType="text" labelText="Meta Name" placeholder="Name" />
-            <InputLabel inputType="text" labelText="Description" placeholder="Description" />
+            <InputLabel elementRef={(element: any) => hookMeta.metaOverview.current['metaName'] = element} inputType="text" labelText="Meta Name" placeholder="Name" />
+            <InputLabel elementRef={(element: any) => hookMeta.metaOverview.current['metaDescription'] = element} inputType="text" labelText="Description" placeholder="Description" />
             <InputLabel inputType="file" labelText="Image" placeholder="Image" />
 
             <Link href="/studio/createMeta" style={{ width: "100%" }}>

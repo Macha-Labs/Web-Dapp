@@ -12,6 +12,7 @@ type Props = {
   onChange?: any;
   padding?: string;
   disabled?: boolean;
+  elementRef?: any;
   inputType: string;
 };
 
@@ -22,11 +23,12 @@ const InputLabel = ({
   onChange = (e?: any) => {},
   padding,
   disabled = false,
+  elementRef,
   inputType
 }: Props) => {
 
   // for text type inputs
-  const inputLabelText = () => {
+  const InputLabelText = () => {
     return (
       <FlexColumn width="100%" vrAlign="flex-start" padding={padding}>
         <Heading
@@ -44,6 +46,7 @@ const InputLabel = ({
 
         <StyledCard className="w-100">
           <LayoutInputs
+            elementRef={elementRef}
             placeholder={placeholder}
             defaultValue={defaultValue}
             onChange={onChange}
@@ -56,7 +59,7 @@ const InputLabel = ({
   };
 
   // for uploading attachments
-  const inputLabelFile = () => {
+  const InputLabelFile = () => {
     return (
       <StyledCol className="text-start">
           <ButtonNative
@@ -84,9 +87,9 @@ const InputLabel = ({
   }
 
   if (inputType == 'file') {
-    return inputLabelFile();
+    return <InputLabelFile />;
   } else {
-    return inputLabelText();
+    return <InputLabelText />;
   }
 };
 
