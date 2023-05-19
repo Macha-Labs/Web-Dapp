@@ -133,7 +133,7 @@ function createMeta() {
               >
                 <InputLabel
                   elementRef={(element: any) =>
-                    (hookMeta.metaOverview.current["triggerName"] = element)
+                    (hookMeta.metaTrigger.current["triggerName"] = element)
                   }
                   inputType="text"
                   labelText="Name"
@@ -144,7 +144,7 @@ function createMeta() {
 
                 <InputLabel
                   elementRef={(element: any) =>
-                    (hookMeta.metaOverview.current["triggerDescription"] =
+                    (hookMeta.metaTrigger.current["triggerDescription"] =
                       element)
                   }
                   inputType="text"
@@ -246,7 +246,7 @@ function createMeta() {
               >
                 <InputLabel
                   elementRef={(element: any) =>
-                    (hookMeta.metaOverview.current["originSchema"] = element)
+                    (hookMeta.metaOrigin.current["originSchema"] = element)
                   }
                   inputType="text"
                   labelText="Request Schema"
@@ -270,7 +270,7 @@ function createMeta() {
                 /> */}
                 <InputLabel
                   elementRef={(element: any) =>
-                    (hookMeta.metaOverview.current["originEndpoint"] = element)
+                    (hookMeta.metaOrigin.current["originEndpoint"] = element)
                   }
                   inputType="text"
                   labelText="Request Endpoint"
@@ -293,6 +293,9 @@ function createMeta() {
                 </Heading>
 
                 <InputSelect
+                elementRef={(element: any) =>
+                  (hookMeta.metaOrigin.current["requestType"] = element)
+                }
                   placeholder="search request type"
                   options={requestTypeOptions}
                   icon={{ slug: "icon-close" }}
@@ -315,15 +318,19 @@ function createMeta() {
                 </Heading>
 
                 <InputSelect
+                elementRef={(element: any) =>
+                  (hookMeta.metaOrigin.current["requestMethod"] = element)
+                }
                   placeholder="search request method"
                   options={requestTypeOptions}
                   icon={{ slug: "icon-close" }}
                   variant={"state_default_hover"}
                   margin="0 0 20px 0"
                 />
+
                 <InputLabel
                   elementRef={(element: any) =>
-                    (hookMeta.metaOverview.current["originRequestParameters"] =
+                    (hookMeta.metaOrigin.current["originRequestParameters"] =
                       element)
                   }
                   inputType="text"
