@@ -1,19 +1,16 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import FlexRow from "@/_ui/flex/FlexRow";
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
+import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
+import FlexRow from "@/_ui/flex/FlexRow";
+import IconImage from "@/_ui/icons/IconImage";
+import InputLabel from "@/_ui/input/InputLabel";
+import InputSelect from "@/_ui/input/InputSelect";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
 import { style } from "@/styles/StyledConstants";
 import { Button, Heading, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
-import FlexBody from "@/_ui/flex/FlexBody";
-import { StyledCard, StyledCol } from "@/styles/StyledComponents";
-import LayoutInputs from "@/layouts/options/LayoutInputs";
-import IconImage from "@/_ui/icons/IconImage";
-import InputLabel from "@/_ui/input/InputLabel";
-import InputSelect from "@/_ui/input/InputSelect";
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
+import { useState } from "react";
 
 function createMeta() {
   const [trigger, setTrigger] = useState<any>(false);
@@ -45,9 +42,9 @@ function createMeta() {
   const settingRequestType = (requestType: string) => {
     requestType == "Graph"
       ? setMethodTypeOptions(["Query", "Mutation"])
-      : requestType == "rest"
+      : requestType == "Rest"
       ? setMethodTypeOptions(["GET", "POST"])
-      : setTriggerType("contract");
+      : setTriggerType("Contract");
   };
   return (
     <>
