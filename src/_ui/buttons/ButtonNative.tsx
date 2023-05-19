@@ -1,6 +1,7 @@
 import { Button, Text } from "@chakra-ui/react";
 import React from "react";
 import IconImage from "../icons/IconImage";
+
 type Props = {
   size?: string;
   style?: any;
@@ -10,6 +11,7 @@ type Props = {
   loadingText?: string;
   icon?: any;
   variant?: string;
+  children?: any;
 };
 
 export default function ButtonNative({
@@ -21,6 +23,7 @@ export default function ButtonNative({
   loadingText = "loading...",
   icon,
   variant,
+  children
 }: Props) {
   return (
     <Button
@@ -33,7 +36,8 @@ export default function ButtonNative({
       {icon && (
         <IconImage slug={icon.slug} size={icon.size} style={icon.style} />
       )}
-      <Text className="mb-0">{text}</Text>
+      {/* <Text className="mb-0">{text}</Text> */}
+      {children}
     </Button>
   );
 }

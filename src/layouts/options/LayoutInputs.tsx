@@ -1,20 +1,44 @@
 import { Input } from "@chakra-ui/react";
 
-const LayoutInputs = (props: any) => {
+type Props = {
+  index?: number;
+  style?: any;
+  placeholder?: string;
+  defaultValue?: string;
+  onChange?: any;
+  disabled?: boolean;
+  required?: boolean;
+  display?: string;
+  variant?: string;
+  type?: string;
+};
+
+const LayoutInputs = ({
+  index,
+  style,
+  placeholder,
+  defaultValue,
+  onChange = (e?: any) => {},
+  disabled,
+  required,
+  display,
+  variant,
+  type
+}: Props) => {
   return (
-    <div className={props.style.class}>
-      {props.data.map((item: any, index: any) => {
-        return (
-          <Input
-            key={index}
-            placeholder={item?.label}
-            value={item?.value}
-            onChange={e => item?.onChange(e.target.value)}
-            disabled={item.disabled}
-            className="m-b-0-5"
-          />
-        );
-      })}
+    <div className={style.class}>
+      <Input
+        key={index}
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        onChange={(e) => onChange(e.target.value)}
+        isDisabled={disabled}
+        isRequired={required}
+        className="m-b-0-5"
+        display={display}
+        variant={variant}
+        type={type}
+      />
     </div>
   );
 };

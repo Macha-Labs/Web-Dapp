@@ -244,32 +244,6 @@ const ChatInput = (props: any) => {
             type="file"
             hidden
           />
-          {/* TODO */}
-          {/* <Button
-            variant="transparent"
-            size="md"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
-          >
-            <Row className="hr-between w-100">Create Poll</Row>
-          </Button> */}
-          {/* <Button
-            variant="transparent"
-            size="md"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkFiles.png" />}
-            onClick={modalPost.onOpen}
-          >
-            <Row className="hr-between w-100">Create Post</Row>
-          </Button>
-          <Button
-            variant="transparent"
-            size="md"
-            className="text-start"
-            rightIcon={<IconImage path="IconDarkWallet.png" />}
-          >
-            <Row className="hr-between w-100">Send Payment</Row>
-          </Button> */}
         </StyledCol>
       </PopoverNative>
     );

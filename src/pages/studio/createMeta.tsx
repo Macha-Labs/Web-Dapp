@@ -16,13 +16,6 @@ import InputSelect from "@/_ui/input/InputSelect";
 import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 
 function createMeta() {
-  // <ButtonMenu
-  //       text="Sort By"
-  //       options={sortOptions}
-  //       icon={{
-  //         slug: "icon-chevron-down",
-  //       }}
-  //     />
   const requestTypeOptions = [
     {
       value: "A-Z",
@@ -81,9 +74,10 @@ function createMeta() {
             </Text>
 
             <InputLabel
+              inputType="text"
               labelText="Add your meta schema"
               placeholder="Description"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
             <Text fontSize={"2xl"} fontWeight={700}>
@@ -122,15 +116,17 @@ function createMeta() {
               </Button>
             </FlexRow>
             <InputLabel
+              inputType="text"
               labelText="Name"
               placeholder="Name"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
             <InputLabel
+              inputType="text"
               labelText="Description"
               placeholder="Description"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
             <Heading
@@ -174,9 +170,10 @@ function createMeta() {
               margin="0 0 20px 0"
             />
             <InputLabel
+              inputType="text"
               labelText="Request Parameter"
               placeholder="Provide Parameter"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
             <FlexRow width="100%" hrAlign="space-between">
@@ -190,27 +187,31 @@ function createMeta() {
               <Button variant="state_default_hover">Create Origin</Button>
             </FlexRow>
             <InputLabel
+            inputType="text"
               labelText="Request Schema"
               placeholder="Request Schema"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
             <InputLabel
+            inputType="text"
               labelText="Request Schema CID"
               placeholder="Request Schema CID"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
             <InputLabel
+            inputType="text"
               labelText="Request Headers"
               placeholder="Request Headers"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
             <InputLabel
+            inputType="text"
               labelText="Request Endpoint"
               placeholder="Request Endpoint"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
             <Heading
@@ -254,9 +255,10 @@ function createMeta() {
               margin="0 0 20px 0"
             />
             <InputLabel
+            inputType="text"
               labelText="Request Parameter"
               placeholder="Provide Parameter"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
             <FlexRow width="100%" hrAlign="space-between">
@@ -271,9 +273,10 @@ function createMeta() {
               text="Select access type"
             />
             <InputLabel
+            inputType="text"
               labelText="User Address For Restricted Access"
               placeholder="User Address For Restricted Access"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
           </FlexColumn>
