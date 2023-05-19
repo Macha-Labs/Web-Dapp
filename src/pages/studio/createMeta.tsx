@@ -8,6 +8,7 @@ import InputSelect from "@/_ui/input/InputSelect";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
+import useMeta from "@/hooks/studio/useMeta";
 import { style } from "@/styles/StyledConstants";
 import { Button, Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
@@ -17,6 +18,8 @@ function createMeta() {
   const [origin, setOrigin] = useState<any>(false);
   const [triggerType, setTriggerType] = useState<any>(null);
   const [methodTypeOptions, setMethodTypeOptions] = useState<any>([]);
+  const hookMeta = useMeta();
+
   const requestTypeOptions = [
     {
       value: "Graph",
@@ -39,6 +42,7 @@ function createMeta() {
       },
     },
   ];
+
   const settingRequestType = (requestType: string) => {
     requestType == "Graph"
       ? setMethodTypeOptions(["Query", "Mutation"])
@@ -46,6 +50,7 @@ function createMeta() {
       ? setMethodTypeOptions(["GET", "POST"])
       : setTriggerType("Contract");
   };
+
   return (
     <>
       <Navigation />
@@ -139,6 +144,8 @@ function createMeta() {
                 Create a new trigger
               </Button>
             </FlexRow>
+
+            {/* ------------------------------------------ Trigger start ------------------------------------------ */}
             {trigger && (
               <FlexColumn
                 width="100%"
@@ -146,14 +153,21 @@ function createMeta() {
                 vrAlign="flex-start"
               >
                 <InputLabel
+                  elementRef={(element: any) =>
+                    (hookMeta.metaOverview.current["triggerName"] = element)
+                  }
                   inputType="text"
                   labelText="Name"
-                  placeholder="Name"
+                  placeholder="Trigger Name"
                   defaultValue=""
                   padding="20px 0px"
                 />
 
                 <InputLabel
+                  elementRef={(element: any) =>
+                    (hookMeta.metaOverview.current["triggerDescription"] =
+                      element)
+                  }
                   inputType="text"
                   labelText="Description"
                   placeholder="Description"
@@ -220,6 +234,10 @@ function createMeta() {
                 </FlexRow>
               </FlexColumn>
             )}
+
+            {/* ---------------------------------------------- Trigger End -------------------------------------------- */}
+
+            {/* ---------------------------------------------- Origin Start -------------------------------------------- */}
             <Text fontSize={"2xl"} fontWeight={700}>
               Origins
             </Text>
@@ -234,6 +252,7 @@ function createMeta() {
                 Create Origin
               </Button>
             </FlexRow>
+
             {origin && (
               <FlexColumn
                 width="100%"
@@ -241,27 +260,33 @@ function createMeta() {
                 vrAlign="flex-start"
               >
                 <InputLabel
+                  elementRef={(element: any) =>
+                    (hookMeta.metaOverview.current["originSchema"] = element)
+                  }
                   inputType="text"
                   labelText="Request Schema"
                   placeholder="Request Schema"
                   defaultValue=""
                   padding="20px 0px"
                 />
-                <InputLabel
+                {/* <InputLabel
                   inputType="text"
                   labelText="Request Schema CID"
                   placeholder="Request Schema CID"
                   defaultValue=""
                   padding="20px 0px"
-                />
-                <InputLabel
+                /> */}
+                {/* <InputLabel
                   inputType="text"
                   labelText="Request Headers"
                   placeholder="Request Headers"
                   defaultValue=""
                   padding="20px 0px"
-                />
+                /> */}
                 <InputLabel
+                  elementRef={(element: any) =>
+                    (hookMeta.metaOverview.current["originEndpoint"] = element)
+                  }
                   inputType="text"
                   labelText="Request Endpoint"
                   placeholder="Request Endpoint"
@@ -312,6 +337,10 @@ function createMeta() {
                   margin="0 0 20px 0"
                 />
                 <InputLabel
+                  elementRef={(element: any) =>
+                    (hookMeta.metaOverview.current["originRequestParameters"] =
+                      element)
+                  }
                   inputType="text"
                   labelText="Request Parameter"
                   placeholder="Provide Parameter"
@@ -324,6 +353,9 @@ function createMeta() {
                 </FlexRow>
               </FlexColumn>
             )}
+
+            {/* ---------------------------------------------- Origin End -------------------------------------------- */}
+
             <Text fontSize={"2xl"} fontWeight={700}>
               Access
             </Text>
