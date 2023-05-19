@@ -1,13 +1,16 @@
 import { StyledLi } from "@/styles/StyledComponents";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import IconImage from "../icons/IconImage";
+import FlexRow from "../flex/FlexRow";
 
 type Props = {
   options: any;
   gstyle?: any;
+  icon?: any;
 };
 
-const NavTabs = ({ options, gstyle }: Props) => {
+const NavTabs = ({ options, gstyle, icon }: Props) => {
   const router = useRouter();
 
   return (
@@ -26,7 +29,10 @@ const NavTabs = ({ options, gstyle }: Props) => {
                   href={option.href}
                   style={gstyle}
                 >
-                  {option.value}
+                  <FlexRow>
+                    {icon && <IconImage slug={icon.slug} />}
+                    {option.value}
+                  </FlexRow>
                 </Link>
               </StyledLi>
             );

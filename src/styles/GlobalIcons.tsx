@@ -64,8 +64,7 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-volume.svg?updatedAt=1680783916154",
   "icon-block-red":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Red_icons/base-red-block.svg?updatedAt=1683699287123",
-  "icon-chevron":
-    "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-chevronBack.svg",
+  "icon-chevron": "/icons/svg/Base-blue/base-blue-chevronBack.svg",
   "icon-chevron-next":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-chevronNext.png?updatedAt=1680703639925",
   "icon-chevron-down": "/icons/svg/Base-blue/base-blue-chevronDown.svg",

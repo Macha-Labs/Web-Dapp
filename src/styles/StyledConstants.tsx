@@ -13,6 +13,7 @@ export const commonStyle = {
   fontH3: "2.8rem",
   fontH4: "1.8rem",
   fontH5: "1.4rem",
+  fontH6: "1rem",
   fontP: "1.6rem",
   fontPSmall: "1.6rem",
   fontPLarge: "2rem",

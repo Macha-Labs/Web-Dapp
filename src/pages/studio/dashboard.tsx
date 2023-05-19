@@ -18,9 +18,9 @@ import { Button, Heading, Text, useDisclosure } from "@chakra-ui/react";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import TagNative from "@/_ui/tag/TagNative";
 import SearchAndFilter from "@/components/studio/SearchAndFilter";
+import Link from "next/link";
 
 const DashBoard = () => {
-
   const metaModal = useDisclosure();
 
   const dashboardNav: any = [
@@ -112,43 +112,43 @@ const DashBoard = () => {
       <Navigation />
 
       {/* <FlexWindow> */}
-        <NavBlock>
-          <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <NavTabs
-              options={dashboardNav}
-              gstyle={{ fontSize: `${style.fontH5}`, fontWeight: "600" }}
-            />
-            <ButtonNative
-              text="Create Metas"
-              variant="state_brand"
-              onClick={() => {
-                metaModal.onOpen();
-              }}
-            />
-          </FlexRow>
-        </NavBlock>
+      <NavBlock>
+        <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
+          <NavTabs
+            options={dashboardNav}
+            gstyle={{ fontSize: `${style.fontH5}`, fontWeight: "600" }}
+          />
+          <ButtonNative
+            text="Create Metas"
+            variant="state_brand"
+            onClick={() => {
+              metaModal.onOpen();
+            }}
+          />
+        </FlexRow>
+      </NavBlock>
 
-        <FlexBody>
-          <SearchAndFilter />
-          <FlexRow
-            hrAlign="space-between"
-            width="100%"
-            flexWrap="wrap"
-            // padding={style.body.padding}
-          >
-            {metaCardOptions.map((item, index) => {
-              return (
-                <MetaCard
-                  image={item.image}
-                  heading={item.heading}
-                  description={item.description}
-                  tags={item.tags}
-                  width="20%"
-                />
-              );
-            })}
-          </FlexRow>
-        </FlexBody>
+      <FlexBody>
+        <SearchAndFilter />
+        <FlexRow
+          hrAlign="space-between"
+          width="100%"
+          flexWrap="wrap"
+          // padding={style.body.padding}
+        >
+          {metaCardOptions.map((item, index) => {
+            return (
+              <MetaCard
+                image={item.image}
+                heading={item.heading}
+                description={item.description}
+                tags={item.tags}
+                width="20%"
+              />
+            );
+          })}
+        </FlexRow>
+      </FlexBody>
       {/* </FlexWindow> */}
 
       <ModalSlider
@@ -186,14 +186,16 @@ const DashBoard = () => {
                 <LayoutInputs data={data} style={{ class: "" }} />
               </StyledCard>
             </StyledCol>
-            <Button variant="state_brand" width="100%">
-              Create Meta
-            </Button>
+            <Link href="/studio/createMeta" style={{ width: "100%" }}>
+              <Button variant="state_brand" width="100%">
+                Create Meta
+              </Button>
+            </Link>
           </FlexColumn>
         }
       />
     </>
   );
-}
+};
 
 export default DashBoard;
