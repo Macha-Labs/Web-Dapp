@@ -46,6 +46,7 @@ function createMeta() {
   return (
     <>
       <Navigation />
+
       <NavBlock>
         <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
           <NavTabs
@@ -60,6 +61,7 @@ function createMeta() {
           />
         </FlexRow>
       </NavBlock>
+
       <FlexBody>
         <FlexRow width="100%">
           <FlexColumn width="100%" vrAlign="flex-start">
@@ -78,16 +80,19 @@ function createMeta() {
               </Text>
               <Button variant="state_brand">SAVE</Button>
             </FlexRow>
+
             <Text fontSize={"2xl"} fontWeight={700}>
               Scheme
             </Text>
 
             <InputLabel
+              inputType="text"
               labelText="Add your meta schema"
               placeholder="Description"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
+
             <Text fontSize={"2xl"} fontWeight={700}>
               Trigger
             </Text>
@@ -104,6 +109,7 @@ function createMeta() {
             >
               Add your meta Schema
             </Heading>
+
             <FlexRow width="50%" hrAlign="space-between">
               <Button variant="state_brand">
                 <FlexRow>
@@ -111,6 +117,7 @@ function createMeta() {
                   <IconImage slug="icon-close" />
                 </FlexRow>
               </Button>
+
               <Button variant="state_brand">
                 <FlexRow>
                   <Text className="m-b-0">Post Request</Text>
@@ -118,6 +125,7 @@ function createMeta() {
                 </FlexRow>
               </Button>
             </FlexRow>
+
             <FlexRow padding="10px 0px">
               <Button
                 variant="state_default_hover"
@@ -135,17 +143,21 @@ function createMeta() {
                 vrAlign="flex-start"
               >
                 <InputLabel
+                  inputType="text"
                   labelText="Name"
                   placeholder="Name"
-                  value=""
+                  defaultValue=""
                   padding="20px 0px"
                 />
+
                 <InputLabel
+                  inputType="text"
                   labelText="Description"
                   placeholder="Description"
-                  value=""
+                  defaultValue=""
                   padding="20px 0px"
                 />
+
                 <Heading
                   as="h6"
                   size="sm"
@@ -159,6 +171,7 @@ function createMeta() {
                 >
                   Request Type
                 </Heading>
+
                 <InputSelect
                   placeholder="search request type"
                   options={requestTypeOptions}
@@ -166,6 +179,7 @@ function createMeta() {
                   variant={"state_default_hover"}
                   margin="0 0 20px 0"
                 />
+
                 <Heading
                   as="h6"
                   size="sm"
@@ -179,6 +193,7 @@ function createMeta() {
                 >
                   Request Method
                 </Heading>
+
                 <InputSelect
                   placeholder="search request method"
                   options={requestTypeOptions}
@@ -186,12 +201,15 @@ function createMeta() {
                   variant={"state_default_hover"}
                   margin="0 0 20px 0"
                 />
+
                 <InputLabel
+                  inputType="text"
                   labelText="Request Parameter"
                   placeholder="Provide Parameter"
-                  value=""
+                  defaultValue=""
                   padding="20px 0px"
                 />
+
                 <FlexRow width="100%" hrAlign="space-between">
                   <Button variant={""}>Discard</Button>
                   <Button variant={"state_brand"}>Save</Button>
@@ -201,6 +219,7 @@ function createMeta() {
             <Text fontSize={"2xl"} fontWeight={700}>
               Origins
             </Text>
+
             <FlexRow padding="10px 0px">
               <Button
                 variant="state_default_hover"
@@ -218,27 +237,31 @@ function createMeta() {
                 vrAlign="flex-start"
               >
                 <InputLabel
+                  inputType="text"
                   labelText="Request Schema"
                   placeholder="Request Schema"
-                  value=""
+                  defaultValue=""
                   padding="20px 0px"
                 />
                 <InputLabel
+                  inputType="text"
                   labelText="Request Schema CID"
                   placeholder="Request Schema CID"
-                  value=""
+                  defaultValue=""
                   padding="20px 0px"
                 />
                 <InputLabel
+                  inputType="text"
                   labelText="Request Headers"
                   placeholder="Request Headers"
-                  value=""
+                  defaultValue=""
                   padding="20px 0px"
                 />
                 <InputLabel
+                  inputType="text"
                   labelText="Request Endpoint"
                   placeholder="Request Endpoint"
-                  value=""
+                  defaultValue=""
                   padding="20px 0px"
                 />
                 <Heading
@@ -254,6 +277,7 @@ function createMeta() {
                 >
                   Request Type
                 </Heading>
+
                 <InputSelect
                   placeholder="search request type"
                   options={requestTypeOptions}
@@ -261,6 +285,7 @@ function createMeta() {
                   variant={"state_default_hover"}
                   margin="0 0 20px 0"
                 />
+
                 <Heading
                   as="h6"
                   size="sm"
@@ -274,6 +299,7 @@ function createMeta() {
                 >
                   Request Method
                 </Heading>
+
                 <InputSelect
                   placeholder="search request method"
                   options={requestTypeOptions}
@@ -282,9 +308,10 @@ function createMeta() {
                   margin="0 0 20px 0"
                 />
                 <InputLabel
+                  inputType="text"
                   labelText="Request Parameter"
                   placeholder="Provide Parameter"
-                  value=""
+                  defaultValue=""
                   padding="20px 0px"
                 />
                 <FlexRow width="100%" hrAlign="space-between">
@@ -296,17 +323,21 @@ function createMeta() {
             <Text fontSize={"2xl"} fontWeight={700}>
               Access
             </Text>
+
             <ButtonMenu
               options={requestTypeOptions}
               text="Select access type"
             />
+
             <InputLabel
+              inputType="text"
               labelText="User Address For Restricted Access"
               placeholder="User Address For Restricted Access"
-              value=""
+              defaultValue=""
               padding="20px 0px"
             />
           </FlexColumn>
+
           <FlexColumn width="100%" hrAlign="flex-start" vrAlign="flex-start">
             <FlexRow width="100%" hrAlign="flex-end">
               <Text>Complete Information For Meta</Text>

@@ -3,6 +3,7 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
+import InputLabel from "@/_ui/input/InputLabel";
 // import ModalSlider from "@/_ui/modal/ModalSlider";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import NavBlock from "@/_ui/nav/NavBlock";
@@ -10,6 +11,7 @@ import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
 import SearchAndFilter from "@/components/studio/SearchAndFilter";
+import useMeta from "@/hooks/studio/useMeta";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { StyledCard, StyledCol } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
@@ -18,6 +20,7 @@ import Link from "next/link";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
+  const hookMetaOverview = useMeta();
 
   const dashboardNav: any = [
     {
@@ -29,6 +32,7 @@ const DashBoard = () => {
       href: "",
     },
   ];
+
   const data = [
     {
       label: "Name",
@@ -36,6 +40,7 @@ const DashBoard = () => {
       onChange: () => {},
     },
   ];
+
   const data2 = [
     {
       label: "Description",
@@ -43,6 +48,7 @@ const DashBoard = () => {
       onChange: () => {},
     },
   ];
+
   const data3 = [
     {
       label: "Attach",
@@ -158,30 +164,11 @@ const DashBoard = () => {
         }
         children={
           <FlexColumn width="100%">
-            <StyledCol>
-              <Heading as="h6" size="sm">
-                Meta Name
-              </Heading>
-              <StyledCard className="m-b-1">
-                <LayoutInputs data={data} style={{ class: "" }} />
-              </StyledCard>
-            </StyledCol>
-            <StyledCol>
-              <Heading as="h6" size="sm">
-                Description
-              </Heading>
-              <StyledCard className="m-b-1">
-                <LayoutInputs data={data} style={{ class: "" }} />
-              </StyledCard>
-            </StyledCol>
-            <StyledCol>
-              <Heading as="h6" size="sm">
-                Attach Image for Meta
-              </Heading>
-              <StyledCard className="m-b-1">
-                <LayoutInputs data={data} style={{ class: "" }} />
-              </StyledCard>
-            </StyledCol>
+
+            <InputLabel inputType="text" labelText="Meta Name" placeholder="Name" />
+            <InputLabel inputType="text" labelText="Description" placeholder="Description" />
+            <InputLabel inputType="file" labelText="Image" placeholder="Image" />
+
             <Link href="/studio/createMeta" style={{ width: "100%" }}>
               <Button variant="state_brand" width="100%">
                 Create Meta
