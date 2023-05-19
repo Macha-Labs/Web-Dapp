@@ -9,6 +9,7 @@ type Props = {
   children: any;
   padding?: string;
   margin?: string;
+  flexWrap?: string;
 };
 
 export default function FlexRow({
@@ -19,11 +20,13 @@ export default function FlexRow({
   children,
   padding,
   margin,
+  flexWrap,
 }: Props) {
   return (
     <div
       style={{
         display: "flex",
+        flexWrap: flexWrap ? flexWrap : "nowrap",
         alignItems: vrAlign ? vrAlign : "center",
         justifyContent: hrAlign ? hrAlign : "center",
         flexDirection: "row",

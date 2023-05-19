@@ -1,8 +1,6 @@
-import Navigation from '@/components/nav/Navigation'
-import React from 'react'
+import Navigation from "@/_ui/nav/Navigation";
+import React from "react";
 
 export default function docs() {
-  return (
-    <Navigation/>
-  )
+  return <Navigation />;
 }

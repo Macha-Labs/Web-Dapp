@@ -138,13 +138,13 @@ export const darkStyle = {
     border: { default: "1px solid #0F172E" },
   },
   window: {},
-  body: { bg: { default: "#00040d" }, padding: "0% 8%" },
+  body: { bg: { default: "#00040d" }, padding: "0% 6%" },
   nav: {
     width: "100vw",
     height: "90%",
     bg: { default: "#00040d" },
     border: { default: "2px solid #0F172E" },
-    padding: "1% 8%",
+    padding: "1% 6%",
   },
   list: {
     padding: "5px",
@@ -185,7 +185,7 @@ export const darkStyle = {
     padding: { default: "10px" },
     margin: { default: "20px" },
     width: {
-      meta: "300px",
+      meta: "30%",
     },
   },
   pannel: { bg: { default: "" }, shadow: { default: "" } },
