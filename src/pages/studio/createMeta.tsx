@@ -37,6 +37,7 @@ function createMeta() {
   return (
     <>
       <Navigation />
+      
       <NavBlock>
         <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
           <NavTabs
@@ -51,9 +52,11 @@ function createMeta() {
           />
         </FlexRow>
       </NavBlock>
+
       <FlexBody>
         <FlexRow width="100%">
           <FlexColumn width="100%" vrAlign="flex-start">
+
             <FlexRow width="100%" hrAlign="space-between" margin="20px 0px">
               <Text
                 bgGradient="linear(
@@ -69,6 +72,7 @@ function createMeta() {
               </Text>
               <Button variant="state_brand">SAVE</Button>
             </FlexRow>
+
             <Text fontSize={"2xl"} fontWeight={700}>
               Scheme
             </Text>
@@ -80,6 +84,7 @@ function createMeta() {
               defaultValue=""
               padding="20px 0px"
             />
+
             <Text fontSize={"2xl"} fontWeight={700}>
               Trigger
             </Text>
@@ -96,6 +101,7 @@ function createMeta() {
             >
               Add your meta Schema
             </Heading>
+
             <FlexRow width="50%" hrAlign="space-between">
               <Button variant="state_brand">
                 <FlexRow>
@@ -103,6 +109,7 @@ function createMeta() {
                   <IconImage slug="icon-close" />
                 </FlexRow>
               </Button>
+
               <Button variant="state_brand">
                 <FlexRow>
                   <Text className="m-b-0">Post Request</Text>
@@ -110,11 +117,13 @@ function createMeta() {
                 </FlexRow>
               </Button>
             </FlexRow>
+
             <FlexRow padding="10px 0px">
               <Button variant="state_default_hover">
                 Create a new trigger
               </Button>
             </FlexRow>
+
             <InputLabel
               inputType="text"
               labelText="Name"
@@ -122,6 +131,7 @@ function createMeta() {
               defaultValue=""
               padding="20px 0px"
             />
+
             <InputLabel
               inputType="text"
               labelText="Description"
@@ -129,6 +139,7 @@ function createMeta() {
               defaultValue=""
               padding="20px 0px"
             />
+
             <Heading
               as="h6"
               size="sm"
@@ -142,6 +153,7 @@ function createMeta() {
             >
               Request Type
             </Heading>
+
             <InputSelect
               placeholder="search request type"
               options={requestTypeOptions}
@@ -149,6 +161,7 @@ function createMeta() {
               variant={"state_default_hover"}
               margin="0 0 20px 0"
             />
+
             <Heading
               as="h6"
               size="sm"
@@ -162,6 +175,104 @@ function createMeta() {
             >
               Request Method
             </Heading>
+
+            <InputSelect
+              placeholder="search request method"
+              options={requestTypeOptions}
+              icon={{ slug: "icon-close" }}
+              variant={"state_default_hover"}
+              margin="0 0 20px 0"
+            />
+
+            <InputLabel
+              inputType="text"
+              labelText="Request Parameter"
+              placeholder="Provide Parameter"
+              defaultValue=""
+              padding="20px 0px"
+            />
+
+            <FlexRow width="100%" hrAlign="space-between">
+              <Button variant={""}>Discard</Button>
+              <Button variant={"state_brand"}>Save</Button>
+            </FlexRow>
+
+            <Text fontSize={"2xl"} fontWeight={700}>
+              Origins
+            </Text>
+
+            <FlexRow padding="10px 0px">
+              <Button variant="state_default_hover">Create Origin</Button>
+            </FlexRow>
+
+            <InputLabel
+              inputType="text"
+              labelText="Request Schema"
+              placeholder="Request Schema"
+              defaultValue=""
+              padding="20px 0px"
+            />
+
+            <InputLabel
+              inputType="text"
+              labelText="Request Schema CID"
+              placeholder="Request Schema CID"
+              defaultValue=""
+              padding="20px 0px"
+            />
+
+            <InputLabel
+              inputType="text"
+              labelText="Request Headers"
+              placeholder="Request Headers"
+              defaultValue=""
+              padding="20px 0px"
+            />
+
+            <InputLabel
+              inputType="text"
+              labelText="Request Endpoint"
+              placeholder="Request Endpoint"
+              defaultValue=""
+              padding="20px 0px"
+            />
+
+            <Heading
+              as="h6"
+              size="sm"
+              bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+              bgClip="text"
+              marginTop={"20px"}
+            >
+              Request Type
+            </Heading>
+
+            <InputSelect
+              placeholder="search request type"
+              options={requestTypeOptions}
+              icon={{ slug: "icon-close" }}
+              variant={"state_default_hover"}
+              margin="0 0 20px 0"
+            />
+
+            <Heading
+              as="h6"
+              size="sm"
+              bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+              bgClip="text"
+              marginTop={"20px"}
+            >
+              Request Method
+            </Heading>
+
             <InputSelect
               placeholder="search request method"
               options={requestTypeOptions}
@@ -180,112 +291,33 @@ function createMeta() {
               <Button variant={""}>Discard</Button>
               <Button variant={"state_brand"}>Save</Button>
             </FlexRow>
-            <Text fontSize={"2xl"} fontWeight={700}>
-              Origins
-            </Text>
-            <FlexRow padding="10px 0px">
-              <Button variant="state_default_hover">Create Origin</Button>
-            </FlexRow>
-            <InputLabel
-            inputType="text"
-              labelText="Request Schema"
-              placeholder="Request Schema"
-              defaultValue=""
-              padding="20px 0px"
-            />
-            <InputLabel
-            inputType="text"
-              labelText="Request Schema CID"
-              placeholder="Request Schema CID"
-              defaultValue=""
-              padding="20px 0px"
-            />
-            <InputLabel
-            inputType="text"
-              labelText="Request Headers"
-              placeholder="Request Headers"
-              defaultValue=""
-              padding="20px 0px"
-            />
-            <InputLabel
-            inputType="text"
-              labelText="Request Endpoint"
-              placeholder="Request Endpoint"
-              defaultValue=""
-              padding="20px 0px"
-            />
-            <Heading
-              as="h6"
-              size="sm"
-              bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-              bgClip="text"
-              marginTop={"20px"}
-            >
-              Request Type
-            </Heading>
-            <InputSelect
-              placeholder="search request type"
-              options={requestTypeOptions}
-              icon={{ slug: "icon-close" }}
-              variant={"state_default_hover"}
-              margin="0 0 20px 0"
-            />
-            <Heading
-              as="h6"
-              size="sm"
-              bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-              bgClip="text"
-              marginTop={"20px"}
-            >
-              Request Method
-            </Heading>
-            <InputSelect
-              placeholder="search request method"
-              options={requestTypeOptions}
-              icon={{ slug: "icon-close" }}
-              variant={"state_default_hover"}
-              margin="0 0 20px 0"
-            />
-            <InputLabel
-            inputType="text"
-              labelText="Request Parameter"
-              placeholder="Provide Parameter"
-              defaultValue=""
-              padding="20px 0px"
-            />
-            <FlexRow width="100%" hrAlign="space-between">
-              <Button variant={""}>Discard</Button>
-              <Button variant={"state_brand"}>Save</Button>
-            </FlexRow>
+
             <Text fontSize={"2xl"} fontWeight={700}>
               Access
             </Text>
+
             <ButtonMenu
               options={requestTypeOptions}
               text="Select access type"
             />
+
             <InputLabel
-            inputType="text"
+              inputType="text"
               labelText="User Address For Restricted Access"
               placeholder="User Address For Restricted Access"
               defaultValue=""
               padding="20px 0px"
             />
+
           </FlexColumn>
+
           <FlexColumn width="100%" hrAlign="flex-start" vrAlign="flex-start">
             <FlexRow width="100%" hrAlign="flex-end">
               <Text>Complete Information For Meta</Text>
               <Button variant="state_brand">SAVE</Button>
             </FlexRow>
           </FlexColumn>
+
         </FlexRow>
       </FlexBody>
     </>
