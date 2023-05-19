@@ -36,7 +36,7 @@ export default function ButtonNative({
       {icon && (
         <IconImage slug={icon.slug} size={icon.size} style={icon.style} />
       )}
-      {/* <Text className="mb-0">{text}</Text> */}
+      {text && <Text className="mb-0">{text}</Text>}
       {children}
     </Button>
   );

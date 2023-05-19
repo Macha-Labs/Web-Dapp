@@ -11,6 +11,7 @@ type Props = {
   display?: string;
   variant?: string;
   type?: string;
+  elementRef?: any;
 };
 
 const LayoutInputs = ({
@@ -23,11 +24,13 @@ const LayoutInputs = ({
   required,
   display,
   variant,
-  type
+  type,
+  elementRef,
 }: Props) => {
   return (
     <div className={style.class}>
       <Input
+        ref={elementRef}
         key={index}
         placeholder={placeholder}
         defaultValue={defaultValue}
