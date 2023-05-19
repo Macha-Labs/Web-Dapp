@@ -36,7 +36,11 @@ const InputSelect = ({
     >
       {options.map((item, index) => {
         return (
-          <option value={item.value} onClick={onClick ? onClick : () => {}}>
+          <option
+            value={item.value}
+            onClick={onClick ? onClick : () => {}}
+            style={{ background: `${style.input.bg.default}` }}
+          >
             {item.value}
           </option>
         );

@@ -6,7 +6,7 @@ import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
 import { style } from "@/styles/StyledConstants";
 import { Button, Heading, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import FlexBody from "@/_ui/flex/FlexBody";
 import { StyledCard, StyledCol } from "@/styles/StyledComponents";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
@@ -23,6 +23,8 @@ function createMeta() {
   //         slug: "icon-chevron-down",
   //       }}
   //     />
+  const [trigger, setTrigger] = useState(false);
+  const [origin, setOrigin] = useState(false);
   const requestTypeOptions = [
     {
       value: "A-Z",
@@ -117,152 +119,180 @@ function createMeta() {
               </Button>
             </FlexRow>
             <FlexRow padding="10px 0px">
-              <Button variant="state_default_hover">
+              <Button
+                variant="state_default_hover"
+                onClick={() => {
+                  setTrigger(true);
+                }}
+              >
                 Create a new trigger
               </Button>
             </FlexRow>
-            <InputLabel
-              labelText="Name"
-              placeholder="Name"
-              value=""
-              padding="20px 0px"
-            />
-            <InputLabel
-              labelText="Description"
-              placeholder="Description"
-              value=""
-              padding="20px 0px"
-            />
-            <Heading
-              as="h6"
-              size="sm"
-              bgGradient="linear(
+            {trigger && (
+              <FlexColumn
+                width="100%"
+                hrAlign="flex-start"
+                vrAlign="flex-start"
+              >
+                <InputLabel
+                  labelText="Name"
+                  placeholder="Name"
+                  value=""
+                  padding="20px 0px"
+                />
+                <InputLabel
+                  labelText="Description"
+                  placeholder="Description"
+                  value=""
+                  padding="20px 0px"
+                />
+                <Heading
+                  as="h6"
+                  size="sm"
+                  bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-              bgClip="text"
-              marginTop={"20px"}
-            >
-              Request Type
-            </Heading>
-            <InputSelect
-              placeholder="search request type"
-              options={requestTypeOptions}
-              icon={{ slug: "icon-close" }}
-              variant={"state_default_hover"}
-              margin="0 0 20px 0"
-            />
-            <Heading
-              as="h6"
-              size="sm"
-              bgGradient="linear(
+                  bgClip="text"
+                  marginTop={"20px"}
+                >
+                  Request Type
+                </Heading>
+                <InputSelect
+                  placeholder="search request type"
+                  options={requestTypeOptions}
+                  icon={{ slug: "icon-close" }}
+                  variant={"state_default_hover"}
+                  margin="0 0 20px 0"
+                />
+                <Heading
+                  as="h6"
+                  size="sm"
+                  bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-              bgClip="text"
-              marginTop={"20px"}
-            >
-              Request Method
-            </Heading>
-            <InputSelect
-              placeholder="search request method"
-              options={requestTypeOptions}
-              icon={{ slug: "icon-close" }}
-              variant={"state_default_hover"}
-              margin="0 0 20px 0"
-            />
-            <InputLabel
-              labelText="Request Parameter"
-              placeholder="Provide Parameter"
-              value=""
-              padding="20px 0px"
-            />
-            <FlexRow width="100%" hrAlign="space-between">
-              <Button variant={""}>Discard</Button>
-              <Button variant={"state_brand"}>Save</Button>
-            </FlexRow>
+                  bgClip="text"
+                  marginTop={"20px"}
+                >
+                  Request Method
+                </Heading>
+                <InputSelect
+                  placeholder="search request method"
+                  options={requestTypeOptions}
+                  icon={{ slug: "icon-close" }}
+                  variant={"state_default_hover"}
+                  margin="0 0 20px 0"
+                />
+                <InputLabel
+                  labelText="Request Parameter"
+                  placeholder="Provide Parameter"
+                  value=""
+                  padding="20px 0px"
+                />
+                <FlexRow width="100%" hrAlign="space-between">
+                  <Button variant={""}>Discard</Button>
+                  <Button variant={"state_brand"}>Save</Button>
+                </FlexRow>
+              </FlexColumn>
+            )}
             <Text fontSize={"2xl"} fontWeight={700}>
               Origins
             </Text>
             <FlexRow padding="10px 0px">
-              <Button variant="state_default_hover">Create Origin</Button>
+              <Button
+                variant="state_default_hover"
+                onClick={() => {
+                  setOrigin(true);
+                }}
+              >
+                Create Origin
+              </Button>
             </FlexRow>
-            <InputLabel
-              labelText="Request Schema"
-              placeholder="Request Schema"
-              value=""
-              padding="20px 0px"
-            />
-            <InputLabel
-              labelText="Request Schema CID"
-              placeholder="Request Schema CID"
-              value=""
-              padding="20px 0px"
-            />
-            <InputLabel
-              labelText="Request Headers"
-              placeholder="Request Headers"
-              value=""
-              padding="20px 0px"
-            />
-            <InputLabel
-              labelText="Request Endpoint"
-              placeholder="Request Endpoint"
-              value=""
-              padding="20px 0px"
-            />
-            <Heading
-              as="h6"
-              size="sm"
-              bgGradient="linear(
+            {origin && (
+              <FlexColumn
+                width="100%"
+                hrAlign="flex-start"
+                vrAlign="flex-start"
+              >
+                <InputLabel
+                  labelText="Request Schema"
+                  placeholder="Request Schema"
+                  value=""
+                  padding="20px 0px"
+                />
+                <InputLabel
+                  labelText="Request Schema CID"
+                  placeholder="Request Schema CID"
+                  value=""
+                  padding="20px 0px"
+                />
+                <InputLabel
+                  labelText="Request Headers"
+                  placeholder="Request Headers"
+                  value=""
+                  padding="20px 0px"
+                />
+                <InputLabel
+                  labelText="Request Endpoint"
+                  placeholder="Request Endpoint"
+                  value=""
+                  padding="20px 0px"
+                />
+                <Heading
+                  as="h6"
+                  size="sm"
+                  bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-              bgClip="text"
-              marginTop={"20px"}
-            >
-              Request Type
-            </Heading>
-            <InputSelect
-              placeholder="search request type"
-              options={requestTypeOptions}
-              icon={{ slug: "icon-close" }}
-              variant={"state_default_hover"}
-              margin="0 0 20px 0"
-            />
-            <Heading
-              as="h6"
-              size="sm"
-              bgGradient="linear(
+                  bgClip="text"
+                  marginTop={"20px"}
+                >
+                  Request Type
+                </Heading>
+                <InputSelect
+                  placeholder="search request type"
+                  options={requestTypeOptions}
+                  icon={{ slug: "icon-close" }}
+                  variant={"state_default_hover"}
+                  margin="0 0 20px 0"
+                />
+                <Heading
+                  as="h6"
+                  size="sm"
+                  bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-              bgClip="text"
-              marginTop={"20px"}
-            >
-              Request Method
-            </Heading>
-            <InputSelect
-              placeholder="search request method"
-              options={requestTypeOptions}
-              icon={{ slug: "icon-close" }}
-              variant={"state_default_hover"}
-              margin="0 0 20px 0"
-            />
-            <InputLabel
-              labelText="Request Parameter"
-              placeholder="Provide Parameter"
-              value=""
-              padding="20px 0px"
-            />
-            <FlexRow width="100%" hrAlign="space-between">
-              <Button variant={""}>Discard</Button>
-              <Button variant={"state_brand"}>Save</Button>
-            </FlexRow>
+                  bgClip="text"
+                  marginTop={"20px"}
+                >
+                  Request Method
+                </Heading>
+                <InputSelect
+                  placeholder="search request method"
+                  options={requestTypeOptions}
+                  icon={{ slug: "icon-close" }}
+                  variant={"state_default_hover"}
+                  margin="0 0 20px 0"
+                />
+                <InputLabel
+                  labelText="Request Parameter"
+                  placeholder="Provide Parameter"
+                  value=""
+                  padding="20px 0px"
+                />
+                <FlexRow width="100%" hrAlign="space-between">
+                  <Button variant={""}>Discard</Button>
+                  <Button variant={"state_brand"}>Save</Button>
+                </FlexRow>
+              </FlexColumn>
+            )}
             <Text fontSize={"2xl"} fontWeight={700}>
               Access
             </Text>

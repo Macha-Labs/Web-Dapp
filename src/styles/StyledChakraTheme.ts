@@ -67,6 +67,9 @@ const theme = extendTheme({
         alignItems: "center",
         height: "100%!important",
       },
+      ".css-1jec974 >option": {
+        background: `${style.input.bg.default}!important`,
+      },
     },
   },
   textStyles: {},
