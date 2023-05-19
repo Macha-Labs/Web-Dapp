@@ -1,23 +1,19 @@
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
-import FlexRow from "@/_ui/flex/FlexRow";
 import FlexColumn from "@/_ui/flex/FlexColumn";
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
-import InputSearch from "@/_ui/input/InputSearch";
 // import ModalSlider from "@/_ui/modal/ModalSlider";
+import ModalSlider from "@/_ui/modal/ModalSlider";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
+import SearchAndFilter from "@/components/studio/SearchAndFilter";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { StyledCard, StyledCol } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
 import { Button, Heading, Text, useDisclosure } from "@chakra-ui/react";
-import ModalSlider from "@/_ui/modal/ModalSlider";
-import TagNative from "@/_ui/tag/TagNative";
-import SearchAndFilter from "@/components/studio/SearchAndFilter";
 import Link from "next/link";
 
 const DashBoard = () => {
