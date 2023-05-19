@@ -11,6 +11,7 @@ type Props = {
   options: any[];
   margin?: string;
   onChangeHandler?: any;
+  elementRef?: any;
 };
 
 const InputSelect = ({
@@ -21,9 +22,11 @@ const InputSelect = ({
   options,
   margin,
   onChangeHandler = (e?: any) => {},
+  elementRef
 }: Props) => {
   return (
     <Select
+    ref={elementRef}
       placeholder={placeholder}
       size={size}
       icon={<IconImage slug={icon.slug} size={icon.size} style={icon.style} />}

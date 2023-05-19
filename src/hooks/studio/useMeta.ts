@@ -13,7 +13,7 @@ const useMeta = () => {
     //     description: metaOverview.current['metaDescription'].value,
     //     image: "",
     //     clientId: "",
-    //     triggers: {}
+    //     triggers: []
     // }
 
     return {

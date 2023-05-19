@@ -20,8 +20,7 @@ function createMeta() {
   const [methodTypeOptions, setMethodTypeOptions] = useState<any>([]);
   const hookMeta = useMeta();
 
-
-  const requestTypeOptions = [ 'Graph', 'Rest', "Contract"];
+  const requestTypeOptions = ["Graph", "Rest", "Contract"];
 
   const settingRequestType = (requestType: string) => {
     requestType == "Graph"
@@ -170,6 +169,9 @@ function createMeta() {
                 </Heading>
 
                 <InputSelect
+                  elementRef={(element: any) =>
+                    (hookMeta.metaTrigger.current["requestType"] = element)
+                  }
                   placeholder="search request type"
                   options={requestTypeOptions}
                   onChangeHandler={settingRequestType}
@@ -193,6 +195,9 @@ function createMeta() {
                 </Heading>
 
                 <InputSelect
+                  elementRef={(element: any) =>
+                    (hookMeta.metaTrigger.current["requestMethod"] = element)
+                  }
                   placeholder="search request method"
                   options={methodTypeOptions}
                   icon={{ slug: "icon-close" }}
@@ -210,7 +215,7 @@ function createMeta() {
 
                 <FlexRow width="100%" hrAlign="space-between">
                   <Button variant={""}>Discard</Button>
-                  <Button variant={"state_brand"}>Save</Button>
+                  <Button variant={"state_brand"} onClick={() => {console.log("logging trigger ", hookMeta.metaTrigger.current['requestType'].value, hookMeta.metaTrigger.current['requestMethod'].value)}}>Save</Button>
                 </FlexRow>
               </FlexColumn>
             )}
