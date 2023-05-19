@@ -45,9 +45,9 @@ function createMeta() {
   const settingRequestType = (requestType: string) => {
     requestType == "Graph"
       ? setMethodTypeOptions(["Query", "Mutation"])
-      : requestType == "rest"
+      : requestType == "Rest"
       ? setMethodTypeOptions(["GET", "POST"])
-      : setTriggerType("contract");
+      : setTriggerType("Contract");
   };
   return (
     <>
