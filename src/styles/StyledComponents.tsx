@@ -131,7 +131,6 @@ export const StyledCol = styled.div`
   flex-direction: column;
   text-align: left;
   width: 100%;
-  padding: 20px;
   &.hr-center {
     align-items: center;
   }
@@ -254,7 +253,7 @@ export const StyledCard = styled.div`
   border-radius: ${style.card.borderRadius};
   // border: ${style.card.border.default};
   // background: ${style.card.bg.default};
-  padding: ${style.card.padding.default};
+  // padding: ${style.card.padding.default};
   box-shadow: ${style.card.shadow.default};
   cursor: pointer;
   width: 100%;

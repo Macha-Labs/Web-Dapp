@@ -10,7 +10,7 @@ type Props = {
   margin?: string;
 };
 
-export default function FlexRow({
+export default function FlexColumn({
   width,
   vrAlign,
   hrAlign,

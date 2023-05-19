@@ -78,7 +78,7 @@ export default function SearchAndFilter() {
         }
         children={
           <FlexColumn width="100%">
-            <StyledCol>
+            <FlexColumn width="100%" vrAlign="flex-start" padding="10px 0px">
               <FlexRow width="100%" hrAlign="space-between">
                 <Heading
                   as="h6"
@@ -115,8 +115,8 @@ export default function SearchAndFilter() {
                   close={true}
                 />
               </FlexRow>
-            </StyledCol>
-            <StyledCol>
+            </FlexColumn>
+            <FlexColumn width="100%" vrAlign="flex-start" padding="10px 0px">
               <FlexRow width="100%" hrAlign="space-between">
                 <Heading
                   as="h6"
@@ -153,8 +153,8 @@ export default function SearchAndFilter() {
                   close={true}
                 />
               </FlexRow>
-            </StyledCol>
-            <StyledCol>
+            </FlexColumn>
+            <FlexColumn width="100%" vrAlign="flex-start" padding="10px 0px">
               <FlexRow width="100%" hrAlign="space-between">
                 <Heading
                   as="h6"
@@ -191,8 +191,8 @@ export default function SearchAndFilter() {
                   close={true}
                 />
               </FlexRow>
-            </StyledCol>
-            <Button variant="state_brand" width="100%">
+            </FlexColumn>
+            <Button variant="state_brand" width="100%" marginTop={"10px"}>
               Done
             </Button>
           </FlexColumn>
