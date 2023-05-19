@@ -14,7 +14,7 @@ type Props = {
   elementRef?: any;
 };
 
-const LayoutInputs = ({
+const layoutInputs = ({
   index,
   style,
   placeholder,
@@ -28,7 +28,7 @@ const LayoutInputs = ({
   elementRef,
 }: Props) => {
   return (
-    <div className={style.class}>
+    <div>
       <Input
         ref={elementRef}
         key={index}
@@ -45,4 +45,4 @@ const LayoutInputs = ({
     </div>
   );
 };
-export default LayoutInputs;
+export default layoutInputs;

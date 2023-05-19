@@ -1,4 +1,4 @@
-import LayoutInputs from "@/layouts/options/LayoutInputs";
+import layoutInputs from "@/layouts/options/LayoutInputs";
 import { StyledCard, StyledCol, StyledRow } from "@/styles/StyledComponents";
 import { Heading } from "@chakra-ui/react";
 import FlexColumn from "../flex/FlexColumn";
@@ -28,7 +28,7 @@ const InputLabel = ({
 }: Props) => {
 
   // for text type inputs
-  const InputLabelText = () => {
+  const inputLabelText = () => {
     return (
       <FlexColumn width="100%" vrAlign="flex-start" padding={padding}>
         <Heading
@@ -45,14 +45,21 @@ const InputLabel = ({
         </Heading>
 
         <StyledCard className="w-100">
-          <LayoutInputs
+          {layoutInputs({
+            elementRef,
+            placeholder,
+            defaultValue,
+            onChange,
+            disabled
+          })}
+          {/* <LayoutInputs
             elementRef={elementRef}
             placeholder={placeholder}
             defaultValue={defaultValue}
             onChange={onChange}
             disabled={disabled}
             style={{ class: "" }}
-          />
+          /> */}
         </StyledCard>
       </FlexColumn>
     );
@@ -89,7 +96,7 @@ const InputLabel = ({
   if (inputType == 'file') {
     return <InputLabelFile />;
   } else {
-    return <InputLabelText />;
+    return inputLabelText();
   }
 };
 

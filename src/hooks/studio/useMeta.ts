@@ -16,10 +16,17 @@ const useMeta = () => {
     //     triggers: []
     // }
 
+    const createMetaPayload = () => {
+        console.log("Meta Overview ", metaOverview.current);
+        console.log("Meta Trigger ", metaTrigger.current);
+        console.log("Meta Origin ", metaOrigin.current);
+    }
+
     return {
         metaOverview: metaOverview,
         metaTrigger: metaTrigger,
-        metaOrigin: metaOrigin
+        metaOrigin: metaOrigin,
+        createMetaPayload: createMetaPayload
     }
 }
 export default useMeta;
