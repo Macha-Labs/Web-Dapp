@@ -26,18 +26,22 @@ const Navigation = () => {
       value: "Docs & Support",
     },
   ];
-  
+
   const walletOptions = [
     {
-      value: "wallet 1",
+      value: "0xc85554A...19a1e",
+      img: "../assets/Avatar.svg",
+      rightIcon: "icon-notification",
       onClick: () => {},
     },
     {
-      value: "wallet 2",
+      value: "Switch Wallet",
+      leftIcon: "icon-notification",
       onClick: () => {},
     },
     {
-      value: "wallet 3",
+      value: "Disconnect Wallet",
+      leftIcon: "icon-notification",
       onClick: () => {},
     },
   ];
@@ -72,7 +76,8 @@ const Navigation = () => {
           <FlexRow>
             <IconImage slug="icon-notification" />
             <ButtonMenu
-              text="Wallet"
+              avatar="../assets/Avatar.svg"
+              text="0xc85554A...19a1e"
               icon={{
                 slug: "icon-chevron-down",
                 style: ` marginLeft: "10px" `,
