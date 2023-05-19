@@ -96,7 +96,7 @@ const DashBoard = () => {
     <>
       <Navigation />
 
-      <FlexWindow>
+      {/* <FlexWindow> */}
         <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <NavTabs
@@ -161,7 +161,8 @@ const DashBoard = () => {
             })}
           </FlexRow>
         </FlexBody>
-      </FlexWindow>
+      {/* </FlexWindow> */}
+
       <ModalSlider
         event={metaModal}
         size="md"
