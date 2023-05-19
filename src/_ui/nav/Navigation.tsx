@@ -6,7 +6,8 @@ import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
 import NavTabs from "./NavTabs";
 
-export default function Navigation() {
+const Navigation = () => {
+  
   const navOptions = [
     {
       href: "/studio/dashboard",
@@ -44,7 +45,7 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className="fixed-top py-3"
+        className="py-3"
         style={{
           background: `${style.input.bg.default}`,
           padding: `${style.nav.padding}`,
@@ -84,3 +85,5 @@ export default function Navigation() {
     </>
   );
 }
+
+export default Navigation;

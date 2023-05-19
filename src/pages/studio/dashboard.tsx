@@ -10,7 +10,8 @@ import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
 import { style } from "@/styles/StyledConstants";
 
-export default function DashBoard() {
+const DashBoard = () => {
+
   const dashboardNav: any = [
     {
       value: "Live Metas",
@@ -75,6 +76,7 @@ export default function DashBoard() {
             <ButtonNative text="Create Metas" variant="state_brand" />
           </FlexRow>
         </NavBlock>
+
         <FlexBody>
           <FlexRow
             width="100%"
@@ -127,3 +129,5 @@ export default function DashBoard() {
     </>
   );
 }
+
+export default DashBoard;
