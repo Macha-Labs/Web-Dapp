@@ -9,8 +9,8 @@ type Props = {
   icon?: any;
   style?: any;
   options: any[];
-  onClick?: any;
   margin?: string;
+  onChangeHandler?: any;
 };
 
 const InputSelect = ({
@@ -19,8 +19,8 @@ const InputSelect = ({
   variant,
   icon,
   options,
-  onClick,
   margin,
+  onChangeHandler = (e?: any) => {},
 }: Props) => {
   return (
     <Select
@@ -28,6 +28,9 @@ const InputSelect = ({
       size={size}
       icon={<IconImage slug={icon.slug} size={icon.size} style={icon.style} />}
       variant={variant}
+      onChange={(e) => {
+        onChangeHandler(e.target.value);
+      }}
       style={{
         background: `${style.input.bg.default}`,
         border: `${style.input.border.default}`,
@@ -38,7 +41,6 @@ const InputSelect = ({
         return (
           <option
             value={item.value}
-            onClick={onClick ? onClick : () => {}}
             style={{ background: `${style.input.bg.default}` }}
           >
             {item.value}

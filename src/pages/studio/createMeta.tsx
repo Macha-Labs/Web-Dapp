@@ -16,33 +16,39 @@ import InputSelect from "@/_ui/input/InputSelect";
 import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 
 function createMeta() {
-  // <ButtonMenu
-  //       text="Sort By"
-  //       options={sortOptions}
-  //       icon={{
-  //         slug: "icon-chevron-down",
-  //       }}
-  //     />
-  const [trigger, setTrigger] = useState(false);
-  const [origin, setOrigin] = useState(false);
+  const [trigger, setTrigger] = useState<any>(false);
+  const [origin, setOrigin] = useState<any>(false);
+  const [triggerType, setTriggerType] = useState<any>(null);
+  const [methodTypeOptions, setMethodTypeOptions] = useState<any>([]);
   const requestTypeOptions = [
     {
-      value: "A-Z",
-      onClick: () => {},
+      value: "Graph",
+      onClick: (e?: any) => {
+        console.log("graph", e);
+        setMethodTypeOptions(["Query", "Mutation"]);
+      },
     },
     {
-      value: "Z-A",
-      onClick: () => {},
+      value: "Rest",
+      onClick: () => {
+        setMethodTypeOptions(["GET", "POST"]);
+      },
     },
     {
-      value: "Last Created",
-      onClick: () => {},
-    },
-    {
-      value: "Last Modified",
-      onClick: () => {},
+      value: "Contract",
+      onClick: () => {
+        setTriggerType("contract");
+        setMethodTypeOptions(["Get", "Post"]);
+      },
     },
   ];
+  const settingRequestType = (requestType: string) => {
+    requestType == "Graph"
+      ? setMethodTypeOptions(["Query", "Mutation"])
+      : requestType == "rest"
+      ? setMethodTypeOptions(["GET", "POST"])
+      : setTriggerType("contract");
+  };
   return (
     <>
       <Navigation />
@@ -175,6 +181,7 @@ function createMeta() {
                 <InputSelect
                   placeholder="search request type"
                   options={requestTypeOptions}
+                  onChangeHandler={settingRequestType}
                   icon={{ slug: "icon-close" }}
                   variant={"state_default_hover"}
                   margin="0 0 20px 0"
@@ -196,7 +203,7 @@ function createMeta() {
 
                 <InputSelect
                   placeholder="search request method"
-                  options={requestTypeOptions}
+                  options={methodTypeOptions}
                   icon={{ slug: "icon-close" }}
                   variant={"state_default_hover"}
                   margin="0 0 20px 0"
