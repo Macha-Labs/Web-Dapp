@@ -71,8 +71,7 @@ const GlobalIcons: any = {
   "icon-chevron-down": "/icons/svg/Base-blue/base-blue-chevronDown.svg",
   "icon-reply":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-replyFilled.svg",
-  "icon-close":
-    "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-cancel.svg",
+  "icon-close": "/icons/svg/Base-blue/base-blue-cancel.svg",
   "icon-attachment":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-attachment.svg",
   "icon-send":

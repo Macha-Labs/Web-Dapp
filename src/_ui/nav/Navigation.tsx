@@ -13,16 +13,16 @@ export default function Navigation() {
       value: "Dashboard",
     },
     {
-      href: "/studio/settings",
-      value: "Settings",
-    },
-    {
       href: "/studio/explore",
       value: "Explore",
     },
     {
       href: "/studio/docs",
-      value: "Docs & Support",
+      value: "Docs",
+    },
+    {
+      href: "/studio/settings",
+      value: "Settings",
     },
   ];
 

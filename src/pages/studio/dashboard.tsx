@@ -17,10 +17,11 @@ import { style } from "@/styles/StyledConstants";
 import { Button, Heading, Text, useDisclosure } from "@chakra-ui/react";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import TagNative from "@/_ui/tag/TagNative";
+import SearchAndFilter from "@/components/studio/SearchAndFilter";
 
 export default function DashBoard() {
   const metaModal = useDisclosure();
-  const filterModal = useDisclosure();
+
   const dashboardNav: any = [
     {
       value: "Live Metas",
@@ -52,20 +53,6 @@ export default function DashBoard() {
       onChange: () => {},
     },
   ];
-  const filterOptions = [
-    {
-      value: "Contract",
-      onClick: () => {},
-    },
-    {
-      value: "Rest",
-      onClick: () => {},
-    },
-    {
-      value: "Graph",
-      onClick: () => {},
-    },
-  ];
 
   const metaCardOptions = [
     {
@@ -78,6 +65,34 @@ export default function DashBoard() {
     {
       image: "../assets/MetaCard.png",
       heading: "META_node2",
+      description:
+        "There is a description here, please mind the gap, something like this and more ...",
+      tags: ["tag1", "tag2"],
+    },
+    {
+      image: "../assets/MetaCard.png",
+      heading: "META_node3",
+      description:
+        "There is a description here, please mind the gap, something like this and more ...",
+      tags: ["tag1", "tag2"],
+    },
+    {
+      image: "../assets/MetaCard.png",
+      heading: "META_node1",
+      description:
+        "There is a description here, please mind the gap, something like this and more ...",
+      tags: ["tag1", "tag2"],
+    },
+    {
+      image: "../assets/MetaCard.png",
+      heading: "META_node2",
+      description:
+        "There is a description here, please mind the gap, something like this and more ...",
+      tags: ["tag1", "tag2"],
+    },
+    {
+      image: "../assets/MetaCard.png",
+      heading: "META_node3",
       description:
         "There is a description here, please mind the gap, something like this and more ...",
       tags: ["tag1", "tag2"],
@@ -112,39 +127,11 @@ export default function DashBoard() {
           </FlexRow>
         </NavBlock>
         <FlexBody>
-          <FlexRow
-            width="100%"
-            hrAlign="space-between"
-            padding={`${style.padding.md} 0rem`}
-          >
-            <FlexRow width="100%" hrAlign="flex-start">
-              <FlexRow width="50%">
-                <InputSearch
-                  size="lg"
-                  placeholder="Search Studio"
-                  icon={{ slug: "icon-search" }}
-                  marginRight={style.card.margin.default}
-                />
-              </FlexRow>
-              <ButtonNative
-                text="Filter"
-                variant="state_brand"
-                onClick={() => {
-                  filterModal.onOpen();
-                }}
-              />
-            </FlexRow>
-            <ButtonMenu
-              text="Sort By"
-              options={filterOptions}
-              icon={{
-                slug: "icon-chevron-down",
-              }}
-            />
-          </FlexRow>
+          <SearchAndFilter />
           <FlexRow
             hrAlign="space-between"
             width="100%"
+            flexWrap="wrap"
             // padding={style.body.padding}
           >
             {metaCardOptions.map((item, index) => {
@@ -154,6 +141,7 @@ export default function DashBoard() {
                   heading={item.heading}
                   description={item.description}
                   tags={item.tags}
+                  width="20%"
                 />
               );
             })}
@@ -166,7 +154,7 @@ export default function DashBoard() {
         header={
           <FlexRow width="100%" hrAlign="space-between">
             <Text className="mb-0">Create Meta</Text>
-            <IconImage slug="icon-notification" />
+            <IconImage slug="icon-close" onClick={() => metaModal.onClose()} />
           </FlexRow>
         }
         children={
@@ -197,128 +185,6 @@ export default function DashBoard() {
             </StyledCol>
             <Button variant="state_brand" width="100%">
               Create Meta
-            </Button>
-          </FlexColumn>
-        }
-      />
-      <ModalSlider
-        event={filterModal}
-        size="md"
-        header={
-          <FlexRow width="100%" hrAlign="space-between">
-            <Text className="mb-0">Filter By</Text>
-            <IconImage slug="icon-notification" />
-          </FlexRow>
-        }
-        children={
-          <FlexColumn width="100%">
-            <StyledCol>
-              <Heading
-                as="h6"
-                size="sm"
-                className="m-b-1"
-                bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-                bgClip="text"
-              >
-                Access
-              </Heading>
-              <FlexRow>
-                <TagNative
-                  value="Public"
-                  margin="0px 10px"
-                  variant="state_brand"
-                  close={true}
-                />
-                <TagNative
-                  value="Public"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-                <TagNative
-                  value="Public"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-              </FlexRow>
-            </StyledCol>
-            <StyledCol>
-              <Heading
-                as="h6"
-                size="sm"
-                className="m-b-1"
-                bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-                bgClip="text"
-              >
-                Request Type
-              </Heading>
-              <FlexRow>
-                <TagNative
-                  value="GraphQL"
-                  variant="state_brand"
-                  close={true}
-                  margin="0px 10px"
-                />
-                <TagNative
-                  value="GraphQL"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-                <TagNative
-                  value="GraphQL"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-              </FlexRow>
-            </StyledCol>
-            <StyledCol>
-              <Heading
-                as="h6"
-                size="sm"
-                className="m-b-1"
-                bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-                bgClip="text"
-              >
-                Network
-              </Heading>
-              <FlexRow>
-                <TagNative
-                  value="Ethereum"
-                  margin="0px 10px"
-                  variant="state_brand"
-                  close={true}
-                />
-                <TagNative
-                  value="Ethereum"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-                <TagNative
-                  value="Ethereum"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-              </FlexRow>
-            </StyledCol>
-            <Button variant="state_brand" width="100%">
-              Done
             </Button>
           </FlexColumn>
         }
