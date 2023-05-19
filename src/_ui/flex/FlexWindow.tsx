@@ -9,7 +9,7 @@ export const FlexWindow = ({ children }: Props) => {
     <div
       style={{
         position: "relative",
-        top: "73px",
+        // top: "73px",
         width: "100vw",
       }}
     >
