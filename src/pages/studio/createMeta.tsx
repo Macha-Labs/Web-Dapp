@@ -3,7 +3,6 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
-import inputLabel from "@/_ui/input/InputLabel";
 import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
 import NavBlock from "@/_ui/nav/NavBlock";
@@ -18,17 +17,27 @@ function createMeta() {
   const [trigger, setTrigger] = useState<any>(false);
   const [origin, setOrigin] = useState<any>(false);
   const [triggerType, setTriggerType] = useState<any>(null);
-  const [methodTypeOptions, setMethodTypeOptions] = useState<any>([]);
+  const [originType, setOriginType] = useState<any>(null);
+  const [triggerMethods, setTriggerMethods] = useState<any>([]);
+  const [originMethods, setOriginMethods] = useState<any>([]);
   const hookMeta = useMeta();
 
   const requestTypeOptions = ["Graph", "Rest", "Contract"];
 
-  const settingRequestType = (requestType: string) => {
+  const settingTriggerType = (requestType: string) => {
     requestType == "Graph"
-      ? setMethodTypeOptions(["Query", "Mutation"])
+      ? setTriggerMethods(["Query", "Mutation"])
       : requestType == "Rest"
-      ? setMethodTypeOptions(["GET", "POST"])
+      ? setTriggerMethods(["GET", "POST"])
       : setTriggerType("Contract");
+  };
+
+  const settingOriginType = (requestType: string) => {
+    requestType == "Graph"
+      ? setOriginMethods(["Query", "Mutation"])
+      : requestType == "Rest"
+      ? setOriginMethods(["GET", "POST"])
+      : setOriginType("Contract");
   };
 
   return (
@@ -72,14 +81,6 @@ function createMeta() {
             <Text fontSize={"2xl"} fontWeight={700}>
               Scheme
             </Text>
-
-            <InputLabel
-              inputType="text"
-              labelText="Add your meta schema"
-              placeholder="Description"
-              defaultValue=""
-              padding="20px 0px"
-            />
 
             <Text fontSize={"2xl"} fontWeight={700}>
               Trigger
@@ -142,13 +143,6 @@ function createMeta() {
                   defaultValue=""
                   padding="20px 0px"
                 />
-                {/* {inputLabel({
-                  inputType: "text",
-                  labelText: "Name",
-                  placeholder:"Trigger Name",
-                  defaultValue: "",
-                  padding: "20px 0px",
-                })} */}
 
                 <InputLabel
                   elementRef={(element: any) =>
@@ -182,36 +176,40 @@ function createMeta() {
                   }
                   placeholder="search request type"
                   options={requestTypeOptions}
-                  onChangeHandler={settingRequestType}
+                  onChangeHandler={settingTriggerType}
                   icon={{ slug: "icon-close" }}
                   variant={"state_default_hover"}
                   margin="0 0 20px 0"
                 />
 
-                <Heading
-                  as="h6"
-                  size="sm"
-                  bgGradient="linear(
+                {triggerMethods.length > 0 && (
+                  <>
+                    <Heading
+                      as="h6"
+                      size="sm"
+                      bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-                  bgClip="text"
-                  marginTop={"20px"}
-                >
-                  Request Method
-                </Heading>
-
-                <InputSelect
-                  elementRef={(element: any) =>
-                    (hookMeta.metaTrigger.current["requestMethod"] = element)
-                  }
-                  placeholder="search request method"
-                  options={methodTypeOptions}
-                  icon={{ slug: "icon-close" }}
-                  variant={"state_default_hover"}
-                  margin="0 0 20px 0"
-                />
+                      bgClip="text"
+                      marginTop={"20px"}
+                    >
+                      Request Method
+                    </Heading>
+                    <InputSelect
+                      elementRef={(element: any) =>
+                        (hookMeta.metaTrigger.current["requestMethod"] =
+                          element)
+                      }
+                      placeholder="search request method"
+                      options={triggerMethods}
+                      icon={{ slug: "icon-close" }}
+                      variant={"state_default_hover"}
+                      margin="0 0 20px 0"
+                    />
+                  </>
+                )}
 
                 <InputLabel
                   elementRef={(element: any) =>
@@ -220,6 +218,17 @@ function createMeta() {
                   inputType="text"
                   labelText="Request Endpoint"
                   placeholder="Endpoint"
+                  defaultValue=""
+                  padding="20px 0px"
+                />
+
+                <InputLabel
+                  elementRef={(element: any) =>
+                    (hookMeta.metaTrigger.current["requestSchema"] = element)
+                  }
+                  inputType="text"
+                  labelText="Trigger Schema"
+                  placeholder="Add your trigger schema"
                   defaultValue=""
                   padding="20px 0px"
                 />
@@ -294,7 +303,8 @@ function createMeta() {
                   elementRef={(element: any) =>
                     (hookMeta.metaOrigin.current["requestType"] = element)
                   }
-                  placeholder="search request type"
+                  placeholder="Select request Type"
+                  onChangeHandler={settingOriginType}
                   options={requestTypeOptions}
                   icon={{ slug: "icon-close" }}
                   variant={"state_default_hover"}
@@ -319,8 +329,8 @@ function createMeta() {
                   elementRef={(element: any) =>
                     (hookMeta.metaOrigin.current["requestMethod"] = element)
                   }
-                  placeholder="search request method"
-                  options={requestTypeOptions}
+                  placeholder="Select Request Method"
+                  options={originMethods}
                   icon={{ slug: "icon-close" }}
                   variant={"state_default_hover"}
                   margin="0 0 20px 0"
@@ -340,6 +350,7 @@ function createMeta() {
                   defaultValue=""
                   padding="20px 0px"
                 /> */}
+
                 <InputLabel
                   elementRef={(element: any) =>
                     (hookMeta.metaOrigin.current["requestEndpoint"] = element)
@@ -353,22 +364,22 @@ function createMeta() {
 
                 <InputLabel
                   elementRef={(element: any) =>
-                    (hookMeta.metaOrigin.current["requestParams"] = element)
+                    (hookMeta.metaOrigin.current["requestSchema"] = element)
                   }
                   inputType="text"
-                  labelText="Request Parameter"
-                  placeholder="Provide Parameter"
+                  labelText="Request Schema"
+                  placeholder="Request Schema"
                   defaultValue=""
                   padding="20px 0px"
                 />
 
                 <InputLabel
                   elementRef={(element: any) =>
-                    (hookMeta.metaOrigin.current["requestSchema"] = element)
+                    (hookMeta.metaOrigin.current["requestParams"] = element)
                   }
                   inputType="text"
-                  labelText="Request Schema"
-                  placeholder="Request Schema"
+                  labelText="Request Parameter"
+                  placeholder="Provide Parameter"
                   defaultValue=""
                   padding="20px 0px"
                 />
@@ -403,7 +414,14 @@ function createMeta() {
           <FlexColumn width="100%" hrAlign="flex-start" vrAlign="flex-start">
             <FlexRow width="100%" hrAlign="flex-end">
               <Text>Complete Information For Meta</Text>
-              <Button variant="state_brand" onClick={() => {hookMeta.createMetaPayload()}}>SAVE</Button>
+              <Button
+                variant="state_brand"
+                onClick={() => {
+                  hookMeta.createMetaPayload();
+                }}
+              >
+                SAVE
+              </Button>
             </FlexRow>
           </FlexColumn>
         </FlexRow>
