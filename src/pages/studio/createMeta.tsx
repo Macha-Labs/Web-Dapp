@@ -22,22 +22,22 @@ function createMeta() {
   const [originMethods, setOriginMethods] = useState<any>([]);
   const hookMeta = useMeta();
 
-  const requestTypeOptions = ["Graph", "Rest", "Contract"];
+  const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
 
   const settingTriggerType = (requestType: string) => {
-    requestType == "Graph"
-      ? setTriggerMethods(["Query", "Mutation"])
-      : requestType == "Rest"
+    requestType == "GRAPH"
+      ? setTriggerMethods(["QUERY", "MUTATION"])
+      : requestType == "REST"
       ? setTriggerMethods(["GET", "POST"])
-      : setTriggerType("Contract");
+      : setTriggerType("CONTRACT");
   };
 
   const settingOriginType = (requestType: string) => {
-    requestType == "Graph"
-      ? setOriginMethods(["Query", "Mutation"])
-      : requestType == "Rest"
+    requestType == "GRAPH"
+      ? setOriginMethods(["QUERY", "MUTATION"])
+      : requestType == "REST"
       ? setOriginMethods(["GET", "POST"])
-      : setOriginType("Contract");
+      : setOriginType("CONTRACT");
   };
 
   return (
@@ -235,7 +235,7 @@ function createMeta() {
 
                 <InputLabel
                   elementRef={(element: any) =>
-                    (hookMeta.metaTrigger.current["requestParameter"] = element)
+                    (hookMeta.metaTrigger.current["requestParams"] = element)
                   }
                   inputType="text"
                   labelText="Request Parameter"
@@ -417,7 +417,7 @@ function createMeta() {
               <Button
                 variant="state_brand"
                 onClick={() => {
-                  hookMeta.createMetaPayload();
+                  hookMeta.publishMeta();
                 }}
               >
                 SAVE
