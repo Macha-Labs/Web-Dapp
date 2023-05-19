@@ -20,28 +20,8 @@ function createMeta() {
   const [methodTypeOptions, setMethodTypeOptions] = useState<any>([]);
   const hookMeta = useMeta();
 
-  const requestTypeOptions = [
-    {
-      value: "Graph",
-      onClick: (e?: any) => {
-        console.log("graph", e);
-        setMethodTypeOptions(["Query", "Mutation"]);
-      },
-    },
-    {
-      value: "Rest",
-      onClick: () => {
-        setMethodTypeOptions(["GET", "POST"]);
-      },
-    },
-    {
-      value: "Contract",
-      onClick: () => {
-        setTriggerType("contract");
-        setMethodTypeOptions(["Get", "Post"]);
-      },
-    },
-  ];
+
+  const requestTypeOptions = [ 'Graph', 'Rest', "Contract"];
 
   const settingRequestType = (requestType: string) => {
     requestType == "Graph"

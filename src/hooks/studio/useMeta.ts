@@ -7,14 +7,14 @@ const useMeta = () => {
     const metaOrigin = useRef<any>({});
 
     // have to make this
-    const metaPayload = {
-        id: "",
-        name: metaOverview.current['metaName'].value,
-        description: metaOverview.current['metaDescription'].value,
-        image: "",
-        clientId: "",
-        triggers: {}
-    }
+    // const metaPayload = {
+    //     id: "",
+    //     name: metaOverview.current['metaName'].value,
+    //     description: metaOverview.current['metaDescription'].value,
+    //     image: "",
+    //     clientId: "",
+    //     triggers: {}
+    // }
 
     return {
         metaOverview: metaOverview,

@@ -40,10 +40,11 @@ const InputSelect = ({
       {options.map((item, index) => {
         return (
           <option
-            value={item.value}
+            key={index}
+            value={item}
             style={{ background: `${style.input.bg.default}` }}
           >
-            {item.value}
+            {item}
           </option>
         );
       })}
