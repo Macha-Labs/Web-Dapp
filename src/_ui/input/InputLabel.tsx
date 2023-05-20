@@ -72,7 +72,7 @@ const InputLabel = ({
           variant="transparent"
           size="md"
           isLoading={false}
-          icon={<IconImage slug="IconDarkFiles.png" />}
+          icon={{ slug: "icon-file" }}
         >
           <label htmlFor="upload-file" className="w-100">
             <StyledRow className="vr-center hr-between w-100">

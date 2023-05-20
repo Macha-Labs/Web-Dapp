@@ -25,7 +25,7 @@ const GlobalIcons: any = {
   "icon-video":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-volume.svg?updatedAt=1680783916154",
   "icon-file":
-    "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-file.svg?updatedAt=1680783869110",
+    "/icons/svg/Base-blue/base-blue-file.svg?updatedAt=1680783869110",
   "icon-pin":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-pinFilled.svg?updatedAt=1680783894226",
   "icon-wallet":
