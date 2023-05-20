@@ -31,7 +31,6 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 const AuthProvider = ({ children }: any) => {
-  const hookMachaAuth = useMachaAuth();
   
   const unwatch = watchAccount((account) => {if($address!=account){
     console.log(account, " . ", $address, "asdf")

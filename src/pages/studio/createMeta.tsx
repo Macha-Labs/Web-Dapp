@@ -8,6 +8,7 @@ import InputSelect from "@/_ui/input/InputSelect";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
+import useMachaAuth from "@/hooks/studio/useMachaAuth";
 import useMeta from "@/hooks/studio/useMeta";
 import { style } from "@/styles/StyledConstants";
 import { Button, Heading, Text } from "@chakra-ui/react";
@@ -21,6 +22,7 @@ function createMeta() {
   const [triggerMethods, setTriggerMethods] = useState<any>([]);
   const [originMethods, setOriginMethods] = useState<any>([]);
   const hookMeta = useMeta();
+  const hookMachaAuth = useMachaAuth();
 
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
 

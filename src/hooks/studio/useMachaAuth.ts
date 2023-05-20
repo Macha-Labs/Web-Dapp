@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
-import { Macha } from "@metaworklabs/macha-dev-sdk/lib";
 import useAuthStore from "@/store/useAuthStore";
+import { Macha } from "@metaworklabs/macha-dev-sdk/lib";
+import { useEffect } from "react";
+
+declare let window: any;
 
 const useMachaAuth = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -9,7 +11,7 @@ const useMachaAuth = () => {
 
   const auth = () => {
       const macha = new Macha({
-        address: $address?.toLowerCase(),
+        address: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
         signer: $signer,
       });
       console.log("Macha init ", macha);
@@ -17,9 +19,8 @@ const useMachaAuth = () => {
   };
 
   useEffect(() => {
-    if ($signer && $address) {
-        auth();
-    }
+    // if ($signer)
+      auth();
   }, [$address, $signer])
 
   return {};
