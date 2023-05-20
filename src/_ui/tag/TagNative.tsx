@@ -32,7 +32,7 @@ const TagNative = ({
       size={size}
       key={size ? size : "md"}
       // variant={variant ? variant : "solid"}
-      bgGradient={style.dropdown.bg.active}
+      bgGradient={variant == "gray" ? "gray" : style.dropdown.bg.active}
       margin={margin}
     >
       {icon && icon.align == "left" && (

@@ -1,24 +1,39 @@
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
-import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import IconImage from "@/_ui/icons/IconImage";
-import InputLabel from "@/_ui/input/InputLabel";
-// import ModalSlider from "@/_ui/modal/ModalSlider";
-import ModalSlider from "@/_ui/modal/ModalSlider";
+import InputSearch from "@/_ui/input/InputSearch";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
-import SearchAndFilter from "@/components/studio/SearchAndFilter";
+import MetaCreateModal from "@/components/studio/MetaCreateModal";
+import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import useMeta from "@/hooks/studio/useMeta";
 import { style } from "@/styles/StyledConstants";
-import { Button, Text, useDisclosure } from "@chakra-ui/react";
-import Link from "next/link";
+import { useDisclosure } from "@chakra-ui/react";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
   const hookMeta = useMeta();
+  const sortOptions = [
+    {
+      value: "A-Z",
+      onClick: () => {},
+    },
+    {
+      value: "Z-A",
+      onClick: () => {},
+    },
+    {
+      value: "Last Created",
+      onClick: () => {},
+    },
+    {
+      value: "Last Modified",
+      onClick: () => {},
+    },
+  ];
 
   const dashboardNav: any = [
     {
@@ -129,7 +144,30 @@ const DashBoard = () => {
       </NavBlock>
 
       <FlexBody>
-        <SearchAndFilter />
+        <FlexRow
+          width="100%"
+          hrAlign="space-between"
+          padding={`${style.padding.md} 0rem`}
+        >
+          <FlexRow width="100%" hrAlign="flex-start">
+            <FlexRow width="50%">
+              <InputSearch
+                size="lg"
+                placeholder="Search Studio"
+                icon={{ slug: "icon-search" }}
+                marginRight={style.card.margin.default}
+              />
+            </FlexRow>
+            <MetaTagFilter />
+          </FlexRow>
+          <ButtonMenu
+            text="Sort By"
+            options={sortOptions}
+            icon={{
+              slug: "icon-chevron-down",
+            }}
+          />
+        </FlexRow>
         <FlexRow
           hrAlign="space-between"
           width="100%"
@@ -150,31 +188,7 @@ const DashBoard = () => {
         </FlexRow>
       </FlexBody>
       {/* </FlexWindow> */}
-
-      <ModalSlider
-        event={metaModal}
-        size="md"
-        header={
-          <FlexRow width="100%" hrAlign="space-between">
-            <Text className="mb-0">Create Meta</Text>
-            <IconImage slug="icon-close" onClick={() => metaModal.onClose()} />
-          </FlexRow>
-        }
-        children={
-          <FlexColumn width="100%">
-
-            <InputLabel elementRef={(element: any) => hookMeta.metaOverview.current['metaName'] = element} inputType="text" labelText="Meta Name" placeholder="Name" />
-            <InputLabel elementRef={(element: any) => hookMeta.metaOverview.current['metaDescription'] = element} inputType="text" labelText="Description" placeholder="Description" />
-            <InputLabel inputType="file" labelText="Image" placeholder="Image" />
-
-            <Link href="/studio/createMeta" style={{ width: "100%" }}>
-              <Button variant="state_brand" width="100%">
-                Create Meta
-              </Button>
-            </Link>
-          </FlexColumn>
-        }
-      />
+      <MetaCreateModal hookMeta={hookMeta} metaModal={metaModal} />
     </>
   );
 };

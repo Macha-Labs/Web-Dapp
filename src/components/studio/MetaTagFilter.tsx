@@ -1,69 +1,23 @@
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
-import FlexRow from "@/_ui/flex/FlexRow";
 import FlexColumn from "@/_ui/flex/FlexColumn";
+import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
-import InputSearch from "@/_ui/input/InputSearch";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import TagNative from "@/_ui/tag/TagNative";
-import { StyledCol } from "@/styles/StyledComponents";
-import { style } from "@/styles/StyledConstants";
 import { Button, Heading, Text, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 
-export default function SearchAndFilter() {
+function MetaTagFilter() {
   const filterModal = useDisclosure();
-  const sortOptions = [
-    {
-      value: "A-Z",
-      onClick: () => {},
-    },
-    {
-      value: "Z-A",
-      onClick: () => {},
-    },
-    {
-      value: "Last Created",
-      onClick: () => {},
-    },
-    {
-      value: "Last Modified",
-      onClick: () => {},
-    },
-  ];
-
   return (
     <>
-      <FlexRow
-        width="100%"
-        hrAlign="space-between"
-        padding={`${style.padding.md} 0rem`}
-      >
-        <FlexRow width="100%" hrAlign="flex-start">
-          <FlexRow width="50%">
-            <InputSearch
-              size="lg"
-              placeholder="Search Studio"
-              icon={{ slug: "icon-search" }}
-              marginRight={style.card.margin.default}
-            />
-          </FlexRow>
-          <ButtonNative
-            text="Filter"
-            variant="state_brand"
-            onClick={() => {
-              filterModal.onOpen();
-            }}
-          />
-        </FlexRow>
-        <ButtonMenu
-          text="Sort By"
-          options={sortOptions}
-          icon={{
-            slug: "icon-chevron-down",
-          }}
-        />
-      </FlexRow>
+      <ButtonNative
+        text="Filter"
+        variant="state_brand"
+        onClick={() => {
+          filterModal.onOpen();
+        }}
+      />
       <ModalSlider
         event={filterModal}
         size="md"
@@ -116,6 +70,7 @@ export default function SearchAndFilter() {
                 />
               </FlexRow>
             </FlexColumn>
+
             <FlexColumn width="100%" vrAlign="flex-start" padding="10px 0px">
               <FlexRow width="100%" hrAlign="space-between">
                 <Heading
@@ -154,6 +109,7 @@ export default function SearchAndFilter() {
                 />
               </FlexRow>
             </FlexColumn>
+
             <FlexColumn width="100%" vrAlign="flex-start" padding="10px 0px">
               <FlexRow width="100%" hrAlign="space-between">
                 <Heading
@@ -192,12 +148,15 @@ export default function SearchAndFilter() {
                 />
               </FlexRow>
             </FlexColumn>
-            <Button variant="state_brand" width="100%" marginTop={"10px"}>
+
+            <ButtonNative variant="state_brand" width="100%" marginTop={"10px"}>
               Done
-            </Button>
+            </ButtonNative>
           </FlexColumn>
         }
       />
     </>
   );
 }
+
+export default MetaTagFilter;

@@ -12,6 +12,9 @@ type Props = {
   icon?: any;
   variant?: string;
   children?: any;
+  width?: string;
+  marginTop?: string;
+  marginBottom?: string;
 };
 
 export default function ButtonNative({
@@ -23,7 +26,10 @@ export default function ButtonNative({
   loadingText = "loading...",
   icon,
   variant,
-  children
+  children,
+  width,
+  marginTop,
+  marginBottom,
 }: Props) {
   return (
     <Button
@@ -32,6 +38,9 @@ export default function ButtonNative({
       isLoading={isLoading}
       loadingText={loadingText}
       onClick={onClick}
+      width={width}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
     >
       {icon && (
         <IconImage slug={icon.slug} size={icon.size} style={icon.style} />

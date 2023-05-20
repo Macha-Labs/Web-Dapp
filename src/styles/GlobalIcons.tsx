@@ -94,7 +94,7 @@ const GlobalIcons: any = {
   "icon-forward":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-forward.svg?updatedAt=1680783869134",
   "icon-copy":
-    "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-copy.svg?updatedAt=1680783864011",
+    "/icons/svg/Base-blue/base-blue-copy.svg?updatedAt=1680783864011",
   "icon-qr":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
   "icon-user":

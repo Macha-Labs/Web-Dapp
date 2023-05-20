@@ -1,11 +1,32 @@
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import InputSearch from "@/_ui/input/InputSearch";
 import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
-import SearchAndFilter from "@/components/studio/SearchAndFilter";
+import MetaTagFilter from "@/components/studio/MetaTagFilter";
+import { style } from "@/styles/StyledConstants";
 
 export default function DashBoard() {
+  const sortOptions = [
+    {
+      value: "A-Z",
+      onClick: () => {},
+    },
+    {
+      value: "Z-A",
+      onClick: () => {},
+    },
+    {
+      value: "Last Created",
+      onClick: () => {},
+    },
+    {
+      value: "Last Modified",
+      onClick: () => {},
+    },
+  ];
   const exploreMetaOptions = [
     {
       image: "../assets/MetaCard.png",
@@ -56,7 +77,30 @@ export default function DashBoard() {
 
       <FlexWindow>
         <FlexBody>
-          <SearchAndFilter />
+          <FlexRow
+            width="100%"
+            hrAlign="space-between"
+            padding={`${style.padding.md} 0rem`}
+          >
+            <FlexRow width="100%" hrAlign="flex-start">
+              <FlexRow width="50%">
+                <InputSearch
+                  size="lg"
+                  placeholder="Search Studio"
+                  icon={{ slug: "icon-search" }}
+                  marginRight={style.card.margin.default}
+                />
+              </FlexRow>
+              <MetaTagFilter />
+            </FlexRow>
+            <ButtonMenu
+              text="Sort By"
+              options={sortOptions}
+              icon={{
+                slug: "icon-chevron-down",
+              }}
+            />
+          </FlexRow>
           <FlexRow
             hrAlign="space-between"
             width="100%"

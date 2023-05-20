@@ -8,9 +8,11 @@ type Props = {
   options: any;
   gstyle?: any;
   icon?: any;
+  value?: string;
+  onChange?: any;
 };
 
-const NavTabs = ({ options, gstyle, icon }: Props) => {
+const NavTabs = ({ options, gstyle, icon, value, onChange }: Props) => {
   const router = useRouter();
 
   return (
@@ -21,8 +23,10 @@ const NavTabs = ({ options, gstyle, icon }: Props) => {
             return (
               <StyledLi
                 className={`nav-item  ms-2 ${
-                  router.pathname === `${option.href}` ? "active" : ""
+                  value === option.value ? "active" : ""
                 }`}
+                key={option.value}
+                onClick={() => onChange(option.value)}
               >
                 <Link
                   className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0 ms-md-3 mx-2 "

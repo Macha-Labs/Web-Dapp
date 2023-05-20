@@ -24,9 +24,8 @@ const InputLabel = ({
   padding,
   disabled = false,
   elementRef,
-  inputType
+  inputType,
 }: Props) => {
-
   // for text type inputs
   const inputLabelText = () => {
     return (
@@ -50,7 +49,7 @@ const InputLabel = ({
             placeholder,
             defaultValue,
             onChange,
-            disabled
+            disabled,
           })}
           {/* <LayoutInputs
             elementRef={elementRef}
@@ -69,32 +68,71 @@ const InputLabel = ({
   const InputLabelFile = () => {
     return (
       <StyledCol className="text-start">
-          <ButtonNative
-            variant="transparent"
-            size="md"
-            isLoading={false}
-            icon={<IconImage slug="IconDarkFiles.png" />}
-          >
-            <label htmlFor="upload-file" className="w-100">
-              <StyledRow className="vr-center hr-between w-100">
-                Upload File{" "}
-              </StyledRow>
-            </label>
-          </ButtonNative>
-          <input
-            id="upload-file"
-            onChange={(e) => {
-              console.log("This is the attachment button");
-            }}
-            type="file"
-            hidden
-          />
-        </StyledCol>
-    )
-  }
+        <ButtonNative
+          variant="transparent"
+          size="md"
+          isLoading={false}
+          icon={<IconImage slug="IconDarkFiles.png" />}
+        >
+          <label htmlFor="upload-file" className="w-100">
+            <StyledRow className="vr-center hr-between w-100">
+              Upload File{" "}
+            </StyledRow>
+          </label>
+        </ButtonNative>
+        <input
+          id="upload-file"
+          onChange={(e) => {
+            console.log("This is the attachment button");
+          }}
+          type="file"
+          hidden
+        />
+      </StyledCol>
+    );
+  };
 
-  if (inputType == 'file') {
+  const InputLabelTextArea = () => {
+    return (
+      <FlexColumn width="100%" vrAlign="flex-start" padding={padding}>
+        <Heading
+          as="h6"
+          size="sm"
+          bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+          bgClip="text"
+        >
+          {labelText}
+        </Heading>
+
+        <StyledCard className="w-100">
+          {layoutInputs({
+            elementRef,
+            placeholder,
+            defaultValue,
+            onChange,
+            disabled,
+          })}
+          {/* <LayoutInputs
+            elementRef={elementRef}
+            placeholder={placeholder}
+            defaultValue={defaultValue}
+            onChange={onChange}
+            disabled={disabled}
+            style={{ class: "" }}
+          /> */}
+        </StyledCard>
+      </FlexColumn>
+    );
+  };
+
+  if (inputType == "file") {
     return <InputLabelFile />;
+  } else if (inputType == "textArea") {
+    return <InputLabelTextArea />;
   } else {
     return inputLabelText();
   }
