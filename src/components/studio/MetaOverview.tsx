@@ -30,7 +30,7 @@ function MetaOverview() {
             <Text>GRAPHQL</Text>
           </FlexColumn>
           <FlexColumn>
-            <Text>CHAIN</Text>
+            <Text>NETWORK</Text>
             <Text>5 min ago</Text>
           </FlexColumn>
         </FlexRow>

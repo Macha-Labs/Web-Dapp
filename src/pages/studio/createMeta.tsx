@@ -9,8 +9,8 @@ import MetaSettings from "@/components/studio/MetaSettings";
 import { metaCreateInfoData } from "@/data/constantData";
 import { style } from "@/styles/StyledConstants";
 import { useState } from "react";
-import MetaCurator from "./MetaCurator";
-import MetaPlayground from "./MetaPlayground";
+import MetaCurator from "../../components/studio/MetaCurator";
+import MetaPlayground from "@/components/studio/MetaPlayground";
 
 function createMeta() {
   const createMetaOptions = [
