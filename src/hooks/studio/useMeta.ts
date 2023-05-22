@@ -1,43 +1,17 @@
 import { ethers } from "ethers";
 import { useEffect, useRef, useState } from "react";
-import { MachaClient } from "@metaworklabs/macha-dev-sdk/lib";
+import { Macha } from "@metaworklabs/macha-dev-sdk/lib";
+import useAuthStore from "@/store/useAuthStore";
 
 declare let window: any;
 const useMeta = () => {
-  let provider;
-  let signer;
   const metaOverview = useRef<any>({});
   const metaTrigger = useRef<any>({});
   const metaOrigin = useRef<any>({});
-  const [browserSigner, setBrowserSigner] = useState<any>();
-  const [machaClient, setMachaClient] = useState<any>();
 
-  const setInit = async () => {
-    if (window.ethereum) {
-      provider = new ethers.providers.Web3Provider(window.ethereum);
-      signer = await provider.getSigner();
-      setBrowserSigner(signer);
-    }
-  };
+  const $macha = useAuthStore((state: any) => state.macha);
 
-  useEffect(() => {
-    setInit();
-  }, []);
-
-  useEffect(() => {
-    if (browserSigner) {
-      const macha = new MachaClient({
-        owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
-        secret: "",
-        signer: browserSigner,
-      }
-      );
-      console.log("Macha init ", macha);
-      setMachaClient(macha);
-    }
-  }, [browserSigner]);
-
-  const publishMeta = async() => {
+  const publishMeta = async () => {
     const metaPayload = {
       id: "",
       name: metaOverview.current["metaName"]
@@ -82,8 +56,8 @@ const useMeta = () => {
     console.log("Meta Origin ", metaOrigin.current);
 
     console.log("Logging Meta Payload ", metaPayload);
-    
-    await machaClient.publisher.metaCreation(metaPayload);
+
+    await $macha.publisher.metaCreation(metaPayload);
   };
 
   return {

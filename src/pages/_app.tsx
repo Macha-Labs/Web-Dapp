@@ -1,25 +1,21 @@
+import { config } from "@/config/index";
 import AuthProvider from "@/providers/AuthProvider";
-import { ChatProvider } from "@/providers/ChatProvider";
-import StreamProvider from "@/providers/StreamProvider";
+import { DataProvider } from "@/providers/DataProvider";
 import "@/styles/globals.css";
 import theme from "@/styles/StyledChakraTheme";
-import Script from "next/script";
 import { ChakraProvider } from "@chakra-ui/react";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { IKContext } from "imagekitio-react";
 import type { AppProps } from "next/app";
-import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { polygon, polygonMumbai } from "wagmi/chains";
-import { publicProvider } from "wagmi/providers/public";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { XmtpProvider } from "@/providers/XmtpProvider";
-import { DataProvider } from "@/providers/DataProvider";
 import Head from "next/head";
-import { config } from "@/config/index";
+import Script from "next/script";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { polygon, filecoinHyperspace } from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
 
-
-const { chains, provider } = configureChains([polygon], [publicProvider()]);
+const { chains, provider } = configureChains([filecoinHyperspace], [publicProvider()]);
 
 const { connectors } = getDefaultWallets({
   appName: "MetaWork",
@@ -63,17 +59,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <RainbowKitProvider chains={chains}>
           <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">
             <AuthProvider>
-              <StreamProvider>
-                <XmtpProvider>
-                  <ChatProvider>
-                    <DataProvider>
-                      <ChakraProvider theme={theme}>
-                        <Component {...pageProps} />
-                      </ChakraProvider>
-                    </DataProvider>
-                  </ChatProvider>
-                </XmtpProvider>
-              </StreamProvider>
+              <DataProvider>
+                <ChakraProvider theme={theme}>
+                  <Component {...pageProps} />
+                </ChakraProvider>
+              </DataProvider>
             </AuthProvider>
           </IKContext>
         </RainbowKitProvider>

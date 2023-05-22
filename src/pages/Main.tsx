@@ -1,27 +1,26 @@
-import "@rainbow-me/rainbowkit/styles.css";
-import LandingPage from "./landing";
-import AuthCard from "@/components/auth/AuthCard";
-import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
-import ChatList from "@/components/chat/ChatList";
-import MobileEmptyState from "@/components/MobileEmptyState";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import Nav from "@/_ui/nav/Nav";
-import useUserStore from "@/store/useUserStore";
+import AuthCard from "@/components/auth/AuthCard";
+import ChatList from "@/components/chat/ChatList";
+import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
+import useAuthStore from "@/store/useAuthStore";
 import { StyledChat, StyledChatList } from "@/styles/StyledComponents";
 import { useDisclosure } from "@chakra-ui/react";
+import "@rainbow-me/rainbowkit/styles.css";
 import { useEffect } from "react";
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
+
 function Main() {
   const modalAuth = useDisclosure();
-  const $connected = useUserStore((state: any) => state.connected);
+  const $isConnected = useAuthStore((state: any) => state.isConnected);
 
   useEffect(() => {
-    if ($connected && modalAuth.isOpen) {
+    if ($isConnected && modalAuth.isOpen) {
       modalAuth.onClose();
-    } else if (!$connected && !modalAuth.isOpen) {
+    } else if (!$isConnected && !modalAuth.isOpen) {
       modalAuth.onOpen();
     }
-  }, [$connected, modalAuth.isOpen]);
+  }, [$isConnected, modalAuth.isOpen]);
   const TemplateAuth = () => {
     return (
       <>
@@ -33,7 +32,7 @@ function Main() {
   };
   return (
     <>
-      {$connected && (
+      {$isConnected && (
         <FlexWindow>
           <div className="left">
             <Nav />
