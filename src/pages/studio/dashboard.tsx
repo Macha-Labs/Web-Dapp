@@ -10,12 +10,18 @@ import MetaCard from "@/components/studio/MetaCard";
 import MetaCreateModal from "@/components/studio/MetaCreateModal";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import useMeta from "@/hooks/studio/useMeta";
+import useAuthStore from "@/store/useAuthStore";
+import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
 import { useDisclosure } from "@chakra-ui/react";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
   const hookMeta = useMeta();
+  const $macha = useAuthStore((state: any) => state.macha);
+  const $userMetas = useUserStore((state: any) => state.userMetas);
+
+
   const sortOptions = [
     {
       value: "A-Z",
@@ -174,13 +180,13 @@ const DashBoard = () => {
           flexWrap="wrap"
           // padding={style.body.padding}
         >
-          {metaCardOptions.map((item, index) => {
+          {$userMetas && $userMetas.map((item: any, index: number) => {
             return (
               <MetaCard
-                image={item.image}
-                heading={item.heading}
+                image={item.image ? item.image : "../assets/MetaCard.png"}
+                heading={item.name}
                 description={item.description}
-                tags={item.tags}
+                tags={item.tags ? item?.tags : ""}
                 width="20%"
               />
             );

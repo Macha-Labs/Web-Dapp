@@ -4,7 +4,7 @@ const useAuthStore = create((set) => ({
   address: null,
   signer: null,
   provider: null,
-  macha: null,
+  macha: {},
   isConnected: null,
   loadSigner: (data: any) => set((state: any) => ({ signer: data })),
   loadMacha: (data: any) => set((state: any) => ({ macha: data })),
