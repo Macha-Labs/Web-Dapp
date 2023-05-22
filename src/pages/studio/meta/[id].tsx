@@ -3,14 +3,15 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
-import MetaCreateInfoCard from "@/components/studio/MetaCreateInfoCard";
 import MetaOverview from "@/components/studio/MetaOverview";
 import MetaSettings from "@/components/studio/MetaSettings";
-import { metaCreateInfoData } from "@/data/constantData";
 import { style } from "@/styles/StyledConstants";
 import { useState } from "react";
-import MetaCurator from "../../components/studio/MetaCurator";
+import MetaCurator from "@/components/studio/MetaCurator";
 import MetaPlayground from "@/components/studio/MetaPlayground";
+import Nav from "@/_ui/nav/Nav";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import FlexColumn from "@/_ui/flex/FlexColumn";
 
 function createMeta() {
   const createMetaOptions = [
@@ -50,24 +51,29 @@ function createMeta() {
         return null;
     }
   };
-  return (
-    <>
-      <Navigation />
 
-      <NavBlock>
-        <MetaCreateInfoCard data={metaCreateInfoData} />
-        <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-          <NavTabs
-            options={createMetaOptions}
-            value={selectedTab}
-            onChange={(value: any) => setSelectedTab(value)}
-            gstyle={{ fontSize: `${style.fontH6}`, fontWeight: "600" }}
-          />
-        </FlexRow>
-      </NavBlock>
-      <FlexBody>{renderComponent()}</FlexBody>
-    </>
-  );
+  const renderBody = () => {
+    return (
+      <>
+        {" "}
+        <NavBlock back={() => {}}>
+          <FlexColumn>
+            <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
+              <NavTabs
+                options={createMetaOptions}
+                value={selectedTab}
+                onChange={(value: any) => setSelectedTab(value)}
+                gstyle={{ fontSize: `${style.fontH6}`, fontWeight: "600" }}
+              />
+            </FlexRow>
+          </FlexColumn>
+        </NavBlock>
+        <FlexBody>{renderComponent()}</FlexBody>
+      </>
+    );
+  };
+
+  return <FlexWindow leftElem={<Nav />} rightElem={renderBody()}></FlexWindow>;
 }
 
 export default createMeta;

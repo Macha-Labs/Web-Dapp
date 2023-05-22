@@ -2,7 +2,9 @@ import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
+import Nav from "@/_ui/nav/Nav";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
@@ -14,13 +16,13 @@ import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
 import { Button, useDisclosure } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
   const hookMeta = useMeta();
   const $macha = useAuthStore((state: any) => state.macha);
   const $userMetas = useUserStore((state: any) => state.userMetas);
-
 
   const sortOptions = [
     {
@@ -76,133 +78,93 @@ const DashBoard = () => {
     },
   ];
 
-  const metaCardOptions = [
-    {
-      image: "../assets/MetaCard.png",
-      heading: "META_node1",
-      description:
-        "There is a description here, please mind the gap, something like this and more ...",
-      tags: ["tag1", "tag2"],
-    },
-    {
-      image: "../assets/MetaCard.png",
-      heading: "META_node2",
-      description:
-        "There is a description here, please mind the gap, something like this and more ...",
-      tags: ["tag1", "tag2"],
-    },
-    {
-      image: "../assets/MetaCard.png",
-      heading: "META_node3",
-      description:
-        "There is a description here, please mind the gap, something like this and more ...",
-      tags: ["tag1", "tag2"],
-    },
-    {
-      image: "../assets/MetaCard.png",
-      heading: "META_node1",
-      description:
-        "There is a description here, please mind the gap, something like this and more ...",
-      tags: ["tag1", "tag2"],
-    },
-    {
-      image: "../assets/MetaCard.png",
-      heading: "META_node2",
-      description:
-        "There is a description here, please mind the gap, something like this and more ...",
-      tags: ["tag1", "tag2"],
-    },
-    {
-      image: "../assets/MetaCard.png",
-      heading: "META_node3",
-      description:
-        "There is a description here, please mind the gap, something like this and more ...",
-      tags: ["tag1", "tag2"],
-    },
-    {
-      image: "../assets/MetaCard.png",
-      heading: "META_node3",
-      description:
-        "There is a description here, please mind the gap, something like this and more ...",
-      tags: ["tag1", "tag2"],
-    },
-  ];
-
   const logClient = () => {
     console.log("Logging macha client ", $macha);
-  }
+  };
 
-  return (
-    <>
-      <Navigation />
-
-      {/* <FlexWindow> */}
-      <NavBlock>
-        <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-          <NavTabs
-            options={dashboardNav}
-            gstyle={{ fontSize: `${style.fontH5}`, fontWeight: "600" }}
-          />
-          <ButtonNative
-            text="Create Metas"
-            variant="state_brand"
-            onClick={() => {
-              metaModal.onOpen();
-            }}
-          />
-        </FlexRow>
-      </NavBlock>
-
-      <FlexBody>
-        <FlexRow
-          width="100%"
-          hrAlign="space-between"
-          padding={`${style.padding.md} 0rem`}
-        >
-          <FlexRow width="100%" hrAlign="flex-start">
-            <FlexRow width="50%">
-              <InputSearch
-                size="lg"
-                placeholder="Search Studio"
-                icon={{ slug: "icon-search" }}
-                marginRight={style.card.margin.default}
-              />
-            </FlexRow>
-            <MetaTagFilter />
+  const renderBody = () => {
+    const router = useRouter();
+    return (
+      <>
+        <NavBlock>
+          <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
+            <NavTabs
+              options={dashboardNav}
+              gstyle={{ fontSize: `${style.fontH5}`, fontWeight: "600" }}
+            />
+            <ButtonNative
+              text="Create Metas"
+              variant="state_brand"
+              onClick={() => {
+                metaModal.onOpen();
+              }}
+            />
           </FlexRow>
-          <Button onClick={() => logClient()}>Log macha</Button>
+        </NavBlock>
 
-          <ButtonMenu
-            text="Sort By"
-            options={sortOptions}
-            icon={{
-              slug: "icon-chevron-down",
-            }}
-          />
-        </FlexRow>
-        <FlexRow
-          hrAlign="space-between"
-          width="100%"
-          flexWrap="wrap"
-          // padding={style.body.padding}
-        >
-          {$macha?.client?.metasOwned && $macha?.client?.metasOwned?.data.map((item: any, index: number) => {
-            return (
-              <MetaCard
-                image={item.image ? item.image : "../assets/MetaCard.png"}
-                heading={item.name}
-                description={item.description}
-                tags={item.tags ? item?.tags : ""}
-                width="20%"
-              />
-            );
-          })}
-        </FlexRow>
-      </FlexBody>
-      {/* </FlexWindow> */}
-      <MetaCreateModal hookMeta={hookMeta} metaModal={metaModal} />
-    </>
-  );
+        <FlexBody>
+          <FlexRow
+            width="100%"
+            hrAlign="space-between"
+            padding={`${style.padding.md} 0rem`}
+          >
+            <FlexRow width="100%" hrAlign="flex-start">
+              <FlexRow width="50%">
+                <InputSearch
+                  size="lg"
+                  placeholder="Search Studio"
+                  icon={{ slug: "icon-search" }}
+                  marginRight={style.card.margin.default}
+                />
+              </FlexRow>
+              <MetaTagFilter />
+            </FlexRow>
+            <Button onClick={() => logClient()}>Log macha</Button>
+
+            <ButtonMenu
+              text="Sort By"
+              options={sortOptions}
+              icon={{
+                slug: "icon-chevron-down",
+              }}
+            />
+          </FlexRow>
+          <FlexRow
+            hrAlign="space-between"
+            width="100%"
+            flexWrap="wrap"
+            // padding={style.body.padding}
+          >
+            {$macha?.client?.metasOwned &&
+              $macha?.client?.metasOwned?.data.map(
+                (item: any, index: number) => {
+                  return (
+                    <MetaCard
+                      image={item.image ? item.image : "../assets/MetaCard.png"}
+                      heading={item.name}
+                      description={item.description}
+                      tags={item.tags ? item?.tags : ""}
+                      width="20%"
+                      onCardClick={() => {
+                        router.push({
+                          pathname: "/studio/meta/[id]",
+                          query: { id: item.id },
+                        });
+                      }}
+                    />
+                  );
+                }
+              )}
+          </FlexRow>
+        </FlexBody>
+        {/* </FlexWindow> */}
+
+        <MetaCreateModal hookMeta={hookMeta} metaModal={metaModal} />
+      </>
+    );
+  };
+
+  return <FlexWindow leftElem={<Nav />} rightElem={renderBody()}></FlexWindow>;
 };
 
 export default DashBoard;

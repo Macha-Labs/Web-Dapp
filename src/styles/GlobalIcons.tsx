@@ -1,13 +1,12 @@
 const GlobalIcons: any = {
   "icon-filter": "",
   "icon-compass":
-    "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-compass.svg?updatedAt=1680783858784",
+    "/icons/svg/Base-blue/base-blue-compass.svg?updatedAt=1680783858784",
   "icon-compass-white":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base_icons/base-compass.svg?updatedAt=1680783662225",
   "icon-search":
     "/icons/svg/Base-blue/base-blue-search.svg?updatedAt=1680783899444",
-  "icon-chat":
-    "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-chat.svg",
+  "icon-chat": "/icons/svg/Base-blue/base-blue-chat.svg",
   "icon-chat-white":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base_icons/base-chat.svg",
   "icon-mute-chat":
@@ -29,7 +28,7 @@ const GlobalIcons: any = {
   "icon-pin":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-pinFilled.svg?updatedAt=1680783894226",
   "icon-wallet":
-    "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-wallet.svg?updatedAt=1680783916158",
+    "/icons/svg/Base-blue/base-blue-wallet.svg?updatedAt=1680783916158",
   "icon-poll":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-poll.svg?updatedAt=1680783894227",
   "icon-permissions":
@@ -98,7 +97,7 @@ const GlobalIcons: any = {
   "icon-qr":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
   "icon-user":
-    "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-user.png?updatedAt=1680703669687",
+    "/icons/png/Base-blue_icons/base-blue-user.png?updatedAt=1680703669687",
   "icon-connections":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-connections.png?updatedAt=1680788697983",
   "icon-chat-edit":

@@ -8,6 +8,9 @@ const useMachaAuth = () => {
   const $signer = useAuthStore((state: any) => state.signer);
   const $macha = useAuthStore((state: any) => state.macha);
   const $loadMacha = useAuthStore((state: any) => state.loadMacha);
+  const $loadUserMetasMap = useUserStore(
+    (state: any) => state.loadUserMetasMap
+  );
   const $loadUserMetas = useUserStore((state: any) => state.loadUserMetas);
 
   const auth = async () => {
@@ -32,9 +35,14 @@ const useMachaAuth = () => {
 
   useEffect(() => {
     console.log("Logging client ", $macha.client); // getting the right value
-      console.log("Logging client metasOwned", $macha.client?.metasOwned); // coming null
-      console.log("Metas Data array ", $macha?.client?.metasOwned?.data); // coming undefined
-      $loadUserMetas($macha?.client?.metasOwned?.data);
+    console.log("Logging client metasOwned", $macha.client?.metasOwned); // coming null
+    console.log("Metas Data array ", $macha?.client?.metasOwned?.data); // coming undefined
+    $loadUserMetas($macha?.client?.metasOwned?.data);
+    let userMetaMap: any = {};
+    $macha?.client?.metasOwned?.data.filter((item: any, index: number) => {
+      userMetaMap[item.id] = item;
+    });
+    $loadUserMetasMap(userMetaMap);
   }, [$macha]);
 
   return {};

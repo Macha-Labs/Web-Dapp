@@ -1,4 +1,5 @@
-import { Box, Text } from "@chakra-ui/react";
+import { StyledRow } from "@/styles/StyledComponents";
+import { Box, Button, Input, TagCloseButton, Text } from "@chakra-ui/react";
 
 type Props = {
     heading: string;

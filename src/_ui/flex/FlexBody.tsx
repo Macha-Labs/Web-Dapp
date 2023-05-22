@@ -12,7 +12,7 @@ const FlexBody = ({ children, gstyle }: Props) => {
       <div
         style={{
           padding: `${style.body.padding}`,
-          background: `${style.input.bg.default}`,
+          background: `${style.body.bg.default}`,
         }}
       >
         {children}

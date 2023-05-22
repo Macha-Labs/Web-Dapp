@@ -57,7 +57,7 @@ const useMeta = () => {
 
     console.log("Logging Meta Payload ", metaPayload);
 
-    await $macha.publisher.metaCreation(metaPayload);
+    // await $macha.publisher.metaCreation(metaPayload);
   };
 
   return {

@@ -3,6 +3,7 @@ import React from "react";
 
 type Props = {
   width?: string;
+  height?: string;
   vrAlign?: string;
   hrAlign?: string;
   className?: string;
@@ -14,6 +15,7 @@ type Props = {
 
 export default function FlexRow({
   width,
+  height,
   vrAlign,
   hrAlign,
   className,
@@ -32,6 +34,7 @@ export default function FlexRow({
         flexDirection: "row",
         textAlign: "left",
         width: width ? width : "100%",
+        height: height ? height : "100%",
         padding: padding ? padding : "0px",
         margin: margin ? margin : "0px",
       }}

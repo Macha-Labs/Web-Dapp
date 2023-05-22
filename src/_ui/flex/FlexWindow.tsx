@@ -1,19 +1,41 @@
+import { style } from "@/styles/StyledConstants";
 import React from "react";
 
 type Props = {
-  children: any;
+  children?: any;
+  leftElem?: any;
+  rightElem?: any;
 };
 
-export const FlexWindow = ({ children }: Props) => {
+export const FlexWindow = ({ children, leftElem, rightElem }: Props) => {
   return (
     <div
+      className="window"
       style={{
         position: "relative",
-        // top: "73px",
         width: "100vw",
+        minHeight: "100vh",
+        background: `${style.body.bg.default}`,
       }}
     >
-      {children}
+      {leftElem && rightElem ? (
+        <>
+          <div
+            className="window-left"
+            style={{ height: "100vh", position: "fixed", left: "0" }}
+          >
+            {leftElem}
+          </div>
+          <div
+            className="window-right"
+            style={{ marginLeft: `${style.nav.width}` }}
+          >
+            {rightElem}
+          </div>
+        </>
+      ) : (
+        <>{children}</>
+      )}
     </div>
   );
 };

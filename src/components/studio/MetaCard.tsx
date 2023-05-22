@@ -11,6 +11,7 @@ type Props = {
   tags: any;
   width?: any;
   cardDirection?: string;
+  onCardClick?: any;
 };
 
 export default function MetaCard({
@@ -20,6 +21,7 @@ export default function MetaCard({
   tags,
   cardDirection = "column",
   width,
+  onCardClick = (e?: any) => {},
 }: Props) {
   return (
     <div
@@ -32,6 +34,9 @@ export default function MetaCard({
         width: ` ${width}`,
         display: "flex",
         flexDirection: `${cardDirection}`,
+      }}
+      onClick={() => {
+        onCardClick();
       }}
     >
       <img src={image} width="100%" />

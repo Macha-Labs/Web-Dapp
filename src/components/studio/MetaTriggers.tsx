@@ -6,6 +6,7 @@ import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import useMeta from "@/hooks/studio/useMeta";
+import useMetaStore from "@/store/useMetaStore";
 import { Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -18,6 +19,7 @@ const MetaTriggers = ({ modal }: Props) => {
   const [triggerMethods, setTriggerMethods] = useState<any>([]);
   const [triggerType, setTriggerType] = useState<any>(null);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
+  const setFormData = useMetaStore((state) => state.setFormData);
 
   const settingTriggerType = (requestType: string) => {
     requestType == "GRAPH"
@@ -173,9 +175,12 @@ const MetaTriggers = ({ modal }: Props) => {
             onClick={() => {
               console.log(
                 "logging trigger ",
+                hookMeta.metaTrigger.current,
                 hookMeta.metaTrigger.current["requestType"].value,
                 hookMeta.metaTrigger.current["requestMethod"].value
               );
+              const triggerData = new FormData(hookMeta.metaTrigger.current);
+              setFormData(Object.fromEntries(triggerData.entries()));
             }}
             text="Save"
           />

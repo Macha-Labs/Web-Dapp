@@ -86,6 +86,14 @@ function MetaSettings() {
               }
               margin={"xs"}
             ></CardPannel>
+            <ButtonNative
+              text="test button"
+              onClick={() => {
+                console.log("Meta Overview ", hookMeta.metaOverview.current);
+                console.log("Meta Trigger ", hookMeta.metaTrigger.current);
+                console.log("Meta Origin ", hookMeta.metaOrigin.current);
+              }}
+            />
           </FlexColumn>
 
           <Text fontSize={"2xl"} fontWeight={700}>

@@ -142,13 +142,13 @@ export const darkStyle = {
     border: { default: "1px solid #0F172E" },
   },
   window: {},
-  body: { bg: { default: "#00040d" }, padding: "0% 6%" },
+  body: { bg: { default: "#00040d" }, padding: "3% 6%" },
   nav: {
-    width: "100vw",
-    height: "90%",
+    width: "5%",
+    height: "100vH",
     bg: { default: "#00040d" },
     border: { default: "2px solid #0F172E" },
-    padding: "1% 6%",
+    padding: "1% 2%",
   },
   list: {
     padding: "5px",

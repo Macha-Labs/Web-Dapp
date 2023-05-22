@@ -412,7 +412,7 @@ export const Placeholder = styled.div`
   border: ${style.borderPlaceholder};
   border-radius: ${style.borderRadius};
   background: ${style.bgPlaceholder};
-  padding: ${style.paddingCard};
+  padding: ${style.card.padding.default};
   min-height: ${style.heightPlaceholder};
 `;
 
@@ -421,21 +421,21 @@ export const Pallet = styled.div`
   border: ${style.borderPallet};
   border-radius: ${style.borderRadius};
   background: none;
-  padding: ${style.paddingCard};
+  padding: ${style.card.padding.default};
 `;
 
 export const Pannel = styled.div`
   border: ${style.borderPannel};
-  border-radius: ${style.borderRadiusCard};
+  border-radius: ${style.card.borderRadius.default};
   box-shadow: ${style.pannel.shadow.default};
   .header {
     background: ${style.bgPannelHeader};
-    padding: ${style.paddingPannel};
-    border-radius: ${style.borderRadiusCard};
+    padding: ${style.card.padding.default};
+    border-radius: ${style.card.borderRadius.default};
   }
 
   .body {
-    padding: ${style.paddingPannelBody};
+    padding: ${style.card.padding.default};
     min-height: 200px;
   }
 `;

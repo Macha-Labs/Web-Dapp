@@ -19,7 +19,6 @@ import {
 } from "@chakra-ui/react";
 import LayoutPostList from "../../layouts/post/LayoutPostList";
 import UserFollowersCard from "./UserFollowersCard";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import IconImage from "@/_ui/icons/IconImage";
@@ -53,21 +52,21 @@ const UserProfile = ({ user }: any) => {
 
   const callbackMessage = {
     success: () => {
-        router.push('/chat/dm');
+      router.push("/chat/dm");
     },
     error: () => {
-        toast({
-            title: "User not on XMTP",
-            status: "error",
-            duration: 3000,
-            position: "bottom-right",
-          });
-    }
-}
+      toast({
+        title: "User not on XMTP",
+        status: "error",
+        duration: 3000,
+        position: "bottom-right",
+      });
+    },
+  };
 
   const handleMessage = () => {
-    hookXmtpChannelNew?.initiateDirect(user?.lens?.ownedBy, callbackMessage)
-  }
+    hookXmtpChannelNew?.initiateDirect(user?.lens?.ownedBy, callbackMessage);
+  };
 
   const templatePosts = () => {
     return (
@@ -134,7 +133,10 @@ const UserProfile = ({ user }: any) => {
             ) : (
               <>
                 <StyledCol className="flex-hr-vr-center">
-                  <Image src="/assets/nofollow.png" className="w-40 m-b-2 m-t-1" />
+                  <Image
+                    src="/assets/nofollow.png"
+                    className="w-40 m-b-2 m-t-1"
+                  />
                   <Heading className="m-b-1" size="lg">
                     There is Nobody here, yet.
                   </Heading>
@@ -275,20 +277,41 @@ const UserProfile = ({ user }: any) => {
               <StyledRow className="w-100 vr-center hr-center">
                 <Tab>
                   <Button variant="state_default_hover">
-                    <IconImage slug="IconDarkPost.png"/>
-                    <Text className="m-l-0-5" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>Posts</Text>
+                    <IconImage slug="IconDarkPost.png" />
+                    <Text
+                      className="m-l-0-5"
+                      paddingBottom="0px"
+                      marginBottom="0px"
+                      style={{ paddingBottom: "0px", marginBottom: "0px" }}
+                    >
+                      Posts
+                    </Text>
                   </Button>
                 </Tab>
                 <Tab>
                   <Button variant="state_default_hover">
                     <IconImage slug="IconDarkFollowers.png" />
-                    <Text className="m-l-0-5" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>Followers</Text>
+                    <Text
+                      className="m-l-0-5"
+                      paddingBottom="0px"
+                      marginBottom="0px"
+                      style={{ paddingBottom: "0px", marginBottom: "0px" }}
+                    >
+                      Followers
+                    </Text>
                   </Button>
                 </Tab>
                 <Tab>
                   <Button variant="state_default_hover">
                     <IconImage slug="IconDarkFollowing.png" />
-                    <Text className="m-l-0-5" paddingBottom="0px" marginBottom="0px" style={{paddingBottom:"0px", marginBottom:"0px"}}>Following</Text>
+                    <Text
+                      className="m-l-0-5"
+                      paddingBottom="0px"
+                      marginBottom="0px"
+                      style={{ paddingBottom: "0px", marginBottom: "0px" }}
+                    >
+                      Following
+                    </Text>
                   </Button>
                 </Tab>
               </StyledRow>
