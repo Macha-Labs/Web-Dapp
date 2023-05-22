@@ -13,7 +13,7 @@ import useMeta from "@/hooks/studio/useMeta";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
-import { useDisclosure } from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
@@ -128,6 +128,10 @@ const DashBoard = () => {
     },
   ];
 
+  const logClient = () => {
+    console.log("Logging macha client ", $macha);
+  }
+
   return (
     <>
       <Navigation />
@@ -166,6 +170,8 @@ const DashBoard = () => {
             </FlexRow>
             <MetaTagFilter />
           </FlexRow>
+          <Button onClick={() => logClient()}>Log macha</Button>
+
           <ButtonMenu
             text="Sort By"
             options={sortOptions}
@@ -180,7 +186,7 @@ const DashBoard = () => {
           flexWrap="wrap"
           // padding={style.body.padding}
         >
-          {$userMetas && $userMetas.map((item: any, index: number) => {
+          {$macha?.client?.metasOwned && $macha?.client?.metasOwned?.data.map((item: any, index: number) => {
             return (
               <MetaCard
                 image={item.image ? item.image : "../assets/MetaCard.png"}
