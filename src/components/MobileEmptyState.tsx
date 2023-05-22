@@ -1,3 +1,4 @@
+import LandingPage from "@/pages/landing";
 import { StyledCol } from "@/styles/StyledComponents";
 import { Button, Text } from "@chakra-ui/react";
 import Link from "next/link";
@@ -27,7 +28,7 @@ export default function MobileEmptyState() {
         >
           Thanks For Visiting !
         </Text>
-        <Landing path="emptyStateIllustration.svg" />
+        {/* <LandingPage path="emptyStateIllustration.svg" /> */}
         <Text
           align={"center"}
           width="300px"

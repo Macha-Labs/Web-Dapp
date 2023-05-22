@@ -5,8 +5,11 @@ import ButtonMenu from "../buttons/ButtonMenu";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
 import NavTabs from "./NavTabs";
+import { truncateAddress } from "@/helpers";
+import useAuthStore from "@/store/useAuthStore";
 
 const Navigation = () => {
+  const $address = useAuthStore((state: any) => state.address);
   
   const navOptions = [
     {
@@ -29,7 +32,7 @@ const Navigation = () => {
 
   const walletOptions = [
     {
-      value: "0xc85554A...19a1e",
+      value: truncateAddress($address),
       img: "../assets/Avatar.svg",
       rightIcon: "icon-notification",
       onClick: () => {},
@@ -77,7 +80,7 @@ const Navigation = () => {
             <IconImage slug="icon-notification" />
             <ButtonMenu
               avatar="../assets/Avatar.svg"
-              text="0xc85554A...19a1e"
+              text={truncateAddress($address)}
               icon={{
                 slug: "icon-chevron-down",
                 style: ` marginLeft: "10px" `,
