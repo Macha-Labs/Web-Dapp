@@ -30,6 +30,10 @@ function createMeta() {
       value: "Settings",
       href: "",
     },
+    {
+      value: "Access",
+      href: "",
+    },
   ];
   const [selectedTab, setSelectedTab] = useState("Overview");
   const renderComponent = () => {
@@ -56,7 +60,7 @@ function createMeta() {
           <NavTabs
             options={createMetaOptions}
             value={selectedTab}
-            onChange={(value) => setSelectedTab(value)}
+            onChange={(value: any) => setSelectedTab(value)}
             gstyle={{ fontSize: `${style.fontH6}`, fontWeight: "600" }}
           />
         </FlexRow>

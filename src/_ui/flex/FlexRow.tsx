@@ -31,7 +31,7 @@ export default function FlexRow({
         justifyContent: hrAlign ? hrAlign : "center",
         flexDirection: "row",
         textAlign: "left",
-        width: width ? width : "fit-content",
+        width: width ? width : "100%",
         padding: padding ? padding : "0px",
         margin: margin ? margin : "0px",
       }}

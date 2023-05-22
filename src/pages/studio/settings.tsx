@@ -6,7 +6,6 @@ import ChakraTable from "@/_ui/list/ChakraTable";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
-import SearchAndFilter from "@/components/studio/SearchAndFilter";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { StyledCard, StyledCol } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";

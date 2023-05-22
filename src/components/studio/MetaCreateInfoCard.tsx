@@ -2,7 +2,7 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import TagNative from "@/_ui/tag/TagNative";
-import { Text } from "@chakra-ui/react";
+import { Image, Text } from "@chakra-ui/react";
 import React from "react";
 
 type Props = {
@@ -13,10 +13,10 @@ function MetaCreateInfoCard({ data }: Props) {
   return (
     <FlexRow width="80%" margin="0 0 20px 0">
       <FlexColumn width="20%" margin="0 20px 0 0">
-        <img src={data.metaImage} />
+        <Image src={data.metaImage} />
       </FlexColumn>
       <FlexColumn width="80%" hrAlign="flex-start" vrAlign="flex-start">
-        <FlexRow vrAlign="center" hrAlign="center">
+        <FlexRow vrAlign="center" width="fit-content">
           <Text className="m-b-0 me-2" fontSize={"2xl"} fontWeight={700}>
             {data.heading}
           </Text>
@@ -28,8 +28,8 @@ function MetaCreateInfoCard({ data }: Props) {
             <Text fontWeight={700} className="m-b-0-5">
               AUTHOR NAME
             </Text>
-            <FlexRow vrAlign="center" hrAlign="center">
-              <img src="../assets/Avatar.svg" />
+            <FlexRow vrAlign="center" hrAlign="flex-start">
+              <Image src="../assets/Avatar.svg" />
               <Text className="m-b-0">{data.authorName}</Text>
             </FlexRow>
           </FlexColumn>

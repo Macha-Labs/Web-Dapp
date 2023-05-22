@@ -12,6 +12,7 @@ type Props = {
   margin?: string;
   onChangeHandler?: any;
   elementRef?: any;
+  width?: any;
 };
 
 const InputSelect = ({
@@ -19,17 +20,25 @@ const InputSelect = ({
   size,
   variant,
   icon,
+  width,
   options,
   margin,
   onChangeHandler = (e?: any) => {},
-  elementRef
+  elementRef,
 }: Props) => {
   return (
     <Select
-    ref={elementRef}
+      ref={elementRef}
       placeholder={placeholder}
       size={size}
-      icon={<IconImage slug={icon.slug} size={icon.size} style={icon.style} />}
+      width={width ? width : "100%"}
+      icon={
+        <IconImage
+          slug={icon ? icon.slug : "icon-chevron-down"}
+          size={icon ? icon.size : "md"}
+          style={icon ? icon.style : ""}
+        />
+      }
       variant={variant}
       onChange={(e) => {
         onChangeHandler(e.target.value);

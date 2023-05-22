@@ -328,28 +328,6 @@ export const StyledXMTPCard = styled.div`
   left: 3px;
 `;
 
-export const StyledCardPannel = styled.div`
-  border-radius: ${style.card.borderRadius};
-  border: ${style.card.border.default};
-  background: ${style.card.bg.default};
-  box-shadow: ${style.card.shadow.default};
-  cursor: pointer;
-  width: 100%;
-
-  .header {
-    border-bottom: ${style.card.border.default};
-    padding: ${style.paddingCard};
-  }
-
-  .body {
-    padding: 1rem;
-  }
-  .footer {
-    border-top: ${style.card.border.default};
-    padding: ${style.paddingCard};
-  }
-`;
-
 export const StyledNFTCard = styled(StyledCard)`
   width: 250px;
   cursor: pointer;
