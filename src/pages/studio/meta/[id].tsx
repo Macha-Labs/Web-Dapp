@@ -12,8 +12,13 @@ import MetaPlayground from "@/components/studio/MetaPlayground";
 import Nav from "@/_ui/nav/Nav";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import FlexColumn from "@/_ui/flex/FlexColumn";
+import useUserStore from "@/store/useUserStore";
+import { useRouter } from "next/router";
 
-function createMeta() {
+const createMeta = () => {
+  const router = useRouter();
+  const $userMetasMap = useUserStore((state: any) => state.userMetasMap);
+
   const createMetaOptions = [
     {
       value: "Overview",
@@ -36,11 +41,13 @@ function createMeta() {
       href: "",
     },
   ];
+
   const [selectedTab, setSelectedTab] = useState("Overview");
+
   const renderComponent = () => {
     switch (selectedTab) {
       case "Overview":
-        return <MetaOverview />;
+        return <MetaOverview metaInfo={$userMetasMap[`${router.query.id}`]} />;
       case "Curator":
         return <MetaCurator />;
       case "Playground":
@@ -74,6 +81,6 @@ function createMeta() {
   };
 
   return <FlexWindow leftElem={<Nav />} rightElem={renderBody()}></FlexWindow>;
-}
+};
 
 export default createMeta;

@@ -6,19 +6,17 @@ import React from "react";
 import MetaCreateInfoCard from "./MetaCreateInfoCard";
 import { metaCreateInfoData } from "@/data/constantData";
 
-function MetaOverview() {
+type Props = {
+  metaInfo: any;
+};
+
+function MetaOverview({ metaInfo }: Props) {
   return (
     <>
-      <MetaCreateInfoCard data={metaCreateInfoData} />
+      <MetaCreateInfoCard data={metaInfo} />
       <FlexRow>
         <FlexColumn width="60%" vrAlign="flex-start">
-          <Text>
-            META_node’s automated options market enables best-in-class pricing
-            based on realtime supply and demand, providing fully-featured
-            peer-to-pool trading and capital efficiency to DeFi options.
-            Premia's automated opdemand, providing fully-featured peer-to-pool
-            trading and capital efficiency to DeFi options.
-          </Text>
+          <Text>{metaInfo.description}</Text>
           <FlexRow width="50%" hrAlign="flex-start">
             <FlexColumn vrAlign="flex-start" width="50%">
               <Text
@@ -31,7 +29,7 @@ function MetaOverview() {
               >
                 CREATED
               </Text>
-              <Text>20-05-23</Text>
+              <Text>{metaInfo.state.createdAt}</Text>
             </FlexColumn>
             <FlexColumn vrAlign="flex-start" width="50%">
               <Text
@@ -44,7 +42,7 @@ function MetaOverview() {
               >
                 LAST MODIFIED
               </Text>
-              <Text>5 min ago</Text>
+              <Text>{metaInfo.state.updatedAt}</Text>
             </FlexColumn>
           </FlexRow>
           <FlexRow width="50%" hrAlign="flex-start">
