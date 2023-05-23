@@ -146,7 +146,14 @@ const MetaOrigins = ({ modal }: Props) => {
           <ButtonNative
             variant={"state_brand"}
             onClick={() => {
-              $loadOriginData(hookMeta.metaOrigin.current);
+              let originData = {
+                requestEndpoint: hookMeta.metaOrigin.current['requestEndpoint'].value,
+                requestMethod: hookMeta.metaOrigin.current['requestMethod'].value,
+                requestParams: hookMeta.metaOrigin.current['requestParams'].value,
+                requestSchema: hookMeta.metaOrigin.current['requestSchema'].value,
+                requestType: hookMeta.metaOrigin.current['requestType'].value,
+              }
+              $loadOriginData(originData);
             }}
           >
             Save

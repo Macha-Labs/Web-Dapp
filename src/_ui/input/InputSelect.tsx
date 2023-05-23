@@ -57,7 +57,7 @@ const InputSelect = ({
             value={index}
             style={{ background: `${style.input.bg.default}` }}
           >
-            <Text>option {index}</Text>
+            <Text>{item}</Text>
           </option>
         );
       })}

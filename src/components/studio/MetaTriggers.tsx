@@ -173,13 +173,16 @@ const MetaTriggers = ({ modal }: Props) => {
           <ButtonNative
             variant={"state_brand"}
             onClick={() => {
-              console.log(
-                "logging trigger ",
-                hookMeta.metaTrigger.current,
-                hookMeta.metaTrigger.current["requestType"].value,
-                hookMeta.metaTrigger.current["requestMethod"].value
-              );
-              $loadTriggerData(hookMeta.metaTrigger.current);
+              let triggerData = {
+                requestEndpoint: hookMeta.metaTrigger.current['requestEndpoint'].value,
+                requestMethod: hookMeta.metaTrigger.current['requestMethod'].value,
+                requestParams: hookMeta.metaTrigger.current['requestParams'].value,
+                requestSchema: hookMeta.metaTrigger.current['requestSchema'].value,
+                requestType: hookMeta.metaTrigger.current['requestType'].value,
+                description: hookMeta.metaTrigger.current['triggerDescription'].value,
+                name: hookMeta.metaTrigger.current['triggerName'].value,
+              }
+              $loadTriggerData(triggerData);
             }}
             text="Save"
           />
