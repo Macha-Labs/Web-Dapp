@@ -5,7 +5,7 @@ import useMetaStore from "@/store/useMetaStore";
 type Props = {
   id: string;
 };
-const useMeta = ({ id = "8n" }: any) => {
+const useMeta = ({ id = "9n" }: any) => {
 
   const $loadMeta = useMetaStore((state: any) => state.loadMeta);
   const $loadMetaInfo = useMetaStore((state: any) => state.loadMetaInfo);

@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 type Props = {
   id: string;
 };
-function MetaPlayground({ id = "8n" }: Props) {
+function MetaPlayground({ id = "9n" }: Props) {
   const hookMeta = useMeta(id);
   const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
@@ -72,6 +72,8 @@ function MetaPlayground({ id = "8n" }: Props) {
               <ButtonNative
                 onClick={async() => {
                   console.log("Logging meta ", $meta);
+                  const result = await $meta.fetchMetaOrigin('yam.eth', 0);
+                  console.log("Origin result", result);
                 }}
               >
                 Run
