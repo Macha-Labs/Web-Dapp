@@ -5,7 +5,7 @@ import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
 import ModalSlider from "@/_ui/modal/ModalSlider";
-import useMeta from "@/hooks/studio/useMeta";
+import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import useMetaStore from "@/store/useMetaStore";
 import { Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const MetaTriggers = ({ modal }: Props) => {
-  const hookMeta = useMeta();
+  const hookMeta = useMetaCreate();
   const [triggerMethods, setTriggerMethods] = useState<any>([]);
   const [triggerType, setTriggerType] = useState<any>(null);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];

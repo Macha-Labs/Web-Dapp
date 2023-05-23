@@ -1,4 +1,4 @@
-import { Select } from "@chakra-ui/react";
+import { Select, Text } from "@chakra-ui/react";
 import IconImage from "../icons/IconImage";
 import { style } from "@/styles/StyledConstants";
 
@@ -26,6 +26,7 @@ const InputSelect = ({
   onChangeHandler = (e?: any) => {},
   elementRef,
 }: Props) => {
+  console.log("Inputoptions", options);
   return (
     <Select
       ref={elementRef}
@@ -56,7 +57,7 @@ const InputSelect = ({
             value={item}
             style={{ background: `${style.input.bg.default}` }}
           >
-            {item}
+            <Text>option {index}</Text>
           </option>
         );
       })}

@@ -1,6 +1,6 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import useMeta from "@/hooks/studio/useMeta";
+import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import { Heading, Image, Text, useDisclosure } from "@chakra-ui/react";
 import MetaOrigins from "./MetaOrigins";
 import MetaTriggers from "./MetaTriggers";
@@ -10,7 +10,7 @@ import CardNative from "@/_ui/cards/CardNative";
 import MetaCreateModal from "./MetaCreateModal";
 
 function MetaSettings() {
-  const hookMeta = useMeta();
+  const hookMeta = useMetaCreate();
   const triggerModal = useDisclosure();
   const originModal = useDisclosure();
   const metaModal = useDisclosure();

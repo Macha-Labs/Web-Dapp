@@ -11,7 +11,7 @@ import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
 import MetaCreateModal from "@/components/studio/MetaCreateModal";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
-import useMeta from "@/hooks/studio/useMeta";
+import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
-  const hookMeta = useMeta();
+  const hookMeta = useMetaCreate();
   const $macha = useAuthStore((state: any) => state.macha);
   const $userMetas = useUserStore((state: any) => state.userMetas);
 

@@ -11,6 +11,16 @@ type Props = {
 };
 
 function MetaOverview({ metaInfo }: Props) {
+  var options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  let date = Date.parse(metaInfo.state.updatedAt);
+  let updatedat = new Date(date);
+  let date2 = Date.parse(metaInfo.state.createdAt);
+  let createdat = new Date(date2);
   return (
     <>
       <MetaCreateInfoCard data={metaInfo} />
@@ -29,7 +39,7 @@ function MetaOverview({ metaInfo }: Props) {
               >
                 CREATED
               </Text>
-              <Text>{metaInfo.state.createdAt}</Text>
+              <Text>{createdat.toLocaleDateString()}</Text>
             </FlexColumn>
             <FlexColumn vrAlign="flex-start" width="50%">
               <Text
@@ -42,10 +52,10 @@ function MetaOverview({ metaInfo }: Props) {
               >
                 LAST MODIFIED
               </Text>
-              <Text>{metaInfo.state.updatedAt}</Text>
+              <Text>{updatedat.toLocaleDateString()}</Text>
             </FlexColumn>
           </FlexRow>
-          <FlexRow width="50%" hrAlign="flex-start">
+          {/* <FlexRow width="50%" hrAlign="flex-start">
             <FlexColumn vrAlign="flex-start" width="50%">
               <Text
                 bgGradient="linear(
@@ -72,7 +82,7 @@ function MetaOverview({ metaInfo }: Props) {
               </Text>
               <Text>5 min ago</Text>
             </FlexColumn>
-          </FlexRow>
+          </FlexRow> */}
         </FlexColumn>
         <FlexColumn width="40%">
           <ImageCarousal />

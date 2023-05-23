@@ -47,11 +47,11 @@ const createMeta = () => {
   const renderComponent = () => {
     switch (selectedTab) {
       case "Overview":
-        return <MetaOverview metaInfo={$userMetasMap[`${router.query.id}`]} />;
+        return <MetaOverview metaInfo={$userMetasMap["8n"]} />;
       case "Curator":
         return <MetaCurator />;
       case "Playground":
-        return <MetaPlayground />;
+        return <MetaPlayground id="8n" />;
       case "Settings":
         return <MetaSettings />;
       default:
