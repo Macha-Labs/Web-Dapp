@@ -56,6 +56,23 @@ function MetaPlayground({ id = "8n" }: Props) {
               placeholder="Triggers"
               options={$metaInfo?.data?.metaData?.triggers}
               width="90%"
+              children={
+                <>
+                  {$metaInfo?.data?.metaData?.triggers.map(
+                    (item: any, index: any) => {
+                      return (
+                        <option
+                          key={index}
+                          value={index}
+                          style={{ background: `${style.input.bg.default}` }}
+                        >
+                          <Text>option {index}</Text>
+                        </option>
+                      );
+                    }
+                  )}
+                </>
+              }
             />
           </>
         )}
