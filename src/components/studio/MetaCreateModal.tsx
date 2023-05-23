@@ -4,6 +4,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import ModalSlider from "@/_ui/modal/ModalSlider";
+import useMetaStore from "@/store/useMetaStore";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
@@ -13,6 +14,10 @@ type Props = {
   hookMeta?: any;
 };
 function MetaCreateModal({ metaModal, hookMeta }: Props) {
+  const $loadOverviewData = useMetaStore(
+    (state: any) => state.loadOverviewData
+  );
+  const $overviewData = useMetaStore((state: any) => state.overviewData);
   return (
     <ModalSlider
       event={metaModal}
@@ -43,11 +48,20 @@ function MetaCreateModal({ metaModal, hookMeta }: Props) {
           />
           <InputLabel inputType="file" labelText="Image" placeholder="Image" />
 
-          <Link href="/studio/createMeta" style={{ width: "100%" }}>
-            <ButtonNative variant="state_brand" width="100%">
-              Create Meta
-            </ButtonNative>
-          </Link>
+          {/* <Link href="/studio/createMeta" style={{ width: "100%" }}> */}
+          <ButtonNative
+            variant="state_brand"
+            width="100%"
+            onClick={(e: any) => {
+              e.preventDefault();
+              $loadOverviewData(hookMeta.metaOverview.current);
+              console.log(hookMeta.metaOverview.current);
+              console.log($overviewData);
+            }}
+          >
+            Create Meta
+          </ButtonNative>
+          {/* </Link> */}
         </FlexColumn>
       }
     />

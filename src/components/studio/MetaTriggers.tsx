@@ -19,7 +19,7 @@ const MetaTriggers = ({ modal }: Props) => {
   const [triggerMethods, setTriggerMethods] = useState<any>([]);
   const [triggerType, setTriggerType] = useState<any>(null);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
-  const setFormData = useMetaStore((state) => state.setFormData);
+  const $loadTriggerData = useMetaStore((state: any) => state.loadTriggerData);
 
   const settingTriggerType = (requestType: string) => {
     requestType == "GRAPH"
@@ -179,8 +179,7 @@ const MetaTriggers = ({ modal }: Props) => {
                 hookMeta.metaTrigger.current["requestType"].value,
                 hookMeta.metaTrigger.current["requestMethod"].value
               );
-              const triggerData = new FormData(hookMeta.metaTrigger.current);
-              setFormData(Object.fromEntries(triggerData.entries()));
+              $loadTriggerData(hookMeta.metaTrigger.current);
             }}
             text="Save"
           />

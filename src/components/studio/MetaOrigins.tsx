@@ -6,6 +6,7 @@ import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
+import useMetaStore from "@/store/useMetaStore";
 import { Button, Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -18,6 +19,7 @@ const MetaOrigins = ({ modal }: Props) => {
   const [originType, setOriginType] = useState<any>(null);
   const [originMethods, setOriginMethods] = useState<any>([]);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
+  const $loadOriginData = useMetaStore((state: any) => state.loadOriginData);
 
   const settingOriginType = (requestType: string) => {
     requestType == "GRAPH"
@@ -140,8 +142,15 @@ const MetaOrigins = ({ modal }: Props) => {
         />
 
         <FlexRow width="100%" hrAlign="space-between">
-          <Button variant={""}>Discard</Button>
-          <Button variant={"state_brand"}>Save</Button>
+          <ButtonNative variant={""}>Discard</ButtonNative>
+          <ButtonNative
+            variant={"state_brand"}
+            onClick={() => {
+              $loadOriginData(hookMeta.metaOrigin.current);
+            }}
+          >
+            Save
+          </ButtonNative>
         </FlexRow>
       </FlexColumn>
 

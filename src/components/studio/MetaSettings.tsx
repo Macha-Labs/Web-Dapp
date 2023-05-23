@@ -8,12 +8,16 @@ import CardPannel from "@/_ui/cards/CardPannel";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardNative from "@/_ui/cards/CardNative";
 import MetaCreateModal from "./MetaCreateModal";
+import useMetaStore from "@/store/useMetaStore";
 
 function MetaSettings() {
   const hookMeta = useMetaCreate();
   const triggerModal = useDisclosure();
   const originModal = useDisclosure();
   const metaModal = useDisclosure();
+  const $overviewData = useMetaStore((state: any) => state.overviewData);
+  const $triggerData = useMetaStore((state: any) => state.triggerData);
+  const $originData = useMetaStore((state: any) => state.originData);
   return (
     <>
       <FlexRow width="100%">
@@ -89,9 +93,9 @@ function MetaSettings() {
             <ButtonNative
               text="test button"
               onClick={() => {
-                console.log("Meta Overview ", hookMeta.metaOverview.current);
-                console.log("Meta Trigger ", hookMeta.metaTrigger.current);
-                console.log("Meta Origin ", hookMeta.metaOrigin.current);
+                console.log("Meta Overview ", $overviewData);
+                console.log("Meta Trigger ", $triggerData);
+                console.log("Meta Origin ", $originData);
               }}
             />
           </FlexColumn>
