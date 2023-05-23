@@ -21,7 +21,7 @@ const useMachaAuth = () => {
     await macha.connectClient({
       owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
     });
-    console.log("Macha init ", macha.client.data);
+    console.log("Macha init ", macha);
     console.log("Macha Client ", macha.client);
     console.log("Macha Client metasOwned ", macha.client?.metasOwned);
 
