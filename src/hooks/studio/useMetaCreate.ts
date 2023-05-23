@@ -54,8 +54,8 @@ const useMetaCreate = () => {
       id: "",
       ...overview,
       clientId: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
-      origin: [...originData],
-      triggers: [...triggerData],
+      origin: [originData],
+      triggers: [triggerData],
       prevIpfsCid: ""
     }
     console.log("Meta Overview ", metaOverview.current);
@@ -64,7 +64,7 @@ const useMetaCreate = () => {
 
     console.log("Logging Meta Payload ", metaPayload);
 
-    // await $macha.publisher.metaCreation(metaPayload);
+    await $macha.publisher.metaCreation(metaPayload);
   };
 
   return {
