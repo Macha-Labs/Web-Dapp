@@ -9,12 +9,14 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardNative from "@/_ui/cards/CardNative";
 import MetaCreateModal from "./MetaCreateModal";
 import useMetaStore from "@/store/useMetaStore";
+import useAuthStore from "@/store/useAuthStore";
 
 function MetaSettings() {
   const hookMeta = useMetaCreate();
   const triggerModal = useDisclosure();
   const originModal = useDisclosure();
   const metaModal = useDisclosure();
+  const $macha = useAuthStore((state: any) => state.macha);
   
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   const $triggerData = useMetaStore((state: any) => state.triggerData);
@@ -94,15 +96,16 @@ function MetaSettings() {
             ></CardPannel>
             <ButtonNative
               text="test button"
-              onClick={() => {
+              onClick={async() => {
                 console.log("Meta Overview ", $overviewData);
                 console.log("Meta Trigger ", $triggerData);
                 console.log("Meta Origin ", $originData);
+                await hookMeta.publishMeta($overviewData, $originData, $triggerData);
               }}
             />
           </FlexColumn>
 
-          <Text fontSize={"2xl"} fontWeight={700}>
+          {/* <Text fontSize={"2xl"} fontWeight={700}>
             Schema
           </Text>
           <Heading
@@ -116,7 +119,7 @@ function MetaSettings() {
             bgClip="text"
           >
             Add your meta Schema
-          </Heading>
+          </Heading> */}
         </FlexColumn>
 
         <FlexColumn width="100%" hrAlign="flex-start" vrAlign="flex-start">
