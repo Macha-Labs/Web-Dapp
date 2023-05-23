@@ -1,7 +1,10 @@
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { Macha } from "@metaworklabs/macha-dev-sdk/lib";
-import { useEffect } from "react";
+import { ethers } from "ethers";
+import { useEffect, useState } from "react";
+
+declare let window: any;
 
 const useMachaAuth = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -13,13 +16,31 @@ const useMachaAuth = () => {
   );
   const $loadUserMetas = useUserStore((state: any) => state.loadUserMetas);
 
+  let provider;
+  let signer;
+  const [browserSigner, setBrowserSigner] = useState<any>();
+  const [machaClient, setMachaClient] = useState<any>();
+
+  const setInit = async () => {
+    if (window.ethereum) {
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      signer = await provider.getSigner();
+      setBrowserSigner(signer);
+    }
+  };
+
+  useEffect(() => {
+    setInit();
+  }, [])
+
   const auth = async () => {
     const macha = new Macha({
       address: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
-      signer: $signer,
+      signer: browserSigner,
     });
     await macha.connectClient({
       owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
+      signer: browserSigner
     });
     console.log("Macha init ", macha);
     console.log("Macha Client ", macha.client);
@@ -29,9 +50,9 @@ const useMachaAuth = () => {
   };
 
   useEffect(() => {
-    // if ($signer)
+    if (browserSigner)
     auth();
-  }, [$address, $signer]);
+  }, [$address, browserSigner]);
 
   useEffect(() => {
     console.log("Logging client ", $macha.client); // getting the right value

@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
 const useMetaStore = create((set) => ({
+  meta: {},
+  loadMeta: (data: any) => set((state: any) => ({ meta: data })),
   overviewData: {},
   loadOverviewData: (data: any) =>
     set((state: any) => ({ overviewData: data })),

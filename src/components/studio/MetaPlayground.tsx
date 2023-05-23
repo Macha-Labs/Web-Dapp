@@ -1,4 +1,3 @@
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
@@ -8,13 +7,14 @@ import useMeta from "@/hooks/studio/useMeta";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
 import { Text } from "@chakra-ui/react";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   id: string;
 };
 function MetaPlayground({ id = "8n" }: Props) {
   const hookMeta = useMeta(id);
+  const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
   const [selectedOrigin, setSelectedOrigin] = useState("");
   const [selectedTrigger, setSelectedTrigger] = useState("");
@@ -69,7 +69,13 @@ function MetaPlayground({ id = "8n" }: Props) {
               <Text fontSize={"2xl"} fontWeight={700}>
                 Origin 1
               </Text>
-              <ButtonNative>Run</ButtonNative>
+              <ButtonNative
+                onClick={async() => {
+                  console.log("Logging meta ", $meta);
+                }}
+              >
+                Run
+              </ButtonNative>
             </FlexRow>
             {$metaInfo.data.metaData.origin.map((item: any, index: any) => {
               return Object.entries(item).map(([key, value]: any) => (

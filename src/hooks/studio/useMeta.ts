@@ -6,17 +6,17 @@ type Props = {
   id: string;
 };
 const useMeta = ({ id = "8n" }: any) => {
-  // const [origins, setOrigins] = useState([]);
 
+  const $loadMeta = useMetaStore((state: any) => state.loadMeta);
   const $loadMetaInfo = useMetaStore((state: any) => state.loadMetaInfo);
 
   const metaInit = async () => {
     const meta = new Meta(id);
     console.log("meta", meta);
+    $loadMeta(meta);
     const metaipfs: any = await meta.fetchMetaIpfs();
     console.log("metaipfs", metaipfs);
     $loadMetaInfo(metaipfs);
-    // setOrigins(metaipfs.data.origin);
   };
 
   useEffect(() => {
