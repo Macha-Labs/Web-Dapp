@@ -44,3 +44,11 @@ export const setDate = (d: string) => {
   const milliDate = new Date(date);
   return milliDate.toLocaleDateString();
 }
+
+export const getItemFromLocal = (key: string) => {
+  return localStorage.getItem(key);
+}
+
+export const setItemOnLocal = (key: string, value: any) => {
+  localStorage.setItem(key, value);
+}

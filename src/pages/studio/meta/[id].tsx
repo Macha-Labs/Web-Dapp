@@ -6,7 +6,7 @@ import Navigation from "@/_ui/nav/Navigation";
 import MetaOverview from "@/components/studio/MetaOverview";
 import MetaSettings from "@/components/studio/MetaSettings";
 import { style } from "@/styles/StyledConstants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MetaCurator from "@/components/studio/MetaCurator";
 import MetaPlayground from "@/components/studio/MetaPlayground";
 import Nav from "@/_ui/nav/Nav";
@@ -14,10 +14,24 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import useUserStore from "@/store/useUserStore";
 import { useRouter } from "next/router";
+import { getItemFromLocal, setItemOnLocal } from "@/helpers";
 
 const CreateMeta = () => {
   const router = useRouter();
   const $userMetasMap = useUserStore((state: any) => state.userMetasMap);
+  const [currentMetaId, setCurrentMetaId] = useState<any>();
+
+  useEffect(() => {
+    console.log("logging the router query", router.query);
+    let currentMetaId = router?.query?.id;
+    let storedMetaId = getItemFromLocal("currentMetaId");
+    if (currentMetaId && currentMetaId != storedMetaId ) {
+      setItemOnLocal("currentMetaId", router?.query?.id);
+      setCurrentMetaId(currentMetaId);
+    } else {
+      setCurrentMetaId(storedMetaId);
+    }
+  }, [])
 
   const createMetaOptions = [
     {
@@ -47,11 +61,11 @@ const CreateMeta = () => {
   const renderComponent = () => {
     switch (selectedTab) {
       case "Overview":
-        return <MetaOverview metaInfo={$userMetasMap["9n"]} />;
+        return <MetaOverview metaInfo={$userMetasMap[currentMetaId]} />;
       case "Curator":
         return <MetaCurator />;
       case "Playground":
-        return <MetaPlayground id="9n" />;
+        return <MetaPlayground id={currentMetaId} />;
       case "Settings":
         return <MetaSettings />;
       default:

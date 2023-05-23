@@ -146,7 +146,7 @@ const DashBoard = () => {
                       width="20%"
                       onCardClick={() => {
                         router.push({
-                          pathname: "/studio/meta/[id]",
+                          pathname: '/studio/meta/[id]',
                           query: { id: item.id },
                         });
                       }}
