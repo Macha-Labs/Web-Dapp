@@ -28,7 +28,7 @@ const InputSelect = ({
   elementRef,
   children,
 }: Props) => {
-  console.log("children", children);
+  // console.log("children", children);
   return (
     <>
       <Select
@@ -53,17 +53,23 @@ const InputSelect = ({
         }}
         margin={margin}
       >
-        {options.map((item, index) => {
-          return (
-            <option
-              key={index}
-              value={children ? index : item}
-              style={{ background: `${style.input.bg.default}` }}
-            >
-              {children ? <>{children}</> : <Text> {item}</Text>}
-            </option>
-          );
-        })}
+        {children ? (
+          <>{children}</>
+        ) : (
+          <>
+            {options.map((item, index) => {
+              return (
+                <option
+                  key={index}
+                  value={item}
+                  style={{ background: `${style.input.bg.default}` }}
+                >
+                  <Text> {item}</Text>
+                </option>
+              );
+            })}
+          </>
+        )}
       </Select>
     </>
   );
