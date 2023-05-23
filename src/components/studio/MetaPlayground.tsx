@@ -7,7 +7,7 @@ import InputSelect from "@/_ui/input/InputSelect";
 import useMeta from "@/hooks/studio/useMeta";
 import useMetaStore from "@/store/useMetaStore";
 import { Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 
 type Props = {
   id: string;
@@ -16,14 +16,18 @@ function MetaPlayground({ id = "8n" }: Props) {
   const hookMeta = useMeta(id);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
 
+  useEffect(() => {
+    console.log("Logging $meta ", $metaInfo);
+  }, [$metaInfo])
+
   return (
     <FlexRow width="100%" hrAlign="flex-start">
       <FlexColumn width="20%" vrAlign="flex-start" hrAlign="flex-start">
-        {/* {$metaInfo?.data?.origin && ( */}
-        {/* <> */}
+        {$metaInfo?.data?.metaData?.origin && (
+        <>
         <InputSelect
           placeholder="Origins"
-          options={hookMeta.origins}
+          options={$metaInfo?.data?.metaData?.origin}
           width="90%"
         />
         {/* <InputSelect
@@ -31,8 +35,8 @@ function MetaPlayground({ id = "8n" }: Props) {
           options={$metaInfo?.data?.triggers}
           width="90%"
         /> */}
-        {/* </> */}
-        {/* )} */}
+        </>
+        )}
       </FlexColumn>
 
       <FlexColumn hrAlign="flex-start" width="40%" vrAlign="flex-start">

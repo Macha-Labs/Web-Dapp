@@ -5,28 +5,26 @@ import { Text } from "@chakra-ui/react";
 import React from "react";
 import MetaCreateInfoCard from "./MetaCreateInfoCard";
 import { metaCreateInfoData } from "@/data/constantData";
+import { setDate } from "@/helpers";
 
 type Props = {
   metaInfo: any;
 };
 
 function MetaOverview({ metaInfo }: Props) {
-  var options = {
+  let options = {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   };
-  let date = Date.parse(metaInfo.state.updatedAt);
-  let updatedat = new Date(date);
-  let date2 = Date.parse(metaInfo.state.createdAt);
-  let createdat = new Date(date2);
+
   return (
     <>
       <MetaCreateInfoCard data={metaInfo} />
       <FlexRow>
         <FlexColumn width="60%" vrAlign="flex-start">
-          <Text>{metaInfo.description}</Text>
+          <Text>{metaInfo?.description}</Text>
           <FlexRow width="50%" hrAlign="flex-start">
             <FlexColumn vrAlign="flex-start" width="50%">
               <Text
@@ -39,7 +37,7 @@ function MetaOverview({ metaInfo }: Props) {
               >
                 CREATED
               </Text>
-              <Text>{createdat.toLocaleDateString()}</Text>
+              <Text>{setDate(metaInfo?.state?.updatedAt)}</Text>
             </FlexColumn>
             <FlexColumn vrAlign="flex-start" width="50%">
               <Text
@@ -52,7 +50,7 @@ function MetaOverview({ metaInfo }: Props) {
               >
                 LAST MODIFIED
               </Text>
-              <Text>{updatedat.toLocaleDateString()}</Text>
+              <Text>{setDate(metaInfo?.state?.createdAt)}</Text>
             </FlexColumn>
           </FlexRow>
           {/* <FlexRow width="50%" hrAlign="flex-start">

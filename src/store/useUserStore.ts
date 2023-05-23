@@ -4,7 +4,7 @@ import { create } from "zustand";
 const useUserStore = create((set) => ({
   user: new User$(null, null, null),
   userMetas: [],
-  userMetasMap: null,
+  userMetasMap: {},
   loadUserMetas: (data: any) => set((state: any) => ({ userMetas: data })),
   loadUserMetasMap: (data: any) =>
     set((state: any) => ({ userMetasMap: data })),

@@ -38,3 +38,9 @@ export const formatTime = (d: Date | undefined): string =>
         minute: '2-digit',
       })
     : ''
+
+export const setDate = (d: string) => {
+  const date = Date.parse(d);
+  const milliDate = new Date(date);
+  return milliDate.toLocaleDateString();
+}

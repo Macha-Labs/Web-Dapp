@@ -6,7 +6,7 @@ type Props = {
   id: string;
 };
 const useMeta = ({ id = "8n" }: any) => {
-  const [origins, setOrigins] = useState([]);
+  // const [origins, setOrigins] = useState([]);
 
   const $loadMetaInfo = useMetaStore((state: any) => state.loadMetaInfo);
 
@@ -16,7 +16,7 @@ const useMeta = ({ id = "8n" }: any) => {
     const metaipfs: any = await meta.fetchMetaIpfs();
     console.log("metaipfs", metaipfs);
     $loadMetaInfo(metaipfs);
-    setOrigins(metaipfs.data.origin);
+    // setOrigins(metaipfs.data.origin);
   };
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const useMeta = ({ id = "8n" }: any) => {
       metaInit();
     }
   }, [id]);
-  return { origins: origins };
+  return { };
 };
 
 export default useMeta;
