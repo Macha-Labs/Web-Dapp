@@ -1,3 +1,4 @@
+import JSONViewer from "@/_ui/JSONViewer";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
@@ -23,6 +24,7 @@ function MetaPlayground({ id = "9n" }: Props) {
     console.log("Logging $meta ", $metaInfo);
   }, [$metaInfo]);
 
+  const [resultData, setResultData] = useState({});
   return (
     <FlexRow width="100%" hrAlign="flex-start">
       <FlexColumn width="20%" vrAlign="flex-start" hrAlign="flex-start">
@@ -74,6 +76,7 @@ function MetaPlayground({ id = "9n" }: Props) {
                   console.log("Logging meta ", $meta);
                   const result = await $meta.fetchMetaOrigin("yam.eth", 0);
                   console.log("Origin result", result);
+                  setResultData(result.data);
                 }}
               >
                 Run
@@ -122,6 +125,9 @@ function MetaPlayground({ id = "9n" }: Props) {
             <InputLabel inputType="text" labelText="Type" /> */}
           </>
         )}
+      </FlexColumn>
+      <FlexColumn width="40%">
+        <JSONViewer data={resultData} />
       </FlexColumn>
     </FlexRow>
   );
