@@ -11,54 +11,35 @@ const useXmtpChannels = () => {
   const [rawConversations, setRawConversations] = useState<any>();
   const hookLensProfileList = useLensProfileList();
 
-  useEffect(() => {
-    if (authContext?.xmtpLogs) {
-      _watch();
-    }
-  }, [authContext?.xmtpLogs]);
-
 
   useEffect(() => {
     
   }, [allConversations])
 
   const _watch = async () => {
-    console.log("Calling useXmtpChannels._watch", authContext?.xmtpLogs);
-    for await (const conversation of authContext?.xmtpLogs) {
-      console.log("New conversation started with ", conversation);
-      let conversations: any[] = [];
-      if (allConversations) {
-        conversations = [...allConversations];
-        conversations.unshift(new Channel$("xmtp", conversation));
-        setAllConversations(conversations);
-      } else {
-        console.log("No conversations");
-      }
-        
-    }
+    
   };
 
   const _unwatch = () => {
-    authContext?.xmtpLogs.return()
   }
 
   const _fetch = async () => {
-    let conversationList = await authContext?.xmtpClient?.conversations?.list();
-    conversationList = conversationList.reverse()
-    setRawConversations(conversationList);
+    // let conversationList = await authContext?.xmtpClient?.conversations?.list();
+    // conversationList = conversationList.reverse()
+    // setRawConversations(conversationList);
 
-    const conversationMap = await conversationList
-      ?.map(async (item: any) => {
-        const peer = await hookLensProfileList.fetch(item.peerAddress);
-        const channelData = new Channel$("xmtp", {...item, peer: peer, raw: item});
-        return channelData;
-      })
-      Promise?.all(conversationMap).then((result: any) => {
-        logger("xmtp", "useXmtpChannels._fetch", "channels from xmtp", [
-          result,
-        ]);
-        setAllConversations(result);
-      });
+    // const conversationMap = await conversationList
+    //   ?.map(async (item: any) => {
+    //     const peer = await hookLensProfileList.fetch(item.peerAddress);
+    //     const channelData = new Channel$("xmtp", {...item, peer: peer, raw: item});
+    //     return channelData;
+    //   })
+    //   Promise?.all(conversationMap).then((result: any) => {
+    //     logger("xmtp", "useXmtpChannels._fetch", "channels from xmtp", [
+    //       result,
+    //     ]);
+    //     setAllConversations(result);
+    //   });
   };
 
   return {

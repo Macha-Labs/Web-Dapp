@@ -7,13 +7,11 @@ import InputSearch from "@/_ui/input/InputSearch";
 import Nav from "@/_ui/nav/Nav";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
-import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
 import MetaCreateModal from "@/components/studio/MetaCreateModal";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import useAuthStore from "@/store/useAuthStore";
-import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -22,7 +20,8 @@ const DashBoard = () => {
   const metaModal = useDisclosure();
   const hookMeta = useMetaCreate();
   const $macha = useAuthStore((state: any) => state.macha);
-  const $userMetas = useUserStore((state: any) => state.userMetas);
+  const router = useRouter();
+
 
   const sortOptions = [
     {
@@ -83,7 +82,6 @@ const DashBoard = () => {
   };
 
   const renderBody = () => {
-    const router = useRouter();
     return (
       <>
         <NavBlock>
@@ -140,6 +138,7 @@ const DashBoard = () => {
                 (item: any, index: number) => {
                   return (
                     <MetaCard
+                      key={index}
                       image={item.image ? item.image : "../assets/MetaCard.png"}
                       heading={item.name}
                       description={item.description}

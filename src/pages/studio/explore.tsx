@@ -110,6 +110,7 @@ export default function DashBoard() {
             {exploreMetaOptions.map((item, index) => {
               return (
                 <MetaCard
+                key={index}
                   image={item.image}
                   heading={item.heading}
                   description={item.description}

@@ -1,4 +1,4 @@
-import Nav from "@/components/nav/Nav";
+import Nav from "@/_ui/nav/Nav";
 import UserCard from "@/components/user/UserCard";
 import UserProfile from "@/components/user/UserProfile";
 import UserEdit from "@/components/user/UserEdit";
@@ -9,7 +9,7 @@ import { StyledPageContainer, StyledPageList } from "@/styles/StyledComponents";
 import { Avatar, Input, Text, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-import ModalWindow from "@/components/modal/ModalWindow";
+import ModalWindow from "@/_ui/modal/ModalWindow";
 import AuthCard from "@/components/auth/AuthCard";
 import { disconnect } from "@wagmi/core";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";

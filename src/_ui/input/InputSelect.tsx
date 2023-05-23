@@ -13,7 +13,7 @@ type Props = {
   onChangeHandler?: any;
   elementRef?: any;
   width?: any;
-  children?: any;
+  childrenComponent?: any;
 };
 
 const InputSelect = ({
@@ -26,7 +26,7 @@ const InputSelect = ({
   margin,
   onChangeHandler = (e?: any) => {},
   elementRef,
-  children,
+  childrenComponent,
 }: Props) => {
   // console.log("children", children);
   return (
@@ -53,8 +53,8 @@ const InputSelect = ({
         }}
         margin={margin}
       >
-        {children ? (
-          <>{children}</>
+        {childrenComponent ? (
+          <>{childrenComponent}</>
         ) : (
           <>
             {options.map((item, index) => {

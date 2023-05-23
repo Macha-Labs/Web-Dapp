@@ -12,11 +12,12 @@ type Props = {
     event: any,
     size?: string,
     header?: any,
-    children?: any,
+    childrenComponent?: any,
     footer?: any
+    children?: any
 }
 
-const ModalSlider = ({event, size, header, children, footer}: Props) => {
+const ModalSlider = ({event, size, header, childrenComponent, footer, children}: Props) => {
 
 
     return (
@@ -35,7 +36,7 @@ const ModalSlider = ({event, size, header, children, footer}: Props) => {
                 </DrawerHeader>}
                 
                 <DrawerBody style={{overflowY:"scroll"}}>
-                        {children}
+                        {childrenComponent}
                 </DrawerBody>
 
                 {footer && <DrawerFooter>

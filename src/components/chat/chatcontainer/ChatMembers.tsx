@@ -96,7 +96,6 @@ const ChatMembers = (props: any) => {
             );
           })}
       </>
-
     </ModalSlider>
   );
 };

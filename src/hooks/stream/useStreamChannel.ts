@@ -5,7 +5,7 @@ import { AuthContext } from "@/providers/AuthProvider";
 
 const useStreamChannel = () => {
   console.log('Rendering >>>>> useStreamChannel');
-  const [channel, setChannel] = useState<any>();
+  const [channel, setChannel] = useState<any>({});
   const authContext = useContext(AuthContext)  
 
   /** 
@@ -14,12 +14,12 @@ const useStreamChannel = () => {
    **/
    const _fetch = async (channelId: any) => {
     if (channelId) {
-      const newChannel = authContext.streamClient?.channel("team", channelId, {});
-      await newChannel?.watch();
-      logger("channel", "_fetch", "channel data from stream ", [
-        newChannel,
-      ]);
-      setChannel(new Channel$('getstream', newChannel));
+      // const newChannel = authContext.streamClient?.channel("team", channelId, {});
+      // await newChannel?.watch();
+      // logger("channel", "_fetch", "channel data from stream ", [
+      //   newChannel,
+      // ]);
+      // setChannel(new Channel$('getstream', newChannel));
     } else {
       setChannel(null);
     }

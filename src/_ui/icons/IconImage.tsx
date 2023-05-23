@@ -5,7 +5,7 @@ import { style as gStyle } from "../../styles/StyledConstants";
 import GlobalIcons from "@/styles/GlobalIcons";
 
 type Props = {
-  slug?: string;
+  slug: string;
   size?: string;
   onClick?: any;
   style?: any;

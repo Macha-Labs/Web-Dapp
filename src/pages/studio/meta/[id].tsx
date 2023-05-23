@@ -15,7 +15,7 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import useUserStore from "@/store/useUserStore";
 import { useRouter } from "next/router";
 
-const createMeta = () => {
+const CreateMeta = () => {
   const router = useRouter();
   const $userMetasMap = useUserStore((state: any) => state.userMetasMap);
 
@@ -83,4 +83,4 @@ const createMeta = () => {
   return <FlexWindow leftElem={<Nav />} rightElem={renderBody()}></FlexWindow>;
 };
 
-export default createMeta;
+export default CreateMeta;

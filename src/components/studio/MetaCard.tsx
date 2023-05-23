@@ -10,7 +10,7 @@ type Props = {
   description: string;
   tags: any;
   width?: any;
-  cardDirection?: string;
+  cardDirection?: any;
   onCardClick?: any;
 };
 
@@ -33,7 +33,7 @@ export default function MetaCard({
         margin: `${style.card.margin.default}`,
         width: ` ${width}`,
         display: "flex",
-        flexDirection: `${cardDirection}`,
+        flexDirection: cardDirection,
       }}
       onClick={() => {
         onCardClick();

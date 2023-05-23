@@ -28,7 +28,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
           <IconImage slug="icon-close" onClick={() => metaModal.onClose()} />
         </FlexRow>
       }
-      children={
+      childrenComponent={
         <FlexColumn width="100%">
           <InputLabel
             elementRef={(element: any) =>

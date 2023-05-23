@@ -52,7 +52,7 @@ const LayoutOptions = (props: any) => {
                 }}
               >
                 <StyledRow className="vr-center">
-                  <IconImage path={item.icon} size={item.size} />
+                  <IconImage slug={item.icon} size={item.size} />
                   <Text fontSize="md" className="m-l-0-5">
                     {item.name}
                   </Text>

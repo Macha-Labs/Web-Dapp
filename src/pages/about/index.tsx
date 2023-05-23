@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { Landing } from "../../components/icons/IconImage";
+// import { Landing } from "../../components/icons/IconImage";
 
 function about() {
   return (
@@ -88,7 +88,6 @@ function about() {
             src="/assets/docs.png"
             alt="metawork_chat"
           /> */}
-          <Landing path="aboutUsPage.png" className="mb-2 mb-md-0 pt-md-3 " />
           {/* <img
             className="backedByImg"
             src="/assets/docs.png"
@@ -212,7 +211,6 @@ function about() {
               </div>
               <div className="d-flex align-items-center teamMembers  mt-3 me-md-3 ">
                 {/* <img src="./assets/nikhil.png" alt="avatar" /> */}
-                <Landing path="nikhil.png" />
                 <div className="d-flex flex-column ms-3 align-items-start">
                   <h4 className="teamMembersHeading mb-1">Nikhil Bhintade</h4>
                   <h5 className="teamMembersSubHeading">Product Manager</h5>
@@ -401,7 +399,6 @@ function about() {
             >
               <div className="d-flex align-items-center ">
                 <div className="footerlogoos">
-                  <Landing path="IconLinkedin.svg" />
                 </div>
                 <h2 className="bottomLinks mt-1 ps-4">LinkedIn</h2>
               </div>

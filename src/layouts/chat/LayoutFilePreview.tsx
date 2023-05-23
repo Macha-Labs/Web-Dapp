@@ -23,7 +23,7 @@ const LayoutFilePreview = (props: any) => {
           <StyledCol className="w-100">
             <StyledRow>
               <IconImage
-                path="IconDarkFiles.png"
+                slug="IconDarkFiles.png"
                 style={{ className: "m-r-0-5" }}
               />
               <Text fontSize="md">

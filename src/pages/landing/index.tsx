@@ -2,7 +2,7 @@ import { Button, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {Landing} from "../../components/icons/IconImage";
+import IconImage from "@/_ui/icons/IconImage";
 
 const LandingPage = () => {
   const sliderText = [
@@ -255,7 +255,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className="pt-3 chatBanner borderBox">
-            <Landing path="workspaceSuitWeb.png" />
+            <IconImage slug="workspaceSuitWeb.png" />
           </div>
 
           <div className="sectionSpacing">
@@ -292,9 +292,8 @@ const LandingPage = () => {
                 <h1 className="highlight mt-3 glassCardHeading">
                   Web3 login with Wallet and Decentralized Identity
                 </h1>
-                <Landing
-                  path="loginImage.png"
-                  className="LoginMetaMask p-md-4 pt-2 mt-md-5"
+                <IconImage
+                  slug="loginImage.png"
                 />
               </div>
             </div>
@@ -771,7 +770,7 @@ const LandingPage = () => {
                     className="footerlogoos"
                     alt="twitterlogo"
                   /> */}
-                  <Landing path="base-mirror.svg" />
+                  <IconImage slug="base-mirror.svg" />
                   {/* <Image src="./assets/base-mirror.svg" /> */}
                   <h2 className="bottomLinks mt-1 ps-4">Mirror</h2>
                 </div>
@@ -786,7 +785,7 @@ const LandingPage = () => {
               >
                 <div className="d-flex align-items-center ">
                   <div className="footerlogoos">
-                    <Landing path="IconLinkedin.svg" />
+                    <IconImage slug="IconLinkedin.svg" />
                   </div>
                   <h2 className="bottomLinks mt-1 ps-4">LinkedIn</h2>
                 </div>

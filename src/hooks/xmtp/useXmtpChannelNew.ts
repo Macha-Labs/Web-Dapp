@@ -11,29 +11,10 @@ const useXmtpChannelNew = () => {
     const [isLoading, setLoading] = useState<any>();
 
     const _validate = async (peerAddress: any, callback?: any) => {
-        setLoading(true);
-        await authContext?.xmtpClient?.canMessage(
-            peerAddress
-        ).then((res: any) => {
-            if (res) {
-                _fetch(peerAddress, callback);
-            } else {
-                console.log(res);
-                callback.error();
-                setLoading(false);
-            }
-        })
+     
     }
 
     const _fetch = async (peerAddress: any, callback?: any) => {
-        await authContext?.xmtpClient?.conversations.newConversation(
-            peerAddress,
-        ).then((res: any) => {
-            console.log(res);
-            chatContext?.hookChannel?.fetch(new Channel$("xmtp", {...res, peer: {}, raw: res}));
-            setLoading(false);
-            callback.success();
-        })
     }
 
     const _initiateSearch = (callback?: any) => {

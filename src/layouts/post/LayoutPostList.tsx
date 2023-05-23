@@ -2,9 +2,7 @@ import { AuthContext } from "@/providers/AuthProvider";
 import { StyledCol } from "@/styles/StyledComponents";
 import { Heading, Image } from "@chakra-ui/react";
 import { useContext } from "react";
-import LayoutCard from "../LayoutCard";
 import LayoutPostCard from "./LayoutPostCard";
-import LayoutPostLoading from "./LayoutPostLoading";
 
 interface Props {
   [key: string]: any;

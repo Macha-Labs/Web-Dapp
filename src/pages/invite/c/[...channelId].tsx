@@ -20,7 +20,7 @@ const Invite = () => {
             router.query?.channelId ? router?.query?.channelId[0] : null
           }
         />
-      </Flex>
+      </FlexWindow>
     );
 }
 

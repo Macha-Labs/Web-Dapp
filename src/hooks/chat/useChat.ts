@@ -172,21 +172,6 @@ const useChat = () => {
     if (actionMessage?.action !== "EDIT") {
       return;
     }
-    await authContext?.streamClient
-      .updateMessage({
-        ...actionMessage.item,
-        id: actionMessage.item?.id,
-        text: editMessageRef.current.value,
-      })
-      .then(() => {
-        toast({
-          title: "Message Updated",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-        setActionMessage(null);
-      });
   };
 
   const deleteMessage = async (message: any) => {
@@ -196,92 +181,19 @@ const useChat = () => {
         publicationId: message.message_custom_data?.postID,
       });
     }
-
-    authContext?.streamClient
-      .deleteMessage(message?.id, true)
-      .then(() => {
-        toast({
-          title: "Message deleted",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-      })
-      .catch((err: any) => {
-        toast({
-          title: "Message could not be deleted",
-          status: "error",
-          duration: 3000,
-          position: "bottom-right",
-        });
-      });
   };
 
   const pinMessage = async (message: any) => {
-    await authContext?.streamClient
-      .pinMessage(message, null)
-      .then(() => {
-        toast({
-          title: "Message Pinned Successfully",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-      })
-      .catch((err: any) => {
-        toast({
-          title: "Message could not be pinned",
-          status: "error",
-          duration: 3000,
-          position: "bottom-right",
-        });
-      });
+
   };
 
   const unPinMessage = async (message: any) => {
-    await authContext?.streamClient
-      .unpinMessage(message)
-      .then(() => {
-        toast({
-          title: "Message Unpinned Successfully",
-          status: "success",
-          duration: 3000,
-          position: "bottom-right",
-        });
-      })
-      .catch((err: any) => {
-        toast({
-          title: "Message could not be unpinned",
-          status: "error",
-          duration: 3000,
-          position: "bottom-right",
-        });
-      });
+
   };
 
   const keyDownMessage = async (event: any, callback?: any) => {
     const keycode = event.which || event.keycode;
     console.log("Keycode", keycode, callback);
-
-    //Logic for typing indicators begins
-    // let typingTimeout;
-    // if (typingTimeout !== undefined) clearTimeout(typingTimeout);
-
-    // await $channelraw.keystroke();
-
-    // typingTimeout = setTimeout(async () => {
-    //   await $channelraw.stopTyping();
-    // }, 3000);
-
-    // $channelraw.on("typing.start", (event: any) => {
-    //   let typingUser = Object.keys($channelraw.state.typing);
-    //   setUsersWhoAreTyping(typingUser);
-    // });
-    // $channelraw.on("typing.stop", (event: any) => {
-    //   setUsersWhoAreTyping(null);
-    // });
-
-    //Logic for typing indicators ends
 
     if ((keycode == 13 && !event.shiftKey)) {
       event.preventDefault();

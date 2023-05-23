@@ -270,7 +270,7 @@ const UserProfile = ({ user }: any) => {
   const templateTabs = () => {
     return (
       <Tabs variant="unstyled">
-        <LayoutCardPannel
+        {/* <LayoutCardPannel
           style={{ className: "m-t-1" }}
           header={
             <TabList className="w-100">
@@ -317,7 +317,7 @@ const UserProfile = ({ user }: any) => {
               </StyledRow>
             </TabList>
           }
-        >
+        > */}
           <TabPanels>
             <TabPanel>{templatePosts()}</TabPanel>
 
@@ -329,7 +329,7 @@ const UserProfile = ({ user }: any) => {
               <TemplateFollowing />
             </TabPanel>
           </TabPanels>
-        </LayoutCardPannel>
+        {/* </LayoutCardPannel> */}
       </Tabs>
     );
   };

@@ -10,7 +10,7 @@ type Props = {
   children: any;
   padding?: string;
   margin?: string;
-  flexWrap?: string;
+  flexWrap?: any;
 };
 
 export default function FlexRow({

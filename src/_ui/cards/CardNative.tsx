@@ -1,4 +1,3 @@
-import { StyledRow, StyledCard } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
 
 type Props = {

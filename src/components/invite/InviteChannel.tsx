@@ -3,7 +3,7 @@ import { AuthContext } from "@/providers/AuthProvider";
 import { StyledCol, StyledCard} from "@/styles/StyledComponents";
 import { Avatar, Button, Heading, Text, useToast } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
-import { ConnectWalletButton } from "../buttons/ConnectWalletButton";
+import { ConnectWalletButton } from "../ConnectWalletButton";
 import { ChatContext } from "@/providers/ChatProvider";
 import { useRouter } from "next/router";
 import MobileEmptyState from "../MobileEmptyState";
@@ -66,29 +66,14 @@ const InviteChannel = (props: any) => {
                     className=""
                     size="lg"
                     variant="state_lens"
-                    isLoading={authContext?.isLoadingLens}
+                    isLoading={false}
                     onClick={() => {
-                      authContext.connectLens(callBacks);
                     }}
                     style={{}}
                   >
                     <Text fontSize={22} paddingBottom={"0px"} marginBottom="0px" style={{marginBottom:"0px", paddingBottom:"0px", color:"#000"}}  >Sign In With Lens</Text>
                   </Button>
                 )}
-                {authContext.address &&
-                  authContext?.user?.lens?.id &&
-                  !authContext.xmtpClientAddress && (
-                    <Button
-                      className=""
-                      size="lg"
-                      variant="state_xmtp"
-                      onClick={() => {
-                        authContext.connectXmtp();
-                      }}
-                    >
-                      <Text fontSize={22} paddingBottom={"0px"} marginBottom="0px" style={{marginBottom:"0px", paddingBottom:"0px"}}>Connect to XMTP</Text>
-                    </Button>
-                  )}
                 {authContext?.isConnected && (
                   <Button
                     onClick={() => {

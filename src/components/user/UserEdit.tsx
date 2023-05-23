@@ -1,6 +1,5 @@
 import { setMetaData } from "@/helpers/lens/lens";
 import useLensProfileUpdate from "@/hooks/lens/useLensProfileUpdate";
-import LayoutCardPannel from "@/layouts/LayoutCardPannel";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { StyledRow } from "@/styles/StyledComponents";
 import { Avatar, Button, Heading } from "@chakra-ui/react";
@@ -52,33 +51,14 @@ const UserEdit = () => {
   ];
 
   return (
-    <LayoutCardPannel
-      header={
-        <StyledRow className="w-100 vr-center hr-between">
-          <Heading as="h6" size="sm">
-            Edit Profile
-          </Heading>
-          <Button
-            onClick={() =>
-              hookLensProfileUpdate.updateLensProfile().then((res: any) => {
-                console.log(res, "res");
-              })
-            }
-            variant="state_brand"
-            size="sm"
-          >
-            Save Profile
-          </Button>
-        </StyledRow>
-      }
-    >
+    <>
       <StyledRow className="hr-center w-100 m-b-1">
         <Avatar size="2xl" src={hookLensProfileUpdate?.userLens?.image} />
       </StyledRow>
-      <LayoutInputs data={data.slice(0, 2)} style={{ class: "m-b-1" }} />
-      <LayoutInputs data={data.slice(2, 4)} style={{ class: "m-b-1" }} />
-      <LayoutInputs data={data.slice(4)} style={{ class: "m-b-1" }} />
-    </LayoutCardPannel>
+      <LayoutInputs style={{ class: "m-b-1" }} />
+      <LayoutInputs style={{ class: "m-b-1" }} />
+      <LayoutInputs style={{ class: "m-b-1" }} />
+    </>
   );
 };
 export default UserEdit;

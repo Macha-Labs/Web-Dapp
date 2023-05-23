@@ -89,7 +89,7 @@ const ChatHeader = (props: any) => {
               {!$channel?.raw?.disconnected &&
                 $channel?.raw?.muteStatus()?.muted && (
                   <IconImage
-                    path="IconDarkMute.png"
+                    slug="IconDarkMute.png"
                     style={{ className: "m-l-0-5" }}
                     size="2xs"
                   />
@@ -129,13 +129,13 @@ const ChatHeader = (props: any) => {
           {router.pathname == "/" && (
             <StyledRow className="vr-center">
               <IconImage
-                path="IconDarkMenu.png"
+                slug="IconDarkMenu.png"
                 onClick={modalSettings.onOpen}
                 style={{ className: "m-r-0-5" }}
               />
 
               <IconImage
-                path="IconDarkUsers.png"
+                slug="IconDarkUsers.png"
                 onClick={membersModal.onOpen}
               />
             </StyledRow>

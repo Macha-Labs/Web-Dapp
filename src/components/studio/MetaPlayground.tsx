@@ -35,7 +35,7 @@ function MetaPlayground({ id = "9n" }: Props) {
               placeholder="Origins"
               options={$metaInfo?.data?.metaData?.origin}
               width="90%"
-              children={
+              childrenComponent={
                 <>
                   {$metaInfo?.data?.metaData?.origin.map(
                     (item: any, index: any) => {

@@ -30,7 +30,7 @@ function MetaTagFilter() {
             />
           </FlexRow>
         }
-        children={
+        childrenComponent={
           <FlexColumn width="100%">
             <FlexColumn width="100%" vrAlign="flex-start" padding="10px 0px">
               <FlexRow width="100%" hrAlign="space-between">

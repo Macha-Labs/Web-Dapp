@@ -20,17 +20,17 @@ function ChakraTable({ th = [], tr = [] }: Props) {
       <Table variant="simple" colorScheme="whiteAlpha">
         <Thead>
           <Tr>
-            {th.map((item) => {
-              return <Th>{item}</Th>;
+            {th.map((item: any, index: number) => {
+              return <Th key={index}>{item}</Th>;
             })}
           </Tr>
         </Thead>
         <Tbody>
-          {tr.map((dataobj) => {
+          {tr.map((dataobj: any, index: number) => {
             return (
-              <Tr>
-                {dataobj.map((data) => {
-                  return <Td>{data}</Td>;
+              <Tr key={index}>
+                {dataobj.map((data: any, index2: number) => {
+                  return <Td key={index2}>{data}</Td>;
                 })}
               </Tr>
             );

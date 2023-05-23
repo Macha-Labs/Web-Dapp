@@ -36,7 +36,7 @@ const StreamProvider = ({children}: any) => {
     return (
         <StreamContext.Provider
             value={{
-                client: authContext?.streamClient,
+                client: {},
                 hookChannel: hookStreamChannel,
                 reloadChannel:  hookStreamChannel._reload,
                 initiate: initiate,

@@ -1,4 +1,4 @@
-export const commonStyle = {
+export const commonStyle: any = {
   borderRadius: "5px",
   borderRadiusButton: "5px",
   borderRadiusTag: "5px",
@@ -63,18 +63,18 @@ export const commonStyle = {
     widthCardList: "calc(50% - 10px)",
   },
   margin: {
-    xs: "1rem",
-    sm: "",
-    md: "1rem",
-    lg: "",
-    xl: "",
+    "xs": "1rem",
+    "sm": "",
+    "md": "1rem",
+    "lg": "",
+    "xl": "",
   },
   padding: {
-    xs: "1rem",
-    sm: "",
-    md: "1rem",
-    lg: "",
-    xl: "",
+    "xs": "1rem",
+    "sm": "",
+    "md": "1rem",
+    "lg": "",
+    "xl": "",
   },
 };
 

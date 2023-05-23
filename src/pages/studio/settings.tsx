@@ -97,9 +97,9 @@ export default function DashBoard() {
             </Heading>
             <StyledCard className="m-b-1">
               <LayoutInputs
-                data={[
-                  { label: "API Key Name", value: "", onChange: () => {} },
-                ]}
+                // data={[
+                //   { label: "API Key Name", value: "", onChange: () => {} },
+                // ]}
                 style={{ class: "" }}
               />
             </StyledCard>

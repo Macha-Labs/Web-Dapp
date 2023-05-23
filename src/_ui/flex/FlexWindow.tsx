@@ -5,6 +5,7 @@ type Props = {
   children?: any;
   leftElem?: any;
   rightElem?: any;
+  style?: any;
 };
 
 export const FlexWindow = ({ children, leftElem, rightElem }: Props) => {

@@ -173,7 +173,7 @@ const ChatEdit = (props: any) => {
         <StyledCol>
           <Heading as="h6" size="sm" className="m-b-1">Channel Details</Heading>
           <StyledCard className="m-b-1">
-            <LayoutInputs data={data} style={{ class: "m-b-1" }} />
+            <LayoutInputs style={{ class: "m-b-1" }} />
           </StyledCard>
         </StyledCol>
         <StyledCol>

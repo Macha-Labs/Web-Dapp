@@ -1,17 +1,17 @@
 import { style } from "@/styles/StyledConstants";
 import React, { useState } from "react";
 
-const JSONViewer = ({ data }) => {
-  const [expanded, setExpanded] = useState({});
+const JSONViewer = ({ data }: any) => {
+  const [expanded, setExpanded] = useState<any>({});
 
-  const handleToggle = (key) => {
-    setExpanded((prevState) => ({
+  const handleToggle = (key: any) => {
+    setExpanded((prevState: any) => ({
       ...prevState,
       [key]: !prevState[key],
     }));
   };
 
-  const renderData = (data, key) => {
+  const renderData = (data: any, key: any) => {
     if (Array.isArray(data)) {
       return (
         <ul>

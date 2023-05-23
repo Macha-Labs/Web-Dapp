@@ -111,7 +111,7 @@ const LayoutPostCard = (props: any) => {
             </StyledCol>
             <StyledCol className="card-footer">
               <StyledRow className="w-100 vr-center">
-                <IconImage path="IconLensColor.png" />
+                <IconImage slug="IconLensColor.png" />
                 <Heading className="h6 m-l-0-5" size="xs">
                   From Lens Protocol
                 </Heading>

@@ -9,7 +9,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import ModalPage from "../modal/ModalPage";
+import ModalPage from "@/_ui/modal/ModalPage";
 
 const OrgControl = (props:any) => {
   const settingModal = useDisclosure();
