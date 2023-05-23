@@ -6,6 +6,7 @@ import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
 import useMeta from "@/hooks/studio/useMeta";
 import useMetaStore from "@/store/useMetaStore";
+import { style } from "@/styles/StyledConstants";
 import { Text } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -32,6 +33,23 @@ function MetaPlayground({ id = "8n" }: Props) {
               placeholder="Origins"
               options={$metaInfo?.data?.metaData?.origin}
               width="90%"
+              children={
+                <>
+                  {$metaInfo?.data?.metaData?.origin.map(
+                    (item: any, index: any) => {
+                      return (
+                        <option
+                          key={index}
+                          value={index}
+                          style={{ background: `${style.input.bg.default}` }}
+                        >
+                          <Text>option {index}</Text>
+                        </option>
+                      );
+                    }
+                  )}
+                </>
+              }
             />
             <InputSelect
               onChangeHandler={setSelectedTrigger}

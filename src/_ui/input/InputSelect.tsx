@@ -13,6 +13,7 @@ type Props = {
   onChangeHandler?: any;
   elementRef?: any;
   width?: any;
+  children?: any;
 };
 
 const InputSelect = ({
@@ -25,43 +26,46 @@ const InputSelect = ({
   margin,
   onChangeHandler = (e?: any) => {},
   elementRef,
+  children,
 }: Props) => {
-  console.log("Inputoptions", options);
+  console.log("children", children);
   return (
-    <Select
-      ref={elementRef}
-      placeholder={placeholder}
-      size={size}
-      width={width ? width : "100%"}
-      icon={
-        <IconImage
-          slug={icon ? icon.slug : "icon-chevron-down"}
-          size={icon ? icon.size : "md"}
-          style={icon ? icon.style : ""}
-        />
-      }
-      variant={variant}
-      onChange={(e) => {
-        onChangeHandler(e.target.value);
-      }}
-      style={{
-        background: `${style.input.bg.default}`,
-        border: `${style.input.border.default}`,
-      }}
-      margin={margin}
-    >
-      {options.map((item, index) => {
-        return (
-          <option
-            key={index}
-            value={index}
-            style={{ background: `${style.input.bg.default}` }}
-          >
-            <Text>{item}</Text>
-          </option>
-        );
-      })}
-    </Select>
+    <>
+      <Select
+        ref={elementRef}
+        placeholder={placeholder}
+        size={size}
+        width={width ? width : "100%"}
+        icon={
+          <IconImage
+            slug={icon ? icon.slug : "icon-chevron-down"}
+            size={icon ? icon.size : "md"}
+            style={icon ? icon.style : ""}
+          />
+        }
+        variant={variant}
+        onChange={(e) => {
+          onChangeHandler(e.target.value);
+        }}
+        style={{
+          background: `${style.input.bg.default}`,
+          border: `${style.input.border.default}`,
+        }}
+        margin={margin}
+      >
+        {options.map((item, index) => {
+          return (
+            <option
+              key={index}
+              value={children ? index : item}
+              style={{ background: `${style.input.bg.default}` }}
+            >
+              {children ? <>{children}</> : <Text> {item}</Text>}
+            </option>
+          );
+        })}
+      </Select>
+    </>
   );
 };
 
