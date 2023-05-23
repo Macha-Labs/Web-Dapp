@@ -15,9 +15,11 @@ function MetaSettings() {
   const triggerModal = useDisclosure();
   const originModal = useDisclosure();
   const metaModal = useDisclosure();
+  
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   const $triggerData = useMetaStore((state: any) => state.triggerData);
   const $originData = useMetaStore((state: any) => state.originData);
+
   return (
     <>
       <FlexRow width="100%">

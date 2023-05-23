@@ -13,7 +13,7 @@ type Props = {
   metaModal?: any;
   hookMeta?: any;
 };
-function MetaCreateModal({ metaModal, hookMeta }: Props) {
+const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
   const $loadOverviewData = useMetaStore(
     (state: any) => state.loadOverviewData
   );
@@ -54,9 +54,11 @@ function MetaCreateModal({ metaModal, hookMeta }: Props) {
             width="100%"
             onClick={(e: any) => {
               e.preventDefault();
-              $loadOverviewData(hookMeta.metaOverview.current);
-              console.log(hookMeta.metaOverview.current);
-              console.log($overviewData);
+              let metaCreateData = {
+                name: hookMeta.metaOverview.current['metaName'].value,
+                description: hookMeta.metaOverview.current['metaDescription'].value,
+              }
+              $loadOverviewData(metaCreateData);
             }}
           >
             Create Meta
