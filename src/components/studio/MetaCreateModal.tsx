@@ -29,25 +29,30 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
         </FlexRow>
       }
       children={
-        <FlexColumn width="100%">
-          <InputLabel
-            elementRef={(element: any) =>
-              (hookMeta.metaOverview.current["metaName"] = element)
-            }
-            inputType="text"
-            labelText="Meta Name"
-            placeholder="Name"
-          />
-          <InputLabel
-            elementRef={(element: any) =>
-              (hookMeta.metaOverview.current["metaDescription"] = element)
-            }
-            inputType="text"
-            labelText="Description"
-            placeholder="Description"
-          />
-          <InputLabel inputType="file" labelText="Image" placeholder="Image" />
-
+        <FlexColumn width="100%" hrAlign="space-between">
+          <FlexColumn hrAlign="space-between" height="35%" marginTop={"sm"}>
+            <InputLabel
+              elementRef={(element: any) =>
+                (hookMeta.metaOverview.current["metaName"] = element)
+              }
+              inputType="text"
+              labelText="Meta Name"
+              placeholder="Name"
+            />
+            <InputLabel
+              elementRef={(element: any) =>
+                (hookMeta.metaOverview.current["metaDescription"] = element)
+              }
+              inputType="text"
+              labelText="Description"
+              placeholder="Description"
+            />
+            <InputLabel
+              inputType="file"
+              labelText="Image"
+              placeholder="Image"
+            />
+          </FlexColumn>
           {/* <Link href="/studio/createMeta" style={{ width: "100%" }}> */}
           <ButtonNative
             variant="state_brand"

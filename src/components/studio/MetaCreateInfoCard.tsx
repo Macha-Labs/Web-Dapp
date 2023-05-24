@@ -16,7 +16,7 @@ function MetaCreateInfoCard({ data }: Props) {
   return (
     <CardNative>
       <FlexRow width="80%" marginBottom="lg">
-        <FlexColumn width="20%" margin="0 20px 0 0">
+        <FlexColumn width="20%" marginRight="sm">
           <Image
             src={
               data?.metaImage ? data?.metaImage : "https://bit.ly/dan-abramov"

@@ -15,13 +15,23 @@ import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
   const hookMeta = useMetaCreate();
   const $macha = useAuthStore((state: any) => state.macha);
   const router = useRouter();
+  const [filteredData, setFilteredData] = useState(
+    $macha?.client?.metasOwned?.data
+  );
 
+  const handleFilter = (inputValue: string) => {
+    const filtered = $macha?.client?.metasOwned?.data.filter((item: any) => {
+      return item.name.toLowerCase().includes(inputValue.toLowerCase());
+    });
+    setFilteredData(filtered);
+  };
 
   const sortOptions = [
     {
@@ -113,6 +123,7 @@ const DashBoard = () => {
                   placeholder="Search Studio"
                   icon={{ slug: "icon-search" }}
                   marginRight={style.card.margin.default}
+                  onChange={handleFilter}
                 />
               </FlexRow>
               <MetaTagFilter />
@@ -133,27 +144,25 @@ const DashBoard = () => {
             flexWrap="wrap"
             // padding={style.body.padding}
           >
-            {$macha?.client?.metasOwned &&
-              $macha?.client?.metasOwned?.data.map(
-                (item: any, index: number) => {
-                  return (
-                    <MetaCard
-                      key={index}
-                      image={item.image ? item.image : "../assets/MetaCard.png"}
-                      heading={item.name}
-                      description={item.description}
-                      tags={item.tags ? item?.tags : ""}
-                      width="20%"
-                      onCardClick={() => {
-                        router.push({
-                          pathname: '/studio/meta/[id]',
-                          query: { id: item.id },
-                        });
-                      }}
-                    />
-                  );
-                }
-              )}
+            {filteredData &&
+              filteredData.map((item: any, index: number) => {
+                return (
+                  <MetaCard
+                    key={index}
+                    image={item.image ? item.image : "../assets/MetaCard.png"}
+                    heading={item.name}
+                    description={item.description}
+                    tags={item.tags ? item?.tags : ""}
+                    width="20%"
+                    onCardClick={() => {
+                      router.push({
+                        pathname: "/studio/meta/[id]",
+                        query: { id: item.id },
+                      });
+                    }}
+                  />
+                );
+              })}
           </FlexRow>
         </FlexBody>
         {/* </FlexWindow> */}
