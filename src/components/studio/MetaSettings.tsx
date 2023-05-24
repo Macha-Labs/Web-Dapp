@@ -30,12 +30,12 @@ function MetaSettings() {
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   const $triggerData = useMetaStore((state: any) => state.triggerData);
   const $originData = useMetaStore((state: any) => state.originData);
-
+  console.log("$originData", $originData);
   return (
     <>
       <FlexRow width="100%">
         <FlexColumn width="100%" vrAlign="flex-start">
-          <FlexRow width="100%" hrAlign="space-between" margin="20px 0px">
+          <FlexRow width="100%" hrAlign="space-between" marginTop="sm">
             <Text
               bgGradient="linear(
                   100.07deg,
@@ -86,7 +86,9 @@ function MetaSettings() {
                 </FlexRow>
               }
               margin={"xs"}
-            ></CardPannel>
+            >
+              <FlexRow></FlexRow>
+            </CardPannel>
             <CardPannel
               header={
                 <FlexRow hrAlign="space-between">
@@ -102,7 +104,16 @@ function MetaSettings() {
                 </FlexRow>
               }
               margin={"xs"}
-            ></CardPannel>
+            >
+              {/* {$originData &&
+                $originData.map((item: any, index: any) => {
+                  return (
+                    <FlexRow>
+                      <Text>Origin {index}</Text>
+                    </FlexRow>
+                  );
+                })} */}
+            </CardPannel>
             <ButtonNative
               text="Save Changes"
               variant="state_brand"
