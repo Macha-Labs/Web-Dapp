@@ -25,9 +25,10 @@ function MetaPlayground({ id }: Props) {
   }, [$metaInfo]);
 
   const [resultData, setResultData] = useState({});
+  
   return (
     <FlexRow width="100%" hrAlign="flex-start">
-      <FlexColumn width="20%" vrAlign="flex-start" hrAlign="flex-start">
+      <FlexColumn hrAlign="flex-start" width="50%" vrAlign="flex-start">
         {$metaInfo?.data?.metaData?.origin && (
           <>
             <InputSelect
@@ -61,10 +62,7 @@ function MetaPlayground({ id }: Props) {
             /> */}
           </>
         )}
-      </FlexColumn>
-      {/* {console.log("originref", originRef.current && originRef.current.value)} */}
 
-      <FlexColumn hrAlign="flex-start" width="40%" vrAlign="flex-start">
         {selectedOrigin === "0" && (
           <>
             <FlexRow width="100%" hrAlign="space-between">
@@ -126,7 +124,7 @@ function MetaPlayground({ id }: Props) {
           </>
         )}
       </FlexColumn>
-      <FlexColumn width="40%">
+      <FlexColumn width="50%">
         <JSONViewer data={resultData} />
       </FlexColumn>
     </FlexRow>
