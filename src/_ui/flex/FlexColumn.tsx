@@ -1,4 +1,5 @@
 import React from "react";
+import { style as gstyle } from "../../styles/StyledConstants";
 
 type Props = {
   width?: string;
@@ -8,7 +9,10 @@ type Props = {
   className?: string;
   children: any;
   padding?: string;
-  margin?: string;
+  marginTop?: any;
+  marginRight?: any;
+  marginBottom?: any;
+  marginLeft?: any;
 };
 
 export default function FlexColumn({
@@ -19,7 +23,10 @@ export default function FlexColumn({
   className,
   children,
   padding,
-  margin,
+  marginTop,
+  marginLeft,
+  marginBottom,
+  marginRight,
 }: Props) {
   return (
     <div
@@ -32,7 +39,10 @@ export default function FlexColumn({
         width: width ? width : "100%",
         height: height ? height : "100%",
         padding: padding ? padding : "0px",
-        margin: margin ? margin : "0px",
+        marginTop: marginTop ? `${gstyle.margin[marginTop]}` : "0px",
+        marginLeft: marginLeft ? `${gstyle.margin[marginLeft]}` : "0px",
+        marginBottom: marginBottom ? `${gstyle.margin[marginBottom]}` : "0px",
+        marginRight: marginRight ? `${gstyle.margin[marginRight]}` : "0px",
       }}
     >
       {children}

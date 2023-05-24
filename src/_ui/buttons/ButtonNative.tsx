@@ -2,6 +2,8 @@ import { Button, Text } from "@chakra-ui/react";
 import React from "react";
 import IconImage from "../icons/IconImage";
 
+import { style as gStyle } from "../../styles/StyledConstants";
+
 type Props = {
   size?: string;
   style?: any;
@@ -15,6 +17,8 @@ type Props = {
   width?: string;
   marginTop?: string;
   marginBottom?: string;
+  marginRight?: string;
+  marginLeft?: string;
 };
 
 export default function ButtonNative({
@@ -30,6 +34,8 @@ export default function ButtonNative({
   width,
   marginTop,
   marginBottom,
+  marginRight,
+  marginLeft,
 }: Props) {
   return (
     <Button
@@ -41,6 +47,8 @@ export default function ButtonNative({
       width={width}
       marginTop={marginTop}
       marginBottom={marginBottom}
+      marginRight={`${gStyle.margin[style?.marginRight]}`}
+      marginLeft={`${gStyle.margin[style?.marginLeft]}`}
     >
       {icon && (
         <IconImage slug={icon.slug} size={icon.size} style={icon.style} />

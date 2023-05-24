@@ -19,7 +19,15 @@ export default function NavBlock({ children, back }: Props) {
       }}
     >
       <FlexRow>
-        {back ? <IconImage slug="icon-chevron" onClick={back} /> : <></>}
+        {back ? (
+          <IconImage
+            slug="icon-chevron"
+            onClick={back}
+            style={{ marginRight: "xs" }}
+          />
+        ) : (
+          <></>
+        )}
         {children}
       </FlexRow>
     </div>

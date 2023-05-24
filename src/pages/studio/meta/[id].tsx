@@ -15,23 +15,26 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import useUserStore from "@/store/useUserStore";
 import { useRouter } from "next/router";
 import { getItemFromLocal, setItemOnLocal } from "@/helpers";
+import { Heading } from "@chakra-ui/react";
+import useMetaStore from "@/store/useMetaStore";
 
 const CreateMeta = () => {
   const router = useRouter();
   const $userMetasMap = useUserStore((state: any) => state.userMetasMap);
+  const $meta = useMetaStore((state: any) => state.meta);
   const [currentMetaId, setCurrentMetaId] = useState<any>();
 
   useEffect(() => {
     console.log("logging the router query", router.query);
     let currentMetaId = router?.query?.id;
     let storedMetaId = getItemFromLocal("currentMetaId");
-    if (currentMetaId && currentMetaId != storedMetaId ) {
+    if (currentMetaId && currentMetaId != storedMetaId) {
       setItemOnLocal("currentMetaId", router?.query?.id);
       setCurrentMetaId(currentMetaId);
     } else {
       setCurrentMetaId(storedMetaId);
     }
-  }, [])
+  }, []);
 
   const createMetaOptions = [
     {
@@ -74,20 +77,28 @@ const CreateMeta = () => {
   };
 
   const renderBody = () => {
+    const router = useRouter();
     return (
       <>
         {" "}
-        <NavBlock back={() => {}}>
-          <FlexColumn>
-            <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-              <NavTabs
-                options={createMetaOptions}
-                value={selectedTab}
-                onChange={(value: any) => setSelectedTab(value)}
-                gstyle={{ fontSize: `${style.fontH6}`, fontWeight: "600" }}
-              />
+        <NavBlock
+          back={() => {
+            router.push("/studio/dashboard");
+          }}
+        >
+          <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
+            <FlexRow width="fit-content">
+              <Heading as="h5" fontSize={style.font.h5} className="m-b-0">
+                {$meta?.data?.name}
+              </Heading>
             </FlexRow>
-          </FlexColumn>
+            <NavTabs
+              options={createMetaOptions}
+              value={selectedTab}
+              onChange={(value: any) => setSelectedTab(value)}
+              gstyle={{ fontSize: `${style.fontH6}`, fontWeight: "600" }}
+            />
+          </FlexRow>
         </NavBlock>
         <FlexBody>{renderComponent()}</FlexBody>
       </>

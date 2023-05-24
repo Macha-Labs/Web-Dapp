@@ -58,7 +58,12 @@ const CardCarousel = () => {
   return (
     <Box overflow="hidden">
       <FlexRow vrAlign="center" hrAlign="center">
-        <IconImage slug="icon-chevron-next" onClick={handlePrev} size="2xl" />
+        <IconImage
+          slug="icon-chevron"
+          onClick={handlePrev}
+          size="sm"
+          style={{ marginRight: "md" }}
+        />
         <Box
           display="flex"
           width="100%"
@@ -73,7 +78,7 @@ const CardCarousel = () => {
               transform={`translateX(${(index - activeIndex) * 100}%)`}
             >
               <Image src={card.coverImage} alt="Cover Image" w="100%" />
-              <FlexRow margin="10px 0px">
+              <FlexRow>
                 <Image
                   src={card.profileImage}
                   alt="Profile Image"
@@ -89,7 +94,12 @@ const CardCarousel = () => {
             </Box>
           ))}
         </Box>
-        <IconImage slug="icon-chevron-next" onClick={handleNext} size="2xl" />
+        <IconImage
+          slug="icon-chevron-next"
+          onClick={handleNext}
+          size="sm"
+          style={{ marginLeft: "md" }}
+        />
       </FlexRow>
       <FlexRow hrAlign="center" vrAlign="center" width="100%">
         {carouselData.map((_, index) => (

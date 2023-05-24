@@ -4,6 +4,7 @@ import { Heading } from "@chakra-ui/react";
 import FlexColumn from "../flex/FlexColumn";
 import ButtonNative from "../buttons/ButtonNative";
 import IconImage from "../icons/IconImage";
+import { style as gStyle } from "../../styles/StyledConstants";
 
 type Props = {
   labelText?: string;
@@ -14,6 +15,10 @@ type Props = {
   disabled?: boolean;
   elementRef?: any;
   inputType: string;
+  marginTop?: string;
+  marginLeft?: string;
+  marginBottom?: string;
+  marginRight?: string;
 };
 
 const InputLabel = ({
@@ -25,11 +30,20 @@ const InputLabel = ({
   disabled = false,
   elementRef,
   inputType,
+  marginTop,
+  marginLeft,
+  marginBottom,
+  marginRight,
 }: Props) => {
   // for text type inputs
   const inputLabelText = () => {
     return (
-      <FlexColumn width="100%" vrAlign="flex-start" padding={padding}>
+      <FlexColumn
+        width="100%"
+        vrAlign="flex-start"
+        padding={padding}
+        height="fit-content"
+      >
         <Heading
           as="h6"
           size="sm"

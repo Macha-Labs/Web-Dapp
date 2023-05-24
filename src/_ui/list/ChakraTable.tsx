@@ -16,7 +16,7 @@ type Props = {
 };
 function ChakraTable({ th = [], tr = [] }: Props) {
   return (
-    <TableContainer>
+    <TableContainer width={"100%"}>
       <Table variant="simple" colorScheme="whiteAlpha">
         <Thead>
           <Tr>

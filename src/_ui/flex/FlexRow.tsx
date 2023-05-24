@@ -1,5 +1,6 @@
 import { StyledRow } from "@/styles/StyledComponents";
 import React from "react";
+import { style as gstyle } from "../../styles/StyledConstants";
 
 type Props = {
   width?: string;
@@ -9,8 +10,11 @@ type Props = {
   className?: string;
   children: any;
   padding?: string;
-  margin?: string;
   flexWrap?: any;
+  marginTop?: any;
+  marginRight?: any;
+  marginBottom?: any;
+  marginLeft?: any;
 };
 
 export default function FlexRow({
@@ -21,8 +25,11 @@ export default function FlexRow({
   className,
   children,
   padding,
-  margin,
   flexWrap,
+  marginTop,
+  marginLeft,
+  marginBottom,
+  marginRight,
 }: Props) {
   return (
     <div
@@ -36,7 +43,10 @@ export default function FlexRow({
         width: width ? width : "100%",
         height: height ? height : "100%",
         padding: padding ? padding : "0px",
-        margin: margin ? margin : "0px",
+        marginTop: marginTop ? `${gstyle.margin[marginTop]}` : "0px",
+        marginLeft: marginLeft ? `${gstyle.margin[marginLeft]}` : "0px",
+        marginBottom: marginBottom ? `${gstyle.margin[marginBottom]}` : "0px",
+        marginRight: marginRight ? `${gstyle.margin[marginRight]}` : "0px",
       }}
     >
       {children}

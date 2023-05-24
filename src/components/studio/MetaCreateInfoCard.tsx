@@ -15,10 +15,12 @@ function MetaCreateInfoCard({ data }: Props) {
   console.log("metadata", data);
   return (
     <CardNative>
-      <FlexRow width="80%" margin="0 0 20px 0">
+      <FlexRow width="80%" marginBottom="lg">
         <FlexColumn width="20%" margin="0 20px 0 0">
           <Image
-            src={data?.metaImage ? data?.metaImage : "https://bit.ly/dan-abramov"}
+            src={
+              data?.metaImage ? data?.metaImage : "https://bit.ly/dan-abramov"
+            }
           />
         </FlexColumn>
         <FlexColumn width="80%" hrAlign="flex-start" vrAlign="flex-start">
@@ -45,7 +47,7 @@ function MetaCreateInfoCard({ data }: Props) {
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
                 <Text className="m-b-0">{truncateAddress(data?.ipfsCid)}</Text>
-                <IconImage slug="icon-copy" />
+                <IconImage slug="icon-copy" style={{ marginLeft: "sm" }} />
               </FlexRow>
             </FlexColumn>
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
@@ -54,7 +56,7 @@ function MetaCreateInfoCard({ data }: Props) {
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
                 <Text className="m-b-0">{data?.id}</Text>
-                <IconImage slug="icon-copy" />
+                <IconImage slug="icon-copy" style={{ marginLeft: "sm" }} />
               </FlexRow>
             </FlexColumn>
           </FlexRow>

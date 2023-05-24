@@ -48,10 +48,11 @@ const JSONViewer = ({ data }: any) => {
       style={{
         overflow: "auto",
         height: "500px",
-        width: "400px",
+        width: "100%",
         border: `${style.card.border.hover}`,
         borderRadius: `${style.card.borderRadius.default}`,
         padding: "20px",
+        marginLeft: `${style.margin.sm}`,
       }}
     >
       {renderData(data, "root")}

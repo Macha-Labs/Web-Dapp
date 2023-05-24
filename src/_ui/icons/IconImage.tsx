@@ -25,6 +25,10 @@ function IconImage({ slug, size, onClick, style }: Props) {
         background: `${gStyle.icon.bg.default}`,
         borderRadius: `${gStyle.icon.borderRadius}`,
         boxShadow: `${gStyle.icon.shadow.default}`,
+        marginLeft: `${gStyle.margin[style?.marginLeft]}`,
+        marginRight: `${gStyle.margin[style?.marginRight]}`,
+        marginBottom: `${gStyle.margin[style?.marginBottom]}`,
+        marginTop: `${gStyle.margin[style?.marginTop]}`,
       }}
       className={style?.className}
       onClick={onClick}

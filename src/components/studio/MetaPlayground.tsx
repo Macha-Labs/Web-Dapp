@@ -25,60 +25,66 @@ function MetaPlayground({ id }: Props) {
   }, [$metaInfo]);
 
   const [resultData, setResultData] = useState({});
-  
+
   return (
-    <FlexRow width="100%" hrAlign="flex-start">
+    <FlexRow width="100%" hrAlign="space-between" vrAlign="flex-start">
       <FlexColumn hrAlign="flex-start" width="50%" vrAlign="flex-start">
-        {$metaInfo?.data?.metaData?.origin && (
-          <>
-            <InputSelect
-              onChangeHandler={setSelectedOrigin}
-              placeholder="Origins"
-              options={$metaInfo?.data?.metaData?.origin}
-              width="90%"
-              childrenComponent={
-                <>
-                  {$metaInfo?.data?.metaData?.origin.map(
-                    (item: any, index: any) => {
-                      return (
-                        <option
-                          key={index}
-                          value={index}
-                          style={{ background: `${style.input.bg.default}` }}
-                        >
-                          <Text>option {index}</Text>
-                        </option>
-                      );
-                    }
-                  )}
-                </>
-              }
-            />
-            {/* <InputSelect
+        <FlexRow hrAlign="space-between" marginBottom={"md"}>
+          {$metaInfo?.data?.metaData?.origin && (
+            <>
+              <InputSelect
+                onChangeHandler={setSelectedOrigin}
+                placeholder="Origins"
+                options={$metaInfo?.data?.metaData?.origin}
+                width="80%"
+                childrenComponent={
+                  <>
+                    {$metaInfo?.data?.metaData?.origin.map(
+                      (item: any, index: any) => {
+                        return (
+                          <option
+                            key={index}
+                            value={index}
+                            style={{ background: `${style.input.bg.default}` }}
+                          >
+                            <Text>option {index}</Text>
+                          </option>
+                        );
+                      }
+                    )}
+                  </>
+                }
+              />
+              {/* <InputSelect
               onChangeHandler={setSelectedTrigger}
               placeholder="Triggers"
               options={$metaInfo?.data?.metaData?.triggers}
               width="90%"
             /> */}
-          </>
-        )}
-
+            </>
+          )}
+          {selectedOrigin === "0" && (
+            <ButtonNative
+              size="sm"
+              onClick={async () => {
+                console.log("Logging meta ", $meta);
+                const result = await $meta.fetchMetaOrigin("yam.eth", 0);
+                console.log("Origin result", result);
+                setResultData(result.data);
+              }}
+              marginLeft="md"
+              variant="state_brand"
+            >
+              Run API
+            </ButtonNative>
+          )}
+        </FlexRow>
         {selectedOrigin === "0" && (
           <>
             <FlexRow width="100%" hrAlign="space-between">
               <Text fontSize={"2xl"} fontWeight={700}>
                 Origin 1
               </Text>
-              <ButtonNative
-                onClick={async () => {
-                  console.log("Logging meta ", $meta);
-                  const result = await $meta.fetchMetaOrigin("yam.eth", 0);
-                  console.log("Origin result", result);
-                  setResultData(result.data);
-                }}
-              >
-                Run
-              </ButtonNative>
             </FlexRow>
             {$metaInfo.data.metaData.origin.map((item: any, index: any) => {
               return Object.entries(item).map(([key, value]: any) => (
@@ -124,7 +130,7 @@ function MetaPlayground({ id }: Props) {
           </>
         )}
       </FlexColumn>
-      <FlexColumn width="50%">
+      <FlexColumn width="45%">
         <JSONViewer data={resultData} />
       </FlexColumn>
     </FlexRow>

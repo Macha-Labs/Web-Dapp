@@ -22,7 +22,7 @@ function MetaOverview({ metaInfo }: Props) {
   return (
     <>
       <MetaCreateInfoCard data={metaInfo} />
-      <FlexRow>
+      <FlexRow vrAlign="flex-start" marginTop={"xl"}>
         <FlexColumn width="60%" vrAlign="flex-start">
           <Text>{metaInfo?.description}</Text>
           <FlexRow width="50%" hrAlign="flex-start">
