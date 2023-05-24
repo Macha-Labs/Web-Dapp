@@ -15,7 +15,7 @@ import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
@@ -25,6 +25,9 @@ const DashBoard = () => {
   const [filteredData, setFilteredData] = useState(
     $macha?.client?.metasOwned?.data
   );
+  useEffect(() => {
+    setFilteredData($macha?.client?.metasOwned?.data);
+  }, [$macha?.client?.metasOwned?.data]);
 
   const handleFilter = (inputValue: string) => {
     const filtered = $macha?.client?.metasOwned?.data.filter((item: any) => {
