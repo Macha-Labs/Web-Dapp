@@ -4,6 +4,7 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
+import Loader from "@/_ui/loader/Loader";
 import Nav from "@/_ui/nav/Nav";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
@@ -22,11 +23,13 @@ const DashBoard = () => {
   const hookMeta = useMetaCreate();
   const $macha = useAuthStore((state: any) => state.macha);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
   const [filteredData, setFilteredData] = useState(
     $macha?.client?.metasOwned?.data
   );
   useEffect(() => {
     setFilteredData($macha?.client?.metasOwned?.data);
+    setIsLoading(false);
   }, [$macha?.client?.metasOwned?.data]);
 
   const handleFilter = (inputValue: string) => {
@@ -147,7 +150,13 @@ const DashBoard = () => {
             flexWrap="wrap"
             // padding={style.body.padding}
           >
-            {filteredData &&
+            {isLoading && (
+              <FlexRow height="500px">
+                <Loader size="lg" />
+              </FlexRow>
+            )}
+            {!isLoading &&
+              filteredData &&
               filteredData.map((item: any, index: number) => {
                 return (
                   <MetaCard
