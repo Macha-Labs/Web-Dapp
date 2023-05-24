@@ -3,7 +3,6 @@ import { style } from "@/styles/StyledConstants";
 import { Text } from "@chakra-ui/react";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import { truncateString } from "@/helpers";
 
 type Props = {
   image: string;
@@ -35,8 +34,6 @@ export default function MetaCard({
         width: ` ${width}`,
         display: "flex",
         flexDirection: cardDirection,
-        cursor: "pointer",
-        height: "400px",
       }}
       onClick={() => {
         onCardClick();
@@ -45,9 +42,9 @@ export default function MetaCard({
       <img src={image} width="100%" />
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start" margin="0px 10px">
         <Text fontSize="2xl" fontWeight="600">
-          {truncateString(heading, 10)}
+          {heading}
         </Text>
-        <Text>{truncateString(description, 50)}</Text>
+        <Text>{description}</Text>
         <FlexRow hrAlign="flex-start" width="100%">
           <TagNative value="Tag 1" variant="state_xmtp" />
           <TagNative value="Tag 1" variant="state_xmtp" margin="0px 10px" />

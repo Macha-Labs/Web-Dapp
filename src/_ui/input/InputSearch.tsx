@@ -15,7 +15,6 @@ type Props = {
   marginTop?: string;
   marginRight?: any;
   marginBottom?: string;
-  onFilter?: any;
 };
 
 const InputSearch = ({
@@ -49,7 +48,7 @@ const InputSearch = ({
         type={type}
         placeholder={placeholder}
         value={value}
-        onChange={(e) => (onChange ? onChange(e.target.value) : () => {})}
+        onChange={onChange ? onChange : () => {}}
         size={size}
         onKeyDown={onKeydown ? onKeydown : () => {}}
       />
