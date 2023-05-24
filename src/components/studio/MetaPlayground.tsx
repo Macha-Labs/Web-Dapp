@@ -26,6 +26,29 @@ function MetaPlayground({ id }: Props) {
 
   const [resultData, setResultData] = useState({});
 
+  const convertStringToJson = (input: string) => {
+    const trimmedString = input.trim();
+    if (
+      trimmedString[0] !== "{" ||
+      trimmedString[trimmedString.length - 1] !== "}"
+    ) {
+      throw new Error(
+        "Invalid string format. The string should be wrapped in curly braces."
+      );
+    }
+    const jsonString = trimmedString.slice(1, -1);
+    const keyValuePairs = jsonString.split(",");
+    const jsonObject: any = {};
+    for (let pair of keyValuePairs) {
+      const [key, value] = pair.split(":");
+      const trimmedKey = key.trim().replace(/(^['"])|(['"]$)/g, "");
+      const trimmedValue = value.trim().replace(/(^['"])|(['"]$)/g, "");
+      jsonObject[trimmedKey] = trimmedValue;
+    }
+    console.log("jsonObject", jsonObject);
+    return jsonObject;
+  };
+
   return (
     <FlexRow width="100%" hrAlign="space-between" vrAlign="flex-start">
       <FlexColumn hrAlign="flex-start" width="50%" vrAlign="flex-start">
@@ -87,14 +110,40 @@ function MetaPlayground({ id }: Props) {
               </Text>
             </FlexRow>
             {$metaInfo.data.metaData.origin.map((item: any, index: any) => {
-              return Object.entries(item).map(([key, value]: any) => (
-                <InputLabel
-                  key={`${index}-${key}`}
-                  inputType="text"
-                  labelText={key}
-                  defaultValue={value}
-                />
-              ));
+              return Object.entries(item).map(([key, value]: any) => {
+                if (key === "requestParams") {
+                  const requestParamObject = convertStringToJson(value);
+                  if (typeof requestParamObject === "object") {
+                    return Object.entries(requestParamObject).map(
+                      ([subKey, subValue]: any) => (
+                        <>
+                          <InputLabel
+                            key={`${index}-${key}`}
+                            inputType="text"
+                            labelText={key}
+                            defaultValue={value}
+                          />
+                          <InputLabel
+                            key={`${index}-${key}-${subKey}`}
+                            inputType={subValue}
+                            labelText={subKey}
+                            defaultValue=""
+                          />
+                        </>
+                      )
+                    );
+                  }
+                } else {
+                  return (
+                    <InputLabel
+                      key={`${index}-${key}`}
+                      inputType="text"
+                      labelText={key}
+                      defaultValue={value}
+                    />
+                  );
+                }
+              });
             })}
             {/* <InputLabel inputType="text" labelText="Headers" placeholder="" />
             <InputLabel inputType="text" labelText="EndPoint" />

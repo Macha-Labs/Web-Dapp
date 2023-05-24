@@ -4,6 +4,7 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
+import Loader from "@/_ui/loader/Loader";
 import Nav from "@/_ui/nav/Nav";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
@@ -15,12 +16,22 @@ import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
   const hookMeta = useMetaCreate();
   const $macha = useAuthStore((state: any) => state.macha);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  const [filteredData, setFilteredData] = useState(
+    $macha?.client?.metasOwned?.data
+  );
+
+  useEffect(() => {
+    setFilteredData($macha?.client?.metasOwned?.data);
+    setIsLoading(false);
+  }, [$macha?.client?.metasOwned?.data]);
 
 
   const sortOptions = [
@@ -52,34 +63,6 @@ const DashBoard = () => {
       href: "",
     },
   ];
-
-  const data = [
-    {
-      label: "Name",
-      value: "",
-      onChange: () => {},
-    },
-  ];
-
-  const data2 = [
-    {
-      label: "Description",
-      value: "",
-      onChange: () => {},
-    },
-  ];
-
-  const data3 = [
-    {
-      label: "Attach",
-      value: "",
-      onChange: () => {},
-    },
-  ];
-
-  const logClient = () => {
-    console.log("Logging macha client ", $macha);
-  };
 
   const renderBody = () => {
     return (
@@ -117,7 +100,6 @@ const DashBoard = () => {
               </FlexRow>
               <MetaTagFilter />
             </FlexRow>
-            <Button onClick={() => logClient()}>Log macha</Button>
 
             <ButtonMenu
               text="Sort By"
@@ -133,27 +115,31 @@ const DashBoard = () => {
             flexWrap="wrap"
             // padding={style.body.padding}
           >
-            {$macha?.client?.metasOwned &&
-              $macha?.client?.metasOwned?.data.map(
-                (item: any, index: number) => {
-                  return (
-                    <MetaCard
-                      key={index}
-                      image={item.image ? item.image : "../assets/MetaCard.png"}
-                      heading={item.name}
-                      description={item.description}
-                      tags={item.tags ? item?.tags : ""}
-                      width="20%"
-                      onCardClick={() => {
-                        router.push({
-                          pathname: '/studio/meta/[id]',
-                          query: { id: item.id },
-                        });
-                      }}
-                    />
-                  );
-                }
-              )}
+            {isLoading && (
+              <FlexRow height="500px">
+                <Loader size="lg" />
+              </FlexRow>
+            )}
+            {!isLoading &&
+              filteredData &&
+              filteredData.map((item: any, index: number) => {
+                return (
+                  <MetaCard
+                    key={index}
+                    image={item.image ? item.image : "../assets/MetaCard.png"}
+                    heading={item.name}
+                    description={item.description}
+                    tags={item.tags ? item?.tags : ""}
+                    width="20%"
+                    onCardClick={() => {
+                      router.push({
+                        pathname: "/studio/meta/[id]",
+                        query: { id: item.id },
+                      });
+                    }}
+                  />
+                );
+              })}
           </FlexRow>
         </FlexBody>
         {/* </FlexWindow> */}
