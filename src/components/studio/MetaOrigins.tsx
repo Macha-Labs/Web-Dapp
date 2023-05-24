@@ -145,16 +145,16 @@ const MetaOrigins = ({ modal }: Props) => {
           <ButtonNative variant={""}>Discard</ButtonNative>
           <ButtonNative
             variant={"state_brand"}
-            onClick={() => {
-              let originData = {
-                requestEndpoint: hookMeta.metaOrigin.current['requestEndpoint'].value,
-                requestMethod: hookMeta.metaOrigin.current['requestMethod'].value,
-                requestParams: hookMeta.metaOrigin.current['requestParams'].value,
-                requestSchema: hookMeta.metaOrigin.current['requestSchema'].value,
-                requestType: hookMeta.metaOrigin.current['requestType'].value,
-              }
-              $loadOriginData(originData);
-            }}
+            // onClick={() => {
+            //   let originData = {
+            //     requestEndpoint: hookMeta.metaOrigin.current['requestEndpoint'].value,
+            //     requestMethod: hookMeta.metaOrigin.current['requestMethod'].value,
+            //     requestParams: hookMeta.metaOrigin.current['requestParams'].value,
+            //     requestSchema: hookMeta.metaOrigin.current['requestSchema'].value,
+            //     requestType: hookMeta.metaOrigin.current['requestType'].value,
+            //   }
+            //   $loadOriginData(originData);
+            // }}
           >
             Save
           </ButtonNative>
