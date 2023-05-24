@@ -7,7 +7,7 @@ import InputSelect from "@/_ui/input/InputSelect";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import useMetaStore from "@/store/useMetaStore";
-import { Button, Heading, Text } from "@chakra-ui/react";
+import { Button, Heading, Text, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 
 type Props = {
@@ -20,6 +20,7 @@ const MetaOrigins = ({ modal }: Props) => {
   const [originMethods, setOriginMethods] = useState<any>([]);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
   const $loadOriginData = useMetaStore((state: any) => state.loadOriginData);
+  const toast = useToast();
 
   const settingOriginType = (requestType: string) => {
     requestType == "GRAPH"
@@ -145,16 +146,27 @@ const MetaOrigins = ({ modal }: Props) => {
           <ButtonNative variant={""}>Discard</ButtonNative>
           <ButtonNative
             variant={"state_brand"}
-            // onClick={() => {
-            //   let originData = {
-            //     requestEndpoint: hookMeta.metaOrigin.current['requestEndpoint'].value,
-            //     requestMethod: hookMeta.metaOrigin.current['requestMethod'].value,
-            //     requestParams: hookMeta.metaOrigin.current['requestParams'].value,
-            //     requestSchema: hookMeta.metaOrigin.current['requestSchema'].value,
-            //     requestType: hookMeta.metaOrigin.current['requestType'].value,
-            //   }
-            //   $loadOriginData(originData);
-            // }}
+            onClick={() => {
+              let originData = {
+                requestEndpoint:
+                  hookMeta.metaOrigin.current["requestEndpoint"].value,
+                requestMethod:
+                  hookMeta.metaOrigin.current["requestMethod"].value,
+                requestParams:
+                  hookMeta.metaOrigin.current["requestParams"].value,
+                requestSchema:
+                  hookMeta.metaOrigin.current["requestSchema"].value,
+                requestType: hookMeta.metaOrigin.current["requestType"].value,
+              };
+              $loadOriginData(originData);
+              modal.onClose();
+              toast({
+                title: "Origin Created",
+                status: "success",
+                duration: 3000,
+                position: "bottom-right",
+              });
+            }}
           >
             Save
           </ButtonNative>

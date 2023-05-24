@@ -1,7 +1,13 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
-import { Heading, Image, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Heading,
+  Image,
+  Text,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 import MetaOrigins from "./MetaOrigins";
 import MetaTriggers from "./MetaTriggers";
 import CardPannel from "@/_ui/cards/CardPannel";
@@ -10,14 +16,17 @@ import CardNative from "@/_ui/cards/CardNative";
 import MetaCreateModal from "./MetaCreateModal";
 import useMetaStore from "@/store/useMetaStore";
 import useAuthStore from "@/store/useAuthStore";
+import MetaEditModal from "./MetaEditModal";
 
 function MetaSettings() {
   const hookMeta = useMetaCreate();
   const triggerModal = useDisclosure();
   const originModal = useDisclosure();
   const metaModal = useDisclosure();
+  const metaEditModal = useDisclosure();
   const $macha = useAuthStore((state: any) => state.macha);
-  
+  const toast = useToast();
+
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   const $triggerData = useMetaStore((state: any) => state.triggerData);
   const $originData = useMetaStore((state: any) => state.originData);
@@ -55,7 +64,7 @@ function MetaSettings() {
                   </Heading>
                 </FlexRow>
                 <ButtonNative
-                  onClick={metaModal.onOpen}
+                  onClick={metaEditModal.onOpen}
                   text="Edit Details"
                   variant="state_default_hover"
                   size="sm"
@@ -95,12 +104,23 @@ function MetaSettings() {
               margin={"xs"}
             ></CardPannel>
             <ButtonNative
-              text="test button"
-              onClick={async() => {
+              text="Save Changes"
+              variant="state_brand"
+              onClick={async () => {
                 console.log("Meta Overview ", $overviewData);
                 console.log("Meta Trigger ", $triggerData);
                 console.log("Meta Origin ", $originData);
-                await hookMeta.publishMeta($overviewData, $originData, $triggerData);
+                await hookMeta.publishMeta(
+                  $overviewData,
+                  $originData,
+                  $triggerData
+                );
+                toast({
+                  title: "Saved",
+                  status: "success",
+                  duration: 3000,
+                  position: "bottom-right",
+                });
               }}
             />
           </FlexColumn>
@@ -139,7 +159,7 @@ function MetaSettings() {
 
       <MetaTriggers modal={triggerModal} />
       <MetaOrigins modal={originModal} />
-      <MetaCreateModal hookMeta={hookMeta} metaModal={metaModal} />
+      <MetaEditModal hookMeta={hookMeta} metaModal={metaEditModal} />
     </>
   );
 }

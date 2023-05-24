@@ -7,7 +7,7 @@ import InputSelect from "@/_ui/input/InputSelect";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import useMetaStore from "@/store/useMetaStore";
-import { Heading, Text } from "@chakra-ui/react";
+import { Heading, Text, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 
 type Props = {
@@ -20,6 +20,7 @@ const MetaTriggers = ({ modal }: Props) => {
   const [triggerType, setTriggerType] = useState<any>(null);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
   const $loadTriggerData = useMetaStore((state: any) => state.loadTriggerData);
+  const toast = useToast();
 
   const settingTriggerType = (requestType: string) => {
     requestType == "GRAPH"
@@ -40,22 +41,6 @@ const MetaTriggers = ({ modal }: Props) => {
         </FlexRow>
       }
     >
-      <FlexRow width="50%" hrAlign="space-between">
-        <ButtonNative variant="state_brand">
-          <FlexRow>
-            <Text className="m-b-0">Get Request</Text>
-            <IconImage slug="icon-close" />
-          </FlexRow>
-        </ButtonNative>
-
-        <ButtonNative variant="state_brand">
-          <FlexRow>
-            <Text className="m-b-0">Post Request</Text>
-            <IconImage slug="icon-close" />
-          </FlexRow>
-        </ButtonNative>
-      </FlexRow>
-
       {/* ------------------------------------------ Trigger start ------------------------------------------ */}
 
       <FlexColumn width="100%" hrAlign="flex-start" vrAlign="flex-start">
@@ -174,15 +159,27 @@ const MetaTriggers = ({ modal }: Props) => {
             variant={"state_brand"}
             onClick={() => {
               let triggerData = {
-                requestEndpoint: hookMeta.metaTrigger.current['requestEndpoint'].value,
-                requestMethod: hookMeta.metaTrigger.current['requestMethod'].value,
-                requestParams: hookMeta.metaTrigger.current['requestParams'].value,
-                requestSchema: hookMeta.metaTrigger.current['requestSchema'].value,
-                requestType: hookMeta.metaTrigger.current['requestType'].value,
-                description: hookMeta.metaTrigger.current['triggerDescription'].value,
-                name: hookMeta.metaTrigger.current['triggerName'].value,
-              }
+                requestEndpoint:
+                  hookMeta.metaTrigger.current["requestEndpoint"].value,
+                requestMethod:
+                  hookMeta.metaTrigger.current["requestMethod"].value,
+                requestParams:
+                  hookMeta.metaTrigger.current["requestParams"].value,
+                requestSchema:
+                  hookMeta.metaTrigger.current["requestSchema"].value,
+                requestType: hookMeta.metaTrigger.current["requestType"].value,
+                description:
+                  hookMeta.metaTrigger.current["triggerDescription"].value,
+                name: hookMeta.metaTrigger.current["triggerName"].value,
+              };
               $loadTriggerData(triggerData);
+              modal.onClose();
+              toast({
+                title: "Trigger Created",
+                status: "success",
+                duration: 3000,
+                position: "bottom-right",
+              });
             }}
             text="Save"
           />

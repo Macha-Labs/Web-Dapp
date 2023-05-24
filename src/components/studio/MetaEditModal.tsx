@@ -13,7 +13,8 @@ type Props = {
   metaModal?: any;
   hookMeta?: any;
 };
-const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
+const MetaEditModal = ({ metaModal, hookMeta }: Props) => {
+  const $meta = useMetaStore((state: any) => state.meta);
   const $loadOverviewData = useMetaStore(
     (state: any) => state.loadOverviewData
   );
@@ -24,7 +25,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
       size="md"
       header={
         <FlexRow width="100%" hrAlign="space-between">
-          <Text className="mb-0">Create Meta</Text>
+          <Text className="mb-0">Edit Meta</Text>
           <IconImage slug="icon-close" onClick={() => metaModal.onClose()} />
         </FlexRow>
       }
@@ -37,6 +38,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
             inputType="text"
             labelText="Meta Name"
             placeholder="Name"
+            defaultValue={$meta?.data?.name}
           />
           <InputLabel
             elementRef={(element: any) =>
@@ -45,6 +47,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
             inputType="text"
             labelText="Description"
             placeholder="Description"
+            defaultValue={$meta?.data?.description}
           />
           <InputLabel inputType="file" labelText="Image" placeholder="Image" />
 
@@ -62,7 +65,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
               $loadOverviewData(metaCreateData);
             }}
           >
-            Create Meta
+            Save Changes
           </ButtonNative>
           {/* </Link> */}
         </FlexColumn>
@@ -71,4 +74,4 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
   );
 };
 
-export default MetaCreateModal;
+export default MetaEditModal;
