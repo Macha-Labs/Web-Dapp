@@ -59,7 +59,7 @@ const MetaTriggers = ({ modal }: Props) => {
           elementRef={(element: any) =>
             (hookMeta.metaTrigger.current["triggerDescription"] = element)
           }
-          inputType="text"
+          inputType="textArea"
           labelText="Description"
           placeholder="Description"
           defaultValue=""
@@ -135,7 +135,7 @@ const MetaTriggers = ({ modal }: Props) => {
           elementRef={(element: any) =>
             (hookMeta.metaTrigger.current["requestSchema"] = element)
           }
-          inputType="text"
+          inputType="textArea"
           labelText="Trigger Schema"
           placeholder="Add your trigger schema"
           defaultValue=""

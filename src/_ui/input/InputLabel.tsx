@@ -5,6 +5,7 @@ import FlexColumn from "../flex/FlexColumn";
 import ButtonNative from "../buttons/ButtonNative";
 import IconImage from "../icons/IconImage";
 import { style as gStyle } from "../../styles/StyledConstants";
+import LayoutTextArea from "@/layouts/options/LayoutTextArea";
 
 type Props = {
   labelText?: string;
@@ -123,7 +124,7 @@ const InputLabel = ({
         </Heading>
 
         <StyledCard className="w-100">
-          {layoutInputs({
+          {LayoutTextArea({
             elementRef,
             placeholder,
             defaultValue,

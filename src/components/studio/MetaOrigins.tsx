@@ -124,7 +124,7 @@ const MetaOrigins = ({ modal }: Props) => {
           elementRef={(element: any) =>
             (hookMeta.metaOrigin.current["requestSchema"] = element)
           }
-          inputType="text"
+          inputType="textArea"
           labelText="Request Schema"
           placeholder="Request Schema"
           defaultValue=""
