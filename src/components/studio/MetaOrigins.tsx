@@ -158,7 +158,9 @@ const MetaOrigins = ({ modal }: Props) => {
                   hookMeta.metaOrigin.current["requestSchema"].value,
                 requestType: hookMeta.metaOrigin.current["requestType"].value,
               };
-              $loadOriginData[$loadOriginData.length] = origin;
+
+              const newKey = Object.keys($loadOriginData).length + 1;
+              $loadOriginData[newKey.toString()] = origin;
               modal.onClose();
               toast({
                 title: "Origin Created",
