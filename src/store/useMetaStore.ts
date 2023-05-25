@@ -8,8 +8,9 @@ const useMetaStore = create((set) => ({
     set((state: any) => ({ overviewData: data })),
   triggerData: {},
   loadTriggerData: (data: any) => set((state: any) => ({ triggerData: data })),
-  originData: {},
-  loadOriginData: (data: any) => set((state: any) => ({ originData: data })),
+  originData: [],
+  loadOriginData: (data: any) =>
+    set((state: any) => ({ originData: [...state.originData, data] })),
   metaInfo: {},
   loadMetaInfo: (data: any) => set((state: any) => ({ metaInfo: data })),
 }));

@@ -17,15 +17,20 @@ import MetaCreateModal from "./MetaCreateModal";
 import useMetaStore from "@/store/useMetaStore";
 import useAuthStore from "@/store/useAuthStore";
 import MetaEditModal from "./MetaEditModal";
+import MetaEditOrigins from "./MetaEditOrigins";
+import { useState } from "react";
 
 function MetaSettings() {
   const hookMeta = useMetaCreate();
   const triggerModal = useDisclosure();
   const originModal = useDisclosure();
+  const editOriginModal = useDisclosure();
   const metaModal = useDisclosure();
   const metaEditModal = useDisclosure();
   const $macha = useAuthStore((state: any) => state.macha);
   const toast = useToast();
+
+  const [selectedOrigin, setSelectedOrigin] = useState(null);
 
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   const $triggerData = useMetaStore((state: any) => state.triggerData);
@@ -86,9 +91,7 @@ function MetaSettings() {
                 </FlexRow>
               }
               margin={"xs"}
-            >
-              {/* <FlexRow></FlexRow> */}
-            </CardPannel>
+            ></CardPannel>
             <CardPannel
               header={
                 <FlexRow hrAlign="space-between">
@@ -105,14 +108,24 @@ function MetaSettings() {
               }
               margin={"xs"}
             >
-              {/* {$originData &&
+              {$originData &&
                 $originData.map((item: any, index: any) => {
                   return (
-                    <FlexRow>
+                    <FlexRow hrAlign="space-between">
                       <Text>Origin {index}</Text>
+
+                      <ButtonNative
+                        text="Edit"
+                        variant="state_default_hover"
+                        size="sm"
+                        onClick={() => {
+                          setSelectedOrigin(index);
+                          editOriginModal.onOpen();
+                        }}
+                      />
                     </FlexRow>
                   );
-                })} */}
+                })}
             </CardPannel>
             <ButtonNative
               text="Save Changes"
@@ -170,6 +183,10 @@ function MetaSettings() {
 
       <MetaTriggers modal={triggerModal} />
       <MetaOrigins modal={originModal} />
+      <MetaEditOrigins
+        modal={editOriginModal}
+        selectedOrigin={selectedOrigin}
+      />
       <MetaEditModal hookMeta={hookMeta} metaModal={metaEditModal} />
     </>
   );
