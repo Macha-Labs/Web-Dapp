@@ -45,10 +45,10 @@ const Nav = (props: any) => {
           >
             <FlexColumn hrAlign="space-between" vrAlign="center">
               <FlexColumn height="fit-content">
-                <Link href="/">
+                <Link href="/studio/dashboard">
                   <Tooltip label="Chat">
                     <IconImage
-                      slug="icon-chat"
+                      slug="icon-dashboard"
                       size="md"
                       style={{
                         className: `m-b-1 ${
@@ -60,10 +60,38 @@ const Nav = (props: any) => {
                     />
                   </Tooltip>
                 </Link>
-                <Link href="/">
+                <Link href="/studio/explore">
+                  <IconImage
+                    slug="icon-compass"
+                    size="md"
+                    style={{
+                      className: `m-b-1 ${
+                        router.pathname === "/chat/dm"
+                          ? "state_active state_hover scale"
+                          : ""
+                      } `,
+                    }}
+                  />
+                </Link>
+                <Link href="/studio/docs">
                   <Tooltip label="Chat">
                     <IconImage
-                      slug="icon-notification"
+                      slug="icon-file"
+                      size="md"
+                      style={{
+                        className: `m-b-1 ${
+                          router.pathname === "/"
+                            ? "state_active state_hover scale"
+                            : ""
+                        } `,
+                      }}
+                    />
+                  </Tooltip>
+                </Link>
+                <Link href="/studio/settings">
+                  <Tooltip label="Chat">
+                    <IconImage
+                      slug="icon-settings"
                       size="md"
                       style={{
                         className: `m-b-1 ${
@@ -78,20 +106,7 @@ const Nav = (props: any) => {
               </FlexColumn>
 
               <FlexColumn height="fit-content">
-                <Link href="/chat/dm">
-                  <IconImage
-                    slug="icon-compass"
-                    size="md"
-                    style={{
-                      className: `m-b-1 ${
-                        router.pathname === "/chat/dm"
-                          ? "state_active state_hover scale"
-                          : ""
-                      } `,
-                    }}
-                  />
-                </Link>
-                <IconImage slug="icon-wallet" style={{ className: "m-b-1" }} />
+                <IconImage slug="icon-bell" style={{ className: "m-b-1" }} />
               </FlexColumn>
             </FlexColumn>
           </div>

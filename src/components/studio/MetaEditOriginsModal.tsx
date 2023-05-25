@@ -1,13 +1,5 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import FlexColumn from "@/_ui/flex/FlexColumn";
-import FlexRow from "@/_ui/flex/FlexRow";
-import IconImage from "@/_ui/icons/IconImage";
-import InputLabel from "@/_ui/input/InputLabel";
-import InputSelect from "@/_ui/input/InputSelect";
-import ModalSlider from "@/_ui/modal/ModalSlider";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import useMetaStore from "@/store/useMetaStore";
-import { Button, Heading, Text, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import OriginModal from "../modals/studio/OriginModal";
 

@@ -9,6 +9,10 @@ const useMetaCreate = () => {
   const metaTrigger = useRef<any>({});
   const metaOrigin = useRef<any>({});
   const $loadOriginData = useMetaStore((state: any) => state.loadOriginData);
+  const $loadTriggerData = useMetaStore((state: any) => state.loadTriggerData);
+  const $updateTriggerData = useMetaStore(
+    (state: any) => state.updateTriggerData
+  );
   const toast = useToast();
 
   const $macha = useAuthStore((state: any) => state.macha);
@@ -104,7 +108,29 @@ const useMetaCreate = () => {
       position: "bottom-right",
     });
   };
-
+  const executeTriggerSave = (selectedTrigger: any) => {
+    let triggerData = {
+      requestEndpoint: metaTrigger.current["requestEndpoint"].value,
+      requestMethod: metaTrigger.current["requestMethod"].value,
+      requestParams: metaTrigger.current["requestParams"].value,
+      requestSchema: metaTrigger.current["requestSchema"].value,
+      requestType: metaTrigger.current["requestType"].value,
+      description: metaTrigger.current["triggerDescription"].value,
+      name: metaTrigger.current["triggerName"].value,
+    };
+    if (selectedTrigger != null)
+      $updateTriggerData(selectedTrigger, triggerData);
+    else {
+      $loadTriggerData(triggerData);
+    }
+    //
+    toast({
+      title: "Trigger Created",
+      status: "success",
+      duration: 3000,
+      position: "bottom-right",
+    });
+  };
   return {
     metaOverview: metaOverview,
     metaTrigger: metaTrigger,
@@ -112,6 +138,7 @@ const useMetaCreate = () => {
     publishMeta: publishMeta,
     settingRequestMethods: settingRequestMethods,
     executeOriginSave: executeOriginSave,
+    executeTriggerSave: executeTriggerSave,
   };
 };
 export default useMetaCreate;

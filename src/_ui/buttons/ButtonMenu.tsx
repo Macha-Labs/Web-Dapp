@@ -60,7 +60,10 @@ const ButtonMenu = ({
       <MenuList>
         {options.map((item, index) => {
           return (
-            <MenuItem key={index} onClick={item.onClick ? item.onClick : () => {}}>
+            <MenuItem
+              key={index}
+              onClick={item.onClick ? item.onClick : () => {}}
+            >
               {item.img && <img src={item.img} />}
               {item.leftIcon && <IconImage slug={item.leftIcon} />}
               {item.value}

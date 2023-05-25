@@ -3,6 +3,7 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
+import Nav from "@/_ui/nav/Nav";
 import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
@@ -71,58 +72,63 @@ export default function DashBoard() {
       tags: ["tag1", "tag2"],
     },
   ];
+  const renderBody = () => {
+    return (
+      // <FlexWindow>
+      <FlexBody>
+        <FlexRow
+          width="100%"
+          hrAlign="space-between"
+          // padding={`${style.padding.md} 0rem`}
+        >
+          <FlexRow width="100%" hrAlign="flex-start">
+            <FlexRow width="50%">
+              <InputSearch
+                size="lg"
+                placeholder="Search Studio"
+                icon={{ slug: "icon-search" }}
+                marginRight={style.card.margin.default}
+              />
+            </FlexRow>
+            <MetaTagFilter />
+          </FlexRow>
+          <ButtonMenu
+            text="Sort By"
+            options={sortOptions}
+            icon={{
+              slug: "icon-chevron-down",
+            }}
+          />
+        </FlexRow>
+        <FlexRow
+          hrAlign="space-between"
+          width="100%"
+          flexWrap="wrap"
+          // padding={style.body.padding}
+        >
+          {exploreMetaOptions.map((item, index) => {
+            return (
+              <MetaCard
+                key={index}
+                image={item.image}
+                heading={item.heading}
+                description={item.description}
+                tags={item.tags}
+                cardDirection="row"
+                width="30%"
+                height="200px"
+              />
+            );
+          })}
+        </FlexRow>
+      </FlexBody>
+      // </FlexWindow>
+    );
+  };
   return (
     <>
-      <Navigation />
-
-      <FlexWindow>
-        <FlexBody>
-          <FlexRow
-            width="100%"
-            hrAlign="space-between"
-            padding={`${style.padding.md} 0rem`}
-          >
-            <FlexRow width="100%" hrAlign="flex-start">
-              <FlexRow width="50%">
-                <InputSearch
-                  size="lg"
-                  placeholder="Search Studio"
-                  icon={{ slug: "icon-search" }}
-                  marginRight={style.card.margin.default}
-                />
-              </FlexRow>
-              <MetaTagFilter />
-            </FlexRow>
-            <ButtonMenu
-              text="Sort By"
-              options={sortOptions}
-              icon={{
-                slug: "icon-chevron-down",
-              }}
-            />
-          </FlexRow>
-          <FlexRow
-            hrAlign="space-between"
-            width="100%"
-            flexWrap="wrap"
-            // padding={style.body.padding}
-          >
-            {exploreMetaOptions.map((item, index) => {
-              return (
-                <MetaCard
-                key={index}
-                  image={item.image}
-                  heading={item.heading}
-                  description={item.description}
-                  tags={item.tags}
-                  cardDirection="row"
-                  width="30%"
-                />
-              );
-            })}
-          </FlexRow>
-        </FlexBody>
-      </FlexWindow>
+      <FlexWindow leftElem={<Nav />} rightElem={renderBody()}></FlexWindow>
+      {/* <Navigation /> */}
     </>
   );
 }

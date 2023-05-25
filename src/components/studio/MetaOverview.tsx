@@ -82,9 +82,7 @@ function MetaOverview({ metaInfo }: Props) {
             </FlexColumn>
           </FlexRow> */}
         </FlexColumn>
-        <FlexColumn width="40%">
-          <ImageCarousal />
-        </FlexColumn>
+        <FlexColumn width="40%">{/* <ImageCarousal /> */}</FlexColumn>
       </FlexRow>
     </>
   );

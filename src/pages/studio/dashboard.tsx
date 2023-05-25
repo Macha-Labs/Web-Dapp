@@ -33,7 +33,6 @@ const DashBoard = () => {
     setIsLoading(false);
   }, [$macha?.client?.metasOwned?.data]);
 
-
   const sortOptions = [
     {
       value: "A-Z",
@@ -106,6 +105,7 @@ const DashBoard = () => {
               options={sortOptions}
               icon={{
                 slug: "icon-chevron-down",
+                marginLeft: "md",
               }}
             />
           </FlexRow>

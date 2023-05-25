@@ -1,36 +1,40 @@
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
+import useMetaStore from "@/store/useMetaStore";
 import { useState } from "react";
 import OriginModal from "../modals/studio/OriginModal";
 import TriggerModal from "../modals/studio/TriggerModal";
 
 type Props = {
   modal: any;
+  selectedTrigger: any;
 };
 
-const MetaTriggersModal = ({ modal }: Props) => {
+const MetaEditTriggerModal = ({ modal, selectedTrigger }: Props) => {
   const hookMetaCreate = useMetaCreate();
-  const [triggerType, setTriggerType] = useState<any>(null);
-  const [triggerMethods, setTriggerMethods] = useState<any>([]);
+  const [originType, setOriginType] = useState<any>(null);
+  const [originMethods, setOriginMethods] = useState<any>([]);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
+  const $triggerData = useMetaStore((state: any) => state.triggerData);
 
   const settingRequestMethods = (requestType: string) => {
     requestType == "GRAPH"
-      ? setTriggerMethods(["QUERY", "MUTATION"])
+      ? setOriginMethods(["QUERY", "MUTATION"])
       : requestType == "REST"
-      ? setTriggerMethods(["GET", "POST"])
-      : setTriggerType("CONTRACT");
+      ? setOriginMethods(["GET", "POST"])
+      : setOriginType("CONTRACT");
   };
-
   return (
     <TriggerModal
       modal={modal}
-      header={"Origin"}
+      header={"Origin Edit"}
       hookMetaCreate={hookMetaCreate}
+      defaultData={$triggerData[selectedTrigger]}
+      selectedTrigger={selectedTrigger}
       requestTypeOptions={requestTypeOptions}
       settingRequestMethod={settingRequestMethods}
-      triggerMethods={triggerMethods}
+      triggerMethods={originMethods}
     />
   );
 };
 
-export default MetaTriggersModal;
+export default MetaEditTriggerModal;
