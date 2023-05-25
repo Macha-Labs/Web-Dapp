@@ -9,7 +9,7 @@ type Props = {
   image: string;
   heading: string;
   description: string;
-  tags: any;
+  tags?: any;
   width?: any;
   cardDirection?: any;
   onCardClick?: any;

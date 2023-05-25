@@ -150,7 +150,7 @@ function MetaSettings() {
                 })}
             </CardPannel>
             <ButtonNative
-              text="Save Changes"
+              text="Publish Changes"
               variant="state_brand"
               onClick={async () => {
                 console.log("Meta Overview ", $overviewData);
