@@ -12,14 +12,16 @@ import { useState } from "react";
 
 type Props = {
   modal: any;
+  selectedOrigin: any;
 };
 
-const MetaOrigins = ({ modal }: Props) => {
+const MetaEditOrigins = ({ modal, selectedOrigin }: Props) => {
   const hookMeta = useMetaCreate();
   const [originType, setOriginType] = useState<any>(null);
   const [originMethods, setOriginMethods] = useState<any>([]);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
   const $loadOriginData = useMetaStore((state: any) => state.loadOriginData);
+  const $originData = useMetaStore((state: any) => state.originData);
   const toast = useToast();
 
   const settingOriginType = (requestType: string) => {
@@ -29,14 +31,14 @@ const MetaOrigins = ({ modal }: Props) => {
       ? setOriginMethods(["GET", "POST"])
       : setOriginType("CONTRACT");
   };
-
+  //   console.log("selectedOrigin", selectedOrigin);
   return (
     <ModalSlider
       event={modal}
       size="md"
       header={
         <FlexRow width="100%" hrAlign="space-between">
-          <Text className="mb-0">Origins</Text>
+          <Text className="mb-0">Edit Origins</Text>
           <IconImage slug="icon-close" onClick={() => modal.onClose()} />
         </FlexRow>
       }
@@ -66,6 +68,7 @@ const MetaOrigins = ({ modal }: Props) => {
           options={requestTypeOptions}
           icon={{ slug: "icon-close" }}
           variant={"state_default_hover"}
+          defaultValue={$originData[selectedOrigin]?.requestType}
           margin="0 0 20px 0"
         />
 
@@ -91,6 +94,7 @@ const MetaOrigins = ({ modal }: Props) => {
           options={originMethods}
           icon={{ slug: "icon-close" }}
           variant={"state_default_hover"}
+          defaultValue={$originData[selectedOrigin]?.requestMethod}
           margin="0 0 20px 0"
         />
 
@@ -116,7 +120,7 @@ const MetaOrigins = ({ modal }: Props) => {
           inputType="text"
           labelText="Request Endpoint"
           placeholder="Request Endpoint"
-          defaultValue=""
+          defaultValue={$originData[selectedOrigin]?.requestEndpoint}
           padding="20px 0px"
         />
 
@@ -127,7 +131,7 @@ const MetaOrigins = ({ modal }: Props) => {
           inputType="textArea"
           labelText="Request Schema"
           placeholder="Request Schema"
-          defaultValue=""
+          defaultValue={$originData[selectedOrigin]?.requestSchema}
           padding="20px 0px"
         />
 
@@ -138,7 +142,7 @@ const MetaOrigins = ({ modal }: Props) => {
           inputType="text"
           labelText="Request Parameter"
           placeholder="Provide Parameter"
-          defaultValue=""
+          defaultValue={$originData[selectedOrigin]?.requestParams}
           padding="20px 0px"
         />
 
@@ -180,4 +184,4 @@ const MetaOrigins = ({ modal }: Props) => {
   );
 };
 
-export default MetaOrigins;
+export default MetaEditOrigins;

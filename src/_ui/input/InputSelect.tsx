@@ -14,6 +14,7 @@ type Props = {
   elementRef?: any;
   width?: any;
   childrenComponent?: any;
+  defaultValue?: any;
 };
 
 const InputSelect = ({
@@ -27,6 +28,7 @@ const InputSelect = ({
   onChangeHandler = (e?: any) => {},
   elementRef,
   childrenComponent,
+  defaultValue,
 }: Props) => {
   // console.log("children", children);
   return (
@@ -36,6 +38,7 @@ const InputSelect = ({
         placeholder={placeholder}
         size={size}
         width={width ? width : "100%"}
+        defaultValue={defaultValue}
         icon={
           <IconImage
             slug={icon ? icon.slug : "icon-chevron-down"}
