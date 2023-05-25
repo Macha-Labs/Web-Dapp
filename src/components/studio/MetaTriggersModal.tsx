@@ -14,7 +14,7 @@ type Props = {
   modal: any;
 };
 
-const MetaTriggers = ({ modal }: Props) => {
+const MetaTriggersModal = ({ modal }: Props) => {
   const hookMeta = useMetaCreate();
   const [triggerMethods, setTriggerMethods] = useState<any>([]);
   const [triggerType, setTriggerType] = useState<any>(null);
@@ -191,4 +191,4 @@ const MetaTriggers = ({ modal }: Props) => {
   );
 };
 
-export default MetaTriggers;
+export default MetaTriggersModal;

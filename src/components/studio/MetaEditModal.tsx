@@ -11,9 +11,9 @@ import React from "react";
 
 type Props = {
   metaModal?: any;
-  hookMeta?: any;
+  hookMetaCreate?: any;
 };
-const MetaEditModal = ({ metaModal, hookMeta }: Props) => {
+const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
   const $meta = useMetaStore((state: any) => state.meta);
   const $loadOverviewData = useMetaStore(
     (state: any) => state.loadOverviewData
@@ -34,7 +34,7 @@ const MetaEditModal = ({ metaModal, hookMeta }: Props) => {
           <FlexColumn hrAlign="space-between" height="35%" marginTop={"sm"}>
             <InputLabel
               elementRef={(element: any) =>
-                (hookMeta.metaOverview.current["metaName"] = element)
+                (hookMetaCreate.metaOverview.current["metaName"] = element)
               }
               inputType="text"
               labelText="Meta Name"
@@ -43,7 +43,7 @@ const MetaEditModal = ({ metaModal, hookMeta }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookMeta.metaOverview.current["metaDescription"] = element)
+                (hookMetaCreate.metaOverview.current["metaDescription"] = element)
               }
               inputType="text"
               labelText="Description"
@@ -63,9 +63,9 @@ const MetaEditModal = ({ metaModal, hookMeta }: Props) => {
             onClick={(e: any) => {
               e.preventDefault();
               let metaCreateData = {
-                name: hookMeta.metaOverview.current["metaName"].value,
+                name: hookMetaCreate.metaOverview.current["metaName"].value,
                 description:
-                  hookMeta.metaOverview.current["metaDescription"].value,
+                  hookMetaCreate.metaOverview.current["metaDescription"].value,
               };
               $loadOverviewData(metaCreateData);
             }}

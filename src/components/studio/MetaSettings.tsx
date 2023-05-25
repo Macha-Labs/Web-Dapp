@@ -8,8 +8,8 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import MetaOrigins from "./MetaOrigins";
-import MetaTriggers from "./MetaTriggers";
+import MetaOriginsModal from "./MetaOriginsModal";
+import MetaTriggersModal from "./MetaTriggersModal";
 import CardPannel from "@/_ui/cards/CardPannel";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardNative from "@/_ui/cards/CardNative";
@@ -17,11 +17,11 @@ import MetaCreateModal from "./MetaCreateModal";
 import useMetaStore from "@/store/useMetaStore";
 import useAuthStore from "@/store/useAuthStore";
 import MetaEditModal from "./MetaEditModal";
-import MetaEditOrigins from "./MetaEditOrigins";
+import MetaEditOriginsModal from "./MetaEditOriginsModal";
 import { useState } from "react";
 
 function MetaSettings() {
-  const hookMeta = useMetaCreate();
+  const hookMetaCreate = useMetaCreate();
   const triggerModal = useDisclosure();
   const originModal = useDisclosure();
   const editOriginModal = useDisclosure();
@@ -134,7 +134,7 @@ function MetaSettings() {
                 console.log("Meta Overview ", $overviewData);
                 console.log("Meta Trigger ", $triggerData);
                 console.log("Meta Origin ", $originData);
-                await hookMeta.publishMeta(
+                await hookMetaCreate.publishMeta(
                   $overviewData,
                   $originData,
                   $triggerData
@@ -172,7 +172,7 @@ function MetaSettings() {
           <Button
             variant="state_brand"
             onClick={() => {
-              hookMeta.publishMeta();
+              hookMetaCreate.publishMeta();
             }}
           >
             SAVE
@@ -181,13 +181,13 @@ function MetaSettings() {
         </FlexColumn>
       </FlexRow>
 
-      <MetaTriggers modal={triggerModal} />
-      <MetaOrigins modal={originModal} />
-      <MetaEditOrigins
+      <MetaTriggersModal modal={triggerModal} />
+      <MetaOriginsModal modal={originModal} />
+      <MetaEditOriginsModal
         modal={editOriginModal}
         selectedOrigin={selectedOrigin}
       />
-      <MetaEditModal hookMeta={hookMeta} metaModal={metaEditModal} />
+      <MetaEditModal hookMetaCreate={hookMetaCreate} metaModal={metaEditModal} />
     </>
   );
 }

@@ -5,30 +5,35 @@ import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
 import ModalSlider from "@/_ui/modal/ModalSlider";
-import useMetaCreate from "@/hooks/studio/useMetaCreate";
-import useMetaStore from "@/store/useMetaStore";
-import { Button, Heading, Text, useToast } from "@chakra-ui/react";
-import { useState } from "react";
+import { Heading, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 type Props = {
   modal: any;
+  header: string;
+  hookMetaCreate: any;
+  requestTypeOptions: string[];
+  settingRequestMethod: (e?: any) => void;
+  originMethods: string[];
+  defaultData?: any;
 };
 
-const MetaOrigins = ({ modal }: Props) => {
-  const hookMeta = useMetaCreate();
-  const [originType, setOriginType] = useState<any>(null);
-  const [originMethods, setOriginMethods] = useState<any>([]);
-  const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
-  const $loadOriginData = useMetaStore((state: any) => state.loadOriginData);
-  const toast = useToast();
+const OriginModal = ({
+  modal,
+  header,
+  hookMetaCreate,
+  requestTypeOptions,
+  settingRequestMethod,
+  originMethods,
+  defaultData = null,
+}: Props) => {
 
-  const settingOriginType = (requestType: string) => {
-    requestType == "GRAPH"
-      ? setOriginMethods(["QUERY", "MUTATION"])
-      : requestType == "REST"
-      ? setOriginMethods(["GET", "POST"])
-      : setOriginType("CONTRACT");
-  };
+  useEffect(() => {
+    if (defaultData) {
+        console.log("Calling request method")
+        settingRequestMethod(defaultData?.requestType);
+    }
+  }, []);
 
   return (
     <ModalSlider
@@ -36,7 +41,7 @@ const MetaOrigins = ({ modal }: Props) => {
       size="md"
       header={
         <FlexRow width="100%" hrAlign="space-between">
-          <Text className="mb-0">Origins</Text>
+          <Text className="mb-0">{header}</Text>
           <IconImage slug="icon-close" onClick={() => modal.onClose()} />
         </FlexRow>
       }
@@ -59,10 +64,11 @@ const MetaOrigins = ({ modal }: Props) => {
         </Heading>
         <InputSelect
           elementRef={(element: any) =>
-            (hookMeta.metaOrigin.current["requestType"] = element)
+            (hookMetaCreate.metaOrigin.current["requestType"] = element)
           }
           placeholder="Select request Type"
-          onChangeHandler={settingOriginType}
+          onChangeHandler={settingRequestMethod}
+          defaultValue={defaultData?.requestType}
           options={requestTypeOptions}
           icon={{ slug: "icon-close" }}
           variant={"state_default_hover"}
@@ -85,10 +91,11 @@ const MetaOrigins = ({ modal }: Props) => {
 
         <InputSelect
           elementRef={(element: any) =>
-            (hookMeta.metaOrigin.current["requestMethod"] = element)
+            (hookMetaCreate.metaOrigin.current["requestMethod"] = element)
           }
           placeholder="Select Request Method"
           options={originMethods}
+          defaultValue={defaultData?.requestMethod}
           icon={{ slug: "icon-close" }}
           variant={"state_default_hover"}
           margin="0 0 20px 0"
@@ -111,34 +118,34 @@ const MetaOrigins = ({ modal }: Props) => {
 
         <InputLabel
           elementRef={(element: any) =>
-            (hookMeta.metaOrigin.current["requestEndpoint"] = element)
+            (hookMetaCreate.metaOrigin.current["requestEndpoint"] = element)
           }
           inputType="text"
           labelText="Request Endpoint"
+          defaultValue={defaultData?.requestEndpoint}
           placeholder="Request Endpoint"
-          defaultValue=""
           padding="20px 0px"
         />
 
         <InputLabel
           elementRef={(element: any) =>
-            (hookMeta.metaOrigin.current["requestSchema"] = element)
+            (hookMetaCreate.metaOrigin.current["requestSchema"] = element)
           }
           inputType="textArea"
           labelText="Request Schema"
           placeholder="Request Schema"
-          defaultValue=""
+          defaultValue={defaultData?.requestSchema}
           padding="20px 0px"
         />
 
         <InputLabel
           elementRef={(element: any) =>
-            (hookMeta.metaOrigin.current["requestParams"] = element)
+            (hookMetaCreate.metaOrigin.current["requestParams"] = element)
           }
           inputType="text"
           labelText="Request Parameter"
           placeholder="Provide Parameter"
-          defaultValue=""
+          defaultValue={defaultData?.requestParams}
           padding="20px 0px"
         />
 
@@ -147,27 +154,8 @@ const MetaOrigins = ({ modal }: Props) => {
           <ButtonNative
             variant={"state_brand"}
             onClick={() => {
-              let originData = {
-                requestEndpoint:
-                  hookMeta.metaOrigin.current["requestEndpoint"].value,
-                requestMethod:
-                  hookMeta.metaOrigin.current["requestMethod"].value,
-                requestParams:
-                  hookMeta.metaOrigin.current["requestParams"].value,
-                requestSchema:
-                  hookMeta.metaOrigin.current["requestSchema"].value,
-                requestType: hookMeta.metaOrigin.current["requestType"].value,
-              };
-
-              const newKey = Object.keys($loadOriginData).length + 1;
-              $loadOriginData(originData);
-              modal.onClose();
-              toast({
-                title: "Origin Created",
-                status: "success",
-                duration: 3000,
-                position: "bottom-right",
-              });
+              //
+              hookMetaCreate.executeOriginSave();
             }}
           >
             Save
@@ -180,4 +168,4 @@ const MetaOrigins = ({ modal }: Props) => {
   );
 };
 
-export default MetaOrigins;
+export default OriginModal;
