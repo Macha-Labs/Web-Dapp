@@ -17,12 +17,14 @@ import { useRouter } from "next/router";
 import { getItemFromLocal, setItemOnLocal } from "@/helpers";
 import { Heading } from "@chakra-ui/react";
 import useMetaStore from "@/store/useMetaStore";
+import useMeta from "@/hooks/studio/useMeta";
 
 const CreateMeta = () => {
   const router = useRouter();
   const $userMetasMap = useUserStore((state: any) => state.userMetasMap);
   const $meta = useMetaStore((state: any) => state.meta);
   const [currentMetaId, setCurrentMetaId] = useState<any>();
+  const hookMeta = useMeta();
 
   useEffect(() => {
     console.log("logging the router query", router.query);
@@ -31,8 +33,10 @@ const CreateMeta = () => {
     if (currentMetaId && currentMetaId != storedMetaId) {
       setItemOnLocal("currentMetaId", router?.query?.id);
       setCurrentMetaId(currentMetaId);
+      hookMeta.metaInit($userMetasMap[currentMetaId]);
     } else {
       setCurrentMetaId(storedMetaId);
+      hookMeta.metaInit($userMetasMap[storedMetaId]);
     }
   }, []);
 
@@ -70,7 +74,7 @@ const CreateMeta = () => {
       case "Playground":
         return <MetaPlayground id={currentMetaId} />;
       case "Settings":
-        return <MetaSettings />;
+        return <MetaSettings metaInfo={$userMetasMap[currentMetaId]} />;
       default:
         return null;
     }

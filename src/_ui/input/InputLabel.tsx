@@ -97,8 +97,8 @@ const InputLabel = ({
         </ButtonNative>
         <input
           id="upload-file"
-          onChange={(e) => {
-            console.log("This is the attachment button");
+          onChange={(e?: any) => {
+            onChange(e);
           }}
           type="file"
           hidden

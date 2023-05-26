@@ -8,6 +8,7 @@ import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import { fetchAllMetas } from "@/service/StudioService";
+import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
 import { useState, useEffect } from "react";
 
@@ -39,6 +40,14 @@ export default function DashBoard() {
     fetchmetas();
   }, []);
 
+  const $userMetas = useUserStore((state: any) => state.userMetas);
+
+  const handleFilter = (inputValue: string) => {
+    const filtered = $userMetas.filter((item: any) => {
+      return item.name.toLowerCase().includes(inputValue.toLowerCase());
+    });
+    setExploreMeta(filtered);
+  };
   const renderBody = () => {
     console.log("exploreMeta", exploreMeta);
     return (
@@ -56,6 +65,7 @@ export default function DashBoard() {
                 placeholder="Search Studio"
                 icon={{ slug: "icon-search" }}
                 marginRight={style.card.margin.default}
+                onChange={(e: any) => handleFilter(e.target.value)}
               />
             </FlexRow>
             <MetaTagFilter />

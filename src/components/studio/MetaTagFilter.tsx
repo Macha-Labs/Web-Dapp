@@ -30,7 +30,7 @@ function MetaTagFilter() {
             />
           </FlexRow>
         }
-        childrenComponent={
+        children={
           <FlexColumn width="100%">
             <FlexColumn width="100%" vrAlign="flex-start" padding="10px 0px">
               <FlexRow width="100%" hrAlign="space-between">
@@ -149,7 +149,7 @@ function MetaTagFilter() {
               </FlexRow>
             </FlexColumn>
 
-            <ButtonNative variant="state_brand" width="100%" marginTop={"10px"}>
+            <ButtonNative variant="state_brand" width="100%" size="lg">
               Done
             </ButtonNative>
           </FlexColumn>

@@ -11,6 +11,7 @@ import NavTabs from "@/_ui/nav/NavTabs";
 import MetaCard from "@/components/studio/MetaCard";
 import MetaCreateModal from "@/components/studio/MetaCreateModal";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
+import { displayImage } from "@/helpers/storage/lightHouseStorage";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
@@ -27,6 +28,13 @@ const DashBoard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const $userMetas = useUserStore((state: any) => state.userMetas);
   const [filteredData, setFilteredData] = useState($userMetas);
+
+  const handleFilter = (inputValue: string) => {
+    const filtered = $userMetas.filter((item: any) => {
+      return item.name.toLowerCase().includes(inputValue.toLowerCase());
+    });
+    setFilteredData(filtered);
+  };
 
   useEffect(() => {
     setFilteredData($userMetas);
@@ -95,6 +103,7 @@ const DashBoard = () => {
                   placeholder="Search Studio"
                   icon={{ slug: "icon-search" }}
                   marginRight={style.card.margin.default}
+                  onChange={(e: any) => handleFilter(e.target.value)}
                 />
               </FlexRow>
               <MetaTagFilter />
@@ -126,7 +135,11 @@ const DashBoard = () => {
                 return (
                   <MetaCard
                     key={index}
-                    image={item.image ? item.image : "../assets/MetaCard.png"}
+                    image={
+                      item.image
+                        ? displayImage(item.image)
+                        : "../assets/MetaCard.png"
+                    }
                     heading={item.name}
                     description={item.description}
                     tags={item.tags ? item?.tags : ""}

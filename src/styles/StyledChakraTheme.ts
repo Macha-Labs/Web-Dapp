@@ -184,6 +184,7 @@ const theme = extendTheme({
         state_brand: {
           background: `${style.button.bg.active}`,
           color: "#FF",
+          // padding: "0.5rem",
         },
         state_brand_hover: {
           background: `${style.button.bg.activeTranslucent}`,
