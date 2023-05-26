@@ -4,11 +4,12 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import ModalSlider from "@/_ui/modal/ModalSlider";
+import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
 import { initialiseNewMeta } from "@/service/StudioService";
 import useMetaStore from "@/store/useMetaStore";
-import { Text } from "@chakra-ui/react";
+import { Image, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   metaModal?: any;
@@ -18,6 +19,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
   const $loadOverviewData = useMetaStore(
     (state: any) => state.loadOverviewData
   );
+  const [imageEvent, setImageEvent] = useState<any>();
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   return (
     <ModalSlider
@@ -52,7 +54,20 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
               inputType="file"
               labelText="Image"
               placeholder="Image"
+              onChange={async (e?: any) => {
+                console.log(e);
+                setImageEvent(e);
+                // const cid = await deploytoLightHouse(e);
+                // console.log(cid);
+              }}
             />
+            {imageEvent && (
+              <Image
+                src={URL.createObjectURL(imageEvent?.target?.files[0])}
+                alt={imageEvent?.target?.files[0].name}
+                width="300px"
+              />
+            )}
           </FlexColumn>
           {/* <Link href="/studio/createMeta" style={{ width: "100%" }}> */}
           <ButtonNative
@@ -60,11 +75,12 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
             width="100%"
             onClick={async (e: any) => {
               e.preventDefault();
+              const cid = await deploytoLightHouse(imageEvent);
               let metaCreateData = {
                 name: hookMeta.metaOverview.current["metaName"].value,
                 description:
                   hookMeta.metaOverview.current["metaDescription"].value,
-                image: "",
+                image: cid,
                 status: "PENDING",
                 owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
               };

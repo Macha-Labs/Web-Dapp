@@ -11,6 +11,7 @@ import NavTabs from "@/_ui/nav/NavTabs";
 import MetaCard from "@/components/studio/MetaCard";
 import MetaCreateModal from "@/components/studio/MetaCreateModal";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
+import { displayImage } from "@/helpers/storage/lightHouseStorage";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
@@ -134,7 +135,11 @@ const DashBoard = () => {
                 return (
                   <MetaCard
                     key={index}
-                    image={item.image ? item.image : "../assets/MetaCard.png"}
+                    image={
+                      item.image
+                        ? displayImage(item.image)
+                        : "../assets/MetaCard.png"
+                    }
                     heading={item.name}
                     description={item.description}
                     tags={item.tags ? item?.tags : ""}

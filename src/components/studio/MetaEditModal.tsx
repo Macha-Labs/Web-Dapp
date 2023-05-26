@@ -4,10 +4,11 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import ModalSlider from "@/_ui/modal/ModalSlider";
+import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
 import useMetaStore from "@/store/useMetaStore";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   metaModal?: any;
@@ -19,6 +20,7 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
     (state: any) => state.loadOverviewData
   );
   const $overviewData = useMetaStore((state: any) => state.overviewData);
+  const [imageEvent, setImageEvent] = useState<any>();
   return (
     <ModalSlider
       event={metaModal}
@@ -43,7 +45,8 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookMetaCreate.metaOverview.current["metaDescription"] = element)
+                (hookMetaCreate.metaOverview.current["metaDescription"] =
+                  element)
               }
               inputType="text"
               labelText="Description"
@@ -54,18 +57,24 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
               inputType="file"
               labelText="Image"
               placeholder="Image"
+              onChange={async (e?: any) => {
+                console.log(e);
+                setImageEvent(e);
+              }}
             />
           </FlexColumn>
           {/* <Link href="/studio/createMeta" style={{ width: "100%" }}> */}
           <ButtonNative
             variant="state_brand"
             width="100%"
-            onClick={(e: any) => {
+            onClick={async (e: any) => {
               e.preventDefault();
+              const cid = await deploytoLightHouse(imageEvent);
               let metaCreateData = {
                 name: hookMetaCreate.metaOverview.current["metaName"].value,
                 description:
                   hookMetaCreate.metaOverview.current["metaDescription"].value,
+                image: cid,
               };
               $loadOverviewData(metaCreateData);
             }}
