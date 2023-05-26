@@ -28,6 +28,13 @@ const DashBoard = () => {
   const $userMetas = useUserStore((state: any) => state.userMetas);
   const [filteredData, setFilteredData] = useState($userMetas);
 
+  const handleFilter = (inputValue: string) => {
+    const filtered = $userMetas.filter((item: any) => {
+      return item.name.toLowerCase().includes(inputValue.toLowerCase());
+    });
+    setFilteredData(filtered);
+  };
+
   useEffect(() => {
     setFilteredData($userMetas);
     setIsLoading(false);
@@ -95,6 +102,7 @@ const DashBoard = () => {
                   placeholder="Search Studio"
                   icon={{ slug: "icon-search" }}
                   marginRight={style.card.margin.default}
+                  onChange={(e: any) => handleFilter(e.target.value)}
                 />
               </FlexRow>
               <MetaTagFilter />

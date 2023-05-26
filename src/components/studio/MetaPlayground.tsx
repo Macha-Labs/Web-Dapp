@@ -14,7 +14,6 @@ type Props = {
   id: string;
 };
 function MetaPlayground({ id }: Props) {
-  const hookMeta = useMeta(id);
   const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
   const [selectedOrigin, setSelectedOrigin] = useState("");

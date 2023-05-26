@@ -22,8 +22,13 @@ import { useState } from "react";
 import MetaEditTriggerModal from "./MetaEditTriggerModal";
 import { deleteMetaInit } from "@/service/StudioService";
 import { useRouter } from "next/router";
+import useMeta from "@/hooks/studio/useMeta";
 
-function MetaSettings() {
+type Props = {
+  metaInfo: any;
+};
+
+function MetaSettings({ metaInfo }: Props) {
   const hookMetaCreate = useMetaCreate();
   const triggerModal = useDisclosure();
   const originModal = useDisclosure();
@@ -40,8 +45,10 @@ function MetaSettings() {
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   const $triggerData = useMetaStore((state: any) => state.triggerData);
   const $originData = useMetaStore((state: any) => state.originData);
-  console.log("$originData", $originData);
+  const $meta = useMetaStore((state: any) => state.meta);
+  console.log("$meta", $meta);
 
+  console.log("metaInfo", metaInfo);
   const router = useRouter();
   return (
     <>
@@ -99,11 +106,29 @@ function MetaSettings() {
               }
               margin={"xs"}
             >
+              {$meta?.data?.triggers &&
+                $meta?.data?.triggers.map((item: any, index: any) => {
+                  return (
+                    <FlexRow hrAlign="space-between">
+                      <Text>{item.name}</Text>
+
+                      {/* <ButtonNative
+                        text="Edit"
+                        variant="state_default_hover"
+                        size="sm"
+                        onClick={() => {
+                          setSelectedTrigger(index);
+                          editTriggerModal.onOpen();
+                        }}
+                      /> */}
+                    </FlexRow>
+                  );
+                })}
               {$triggerData &&
                 $triggerData.map((item: any, index: any) => {
                   return (
                     <FlexRow hrAlign="space-between">
-                      <Text>Trigger {index}</Text>
+                      <Text>{item.name}</Text>
 
                       <ButtonNative
                         text="Edit"
@@ -134,6 +159,9 @@ function MetaSettings() {
               }
               margin={"xs"}
             >
+              <Text as="h6" fontSize="16" className="m-b-1">
+                Unpublished Origins
+              </Text>
               {$originData &&
                 $originData.map((item: any, index: any) => {
                   return (
@@ -152,6 +180,27 @@ function MetaSettings() {
                     </FlexRow>
                   );
                 })}
+              <Text as="h6" fontSize="16" className="m-b-1">
+                Published Origins
+              </Text>
+              {$meta?.data?.origin &&
+                $meta?.data?.origin.map((item: any, index: any) => {
+                  return (
+                    <FlexRow hrAlign="space-between">
+                      <Text>Origin {index}</Text>
+
+                      {/* <ButtonNative
+                      text="Edit"
+                      variant="state_default_hover"
+                      size="sm"
+                      onClick={() => {
+                        setSelectedOrigin(index);
+                        editOriginModal.onOpen();
+                      }}
+                    /> */}
+                    </FlexRow>
+                  );
+                })}
             </CardPannel>
             <ButtonNative
               text="Publish Changes"
@@ -160,7 +209,7 @@ function MetaSettings() {
                 console.log("Meta Overview ", $overviewData);
                 console.log("Meta Trigger ", $triggerData);
                 console.log("Meta Origin ", $originData);
-                deleteMetaInit(router?.query?.id);
+                deleteMetaInit($meta);
                 await hookMetaCreate.publishMeta(
                   $overviewData,
                   $originData,
