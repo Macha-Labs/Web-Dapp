@@ -22,7 +22,7 @@ function MetaTagFilter() {
         event={filterModal}
         size="md"
         header={
-          <FlexRow width="100%" hrAlign="space-between">
+          <FlexRow hrAlign="space-between">
             <Text className="mb-0">Filter By</Text>
             <IconImage
               slug="icon-close"
@@ -31,124 +31,137 @@ function MetaTagFilter() {
           </FlexRow>
         }
         children={
-          <FlexColumn width="100%">
-            <FlexColumn width="100%" vrAlign="flex-start" padding="10px 0px">
-              <FlexRow width="100%" hrAlign="space-between">
-                <Heading
-                  as="h6"
-                  size="sm"
-                  className="m-b-1"
-                  bgGradient="linear(
+          <FlexColumn hrAlign="space-between">
+            <FlexColumn hrAlign="flex-start">
+              <FlexColumn
+                vrAlign="flex-start"
+                height="fit-content"
+                padding="10px 0px"
+              >
+                <FlexRow hrAlign="space-between">
+                  <Heading
+                    as="h6"
+                    size="sm"
+                    className="m-b-1"
+                    bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-                  bgClip="text"
-                >
-                  Access
-                </Heading>
-                <IconImage slug="icon-chevron-down" />
-              </FlexRow>
-              <FlexRow>
-                <TagNative
-                  value="Public"
-                  margin="0px 10px"
-                  variant="state_brand"
-                  close={true}
-                />
-                <TagNative
-                  value="Public"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-                <TagNative
-                  value="Public"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-              </FlexRow>
-            </FlexColumn>
+                    bgClip="text"
+                  >
+                    Access
+                  </Heading>
+                  <IconImage slug="icon-chevron-down" />
+                </FlexRow>
+                <FlexRow hrAlign="flex-start">
+                  <TagNative
+                    value="Public"
+                    margin="0px 10px"
+                    variant="state_brand"
+                    close={true}
+                  />
+                  <TagNative
+                    value="Public"
+                    margin="0px 10px"
+                    variant="state_xmtp"
+                    close={true}
+                  />
+                  <TagNative
+                    value="Public"
+                    margin="0px 10px"
+                    variant="state_xmtp"
+                    close={true}
+                  />
+                </FlexRow>
+              </FlexColumn>
 
-            <FlexColumn width="100%" vrAlign="flex-start" padding="10px 0px">
-              <FlexRow width="100%" hrAlign="space-between">
-                <Heading
-                  as="h6"
-                  size="sm"
-                  className="m-b-1"
-                  bgGradient="linear(
+              <FlexColumn
+                vrAlign="flex-start"
+                height="fit-content"
+                padding="10px 0px"
+              >
+                <FlexRow hrAlign="space-between">
+                  <Heading
+                    as="h6"
+                    size="sm"
+                    className="m-b-1"
+                    bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-                  bgClip="text"
-                >
-                  Request Type
-                </Heading>
-                <IconImage slug="icon-chevron-down" />
-              </FlexRow>
-              <FlexRow>
-                <TagNative
-                  value="GraphQL"
-                  variant="state_brand"
-                  close={true}
-                  margin="0px 10px"
-                />
-                <TagNative
-                  value="GraphQL"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-                <TagNative
-                  value="GraphQL"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-              </FlexRow>
-            </FlexColumn>
+                    bgClip="text"
+                  >
+                    Request Type
+                  </Heading>
+                  <IconImage slug="icon-chevron-down" />
+                </FlexRow>
+                <FlexRow hrAlign="flex-start">
+                  <TagNative
+                    value="GraphQL"
+                    variant="state_brand"
+                    close={true}
+                    margin="0px 10px"
+                  />
+                  <TagNative
+                    value="GraphQL"
+                    margin="0px 10px"
+                    variant="state_xmtp"
+                    close={true}
+                  />
+                  <TagNative
+                    value="GraphQL"
+                    margin="0px 10px"
+                    variant="state_xmtp"
+                    close={true}
+                  />
+                </FlexRow>
+              </FlexColumn>
 
-            <FlexColumn width="100%" vrAlign="flex-start" padding="10px 0px">
-              <FlexRow width="100%" hrAlign="space-between">
-                <Heading
-                  as="h6"
-                  size="sm"
-                  className="m-b-1"
-                  bgGradient="linear(
+              <FlexColumn
+                height="fit-content"
+                vrAlign="flex-start"
+                padding="10px 0px"
+              >
+                <FlexRow hrAlign="space-between">
+                  <Heading
+                    as="h6"
+                    size="sm"
+                    className="m-b-1"
+                    bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-                  bgClip="text"
-                >
-                  Network
-                </Heading>
-                <IconImage slug="icon-chevron-down" />
-              </FlexRow>
-              <FlexRow>
-                <TagNative
-                  value="Ethereum"
-                  margin="0px 10px"
-                  variant="state_brand"
-                  close={true}
-                />
-                <TagNative
-                  value="Ethereum"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-                <TagNative
-                  value="Ethereum"
-                  margin="0px 10px"
-                  variant="state_xmtp"
-                  close={true}
-                />
-              </FlexRow>
+                    bgClip="text"
+                  >
+                    Network
+                  </Heading>
+                  <IconImage slug="icon-chevron-down" />
+                </FlexRow>
+                <FlexRow hrAlign="flex-start">
+                  <TagNative
+                    value="Ethereum"
+                    margin="0px 10px"
+                    variant="state_brand"
+                    close={true}
+                  />
+                  <TagNative
+                    value="Ethereum"
+                    margin="0px 10px"
+                    variant="state_xmtp"
+                    close={true}
+                  />
+                  <TagNative
+                    value="Ethereum"
+                    margin="0px 10px"
+                    variant="state_xmtp"
+                    close={true}
+                  />
+                </FlexRow>
+              </FlexColumn>
             </FlexColumn>
-
             <ButtonNative variant="state_brand" width="100%" size="lg">
               Done
             </ButtonNative>
