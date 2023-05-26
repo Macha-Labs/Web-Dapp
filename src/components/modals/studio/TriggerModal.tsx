@@ -14,18 +14,20 @@ type Props = {
   hookMetaCreate: any;
   requestTypeOptions: string[];
   settingRequestMethod: (e?: any) => void;
-  originMethods: string[];
+  triggerMethods: string[];
   defaultData?: any;
+  selectedTrigger?: any;
 };
 
-const OriginModal = ({
+const TriggerModal = ({
   modal,
   header,
   hookMetaCreate,
   requestTypeOptions,
   settingRequestMethod,
-  originMethods,
+  triggerMethods,
   defaultData = null,
+  selectedTrigger = null,
 }: Props) => {
   useEffect(() => {
     if (defaultData) {
@@ -33,7 +35,6 @@ const OriginModal = ({
       settingRequestMethod(defaultData?.requestType);
     }
   }, []);
-
   return (
     <ModalSlider
       event={modal}
@@ -45,9 +46,31 @@ const OriginModal = ({
         </FlexRow>
       }
     >
-      {/* ---------------------------------------------- Origin Start -------------------------------------------- */}
+      {/* ------------------------------------------ Trigger start ------------------------------------------ */}
 
       <FlexColumn width="100%" hrAlign="flex-start" vrAlign="flex-start">
+        <InputLabel
+          elementRef={(element: any) =>
+            (hookMetaCreate.metaTrigger.current["triggerName"] = element)
+          }
+          inputType="text"
+          labelText="Name"
+          placeholder="Trigger Name"
+          defaultValue={defaultData?.name}
+          padding="20px 0px"
+        />
+
+        <InputLabel
+          elementRef={(element: any) =>
+            (hookMetaCreate.metaTrigger.current["triggerDescription"] = element)
+          }
+          inputType="textArea"
+          labelText="Description"
+          placeholder="Description"
+          defaultValue={defaultData?.description}
+          padding="20px 0px"
+        />
+
         <Heading
           as="h6"
           size="sm"
@@ -61,85 +84,74 @@ const OriginModal = ({
         >
           Request Type
         </Heading>
+
         <InputSelect
           elementRef={(element: any) =>
-            (hookMetaCreate.metaOrigin.current["requestType"] = element)
+            (hookMetaCreate.metaTrigger.current["requestType"] = element)
           }
-          placeholder="Select request Type"
+          placeholder="Search request type"
+          options={requestTypeOptions}
           onChangeHandler={settingRequestMethod}
           defaultValue={defaultData?.requestType}
-          options={requestTypeOptions}
           icon={{ slug: "icon-close" }}
           variant={"state_default_hover"}
           margin="0 0 20px 0"
         />
 
-        <Heading
-          as="h6"
-          size="sm"
-          bgGradient="linear(
+        {triggerMethods.length > 0 && (
+          <>
+            <Heading
+              as="h6"
+              size="sm"
+              bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-          bgClip="text"
-          marginTop={"20px"}
-        >
-          Request Method
-        </Heading>
-
-        <InputSelect
-          elementRef={(element: any) =>
-            (hookMetaCreate.metaOrigin.current["requestMethod"] = element)
-          }
-          placeholder="Select Request Method"
-          options={originMethods}
-          defaultValue={defaultData?.requestMethod}
-          icon={{ slug: "icon-close" }}
-          variant={"state_default_hover"}
-          margin="0 0 20px 0"
-        />
-
-        {/* <InputLabel
-                  inputType="text"
-                  labelText="Request Schema CID"
-                  placeholder="Request Schema CID"
-                  defaultValue=""
-                  padding="20px 0px"
-                /> */}
-        {/* <InputLabel
-                  inputType="text"
-                  labelText="Request Headers"
-                  placeholder="Request Headers"
-                  defaultValue=""
-                  padding="20px 0px"
-                /> */}
+              bgClip="text"
+              marginTop={"20px"}
+            >
+              Request Method
+            </Heading>
+            <InputSelect
+              elementRef={(element: any) =>
+                (hookMetaCreate.metaTrigger.current["requestMethod"] = element)
+              }
+              placeholder="search request method"
+              options={triggerMethods}
+              defaultValue={defaultData?.requestMethod}
+              icon={{ slug: "icon-close" }}
+              variant={"state_default_hover"}
+              margin="0 0 20px 0"
+            />
+          </>
+        )}
 
         <InputLabel
           elementRef={(element: any) =>
-            (hookMetaCreate.metaOrigin.current["requestEndpoint"] = element)
+            (hookMetaCreate.metaTrigger.current["requestEndpoint"] = element)
           }
           inputType="text"
           labelText="Request Endpoint"
           defaultValue={defaultData?.requestEndpoint}
-          placeholder="Request Endpoint"
+          placeholder="Endpoint"
           padding="20px 0px"
         />
 
         <InputLabel
           elementRef={(element: any) =>
-            (hookMetaCreate.metaOrigin.current["requestSchema"] = element)
+            (hookMetaCreate.metaTrigger.current["requestSchema"] = element)
           }
           inputType="textArea"
-          labelText="Request Schema"
-          placeholder="Request Schema"
+          labelText="Trigger Schema"
+          placeholder="Add your trigger schema"
           defaultValue={defaultData?.requestSchema}
           padding="20px 0px"
         />
 
         <InputLabel
           elementRef={(element: any) =>
-            (hookMetaCreate.metaOrigin.current["requestParams"] = element)
+            (hookMetaCreate.metaTrigger.current["requestParams"] = element)
           }
           inputType="text"
           labelText="Request Parameter"
@@ -149,23 +161,21 @@ const OriginModal = ({
         />
 
         <FlexRow width="100%" hrAlign="space-between">
-          <ButtonNative variant={""}>Discard</ButtonNative>
+          <ButtonNative text="Discard" />
           <ButtonNative
             variant={"state_brand"}
             onClick={() => {
-              //
-              hookMetaCreate.executeOriginSave();
+              hookMetaCreate.executeTriggerSave(selectedTrigger);
               modal.onClose();
             }}
-          >
-            Save
-          </ButtonNative>
+            text="Save"
+          />
         </FlexRow>
       </FlexColumn>
 
-      {/* ---------------------------------------------- Origin End -------------------------------------------- */}
+      {/* ---------------------------------------------- Trigger End -------------------------------------------- */}
     </ModalSlider>
   );
 };
 
-export default OriginModal;
+export default TriggerModal;

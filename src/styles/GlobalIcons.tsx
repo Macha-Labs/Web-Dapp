@@ -7,6 +7,12 @@ const GlobalIcons: any = {
   "icon-search":
     "/icons/svg/Base-blue/base-blue-search.svg?updatedAt=1680783899444",
   "icon-chat": "/icons/svg/Base-blue/base-blue-chat.svg",
+  "icon-dashboard":
+    "/icons/svg/Base-blue/base-blue-dashboard.svg?updatedAt=1685012312872",
+  "icon-settings":
+    "/icons/svg/Base-blue/base-blue-settingsFilled.svg?updatedAt=1680783904683",
+  "icon-bell":
+    "/icons/svg/Base-blue/base-blue-bell.svg?updatedAt=1685012312681",
   "icon-chat-white":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base_icons/base-chat.svg",
   "icon-mute-chat":

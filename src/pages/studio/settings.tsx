@@ -1,8 +1,10 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
+import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import ChakraTable from "@/_ui/list/ChakraTable";
+import Nav from "@/_ui/nav/Nav";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
 import Navigation from "@/_ui/nav/Navigation";
@@ -23,11 +25,9 @@ export default function DashBoard() {
     },
   ];
 
-  return (
-    <>
-      <Navigation />
-
-      <FlexWindow>
+  const renderBody = () => {
+    return (
+      <>
         <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <NavTabs
@@ -37,7 +37,7 @@ export default function DashBoard() {
           </FlexRow>
         </NavBlock>
         <FlexBody>
-          <FlexRow padding="10px 0px">
+          <FlexRow hrAlign="flex-start">
             <Text
               className="m-b-0"
               bgGradient="linear(
@@ -74,15 +74,15 @@ export default function DashBoard() {
               ],
             ]}
           />
-          <FlexRow padding="10px 0px">
+          <FlexRow hrAlign="flex-start" marginTop={"sm"}>
             <Button variant="state_default_hover">Create New API keys</Button>
           </FlexRow>
-          <FlexRow>
+          <FlexRow hrAlign="flex-start" marginTop={"sm"}>
             <Text fontSize={"2xl"} fontWeight={700}>
               New API Keys
             </Text>
           </FlexRow>
-          <StyledCol>
+          <FlexColumn vrAlign="flex-start">
             <Heading
               as="h6"
               size="sm"
@@ -103,12 +103,13 @@ export default function DashBoard() {
                 style={{ class: "" }}
               />
             </StyledCard>
-          </StyledCol>
+          </FlexColumn>
           <FlexRow width="100%" hrAlign="flex-end">
             <ButtonNative variant="state_brand" text="Create Api" />
           </FlexRow>
         </FlexBody>
-      </FlexWindow>
-    </>
-  );
+      </>
+    );
+  };
+  return <FlexWindow leftElem={<Nav />} rightElem={renderBody()}></FlexWindow>;
 }

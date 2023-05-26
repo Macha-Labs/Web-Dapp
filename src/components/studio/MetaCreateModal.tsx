@@ -4,6 +4,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import ModalSlider from "@/_ui/modal/ModalSlider";
+import { initialiseNewMeta } from "@/service/StudioService";
 import useMetaStore from "@/store/useMetaStore";
 import { Text } from "@chakra-ui/react";
 import Link from "next/link";
@@ -29,36 +30,45 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
         </FlexRow>
       }
       children={
-        <FlexColumn width="100%">
-          <InputLabel
-            elementRef={(element: any) =>
-              (hookMeta.metaOverview.current["metaName"] = element)
-            }
-            inputType="text"
-            labelText="Meta Name"
-            placeholder="Name"
-          />
-          <InputLabel
-            elementRef={(element: any) =>
-              (hookMeta.metaOverview.current["metaDescription"] = element)
-            }
-            inputType="text"
-            labelText="Description"
-            placeholder="Description"
-          />
-          <InputLabel inputType="file" labelText="Image" placeholder="Image" />
-
+        <FlexColumn width="100%" hrAlign="space-between" height="100%">
+          <FlexColumn hrAlign="space-between" height="35%">
+            <InputLabel
+              elementRef={(element: any) =>
+                (hookMeta.metaOverview.current["metaName"] = element)
+              }
+              inputType="text"
+              labelText="Meta Name"
+              placeholder="Name"
+            />
+            <InputLabel
+              elementRef={(element: any) =>
+                (hookMeta.metaOverview.current["metaDescription"] = element)
+              }
+              inputType="text"
+              labelText="Description"
+              placeholder="Description"
+            />
+            <InputLabel
+              inputType="file"
+              labelText="Image"
+              placeholder="Image"
+            />
+          </FlexColumn>
           {/* <Link href="/studio/createMeta" style={{ width: "100%" }}> */}
           <ButtonNative
             variant="state_brand"
             width="100%"
-            onClick={(e: any) => {
+            onClick={async (e: any) => {
               e.preventDefault();
               let metaCreateData = {
                 name: hookMeta.metaOverview.current["metaName"].value,
                 description:
                   hookMeta.metaOverview.current["metaDescription"].value,
+                image: "",
+                status: "PENDING",
+                owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
               };
+              await initialiseNewMeta(metaCreateData);
               $loadOverviewData(metaCreateData);
             }}
           >

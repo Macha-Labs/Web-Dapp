@@ -1,3 +1,4 @@
+import { fetchPendingMeta } from "@/service/StudioService";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { Macha } from "@metaworklabs/macha-dev-sdk/lib";
@@ -31,7 +32,7 @@ const useMachaAuth = () => {
 
   useEffect(() => {
     setInit();
-  }, [])
+  }, []);
 
   const auth = async () => {
     const macha = new Macha({
@@ -40,7 +41,7 @@ const useMachaAuth = () => {
     });
     await macha.connectClient({
       owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
-      signer: browserSigner
+      signer: browserSigner,
     });
     console.log("Macha init ", macha);
     console.log("Macha Client ", macha.client);
@@ -50,20 +51,34 @@ const useMachaAuth = () => {
   };
 
   useEffect(() => {
-    if (browserSigner)
-    auth();
+    if (browserSigner) auth();
   }, [$address, browserSigner]);
 
+  const fetchingMetas = async () => {
+    fetchPendingMeta("0x4eff290c1a734411b39aaa96eabe1e25f0e223ae").then(
+      (res) => {
+        console.log("response penging", res);
+        const allMetas = [...$macha?.client?.metasOwned?.data, ...res.data];
+        console.log("allMetas", allMetas);
+        $loadUserMetas(allMetas);
+        let userMetaMap: any = {};
+        allMetas.filter((item: any, index: number) => {
+          item?.state?.status == "PENDING"
+            ? (userMetaMap[item._id.toString()] = item)
+            : (userMetaMap[item.id] = item);
+        });
+        $loadUserMetasMap(userMetaMap);
+        return res.data;
+      }
+    );
+    // return res;
+  };
   useEffect(() => {
     console.log("Logging client ", $macha.client); // getting the right value
     console.log("Logging client metasOwned", $macha.client?.metasOwned); // coming null
     console.log("Metas Data array ", $macha?.client?.metasOwned?.data); // coming undefined
-    $loadUserMetas($macha?.client?.metasOwned?.data);
-    let userMetaMap: any = {};
-    $macha?.client?.metasOwned?.data.filter((item: any, index: number) => {
-      userMetaMap[item.id] = item;
-    });
-    $loadUserMetasMap(userMetaMap);
+    const pending = fetchingMetas();
+    console.log("pending metas", pending);
   }, [$macha]);
 
   return {};

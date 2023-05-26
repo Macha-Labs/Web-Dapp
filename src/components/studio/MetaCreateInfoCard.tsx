@@ -15,8 +15,8 @@ function MetaCreateInfoCard({ data }: Props) {
   console.log("metadata", data);
   return (
     <CardNative>
-      <FlexRow width="80%" marginBottom="lg">
-        <FlexColumn width="20%" margin="0 20px 0 0">
+      <FlexRow width="80%">
+        <FlexColumn width="20%" marginRight={"md"}>
           <Image
             src={
               data?.metaImage ? data?.metaImage : "https://bit.ly/dan-abramov"
@@ -37,7 +37,10 @@ function MetaCreateInfoCard({ data }: Props) {
                 AUTHOR NAME
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
-                <Image src="../assets/Avatar.svg" />
+                <Image
+                  src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                  marginRight={"10px"}
+                />
                 <Text className="m-b-0">{truncateAddress(data?.owner)}</Text>
               </FlexRow>
             </FlexColumn>

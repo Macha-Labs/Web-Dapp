@@ -19,23 +19,30 @@ import useAuthStore from "@/store/useAuthStore";
 import MetaEditModal from "./MetaEditModal";
 import MetaEditOriginsModal from "./MetaEditOriginsModal";
 import { useState } from "react";
+import MetaEditTriggerModal from "./MetaEditTriggerModal";
+import { deleteMetaInit } from "@/service/StudioService";
+import { useRouter } from "next/router";
 
 function MetaSettings() {
   const hookMetaCreate = useMetaCreate();
   const triggerModal = useDisclosure();
   const originModal = useDisclosure();
   const editOriginModal = useDisclosure();
+  const editTriggerModal = useDisclosure();
   const metaModal = useDisclosure();
   const metaEditModal = useDisclosure();
   const $macha = useAuthStore((state: any) => state.macha);
   const toast = useToast();
 
   const [selectedOrigin, setSelectedOrigin] = useState(null);
+  const [selectedTrigger, setSelectedTrigger] = useState(null);
 
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   const $triggerData = useMetaStore((state: any) => state.triggerData);
   const $originData = useMetaStore((state: any) => state.originData);
   console.log("$originData", $originData);
+
+  const router = useRouter();
   return (
     <>
       <FlexRow width="100%">
@@ -91,7 +98,26 @@ function MetaSettings() {
                 </FlexRow>
               }
               margin={"xs"}
-            ></CardPannel>
+            >
+              {$triggerData &&
+                $triggerData.map((item: any, index: any) => {
+                  return (
+                    <FlexRow hrAlign="space-between">
+                      <Text>Trigger {index}</Text>
+
+                      <ButtonNative
+                        text="Edit"
+                        variant="state_default_hover"
+                        size="sm"
+                        onClick={() => {
+                          setSelectedTrigger(index);
+                          editTriggerModal.onOpen();
+                        }}
+                      />
+                    </FlexRow>
+                  );
+                })}
+            </CardPannel>
             <CardPannel
               header={
                 <FlexRow hrAlign="space-between">
@@ -128,12 +154,13 @@ function MetaSettings() {
                 })}
             </CardPannel>
             <ButtonNative
-              text="Save Changes"
+              text="Publish Changes"
               variant="state_brand"
               onClick={async () => {
                 console.log("Meta Overview ", $overviewData);
                 console.log("Meta Trigger ", $triggerData);
                 console.log("Meta Origin ", $originData);
+                deleteMetaInit(router?.query?.id);
                 await hookMetaCreate.publishMeta(
                   $overviewData,
                   $originData,
@@ -187,7 +214,14 @@ function MetaSettings() {
         modal={editOriginModal}
         selectedOrigin={selectedOrigin}
       />
-      <MetaEditModal hookMetaCreate={hookMetaCreate} metaModal={metaEditModal} />
+      <MetaEditTriggerModal
+        modal={editTriggerModal}
+        selectedTrigger={selectedTrigger}
+      />
+      <MetaEditModal
+        hookMetaCreate={hookMetaCreate}
+        metaModal={metaEditModal}
+      />
     </>
   );
 }

@@ -13,6 +13,7 @@ import MetaCreateModal from "@/components/studio/MetaCreateModal";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import useAuthStore from "@/store/useAuthStore";
+import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -24,15 +25,13 @@ const DashBoard = () => {
   const $macha = useAuthStore((state: any) => state.macha);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [filteredData, setFilteredData] = useState(
-    $macha?.client?.metasOwned?.data
-  );
+  const $userMetas = useUserStore((state: any) => state.userMetas);
+  const [filteredData, setFilteredData] = useState($userMetas);
 
   useEffect(() => {
-    setFilteredData($macha?.client?.metasOwned?.data);
+    setFilteredData($userMetas);
     setIsLoading(false);
-  }, [$macha?.client?.metasOwned?.data]);
-
+  }, [$userMetas]);
 
   const sortOptions = [
     {
@@ -106,6 +105,7 @@ const DashBoard = () => {
               options={sortOptions}
               icon={{
                 slug: "icon-chevron-down",
+                marginLeft: "md",
               }}
             />
           </FlexRow>
@@ -134,7 +134,10 @@ const DashBoard = () => {
                     onCardClick={() => {
                       router.push({
                         pathname: "/studio/meta/[id]",
-                        query: { id: item.id },
+                        query: {
+                          id:
+                            item.state.status == "PENDING" ? item._id : item.id,
+                        },
                       });
                     }}
                   />
