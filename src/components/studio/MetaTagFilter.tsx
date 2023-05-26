@@ -30,144 +30,143 @@ function MetaTagFilter() {
             />
           </FlexRow>
         }
-        children={
-          <FlexColumn hrAlign="space-between">
-            <FlexColumn hrAlign="flex-start">
-              <FlexColumn
-                vrAlign="flex-start"
-                height="fit-content"
-                padding="10px 0px"
-              >
-                <FlexRow hrAlign="space-between">
-                  <Heading
-                    as="h6"
-                    size="sm"
-                    className="m-b-1"
-                    bgGradient="linear(
+      >
+        <FlexColumn hrAlign="space-between">
+          <FlexColumn hrAlign="flex-start">
+            <FlexColumn
+              vrAlign="flex-start"
+              height="fit-content"
+              padding="10px 0px"
+            >
+              <FlexRow hrAlign="space-between">
+                <Heading
+                  as="h6"
+                  size="sm"
+                  className="m-b-1"
+                  bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-                    bgClip="text"
-                  >
-                    Access
-                  </Heading>
-                  <IconImage slug="icon-chevron-down" />
-                </FlexRow>
-                <FlexRow hrAlign="flex-start">
-                  <TagNative
-                    value="Public"
-                    margin="0px 10px"
-                    variant="state_brand"
-                    close={true}
-                  />
-                  <TagNative
-                    value="Public"
-                    margin="0px 10px"
-                    variant="state_xmtp"
-                    close={true}
-                  />
-                  <TagNative
-                    value="Public"
-                    margin="0px 10px"
-                    variant="state_xmtp"
-                    close={true}
-                  />
-                </FlexRow>
-              </FlexColumn>
-
-              <FlexColumn
-                vrAlign="flex-start"
-                height="fit-content"
-                padding="10px 0px"
-              >
-                <FlexRow hrAlign="space-between">
-                  <Heading
-                    as="h6"
-                    size="sm"
-                    className="m-b-1"
-                    bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-                    bgClip="text"
-                  >
-                    Request Type
-                  </Heading>
-                  <IconImage slug="icon-chevron-down" />
-                </FlexRow>
-                <FlexRow hrAlign="flex-start">
-                  <TagNative
-                    value="GraphQL"
-                    variant="state_brand"
-                    close={true}
-                    margin="0px 10px"
-                  />
-                  <TagNative
-                    value="GraphQL"
-                    margin="0px 10px"
-                    variant="state_xmtp"
-                    close={true}
-                  />
-                  <TagNative
-                    value="GraphQL"
-                    margin="0px 10px"
-                    variant="state_xmtp"
-                    close={true}
-                  />
-                </FlexRow>
-              </FlexColumn>
-
-              <FlexColumn
-                height="fit-content"
-                vrAlign="flex-start"
-                padding="10px 0px"
-              >
-                <FlexRow hrAlign="space-between">
-                  <Heading
-                    as="h6"
-                    size="sm"
-                    className="m-b-1"
-                    bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-                    bgClip="text"
-                  >
-                    Network
-                  </Heading>
-                  <IconImage slug="icon-chevron-down" />
-                </FlexRow>
-                <FlexRow hrAlign="flex-start">
-                  <TagNative
-                    value="Ethereum"
-                    margin="0px 10px"
-                    variant="state_brand"
-                    close={true}
-                  />
-                  <TagNative
-                    value="Ethereum"
-                    margin="0px 10px"
-                    variant="state_xmtp"
-                    close={true}
-                  />
-                  <TagNative
-                    value="Ethereum"
-                    margin="0px 10px"
-                    variant="state_xmtp"
-                    close={true}
-                  />
-                </FlexRow>
-              </FlexColumn>
+                  bgClip="text"
+                >
+                  Access
+                </Heading>
+                <IconImage slug="icon-chevron-down" />
+              </FlexRow>
+              <FlexRow hrAlign="flex-start">
+                <TagNative
+                  value="Public"
+                  margin="0px 10px"
+                  variant="state_brand"
+                  close={true}
+                />
+                <TagNative
+                  value="Public"
+                  margin="0px 10px"
+                  variant="state_xmtp"
+                  close={true}
+                />
+                <TagNative
+                  value="Public"
+                  margin="0px 10px"
+                  variant="state_xmtp"
+                  close={true}
+                />
+              </FlexRow>
             </FlexColumn>
-            <ButtonNative variant="state_brand" width="100%" size="lg">
-              Done
-            </ButtonNative>
+
+            <FlexColumn
+              vrAlign="flex-start"
+              height="fit-content"
+              padding="10px 0px"
+            >
+              <FlexRow hrAlign="space-between">
+                <Heading
+                  as="h6"
+                  size="sm"
+                  className="m-b-1"
+                  bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+                  bgClip="text"
+                >
+                  Request Type
+                </Heading>
+                <IconImage slug="icon-chevron-down" />
+              </FlexRow>
+              <FlexRow hrAlign="flex-start">
+                <TagNative
+                  value="GraphQL"
+                  variant="state_brand"
+                  close={true}
+                  margin="0px 10px"
+                />
+                <TagNative
+                  value="GraphQL"
+                  margin="0px 10px"
+                  variant="state_xmtp"
+                  close={true}
+                />
+                <TagNative
+                  value="GraphQL"
+                  margin="0px 10px"
+                  variant="state_xmtp"
+                  close={true}
+                />
+              </FlexRow>
+            </FlexColumn>
+
+            <FlexColumn
+              height="fit-content"
+              vrAlign="flex-start"
+              padding="10px 0px"
+            >
+              <FlexRow hrAlign="space-between">
+                <Heading
+                  as="h6"
+                  size="sm"
+                  className="m-b-1"
+                  bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+                  bgClip="text"
+                >
+                  Network
+                </Heading>
+                <IconImage slug="icon-chevron-down" />
+              </FlexRow>
+              <FlexRow hrAlign="flex-start">
+                <TagNative
+                  value="Ethereum"
+                  margin="0px 10px"
+                  variant="state_brand"
+                  close={true}
+                />
+                <TagNative
+                  value="Ethereum"
+                  margin="0px 10px"
+                  variant="state_xmtp"
+                  close={true}
+                />
+                <TagNative
+                  value="Ethereum"
+                  margin="0px 10px"
+                  variant="state_xmtp"
+                  close={true}
+                />
+              </FlexRow>
+            </FlexColumn>
           </FlexColumn>
-        }
-      />
+          <ButtonNative variant="state_brand" width="100%" size="lg">
+            Done
+          </ButtonNative>
+        </FlexColumn>
+      </ModalSlider>
     </>
   );
 }

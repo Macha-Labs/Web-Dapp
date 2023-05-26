@@ -138,7 +138,7 @@ const DashBoard = () => {
                     image={
                       item.image
                         ? displayImage(item.image)
-                        : "../assets/MetaCard.png"
+                        : "https://bit.ly/dan-abramov"
                     }
                     heading={item.name}
                     description={item.description}

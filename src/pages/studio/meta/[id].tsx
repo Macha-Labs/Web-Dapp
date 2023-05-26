@@ -20,19 +20,19 @@ import useMetaStore from "@/store/useMetaStore";
 import useMeta from "@/hooks/studio/useMeta";
 
 const CreateMeta = () => {
-  const router = useRouter();
   const $userMetasMap = useUserStore((state: any) => state.userMetasMap);
   const $meta = useMetaStore((state: any) => state.meta);
   const [currentMetaId, setCurrentMetaId] = useState<any>();
   const hookMeta = useMeta();
+  const router = useRouter();
 
   useEffect(() => {
     console.log("logging the router query", router.query);
-    let currentMetaId = router?.query?.id;
-    let storedMetaId = getItemFromLocal("currentMetaId");
+    let currentId = router?.query?.id;
+    let storedMetaId: any = getItemFromLocal("currentMetaId");
     if (currentMetaId && currentMetaId != storedMetaId) {
       setItemOnLocal("currentMetaId", router?.query?.id);
-      setCurrentMetaId(currentMetaId);
+      setCurrentMetaId(currentId);
       hookMeta.metaInit($userMetasMap[currentMetaId]);
     } else {
       setCurrentMetaId(storedMetaId);
@@ -81,7 +81,6 @@ const CreateMeta = () => {
   };
 
   const renderBody = () => {
-    const router = useRouter();
     return (
       <>
         {" "}

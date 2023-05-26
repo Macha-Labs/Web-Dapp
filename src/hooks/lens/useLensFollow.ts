@@ -5,8 +5,8 @@ import { followUser, unfollowUser } from "../../helpers/lens/lens";
 import { config } from "../../config";
 import { signedTypeData } from "../../helpers/lens/lensApiService";
 import { useContext, useState } from "react";
-import { lensHubAbi } from "../../abi/lensHubAbi";
-import { lensFollowAbi } from "../../abi/lensFollowAbi";
+// import { lensHubAbi } from "../../abi/lensHubAbi";
+// import { lensFollowAbi } from "../../abi/lensFollowAbi";
 import { fetchSigner } from "@wagmi/core";
 
 const useLensFollows = (profileID: any) => {
@@ -57,7 +57,7 @@ const useLensFollows = (profileID: any) => {
         const signer: any = await fetchSigner();
         const lensHub = new ethers.Contract(
           config.LENS_HUB_CONTRACT,
-          lensHubAbi,
+          // lensHubAbi,
           signer
         );
 
@@ -95,7 +95,7 @@ const useLensFollows = (profileID: any) => {
         // load up the follower nft contract
         const followNftContract = new ethers.Contract(
           typedData.domain.verifyingContract,
-          lensFollowAbi,
+          // lensFollowAbi,
           signer
         );
 
