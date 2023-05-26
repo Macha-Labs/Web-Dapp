@@ -20,6 +20,8 @@ import MetaEditModal from "./MetaEditModal";
 import MetaEditOriginsModal from "./MetaEditOriginsModal";
 import { useState } from "react";
 import MetaEditTriggerModal from "./MetaEditTriggerModal";
+import { deleteMetaInit } from "@/service/StudioService";
+import { useRouter } from "next/router";
 
 function MetaSettings() {
   const hookMetaCreate = useMetaCreate();
@@ -39,6 +41,8 @@ function MetaSettings() {
   const $triggerData = useMetaStore((state: any) => state.triggerData);
   const $originData = useMetaStore((state: any) => state.originData);
   console.log("$originData", $originData);
+
+  const router = useRouter();
   return (
     <>
       <FlexRow width="100%">
@@ -156,6 +160,7 @@ function MetaSettings() {
                 console.log("Meta Overview ", $overviewData);
                 console.log("Meta Trigger ", $triggerData);
                 console.log("Meta Origin ", $originData);
+                deleteMetaInit(router?.query?.id);
                 await hookMetaCreate.publishMeta(
                   $overviewData,
                   $originData,

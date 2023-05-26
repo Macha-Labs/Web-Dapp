@@ -40,3 +40,16 @@ export const fetchPendingMeta = async (owner: string) => {
   console.log("form studio service pending metas", response);
   return response.json();
 };
+
+export const deleteMetaInit = async (metaId: string) => {
+  const response = await fetch(
+    `${config.metaServer}/api/studio/delete/${metaId}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log("form studio service deleting pending metas", response);
+  return response.json();
+};
