@@ -119,7 +119,7 @@ const DashBoard = () => {
             />
           </FlexRow>
           <FlexRow
-            hrAlign="space-between"
+            hrAlign="flex-start"
             width="100%"
             flexWrap="wrap"
             // padding={style.body.padding}

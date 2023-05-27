@@ -34,24 +34,43 @@ export default function MetaCard({
         background: `${style.card.bg.meta}`,
         padding: ` ${style.card.padding.default}`,
         margin: `${style.card.margin.default}`,
-        width: ` ${width}`,
+        width: `250px`,
         display: "flex",
         flexDirection: cardDirection,
-        justifyContent: "space-between",
+        justifyContent: cardDirection == "row" ? "space-between" : "center",
         height: height ? height : "400px",
       }}
       onClick={() => {
         onCardClick();
       }}
     >
-      <FlexColumn>
-        <Image src={image} width={"100%"} />
+      <FlexColumn hrAlign="center">
+        <div
+          style={{
+            width: "200px",
+            height: "200px",
+            maxWidth: "200px",
+            maxHeight: "200px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Image
+            src={image}
+            style={{
+              maxWidth: "100%",
+              maxHeight: "100%",
+              objectFit: "contain",
+            }}
+          />
+        </div>
       </FlexColumn>
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start" marginLeft={"sm"}>
         <Text fontSize="2xl" fontWeight="600">
           {truncateString(heading, 10)}
         </Text>
-        <Text>{truncateString(description, 50)}</Text>
+        <Text height={"80px"}>{truncateString(description, 50)}</Text>
         <FlexRow hrAlign="flex-start" width="100%">
           <TagNative value="Tag 1" variant="state_xmtp" />
           <TagNative value="Tag 1" variant="state_xmtp" margin="0px 10px" />

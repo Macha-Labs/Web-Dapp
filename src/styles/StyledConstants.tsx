@@ -178,7 +178,7 @@ export const darkStyle = {
         "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
     padding: { default: "10px" },
-    margin: { default: "20px" },
+    margin: { default: "2.1rem" },
     width: {
       meta: "30%",
     },
