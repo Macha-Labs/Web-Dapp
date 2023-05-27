@@ -96,8 +96,8 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
               image: cid,
               createdAt: $meta?.state?.createdAt
             };
-            $loadOverviewData(metaCreateData);
-            await editPendingMeta($meta._id, metaCreateData);
+            $loadOverviewData(metaUpdateData);
+            await editPendingMeta($meta._id, metaUpdateData);
           }}
         >
           Save Changes
