@@ -5,8 +5,9 @@ import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
+import { editPendingMeta } from "@/service/StudioService";
 import useMetaStore from "@/store/useMetaStore";
-import { Text } from "@chakra-ui/react";
+import { Image, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -41,7 +42,7 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
             inputType="text"
             labelText="Meta Name"
             placeholder="Name"
-            defaultValue={$meta?.data?.name}
+            defaultValue={$meta?.name}
           />
           <InputLabel
             elementRef={(element: any) =>
@@ -50,7 +51,7 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
             inputType="text"
             labelText="Description"
             placeholder="Description"
-            defaultValue={$meta?.data?.description}
+            defaultValue={$meta?.description}
           />
           <InputLabel
             inputType="file"
@@ -62,6 +63,13 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
             }}
           />
         </FlexColumn>
+        {imageEvent && (
+          <Image
+            src={URL.createObjectURL(imageEvent?.target?.files[0])}
+            alt={imageEvent?.target?.files[0].name}
+            width="300px"
+          />
+        )}
         {/* <Link href="/studio/createMeta" style={{ width: "100%" }}> */}
         <ButtonNative
           variant="state_brand"
@@ -76,6 +84,7 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
               image: cid,
             };
             $loadOverviewData(metaCreateData);
+            await editPendingMeta($meta._id, metaCreateData);
           }}
         >
           Save Changes

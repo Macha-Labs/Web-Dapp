@@ -67,6 +67,7 @@ const useMachaAuth = () => {
             ? (userMetaMap[item._id.toString()] = item)
             : (userMetaMap[item.id] = item);
         });
+        console.log("userMetaMap", userMetaMap);
         $loadUserMetasMap(userMetaMap);
         return res.data;
       }

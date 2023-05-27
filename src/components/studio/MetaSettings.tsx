@@ -36,7 +36,6 @@ function MetaSettings({ metaInfo }: Props) {
   const editTriggerModal = useDisclosure();
   const metaModal = useDisclosure();
   const metaEditModal = useDisclosure();
-  const $macha = useAuthStore((state: any) => state.macha);
   const toast = useToast();
 
   const [selectedOrigin, setSelectedOrigin] = useState(null);
