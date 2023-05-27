@@ -1,5 +1,6 @@
 import JSONViewer from "@/_ui/JSONViewer";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import InputLabel from "@/_ui/input/InputLabel";
@@ -7,7 +8,7 @@ import InputSelect from "@/_ui/input/InputSelect";
 import useMeta from "@/hooks/studio/useMeta";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
-import { Text } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -108,42 +109,46 @@ function MetaPlayground({ id }: Props) {
                 Origin 1
               </Text>
             </FlexRow>
-            {$metaInfo.data.metaData.origin.map((item: any, index: any) => {
-              return Object.entries(item).map(([key, value]: any) => {
-                if (key === "requestParams") {
-                  const requestParamObject = convertStringToJson(value);
-                  if (typeof requestParamObject === "object") {
-                    return Object.entries(requestParamObject).map(
-                      ([subKey, subValue]: any) => (
-                        <>
-                          <InputLabel
-                            key={`${index}-${key}`}
-                            inputType="text"
-                            labelText={key}
-                            defaultValue={value}
-                          />
-                          <InputLabel
-                            key={`${index}-${key}-${subKey}`}
-                            inputType={subValue}
-                            labelText={subKey}
-                            defaultValue=""
-                          />
-                        </>
-                      )
-                    );
-                  }
-                } else {
+            <CardNative padding="lg">
+              {$metaInfo.data.metaData.origin.map((item: any, index: any) => {
+                return Object.entries(item).map(([key, value]: any) => {
+                  // if (key === "requestParams") {
+                  //   const requestParamObject = convertStringToJson(value);
+                  //   if (typeof requestParamObject === "object") {
+                  //     return Object.entries(requestParamObject).map(
+                  //       ([subKey, subValue]: any) => (
+                  //         <>
+                  //           <InputLabel
+                  //             key={`${index}-${key}`}
+                  //             inputType="text"
+                  //             labelText={key}
+                  //             defaultValue={value}
+                  //           />
+                  //           <InputLabel
+                  //             key={`${index}-${key}-${subKey}`}
+                  //             inputType={subValue}
+                  //             labelText={subKey}
+                  //             defaultValue=""
+                  //           />
+                  //         </>
+                  //       )
+                  //     );
+                  //   }
+                  // } else {
                   return (
-                    <InputLabel
-                      key={`${index}-${key}`}
-                      inputType="text"
-                      labelText={key}
-                      defaultValue={value}
-                    />
+                    <>
+                      {/* <CardNative> */}
+                      <Heading as="h5" fontSize={"lg"}>
+                        {key}
+                      </Heading>
+                      <Text>{value}</Text>
+                      {/* </CardNative> */}
+                    </>
                   );
-                }
-              });
-            })}
+                  // }
+                });
+              })}
+            </CardNative>
             {/* <InputLabel inputType="text" labelText="Headers" placeholder="" />
             <InputLabel inputType="text" labelText="EndPoint" />
             <InputLabel inputType="text" labelText="Methods" />
