@@ -74,11 +74,15 @@ function MetaSettings({ metaInfo }: Props) {
                   <Image
                     boxSize="100px"
                     objectFit="cover"
-                    src="https://bit.ly/dan-abramov"
+                    src={
+                      metaInfo?.image
+                        ? ` https://gateway.lighthouse.storage/ipfs/${metaInfo?.image}`
+                        : "https://bit.ly/dan-abramov"
+                    }
                     alt="Dan Abramov"
                   />
                   <Heading as="h4" fontSize="18" className="m-l-0-5">
-                    Meta Name
+                    {metaInfo?.name}
                   </Heading>
                 </FlexRow>
                 <ButtonNative

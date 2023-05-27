@@ -10,6 +10,7 @@ import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import { fetchAllMetas } from "@/service/StudioService";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
 export default function DashBoard() {
@@ -41,6 +42,8 @@ export default function DashBoard() {
   }, []);
 
   const $userMetas = useUserStore((state: any) => state.userMetas);
+
+  const router = useRouter();
 
   const handleFilter = (inputValue: string) => {
     const filtered = $userMetas.filter((item: any) => {
@@ -92,6 +95,14 @@ export default function DashBoard() {
                 heading={item?.name}
                 description={item?.description}
                 // tags={item.tags}
+                onCardClick={() => {
+                  router.push({
+                    pathname: "/studio/meta/[id]",
+                    query: {
+                      id: item.state.status == "PENDING" ? item._id : item.id,
+                    },
+                  });
+                }}
                 cardDirection="row"
                 width="30%"
                 height="200px"

@@ -9,6 +9,7 @@ import { editPendingMeta } from "@/service/StudioService";
 import useMetaStore from "@/store/useMetaStore";
 import { Image, Text } from "@chakra-ui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 type Props = {
@@ -20,8 +21,12 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
   const $loadOverviewData = useMetaStore(
     (state: any) => state.loadOverviewData
   );
+
+  const router = useRouter();
+
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   const [imageEvent, setImageEvent] = useState<any>();
+  console.log("metaaaa", $meta);
   return (
     <ModalSlider
       event={metaModal}
@@ -62,6 +67,13 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
               setImageEvent(e);
             }}
           />
+          {imageEvent && (
+            <Image
+              src={URL.createObjectURL(imageEvent?.target?.files[0])}
+              alt={imageEvent?.target?.files[0].name}
+              width="300px"
+            />
+          )}
         </FlexColumn>
         {imageEvent && (
           <Image
@@ -77,7 +89,7 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
           onClick={async (e: any) => {
             e.preventDefault();
             const cid = await deploytoLightHouse(imageEvent);
-            let metaCreateData = {
+            let metaUpdateData = {
               name: hookMetaCreate.metaOverview.current["metaName"].value,
               description:
                 hookMetaCreate.metaOverview.current["metaDescription"].value,

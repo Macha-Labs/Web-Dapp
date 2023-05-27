@@ -19,7 +19,9 @@ function MetaCreateInfoCard({ data }: Props) {
         <FlexColumn width="20%" marginRight={"md"}>
           <Image
             src={
-              data?.metaImage ? data?.metaImage : "https://bit.ly/dan-abramov"
+              data?.image
+                ? ` https://gateway.lighthouse.storage/ipfs/${data?.image}`
+                : "https://bit.ly/dan-abramov"
             }
           />
         </FlexColumn>

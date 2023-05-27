@@ -56,15 +56,18 @@ export const deleteMetaInit = async (meta: any) => {
   } else return null;
 };
 
-export const editPendingMeta = async(id: string, data: any) => {
+export const editPendingMeta = async (id: string, data: any) => {
   if (data && id) {
-    const response = await fetch(`${config.metaServer}/api/studio/update/${id}`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
+    const response = await fetch(
+      `${config.metaServer}/api/studio/update/${id}`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     console.log("Edit response", response);
   }
-}
+};
