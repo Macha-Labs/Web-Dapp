@@ -104,7 +104,7 @@ const CreateMeta = () => {
         >
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <FlexRow width="fit-content">
-              <Heading as="h5" fontSize={style.font.h5} className="m-b-0">
+              <Heading fontSize={style.font.h5} className="m-b-0">
                 {$meta?.data?.name}
               </Heading>
             </FlexRow>

@@ -95,8 +95,8 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
                 hookMetaCreate.metaOverview.current["metaDescription"].value,
               image: cid,
             };
-            $loadOverviewData(metaCreateData);
-            await editPendingMeta($meta._id, metaCreateData);
+            $loadOverviewData(metaUpdateData);
+            await editPendingMeta($meta._id, metaUpdateData);
           }}
         >
           Save Changes

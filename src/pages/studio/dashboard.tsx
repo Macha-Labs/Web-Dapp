@@ -145,13 +145,20 @@ const DashBoard = () => {
                     tags={item.tags ? item?.tags : ""}
                     width="20%"
                     onCardClick={() => {
-                      router.push({
-                        pathname: "/studio/meta/[id]",
-                        query: {
-                          id:
-                            item.state.status == "PENDING" ? item._id : item.id,
+                      router.push(
+                        {
+                          pathname: "/studio/meta/[id]",
+                          query: {
+                            id:
+                              item.state.status == "PENDING"
+                                ? item._id
+                                : item.id,
+                          },
                         },
-                      });
+                        `/studio/meta/${
+                          item.state.status == "PENDING" ? item._id : item.id
+                        }`
+                      );
                     }}
                   />
                 );
