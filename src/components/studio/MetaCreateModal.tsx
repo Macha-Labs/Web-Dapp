@@ -31,69 +31,68 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
           <IconImage slug="icon-close" onClick={() => metaModal.onClose()} />
         </FlexRow>
       }
-      children={
-        <FlexColumn width="100%" hrAlign="space-between" height="100%">
-          <FlexColumn hrAlign="space-between" height="35%">
-            <InputLabel
-              elementRef={(element: any) =>
-                (hookMeta.metaOverview.current["metaName"] = element)
-              }
-              inputType="text"
-              labelText="Meta Name"
-              placeholder="Name"
-            />
-            <InputLabel
-              elementRef={(element: any) =>
-                (hookMeta.metaOverview.current["metaDescription"] = element)
-              }
-              inputType="text"
-              labelText="Description"
-              placeholder="Description"
-            />
-            <InputLabel
-              inputType="file"
-              labelText="Image"
-              placeholder="Image"
-              onChange={async (e?: any) => {
-                console.log(e);
-                setImageEvent(e);
-                // const cid = await deploytoLightHouse(e);
-                // console.log(cid);
-              }}
-            />
-            {imageEvent && (
-              <Image
-                src={URL.createObjectURL(imageEvent?.target?.files[0])}
-                alt={imageEvent?.target?.files[0].name}
-                width="300px"
-              />
-            )}
-          </FlexColumn>
-          {/* <Link href="/studio/createMeta" style={{ width: "100%" }}> */}
-          <ButtonNative
-            variant="state_brand"
-            width="100%"
-            onClick={async (e: any) => {
-              e.preventDefault();
-              const cid = await deploytoLightHouse(imageEvent);
-              let metaCreateData = {
-                name: hookMeta.metaOverview.current["metaName"].value,
-                description:
-                  hookMeta.metaOverview.current["metaDescription"].value,
-                image: cid,
-                status: "PENDING",
-                owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
-              };
-              await initialiseNewMeta(metaCreateData);
-              $loadOverviewData(metaCreateData);
+    >
+      <FlexColumn width="100%" hrAlign="space-between" height="100%">
+        <FlexColumn hrAlign="space-between" height="35%">
+          <InputLabel
+            elementRef={(element: any) =>
+              (hookMeta.metaOverview.current["metaName"] = element)
+            }
+            inputType="text"
+            labelText="Meta Name"
+            placeholder="Name"
+          />
+          <InputLabel
+            elementRef={(element: any) =>
+              (hookMeta.metaOverview.current["metaDescription"] = element)
+            }
+            inputType="text"
+            labelText="Description"
+            placeholder="Description"
+          />
+          <InputLabel
+            inputType="file"
+            labelText="Image"
+            placeholder="Image"
+            onChange={async (e?: any) => {
+              console.log(e);
+              setImageEvent(e);
+              // const cid = await deploytoLightHouse(e);
+              // console.log(cid);
             }}
-          >
-            Create Meta
-          </ButtonNative>
-          {/* </Link> */}
+          />
+          {imageEvent && (
+            <Image
+              src={URL.createObjectURL(imageEvent?.target?.files[0])}
+              alt={imageEvent?.target?.files[0].name}
+              width="300px"
+            />
+          )}
         </FlexColumn>
-      }
-    />
+        {/* <Link href="/studio/createMeta" style={{ width: "100%" }}> */}
+        <ButtonNative
+          variant="state_brand"
+          width="100%"
+          onClick={async (e: any) => {
+            e.preventDefault();
+            const cid = await deploytoLightHouse(imageEvent);
+            let metaCreateData = {
+              name: hookMeta.metaOverview.current["metaName"].value,
+              description:
+                hookMeta.metaOverview.current["metaDescription"].value,
+              image: cid,
+              status: "PENDING",
+              owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
+            };
+            await initialiseNewMeta(metaCreateData);
+            $loadOverviewData(metaCreateData);
+          }}
+        >
+          Create Meta
+        </ButtonNative>
+        {/* </Link> */}
+      </FlexColumn>
+    </ModalSlider>
   );
 };
 

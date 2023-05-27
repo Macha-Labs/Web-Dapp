@@ -6,7 +6,7 @@ import useUserStore from "@/store/useUserStore";
 import useAuthStore from "@/store/useAuthStore";
 import { fetchSigner, watchAccount } from "@wagmi/core";
 import { useAccount, useDisconnect } from "wagmi";
-import { putStreamToken } from "../service/StreamService";
+// import { putStreamToken } from "../service/StreamService";
 import { findOrCreateUser } from "../service/UserService";
 import useMachaAuth from "@/hooks/studio/useMachaAuth";
 
@@ -26,31 +26,32 @@ export const AuthContext = createContext<AuthContextType>({
   connectWallet: () => {},
   disconnectWallet: () => {},
   user: null,
-  setUser: param => {},
+  setUser: (param) => {},
   isConnected: () => {},
 });
 
 const AuthProvider = ({ children }: any) => {
   const hookMachaAuth = useMachaAuth();
-  
-  const unwatch = watchAccount((account) => {if($address!=account){
-    console.log(account, " . ", $address, "asdf")
-    // window.location.href="https://metaworkhq.com"
-  }})
 
+  const unwatch = watchAccount((account) => {
+    if ($address != account) {
+      console.log(account, " . ", $address, "asdf");
+      // window.location.href="https://metaworkhq.com"
+    }
+  });
 
-  console.log('Rendering >>>>> AuthProvider');
+  console.log("Rendering >>>>> AuthProvider");
   const [user, setUser] = useState<any>(new User$(null, null, null));
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
 
   //
   const $address = useAuthStore((state: any) => state.address);
-  const $loadAddress = useAuthStore(((state: any) => state.loadAddress));
+  const $loadAddress = useAuthStore((state: any) => state.loadAddress);
   const $signer = useAuthStore((state: any) => state.signer);
-  const $loadSigner = useAuthStore(((state: any) => state.loadSigner));
+  const $loadSigner = useAuthStore((state: any) => state.loadSigner);
   const $isConnected = useAuthStore((state: any) => state.connected);
-  const $loadIsConnected = useAuthStore(((state: any) => state.loadIsConnected))
+  const $loadIsConnected = useAuthStore((state: any) => state.loadIsConnected);
 
   const _fetchUserFromDB = async () => {
     if (address) {
@@ -63,17 +64,17 @@ const AuthProvider = ({ children }: any) => {
           "Response from findOrCreateUser",
           [data]
         );
-        putStreamToken({ userAddress: address.toLowerCase() }).then(
-          (res: any) => {
-            logger(
-              "auth",
-              "useEffect[user.db.id]",
-              "response from putStreamToken api",
-              [res]
-            );
-            user.setDb(res);
-          }
-        );
+        // putStreamToken({ userAddress: address.toLowerCase() }).then(
+        //   (res: any) => {
+        //     logger(
+        //       "auth",
+        //       "useEffect[user.db.id]",
+        //       "response from putStreamToken api",
+        //       [res]
+        //     );
+        //     user.setDb(res);
+        //   }
+        // );
       });
     }
   };
@@ -116,10 +117,13 @@ const AuthProvider = ({ children }: any) => {
   }, [address]);
 
   useEffect(() => {
-    logger('auth', 'useEffect[connected]', 'values', [address, isConnected, user?.db?.id])
-    $loadIsConnected(isConnected && address && user?.db?.id  ? true : false)
+    logger("auth", "useEffect[connected]", "values", [
+      address,
+      isConnected,
+      user?.db?.id,
+    ]);
+    $loadIsConnected(isConnected && address && user?.db?.id ? true : false);
   }, [address, isConnected, user?.db?.id]);
-
 
   return (
     <AuthContext.Provider

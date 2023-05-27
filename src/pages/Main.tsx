@@ -2,8 +2,8 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import Nav from "@/_ui/nav/Nav";
 import AuthCard from "@/components/auth/AuthCard";
-import ChatList from "@/components/chat/ChatList";
-import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
+// import ChatList from "@/components/chat/ChatList";
+// import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
 import useAuthStore from "@/store/useAuthStore";
 import { StyledChat, StyledChatList } from "@/styles/StyledComponents";
 import { useDisclosure } from "@chakra-ui/react";
@@ -40,12 +40,10 @@ function Main() {
 
           <div className="right">
             <StyledChatList>
-              <ChatList />
+              {/* <ChatList /> */}
               {/* <MobileEmptyState /> */}
             </StyledChatList>
-            <StyledChat>
-              <ChatContainer />
-            </StyledChat>
+            <StyledChat>{/* <ChatContainer /> */}</StyledChat>
           </div>
         </FlexWindow>
       )}

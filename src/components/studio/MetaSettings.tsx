@@ -109,7 +109,7 @@ function MetaSettings({ metaInfo }: Props) {
               {$meta?.data?.triggers &&
                 $meta?.data?.triggers.map((item: any, index: any) => {
                   return (
-                    <FlexRow hrAlign="space-between">
+                    <FlexRow hrAlign="space-between" key={index}>
                       <Text>{item.name}</Text>
 
                       {/* <ButtonNative
@@ -127,7 +127,7 @@ function MetaSettings({ metaInfo }: Props) {
               {$triggerData &&
                 $triggerData.map((item: any, index: any) => {
                   return (
-                    <FlexRow hrAlign="space-between">
+                    <FlexRow hrAlign="space-between" key={index}>
                       <Text>{item.name}</Text>
 
                       <ButtonNative
@@ -165,7 +165,7 @@ function MetaSettings({ metaInfo }: Props) {
               {$originData &&
                 $originData.map((item: any, index: any) => {
                   return (
-                    <FlexRow hrAlign="space-between">
+                    <FlexRow hrAlign="space-between" key={index}>
                       <Text>Origin {index}</Text>
 
                       <ButtonNative
@@ -186,7 +186,7 @@ function MetaSettings({ metaInfo }: Props) {
               {$meta?.data?.origin &&
                 $meta?.data?.origin.map((item: any, index: any) => {
                   return (
-                    <FlexRow hrAlign="space-between">
+                    <FlexRow hrAlign="space-between" key={index}>
                       <Text>Origin {index}</Text>
 
                       {/* <ButtonNative
