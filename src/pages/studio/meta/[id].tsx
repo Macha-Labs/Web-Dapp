@@ -29,18 +29,21 @@ const CreateMeta = () => {
   const $address = useAuthStore((state: any) => state.address);
 
   useEffect(() => {
-    console.log("logging the router query", router.query);
-    let currentId: any = router?.query?.id;
-    let storedMetaId: any = getItemFromLocal("currentMetaId");
-    if (currentId && currentId != storedMetaId) {
-      setItemOnLocal("currentMetaId", router?.query?.id);
-      setCurrentMetaId(currentId);
-      hookMeta.metaInit($userMetasMap[currentId]);
-    } else {
-      setCurrentMetaId(storedMetaId);
-      hookMeta.metaInit($userMetasMap[storedMetaId]);
+    if ($userMetasMap) {
+      console.log("logging the router query", router.query);
+      let currentId: any = router?.query?.id;
+      let storedMetaId: any = getItemFromLocal("currentMetaId");
+      if (currentId && currentId != storedMetaId) {
+        setItemOnLocal("currentMetaId", router?.query?.id);
+        setCurrentMetaId(currentId);
+        hookMeta.metaInit($userMetasMap[currentId]);
+      } else {
+        console.log("storedMetaid", storedMetaId);
+        setCurrentMetaId(storedMetaId);
+        hookMeta.metaInit($userMetasMap[storedMetaId]);
+      }
     }
-  }, []);
+  }, [$userMetasMap]);
 
   const createMetaOptions = [
     {

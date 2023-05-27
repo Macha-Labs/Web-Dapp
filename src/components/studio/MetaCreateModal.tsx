@@ -9,7 +9,7 @@ import { initialiseNewMeta } from "@/service/StudioService";
 import useMetaStore from "@/store/useMetaStore";
 import { Image, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 type Props = {
   metaModal?: any;
@@ -21,6 +21,12 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
   );
   const [imageEvent, setImageEvent] = useState<any>();
   const $overviewData = useMetaStore((state: any) => state.overviewData);
+  const $meta = useMetaStore((state: any) => state.meta);
+
+  useEffect(() => {
+    console.log("Logging pending meta ", $meta);
+  }, [])
+
   return (
     <ModalSlider
       event={metaModal}
@@ -39,6 +45,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
               (hookMeta.metaOverview.current["metaName"] = element)
             }
             inputType="text"
+            defaultValue={$meta.name}
             labelText="Meta Name"
             placeholder="Name"
           />
@@ -57,8 +64,6 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
             onChange={async (e?: any) => {
               console.log(e);
               setImageEvent(e);
-              // const cid = await deploytoLightHouse(e);
-              // console.log(cid);
             }}
           />
           {imageEvent && (

@@ -56,18 +56,18 @@ export const deleteMetaInit = async (meta: any) => {
   } else return null;
 };
 
-export const updateMetaDetails = async (metaId: any, data: any) => {
-  const response = await fetch(
-    `${config.metaServer}/api/studio/update/${metaId}`,
-    {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    }
-  );
-  console.log("form studio service update", response);
-  return response.json();
+export const editPendingMeta = async (id: string, data: any) => {
+  if (data && id) {
+    const response = await fetch(
+      `${config.metaServer}/api/studio/update/${id}`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("Edit response", response);
+  }
 };
