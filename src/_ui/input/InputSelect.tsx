@@ -1,6 +1,7 @@
 import { Select, Text } from "@chakra-ui/react";
 import IconImage from "../icons/IconImage";
 import { style } from "@/styles/StyledConstants";
+import IconBase from "../icons/IconsBase";
 
 type Props = {
   placeholder?: string;
@@ -40,7 +41,7 @@ const InputSelect = ({
         width={width ? width : "100%"}
         defaultValue={defaultValue}
         icon={
-          <IconImage
+          <IconBase
             slug={icon ? icon.slug : "icon-chevron-down"}
             size={icon ? icon.size : "md"}
             style={icon ? icon.style : ""}
@@ -65,7 +66,9 @@ const InputSelect = ({
                 <option
                   key={index}
                   value={item}
-                  style={{ background: `${style.input.bg.default}` }}
+                  style={{
+                    background: `${style.input.bg.default}`,
+                  }}
                 >
                   <Text> {item}</Text>
                 </option>

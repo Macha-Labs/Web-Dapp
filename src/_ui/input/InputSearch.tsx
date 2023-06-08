@@ -1,6 +1,8 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import React from "react";
 import IconImage from "@/_ui/icons/IconImage";
+import IconBase from "../icons/IconsBase";
+import { style as gStyle } from "../../styles/StyledConstants";
 
 type Props = {
   type?: string;
@@ -15,6 +17,7 @@ type Props = {
   marginTop?: string;
   marginRight?: any;
   marginBottom?: string;
+  width?: string;
 };
 
 const InputSearch = ({
@@ -30,6 +33,7 @@ const InputSearch = ({
   marginTop,
   marginRight,
   marginBottom,
+  width,
 }: Props) => {
   return (
     <InputGroup
@@ -41,7 +45,7 @@ const InputSearch = ({
     >
       {icon && (
         <InputLeftElement pointerEvents="none">
-          <IconImage slug={icon.slug} size={icon.size} />
+          <IconBase slug={icon.slug} size={icon.size} />
         </InputLeftElement>
       )}
       <Input
@@ -51,6 +55,8 @@ const InputSearch = ({
         onChange={onChange ? onChange : () => {}}
         size={size}
         onKeyDown={onKeydown ? onKeydown : () => {}}
+        _placeholder={{ color: `#132041` }}
+        width={width}
       />
     </InputGroup>
   );

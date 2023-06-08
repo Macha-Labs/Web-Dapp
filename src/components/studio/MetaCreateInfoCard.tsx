@@ -2,9 +2,11 @@ import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
+import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
 import { truncateAddress } from "@/helpers";
-import { Image, Text } from "@chakra-ui/react";
+import { style } from "@/styles/StyledConstants";
+import { Divider, Image, Text, useToast } from "@chakra-ui/react";
 import React from "react";
 
 type Props = {
@@ -13,11 +15,17 @@ type Props = {
 
 function MetaCreateInfoCard({ data }: Props) {
   console.log("metadata", data);
+  const toast = useToast();
   return (
     <CardNative>
       <FlexRow width="80%">
-        <FlexColumn width="20%" marginRight={"md"}>
+        <FlexColumn width="28%" vrAlign="flex-start" marginRight={"md"}>
           <Image
+            style={{
+              borderRadius: style.card.borderRadius.image,
+              height: "15rem",
+              width: "15rem",
+            }}
             src={
               data?.image
                 ? ` https://gateway.lighthouse.storage/ipfs/${data?.image}`
@@ -27,12 +35,18 @@ function MetaCreateInfoCard({ data }: Props) {
         </FlexColumn>
         <FlexColumn width="80%" hrAlign="flex-start" vrAlign="flex-start">
           <FlexRow vrAlign="center" width="fit-content">
-            <Text className="m-b-0 me-2" fontSize={"2xl"} fontWeight={700}>
+            <Text className="m-b-0 me-2" fontSize={"4xl"} fontWeight={700}>
               {data?.name}
             </Text>
-            <TagNative variant="state_brand" value={data?.state?.status} />
+            <TagNative
+              marginTop="10px"
+              variant="state_brand"
+              value={data?.state?.status}
+              size="sm"
+            />
           </FlexRow>
-          <Text>{data?.description}</Text>
+          <Text className="m-b-0">{data?.description}</Text>
+          <Divider borderColor="#004ad9" />
           <FlexRow width="100%" hrAlign="space-between">
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
               <Text fontWeight={700} className="m-b-0-5">
@@ -52,7 +66,20 @@ function MetaCreateInfoCard({ data }: Props) {
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
                 <Text className="m-b-0">{truncateAddress(data?.ipfsCid)}</Text>
-                <IconImage slug="icon-copy" style={{ marginLeft: "sm" }} />
+                <IconBase
+                  slug="icon-copy"
+                  style={{ marginLeft: "sm" }}
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      "npm i @metaworklabs/macha-dev-sdk"
+                    );
+                    toast({
+                      title: "Copied To Clipboard",
+                      status: "success",
+                      duration: 3000,
+                    });
+                  }}
+                />
               </FlexRow>
             </FlexColumn>
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
@@ -61,7 +88,20 @@ function MetaCreateInfoCard({ data }: Props) {
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
                 <Text className="m-b-0">{data?.id}</Text>
-                <IconImage slug="icon-copy" style={{ marginLeft: "sm" }} />
+                <IconBase
+                  slug="icon-copy"
+                  style={{ marginLeft: "sm" }}
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      "npm i @metaworklabs/macha-dev-sdk"
+                    );
+                    toast({
+                      title: "Copied To Clipboard",
+                      status: "success",
+                      duration: 3000,
+                    });
+                  }}
+                />
               </FlexRow>
             </FlexColumn>
           </FlexRow>

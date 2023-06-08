@@ -10,10 +10,10 @@ const theme = extendTheme({
         background: `${style.bgMain}`,
       },
       "h1, h2, h3, h4, h5, h6": {
-        color: `${style.colorH}`,
+        color: `${style.color.h}`,
       },
       "div, p, span": {
-        color: `${style.colorP}`,
+        color: `${style.color.p}`,
       },
       "*::placeholder": {
         color: `${style.colorPlaceholder}`,
@@ -68,6 +68,12 @@ const theme = extendTheme({
         height: "100%!important",
       },
       ".css-1jec974 >option": {
+        background: `${style.input.bg.default}!important`,
+      },
+      ".css-2t0ktt": {
+        borderRadius: `${style.input.borderRadius.default}!important`,
+      },
+      ".css-7p9xsp >option": {
         background: `${style.input.bg.default}!important`,
       },
     },

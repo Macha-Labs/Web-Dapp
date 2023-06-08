@@ -20,9 +20,9 @@ const CardPannel = ({
   return (
     <div
       style={{
-        borderRadius: ` ${style.card.borderRadius}`,
-        border: `${style.card.border.default}`,
-        background: ` ${style.card.bg.default}`,
+        // borderRadius: ` ${style.card.borderRadius}`,
+        border: `${style.input.border.default}`,
+        borderRadius: `${style.card.borderRadius.default}`,
         boxShadow: ` ${style.card.shadow.default} `,
         cursor: "pointer",
         width: width ? `${width}` : "100%",
@@ -31,6 +31,10 @@ const CardPannel = ({
     >
       <div
         style={{
+          background: ` ${style.card.bg.overview}`,
+          // borderTopRadius: `${style.card.borderRadius.default}`,
+          borderTopLeftRadius: `${style.card.borderRadius.default}`,
+          borderTopRightRadius: `${style.card.borderRadius.default}`,
           borderBottom: `${style.card.border.default}`,
           padding: `${style.card.padding.default}`,
         }}

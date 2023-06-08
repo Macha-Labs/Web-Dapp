@@ -2,6 +2,7 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import {
+  Divider,
   Heading,
   Image,
   Text,
@@ -23,6 +24,7 @@ import MetaEditTriggerModal from "./MetaEditTriggerModal";
 import { deleteMetaInit } from "@/service/StudioService";
 import { useRouter } from "next/router";
 import useMeta from "@/hooks/studio/useMeta";
+import { style } from "@/styles/StyledConstants";
 
 type Props = {
   metaInfo: any;
@@ -68,31 +70,44 @@ function MetaSettings({ metaInfo }: Props) {
             </Text>
           </FlexRow>
           <FlexColumn width="100%">
-            <CardNative>
-              <FlexRow hrAlign="space-between">
-                <FlexRow hrAlign="flex-start">
-                  <Image
-                    boxSize="100px"
-                    objectFit="cover"
-                    src={
-                      metaInfo?.image
-                        ? ` https://gateway.lighthouse.storage/ipfs/${metaInfo?.image}`
-                        : "https://bit.ly/dan-abramov"
-                    }
-                    alt="Dan Abramov"
-                  />
-                  <Heading as="h4" fontSize="18" className="m-l-0-5">
-                    {metaInfo?.name}
+            <CardPannel
+              header={
+                <FlexRow hrAlign="space-between">
+                  <Heading as="h4" fontSize="18" className="m-b-0">
+                    Meta Details
                   </Heading>
+
+                  <ButtonNative
+                    marginRight="0px"
+                    onClick={metaEditModal.onOpen}
+                    text="Edit"
+                    variant="state_default_hover"
+                    size="sm"
+                  />
                 </FlexRow>
-                <ButtonNative
-                  onClick={metaEditModal.onOpen}
-                  text="Edit Details"
-                  variant="state_default_hover"
-                  size="sm"
+              }
+              margin={"xs"}
+            >
+              <FlexRow hrAlign="flex-start">
+                <Image
+                  boxSize="100px"
+                  objectFit="cover"
+                  marginRight={style.margin["lg"]}
+                  src={
+                    metaInfo?.image
+                      ? ` https://gateway.lighthouse.storage/ipfs/${metaInfo?.image}`
+                      : "https://bit.ly/dan-abramov"
+                  }
+                  alt="Dan Abramov"
                 />
+                <FlexColumn vrAlign="flex-start">
+                  <Text fontWeight={600} fontSize={"2xl"}>
+                    {metaInfo?.name}
+                  </Text>
+                  <Text>{metaInfo?.description}</Text>
+                </FlexColumn>
               </FlexRow>
-            </CardNative>
+            </CardPannel>
             <CardPannel
               header={
                 <FlexRow hrAlign="space-between">
@@ -104,6 +119,7 @@ function MetaSettings({ metaInfo }: Props) {
                     text="Add New"
                     variant="state_default_hover"
                     size="sm"
+                    marginRight="0px"
                   />
                 </FlexRow>
               }
@@ -141,6 +157,7 @@ function MetaSettings({ metaInfo }: Props) {
                           setSelectedTrigger(index);
                           editTriggerModal.onOpen();
                         }}
+                        marginRight="0px"
                       />
                     </FlexRow>
                   );
@@ -157,33 +174,69 @@ function MetaSettings({ metaInfo }: Props) {
                     text="Add New"
                     variant="state_default_hover"
                     size="sm"
+                    marginRight="0px"
                   />
                 </FlexRow>
               }
               margin={"xs"}
             >
-              <Text as="h6" fontSize="16" className="m-b-1">
+              <Text
+                as="h6"
+                fontSize="16"
+                className="m-b-1"
+                bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+                bgClip="text"
+              >
                 Unpublished Origins
               </Text>
               {$originData &&
                 $originData.map((item: any, index: any) => {
                   return (
-                    <FlexRow hrAlign="space-between" key={index}>
-                      <Text>Origin {index}</Text>
+                    <FlexColumn>
+                      <FlexRow
+                        hrAlign="space-between"
+                        key={index}
+                        vrAlign="center"
+                        paddingLeft={"xl"}
+                        // marginBottom={"md"}
+                      >
+                        <Text className="m-b-0">Origin {index}</Text>
 
-                      <ButtonNative
-                        text="Edit"
-                        variant="state_default_hover"
-                        size="sm"
-                        onClick={() => {
-                          setSelectedOrigin(index);
-                          editOriginModal.onOpen();
-                        }}
+                        <ButtonNative
+                          text="Edit"
+                          variant="state_default_hover"
+                          size="sm"
+                          onClick={() => {
+                            setSelectedOrigin(index);
+                            editOriginModal.onOpen();
+                          }}
+                          marginRight="0px"
+                        />
+                      </FlexRow>
+
+                      <Divider
+                        width={"95%"}
+                        alignSelf={"flex-end"}
+                        borderColor={"#14244B"}
                       />
-                    </FlexRow>
+                    </FlexColumn>
                   );
                 })}
-              <Text as="h6" fontSize="16" className="m-b-1">
+              <Text
+                as="h6"
+                fontSize="16"
+                className="m-b-1"
+                bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+                bgClip="text"
+              >
                 Published Origins
               </Text>
               {$meta?.data?.origin &&

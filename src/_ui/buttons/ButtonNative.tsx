@@ -3,6 +3,7 @@ import React from "react";
 import IconImage from "../icons/IconImage";
 
 import { style as gStyle } from "../../styles/StyledConstants";
+import IconBase from "../icons/IconsBase";
 
 type Props = {
   size?: string;
@@ -11,7 +12,8 @@ type Props = {
   text?: string;
   isLoading?: boolean;
   loadingText?: string;
-  icon?: any;
+  iconLeft?: any;
+  iconRight?: any;
   variant?: string;
   children?: any;
   width?: string;
@@ -28,7 +30,8 @@ export default function ButtonNative({
   text,
   isLoading = false,
   loadingText = "loading...",
-  icon,
+  iconLeft,
+  iconRight,
   variant,
   children,
   width,
@@ -49,11 +52,31 @@ export default function ButtonNative({
       marginBottom={marginBottom}
       marginRight={`${gStyle.margin[style?.marginRight]}`}
       marginLeft={`${gStyle.margin[style?.marginLeft]}`}
+      borderRadius={`${gStyle.button.borderRadius.default}`}
+      borderColor="#14244b"
     >
-      {icon && (
-        <IconImage slug={icon.slug} size={icon.size} style={icon.style} />
+      {iconLeft && (
+        <IconBase
+          slug={iconLeft.slug}
+          size={iconLeft.size}
+          style={iconLeft.style}
+        />
       )}
-      {text && <Text className="mb-0">{text}</Text>}
+      {text && (
+        <Text
+          className="mb-0"
+          marginRight={marginRight ? marginRight : gStyle.margin["xxs"]}
+        >
+          {text}
+        </Text>
+      )}
+      {iconRight && (
+        <IconBase
+          slug={iconRight.slug}
+          size={iconRight.size}
+          style={iconRight.style}
+        />
+      )}
       {children}
     </Button>
   );

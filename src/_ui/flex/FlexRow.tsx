@@ -15,6 +15,10 @@ type Props = {
   marginRight?: any;
   marginBottom?: any;
   marginLeft?: any;
+  paddingLeft?: string;
+  paddingRight?: string;
+  paddingTop?: string;
+  paddingBottom?: string;
 };
 
 export default function FlexRow({
@@ -30,6 +34,10 @@ export default function FlexRow({
   marginLeft,
   marginBottom,
   marginRight,
+  paddingBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
 }: Props) {
   return (
     <div
@@ -43,6 +51,12 @@ export default function FlexRow({
         width: width ? width : "100%",
         height: height ? height : "100%",
         padding: padding ? padding : "0px",
+        paddingLeft: paddingLeft ? `${gstyle.margin[paddingLeft]}` : "0px",
+        paddingRight: paddingRight ? `${gstyle.margin[paddingRight]}` : "0px",
+        paddingTop: paddingTop ? `${gstyle.margin[paddingTop]}` : "0px",
+        paddingBottom: paddingBottom
+          ? `${gstyle.margin[paddingBottom]}`
+          : "0px",
         marginTop: marginTop ? `${gstyle.margin[marginTop]}` : "0px",
         marginLeft: marginLeft ? `${gstyle.margin[marginLeft]}` : "0px",
         marginBottom: marginBottom ? `${gstyle.margin[marginBottom]}` : "0px",

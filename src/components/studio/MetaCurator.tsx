@@ -5,15 +5,17 @@ import React from "react";
 
 function MetaCurator() {
   return (
-    <FlexColumn>
+    <FlexColumn vrAlign="flex-start">
       <InputSearch
         size="lg"
         placeholder="Search Studio"
         icon={{ slug: "icon-search" }}
         marginBottom="20px"
         marginTop="20px"
+        width="40%"
       />
       <ChakraTable
+        tableWidth="70%"
         th={["Curators", "Meta", "Curating Since"]}
         tr={[
           ["ABX_NAME", "Meta_war", "29-2-2020"],

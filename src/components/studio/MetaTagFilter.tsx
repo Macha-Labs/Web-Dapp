@@ -12,8 +12,9 @@ function MetaTagFilter() {
   return (
     <>
       <ButtonNative
+        iconRight={{ slug: "icon-filter" }}
         text="Filter"
-        variant="state_brand"
+        variant="state_default_hover"
         onClick={() => {
           filterModal.onOpen();
         }}

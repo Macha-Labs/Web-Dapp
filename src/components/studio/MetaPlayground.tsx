@@ -104,12 +104,12 @@ function MetaPlayground({ id }: Props) {
         </FlexRow>
         {selectedOrigin === "0" && (
           <>
-            <FlexRow width="100%" hrAlign="space-between">
-              <Text fontSize={"2xl"} fontWeight={700}>
-                Origin 1
-              </Text>
-            </FlexRow>
-            <CardNative padding="lg">
+            <CardNative padding={style.margin["lg"]}>
+              <FlexRow width="100%" hrAlign="space-between">
+                <Text fontSize={"2xl"} fontWeight={700}>
+                  Origin 1
+                </Text>
+              </FlexRow>
               {$metaInfo.data.metaData.origin.map((item: any, index: any) => {
                 return Object.entries(item).map(([key, value]: any) => {
                   // if (key === "requestParams") {
@@ -138,7 +138,16 @@ function MetaPlayground({ id }: Props) {
                   return (
                     <>
                       {/* <CardNative> */}
-                      <Heading as="h5" fontSize={"lg"}>
+                      <Heading
+                        as="h5"
+                        fontSize={"lg"}
+                        bgGradient="linear(
+                          100.07deg,
+                          #2a85ff 0.39%,
+                          #2448c7 73.45%
+                        )"
+                        bgClip="text"
+                      >
                         {key}
                       </Heading>
                       <Text>{value}</Text>

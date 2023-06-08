@@ -1,4 +1,5 @@
 import { StyledRow } from "@/styles/StyledComponents";
+import { style } from "@/styles/StyledConstants";
 import {
   Drawer,
   DrawerBody,
@@ -25,16 +26,28 @@ const ModalSlider = ({ event, size, header, footer, children }: Props) => {
       size={size ? size : "xs"}
     >
       <DrawerOverlay overflow="scroll" />
-      <DrawerContent>
+      <DrawerContent border={style.modal.border.default}>
         {header && (
-          <DrawerHeader>
+          <DrawerHeader
+            style={{
+              background: `${style.popover.bg.default}`,
+            }}
+          >
             <StyledRow className="vr-center justify-content-center">
               {header}
             </StyledRow>
           </DrawerHeader>
         )}
 
-        <DrawerBody style={{ overflowY: "scroll" }}>{children}</DrawerBody>
+        <DrawerBody
+          style={{
+            overflowY: "scroll",
+            background: `${style.popover.bg.default}`,
+            // background: "#000416",
+          }}
+        >
+          {children}
+        </DrawerBody>
 
         {footer && <DrawerFooter>{footer}</DrawerFooter>}
       </DrawerContent>

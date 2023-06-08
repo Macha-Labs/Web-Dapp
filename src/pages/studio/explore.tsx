@@ -6,6 +6,7 @@ import InputSearch from "@/_ui/input/InputSearch";
 import Nav from "@/_ui/nav/Nav";
 import Navigation from "@/_ui/nav/Navigation";
 import MetaCard from "@/components/studio/MetaCard";
+import MetaHorizontalCard from "@/components/studio/MetaHorizontalCard";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import { fetchAllMetas } from "@/service/StudioService";
 import useUserStore from "@/store/useUserStore";
@@ -82,14 +83,15 @@ export default function DashBoard() {
           />
         </FlexRow>
         <FlexRow
-          hrAlign="space-between"
+          hrAlign="flex-start"
           width="100%"
           flexWrap="wrap"
+          paddingTop="md"
           // padding={style.body.padding}
         >
           {exploreMeta.map((item: any, index: number) => {
             return (
-              <MetaCard
+              <MetaHorizontalCard
                 key={index}
                 image={item?.image ? item?.image : "https://bit.ly/dan-abramov"}
                 heading={item?.name}
@@ -103,9 +105,6 @@ export default function DashBoard() {
                     },
                   });
                 }}
-                cardDirection="row"
-                width="30%"
-                height="200px"
               />
             );
           })}

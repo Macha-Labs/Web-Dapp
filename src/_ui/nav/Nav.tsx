@@ -52,9 +52,9 @@ const Nav = (props: any) => {
                       size="md"
                       style={{
                         className: `m-b-1 ${
-                          router.pathname === "/"
-                            ? "state_active state_hover scale"
-                            : ""
+                          router.pathname === "/studio/dashboard"
+                            ? "state_active "
+                            : "state_hover"
                         } `,
                       }}
                     />
@@ -66,9 +66,9 @@ const Nav = (props: any) => {
                     size="md"
                     style={{
                       className: `m-b-1 ${
-                        router.pathname === "/chat/dm"
-                          ? "state_active state_hover scale"
-                          : ""
+                        router.pathname === "/studio/explore"
+                          ? "state_active"
+                          : "state_hover"
                       } `,
                     }}
                   />
@@ -80,9 +80,9 @@ const Nav = (props: any) => {
                       size="md"
                       style={{
                         className: `m-b-1 ${
-                          router.pathname === "/"
-                            ? "state_active state_hover scale"
-                            : ""
+                          router.pathname === "/studio/docs"
+                            ? "state_active"
+                            : "state_hover"
                         } `,
                       }}
                     />
@@ -95,9 +95,9 @@ const Nav = (props: any) => {
                       size="md"
                       style={{
                         className: `m-b-1 ${
-                          router.pathname === "/"
-                            ? "state_active state_hover scale"
-                            : ""
+                          router.pathname === "/studio/settings"
+                            ? "state_active"
+                            : "state_hover"
                         } `,
                       }}
                     />

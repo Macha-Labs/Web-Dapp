@@ -10,6 +10,7 @@ import React from "react";
 import IconImage from "../icons/IconImage";
 import FlexRow from "../flex/FlexRow";
 import { style } from "@/styles/StyledConstants";
+import IconBase from "../icons/IconsBase";
 
 type Props = {
   text?: string;
@@ -42,9 +43,10 @@ const ButtonMenu = ({
       <MenuButton
         variant={"state_default_hover"}
         as={Button}
+        style={{ borderRadius: `${style.card.borderRadius.button}` }}
         rightIcon={
           icon ? (
-            <IconImage slug={icon.slug} size={icon.size} style={icon.style} />
+            <IconBase slug={icon.slug} size={icon.size} style={icon.style} />
           ) : (
             <></>
           )

@@ -1,5 +1,7 @@
 import { style } from "@/styles/StyledConstants";
+import { Text } from "@chakra-ui/react";
 import React, { useState } from "react";
+import IconBase from "./icons/IconsBase";
 
 const JSONViewer = ({ data }: any) => {
   const [expanded, setExpanded] = useState<any>({});
@@ -16,7 +18,12 @@ const JSONViewer = ({ data }: any) => {
       return (
         <ul>
           {data.map((item, index) => (
-            <li key={index}>{renderData(item, `${key}_${index}`)}</li>
+            <li
+              key={index}
+              style={{ listStyleType: "none", marginTop: style.margin["xs"] }}
+            >
+              {renderData(item, `${key}_${index}`)}
+            </li>
           ))}
         </ul>
       );
@@ -24,12 +31,22 @@ const JSONViewer = ({ data }: any) => {
       return (
         <div>
           <span onClick={() => handleToggle(key)} style={{ cursor: "pointer" }}>
-            {expanded[key] ? "▼" : "►"}
+            {expanded[key] ? (
+              <IconBase slug="icon-down" />
+            ) : (
+              <IconBase slug="icon-right" />
+            )}
           </span>
           {expanded[key] && (
             <ul>
               {Object.entries(data).map(([nestedKey, value]) => (
-                <li key={nestedKey}>
+                <li
+                  key={nestedKey}
+                  style={{
+                    listStyleType: "none",
+                    marginTop: style.margin["xs"],
+                  }}
+                >
                   <strong>{nestedKey}: </strong>
                   {renderData(value, `${key}_${nestedKey}`)}
                 </li>
@@ -43,11 +60,13 @@ const JSONViewer = ({ data }: any) => {
     }
   };
 
+  // console.log("keys", );
+
   return (
     <div
       style={{
         overflow: "auto",
-        height: "500px",
+        height: "86vh",
         width: "100%",
         border: `${style.card.border.hover}`,
         borderRadius: `${style.card.borderRadius.default}`,
@@ -55,6 +74,7 @@ const JSONViewer = ({ data }: any) => {
         marginLeft: `${style.margin.sm}`,
       }}
     >
+      <Text>Resultant Data</Text>
       {renderData(data, "root")}
     </div>
   );

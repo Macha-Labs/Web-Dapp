@@ -29,10 +29,9 @@ function MetaOverview({ metaInfo }: Props) {
             <FlexColumn vrAlign="flex-start" width="50%">
               <Text
                 bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
+                  100.07deg, #197cec 100%, #004889 100%
                 )"
+                fontWeight={600}
                 bgClip="text"
               >
                 CREATED
@@ -42,10 +41,9 @@ function MetaOverview({ metaInfo }: Props) {
             <FlexColumn vrAlign="flex-start" width="50%">
               <Text
                 bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
+                  100.07deg, #197cec 100%, #004889 100%
                 )"
+                fontWeight={600}
                 bgClip="text"
               >
                 LAST MODIFIED

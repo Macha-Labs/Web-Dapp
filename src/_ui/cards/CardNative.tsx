@@ -22,10 +22,10 @@ const CardNative = ({
       style={{
         height: `${height}`,
         width: width ? `${width}` : "100%",
-        padding: padding ? `${padding}` : `${style.card.padding.default}`,
-        borderRadius: ` ${style.card.borderRadius}`,
+        padding: padding ? `${padding}` : `${style.card.padding.overview}`,
+        borderRadius: ` ${style.card.borderRadius.default}`,
         border: `${style.card.border.default}`,
-        background: ` ${style.card.bg.default}`,
+        background: ` ${style.card.bg.overview}`,
         boxShadow: ` ${style.card.shadow.default} `,
         cursor: "pointer",
         margin: margin ? style?.margin[margin] : "0rem",

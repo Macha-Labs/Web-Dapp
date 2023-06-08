@@ -1,3 +1,4 @@
+import { style } from "@/styles/StyledConstants";
 import {
   Table,
   TableCaption,
@@ -13,15 +14,44 @@ type Props = {
   variant?: string;
   th: any[];
   tr: any;
+  tableWidth: string;
 };
-function ChakraTable({ th = [], tr = [] }: Props) {
+function ChakraTable({ th = [], tr = [], tableWidth }: Props) {
   return (
-    <TableContainer width={"100%"}>
+    <TableContainer
+      width={tableWidth}
+      rounded={"md"}
+      style={{ borderColor: "#14244b", borderWidth: "1px" }}
+    >
       <Table variant="simple" colorScheme="whiteAlpha">
         <Thead>
-          <Tr>
+          <Tr
+            css={{
+              background: style.card.bg.overview,
+            }}
+          >
             {th.map((item: any, index: number) => {
-              return <Th key={index}>{item}</Th>;
+              return (
+                <Th
+                  key={index}
+                  style={{
+                    borderBottomColor: "#14244b",
+                    borderRightColor: "#14244b",
+                    borderWidth: "1px",
+                    paddingTop: "20px",
+                    paddingBottom: "20px",
+                    // borderRadius: "30px",
+                    textAlign: "center",
+                    color: "white",
+                    fontWeight: "600",
+                    fontSize: style.font.h5,
+                    borderCollapse: "separate",
+                    borderSpacing: "0 1rem",
+                  }}
+                >
+                  {item}
+                </Th>
+              );
             })}
           </Tr>
         </Thead>
@@ -30,7 +60,20 @@ function ChakraTable({ th = [], tr = [] }: Props) {
             return (
               <Tr key={index}>
                 {dataobj.map((data: any, index2: number) => {
-                  return <Td key={index2}>{data}</Td>;
+                  return (
+                    <Td
+                      key={index2}
+                      style={{
+                        borderColor: "#14244b",
+                        borderWidth: "1px",
+                        borderRadius: "30px",
+                        textAlign: "center",
+                        color: "white",
+                      }}
+                    >
+                      {data}
+                    </Td>
+                  );
                 })}
               </Tr>
             );

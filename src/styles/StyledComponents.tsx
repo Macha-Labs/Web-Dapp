@@ -7,7 +7,6 @@ export const StyledImageView = styled.div<{ viewMode: boolean }>`
       case true:
         return css`
           position: fixed;
-          top: 0;
           left: 0;
           height: 100vh;
           width: 100% !important;
@@ -102,14 +101,11 @@ export const StyledRow = styled.div`
 `;
 export const StyledLi = styled.li`
   &.active {
-    background: -webkit-linear-gradient(
-      100.07deg,
-      #2a85ff 0.39%,
-      #2448c7 73.45%
-    );
+    background: -webkit-linear-gradient(100.07deg, #197cec 100%, #004889 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: underline;
+    font-weight: 600;
   }
 `;
 export const RowHover = styled(StyledRow)`
@@ -160,12 +156,6 @@ export const Main = styled.div`
     text-decoration: none;
   }
 
-  @media screen and (max-width: 480px) {
-    width: ${style.mob.widthMain};
-    margin-left: ${style.mob.marginMain};
-    // padding: ${style.mob.paddingMain};
-  }
-
   h1,
   h2,
   h3,
@@ -188,11 +178,6 @@ export const Section = styled.div`
   &.md {
     width: 60%;
   }
-
-  @media screen and (max-width: 480px) {
-    width: ${style.mob.widthSection};
-    margin-bottom: 3rem;
-  }
 `;
 
 export const List = styled.div`
@@ -210,9 +195,6 @@ export const List = styled.div`
     }
     &::first-child {
       margin-left: -5px;
-    }
-    @media screen and (max-width: 480px) {
-      width: ${style.mob.widthCardList};
     }
   }
   &.span-1 {
@@ -450,11 +432,6 @@ export const Banner = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-
-  @media screen and (max-width: 480px) {
-    padding: ${style.mob.paddingBanner};
-    height: ${style.mob.heightBanner};
-  }
 `;
 
 export const Logo = styled.img`
@@ -467,29 +444,14 @@ export const Logo = styled.img`
   object-position: center;
   aspect-ratio: 1/1;
 
-  @media screen and (max-width: 480px) {
-    width: ${style.mob.sizeLogo};
-    height: ${style.mob.sizeLogo};
-  }
-
   &.sm {
     width: ${style.sizeLogoSmall};
     height: ${style.sizeLogoSmall};
-
-    @media screen and (max-width: 480px) {
-      width: ${style.mob.sizeLogoSmall};
-      height: ${style.mob.sizeLogoSmall};
-    }
   }
 
   &.lg {
     width: ${style.sizeLogoLarge};
     height: ${style.sizeLogoLarge};
-
-    @media screen and (max-width: 480px) {
-      width: ${style.mob.sizeLogoLarge};
-      height: ${style.mob.sizeLogoLarge};
-    }
   }
 `;
 
@@ -502,10 +464,6 @@ export const Cover = styled.div`
   background-size: cover;
   display: flex;
   align-items: center;
-
-  @media screen and (max-width: 480px) {
-    height: ${style.mob.heightCover};
-  }
 
   .intro {
     align-items: center;

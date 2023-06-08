@@ -1,5 +1,6 @@
 const GlobalIcons: any = {
-  "icon-filter": "",
+  "icon-filter":
+    "/icons/svg/Base-blue/base-blue-filter.svg?updatedAt=1680783869195",
   "icon-compass":
     "/icons/svg/Base-blue/base-blue-compass.svg?updatedAt=1680783858784",
   "icon-compass-white":
@@ -9,8 +10,12 @@ const GlobalIcons: any = {
   "icon-chat": "/icons/svg/Base-blue/base-blue-chat.svg",
   "icon-dashboard":
     "/icons/svg/Base-blue/base-blue-dashboard.svg?updatedAt=1685012312872",
+  "icon-down":
+    "/icons/svg/Base-blue/base-blue-arrowFilled-down.svg?updatedAt=1686047698220",
+  "icon-right":
+    "/icons/svg/Base-blue/base-blue-arrowFilled-right.svg?updatedAt=1686047698227",
   "icon-settings":
-    "/icons/svg/Base-blue/base-blue-settingsFilled.svg?updatedAt=1680783904683",
+    "/icons/svg/Base-blue/base-blue-settingsFilled.svg?updatedAt=1685711171677",
   "icon-bell":
     "/icons/svg/Base-blue/base-blue-bell.svg?updatedAt=1685012312681",
   "icon-chat-white":

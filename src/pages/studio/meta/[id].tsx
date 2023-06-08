@@ -51,7 +51,7 @@ const CreateMeta = () => {
       href: "",
     },
     {
-      value: "Curator",
+      value: "Curators",
       href: "",
     },
     {
@@ -81,7 +81,7 @@ const CreateMeta = () => {
     switch (selectedTab) {
       case "Overview":
         return <MetaOverview metaInfo={$userMetasMap[currentMetaId]} />;
-      case "Curator":
+      case "Curators":
         return <MetaCurator />;
       case "Playground":
         return <MetaPlayground id={currentMetaId} />;
@@ -109,6 +109,8 @@ const CreateMeta = () => {
               </Heading>
             </FlexRow>
             <NavTabs
+              width="40%"
+              // gstyle={{ fontSize: `${style.font.h5}`, fontWeight: "600" }}
               // options={createMetaOptions}
               options={options}
               // $meta.owner == $address
@@ -119,7 +121,7 @@ const CreateMeta = () => {
 
               value={selectedTab}
               onChange={(value: any) => setSelectedTab(value)}
-              gstyle={{ fontSize: `${style.fontH6}`, fontWeight: "600" }}
+              gstyle={{ fontSize: `${style.font.h5}` }}
             />
           </FlexRow>
         </NavBlock>

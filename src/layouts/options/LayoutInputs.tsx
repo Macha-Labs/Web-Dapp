@@ -41,6 +41,7 @@ const layoutInputs = ({
         display={display}
         variant={variant}
         type={type}
+        _placeholder={{ color: "#132041" }}
       />
     </div>
   );

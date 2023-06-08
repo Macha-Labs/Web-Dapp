@@ -2,6 +2,7 @@ import React from "react";
 import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
+import IconBase from "../icons/IconsBase";
 type Props = {
   children: any;
   back?: any;
@@ -20,7 +21,7 @@ export default function NavBlock({ children, back }: Props) {
     >
       <FlexRow>
         {back ? (
-          <IconImage
+          <IconBase
             slug="icon-chevron"
             onClick={back}
             style={{ marginRight: "xs" }}

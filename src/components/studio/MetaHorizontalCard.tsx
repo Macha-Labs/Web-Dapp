@@ -16,7 +16,7 @@ type Props = {
   height?: any;
 };
 
-export default function MetaCard({
+export default function MetaHorizontalCard({
   image,
   heading,
   description,
@@ -30,12 +30,14 @@ export default function MetaCard({
     <>
       <div
         style={{
-          height: "400px",
-          width: "200px",
+          height: "200px",
+          width: "400px",
           border: `${style.card.border.meta}`,
           borderRadius: `${style.card.borderRadius.default}`,
           background: `${style.card.bg.meta}`,
           padding: ` ${style.card.padding.default}`,
+          display: "flex",
+          flexDirection: "row",
           marginRight: ` ${style.margin["sm"]}`,
           marginBottom: ` ${style.margin["sm"]}`,
         }}
@@ -43,14 +45,14 @@ export default function MetaCard({
           onCardClick();
         }}
       >
-        <div style={{ height: "50%" }}>
-          <Image src={image} width={"100%"} />
+        <div style={{ width: "50%" }}>
+          <Image src={image} height={"100%"} />
         </div>
-        <div style={{ height: "50%" }}>
+        <div style={{ width: "50%" }}>
           <Text height="30px" fontSize={"2xl"}>
             {truncateString(heading, 10)}
           </Text>
-          <Text height="80px">{truncateString(description, 50)}</Text>
+          <Text height="50px">{truncateString(description, 30)}</Text>
           <FlexRow hrAlign="flex-start" width="100%" height="50px">
             <TagNative
               value="Tag 1"

@@ -17,6 +17,11 @@ type Props = {
   rightElement?: any;
   close?: boolean;
   margin?: string;
+  marginTop?: string;
+  marginRight?: string;
+  marginLeft?: string;
+  marginBottom?: string;
+  lineHeight?: string;
 };
 
 const TagNative = ({
@@ -25,7 +30,11 @@ const TagNative = ({
   value,
   icon,
   close = false,
-  margin = "0px",
+  marginBottom,
+  marginLeft,
+  marginRight = "xxs",
+  marginTop,
+  lineHeight,
 }: Props) => {
   return (
     <Tag
@@ -33,12 +42,17 @@ const TagNative = ({
       key={size ? size : "md"}
       // variant={variant ? variant : "solid"}
       bgGradient={variant == "gray" ? "gray" : style.dropdown.bg.active}
-      margin={margin}
+      marginTop={marginTop}
+      marginRight={style.margin[marginRight]}
+      marginBottom={marginBottom}
+      marginLeft={marginLeft}
     >
       {icon && icon.align == "left" && (
         <TagLeftIcon boxSize="12px" as={AddIcon} />
       )}
-      <TagLabel>{value}</TagLabel>
+      <TagLabel style={{ lineHeight: lineHeight ? lineHeight : "1" }}>
+        {value}
+      </TagLabel>
       {icon && icon.align == "right" && (
         <TagRightIcon boxSize="12px" as={AddIcon} />
       )}
