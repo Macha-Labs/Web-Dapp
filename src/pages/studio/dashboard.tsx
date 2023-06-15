@@ -10,9 +10,11 @@ import NavBlock from "@/_ui/nav/NavBlock";
 import NavTabs from "@/_ui/nav/NavTabs";
 import MetaCard from "@/components/studio/MetaCard";
 import MetaCreateModal from "@/components/studio/MetaCreateModal";
+import MetaHorizontalCard from "@/components/studio/MetaHorizontalCard";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import { displayImage } from "@/helpers/storage/lightHouseStorage";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
+import { fetchAllMetas } from "@/service/StudioService";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
@@ -28,7 +30,8 @@ const DashBoard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const $userMetas = useUserStore((state: any) => state.userMetas);
   const [filteredData, setFilteredData] = useState($userMetas);
-  const [selectedNavTab, setSelectedNavTab] = useState("Live Metas");
+  const [selectedNavTab, setSelectedNavTab] = useState("Your Metas");
+  const [exploreMeta, setExploreMeta] = useState<any>([]);
 
   const handleFilter = (inputValue: string) => {
     const filtered = $userMetas.filter((item: any) => {
@@ -37,10 +40,18 @@ const DashBoard = () => {
     setFilteredData(filtered);
   };
 
+  const fetchmetas = async () => {
+    const allMetas = await fetchAllMetas();
+    setExploreMeta(allMetas.data);
+  };
+
   useEffect(() => {
     setFilteredData($userMetas);
     setIsLoading(false);
   }, [$userMetas]);
+  useEffect(() => {
+    fetchmetas();
+  }, []);
 
   const sortOptions = [
     {
@@ -63,7 +74,7 @@ const DashBoard = () => {
 
   const dashboardNav: any = [
     {
-      value: "Live Metas",
+      value: "Your Metas",
       href: "",
     },
     {
@@ -94,79 +105,119 @@ const DashBoard = () => {
           </FlexRow>
         </NavBlock>
 
-        {selectedNavTab == "Live Metas" && (
-          <FlexBody>
-            <FlexRow width="100%" hrAlign="space-between" paddingTop="md">
-              <FlexRow width="100%" hrAlign="flex-start">
-                <FlexRow width="50%">
-                  <InputSearch
-                    size="lg"
-                    placeholder="Search Studio"
-                    icon={{ slug: "icon-search" }}
-                    marginRight={style.card.margin.default}
-                    onChange={(e: any) => handleFilter(e.target.value)}
-                  />
-                </FlexRow>
-                <MetaTagFilter />
+        <FlexBody>
+          <FlexRow width="100%" hrAlign="space-between" paddingTop="md">
+            <FlexRow width="100%" hrAlign="flex-start">
+              <FlexRow width="50%">
+                <InputSearch
+                  size="lg"
+                  placeholder="Search Studio"
+                  icon={{ slug: "icon-search" }}
+                  marginRight={style.card.margin.default}
+                  onChange={(e: any) => handleFilter(e.target.value)}
+                />
               </FlexRow>
-
-              <ButtonMenu
-                text="Sort By"
-                options={sortOptions}
-                icon={{
-                  slug: "icon-chevron-down",
-                  marginLeft: "md",
-                }}
-              />
+              <MetaTagFilter />
             </FlexRow>
-            <FlexRow
-              hrAlign="flex-start"
-              width="100%"
-              flexWrap="wrap"
-              // padding={style.body.padding}
-              paddingTop="md"
-            >
-              {isLoading && (
-                <FlexRow height="500px">
-                  <Loader size="lg" />
-                </FlexRow>
-              )}
-              {!isLoading &&
-                filteredData &&
-                filteredData.map((item: any, index: number) => {
+
+            <ButtonMenu
+              text="Sort By"
+              options={sortOptions}
+              icon={{
+                slug: "icon-chevron-down",
+                marginLeft: "md",
+              }}
+            />
+          </FlexRow>
+          {selectedNavTab == "Your Metas" && (
+            <>
+              <FlexRow
+                hrAlign="flex-start"
+                width="100%"
+                flexWrap="wrap"
+                // padding={style.body.padding}
+                paddingTop="md"
+              >
+                {isLoading && (
+                  <FlexRow height="500px">
+                    <Loader size="lg" />
+                  </FlexRow>
+                )}
+                {!isLoading &&
+                  filteredData &&
+                  filteredData.map((item: any, index: number) => {
+                    return (
+                      <MetaCard
+                        key={index}
+                        image={
+                          item.image
+                            ? displayImage(item.image)
+                            : "https://bit.ly/dan-abramov"
+                        }
+                        heading={item.name}
+                        description={item.description}
+                        tags={item.tags ? item?.tags : ""}
+                        onCardClick={() => {
+                          router.push(
+                            {
+                              pathname: "/studio/meta/[id]",
+                              query: {
+                                id:
+                                  item.state.status == "PENDING"
+                                    ? item._id
+                                    : item.id,
+                              },
+                            },
+                            `/studio/meta/${
+                              item.state.status == "PENDING"
+                                ? item._id
+                                : item.id
+                            }`
+                          );
+                        }}
+                      />
+                    );
+                  })}
+              </FlexRow>
+            </>
+          )}
+          {selectedNavTab == "Others" && (
+            <>
+              <FlexRow
+                hrAlign="flex-start"
+                width="100%"
+                flexWrap="wrap"
+                paddingTop="md"
+                // padding={style.body.padding}
+              >
+                {exploreMeta.map((item: any, index: number) => {
                   return (
-                    <MetaCard
+                    <MetaHorizontalCard
                       key={index}
                       image={
-                        item.image
-                          ? displayImage(item.image)
-                          : "https://bit.ly/dan-abramov"
+                        item?.image ? item?.image : "https://bit.ly/dan-abramov"
                       }
-                      heading={item.name}
-                      description={item.description}
-                      tags={item.tags ? item?.tags : ""}
+                      heading={item?.name}
+                      description={item?.description}
+                      // tags={item.tags}
                       onCardClick={() => {
-                        router.push(
-                          {
-                            pathname: "/studio/meta/[id]",
-                            query: {
-                              id:
-                                item.state.status == "PENDING"
-                                  ? item._id
-                                  : item.id,
-                            },
+                        router.push({
+                          pathname: "/studio/meta/[id]",
+                          query: {
+                            id:
+                              item.state.status == "PENDING"
+                                ? item._id
+                                : item.id,
                           },
-                          `/studio/meta/${
-                            item.state.status == "PENDING" ? item._id : item.id
-                          }`
-                        );
+                        });
                       }}
                     />
                   );
                 })}
-            </FlexRow>
-          </FlexBody>
-        )}
+              </FlexRow>
+            </>
+          )}
+        </FlexBody>
         {/* </FlexWindow> */}
 
         <MetaCreateModal hookMeta={hookMeta} metaModal={metaModal} />

@@ -28,6 +28,7 @@
     "@types/react-dom": "18.0.10",
     "@types/uuid": "^9.0.1",
     "@xmtp/xmtp-js": "^7.13.0",
+    "alchemy-sdk": "^2.9.0",
     "aws-sdk": "^2.1163.0",
     "bootstrap": "^5.2.3",
     "eslint": "8.34.0",

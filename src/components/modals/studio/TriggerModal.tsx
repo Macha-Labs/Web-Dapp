@@ -5,6 +5,7 @@ import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
 import ModalSlider from "@/_ui/modal/ModalSlider";
+import { style } from "@/styles/StyledConstants";
 import { Heading, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -57,7 +58,7 @@ const TriggerModal = ({
           labelText="Name"
           placeholder="Trigger Name"
           defaultValue={defaultData?.name}
-          padding="20px 0px"
+          // padding="20px 0px"
         />
 
         <InputLabel
@@ -68,7 +69,7 @@ const TriggerModal = ({
           labelText="Description"
           placeholder="Description"
           defaultValue={defaultData?.description}
-          padding="20px 0px"
+          // padding="20px 0px"
         />
 
         <Heading
@@ -80,7 +81,8 @@ const TriggerModal = ({
                   #2448c7 73.45%
                 )"
           bgClip="text"
-          marginTop={"20px"}
+          // marginTop={"20px"}
+          marginTop={style.margin["sm"]}
         >
           Request Type
         </Heading>
@@ -93,9 +95,9 @@ const TriggerModal = ({
           options={requestTypeOptions}
           onChangeHandler={settingRequestMethod}
           defaultValue={defaultData?.requestType}
-          icon={{ slug: "icon-close" }}
+          icon={{ slug: "icon-chevron-down" }}
           variant={"state_default_hover"}
-          margin="0 0 20px 0"
+          // margin="0 0 10px 0"
         />
 
         {triggerMethods.length > 0 && (
@@ -109,7 +111,8 @@ const TriggerModal = ({
                   #2448c7 73.45%
                 )"
               bgClip="text"
-              marginTop={"20px"}
+              // marginTop={"20px"}
+              marginTop={style.margin["sm"]}
             >
               Request Method
             </Heading>
@@ -120,9 +123,9 @@ const TriggerModal = ({
               placeholder="search request method"
               options={triggerMethods}
               defaultValue={defaultData?.requestMethod}
-              icon={{ slug: "icon-close" }}
+              icon={{ slug: "icon-chevron-down" }}
               variant={"state_default_hover"}
-              margin="0 0 20px 0"
+              margin="0 0 10px 0"
             />
           </>
         )}
@@ -135,7 +138,8 @@ const TriggerModal = ({
           labelText="Request Endpoint"
           defaultValue={defaultData?.requestEndpoint}
           placeholder="Endpoint"
-          padding="20px 0px"
+          marginTop="sm"
+          // padding="20px 0px"
         />
 
         <InputLabel
@@ -146,7 +150,7 @@ const TriggerModal = ({
           labelText="Trigger Schema"
           placeholder="Add your trigger schema"
           defaultValue={defaultData?.requestSchema}
-          padding="20px 0px"
+          // padding="20px 0px"
         />
 
         <InputLabel
@@ -157,11 +161,12 @@ const TriggerModal = ({
           labelText="Request Parameter"
           placeholder="Provide Parameter"
           defaultValue={defaultData?.requestParams}
-          padding="20px 0px"
+          marginTop="sm"
+          // padding="20px 0px"
         />
 
-        <FlexRow width="100%" hrAlign="space-between">
-          <ButtonNative text="Discard" />
+        <FlexRow width="100%" hrAlign="space-between" marginTop={"sm"}>
+          <ButtonNative text="Discard" marginRight="0px" />
           <ButtonNative
             variant={"state_brand"}
             onClick={() => {
@@ -169,6 +174,7 @@ const TriggerModal = ({
               modal.onClose();
             }}
             text="Save"
+            marginRight="0px"
           />
         </FlexRow>
       </FlexColumn>

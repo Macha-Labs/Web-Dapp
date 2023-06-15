@@ -45,10 +45,36 @@ const Nav = (props: any) => {
           >
             <FlexColumn hrAlign="space-between" vrAlign="center">
               <FlexColumn height="fit-content">
+                <Link href="/studio/explorer">
+                  <IconImage
+                    slug="icon-dashboard"
+                    size="md"
+                    style={{
+                      className: `m-b-1 ${
+                        router.pathname === "/studio/explorer"
+                          ? "state_active"
+                          : "state_hover"
+                      } `,
+                    }}
+                  />
+                </Link>
+                <Link href="/studio/explore">
+                  <IconImage
+                    slug="icon-rocket"
+                    size="md"
+                    style={{
+                      className: `m-b-1 ${
+                        router.pathname === "/studio/explore"
+                          ? "state_active"
+                          : "state_hover"
+                      } `,
+                    }}
+                  />
+                </Link>
                 <Link href="/studio/dashboard">
                   <Tooltip label="Chat">
                     <IconImage
-                      slug="icon-dashboard"
+                      slug="icon-code"
                       size="md"
                       style={{
                         className: `m-b-1 ${
@@ -60,20 +86,7 @@ const Nav = (props: any) => {
                     />
                   </Tooltip>
                 </Link>
-                <Link href="/studio/explore">
-                  <IconImage
-                    slug="icon-compass"
-                    size="md"
-                    style={{
-                      className: `m-b-1 ${
-                        router.pathname === "/studio/explore"
-                          ? "state_active"
-                          : "state_hover"
-                      } `,
-                    }}
-                  />
-                </Link>
-                <Link href="/studio/docs">
+                {/* <Link href="/studio/docs">
                   <Tooltip label="Chat">
                     <IconImage
                       slug="icon-file"
@@ -87,7 +100,11 @@ const Nav = (props: any) => {
                       }}
                     />
                   </Tooltip>
-                </Link>
+                </Link> */}
+              </FlexColumn>
+
+              <FlexColumn height="fit-content">
+                <IconImage slug="icon-bell" style={{ className: "m-b-1" }} />
                 <Link href="/studio/settings">
                   <Tooltip label="Chat">
                     <IconImage
@@ -103,10 +120,6 @@ const Nav = (props: any) => {
                     />
                   </Tooltip>
                 </Link>
-              </FlexColumn>
-
-              <FlexColumn height="fit-content">
-                <IconImage slug="icon-bell" style={{ className: "m-b-1" }} />
               </FlexColumn>
             </FlexColumn>
           </div>

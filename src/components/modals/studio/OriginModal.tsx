@@ -5,6 +5,7 @@ import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
 import ModalSlider from "@/_ui/modal/ModalSlider";
+import { style } from "@/styles/StyledConstants";
 import { Heading, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -57,7 +58,7 @@ const OriginModal = ({
                   #2448c7 73.45%
                 )"
           bgClip="text"
-          marginTop={"20px"}
+          marginTop={style.margin["sm"]}
         >
           Request Type
         </Heading>
@@ -69,9 +70,10 @@ const OriginModal = ({
           onChangeHandler={settingRequestMethod}
           defaultValue={defaultData?.requestType}
           options={requestTypeOptions}
-          icon={{ slug: "icon-close" }}
+          icon={{ slug: "icon-chevron-down" }}
           variant={"state_default_hover"}
-          margin="0 0 20px 0"
+
+          // margin="0 0 20px 0"
         />
 
         <Heading
@@ -83,7 +85,7 @@ const OriginModal = ({
                   #2448c7 73.45%
                 )"
           bgClip="text"
-          marginTop={"20px"}
+          marginTop={style.margin["sm"]}
         >
           Request Method
         </Heading>
@@ -95,9 +97,9 @@ const OriginModal = ({
           placeholder="Select Request Method"
           options={originMethods}
           defaultValue={defaultData?.requestMethod}
-          icon={{ slug: "icon-close" }}
+          icon={{ slug: "icon-chevron-down" }}
           variant={"state_default_hover"}
-          margin="0 0 20px 0"
+          // margin="0 0 10px 0"
         />
 
         {/* <InputLabel
@@ -123,7 +125,8 @@ const OriginModal = ({
           labelText="Request Endpoint"
           defaultValue={defaultData?.requestEndpoint}
           placeholder="Request Endpoint"
-          padding="20px 0px"
+          marginTop="sm"
+          // padding="20px 0px"
         />
 
         <InputLabel
@@ -134,7 +137,9 @@ const OriginModal = ({
           labelText="Request Schema"
           placeholder="Request Schema"
           defaultValue={defaultData?.requestSchema}
-          padding="20px 0px"
+          marginTop="sm"
+          // padding="20px 0p
+          // padding="20px 0px"
         />
 
         <InputLabel
@@ -145,11 +150,12 @@ const OriginModal = ({
           labelText="Request Parameter"
           placeholder="Provide Parameter"
           defaultValue={defaultData?.requestParams}
-          padding="20px 0px"
+          // padding="20px 0px"
+          marginTop="sm"
         />
 
-        <FlexRow width="100%" hrAlign="space-between">
-          <ButtonNative variant={""}>Discard</ButtonNative>
+        <FlexRow width="100%" hrAlign="space-between" className="mt-3">
+          <ButtonNative>Discard</ButtonNative>
           <ButtonNative
             variant={"state_brand"}
             onClick={() => {

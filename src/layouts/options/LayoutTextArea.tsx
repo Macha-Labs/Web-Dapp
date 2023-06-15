@@ -35,7 +35,7 @@ const LayoutTextArea = ({
         onChange={(e) => onChange(e.target.value)}
         isDisabled={disabled}
         isRequired={required}
-        className="m-b-0-5"
+        // className="m-b-0"
         display={display}
         variant={variant}
       />

@@ -40,9 +40,9 @@ const NavTabs = ({ options, gstyle, icon, value, onChange, width }: Props) => {
                 >
                   <FlexRow>
                     {icon && <IconImage slug={icon.slug} />}
-                    {/* <Text fontSize={"xl"} className="m-b-0"> */}
-                    {option.value}
-                    {/* </Text> */}
+                    <Text fontSize={"2xl"} fontWeight={600} className="m-b-0">
+                      {option.value}
+                    </Text>
                   </FlexRow>
                 </Link>
                 <Divider

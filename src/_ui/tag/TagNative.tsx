@@ -40,6 +40,7 @@ const TagNative = ({
     <Tag
       size={size}
       key={size ? size : "md"}
+      borderRadius={"2xl"}
       // variant={variant ? variant : "solid"}
       bgGradient={variant == "gray" ? "gray" : style.dropdown.bg.active}
       marginTop={marginTop}
@@ -50,7 +51,9 @@ const TagNative = ({
       {icon && icon.align == "left" && (
         <TagLeftIcon boxSize="12px" as={AddIcon} />
       )}
-      <TagLabel style={{ lineHeight: lineHeight ? lineHeight : "1" }}>
+      <TagLabel
+        style={{ lineHeight: lineHeight ? lineHeight : "1", fontSize: "12px" }}
+      >
         {value}
       </TagLabel>
       {icon && icon.align == "right" && (

@@ -45,7 +45,12 @@ export const darkStyle = {
     border: { default: "1px solid #0F172E" },
   },
   window: {},
-  body: { bg: { default: "#00040d" }, padding: "1% 6%" },
+  body: {
+    bg: { default: "#00040d" },
+    padding: "1% 6%",
+    margin: { top: "50px" },
+    paddingTop: "80px",
+  },
   nav: {
     width: "5%",
     height: "100vH",
@@ -81,6 +86,7 @@ export const darkStyle = {
       default: "1px solid #0a1020",
       hover: "2px solid rgba(15,23,46,1)",
       meta: "1px solid #197cec",
+      mcard: "1px solid #353c54",
     },
     borderRadius: {
       default: "20px",

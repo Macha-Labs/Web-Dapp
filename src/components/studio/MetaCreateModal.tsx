@@ -25,7 +25,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
 
   useEffect(() => {
     console.log("Logging pending meta ", $meta);
-  }, [])
+  }, []);
 
   return (
     <ModalSlider
@@ -56,6 +56,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
             inputType="text"
             labelText="Description"
             placeholder="Description"
+            marginTop="sm"
           />
           <InputLabel
             inputType="file"

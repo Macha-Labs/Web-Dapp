@@ -76,6 +76,11 @@ const theme = extendTheme({
       ".css-7p9xsp >option": {
         background: `${style.input.bg.default}!important`,
       },
+
+      ".css-1bki5fo::placeholder": {
+        color: "#132041",
+        paddingLeft: "5px",
+      },
     },
   },
   textStyles: {},

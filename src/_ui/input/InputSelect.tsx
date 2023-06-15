@@ -16,6 +16,7 @@ type Props = {
   width?: any;
   childrenComponent?: any;
   defaultValue?: any;
+  marginTop?: string;
 };
 
 const InputSelect = ({
@@ -30,6 +31,7 @@ const InputSelect = ({
   elementRef,
   childrenComponent,
   defaultValue,
+  marginTop,
 }: Props) => {
   // console.log("children", children);
   return (

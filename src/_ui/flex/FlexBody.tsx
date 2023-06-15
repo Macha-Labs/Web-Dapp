@@ -13,6 +13,7 @@ const FlexBody = ({ children, gstyle }: Props) => {
         style={{
           padding: `${style.body.padding}`,
           background: `${style.body.bg.default}`,
+          paddingTop: `${style.body.paddingTop}`,
         }}
       >
         {children}

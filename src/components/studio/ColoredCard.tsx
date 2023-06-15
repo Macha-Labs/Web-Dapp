@@ -4,6 +4,7 @@ import { Image, Text } from "@chakra-ui/react";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { truncateString } from "@/helpers";
+import IconBase from "@/_ui/icons/IconsBase";
 
 type Props = {
   image: string;
@@ -14,12 +15,16 @@ type Props = {
   cardDirection?: any;
   onCardClick?: any;
   height?: any;
+  bg: any;
+  borderColor: any;
 };
 
-export default function MetaHorizontalCard({
+export default function ColoredCard({
   image,
   heading,
   description,
+  bg,
+  borderColor,
   tags,
   cardDirection = "column",
   width,
@@ -30,35 +35,34 @@ export default function MetaHorizontalCard({
     <>
       <div
         style={{
-          height: "200px",
-          width: "400px",
+          height: "150px",
+          width: "280px",
           border: `${style.card.border.meta}`,
           borderRadius: `${style.card.borderRadius.default}`,
-          background: `${style.card.bg.meta}`,
+          background: `${bg}`,
+          borderColor: `${borderColor}`,
           padding: ` ${style.card.padding.default}`,
-          display: "flex",
-          flexDirection: "row",
-          marginRight: ` ${style.margin["sm"]}`,
-          marginBottom: ` ${style.margin["sm"]}`,
+          marginRight: ` ${style.margin["lg"]}`,
+          marginBottom: ` ${style.margin["lg"]}`,
         }}
         onClick={() => {
           onCardClick();
         }}
       >
-        <div style={{ width: "50%" }}>
-          <Image
-            src={image}
-            height={"100%"}
-            objectFit={"cover"}
-            borderRadius={style.card.borderRadius.default}
-          />
-        </div>
-        <div style={{ width: "50%" }}>
-          <Text height="30px" fontSize={"2xl"} fontWeight={600}>
-            {truncateString(heading, 10)}
-          </Text>
-          <Text height="50px">{truncateString(description, 30)}</Text>
-          <FlexRow hrAlign="flex-start" width="100%" height="50px">
+        <div style={{}}>
+          <FlexRow hrAlign="flex-start" vrAlign="center">
+            <IconBase slug={image} />
+            <Text
+              fontSize={"xl"}
+              fontWeight={600}
+              className="m-b-0 m-l-0-5"
+              lineHeight={"1rem"}
+            >
+              {heading}
+            </Text>
+          </FlexRow>
+          <Text className="m-t-0-5">{truncateString(description, 50)}</Text>
+          {/* <FlexRow hrAlign="flex-start" width="100%" height="50px">
             <TagNative
               value="Tag 1"
               variant="state_xmtp"
@@ -72,7 +76,7 @@ export default function MetaHorizontalCard({
               size="sm"
               lineHeight="1.5"
             />
-          </FlexRow>
+          </FlexRow> */}
         </div>
       </div>
     </>

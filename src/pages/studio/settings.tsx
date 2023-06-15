@@ -39,7 +39,6 @@ export default function DashBoard() {
         <FlexBody>
           <FlexRow hrAlign="flex-start">
             <Text
-              className="m-b-0"
               bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
@@ -52,6 +51,7 @@ export default function DashBoard() {
             </Text>
           </FlexRow>
           <ChakraTable
+            tableWidth="100%"
             th={["Name", "API Key", "Time of creation", ""]}
             tr={[
               [
@@ -75,7 +75,9 @@ export default function DashBoard() {
             ]}
           />
           <FlexRow hrAlign="flex-start" marginTop={"sm"}>
-            <Button variant="state_default_hover">Create New API keys</Button>
+            <ButtonNative variant="state_default_hover">
+              Create New API keys
+            </ButtonNative>
           </FlexRow>
           <FlexRow hrAlign="flex-start" marginTop={"sm"}>
             <Text fontSize={"2xl"} fontWeight={700}>
@@ -105,7 +107,7 @@ export default function DashBoard() {
             </StyledCard>
           </FlexColumn>
           <FlexRow width="100%" hrAlign="flex-end">
-            <ButtonNative variant="state_brand" text="Create Api" />
+            <ButtonNative variant="state_brand" text="Create API" />
           </FlexRow>
         </FlexBody>
       </>

@@ -24,7 +24,7 @@ const MetaTriggersModal = ({ modal }: Props) => {
   return (
     <TriggerModal
       modal={modal}
-      header={"Origin"}
+      header={"Trigger"}
       hookMetaCreate={hookMetaCreate}
       requestTypeOptions={requestTypeOptions}
       settingRequestMethod={settingRequestMethods}

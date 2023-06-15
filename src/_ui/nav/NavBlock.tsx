@@ -17,6 +17,10 @@ export default function NavBlock({ children, back }: Props) {
         padding: `${style.nav.padding}`,
         width: `100%`,
         borderBottom: `${style.nav.border.default}`,
+        position: "fixed",
+        height: "60px",
+        top: 0,
+        zIndex: 1,
       }}
     >
       <FlexRow>

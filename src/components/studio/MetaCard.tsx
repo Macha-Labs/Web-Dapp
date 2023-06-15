@@ -31,26 +31,33 @@ export default function MetaCard({
       <div
         style={{
           height: "400px",
-          width: "200px",
+          width: "250px",
           border: `${style.card.border.meta}`,
           borderRadius: `${style.card.borderRadius.default}`,
           background: `${style.card.bg.meta}`,
           padding: ` ${style.card.padding.default}`,
-          marginRight: ` ${style.margin["sm"]}`,
-          marginBottom: ` ${style.margin["sm"]}`,
+          marginRight: ` ${style.margin["lg"]}`,
+          marginBottom: ` ${style.margin["lg"]}`,
         }}
         onClick={() => {
           onCardClick();
         }}
       >
-        <div style={{ height: "50%" }}>
-          <Image src={image} width={"100%"} />
+        <div
+          style={{ height: "50%", display: "flex", justifyContent: "center" }}
+        >
+          <Image
+            src={image}
+            width={"100%"}
+            objectFit={"cover"}
+            borderRadius={style.card.borderRadius.default}
+          />
         </div>
-        <div style={{ height: "50%" }}>
-          <Text height="30px" fontSize={"2xl"}>
-            {truncateString(heading, 10)}
+        <div style={{ height: "50%", marginTop: `${style.margin["sm"]}` }}>
+          <Text height="30px" fontSize={"2xl"} fontWeight={600}>
+            {truncateString(heading, 15)}
           </Text>
-          <Text height="80px">{truncateString(description, 50)}</Text>
+          <Text height="50px">{truncateString(description, 50)}</Text>
           <FlexRow hrAlign="flex-start" width="100%" height="50px">
             <TagNative
               value="Tag 1"
