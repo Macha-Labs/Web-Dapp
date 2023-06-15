@@ -118,7 +118,7 @@ const GlobalIcons: any = {
   "icon-chat-edit":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-editChat.svg",
   "icon-code":
-    "/icons/svg/Base-blue/base-blue-deploy.svg?updatedAt=1680783864010",
+    "/icons/svg/Base-blue/base-blue-deploy.svg?updatedAt=1686831739162",
   "icon-rocket":
     "/icons/svg/Base-blue/base-blue-rocket.svg?updatedAt=1686739684462",
   "logo-Lens": "/Studio-Logos/lens.svg?updatedAt=1686740026746",
