@@ -4,10 +4,10 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
-import Nav from "@/_ui/nav/Nav";
+import NavLeft from "@/_ui/nav/NavLeft";
 import NavBlock from "@/_ui/nav/NavBlock";
-import NavTabs from "@/_ui/nav/NavTabs";
-import Navigation from "@/_ui/nav/Navigation";
+import Tabs from "@/_ui/tabs/Tabs";
+import NavTop from "@/_ui/nav/NavTop";
 import MetaCard from "@/components/studio/MetaCard";
 import MetaHorizontalCard from "@/components/studio/MetaHorizontalCard";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
@@ -67,7 +67,7 @@ export default function explorer() {
       <>
         <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <NavTabs
+            <Tabs
               width="15%"
               options={dashboardNav}
               gstyle={{ fontSize: `${style.font.h5}` }}
@@ -99,7 +99,7 @@ export default function explorer() {
   };
   return (
     <>
-      <FlexWindow leftElem={<Nav />} rightElem={renderBody()}></FlexWindow>
+      <FlexWindow leftElem={<NavLeft />} rightElem={renderBody()}></FlexWindow>
       {/* <Navigation /> */}
     </>
   );

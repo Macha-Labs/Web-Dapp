@@ -81,6 +81,10 @@ const theme = extendTheme({
         color: "#132041",
         paddingLeft: "5px",
       },
+      ".css-12793pk >option": {
+        background: `${style.input.bg.default}!important`,
+        border: "0px",
+      },
     },
   },
   textStyles: {},

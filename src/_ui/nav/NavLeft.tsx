@@ -9,7 +9,7 @@ import FlexRow from "../flex/FlexRow";
 import { style } from "@/styles/StyledConstants";
 import FlexColumn from "../flex/FlexColumn";
 
-const Nav = (props: any) => {
+const NavLeft = (props: any) => {
   const router = useRouter();
 
   return (
@@ -128,4 +128,4 @@ const Nav = (props: any) => {
     </>
   );
 };
-export default Nav;
+export default NavLeft;

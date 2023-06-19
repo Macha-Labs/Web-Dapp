@@ -1,15 +1,15 @@
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import NavBlock from "@/_ui/nav/NavBlock";
-import NavTabs from "@/_ui/nav/NavTabs";
-import Navigation from "@/_ui/nav/Navigation";
+import Tabs from "@/_ui/tabs/Tabs";
+import NavTop from "@/_ui/nav/NavTop";
 import MetaOverview from "@/components/studio/MetaOverview";
 import MetaSettings from "@/components/studio/MetaSettings";
 import { style } from "@/styles/StyledConstants";
 import { useEffect, useState } from "react";
 import MetaCurator from "@/components/studio/MetaCurator";
 import MetaPlayground from "@/components/studio/MetaPlayground";
-import Nav from "@/_ui/nav/Nav";
+import NavLeft from "@/_ui/nav/NavLeft";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import useUserStore from "@/store/useUserStore";
@@ -19,6 +19,7 @@ import { Heading } from "@chakra-ui/react";
 import useMetaStore from "@/store/useMetaStore";
 import useMeta from "@/hooks/studio/useMeta";
 import useAuthStore from "@/store/useAuthStore";
+import MetaNewPlayground from "@/components/studio/MetaNewPlayground";
 
 const CreateMeta = () => {
   const $userMetasMap = useUserStore((state: any) => state.userMetasMap);
@@ -84,7 +85,7 @@ const CreateMeta = () => {
       case "Curators":
         return <MetaCurator />;
       case "Playground":
-        return <MetaPlayground id={currentMetaId} />;
+        return <MetaNewPlayground id={currentMetaId} />;
       case "Settings":
         return <MetaSettings metaInfo={$userMetasMap[currentMetaId]} />;
       default:
@@ -108,7 +109,7 @@ const CreateMeta = () => {
                 {$meta?.data?.name}
               </Heading>
             </FlexRow>
-            <NavTabs
+            <Tabs
               width="40%"
               // gstyle={{ fontSize: `${style.font.h5}`, fontWeight: "600" }}
               // options={createMetaOptions}
@@ -130,7 +131,7 @@ const CreateMeta = () => {
     );
   };
 
-  return <FlexWindow leftElem={<Nav />} rightElem={renderBody()}></FlexWindow>;
+  return <FlexWindow view="col" bodyElem={renderBody()}></FlexWindow>;
 };
 
 export default CreateMeta;

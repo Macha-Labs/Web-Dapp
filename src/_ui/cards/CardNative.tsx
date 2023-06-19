@@ -7,6 +7,8 @@ type Props = {
   width?: string;
   children?: any;
   margin?: string;
+  border?: any;
+  bg?: any;
 };
 
 const CardNative = ({
@@ -16,6 +18,8 @@ const CardNative = ({
   onClick,
   margin,
   children,
+  border,
+  bg,
 }: Props) => {
   return (
     <div
@@ -24,8 +28,8 @@ const CardNative = ({
         width: width ? `${width}` : "100%",
         padding: padding ? `${padding}` : `${style.card.padding.overview}`,
         borderRadius: ` ${style.card.borderRadius.default}`,
-        border: `${style.card.border.default}`,
-        background: ` ${style.card.bg.overview}`,
+        border: `${border ? border : style.card.border.default}`,
+        background: ` ${bg ? bg : style.card.bg.overview}`,
         boxShadow: ` ${style.card.shadow.default} `,
         cursor: "pointer",
         margin: margin ? style?.margin[margin] : "0rem",

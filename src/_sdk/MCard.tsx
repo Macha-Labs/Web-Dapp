@@ -10,9 +10,10 @@ type Props = {
   title?: string;
   image?: string;
   floorPrice?: string;
+  description?: string;
 };
 
-const MCard = ({ image, title, floorPrice }: Props) => {
+const MCard = ({ image, title, floorPrice, description }: Props) => {
   return (
     <Box
       borderRadius={gStyle.card.borderRadius.default}
@@ -28,8 +29,10 @@ const MCard = ({ image, title, floorPrice }: Props) => {
         <TagNative size="sm" value="Live Now" />
         <IconBase slug="icon-close" style={{ marginBottom: "sm" }} />
       </FlexRow>
-      <div style={{ height: "60%", display: "flex", justifyContent: "center" }}>
-        {image && (
+      {image && (
+        <div
+          style={{ height: "60%", display: "flex", justifyContent: "center" }}
+        >
           <Image
             src={image}
             alt="coverImage"
@@ -37,8 +40,8 @@ const MCard = ({ image, title, floorPrice }: Props) => {
             objectFit={"cover"}
             borderRadius={gStyle.card.borderRadius.default}
           />
-        )}
-      </div>
+        </div>
+      )}
       <FlexColumn height="auto" vrAlign="flex-start">
         <Text
           className="m-b-0"
@@ -48,9 +51,20 @@ const MCard = ({ image, title, floorPrice }: Props) => {
         >
           {title}
         </Text>
-        <Text fontSize={"xs"} fontWeight={600} color={"#246bfb"}>
-          <span style={{ color: "#7c7c7c" }}>Floor Price :</span> {floorPrice}
-        </Text>
+        {description && (
+          <Text
+            className="m-b-0"
+            fontSize={"md"}
+            marginTop={gStyle.margin["sm"]}
+          >
+            {description}
+          </Text>
+        )}
+        {floorPrice && (
+          <Text fontSize={"xs"} fontWeight={600} color={"#246bfb"}>
+            <span style={{ color: "#7c7c7c" }}>Floor Price :</span> {floorPrice}
+          </Text>
+        )}
       </FlexColumn>
     </Box>
   );

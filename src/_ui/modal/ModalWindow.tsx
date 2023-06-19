@@ -1,20 +1,33 @@
-import { Modal, ModalOverlay, ModalContent, ModalBody, ModalHeader, ModalCloseButton } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalHeader,
+  ModalFooter,
+  ModalCloseButton,
+} from "@chakra-ui/react";
 
-const ModalWindow = (props: any) => {
-    return <>
-        <Modal onClose={props.event?.onClose} isOpen={props.event?.isOpen} size='xl'>
-                <ModalOverlay />
-                {props.header && <ModalHeader>
-                    {props?.header}
-                    <ModalCloseButton></ModalCloseButton>
-                </ModalHeader>}
-                <ModalContent >
-                    <ModalBody className="hidescroll" style={{ padding: "0px" }}>
-                        {props.children}
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
-    </>
-}
+type Props = {
+  event: any;
+  size?: string;
+  header?: any;
+  childrenComponent?: any;
+  footer?: any;
+  children?: any;
+};
+
+const ModalWindow = ({ event, size, header, footer, children }: Props) => {
+  return (
+    <Modal onClose={event?.onClose} isOpen={event?.isOpen} size="xl">
+      <ModalOverlay />
+      <ModalContent>
+        {header && <ModalHeader>{header}</ModalHeader>}
+        <ModalBody>{children}</ModalBody>
+        {footer && <ModalFooter>{footer}</ModalFooter>}
+      </ModalContent>
+    </Modal>
+  );
+};
 
 export default ModalWindow;

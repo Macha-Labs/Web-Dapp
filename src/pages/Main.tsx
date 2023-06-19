@@ -1,6 +1,6 @@
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import ModalWindow from "@/_ui/modal/ModalWindow";
-import Nav from "@/_ui/nav/Nav";
+import NavLeft from "@/_ui/nav/NavLeft";
 import AuthCard from "@/components/auth/AuthCard";
 // import ChatList from "@/components/chat/ChatList";
 // import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
@@ -35,7 +35,7 @@ function Main() {
       {$isConnected && (
         <FlexWindow>
           <div className="left">
-            <Nav />
+            <NavLeft />
           </div>
 
           <div className="right">

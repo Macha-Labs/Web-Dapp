@@ -12,10 +12,13 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { polygon, filecoinHyperspace } from "wagmi/chains";
+import { polygon, filecoinCalibration } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
-const { chains, provider } = configureChains([filecoinHyperspace], [publicProvider()]);
+const { chains, provider } = configureChains(
+  [filecoinCalibration],
+  [publicProvider()]
+);
 
 const { connectors } = getDefaultWallets({
   appName: "MetaWork",

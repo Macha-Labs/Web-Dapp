@@ -14,7 +14,7 @@ type Props = {
   width?: string;
 };
 
-const NavTabs = ({ options, gstyle, icon, value, onChange, width }: Props) => {
+const Tabs = ({ options, gstyle, icon, value, onChange, width }: Props) => {
   const router = useRouter();
 
   return (
@@ -40,7 +40,7 @@ const NavTabs = ({ options, gstyle, icon, value, onChange, width }: Props) => {
                 >
                   <FlexRow>
                     {icon && <IconImage slug={icon.slug} />}
-                    <Text fontSize={"2xl"} fontWeight={600} className="m-b-0">
+                    <Text fontSize={"lg"} fontWeight={600} className="m-b-0">
                       {option.value}
                     </Text>
                   </FlexRow>
@@ -63,4 +63,4 @@ const NavTabs = ({ options, gstyle, icon, value, onChange, width }: Props) => {
   );
 };
 
-export default NavTabs;
+export default Tabs;

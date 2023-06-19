@@ -1,4 +1,12 @@
 const GlobalIcons: any = {
+  "icon-dataNetwork":
+    "/icons/svg/Base-blue/base-blue-datanetwork.svg?updatedAt=1687155834445",
+  "icon-adsNetwork":
+    "/icons/svg/Base-blue/base-blue-adsNetwork.svg?updatedAt=1687155834666",
+  "icon-disconnectWallet":
+    "/icons/svg/Base-blue/base-blue-walletDisconnect.svg?updatedAt=1686990403912",
+  "icon-switchWallet":
+    "/icons/svg/Base-blue/base-blue-walletChange.svg?updatedAt=1686990403648",
   "icon-filter":
     "/icons/svg/Base-blue/base-blue-filter.svg?updatedAt=1680783869195",
   "icon-compass":
@@ -7,6 +15,8 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base_icons/base-compass.svg?updatedAt=1680783662225",
   "icon-search":
     "/icons/svg/Base-blue/base-blue-search.svg?updatedAt=1680783899444",
+  "icon-search24":
+    "/icons/svg/Base-blue/base-blue-search24.svg?updatedAt=1687157119887",
   "icon-chat": "/icons/svg/Base-blue/base-blue-chat.svg",
   "icon-dashboard":
     "/icons/svg/Base-blue/base-blue-dasboardOutlined.svg?updatedAt=1686744027177",

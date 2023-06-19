@@ -88,7 +88,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
                 hookMeta.metaOverview.current["metaDescription"].value,
               image: cid,
               status: "PENDING",
-              owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
+              owner: "0x7FD154df41ec41336A86Ee53a3F7Fe886E80Efc7",
             };
             await initialiseNewMeta(metaCreateData);
             $loadOverviewData(metaCreateData);

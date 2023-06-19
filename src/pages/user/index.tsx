@@ -1,4 +1,4 @@
-import Nav from "@/_ui/nav/Nav";
+import NavLeft from "@/_ui/nav/NavLeft";
 import UserCard from "@/components/user/UserCard";
 import UserProfile from "@/components/user/UserProfile";
 import UserEdit from "@/components/user/UserEdit";
@@ -157,7 +157,7 @@ const User = () => {
       {authContext?.user?.lens?.id && (
         <FlexWindow>
           <div className="left">
-            <Nav />
+            <NavLeft />
           </div>
           <div className="right">
             <Template />

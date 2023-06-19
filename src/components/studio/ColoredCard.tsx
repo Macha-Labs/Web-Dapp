@@ -61,7 +61,9 @@ export default function ColoredCard({
               {heading}
             </Text>
           </FlexRow>
-          <Text className="m-t-0-5">{truncateString(description, 50)}</Text>
+          <Text className="m-t-0-5" fontWeight={200} fontSize={"sm"}>
+            {truncateString(description, 110)}
+          </Text>
           {/* <FlexRow hrAlign="flex-start" width="100%" height="50px">
             <TagNative
               value="Tag 1"

@@ -4,10 +4,10 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import ChakraTable from "@/_ui/list/ChakraTable";
-import Nav from "@/_ui/nav/Nav";
+import NavLeft from "@/_ui/nav/NavLeft";
 import NavBlock from "@/_ui/nav/NavBlock";
-import NavTabs from "@/_ui/nav/NavTabs";
-import Navigation from "@/_ui/nav/Navigation";
+import Tabs from "@/_ui/tabs/Tabs";
+import NavTop from "@/_ui/nav/NavTop";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import { StyledCard, StyledCol } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
@@ -30,7 +30,7 @@ export default function DashBoard() {
       <>
         <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <NavTabs
+            <Tabs
               options={dashboardNav}
               gstyle={{ fontSize: `${style.fontH5}`, fontWeight: "600" }}
             />
@@ -113,5 +113,7 @@ export default function DashBoard() {
       </>
     );
   };
-  return <FlexWindow leftElem={<Nav />} rightElem={renderBody()}></FlexWindow>;
+  return (
+    <FlexWindow leftElem={<NavLeft />} rightElem={renderBody()}></FlexWindow>
+  );
 }

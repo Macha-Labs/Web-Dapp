@@ -24,6 +24,8 @@ type Props = {
   img?: string;
   leftIcon?: string;
   rightIcon?: string;
+  marginLeft?: string;
+  marginRight?: string;
 };
 
 const ButtonMenu = ({
@@ -37,44 +39,64 @@ const ButtonMenu = ({
   img,
   leftIcon,
   rightIcon,
+  marginLeft,
+  marginRight,
 }: Props) => {
   return (
-    <Menu>
-      <MenuButton
-        variant={"state_default_hover"}
-        as={Button}
-        style={{ borderRadius: `${style.card.borderRadius.button}` }}
-        rightIcon={
-          icon ? (
-            <IconBase slug={icon.slug} size={icon.size} style={icon.style} />
-          ) : (
-            <></>
-          )
-        }
-      >
-        <FlexRow>
-          {avatar && <img src={avatar} />}
-          <Text marginLeft={style.button.margin.default} className="mb-0">
-            {text}
-          </Text>
-        </FlexRow>
-      </MenuButton>
-      <MenuList>
-        {options.map((item, index) => {
-          return (
-            <MenuItem
-              key={index}
-              onClick={item.onClick ? item.onClick : () => {}}
+    <div style={{ marginLeft: `${marginLeft}`, marginRight: `${marginRight}` }}>
+      <Menu>
+        <MenuButton
+          variant={"state_default_hover"}
+          as={Button}
+          style={{
+            borderRadius: `${style.card.borderRadius.button}`,
+          }}
+          rightIcon={
+            icon ? (
+              <IconBase slug={icon.slug} size="sm" style={icon.style} />
+            ) : (
+              <></>
+            )
+          }
+          height={"35px"}
+        >
+          <FlexRow>
+            {avatar && <img src={avatar} />}
+            <Text
+              marginLeft={style.button.margin.default}
+              fontSize={"sm"}
+              className="mb-0"
             >
-              {item.img && <img src={item.img} />}
-              {item.leftIcon && <IconImage slug={item.leftIcon} />}
-              {item.value}
-              {item.rightIcon && <IconImage slug={item.rightIcon} />}
-            </MenuItem>
-          );
-        })}
-      </MenuList>
-    </Menu>
+              {text}
+            </Text>
+          </FlexRow>
+        </MenuButton>
+        <MenuList>
+          {options.map((item, index) => {
+            return (
+              <MenuItem
+                key={index}
+                onClick={item.onClick ? item.onClick : () => {}}
+              >
+                <FlexRow hrAlign="space-between">
+                  {item.img && (
+                    <img
+                      style={{ height: "25px", width: "25px" }}
+                      src={item.img}
+                    />
+                  )}
+                  {item.leftIcon && <IconImage slug={item.leftIcon} />}
+                  <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
+                    {item.value}
+                    {item.rightIcon && <IconImage slug={item.rightIcon} />}
+                  </FlexRow>
+                </FlexRow>
+              </MenuItem>
+            );
+          })}
+        </MenuList>
+      </Menu>
+    </div>
   );
 };
 

@@ -6,10 +6,10 @@ export const helperIPFS = (ipfsLink: any) => {
 };
 
 export const truncateString = (address: any, size: any) => {
-  if (address) {
+  if (address.length > size) {
     return address.slice(0, size) + "...";
   }
-  return "";
+  return address;
 };
 
 export const truncateAddress = (address: any) => {

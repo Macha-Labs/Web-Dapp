@@ -15,6 +15,8 @@ export const commonStyle: any = {
     md: "1.5rem",
     lg: "1.8rem",
     xl: "2.4rem",
+    nav: "70px",
+    subnav: "60px",
   },
   padding: {
     xxs: "0.5rem",
@@ -52,11 +54,12 @@ export const darkStyle = {
     paddingTop: "80px",
   },
   nav: {
-    width: "5%",
-    height: "100vH",
+    width: "100%",
+    height: "75px",
     bg: { default: "#00040d" },
     border: { default: "2px solid #0F172E" },
     padding: "1% 6%",
+    margin: "75px",
   },
   list: {
     padding: "5px",
@@ -198,7 +201,7 @@ export const darkStyle = {
       "3xs": "10",
       "2xs": "12",
       xs: "16",
-      sm: "18",
+      sm: "18px",
       md: "20",
       lg: "25",
       xl: "35",

@@ -6,9 +6,10 @@ import IconBase from "../icons/IconsBase";
 type Props = {
   children: any;
   back?: any;
+  marginTop?: any;
 };
 
-export default function NavBlock({ children, back }: Props) {
+export default function NavBlock({ children, back, marginTop }: Props) {
   return (
     <div
       className=""
@@ -21,6 +22,7 @@ export default function NavBlock({ children, back }: Props) {
         height: "60px",
         top: 0,
         zIndex: 1,
+        marginTop: `${marginTop ? marginTop : "0px"}`,
       }}
     >
       <FlexRow>
