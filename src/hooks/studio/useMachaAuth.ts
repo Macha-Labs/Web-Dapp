@@ -36,11 +36,11 @@ const useMachaAuth = () => {
 
   const auth = async () => {
     const macha = new Macha({
-      address: "0x7FD154df41ec41336A86Ee53a3F7Fe886E80Efc7",
+      address: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
       signer: browserSigner,
     });
     await macha.connectClient({
-      owner: "0x7FD154df41ec41336A86Ee53a3F7Fe886E80Efc7",
+      owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
       signer: browserSigner,
     });
     console.log("Macha init ", macha);
@@ -55,7 +55,7 @@ const useMachaAuth = () => {
   }, [$address, browserSigner]);
 
   const fetchingMetas = async () => {
-    fetchPendingMeta("0x7FD154df41ec41336A86Ee53a3F7Fe886E80Efc7").then(
+    fetchPendingMeta("0x4eff290c1a734411b39aaa96eabe1e25f0e223ae").then(
       (res) => {
         console.log("response penging", res);
         const allMetas = [...$macha?.client?.metasOwned?.data, ...res.data];

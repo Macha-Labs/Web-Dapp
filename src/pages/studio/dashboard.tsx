@@ -31,7 +31,7 @@ import ApiCreateModal from "@/components/studio/ApiCreateModal";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
-  const hookMeta = useMetaCreate();
+  const hookMetaCreate = useMetaCreate();
   const $macha = useAuthStore((state: any) => state.macha);
   const $address = useAuthStore((state: any) => state.address);
   const router = useRouter();
@@ -339,7 +339,7 @@ const DashBoard = () => {
           )}
         </FlexBody>
         {/* </FlexWindow> */}
-        <ApiCreateModal modal={metaModal} hookMeta={hookMeta} />
+        <ApiCreateModal modal={metaModal} hookMetaCreate={hookMetaCreate} />
         {/* <MetaCreateModal hookMeta={hookMeta} metaModal={metaModal} /> */}
       </>
     );

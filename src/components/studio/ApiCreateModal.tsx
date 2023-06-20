@@ -15,10 +15,10 @@ import { useState } from "react";
 
 type Props = {
   modal: any;
-  hookMeta?: any;
+  hookMetaCreate?: any;
 };
 
-const ApiCreateModal = ({ modal, hookMeta }: Props) => {
+const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
   const $meta = useMetaStore((state: any) => state.meta);
   const hookMachaApi = useMachaApi();
   const $loadOverviewData = useMetaStore(
@@ -31,7 +31,13 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
     switch (field?.type) {
       case "input":
         return (
-          <InputLabel labelText={field?.title} inputType={field?.inputType} />
+          <InputLabel
+            elementRef={(element: any) =>
+              (hookMetaCreate.apiDataRef.current["requestEndpoint"] = element)
+            }
+            labelText={field?.title}
+            inputType={field?.inputType}
+          />
         );
       case "select":
         return (
@@ -48,7 +54,12 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
             >
               {field?.title}
             </Heading>
-            <InputSelect options={field?.options} />
+            <InputSelect
+              elementRef={(element: any) =>
+                (hookMetaCreate.apiDataRef.current["requestMethod"] = element)
+              }
+              options={field?.options}
+            />
           </FlexColumn>
         );
     }
@@ -71,17 +82,12 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
             width="100%"
             onClick={async (e: any) => {
               e.preventDefault();
-              //   const cid = await deploytoLightHouse(imageEvent);
-              let metaCreateData = {
-                name: hookMeta.metaOverview.current["metaName"].value,
-                description:
-                  hookMeta.metaOverview.current["metaDescription"].value,
-                // image: cid,
-                status: "PENDING",
-                owner: "0x7FD154df41ec41336A86Ee53a3F7Fe886E80Efc7",
-              };
-              await initialiseNewMeta(metaCreateData);
-              $loadOverviewData(metaCreateData);
+              await hookMetaCreate.publishApi();
+              // console.log("Logging ", hookMetaCreate.apiDataRef.current["name"].value,
+              // hookMetaCreate.apiDataRef.current["description"].value,
+              // hookMetaCreate.apiDataRef.current["requestType"].value,
+              // hookMetaCreate.apiDataRef.current["requestMethod"].value,
+              // hookMetaCreate.apiDataRef.current["requestEndpoint"].value);
             }}
           >
             Create API
@@ -97,7 +103,7 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
           <FlexColumn hrAlign="space-between" height="35%">
             <InputLabel
               elementRef={(element: any) =>
-                (hookMeta.metaOverview.current["metaName"] = element)
+                (hookMetaCreate.apiDataRef.current["name"] = element)
               }
               inputType="text"
               defaultValue={$meta.name}
@@ -106,7 +112,7 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookMeta.metaOverview.current["metaDescription"] = element)
+                (hookMetaCreate.apiDataRef.current["description"] = element)
               }
               inputType="text"
               labelText="Description"
@@ -145,6 +151,8 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
                           : style.card.bg.overview
                       }
                       onClick={() => {
+                        hookMetaCreate.apiDataRef.current["requestType"] =
+                          {value: item.slug};
                         console.log("clicked", item.slug);
                         setApiType(item.slug);
                       }}
