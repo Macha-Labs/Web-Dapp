@@ -2,13 +2,12 @@ import { createContext, useEffect, useState } from "react";
 import { logger } from "../helpers/logger";
 import { User$ } from "../schema/user";
 // import { removeAsyncData } from "../service/AsyncStorageService";
-import useUserStore from "@/store/useUserStore";
 import useAuthStore from "@/store/useAuthStore";
 import { fetchSigner, watchAccount } from "@wagmi/core";
 import { useAccount, useDisconnect } from "wagmi";
 // import { putStreamToken } from "../service/StreamService";
-import { findOrCreateUser } from "../service/UserService";
 import useMachaAuth from "@/hooks/studio/useMachaAuth";
+import { findOrCreateUser } from "../service/UserService";
 
 export type AuthContextType = {
   signer: any | undefined;
@@ -64,17 +63,6 @@ const AuthProvider = ({ children }: any) => {
           "Response from findOrCreateUser",
           [data]
         );
-        // putStreamToken({ userAddress: address.toLowerCase() }).then(
-        //   (res: any) => {
-        //     logger(
-        //       "auth",
-        //       "useEffect[user.db.id]",
-        //       "response from putStreamToken api",
-        //       [res]
-        //     );
-        //     user.setDb(res);
-        //   }
-        // );
       });
     }
   };
@@ -109,6 +97,7 @@ const AuthProvider = ({ children }: any) => {
 
   useEffect(() => {
     logger("auth", "useEffect[address]", "address", [address]);
+    console.log("Connected address is ", address);
     if (address) {
       $loadAddress(address.toLowerCase());
       _fetchSignerFromWagmi();

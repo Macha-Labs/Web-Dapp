@@ -3,13 +3,36 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import InputLabel from "@/_ui/input/InputLabel";
+import useMachaAuth from "@/hooks/studio/useMachaAuth";
 import { style } from "@/styles/StyledConstants";
 import { useRouter } from "next/router";
+import NavTop from "@/_ui/nav/NavTop";
+import NavButton from "@/components/buttons/NavButton";
+import WalletButton from "@/components/buttons/WalletButton";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
+import useAuthStore from "@/store/useAuthStore";
+
 
 const client = () => {
   const router = useRouter();
+  const hookMachaAuth = useMachaAuth();
+  const $address = useAuthStore((state: any) => state.address);
+
   return (
     <FlexBody>
+      <NavTop
+        rightElem={
+          <FlexRow width="fit-content">
+            <NavButton
+              marginRight={style.margin["sm"]}
+              marginLeft={style.margin["sm"]}
+            />
+            {$address ? <WalletButton /> : <ConnectWalletButton />}
+          </FlexRow>
+        }
+      />
+    );
+
       <FlexColumn
         width="100%"
         hrAlign="space-between"
@@ -19,18 +42,27 @@ const client = () => {
       >
         <FlexColumn width="100%">
           <InputLabel
+            elementRef={(element: any) =>
+              (hookMachaAuth.clientDataRef.current["name"] = element)
+            }
             inputType="text"
             //   defaultValue={}
             labelText="Name"
             placeholder="Name"
           />
           <InputLabel
+            elementRef={(element: any) =>
+              (hookMachaAuth.clientDataRef.current["description"] = element)
+            }
             inputType="text"
             labelText="Description"
             placeholder="Description"
             marginTop="sm"
           />
           <InputLabel
+            elementRef={(element: any) =>
+              (hookMachaAuth.clientDataRef.current["admins"] = element)
+            }
             inputType="textArea"
             labelText="Admins"
             placeholder="Admins"
@@ -49,7 +81,8 @@ const client = () => {
           <ButtonNative
             variant="state_brand"
             onClick={() => {
-              router.push("/studio/dashboard");
+              hookMachaAuth.registerClient();
+              // router.push("/studio/dashboard");
             }}
           >
             Create

@@ -1,15 +1,18 @@
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
 import Loader from "@/_ui/loader/Loader";
-import NavLeft from "@/_ui/nav/NavLeft";
 import NavBlock from "@/_ui/nav/NavBlock";
+import NavTop from "@/_ui/nav/NavTop";
 import Tabs from "@/_ui/tabs/Tabs";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
+import NavButton from "@/components/buttons/NavButton";
+import WalletButton from "@/components/buttons/WalletButton";
+import ApiCreateModal from "@/components/studio/ApiCreateModal";
+import ColoredCard from "@/components/studio/ColoredCard";
 import MetaCard from "@/components/studio/MetaCard";
-import MetaCreateModal from "@/components/studio/MetaCreateModal";
 import MetaHorizontalCard from "@/components/studio/MetaHorizontalCard";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import { displayImage } from "@/helpers/storage/lightHouseStorage";
@@ -18,17 +21,9 @@ import { fetchAllMetas } from "@/service/StudioService";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
-import { Button, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import NavTop from "@/_ui/nav/NavTop";
-import WalletButton from "@/components/buttons/WalletButton";
-import NavTabs from "@/components/tabs/NavTabs";
-import NavButton from "@/components/buttons/NavButton";
-import ColoredCard from "@/components/studio/ColoredCard";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import ApiCreateModal from "@/components/studio/ApiCreateModal";
-import ClientCreateModal from "@/components/studio/ClientCreateModal";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
@@ -217,15 +212,6 @@ const DashBoard = () => {
               </FlexRow>
               <MetaTagFilter />
             </FlexRow>
-
-            {/* <ButtonMenu
-              text="Sort By"
-              options={sortOptions}
-              icon={{
-                slug: "icon-chevron-down",
-                marginLeft: "md",
-              }}
-            /> */}
             <ButtonNative
               size="sm"
               text="Create API"

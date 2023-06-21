@@ -3,11 +3,13 @@ import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { Macha } from "@metaworklabs/macha-dev-sdk/lib";
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { fetchSigner, watchAccount } from "@wagmi/core";
 
 declare let window: any;
 
 const useMachaAuth = () => {
+  const clientDataRef = useRef<any>({});
   const $address = useAuthStore((state: any) => state.address);
   const $signer = useAuthStore((state: any) => state.signer);
   const $macha = useAuthStore((state: any) => state.macha);
@@ -74,6 +76,7 @@ const useMachaAuth = () => {
     );
     // return res;
   };
+
   useEffect(() => {
     console.log("Logging client ", $macha.client); // getting the right value
     console.log("Logging client metasOwned", $macha.client?.metasOwned); // coming null
@@ -82,6 +85,27 @@ const useMachaAuth = () => {
     console.log("pending metas", pending);
   }, [$macha]);
 
-  return {};
+  const registerClient = async() => {
+    const signer = await fetchSigner();
+    console.log("Current signer ", signer);
+    const clientAuthPayload = {
+      owner: $address ? $address.toLowerCase() : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
+      signer: $signer
+    }
+    const clientData = {
+      name: clientDataRef.current["name"].value,
+      description: clientDataRef.current["description"].value,
+      image: "",
+      admins: clientDataRef.current["admins"].value
+    }
+
+    console.log(clientAuthPayload, clientData);
+    await $macha.createClient(clientAuthPayload, clientData);
+  }
+
+  return {
+    clientDataRef: clientDataRef,
+    registerClient: registerClient
+  };
 };
 export default useMachaAuth;
