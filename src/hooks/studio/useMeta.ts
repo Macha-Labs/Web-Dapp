@@ -1,5 +1,5 @@
 import useMetaStore from "@/store/useMetaStore";
-import { Meta } from "@metaworklabs/macha-dev-sdk/lib";
+import { Meta, Api } from "@metaworklabs/macha-dev-sdk/lib";
 
 const useMeta = () => {
   const $loadMeta = useMetaStore((state: any) => state.loadMeta);
@@ -25,7 +25,21 @@ const useMeta = () => {
     }
   };
 
-  return { metaInit: metaInit };
+  const apiInit = async(data: any) => {
+    try {
+      const apiClass = new Api(data?.id);
+      console.log("Api class ", apiClass);
+      const apiIpfs: any = await apiClass.fetchApiIpfs();
+      console.log("apiIpfs ", apiIpfs);
+    } catch (error) {
+      console.log("Error in initializing Api class");
+    }
+  }
+
+  return { 
+    metaInit: metaInit,
+    apiInit: apiInit
+  };
 };
 
 export default useMeta;

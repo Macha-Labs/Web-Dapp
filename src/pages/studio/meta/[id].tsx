@@ -1,47 +1,58 @@
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavBlock from "@/_ui/nav/NavBlock";
 import Tabs from "@/_ui/tabs/Tabs";
-import NavTop from "@/_ui/nav/NavTop";
+import MetaCurator from "@/components/studio/MetaCurator";
+import MetaNewPlayground from "@/components/studio/MetaNewPlayground";
 import MetaOverview from "@/components/studio/MetaOverview";
 import MetaSettings from "@/components/studio/MetaSettings";
-import { style } from "@/styles/StyledConstants";
-import { useEffect, useState } from "react";
-import MetaCurator from "@/components/studio/MetaCurator";
-import MetaPlayground from "@/components/studio/MetaPlayground";
-import NavLeft from "@/_ui/nav/NavLeft";
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import FlexColumn from "@/_ui/flex/FlexColumn";
-import useUserStore from "@/store/useUserStore";
-import { useRouter } from "next/router";
 import { getItemFromLocal, setItemOnLocal } from "@/helpers";
-import { Heading } from "@chakra-ui/react";
-import useMetaStore from "@/store/useMetaStore";
 import useMeta from "@/hooks/studio/useMeta";
 import useAuthStore from "@/store/useAuthStore";
-import MetaNewPlayground from "@/components/studio/MetaNewPlayground";
+import useMetaStore from "@/store/useMetaStore";
+import useUserStore from "@/store/useUserStore";
+import { style } from "@/styles/StyledConstants";
+import { Heading } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const CreateMeta = () => {
   const $userMetasMap = useUserStore((state: any) => state.userMetasMap);
+  const $userApisMap = useUserStore((state: any) => state.userApisMap);
   const $meta = useMetaStore((state: any) => state.meta);
   const [currentMetaId, setCurrentMetaId] = useState<any>();
+  const [currentApiId, setCurrentApiId] = useState<any>();
   const hookMeta = useMeta();
   const router = useRouter();
   const $address = useAuthStore((state: any) => state.address);
 
   useEffect(() => {
-    if ($userMetasMap) {
-      console.log("logging the router query", router.query);
-      let currentId: any = router?.query?.id;
-      let storedMetaId: any = getItemFromLocal("currentMetaId");
-      if (currentId && currentId != storedMetaId) {
-        setItemOnLocal("currentMetaId", router?.query?.id);
-        setCurrentMetaId(currentId);
-        hookMeta.metaInit($userMetasMap[currentId]);
+    // if ($userMetasMap) {
+    //   console.log("logging the router query", router.query);
+    //   let currentId: any = router?.query?.id;
+    //   let storedMetaId: any = getItemFromLocal("currentMetaId");
+    //   if (currentId && currentId != storedMetaId) {
+    //     setItemOnLocal("currentMetaId", router?.query?.id);
+    //     setCurrentMetaId(currentId);
+    //     hookMeta.metaInit($userMetasMap[currentId]);
+    //   } else {
+    //     console.log("storedMetaid", storedMetaId);
+    //     setCurrentMetaId(storedMetaId);
+    //     hookMeta.metaInit($userMetasMap[storedMetaId]);
+    //   }
+    // }
+    if ($userApisMap) {
+      let currentApiId: any = router?.query?.id;
+      let storedApiId: any = getItemFromLocal("currentApiId");
+      if (currentApiId && currentApiId != storedApiId) {
+        setItemOnLocal("currentApiId", router?.query?.id);
+        setCurrentApiId(currentApiId);
+        hookMeta.apiInit($userApisMap[currentApiId]);
       } else {
-        console.log("storedMetaid", storedMetaId);
-        setCurrentMetaId(storedMetaId);
-        hookMeta.metaInit($userMetasMap[storedMetaId]);
+        console.log("storedApiId", storedApiId);
+        setCurrentApiId(storedApiId);
+        hookMeta.apiInit($userApisMap[storedApiId]);
       }
     }
   }, [$userMetasMap]);
@@ -81,13 +92,13 @@ const CreateMeta = () => {
   const renderComponent = () => {
     switch (selectedTab) {
       case "Overview":
-        return <MetaOverview metaInfo={$userMetasMap[currentMetaId]} />;
+        return <MetaOverview metaInfo={$userApisMap[currentApiId]} />;
       case "Curators":
         return <MetaCurator />;
       case "Playground":
-        return <MetaNewPlayground id={currentMetaId} />;
+        return <MetaNewPlayground id={currentApiId} />;
       case "Settings":
-        return <MetaSettings metaInfo={$userMetasMap[currentMetaId]} />;
+        return <MetaSettings metaInfo={$userApisMap[currentApiId]} />;
       default:
         return null;
     }
