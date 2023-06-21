@@ -105,7 +105,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
     console.log("deleting", index);
     // setTableRows(tableRows.filter((_, i) => i !== index));
     const beforeArray = tableRows.slice(0, index);
-    const afterArray = tableRows.slice(0, 2);
+    const afterArray = tableRows.slice(index + 1);
 
     console.log(
       "before",
@@ -121,6 +121,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
   const handleAddRow = () => {
     console.log(tableRows.length);
     const currentIndex = tableRows.length;
+    // console.log(Date.now( ));
     const newRow = [
       <InputLabel id={Date.now()} inputType="text" />,
       "Meta_war",
