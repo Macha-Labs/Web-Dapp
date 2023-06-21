@@ -31,6 +31,7 @@ function TableNative({ th = [], tr = [], tableWidth, align = "left" }: Props) {
           <Tr
             css={{
               background: style.card.bg.overview,
+              borderColor: "#14244b",
             }}
           >
             {th.map((item: any, index: number) => {
