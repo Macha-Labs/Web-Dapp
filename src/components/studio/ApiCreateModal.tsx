@@ -10,7 +10,6 @@ import TableNative from "@/_ui/list/TableNative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import useMachaApi from "@/hooks/studio/useMachaApi";
 import useMetaStore from "@/store/useMetaStore";
-import { StyledCard } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
 import { Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
@@ -23,45 +22,8 @@ type Props = {
 const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
   const $meta = useMetaStore((state: any) => state.meta);
   const hookMachaApi = useMachaApi();
-  const $loadOverviewData = useMetaStore(
-    (state: any) => state.loadOverviewData
-  );
 
-  const [tableRows, setTableRows] = useState([
-    [
-      <InputLabel inputType="text" />,
-      "Meta_war",
-      <IconImage
-        slug="icon-delete-blue"
-        size="sm"
-        onClick={() => {
-          // setTableRows(tableRows.splice(0, 1));
-        }}
-      />,
-    ],
-    [
-      "ABX_NAME1",
-      "Meta_war",
-      <IconImage
-        slug="icon-delete-blue"
-        size="sm"
-        onClick={() => {
-          // setTableRows(tableRows.splice(1, 1));
-        }}
-      />,
-    ],
-    [
-      "ABX_NAME",
-      "Meta_war",
-      <IconImage
-        slug="icon-delete-blue"
-        size="sm"
-        onClick={() => {
-          // setTableRows(tableRows.splice(2, 1));
-        }}
-      />,
-    ],
-  ]);
+  const [tableRows, setTableRows] = useState<any>([]);
 
   const renderForm = (field: any) => {
     switch (field?.type) {
@@ -103,32 +65,21 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
 
   const handleDeleteRow = (index: number) => {
     console.log("deleting", index);
-    // setTableRows(tableRows.filter((_, i) => i !== index));
-    const beforeArray = tableRows.slice(0, index);
-    const afterArray = tableRows.slice(0, 2);
-
-    console.log(
-      "before",
-      beforeArray,
-      "after",
-      afterArray,
-      "tablerow",
-      tableRows
-    );
-    setTableRows([...beforeArray, ...afterArray]);
+    const rows = [...tableRows];
+    rows.splice(index, 1);
+    console.log("Remaining rows ", rows);
+    setTableRows(rows);
   };
 
   const handleAddRow = () => {
     console.log(tableRows.length);
-    const currentIndex = tableRows.length;
     const newRow = [
-      <InputLabel id={Date.now()} inputType="text" />,
-      "Meta_war",
+      <InputLabel id={tableRows.length} defaultValue="" placeholder="Key" inputType="text" />,
+      `Meta_war ${tableRows.length}`,
     ];
     setTableRows([...tableRows, newRow]);
   };
 
-  console.log("inapicreatecompoent");
   return (
     <>
       <ModalWindow
@@ -275,7 +226,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
                 align="left"
                 tableWidth="100%"
                 th={["Key", "Value", "Action"]}
-                tr={tableRows.map((row, index) => [
+                tr={tableRows.map((row: any, index: number) => [
                   ...row.slice(0, 2),
                   <IconImage
                     slug="icon-delete-blue"
