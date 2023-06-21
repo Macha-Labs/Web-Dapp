@@ -49,18 +49,20 @@ const InputLabel = ({
         hrAlign="flex-start"
         marginTop={marginTop ? marginTop : ""}
       >
-        <Heading
-          as="h6"
-          size="sm"
-          bgGradient="linear(
+        {labelText && (
+          <Heading
+            as="h6"
+            size="sm"
+            bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-          bgClip="text"
-        >
-          {labelText}
-        </Heading>
+            bgClip="text"
+          >
+            {labelText}
+          </Heading>
+        )}
 
         <StyledCard className="w-100">
           {layoutInputs({

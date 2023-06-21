@@ -28,9 +28,11 @@ import NavButton from "@/components/buttons/NavButton";
 import ColoredCard from "@/components/studio/ColoredCard";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
+import ClientCreateModal from "@/components/studio/ClientCreateModal";
 
 const DashBoard = () => {
   const metaModal = useDisclosure();
+  const clientModal = useDisclosure();
   const hookMeta = useMetaCreate();
   const $macha = useAuthStore((state: any) => state.macha);
   const $address = useAuthStore((state: any) => state.address);
@@ -169,6 +171,7 @@ const DashBoard = () => {
   ];
 
   const renderBody = () => {
+    if (!$address) return null;
     return (
       <>
         <NavBlock marginTop={style.margin["nav"]}>
@@ -180,14 +183,14 @@ const DashBoard = () => {
               value={selectedNavTab}
               onChange={setSelectedNavTab}
             />
-            {/* <ButtonNative
+            <ButtonNative
               size="sm"
-              text="Create Metas"
+              text="Create Client"
               variant="state_brand"
               onClick={() => {
-                metaModal.onOpen();
+                clientModal.onOpen();
               }}
-            /> */}
+            />
           </FlexRow>
         </NavBlock>
 
@@ -339,6 +342,7 @@ const DashBoard = () => {
           )}
         </FlexBody>
         {/* </FlexWindow> */}
+        <ClientCreateModal modal={clientModal} hookMeta={hookMeta} />
         <ApiCreateModal modal={metaModal} hookMeta={hookMeta} />
         {/* <MetaCreateModal hookMeta={hookMeta} metaModal={metaModal} /> */}
       </>

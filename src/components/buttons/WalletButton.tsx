@@ -22,10 +22,16 @@ const WalletButton = () => {
       leftIcon: "icon-disconnectWallet",
       onClick: () => {},
     },
+    {
+      value: "Register as Publisher",
+      leftIcon: "icon-user",
+      onClick: () => {},
+    },
   ];
 
   return (
     <ButtonMenu
+      size={"md"}
       avatar="../assets/Avatar.svg"
       text={truncateAddress($address)}
       icon={{

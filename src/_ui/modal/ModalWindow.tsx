@@ -19,12 +19,18 @@ type Props = {
 
 const ModalWindow = ({ event, size, header, footer, children }: Props) => {
   return (
-    <Modal onClose={event?.onClose} isOpen={event?.isOpen} size="xl">
+    <Modal
+      onClose={event?.onClose}
+      isOpen={event?.isOpen}
+      size={size ? size : "xl"}
+    >
       <ModalOverlay />
       <ModalContent>
         {header && <ModalHeader>{header}</ModalHeader>}
         <ModalBody>{children}</ModalBody>
-        {footer && <ModalFooter>{footer}</ModalFooter>}
+        {footer && (
+          <ModalFooter justifyContent={"flex-start"}>{footer}</ModalFooter>
+        )}
       </ModalContent>
     </Modal>
   );

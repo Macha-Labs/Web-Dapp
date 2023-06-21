@@ -9,6 +9,10 @@ type Props = {
   margin?: string;
   border?: any;
   bg?: any;
+  marginLeft?: any;
+  marginRight?: any;
+  marginTop?: any;
+  marginBottom?: any;
 };
 
 const CardNative = ({
@@ -20,6 +24,10 @@ const CardNative = ({
   children,
   border,
   bg,
+  marginLeft,
+  marginRight,
+  marginTop,
+  marginBottom,
 }: Props) => {
   return (
     <div
@@ -33,6 +41,10 @@ const CardNative = ({
         boxShadow: ` ${style.card.shadow.default} `,
         cursor: "pointer",
         margin: margin ? style?.margin[margin] : "0rem",
+        marginLeft: `${style.margin[marginLeft]}`,
+        marginRight: `${style.margin[marginRight]}`,
+        marginTop: `${style.margin[marginTop]}`,
+        marginBottom: `${style.margin[marginBottom]}`,
       }}
       onClick={onClick}
     >

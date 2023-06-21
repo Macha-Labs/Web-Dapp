@@ -1,5 +1,6 @@
 import { style } from "@/styles/StyledConstants";
 import {
+  Input,
   Table,
   TableCaption,
   TableContainer,
@@ -10,20 +11,22 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import React from "react";
+
 type Props = {
   variant?: string;
   th: any[];
   tr: any;
   tableWidth: string;
+  align: string;
 };
-function ChakraTable({ th = [], tr = [], tableWidth }: Props) {
+function TableNative({ th = [], tr = [], tableWidth, align = "left" }: Props) {
   return (
     <TableContainer
       width={tableWidth}
       rounded={"md"}
-      style={{ borderColor: "#14244b", borderWidth: "1px" }}
+      // style={{ borderColor: "#14244b", borderWidth: "1px" }}
     >
-      <Table variant="simple" colorScheme="whiteAlpha">
+      <Table variant="unstyled" colorScheme="whiteAlpha" size="sm">
         <Thead>
           <Tr
             css={{
@@ -41,10 +44,10 @@ function ChakraTable({ th = [], tr = [], tableWidth }: Props) {
                     paddingTop: "20px",
                     paddingBottom: "20px",
                     // borderRadius: "30px",
-                    textAlign: "center",
+                    textAlign: { align },
                     color: "white",
                     fontWeight: "600",
-                    fontSize: style.font.h5,
+                    fontSize: style.font.h6,
                     borderCollapse: "separate",
                     borderSpacing: "0 1rem",
                   }}
@@ -64,11 +67,13 @@ function ChakraTable({ th = [], tr = [], tableWidth }: Props) {
                     <Td
                       key={index2}
                       style={{
+                        width: "fit-content",
                         borderColor: "#14244b",
                         borderWidth: "1px",
                         borderRadius: "30px",
                         textAlign: "center",
                         color: "white",
+                        padding: "0px",
                       }}
                     >
                       {data}
@@ -84,4 +89,4 @@ function ChakraTable({ th = [], tr = [], tableWidth }: Props) {
   );
 }
 
-export default ChakraTable;
+export default TableNative;

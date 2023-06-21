@@ -85,7 +85,9 @@ const ButtonMenu = ({
                       src={item.img}
                     />
                   )}
-                  {item.leftIcon && <IconImage slug={item.leftIcon} />}
+                  {item.leftIcon && (
+                    <IconImage slug={item.leftIcon} size={size} />
+                  )}
                   <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
                     {item.value}
                     {item.rightIcon && <IconImage slug={item.rightIcon} />}

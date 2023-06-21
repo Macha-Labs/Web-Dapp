@@ -35,12 +35,10 @@ function IconImage({ slug, size, onClick, style }: Props) {
     >
       <IKImage
         path={GlobalIcons[slug]}
-        transformation={[
-          {
-            height: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,
-            width: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,
-          },
-        ]}
+        style={{
+          height: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,
+          width: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,
+        }}
       />
       <style jsx>{`
         .state_active {

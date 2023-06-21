@@ -48,10 +48,10 @@ export default function ButtonNative({
       loadingText={loadingText}
       onClick={onClick}
       width={width}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
-      marginRight={`${gStyle.margin[style?.marginRight]}`}
-      marginLeft={`${gStyle.margin[style?.marginLeft]}`}
+      marginTop={`${marginTop ? gStyle.margin[marginTop] : "0px"}`}
+      marginBottom={`${marginBottom ? gStyle.margin[marginBottom] : "0px"}`}
+      marginRight={`${marginRight ? gStyle.margin[marginRight] : "0px"}`}
+      marginLeft={`${marginLeft ? gStyle.margin[marginLeft] : "0px"}`}
       borderRadius={`${gStyle.button.borderRadius.default}`}
       borderColor="#14244b"
     >

@@ -1,6 +1,6 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import InputSearch from "@/_ui/input/InputSearch";
-import ChakraTable from "@/_ui/list/ChakraTable";
+import TableNative from "@/_ui/list/Tablenative";
 import React from "react";
 
 function MetaCurator() {
@@ -14,7 +14,7 @@ function MetaCurator() {
         marginTop="20px"
         width="40%"
       />
-      <ChakraTable
+      <TableNative
         tableWidth="70%"
         th={["Curators", "Meta", "Curating Since"]}
         tr={[

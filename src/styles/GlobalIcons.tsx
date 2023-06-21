@@ -63,7 +63,9 @@ const GlobalIcons: any = {
   "icon-clear-red":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Red_icons/base-red-cancel.svg?updatedAt=1683699287130",
   "icon-delete-red":
-    "https://ik.imagekit.io/metaworkLabs/icons/svg/Red_icons/base-red-delete.svg?updatedAt=1683699287179",
+    "/icons/svg/Red_icons/base-red-delete.svg?updatedAt=1683699287179",
+  "icon-delete-blue":
+    "/icons/svg/Base-blue/base-blue-delete.svg?updatedAt=1680783863984",
   "icon-exit-red":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Red_icons/base-red-exit.svg?updatedAt=1683699740768",
   "icon-switch-profile":

@@ -3,7 +3,7 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import ChakraTable from "@/_ui/list/ChakraTable";
+import TableNative from "@/_ui/list/Tablenative";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavBlock from "@/_ui/nav/NavBlock";
 import Tabs from "@/_ui/tabs/Tabs";
@@ -50,7 +50,7 @@ export default function DashBoard() {
               Your API Keys
             </Text>
           </FlexRow>
-          <ChakraTable
+          <TableNative
             tableWidth="100%"
             th={["Name", "API Key", "Time of creation", ""]}
             tr={[

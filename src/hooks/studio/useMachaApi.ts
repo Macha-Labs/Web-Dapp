@@ -2,6 +2,8 @@ import { useState } from "react";
 
 const useMachaApi = () => {
   const [selectedType, setSelectedType] = useState("https");
+  const [params, setParams] = useState<any>([]);
+  const [headers, setHeaders] = useState<any>([]);
 
   const apiTypes = [
     {
@@ -13,18 +15,13 @@ const useMachaApi = () => {
       title: "Graph",
     },
     {
-      slug: "contracts",
+      slug: "contract",
       title: "Contract",
     },
   ];
 
   const apiForm = {
     https: [
-      {
-        title: "URL",
-        type: "input",
-        inputType: "text",
-      },
       {
         title: "Method",
         type: "select",
@@ -36,9 +33,25 @@ const useMachaApi = () => {
           { slug: "delete", title: "DELETE" },
         ],
       },
+      {
+        title: "URL",
+        type: "input",
+        inputType: "text",
+      },
     ],
     graph: [],
-    contract: [],
+    contract: [
+      {
+        title: "Contract Address",
+        type: "input",
+        inputType: "text",
+      },
+      {
+        title: "Network",
+        type: "select",
+        options: [],
+      },
+    ],
   };
 
   return {
