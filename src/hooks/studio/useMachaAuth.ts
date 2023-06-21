@@ -86,9 +86,7 @@ const useMachaAuth = () => {
   }, [$macha]);
 
   const registerClient = async() => {
-    const signer = await fetchSigner();
-    console.log("Current signer ", signer);
-    const clientAuthPayload = {
+    const authPayload = {
       owner: $address ? $address.toLowerCase() : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
       signer: $signer
     }
@@ -99,13 +97,28 @@ const useMachaAuth = () => {
       admins: clientDataRef.current["admins"].value
     }
 
-    console.log(clientAuthPayload, clientData);
-    await $macha.createClient(clientAuthPayload, clientData);
+    console.log(authPayload, clientData);
+    await $macha.createClient(authPayload, clientData);
+  }
+
+  const registerPublisher = async() => {
+    const publisherPayload = {
+      clientId: $address ? $address.toLowerCase() : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae"
+    }
+
+    const authPayload = {
+      owner: $address ? $address.toLowerCase() : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
+      signer: $signer
+    }
+
+    await $macha.createPublisher(publisherPayload, authPayload);
+    
   }
 
   return {
     clientDataRef: clientDataRef,
-    registerClient: registerClient
+    registerClient: registerClient,
+    registerPublisher: registerPublisher
   };
 };
 export default useMachaAuth;

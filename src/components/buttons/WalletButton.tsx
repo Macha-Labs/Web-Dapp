@@ -1,9 +1,11 @@
 import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import { truncateAddress } from "@/helpers";
+import useMachaAuth from "@/hooks/studio/useMachaAuth";
 import useAuthStore from "@/store/useAuthStore";
 
 const WalletButton = () => {
   const $address = useAuthStore((state: any) => state.address);
+  const hookMachaAuth = useMachaAuth();
 
   const walletOptions = [
     {
@@ -25,7 +27,9 @@ const WalletButton = () => {
     {
       value: "Register as Publisher",
       leftIcon: "icon-user",
-      onClick: () => {},
+      onClick: () => {
+        hookMachaAuth.registerPublisher();
+      },
     },
   ];
 
