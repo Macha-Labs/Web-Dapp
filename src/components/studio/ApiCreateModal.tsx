@@ -10,6 +10,7 @@ import TableNative from "@/_ui/list/TableNative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import useMachaApi from "@/hooks/studio/useMachaApi";
 import useMetaStore from "@/store/useMetaStore";
+import { StyledCard } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
 import { Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
@@ -101,11 +102,32 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
   };
 
   const handleDeleteRow = (index: number) => {
-    console.log(tableRows[index]);
-    setTableRows((prevTableRows) =>
-      prevTableRows.filter((_, i) => i !== index)
+    console.log("deleting", index);
+    // setTableRows(tableRows.filter((_, i) => i !== index));
+    const beforeArray = tableRows.slice(0, index);
+    const afterArray = tableRows.slice(0, 2);
+
+    console.log(
+      "before",
+      beforeArray,
+      "after",
+      afterArray,
+      "tablerow",
+      tableRows
     );
+    setTableRows([...beforeArray, ...afterArray]);
   };
+
+  const handleAddRow = () => {
+    console.log(tableRows.length);
+    const currentIndex = tableRows.length;
+    const newRow = [
+      <InputLabel id={Date.now()} inputType="text" />,
+      "Meta_war",
+    ];
+    setTableRows([...tableRows, newRow]);
+  };
+
   console.log("inapicreatecompoent");
   return (
     <>
@@ -123,7 +145,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
             <ButtonNative
               variant="state_brand"
               // marginTop={style.margin["lg"]}
-              width="100%"
+
               onClick={async (e: any) => {
                 e.preventDefault();
                 await hookMetaCreate.publishApi();
@@ -150,7 +172,6 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
           padding={style.padding["sm"]}
         >
           <FlexColumn hrAlign="space-between" height="35%">
-            
             <FlexColumn vrAlign="flex-start" marginTop={"sm"}>
               <Heading
                 as="h6"
@@ -164,7 +185,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
               >
                 API type
               </Heading>
-              <FlexRow hrAlign="flex-start">
+              <FlexRow hrAlign="flex-start" marginBottom={"sm"}>
                 {hookMachaApi?.apiTypes?.map((item: any) => {
                   console.log(item);
                   return (
@@ -265,7 +286,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
                     slug="icon-delete-blue"
                     size="sm"
                     onClick={() => {
-                      console.log("deleting", index);
+                      // console.log("deleting", index);
                       handleDeleteRow(index);
                     }}
                   />,
@@ -276,19 +297,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
                 width="100%"
                 marginTop="sm"
                 variant="state_default_hover"
-                onClick={() => {
-                  console.log(tableRows.length);
-                  const newRow = [
-                    <InputLabel inputType="text" />,
-                    "Meta_war",
-                    <IconImage
-                      slug="icon-delete-blue"
-                      size="sm"
-                      onClick={() => handleDeleteRow(tableRows.length)}
-                    />,
-                  ];
-                  setTableRows((prevRows) => [...prevRows, newRow]);
-                }}
+                onClick={handleAddRow}
               >
                 Add New Param
               </ButtonNative>

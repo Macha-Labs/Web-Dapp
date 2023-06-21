@@ -172,19 +172,11 @@ const DashBoard = () => {
         <NavBlock marginTop={style.margin["nav"]}>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <Tabs
-              width="30%"
+              // width="30%"
               options={dashboardNav}
               gstyle={{ fontSize: `${style.font.h5}` }}
               value={selectedNavTab}
               onChange={setSelectedNavTab}
-            />
-            <ButtonNative
-              size="sm"
-              text="Create Client"
-              variant="state_brand"
-              onClick={() => {
-                clientModal.onOpen();
-              }}
             />
           </FlexRow>
         </NavBlock>

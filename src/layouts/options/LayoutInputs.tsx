@@ -12,9 +12,11 @@ type Props = {
   variant?: string;
   type?: string;
   elementRef?: any;
+  id?: any;
 };
 
 const layoutInputs = ({
+  id,
   index,
   style,
   placeholder,
@@ -30,6 +32,7 @@ const layoutInputs = ({
   return (
     <div>
       <Input
+        id={id}
         ref={elementRef}
         key={index}
         placeholder={placeholder}

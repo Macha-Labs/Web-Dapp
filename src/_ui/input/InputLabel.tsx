@@ -10,6 +10,7 @@ import { DragEvent, useRef, useState } from "react";
 import IconBase from "../icons/IconsBase";
 
 type Props = {
+  id?: any;
   labelText?: string;
   placeholder?: string;
   defaultValue?: string;
@@ -25,6 +26,7 @@ type Props = {
 };
 
 const InputLabel = ({
+  id,
   labelText,
   placeholder,
   defaultValue,
@@ -66,6 +68,7 @@ const InputLabel = ({
 
         <StyledCard className="w-100">
           {layoutInputs({
+            id,
             elementRef,
             placeholder,
             defaultValue,

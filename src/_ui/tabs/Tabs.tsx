@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import IconImage from "../icons/IconImage";
 import FlexRow from "../flex/FlexRow";
 import { Divider, Text } from "@chakra-ui/react";
+import { style } from "@/styles/StyledConstants";
 
 type Props = {
   options: any;
@@ -20,7 +21,7 @@ const Tabs = ({ options, gstyle, icon, value, onChange, width }: Props) => {
   return (
     <>
       <ul
-        className="navbar-nav justify-content-between d-flex align-items-center flex-row mt-2 mt-md-0"
+        className="navbar-nav justify-content-start d-flex align-items-center flex-row mt-2 mt-md-0"
         style={{ width: `${width ? width : "100%"}` }}
       >
         {options ? (
@@ -32,6 +33,7 @@ const Tabs = ({ options, gstyle, icon, value, onChange, width }: Props) => {
                 }`}
                 key={idx}
                 onClick={() => onChange(option.value)}
+                style={{ marginRight: `${style.margin["md"]}` }}
               >
                 <Link
                   className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0  "
@@ -45,13 +47,6 @@ const Tabs = ({ options, gstyle, icon, value, onChange, width }: Props) => {
                     </Text>
                   </FlexRow>
                 </Link>
-                <Divider
-                  borderColor={value === option.value ? "#197cec" : "#000408"}
-                  borderWidth={"2px"}
-                  borderRadius={"md"}
-                  width={"98%"}
-                  className="m-0 mt-1"
-                />
               </StyledLi>
             );
           })
