@@ -18,6 +18,11 @@ const useMachaAuth = () => {
   );
   const $loadUserMetas = useUserStore((state: any) => state.loadUserMetas);
 
+  const $loadUserApisMap = useUserStore(
+    (state: any) => state.loadUserApisMap
+  );
+  const $loadUserApis = useUserStore((state: any) => state.loadUserApis);
+
   let provider;
   let signer;
   const [browserSigner, setBrowserSigner] = useState<any>();
@@ -76,11 +81,23 @@ const useMachaAuth = () => {
     // return res;
   };
 
+  const fetchingApis = async() => {
+    $loadUserApis($macha.client.apisOwned?.data);
+    let userApisMap: any = {};
+    $macha.client.apisOwned?.data.map((item: any, index: number) => {
+      console.log("Api name ", item?.name);
+      userApisMap[item?.id] = item;
+    });
+    $loadUserApisMap(userApisMap);
+    return;
+  }
+
   useEffect(() => {
     console.log("Logging client ", $macha.client); // getting the right value
     console.log("Logging client metasOwned", $macha.client?.metasOwned); // coming null
     console.log("Metas Data array ", $macha?.client?.metasOwned?.data); // coming undefined
     const pending = fetchingMetas();
+    fetchingApis();
     console.log("pending metas", pending);
   }, [$macha]);
 

@@ -127,11 +127,6 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
               onClick={async (e: any) => {
                 e.preventDefault();
                 await hookMetaCreate.publishApi();
-                // console.log("Logging ", hookMetaCreate.apiDataRef.current["name"].value,
-                // hookMetaCreate.apiDataRef.current["description"].value,
-                // hookMetaCreate.apiDataRef.current["requestType"].value,
-                // hookMetaCreate.apiDataRef.current["requestMethod"].value,
-                // hookMetaCreate.apiDataRef.current["requestEndpoint"].value);
               }}
             >
               Create API
