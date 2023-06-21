@@ -33,7 +33,7 @@ import ClientCreateModal from "@/components/studio/ClientCreateModal";
 const DashBoard = () => {
   const metaModal = useDisclosure();
   const clientModal = useDisclosure();
-  const hookMeta = useMetaCreate();
+  const hookMetaCreate = useMetaCreate();
   const $macha = useAuthStore((state: any) => state.macha);
   const $address = useAuthStore((state: any) => state.address);
   const router = useRouter();
@@ -342,9 +342,7 @@ const DashBoard = () => {
           )}
         </FlexBody>
         {/* </FlexWindow> */}
-        <ClientCreateModal modal={clientModal} hookMeta={hookMeta} />
-        <ApiCreateModal modal={metaModal} hookMeta={hookMeta} />
-        {/* <MetaCreateModal hookMeta={hookMeta} metaModal={metaModal} /> */}
+        <ApiCreateModal modal={metaModal} hookMetaCreate={hookMetaCreate} />
       </>
     );
   };

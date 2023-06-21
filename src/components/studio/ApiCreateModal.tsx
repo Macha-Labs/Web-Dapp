@@ -17,10 +17,10 @@ import { useState } from "react";
 
 type Props = {
   modal: any;
-  hookMeta?: any;
+  hookMetaCreate?: any;
 };
 
-const ApiCreateModal = ({ modal, hookMeta }: Props) => {
+const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
   const $meta = useMetaStore((state: any) => state.meta);
   const hookMachaApi = useMachaApi();
   const $loadOverviewData = useMetaStore(
@@ -67,7 +67,13 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
     switch (field?.type) {
       case "input":
         return (
-          <InputLabel labelText={field?.title} inputType={field?.inputType} />
+          <InputLabel
+            elementRef={(element: any) =>
+              (hookMetaCreate.apiDataRef.current["requestEndpoint"] = element)
+            }
+            labelText={field?.title}
+            inputType={field?.inputType}
+          />
         );
       case "select":
         return (
@@ -84,7 +90,12 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
             >
               {field?.title}
             </Heading>
-            <InputSelect options={field?.options} />
+            <InputSelect
+              elementRef={(element: any) =>
+                (hookMetaCreate.apiDataRef.current["requestMethod"] = element)
+              }
+              options={field?.options}
+            />
           </FlexColumn>
         );
     }
@@ -113,24 +124,20 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
             <ButtonNative
               variant="state_brand"
               // marginTop={style.margin["lg"]}
-              // width="50%"
+              width="100%"
               onClick={async (e: any) => {
                 e.preventDefault();
-                //   const cid = await deploytoLightHouse(imageEvent);
-                let metaCreateData = {
-                  name: hookMeta.metaOverview.current["metaName"].value,
-                  description:
-                    hookMeta.metaOverview.current["metaDescription"].value,
-                  // image: cid,
-                  status: "PENDING",
-                  owner: "0x7FD154df41ec41336A86Ee53a3F7Fe886E80Efc7",
-                };
-                await initialiseNewMeta(metaCreateData);
-                $loadOverviewData(metaCreateData);
+                await hookMetaCreate.publishApi();
+                // console.log("Logging ", hookMetaCreate.apiDataRef.current["name"].value,
+                // hookMetaCreate.apiDataRef.current["description"].value,
+                // hookMetaCreate.apiDataRef.current["requestType"].value,
+                // hookMetaCreate.apiDataRef.current["requestMethod"].value,
+                // hookMetaCreate.apiDataRef.current["requestEndpoint"].value);
               }}
             >
-              Submit API
+              Create API
             </ButtonNative>
+
             <ButtonNative variant="state_default_hover" marginLeft="sm">
               Cancel
             </ButtonNative>
@@ -143,8 +150,26 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
           height="100%"
           padding={style.padding["sm"]}
         >
-          <FlexColumn width="100%">
-            <FlexColumn vrAlign="flex-start" marginBottom={"sm"}>
+          <FlexColumn hrAlign="space-between" height="35%">
+            <InputLabel
+              elementRef={(element: any) =>
+                (hookMetaCreate.apiDataRef.current["name"] = element)
+              }
+              inputType="text"
+              defaultValue={$meta.name}
+              labelText="API Name"
+              placeholder="Name"
+            />
+            <InputLabel
+              elementRef={(element: any) =>
+                (hookMetaCreate.apiDataRef.current["description"] = element)
+              }
+              inputType="text"
+              labelText="Description"
+              placeholder="Description"
+              marginTop="sm"
+            />
+            <FlexColumn vrAlign="flex-start" marginTop={"sm"}>
               <Heading
                 as="h6"
                 size="sm"
@@ -176,6 +201,9 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
                           : style.card.bg.overview
                       }
                       onClick={() => {
+                        hookMetaCreate.apiDataRef.current["requestType"] = {
+                          value: item.slug,
+                        };
                         console.log("clicked", item.slug);
                         hookMachaApi.setSelectedType(item.slug);
                       }}
@@ -197,7 +225,7 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
             </FlexColumn>
             <InputLabel
               elementRef={(element: any) =>
-                (hookMeta.metaOverview.current["metaName"] = element)
+                (hookMetaCreate.metaOverview.current["metaName"] = element)
               }
               inputType="text"
               defaultValue={$meta.name}
@@ -206,7 +234,8 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookMeta.metaOverview.current["metaDescription"] = element)
+                (hookMetaCreate.metaOverview.current["metaDescription"] =
+                  element)
               }
               inputType="text"
               labelText="Description"
