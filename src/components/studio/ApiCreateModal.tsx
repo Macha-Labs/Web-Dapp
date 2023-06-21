@@ -150,24 +150,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
           padding={style.padding["sm"]}
         >
           <FlexColumn hrAlign="space-between" height="35%">
-            <InputLabel
-              elementRef={(element: any) =>
-                (hookMetaCreate.apiDataRef.current["name"] = element)
-              }
-              inputType="text"
-              defaultValue={$meta.name}
-              labelText="API Name"
-              placeholder="Name"
-            />
-            <InputLabel
-              elementRef={(element: any) =>
-                (hookMetaCreate.apiDataRef.current["description"] = element)
-              }
-              inputType="text"
-              labelText="Description"
-              placeholder="Description"
-              marginTop="sm"
-            />
+            
             <FlexColumn vrAlign="flex-start" marginTop={"sm"}>
               <Heading
                 as="h6"
@@ -224,7 +207,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
             </FlexColumn>
             <InputLabel
               elementRef={(element: any) =>
-                (hookMetaCreate.metaOverview.current["metaName"] = element)
+                (hookMetaCreate.apiDataRef.current["name"] = element)
               }
               inputType="text"
               defaultValue={$meta.name}
@@ -233,8 +216,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookMetaCreate.metaOverview.current["metaDescription"] =
-                  element)
+                (hookMetaCreate.apiDataRef.current["description"] = element)
               }
               inputType="text"
               labelText="Description"
