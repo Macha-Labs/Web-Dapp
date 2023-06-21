@@ -34,12 +34,13 @@ const DashBoard = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const $userMetas = useUserStore((state: any) => state.userMetas);
+  const $userApis = useUserStore((state: any) => state.userApis);
   const [filteredData, setFilteredData] = useState($userMetas);
   const [selectedNavTab, setSelectedNavTab] = useState("Your APIs");
   const [exploreMeta, setExploreMeta] = useState<any>([]);
 
   const handleFilter = (inputValue: string) => {
-    const filtered = $userMetas.filter((item: any) => {
+    const filtered = $userApis.filter((item: any) => {
       return item.name.toLowerCase().includes(inputValue.toLowerCase());
     });
     setFilteredData(filtered);
@@ -51,9 +52,10 @@ const DashBoard = () => {
   };
 
   useEffect(() => {
-    setFilteredData($userMetas);
+    setFilteredData($userApis);
     setIsLoading(false);
-  }, [$userMetas]);
+  }, [$userApis]);
+
   useEffect(() => {
     fetchmetas();
   }, []);
