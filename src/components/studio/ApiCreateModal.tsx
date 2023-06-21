@@ -103,19 +103,19 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
 
   const handleDeleteRow = (index: number) => {
     console.log("deleting", index);
-    // setTableRows(tableRows.filter((_, i) => i !== index));
-    const beforeArray = tableRows.slice(0, index);
-    const afterArray = tableRows.slice(index + 1);
+    setTableRows(tableRows.filter((_, i) => i !== index));
+    // const beforeArray = tableRows.slice(0, index);
+    // const afterArray = tableRows.slice(index + 1);
 
-    console.log(
-      "before",
-      beforeArray,
-      "after",
-      afterArray,
-      "tablerow",
-      tableRows
-    );
-    setTableRows([...beforeArray, ...afterArray]);
+    // console.log(
+    //   "before",
+    //   beforeArray,
+    //   "after",
+    //   afterArray,
+    //   "tablerow",
+    //   tableRows
+    // );
+    // setTableRows([...beforeArray, ...afterArray]);
   };
 
   const handleAddRow = () => {
