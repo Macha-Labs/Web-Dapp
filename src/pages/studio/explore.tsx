@@ -1,26 +1,19 @@
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import InputSearch from "@/_ui/input/InputSearch";
-import NavLeft from "@/_ui/nav/NavLeft";
 import NavBlock from "@/_ui/nav/NavBlock";
-import Tabs from "@/_ui/tabs/Tabs";
 import NavTop from "@/_ui/nav/NavTop";
-import MetaCard from "@/components/studio/MetaCard";
-import MetaHorizontalCard from "@/components/studio/MetaHorizontalCard";
-import MetaTagFilter from "@/components/studio/MetaTagFilter";
-import { fetchAllMetas } from "@/service/StudioService";
+import Tabs from "@/_ui/tabs/Tabs";
+import { fetchAllMetas } from "@/service/studio/MetaService";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { Network, Alchemy } from "alchemy-sdk";
-import ColoredCard from "@/components/studio/ColoredCard";
 import FlexColumn from "@/_ui/flex/FlexColumn";
+import ColoredCard from "@/components/studio/ColoredCard";
 import { Text } from "@chakra-ui/react";
+import { Alchemy, Network } from "alchemy-sdk";
 
 export default function DashBoard() {
   const settings = {

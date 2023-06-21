@@ -9,7 +9,6 @@ import TableNative from "@/_ui/list/TableNative";
 // import TableNative from "@/_ui/list/Tablenative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import useMachaApi from "@/hooks/studio/useMachaApi";
-import { initialiseNewMeta } from "@/service/StudioService";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
 import { Heading, Text } from "@chakra-ui/react";
@@ -101,7 +100,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
     }
   };
 
-  const handleDeleteRow = (index) => {
+  const handleDeleteRow = (index: number) => {
     console.log(tableRows[index]);
     setTableRows((prevTableRows) =>
       prevTableRows.filter((_, i) => i !== index)

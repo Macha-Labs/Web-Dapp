@@ -17,7 +17,7 @@ import MetaHorizontalCard from "@/components/studio/MetaHorizontalCard";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import { displayImage } from "@/helpers/storage/lightHouseStorage";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
-import { fetchAllMetas } from "@/service/StudioService";
+import { fetchAllMetas } from "@/service/studio/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";

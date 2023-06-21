@@ -1,6 +1,11 @@
+import ButtonNative from "@/_ui/buttons/ButtonNative";
+import CardPannel from "@/_ui/cards/CardPannel";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
+import { deleteMetaInit } from "@/service/studio/MetaService";
+import useMetaStore from "@/store/useMetaStore";
+import { style } from "@/styles/StyledConstants";
 import {
   Divider,
   Heading,
@@ -9,22 +14,13 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import MetaOriginsModal from "./MetaOriginsModal";
-import MetaTriggersModal from "./MetaTriggersModal";
-import CardPannel from "@/_ui/cards/CardPannel";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import CardNative from "@/_ui/cards/CardNative";
-import MetaCreateModal from "./MetaCreateModal";
-import useMetaStore from "@/store/useMetaStore";
-import useAuthStore from "@/store/useAuthStore";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import MetaEditModal from "./MetaEditModal";
 import MetaEditOriginsModal from "./MetaEditOriginsModal";
-import { useState } from "react";
 import MetaEditTriggerModal from "./MetaEditTriggerModal";
-import { deleteMetaInit } from "@/service/StudioService";
-import { useRouter } from "next/router";
-import useMeta from "@/hooks/studio/useMeta";
-import { style } from "@/styles/StyledConstants";
+import MetaOriginsModal from "./MetaOriginsModal";
+import MetaTriggersModal from "./MetaTriggersModal";
 
 type Props = {
   metaInfo: any;

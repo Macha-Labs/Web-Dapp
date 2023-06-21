@@ -1,19 +1,15 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
-import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
-import InputSelect from "@/_ui/input/InputSelect";
-import TableNative from "@/_ui/list/TableNative";
 // import TableNative from "@/_ui/list/Tablenative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import useMachaApi from "@/hooks/studio/useMachaApi";
-import { initialiseNewMeta } from "@/service/StudioService";
+import { initialiseNewMeta } from "@/service/studio/MetaService";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
-import { Heading, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { Text } from "@chakra-ui/react";
 
 type Props = {
   modal: any;

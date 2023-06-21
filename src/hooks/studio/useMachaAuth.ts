@@ -1,10 +1,9 @@
-import { fetchPendingMeta } from "@/service/StudioService";
+import { fetchPendingMeta } from "@/service/studio/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { Macha } from "@metaworklabs/macha-dev-sdk/lib";
 import { ethers } from "ethers";
 import { useEffect, useRef, useState } from "react";
-import { fetchSigner, watchAccount } from "@wagmi/core";
 
 declare let window: any;
 

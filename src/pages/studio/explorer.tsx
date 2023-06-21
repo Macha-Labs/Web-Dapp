@@ -1,28 +1,15 @@
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import InputSearch from "@/_ui/input/InputSearch";
-import NavLeft from "@/_ui/nav/NavLeft";
 import NavBlock from "@/_ui/nav/NavBlock";
+import NavLeft from "@/_ui/nav/NavLeft";
 import Tabs from "@/_ui/tabs/Tabs";
-import NavTop from "@/_ui/nav/NavTop";
-import MetaCard from "@/components/studio/MetaCard";
-import MetaHorizontalCard from "@/components/studio/MetaHorizontalCard";
-import MetaTagFilter from "@/components/studio/MetaTagFilter";
-import { fetchAllMetas } from "@/service/StudioService";
-import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import ColoredCard from "@/components/studio/ColoredCard";
-import FlexColumn from "@/_ui/flex/FlexColumn";
-import { Text } from "@chakra-ui/react";
-import useNftStore from "@/store/useNftStore";
-import useNftData from "@/hooks/studio/useNftData";
 import MCard from "@/_sdk/MCard";
+import useNftData from "@/hooks/studio/useNftData";
+import { Text } from "@chakra-ui/react";
 
 export default function explorer() {
   const dashboardNav: any = [

@@ -5,11 +5,10 @@ import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
-import { initialiseNewMeta } from "@/service/StudioService";
+import { initialiseNewMeta } from "@/service/studio/MetaService";
 import useMetaStore from "@/store/useMetaStore";
 import { Image, Text } from "@chakra-ui/react";
-import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   metaModal?: any;

@@ -2,17 +2,15 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
-import IconBase from "@/_ui/icons/IconsBase";
 import InputLabel from "@/_ui/input/InputLabel";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
-import { editPendingMeta } from "@/service/StudioService";
+import { editPendingMeta } from "@/service/studio/MetaService";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Image, Text } from "@chakra-ui/react";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
 
 type Props = {
   metaModal?: any;
