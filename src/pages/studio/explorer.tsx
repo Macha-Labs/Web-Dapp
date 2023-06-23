@@ -11,7 +11,10 @@ import MCard from "@/_sdk/MCard";
 import useNftData from "@/hooks/studio/useNftData";
 import { Text } from "@chakra-ui/react";
 
-export default function explorer() {
+export default function Explorer() {
+  const [selectedNavTab, setSelectedNavTab] = useState("Your Metas");
+  const hookNftData = useNftData();
+  
   const dashboardNav: any = [
     {
       value: "",
@@ -22,31 +25,6 @@ export default function explorer() {
       href: "",
     },
   ];
-
-  const [selectedNavTab, setSelectedNavTab] = useState("Your Metas");
-  const hookNftData = useNftData();
-  // const [totalNfts, setTotalNfts] = useState(0);
-  // const [exploreMeta, setExploreMeta] = useState<any>([]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const { totalNfts } = await useNftData();
-  //     setTotalNfts(totalNfts);
-  //   }
-  //   fetchData();
-  // }, []);
-
-  // const fetchmetas = async () => {
-  //   const allMetas = await fetchAllMetas();
-  //   setExploreMeta(allMetas.data);
-  // };
-  // useEffect(() => {
-  //   fetchmetas();
-  // }, []);
-
-  // const $userMetas = useUserStore((state: any) => state.userMetas);
-
-  // const router = useRouter();
 
   const renderBody = () => {
     console.log("exploreMeta", hookNftData);
@@ -66,13 +44,14 @@ export default function explorer() {
         <FlexBody>
           <FlexRow hrAlign="flex-start">
             <Text fontSize={"lg"} fontWeight={600}>
-              Your NFT's : {hookNftData.totalNfts}
+              Your NFT&apos;s : {hookNftData.totalNfts}
             </Text>
           </FlexRow>
           <FlexRow flexWrap={"wrap"} hrAlign="flex-start">
-            {hookNftData.nftData.map((item: any) => {
+            {hookNftData.nftData.map((item: any, index: number) => {
               return (
                 <MCard
+                  key={index}
                   title={item.nftName}
                   image={item.imageUrl}
                   floorPrice={item.floorPrice}

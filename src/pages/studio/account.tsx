@@ -2,21 +2,19 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputLabel from "@/_ui/input/InputLabel";
-import useMachaAuth from "@/hooks/studio/useMachaAuth";
-import { style } from "@/styles/StyledConstants";
-import { useRouter } from "next/router";
+import NavBlock from "@/_ui/nav/NavBlock";
 import NavTop from "@/_ui/nav/NavTop";
+import Tabs from "@/_ui/tabs/Tabs";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
 import WalletButton from "@/components/buttons/WalletButton";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
+import useMachaAuth from "@/hooks/studio/useMachaAuth";
 import useAuthStore from "@/store/useAuthStore";
-import NavBlock from "@/_ui/nav/NavBlock";
-import Tabs from "@/_ui/tabs/Tabs";
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import { style } from "@/styles/StyledConstants";
 
-const account = () => {
-  const router = useRouter();
+const Account = () => {
   const hookMachaAuth = useMachaAuth();
   const $address = useAuthStore((state: any) => state.address);
 
@@ -130,4 +128,4 @@ const account = () => {
     ></FlexWindow>
   );
 };
-export default account;
+export default Account;

@@ -17,9 +17,9 @@ type Props = {
   th: any[];
   tr: any;
   tableWidth: string;
-  align: string;
+  align?: any;
 };
-function TableNative({ th = [], tr = [], tableWidth, align = "left" }: Props) {
+function TableNative({ th = [], tr = [], tableWidth, align = "start" }: Props) {
   return (
     <TableContainer
       width={tableWidth}
@@ -44,8 +44,7 @@ function TableNative({ th = [], tr = [], tableWidth, align = "left" }: Props) {
                     borderWidth: "1px",
                     paddingTop: "20px",
                     paddingBottom: "20px",
-                    // borderRadius: "30px",
-                    textAlign: { align },
+                    textAlign: align,
                     color: "white",
                     fontWeight: "600",
                     fontSize: style.font.h6,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const useMachaApi = () => {
-  const [selectedType, setSelectedType] = useState("https");
+  const [selectedType, setSelectedType] = useState<string>("https");
   const [params, setParams] = useState<any>([]);
   const [headers, setHeaders] = useState<any>([]);
 
@@ -20,8 +20,8 @@ const useMachaApi = () => {
     },
   ];
 
-  const apiForm = {
-    https: [
+  const apiForm: any = {
+    "https": [
       {
         title: "Method",
         type: "select",
@@ -39,8 +39,8 @@ const useMachaApi = () => {
         inputType: "text",
       },
     ],
-    graph: [],
-    contract: [
+    "graph": [],
+    "contract": [
       {
         title: "Contract Address",
         type: "input",

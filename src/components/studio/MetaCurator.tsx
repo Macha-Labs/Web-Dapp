@@ -1,6 +1,6 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import InputSearch from "@/_ui/input/InputSearch";
-import TableNative from "@/_ui/list/Tablenative";
+import TableNative from "@/_ui/list/TableNative";
 import React from "react";
 
 function MetaCurator() {

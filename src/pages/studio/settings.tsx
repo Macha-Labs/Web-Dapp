@@ -3,15 +3,14 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import TableNative from "@/_ui/list/Tablenative";
-import NavLeft from "@/_ui/nav/NavLeft";
+import TableNative from "@/_ui/list/TableNative";
 import NavBlock from "@/_ui/nav/NavBlock";
+import NavLeft from "@/_ui/nav/NavLeft";
 import Tabs from "@/_ui/tabs/Tabs";
-import NavTop from "@/_ui/nav/NavTop";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
-import { StyledCard, StyledCol } from "@/styles/StyledComponents";
+import { StyledCard } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
-import { Button, Heading, Text } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 
 export default function DashBoard() {
   const dashboardNav: any = [

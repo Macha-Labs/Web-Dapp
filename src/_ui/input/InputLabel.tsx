@@ -1,12 +1,10 @@
 import layoutInputs from "@/layouts/options/LayoutInputs";
-import { StyledCard, StyledCol, StyledRow } from "@/styles/StyledComponents";
-import { Box, Button, Heading, Text } from "@chakra-ui/react";
-import FlexColumn from "../flex/FlexColumn";
-import ButtonNative from "../buttons/ButtonNative";
-import IconImage from "../icons/IconImage";
-import { style as gStyle } from "../../styles/StyledConstants";
 import LayoutTextArea from "@/layouts/options/LayoutTextArea";
+import { StyledCard } from "@/styles/StyledComponents";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { DragEvent, useRef, useState } from "react";
+import { style as gStyle } from "../../styles/StyledConstants";
+import FlexColumn from "../flex/FlexColumn";
 import IconBase from "../icons/IconsBase";
 
 type Props = {
@@ -16,6 +14,7 @@ type Props = {
   defaultValue?: string;
   onChange?: any;
   padding?: string;
+  style?: any;
   disabled?: boolean;
   elementRef?: any;
   inputType: string;
@@ -32,6 +31,7 @@ const InputLabel = ({
   defaultValue,
   onChange = (e?: any) => {},
   padding,
+  style,
   disabled = false,
   elementRef,
   inputType,
@@ -74,15 +74,8 @@ const InputLabel = ({
             defaultValue,
             onChange,
             disabled,
+            style
           })}
-          {/* <LayoutInputs
-            elementRef={elementRef}
-            placeholder={placeholder}
-            defaultValue={defaultValue}
-            onChange={onChange}
-            disabled={disabled}
-            style={{ class: "" }}
-          /> */}
         </StyledCard>
       </FlexColumn>
     );
@@ -90,11 +83,11 @@ const InputLabel = ({
 
   // for uploading attachments
   const InputLabelFile = () => {
-    const [dragActive, setDragActive] = useState(false);
-    const inputRef = useRef(null);
+    const [dragActive, setDragActive] = useState<any>(false);
+    const inputRef = useRef<any>(null);
 
     const onButtonClick = () => {
-      inputRef?.current?.click();
+      inputRef.current.click();
     };
 
     const handleDrag = (e: DragEvent<HTMLDivElement | HTMLFormElement>) => {
@@ -212,15 +205,6 @@ const InputLabel = ({
               </Text>
             </FlexColumn>
           </label>
-          {/* {dragActive && (
-          <div
-            id="drag-file-element"
-            onDragEnter={handleDrag}
-            onDragLeave={handleDrag}
-            onDragOver={handleDrag}
-            onDrop={handleDrop}
-          ></div>
-        )} */}
         </Box>
       </FlexColumn>
     );

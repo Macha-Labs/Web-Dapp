@@ -8,6 +8,8 @@ type Props = {
   bodyElem?: any;
   style?: any;
   marginTop?: any;
+  leftElem?: any;
+  rightElem?: any;
 };
 
 export const FlexWindow = ({

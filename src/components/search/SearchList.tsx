@@ -11,9 +11,10 @@ const SearchList = ({ data }: Props) => {
   return (
     <FlexRow flexWrap={"wrap"} marginTop={"lg"} hrAlign="flex-start">
       {Object.keys(data).length > 0 ? (
-        data.map((result: any, idx: any) => {
+        data.map((result: any, index: number) => {
           return (
             <MCard
+              key={index}
               title={truncateString(result.author, 10)}
               description={truncateString(result.body, 150)}
               // floorPrice={item.floorPrice}

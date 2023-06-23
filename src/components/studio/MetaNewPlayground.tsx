@@ -106,9 +106,10 @@ function MetaNewPlayground({ id }: Props) {
       {console.log("resultData", resultData)}
       <FlexRow flexWrap={"wrap"} marginTop={"lg"} hrAlign="flex-start">
         {Object.keys(resultData).length > 0 ? (
-          resultData.proposals.map((result: any, idx: any) => {
+          resultData.proposals.map((result: any, index: any) => {
             return (
               <MCard
+                key={index}
                 title={truncateString(result.author, 10)}
                 description={truncateString(result.body, 150)}
                 // floorPrice={item.floorPrice}

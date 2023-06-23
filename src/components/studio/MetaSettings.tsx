@@ -192,7 +192,7 @@ function MetaSettings({ metaInfo }: Props) {
               {$originData &&
                 $originData.map((item: any, index: any) => {
                   return (
-                    <FlexColumn>
+                    <FlexColumn key={index}>
                       <FlexRow
                         hrAlign="space-between"
                         key={index}

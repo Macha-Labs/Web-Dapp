@@ -5,7 +5,6 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
-import TableNative from "@/_ui/list/TableNative";
 // import TableNative from "@/_ui/list/Tablenative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import useMachaApi from "@/hooks/studio/useMachaApi";
@@ -64,27 +63,11 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
     }
   };
 
-  // const handleDeleteRow = (index: number) => {
-  //   console.log("deleting", index);
-  //   setTableRows(tableRows.filter((_, i) => i !== index));
-  //   // const beforeArray = tableRows.slice(0, index);
-  //   // const afterArray = tableRows.slice(index + 1);
-
-  //   // console.log(
-  //   //   "before",
-  //   //   beforeArray,
-  //   //   "after",
-  //   //   afterArray,
-  //   //   "tablerow",
-  //   //   tableRows
-  //   // );
-  //   // setTableRows([...beforeArray, ...afterArray]);
-  // };
-
   const handleAddRow = () => {
     console.log(tableRows.length);
     const newRow = [
       <InputLabel
+        key={tableRows.length}
         id={tableRows.length}
         defaultValue=""
         placeholder="Key"
@@ -147,10 +130,11 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
                 API type
               </Heading>
               <FlexRow hrAlign="flex-start" marginBottom={"sm"}>
-                {hookMachaApi?.apiTypes?.map((item: any) => {
+                {hookMachaApi?.apiTypes?.map((item: any, index: number) => {
                   console.log(item);
                   return (
                     <CardNative
+                      key={index}
                       marginRight="xs"
                       padding="1rem"
                       width="fit-content"
@@ -209,10 +193,11 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
           <FlexColumn vrAlign="flex-start" marginTop={"sm"} width="100%">
             {/* Main Form */}
             <FlexColumn>
-              {hookMachaApi?.apiForm[hookMachaApi.selectedType]?.map(
-                (item: any) => {
+              {hookMachaApi.apiForm[hookMachaApi.selectedType].map(
+                (item: any, index: number) => {
                   return (
                     <FlexRow
+                      key={index}
                       width="100%"
                       hrAlign="flex-start"
                       marginBottom={"sm"}
@@ -237,22 +222,6 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
               >
                 Params
               </Heading>
-              {/* <TableNative
-                align="left"
-                tableWidth="100%"
-                th={["Key", "Value", "Action"]}
-                tr={tableRows.map((row: any, index: number) => [
-                  ...row.slice(0, 2),
-                  <IconImage
-                    slug="icon-delete-blue"
-                    size="sm"
-                    onClick={() => {
-                      // console.log("deleting", index);
-                      handleDeleteRow(index);
-                    }}
-                  />,
-                ])}
-              /> */}
               <EditableTable />
             </FlexColumn>
           </FlexColumn>

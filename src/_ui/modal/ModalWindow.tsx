@@ -15,9 +15,10 @@ type Props = {
   childrenComponent?: any;
   footer?: any;
   children?: any;
+  style?: any;
 };
 
-const ModalWindow = ({ event, size, header, footer, children }: Props) => {
+const ModalWindow = ({ event, size, header, footer, children, style }: Props) => {
   return (
     <Modal
       onClose={event?.onClose}
