@@ -17,7 +17,7 @@ import { Text } from "@chakra-ui/react";
 export default function DashBoard() {
   const hookAlchemy = useAlchemy();
   const [exploreMeta, setExploreMeta] = useState<any>([]);
-  const [selectedNavTab, setSelectedNavTab] = useState("Your Metas");
+  const [selectedNavTab, setSelectedNavTab] = useState<string>("Your Metas");
 
   const dashboardNav: any = [
     {
