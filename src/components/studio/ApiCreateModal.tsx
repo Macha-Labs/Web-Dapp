@@ -12,7 +12,7 @@ import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
 import { Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import EditableTable from "./CustomeTable";
+import CustomTable from "./CustomTable";
 
 type Props = {
   modal: any;
@@ -22,8 +22,6 @@ type Props = {
 const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
   const $meta = useMetaStore((state: any) => state.meta);
   const hookMachaApi = useMachaApi();
-
-  const [tableRows, setTableRows] = useState<any>([]);
 
   const renderForm = (field: any) => {
     switch (field?.type) {
@@ -61,21 +59,6 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
           </FlexColumn>
         );
     }
-  };
-
-  const handleAddRow = () => {
-    console.log(tableRows.length);
-    const newRow = [
-      <InputLabel
-        key={tableRows.length}
-        id={tableRows.length}
-        defaultValue=""
-        placeholder="Key"
-        inputType="text"
-      />,
-      `Meta_war ${tableRows.length}`,
-    ];
-    setTableRows([...tableRows, newRow]);
   };
 
   return (
@@ -222,12 +205,9 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
               >
                 Params
               </Heading>
-              <EditableTable />
+              <CustomTable />
             </FlexColumn>
           </FlexColumn>
-          {/* <Link href="/studio/createMeta" style={{ width: "100%" }}> */}
-
-          {/* </Link> */}
         </FlexColumn>
       </ModalWindow>
     </>

@@ -7,10 +7,10 @@ const JSONViewer = ({ data }: any) => {
   const [expanded, setExpanded] = useState<any>({});
 
   const handleToggle = (key: any) => {
-    setExpanded((prevState: any) => ({
-      ...prevState,
-      [key]: !prevState[key],
-    }));
+    setExpanded({
+      ...expanded,
+      [key]: !expanded[key],
+    });
   };
 
   const renderData = (data: any, key: any) => {

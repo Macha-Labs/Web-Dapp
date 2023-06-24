@@ -1,6 +1,5 @@
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
 import { useState } from "react";
-import OriginModal from "../modals/studio/OriginModal";
 import TriggerModal from "../modals/studio/TriggerModal";
 
 type Props = {

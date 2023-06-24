@@ -3,7 +3,7 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavTop from "@/_ui/nav/NavTop";
 import React from "react";
 
-export default function docs() {
+export default function Docs() {
   const renderBody = () => {
     return <></>;
   };

@@ -1,6 +1,4 @@
 import { Button, Text } from "@chakra-ui/react";
-import React from "react";
-import IconImage from "../icons/IconImage";
 
 import { style as gStyle } from "../../styles/StyledConstants";
 import IconBase from "../icons/IconsBase";

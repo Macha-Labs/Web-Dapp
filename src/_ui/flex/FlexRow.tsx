@@ -1,5 +1,3 @@
-import { StyledRow } from "@/styles/StyledComponents";
-import React from "react";
 import { style as gstyle } from "../../styles/StyledConstants";
 
 type Props = {

@@ -1,8 +1,7 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import IconImage from "@/_ui/icons/IconImage";
-import InputLabel from "@/_ui/input/InputLabel";
 import { style } from "@/styles/StyledConstants";
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface TableRow {
   id: number;
@@ -10,7 +9,7 @@ interface TableRow {
   value: string;
 }
 
-const EditableTable = () => {
+const CustomTable = () => {
   const [rows, setRows] = useState<TableRow[]>([]);
   const [newRow, setNewRow] = useState<TableRow>({
     id: 0,
@@ -104,7 +103,6 @@ const EditableTable = () => {
           {rows.map((row) => (
             <tr key={row.id}>
               <td>
-                
                 <input
                   style={{
                     background: "black",
@@ -175,4 +173,4 @@ const EditableTable = () => {
   );
 };
 
-export default EditableTable;
+export default CustomTable;

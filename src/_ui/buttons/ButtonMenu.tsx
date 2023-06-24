@@ -1,3 +1,4 @@
+import { style } from "@/styles/StyledConstants";
 import {
   Button,
   Menu,
@@ -6,10 +7,8 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
-import IconImage from "../icons/IconImage";
 import FlexRow from "../flex/FlexRow";
-import { style } from "@/styles/StyledConstants";
+import IconImage from "../icons/IconImage";
 import IconBase from "../icons/IconsBase";
 
 type Props = {

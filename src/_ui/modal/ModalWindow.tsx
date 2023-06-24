@@ -1,11 +1,10 @@
 import {
   Modal,
-  ModalOverlay,
-  ModalContent,
   ModalBody,
-  ModalHeader,
+  ModalContent,
   ModalFooter,
-  ModalCloseButton,
+  ModalHeader,
+  ModalOverlay,
 } from "@chakra-ui/react";
 
 type Props = {
@@ -18,7 +17,14 @@ type Props = {
   style?: any;
 };
 
-const ModalWindow = ({ event, size, header, footer, children, style }: Props) => {
+const ModalWindow = ({
+  event,
+  size,
+  header,
+  footer,
+  children,
+  style,
+}: Props) => {
   return (
     <Modal
       onClose={event?.onClose}

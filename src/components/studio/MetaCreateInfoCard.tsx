@@ -1,13 +1,11 @@
 import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import IconImage from "@/_ui/icons/IconImage";
 import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
 import { truncateAddress } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
 import { Divider, Image, Text, useToast } from "@chakra-ui/react";
-import React from "react";
 
 type Props = {
   data?: any;

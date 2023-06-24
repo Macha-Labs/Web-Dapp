@@ -1,47 +1,11 @@
-import { Box, Flex, IconButton, Image, Text } from "@chakra-ui/react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { carouselData } from "@/data/studio/constant";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import IconImage from "../icons/IconImage";
 import FlexRow from "../flex/FlexRow";
+import IconImage from "../icons/IconImage";
 
-const carouselData = [
-  {
-    id: 0,
-    coverImage:
-      "https://media.sproutsocial.com/uploads/2021/05/twitter-profile-photo-example.png",
-    profileImage:
-      "https://w7.pngwing.com/pngs/613/636/png-transparent-computer-icons-user-profile-male-avatar-avatar-heroes-logo-black.png",
-    title: "Card 1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 1,
-    coverImage:
-      "https://media.sproutsocial.com/uploads/2021/05/twitter-header-photo-1.png",
-    profileImage: "path-to-profile-image-2.jpg",
-    title: "Card 2",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 3,
-    coverImage:
-      "https://media.sproutsocial.com/uploads/2021/05/twitter-header-photo-1.png",
-    profileImage: "path-to-profile-image-2.jpg",
-    title: "Card 3",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    id: 4,
-    coverImage:
-      "https://media.sproutsocial.com/uploads/2021/05/twitter-header-photo-1.png",
-    profileImage: "path-to-profile-image-2.jpg",
-    title: "Card 4",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-];
-
-const CardCarousel = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+const ImageCarousal = () => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const handlePrev = () => {
     setActiveIndex((prevIndex) =>
@@ -119,4 +83,4 @@ const CardCarousel = () => {
   );
 };
 
-export default CardCarousel;
+export default ImageCarousal;

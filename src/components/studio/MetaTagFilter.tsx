@@ -4,8 +4,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import TagNative from "@/_ui/tag/TagNative";
-import { Button, Heading, Text, useDisclosure } from "@chakra-ui/react";
-import React from "react";
+import { Heading, Text, useDisclosure } from "@chakra-ui/react";
 
 function MetaTagFilter() {
   const filterModal = useDisclosure();

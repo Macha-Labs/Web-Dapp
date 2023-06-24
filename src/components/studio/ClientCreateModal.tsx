@@ -16,7 +16,7 @@ type Props = {
   hookMeta?: any;
 };
 
-const ApiCreateModal = ({ modal, hookMeta }: Props) => {
+const ClientCreateModal = ({ modal, hookMeta }: Props) => {
   //   const $meta = useMetaStore((state: any) => state.meta);
   const hookMachaApi = useMachaApi();
   const $loadOverviewData = useMetaStore(
@@ -97,4 +97,4 @@ const ApiCreateModal = ({ modal, hookMeta }: Props) => {
   );
 };
 
-export default ApiCreateModal;
+export default ClientCreateModal;

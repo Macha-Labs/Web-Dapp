@@ -15,7 +15,7 @@ type Props = {
   id?: any;
 };
 
-const layoutInputs = ({
+const LayoutInputs = ({
   id,
   index,
   style,
@@ -50,4 +50,4 @@ const layoutInputs = ({
     </div>
   );
 };
-export default layoutInputs;
+export default LayoutInputs;

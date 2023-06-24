@@ -1,8 +1,6 @@
 import { style } from "@/styles/StyledConstants";
 import {
-  Input,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -10,7 +8,6 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import React from "react";
 
 type Props = {
   variant?: string;

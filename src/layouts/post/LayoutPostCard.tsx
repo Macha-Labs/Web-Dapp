@@ -1,14 +1,13 @@
 import IconImage from "@/_ui/icons/IconImage";
 import { helperIPFS } from "@/helpers";
-import { likePost, unlikePost } from "@/helpers/lens/lens";
 import useLensPosts from "@/hooks/lens/useLensPosts";
 import {
   StyledCol,
-  StyledRow,
   StyledPostCard,
+  StyledRow,
 } from "@/styles/StyledComponents";
-import { Avatar, Button, Flex, Heading, Text, Image } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { Avatar, Heading, Image, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 const LayoutPostCard = (props: any) => {
   const hookLensPosts = useLensPosts();

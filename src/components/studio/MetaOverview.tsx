@@ -1,11 +1,8 @@
-import ImageCarousal from "@/_ui/carousal/ImageCarousal";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import { Text } from "@chakra-ui/react";
-import React from "react";
-import MetaCreateInfoCard from "./MetaCreateInfoCard";
-import { metaCreateInfoData } from "@/data/constantData";
 import { setDate } from "@/helpers";
+import { Text } from "@chakra-ui/react";
+import MetaCreateInfoCard from "./MetaCreateInfoCard";
 
 type Props = {
   metaInfo: any;

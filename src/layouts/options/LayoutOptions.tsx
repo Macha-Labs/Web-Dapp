@@ -1,10 +1,6 @@
 import IconImage from "@/_ui/icons/IconImage";
-import {
-  StyledIcon,
-  StyledRow,
-  StyledOptionsCard,
-} from "@/styles/StyledComponents";
-import { Heading, Text } from "@chakra-ui/react";
+import { StyledOptionsCard, StyledRow } from "@/styles/StyledComponents";
+import { Text } from "@chakra-ui/react";
 
 const LayoutOptions = (props: any) => {
   return (

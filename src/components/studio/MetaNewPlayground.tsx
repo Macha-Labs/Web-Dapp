@@ -1,18 +1,11 @@
 import MCard from "@/_sdk/MCard";
-import JSONViewer from "@/_ui/JSONViewer";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
-import InputLabel from "@/_ui/input/InputLabel";
-import InputSelect from "@/_ui/input/InputSelect";
 import { truncateString } from "@/helpers";
-import useMeta from "@/hooks/studio/useMeta";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
 import {
-  Heading,
   Input,
   InputGroup,
   InputRightElement,
@@ -33,9 +26,7 @@ function MetaNewPlayground({ id }: Props) {
 
   const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
-  const [selectedOption, setSelectedOption] = useState(options[0].value);
-  const [selectedOrigin, setSelectedOrigin] = useState("");
-  const [selectedTrigger, setSelectedTrigger] = useState("");
+  const [selectedOption, setSelectedOption] = useState<any>(options[0].value);
 
   useEffect(() => {
     console.log("Logging $meta ", $metaInfo);

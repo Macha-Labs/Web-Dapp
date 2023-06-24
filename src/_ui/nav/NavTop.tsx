@@ -3,7 +3,6 @@ import Link from "next/link";
 import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
-import Tabs from "../tabs/Tabs";
 
 type Props = {
   rightElem?: any;

@@ -1,8 +1,5 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import React from "react";
-import IconImage from "@/_ui/icons/IconImage";
 import IconBase from "../icons/IconsBase";
-import { style as gStyle } from "../../styles/StyledConstants";
 
 type Props = {
   type?: string;

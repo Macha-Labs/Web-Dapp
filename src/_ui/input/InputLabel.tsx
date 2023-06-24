@@ -1,4 +1,4 @@
-import layoutInputs from "@/layouts/options/LayoutInputs";
+import LayoutInputs from "@/layouts/options/LayoutInputs";
 import LayoutTextArea from "@/layouts/options/LayoutTextArea";
 import { StyledCard } from "@/styles/StyledComponents";
 import { Box, Heading, Text } from "@chakra-ui/react";
@@ -67,14 +67,14 @@ const InputLabel = ({
         )}
 
         <StyledCard className="w-100">
-          {layoutInputs({
+          {LayoutInputs({
             id,
             elementRef,
             placeholder,
             defaultValue,
             onChange,
             disabled,
-            style
+            style,
           })}
         </StyledCard>
       </FlexColumn>

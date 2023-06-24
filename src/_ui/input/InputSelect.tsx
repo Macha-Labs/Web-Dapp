@@ -1,6 +1,5 @@
-import { Select, Text } from "@chakra-ui/react";
-import IconImage from "../icons/IconImage";
 import { style } from "@/styles/StyledConstants";
+import { Select, Text } from "@chakra-ui/react";
 import IconBase from "../icons/IconsBase";
 
 type Props = {

@@ -16,7 +16,7 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 
 const User = () => {
   const authContext = useContext(AuthContext);
-  const [tabwindow, setTabwindow] = useState("UserProfile");
+  const [tabwindow, setTabwindow] = useState<string>("UserProfile");
   const modalAuth = useDisclosure();
   const modalEdit = useDisclosure();
   const userSettings = [

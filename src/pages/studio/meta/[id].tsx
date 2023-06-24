@@ -28,20 +28,6 @@ const CreateMeta = () => {
   const $address = useAuthStore((state: any) => state.address);
 
   useEffect(() => {
-    // if ($userMetasMap) {
-    //   console.log("logging the router query", router.query);
-    //   let currentId: any = router?.query?.id;
-    //   let storedMetaId: any = getItemFromLocal("currentMetaId");
-    //   if (currentId && currentId != storedMetaId) {
-    //     setItemOnLocal("currentMetaId", router?.query?.id);
-    //     setCurrentMetaId(currentId);
-    //     hookMeta.metaInit($userMetasMap[currentId]);
-    //   } else {
-    //     console.log("storedMetaid", storedMetaId);
-    //     setCurrentMetaId(storedMetaId);
-    //     hookMeta.metaInit($userMetasMap[storedMetaId]);
-    //   }
-    // }
     if ($userApisMap) {
       let currentApiId: any = router?.query?.id;
       let storedApiId: any = getItemFromLocal("currentApiId");
@@ -105,7 +91,6 @@ const CreateMeta = () => {
   };
 
   const renderBody = () => {
-    // console.log("$mta")
     return (
       <>
         {" "}
@@ -122,15 +107,7 @@ const CreateMeta = () => {
             </FlexRow>
             <Tabs
               width="40%"
-              // gstyle={{ fontSize: `${style.font.h5}`, fontWeight: "600" }}
-              // options={createMetaOptions}
               options={options}
-              // $meta.owner == $address
-              //   ? $meta?.status?.status == "PENDING"
-              //     ? createMetaOptions.splice(2, 1)
-              //     : createMetaOptions
-              //   : createMetaOptions.slice(0, -2)
-
               value={selectedTab}
               onChange={(value: any) => setSelectedTab(value)}
               gstyle={{ fontSize: `${style.font.h5}` }}

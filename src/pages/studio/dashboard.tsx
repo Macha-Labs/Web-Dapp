@@ -37,9 +37,9 @@ const DashBoard = () => {
   const $userApis = useUserStore((state: any) => state.userApis);
 
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
-  const [filteredData, setFilteredData] = useState($userMetas);
-  const [selectedNavTab, setSelectedNavTab] = useState("Your APIs");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [filteredData, setFilteredData] = useState<any>($userMetas);
+  const [selectedNavTab, setSelectedNavTab] = useState<string>("Your APIs");
   const [exploreMeta, setExploreMeta] = useState<any>([]);
 
   const handleFilter = (inputValue: string) => {

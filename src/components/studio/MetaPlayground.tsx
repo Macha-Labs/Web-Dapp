@@ -5,7 +5,6 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
-import useMeta from "@/hooks/studio/useMeta";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
 import { Heading, Text } from "@chakra-ui/react";
@@ -17,37 +16,13 @@ type Props = {
 function MetaPlayground({ id }: Props) {
   const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
-  const [selectedOrigin, setSelectedOrigin] = useState("");
-  const [selectedTrigger, setSelectedTrigger] = useState("");
+  const [selectedOrigin, setSelectedOrigin] = useState<any>("");
+  const [selectedTrigger, setSelectedTrigger] = useState<any>("");
+  const [resultData, setResultData] = useState<any>({});
 
   useEffect(() => {
     console.log("Logging $meta ", $metaInfo);
   }, [$metaInfo]);
-
-  const [resultData, setResultData] = useState({});
-
-  const convertStringToJson = (input: string) => {
-    const trimmedString = input.trim();
-    if (
-      trimmedString[0] !== "{" ||
-      trimmedString[trimmedString.length - 1] !== "}"
-    ) {
-      throw new Error(
-        "Invalid string format. The string should be wrapped in curly braces."
-      );
-    }
-    const jsonString = trimmedString.slice(1, -1);
-    const keyValuePairs = jsonString.split(",");
-    const jsonObject: any = {};
-    for (let pair of keyValuePairs) {
-      const [key, value] = pair.split(":");
-      const trimmedKey = key.trim().replace(/(^['"])|(['"]$)/g, "");
-      const trimmedValue = value.trim().replace(/(^['"])|(['"]$)/g, "");
-      jsonObject[trimmedKey] = trimmedValue;
-    }
-    console.log("jsonObject", jsonObject);
-    return jsonObject;
-  };
 
   return (
     <FlexRow width="100%" hrAlign="space-between" vrAlign="flex-start">

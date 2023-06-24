@@ -1,13 +1,10 @@
-import React from "react";
-import { StyledRow, StyledNav } from "../../styles/StyledComponents";
+import { style } from "@/styles/StyledConstants";
 import { Image, Tooltip } from "@chakra-ui/react";
 import Link from "next/link";
-import ModalPage from "../modal/ModalPage";
-import IconImage from "../icons/IconImage";
 import { useRouter } from "next/router";
-import FlexRow from "../flex/FlexRow";
-import { style } from "@/styles/StyledConstants";
 import FlexColumn from "../flex/FlexColumn";
+import FlexRow from "../flex/FlexRow";
+import IconImage from "../icons/IconImage";
 
 const NavLeft = (props: any) => {
   const router = useRouter();

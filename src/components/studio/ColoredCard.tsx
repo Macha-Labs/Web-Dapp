@@ -1,10 +1,8 @@
-import TagNative from "@/_ui/tag/TagNative";
-import { style } from "@/styles/StyledConstants";
-import { Image, Text } from "@chakra-ui/react";
-import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import { truncateString } from "@/helpers";
 import IconBase from "@/_ui/icons/IconsBase";
+import { truncateString } from "@/helpers";
+import { style } from "@/styles/StyledConstants";
+import { Text } from "@chakra-ui/react";
 
 type Props = {
   image: string;

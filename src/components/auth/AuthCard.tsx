@@ -10,7 +10,7 @@ const AuthCard = () => {
   console.log("Rendering >>>>> AuthCard");
   const authContext = useContext(AuthContext);
   const toast = useToast();
-  const [mobile, setMobile] = useState(false);
+  const [mobile, setMobile] = useState<boolean>(false);
 
   useEffect(() => {
     if (window.innerWidth < 1024) {

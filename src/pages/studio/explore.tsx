@@ -14,7 +14,7 @@ import { exploreModules } from "@/data/studio/constant";
 import useAlchemy from "@/hooks/studio/useAlchemy";
 import { Text } from "@chakra-ui/react";
 
-export default function DashBoard() {
+export default function Explore() {
   const hookAlchemy = useAlchemy();
   const [exploreMeta, setExploreMeta] = useState<any>([]);
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Your Metas");

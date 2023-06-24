@@ -1,5 +1,4 @@
 import { style } from "@/styles/StyledConstants";
-import { Children } from "react";
 
 type Props = {
   header?: any;

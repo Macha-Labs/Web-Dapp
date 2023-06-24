@@ -36,8 +36,8 @@ function MetaSettings({ metaInfo }: Props) {
   const metaEditModal = useDisclosure();
   const toast = useToast();
 
-  const [selectedOrigin, setSelectedOrigin] = useState(null);
-  const [selectedTrigger, setSelectedTrigger] = useState(null);
+  const [selectedOrigin, setSelectedOrigin] = useState<any>(null);
+  const [selectedTrigger, setSelectedTrigger] = useState<any>(null);
 
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   const $triggerData = useMetaStore((state: any) => state.triggerData);

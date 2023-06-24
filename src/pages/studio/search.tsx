@@ -1,35 +1,25 @@
-import MCard from "@/_sdk/MCard";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import IconBase from "@/_ui/icons/IconsBase";
 import NavTop from "@/_ui/nav/NavTop";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
 import WalletButton from "@/components/buttons/WalletButton";
 import SearchHeader from "@/components/search/SearchHeader";
 import SearchList from "@/components/search/SearchList";
-import { truncateString } from "@/helpers";
 import useMachaSearch from "@/hooks/studio/useMachaSearch";
 import useAuthStore from "@/store/useAuthStore";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
-import {
-  Input,
-  InputGroup,
-  InputRightElement,
-  Select,
-  Text,
-} from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Search = () => {
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
   const $address = useAuthStore((state: any) => state.address);
 
-  const [selectedOrigin, setSelectedOrigin] = useState("");
-  const [selectedTrigger, setSelectedTrigger] = useState("");
+  const [selectedOrigin, setSelectedOrigin] = useState<string>("");
+  const [selectedTrigger, setSelectedTrigger] = useState<string>("");
 
   const hookMachaSearch = useMachaSearch();
 

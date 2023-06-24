@@ -1,10 +1,10 @@
 import { StyledLi } from "@/styles/StyledComponents";
+import { style } from "@/styles/StyledConstants";
+import { Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import IconImage from "../icons/IconImage";
 import FlexRow from "../flex/FlexRow";
-import { Divider, Text } from "@chakra-ui/react";
-import { style } from "@/styles/StyledConstants";
+import IconImage from "../icons/IconImage";
 
 type Props = {
   options: any;

@@ -1,8 +1,5 @@
 import ButtonMenu from "@/_ui/buttons/ButtonMenu";
-import { truncateAddress } from "@/helpers";
-import Search from "@/pages/studio/search";
 import useAuthStore from "@/store/useAuthStore";
-import { style } from "@/styles/StyledConstants";
 import { useRouter } from "next/router";
 
 type Props = {

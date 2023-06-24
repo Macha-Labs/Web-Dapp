@@ -12,7 +12,7 @@ import { StyledCard } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
 import { Heading, Text } from "@chakra-ui/react";
 
-export default function DashBoard() {
+export default function Settings() {
   const dashboardNav: any = [
     {
       value: "API Keys",
