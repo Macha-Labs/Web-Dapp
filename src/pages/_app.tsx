@@ -36,10 +36,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>MetaWork: Chat Platform</title>
+        <title>Macha</title>
         <meta
           name="description"
-          content="Building Private and Secured Decentralized Suite"
+          content="Building Interoperable Web"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:image" content="/assets/Chat-Screen.png" />

@@ -96,7 +96,7 @@ const CreateMeta = () => {
         {" "}
         <NavBlock
           back={() => {
-            router.push("/studio/dashboard");
+            router.push("/data-studio");
           }}
         >
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">

@@ -17,21 +17,21 @@ const NavButton = ({ marginLeft, marginRight }: Props) => {
       value: "Search",
       leftIcon: "icon-search24",
       onClick: () => {
-        router.push("/studio/search");
+        router.push("/search");
       },
     },
     {
-      value: "Ads Network",
+      value: "Nft Studio",
       leftIcon: "icon-adsNetwork",
       onClick: () => {
-        router.push("/studio/ads");
+        router.push("/nft-studio");
       },
     },
     {
-      value: "Data Network",
+      value: "Data Studio",
       leftIcon: "icon-dataNetwork",
       onClick: () => {
-        router.push("/studio/dashboard");
+        router.push("/data-studio");
       },
     },
   ];

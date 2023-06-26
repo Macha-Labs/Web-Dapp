@@ -9,7 +9,7 @@ import { style } from "@/styles/StyledConstants";
 import { useEffect, useState } from "react";
 
 import FlexColumn from "@/_ui/flex/FlexColumn";
-import ColoredCard from "@/components/studio/ColoredCard";
+import ColoredCard from "@/components/cards/ColoredCard";
 import { exploreModules } from "@/data/studio/constant";
 import useAlchemy from "@/hooks/studio/useAlchemy";
 import { Text } from "@chakra-ui/react";
