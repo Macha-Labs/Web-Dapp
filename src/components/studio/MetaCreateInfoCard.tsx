@@ -60,7 +60,7 @@ function MetaCreateInfoCard({ data }: Props) {
             </FlexColumn>
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
               <Text fontWeight={700} className="m-b-0-5">
-                SLUG
+                CID
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
                 <Text className="m-b-0">{truncateAddress(data?.ipfsCid)}</Text>
@@ -82,7 +82,7 @@ function MetaCreateInfoCard({ data }: Props) {
             </FlexColumn>
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
               <Text fontWeight={700} className="m-b-0-5">
-                META ID
+                API ID
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
                 <Text className="m-b-0">{data?.id}</Text>

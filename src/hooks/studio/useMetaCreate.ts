@@ -58,6 +58,7 @@ const useMetaCreate = () => {
     }
 
     console.log("The Api payload data is ", apiPayload);
+    console.log("The macha instance is ", $macha);
     await $macha.publisher.apiCreation(apiPayload);
   }
 

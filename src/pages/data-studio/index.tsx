@@ -111,13 +111,14 @@ const DashBoard = () => {
                 {!isLoading &&
                   filteredData &&
                   filteredData.map((item: any, index: number) => {
+                    console.log("Checking request ", item.request);
                     return (
                       <MetaCard
                         key={index}
                         cardView="horizontal"
                         heading={item.name}
                         description={item.description}
-                        tags={item.tags ? item?.tags : ""}
+                        tags={[item.request?.requestType, item.request?.requestMethod]}
                         onCardClick={() => {
                           router.push(
                             {

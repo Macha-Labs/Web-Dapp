@@ -114,12 +114,13 @@ const useMachaAuth = () => {
     }
 
     console.log(authPayload, clientData);
-    await $macha.createClient(authPayload, clientData);
+    await $macha.createClient(clientData, authPayload);
   }
 
   const registerPublisher = async() => {
     const publisherPayload = {
-      clientId: $address ? $address.toLowerCase() : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae"
+      id: "",
+      owner: $address ? $address.toLowerCase() : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae"
     }
 
     const authPayload = {

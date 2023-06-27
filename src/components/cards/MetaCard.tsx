@@ -8,7 +8,7 @@ type Props = {
   image?: string;
   heading: string;
   description: string;
-  tags?: any;
+  tags?: string[];
   width?: any;
   cardView?: string;
   onCardClick?: any;
@@ -25,7 +25,7 @@ export default function MetaCard({
   onCardClick = (e?: any) => {},
   height,
 }: Props) {
-
+  console.log("Got tags ", tags);
   const horizontalView = () => {
     return (
       <>
@@ -64,19 +64,17 @@ export default function MetaCard({
             <Text>{truncateString(description, 30)}</Text>
 
             <FlexRow height="fit-content" hrAlign="flex-start" width="100%">
-              <TagNative
-                value="Tag 1"
-                variant="state_xmtp"
-                size="sm"
-                lineHeight="1.5"
-              />
-              <TagNative
-                value="Tag 1"
-                variant="state_xmtp"
-                marginRight="xxs"
-                size="sm"
-                lineHeight="1.5"
-              />
+              {tags?.map((tag: string, index: number) => {
+                return (
+                  <TagNative
+                    key={index}
+                    value={tag}
+                    variant="state_xmtp"
+                    size="sm"
+                    lineHeight="1.5"
+                  />
+                );
+              })}
             </FlexRow>
           </div>
         </div>
