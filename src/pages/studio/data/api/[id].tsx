@@ -4,7 +4,7 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavBlock from "@/_ui/nav/NavBlock";
 import Tabs from "@/_ui/tabs/Tabs";
 import MetaCurator from "@/components/studio/MetaCurator";
-import MetaNewPlayground from "@/components/studio/MetaNewPlayground";
+import SearchDetails from "@/components/search/SearchDetails";
 import MetaOverview from "@/components/studio/MetaOverview";
 import MetaSettings from "@/components/studio/MetaSettings";
 import { getItemFromLocal, setItemOnLocal } from "@/helpers";
@@ -82,7 +82,7 @@ const CreateMeta = () => {
       case "Curators":
         return <MetaCurator />;
       case "Playground":
-        return <MetaNewPlayground id={currentApiId} />;
+        return <SearchDetails id={currentApiId} />;
       case "Settings":
         return <MetaSettings metaInfo={$userApisMap[currentApiId]} />;
       default:

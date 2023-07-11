@@ -94,6 +94,8 @@ const GlobalIcons: any = {
   "icon-chevron-next":
     "/icons/png/Base-blue_icons/base-blue-chevronNext.png?updatedAt=1680703639925",
   "icon-chevron-down": "/icons/svg/Base-blue/base-blue-chevronDown.svg",
+  "icon-chevron-up":
+    "/icons/svg/Base-blue/base-blue-chevronUp.svg?updatedAt=1680783858756",
   "icon-reply":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-replyFilled.svg",
   "icon-close": "/icons/svg/Base-blue/base-blue-cancel.svg",

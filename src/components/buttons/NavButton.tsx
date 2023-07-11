@@ -24,14 +24,14 @@ const NavButton = ({ marginLeft, marginRight }: Props) => {
       value: "Nft Studio",
       leftIcon: "icon-adsNetwork",
       onClick: () => {
-        router.push("/nft-studio");
+        router.push("/studio/nft");
       },
     },
     {
       value: "Data Studio",
       leftIcon: "icon-dataNetwork",
       onClick: () => {
-        router.push("/data-studio");
+        router.push("/studio/data");
       },
     },
   ];

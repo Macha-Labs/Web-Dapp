@@ -18,9 +18,7 @@ const useMachaAuth = () => {
   );
   const $loadUserMetas = useUserStore((state: any) => state.loadUserMetas);
 
-  const $loadUserApisMap = useUserStore(
-    (state: any) => state.loadUserApisMap
-  );
+  const $loadUserApisMap = useUserStore((state: any) => state.loadUserApisMap);
   const $loadUserApis = useUserStore((state: any) => state.loadUserApis);
 
   let provider;
@@ -64,14 +62,16 @@ const useMachaAuth = () => {
     fetchPendingMeta("0x4eff290c1a734411b39aaa96eabe1e25f0e223ae").then(
       (res) => {
         console.log("response penging", res);
-        const allMetas = [...$macha?.client?.metasOwned?.data, ...res.data];
+        const allMetas = $macha?.client?.metasOwned?.data
+          ? [...$macha?.client?.metasOwned?.data, ...res.data]
+          : [$macha?.client?.metasOwned?.data, ...res.data];
         console.log("allMetas", allMetas);
         $loadUserMetas(allMetas);
         let userMetaMap: any = {};
         allMetas.filter((item: any, index: number) => {
           item?.state?.status == "PENDING"
             ? (userMetaMap[item._id.toString()] = item)
-            : (userMetaMap[item.id] = item);
+            : (userMetaMap[item?.id] = item);
         });
         console.log("userMetaMap", userMetaMap);
         $loadUserMetasMap(userMetaMap);
@@ -81,16 +81,16 @@ const useMachaAuth = () => {
     // return res;
   };
 
-  const fetchingApis = async() => {
-    $loadUserApis($macha.client.apisOwned?.data);
+  const fetchingApis = async () => {
+    $loadUserApis($macha.client?.apisOwned?.data);
     let userApisMap: any = {};
-    $macha.client.apisOwned?.data.map((item: any, index: number) => {
+    $macha.client?.apisOwned?.data.map((item: any, index: number) => {
       console.log("Api name ", item?.name);
       userApisMap[item?.id] = item;
     });
     $loadUserApisMap(userApisMap);
     return;
-  }
+  };
 
   useEffect(() => {
     console.log("Logging client ", $macha.client); // getting the right value
@@ -101,41 +101,46 @@ const useMachaAuth = () => {
     console.log("pending metas", pending);
   }, [$macha]);
 
-  const registerClient = async() => {
+  const registerClient = async () => {
     const authPayload = {
-      owner: $address ? $address.toLowerCase() : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
-      signer: $signer
-    }
+      owner: $address
+        ? $address.toLowerCase()
+        : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
+      signer: $signer,
+    };
     const clientData = {
       name: clientDataRef.current["name"].value,
       description: clientDataRef.current["description"].value,
       image: "",
-      admins: clientDataRef.current["admins"].value
-    }
+      admins: clientDataRef.current["admins"].value,
+    };
 
     console.log(authPayload, clientData);
     await $macha.createClient(clientData, authPayload);
-  }
+  };
 
-  const registerPublisher = async() => {
+  const registerPublisher = async () => {
     const publisherPayload = {
       id: "",
-      owner: $address ? $address.toLowerCase() : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae"
-    }
+      owner: $address
+        ? $address.toLowerCase()
+        : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
+    };
 
     const authPayload = {
-      owner: $address ? $address.toLowerCase() : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
-      signer: $signer
-    }
+      owner: $address
+        ? $address.toLowerCase()
+        : "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
+      signer: $signer,
+    };
 
     await $macha.createPublisher(publisherPayload, authPayload);
-    
-  }
+  };
 
   return {
     clientDataRef: clientDataRef,
     registerClient: registerClient,
-    registerPublisher: registerPublisher
+    registerPublisher: registerPublisher,
   };
 };
 export default useMachaAuth;

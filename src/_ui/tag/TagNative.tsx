@@ -42,7 +42,7 @@ const TagNative = ({
       key={size ? size : "md"}
       borderRadius={"2xl"}
       // variant={variant ? variant : "solid"}
-      bgGradient={variant == "gray" ? "gray" : style.dropdown.bg.active}
+      bgGradient={variant ? variant : style.dropdown.bg.active}
       marginTop={marginTop}
       marginRight={style.margin[marginRight]}
       marginBottom={marginBottom}
