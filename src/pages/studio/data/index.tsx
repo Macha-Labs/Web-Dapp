@@ -17,7 +17,8 @@ import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import { dashboardModules } from "@/data/studio/constant";
 import { displayImage } from "@/helpers/storage/lightHouseStorage";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
-import { fetchAllMetas } from "@/service/studio/MetaService";
+import useTransaction from "@/hooks/studio/useTransaction";
+import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
@@ -49,6 +50,7 @@ const DashBoard = () => {
 
   const fetchmetas = async () => {
     const allMetas = await fetchAllMetas();
+
     setExploreMeta(allMetas.data);
   };
 
@@ -95,82 +97,83 @@ const DashBoard = () => {
     return (
       <>
         {selectedNavTab == "Your APIs" && (
-            <>
-              <FlexRow
-                hrAlign="flex-start"
-                width="100%"
-                flexWrap="wrap"
-                // padding={style.body.padding}
-                paddingTop="md"
-              >
-                {isLoading && (
-                  <FlexRow height="500px">
-                    <Loader size="lg" />
-                  </FlexRow>
-                )}
-                {!isLoading &&
-                  filteredData &&
-                  filteredData.map((item: any, index: number) => {
-                    console.log("Checking request ", item.request);
-                    return (
-                      <MetaCard
-                        key={index}
-                        cardView="horizontal"
-                        heading={item.name}
-                        description={item.description}
-                        tags={[item.request?.requestType, item.request?.requestMethod]}
-                        onCardClick={() => {
-                          router.push(
-                            {
-                              pathname: "/data-studio/api/[id]",
-                              query: {
-                                id:
-                                  item.state.status == "PENDING"
-                                    ? item._id
-                                    : item.id,
-                              },
-                            },
-                            `/data-studio/api/${
-                              item.state.status == "PENDING"
-                                ? item._id
-                                : item.id
-                            }`
-                          );
-                        }}
-                      />
-                    );
-                  })}
-              </FlexRow>
-            </>
-          )}
-      </>
-    )
-  }
-
-  const renderExplore = () => {
-    return (
-      <> 
-         {selectedNavTab == "Explore" && (
-            <>
-              <FlexRow hrAlign="flex-start" marginTop={"md"} flexWrap="wrap">
-                {dashboardModules.map((item: any, index: number) => {
+          <>
+            <FlexRow
+              hrAlign="flex-start"
+              width="100%"
+              flexWrap="wrap"
+              // padding={style.body.padding}
+              paddingTop="md"
+            >
+              {isLoading && (
+                <FlexRow height="500px">
+                  <Loader size="lg" />
+                </FlexRow>
+              )}
+              {!isLoading &&
+                filteredData &&
+                filteredData.map((item: any, index: number) => {
+                  console.log("Checking request ", item.request);
                   return (
-                    <ColoredCard
+                    <MetaCard
                       key={index}
-                      heading={item.heading}
+                      cardView="horizontal"
+                      heading={item.name}
                       description={item.description}
-                      image={item.image}
-                      bg={item.bg}
-                      borderColor={item.borderColor}
+                      tags={[
+                        item.request?.requestType,
+                        item.request?.requestMethod,
+                      ]}
+                      onCardClick={() => {
+                        router.push(
+                          {
+                            pathname: "/studio/data/api/[id]",
+                            query: {
+                              id:
+                                item.state.status == "PENDING"
+                                  ? item._id
+                                  : item.id,
+                            },
+                          },
+                          `/studio/data/api/${
+                            item.state.status == "PENDING" ? item._id : item.id
+                          }`
+                        );
+                      }}
                     />
                   );
                 })}
-              </FlexRow>
-            </>
-          )}
+            </FlexRow>
+          </>
+        )}
       </>
-    )
-  }
+    );
+  };
+
+  const renderExplore = () => {
+    return (
+      <>
+        {selectedNavTab == "Explore" && (
+          <>
+            <FlexRow hrAlign="flex-start" marginTop={"md"} flexWrap="wrap">
+              {dashboardModules.map((item: any, index: number) => {
+                return (
+                  <ColoredCard
+                    key={index}
+                    heading={item.heading}
+                    description={item.description}
+                    image={item.image}
+                    bg={item.bg}
+                    borderColor={item.borderColor}
+                  />
+                );
+              })}
+            </FlexRow>
+          </>
+        )}
+      </>
+    );
+  };
 
   const renderBody = () => {
     if (!$address) return null;

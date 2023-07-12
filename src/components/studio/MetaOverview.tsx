@@ -1,8 +1,9 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { setDate } from "@/helpers";
-import { Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import MetaCreateInfoCard from "./MetaCreateInfoCard";
+import { style } from "@/styles/StyledConstants";
 
 type Props = {
   metaInfo: any;
@@ -17,7 +18,7 @@ function MetaOverview({ metaInfo }: Props) {
   };
 
   return (
-    <>
+    <Box paddingTop={style.padding["xxxl"]}>
       <MetaCreateInfoCard data={metaInfo} />
       <FlexRow vrAlign="flex-start" marginTop={"xl"}>
         <FlexColumn width="60%" vrAlign="flex-start">
@@ -51,7 +52,7 @@ function MetaOverview({ metaInfo }: Props) {
         </FlexColumn>
         <FlexColumn width="40%">{/* <ImageCarousal /> */}</FlexColumn>
       </FlexRow>
-    </>
+    </Box>
   );
 }
 

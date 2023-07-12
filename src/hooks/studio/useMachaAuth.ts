@@ -1,4 +1,4 @@
-import { fetchPendingMeta } from "@/service/studio/MetaService";
+import { fetchPendingMeta } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { Macha } from "@metaworklabs/macha-dev-sdk/lib";

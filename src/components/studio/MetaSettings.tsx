@@ -3,7 +3,7 @@ import CardPannel from "@/_ui/cards/CardPannel";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import useMetaCreate from "@/hooks/studio/useMetaCreate";
-import { deleteMetaInit } from "@/service/studio/MetaService";
+import { deleteMetaInit } from "@/service/MetaService";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
 import {

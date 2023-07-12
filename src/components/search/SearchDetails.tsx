@@ -4,9 +4,11 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
+import useTransaction from "@/hooks/studio/useTransaction";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
-import { Avatar, Box, Divider, Text } from "@chakra-ui/react";
+import { Avatar, Box, Divider, Text, useRadio } from "@chakra-ui/react";
+import { fetchTransaction } from "@wagmi/core";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -19,18 +21,11 @@ function SearchDetails({ id }: Props) {
     { value: "paragraph.xyz", label: "Paragraph.xyz" },
   ];
 
-  const details = [
-    { key: "Block", value: "	17661009" },
-    { key: "Block Confirmations ", value: "	17661009" },
-    { key: "ETH Price	", value: "	17661009" },
-    { key: "Gas Used	", value: "	17661009" },
-    { key: "Gas Price	", value: "	17661009" },
-    { key: "Txn Type	", value: "	17661009" },
-    { key: "Nonce", value: "	17661009" },
-  ];
+  const hookTransaction = useTransaction();
 
   const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
+
   const [selectedOption, setSelectedOption] = useState<any>(options[0].value);
   const [detailToggle, setDetailsToggle] = useState<any>(false);
   const [hexToggle, setHexToggle] = useState<any>(false);
@@ -64,28 +59,19 @@ function SearchDetails({ id }: Props) {
 
   return (
     <>
-      <FlexRow marginTop={"xxl"} hrAlign="space-between">
-        <Text fontSize={style.font.h1} fontWeight={600}>
+      <FlexRow marginTop={"xxl"} hrAlign="space-between" vrAlign="flex-end">
+        <Text
+          fontSize={style.font.h1}
+          fontWeight={600}
+          className="mb-0"
+          lineHeight={style.font.h1}
+          marginTop={style.margin["sm"]}
+        >
           Intraction Details
         </Text>
         <ButtonNative variant="state_brand" text="Share" marginRight="0px" />
       </FlexRow>
-      <Tabs
-        options={[
-          {
-            href: "",
-            value: "Details",
-          },
-          {
-            href: "",
-            value: "Internal",
-          },
-          {
-            href: "",
-            value: "Logs",
-          },
-        ]}
-      />
+
       <Divider />
       <FlexRow hrAlign="start" marginBottom={"xs"}>
         <TagNative variant="green" value="Success" size="sm" />
@@ -115,8 +101,11 @@ function SearchDetails({ id }: Props) {
                   </td>
                   <td>
                     <FlexColumn vrAlign="start" marginLeft={"sm"}>
-                      <Text className="mb-0">0xeb...f7ee</Text>
-                      <Text className="mb-0">Ethereum</Text>
+                      <Text className="mb-0">
+                        {hookTransaction?.transactionDetails &&
+                          hookTransaction.transactionDetails[4]?.value}
+                      </Text>
+                      {/* <Text className="mb-0">Ethereum</Text> */}
                     </FlexColumn>
                   </td>
                 </tr>
@@ -138,17 +127,18 @@ function SearchDetails({ id }: Props) {
                   <td>
                     <FlexRow hrAlign="flex-start">
                       <Text className="mb-0" marginStart={style.margin.sm}>
-                        Transfer
+                        {hookTransaction?.transactionDetails &&
+                          hookTransaction.transactionDetails[7]?.value}
                       </Text>
                       <Text className="mb-0" marginLeft={style.margin["xxs"]}>
-                        0.295 ETH
+                        {/* 0.295 ETH */}
                       </Text>
                       <Text
                         className="mb-0"
                         color="rgba(255,255,255,0.7)"
                         marginLeft={style.margin["xxs"]}
                       >
-                        $ 549.68
+                        {/* $ 549.68 */}
                       </Text>
                     </FlexRow>
                   </td>
@@ -170,14 +160,17 @@ function SearchDetails({ id }: Props) {
                   </td>
                   <td>
                     <FlexColumn vrAlign="start" marginLeft={"sm"}>
-                      <Text className="mb-0">0xeb...f7ee</Text>
-                      <Text className="mb-0">Ethereum</Text>
+                      <Text className="mb-0">
+                        {hookTransaction?.transactionDetails &&
+                          hookTransaction.transactionDetails[5]?.value}
+                      </Text>
+                      {/* <Text className="mb-0">Ethereum</Text> */}
                     </FlexColumn>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <Divider
+            {/* <Divider
               border={style.card.border.meta}
               marginY={style.margin["sm"]}
             />
@@ -244,7 +237,7 @@ function SearchDetails({ id }: Props) {
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </table> */}
           </Box>
           <Box
             width={"100%"}
@@ -279,7 +272,7 @@ function SearchDetails({ id }: Props) {
                 style={{ marginTop: `${style.margin["xl"]}`, width: "100%" }}
               >
                 <tbody>
-                  {details.map((item) => {
+                  {hookTransaction?.transactionDetails.map((item: any) => {
                     return (
                       <tr
                         style={{
