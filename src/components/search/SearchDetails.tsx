@@ -12,17 +12,17 @@ import { fetchTransaction } from "@wagmi/core";
 import { useEffect, useState } from "react";
 
 type Props = {
-  id: string;
+  id: string,
+  transactionHash: string | string[] | undefined
 };
-function SearchDetails({ id }: Props) {
+function SearchDetails({ id, transactionHash }: Props) {
   const options = [
     { value: "snapshot", label: "SnapShot" },
     { value: "poap", label: "POAP" },
     { value: "paragraph.xyz", label: "Paragraph.xyz" },
   ];
 
-  const hookTransaction = useTransaction();
-
+  const hookTransaction = useTransaction()
   const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
 
@@ -34,6 +34,10 @@ function SearchDetails({ id }: Props) {
   useEffect(() => {
     console.log("Logging $meta ", $metaInfo);
   }, [$metaInfo]);
+
+  useEffect(() => {
+    hookTransaction.fetchTransactionData(transactionHash)
+  },[])
 
   // const [query, setQuery] = useState("");
 
@@ -75,6 +79,7 @@ function SearchDetails({ id }: Props) {
       <Divider />
       <FlexRow hrAlign="start" marginBottom={"xs"}>
         <TagNative variant="green" value="Success" size="sm" />
+        {/* TODO: make dynamic */}
         <Text className="mb-0">about 1 hour ago </Text>
         <Text
           color="rgba(255,255,255,0.5)"
@@ -82,6 +87,7 @@ function SearchDetails({ id }: Props) {
           marginStart={style.margin.xxs}
         >
           {" "}
+          {/* TODO: make dynamic */}
           Jul 8 2023 at 11:30:47 AM
         </Text>
       </FlexRow>
@@ -127,7 +133,7 @@ function SearchDetails({ id }: Props) {
                   <td>
                     <FlexRow hrAlign="flex-start">
                       <Text className="mb-0" marginStart={style.margin.sm}>
-                        {hookTransaction?.transactionDetails &&
+                        {hookTransaction.transactionDetails &&
                           hookTransaction.transactionDetails[7]?.value}
                       </Text>
                       <Text className="mb-0" marginLeft={style.margin["xxs"]}>

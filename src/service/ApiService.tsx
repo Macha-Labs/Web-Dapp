@@ -13,9 +13,26 @@ export const transactionData = async (transactionHash: string) => {
   const data = await response.json();
   return data;
 };
+
 export const contractData = async (contractName: string) => {
   const response = await fetch(
     `${config.metaServer}/indexer/transactions/fetch-by-name/${contractName}`
+  );
+  const data = await response.json();
+  return data;
+};
+
+export const contractDataBySlug = async (contractSlug: string) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/transactions/fetch-by-slug/${contractSlug}`
+  );
+  const data = await response.json();
+  return data;
+};
+
+export const allContracts = async () => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/transactions/fetchAll`
   );
   const data = await response.json();
   return data;

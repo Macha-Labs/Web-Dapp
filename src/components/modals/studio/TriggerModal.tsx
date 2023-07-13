@@ -35,7 +35,7 @@ const TriggerModal = ({
       console.log("Calling request method");
       settingRequestMethod(defaultData?.requestType);
     }
-  }, []);
+  }, [defaultData,settingRequestMethod]);
   return (
     <ModalSlider
       event={modal}

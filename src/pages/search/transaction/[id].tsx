@@ -52,13 +52,15 @@ const SearchResult = () => {
 
   const [selectedTab, setSelectedTab] = useState("Details");
 
+  const id = router.query.id
+
   const renderBody = () => {
     return (
       <>
         {" "}
         <NavBlock
           back={() => {
-            router.push("/search");
+            router.back();
           }}
         >
           <FlexRow width="100%" vrAlign="center" hrAlign="flex-end">
@@ -72,7 +74,7 @@ const SearchResult = () => {
           </FlexRow>
         </NavBlock>
         <FlexBody>
-          <SearchDetails id={currentApiId} />
+          <SearchDetails id={currentApiId} transactionHash={id}/>
         </FlexBody>
       </>
     );

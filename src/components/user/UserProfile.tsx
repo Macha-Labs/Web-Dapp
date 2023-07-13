@@ -40,7 +40,7 @@ const UserProfile = ({ user }: any) => {
   useEffect(() => {
     getOwnedProfiles(user?.lens?.ownedBy);
     console.log(user?.lens?.ownedBy, "user?.lens?.ownedBy");
-  }, [user?.lens?.ownedBy]);
+  }, [user?.lens?.ownedBy,getOwnedProfiles]);
 
   const hookLensConnections = useLensConnections(
     userLens?.ownedBy,
@@ -136,6 +136,7 @@ const UserProfile = ({ user }: any) => {
                   <Image
                     src="/assets/nofollow.png"
                     className="w-40 m-b-2 m-t-1"
+                    alt="follow"
                   />
                   <Heading className="m-b-1" size="lg">
                     There is Nobody here, yet.
@@ -178,6 +179,7 @@ const UserProfile = ({ user }: any) => {
                   <Image
                     src="/assets/nofollow.png"
                     className="w-40 m-b-2 m-t-1"
+                    alt="follow"
                   />
                   <Heading className="m-b-1" size="lg">
                     There is nobody here, yet.

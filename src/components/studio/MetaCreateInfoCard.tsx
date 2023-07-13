@@ -24,6 +24,7 @@ function MetaCreateInfoCard({ data }: Props) {
               height: "15rem",
               width: "15rem",
             }}
+            alt="Meta-info"
             src={
               data?.image
                 ? ` https://gateway.lighthouse.storage/ipfs/${data?.image}`
@@ -54,6 +55,7 @@ function MetaCreateInfoCard({ data }: Props) {
                 <Image
                   src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
                   marginRight={"10px"}
+                  alt="meta-avatar"
                 />
                 <Text className="m-b-0">{truncateAddress(data?.owner)}</Text>
               </FlexRow>

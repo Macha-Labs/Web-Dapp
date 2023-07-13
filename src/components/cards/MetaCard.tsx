@@ -50,6 +50,7 @@ export default function MetaCard({
             <div style={{ width: "35%" }}>
               <Image
                 src={image}
+                alt="meta-card-image"
                 height={"100%"}
                 objectFit={"cover"}
                 borderRadius={style.card.borderRadius.default}
@@ -105,6 +106,7 @@ export default function MetaCard({
           >
             <Image
               src={image}
+              alt="meta-card-image"
               width={"100%"}
               objectFit={"cover"}
               borderRadius={style.card.borderRadius.default}

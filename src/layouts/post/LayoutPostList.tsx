@@ -26,7 +26,7 @@ const LayoutPostList = ({ ...props }) => {
       return (
         <>
           <StyledCol className="flex-hr-vr-center">
-            <Image src="/assets/nopost.png" className="w-40" />
+            <Image src="/assets/nopost.png" className="w-40" alt="post" />
             <Heading className="m-b-1" size="lg">
               You have no posts yet
             </Heading>

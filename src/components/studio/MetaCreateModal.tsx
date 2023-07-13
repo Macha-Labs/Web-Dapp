@@ -24,7 +24,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
 
   useEffect(() => {
     console.log("Logging pending meta ", $meta);
-  }, []);
+  }, [$meta]);
 
   return (
     <ModalSlider

@@ -33,7 +33,7 @@ const OriginModal = ({
       console.log("Calling request method");
       settingRequestMethod(defaultData?.requestType);
     }
-  }, []);
+  }, [defaultData,settingRequestMethod]);
 
   return (
     <ModalSlider

@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { contractData, transactionData } from "@/service/ApiService";
+import { allContracts, contractData, contractDataBySlug, transactionData } from "@/service/ApiService";
+import useContractStore from "@/store/useContractStore";
 
 const useTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
   const [contractDetails, setContractDetails] = useState<any>();
+  const $loadAllContractDetails = useContractStore((state: any) => state.loadAllContractDetails);
+  const [allContractDetails,setAllContractDetails] = useState();
 
-  const fetchTransactionData = async () => {
-    transactionData(
-      "0x988fbdbf016968ac86f18777d84b69a9de92a32d842d4ca693a36e43e38f310e"
-    ).then((res: any) => {
+  const fetchTransactionData = async (transactionHash: any) => {
+    transactionData(transactionHash).then((res: any) => {
       console.log("contract not", res);
       setTransactionDetails([
         { key: "Block Hash", value: res.data[0].transaction.block_hash },
@@ -26,20 +27,27 @@ const useTransaction = () => {
     });
   };
 
-  const fetchContractData = async () => {
-    contractData("Opensea").then((res: any) => {
+  const fetchContractData = async (contract_slug: any) => {
+    contractDataBySlug(contract_slug).then((res: any) => {
       console.log("contract fetching", res);
       setContractDetails(res.data);
     });
   };
 
-  useEffect(() => {
-    fetchTransactionData();
-    fetchContractData();
-  }, []);
+  const fetchAllContracts = async () => {
+    allContracts().then((res: any) => {
+      console.log("all contract data from use transaction", res.data);
+      setAllContractDetails(res.data)
+    });
+  };
+
   return {
     transactionDetails: transactionDetails,
     contractDetails: contractDetails,
+    fetchTransactionData: fetchTransactionData,
+    fetchAllContracts: fetchAllContracts,
+    allContractDetails: allContractDetails,
+    fetchContractData: fetchContractData
   };
 };
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { setDate, truncateAddress, truncateString } from "@/helpers";
@@ -19,6 +19,12 @@ type Props = {
 const Contract = () => {
   const router = useRouter();
   const hookTransaction = useTransaction();
+
+  const slug = router.query.id
+
+  useEffect(() => {
+    hookTransaction.fetchContractData(slug)
+  }, [])
 
   const renderComponent = () => {
     let options = {
@@ -99,7 +105,9 @@ const Contract = () => {
                       // width: "100%",
                     }}
                   >
-                    <td>{truncateAddress(item.transaction.txn_hash)}</td>
+                    <td onClick={() => {
+                      router.push(`/search/transaction/${item.transaction.txn_hash}`)
+                    }} style={{ cursor: "pointer" }}>{truncateAddress(item.transaction.txn_hash)}</td>
                     <td>{truncateString(item.timestamp, 5)}</td>
                     <td>{truncateAddress(item.transaction.method_name)}</td>
                     <td>{truncateAddress(item.transaction.from)}</td>
@@ -119,7 +127,7 @@ const Contract = () => {
         {" "}
         <NavBlock
           back={() => {
-            router.push("/studio/data");
+            router.back();
           }}
         >
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
