@@ -81,8 +81,8 @@ const CreateMeta = () => {
         return <MetaOverview metaInfo={$userApisMap[currentApiId]} />;
       case "Curators":
         return <MetaCurator />;
-      case "Playground":
-        return <SearchDetails id={currentApiId} />;
+      // case "Playground":
+      //   return <SearchDetails id={currentApiId}  />;
       case "Settings":
         return <MetaSettings metaInfo={$userApisMap[currentApiId]} />;
       default:

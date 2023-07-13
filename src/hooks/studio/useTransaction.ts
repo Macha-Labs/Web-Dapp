@@ -6,7 +6,7 @@ const useTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
   const [contractDetails, setContractDetails] = useState<any>();
   const $loadAllContractDetails = useContractStore((state: any) => state.loadAllContractDetails);
-  const [allContractDetails,setAllContractDetails] = useState();
+  const [allContractDetails,setAllContractDetails] = useState([]);
 
   const fetchTransactionData = async (transactionHash: any) => {
     transactionData(transactionHash).then((res: any) => {
