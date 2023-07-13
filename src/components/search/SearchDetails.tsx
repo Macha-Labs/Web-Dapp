@@ -275,6 +275,7 @@ function SearchDetails({ id }: Props) {
                   {hookTransaction?.transactionDetails.map((item: any) => {
                     return (
                       <tr
+                        key={item._id}
                         style={{
                           borderBottom: `${style.card.border.default}`,
                           // width: "100%",

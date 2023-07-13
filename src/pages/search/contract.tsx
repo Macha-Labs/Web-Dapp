@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { setDate, truncateAddress, truncateString } from "@/helpers";
@@ -16,7 +16,7 @@ type Props = {
   metaInfo: any;
 };
 
-const contract = () => {
+const Contract = () => {
   const router = useRouter();
   const hookTransaction = useTransaction();
 
@@ -93,6 +93,7 @@ const contract = () => {
               {hookTransaction?.contractDetails.map((item: any) => {
                 return (
                   <tr
+                    key={item._id}
                     style={{
                       borderBottom: `${style.card.border.default}`,
                       // width: "100%",
@@ -143,4 +144,4 @@ const contract = () => {
   return <FlexWindow view="col" bodyElem={renderBody()}></FlexWindow>;
 };
 
-export default contract;
+export default Contract;

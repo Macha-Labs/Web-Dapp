@@ -5,7 +5,7 @@ import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
-import { initialiseNewMeta } from "@/service/studio/MetaService";
+import { initialiseNewMeta } from "@/service/MetaService";
 import useMetaStore from "@/store/useMetaStore";
 import { Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";

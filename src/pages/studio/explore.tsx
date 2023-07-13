@@ -4,7 +4,7 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTop from "@/_ui/nav/NavTop";
 import Tabs from "@/_ui/tabs/Tabs";
-import { fetchAllMetas } from "@/service/studio/MetaService";
+import { fetchAllMetas } from "@/service/MetaService";
 import { style } from "@/styles/StyledConstants";
 import { useEffect, useState } from "react";
 
