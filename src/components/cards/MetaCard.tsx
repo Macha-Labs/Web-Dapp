@@ -32,7 +32,7 @@ export default function MetaCard({
         <div
           style={{
             height: "fit-content",
-            width: "400px",
+            width: "22rem",
             border: `${style.card.border.meta}`,
             borderRadius: `${style.card.borderRadius.default}`,
             background: `${style.card.bg.meta}`,
@@ -53,7 +53,7 @@ export default function MetaCard({
                 src={image}
                 alt="meta-card-image"
                 height={"100%"}
-                objectFit={"cover"}
+                objectFit={"contain"}
                 borderRadius={style.card.borderRadius.default}
               />
             </div>
