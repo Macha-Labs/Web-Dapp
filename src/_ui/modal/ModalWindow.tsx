@@ -33,7 +33,7 @@ const ModalWindow = ({
     >
       <ModalOverlay />
       <ModalContent>
-        {header && <ModalHeader>{header}</ModalHeader>}
+        {header && <ModalHeader paddingTop="150px">{header}</ModalHeader>}
         <ModalBody>{children}</ModalBody>
         {footer && (
           <ModalFooter justifyContent={"flex-start"}>{footer}</ModalFooter>

@@ -13,16 +13,16 @@ type Props = {
   value?: string;
   onChange?: any;
   width?: string;
+  hrAlign?: string;
 };
 
-const Tabs = ({ options, gstyle, icon, value, onChange, width }: Props) => {
-  const router = useRouter();
+const Tabs = ({ options, gstyle, icon, value, onChange, width, hrAlign }: Props) => {
 
   return (
     <>
       <ul
-        className="navbar-nav justify-content-start d-flex align-items-center flex-row mt-2 mt-md-0"
-        style={{ width: `${width ? width : "100%"}` }}
+        className="navbar-nav d-flex align-items-center flex-row mt-2 mt-md-0"
+        style={{ width: `${width ? width : "100%"}`, justifyContent: `${hrAlign? hrAlign: "flex-start"}`}}
       >
         {options ? (
           options?.map((option: any, idx: any) => {

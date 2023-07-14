@@ -96,18 +96,19 @@ const CreateMeta = () => {
         {" "}
         <NavBlock
           back={() => {
-            router.push("/studio/data");
+            router.back();
           }}
         >
-          <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
+          <FlexRow width="100%" vrAlign="center" hrAlign="space-between" >
             <FlexRow width="fit-content">
               <Heading fontSize={style.font.h5} className="m-b-0">
-                {$meta?.data?.name}
+                {/* {$meta?.data?.name} */} Meta name
               </Heading>
             </FlexRow>
             <Tabs
               width="40%"
               options={options}
+              hrAlign={"flex-end"}
               value={selectedTab}
               onChange={(value: any) => setSelectedTab(value)}
               gstyle={{ fontSize: `${style.font.h5}` }}

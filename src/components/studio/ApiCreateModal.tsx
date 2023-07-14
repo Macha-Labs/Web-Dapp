@@ -11,7 +11,6 @@ import useMachaApi from "@/hooks/studio/useMachaApi";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
 import { Heading, Text } from "@chakra-ui/react";
-import { useState } from "react";
 import CustomTable from "./CustomTable";
 
 type Props = {
