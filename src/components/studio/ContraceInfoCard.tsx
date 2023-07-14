@@ -78,7 +78,7 @@ function ContractInfoCard({ data }: Props) {
             </FlexColumn>
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
               <Text fontWeight={700} className="m-b-0-5">
-                Chain
+                Chain ID
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
                 <Text className="m-b-0">{data?.chain}</Text>

@@ -20,9 +20,8 @@ type Props = {
 };
 
 const AllContracts = () => {
-
   const router = useRouter();
-  const hookTransaction = useTransaction()
+  const hookTransaction = useTransaction();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -30,48 +29,52 @@ const AllContracts = () => {
   }, [hookTransaction.allContractDetails]);
 
   useEffect(() => {
-    hookTransaction.fetchAllContracts()
-  }, [])
+    hookTransaction.fetchAllContracts();
+  }, []);
 
   const renderComponent = () => {
-    return <FlexRow
-      hrAlign="flex-start"
-      width="100%"
-      marginTop="xxl"
-      flexWrap="wrap"
-      // padding={style.body.padding}
-      paddingTop="md"
-    >
-      {isLoading && (
-        <FlexRow height="500px">
-          <Loader size="lg" />
-        </FlexRow>
-      )}
-      {!isLoading &&
-        hookTransaction.allContractDetails &&
-        hookTransaction.allContractDetails.map((item: any, index: number) => {
-          console.log("Checking request ", item.request);
-          return (
-            <MetaCard
-              key={index}
-              cardView="horizontal"
-              heading={item.transaction.contract_address}
-              description={item.transaction.from}
-              onCardClick={() => {
-                router.push(
-                  {
-                    pathname: `/search/contract/[id]`,
-                    query: {
-                      id:item.transaction.contract_slug
-                    },
-                  },
-                  `/search/contract/${item.transaction.contract_slug}`
-                );
-              }}
-            />
-          );
-        })}
-    </FlexRow>
+    return (
+      <FlexRow
+        hrAlign="flex-start"
+        width="100%"
+        marginTop="xxl"
+        flexWrap="wrap"
+        // padding={style.body.padding}
+        paddingTop="md"
+      >
+        {isLoading && (
+          <FlexRow height="500px">
+            <Loader size="lg" />
+          </FlexRow>
+        )}
+        {!isLoading &&
+          hookTransaction?.allContractDetails &&
+          hookTransaction?.allContractDetails.map(
+            (item: any, index: number) => {
+              console.log("Checking request ", item.request);
+              return (
+                <MetaCard
+                  key={index}
+                  cardView="horizontal"
+                  heading={item.contract.address}
+                  description={item.contract.description}
+                  onCardClick={() => {
+                    router.push(
+                      {
+                        pathname: `/search/contract/[id]`,
+                        query: {
+                          id: item.contract.slug,
+                        },
+                      },
+                      `/search/contract/${item.contract.slug}`
+                    );
+                  }}
+                />
+              );
+            }
+          )}
+      </FlexRow>
+    );
   };
 
   const renderBody = () => {

@@ -20,11 +20,12 @@ const Contract = () => {
   const router = useRouter();
   const hookTransaction = useTransaction();
 
-  const slug = router.query.id
+  const slug = router.query.id;
 
   useEffect(() => {
-    hookTransaction.fetchContractData(slug)
-  }, [])
+    hookTransaction.fetchContractTxnData(slug);
+    hookTransaction.fetchContractData(slug);
+  }, []);
 
   const renderComponent = () => {
     let options = {
@@ -33,20 +34,25 @@ const Contract = () => {
       month: "long",
       day: "numeric",
     };
-
+    console.log(
+      "contract details",
+      hookTransaction.contractDetails[0].contract
+    );
     return (
       <Box paddingTop={style.padding["xxxl"]}>
         <ContractInfoCard
           data={{
-            name: "Contract Name",
+            name: hookTransaction.contractDetails[0].contract.name,
             state: { status: "Live" },
-            address: "0xasdca211514",
-            owner: "0x2132135442151351535",
-            description: "sample desc",
-            chain: "ethereum",
+            address: hookTransaction.contractDetails[0].contract.address,
+            owner: hookTransaction.contractDetails[0].contract.address,
+            description:
+              hookTransaction.contractDetails[0].contract.description,
+            chain: hookTransaction.contractDetails[0].contract.chain_id,
           }}
         />
-        {hookTransaction?.contractDetails && (
+        {console.log(hookTransaction.contractDetails)}
+        {hookTransaction?.contractTxnDetails && (
           <table style={{ marginTop: style.margin["sm"] }}>
             <tbody>
               <tr
@@ -96,18 +102,24 @@ const Contract = () => {
                   To
                 </td>
               </tr>
-              {hookTransaction?.contractDetails.map((item: any) => {
+              {hookTransaction?.contractTxnDetails.map((item: any) => {
                 return (
                   <tr
                     key={item._id}
                     style={{
                       borderBottom: `${style.card.border.default}`,
-                      // width: "100%",
                     }}
                   >
-                    <td onClick={() => {
-                      router.push(`/search/transaction/${item.transaction.txn_hash}`)
-                    }} style={{ cursor: "pointer" }}>{truncateAddress(item.transaction.txn_hash)}</td>
+                    <td
+                      onClick={() => {
+                        router.push(
+                          `/search/transaction/${item.transaction.txn_hash}`
+                        );
+                      }}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {truncateAddress(item.transaction.txn_hash)}
+                    </td>
                     <td>{truncateString(item.timestamp, 5)}</td>
                     <td>{truncateAddress(item.transaction.method_name)}</td>
                     <td>{truncateAddress(item.transaction.from)}</td>

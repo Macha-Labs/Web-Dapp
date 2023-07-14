@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
-import { allContracts, contractData, contractDataBySlug, transactionData } from "@/service/ApiService";
+import {
+  allContracts,
+  contractData,
+  contractDataBySlug,
+  transactionData,
+  txnDataBySlug,
+} from "@/service/ApiService";
 import useContractStore from "@/store/useContractStore";
 
 const useTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
   const [contractDetails, setContractDetails] = useState<any>();
-  const $loadAllContractDetails = useContractStore((state: any) => state.loadAllContractDetails);
-  const [allContractDetails,setAllContractDetails] = useState();
+  const [contractTxnDetails, setContractTxnDetails] = useState<any>();
+  const $loadAllContractDetails = useContractStore(
+    (state: any) => state.loadAllContractDetails
+  );
+  const [allContractDetails, setAllContractDetails] = useState();
 
   const fetchTransactionData = async (transactionHash: any) => {
     transactionData(transactionHash).then((res: any) => {
@@ -33,21 +42,29 @@ const useTransaction = () => {
       setContractDetails(res.data);
     });
   };
+  const fetchContractTxnData = async (contract_slug: any) => {
+    txnDataBySlug(contract_slug).then((res: any) => {
+      console.log("contract txn fetching", res);
+      setContractTxnDetails(res.data);
+    });
+  };
 
   const fetchAllContracts = async () => {
     allContracts().then((res: any) => {
       console.log("all contract data from use transaction", res.data);
-      setAllContractDetails(res.data)
+      setAllContractDetails(res.data);
     });
   };
 
   return {
     transactionDetails: transactionDetails,
     contractDetails: contractDetails,
+    contractTxnDetails: contractTxnDetails,
     fetchTransactionData: fetchTransactionData,
     fetchAllContracts: fetchAllContracts,
     allContractDetails: allContractDetails,
-    fetchContractData: fetchContractData
+    fetchContractData: fetchContractData,
+    fetchContractTxnData: fetchContractTxnData,
   };
 };
 
