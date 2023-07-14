@@ -26,6 +26,7 @@ const AllContracts = () => {
 
   useEffect(() => {
     setIsLoading(false);
+    console.log(hookTransaction.allContractDetails)
   }, [hookTransaction.allContractDetails]);
 
   useEffect(() => {
