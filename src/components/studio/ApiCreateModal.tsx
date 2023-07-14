@@ -16,10 +16,10 @@ import CustomTable from "./CustomTable";
 
 type Props = {
   modal: any;
-  hookMetaCreate?: any;
+  hookApiCreate?: any;
 };
 
-const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
+const ApiCreateModal = ({ modal, hookApiCreate }: Props) => {
   const $meta = useMetaStore((state: any) => state.meta);
   const hookMachaApi = useMachaApi();
 
@@ -29,7 +29,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
         return (
           <InputLabel
             elementRef={(element: any) =>
-              (hookMetaCreate.apiDataRef.current["requestEndpoint"] = element)
+              (hookApiCreate.apiDataRef.current["requestEndpoint"] = element)
             }
             labelText={field?.title}
             inputType={field?.inputType}
@@ -52,7 +52,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
             </Heading>
             <InputSelect
               elementRef={(element: any) =>
-                (hookMetaCreate.apiDataRef.current["requestMethod"] = element)
+                (hookApiCreate.apiDataRef.current["requestMethod"] = element)
               }
               options={field?.options}
             />
@@ -80,7 +80,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
 
               onClick={async (e: any) => {
                 e.preventDefault();
-                await hookMetaCreate.publishApi();
+                await hookApiCreate.publishApi();
               }}
             >
               Create API
@@ -132,7 +132,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
                           : style.card.bg.overview
                       }
                       onClick={() => {
-                        hookMetaCreate.apiDataRef.current["requestType"] = {
+                        hookApiCreate.apiDataRef.current["requestType"] = {
                           value: item.slug,
                         };
                         console.log("clicked", item.slug);
@@ -156,7 +156,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
             </FlexColumn>
             <InputLabel
               elementRef={(element: any) =>
-                (hookMetaCreate.apiDataRef.current["name"] = element)
+                (hookApiCreate.apiDataRef.current["name"] = element)
               }
               inputType="text"
               defaultValue={$meta.name}
@@ -165,7 +165,7 @@ const ApiCreateModal = ({ modal, hookMetaCreate }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookMetaCreate.apiDataRef.current["description"] = element)
+                (hookApiCreate.apiDataRef.current["description"] = element)
               }
               inputType="text"
               labelText="Description"

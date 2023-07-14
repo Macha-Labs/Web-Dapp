@@ -4,7 +4,7 @@ import { useToast } from "@chakra-ui/react";
 import { useRef } from "react";
 
 declare let window: any;
-const useMetaCreate = () => {
+const useApiCreate = () => {
   const metaOverview = useRef<any>({});
   const metaTrigger = useRef<any>({});
   const metaOrigin = useRef<any>({});
@@ -128,4 +128,4 @@ const useMetaCreate = () => {
     executeTriggerSave: executeTriggerSave,
   };
 };
-export default useMetaCreate;
+export default useApiCreate;

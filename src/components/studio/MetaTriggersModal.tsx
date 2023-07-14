@@ -1,4 +1,4 @@
-import useMetaCreate from "@/hooks/studio/useMetaCreate";
+import useApiCreate from "@/hooks/studio/useApiCreate";
 import { useState } from "react";
 import TriggerModal from "../modals/studio/TriggerModal";
 
@@ -7,7 +7,7 @@ type Props = {
 };
 
 const MetaTriggersModal = ({ modal }: Props) => {
-  const hookMetaCreate = useMetaCreate();
+  const hookMetaCreate = useApiCreate();
   const [triggerType, setTriggerType] = useState<any>(null);
   const [triggerMethods, setTriggerMethods] = useState<any>([]);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];

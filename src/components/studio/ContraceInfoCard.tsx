@@ -16,7 +16,7 @@ function ContractInfoCard({ data }: Props) {
   const toast = useToast();
   return (
     <CardNative>
-      <FlexRow width="80%">
+      <FlexRow width="100%">
         <FlexColumn width="28%" vrAlign="flex-start" marginRight={"md"}>
           <Image
             style={{
@@ -27,12 +27,12 @@ function ContractInfoCard({ data }: Props) {
             alt="contract-info"
             src={
               data?.image
-                ? ` https://gateway.lighthouse.storage/ipfs/${data?.image}`
-                : "https://bit.ly/dan-abramov"
+                ? data?.image
+                : "https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
             }
           />
         </FlexColumn>
-        <FlexColumn width="80%" hrAlign="flex-start" vrAlign="flex-start">
+        <FlexColumn width="100%" hrAlign="flex-start" vrAlign="flex-start">
           <FlexRow vrAlign="center" width="fit-content">
             <Text className="m-b-0 me-2" fontSize={"4xl"} fontWeight={700}>
               {data?.name}

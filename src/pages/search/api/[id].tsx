@@ -4,7 +4,7 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavBlock from "@/_ui/nav/NavBlock";
 import Tabs from "@/_ui/tabs/Tabs";
 import MetaCurator from "@/components/studio/MetaCurator";
-import SearchDetails from "@/components/search/SearchDetails";
+import TxnDetails from "@/components/studio/TxnDetails";
 import MetaOverview from "@/components/studio/MetaOverview";
 import MetaSettings from "@/components/studio/MetaSettings";
 import { getItemFromLocal, setItemOnLocal } from "@/helpers";

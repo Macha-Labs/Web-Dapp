@@ -109,6 +109,7 @@ export const darkStyle = {
     width: {
       meta: "30%",
     },
+    cursor: { default: "pointer"}
   },
   pannel: { bg: { default: "" }, shadow: { default: "" } },
   input: {
@@ -235,6 +236,39 @@ export const darkStyle = {
       end: "#001E57",
     },
   },
+  table: {
+    bg: {
+      default: " linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)"
+    },
+    borderColor: {
+      default: "#14244b"
+    },
+    Th: {
+      borderBottomColor: "#14244b",
+      borderRightColor: "#14244b",
+      borderWidth: "1px",
+      paddingTop: "20px",
+      paddingBottom: "20px",
+      textAlign: "start",
+      color: "white",
+      fontWeight: "600",
+      fontSize: "1rem",
+      borderCollapse: "separate",
+      borderSpacing: "0 1rem",
+    },
+    Td: {
+      borderColor: "#14244b",
+      borderWidth: "1px",
+      borderRadius: "30px",
+      textAlign: "start",
+      color: "white",
+      padding: "10px 24px",
+    },
+    cursor: {
+      default: "",
+      pointer: "pointer"
+    }
+  }
 };
 
 export const style = { ...commonStyle, ...darkStyle };

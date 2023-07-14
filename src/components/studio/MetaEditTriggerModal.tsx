@@ -1,4 +1,4 @@
-import useMetaCreate from "@/hooks/studio/useMetaCreate";
+import useApiCreate from "@/hooks/studio/useApiCreate";
 import useMetaStore from "@/store/useMetaStore";
 import { useState } from "react";
 import TriggerModal from "../modals/studio/TriggerModal";
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const MetaEditTriggerModal = ({ modal, selectedTrigger }: Props) => {
-  const hookMetaCreate = useMetaCreate();
+  const hookMetaCreate = useApiCreate();
   const [originType, setOriginType] = useState<any>(null);
   const [originMethods, setOriginMethods] = useState<any>([]);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];

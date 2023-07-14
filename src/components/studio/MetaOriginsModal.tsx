@@ -1,4 +1,4 @@
-import useMetaCreate from "@/hooks/studio/useMetaCreate";
+import useApiCreate from "@/hooks/studio/useApiCreate";
 import { useState } from "react";
 import OriginModal from "../modals/studio/OriginModal";
 
@@ -7,7 +7,7 @@ type Props = {
 };
 
 const MetaOriginsModal = ({ modal }: Props) => {
-  const hookMetaCreate = useMetaCreate();
+  const hookMetaCreate = useApiCreate();
   const [originType, setOriginType] = useState<any>(null);
   const [originMethods, setOriginMethods] = useState<any>([]);
   const requestTypeOptions = ["GRAPH", "REST", "CONTRACT"];
