@@ -8,10 +8,10 @@ import Tabs from "@/_ui/tabs/Tabs";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
 import WalletButton from "@/components/buttons/WalletButton";
-import ApiCreateModal from "@/components/studio/ApiCreateModal";
 import ApiList from "@/components/studio/ApiList";
+import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import ContractList from "@/components/studio/ContractList";
-import useApiCreate from "@/hooks/studio/useApiCreate";
+import useContractCreate from "@/hooks/studio/useContractCreate";
 import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
@@ -30,7 +30,7 @@ const DashBoard = () => {
     setExploreMeta(allMetas.data);
   };
   const modal = useDisclosure()
-  const hookApiCreate = useApiCreate();
+  const hookContractCreate = useContractCreate();
 
   useEffect(() => {
     fetchmetas();
@@ -82,14 +82,14 @@ const DashBoard = () => {
               value={selectedNavTab}
               onChange={setSelectedNavTab}
             />
-            <ButtonNative
+            {selectedNavTab == "Contracts" && <ButtonNative
               size="sm"
               text="Create Contract"
               variant="state_brand"
               onClick={() => {
                 modal.onOpen();
               }}
-            />
+            />}
           </FlexRow>
         </NavBlock>
 
@@ -97,7 +97,7 @@ const DashBoard = () => {
           {renderContracts()}
           {renderAPIs()}
         </FlexBody>
-        <ApiCreateModal modal={modal} hookApiCreate={hookApiCreate} />
+        <ContractCreateModal modal={modal} hookContractCreate={hookContractCreate} />
       </>
     );
   };
