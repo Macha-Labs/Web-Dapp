@@ -15,14 +15,14 @@ type Props = {
   id: string,
   transactionHash: string | string[] | undefined
 };
-function SearchDetails({ id, transactionHash }: Props) {
+function TxnDetails({ id, transactionHash }: Props) {
   const options = [
     { value: "snapshot", label: "SnapShot" },
     { value: "poap", label: "POAP" },
     { value: "paragraph.xyz", label: "Paragraph.xyz" },
   ];
 
-  const hookTransaction = useTransaction()
+  const hookTransaction = useTransaction(transactionHash)
   const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
 
@@ -35,9 +35,6 @@ function SearchDetails({ id, transactionHash }: Props) {
     console.log("Logging $meta ", $metaInfo);
   }, [$metaInfo]);
 
-  useEffect(() => {
-    hookTransaction.fetchTransactionData(transactionHash)
-  },[])
 
   // const [query, setQuery] = useState("");
 
@@ -71,7 +68,7 @@ function SearchDetails({ id, transactionHash }: Props) {
           lineHeight={style.font.h1}
           marginTop={style.margin["sm"]}
         >
-          Intraction Details
+          Txn Details
         </Text>
         <ButtonNative variant="state_brand" text="Share" marginRight="0px" />
       </FlexRow>
@@ -412,4 +409,4 @@ function SearchDetails({ id, transactionHash }: Props) {
   );
 }
 
-export default SearchDetails;
+export default TxnDetails;

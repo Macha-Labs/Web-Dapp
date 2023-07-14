@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { allContracts, contractData, contractDataBySlug, transactionData } from "@/service/ApiService";
-import useContractStore from "@/store/useContractStore";
+import {
+  transactionData,
+} from "@/service/ApiService";
 
-const useTransaction = () => {
+const useTransaction = (transactionHash: any) => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
-  const [contractDetails, setContractDetails] = useState<any>();
-  const $loadAllContractDetails = useContractStore((state: any) => state.loadAllContractDetails);
-  const [allContractDetails,setAllContractDetails] = useState([]);
 
-  const fetchTransactionData = async (transactionHash: any) => {
+  useEffect(() => {
+    _fetch(transactionHash)
+  },[])
+
+  const _fetch = async (transactionHash: any) => {
     transactionData(transactionHash).then((res: any) => {
       console.log("contract not", res);
       setTransactionDetails([
@@ -27,27 +29,8 @@ const useTransaction = () => {
     });
   };
 
-  const fetchContractTransactionData = async (contract_slug: any) => {
-    contractDataBySlug(contract_slug).then((res: any) => {
-      console.log("contract fetching", res);
-      setContractDetails(res.data);
-    });
-  };
-
-  const fetchAllContracts = async () => {
-    allContracts().then((res: any) => {
-      console.log("all contract data from use transaction", res.data);
-      setAllContractDetails(res.data)
-    });
-  };
-
   return {
     transactionDetails: transactionDetails,
-    contractDetails: contractDetails,
-    fetchTransactionData: fetchTransactionData,
-    fetchAllContracts: fetchAllContracts,
-    allContractDetails: allContractDetails,
-    fetchContractTransactionData: fetchContractTransactionData
   };
 };
 

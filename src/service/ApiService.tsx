@@ -24,6 +24,13 @@ export const contractData = async (contractName: string) => {
 
 export const contractDataBySlug = async (contractSlug: string) => {
   const response = await fetch(
+    `${config.metaServer}/indexer/contracts/fetch-by-slug/${contractSlug}`
+  );
+  const data = await response.json();
+  return data;
+};
+export const txnDataBySlug = async (contractSlug: string) => {
+  const response = await fetch(
     `${config.metaServer}/indexer/transactions/fetch-by-slug/${contractSlug}`
   );
   const data = await response.json();
@@ -32,7 +39,7 @@ export const contractDataBySlug = async (contractSlug: string) => {
 
 export const allContracts = async () => {
   const response = await fetch(
-    `${config.metaServer}/indexer/transactions/fetchAll`
+    `${config.metaServer}/indexer/contracts/fetchAll`
   );
   const data = await response.json();
   return data;

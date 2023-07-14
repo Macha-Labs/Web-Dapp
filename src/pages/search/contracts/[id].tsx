@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
-import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import { setDate, truncateAddress, truncateString } from "@/helpers";
 import { Box, Heading, Table, TableContainer, Tabs, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
-import MetaCreateInfoCard from "@/components/studio/MetaCreateInfoCard";
 import { style } from "@/styles/StyledConstants";
 import { useRouter } from "next/router";
 import NavBlock from "@/_ui/nav/NavBlock";
@@ -11,8 +8,9 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import useTransaction from "@/hooks/studio/useTransaction";
 import ContractInfoCard from "@/components/studio/ContraceInfoCard";
-import TableNative from "@/_ui/table/TableNative";
 import TxnTable from "@/components/studio/TxnTable";
+import useContract from "@/hooks/studio/useContract";
+import useContractTxn from "@/hooks/studio/useContractTxn";
 
 type Props = {
   metaInfo: any;
@@ -20,13 +18,9 @@ type Props = {
 
 const Contract = () => {
   const router = useRouter();
-  const hookTransaction = useTransaction();
-
-  const slug = router.query.id
-
-  useEffect(() => {
-    hookTransaction.fetchContractTransactionData(slug)
-  }, [])
+  const slug = router.query.id;
+  const hookContractTxn = useContractTxn(slug);
+  const hookContract = useContract(slug)
 
   const renderComponent = () => {
     let options = {
@@ -35,20 +29,25 @@ const Contract = () => {
       month: "long",
       day: "numeric",
     };
-
+    console.log(
+      "contract details",
+      hookContract?.contractDetails
+    );
     return (
       <Box paddingTop={style.padding["xxxl"]}>
-        <ContractInfoCard
+        {hookContract.contractDetails && <ContractInfoCard
           data={{
-            name: "Contract Name",
+            name: hookContract.contractDetails[0]?.contract?.name,
+            image: hookContract.contractDetails[0]?.contract?.image,
             state: { status: "Live" },
-            address: "0xasdca211514",
-            owner: "0x2132135442151351535",
-            description: "sample desc",
-            chain: "ethereum",
+            address: hookContract.contractDetails[0]?.contract.address,
+            owner: hookContract.contractDetails[0]?.contract.address,
+            description:
+              hookContract.contractDetails[0]?.contract.description,
+            chain: hookContract.contractDetails[0]?.contract.chain_id,
           }}
-        />
-          <TxnTable hookTransaction={hookTransaction} />
+        />}
+        <TxnTable txnData={hookContractTxn?.contractTxnDetails} />
       </Box>
     );
   };
@@ -64,7 +63,7 @@ const Contract = () => {
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <FlexRow width="fit-content">
               <Heading fontSize={style.font.h5} className="m-b-0">
-                Contract name
+                {hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract.name}
               </Heading>
             </FlexRow>
             {/* <Tabs

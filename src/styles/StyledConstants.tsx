@@ -109,6 +109,7 @@ export const darkStyle = {
     width: {
       meta: "30%",
     },
+    cursor: { default: "pointer"}
   },
   pannel: { bg: { default: "" }, shadow: { default: "" } },
   input: {
@@ -262,6 +263,10 @@ export const darkStyle = {
       textAlign: "start",
       color: "white",
       padding: "10px 24px",
+    },
+    cursor: {
+      default: "",
+      pointer: "pointer"
     }
   }
 };

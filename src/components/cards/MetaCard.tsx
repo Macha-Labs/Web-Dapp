@@ -41,13 +41,14 @@ export default function MetaCard({
             flexDirection: "row",
             marginRight: ` ${style.margin["sm"]}`,
             marginBottom: ` ${style.margin["sm"]}`,
+            cursor: `${style.card.cursor.default}`
           }}
           onClick={() => {
             onCardClick();
           }}
         >
           {image && (
-            <div style={{ width: "35%" }}>
+            <div style={{ width: "35%" , marginRight: style.margin.sm}}>
               <Image
                 src={image}
                 alt="meta-card-image"

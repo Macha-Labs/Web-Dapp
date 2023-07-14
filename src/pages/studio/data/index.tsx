@@ -13,10 +13,12 @@ import WalletButton from "@/components/buttons/WalletButton";
 import ColoredCard from "@/components/cards/ColoredCard";
 import MetaCard from "@/components/cards/MetaCard";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
+import ApiList from "@/components/studio/ApiList";
+import ContractList from "@/components/studio/ContractList";
 import MetaTagFilter from "@/components/studio/MetaTagFilter";
 import { dashboardModules } from "@/data/studio/constant";
 import { displayImage } from "@/helpers/storage/lightHouseStorage";
-import useMetaCreate from "@/hooks/studio/useMetaCreate";
+import useApiCreate from "@/hooks/studio/useApiCreate";
 import useTransaction from "@/hooks/studio/useTransaction";
 import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
@@ -27,26 +29,14 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const DashBoard = () => {
-  const metaModal = useDisclosure();
-  const hookMetaCreate = useMetaCreate();
 
   const $macha = useAuthStore((state: any) => state.macha);
-  const $address = useAuthStore((state: any) => state.address);
-  const $userMetas = useUserStore((state: any) => state.userMetas);
-  const $userApis = useUserStore((state: any) => state.userApis);
+  const $address = useAuthStore((state: any) => state.address)
 
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [filteredData, setFilteredData] = useState<any>($userMetas);
-  const [selectedNavTab, setSelectedNavTab] = useState<string>("Your APIs");
-  const [exploreMeta, setExploreMeta] = useState<any>([]);
 
-  const handleFilter = (inputValue: string) => {
-    const filtered = $userApis.filter((item: any) => {
-      return item.name.toLowerCase().includes(inputValue.toLowerCase());
-    });
-    setFilteredData(filtered);
-  };
+  const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
+  const [exploreMeta, setExploreMeta] = useState<any>([]);
 
   const fetchmetas = async () => {
     const allMetas = await fetchAllMetas();
@@ -54,10 +44,7 @@ const DashBoard = () => {
     setExploreMeta(allMetas.data);
   };
 
-  useEffect(() => {
-    setFilteredData($userApis);
-    setIsLoading(false);
-  }, [$userApis]);
+
 
   useEffect(() => {
     fetchmetas();
@@ -84,11 +71,11 @@ const DashBoard = () => {
 
   const dashboardNav: any = [
     {
-      value: "Your APIs",
-      href: "",
-    },
-    {
-      value: "Explore",
+      value: "Contracts",
+      href: ""
+    }
+    ,{
+      value: "APIs",
       href: "",
     },
   ];
@@ -96,59 +83,22 @@ const DashBoard = () => {
   const renderAPIs = () => {
     return (
       <>
-        {selectedNavTab == "Your APIs" && (
-          <>
-            <FlexRow
-              hrAlign="flex-start"
-              width="100%"
-              flexWrap="wrap"
-              // padding={style.body.padding}
-              paddingTop="md"
-            >
-              {isLoading && (
-                <FlexRow height="500px">
-                  <Loader size="lg" />
-                </FlexRow>
-              )}
-              {!isLoading &&
-                filteredData &&
-                filteredData.map((item: any, index: number) => {
-                  console.log("Checking request ", item.request);
-                  return (
-                    <MetaCard
-                      key={index}
-                      cardView="horizontal"
-                      heading={item.name}
-                      description={item.description}
-                      tags={[
-                        item.request?.requestType,
-                        item.request?.requestMethod,
-                      ]}
-                      onCardClick={() => {
-                        router.push(
-                          {
-                            pathname: "/studio/data/api/[id]",
-                            query: {
-                              id:
-                                item.state.status == "PENDING"
-                                  ? item._id
-                                  : item.id,
-                            },
-                          },
-                          `/studio/data/api/${
-                            item.state.status == "PENDING" ? item._id : item.id
-                          }`
-                        );
-                      }}
-                    />
-                  );
-                })}
-            </FlexRow>
-          </>
+        {selectedNavTab == "APIs" && (
+          <ApiList />
         )}
       </>
     );
   };
+
+  const renderContracts = () => {
+    return (
+      <>
+      {selectedNavTab == "Contracts" && (
+        <ContractList />
+      )}
+      </>
+    )
+  }
 
   const renderExplore = () => {
     return (
@@ -192,41 +142,9 @@ const DashBoard = () => {
         </NavBlock>
 
         <FlexBody>
-          <FlexRow
-            width="100%"
-            hrAlign="space-between"
-            paddingTop="2xl"
-            marginTop={"subnav"}
-          >
-            <FlexRow
-              width="100%"
-              hrAlign="flex-start"
-              // marginTop={style.margin.nav}
-            >
-              <FlexRow width="50%">
-                <InputSearch
-                  size="lg"
-                  placeholder="Search Studio"
-                  icon={{ slug: "icon-search" }}
-                  marginRight={style.card.margin.default}
-                  onChange={(e: any) => handleFilter(e.target.value)}
-                />
-              </FlexRow>
-              <MetaTagFilter />
-            </FlexRow>
-            <ButtonNative
-              size="sm"
-              text="Create API"
-              variant="state_brand"
-              onClick={() => {
-                metaModal.onOpen();
-              }}
-            />
-          </FlexRow>
+          {renderContracts()}
           {renderAPIs()}
-          {renderExplore()}
         </FlexBody>
-        <ApiCreateModal modal={metaModal} hookMetaCreate={hookMetaCreate} />
       </>
     );
   };
