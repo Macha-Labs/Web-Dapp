@@ -27,7 +27,7 @@ const useTransaction = () => {
     });
   };
 
-  const fetchContractData = async (contract_slug: any) => {
+  const fetchContractTransactionData = async (contract_slug: any) => {
     contractDataBySlug(contract_slug).then((res: any) => {
       console.log("contract fetching", res);
       setContractDetails(res.data);
@@ -47,7 +47,7 @@ const useTransaction = () => {
     fetchTransactionData: fetchTransactionData,
     fetchAllContracts: fetchAllContracts,
     allContractDetails: allContractDetails,
-    fetchContractData: fetchContractData
+    fetchContractTransactionData: fetchContractTransactionData
   };
 };
 
