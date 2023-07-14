@@ -1,195 +1,142 @@
-export const commonStyle = {
-  borderRadius: "5px",
-  borderRadiusButton: "5px",
-  borderRadiusTag: "5px",
-  borderRadiusCard: "5px",
-  borderRadiusInput: "5px",
-  borderRadiusPallet: "5px",
-  borderRadiusModal: ".8rem",
-  borderRadiusIcon: "5px",
-  fontInput: "1.6rem",
-  fontSubHeading: "1.3rem",
-  fontTag: "1.4rem",
-  fontH1: "4.2rem",
-  fontH2: "3.6rem",
-  fontH3: "2.8rem",
-  fontP: "1.6rem",
-  fontPSmall: "1.6rem",
-  fontPLarge: "2rem",
-  sizeIconSmall: "35px",
-  sizeIcon: "50px",
-  sizeIconLarge: "75px",
-  sizeLogo: "50px",
-  sizeLogoSmall: "40px",
-  sizeLogoLarge: "80px",
-  paddingMain: "50px 0px 50px 0px",
-  paddingInput: "0 1rem",
-  paddingPallet: "1rem",
-  paddingCard: "15px",
-  paddingPannel: "15px",
-  paddingPannelBody: "25px",
-  paddingButton: "1rem 1.3rem",
-  paddingButtonSmall: "0.8rem 1rem",
-  paddingButtonXSmall: "0.5rem",
-  paddingButtonLarge: "1rem 1.3rem",
-  paddingDropdown: "1.3rem",
-  paddingCover: "25px",
-  paddingBanner: "0 35px",
-  paddingModal: "2rem",
-  paddingNav: "10px",
-  marginModal: "75px auto",
-  marginMain: "0px",
-  marginMainTop: "0px",
-  heightInput: "5rem",
-  heightCover: "20rem",
-  heightHeader: "75px",
-  heightPlaceholder: "150px",
-  widthSidebar: "300px",
-  widthSidebarControl: "65px",
-  widthMain: "calc(100%)",
-  widthNav: "100%",
-  widthSection: "85%",
-  widthCardList: "calc(20% - 10px)",
-  widthModal: "80%",
-
-  mob: {
-    fontH1: "2.6rem",
-    fontH2: "2.2rem",
-    fontH3: "2.1rem",
-    fontP: "1.4rem",
-    fontPSmall: "1.1rem",
-    fontPLarge: "1.6rem",
-    sizeLogo: "60px",
-    sizeLogoSmall: "30px",
-    sizeLogoLarge: "70px",
-    marginModal: "15px auto",
-    marginMain: "0px",
-    paddingBanner: "0px 35px",
-    paddingMain: "30px 0px 30px 0px",
-    heightBanner: "15rem",
-    heightCover: "10rem",
-    widthMain: "100%",
-    widthSection: "90%",
-    widthCardList: "calc(50% - 10px)",
-    widthModal: "100%",
+export const commonStyle: any = {
+  font: {
+    h1: "2.2rem",
+    h2: "2rem",
+    h3: "1.6rem",
+    h4: "1.4rem",
+    h5: "1.2rem",
+    h6: "1rem",
+    p: "1rem",
+  },
+  margin: {
+    xxs: "0.5rem",
+    xs: "1rem",
+    sm: "1.2rem",
+    md: "1.5rem",
+    lg: "1.8rem",
+    xl: "2.4rem",
+    xxl: "3.2rem",
+    nav: "70px",
+    subnav: "60px",
+  },
+  padding: {
+    xxs: "0.5rem",
+    xs: "1rem",
+    sm: "1.2rem",
+    md: "1.5rem",
+    lg: "1.8rem",
+    xl: "2.4rem",
+    xxl: "3.2rem",
+    xxxl: "4rem",
+  },
+  color: {
+    p: "#fff",
+    h: "#fff",
   },
 };
 
 export const darkStyle = {
-  bg1: "#00042C",
-  bg2: "#181A20",
-  bg3: "#16191B",
-  bg4: "#111315",
-  bg: "#00040d",
   bgLayout: { primary: "#181A20", secondry: "#111315" },
-  //
-  brCard: {
-    transparent: "#262A34",
-    default: "#333",
-    hover: "#555",
-    active: "",
-  },
   brButton: { active: "#2A85FF" },
-  //
-  color5: "#3182CE",
-  bgMain: "#00040d",
-  bgModalOverlay: "#000320",
-  bgOverlay:
-    "linear-gradient(90deg, rgba(246,246,246,0.6) 0%, rgba(234,238,246,0.8) 44%, rgba(231,235,242,0.8) 100%)",
-  bgSidebar: "#232323",
-  bgSidebarMenu: "#232323",
-  bgDropdown: "#202124",
-  bgPannelHeader: "#00042C",
-  bgPlaceholder: "#1D224A",
-  border: "1px solid #0F172E",
-  borderDark: "1px solid #232323",
-  borderInput: "1px solid rgba(247,248,248,0.1)",
-  borderCard: "1px solid RGBA(0, 0, 0, 0.20)",
-  borderButton: "none",
-  borderTag: "1px solid #333233",
-  borderTagActive: "1px solid #50A7EA",
-  borderLoaderLeft: "#3182ce",
-  borderDropdown: "1px solid rgba(247,248,248,0.1)",
-  borderPannel: "1px solid rgba(247,248,248,0.1)",
-  borderModal: "1px solid rgba(247,248,248,0.1)",
-  borderPallet: "1px solid rgba(247,248,248,0.1)",
-  borderPlaceholder: "1px solid rgba(247,248,248,0.1)",
-  blurOverlay: "3px",
-  colorH: "#FFF",
-  colorHAlt: "#FFF",
-  colorP: "#EFEFEF",
-  colorText: "#EFEFEF",
-  colorSubHeading: "rgb(var(--neutral700-rgb,102,102,102))",
-  colorPlaceholder: "#babdbe",
-  colorButton: "#EFEFEF",
-  colorButtonActive: "#333",
-  colorButtonLight: "#F5F5F5",
-  colorButtonLightHover: "#F5F5F5",
-  colorButtonLightActive: "#333",
-  colorInput: "#FFF",
-  colorIcon: "#888",
-  colorIconActive: "#333",
-  focusInput: "0",
+
+  flex: {
+    justifyContent: {
+      hrCenter: "center",
+      hrBetween: "space-between",
+    },
+  },
   header: {
     bg: { default: "#00040d" },
     border: { default: "1px solid #0F172E" },
   },
-  body: { bg: { default: "#00040d" }, padding: "20px 10px" },
+  window: {},
+  body: {
+    bg: { default: "#00040d" },
+    padding: "1% 6%",
+    margin: { top: "50px" },
+    paddingTop: "80px",
+  },
   nav: {
-    width: "5%",
-    height: "90%",
+    width: "100%",
+    height: "75px",
     bg: { default: "#00040d" },
     border: { default: "2px solid #0F172E" },
+    padding: "1% 6%",
+    margin: "75px",
   },
   list: {
-    padding: '5px',
+    padding: "5px",
     bg: {
-      default: 'transparent',
+      default: "transparent",
       hover:
         "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
     },
     shadow: {
-      default: '',
-      hover: "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)"
-    }
+      default: "",
+      hover:
+        "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
+    },
   },
   card: {
     bg: {
-      default: "#00040d",
-      highlight: "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
+      default:
+        " linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
+      highlight:
+        "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
       hover:
         "linear-gradient(141.09deg, rgba(13, 25, 65, 0.5) 11.08%, rgba(0, 20, 60, 0.38) 89.68%)",
+      meta: "#020A21",
+      overview: "#020a21",
     },
     border: {
       default: "1px solid #0a1020",
-      hover: "1px solid rgba(15,23,46,1)",
+      hover: "2px solid rgba(15,23,46,1)",
+      meta: "1px solid #197cec",
+      mcard: "1px solid #353c54",
     },
-    borderRadius: "5px",
+    borderRadius: {
+      default: "20px",
+      image: "14px",
+      button: "10px",
+    },
     shadow: {
       default: "0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)",
       hover:
         "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
-    padding: { default: "10px" },
-    
+    padding: { default: "16px", overview: "26px" },
+    margin: { default: "2.1rem", right: "3rem" },
+    width: {
+      meta: "30%",
+    },
+    cursor: { default: "pointer"}
   },
   pannel: { bg: { default: "" }, shadow: { default: "" } },
   input: {
-    bg: { 
+    bg: {
       default: "#000511",
-      active: "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);"
+      active:
+        "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);",
     },
     shadow: {
       hover:
         "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
-    border: { 
-        default: "1px solid #14244B", 
-        active: "1px solid rgba(15,23,46,1)" },
+    border: {
+      default: "1px solid  #0F172E",
+      active: "1px solid rgba(15,23,46,1)",
+    },
+    placeholder: {
+      color: "#132041",
+    },
+    borderRadius: {
+      default: "10px",
+    },
   },
   message: {
     bg: {
-      default: "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);",
+      default:
+        "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%);",
       active: "#246BFD",
     },
     color: {
@@ -212,12 +159,31 @@ export const darkStyle = {
     bg: { default: "#00040d" },
     border: { default: "1px solid #0F172E" },
     shadow: { default: "" },
+    borderRadius: ".8rem",
+    padding: "2rem",
+    margin: "75px auto",
+    width: "80%",
+    bgOverlay: "#000320",
   },
   popover: { bg: { default: "#000416" } },
   sidebar: {},
-  dropdown: {},
+  dropdown: {
+    bg: {
+      transparent: "transparent",
+      default: "#00040d",
+      hover: "#000C29",
+      active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
+      activeTranslucent:
+        "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);",
+      disabled: "",
+    },
+    border: "1px solid rgba(247,248,248,0.1)",
+    padding: "1.3rem",
+    shadowDropdown:
+      "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",
+  },
   avatar: {
-    border: '2px solid #246bfd',
+    border: "2px solid #246bfd",
   },
   icon: {
     bg: {
@@ -226,7 +192,7 @@ export const darkStyle = {
         "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
       hover:
         "linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
-      active: "",
+      active: "red",
     },
     borderRadius: "12px",
     shadow: {
@@ -234,26 +200,75 @@ export const darkStyle = {
       hover:
         "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
+    sizes: {
+      default: "20",
+      "3xs": "10",
+      "2xs": "12",
+      xs: "16",
+      sm: "18px",
+      md: "20px",
+      lg: "25px",
+      xl: "35px",
+      "2xl": "50",
+      "3xl": "75",
+      "4xl": "100",
+    },
   },
   button: {
     bg: {
       transparent: "transparent",
-      default: "linear-gradient(100.07deg, #197CEC 0.39%, #004AD9 73.45%)",
+      default: "#00040d",
       hover: "#000C29",
       active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
       activeTranslucent:
         "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);",
       disabled: "",
     },
+    color: "#EFEFEF",
+    margin: { default: "5px" },
+    borderRadius: {
+      default: "10px",
+    },
   },
   loader: {
     bg: {
-      start: '#000416',
-      end: '#001E57'
-    }
+      start: "#000416",
+      end: "#001E57",
+    },
   },
-  shadowDropdown:
-    "rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px, rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px",
+  table: {
+    bg: {
+      default: " linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)"
+    },
+    borderColor: {
+      default: "#14244b"
+    },
+    Th: {
+      borderBottomColor: "#14244b",
+      borderRightColor: "#14244b",
+      borderWidth: "1px",
+      paddingTop: "20px",
+      paddingBottom: "20px",
+      textAlign: "start",
+      color: "white",
+      fontWeight: "600",
+      fontSize: "1rem",
+      borderCollapse: "separate",
+      borderSpacing: "0 1rem",
+    },
+    Td: {
+      borderColor: "#14244b",
+      borderWidth: "1px",
+      borderRadius: "30px",
+      textAlign: "start",
+      color: "white",
+      padding: "10px 24px",
+    },
+    cursor: {
+      default: "",
+      pointer: "pointer"
+    }
+  }
 };
 
 export const style = { ...commonStyle, ...darkStyle };

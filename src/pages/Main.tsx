@@ -1,30 +1,26 @@
-import "@rainbow-me/rainbowkit/styles.css";
-import LandingPage from "./landing";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import ModalWindow from "@/_ui/modal/ModalWindow";
+import NavLeft from "@/_ui/nav/NavLeft";
 import AuthCard from "@/components/auth/AuthCard";
-import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
-import ChatList from "@/components/chat/ChatList";
-import MobileEmptyState from "@/components/MobileEmptyState";
-import ModalWindow from "@/components/modal/ModalWindow";
-import Nav from "@/components/nav/Nav";
-import useUserStore from "@/store/useUserStore";
-import {
-  StyledChat,
-  StyledChatList,
-  StyledWindow,
-} from "@/styles/StyledComponents";
+// import ChatList from "@/components/chat/ChatList";
+// import ChatContainer from "@/components/chat/chatcontainer/ChatContainer";
+import useAuthStore from "@/store/useAuthStore";
+import { StyledChat, StyledChatList } from "@/styles/StyledComponents";
 import { useDisclosure } from "@chakra-ui/react";
+import "@rainbow-me/rainbowkit/styles.css";
 import { useEffect } from "react";
+
 function Main() {
   const modalAuth = useDisclosure();
-  const $connected = useUserStore((state: any) => state.connected);
+  const $isConnected = useAuthStore((state: any) => state.isConnected);
 
   useEffect(() => {
-    if ($connected && modalAuth.isOpen) {
+    if ($isConnected && modalAuth.isOpen) {
       modalAuth.onClose();
-    } else if (!$connected && !modalAuth.isOpen) {
+    } else if (!$isConnected && !modalAuth.isOpen) {
       modalAuth.onOpen();
     }
-  }, [$connected, modalAuth.isOpen]);
+  }, [$isConnected, modalAuth.isOpen]);
   const TemplateAuth = () => {
     return (
       <>
@@ -36,22 +32,20 @@ function Main() {
   };
   return (
     <>
-     {$connected && (
-        <StyledWindow>
+      {$isConnected && (
+        <FlexWindow>
           <div className="left">
-            <Nav />
+            <NavLeft />
           </div>
 
           <div className="right">
             <StyledChatList>
-              <ChatList />
+              {/* <ChatList /> */}
               {/* <MobileEmptyState /> */}
             </StyledChatList>
-            <StyledChat>
-              <ChatContainer />
-            </StyledChat>
+            <StyledChat>{/* <ChatContainer /> */}</StyledChat>
           </div>
-        </StyledWindow>
+        </FlexWindow>
       )}
       {modalAuth.isOpen && <TemplateAuth />}
     </>

@@ -65,7 +65,7 @@ const useLensConnections = (account?: any, lensId?: any) => {
       getFollowers(lensId);
       // getLensProfile(lensId);
     }
-  }, [lensId]);
+  }, [lensId,account]);
 
   const _fetch = (userLens: any) => {
     console.log('fetching user followers and following');

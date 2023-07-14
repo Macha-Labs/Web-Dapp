@@ -7,13 +7,13 @@ import { setMetaData } from "@/helpers/lens/lens";
 import { v4 as uuidv4 } from "uuid";
 import { fetchSigner, signTypedData } from "@wagmi/core";
 import signedTypeData, { splitSignature } from "@/helpers/lens/lensApiService";
-import { LensHubAbi } from "@/contracts/lens/lensHubContractAbi";
+// import { LensHubAbi } from "@/contracts/lens/lensHubContractAbi";
 import {
   LENS_HUB_CONTRACT,
   LENS_PERIPHERY_CONTRACT,
 } from "@/helpers/lens/lensContract";
 import { ethers } from "ethers";
-import { LensPheripheryAbi } from "@/abi/lensPheripheryAbi";
+// import { LensPheripheryAbi } from "@/abi/lensPheripheryAbi";
 const useLensProfileUpdate = () => {
   const [isLoading, setIsLoading] = useState<any>(false);
   const [loadingText, setLoadingText] = useState<any>("Sending Request");
@@ -60,7 +60,7 @@ const useLensProfileUpdate = () => {
     console.log(signer);
     const lensHub = new ethers.Contract(
       LENS_PERIPHERY_CONTRACT,
-      LensPheripheryAbi,
+      // LensPheripheryAbi,
       signer
     );
     console.log(

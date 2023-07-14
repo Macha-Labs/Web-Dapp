@@ -1,4 +1,4 @@
-import { LensHubAbi } from "@/contracts/lens/lensHubContractAbi";
+// import { LensHubAbi } from "@/contracts/lens/lensHubContractAbi"
 import { createNewPost, validateMetadata } from "@/helpers/lens/lens";
 import signedTypeData from "@/helpers/lens/lensApiService";
 import { LENS_HUB_CONTRACT } from "@/helpers/lens/lensContract";
@@ -11,7 +11,6 @@ import { splitSignature } from "ethers/lib/utils";
 import { useContext } from "react";
 import { v4 } from "uuid";
 import { fetchSigner } from "@wagmi/core";
-
 
 const useCreateLensPost = () => {
   const authContext = useContext(AuthContext);
@@ -122,10 +121,10 @@ const useCreateLensPost = () => {
 
     const { v, r, s } = splitSignature(signedResult.signature);
     const signer: any = await fetchSigner();
-    
+
     const lensHub = new ethers.Contract(
       LENS_HUB_CONTRACT,
-      LensHubAbi,
+      // LensHubAbi,
       signer
     );
     const tx = await lensHub.postWithSig({

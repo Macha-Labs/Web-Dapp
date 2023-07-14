@@ -1,6 +1,6 @@
-import IconImage from "@/components/icons/IconImage";
-import { StyledIcon, Row, StyledOptionsCard } from "@/styles/StyledComponents";
-import { Heading, Text } from "@chakra-ui/react";
+import IconImage from "@/_ui/icons/IconImage";
+import { StyledOptionsCard, StyledRow } from "@/styles/StyledComponents";
+import { Text } from "@chakra-ui/react";
 
 const LayoutOptions = (props: any) => {
   return (
@@ -20,36 +20,41 @@ const LayoutOptions = (props: any) => {
               return null;
             }
             if (
-              item.name === "Mute Chat" && !props?.channelRawData?.disconnected &&
+              item.name === "Mute Chat" &&
+              !props?.channelRawData?.disconnected &&
               props.channelRawData?.muteStatus().muted
             ) {
               return null;
             }
             if (
-              item.name === "UnMute Chat" && !props?.channelRawData?.disconnected &&
+              item.name === "UnMute Chat" &&
+              !props?.channelRawData?.disconnected &&
               !props.channelRawData?.muteStatus().muted
             ) {
               return null;
             }
-            if(item.name === "Leave Channel" && props.channelAdmin == props.userId){
-              return null
+            if (
+              item.name === "Leave Channel" &&
+              props.channelAdmin == props.userId
+            ) {
+              return null;
             }
             return (
-              <Row
+              <StyledRow
                 className="item m-b-0-5 hr-between"
                 key={index}
                 onClick={() => {
                   item.onPress();
                 }}
               >
-                <Row className="vr-center">
-                  <IconImage path={item.icon} size={item.size} />
+                <StyledRow className="vr-center">
+                  <IconImage slug={item.icon} size={item.size} />
                   <Text fontSize="md" className="m-l-0-5">
                     {item.name}
                   </Text>
-                </Row>
-                <Row></Row>
-              </Row>
+                </StyledRow>
+                <StyledRow></StyledRow>
+              </StyledRow>
             );
           })}
         </>

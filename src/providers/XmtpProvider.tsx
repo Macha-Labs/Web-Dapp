@@ -36,7 +36,7 @@ export const XmtpProvider = ({ children }: any) => {
     // Breaking logs loop
     logs?.return();
     // Reading new logs
-    if (authContext.xmtpClientAddress && conversation) {
+    if (conversation) {
       const streamMessages = async () => {
         const newLog = await conversation?.xmtpRaw?.streamMessages();
         console.log('Logs for conversations', conversation, newLog)
@@ -50,9 +50,7 @@ export const XmtpProvider = ({ children }: any) => {
 
   const _newConversation = async (channel: any) => {
     loggerInit('XMTPProvider.fetchXmtpConversation');
-    const result = await authContext?.xmtpClient.conversations.newConversation(
-      channel?.id
-    );
+    const result = {}
     logger('xmtp', 'XMTPProvider.fetchXmtpConversation', 'Conversation is', [result])
     setConversation(result);
   };

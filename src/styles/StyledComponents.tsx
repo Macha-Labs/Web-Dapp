@@ -7,7 +7,6 @@ export const StyledImageView = styled.div<{ viewMode: boolean }>`
       case true:
         return css`
           position: fixed;
-          top: 0;
           left: 0;
           height: 100vh;
           width: 100% !important;
@@ -66,34 +65,11 @@ export const StyledIframeView = styled.div`
   }
 `;
 
-export const StyledWindow = styled.div`
-  position: fixed;
-  width: 100vw;
-
-  .left {
-  }
-
-  .right {
-    width: calc(100vw - ${style.nav.width});
-    position: fixed;
-    left: calc(${style.nav.width});
-    display: flex !important;
-  }
-
-  .middle {
-    width: 35%;
-    margin: auto;
-    margin-top: 8%;
-    height: 100vh;
-  }
-  
-  }
-`;
-
-export const Row = styled.div`
+export const StyledRow = styled.div`
   display: flex;
   flex-direction: row;
   text-align: left;
+  width: 100%;
 
   &.flex-wrap {
     flex-wrap: wrap !important;
@@ -123,8 +99,16 @@ export const Row = styled.div`
     flex-direction: column;
   }
 `;
-
-export const RowHover = styled(Row)`
+export const StyledLi = styled.li`
+  &.active {
+    background: -webkit-linear-gradient(100.07deg, #197cec 100%, #004889 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+`;
+export const RowHover = styled(StyledRow)`
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 0.5rem;
@@ -138,11 +122,11 @@ export const RowHover = styled(Row)`
   }
 `;
 
-export const Col = styled.div`
+export const StyledCol = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-
+  width: 100%;
   &.hr-center {
     align-items: center;
   }
@@ -172,12 +156,6 @@ export const Main = styled.div`
     text-decoration: none;
   }
 
-  @media screen and (max-width: 480px) {
-    width: ${style.mob.widthMain};
-    margin-left: ${style.mob.marginMain};
-    // padding: ${style.mob.paddingMain};
-  }
-
   h1,
   h2,
   h3,
@@ -200,11 +178,6 @@ export const Section = styled.div`
   &.md {
     width: 60%;
   }
-
-  @media screen and (max-width: 480px) {
-    width: ${style.mob.widthSection};
-    margin-bottom: 3rem;
-  }
 `;
 
 export const List = styled.div`
@@ -222,9 +195,6 @@ export const List = styled.div`
     }
     &::first-child {
       margin-left: -5px;
-    }
-    @media screen and (max-width: 480px) {
-      width: ${style.mob.widthCardList};
     }
   }
   &.span-1 {
@@ -263,9 +233,9 @@ export const List = styled.div`
 
 export const StyledCard = styled.div`
   border-radius: ${style.card.borderRadius};
-  border: ${style.card.border.default};
-  background: ${style.card.bg.default};
-  padding: ${style.card.padding.default};
+  // border: ${style.card.border.default};
+  // background: ${style.card.bg.default};
+  // padding: ${style.card.padding.default};
   box-shadow: ${style.card.shadow.default};
   cursor: pointer;
   width: 100%;
@@ -324,7 +294,7 @@ export const StyledCard = styled.div`
     ) !important;
     padding: 48px 0px !important;
     border-radius: 10px;
-    border: 1px solid rgb(32,108,255,0.7);
+    border: 1px solid rgb(32, 108, 255, 0.7);
   }
 `;
 export const StyledXMTPCard = styled.div`
@@ -338,28 +308,6 @@ export const StyledXMTPCard = styled.div`
   position: absolute;
   bottom: 10px;
   left: 3px;
-`;
-
-export const StyledCardPannel = styled.div`
-  border-radius: ${style.card.borderRadius};
-  border: ${style.card.border.default};
-  background: ${style.card.bg.default};
-  box-shadow: ${style.card.shadow.default};
-  cursor: pointer;
-  width: 100%;
-
-  .header {
-    border-bottom: ${style.card.border.default};
-    padding: ${style.paddingCard};
-  }
-
-  .body {
-    padding: 1rem;
-  }
-  .footer {
-    border-top: ${style.card.border.default};
-    padding: ${style.paddingCard};
-  }
 `;
 
 export const StyledNFTCard = styled(StyledCard)`
@@ -446,7 +394,7 @@ export const Placeholder = styled.div`
   border: ${style.borderPlaceholder};
   border-radius: ${style.borderRadius};
   background: ${style.bgPlaceholder};
-  padding: ${style.paddingCard};
+  padding: ${style.card.padding.default};
   min-height: ${style.heightPlaceholder};
 `;
 
@@ -455,21 +403,21 @@ export const Pallet = styled.div`
   border: ${style.borderPallet};
   border-radius: ${style.borderRadius};
   background: none;
-  padding: ${style.paddingCard};
+  padding: ${style.card.padding.default};
 `;
 
 export const Pannel = styled.div`
   border: ${style.borderPannel};
-  border-radius: ${style.borderRadiusCard};
+  border-radius: ${style.card.borderRadius.default};
   box-shadow: ${style.pannel.shadow.default};
   .header {
     background: ${style.bgPannelHeader};
-    padding: ${style.paddingPannel};
-    border-radius: ${style.borderRadiusCard};
+    padding: ${style.card.padding.default};
+    border-radius: ${style.card.borderRadius.default};
   }
 
   .body {
-    padding: ${style.paddingPannelBody};
+    padding: ${style.card.padding.default};
     min-height: 200px;
   }
 `;
@@ -484,11 +432,6 @@ export const Banner = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-
-  @media screen and (max-width: 480px) {
-    padding: ${style.mob.paddingBanner};
-    height: ${style.mob.heightBanner};
-  }
 `;
 
 export const Logo = styled.img`
@@ -501,29 +444,14 @@ export const Logo = styled.img`
   object-position: center;
   aspect-ratio: 1/1;
 
-  @media screen and (max-width: 480px) {
-    width: ${style.mob.sizeLogo};
-    height: ${style.mob.sizeLogo};
-  }
-
   &.sm {
     width: ${style.sizeLogoSmall};
     height: ${style.sizeLogoSmall};
-
-    @media screen and (max-width: 480px) {
-      width: ${style.mob.sizeLogoSmall};
-      height: ${style.mob.sizeLogoSmall};
-    }
   }
 
   &.lg {
     width: ${style.sizeLogoLarge};
     height: ${style.sizeLogoLarge};
-
-    @media screen and (max-width: 480px) {
-      width: ${style.mob.sizeLogoLarge};
-      height: ${style.mob.sizeLogoLarge};
-    }
   }
 `;
 
@@ -536,10 +464,6 @@ export const Cover = styled.div`
   background-size: cover;
   display: flex;
   align-items: center;
-
-  @media screen and (max-width: 480px) {
-    height: ${style.mob.heightCover};
-  }
 
   .intro {
     align-items: center;
@@ -613,11 +537,6 @@ export const StyledIcon = styled.i`
 
   &.circled {
     border-radius: 50%;
-  }
-
-  &.sm {
-    width: ${style.sizeIconSmall};
-    height: ${style.sizeIconSmall};
   }
 `;
 
@@ -765,7 +684,7 @@ export const StyledChat = styled.div`
     }
   }
 `;
-export const StyledChatItem = styled(Row)`
+export const StyledChatItem = styled(StyledRow)`
   text-align: start;
   align-items: center;
   justify-content: flex-start;
@@ -823,7 +742,7 @@ export const StyledChatInputContainer = styled.div`
   padding: 5px 10px;
 `;
 
-export const StyledChatInput = styled(Row)`
+export const StyledChatInput = styled(StyledRow)`
   width: 100%;
   border-radius: 5px;
   background: ${style.card.bg.default};
@@ -883,7 +802,7 @@ export const StyledConversationContainer = styled.div`
   width: 100%;
 `;
 
-export const StyledConversation = styled(Col)`
+export const StyledConversation = styled(StyledCol)`
   cursor: pointer;
   padding: 15px 15px;
   position: relative;

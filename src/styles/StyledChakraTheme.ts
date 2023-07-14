@@ -10,15 +10,15 @@ const theme = extendTheme({
         background: `${style.bgMain}`,
       },
       "h1, h2, h3, h4, h5, h6": {
-        color: `${style.colorH}`,
+        color: `${style.color.h}`,
       },
       "div, p, span": {
-        color: `${style.colorP}`,
+        color: `${style.color.p}`,
       },
       "*::placeholder": {
         color: `${style.colorPlaceholder}`,
       },
-      "textarea": {
+      textarea: {
         border: `${style.input.border.default} !important`,
         color: `${style.colorInput} !important`,
         background: `${style.input.bg.default} !important`,
@@ -26,7 +26,7 @@ const theme = extendTheme({
         paddingRight: "0.5rem !important",
       },
       "input:focus": {
-        background: '#000'
+        background: "#000",
       },
       ".chakra-modal__content": {
         // borderLeft: `${style.modal.border.default} !important`,
@@ -44,18 +44,46 @@ const theme = extendTheme({
         borderTop: `${style.modal.border.default} !important`,
       },
       ".chakra-modal__overlay": {
-        opacity: "0.65 !important",
+        opacity: "0.9 !important",
         background: `${style.modal.bg.default} !important`,
       },
-      ".css-wl0d9u ":{
-        backgroundImage: `url("/assets/invitebg.png")`,
-          backgroundRepeat:"no-repeat",
-          backgroundPosition:"center",
-          backgroundSize:"cover",
-          height:"100vh"
+      ".css-wl0d9u ": {
+        // backgroundImage: `url("/assets/invitebg.png")`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        height: "100vh",
       },
       ".alert": {
         background: `${style.bgPannelHeader}`,
+      },
+      ".chakra-input__left-element": {
+        display: "flex",
+        alignItems: "center",
+        height: "100%!important",
+      },
+      ".chakra-input__right-element": {
+        display: "flex",
+        alignItems: "center",
+        height: "100%!important",
+      },
+      ".css-1jec974 >option": {
+        background: `${style.input.bg.default}!important`,
+      },
+      ".css-2t0ktt": {
+        borderRadius: `${style.input.borderRadius.default}!important`,
+      },
+      ".css-7p9xsp >option": {
+        background: `${style.input.bg.default}!important`,
+      },
+
+      ".css-1bki5fo::placeholder": {
+        color: "#132041",
+        paddingLeft: "5px",
+      },
+      ".css-12793pk >option": {
+        background: `${style.input.bg.default}!important`,
+        border: "0px",
       },
     },
   },
@@ -73,7 +101,7 @@ const theme = extendTheme({
           _focusVisible: {
             border: `${style.input.border.active}`,
             bg: `${style.input.bg.active}`,
-            shadow: `${style.input.shadow.hover}`
+            shadow: `${style.input.shadow.hover}`,
           },
         },
       },
@@ -102,7 +130,7 @@ const theme = extendTheme({
             _focusVisible: {
               border: `${style.input.border.active}`,
               bg: `${style.input.bg.active}`,
-              shadow: `${style.input.shadow.hover}`
+              shadow: `${style.input.shadow.hover}`,
             },
           },
         },
@@ -126,6 +154,7 @@ const theme = extendTheme({
         },
       },
     },
+
     Button: {
       baseStyle: {
         background: `${style.button.bg.default}`,
@@ -170,6 +199,7 @@ const theme = extendTheme({
         state_brand: {
           background: `${style.button.bg.active}`,
           color: "#FF",
+          // padding: "0.5rem",
         },
         state_brand_hover: {
           background: `${style.button.bg.activeTranslucent}`,
@@ -253,6 +283,10 @@ const theme = extendTheme({
         colorScheme: "whiteAlpha",
       },
       variants: {
+        state_brand: {
+          background: `${style.button.bg.active}`,
+          color: "#FF",
+        },
         state_xmtp: {
           opacity: "0.95",
           background: `linear-gradient(91.55deg, #FC4F37 -5.05%, #31006E 105.58%)`,
@@ -260,18 +294,22 @@ const theme = extendTheme({
           _hover: {
             opacity: "1",
           },
-        }
-      }
+        },
+      },
     },
     Menu: {
       baseStyle: {
         list: {
-          bg: `${style.bgDropdown}`,
-          border: `${style.borderDropdown}`,
+          bg: `${style.dropdown.bg.default}`,
+          border: `${style.dropdown.border}`,
           minW: "5xs",
           zIndex: 1000,
         },
         item: {
+          bg: `${style.button.bg.default}`,
+          _hover: {
+            bg: `${style.button.bg.hover}`,
+          },
           _focus: {
             bg: `${style.button.bg.default}`,
           },

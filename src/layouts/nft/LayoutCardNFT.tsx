@@ -1,19 +1,19 @@
-import { Col, Row } from "@/styles/StyledComponents";
+import { StyledCol, StyledRow } from "@/styles/StyledComponents";
 import { Avatar, Heading, Text } from "@chakra-ui/react";
 
 const LayoutCardNFT = () => {
 
     return(
         <>
-            <Row className="vr-center w-100">
-                <Col className="m-r-1">
+            <StyledRow className="vr-center w-100">
+                <StyledCol className="m-r-1">
                     <Avatar size="xl" />
-                </Col>
-                <Col>
+                </StyledCol>
+                <StyledCol>
                     <Heading as="h5" size="md" className="m-b-1">NFT Name</Heading>
                     <Text>NFT Description</Text>
-                </Col>
-            </Row>
+                </StyledCol>
+            </StyledRow>
         </>
     )
 }
