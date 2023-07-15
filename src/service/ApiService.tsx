@@ -44,3 +44,18 @@ export const allContracts = async () => {
   const data = await response.json();
   return data;
 };
+
+export const createNewContract = async (data: any) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/contracts/edit-upload`,
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log("form create new contract ", response);
+  return response.json();
+};

@@ -19,7 +19,6 @@ type Props = {
 };
 
 const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
-
   return (
     <>
       <ModalWindow
@@ -36,10 +35,10 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
             <ButtonNative
               variant="state_brand"
               marginTop={style.margin["lg"]}
-
               onClick={async (e: any) => {
                 e.preventDefault();
-                await hookContractCreate.publishApi();
+                console.log(hookContractCreate);
+                await hookContractCreate.publishContract();
               }}
             >
               Create Contract
@@ -68,7 +67,8 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["description"] = element)
+                (hookContractCreate.contractDataRef.current["description"] =
+                  element)
               }
               inputType="text"
               labelText="Description"
@@ -77,7 +77,8 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["address"] = element)
+                (hookContractCreate.contractDataRef.current["address"] =
+                  element)
               }
               inputType="text"
               labelText="Address"
@@ -86,7 +87,8 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["chainId"] = element)
+                (hookContractCreate.contractDataRef.current["chainId"] =
+                  element)
               }
               inputType="text"
               labelText="Chain Id"
@@ -104,7 +106,9 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["interested_methods"] = element)
+                (hookContractCreate.contractDataRef.current[
+                  "interested_methods"
+                ] = element)
               }
               inputType="text"
               labelText="Interested Methods"
@@ -113,7 +117,9 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["interested_events"] = element)
+                (hookContractCreate.contractDataRef.current[
+                  "interested_events"
+                ] = element)
               }
               inputType="text"
               labelText="Interested Events"
