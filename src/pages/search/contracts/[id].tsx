@@ -11,6 +11,7 @@ import ContractInfoCard from "@/components/studio/ContraceInfoCard";
 import TxnTable from "@/components/studio/TxnTable";
 import useContract from "@/hooks/studio/useContract";
 import useContractTxn from "@/hooks/studio/useContractTxn";
+import InputSearch from "@/_ui/input/InputSearch";
 
 type Props = {
   metaInfo: any;
@@ -47,6 +48,28 @@ const Contract = () => {
             chain: hookContract.contractDetails[0]?.contract.chain_id,
           }}
         />}
+         <InputSearch
+            marginTop={style.margin.xl}
+            width="50%"
+            size="lg"
+            placeholder="Search Studio"
+            icon={{ slug: "icon-search" }}
+            marginRight={style.card.margin.default}
+            // onChange={(e: any) => hookContractList.handleFilter(e.target.value)}
+          />
+        <Text 
+        mt={style.margin.xl}
+        mb={0}
+        style={{
+              background: `-webkit-linear-gradient(
+              270deg,
+              rgb(25, 124, 236),
+              rgb(0, 74, 217)
+            )`,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}>Transactions in the last 12 hours </Text>
         <TxnTable txnData={hookContractTxn?.contractTxnDetails} />
       </Box>
     );
