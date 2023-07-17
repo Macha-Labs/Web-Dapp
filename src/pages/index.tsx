@@ -15,12 +15,11 @@ import useContractCreate from "@/hooks/studio/useContractCreate";
 import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
-import { useDisclosure } from "@chakra-ui/react";
+import { useDisclosure, Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const DashBoard = () => {
-
-  const $address = useAuthStore((state: any) => state.address)
+  const $address = useAuthStore((state: any) => state.address);
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
   const [exploreMeta, setExploreMeta] = useState<any>([]);
 
@@ -29,44 +28,31 @@ const DashBoard = () => {
 
     setExploreMeta(allMetas.data);
   };
-  const modal = useDisclosure()
+  const modal = useDisclosure();
   const hookContractCreate = useContractCreate(modal);
 
   useEffect(() => {
     fetchmetas();
   }, []);
 
-
   const dashboardNav: any = [
     {
       value: "Contracts",
-      href: ""
-    }
-    , {
+      href: "",
+    },
+    {
       value: "APIs",
       href: "",
     },
   ];
 
   const renderAPIs = () => {
-    return (
-      <>
-        {selectedNavTab == "APIs" && (
-          <ApiList />
-        )}
-      </>
-    );
+    return <>{selectedNavTab == "APIs" && <ApiList />}</>;
   };
 
   const renderContracts = () => {
-    return (
-      <>
-        {selectedNavTab == "Contracts" && (
-          <ContractList />
-        )}
-      </>
-    )
-  }
+    return <>{selectedNavTab == "Contracts" && <ContractList />}</>;
+  };
 
   const renderBody = () => {
     if (!$address) return null;
@@ -82,36 +68,44 @@ const DashBoard = () => {
               value={selectedNavTab}
               onChange={setSelectedNavTab}
             />
-            {selectedNavTab == "Contracts" && <ButtonNative
-              size="sm"
-              text="Create Contract"
-              variant="state_brand"
-              onClick={() => {
-                modal.onOpen();
-              }}
-            />}
+            {selectedNavTab == "Contracts" && (
+              <ButtonNative
+                size="sm"
+                text="Create Contract"
+                variant="state_brand"
+                onClick={() => {
+                  modal.onOpen();
+                }}
+              />
+            )}
           </FlexRow>
         </NavBlock>
 
         <FlexBody>
-          {renderContracts()}
-          {renderAPIs()}
+          <Box style={{ overflow: "hidden" }}>
+            {renderContracts()}
+            {renderAPIs()}
+          </Box>
         </FlexBody>
-        <ContractCreateModal modal={modal} hookContractCreate={hookContractCreate} />
+        <ContractCreateModal
+          modal={modal}
+          hookContractCreate={hookContractCreate}
+        />
       </>
     );
   };
 
   const renderNav = () => {
-    
     return (
       <NavTop
         rightElem={
           <FlexRow width="fit-content">
-            {$address && <NavButton
-              marginRight={style.margin["sm"]}
-              marginLeft={style.margin["sm"]}
-            />}
+            {$address && (
+              <NavButton
+                marginRight={style.margin["sm"]}
+                marginLeft={style.margin["sm"]}
+              />
+            )}
             {<ConnectWalletButton />}
           </FlexRow>
         }

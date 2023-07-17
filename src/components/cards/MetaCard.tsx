@@ -15,6 +15,9 @@ type Props = {
   height?: any;
 };
 
+
+
+
 export default function MetaCard({
   image,
   heading,
