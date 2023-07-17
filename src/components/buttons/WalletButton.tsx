@@ -2,6 +2,7 @@ import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import { truncateAddress } from "@/helpers";
 import useMachaAuth from "@/hooks/studio/useMachaAuth";
 import useAuthStore from "@/store/useAuthStore";
+import { useDisconnect } from "wagmi";
 
 const WalletButton = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -22,7 +23,9 @@ const WalletButton = () => {
     {
       value: "Disconnect Wallet",
       leftIcon: "icon-disconnectWallet",
-      onClick: () => {},
+      onClick: async () => {
+        
+      },
     },
     {
       value: "Register as Publisher",

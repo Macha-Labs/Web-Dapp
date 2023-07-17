@@ -41,7 +41,7 @@ const NavTop = ({ rightElem, centerElem }: Props) => {
           </FlexRow>
 
           <FlexRow vrAlign="center" hrAlign="flex-end">
-            <IconImage slug="icon-bell" />
+            {/* <IconImage slug="icon-bell" /> */}
             {rightElem}
           </FlexRow>
         </FlexRow>

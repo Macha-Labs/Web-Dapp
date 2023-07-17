@@ -108,11 +108,11 @@ const DashBoard = () => {
       <NavTop
         rightElem={
           <FlexRow width="fit-content">
-            <NavButton
+            {$address && <NavButton
               marginRight={style.margin["sm"]}
               marginLeft={style.margin["sm"]}
-            />
-            {$address ? <WalletButton /> : <ConnectWalletButton />}
+            />}
+            {<ConnectWalletButton />}
           </FlexRow>
         }
       />
