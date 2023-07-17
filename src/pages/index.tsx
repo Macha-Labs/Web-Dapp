@@ -30,7 +30,7 @@ const DashBoard = () => {
     setExploreMeta(allMetas.data);
   };
   const modal = useDisclosure()
-  const hookContractCreate = useContractCreate();
+  const hookContractCreate = useContractCreate(modal);
 
   useEffect(() => {
     fetchmetas();

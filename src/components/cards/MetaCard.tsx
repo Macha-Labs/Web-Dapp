@@ -31,7 +31,7 @@ export default function MetaCard({
       <>
         <div
           style={{
-            height: "fit-content",
+            height: `${height ? height :"fit-content"}`,
             width: "22rem",
             border: `${style.card.border.meta}`,
             borderRadius: `${style.card.borderRadius.default}`,

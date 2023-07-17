@@ -37,6 +37,7 @@ const ContractList = () => {
                   <MetaCard
                     key={index}
                     cardView="horizontal"
+                    height="8rem"
                     heading={item?.contract?.name}
                     image={item?.contract?.image ? item?.contract?.image : "https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"}
                     description={item?.contract?.description}

@@ -6,6 +6,7 @@ export const commonStyle: any = {
     h4: "1.4rem",
     h5: "1.2rem",
     h6: "1rem",
+    h7: "0.8rem",
     p: "1rem",
   },
   margin: {
