@@ -10,7 +10,7 @@ import ModalWindow from "@/_ui/modal/ModalWindow";
 import useMachaApi from "@/hooks/studio/useMachaApi";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
-import { Heading, Text } from "@chakra-ui/react";
+import { FormControl, Heading, Text } from "@chakra-ui/react";
 import CustomTable from "./CustomTable";
 
 type Props = {
@@ -19,7 +19,6 @@ type Props = {
 };
 
 const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
-
   return (
     <>
       <ModalWindow
@@ -36,16 +35,15 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
             <ButtonNative
               variant="state_brand"
               marginTop={style.margin["lg"]}
-
               onClick={async (e: any) => {
                 e.preventDefault();
-                await hookContractCreate.publishApi();
+                await hookContractCreate.publishContract();
               }}
             >
               Create Contract
             </ButtonNative>
 
-            <ButtonNative variant="state_default_hover" marginLeft="sm">
+            <ButtonNative variant="state_default_hover" marginLeft="sm" onClick={() => modal.onClose()}>
               Cancel
             </ButtonNative>
           </FlexRow>
@@ -58,38 +56,51 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
           padding={style.padding["sm"]}
         >
           <FlexColumn hrAlign="space-between" height="35%">
+            <Text
+              fontSize={style.font.h7}
+              textAlign="left" width="100%"
+              bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+              bgClip="text"
+            >All * marked fields are required</Text>
             <InputLabel
               elementRef={(element: any) =>
                 (hookContractCreate.contractDataRef.current["name"] = element)
               }
               inputType="text"
-              labelText="Contract Name"
+              labelText="Contract Name *"
               placeholder="Name"
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["description"] = element)
+              (hookContractCreate.contractDataRef.current["description"] =
+                element)
               }
               inputType="text"
-              labelText="Description"
+              labelText="Description *"
               placeholder="Description"
               marginTop="sm"
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["address"] = element)
+              (hookContractCreate.contractDataRef.current["address"] =
+                element)
               }
               inputType="text"
-              labelText="Address"
+              labelText="Address *"
               placeholder="Address"
               marginTop="sm"
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["chainId"] = element)
+              (hookContractCreate.contractDataRef.current["chainId"] =
+                element)
               }
               inputType="text"
-              labelText="Chain Id"
+              labelText="Chain Id *"
               placeholder="Chain Id"
               marginTop="sm"
             />
@@ -98,26 +109,41 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 (hookContractCreate.contractDataRef.current["slug"] = element)
               }
               inputType="text"
-              labelText="Slug"
+              labelText="Slug *"
               placeholder="Slug"
               marginTop="sm"
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["interested_methods"] = element)
+              (hookContractCreate.contractDataRef.current[
+                "interested_methods"
+              ] = element)
               }
               inputType="text"
-              labelText="Interested Methods"
+              labelText="Interested Methods *"
               placeholder="Interested Methods"
               marginTop="sm"
             />
             <InputLabel
               elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["interested_events"] = element)
+              (hookContractCreate.contractDataRef.current[
+                "interested_events"
+              ] = element)
               }
               inputType="text"
-              labelText="Interested Events"
+              labelText="Interested Events *"
               placeholder="Interested Events"
+              marginTop="sm"
+            />
+            <InputLabel
+              elementRef={(element: any) =>
+              (hookContractCreate.contractDataRef.current[
+                "read_abi_from"
+              ] = element)
+              }
+              inputType="text"
+              labelText="Read ABI From"
+              placeholder="Read ABI From"
               marginTop="sm"
             />
           </FlexColumn>

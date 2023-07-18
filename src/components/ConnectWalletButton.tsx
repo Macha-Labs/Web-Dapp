@@ -1,7 +1,17 @@
-import { Button, Text } from '@chakra-ui/react';
+import FlexRow from '@/_ui/flex/FlexRow';
+import IconImage from '@/_ui/icons/IconImage';
+import IconBase from '@/_ui/icons/IconsBase';
+import { truncateAddress } from '@/helpers';
+import useMachaAuth from '@/hooks/studio/useMachaAuth';
+import useAuthStore from '@/store/useAuthStore';
+import { style } from '@/styles/StyledConstants';
+import { Button, Image, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-export const ConnectWalletButton = (props:any) => {
+export const ConnectWalletButton = (props: any) => {
+  const $address = useAuthStore((state: any) => state.address);
+  const $loadAddress = useAuthStore((state: any) => state.loadAddress);
+  const hookMachaAuth = useMachaAuth();
   // console.log("mobile device detection", window.navigator.userAgent);
   return (
     <ConnectButton.Custom>
@@ -25,7 +35,7 @@ export const ConnectWalletButton = (props:any) => {
             authenticationStatus === 'authenticated');
         return (
           <div
-           className="w-100"
+            className="w-100"
             {...(!ready && {
               'aria-hidden': true,
               'style': {
@@ -44,7 +54,7 @@ export const ConnectWalletButton = (props:any) => {
                     variant="state_brand"
                     onClick={openConnectModal}
                   >
-                    <Text paddingBottom={"0px"} marginBottom="0px" fontSize={props?.font} style={{marginBottom:"0px", paddingBottom:"0px"}}>Connect Wallet</Text>
+                    <Text paddingBottom={"0px"} marginBottom="0px" fontSize={props?.font} style={{ marginBottom: "0px", paddingBottom: "0px" }}>Connect Wallet</Text>
                   </Button>
                 );
               }
@@ -57,7 +67,7 @@ export const ConnectWalletButton = (props:any) => {
               }
               return (
                 <div style={{ display: 'flex', gap: 12 }} className="w-100">
-                  <button
+                  {/* <button
                     className="w-100"
                     onClick={openChainModal}
                     style={{ display: 'flex', alignItems: 'center' }}
@@ -84,13 +94,86 @@ export const ConnectWalletButton = (props:any) => {
                       </div>
                     )}
                     {chain.name}
-                  </button>
-                  <button onClick={openAccountModal} type="button">
+                  </button> */}
+                  {/* <button onClick={openAccountModal} type="button">
                     {account.displayName}
                     {account.displayBalance
                       ? ` (${account.displayBalance})`
                       : ''}
-                  </button>
+                  </button> */}
+                  <Menu>
+                    <MenuButton
+                      variant={"state_default_hover"}
+                      as={Button}
+                      style={{
+                        borderRadius: `${style.card.borderRadius.button}`,
+                      }}
+                      rightIcon={
+                        <IconBase slug="icon-chevron-down" size="sm" style={` marginLeft: "10px" `} />
+                      }
+                      height={"35px"}
+                    >
+                      <FlexRow>
+                        <Image src={"../assets/Avatar.svg"} alt="avatar" />
+                        <Text
+                          marginLeft={style.button.margin.default}
+                          fontSize={"sm"}
+                          className="mb-0"
+                        >
+                          {truncateAddress($address)}
+                        </Text>
+                      </FlexRow>
+                    </MenuButton>
+                    <MenuList>
+                      <MenuItem
+                        onClick={() => { }}
+                      >
+                        <FlexRow hrAlign="space-between">
+                          <Image
+                            style={{ height: "25px", width: "25px" }}
+                            src="../assets/Avatar.svg" alt=""
+                          />
+                          {/* <IconImage slug="icon-switchWallet" /> */}
+                          <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
+                            {truncateAddress($address)}
+                            {/* <IconImage slug="icon-switchWallet" /> */}
+                          </FlexRow>
+                        </FlexRow>
+                      </MenuItem>
+                      <MenuItem
+                        onClick={openConnectModal}
+                      >
+                        <FlexRow hrAlign="space-between">
+                          <IconImage slug="icon-switchWallet" />
+                          <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
+                            {"Switch Wallet"}
+                          </FlexRow>
+                        </FlexRow>
+                      </MenuItem>
+                      <MenuItem
+                        onClick={openAccountModal}
+                      >
+                        <FlexRow hrAlign="space-between">
+                          <IconImage slug="icon-disconnectWallet" />
+                          <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
+                            {"Disconnect Wallet"}
+                          </FlexRow>
+                        </FlexRow>
+                      </MenuItem>
+                      <MenuItem
+                        onClick={() => {
+                          hookMachaAuth.registerPublisher();
+                        }}
+                      >
+                        <FlexRow hrAlign="space-between">
+                          <IconImage slug="icon-user" />
+                          <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
+                            {"Register as Publisher"}
+                          </FlexRow>
+                        </FlexRow>
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
                 </div>
               );
             })()}

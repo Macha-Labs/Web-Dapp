@@ -4,7 +4,7 @@ import { DataProvider } from "@/providers/DataProvider";
 import "@/styles/globals.css";
 import theme from "@/styles/StyledChakraTheme";
 import { ChakraProvider } from "@chakra-ui/react";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { darkTheme, getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { IKContext } from "imagekitio-react";
@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
         gtag('config', '${config.GOOGLE_ANALYTICS_ID}');`}
       </Script>
       <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
+        <RainbowKitProvider chains={chains} theme={darkTheme()}>
           <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">
             <AuthProvider>
               <DataProvider>

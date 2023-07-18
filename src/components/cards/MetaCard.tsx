@@ -15,6 +15,9 @@ type Props = {
   height?: any;
 };
 
+
+
+
 export default function MetaCard({
   image,
   heading,
@@ -31,7 +34,7 @@ export default function MetaCard({
       <>
         <div
           style={{
-            height: "fit-content",
+            height: `${height ? height :"fit-content"}`,
             width: "22rem",
             border: `${style.card.border.meta}`,
             borderRadius: `${style.card.borderRadius.default}`,
@@ -60,10 +63,10 @@ export default function MetaCard({
           )}
 
           <div style={{ width: image ? "65%" : "100%" }}>
-            <Text height="30px" fontSize={"2xl"} fontWeight={600}>
+            <Text lineHeight="1.25rem" fontSize={"2xl"} fontWeight={600}>
               {truncateString(heading, 10)}
             </Text>
-            <Text>{truncateString(description, 30)}</Text>
+            <Text lineHeight="1.5rem">{truncateString(description, 30)}</Text>
 
             <FlexRow height="fit-content" hrAlign="flex-start" width="100%">
               {tags?.map((tag: string, index: number) => {
@@ -114,10 +117,10 @@ export default function MetaCard({
             />
           </div>
           <div style={{ height: "50%", marginTop: `${style.margin["sm"]}` }}>
-            <Text height="30px" fontSize={"2xl"} fontWeight={600}>
+            <Text  lineHeight="1rem" fontSize={"2xl"} fontWeight={600}>
               {truncateString(heading, 15)}
             </Text>
-            <Text height="50px">{truncateString(description, 50)}</Text>
+            <Text height="2rem">{truncateString(description, 50)}</Text>
             <FlexRow hrAlign="flex-start" width="100%" height="50px">
               <TagNative
                 value="Tag 1"
