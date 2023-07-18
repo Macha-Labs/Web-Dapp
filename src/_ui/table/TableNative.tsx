@@ -1,6 +1,6 @@
-import { truncateAddress, truncateString } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { useState } from "react";
 
 type Prop = {
   data: any
@@ -8,7 +8,8 @@ type Prop = {
   tbodyChildren: any
 }
 
-const TableNative = ({data,tbodyChildren,theadChildren}: Prop) => {
+const TableNative = ({ data, tbodyChildren, theadChildren }: Prop) => {
+
   return (
     <div>
       <TableContainer
@@ -30,6 +31,10 @@ const TableNative = ({data,tbodyChildren,theadChildren}: Prop) => {
             {data?.map((item: any) => {
               return (
                 <Tr
+                  _hover={{
+                    transform: "scale(1.01,1.01)",
+                    background: `${style.table.bg.hover}`
+                  }}
                   key={item._id}
                   style={{
                     borderBottom: `${style.card.border.default}`,

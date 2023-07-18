@@ -45,7 +45,7 @@ const theme = extendTheme({
       },
       ".chakra-modal__overlay": {
         opacity: "0.9 !important",
-        background: `${style.modal.bg.default} !important`,
+        background: `${style.modal.bg.overlay} !important`,
       },
       ".css-wl0d9u ": {
         // backgroundImage: `url("/assets/invitebg.png")`,

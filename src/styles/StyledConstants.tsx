@@ -164,7 +164,7 @@ export const darkStyle = {
     },
   },
   modal: {
-    bg: { default: "#00040d" },
+    bg: { default: "#020A21" ,overlay: "#00040d", },
     border: { default: "1px solid #0F172E" },
     shadow: { default: "" },
     borderRadius: ".8rem",
@@ -246,7 +246,8 @@ export const darkStyle = {
   },
   table: {
     bg: {
-      default: " linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)"
+      default: " linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
+      hover: "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%)"
     },
     borderColor: {
       default: "#14244b"
@@ -267,7 +268,6 @@ export const darkStyle = {
     Td: {
       borderColor: "#14244b",
       borderWidth: "1px",
-      borderRadius: "30px",
       textAlign: "start",
       color: "white",
       padding: "10px 24px",

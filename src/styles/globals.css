@@ -5,26 +5,6 @@
 }
 
 
-/* width */
-.scrollBar::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-.scrollBar::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-.scrollBar::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-.scrollBar::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
 
 :root {
   --max-width: 1100px;

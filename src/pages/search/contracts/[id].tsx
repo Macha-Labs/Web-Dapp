@@ -12,6 +12,7 @@ import TxnTable from "@/components/studio/TxnTable";
 import useContract from "@/hooks/studio/useContract";
 import useContractTxn from "@/hooks/studio/useContractTxn";
 import InputSearch from "@/_ui/input/InputSearch";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 
 type Props = {
   metaInfo: any;
@@ -48,29 +49,37 @@ const Contract = () => {
             chain: hookContract.contractDetails[0]?.contract.chain_id,
           }}
         />}
-         <InputSearch
-            marginTop={style.margin.xl}
-            width="50%"
-            size="lg"
-            placeholder="Search Studio"
-            icon={{ slug: "icon-search" }}
-            marginRight={style.card.margin.default}
-            // onChange={(e: any) => hookContractList.handleFilter(e.target.value)}
-          />
-        <Text 
-        mt={style.margin.xl}
-        mb={0}
-        style={{
-              background: `-webkit-linear-gradient(
+        <FlexRow hrAlign="flex-start" vrAlign="center" marginTop="xl">
+          <Box width="40%">
+            <InputSearch
+              width="100%"
+              size="lg"
+              placeholder="Search Studio"
+              icon={{ slug: "icon-search" }}
+              onChange={(e: any) => hookContractTxn.setSearchVal(e.target.value)}
+              onKeydown={(e: any) => {
+                if (e.key === 'Enter') {
+                  hookContractTxn.handleFilter(hookContractTxn.searchVal)
+                }
+              }}
+            />
+          </Box>
+          {/* <ButtonNative marginLeft="lg" variant="state_brand" text="Search" marginRight="0px" onClick={() => hookContractTxn.handleFilter(hookContractTxn.searchVal)} /> */}
+        </FlexRow>
+        <Text
+          mt={style.margin.xl}
+          mb={0}
+          style={{
+            background: `-webkit-linear-gradient(
               270deg,
               rgb(25, 124, 236),
               rgb(0, 74, 217)
             )`,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-            }}>Transactions in the last 12 hours </Text>
-        <TxnTable txnData={hookContractTxn?.contractTxnDetails} />
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}>Transactions in the last 12 hours </Text>
+        <TxnTable txnData={hookContractTxn?.filteredData} />
       </Box>
     );
   };
