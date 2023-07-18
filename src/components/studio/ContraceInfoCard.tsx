@@ -52,6 +52,18 @@ function ContractInfoCard({ data }: Props) {
                   alt="avatar"
                 />
                 <Text className="m-b-0">{truncateAddress(data?.address)}</Text>
+                <IconBase
+                  slug="icon-copy"
+                  style={{ marginLeft: "sm" }}
+                  onClick={() => {
+                    navigator.clipboard.writeText(data?.address);
+                    toast({
+                      title: "Copied To Clipboard",
+                      status: "success",
+                      duration: 3000,
+                    });
+                  }}
+                />
               </FlexRow>
             </FlexColumn>
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
@@ -64,9 +76,7 @@ function ContractInfoCard({ data }: Props) {
                   slug="icon-copy"
                   style={{ marginLeft: "sm" }}
                   onClick={() => {
-                    navigator.clipboard.writeText(
-                      "npm i @metaworklabs/macha-dev-sdk"
-                    );
+                    navigator.clipboard.writeText(data?.owner);
                     toast({
                       title: "Copied To Clipboard",
                       status: "success",
@@ -81,14 +91,12 @@ function ContractInfoCard({ data }: Props) {
                 Chain ID
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
-                <Text className="m-b-0">{data?.chain}</Text>
+                <Text className="m-b-0">{data?.chain_id}</Text>
                 <IconBase
                   slug="icon-copy"
                   style={{ marginLeft: "sm" }}
                   onClick={() => {
-                    navigator.clipboard.writeText(
-                      "npm i @metaworklabs/macha-dev-sdk"
-                    );
+                    navigator.clipboard.writeText(data?.chain_id);
                     toast({
                       title: "Copied To Clipboard",
                       status: "success",
