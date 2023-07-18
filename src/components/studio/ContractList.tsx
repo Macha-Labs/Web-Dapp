@@ -41,8 +41,7 @@ const ContractList = () => {
               <Loader size="lg" />
             </FlexRow>
           )}
-          <Box display="flex" flexWrap="wrap" width="100vw" overflowY="hidden" >
-            <Box style={{ overflowY: "scroll" }} height={500} width="100vw" display="flex" flexWrap="wrap" className="scrollBar">
+            <Box width="100vw" display="flex" flexWrap="wrap">
               {!hookContractList.isLoading &&
                 hookContractList?.filterData &&
                 hookContractList?.filterData.map((item: any, index: number) => {
@@ -75,7 +74,6 @@ const ContractList = () => {
                   );
                 })}
             </Box>
-          </Box>
         </FlexRow>
       </>
     );

@@ -23,7 +23,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
     <>
       <ModalWindow
         event={modal}
-        size="5xl"
+        size="3xl"
         header={
           <FlexRow width="100%" hrAlign="space-between">
             <Text className="mb-0">Contract</Text>

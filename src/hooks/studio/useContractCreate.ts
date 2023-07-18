@@ -1,11 +1,13 @@
 import { createNewContract } from "@/service/ApiService";
 import { useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useRef } from "react";
 
 
 const useContractCreate = (modal: any) => {
   const contractDataRef = useRef<any>({});
   const toast = useToast();
+  const router = useRouter()
 
   const publishContract = async () => {
     let interested_events = contractDataRef.current["interested_events"]?.value
@@ -50,6 +52,13 @@ const useContractCreate = (modal: any) => {
       console.log("The contract payload data is ", contractPayload);
       createNewContract(contractPayload).then((res) => {
         modal.onClose()
+        toast({
+          title: "Contract created!",
+          status: "success",
+          duration: 3000,
+          position: "top-right"
+        });
+        router.push(`/search/contracts/${contractPayload.slug}`)
       })
     }
 
