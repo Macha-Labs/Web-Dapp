@@ -13,7 +13,7 @@ const useContract = (_contract_slug: any) => {
 
   const _fetch = async (contract_slug: any) => {
     contractDataBySlug(contract_slug).then((res: any) => {
-      console.log("contract fetching", res);
+      console.log("contract fetching", res.data);
       setIsLoading(false)
       setContractDetails(res.data);
     });

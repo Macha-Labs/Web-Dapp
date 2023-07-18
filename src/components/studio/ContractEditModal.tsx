@@ -16,9 +16,11 @@ import CustomTable from "./CustomTable";
 type Props = {
   modal: any;
   hookContractCreate?: any;
+  hookContract?: any
 };
 
-const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
+const CreateContractModal = ({ modal, hookContractCreate, hookContract }: Props) => {
+
   return (
     <>
       <ModalWindow
@@ -37,10 +39,10 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
               marginTop={style.margin["lg"]}
               onClick={async (e: any) => {
                 e.preventDefault();
-                await hookContractCreate.publishContract();
+                await hookContractCreate.editContract(hookContract.contractDetails[0]?._id);
               }}
             >
-              Create Contract
+              Save
             </ButtonNative>
 
             <ButtonNative variant="state_default_hover" marginLeft="sm" onClick={() => modal.onClose()}>
@@ -70,6 +72,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
               elementRef={(element: any) =>
                 (hookContractCreate.contractDataRef.current["name"] = element)
               }
+              defaultValue={hookContract.contractDetails[0]?.contract?.name}
               inputType="text"
               labelText="Contract Name *"
               placeholder="Name"
@@ -80,6 +83,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 element)
               }
               inputType="text"
+              defaultValue={hookContract.contractDetails[0]?.contract?.description}
               labelText="Description *"
               placeholder="Description"
               marginTop="sm"
@@ -90,6 +94,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 element)
               }
               inputType="text"
+              defaultValue={hookContract.contractDetails[0]?.contract?.address}
               labelText="Address *"
               placeholder="Address"
               marginTop="sm"
@@ -99,6 +104,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
               (hookContractCreate.contractDataRef.current["chain_id"] =
                 element)
               }
+              defaultValue={hookContract.contractDetails[0]?.contract?.chain_id}
               inputType="text"
               labelText="Chain Id *"
               placeholder="Chain Id"
@@ -109,6 +115,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 (hookContractCreate.contractDataRef.current["slug"] = element)
               }
               inputType="text"
+              defaultValue={hookContract.contractDetails[0]?.contract?.slug}
               labelText="Slug *"
               placeholder="Slug"
               marginTop="sm"
@@ -120,6 +127,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
               ] = element)
               }
               inputType="text"
+              defaultValue={hookContract.contractDetails[0]?.contract?.interested_methods.join()}
               labelText="Interested Methods *"
               placeholder="Interested Methods"
               marginTop="sm"
@@ -131,6 +139,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
               ] = element)
               }
               inputType="text"
+              defaultValue={hookContract.contractDetails[0]?.contract?.interested_events.join()}
               labelText="Interested Events *"
               placeholder="Interested Events"
               marginTop="sm"
@@ -142,6 +151,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
               ] = element)
               }
               inputType="text"
+              defaultValue={hookContract.contractDetails[0]?.contract?.read_abi_from}
               labelText="Read ABI From"
               placeholder="Read ABI From"
               marginTop="sm"
