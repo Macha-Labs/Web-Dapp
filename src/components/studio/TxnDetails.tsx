@@ -4,16 +4,18 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
+import { truncateAddress, truncateString } from "@/helpers";
 import useTransaction from "@/hooks/studio/useTransaction";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
-import { Avatar, Box, Divider, Text, useRadio } from "@chakra-ui/react";
+import { Avatar, Box, Divider, Text, color, useRadio } from "@chakra-ui/react";
 import { fetchTransaction } from "@wagmi/core";
 import { useEffect, useState } from "react";
+import { Heading, useToast } from "@chakra-ui/react";
 
 type Props = {
-  id: string,
-  transactionHash: string | string[] | undefined
+  id: string;
+  transactionHash: string | string[] | undefined;
 };
 function TxnDetails({ id, transactionHash }: Props) {
   const options = [
@@ -22,7 +24,7 @@ function TxnDetails({ id, transactionHash }: Props) {
     { value: "paragraph.xyz", label: "Paragraph.xyz" },
   ];
 
-  const hookTransaction = useTransaction(transactionHash)
+  const hookTransaction = useTransaction(transactionHash);
   const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
 
@@ -30,11 +32,10 @@ function TxnDetails({ id, transactionHash }: Props) {
   const [detailToggle, setDetailsToggle] = useState<any>(false);
   const [hexToggle, setHexToggle] = useState<any>(false);
   const [resultData, setResultData] = useState<any>({});
-
+  const toast = useToast();
   useEffect(() => {
     console.log("Logging $meta ", $metaInfo);
   }, [$metaInfo]);
-
 
   // const [query, setQuery] = useState("");
 
@@ -60,7 +61,7 @@ function TxnDetails({ id, transactionHash }: Props) {
 
   return (
     <>
-      <FlexRow marginTop={"xxl"} hrAlign="space-between" vrAlign="flex-end">
+      <FlexRow marginTop={"xxl"} hrAlign="space-between" vrAlign="flex-end" marginBottom={"md"} width="68%">
         <Text
           fontSize={style.font.h1}
           fontWeight={600}
@@ -68,28 +69,71 @@ function TxnDetails({ id, transactionHash }: Props) {
           lineHeight={style.font.h1}
           marginTop={style.margin["sm"]}
         >
-          Txn Details
+          Transacation Details
         </Text>
-        <ButtonNative variant="state_brand" text="Share" marginRight="0px" />
+        <ButtonNative variant="state_brand" text="Share" marginRight="0px" iconRight={{slug:"icon-share"}}  />
       </FlexRow>
 
-      <Divider />
+      {/* <Divider /> */}
       <FlexRow hrAlign="start" marginBottom={"xs"}>
-        <TagNative variant="green" value="Success" size="sm" />
-        {/* TODO: make dynamic */}
-        <Text className="mb-0">about 1 hour ago </Text>
-        <Text
-          color="rgba(255,255,255,0.5)"
-          className="mb-0"
-          marginStart={style.margin.xxs}
-        >
-          {" "}
+        <Box>
+          <Text
+            mb={0}
+            style={{
+              background: `-webkit-linear-gradient(
+              270deg,
+              rgb(25, 124, 236),
+              rgb(0, 74, 217)
+            )`,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+              fontWeight: `${style.fontWeight.dark}`,
+            }}
+          >
+            CREATED
+          </Text>
+          <Text
+            color="rgba(255,255,255,0.5)"
+            className="mb-0"
+            // marginStart={style.margin.xxs}
+          >
+            {" "}
+            {/* TODO: make dynamic */}
+            Jul 8 2023 at 11:30:47 AM
+          </Text>
+        </Box>
+        <Box padding="0% 8% 0% 8%">
+          <Text
+            mb={0}
+            style={{
+              background: `-webkit-linear-gradient(
+              270deg,
+              rgb(25, 124, 236),
+              rgb(0, 74, 217)
+            )`,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+              fontWeight: `${style.fontWeight.dark}`,
+            }}
+          >
+            Status
+          </Text>
+          <Text
+            color="rgba(255,255,255,0.5)"
+            className="mb-0"
+            // marginStart={style.margin.xxs}
+          >
+            {" "}
+            {/* TODO: make dynamic */}
+            Success
+          </Text>
           {/* TODO: make dynamic */}
-          Jul 8 2023 at 11:30:47 AM
-        </Text>
+        </Box>
       </FlexRow>
       <FlexRow hrAlign="space-between" vrAlign="flex-start">
-        <FlexColumn width="58%" hrAlign="flex-start" vrAlign="flex-start">
+        <FlexColumn width="68%" hrAlign="flex-start" vrAlign="flex-start">
           <Box
             width={"100%"}
             border={style.card.border.hover}
@@ -100,16 +144,37 @@ function TxnDetails({ id, transactionHash }: Props) {
               <tbody>
                 <tr>
                   <td style={{ display: "flex", justifyContent: "center" }}>
-                    <Avatar />{" "}
+                    <Avatar src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873" />
                   </td>
                   <td>
-                    <FlexColumn vrAlign="start" marginLeft={"sm"}>
+                    <FlexRow
+                      vrAlign="start"
+                      marginLeft={"sm"}
+                      hrAlign="flex-start"
+                    >
                       <Text className="mb-0">
                         {hookTransaction?.transactionDetails &&
-                          hookTransaction.transactionDetails[4]?.value}
+                          truncateAddress(
+                            hookTransaction.transactionDetails[4]?.value
+                          )}
                       </Text>
+                      <IconBase
+                        slug="icon-copy"
+                        style={{ marginLeft: "sm" }}
+                        onClick={() => {
+                          navigator.clipboard.writeText(
+                            hookTransaction.transactionDetails[4]?.value
+                          );
+                          toast({
+                            title: "Copied To Clipboard",
+                            status: "success",
+                            duration: 3000,
+                          });
+                        }}
+                      />
+
                       {/* <Text className="mb-0">Ethereum</Text> */}
-                    </FlexColumn>
+                    </FlexRow>
                   </td>
                 </tr>
                 <tr>
@@ -125,13 +190,38 @@ function TxnDetails({ id, transactionHash }: Props) {
                 </tr>
                 <tr>
                   <td style={{ display: "flex", justifyContent: "center" }}>
-                    <IconBase slug="icon-close" />
+                    <IconBase slug="icon-code" />
                   </td>
                   <td>
                     <FlexRow hrAlign="flex-start">
                       <Text className="mb-0" marginStart={style.margin.sm}>
+                        Method
+                      </Text>
+                      <Text
+                        className="mb-0"
+                        style={{
+                          background: `-webkit-linear-gradient(
+                          270deg,
+                          rgb(25, 124, 236),
+                          rgb(0, 74, 217)
+                        )`,
+                          WebkitBackgroundClip: "text",
+                          backgroundClip: "text",
+                          color: "transparent",
+                          marginLeft: `${style.margin.sm}`,
+                          textDecoration: "none",
+                        }}
+                        _hover={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                          transform: "scale(1.05)",
+                        }}
+                      >
                         {hookTransaction.transactionDetails &&
-                          hookTransaction.transactionDetails[7]?.value}
+                          truncateString(
+                            hookTransaction.transactionDetails[7]?.value,
+                            15
+                          )}
                       </Text>
                       <Text className="mb-0" marginLeft={style.margin["xxs"]}>
                         {/* 0.295 ETH */}
@@ -159,16 +249,36 @@ function TxnDetails({ id, transactionHash }: Props) {
                 </tr>
                 <tr>
                   <td style={{ display: "flex", justifyContent: "center" }}>
-                    <Avatar />{" "}
+                    <Avatar src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873" />{" "}
                   </td>
                   <td>
-                    <FlexColumn vrAlign="start" marginLeft={"sm"}>
-                      <Text className="mb-0">
+                    <FlexRow
+                      vrAlign="start"
+                      marginLeft={"sm"}
+                      hrAlign="flex-start"
+                    >
+                      <Text className="mb-0" textAlign="left">
                         {hookTransaction?.transactionDetails &&
-                          hookTransaction.transactionDetails[5]?.value}
+                          truncateAddress(
+                            hookTransaction.transactionDetails[5]?.value
+                          )}
                       </Text>
+                      <IconBase
+                        slug="icon-copy"
+                        style={{ marginLeft: "sm" }}
+                        onClick={() => {
+                          navigator.clipboard.writeText(
+                            hookTransaction.transactionDetails[5]?.value
+                          );
+                          toast({
+                            title: "Copied To Clipboard",
+                            status: "success",
+                            duration: 3000,
+                          });
+                        }}
+                      />
                       {/* <Text className="mb-0">Ethereum</Text> */}
-                    </FlexColumn>
+                    </FlexRow>
                   </td>
                 </tr>
               </tbody>
@@ -261,7 +371,7 @@ function TxnDetails({ id, transactionHash }: Props) {
                   fontSize={style.font.h5}
                   fontWeight={600}
                 >
-                  Details
+                  All Details
                 </Text>
                 {detailToggle ? (
                   <IconBase slug="icon-chevron-up" />
@@ -279,21 +389,32 @@ function TxnDetails({ id, transactionHash }: Props) {
                     return (
                       <tr
                         key={item._id}
-                        style={{
-                          borderBottom: `${style.card.border.default}`,
-                          // width: "100%",
-                        }}
+                        style={
+                          {
+                            // borderBottom: `${style.card.border.default}`,
+                            // width: "100%",
+                          }
+                        }
                       >
                         <td
                           style={{
                             paddingTop: `${style.padding["xxs"]}`,
                             paddingBottom: `${style.padding["xxs"]}`,
                             width: "fit-content",
+                            background: `-webkit-linear-gradient(
+                              270deg,
+                              rgb(25, 124, 236),
+                              rgb(0, 74, 217)
+                            )`,
+                            WebkitBackgroundClip: "text",
+                            backgroundClip: "text",
+                            color: "transparent",
+                            fontWeight:`${style.fontWeight.dark}`
                           }}
                         >
                           {item.key}
                         </td>
-                        <td style={{}}>{item.value}</td>
+                        <td style={{}}>{truncateString(item.value, 20)}</td>
                       </tr>
                     );
                   })}
@@ -332,19 +453,19 @@ function TxnDetails({ id, transactionHash }: Props) {
             {hexToggle && <Text marginTop={style.margin.xl}>Function</Text>}
           </Box>
         </FlexColumn>
-        <FlexColumn width="38%" hrAlign="flex-start" vrAlign="flex-start">
+        <FlexColumn width="28%" hrAlign="flex-start" vrAlign="flex-start">
           <Box
             width={"100%"}
-            border={style.card.border.hover}
-            borderRadius={style.card.borderRadius.default}
+            // border={style.card.border.hover}
+            // borderRadius={style.card.borderRadius.default}
             padding={style.padding["lg"]}
           >
             <FlexRow>
-              <Avatar />{" "}
+              {/* <Avatar />{" "}
               <FlexColumn>
                 <Text>0xeb...f7ee</Text>
                 <Text>Ethereum</Text>
-              </FlexColumn>{" "}
+              </FlexColumn>{" "} */}
             </FlexRow>
           </Box>
         </FlexColumn>
