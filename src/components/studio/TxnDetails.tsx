@@ -12,6 +12,7 @@ import { Avatar, Box, Divider, Text, color, useRadio } from "@chakra-ui/react";
 import { fetchTransaction } from "@wagmi/core";
 import { useEffect, useState } from "react";
 import { Heading, useToast } from "@chakra-ui/react";
+import Loader from "@/_ui/loader/Loader";
 
 type Props = {
   id: string;
@@ -60,7 +61,9 @@ function TxnDetails({ id, transactionHash }: Props) {
   // };
 
   return (
-    <>
+    <>{hookTransaction.isLoading ? <FlexRow height="500px">
+      <Loader size="lg" />
+    </FlexRow> : (<>
       <FlexRow marginTop={"xxl"} hrAlign="space-between" vrAlign="flex-end" marginBottom={"md"} width="68%">
         <Text
           fontSize={style.font.h1}
@@ -71,7 +74,7 @@ function TxnDetails({ id, transactionHash }: Props) {
         >
           Transacation Details
         </Text>
-        <ButtonNative variant="state_brand" text="Share" marginRight="0px" iconRight={{slug:"icon-share"}}  />
+        <ButtonNative variant="state_brand" text="Share" marginRight="0px" iconRight={{ slug: "icon-base-share", style: { marginLeft: "xxs" } }} />
       </FlexRow>
 
       {/* <Divider /> */}
@@ -96,7 +99,7 @@ function TxnDetails({ id, transactionHash }: Props) {
           <Text
             color="rgba(255,255,255,0.5)"
             className="mb-0"
-            // marginStart={style.margin.xxs}
+          // marginStart={style.margin.xxs}
           >
             {" "}
             {/* TODO: make dynamic */}
@@ -123,7 +126,7 @@ function TxnDetails({ id, transactionHash }: Props) {
           <Text
             color="rgba(255,255,255,0.5)"
             className="mb-0"
-            // marginStart={style.margin.xxs}
+          // marginStart={style.margin.xxs}
           >
             {" "}
             {/* TODO: make dynamic */}
@@ -409,7 +412,7 @@ function TxnDetails({ id, transactionHash }: Props) {
                             WebkitBackgroundClip: "text",
                             backgroundClip: "text",
                             color: "transparent",
-                            fontWeight:`${style.fontWeight.dark}`
+                            fontWeight: `${style.fontWeight.dark}`
                           }}
                         >
                           {item.key}
@@ -470,6 +473,7 @@ function TxnDetails({ id, transactionHash }: Props) {
           </Box>
         </FlexColumn>
       </FlexRow>
+    </>)}
     </>
     // <FlexColumn
     //   width="100%"

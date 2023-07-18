@@ -9,11 +9,13 @@ const useContractTxn = (slug: any) => {
 
   const [contractTxnDetails, setContractTxnDetails] = useState<any>();
   const [filteredData, setFilteredData] = useState<any>(contractTxnDetails);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchVal,setSearchVal] = useState<any>("");
 
   const _fetch = async (contract_slug: any) => {
     txnDataBySlug(contract_slug).then((res: any) => {
       console.log("contract txn fetching", res);
+      setIsLoading(false)
       setContractTxnDetails(res.data);
       setFilteredData(res.data);
     });
@@ -32,7 +34,8 @@ const useContractTxn = (slug: any) => {
     setFilteredData: setFilteredData,
     handleFilter: handleFilter,
     searchVal: searchVal,
-    setSearchVal: setSearchVal
+    setSearchVal: setSearchVal,
+    isLoading: isLoading
   }
 }
 export default useContractTxn

@@ -3,6 +3,7 @@ import { transactionData } from "@/service/ApiService";
 
 const useTransaction = (transactionHash: any) => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     _fetch(transactionHash);
@@ -11,6 +12,7 @@ const useTransaction = (transactionHash: any) => {
   const _fetch = async (transactionHash: any) => {
     transactionData(transactionHash).then((res: any) => {
       console.log("contract not", res);
+      setIsLoading(false)
       setTransactionDetails([
         { key: "Block Hash", value: res.data[0].transaction.block_hash },
         { key: "Block Number", value: res.data[0].transaction.block_number },
@@ -29,6 +31,7 @@ const useTransaction = (transactionHash: any) => {
 
   return {
     transactionDetails: transactionDetails,
+    isLoading: isLoading
   };
 };
 

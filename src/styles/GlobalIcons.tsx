@@ -119,6 +119,8 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-collect.svg",
   "icon-share":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-share-1.svg",
+  "icon-base-share":
+    "/icons/svg/Base_icons/base-share.svg?updatedAt=1680783709529",
   "icon-forward":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-forward.svg?updatedAt=1680783869134",
   "icon-copy":

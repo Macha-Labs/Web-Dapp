@@ -13,6 +13,7 @@ import useContract from "@/hooks/studio/useContract";
 import useContractTxn from "@/hooks/studio/useContractTxn";
 import InputSearch from "@/_ui/input/InputSearch";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import Loader from "@/_ui/loader/Loader";
 
 type Props = {
   metaInfo: any;
@@ -79,35 +80,41 @@ const Contract = () => {
             backgroundClip: "text",
             color: "transparent",
           }}>Transactions in the last 12 hours </Text>
-        <TxnTable txnData={hookContractTxn?.filteredData} />
+        {hookContractTxn.isLoading ? <FlexRow height="100px">
+          <Loader size="lg" />
+        </FlexRow> : <TxnTable txnData={hookContractTxn?.filteredData} />}
       </Box>
     );
   };
   const renderBody = () => {
     return (
       <>
-        {" "}
-        <NavBlock
-          back={() => {
-            router.back();
-          }}
-        >
-          <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <FlexRow width="fit-content">
-              <Heading fontSize={style.font.h5} className="m-b-0">
-                {hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract.name}
-              </Heading>
-            </FlexRow>
-            {/* <Tabs
+        {!hookContract.isLoading ? (<>
+          {" "}
+          <NavBlock
+            back={() => {
+              router.back();
+            }}
+          >
+            <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
+              <FlexRow width="fit-content">
+                <Heading fontSize={style.font.h5} className="m-b-0">
+                  {hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract.name}
+                </Heading>
+              </FlexRow>
+              {/* <Tabs
               width="40%"
               options={options}
               value={selectedTab}
               onChange={(value: any) => setSelectedTab(value)}
               gstyle={{ fontSize: `${style.font.h5}` }}
             /> */}
-          </FlexRow>
-        </NavBlock>
-        <FlexBody>{renderComponent()}</FlexBody>
+            </FlexRow>
+          </NavBlock>
+          <FlexBody>{renderComponent()}</FlexBody>
+        </>) : <FlexRow height="500px">
+          <Loader size="lg" />
+        </FlexRow>}
       </>
     );
   };
