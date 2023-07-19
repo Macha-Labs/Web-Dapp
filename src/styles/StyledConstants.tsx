@@ -101,6 +101,7 @@ export const darkStyle = {
       hover: "2px solid rgba(15,23,46,1)",
       meta: "1px solid #197cec",
       mcard: "1px solid #353c54",
+      contract: "1px solid #061133"
     },
     borderRadius: {
       default: "20px",

@@ -42,7 +42,7 @@ const ButtonMenu = ({
   marginRight,
 }: Props) => {
   return (
-    <div style={{ marginLeft: `${marginLeft}`, marginRight: `${marginRight}` }}>
+    <div style={{ marginLeft: `${marginLeft}`, marginRight: `${marginRight}`,width: "100%" }}>
       <Menu>
         <MenuButton
           variant={"state_default_hover"}
@@ -85,7 +85,7 @@ const ButtonMenu = ({
                     />
                   )}
                   {item.leftIcon && (
-                    <IconImage slug={item.leftIcon} size={size} />
+                    <IconImage slug={item.leftIcon} size={size} style={{marginLeft: "sm"}}/>
                   )}
                   <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
                     {item.value}

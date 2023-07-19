@@ -23,12 +23,19 @@ type Props = {
 
 const Contract = () => {
   const router = useRouter();
-  const slug = router.query.id;
-  const hookContractTxn = useContractTxn(slug);
-  const hookContract = useContract(slug)
+  const isReady = router.isReady;
+  const slug = router.query.id
+  const hookContractTxn = useContractTxn();
+  const hookContract = useContract()
   const modal = useDisclosure();
   const hookContractCreate = useContractCreate(modal);
 
+  useEffect(() => {
+    if (isReady) {
+      hookContract._fetch(router.query.id),
+      hookContractTxn._fetch(router.query.id)
+    }
+  }, [router.query.id])
 
   const renderComponent = () => {
     let options = {
@@ -115,9 +122,9 @@ const Contract = () => {
                   size="sm"
                   text="Edit Contract"
                   variant="state_brand"
-                onClick={() => {
-                  modal.onOpen();
-                }}
+                  onClick={() => {
+                    modal.onOpen();
+                  }}
                 />
               </FlexRow>
               {/* <Tabs

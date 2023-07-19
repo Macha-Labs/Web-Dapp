@@ -66,7 +66,7 @@ export const ConnectWalletButton = (props: any) => {
                 );
               }
               return (
-                <div style={{ display: 'flex', gap: 12 }} className="w-100">
+                <div style={{ display: 'flex', justifyContent: "flex-end"}} className="w-100">
                   {/* <button
                     className="w-100"
                     onClick={openChainModal}
