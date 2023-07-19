@@ -40,7 +40,7 @@ const ContractList = () => {
               <Loader size="lg" />
             </FlexRow>
           )}
-            <Box width="100vw" display="flex" flexWrap="wrap">
+            <Box width="100vw" display="flex" flexWrap="wrap" paddingLeft={1}>
               {!hookContractList.isLoading &&
                 hookContractList?.filterData &&
                 hookContractList?.filterData.map((item: any, index: number) => {

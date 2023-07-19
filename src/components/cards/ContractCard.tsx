@@ -21,25 +21,32 @@ const ContractCard = ({
   heading,
   description,
   tags,
-  onCardClick = (e?: any) => { },
+  onCardClick = (e?: any) => {},
   height,
   address,
 }: Props) => {
   return (
     <Box
+      _hover={{
+        transform: "scale(1.01,1.01)",
+        border: "1px solid #197cec !important",
+      }}
       style={{
         height: "17rem",
-        width: "22.5rem",
+        width: "21.5rem",
         border: `${style.card.border.contract}`,
         borderRadius: `${style.card.borderRadius.default}`,
         background: `${style.card.bg.meta}`,
         padding: ` ${style.padding.md}`,
         display: "flex",
         flexDirection: "column",
-        marginRight: ` ${style.margin["xl"]}`,
-        marginBottom: ` ${style.margin["xl"]}`,
+        marginRight: ` ${style.margin["lg"]}`,
+        marginBottom: ` ${style.margin["lg"]}`,
         cursor: `${style.card.cursor.default}`,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        transitionTimingFunction: "ease-in-out",
+        transitionProperty: " transform ",
+        transitionDuration:"600ms"
       }}
       onClick={() => {
         onCardClick();
@@ -94,11 +101,25 @@ const ContractCard = ({
         </div>
       )}
 
-      <div style={{ width: "100%", height: "70%",paddingTop: `${style.padding.xxs}`, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+      <div
+        style={{
+          width: "100%",
+          height: "70%",
+          paddingTop: `${style.padding.xxs}`,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+        }}
+      >
         <Text lineHeight="1.25rem" fontSize={"2xl"} fontWeight={600}>
           {truncateString(heading, 10)}
         </Text>
-        <Text lineHeight="1.5rem" style={{ height: "2.5rem",marginBottom: `${style.margin.sm}` }}>{truncateString(description, 100)} </Text>
+        <Text
+          lineHeight="1.5rem"
+          style={{ height: "2.5rem", marginBottom: `${style.margin.sm}` }}
+        >
+          {truncateString(description, 100)}{" "}
+        </Text>
         <Text
           style={{
             background: `-webkit-linear-gradient(
@@ -110,14 +131,17 @@ const ContractCard = ({
             backgroundClip: "text",
             color: "transparent",
             fontWeight: `${style.fontWeight.dark}`,
-            marginBottom: `0.8rem`
+            marginBottom: `0.8rem`,
           }}
           lineHeight="1rem"
         >
           Contract Address:
         </Text>
         <Text
-          style={{ fontWeight: `${style.fontWeight.dark}`, marginBottom: "0.5rem" }}
+          style={{
+            fontWeight: `${style.fontWeight.dark}`,
+            marginBottom: "0.5rem",
+          }}
           lineHeight="0.5rem"
         >
           {truncateAddress(address)}
