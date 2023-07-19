@@ -21,6 +21,13 @@ const useContractCreate = (modal: any) => {
     interested_methods =  interested_methods.map((event: any) => {
       return event.trim()
     })
+
+    let admins = contractDataRef.current["admins"]?.value
+    admins = admins.split(',');
+    admins = admins.map((admin: any) => {
+      return admin.toLowerCase().trim()
+    })
+
     const contractPayload = {
       name: contractDataRef.current["name"]?.value,
       description: contractDataRef.current["description"]?.value,
@@ -30,7 +37,8 @@ const useContractCreate = (modal: any) => {
       interested_methods: interested_methods,
       interested_events: interested_events,
       read_abi_from: contractDataRef.current["read_abi_from"]?.value,
-      id: _id
+      id: _id,
+      admins: admins
     };
     
     // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
@@ -39,8 +47,7 @@ const useContractCreate = (modal: any) => {
     contractPayload.address == undefined || contractPayload.address == "" ||
     contractPayload.chain_id == undefined || contractPayload.chain_id == "" ||
     contractPayload.slug == undefined || contractPayload.slug == "" || 
-    contractDataRef.current["interested_methods"].value == "" || contractDataRef.current["interested_methods"].value == undefined || 
-    contractDataRef.current["interested_events"].value == "" || contractDataRef.current["interested_events"].value == undefined
+    contractDataRef.current["interested_methods"].value == "" || contractDataRef.current["interested_methods"].value == undefined || contractDataRef.current["interested_events"].value == "" || contractDataRef.current["interested_events"].value == undefined || contractDataRef.current["admins"].value == "" || contractDataRef.current["admins"].value == undefined
     ){
       toast({
         title: "Required fields cannot be empty",
@@ -77,6 +84,13 @@ const useContractCreate = (modal: any) => {
     interested_methods =  interested_methods.map((event: any) => {
       return event.trim()
     })
+
+    let admins = contractDataRef.current["admins"]?.value
+    admins = admins.split(',');
+    admins = admins.map((admin: any) => {
+      return admin.toLowerCase().trim()
+    })
+
     const contractPayload = {
       name: contractDataRef.current["name"]?.value,
       description: contractDataRef.current["description"]?.value,
@@ -86,6 +100,7 @@ const useContractCreate = (modal: any) => {
       interested_methods: interested_methods,
       interested_events: interested_events,
       read_abi_from: contractDataRef.current["read_abi_from"]?.value,
+      admins: admins
     };
     
     // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
@@ -95,7 +110,7 @@ const useContractCreate = (modal: any) => {
     contractPayload.chain_id == undefined || contractPayload.chain_id == "" ||
     contractPayload.slug == undefined || contractPayload.slug == "" || 
     contractDataRef.current["interested_methods"].value == "" || contractDataRef.current["interested_methods"].value == undefined || 
-    contractDataRef.current["interested_events"].value == "" || contractDataRef.current["interested_events"].value == undefined
+    contractDataRef.current["interested_events"].value == "" || contractDataRef.current["interested_events"].value == undefined || contractDataRef.current["admins"].value == "" || contractDataRef.current["admins"].value == undefined
     ){
       toast({
         title: "Required fields cannot be empty",

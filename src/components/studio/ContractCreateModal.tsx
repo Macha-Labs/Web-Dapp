@@ -1,17 +1,12 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
-import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
-import InputSelect from "@/_ui/input/InputSelect";
 // import TableNative from "@/_ui/list/Tablenative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
-import useMachaApi from "@/hooks/studio/useMachaApi";
-import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
-import { FormControl, Heading, Text } from "@chakra-ui/react";
-import CustomTable from "./CustomTable";
+import { Text } from "@chakra-ui/react";
 
 type Props = {
   modal: any;
@@ -144,6 +139,17 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
               inputType="text"
               labelText="Read ABI From"
               placeholder="Read ABI From"
+              marginTop="sm"
+            />
+            <InputLabel
+              elementRef={(element: any) =>
+              (hookContractCreate.contractDataRef.current[
+                "admins"
+              ] = element)
+              }
+              inputType="text"
+              labelText="Admins *"
+              placeholder="Admins"
               marginTop="sm"
             />
           </FlexColumn>

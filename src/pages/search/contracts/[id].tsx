@@ -16,12 +16,14 @@ import InputSearch from "@/_ui/input/InputSearch";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import Loader from "@/_ui/loader/Loader";
 import useContractCreate from "@/hooks/studio/useContractCreate";
+import useAuthStore from '@/store/useAuthStore';
 
 type Props = {
   metaInfo: any;
 };
 
 const Contract = () => {
+  const $address = useAuthStore((state: any) => state.address);
   const router = useRouter();
   const isReady = router.isReady;
   const slug = router.query.id
@@ -33,11 +35,13 @@ const Contract = () => {
   useEffect(() => {
     if (isReady) {
       hookContract._fetch(router.query.id),
-      hookContractTxn._fetch(router.query.id)
+        hookContractTxn._fetch(router.query.id)
     }
   }, [router.query.id])
 
+
   const renderComponent = () => {
+
     let options = {
       weekday: "long",
       year: "numeric",
@@ -118,14 +122,14 @@ const Contract = () => {
                 <Heading fontSize={style.font.h5} className="m-b-0">
                   {hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract.name}
                 </Heading>
-                <ButtonNative
+                {hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract?.admins.includes($address) && <ButtonNative
                   size="sm"
                   text="Edit Contract"
                   variant="state_brand"
                   onClick={() => {
                     modal.onOpen();
                   }}
-                />
+                />}
               </FlexRow>
               {/* <Tabs
               width="40%"

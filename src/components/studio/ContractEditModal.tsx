@@ -147,6 +147,18 @@ const CreateContractModal = ({ modal, hookContractCreate, hookContract }: Props)
             <InputLabel
               elementRef={(element: any) =>
               (hookContractCreate.contractDataRef.current[
+                "admins"
+              ] = element)
+              }
+              inputType="text"
+              defaultValue={hookContract.contractDetails[0]?.contract?.admins?.join()}
+              labelText="Admins *"
+              placeholder="Admins"
+              marginTop="sm"
+            />
+            <InputLabel
+              elementRef={(element: any) =>
+              (hookContractCreate.contractDataRef.current[
                 "read_abi_from"
               ] = element)
               }
