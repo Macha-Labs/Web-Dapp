@@ -122,7 +122,7 @@ const Contract = () => {
                 <Heading fontSize={style.font.h5} className="m-b-0">
                   {hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract.name}
                 </Heading>
-                {hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract?.admins.includes($address) && <ButtonNative
+                {$address && hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract?.admins?.includes($address) && <ButtonNative
                   size="sm"
                   text="Edit Contract"
                   variant="state_brand"
