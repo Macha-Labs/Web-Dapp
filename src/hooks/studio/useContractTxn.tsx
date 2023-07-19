@@ -1,11 +1,7 @@
 import { txnDataBySlug } from "@/service/ApiService";
 import { useState, useEffect } from "react"
 
-const useContractTxn = (slug: any) => {
-
-  useEffect(() => {
-    _fetch(slug)
-  }, [])
+const useContractTxn = () => {
 
   const [contractTxnDetails, setContractTxnDetails] = useState<any>();
   const [filteredData, setFilteredData] = useState<any>(contractTxnDetails);
@@ -35,7 +31,8 @@ const useContractTxn = (slug: any) => {
     handleFilter: handleFilter,
     searchVal: searchVal,
     setSearchVal: setSearchVal,
-    isLoading: isLoading
+    isLoading: isLoading,
+    _fetch: _fetch
   }
 }
 export default useContractTxn

@@ -4,7 +4,9 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavBlock from "@/_ui/nav/NavBlock";
 import TxnDetails from "@/components/studio/TxnDetails"; 
 import { getItemFromLocal, setItemOnLocal, truncateAddress } from "@/helpers";
+import useContractTxn from "@/hooks/studio/useContractTxn";
 import useMeta from "@/hooks/studio/useMeta";
+import useTransaction from "@/hooks/studio/useTransaction";
 import useAuthStore from "@/store/useAuthStore";
 import useMetaStore from "@/store/useMetaStore";
 import useUserStore from "@/store/useUserStore";
@@ -19,6 +21,7 @@ const SearchResult = () => {
   const [currentApiId, setCurrentApiId] = useState<any>();
   const hookMeta = useMeta();
   const router = useRouter();
+  const hookTxn = useTransaction();
 
   useEffect(() => {
     if ($userApisMap) {
@@ -35,6 +38,12 @@ const SearchResult = () => {
       }
     }
   }, [$userMetasMap]);
+
+  useEffect(() => {
+    if(router.isReady){
+      hookTxn._fetch(router.query.id)
+    }
+  },[router.query.id])
 
 
   const id = router.query.id
@@ -53,7 +62,7 @@ const SearchResult = () => {
           </FlexRow>
         </NavBlock>
         <FlexBody>
-          <TxnDetails id={currentApiId} transactionHash={id} />
+          <TxnDetails id={currentApiId} transactionDetails={hookTxn.transactionDetails} isLoading={hookTxn.isLoading} />
         </FlexBody>
       </>
     );

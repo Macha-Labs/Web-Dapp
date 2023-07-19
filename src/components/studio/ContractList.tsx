@@ -19,15 +19,14 @@ const ContractList = () => {
   const renderComponent = () => {
     return (
       <>
-        <FlexRow width="50%" paddingTop="2xl" marginTop={"subnav"}>
+        <Box width="50%" paddingTop={style.padding.xxl} >
           <InputSearch
             size="lg"
             placeholder="Search Studio"
             icon={{ slug: "icon-search" }}
-            marginRight={style.card.margin.default}
             onChange={(e: any) => hookContractList.handleFilter(e.target.value)}
           />
-        </FlexRow>
+        </Box>
         <FlexRow
           hrAlign="flex-start"
           width="100%"
@@ -41,7 +40,7 @@ const ContractList = () => {
               <Loader size="lg" />
             </FlexRow>
           )}
-            <Box width="100vw" display="flex" flexWrap="wrap">
+            <Box width="100vw" display="flex" flexWrap="wrap" paddingLeft={1}>
               {!hookContractList.isLoading &&
                 hookContractList?.filterData &&
                 hookContractList?.filterData.map((item: any, index: number) => {

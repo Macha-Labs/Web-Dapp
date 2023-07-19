@@ -53,6 +53,7 @@ export const ConnectWalletButton = (props: any) => {
                     size={props.size}
                     variant="state_brand"
                     onClick={openConnectModal}
+                    borderRadius={style.button.borderRadius.default}
                   >
                     <Text paddingBottom={"0px"} marginBottom="0px" fontSize={props?.font} style={{ marginBottom: "0px", paddingBottom: "0px" }}>Connect Wallet</Text>
                   </Button>
@@ -66,7 +67,7 @@ export const ConnectWalletButton = (props: any) => {
                 );
               }
               return (
-                <div style={{ display: 'flex', gap: 12 }} className="w-100">
+                <div style={{ display: 'flex', justifyContent: "flex-end"}} className="w-100">
                   {/* <button
                     className="w-100"
                     onClick={openChainModal}

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import FlexRow from "@/_ui/flex/FlexRow";
-import { Box, Heading, Table, TableContainer, Tabs, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Heading, Table, TableContainer, Tabs, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
 import { style } from "@/styles/StyledConstants";
+import ContractEditModal from "@/components/studio/ContractEditModal";
 import { useRouter } from "next/router";
 import NavBlock from "@/_ui/nav/NavBlock";
 import FlexBody from "@/_ui/flex/FlexBody";
@@ -14,18 +15,33 @@ import useContractTxn from "@/hooks/studio/useContractTxn";
 import InputSearch from "@/_ui/input/InputSearch";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import Loader from "@/_ui/loader/Loader";
+import useContractCreate from "@/hooks/studio/useContractCreate";
+import useAuthStore from '@/store/useAuthStore';
 
 type Props = {
   metaInfo: any;
 };
 
 const Contract = () => {
+  const $address = useAuthStore((state: any) => state.address);
   const router = useRouter();
-  const slug = router.query.id;
-  const hookContractTxn = useContractTxn(slug);
-  const hookContract = useContract(slug)
+  const isReady = router.isReady;
+  const slug = router.query.id
+  const hookContractTxn = useContractTxn();
+  const hookContract = useContract()
+  const modal = useDisclosure();
+  const hookContractCreate = useContractCreate(modal);
+
+  useEffect(() => {
+    if (isReady) {
+      hookContract._fetch(router.query.id),
+        hookContractTxn._fetch(router.query.id)
+    }
+  }, [router.query.id])
+
 
   const renderComponent = () => {
+
     let options = {
       weekday: "long",
       year: "numeric",
@@ -47,7 +63,7 @@ const Contract = () => {
             owner: hookContract.contractDetails[0]?.contract.address,
             description:
               hookContract.contractDetails[0]?.contract.description,
-            chain: hookContract.contractDetails[0]?.contract.chain_id,
+            chain_id: hookContract.contractDetails[0]?.contract.chain_id,
           }}
         />}
         <FlexRow hrAlign="flex-start" vrAlign="center" marginTop="xl">
@@ -67,6 +83,11 @@ const Contract = () => {
           </Box>
           {/* <ButtonNative marginLeft="lg" variant="state_brand" text="Search" marginRight="0px" onClick={() => hookContractTxn.handleFilter(hookContractTxn.searchVal)} /> */}
         </FlexRow>
+        <ContractEditModal
+          modal={modal}
+          hookContractCreate={hookContractCreate}
+          hookContract={hookContract}
+        />
         <Text
           mt={style.margin.xl}
           mb={0}
@@ -97,10 +118,18 @@ const Contract = () => {
             }}
           >
             <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-              <FlexRow width="fit-content">
+              <FlexRow width="100%" hrAlign="space-between">
                 <Heading fontSize={style.font.h5} className="m-b-0">
                   {hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract.name}
                 </Heading>
+                {$address && hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract?.admins?.includes($address) && <ButtonNative
+                  size="sm"
+                  text="Edit Contract"
+                  variant="state_brand"
+                  onClick={() => {
+                    modal.onOpen();
+                  }}
+                />}
               </FlexRow>
               {/* <Tabs
               width="40%"

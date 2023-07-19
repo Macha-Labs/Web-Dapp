@@ -73,6 +73,9 @@ const DashBoard = () => {
                 size="sm"
                 text="Create Contract"
                 variant="state_brand"
+                marginRight="0px"
+                paddingLeft="sm"
+                paddingRight="sm"
                 onClick={() => {
                   modal.onOpen();
                 }}

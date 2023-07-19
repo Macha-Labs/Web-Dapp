@@ -16,16 +16,16 @@ import Loader from "@/_ui/loader/Loader";
 
 type Props = {
   id: string;
-  transactionHash: string | string[] | undefined;
+  transactionDetails: any,
+  isLoading: any
 };
-function TxnDetails({ id, transactionHash }: Props) {
+function TxnDetails({ id, transactionDetails, isLoading}: Props) {
   const options = [
     { value: "snapshot", label: "SnapShot" },
     { value: "poap", label: "POAP" },
     { value: "paragraph.xyz", label: "Paragraph.xyz" },
   ];
 
-  const hookTransaction = useTransaction(transactionHash);
   const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
 
@@ -61,7 +61,7 @@ function TxnDetails({ id, transactionHash }: Props) {
   // };
 
   return (
-    <>{hookTransaction.isLoading ? <FlexRow height="500px">
+    <>{isLoading ? <FlexRow height="500px">
       <Loader size="lg" />
     </FlexRow> : (<>
       <FlexRow marginTop={"xxl"} hrAlign="space-between" vrAlign="flex-end" marginBottom={"md"} width="68%">
@@ -74,7 +74,7 @@ function TxnDetails({ id, transactionHash }: Props) {
         >
           Transacation Details
         </Text>
-        <ButtonNative variant="state_brand" text="Share" marginRight="0px" iconRight={{ slug: "icon-base-share", style: { marginLeft: "xxs" } }} />
+        <ButtonNative textFontSize="h5" paddingLeft="sm" paddingRight="sm" variant="state_brand" text="Share" marginRight="0px" iconRight={{ slug: "icon-base-share", style: { marginLeft: "xxs" } }} />
       </FlexRow>
 
       {/* <Divider /> */}
@@ -156,9 +156,9 @@ function TxnDetails({ id, transactionHash }: Props) {
                       hrAlign="flex-start"
                     >
                       <Text className="mb-0">
-                        {hookTransaction?.transactionDetails &&
+                        {transactionDetails &&
                           truncateAddress(
-                            hookTransaction.transactionDetails[4]?.value
+                            transactionDetails[4]?.value
                           )}
                       </Text>
                       <IconBase
@@ -166,7 +166,7 @@ function TxnDetails({ id, transactionHash }: Props) {
                         style={{ marginLeft: "sm" }}
                         onClick={() => {
                           navigator.clipboard.writeText(
-                            hookTransaction.transactionDetails[4]?.value
+                            transactionDetails[4]?.value
                           );
                           toast({
                             title: "Copied To Clipboard",
@@ -220,11 +220,7 @@ function TxnDetails({ id, transactionHash }: Props) {
                           transform: "scale(1.05)",
                         }}
                       >
-                        {hookTransaction.transactionDetails &&
-                          truncateString(
-                            hookTransaction.transactionDetails[7]?.value,
-                            15
-                          )}
+                        {transactionDetails && transactionDetails[7]?.value}
                       </Text>
                       <Text className="mb-0" marginLeft={style.margin["xxs"]}>
                         {/* 0.295 ETH */}
@@ -261,9 +257,9 @@ function TxnDetails({ id, transactionHash }: Props) {
                       hrAlign="flex-start"
                     >
                       <Text className="mb-0" textAlign="left">
-                        {hookTransaction?.transactionDetails &&
+                        {transactionDetails &&
                           truncateAddress(
-                            hookTransaction.transactionDetails[5]?.value
+                            transactionDetails[5]?.value
                           )}
                       </Text>
                       <IconBase
@@ -271,7 +267,7 @@ function TxnDetails({ id, transactionHash }: Props) {
                         style={{ marginLeft: "sm" }}
                         onClick={() => {
                           navigator.clipboard.writeText(
-                            hookTransaction.transactionDetails[5]?.value
+                            transactionDetails[5]?.value
                           );
                           toast({
                             title: "Copied To Clipboard",
@@ -388,7 +384,7 @@ function TxnDetails({ id, transactionHash }: Props) {
                 style={{ marginTop: `${style.margin["xl"]}`, width: "100%" }}
               >
                 <tbody>
-                  {hookTransaction?.transactionDetails.map((item: any) => {
+                  {transactionDetails.map((item: any) => {
                     return (
                       <tr
                         key={item._id}

@@ -1,5 +1,6 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import IconBase from "../icons/IconsBase";
+import { style as gStyle } from "../../styles/StyledConstants";
 
 type Props = {
   type?: string;
@@ -37,7 +38,7 @@ const InputSearch = ({
       className={style?.className}
       marginTop={marginTop ? marginTop : "0px"}
       marginBottom={marginBottom ? marginBottom : "0px"}
-      marginLeft={marginLeft ? marginLeft : "0px"}
+      marginLeft={marginLeft ? marginLeft : "2px"}
       marginRight={marginRight ? marginRight : "0px"}
     >
       {icon && (
@@ -54,6 +55,8 @@ const InputSearch = ({
         onKeyDown={onKeydown ? onKeydown : () => {}}
         _placeholder={{ color: `#132041` }}
         width={width}
+        border={gStyle.input.border.search}
+        borderRadius={gStyle.input.borderRadius.default}
       />
     </InputGroup>
   );

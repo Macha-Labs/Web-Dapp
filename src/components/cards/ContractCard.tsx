@@ -26,20 +26,27 @@ const ContractCard = ({
   address,
 }: Props) => {
   return (
-    <div
+    <Box
+      _hover={{
+        transform: "scale(1.01,1.01)",
+        border: "1px solid #197cec !important",
+      }}
       style={{
         height: "17rem",
-        width: "22rem",
-        border: `${style.card.border.meta}`,
+        width: "21.5rem",
+        border: `${style.card.border.contract}`,
         borderRadius: `${style.card.borderRadius.default}`,
         background: `${style.card.bg.meta}`,
-        padding: ` ${style.card.padding.default}`,
+        padding: ` ${style.padding.md}`,
         display: "flex",
         flexDirection: "column",
-        marginRight: ` ${style.margin["sm"]}`,
-        marginBottom: ` ${style.margin["sm"]}`,
+        marginRight: ` ${style.margin["lg"]}`,
+        marginBottom: ` ${style.margin["lg"]}`,
         cursor: `${style.card.cursor.default}`,
-        justifyContent:"space-between"
+        justifyContent: "space-between",
+        transitionTimingFunction: "ease-in-out",
+        transitionProperty: " transform ",
+        transitionDuration:"600ms"
       }}
       onClick={() => {
         onCardClick();
@@ -50,7 +57,7 @@ const ContractCard = ({
           style={{
             width: "100%",
             marginRight: style.margin.sm,
-            height: "25%",
+            height: "30%",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
@@ -61,8 +68,8 @@ const ContractCard = ({
             //  display={flex}
             src={image}
             alt="meta-card-image"
-            height={"4rem"}
-            width={"4rem"}
+            height={"4.5rem"}
+            width={"4.5rem"}
             objectFit={"contain"}
             borderRadius={style.card.borderRadius.default}
           />
@@ -94,11 +101,25 @@ const ContractCard = ({
         </div>
       )}
 
-      <div style={{ width:"100%" }}>
+      <div
+        style={{
+          width: "100%",
+          height: "70%",
+          paddingTop: `${style.padding.xxs}`,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+        }}
+      >
         <Text lineHeight="1.25rem" fontSize={"2xl"} fontWeight={600}>
           {truncateString(heading, 10)}
         </Text>
-        <Text lineHeight="1.5rem" style={{height:"2.5rem"}}>{truncateString(description, 100)} </Text>
+        <Text
+          lineHeight="1.5rem"
+          style={{ height: "2.5rem", marginBottom: `${style.margin.sm}` }}
+        >
+          {truncateString(description, 100)}{" "}
+        </Text>
         <Text
           style={{
             background: `-webkit-linear-gradient(
@@ -110,13 +131,17 @@ const ContractCard = ({
             backgroundClip: "text",
             color: "transparent",
             fontWeight: `${style.fontWeight.dark}`,
+            marginBottom: `0.8rem`,
           }}
           lineHeight="1rem"
         >
           Contract Address:
         </Text>
         <Text
-          style={{ fontWeight: `${style.fontWeight.dark}` }}
+          style={{
+            fontWeight: `${style.fontWeight.dark}`,
+            marginBottom: "0.5rem",
+          }}
           lineHeight="0.5rem"
         >
           {truncateAddress(address)}
@@ -136,7 +161,7 @@ const ContractCard = ({
           })}
         </FlexRow>
       </div>
-    </div>
+    </Box>
   );
 };
 

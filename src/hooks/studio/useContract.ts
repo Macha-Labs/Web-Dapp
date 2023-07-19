@@ -1,19 +1,14 @@
 import { contractDataBySlug } from "@/service/ApiService";
 import {useState,useEffect} from "react"
 
-const useContract = (_contract_slug: any) => {
+const useContract = () => {
 
   const [contractDetails, setContractDetails] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-
-  useEffect(() => {
-    _fetch(_contract_slug)
-  },[])
-
   const _fetch = async (contract_slug: any) => {
     contractDataBySlug(contract_slug).then((res: any) => {
-      console.log("contract fetching", res);
+      console.log("contract fetching", res.data);
       setIsLoading(false)
       setContractDetails(res.data);
     });
@@ -21,7 +16,8 @@ const useContract = (_contract_slug: any) => {
 
   return {
     contractDetails: contractDetails,
-    isLoading: isLoading
+    isLoading: isLoading,
+    _fetch: _fetch
   }
 
 }

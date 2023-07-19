@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import { transactionData } from "@/service/ApiService";
 
-const useTransaction = (transactionHash: any) => {
+const useTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    _fetch(transactionHash);
-  }, []);
 
   const _fetch = async (transactionHash: any) => {
     transactionData(transactionHash).then((res: any) => {
@@ -31,7 +27,8 @@ const useTransaction = (transactionHash: any) => {
 
   return {
     transactionDetails: transactionDetails,
-    isLoading: isLoading
+    isLoading: isLoading,
+    _fetch: _fetch
   };
 };
 
