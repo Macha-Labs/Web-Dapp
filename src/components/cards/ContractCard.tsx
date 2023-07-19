@@ -29,15 +29,15 @@ const ContractCard = ({
     <Box
       style={{
         height: "17rem",
-        width: "22rem",
+        width: "22.5rem",
         border: `${style.card.border.contract}`,
         borderRadius: `${style.card.borderRadius.default}`,
         background: `${style.card.bg.meta}`,
         padding: ` ${style.padding.md}`,
         display: "flex",
         flexDirection: "column",
-        marginRight: ` ${style.margin["sm"]}`,
-        marginBottom: ` ${style.margin["sm"]}`,
+        marginRight: ` ${style.margin["xl"]}`,
+        marginBottom: ` ${style.margin["xl"]}`,
         cursor: `${style.card.cursor.default}`,
         justifyContent: "space-between"
       }}

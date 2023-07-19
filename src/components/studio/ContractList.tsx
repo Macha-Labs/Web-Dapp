@@ -19,16 +19,14 @@ const ContractList = () => {
   const renderComponent = () => {
     return (
       <>
-        <FlexRow width="50%" paddingTop="2xl" marginTop={"subnav"}>
+        <Box width="50%" paddingTop={style.padding.xxl} >
           <InputSearch
             size="lg"
             placeholder="Search Studio"
             icon={{ slug: "icon-search" }}
-            marginRight={style.card.margin.default}
-            marginLeft={style.margin.xxs}
             onChange={(e: any) => hookContractList.handleFilter(e.target.value)}
           />
-        </FlexRow>
+        </Box>
         <FlexRow
           hrAlign="flex-start"
           width="100%"

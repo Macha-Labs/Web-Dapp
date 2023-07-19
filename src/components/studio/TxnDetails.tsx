@@ -74,7 +74,7 @@ function TxnDetails({ id, transactionDetails, isLoading}: Props) {
         >
           Transacation Details
         </Text>
-        <ButtonNative variant="state_brand" text="Share" marginRight="0px" iconRight={{ slug: "icon-base-share", style: { marginLeft: "xxs" } }} />
+        <ButtonNative textFontSize="h5" paddingLeft="sm" paddingRight="sm" variant="state_brand" text="Share" marginRight="0px" iconRight={{ slug: "icon-base-share", style: { marginLeft: "xxs" } }} />
       </FlexRow>
 
       {/* <Divider /> */}
@@ -220,11 +220,7 @@ function TxnDetails({ id, transactionDetails, isLoading}: Props) {
                           transform: "scale(1.05)",
                         }}
                       >
-                        {transactionDetails &&
-                          truncateString(
-                            transactionDetails[7]?.value,
-                            15
-                          )}
+                        {transactionDetails && transactionDetails[7]?.value}
                       </Text>
                       <Text className="mb-0" marginLeft={style.margin["xxs"]}>
                         {/* 0.295 ETH */}

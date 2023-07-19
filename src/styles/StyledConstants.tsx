@@ -134,6 +134,7 @@ export const darkStyle = {
     border: {
       default: "1px solid  #0F172E",
       active: "1px solid rgba(15,23,46,1)",
+      search: "2px solid #0F172E"
     },
     placeholder: {
       color: "#132041",
@@ -236,7 +237,8 @@ export const darkStyle = {
     color: "#EFEFEF",
     margin: { default: "5px" },
     borderRadius: {
-      default: "10px",
+      default: "0.5rem",
+      sm: "1rem"
     },
   },
   loader: {

@@ -19,6 +19,12 @@ type Props = {
   marginBottom?: string;
   marginRight?: string;
   marginLeft?: string;
+  paddingRight?: string;
+  paddingLeft?: string;
+  paddingTop?: string;
+  paddingBottom?: string;
+  borderRadius?: string;
+  textFontSize?: string;
 };
 
 export default function ButtonNative({
@@ -37,6 +43,12 @@ export default function ButtonNative({
   marginBottom,
   marginRight,
   marginLeft,
+  paddingBottom,
+  paddingLeft,
+  paddingRight,
+  paddingTop,
+  borderRadius,
+  textFontSize
 }: Props) {
   return (
     <Button
@@ -50,7 +62,11 @@ export default function ButtonNative({
       marginBottom={`${marginBottom ? gStyle.margin[marginBottom] : "0px"}`}
       marginRight={`${marginRight ? gStyle.margin[marginRight] : "0px"}`}
       marginLeft={`${marginLeft ? gStyle.margin[marginLeft] : "0px"}`}
-      borderRadius={`${gStyle.button.borderRadius.default}`}
+      borderRadius={`${borderRadius ? gStyle.button.borderRadius[borderRadius]:gStyle.button.borderRadius.default}`}
+      paddingRight={`${paddingRight ? gStyle.padding[paddingRight] : "12px"}`}
+      paddingLeft={`${paddingLeft ? gStyle.padding[paddingLeft] : "12px"}`}
+      paddingTop={`${paddingTop ? gStyle.padding[paddingTop] :"12px"}`}
+      paddingBottom={`${paddingBottom ? gStyle.padding[paddingBottom] : "12px"}`}
       borderColor="#14244b"
     >
       {iconLeft && (
@@ -62,8 +78,7 @@ export default function ButtonNative({
       )}
       {text && (
         <Text
-          className="mb-0"
-          marginRight={marginRight ? marginRight : gStyle.margin["xxs"]}
+          className="mb-0" fontSize={textFontSize ? gStyle.font[textFontSize] : "1rem"} marginRight={marginRight ? marginRight : gStyle.margin["xxs"]}
         >
           {text}
         </Text>
