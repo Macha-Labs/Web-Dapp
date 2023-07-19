@@ -30,6 +30,7 @@ const theme = extendTheme({
       },
       ".chakra-modal__content": {
         // borderLeft: `${style.modal.border.default} !important`,
+        background: `${style.modal.bg.overlay} !important`,
       },
       ".chakra-modal__body": {
         background: `${style.modal.bg.default}`,

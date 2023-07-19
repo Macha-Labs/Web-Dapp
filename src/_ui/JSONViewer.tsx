@@ -64,17 +64,17 @@ const JSONViewer = ({ data }: any) => {
 
   return (
     <div
+      className="no-scrollbar"
       style={{
         overflow: "auto",
-        height: "86vh",
+        height: "500px",
         width: "100%",
-        border: `${style.card.border.hover}`,
-        borderRadius: `${style.card.borderRadius.default}`,
-        padding: "20px",
-        marginLeft: `${style.margin.sm}`,
+
+        // borderRadius: `${style.card.borderRadius.default}`,
+        // padding: "20px",
+        // marginLeft: `${style.margin.sm}`,
       }}
     >
-      <Text>Resultant Data</Text>
       {renderData(data, "root")}
     </div>
   );
