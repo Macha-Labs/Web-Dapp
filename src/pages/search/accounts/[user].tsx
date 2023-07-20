@@ -1,35 +1,31 @@
 import FlexRow from "@/_ui/flex/FlexRow";
-import Loader from "@/_ui/loader/Loader";
-
-import { useRouter } from "next/router";
 import { style } from "@/styles/StyledConstants";
-import { Divider, Flex, Heading, Image, Link, Text } from "@chakra-ui/react";
+import { Divider, Flex, Image, Link, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 // import InteractionTable from "@/pages/search/network/InteractionTable";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import React, { useEffect, useState } from "react";
-import { Box, Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-
-import ContractEditModal from "@/components/studio/ContractEditModal";
-
-import InteractionTable from "@/components/studio/InteractionTable";
 import NavBlock from "@/_ui/nav/NavBlock";
-import TxnTable from "@/components/studio/TxnTable";
-import FlexBody from "@/_ui/flex/FlexBody";
-import useContractTxn from "@/hooks/studio/useContractTxn";
 import TagNative from "@/_ui/tag/TagNative";
+import InteractionTable from "@/components/studio/InteractionTable";
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import useUserTxn from "@/hooks/studio/useUserTxn";
+import FlexBody from "@/_ui/flex/FlexBody";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const hookContractTxn = useContractTxn();
+  const hookUserTxn = useUserTxn();
   const router = useRouter();
-  //   const isReady = router.isReady;
   const handleTabChange = (index: any) => {
     setActiveTab(index);
   };
 
   useEffect(() => {
-    hookContractTxn._fetch("opensea_ethereum");
-  }, []);
+    if(router.isReady){
+      hookUserTxn._fetch(router.query.user);
+    }
+  }, [router.query.user]);
+  
   const renderComponent = () => {
     return (
       <>
@@ -153,7 +149,7 @@ const Network = () => {
                       This is the content of Tab 1.
                       {/* <TxnTable txnData={hookContractTxn?.filteredData} /> */}
                       <InteractionTable
-                        txnData={hookContractTxn?.filteredData}
+                        txnData={hookUserTxn?.filteredData}
                       />
                     </Box>
                   </TabPanel>

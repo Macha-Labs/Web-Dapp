@@ -60,6 +60,20 @@ export const createNewContract = async (data: any) => {
   return response.json();
 };
 
+export const deleteContract = async (contract_id: any) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/contracts/delete/${contract_id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log("Deleted Contract", response);
+  return response.json();
+};
+
 export const txnByChainId = async (chain_id: any) => {
   const response = await fetch(
     `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}`
@@ -67,6 +81,15 @@ export const txnByChainId = async (chain_id: any) => {
   const data = await response.json();
   return data;
 };
-// /indexer/transactions/fetch-by-contract-address/:contract_address
+
+export const txnByUserAddress = async (from_address: any) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/transactions/fetch-by-user-address/${from_address}`
+  );
+  const data = await response.json();
+  return data;
+};
+
+// /indexer/transactions/fetch-by-user-address/:from_address
 
 // /indexer/transactions/fetch-by-chain-id/:chain_id
