@@ -14,13 +14,13 @@ const TableNative = ({ data, tbodyChildren, theadChildren }: Prop) => {
     <div>
       <TableContainer
         width="100%"
-        rounded={"md"}
+        // rounded={"md"}
       >
         <Table style={{ marginTop: style.margin["sm"] }} variant="unstyled" colorScheme="whiteAlpha" size="md">
           <Thead>
             <Tr
               css={{
-                background: style.table.bg.default,
+                // background: style.table.bg.default,
                 borderColor: style.table.borderColor.default,
               }}
             >

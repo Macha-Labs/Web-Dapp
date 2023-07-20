@@ -121,7 +121,9 @@ const Contract = () => {
             <Loader size="lg" />
           </FlexRow>
         ) : (
-          <TxnTable txnData={hookContractTxn?.filteredData} />
+          <Box marginTop="1rem" border="1px solid #14244b" borderRadius="20px">
+            <TxnTable txnData={hookContractTxn?.filteredData} />
+          </Box>
         )}
       </Box>
     );
