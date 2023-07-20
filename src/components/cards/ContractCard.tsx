@@ -3,6 +3,8 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import TagNative from "@/_ui/tag/TagNative";
 import { truncateAddress, truncateString } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
+import chains from "@/data/network";
+import IconBase from "@/_ui/icons/IconsBase";
 
 type Props = {
   image?: string;
@@ -14,6 +16,7 @@ type Props = {
   onCardClick?: any;
   height?: any;
   address?: any;
+  chainId?: any;
 };
 
 const ContractCard = ({
@@ -21,9 +24,10 @@ const ContractCard = ({
   heading,
   description,
   tags,
-  onCardClick = (e?: any) => {},
+  onCardClick = (e?: any) => { },
   height,
   address,
+  chainId
 }: Props) => {
   return (
     <Box
@@ -46,7 +50,7 @@ const ContractCard = ({
         justifyContent: "space-between",
         transitionTimingFunction: "ease-in-out",
         transitionProperty: " transform ",
-        transitionDuration:"600ms"
+        transitionDuration: "600ms"
       }}
       onClick={() => {
         onCardClick();
@@ -61,6 +65,7 @@ const ContractCard = ({
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            marginBottom: `${style.margin.xs}`
             // paddingRight: `${style.padding.xs}`,
           }}
         >
@@ -120,32 +125,70 @@ const ContractCard = ({
         >
           {truncateString(description, 100)}{" "}
         </Text>
-        <Text
-          style={{
-            background: `-webkit-linear-gradient(
-              270deg,
-              rgb(25, 124, 236),
-              rgb(0, 74, 217)
-            )`,
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
-            fontWeight: `${style.fontWeight.dark}`,
-            marginBottom: `0.8rem`,
-          }}
-          lineHeight="1rem"
-        >
-          Contract Address:
-        </Text>
-        <Text
-          style={{
-            fontWeight: `${style.fontWeight.dark}`,
-            marginBottom: "0.5rem",
-          }}
-          lineHeight="0.5rem"
-        >
-          {truncateAddress(address)}
-        </Text>
+        <FlexRow hrAlign="space-between">
+          <Box style={{ display: "flex", flexDirection: "column" }}>
+            <Text
+              style={{
+                background: `-webkit-linear-gradient(
+                270deg,
+                rgb(25, 124, 236),
+                rgb(0, 74, 217)
+                )`,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                fontWeight: `${style.fontWeight.dark}`,
+                marginBottom: `0.8rem`,
+              }}
+              lineHeight="1rem"
+            >
+              Contract Address:
+            </Text>
+            <Text
+              style={{
+                fontWeight: `${style.fontWeight.dark}`,
+                marginBottom: "0.5rem",
+              }}
+              lineHeight="0.5rem"
+            >
+              {truncateAddress(address)}
+            </Text>
+          </Box>
+          <Box style={{ display: "flex", flexDirection: "column" }}>
+            <Text
+              style={{
+                background: `-webkit-linear-gradient(
+                270deg,
+                rgb(25, 124, 236),
+                rgb(0, 74, 217)
+                )`,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                fontWeight: `${style.fontWeight.dark}`,
+                marginBottom: `1.2rem`,
+              }}
+              lineHeight="1rem"
+            >
+              Chain:
+            </Text>
+            <Box style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+              <Text
+                style={{
+                  fontWeight: `${style.fontWeight.dark}`,
+                  marginBottom: "0px",
+                  marginTop: "-10px"
+                }}
+                lineHeight="0.5rem"
+              >
+                {chains[chainId].chainName}
+              </Text>
+              <Box style={{marginTop: "-10px",marginLeft: "0.25rem"}}>
+                <IconBase slug={chains[chainId].chainImage} size="xs" />
+              </Box>
+            </Box>
+          </Box>
+        </FlexRow>
 
         <FlexRow height="fit-content" hrAlign="flex-start" width="100%">
           {tags?.map((tag: string, index: number) => {

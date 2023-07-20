@@ -145,5 +145,7 @@ const GlobalIcons: any = {
   "logo-Sound.xyz": "/Studio-Logos/sound.svg?updatedAt=1686740612486",
   "logo-Paragraph.xyz": "/Studio-Logos/paragraph.svg?updatedAt=1686740612876",
   "logo-MintKudos": "/Studio-Logos/mintcudos.svg?updatedAt=1686740614448",
+  "logo-Ethereum": "/Assets/logo/ethereum-1.svg?updatedAt=1689839758613",
+  "logo-Polygon": "/Assets/logo/polygon.svg?updatedAt=1689840138029"
 };
 export default GlobalIcons;
