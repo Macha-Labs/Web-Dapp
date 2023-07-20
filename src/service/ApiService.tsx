@@ -64,7 +64,7 @@ export const deleteContract = async (contract_id: any) => {
   const response = await fetch(
     `${config.metaServer}/indexer/contracts/delete/${contract_id}`,
     {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
