@@ -4,7 +4,11 @@ import { DataProvider } from "@/providers/DataProvider";
 import "@/styles/globals.css";
 import theme from "@/styles/StyledChakraTheme";
 import { ChakraProvider } from "@chakra-ui/react";
-import { darkTheme, getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import {
+  darkTheme,
+  getDefaultWallets,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { IKContext } from "imagekitio-react";
@@ -26,7 +30,7 @@ const { connectors } = getDefaultWallets({
 });
 
 const wagmiClient = createClient({
-  autoConnect: false,
+  autoConnect: true,
   connectors,
   provider,
 });
@@ -37,10 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Macha</title>
-        <meta
-          name="description"
-          content="Building Interoperable Web"
-        />
+        <meta name="description" content="Building Interoperable Web" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:image" content="/assets/Chat-Screen.png" />
         <link rel="icon" href="/favicon.ico" />
