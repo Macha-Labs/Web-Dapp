@@ -1,35 +1,36 @@
 import FlexRow from "@/_ui/flex/FlexRow";
-import Loader from "@/_ui/loader/Loader";
 
-import { useRouter } from "next/router";
 import { style } from "@/styles/StyledConstants";
-import { Divider, Flex, Heading, Image, Link, Text } from "@chakra-ui/react";
+import { Divider, Flex, Image, Link, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 // import InteractionTable from "@/pages/search/network/InteractionTable";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import React, { useEffect, useState } from "react";
-import { Box, Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
-import ContractEditModal from "@/components/studio/ContractEditModal";
-
-import InteractionTable from "@/components/studio/InteractionTable";
-import NavBlock from "@/_ui/nav/NavBlock";
-import TxnTable from "@/components/studio/TxnTable";
 import FlexBody from "@/_ui/flex/FlexBody";
-import useContractTxn from "@/hooks/studio/useContractTxn";
+import NavBlock from "@/_ui/nav/NavBlock";
 import TagNative from "@/_ui/tag/TagNative";
+import InteractionTable from "@/components/studio/InteractionTable";
+import useChainTxn from "@/hooks/studio/useChainTxn";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const hookContractTxn = useContractTxn();
+  const hookChainTxn = useChainTxn();
+
   const router = useRouter();
-  //   const isReady = router.isReady;
+  const isReady = router.isReady;
   const handleTabChange = (index: any) => {
     setActiveTab(index);
   };
 
+
+
   useEffect(() => {
-    hookContractTxn._fetch("opensea_ethereum");
-  }, []);
+    if (isReady) {
+      hookChainTxn._fetch(router.query.chain);
+    }
+  }, [router.query.chain]);
   const renderComponent = () => {
     return (
       <>
@@ -162,7 +163,7 @@ const Network = () => {
                       This is the content of Tab 1.
                       {/* <TxnTable txnData={hookContractTxn?.filteredData} /> */}
                       <InteractionTable
-                        txnData={hookContractTxn?.filteredData}
+                        txnData={hookChainTxn?.filteredData}
                       />
                     </Box>
                   </TabPanel>
@@ -247,7 +248,7 @@ const Network = () => {
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-            //   marginLeft={style.margin.xxs}
+              //   marginLeft={style.margin.xxs}
             >
               Ethereum
             </Text>
