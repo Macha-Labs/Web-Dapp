@@ -55,6 +55,8 @@ const DashBoard = () => {
     return <>{selectedNavTab == "Contracts" && <ContractList />}</>;
   };
 
+  
+
   const renderBody = () => {
     if (!$address) return null;
 
@@ -72,7 +74,7 @@ const DashBoard = () => {
                   onChange={setSelectedNavTab}
                 />
                 <Text className="mb-0" color="#C6C6C6" marginRight="3px">
-                  Api
+                  Functions
                 </Text>
                 <TagNative value="soon" size="sm" variant="grey" />
               </FlexRow>
