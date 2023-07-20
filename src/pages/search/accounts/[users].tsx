@@ -37,29 +37,22 @@ const Network = () => {
           <>
             <Box>
               {/* <Text fontSize="3rem">Interactions</Text> */}
-              <Flex justify="space-between">
-                <Box>
-                  <Box display="flex" alignItems="center">
-                    <Image
-                      height="2rem"
-                      src="https://ik.imagekit.io/metaworkLabs/Assets/logo/ethereum-eth.svg?updatedAt=1689845348891"
-                      alt="ethereum"
-                    />
-                    <Text
-                      fontSize={style.font.h2}
-                      fontWeight="600"
-                      marginBottom={0}
-                      marginLeft={style.margin.xxs}
-                    >
-                      Ethereum
-                    </Text>
-                  </Box>
-                  <Text>
-                    Open source platform to write and distribute decentralized
-                    applications.
+              <Flex justify="space-between" marginBottom="1rem">
+                <Box display="flex" alignItems="center">
+                  <Image
+                    height="2rem"
+                    src="https://ik.imagekit.io/metaworkLabs/Assets/logo/ethereum-eth.svg?updatedAt=1689845348891"
+                    alt="ethereum"
+                  />
+                  <Text
+                    fontSize={style.font.h2}
+                    fontWeight="600"
+                    marginBottom={0}
+                    marginLeft={style.margin.xxs}
+                  >
+                    0xc3...95ce
                   </Text>
                 </Box>
-                <Box>Symbols</Box>
               </Flex>
               <Flex
                 justify="space-between"
@@ -73,14 +66,14 @@ const Network = () => {
                   justifyContent="space-between"
                 >
                   <Box>
-                    <Text marginBottom={0}>Market Cap</Text>
+                    <Text marginBottom={0}>Networth</Text>
                     <Text
                       fontWeight={style.fontWeight.extraDark}
                       marginBottom={0}
                     >
-                      $230.79B
+                      US$0.01
                     </Text>
-                    <Text>120.2M ETH</Text>
+                    <Text>1 ERC-20 tokens</Text>
                   </Box>
 
                   <Divider
@@ -97,14 +90,13 @@ const Network = () => {
                   justifyContent="space-between"
                 >
                   <Box>
-                    <Text marginBottom={0}>Interactions</Text>
+                    <Text marginBottom={0}>Activity</Text>
                     <Text
                       marginBottom={0}
                       fontWeight={style.fontWeight.extraDark}
                     >
-                      1,999,185,792
+                      17 Interactions
                     </Text>
-                    <Text>8.83 interactions per second</Text>
                   </Box>
                   <Divider
                     orientation="vertical"
@@ -120,14 +112,13 @@ const Network = () => {
                   justifyContent="space-between"
                 >
                   <Box>
-                    <Text marginBottom={0}>EHT Price</Text>
+                    <Text marginBottom={0}>Collectibles</Text>
                     <Text
                       marginBottom={0}
                       fontWeight={style.fontWeight.extraDark}
                     >
-                      US$1,920.18
+                      0 Pieces
                     </Text>
-                    <Text>$230.81B</Text>
                   </Box>
                   <Divider
                     orientation="vertical"
@@ -137,14 +128,14 @@ const Network = () => {
                   />
                 </Box>
                 <Box flex="1" p={4}>
-                  <Text marginBottom={0}>Latest Block</Text>
+                  <Text marginBottom={0}>Active Since</Text>
                   <Text
                     marginBottom={0}
                     fontWeight={style.fontWeight.extraDark}
                   >
-                    17734045
+                    Jan 13, 2023
                   </Text>
-                  <Text>less than a minute</Text>
+                  <Text>6 months</Text>
                 </Box>
               </Flex>
             </Box>
@@ -247,7 +238,7 @@ const Network = () => {
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-            //   marginLeft={style.margin.xxs}
+              //   marginLeft={style.margin.xxs}
             >
               Ethereum
             </Text>

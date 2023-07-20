@@ -35,37 +35,34 @@ const Contract = () => {
   useEffect(() => {
     if (isReady) {
       hookContract._fetch(router.query.id),
-        hookContractTxn._fetch(router.query.id)
+        hookContractTxn._fetch(router.query.id);
     }
-  }, [router.query.id])
-
+  }, [router.query.id]);
 
   const renderComponent = () => {
-
     let options = {
       weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
     };
-    console.log(
-      "contract details",
-      hookContract?.contractDetails
-    );
+    console.log("contract details", hookContract?.contractDetails);
     return (
       <Box paddingTop={style.padding["xxxl"]}>
-        {hookContract.contractDetails && <ContractInfoCard
-          data={{
-            name: hookContract.contractDetails[0]?.contract?.name,
-            image: hookContract.contractDetails[0]?.contract?.image,
-            state: { status: "Live" },
-            address: hookContract.contractDetails[0]?.contract.address,
-            owner: hookContract.contractDetails[0]?.contract.address,
-            description:
-              hookContract.contractDetails[0]?.contract.description,
-            chain_id: hookContract.contractDetails[0]?.contract.chain_id,
-          }}
-        />}
+        {hookContract.contractDetails && (
+          <ContractInfoCard
+            data={{
+              name: hookContract.contractDetails[0]?.contract?.name,
+              image: hookContract.contractDetails[0]?.contract?.image,
+              state: { status: "Live" },
+              address: hookContract.contractDetails[0]?.contract.address,
+              owner: hookContract.contractDetails[0]?.contract.address,
+              description:
+                hookContract.contractDetails[0]?.contract.description,
+              chain_id: hookContract.contractDetails[0]?.contract.chain_id,
+            }}
+          />
+        )}
         <FlexRow hrAlign="flex-start" vrAlign="center" marginTop="xl">
           <Box width="40%">
             <InputSearch
@@ -73,10 +70,12 @@ const Contract = () => {
               size="lg"
               placeholder="Search Studio"
               icon={{ slug: "icon-search" }}
-              onChange={(e: any) => hookContractTxn.setSearchVal(e.target.value)}
+              onChange={(e: any) =>
+                hookContractTxn.setSearchVal(e.target.value)
+              }
               onKeydown={(e: any) => {
-                if (e.key === 'Enter') {
-                  hookContractTxn.handleFilter(hookContractTxn.searchVal)
+                if (e.key === "Enter") {
+                  hookContractTxn.handleFilter(hookContractTxn.searchVal);
                 }
               }}
             />
@@ -104,10 +103,17 @@ const Contract = () => {
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
             color: "transparent",
-          }}>Transactions in the last 12 hours </Text>
-        {hookContractTxn.isLoading ? <FlexRow height="100px">
-          <Loader size="lg" />
-        </FlexRow> : <TxnTable txnData={hookContractTxn?.filteredData} />}
+          }}
+        >
+          Transactions in the last 12 hours{" "}
+        </Text>
+        {hookContractTxn.isLoading ? (
+          <FlexRow height="100px">
+            <Loader size="lg" />
+          </FlexRow>
+        ) : (
+          <TxnTable txnData={hookContractTxn?.filteredData} />
+        )}
       </Box>
     );
   };
@@ -153,12 +159,15 @@ const Contract = () => {
               onChange={(value: any) => setSelectedTab(value)}
               gstyle={{ fontSize: `${style.font.h5}` }}
             /> */}
-            </FlexRow>
-          </NavBlock>
-          <FlexBody>{renderComponent()}</FlexBody>
-        </>) : <FlexRow height="500px">
-          <Loader size="lg" />
-        </FlexRow>}
+              </FlexRow>
+            </NavBlock>
+            <FlexBody>{renderComponent()}</FlexBody>
+          </>
+        ) : (
+          <FlexRow height="500px">
+            <Loader size="lg" />
+          </FlexRow>
+        )}
       </>
     );
   };
