@@ -12,7 +12,7 @@ const JSONViewer = ({ data }: any) => {
       [key]: !expanded[key],
     });
   };
-
+  
   const renderData = (data: any, key: any) => {
     if (Array.isArray(data)) {
       return (
@@ -32,9 +32,9 @@ const JSONViewer = ({ data }: any) => {
         <div>
           <span onClick={() => handleToggle(key)} style={{ cursor: "pointer" }}>
             {expanded[key] ? (
-              <IconBase slug="icon-down" />
+              <IconBase slug="icon-chevron-down" size="md" />
             ) : (
-              <IconBase slug="icon-right" />
+              <IconBase slug="icon-chevron-next" size="md" />
             )}
           </span>
           {expanded[key] && (
