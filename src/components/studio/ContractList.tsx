@@ -21,6 +21,7 @@ const ContractList = () => {
       <>
         <Box width="50%" paddingTop={style.padding.xxl} >
           <InputSearch
+            marginTop={style.margin.sm}
             size="lg"
             placeholder="Search Studio"
             icon={{ slug: "icon-search" }}
