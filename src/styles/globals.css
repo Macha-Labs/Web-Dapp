@@ -1,10 +1,6 @@
-
-
 ::-webkit-scrollbar {
   /* display: none; */
 }
-
-
 
 :root {
   --max-width: 1100px;
@@ -97,6 +93,10 @@ body {
   font-size: 16px;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* small screen */
 @media only screen and (min-width: 480px) {
   html {
@@ -121,12 +121,6 @@ body {
     font-size: 16px;
   }
 }
-
-  @media only screen and (min-width: 1536px) {
-    html {
-      font-size: 18px;
-    }
-  }
 
 body::-webkit-scrollbar {
   /* display: none; */

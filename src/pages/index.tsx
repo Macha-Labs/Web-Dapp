@@ -5,6 +5,7 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTop from "@/_ui/nav/NavTop";
 import Tabs from "@/_ui/tabs/Tabs";
+import TagNative from "@/_ui/tag/TagNative";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
 import WalletButton from "@/components/buttons/WalletButton";
@@ -15,7 +16,7 @@ import useContractCreate from "@/hooks/studio/useContractCreate";
 import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
-import { useDisclosure, Box } from "@chakra-ui/react";
+import { useDisclosure, Box, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const DashBoard = () => {
@@ -40,10 +41,10 @@ const DashBoard = () => {
       value: "Contracts",
       href: "",
     },
-    {
-      value: "APIs",
-      href: "",
-    },
+    // {
+    //   value: "APIs",
+    //   href: "",
+    // },
   ];
 
   const renderAPIs = () => {
@@ -61,13 +62,21 @@ const DashBoard = () => {
       <>
         <NavBlock marginTop={style.margin["nav"]}>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <Tabs
-              // width="30%"
-              options={dashboardNav}
-              gstyle={{ fontSize: `${style.font.h5}` }}
-              value={selectedNavTab}
-              onChange={setSelectedNavTab}
-            />
+            <Box cursor={"not-allowed"}>
+              <FlexRow hrAlign="flex-start" vrAlign="center">
+                <Tabs
+                  width="fit-content"
+                  options={dashboardNav}
+                  gstyle={{ fontSize: `${style.font.h5}` }}
+                  value={selectedNavTab}
+                  onChange={setSelectedNavTab}
+                />
+                <Text className="mb-0" color="#C6C6C6" marginRight="3px">
+                  Api
+                </Text>
+                <TagNative value="soon" size="sm" variant="grey" />
+              </FlexRow>
+            </Box>
             {selectedNavTab == "Contracts" && (
               <ButtonNative
                 size="sm"

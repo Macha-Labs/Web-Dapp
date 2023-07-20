@@ -1,8 +1,9 @@
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavBlock from "@/_ui/nav/NavBlock";
-import TxnDetails from "@/components/studio/TxnDetails"; 
+import TxnDetails from "@/components/studio/TxnDetails";
 import { getItemFromLocal, setItemOnLocal, truncateAddress } from "@/helpers";
 import useContractTxn from "@/hooks/studio/useContractTxn";
 import useMeta from "@/hooks/studio/useMeta";
@@ -40,13 +41,12 @@ const SearchResult = () => {
   }, [$userMetasMap]);
 
   useEffect(() => {
-    if(router.isReady){
-      hookTxn._fetch(router.query.id)
+    if (router.isReady) {
+      hookTxn._fetch(router.query.id);
     }
-  },[router.query.id])
+  }, [router.query.id]);
 
-
-  const id = router.query.id
+  const id = router.query.id;
 
   const renderBody = () => {
     return (
@@ -57,12 +57,31 @@ const SearchResult = () => {
             router.back();
           }}
         >
-          <FlexRow width="100%" vrAlign="center" hrAlign="flex-start">
-            <Heading fontSize={style.font.h5} className="m-b-0">{truncateAddress(id)}</Heading>
+          <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
+            <Heading fontSize={style.font.h5} className="m-b-0">
+              {truncateAddress(id)}
+            </Heading>
+            <ButtonNative
+              textFontSize="h5"
+              paddingLeft="sm"
+              paddingRight="sm"
+              variant="state_brand"
+              text="Share"
+              marginRight="0px"
+              iconRight={{
+                slug: "icon-base-share",
+                style: { marginLeft: "xxs" },
+              }}
+            />
           </FlexRow>
         </NavBlock>
         <FlexBody>
-          <TxnDetails id={currentApiId} transactionDetails={hookTxn.transactionDetails} isLoading={hookTxn.isLoading} />
+          <TxnDetails
+            id={currentApiId}
+            transactionDetails={hookTxn.transactionDetails}
+            isLoading={hookTxn.isLoading}
+            methodParams={hookTxn.methodParams}
+          />
         </FlexBody>
       </>
     );

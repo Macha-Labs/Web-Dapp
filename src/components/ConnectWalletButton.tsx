@@ -1,12 +1,20 @@
-import FlexRow from '@/_ui/flex/FlexRow';
-import IconImage from '@/_ui/icons/IconImage';
-import IconBase from '@/_ui/icons/IconsBase';
-import { truncateAddress } from '@/helpers';
-import useMachaAuth from '@/hooks/studio/useMachaAuth';
-import useAuthStore from '@/store/useAuthStore';
-import { style } from '@/styles/StyledConstants';
-import { Button, Image, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import FlexRow from "@/_ui/flex/FlexRow";
+import IconImage from "@/_ui/icons/IconImage";
+import IconBase from "@/_ui/icons/IconsBase";
+import { truncateAddress } from "@/helpers";
+import useMachaAuth from "@/hooks/studio/useMachaAuth";
+import useAuthStore from "@/store/useAuthStore";
+import { style } from "@/styles/StyledConstants";
+import {
+  Button,
+  Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export const ConnectWalletButton = (props: any) => {
   const $address = useAuthStore((state: any) => state.address);
@@ -26,22 +34,21 @@ export const ConnectWalletButton = (props: any) => {
       }) => {
         // Note: If your app doesn't use authentication, you
         // can remove all 'authenticationStatus' checks
-        const ready = mounted && authenticationStatus !== 'loading';
+        const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
           account &&
           chain &&
-          (!authenticationStatus ||
-            authenticationStatus === 'authenticated');
+          (!authenticationStatus || authenticationStatus === "authenticated");
         return (
           <div
             className="w-100"
             {...(!ready && {
-              'aria-hidden': true,
-              'style': {
+              "aria-hidden": true,
+              style: {
                 opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
+                pointerEvents: "none",
+                userSelect: "none",
               },
             })}
           >
@@ -55,7 +62,14 @@ export const ConnectWalletButton = (props: any) => {
                     onClick={openConnectModal}
                     borderRadius={style.button.borderRadius.default}
                   >
-                    <Text paddingBottom={"0px"} marginBottom="0px" fontSize={props?.font} style={{ marginBottom: "0px", paddingBottom: "0px" }}>Connect Wallet</Text>
+                    <Text
+                      paddingBottom={"0px"}
+                      marginBottom="0px"
+                      fontSize={props?.font}
+                      style={{ marginBottom: "0px", paddingBottom: "0px" }}
+                    >
+                      Connect Wallet
+                    </Text>
                   </Button>
                 );
               }
@@ -67,7 +81,10 @@ export const ConnectWalletButton = (props: any) => {
                 );
               }
               return (
-                <div style={{ display: 'flex', justifyContent: "flex-end"}} className="w-100">
+                <div
+                  style={{ display: "flex", justifyContent: "flex-end" }}
+                  className="w-100"
+                >
                   {/* <button
                     className="w-100"
                     onClick={openChainModal}
@@ -110,7 +127,11 @@ export const ConnectWalletButton = (props: any) => {
                         borderRadius: `${style.card.borderRadius.button}`,
                       }}
                       rightIcon={
-                        <IconBase slug="icon-chevron-down" size="sm" style={` marginLeft: "10px" `} />
+                        <IconBase
+                          slug="icon-chevron-down"
+                          size="sm"
+                          style={` marginLeft: "10px" `}
+                        />
                       }
                       height={"35px"}
                     >
@@ -126,37 +147,44 @@ export const ConnectWalletButton = (props: any) => {
                       </FlexRow>
                     </MenuButton>
                     <MenuList>
-                      <MenuItem
-                        onClick={() => { }}
-                      >
+                      <MenuItem onClick={() => {}}>
                         <FlexRow hrAlign="space-between">
                           <Image
                             style={{ height: "25px", width: "25px" }}
-                            src="../assets/Avatar.svg" alt=""
+                            src="../assets/Avatar.svg"
+                            alt=""
                           />
                           {/* <IconImage slug="icon-switchWallet" /> */}
-                          <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
+                          <FlexRow
+                            hrAlign="flex-start"
+                            width="90%"
+                            marginLeft={"sm"}
+                          >
                             {truncateAddress($address)}
                             {/* <IconImage slug="icon-switchWallet" /> */}
                           </FlexRow>
                         </FlexRow>
                       </MenuItem>
-                      <MenuItem
-                        onClick={openConnectModal}
-                      >
+                      <MenuItem onClick={openConnectModal}>
                         <FlexRow hrAlign="space-between">
                           <IconImage slug="icon-switchWallet" />
-                          <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
+                          <FlexRow
+                            hrAlign="flex-start"
+                            width="90%"
+                            marginLeft={"sm"}
+                          >
                             {"Switch Wallet"}
                           </FlexRow>
                         </FlexRow>
                       </MenuItem>
-                      <MenuItem
-                        onClick={openAccountModal}
-                      >
+                      <MenuItem onClick={openAccountModal}>
                         <FlexRow hrAlign="space-between">
                           <IconImage slug="icon-disconnectWallet" />
-                          <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
+                          <FlexRow
+                            hrAlign="flex-start"
+                            width="90%"
+                            marginLeft={"lg"}
+                          >
                             {"Disconnect Wallet"}
                           </FlexRow>
                         </FlexRow>
@@ -167,8 +195,12 @@ export const ConnectWalletButton = (props: any) => {
                         }}
                       >
                         <FlexRow hrAlign="space-between">
-                          <IconImage slug="icon-user" />
-                          <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
+                          <IconImage slug="icon-user" size="sm" />
+                          <FlexRow
+                            hrAlign="flex-start"
+                            width="90%"
+                            marginLeft={"sm"}
+                          >
                             {"Register as Publisher"}
                           </FlexRow>
                         </FlexRow>

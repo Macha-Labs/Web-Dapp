@@ -13,13 +13,20 @@ import { fetchTransaction } from "@wagmi/core";
 import { useEffect, useState } from "react";
 import { Heading, useToast } from "@chakra-ui/react";
 import Loader from "@/_ui/loader/Loader";
+import JSONViewer from "@/_ui/JSONViewer";
 
 type Props = {
   id: string;
-  transactionDetails: any,
-  isLoading: any
+  transactionDetails: any;
+  isLoading: any;
+  methodParams?: any;
 };
-function TxnDetails({ id, transactionDetails, isLoading}: Props) {
+function TxnDetails({
+  id,
+  transactionDetails,
+  isLoading,
+  methodParams,
+}: Props) {
   const options = [
     { value: "snapshot", label: "SnapShot" },
     { value: "poap", label: "POAP" },
@@ -61,228 +68,236 @@ function TxnDetails({ id, transactionDetails, isLoading}: Props) {
   // };
 
   return (
-    <>{isLoading ? <FlexRow height="500px">
-      <Loader size="lg" />
-    </FlexRow> : (<>
-      <FlexRow marginTop={"xxl"} hrAlign="space-between" vrAlign="flex-end" marginBottom={"md"} width="68%">
-        <Text
-          fontSize={style.font.h1}
-          fontWeight={600}
-          className="mb-0"
-          lineHeight={style.font.h1}
-          marginTop={style.margin["sm"]}
-        >
-          Transacation Details
-        </Text>
-        <ButtonNative textFontSize="h5" paddingLeft="sm" paddingRight="sm" variant="state_brand" text="Share" marginRight="0px" iconRight={{ slug: "icon-base-share", style: { marginLeft: "xxs" } }} />
-      </FlexRow>
+    <>
+      {isLoading ? (
+        <FlexRow height="500px">
+          <Loader size="lg" />
+        </FlexRow>
+      ) : (
+        <>
+          <FlexRow
+            marginTop={"xxl"}
+            hrAlign="space-between"
+            vrAlign="flex-end"
+            marginBottom={"md"}
+            width="68%"
+          >
+            <Text
+              fontSize={style.font.h1}
+              fontWeight={600}
+              className="mb-0"
+              lineHeight={style.font.h1}
+              marginTop={style.margin["sm"]}
+            >
+              Transacation Details
+            </Text>
+          </FlexRow>
 
-      {/* <Divider /> */}
-      <FlexRow hrAlign="start" marginBottom={"xs"}>
-        <Box>
-          <Text
-            mb={0}
-            style={{
-              background: `-webkit-linear-gradient(
+          {/* <Divider /> */}
+          <FlexRow hrAlign="start" marginBottom={"xs"}>
+            <Box>
+              <Text
+                mb={0}
+                style={{
+                  background: `-webkit-linear-gradient(
               270deg,
               rgb(25, 124, 236),
               rgb(0, 74, 217)
             )`,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-              fontWeight: `${style.fontWeight.dark}`,
-            }}
-          >
-            CREATED
-          </Text>
-          <Text
-            color="rgba(255,255,255,0.5)"
-            className="mb-0"
-          // marginStart={style.margin.xxs}
-          >
-            {" "}
-            {/* TODO: make dynamic */}
-            Jul 8 2023 at 11:30:47 AM
-          </Text>
-        </Box>
-        <Box padding="0% 8% 0% 8%">
-          <Text
-            mb={0}
-            style={{
-              background: `-webkit-linear-gradient(
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  fontWeight: `${style.fontWeight.dark}`,
+                }}
+              >
+                CREATED
+              </Text>
+              <Text
+                color="rgba(255,255,255,0.5)"
+                className="mb-0"
+                // marginStart={style.margin.xxs}
+              >
+                {" "}
+                {/* TODO: make dynamic */}
+                Jul 8 2023 at 11:30:47 AM
+              </Text>
+            </Box>
+            <Box padding="0% 8% 0% 8%">
+              <Text
+                mb={0}
+                style={{
+                  background: `-webkit-linear-gradient(
               270deg,
               rgb(25, 124, 236),
               rgb(0, 74, 217)
             )`,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-              fontWeight: `${style.fontWeight.dark}`,
-            }}
-          >
-            Status
-          </Text>
-          <Text
-            color="rgba(255,255,255,0.5)"
-            className="mb-0"
-          // marginStart={style.margin.xxs}
-          >
-            {" "}
-            {/* TODO: make dynamic */}
-            Success
-          </Text>
-          {/* TODO: make dynamic */}
-        </Box>
-      </FlexRow>
-      <FlexRow hrAlign="space-between" vrAlign="flex-start">
-        <FlexColumn width="68%" hrAlign="flex-start" vrAlign="flex-start">
-          <Box
-            width={"100%"}
-            border={style.card.border.hover}
-            borderRadius={style.card.borderRadius.default}
-            padding={style.padding["lg"]}
-          >
-            <table>
-              <tbody>
-                <tr>
-                  <td style={{ display: "flex", justifyContent: "center" }}>
-                    <Avatar src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873" />
-                  </td>
-                  <td>
-                    <FlexRow
-                      vrAlign="start"
-                      marginLeft={"sm"}
-                      hrAlign="flex-start"
-                    >
-                      <Text className="mb-0">
-                        {transactionDetails &&
-                          truncateAddress(
-                            transactionDetails[4]?.value
-                          )}
-                      </Text>
-                      <IconBase
-                        slug="icon-copy"
-                        style={{ marginLeft: "sm" }}
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            transactionDetails[4]?.value
-                          );
-                          toast({
-                            title: "Copied To Clipboard",
-                            status: "success",
-                            duration: 3000,
-                          });
-                        }}
-                      />
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  fontWeight: `${style.fontWeight.dark}`,
+                }}
+              >
+                Status
+              </Text>
+              <Text
+                color="rgba(255,255,255,0.5)"
+                className="mb-0"
+                // marginStart={style.margin.xxs}
+              >
+                {" "}
+                {/* TODO: make dynamic */}
+                Success
+              </Text>
+              {/* TODO: make dynamic */}
+            </Box>
+          </FlexRow>
+          <FlexRow hrAlign="space-between" vrAlign="flex-start">
+            <FlexColumn width="68%" hrAlign="flex-start" vrAlign="flex-start">
+              <Box
+                width={"100%"}
+                border={style.card.border.hover}
+                borderRadius={style.card.borderRadius.default}
+                padding={style.padding["lg"]}
+              >
+                <table>
+                  <tbody>
+                    <tr>
+                      <td style={{ display: "flex", justifyContent: "center" }}>
+                        <Avatar src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873" />
+                      </td>
+                      <td>
+                        <FlexRow
+                          vrAlign="start"
+                          marginLeft={"sm"}
+                          hrAlign="flex-start"
+                        >
+                          <Text className="mb-0">
+                            {transactionDetails &&
+                              truncateAddress(transactionDetails[4]?.value)}
+                          </Text>
+                          <IconBase
+                            slug="icon-copy"
+                            style={{ marginLeft: "sm" }}
+                            onClick={() => {
+                              navigator.clipboard.writeText(
+                                transactionDetails[4]?.value
+                              );
+                              toast({
+                                title: "Copied To Clipboard",
+                                status: "success",
+                                duration: 3000,
+                              });
+                            }}
+                          />
 
-                      {/* <Text className="mb-0">Ethereum</Text> */}
-                    </FlexRow>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ display: "flex", justifyContent: "center" }}>
-                    <Divider
-                      orientation="vertical"
-                      border={style.card.border.meta}
-                      height={"20px"}
-                      width={"0px"}
-                    />
-                  </td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td style={{ display: "flex", justifyContent: "center" }}>
-                    <IconBase slug="icon-code" />
-                  </td>
-                  <td>
-                    <FlexRow hrAlign="flex-start">
-                      <Text className="mb-0" marginStart={style.margin.sm}>
-                        Method
-                      </Text>
-                      <Text
-                        className="mb-0"
-                        style={{
-                          background: `-webkit-linear-gradient(
+                          {/* <Text className="mb-0">Ethereum</Text> */}
+                        </FlexRow>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style={{ display: "flex", justifyContent: "center" }}>
+                        <Divider
+                          orientation="vertical"
+                          border={style.card.border.meta}
+                          height={"20px"}
+                          width={"0px"}
+                        />
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td style={{ display: "flex", justifyContent: "center" }}>
+                        <IconBase slug="icon-code" />
+                      </td>
+                      <td>
+                        <FlexRow hrAlign="flex-start">
+                          <Text className="mb-0" marginStart={style.margin.sm}>
+                            Method
+                          </Text>
+                          <Text
+                            className="mb-0"
+                            style={{
+                              background: `-webkit-linear-gradient(
                           270deg,
                           rgb(25, 124, 236),
                           rgb(0, 74, 217)
                         )`,
-                          WebkitBackgroundClip: "text",
-                          backgroundClip: "text",
-                          color: "transparent",
-                          marginLeft: `${style.margin.sm}`,
-                          textDecoration: "none",
-                        }}
-                        _hover={{
-                          textDecoration: "underline",
-                          cursor: "pointer",
-                          transform: "scale(1.05)",
-                        }}
-                      >
-                        {transactionDetails && transactionDetails[7]?.value}
-                      </Text>
-                      <Text className="mb-0" marginLeft={style.margin["xxs"]}>
-                        {/* 0.295 ETH */}
-                      </Text>
-                      <Text
-                        className="mb-0"
-                        color="rgba(255,255,255,0.7)"
-                        marginLeft={style.margin["xxs"]}
-                      >
-                        {/* $ 549.68 */}
-                      </Text>
-                    </FlexRow>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ display: "flex", justifyContent: "center" }}>
-                    <Divider
-                      orientation="vertical"
-                      border={style.card.border.meta}
-                      height={"20px"}
-                      width={"0px"}
-                    />
-                  </td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td style={{ display: "flex", justifyContent: "center" }}>
-                    <Avatar src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873" />{" "}
-                  </td>
-                  <td>
-                    <FlexRow
-                      vrAlign="start"
-                      marginLeft={"sm"}
-                      hrAlign="flex-start"
-                    >
-                      <Text className="mb-0" textAlign="left">
-                        {transactionDetails &&
-                          truncateAddress(
-                            transactionDetails[5]?.value
-                          )}
-                      </Text>
-                      <IconBase
-                        slug="icon-copy"
-                        style={{ marginLeft: "sm" }}
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            transactionDetails[5]?.value
-                          );
-                          toast({
-                            title: "Copied To Clipboard",
-                            status: "success",
-                            duration: 3000,
-                          });
-                        }}
-                      />
-                      {/* <Text className="mb-0">Ethereum</Text> */}
-                    </FlexRow>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            {/* <Divider
+                              WebkitBackgroundClip: "text",
+                              backgroundClip: "text",
+                              color: "transparent",
+                              marginLeft: `${style.margin.sm}`,
+                              textDecoration: "none",
+                            }}
+                            _hover={{
+                              textDecoration: "underline",
+                              cursor: "pointer",
+                              transform: "scale(1.05)",
+                            }}
+                          >
+                            {transactionDetails && transactionDetails[7]?.value}
+                          </Text>
+                          <Text
+                            className="mb-0"
+                            marginLeft={style.margin["xxs"]}
+                          >
+                            {/* 0.295 ETH */}
+                          </Text>
+                          <Text
+                            className="mb-0"
+                            color="rgba(255,255,255,0.7)"
+                            marginLeft={style.margin["xxs"]}
+                          >
+                            {/* $ 549.68 */}
+                          </Text>
+                        </FlexRow>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style={{ display: "flex", justifyContent: "center" }}>
+                        <Divider
+                          orientation="vertical"
+                          border={style.card.border.meta}
+                          height={"20px"}
+                          width={"0px"}
+                        />
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td style={{ display: "flex", justifyContent: "center" }}>
+                        <Avatar src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873" />{" "}
+                      </td>
+                      <td>
+                        <FlexRow
+                          vrAlign="start"
+                          marginLeft={"sm"}
+                          hrAlign="flex-start"
+                        >
+                          <Text className="mb-0" textAlign="left">
+                            {transactionDetails &&
+                              truncateAddress(transactionDetails[5]?.value)}
+                          </Text>
+                          <IconBase
+                            slug="icon-copy"
+                            style={{ marginLeft: "sm" }}
+                            onClick={() => {
+                              navigator.clipboard.writeText(
+                                transactionDetails[5]?.value
+                              );
+                              toast({
+                                title: "Copied To Clipboard",
+                                status: "success",
+                                duration: 3000,
+                              });
+                            }}
+                          />
+                          {/* <Text className="mb-0">Ethereum</Text> */}
+                        </FlexRow>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                {/* <Divider
               border={style.card.border.meta}
               marginY={style.margin["sm"]}
             />
@@ -350,126 +365,137 @@ function TxnDetails({ id, transactionDetails, isLoading}: Props) {
                 </tr>
               </tbody>
             </table> */}
-          </Box>
-          <Box
-            width={"100%"}
-            border={style.card.border.hover}
-            borderRadius={style.card.borderRadius.default}
-            padding={style.padding["lg"]}
-            marginTop={style.margin.xl}
-          >
-            <Box
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                setDetailsToggle(!detailToggle);
-              }}
-            >
-              <FlexRow hrAlign="space-between">
-                <Text
-                  className="mb-0"
-                  fontSize={style.font.h5}
-                  fontWeight={600}
-                >
-                  All Details
-                </Text>
-                {detailToggle ? (
-                  <IconBase slug="icon-chevron-up" />
-                ) : (
-                  <IconBase slug="icon-chevron-down" />
-                )}
-              </FlexRow>
-            </Box>
-            {detailToggle && (
-              <table
-                style={{ marginTop: `${style.margin["xl"]}`, width: "100%" }}
+              </Box>
+              <Box
+                width={"100%"}
+                border={style.card.border.hover}
+                borderRadius={style.card.borderRadius.default}
+                padding={style.padding["lg"]}
+                marginTop={style.margin.xl}
               >
-                <tbody>
-                  {transactionDetails.map((item: any) => {
-                    return (
-                      <tr
-                        key={item._id}
-                        style={
-                          {
-                            // borderBottom: `${style.card.border.default}`,
-                            // width: "100%",
-                          }
-                        }
-                      >
-                        <td
-                          style={{
-                            paddingTop: `${style.padding["xxs"]}`,
-                            paddingBottom: `${style.padding["xxs"]}`,
-                            width: "fit-content",
-                            background: `-webkit-linear-gradient(
+                <Box
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setDetailsToggle(!detailToggle);
+                  }}
+                >
+                  <FlexRow hrAlign="space-between">
+                    <Text
+                      className="mb-0"
+                      fontSize={style.font.h5}
+                      fontWeight={600}
+                    >
+                      All Details
+                    </Text>
+                    {detailToggle ? (
+                      <IconBase slug="icon-chevron-up" />
+                    ) : (
+                      <IconBase slug="icon-chevron-down" />
+                    )}
+                  </FlexRow>
+                </Box>
+                {detailToggle && (
+                  <table
+                    style={{
+                      marginTop: `${style.margin["xl"]}`,
+                      width: "100%",
+                    }}
+                  >
+                    <tbody>
+                      {transactionDetails.map((item: any) => {
+                        return (
+                          <tr
+                            key={item._id}
+                            style={
+                              {
+                                // borderBottom: `${style.card.border.default}`,
+                                // width: "100%",
+                              }
+                            }
+                          >
+                            <td
+                              style={{
+                                paddingTop: `${style.padding["xxs"]}`,
+                                paddingBottom: `${style.padding["xxs"]}`,
+                                width: "fit-content",
+                                background: `-webkit-linear-gradient(
                               270deg,
                               rgb(25, 124, 236),
                               rgb(0, 74, 217)
                             )`,
-                            WebkitBackgroundClip: "text",
-                            backgroundClip: "text",
-                            color: "transparent",
-                            fontWeight: `${style.fontWeight.dark}`
-                          }}
-                        >
-                          {item.key}
-                        </td>
-                        <td style={{}}>{truncateString(item.value, 20)}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            )}
-          </Box>
-          <Box
-            width={"100%"}
-            border={style.card.border.hover}
-            borderRadius={style.card.borderRadius.default}
-            padding={style.padding["lg"]}
-            marginTop={style.margin.xl}
-          >
-            <Box
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                setHexToggle(!hexToggle);
-              }}
-            >
-              <FlexRow hrAlign="space-between">
-                <Text
-                  className="mb-0"
-                  fontSize={style.font.h5}
-                  fontWeight={600}
-                >
-                  Hex Input Data
-                </Text>
-                {hexToggle ? (
-                  <IconBase slug="icon-chevron-up" />
-                ) : (
-                  <IconBase slug="icon-chevron-down" />
+                                WebkitBackgroundClip: "text",
+                                backgroundClip: "text",
+                                color: "transparent",
+                                fontWeight: `${style.fontWeight.dark}`,
+                              }}
+                            >
+                              {item.key}
+                            </td>
+                            <td style={{}}>{truncateString(item.value, 20)}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 )}
-              </FlexRow>
-            </Box>
-            {hexToggle && <Text marginTop={style.margin.xl}>Function</Text>}
-          </Box>
-        </FlexColumn>
-        <FlexColumn width="28%" hrAlign="flex-start" vrAlign="flex-start">
-          <Box
-            width={"100%"}
-            // border={style.card.border.hover}
-            // borderRadius={style.card.borderRadius.default}
-            padding={style.padding["lg"]}
-          >
-            <FlexRow>
-              {/* <Avatar />{" "}
+              </Box>
+              <Box
+                width={"100%"}
+                border={style.card.border.hover}
+                borderRadius={style.card.borderRadius.default}
+                padding={style.padding["lg"]}
+                marginTop={style.margin.xl}
+              >
+                <Box
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setHexToggle(!hexToggle);
+                  }}
+                >
+                  <FlexRow hrAlign="space-between">
+                    <Text
+                      className="mb-0"
+                      fontSize={style.font.h5}
+                      fontWeight={600}
+                    >
+                      Hex Input Data
+                    </Text>
+                    {hexToggle ? (
+                      <IconBase slug="icon-chevron-up" />
+                    ) : (
+                      <IconBase slug="icon-chevron-down" />
+                    )}
+                  </FlexRow>
+                </Box>
+                {hexToggle && (
+                  <>
+                    {/* <Text>asdf</Text> */}
+                    
+                    {console.log("this is methodParams" ,methodParams)}
+                    <JSONViewer data={methodParams} />
+                  </>
+                )}
+              </Box>
+            </FlexColumn>
+            <FlexColumn width="28%" hrAlign="flex-start" vrAlign="flex-start">
+              <Box
+                width={"100%"}
+                // border={style.card.border.hover}
+                // borderRadius={style.card.borderRadius.default}
+                padding={style.padding["lg"]}
+              >
+                <FlexRow>
+                  {/* <Avatar />{" "}
               <FlexColumn>
                 <Text>0xeb...f7ee</Text>
                 <Text>Ethereum</Text>
               </FlexColumn>{" "} */}
-            </FlexRow>
-          </Box>
-        </FlexColumn>
-      </FlexRow>
-    </>)}
+                </FlexRow>
+              </Box>
+            </FlexColumn>
+          </FlexRow>
+        </>
+      )}
     </>
     // <FlexColumn
     //   width="100%"

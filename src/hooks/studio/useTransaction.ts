@@ -3,12 +3,13 @@ import { transactionData } from "@/service/ApiService";
 
 const useTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
+  const [methodParams, setMethodParams] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const _fetch = async (transactionHash: any) => {
     transactionData(transactionHash).then((res: any) => {
       console.log("contract not", res);
-      setIsLoading(false)
+      setIsLoading(false);
       setTransactionDetails([
         { key: "Block Hash", value: res.data[0].transaction.block_hash },
         { key: "Block Number", value: res.data[0].transaction.block_number },
@@ -22,13 +23,15 @@ const useTransaction = () => {
         { key: "Status", value: res.data[0].transaction.status },
         { key: "Time Stamp", value: res.data[0].timestamp },
       ]);
+      setMethodParams(res.data[0].transaction.method_params);
     });
   };
 
   return {
     transactionDetails: transactionDetails,
+    methodParams: methodParams,
     isLoading: isLoading,
-    _fetch: _fetch
+    _fetch: _fetch,
   };
 };
 

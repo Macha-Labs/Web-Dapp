@@ -12,7 +12,7 @@ const JSONViewer = ({ data }: any) => {
       [key]: !expanded[key],
     });
   };
-
+  
   const renderData = (data: any, key: any) => {
     if (Array.isArray(data)) {
       return (
@@ -32,9 +32,9 @@ const JSONViewer = ({ data }: any) => {
         <div>
           <span onClick={() => handleToggle(key)} style={{ cursor: "pointer" }}>
             {expanded[key] ? (
-              <IconBase slug="icon-down" />
+              <IconBase slug="icon-chevron-down" size="md" />
             ) : (
-              <IconBase slug="icon-right" />
+              <IconBase slug="icon-chevron-next" size="md" />
             )}
           </span>
           {expanded[key] && (
@@ -64,17 +64,17 @@ const JSONViewer = ({ data }: any) => {
 
   return (
     <div
+      className="no-scrollbar"
       style={{
         overflow: "auto",
-        height: "86vh",
+        height: "500px",
         width: "100%",
-        border: `${style.card.border.hover}`,
-        borderRadius: `${style.card.borderRadius.default}`,
-        padding: "20px",
-        marginLeft: `${style.margin.sm}`,
+
+        // borderRadius: `${style.card.borderRadius.default}`,
+        // padding: "20px",
+        // marginLeft: `${style.margin.sm}`,
       }}
     >
-      <Text>Resultant Data</Text>
       {renderData(data, "root")}
     </div>
   );
