@@ -59,3 +59,14 @@ export const createNewContract = async (data: any) => {
   console.log("form create new contract ", response);
   return response.json();
 };
+
+export const txnByChainId = async (chain_id: any) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}`
+  );
+  const data = await response.json();
+  return data;
+};
+// /indexer/transactions/fetch-by-contract-address/:contract_address
+
+// /indexer/transactions/fetch-by-chain-id/:chain_id
