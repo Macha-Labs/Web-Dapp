@@ -13,7 +13,6 @@ import { fetchTransaction } from "@wagmi/core";
 import { useEffect, useState } from "react";
 import { Heading, useToast } from "@chakra-ui/react";
 import Loader from "@/_ui/loader/Loader";
-import MethodParams from "./MethodParams";
 import JSONViewer from "@/_ui/JSONViewer";
 
 type Props = {
@@ -471,6 +470,8 @@ function TxnDetails({
                 {hexToggle && (
                   <>
                     {/* <Text>asdf</Text> */}
+                    
+                    {console.log("this is methodParams" ,methodParams)}
                     <JSONViewer data={methodParams} />
                   </>
                 )}
