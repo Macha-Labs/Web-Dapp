@@ -59,3 +59,17 @@ export const createNewContract = async (data: any) => {
   console.log("form create new contract ", response);
   return response.json();
 };
+
+export const deleteContract = async (contract_id: any) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/contracts/delete/${contract_id}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log("Deleted Contract", response);
+  return response.json();
+};

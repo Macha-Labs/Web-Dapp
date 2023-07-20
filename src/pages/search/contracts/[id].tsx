@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
-import FlexRow from "@/_ui/flex/FlexRow";
-import { Box, Heading, Table, TableContainer, Tabs, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
-import { style } from "@/styles/StyledConstants";
-import ContractEditModal from "@/components/studio/ContractEditModal";
-import { useRouter } from "next/router";
-import NavBlock from "@/_ui/nav/NavBlock";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
+import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import useTransaction from "@/hooks/studio/useTransaction";
+import InputSearch from "@/_ui/input/InputSearch";
+import Loader from "@/_ui/loader/Loader";
+import NavBlock from "@/_ui/nav/NavBlock";
 import ContractInfoCard from "@/components/studio/ContraceInfoCard";
+import ContractDeleteModal from "@/components/studio/ContractDeleteModal";
+import ContractEditModal from "@/components/studio/ContractEditModal";
 import TxnTable from "@/components/studio/TxnTable";
 import useContract from "@/hooks/studio/useContract";
-import useContractTxn from "@/hooks/studio/useContractTxn";
-import InputSearch from "@/_ui/input/InputSearch";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import Loader from "@/_ui/loader/Loader";
 import useContractCreate from "@/hooks/studio/useContractCreate";
+import useContractTxn from "@/hooks/studio/useContractTxn";
 import useAuthStore from '@/store/useAuthStore';
+import { style } from "@/styles/StyledConstants";
+import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 type Props = {
   metaInfo: any;
@@ -26,11 +26,11 @@ const Contract = () => {
   const $address = useAuthStore((state: any) => state.address);
   const router = useRouter();
   const isReady = router.isReady;
-  const slug = router.query.id
   const hookContractTxn = useContractTxn();
   const hookContract = useContract()
-  const modal = useDisclosure();
-  const hookContractCreate = useContractCreate(modal);
+  const editModal = useDisclosure();
+  const deleteModal = useDisclosure();
+  const hookContractCreate = useContractCreate(editModal);
 
   useEffect(() => {
     if (isReady) {
@@ -84,8 +84,12 @@ const Contract = () => {
           {/* <ButtonNative marginLeft="lg" variant="state_brand" text="Search" marginRight="0px" onClick={() => hookContractTxn.handleFilter(hookContractTxn.searchVal)} /> */}
         </FlexRow>
         <ContractEditModal
-          modal={modal}
+          modal={editModal}
           hookContractCreate={hookContractCreate}
+          hookContract={hookContract}
+        />
+        <ContractDeleteModal
+          modal={deleteModal}
           hookContract={hookContract}
         />
         <Text
@@ -122,14 +126,25 @@ const Contract = () => {
                 <Heading fontSize={style.font.h5} className="m-b-0">
                   {hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract.name}
                 </Heading>
-                {$address && hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract?.admins?.includes($address) && <ButtonNative
-                  size="sm"
-                  text="Edit Contract"
-                  variant="state_brand"
-                  onClick={() => {
-                    modal.onOpen();
-                  }}
-                />}
+                <Box style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
+                  {$address && hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract?.admins?.includes($address) && <ButtonNative
+                    size="sm"
+                    text="Edit Contract"
+                    variant="state_brand"
+                    onClick={() => {
+                      editModal.onOpen();
+                    }}
+                  />}
+                  {$address && hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract?.admins?.includes($address) && <ButtonNative
+                    size="sm"
+                    text="Delete Contract"
+                    variant="state_brand"
+                    marginLeft="md"
+                    onClick={() => {
+                      deleteModal.onOpen();
+                    }}
+                  />}
+                </Box>
               </FlexRow>
               {/* <Tabs
               width="40%"
