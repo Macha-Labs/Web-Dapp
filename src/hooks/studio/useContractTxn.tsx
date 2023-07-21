@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 
 const useContractTxn = () => {
 
-  const [contractTxnDetails, setContractTxnDetails] = useState<any>();
+  const [contractTxnDetails, setContractTxnDetails] = useState<any>([]);
   const [filteredData, setFilteredData] = useState<any>(contractTxnDetails);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchVal,setSearchVal] = useState<any>("");

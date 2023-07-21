@@ -24,6 +24,7 @@ export const commonStyle: any = {
     lg: "1.8rem",
     xl: "2.4rem",
     xxl: "3.2rem",
+    xxxl: "4rem",
     nav: "70px",
     subnav: "60px",
   },
@@ -220,7 +221,7 @@ export const darkStyle = {
       "md": "1.25rem",
       "lg": "1.56rem",
       "xl": "2rem",
-      "2xl": "3.1rempx",
+      "2xl": "3.1rem",
       "3xl": "4.6rem",
       "4xl": "6.25rem",
     },
@@ -255,6 +256,9 @@ export const darkStyle = {
     },
     borderColor: {
       default: "#14244b"
+    },
+    border: {
+      thead: "2px solid #1b2d59",
     },
     Th: {
       borderBottomColor: "#14244b",

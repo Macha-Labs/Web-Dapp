@@ -421,18 +421,17 @@ function TxnDetails({
                               }
                             }
                           >
-                            <Box style={
-                                  {
-                                    paddingTop: `${style.padding["xxs"]}`,
-                                    paddingBottom: `${style.padding["xxs"]}`,
-                                  }
-                                } >
+                            <Box
+                              style={{
+                                paddingTop: `${style.padding["xxs"]}`,
+                                paddingBottom: `${style.padding["xxs"]}`,
+                              }}
+                            >
                               <Image
                                 src={item.src}
                                 alt="icon"
                                 marginBottom={0}
                                 height="1.5rem"
-                                
                               />
                             </Box>
                             <td
@@ -440,7 +439,8 @@ function TxnDetails({
                                 paddingTop: `${style.padding["xxs"]}`,
                                 paddingBottom: `${style.padding["xxs"]}`,
                                 width: "fit-content",
-                                fontWeight: `${style.fontWeight.extraDark}`,
+                                fontWeight: `${style.fontWeight.dark}`,
+                                fontSize: `${style.font.h5}`
                               }}
                             >
                               {item.key}
