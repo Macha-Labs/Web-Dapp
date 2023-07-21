@@ -51,6 +51,7 @@ const ContractList = () => {
                       key={index}
                       // cardView="horizontal"
                       height="8rem"
+                      chainId={item?.contract?.chain_id}
                       address={item?.contract?.address}
                       heading={item?.contract?.name}
                       image={

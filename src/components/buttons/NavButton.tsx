@@ -5,26 +5,27 @@ import { useRouter } from "next/router";
 type Props = {
   marginLeft?: any;
   marginRight?: any;
+  width?: any
 };
 
-const NavButton = ({ marginLeft, marginRight }: Props) => {
+const NavButton = ({ marginLeft, marginRight,width }: Props) => {
   const $address = useAuthStore((state: any) => state.address);
   const router = useRouter();
   const { asPath } = useRouter();
 
   const options = [
     {
-      value: "Data Studio",
-      leftIcon: "icon-dataNetwork",
+      value: "Search",
+      leftIcon: "icon-search24",
       onClick: () => {
         router.push("/");
       },
     },
     {
-      value: "Search",
-      leftIcon: "icon-search24",
+      value: "Data Studio",
+      leftIcon: "icon-dataNetwork",
       onClick: () => {
-        router.push("/search");
+        router.push("/studio/data");
       },
     },
     {
@@ -40,8 +41,9 @@ const NavButton = ({ marginLeft, marginRight }: Props) => {
     <ButtonMenu
       marginLeft={marginLeft}
       marginRight={marginRight}
+      width={width ? width : "100%"}
       text={
-        asPath == "/search"
+        asPath == "/"
           ? "Search"
           : asPath == "/studio/nft"
             ? "NFT Network"

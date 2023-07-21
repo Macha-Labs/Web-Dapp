@@ -8,7 +8,15 @@ import { truncateAddress, truncateString } from "@/helpers";
 import useTransaction from "@/hooks/studio/useTransaction";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
-import { Avatar, Box, Divider, Text, color, useRadio } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Divider,
+  Image,
+  Text,
+  color,
+  useRadio,
+} from "@chakra-ui/react";
 import { fetchTransaction } from "@wagmi/core";
 import { useEffect, useState } from "react";
 import { Heading, useToast } from "@chakra-ui/react";
@@ -207,7 +215,7 @@ function TxnDetails({
                     </tr>
                     <tr>
                       <td style={{ display: "flex", justifyContent: "center" }}>
-                        <IconBase slug="icon-code" />
+                        <IconBase slug="icon-colored-deploy" size="lg" />
                       </td>
                       <td>
                         <FlexRow hrAlign="flex-start">
@@ -418,20 +426,36 @@ function TxnDetails({
                                 paddingTop: `${style.padding["xxs"]}`,
                                 paddingBottom: `${style.padding["xxs"]}`,
                                 width: "fit-content",
-                                background: `-webkit-linear-gradient(
-                              270deg,
-                              rgb(25, 124, 236),
-                              rgb(0, 74, 217)
-                            )`,
-                                WebkitBackgroundClip: "text",
-                                backgroundClip: "text",
-                                color: "transparent",
+                                fontWeight: `${style.fontWeight.dark}`,
+                                fontSize: `${style.font.h5}`,
+                              }}
+                            >
+                              <Box
+                                style={{
+                                  paddingTop: `${style.padding["xxs"]}`,
+                                  paddingBottom: `${style.padding["xxs"]}`,
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Image
+                                  src={item.src}
+                                  alt="icon"
+                                  marginBottom={0}
+                                  height="1.5rem"
+                                  marginRight={2}
+                                />
+                                {item.key}
+                              </Box>
+                            </td>
+                            <td
+                              style={{
+                                color: "grey",
                                 fontWeight: `${style.fontWeight.dark}`,
                               }}
                             >
-                              {item.key}
+                              {truncateString(item.value, 20)}
                             </td>
-                            <td style={{}}>{truncateString(item.value, 20)}</td>
                           </tr>
                         );
                       })}
@@ -470,8 +494,8 @@ function TxnDetails({
                 {hexToggle && (
                   <>
                     {/* <Text>asdf</Text> */}
-                    
-                    {console.log("this is methodParams" ,methodParams)}
+
+                    {console.log("this is methodParams", methodParams)}
                     <JSONViewer data={methodParams} />
                   </>
                 )}

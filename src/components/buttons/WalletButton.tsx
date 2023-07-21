@@ -31,7 +31,8 @@ const WalletButton = () => {
       value: "Register as Publisher",
       leftIcon: "icon-user",
       onClick: () => {
-        hookMachaAuth.registerPublisher();
+        // hookMachaAuth.registerPublisher();
+        
       },
     },
   ];

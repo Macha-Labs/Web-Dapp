@@ -3,66 +3,62 @@ import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 
-const useContractCreate = (modal: any) => {
+const usePublisherCreate = (modal: any) => {
   const contractDataRef = useRef<any>({});
   const toast = useToast();
   const router = useRouter();
   const [formStep, setFormStep] = useState(1);
 
-  const validateSteps = () => {
-    if (formStep == 1) {
-      if (
-        contractDataRef.current["address"]?.value == "" ||
-        contractDataRef.current["address"]?.value == undefined ||
-        contractDataRef.current["chain_id"]?.value == "" ||
-        contractDataRef.current["chain_id"]?.value == undefined
-      ) {
-        return false;
-      } else {
-        return true;
-      }
-    }
-    if (formStep == 2) {
-      if (
-        contractDataRef.current["name"]?.value == "" ||
-        contractDataRef.current["name"]?.value == undefined ||
-        contractDataRef.current["slug"]?.value == "" ||
-        contractDataRef.current["slug"]?.value == undefined ||
-        contractDataRef.current["description"]?.value == "" ||
-        contractDataRef.current["description"]?.value == undefined ||
-        contractDataRef.current["image"]?.value == "" ||
-        contractDataRef.current["image"]?.value == undefined
-      ) {
-        return false;
-      } else {
-        return true;
-      }
-    }
-    if (formStep == 3) {
-      if (
-        contractDataRef.current["interested_events"]?.value == "" ||
-        contractDataRef.current["interested_events"]?.value == undefined ||
-        contractDataRef.current["interested_methods"]?.value == "" ||
-        contractDataRef.current["interested_methods"]?.value == undefined ||
-        contractDataRef.current["admins"]?.value == "" ||
-        contractDataRef.current["admins"]?.value == undefined
-      ) {
-        return false;
-      } else {
-        return true;
-      }
-    }
-  };
+  //   const validateSteps = () => {
+  //     if (formStep == 1) {
+  //       if (
+  //         contractDataRef.current["address"]?.value == "" ||
+  //         contractDataRef.current["address"]?.value == undefined ||
+  //         contractDataRef.current["chain_id"]?.value == "" ||
+  //         contractDataRef.current["chain_id"]?.value == undefined
+  //       ) {
+  //         return false;
+  //       } else {
+  //         return true;
+  //       }
+  //     }
+  //     if (formStep == 2) {
+  //       if (
+  //         contractDataRef.current["name"]?.value == "" ||
+  //         contractDataRef.current["name"]?.value == undefined ||
+  //         contractDataRef.current["slug"]?.value == "" ||
+  //         contractDataRef.current["slug"]?.value == undefined ||
+  //         contractDataRef.current["description"]?.value == "" ||
+  //         contractDataRef.current["description"]?.value == undefined ||
+  //         contractDataRef.current["image"]?.value == "" ||
+  //         contractDataRef.current["image"]?.value == undefined
+  //       ) {
+  //         return false;
+  //       } else {
+  //         return true;
+  //       }
+  //     }
+  //     if (formStep == 3) {
+  //       if (
+  //         contractDataRef.current["interested_events"]?.value == "" ||
+  //         contractDataRef.current["interested_events"]?.value == undefined ||
+  //         contractDataRef.current["interested_methods"]?.value == "" ||
+  //         contractDataRef.current["interested_methods"]?.value == undefined ||
+  //         contractDataRef.current["admins"]?.value == "" ||
+  //         contractDataRef.current["admins"]?.value == undefined
+  //       ) {
+  //         return false;
+  //       } else {
+  //         return true;
+  //       }
+  //     }
+  //   };
 
   const nextFormStep = () => {
-    if (formStep >= 3) {
+    if (formStep >= 6) {
       return;
     } else {
-      if (validateSteps()) {
-        setFormStep((currentStep) => currentStep + 1);
-      } else {
-        return;
-      }
+      setFormStep((currentStep) => currentStep + 1);
     }
   };
 
@@ -231,4 +227,4 @@ const useContractCreate = (modal: any) => {
     prevFormStep: prevFormStep,
   };
 };
-export default useContractCreate;
+export default usePublisherCreate;

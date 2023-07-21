@@ -62,15 +62,15 @@ const SearchResult = () => {
               {truncateAddress(id)}
             </Heading>
             <ButtonNative
-              textFontSize="h5"
-              paddingLeft="sm"
-              paddingRight="sm"
+              textFontSize="h7"
+              size="sm"
               variant="state_brand"
               text="Share"
               marginRight="0px"
               iconRight={{
                 slug: "icon-base-share",
                 style: { marginLeft: "xxs" },
+                size: "xs"
               }}
             />
           </FlexRow>

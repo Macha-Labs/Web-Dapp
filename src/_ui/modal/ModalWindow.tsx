@@ -27,6 +27,7 @@ const ModalWindow = ({
 }: Props) => {
   return (
     <Modal
+      isCentered
       onClose={event?.onClose}
       isOpen={event?.isOpen}
       size={size ? size : "xl"}
@@ -35,12 +36,12 @@ const ModalWindow = ({
       <ModalContent>
         {header && (
           <ModalHeader
-            marginTop="9rem"
-            sx={{
-              "@media screen and (min-width: 1280px)": {
-                marginTop: "20rem",
-              },
-            }}
+          // marginTop="9rem"
+          // sx={{
+          //   "@media screen and (min-width: 1280px)": {
+          //     marginTop: "5rem",
+          //   },
+          // }}
           >
             {header}
           </ModalHeader>

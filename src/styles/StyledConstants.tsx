@@ -10,11 +10,11 @@ export const commonStyle: any = {
     p: "1rem",
   },
   fontWeight: {
-    light:"200",
-    medium:"400",
-    dark:"600",
-    default:"400",
-    extraDark:"800",
+    light: "200",
+    medium: "400",
+    dark: "600",
+    default: "400",
+    extraDark: "800",
   },
   margin: {
     xxs: "0.5rem",
@@ -24,10 +24,12 @@ export const commonStyle: any = {
     lg: "1.8rem",
     xl: "2.4rem",
     xxl: "3.2rem",
+    xxxl: "4rem",
     nav: "70px",
     subnav: "60px",
   },
   padding: {
+    xxxs: "0.25rem",
     xxs: "0.5rem",
     xs: "1rem",
     sm: "1.2rem",
@@ -101,7 +103,7 @@ export const darkStyle = {
       hover: "2px solid rgba(15,23,46,1)",
       meta: "1px solid #197cec",
       mcard: "1px solid #353c54",
-      contract: "1px solid #061133"
+      contract: "1px solid #061133",
     },
     borderRadius: {
       default: "20px",
@@ -118,7 +120,7 @@ export const darkStyle = {
     width: {
       meta: "30%",
     },
-    cursor: { default: "pointer"}
+    cursor: { default: "pointer" },
   },
   pannel: { bg: { default: "" }, shadow: { default: "" } },
   input: {
@@ -134,7 +136,7 @@ export const darkStyle = {
     border: {
       default: "1px solid  #0F172E",
       active: "1px solid rgba(15,23,46,1)",
-      search: "2px solid #0F172E"
+      search: "2px solid #0F172E",
     },
     placeholder: {
       color: "#132041",
@@ -166,10 +168,21 @@ export const darkStyle = {
     },
   },
   modal: {
-    bg: { default: "#020A21" ,overlay: "#00040d", },
-    border: { default: "1px solid #0F172E" },
+    bg: {
+      default: "#020A21",
+      overlay: "#00040d",
+      contractModal: "linear-gradient(147deg, #000B2D 0%, #010510 94.96%)",
+    },
+    border: {
+      default: "1px solid #0F172E",
+      contract: "2px solid #0a1020",
+      hover: "2px solid rgba(15,23,46,1)",
+      meta: "1px solid #197cec",
+      mcard: "1px solid #353c54",
+      // contract: "1px solid #061133",
+    },
     shadow: { default: "" },
-    borderRadius: ".8rem",
+    borderRadius: "1.4rem",
     padding: "2rem",
     margin: "75px auto",
     width: "80%",
@@ -211,17 +224,17 @@ export const darkStyle = {
         "-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)",
     },
     sizes: {
-      default: "20",
-      "3xs": "10",
-      "2xs": "12",
-      xs: "16",
-      sm: "18px",
-      md: "20px",
-      lg: "25px",
-      xl: "35px",
-      "2xl": "50",
-      "3xl": "75",
-      "4xl": "100",
+      default: "1.25rem",
+      "3xs": "0.62rem",
+      "2xs": "0.75rem",
+      xs: "1rem",
+      sm: "1.125rem",
+      md: "1.25rem",
+      lg: "1.56rem",
+      xl: "2rem",
+      "2xl": "3.1rem",
+      "3xl": "4.6rem",
+      "4xl": "6.25rem",
     },
   },
   button: {
@@ -238,7 +251,7 @@ export const darkStyle = {
     margin: { default: "5px" },
     borderRadius: {
       default: "0.5rem",
-      sm: "1rem"
+      sm: "1rem",
     },
   },
   loader: {
@@ -249,11 +262,17 @@ export const darkStyle = {
   },
   table: {
     bg: {
-      default: " linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
-      hover: "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%)"
+      default:
+        " linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
+      hover:
+        "linear-gradient(141.09deg, rgba(10, 19, 51, 0.5) 11.08%, rgba(0, 15, 44, 0.38) 89.68%)",
     },
     borderColor: {
-      default: "#14244b"
+      default: "#14244b",
+    },
+
+    border: {
+      thead: "2px solid #1b2d59",
     },
     Th: {
       borderBottomColor: "#14244b",
@@ -277,9 +296,9 @@ export const darkStyle = {
     },
     cursor: {
       default: "",
-      pointer: "pointer"
-    }
-  }
+      pointer: "pointer",
+    },
+  },
 };
 
 export const style = { ...commonStyle, ...darkStyle };

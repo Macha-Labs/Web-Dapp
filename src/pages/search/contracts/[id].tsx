@@ -5,7 +5,7 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
 import Loader from "@/_ui/loader/Loader";
 import NavBlock from "@/_ui/nav/NavBlock";
-import ContractInfoCard from "@/components/studio/ContraceInfoCard";
+import ContractInfoCard from "@/components/studio/ContractInfoCard";
 import ContractDeleteModal from "@/components/studio/ContractDeleteModal";
 import ContractEditModal from "@/components/studio/ContractEditModal";
 import TxnTable from "@/components/studio/TxnTable";
@@ -35,54 +35,53 @@ const Contract = () => {
   useEffect(() => {
     if (isReady) {
       hookContract._fetch(router.query.id),
-        hookContractTxn._fetch(router.query.id)
+        hookContractTxn._fetch(router.query.id);
     }
-  }, [router.query.id])
-
+  }, [router.query.id]);
 
   const renderComponent = () => {
-
     let options = {
       weekday: "long",
       year: "numeric",
       month: "long",
       day: "numeric",
     };
-    console.log(
-      "contract details",
-      hookContract?.contractDetails
-    );
+    console.log("contract details", hookContract?.contractDetails);
     return (
       <Box paddingTop={style.padding["xxxl"]}>
-        {hookContract.contractDetails && <ContractInfoCard
-          data={{
-            name: hookContract.contractDetails[0]?.contract?.name,
-            image: hookContract.contractDetails[0]?.contract?.image,
-            state: { status: "Live" },
-            address: hookContract.contractDetails[0]?.contract.address,
-            owner: hookContract.contractDetails[0]?.contract.address,
-            description:
-              hookContract.contractDetails[0]?.contract.description,
-            chain_id: hookContract.contractDetails[0]?.contract.chain_id,
-          }}
-        />}
-        <FlexRow hrAlign="flex-start" vrAlign="center" marginTop="xl">
+        {hookContract.contractDetails && (
+          <ContractInfoCard
+            data={{
+              name: hookContract.contractDetails[0]?.contract?.name,
+              image: hookContract.contractDetails[0]?.contract?.image,
+              state: { status: "Live" },
+              address: hookContract.contractDetails[0]?.contract.address,
+              owner: hookContract.contractDetails[0]?.contract.address,
+              description:
+                hookContract.contractDetails[0]?.contract.description,
+              chain_id: hookContract.contractDetails[0]?.contract.chain_id,
+            }}
+          />
+        )}
+        {hookContractTxn?.filteredData[0] && <FlexRow hrAlign="flex-start" vrAlign="center" marginTop="xl">
           <Box width="40%">
             <InputSearch
               width="100%"
               size="lg"
               placeholder="Search Studio"
               icon={{ slug: "icon-search" }}
-              onChange={(e: any) => hookContractTxn.setSearchVal(e.target.value)}
+              onChange={(e: any) =>
+                hookContractTxn.setSearchVal(e.target.value)
+              }
               onKeydown={(e: any) => {
-                if (e.key === 'Enter') {
-                  hookContractTxn.handleFilter(hookContractTxn.searchVal)
+                if (e.key === "Enter") {
+                  hookContractTxn.handleFilter(hookContractTxn.searchVal);
                 }
               }}
             />
           </Box>
           {/* <ButtonNative marginLeft="lg" variant="state_brand" text="Search" marginRight="0px" onClick={() => hookContractTxn.handleFilter(hookContractTxn.searchVal)} /> */}
-        </FlexRow>
+        </FlexRow>}
         <ContractEditModal
           modal={editModal}
           hookContractCreate={hookContractCreate}
@@ -92,22 +91,46 @@ const Contract = () => {
           modal={deleteModal}
           hookContract={hookContract}
         />
-        <Text
+        {hookContractTxn.isLoading ? (
+          <FlexRow height="100px">
+            <Loader size="lg" />
+          </FlexRow>
+        ) : (hookContractTxn?.filteredData[0] ? <>
+          <Text
+            mt={style.margin.xl}
+            mb={0}
+            style={{
+              background: `-webkit-linear-gradient(
+            270deg,
+            rgb(25, 124, 236),
+            rgb(0, 74, 217)
+          )`,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            Transactions in the last 12 hours{" "}
+          </Text>
+          <Box marginTop="1rem" border={style.table.border.thead} borderRadius="20px">
+            <TxnTable txnData={hookContractTxn?.filteredData} />
+          </Box>
+        </> : (<Text
           mt={style.margin.xl}
           mb={0}
           style={{
             background: `-webkit-linear-gradient(
-              270deg,
-              rgb(25, 124, 236),
-              rgb(0, 74, 217)
-            )`,
+            270deg,
+            rgb(25, 124, 236),
+            rgb(0, 74, 217)
+          )`,
             WebkitBackgroundClip: "text",
             backgroundClip: "text",
             color: "transparent",
-          }}>Transactions in the last 12 hours </Text>
-        {hookContractTxn.isLoading ? <FlexRow height="100px">
-          <Loader size="lg" />
-        </FlexRow> : <TxnTable txnData={hookContractTxn?.filteredData} />}
+          }}
+        >
+          No Transactions to Display
+        </Text>))}
       </Box>
     );
   };
@@ -126,7 +149,7 @@ const Contract = () => {
                 <Heading fontSize={style.font.h5} className="m-b-0">
                   {hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract.name}
                 </Heading>
-                <Box style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
+                <Box style={{ display: "flex", flexDirection: "row", justifyContent: "flex-end" }}>
                   {$address && hookContract?.contractDetails && hookContract?.contractDetails[0]?.contract?.admins?.includes($address) && <ButtonNative
                     size="sm"
                     text="Edit Contract"
@@ -156,9 +179,12 @@ const Contract = () => {
             </FlexRow>
           </NavBlock>
           <FlexBody>{renderComponent()}</FlexBody>
-        </>) : <FlexRow height="500px">
-          <Loader size="lg" />
-        </FlexRow>}
+        </>
+        ) : (
+          <FlexRow height="500px">
+            <Loader size="lg" />
+          </FlexRow>
+        )}
       </>
     );
   };

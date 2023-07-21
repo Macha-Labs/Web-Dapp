@@ -73,3 +73,26 @@ export const deleteContract = async (contract_id: any) => {
   console.log("Deleted Contract", response);
   return response.json();
 };
+
+export const txnByChainId = async (chain_id: any,cursor: any) => {
+  let url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}`
+  if(cursor != 1){
+    url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}?cursor=${cursor}`
+  }
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+};
+
+export const txnByUserAddress = async (from_address: any) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/transactions/fetch-by-user-address/${from_address}`
+  );
+  const data = await response.json();
+  return data;
+};
+
+// /indexer/transactions/fetch-by-user-address/:from_address
+
+// /indexer/transactions/fetch-by-chain-id/:chain_id
+
