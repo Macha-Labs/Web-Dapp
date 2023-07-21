@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { transactionData } from "@/service/ApiService";
+import { ethers } from "ethers";
 
 const useTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
@@ -28,7 +29,7 @@ const useTransaction = () => {
         },
         {
           key: "Gas Price	",
-          value: res.data[0].transaction.gas_price,
+          value: parseInt(res.data[0].transaction.gas_price,16),
           src: "https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-gas-price.svg?updatedAt=1689916350473",
         },
         {

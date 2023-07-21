@@ -5,9 +5,10 @@ import { useRouter } from "next/router";
 type Props = {
   marginLeft?: any;
   marginRight?: any;
+  width?: any
 };
 
-const NavButton = ({ marginLeft, marginRight }: Props) => {
+const NavButton = ({ marginLeft, marginRight,width }: Props) => {
   const $address = useAuthStore((state: any) => state.address);
   const router = useRouter();
   const { asPath } = useRouter();
@@ -40,6 +41,7 @@ const NavButton = ({ marginLeft, marginRight }: Props) => {
     <ButtonMenu
       marginLeft={marginLeft}
       marginRight={marginRight}
+      width={width ? width : "100%"}
       text={
         asPath == "/"
           ? "Search"

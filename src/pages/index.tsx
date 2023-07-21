@@ -12,6 +12,7 @@ import useMachaSearch from "@/hooks/studio/useMachaSearch";
 import useAuthStore from "@/store/useAuthStore";
 import useMetaStore from "@/store/useMetaStore";
 import { style } from "@/styles/StyledConstants";
+import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const Search = () => {
@@ -31,12 +32,17 @@ const Search = () => {
     return (
       <NavTop
         rightElem={
-          <FlexRow width="fit-content">
-            <NavButton
-              marginRight={style.margin["sm"]}
-              marginLeft={style.margin["sm"]}
-            />
-            {$address ? <WalletButton /> : <ConnectWalletButton />}
+          <FlexRow hrAlign="flex-end">
+            {$address && (
+              <NavButton
+                marginRight={style.margin["xxs"]}
+                marginLeft={style.margin["xxs"]}
+                width="fit-content"
+              />
+            )}
+            <Box>
+            <ConnectWalletButton />
+            </Box>
           </FlexRow>
         }
       />
