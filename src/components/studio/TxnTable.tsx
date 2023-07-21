@@ -31,7 +31,7 @@ const TxnTable = ({ txnData }: Prop) => {
             <>
               <Th
                 style={{
-                  textAlign: "center",
+                  textAlign: "left",
                   fontSize: "1rem",
                   paddingTop: "2rem",
                   paddingBottom: "2rem",
@@ -42,7 +42,7 @@ const TxnTable = ({ txnData }: Prop) => {
               </Th>
               <Th
                 style={{
-                  textAlign: "center",
+                  textAlign: "left",
                   fontSize: "1rem",
                   paddingTop: "2rem",
                   paddingBottom: "2rem",
@@ -53,7 +53,7 @@ const TxnTable = ({ txnData }: Prop) => {
               </Th>
               <Th
                 style={{
-                  textAlign: "center",
+                  textAlign: "left",
                   fontSize: "1rem",
                   paddingTop: "2rem",
                   paddingBottom: "2rem",
@@ -64,7 +64,7 @@ const TxnTable = ({ txnData }: Prop) => {
               </Th>
               <Th
                 style={{
-                  textAlign: "center",
+                  textAlign: "left",
                   fontSize: "1rem",
                   paddingTop: "2rem",
                   paddingBottom: "2rem",
@@ -75,7 +75,7 @@ const TxnTable = ({ txnData }: Prop) => {
               </Th>
               <Th
                 style={{
-                  textAlign: "center",
+                  textAlign: "left",
                   fontSize: "1rem",
                   paddingTop: "2rem",
                   paddingBottom: "2rem",
@@ -100,13 +100,14 @@ const TxnTable = ({ txnData }: Prop) => {
             return (
               <>
                 <Td
+                  _hover={{ textDecoration: "underline" }}
                   cursor={style.table.cursor.pointer}
                   onClick={() => {
                     router.push(
                       `/search/transaction/${item.transaction.txn_hash}`
                     );
                   }}
-                  style={{ textAlign: "center" }}
+                  style={{ textAlign: "left" }}
                 >
                   {truncateAddress(item?.transaction?.txn_hash)}
                 </Td>
@@ -136,7 +137,17 @@ const TxnTable = ({ txnData }: Prop) => {
                       size="xxs"
                       src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
                     />
-                    <Text paddingLeft={2} marginBottom={0}>
+                    <Text
+                      paddingLeft={2}
+                      marginBottom={0}
+                      _hover={{ textDecoration: "underline" }}
+                      cursor={style.table.cursor.pointer}
+                      onClick={() => {
+                        router.push(
+                          `/search/accounts/${item.transaction.from}`
+                        );
+                      }}
+                    >
                       {truncateAddress(item?.transaction?.from)}
                     </Text>
                   </Flex>
@@ -147,7 +158,15 @@ const TxnTable = ({ txnData }: Prop) => {
                       size="xxs"
                       src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
                     />
-                    <Text paddingLeft={2} marginBottom={0}>
+                    <Text
+                      paddingLeft={2}
+                      marginBottom={0}
+                      _hover={{ textDecoration: "underline" }}
+                      cursor={style.table.cursor.pointer}
+                      onClick={() => {
+                        router.push(`/search/accounts/${item.transaction.to}`);
+                      }}
+                    >
                       {truncateAddress(item?.transaction?.to)}
                     </Text>
                   </Flex>

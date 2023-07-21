@@ -14,17 +14,17 @@ const NavButton = ({ marginLeft, marginRight }: Props) => {
 
   const options = [
     {
-      value: "Data Studio",
-      leftIcon: "icon-dataNetwork",
+      value: "Search",
+      leftIcon: "icon-search24",
       onClick: () => {
         router.push("/");
       },
     },
     {
-      value: "Search",
-      leftIcon: "icon-search24",
+      value: "Data Studio",
+      leftIcon: "icon-dataNetwork",
       onClick: () => {
-        router.push("/search");
+        router.push("/studio/data");
       },
     },
     {
@@ -41,7 +41,7 @@ const NavButton = ({ marginLeft, marginRight }: Props) => {
       marginLeft={marginLeft}
       marginRight={marginRight}
       text={
-        asPath == "/search"
+        asPath == "/"
           ? "Search"
           : asPath == "/studio/nft"
             ? "NFT Network"

@@ -14,6 +14,7 @@ import TagNative from "@/_ui/tag/TagNative";
 import InteractionTable from "@/components/studio/InteractionTable";
 import useChainTxn from "@/hooks/studio/useChainTxn";
 import TxnTable from "@/components/studio/TxnTable";
+import Loader from "@/_ui/loader/Loader";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -156,17 +157,26 @@ const Network = () => {
                   <Tab>About</Tab>
                 </TabList>
                 <TabPanels>
-                  <TabPanel>
-                    <Box
-                      marginTop="1rem"
-                      border="1px solid #14244b"
-                      borderRadius="20px"
-                    >
-                      {/* Content for Tab 1 */}
-
-                      <TxnTable txnData={hookChainTxn?.filteredData} />
-                    </Box>
-                  </TabPanel>
+                  {hookChainTxn.isLoading ? (
+                    <FlexRow height="100px">
+                      <Loader size="lg" />
+                    </FlexRow>
+                  ) : (
+                    hookChainTxn?.filteredData[0] && (
+                      <TabPanel>
+                        <Box
+                          marginTop="1rem"
+                          border="1px solid #14244b"
+                          borderRadius="20px"
+                        >
+                          {/* Content for Tab 1 */}
+                          {hookChainTxn?.filteredData[0] && (
+                            <TxnTable txnData={hookChainTxn?.filteredData} />
+                          )}
+                        </Box>
+                      </TabPanel>
+                    )
+                  )}
                   <TabPanel></TabPanel>
                   <TabPanel>
                     <Flex>

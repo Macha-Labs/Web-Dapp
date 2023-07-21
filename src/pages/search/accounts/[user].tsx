@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import useUserTxn from "@/hooks/studio/useUserTxn";
 import FlexBody from "@/_ui/flex/FlexBody";
 import TxnTable from "@/components/studio/TxnTable";
+import Loader from "@/_ui/loader/Loader";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -144,17 +145,25 @@ const Network = () => {
                   <Tab>About</Tab>
                 </TabList>
                 <TabPanels>
-                  <TabPanel>
-                    <Box
-                      marginTop="1rem"
-                      border="1px solid #14244b"
-                      borderRadius="20px"
-                    >
-                      {/* Content for Tab 1 */}
+                  {hookUserTxn.isLoading ? (
+                    <FlexRow height="100px">
+                      <Loader size="lg" />
+                    </FlexRow>
+                  ) : (
+                    hookUserTxn?.filteredData[0] && (
+                      <TabPanel>
+                        <Box
+                          marginTop="1rem"
+                          border="1px solid #14244b"
+                          borderRadius="20px"
+                        >
+                          {/* Content for Tab 1 */}
 
-                      <TxnTable txnData={hookUserTxn?.filteredData} />
-                    </Box>
-                  </TabPanel>
+                          <TxnTable txnData={hookUserTxn?.filteredData} />
+                        </Box>
+                      </TabPanel>
+                    )
+                  )}
                   <TabPanel></TabPanel>
                   <TabPanel>
                     <Flex>

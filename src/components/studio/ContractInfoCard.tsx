@@ -6,7 +6,8 @@ import TagNative from "@/_ui/tag/TagNative";
 import chains from "@/data/network";
 import { truncateAddress } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
-import { Divider, Image, Text, useToast } from "@chakra-ui/react";
+import { Box, Divider, Image, Text, useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 type Props = {
   data?: any;
@@ -15,6 +16,8 @@ type Props = {
 function ContractInfoCard({ data }: Props) {
   console.log("metadata", data);
   const toast = useToast();
+  const router = useRouter();
+
   return (
     <CardNative>
       <FlexRow width="100%">
@@ -111,10 +114,12 @@ function ContractInfoCard({ data }: Props) {
               <Text fontWeight={700} className="m-b-0-5">
                 Chain
               </Text>
-              <FlexRow vrAlign="center" hrAlign="flex-start">
-                <Text className="m-b-0">{chains[data?.chain_id].chainName}</Text>
-                <IconBase slug={chains[data?.chain_id].chainImage} style={{ marginLeft: "xxs" }} size="md" />
-              </FlexRow>
+              <Box onClick={() => router.push(`/search/network/${data?.chain_id}`)} cursor="pointer" _hover={{textDecoration: "underline"}}>
+                <FlexRow vrAlign="center" hrAlign="flex-start">
+                  <Text className="m-b-0">{chains[data?.chain_id].chainName}</Text>
+                  <IconBase slug={chains[data?.chain_id].chainImage} style={{ marginLeft: "xxs" }} size="md" />
+                </FlexRow>
+              </Box>
             </FlexColumn>
           </FlexRow>
         </FlexColumn>
