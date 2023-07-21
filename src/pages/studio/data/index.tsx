@@ -12,6 +12,7 @@ import WalletButton from "@/components/buttons/WalletButton";
 import ApiList from "@/components/studio/ApiList";
 import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import ContractList from "@/components/studio/ContractList";
+import CreatePublisherModal from "@/components/studio/PublisherModal";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
@@ -29,8 +30,9 @@ const DashBoard = () => {
 
     setExploreMeta(allMetas.data);
   };
-  const modal = useDisclosure();
-  const hookContractCreate = useContractCreate(modal);
+  const contractModal = useDisclosure();
+
+  const hookContractCreate = useContractCreate(contractModal);
 
   useEffect(() => {
     fetchmetas();
@@ -86,7 +88,7 @@ const DashBoard = () => {
                 paddingLeft="sm"
                 paddingRight="sm"
                 onClick={() => {
-                  modal.onOpen();
+                  contractModal.onOpen();
                 }}
               />
             )}
@@ -100,7 +102,7 @@ const DashBoard = () => {
           </Box>
         </FlexBody>
         <ContractCreateModal
-          modal={modal}
+          modal={contractModal}
           hookContractCreate={hookContractCreate}
         />
       </>

@@ -1,6 +1,6 @@
 import IconBase from "@/_ui/icons/IconsBase";
 import TableNative from "@/_ui/table/TableNative";
-import { truncateAddress } from "@/helpers";
+import { truncateAddress, truncateString } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
 import {
   Avatar,
@@ -107,12 +107,22 @@ const TxnTable = ({ txnData }: Prop) => {
                       `/search/transaction/${item.transaction.txn_hash}`
                     );
                   }}
-                  style={{ textAlign: "center"}}
+                  style={{
+                    textAlign: "center",
+                    paddingTop: `${style.padding.lg}`,
+                    paddingBottom: `${style.padding.lg}`,
+                  }}
                 >
                   {truncateAddress(item?.transaction?.txn_hash)}
                 </Td>
                 <Td style={{ textAlign: "center" }}>
-                  <Box style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                  <Box
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                    }}
+                  >
                     <Image
                       src="https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-successful.svg?updatedAt=1689916345779"
                       alt=""
@@ -124,45 +134,85 @@ const TxnTable = ({ txnData }: Prop) => {
                   </Box>
                 </Td>
                 <Td style={{ textAlign: "center" }}>
-                  <Box style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                    <Box style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "50%", alignItems:"center"}}>
-                      <IconBase slug="icon-colored-deploy" style={{ paddingLeft: "sm" }} />
-                      <Text paddingLeft={2} marginBottom={0} width="80%" textAlign="center">
-                        {item?.transaction?.method_name}
+                  <Box
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Box
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        width: "50%",
+                        alignItems: "center",
+                      }}
+                    >
+                      <IconBase
+                        slug="icon-colored-deploy"
+                        style={{ paddingLeft: "sm" }}
+                      />
+                      <Text
+                        paddingLeft={2}
+                        marginBottom={0}
+                        width="80%"
+                        textAlign="center"
+                      >
+                        {truncateString(item?.transaction?.method_name, 20)}
                       </Text>
                     </Box>
                   </Box>
                 </Td>
                 <Td style={{ textAlign: "center" }}>
-                  <Box style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                  <Box
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                    }}
+                  >
                     <Avatar
                       size="xxs"
                       src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
                     />
-                    <Text paddingLeft={2} marginBottom={0} _hover={{ textDecoration: "underline" }}
+                    <Text
+                      paddingLeft={2}
+                      marginBottom={0}
+                      _hover={{ textDecoration: "underline" }}
                       cursor={style.table.cursor.pointer}
                       onClick={() => {
                         router.push(
                           `/search/accounts/${item.transaction.from}`
                         );
-                      }}>
+                      }}
+                    >
                       {truncateAddress(item?.transaction?.from)}
                     </Text>
                   </Box>
                 </Td>
                 <Td style={{ textAlign: "center" }}>
-                  <Box style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                  <Box
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                    }}
+                  >
                     <Avatar
                       size="xxs"
                       src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
                     />
-                    <Text paddingLeft={2} marginBottom={0} _hover={{ textDecoration: "underline" }}
+                    <Text
+                      paddingLeft={2}
+                      marginBottom={0}
+                      _hover={{ textDecoration: "underline" }}
                       cursor={style.table.cursor.pointer}
                       onClick={() => {
-                        router.push(
-                          `/search/accounts/${item.transaction.to}`
-                        );
-                      }}>
+                        router.push(`/search/accounts/${item.transaction.to}`);
+                      }}
+                    >
                       {truncateAddress(item?.transaction?.to)}
                     </Text>
                   </Box>

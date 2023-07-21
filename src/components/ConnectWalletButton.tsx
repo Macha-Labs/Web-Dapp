@@ -13,13 +13,18 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import CreatePublisherModal from "./studio/PublisherModal";
+import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
 
 export const ConnectWalletButton = (props: any) => {
+  const publisherModal = useDisclosure();
   const $address = useAuthStore((state: any) => state.address);
   const $loadAddress = useAuthStore((state: any) => state.loadAddress);
   const hookMachaAuth = useMachaAuth();
+  const hookPublisherCreate = usePublisherCreate(publisherModal);
   // console.log("mobile device detection", window.navigator.userAgent);
   return (
     <ConnectButton.Custom>
@@ -191,7 +196,7 @@ export const ConnectWalletButton = (props: any) => {
                       </MenuItem>
                       <MenuItem
                         onClick={() => {
-                          hookMachaAuth.registerPublisher();
+                          publisherModal.onOpen();
                         }}
                       >
                         <FlexRow hrAlign="space-between">
@@ -200,11 +205,18 @@ export const ConnectWalletButton = (props: any) => {
                             hrAlign="flex-start"
                             width="90%"
                             marginLeft={"sm"}
+                            
                           >
                             {"Register as Publisher"}
+                            
                           </FlexRow>
+
                         </FlexRow>
                       </MenuItem>
+                      <CreatePublisherModal
+                              modal={publisherModal}
+                              hookPublisherCreate={hookPublisherCreate}
+                            />
                     </MenuList>
                   </Menu>
                 </div>

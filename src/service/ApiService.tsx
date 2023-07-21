@@ -95,3 +95,4 @@ export const txnByUserAddress = async (from_address: any) => {
 // /indexer/transactions/fetch-by-user-address/:from_address
 
 // /indexer/transactions/fetch-by-chain-id/:chain_id
+
