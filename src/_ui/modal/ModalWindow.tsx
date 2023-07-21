@@ -36,12 +36,12 @@ const ModalWindow = ({
       <ModalContent>
         {header && (
           <ModalHeader
-            // marginTop="9rem"
-            // sx={{
-            //   "@media screen and (min-width: 1280px)": {
-            //     marginTop: "5rem",
-            //   },
-            // }}
+          // marginTop="9rem"
+          // sx={{
+          //   "@media screen and (min-width: 1280px)": {
+          //     marginTop: "5rem",
+          //   },
+          // }}
           >
             {header}
           </ModalHeader>

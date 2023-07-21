@@ -30,24 +30,29 @@ const theme = extendTheme({
       },
       ".chakra-modal__content": {
         // borderLeft: `${style.modal.border.default} !important`,
-        background: `${style.modal.bg.overlay} !important`,
+        background: `${style.modal.bg.contractModal} !important`,
+        borderRadius: `${style.modal.borderRadius}!important`,
+        border: `${style.modal.border.contract}!important`,
       },
       ".chakra-modal__body": {
-        background: `${style.modal.bg.default}`,
+        // background: `${style.modal.bg.contractModal}`,
         paddingTop: "1rem !importannt",
       },
       ".chakra-modal__header": {
-        background: `${style.modal.bg.default}`,
+        // background: `${style.modal.bg.contractModal}`,
         borderBottom: `${style.modal.border.default} !important`,
       },
       ".chakra-modal__footer": {
-        background: `${style.modal.bg.default}`,
+        // background: `${style.modal.bg.contractModal}`,
         borderTop: `${style.modal.border.default} !important`,
       },
       ".chakra-modal__overlay": {
         opacity: "0.9 !important",
         background: `${style.modal.bg.overlay} !important`,
       },
+      // ".chakra-modal__content": {
+      //   background: `${style.modal.bg.contractModal}!important`,
+      // },
       ".css-wl0d9u ": {
         // backgroundImage: `url("/assets/invitebg.png")`,
         backgroundRepeat: "no-repeat",
