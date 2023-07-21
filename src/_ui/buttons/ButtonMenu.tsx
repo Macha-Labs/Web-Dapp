@@ -25,6 +25,7 @@ type Props = {
   rightIcon?: string;
   marginLeft?: string;
   marginRight?: string;
+  width?: string;
 };
 
 const ButtonMenu = ({
@@ -40,9 +41,10 @@ const ButtonMenu = ({
   rightIcon,
   marginLeft,
   marginRight,
+  width
 }: Props) => {
   return (
-    <div style={{ marginLeft: `${marginLeft}`, marginRight: `${marginRight}`,width: "100%" }}>
+    <div style={{ marginLeft: `${marginLeft}`, marginRight: `${marginRight}`,width: `${width ? width : "100%"}` }}>
       <Menu>
         <MenuButton
           variant={"state_default_hover"}

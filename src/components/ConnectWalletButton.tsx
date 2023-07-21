@@ -183,7 +183,7 @@ export const ConnectWalletButton = (props: any) => {
                           <FlexRow
                             hrAlign="flex-start"
                             width="90%"
-                            marginLeft={"lg"}
+                            marginLeft={"sm"}
                           >
                             {"Disconnect Wallet"}
                           </FlexRow>
