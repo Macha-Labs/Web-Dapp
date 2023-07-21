@@ -39,7 +39,6 @@ const CardNative = ({
         border: `${border ? border : style.card.border.default}`,
         background: ` ${bg ? bg : style.card.bg.overview}`,
         boxShadow: ` ${style.card.shadow.default} `,
-        cursor: "pointer",
         margin: margin ? style?.margin[margin] : "0rem",
         marginLeft: `${style.margin[marginLeft]}`,
         marginRight: `${style.margin[marginRight]}`,

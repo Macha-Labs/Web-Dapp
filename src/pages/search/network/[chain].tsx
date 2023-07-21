@@ -13,6 +13,8 @@ import NavBlock from "@/_ui/nav/NavBlock";
 import TagNative from "@/_ui/tag/TagNative";
 import InteractionTable from "@/components/studio/InteractionTable";
 import useChainTxn from "@/hooks/studio/useChainTxn";
+import TxnTable from "@/components/studio/TxnTable";
+import Loader from "@/_ui/loader/Loader";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -23,8 +25,6 @@ const Network = () => {
   const handleTabChange = (index: any) => {
     setActiveTab(index);
   };
-
-
 
   useEffect(() => {
     if (isReady) {
@@ -157,16 +157,21 @@ const Network = () => {
                   <Tab>About</Tab>
                 </TabList>
                 <TabPanels>
-                  <TabPanel>
-                    <Box p={4}>
-                      {/* Content for Tab 1 */}
-                      This is the content of Tab 1.
-                      {/* <TxnTable txnData={hookContractTxn?.filteredData} /> */}
-                      <InteractionTable
-                        txnData={hookChainTxn?.filteredData}
-                      />
-                    </Box>
-                  </TabPanel>
+                  {hookChainTxn.isLoading ? (
+                    <FlexRow height="100px">
+                      <Loader size="lg" />
+                    </FlexRow>
+                  ) :
+                    (hookChainTxn?.filteredData[0] && <TabPanel>
+                      <Box
+                        marginTop="1rem"
+                        border="1px solid #14244b"
+                        borderRadius="20px"
+                      >
+                        {/* Content for Tab 1 */}
+                        {hookChainTxn?.filteredData[0] && <TxnTable txnData={hookChainTxn?.filteredData} />}
+                      </Box>
+                    </TabPanel>)}
                   <TabPanel></TabPanel>
                   <TabPanel>
                     <Flex>
@@ -248,7 +253,7 @@ const Network = () => {
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-              //   marginLeft={style.margin.xxs}
+            //   marginLeft={style.margin.xxs}
             >
               Ethereum
             </Text>
