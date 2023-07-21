@@ -139,6 +139,8 @@ const GlobalIcons: any = {
     "/icons/svg/Base-blue/base-blue-deploy.svg?updatedAt=1686831739162",
   "icon-rocket":
     "/icons/svg/Base-blue/base-blue-rocket.svg?updatedAt=1686739684462",
+  "icon-colored-deploy":
+    "/icons/svg/miscellaneous_icons/coloured-deploy.svg?updatedAt=1689916345670",
   "logo-Lens": "/Studio-Logos/lens.svg?updatedAt=1686740026746",
   "logo-Macha": "/Studio-Logos/metawork.svg?updatedAt=1686740613025",
   "logo-Farcaster": "/Studio-Logos/farcaster.svg?updatedAt=1686740612210",

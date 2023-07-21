@@ -215,7 +215,7 @@ function TxnDetails({
                     </tr>
                     <tr>
                       <td style={{ display: "flex", justifyContent: "center" }}>
-                        <IconBase slug="icon-code" />
+                        <IconBase slug="icon-colored-deploy" size="lg" />
                       </td>
                       <td>
                         <FlexRow hrAlign="flex-start">
@@ -421,19 +421,6 @@ function TxnDetails({
                               }
                             }
                           >
-                            <Box
-                              style={{
-                                paddingTop: `${style.padding["xxs"]}`,
-                                paddingBottom: `${style.padding["xxs"]}`,
-                              }}
-                            >
-                              <Image
-                                src={item.src}
-                                alt="icon"
-                                marginBottom={0}
-                                height="1.5rem"
-                              />
-                            </Box>
                             <td
                               style={{
                                 paddingTop: `${style.padding["xxs"]}`,
@@ -443,7 +430,23 @@ function TxnDetails({
                                 fontSize: `${style.font.h5}`,
                               }}
                             >
-                              {item.key}
+                              <Box
+                                style={{
+                                  paddingTop: `${style.padding["xxs"]}`,
+                                  paddingBottom: `${style.padding["xxs"]}`,
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Image
+                                  src={item.src}
+                                  alt="icon"
+                                  marginBottom={0}
+                                  height="1.5rem"
+                                  marginRight={2}
+                                />
+                                {item.key}
+                              </Box>
                             </td>
                             <td
                               style={{

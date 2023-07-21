@@ -16,13 +16,9 @@ const TableNative = ({ data, tbodyChildren, theadChildren }: Prop) => {
         width="100%"
         // rounded={"md"}
       >
-        <Table style={{ marginTop: style.margin["sm"] }} variant="unstyled" colorScheme="whiteAlpha" size="md">
-          <Thead>
+        <Table style={{ overflow: "hidden"}} variant="unstyled" colorScheme="whiteAlpha" size="md">
+          <Thead borderBottom={style.table.border.thead}>
             <Tr
-              css={{
-                // background: style.table.bg.default,
-                borderColor: style.table.borderColor.default,
-              }}
             >
               {theadChildren}
             </Tr>
@@ -36,10 +32,6 @@ const TableNative = ({ data, tbodyChildren, theadChildren }: Prop) => {
                     background: `${style.table.bg.hover}`
                   }}
                   key={item._id}
-                  style={{
-                    borderBottom: `${style.card.border.default}`,
-                    // width: "100%",
-                  }}
                 >
                   {tbodyChildren(item)}
                 </Tr>

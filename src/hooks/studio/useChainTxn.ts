@@ -6,16 +6,17 @@ const useChainTxn = () => {
   const [chainTxnDetails, setChainTxnDetails] = useState<any>();
   const [filteredData, setFilteredData] = useState<any>(chainTxnDetails);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [searchVal,setSearchVal] = useState<any>("");
-
-  
+  const [searchVal, setSearchVal] = useState<any>("");
+  const [cursor, setCursor] = useState<any>("1");
 
   const _fetch = async (chain_id: any) => {
-    txnByChainId(chain_id).then((res: any) => {
+    setIsLoading(true)
+    txnByChainId(chain_id, cursor).then((res: any) => {
       console.log("chain txn fetching", res);
       setIsLoading(false)
       setChainTxnDetails(res.data);
       setFilteredData(res.data);
+      setCursor(res.cursor)
     });
   };
 

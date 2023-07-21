@@ -13,6 +13,7 @@ import ApiCreateModal from "@/components/studio/ApiCreateModal";
 import ApiList from "@/components/studio/ApiList";
 import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import ContractList from "@/components/studio/ContractList";
+import CreatePublisherModal from "@/components/studio/PublisherModal";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
