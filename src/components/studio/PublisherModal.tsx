@@ -56,6 +56,15 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 <ButtonNative
                   variant="state_brand"
                   marginTop={style.margin["lg"]}
+                  onClick={hookPublisherCreate.nextFormStep}
+                >
+                  Next
+                </ButtonNative>
+              )}
+              {hookPublisherCreate.formStep == 4 && (
+                <ButtonNative
+                  variant="state_brand"
+                  marginTop={style.margin["lg"]}
                   onClick={async (e: any) => {
                     e.preventDefault();
                     await hookPublisherCreate.publishContract();
@@ -108,7 +117,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
 
             {hookPublisherCreate.formStep == 1 && (
               <>
-                <Box paddingTop={style.padding.xl} paddingBottom={style.padding.xl}>
+                <Box
+                  paddingTop={style.padding.xl}
+                  paddingBottom={style.padding.xl}
+                >
                   <Image
                     src="https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-Txn%20Hash.svg?updatedAt=1689916345026"
                     alt="txn-icon"
@@ -116,7 +128,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   />
                 </Box>
                 <Box>
-                  <Text style={{ fontWeight: `${style.fontWeight.dark}`, fontSize: `${style.font.h4}` }}>
+                  <Text
+                    style={{
+                      fontWeight: `${style.fontWeight.dark}`,
+                      fontSize: `${style.font.h4}`,
+                    }}
+                  >
                     Welcome to Publisher
                   </Text>
                 </Box>
@@ -131,63 +148,66 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
               </>
             )}
             {hookPublisherCreate.formStep == 2 && (
-            //   <>
-            //     <Box
-            //       style={{
-            //         width: "100%",
-            //         display: "flex",
-            //         flexDirection: "row",
-            //         justifyContent: "space-between",
-            //         alignItems: "center",
-            //       }}
-            //     >
-            //       <Box width="47%">
-            //         <InputLabel
-            //           elementRef={(element: any) =>
-            //             (hookPublisherCreate.contractDataRef.current["name"] =
-            //               element)
-            //           }
-            //           inputType="text"
-            //           labelText="Contract Name *"
-            //           placeholder="Name"
-            //         />
-            //       </Box>
-            //       <Box width="47%">
-            //         <InputLabel
-            //           elementRef={(element: any) =>
-            //             (hookPublisherCreate.contractDataRef.current["slug"] =
-            //               element)
-            //           }
-            //           inputType="text"
-            //           labelText="Slug *"
-            //           placeholder="Slug"
-            //         />
-            //       </Box>
-            //     </Box>
-            //     <InputLabel
-            //       elementRef={(element: any) =>
-            //         (hookPublisherCreate.contractDataRef.current[
-            //           "description"
-            //         ] = element)
-            //       }
-            //       inputType="text"
-            //       labelText="Description *"
-            //       placeholder="Description"
-            //       marginTop="sm"
-            //     />
-            //     <InputLabel
-            //       elementRef={(element: any) =>
-            //         (hookPublisherCreate.contractDataRef.current["image"] =
-            //           element)
-            //       }
-            //       inputType="text"
-            //       labelText="Image *"
-            //       placeholder="Image"
-            //       marginTop="sm"
-            //     />
-            //   </>
-            <>
-                <Box paddingTop={style.padding.xl} paddingBottom={style.padding.xl}>
+              //   <>
+              //     <Box
+              //       style={{
+              //         width: "100%",
+              //         display: "flex",
+              //         flexDirection: "row",
+              //         justifyContent: "space-between",
+              //         alignItems: "center",
+              //       }}
+              //     >
+              //       <Box width="47%">
+              //         <InputLabel
+              //           elementRef={(element: any) =>
+              //             (hookPublisherCreate.contractDataRef.current["name"] =
+              //               element)
+              //           }
+              //           inputType="text"
+              //           labelText="Contract Name *"
+              //           placeholder="Name"
+              //         />
+              //       </Box>
+              //       <Box width="47%">
+              //         <InputLabel
+              //           elementRef={(element: any) =>
+              //             (hookPublisherCreate.contractDataRef.current["slug"] =
+              //               element)
+              //           }
+              //           inputType="text"
+              //           labelText="Slug *"
+              //           placeholder="Slug"
+              //         />
+              //       </Box>
+              //     </Box>
+              //     <InputLabel
+              //       elementRef={(element: any) =>
+              //         (hookPublisherCreate.contractDataRef.current[
+              //           "description"
+              //         ] = element)
+              //       }
+              //       inputType="text"
+              //       labelText="Description *"
+              //       placeholder="Description"
+              //       marginTop="sm"
+              //     />
+              //     <InputLabel
+              //       elementRef={(element: any) =>
+              //         (hookPublisherCreate.contractDataRef.current["image"] =
+              //           element)
+              //       }
+              //       inputType="text"
+              //       labelText="Image *"
+              //       placeholder="Image"
+              //       marginTop="sm"
+              //     />
+              //   </>
+              <>
+                <Box
+                  paddingTop={style.padding.xl}
+                  paddingBottom={style.padding.xl}
+                >
                   <Image
                     src="https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-Txn%20Hash.svg?updatedAt=1689916345026"
                     alt="txn-icon"
@@ -195,7 +215,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   />
                 </Box>
                 <Box>
-                  <Text style={{ fontWeight: `${style.fontWeight.dark}`, fontSize: `${style.font.h4}` }}>
+                  <Text
+                    style={{
+                      fontWeight: `${style.fontWeight.dark}`,
+                      fontSize: `${style.font.h4}`,
+                    }}
+                  >
                     Welcome to 2nd Slide
                   </Text>
                 </Box>
@@ -211,42 +236,45 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
             )}
 
             {hookPublisherCreate.formStep == 3 && (
-            //   <>
-            //     <InputLabel
-            //       elementRef={(element: any) =>
-            //         (hookPublisherCreate.contractDataRef.current[
-            //           "interested_methods"
-            //         ] = element)
-            //       }
-            //       inputType="text"
-            //       labelText="Interested Methods *"
-            //       placeholder="Interested Methods"
-            //       marginTop="sm"
-            //     />
-            //     <InputLabel
-            //       elementRef={(element: any) =>
-            //         (hookPublisherCreate.contractDataRef.current[
-            //           "interested_events"
-            //         ] = element)
-            //       }
-            //       inputType="text"
-            //       labelText="Interested Events *"
-            //       placeholder="Interested Events"
-            //       marginTop="sm"
-            //     />
-            //     <InputLabel
-            //       elementRef={(element: any) =>
-            //         (hookPublisherCreate.contractDataRef.current["admins"] =
-            //           element)
-            //       }
-            //       inputType="text"
-            //       labelText="Admins *"
-            //       placeholder="Admins"
-            //       marginTop="sm"
-            //     />
-            //   </>
-            <>
-                <Box paddingTop={style.padding.xl} paddingBottom={style.padding.xl}>
+              //   <>
+              //     <InputLabel
+              //       elementRef={(element: any) =>
+              //         (hookPublisherCreate.contractDataRef.current[
+              //           "interested_methods"
+              //         ] = element)
+              //       }
+              //       inputType="text"
+              //       labelText="Interested Methods *"
+              //       placeholder="Interested Methods"
+              //       marginTop="sm"
+              //     />
+              //     <InputLabel
+              //       elementRef={(element: any) =>
+              //         (hookPublisherCreate.contractDataRef.current[
+              //           "interested_events"
+              //         ] = element)
+              //       }
+              //       inputType="text"
+              //       labelText="Interested Events *"
+              //       placeholder="Interested Events"
+              //       marginTop="sm"
+              //     />
+              //     <InputLabel
+              //       elementRef={(element: any) =>
+              //         (hookPublisherCreate.contractDataRef.current["admins"] =
+              //           element)
+              //       }
+              //       inputType="text"
+              //       labelText="Admins *"
+              //       placeholder="Admins"
+              //       marginTop="sm"
+              //     />
+              //   </>
+              <>
+                <Box
+                  paddingTop={style.padding.xl}
+                  paddingBottom={style.padding.xl}
+                >
                   <Image
                     src="https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-Txn%20Hash.svg?updatedAt=1689916345026"
                     alt="txn-icon"
@@ -254,7 +282,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   />
                 </Box>
                 <Box>
-                  <Text style={{ fontWeight: `${style.fontWeight.dark}`, fontSize: `${style.font.h4}` }}>
+                  <Text
+                    style={{
+                      fontWeight: `${style.fontWeight.dark}`,
+                      fontSize: `${style.font.h4}`,
+                    }}
+                  >
                     Welcome to 3rd step
                   </Text>
                 </Box>
@@ -265,6 +298,76 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     ipsa magnam, impedit quo, fugit et corporis odio est facere,
                     modi porro. Unde, commodi!
                   </Text>
+                </Box>
+              </>
+            )}
+            {hookPublisherCreate.formStep == 4 && (
+              <>
+                <Box
+                  paddingTop={style.padding.lg}
+                  paddingBottom={style.padding.lg}
+                >
+                  <Box>
+                    <Text
+                      textAlign="left"
+                      style={{
+                        fontWeight: `${style.fontWeight.dark}`,
+                        fontSize: `${style.font.h4}`,
+                      }}
+                    >
+                      Choose the type of publisher account
+                    </Text>
+                    <Text textAlign="left">For individual plan is good</Text>
+                  </Box>
+                  <Box
+                    style={{
+                      border: `${style.card.border.contract}`,
+                      borderRadius: `${style.card.borderRadius.default}`,
+                      padding: `${style.padding.md}`,
+                    }}
+                    _hover={{
+                      transform: "scale(1.01,1.01)",
+                      border: "1px solid #197cec !important",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontWeight: `${style.fontWeight.dark}`,
+                        fontSize: `${style.font.h4}`,
+                      }}
+                    >
+                      Individual
+                    </Text>
+                    <Text>
+                      For Individual Plan is good when you have, Something like
+                      this a text
+                    </Text>
+                  </Box>
+                  <Box
+                    _hover={{
+                      transform: "scale(1.01,1.01)",
+                      border: "1px solid #197cec !important",
+                    }}
+                    style={{
+                      border: `${style.card.border.contract}`,
+                      borderRadius: `${style.card.borderRadius.default}`,
+                      padding: `${style.padding.md}`,
+                      marginTop: `${style.margin.sm}`,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontWeight: `${style.fontWeight.dark}`,
+                        fontSize: `${style.font.h4}`,
+                      }}
+                    >
+                      Organisation
+                    </Text>
+                    <Text>
+                      For Organisation Plan is good when you have, Something
+                      like this a text
+                    </Text>
+                  </Box>
                 </Box>
               </>
             )}
