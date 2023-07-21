@@ -65,17 +65,17 @@ const DashBoard = () => {
       <>
         <NavBlock marginTop={style.margin["nav"]}>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <Box cursor={"not-allowed"}>
-              <FlexRow hrAlign="flex-start" vrAlign="center">
-                <Tabs
-                  width="fit-content"
-                  options={dashboardNav}
-                  gstyle={{ fontSize: `${style.font.h5}` }}
-                  value={selectedNavTab}
-                  onChange={setSelectedNavTab}
-                />
-              </FlexRow>
-            </Box>
+            {/* <Box cursor={"not-allowed"}> */}
+            <FlexRow hrAlign="flex-start" vrAlign="center">
+              <Tabs
+                width="fit-content"
+                options={dashboardNav}
+                gstyle={{ fontSize: `${style.font.h5}` }}
+                value={selectedNavTab}
+                onChange={setSelectedNavTab}
+              />
+            </FlexRow>
+            {/* </Box> */}
             {selectedNavTab == "Contracts" && (
               <ButtonNative
                 size="sm"

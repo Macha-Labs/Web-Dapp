@@ -270,8 +270,7 @@ export const darkStyle = {
     borderColor: {
       default: "#14244b",
     },
-    
-    },
+
     border: {
       thead: "2px solid #1b2d59",
     },
