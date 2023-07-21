@@ -28,6 +28,8 @@ const GlobalIcons: any = {
     "/icons/svg/Base-blue/base-blue-changeImage.svg?updatedAt=1686305923116",
   "icon-right":
     "/icons/svg/Base-blue/base-blue-arrowFilled-right.svg?updatedAt=1686047698227",
+  "icon-success":
+    "/icons/svg/miscellaneous_icons/coloured-successful.svg?updatedAt=1689916345779",
   "icon-settings":
     "/icons/svg/Base-blue/base-blue-settingsFilled.svg?updatedAt=1685711171677",
   "icon-bell":
