@@ -9,6 +9,7 @@ import TagNative from "@/_ui/tag/TagNative";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
 import WalletButton from "@/components/buttons/WalletButton";
+import ApiCreateModal from "@/components/studio/ApiCreateModal";
 import ApiList from "@/components/studio/ApiList";
 import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import ContractList from "@/components/studio/ContractList";
@@ -29,8 +30,9 @@ const DashBoard = () => {
 
     setExploreMeta(allMetas.data);
   };
-  const modal = useDisclosure();
-  const hookContractCreate = useContractCreate(modal);
+  const contractModal = useDisclosure();
+  const metaModal = useDisclosure();
+  const hookContractCreate = useContractCreate(contractModal);
 
   useEffect(() => {
     fetchmetas();
@@ -41,14 +43,14 @@ const DashBoard = () => {
       value: "Contracts",
       href: "",
     },
-    // {
-    //   value: "APIs",
-    //   href: "",
-    // },
+    {
+      value: "Functions",
+      href: "",
+    },
   ];
 
   const renderAPIs = () => {
-    return <>{selectedNavTab == "APIs" && <ApiList />}</>;
+    return <>{selectedNavTab == "Functions" && <ApiList />}</>;
   };
 
   const renderContracts = () => {
@@ -71,10 +73,6 @@ const DashBoard = () => {
                   value={selectedNavTab}
                   onChange={setSelectedNavTab}
                 />
-                <Text className="mb-0" color="#C6C6C6" marginRight="3px">
-                  Functions
-                </Text>
-                <TagNative value="soon" size="sm" variant="grey" />
               </FlexRow>
             </Box>
             {selectedNavTab == "Contracts" && (
@@ -86,7 +84,20 @@ const DashBoard = () => {
                 paddingLeft="sm"
                 paddingRight="sm"
                 onClick={() => {
-                  modal.onOpen();
+                  contractModal.onOpen();
+                }}
+              />
+            )}
+            {selectedNavTab == "Functions" && (
+              <ButtonNative
+                size="sm"
+                text="Create Function"
+                variant="state_brand"
+                marginRight="0px"
+                paddingLeft="sm"
+                paddingRight="sm"
+                onClick={() => {
+                  metaModal.onOpen();
                 }}
               />
             )}
@@ -100,9 +111,10 @@ const DashBoard = () => {
           </Box>
         </FlexBody>
         <ContractCreateModal
-          modal={modal}
+          modal={contractModal}
           hookContractCreate={hookContractCreate}
         />
+        <ApiCreateModal modal={metaModal} />
       </>
     );
   };
