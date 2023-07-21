@@ -11,6 +11,7 @@ import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import useUserTxn from "@/hooks/studio/useUserTxn";
 import FlexBody from "@/_ui/flex/FlexBody";
+import TxnTable from "@/components/studio/TxnTable";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -21,11 +22,11 @@ const Network = () => {
   };
 
   useEffect(() => {
-    if(router.isReady){
+    if (router.isReady) {
       hookUserTxn._fetch(router.query.user);
     }
   }, [router.query.user]);
-  
+
   const renderComponent = () => {
     return (
       <>
@@ -144,13 +145,14 @@ const Network = () => {
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <Box p={4}>
+                    <Box
+                      marginTop="1rem"
+                      border="1px solid #14244b"
+                      borderRadius="20px"
+                    >
                       {/* Content for Tab 1 */}
-                      This is the content of Tab 1.
-                      {/* <TxnTable txnData={hookContractTxn?.filteredData} /> */}
-                      <InteractionTable
-                        txnData={hookUserTxn?.filteredData}
-                      />
+
+                      <TxnTable txnData={hookUserTxn?.filteredData} />
                     </Box>
                   </TabPanel>
                   <TabPanel></TabPanel>

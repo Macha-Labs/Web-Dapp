@@ -2,7 +2,17 @@ import IconBase from "@/_ui/icons/IconsBase";
 import TableNative from "@/_ui/table/TableNative";
 import { truncateAddress } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
-import { Avatar, Flex, Td, Text, Th } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Divider,
+  Flex,
+  Image,
+  Stack,
+  Td,
+  Text,
+  Th,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 type Prop = {
@@ -19,17 +29,71 @@ const TxnTable = ({ txnData }: Prop) => {
           data={txnData}
           theadChildren={
             <>
-              <Th style={{ textAlign: "center", fontSize: "1rem" , paddingTop:"2rem" , paddingBottom:"2rem"}}>
+              <Th
+                style={{
+                  textAlign: "center",
+                  fontSize: "1rem",
+                  paddingTop: "2rem",
+                  paddingBottom: "2rem",
+                  textTransform: "capitalize",
+                }}
+              >
                 Txn Hash
               </Th>
-              <Th style={{ textAlign: "center", fontSize: "1rem" , paddingTop:"2rem" , paddingBottom:"2rem"}}>
+              <Th
+                style={{
+                  textAlign: "center",
+                  fontSize: "1rem",
+                  paddingTop: "2rem",
+                  paddingBottom: "2rem",
+                  textTransform: "capitalize",
+                }}
+              >
                 Time of Creation
               </Th>
-              <Th style={{ textAlign: "center", fontSize: "1rem" , paddingTop:"2rem" , paddingBottom:"2rem"}}>
+              <Th
+                style={{
+                  textAlign: "center",
+                  fontSize: "1rem",
+                  paddingTop: "2rem",
+                  paddingBottom: "2rem",
+                  textTransform: "capitalize",
+                }}
+              >
                 Method Name
               </Th>
-              <Th style={{ textAlign: "center", fontSize: "1rem" , paddingTop:"2rem" , paddingBottom:"2rem"}}>From</Th>
-              <Th style={{ textAlign: "center", fontSize: "1rem" , paddingTop:"2rem" , paddingBottom:"2rem"}}>To</Th>
+              <Th
+                style={{
+                  textAlign: "center",
+                  fontSize: "1rem",
+                  paddingTop: "2rem",
+                  paddingBottom: "2rem",
+                  textTransform: "capitalize",
+                }}
+              >
+                From
+              </Th>
+              <Th
+                style={{
+                  textAlign: "center",
+                  fontSize: "1rem",
+                  paddingTop: "2rem",
+                  paddingBottom: "2rem",
+                  textTransform: "capitalize",
+                }}
+              >
+                To
+              </Th>
+
+              <Box width="100%">
+                <Divider
+                  orientation="horizontal"
+                  borderColor="#004ad9"
+                  border={style.card.border.meta}
+                  height="5px"
+                  width={0}
+                />
+              </Box>
             </>
           }
           tbodyChildren={(item: any) => {
@@ -46,7 +110,18 @@ const TxnTable = ({ txnData }: Prop) => {
                 >
                   {truncateAddress(item?.transaction?.txn_hash)}
                 </Td>
-                <Td style={{ textAlign: "center" }}>{item?.timestamp}</Td>
+                <Td style={{ textAlign: "center" }}>
+                  <Flex>
+                    <Image
+                      src="https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-successful.svg?updatedAt=1689916345779"
+                      alt=""
+                      height="1.5rem"
+                    />
+                    <Text paddingLeft={2} marginBottom={0}>
+                      {item?.timestamp}
+                    </Text>
+                  </Flex>
+                </Td>
                 <Td style={{ textAlign: "center" }}>
                   <Flex>
                     <IconBase slug="icon-code" style={{ paddingLeft: "sm" }} />
