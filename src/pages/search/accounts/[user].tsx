@@ -1,6 +1,6 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 import { style } from "@/styles/StyledConstants";
-import { Divider, Flex, Image, Link, Text } from "@chakra-ui/react";
+import { Avatar, Divider, Flex, Image, Link, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 // import InteractionTable from "@/pages/search/network/InteractionTable";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
@@ -31,24 +31,23 @@ const Network = () => {
   const renderComponent = () => {
     return (
       <>
-        <Box marginTop={style.margin.xxl}>
+        <Box marginTop={style.margin.xxxl}>
           <>
             <Box>
               {/* <Text fontSize="3rem">Interactions</Text> */}
-              <Flex justify="space-between" marginBottom="1rem">
-                <Box display="flex" alignItems="center">
-                  <Image
-                    height="2rem"
-                    src="https://ik.imagekit.io/metaworkLabs/Assets/logo/ethereum-eth.svg?updatedAt=1689845348891"
-                    alt="ethereum"
-                  />
+              <Flex justify="space-between">
+                <Box display="flex" alignItems="center" marginBottom={style.margin.lg}>
+                <Avatar
+                      size="md"
+                      src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                    />
                   <Text
                     fontSize={style.font.h2}
                     fontWeight="600"
                     marginBottom={0}
                     marginLeft={style.margin.xxs}
                   >
-                    0xc3...95ce
+                    {router.query.user}
                   </Text>
                 </Box>
               </Flex>
@@ -137,92 +136,36 @@ const Network = () => {
                 </Box>
               </Flex>
             </Box>
-            <Box p={4}>
-              <Tabs index={activeTab} onChange={handleTabChange}>
-                <TabList>
-                  <Tab>Transactions</Tab>
-                  <Tab>Blocks</Tab>
-                  <Tab>About</Tab>
-                </TabList>
-                <TabPanels>
-                  {hookUserTxn.isLoading ? (
-                    <FlexRow height="100px">
-                      <Loader size="lg" />
-                    </FlexRow>
-                  ) :
-                    (hookUserTxn?.filteredData[0] && <TabPanel>
-                      <Box
-                        marginTop="1rem"
-                        border="1px solid #14244b"
-                        borderRadius="20px"
-                      >
-                        {/* Content for Tab 1 */}
-
-                        <TxnTable txnData={hookUserTxn?.filteredData} />
-                      </Box>
-                    </TabPanel>)}
-                  <TabPanel></TabPanel>
-                  <TabPanel>
-                    <Flex>
-                      <Box flex="7" p={4}>
-                        {/* Content for column 1 */}
-
-                        <Box display="flex" flexDirection="column">
-                          <Box display="flex" flexDirection="column">
-                            <Text fontWeight={style.fontWeight.dark}>
-                              About Ethereum
-                            </Text>
-                            <Text>
-                              Ethereum is a technology that&apos;s home to
-                              digital money, global payments, and applications.
-                              The community has built a booming digital economy,
-                              bold new ways for creators to earn online, and so
-                              much more. It&apos;s open to everyone, wherever
-                              you are in the world – all you need is the
-                              internet.
-                            </Text>
-                            <Text fontWeight={style.fontWeight.dark}>Team</Text>
-                          </Box>
-                          <Box>
-                            <Text fontWeight={style.fontWeight.dark}>
-                              Compatible Wallets
-                            </Text>
-                            <Box display="flex" flex="flex-wrap">
-                              <TagNative size="sm" value="Trust Wallet" />
-                              <TagNative size="sm" value="Zeroin" />
-                              <TagNative size="sm" value="Tally Ho" />
-                              <TagNative size="sm" value="Coinbase Wallet" />
-                              <TagNative size="sm" value="Metamask" />
-                              <TagNative size="sm" value="Safe" />
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                      <Box flex="3" p={4}>
-                        {/* Content for column 2 */}
-                        <Text fontWeight={style.fontWeight.dark}>
-                          Official Links
-                        </Text>
-                        <Box
-                          display="flex"
-                          flexDirection="column"
-                          justifyContent="space-between"
-                        >
-                          <Link href="github.com/ethereum">
-                            github.com/ethereum
-                          </Link>
-                          <Link href="github.com/ethereum">
-                            github.com/ethereum
-                          </Link>
-                          <Link href="github.com/ethereum">
-                            github.com/ethereum
-                          </Link>
-                        </Box>
-                      </Box>
-                    </Flex>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
+            <Box >
+              {hookUserTxn.isLoading ? (
+                <FlexRow height="100px">
+                  <Loader size="lg" />
+                </FlexRow>
+              ) :
+                (hookUserTxn?.filteredData[0] &&
+                  <>
+                    <Text
+                      mt={style.margin.lg}
+                      mb={style.margin.lg}
+                      style={{
+                        background: `-webkit-linear-gradient(270deg,rgb(25, 124, 236),rgb(0, 74, 217))`,
+                        WebkitBackgroundClip: "text",
+                        backgroundClip: "text",
+                        color: "transparent",
+                      }}
+                    >
+                      Transactions in the last 12 hours{" "}
+                    </Text>
+                    <Box
+                      marginTop="1rem"
+                      border={style.table.border.thead}
+                      borderRadius="20px"
+                    >
+                      {/* Content for Tab 1 */}
+                      <TxnTable txnData={hookUserTxn?.filteredData} />
+                    </Box>
+                  </>
+                )}
             </Box>
           </>
         </Box>

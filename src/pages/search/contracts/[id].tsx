@@ -112,7 +112,7 @@ const Contract = () => {
           >
             Transactions in the last 12 hours{" "}
           </Text>
-          <Box marginTop="1rem" border="1px solid #14244b" borderRadius="20px">
+          <Box marginTop="1rem" border={style.table.border.thead} borderRadius="20px">
             <TxnTable txnData={hookContractTxn?.filteredData} />
           </Box>
         </> : (<Text
