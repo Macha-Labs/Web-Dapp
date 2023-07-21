@@ -74,10 +74,12 @@ export const deleteContract = async (contract_id: any) => {
   return response.json();
 };
 
-export const txnByChainId = async (chain_id: any) => {
-  const response = await fetch(
-    `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}`
-  );
+export const txnByChainId = async (chain_id: any,cursor: any) => {
+  let url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}`
+  if(cursor != 1){
+    url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}?cursor=${cursor}`
+  }
+  const response = await fetch(url);
   const data = await response.json();
   return data;
 };

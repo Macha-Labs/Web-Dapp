@@ -4,6 +4,7 @@ import { style } from "@/styles/StyledConstants";
 import { Divider, Flex, Link, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 // import InteractionTable from "@/pages/search/network/InteractionTable";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import IconBase from "@/_ui/icons/IconsBase";
@@ -18,16 +19,11 @@ import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const Network = () => {
-  const [activeTab, setActiveTab] = useState(0);
   const hookChainTxn = useChainTxn();
   const router = useRouter();
   const chainId: any = router.query.chainId
   const isReady = router.isReady;
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Transactions");
-
-  const handleTabChange = (index: any) => {
-    setActiveTab(index);
-  };
 
   useEffect(() => {
     if (isReady) {
@@ -118,13 +114,24 @@ const Network = () => {
         </FlexRow>
       ) :
         (hookChainTxn?.filteredData[0] &&
-          <Box
-            border={style.table.border.thead}
-            borderRadius="20px"
-          >
-            {/* Content for Tab 1 */}
-            {hookChainTxn?.filteredData[0] && <TxnTable txnData={hookChainTxn?.filteredData} />}
-          </Box>
+          <>
+            <Box
+              border={style.table.border.thead}
+              borderRadius="20px"
+            >
+              {/* Content for Tab 1 */}
+              {hookChainTxn?.filteredData[0] && <TxnTable txnData={hookChainTxn?.filteredData} />}
+            </Box>
+            <Box marginY={10} style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+              {hookChainTxn.filteredData.length >= 10 && <ButtonNative
+                variant="state_brand"
+                marginTop={style.margin["lg"]}
+                onClick={() => hookChainTxn._fetch(router.query.chainId)}
+                >
+                Next
+              </ButtonNative>}
+            </Box>
+          </>
         )}
     </>}</>;
   };
@@ -250,7 +257,7 @@ const Network = () => {
               <Tabs
                 width="fit-content"
                 options={chainNav}
-                gstyle={{ fontSize: `${style.font.h5}`, marginBottom: `${style.margin.md}`}}
+                gstyle={{ fontSize: `${style.font.h5}`, marginBottom: `${style.margin.md}` }}
                 value={selectedNavTab}
                 onChange={setSelectedNavTab}
               />
