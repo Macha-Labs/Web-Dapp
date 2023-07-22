@@ -123,7 +123,7 @@ function TxnDetails({
               <Text
                 color="rgba(255,255,255,0.5)"
                 className="mb-0"
-              // marginStart={style.margin.xxs}
+                // marginStart={style.margin.xxs}
               >
                 {" "}
                 {/* TODO: make dynamic */}
@@ -150,7 +150,7 @@ function TxnDetails({
               <Text
                 color="rgba(255,255,255,0.5)"
                 className="mb-0"
-              // marginStart={style.margin.xxs}
+                // marginStart={style.margin.xxs}
               >
                 {" "}
                 {/* TODO: make dynamic */}
@@ -427,7 +427,7 @@ function TxnDetails({
                                 paddingBottom: `${style.padding["xxs"]}`,
                                 width: "fit-content",
                                 fontWeight: `${style.fontWeight.dark}`,
-                                fontSize: `${style.font.h5}`
+                                fontSize: `${style.font.h5}`,
                               }}
                             >
                               <Box
@@ -435,7 +435,7 @@ function TxnDetails({
                                   paddingTop: `${style.padding["xxs"]}`,
                                   paddingBottom: `${style.padding["xxs"]}`,
                                   display: "flex",
-                                  alignItems: "center"
+                                  alignItems: "center",
                                 }}
                               >
                                 <Image

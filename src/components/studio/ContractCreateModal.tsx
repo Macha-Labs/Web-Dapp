@@ -28,38 +28,50 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
         }
         footer={
           <FlexRow hrAlign="flex-end">
-            <Box style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
               {hookContractCreate.formStep == 1 && <Box></Box>}
 
-              {hookContractCreate.formStep > 1 && <ButtonNative
-                variant="state_brand"
-                marginTop={style.margin["lg"]}
-                onClick={hookContractCreate.prevFormStep}>
-                Back
-              </ButtonNative>
-              }
+              {hookContractCreate.formStep > 1 && (
+                <ButtonNative
+                  variant="state_default_hover"
+                  marginTop={style.margin["lg"]}
+                  onClick={hookContractCreate.prevFormStep}
+                >
+                  Back
+                </ButtonNative>
+              )}
 
-              {hookContractCreate.formStep < 3 && <ButtonNative
-                variant="state_brand"
-                marginTop={style.margin["lg"]}
-                onClick={hookContractCreate.nextFormStep}>
-                Next
-              </ButtonNative>
-              }
+              {hookContractCreate.formStep < 3 && (
+                <ButtonNative
+                  variant="state_brand"
+                  marginTop={style.margin["lg"]}
+                  onClick={hookContractCreate.nextFormStep}
+                >
+                  Next
+                </ButtonNative>
+              )}
 
-              {hookContractCreate.formStep == 3 && <ButtonNative
-                variant="state_brand"
-                marginTop={style.margin["lg"]}
-                onClick={async (e: any) => {
-                  e.preventDefault();
-                  await hookContractCreate.publishContract();
-                }}
-              >
-                Create
-              </ButtonNative>
-              }
+              {hookContractCreate.formStep == 3 && (
+                <ButtonNative
+                  variant="state_brand"
+                  marginTop={style.margin["lg"]}
+                  onClick={async (e: any) => {
+                    e.preventDefault();
+                    await hookContractCreate.publishContract();
+                  }}
+                >
+                  Create
+                </ButtonNative>
+              )}
             </Box>
-          </FlexRow >
+          </FlexRow>
         }
       >
         <FlexColumn
@@ -69,40 +81,106 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
           padding={style.padding["sm"]}
         >
           <FlexColumn hrAlign="space-between" height="35%">
-            <Box style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
-              <Box style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between" }}>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <Box
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Box>
-                  {hookContractCreate.formStep > 1 ? <IconBase size="xl" slug="icon-success" /> : <Text rounded="full" style={{ border: `${style.card.border.meta}`, paddingLeft: `${style.padding.xxs}`, paddingRight: `${style.padding.xxs}` }} >
-                    1
-                  </Text>}
+                  {hookContractCreate.formStep > 1 ? (
+                    <IconBase size="xl" slug="icon-success" />
+                  ) : (
+                    <Text
+                      rounded="full"
+                      style={{
+                        border: `${style.card.border.meta}`,
+                        paddingLeft: `${style.padding.xxs}`,
+                        paddingRight: `${style.padding.xxs}`,
+                      }}
+                    >
+                      1
+                    </Text>
+                  )}
                 </Box>
-                <Text>
-                  First
-                </Text>
+                <Text>First</Text>
               </Box>
-              <Divider marginX="8px" border={hookContractCreate.formStep > 1 && style.card.border.meta} />
-              <Box style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between" }}>
-                {hookContractCreate.formStep > 2 ? <IconBase size="xl" slug="icon-success" /> : <Text rounded="full" style={{ border: `${style.card.border.meta}`, paddingLeft: `${style.padding.xxs}`, paddingRight: `${style.padding.xxs}` }} >
-                  2
-                </Text>}
-                <Text>
-                  Second
-                </Text>
+              <Divider
+                marginX="8px"
+                border={
+                  hookContractCreate.formStep > 1 && style.card.border.meta
+                }
+              />
+              <Box
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                {hookContractCreate.formStep > 2 ? (
+                  <IconBase size="xl" slug="icon-success" />
+                ) : (
+                  <Text
+                    rounded="full"
+                    style={{
+                      border: `${style.card.border.meta}`,
+                      paddingLeft: `${style.padding.xxs}`,
+                      paddingRight: `${style.padding.xxs}`,
+                    }}
+                  >
+                    2
+                  </Text>
+                )}
+                <Text>Second</Text>
               </Box>
-              <Divider marginX="8px" border={hookContractCreate.formStep > 2 && style.card.border.meta} />
-              <Box style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between" }}>
-                {hookContractCreate.formStep > 3 ? <IconBase size="xl" slug="icon-success" /> : <Text rounded="full" style={{ border: `${style.card.border.meta}`, paddingLeft: `${style.padding.xxs}`, paddingRight: `${style.padding.xxs}` }} >
-                  3
-                </Text>}
-                <Text>
-                  Third
-                </Text>
+              <Divider
+                marginX="8px"
+                border={
+                  hookContractCreate.formStep > 2 && style.card.border.meta
+                }
+              />
+              <Box
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                {hookContractCreate.formStep > 3 ? (
+                  <IconBase size="xl" slug="icon-success" />
+                ) : (
+                  <Text
+                    rounded="full"
+                    style={{
+                      border: `${style.card.border.meta}`,
+                      paddingLeft: `${style.padding.xxs}`,
+                      paddingRight: `${style.padding.xxs}`,
+                    }}
+                  >
+                    3
+                  </Text>
+                )}
+                <Text>Third</Text>
               </Box>
             </Box>
 
             <Text
               fontSize={style.font.h7}
-              textAlign="left" width="100%"
+              textAlign="left"
+              width="100%"
               bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
@@ -193,7 +271,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
             </>}
           </FlexColumn>
         </FlexColumn>
-      </ModalWindow >
+      </ModalWindow>
     </>
   );
 };

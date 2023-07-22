@@ -36,11 +36,15 @@ const Network = () => {
             <Box>
               {/* <Text fontSize="3rem">Interactions</Text> */}
               <Flex justify="space-between">
-                <Box display="flex" alignItems="center" marginBottom={style.margin.lg}>
-                <Avatar
-                      size="md"
-                      src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
-                    />
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  marginBottom={style.margin.lg}
+                >
+                  <Avatar
+                    size="md"
+                    src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                  />
                   <Text
                     fontSize={style.font.h2}
                     fontWeight="600"
@@ -136,13 +140,13 @@ const Network = () => {
                 </Box>
               </Flex>
             </Box>
-            <Box >
+            <Box>
               {hookUserTxn.isLoading ? (
                 <FlexRow height="100px">
                   <Loader size="lg" />
                 </FlexRow>
-              ) :
-                (hookUserTxn?.filteredData[0] &&
+              ) : (
+                hookUserTxn?.filteredData[0] && (
                   <>
                     <Text
                       mt={style.margin.lg}
@@ -165,7 +169,8 @@ const Network = () => {
                       <TxnTable txnData={hookUserTxn?.filteredData} />
                     </Box>
                   </>
-                )}
+                )
+              )}
             </Box>
           </>
         </Box>
@@ -185,7 +190,7 @@ const Network = () => {
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-            //   marginLeft={style.margin.xxs}
+              //   marginLeft={style.margin.xxs}
             >
               Ethereum
             </Text>

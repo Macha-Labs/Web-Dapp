@@ -9,6 +9,7 @@ import TagNative from "@/_ui/tag/TagNative";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
 import WalletButton from "@/components/buttons/WalletButton";
+import ApiCreateModal from "@/components/studio/ApiCreateModal";
 import ApiList from "@/components/studio/ApiList";
 import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import ContractList from "@/components/studio/ContractList";
@@ -31,7 +32,7 @@ const DashBoard = () => {
     setExploreMeta(allMetas.data);
   };
   const contractModal = useDisclosure();
-
+  const metaModal = useDisclosure();
   const hookContractCreate = useContractCreate(contractModal);
 
   useEffect(() => {
@@ -43,14 +44,14 @@ const DashBoard = () => {
       value: "Contracts",
       href: "",
     },
-    // {
-    //   value: "APIs",
-    //   href: "",
-    // },
+    {
+      value: "Functions",
+      href: "",
+    },
   ];
 
   const renderAPIs = () => {
-    return <>{selectedNavTab == "APIs" && <ApiList />}</>;
+    return <>{selectedNavTab == "Functions" && <ApiList />}</>;
   };
 
   const renderContracts = () => {
@@ -64,21 +65,17 @@ const DashBoard = () => {
       <>
         <NavBlock marginTop={style.margin["nav"]}>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <Box cursor={"not-allowed"}>
-              <FlexRow hrAlign="flex-start" vrAlign="center">
-                <Tabs
-                  width="fit-content"
-                  options={dashboardNav}
-                  gstyle={{ fontSize: `${style.font.h5}` }}
-                  value={selectedNavTab}
-                  onChange={setSelectedNavTab}
-                />
-                <Text className="mb-0" color="#C6C6C6" marginRight="3px">
-                  Functions
-                </Text>
-                <TagNative value="soon" size="sm" variant="grey" />
-              </FlexRow>
-            </Box>
+            {/* <Box cursor={"not-allowed"}> */}
+            <FlexRow hrAlign="flex-start" vrAlign="center">
+              <Tabs
+                width="fit-content"
+                options={dashboardNav}
+                gstyle={{ fontSize: `${style.font.h5}` }}
+                value={selectedNavTab}
+                onChange={setSelectedNavTab}
+              />
+            </FlexRow>
+            {/* </Box> */}
             {selectedNavTab == "Contracts" && (
               <ButtonNative
                 size="sm"
@@ -89,6 +86,19 @@ const DashBoard = () => {
                 paddingRight="sm"
                 onClick={() => {
                   contractModal.onOpen();
+                }}
+              />
+            )}
+            {selectedNavTab == "Functions" && (
+              <ButtonNative
+                size="sm"
+                text="Create Function"
+                variant="state_brand"
+                marginRight="0px"
+                paddingLeft="sm"
+                paddingRight="sm"
+                onClick={() => {
+                  metaModal.onOpen();
                 }}
               />
             )}
@@ -105,6 +115,7 @@ const DashBoard = () => {
           modal={contractModal}
           hookContractCreate={hookContractCreate}
         />
+        <ApiCreateModal modal={metaModal} />
       </>
     );
   };
