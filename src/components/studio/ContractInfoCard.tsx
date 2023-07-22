@@ -116,8 +116,8 @@ function ContractInfoCard({ data }: Props) {
               </Text>
               <Box onClick={() => router.push(`/search/network/${data?.chain_id}`)} cursor="pointer" _hover={{textDecoration: "underline"}}>
                 <FlexRow vrAlign="center" hrAlign="flex-start">
-                  <Text className="m-b-0">{chains[data?.chain_id].chainName}</Text>
-                  <IconBase slug={chains[data?.chain_id].chainImage} style={{ marginLeft: "xxs" }} size="md" />
+                  <Text className="m-b-0">{chains[data?.chain_id]?.chainName}</Text>
+                  <IconBase slug={chains[data?.chain_id]?.chainImage} style={{ marginLeft: "xxs" }} size="md" />
                 </FlexRow>
               </Box>
             </FlexColumn>

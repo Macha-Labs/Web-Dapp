@@ -112,30 +112,23 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
             >All * marked fields are required</Text>
             {hookContractCreate.formStep == 1 && <>
               <InputLabel
-                elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["address"] =
-                  element)
-                }
+                value={hookContractCreate.$contractFormData.address}
                 inputType="text"
                 labelText="Address *"
                 placeholder="Address"
+                onChange={(e: any) => hookContractCreate.$loadContractFormData({ address: e.target.value })}
               />
               <InputLabel
-                elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["chain_id"] =
-                  element)
-                }
+                value={hookContractCreate.$contractFormData.chain_id}
+                onChange={(e: any) => hookContractCreate.$loadContractFormData({ chain_id: e.target.value })}
                 inputType="text"
                 labelText="Chain Id *"
                 placeholder="Chain Id"
                 marginTop="sm"
               />
               <InputLabel
-                elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current[
-                  "read_abi_from"
-                ] = element)
-                }
+                value={hookContractCreate.$contractFormData.read_abi_from}
+                onChange={(e: any) => hookContractCreate.$loadContractFormData({ read_abi_from: e.target.value })}
                 inputType="text"
                 labelText="Read ABI From"
                 placeholder="Read ABI From"
@@ -146,9 +139,8 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
               <Box style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <Box width="47%">
                   <InputLabel
-                    elementRef={(element: any) =>
-                      (hookContractCreate.contractDataRef.current["name"] = element)
-                    }
+                    value={hookContractCreate.$contractFormData.name}
+                    onChange={(e: any) => hookContractCreate.$loadContractFormData({ name: e.target.value })}
                     inputType="text"
                     labelText="Contract Name *"
                     placeholder="Name"
@@ -156,9 +148,8 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 </Box>
                 <Box width="47%">
                   <InputLabel
-                    elementRef={(element: any) =>
-                      (hookContractCreate.contractDataRef.current["slug"] = element)
-                    }
+                    value={hookContractCreate.$contractFormData.slug}
+                    onChange={(e: any) => hookContractCreate.$loadContractFormData({ slug: e.target.value })}
                     inputType="text"
                     labelText="Slug *"
                     placeholder="Slug"
@@ -166,59 +157,37 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 </Box>
               </Box>
               <InputLabel
-                elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["description"] =
-                  element)
-                }
+                value={hookContractCreate.$contractFormData.description}
+                onChange={(e: any) => hookContractCreate.$loadContractFormData({description: e.target.value})}
                 inputType="text"
                 labelText="Description *"
                 placeholder="Description"
                 marginTop="sm"
               />
               <InputLabel
-                elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current["image"] =
-                  element)
-                }
+                value={hookContractCreate.$contractFormData.image}
+                onChange={(e: any) => hookContractCreate.$loadContractFormData({image: e.target.value})}
                 inputType="text"
                 labelText="Image *"
                 placeholder="Image"
                 marginTop="sm"
               />
             </>}
-
             {hookContractCreate.formStep == 3 && <>
               <InputLabel
-                elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current[
-                  "interested_methods"
-                ] = element)
-                }
+                value={hookContractCreate.$contractFormData.interested_methods}
+                onChange={(e: any) => hookContractCreate.$loadContractFormData({interested_methods: e.target.value})}
                 inputType="text"
                 labelText="Interested Methods *"
                 placeholder="Interested Methods"
                 marginTop="sm"
               />
               <InputLabel
-                elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current[
-                  "interested_events"
-                ] = element)
-                }
+                value={hookContractCreate.$contractFormData.interested_events}
+                onChange={(e: any) => hookContractCreate.$loadContractFormData({interested_events: e.target.value})}
                 inputType="text"
                 labelText="Interested Events *"
                 placeholder="Interested Events"
-                marginTop="sm"
-              />
-              <InputLabel
-                elementRef={(element: any) =>
-                (hookContractCreate.contractDataRef.current[
-                  "admins"
-                ] = element)
-                }
-                inputType="text"
-                labelText="Admins *"
-                placeholder="Admins"
                 marginTop="sm"
               />
             </>}

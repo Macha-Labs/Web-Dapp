@@ -1,64 +1,81 @@
-import { createNewContract } from "@/service/ApiService";
+import { createNewPublisher } from "@/service/ApiService";
+import useAuthStore from "@/store/useAuthStore";
+import usePublisherFormStore from "@/store/usePublisherFormStore";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const usePublisherCreate = (modal: any) => {
-  const contractDataRef = useRef<any>({});
+  const publisherDataRef = useRef<any>({});
   const toast = useToast();
   const router = useRouter();
-  const [formStep, setFormStep] = useState(1);
+  const [formStep, setFormStep] = useState<any>(1);
+  const [publisherType, setPublisherType] = useState<any>(undefined);
+  const $address = useAuthStore((state: any) => state.address);
+  const $publisherFormData = usePublisherFormStore((state: any) => state.publisherFormData);
+  const $loadPublisherFormData = usePublisherFormStore((state: any) => state.loadPublisherFormData);
 
-  //   const validateSteps = () => {
-  //     if (formStep == 1) {
-  //       if (
-  //         contractDataRef.current["address"]?.value == "" ||
-  //         contractDataRef.current["address"]?.value == undefined ||
-  //         contractDataRef.current["chain_id"]?.value == "" ||
-  //         contractDataRef.current["chain_id"]?.value == undefined
-  //       ) {
-  //         return false;
-  //       } else {
-  //         return true;
-  //       }
-  //     }
-  //     if (formStep == 2) {
-  //       if (
-  //         contractDataRef.current["name"]?.value == "" ||
-  //         contractDataRef.current["name"]?.value == undefined ||
-  //         contractDataRef.current["slug"]?.value == "" ||
-  //         contractDataRef.current["slug"]?.value == undefined ||
-  //         contractDataRef.current["description"]?.value == "" ||
-  //         contractDataRef.current["description"]?.value == undefined ||
-  //         contractDataRef.current["image"]?.value == "" ||
-  //         contractDataRef.current["image"]?.value == undefined
-  //       ) {
-  //         return false;
-  //       } else {
-  //         return true;
-  //       }
-  //     }
-  //     if (formStep == 3) {
-  //       if (
-  //         contractDataRef.current["interested_events"]?.value == "" ||
-  //         contractDataRef.current["interested_events"]?.value == undefined ||
-  //         contractDataRef.current["interested_methods"]?.value == "" ||
-  //         contractDataRef.current["interested_methods"]?.value == undefined ||
-  //         contractDataRef.current["admins"]?.value == "" ||
-  //         contractDataRef.current["admins"]?.value == undefined
-  //       ) {
-  //         return false;
-  //       } else {
-  //         return true;
-  //       }
-  //     }
-  //   };
+
+  useEffect(() => {
+    if($address != null)
+    $loadPublisherFormData({address: $address})
+  },[$address])
+
+  const setClear = () => {
+    setFormStep(1);
+    setPublisherType(undefined)
+  }
+
+  const selectPublisher = (type: string) => {
+    setPublisherType(type)
+    $loadPublisherFormData({ publisherType: publisherType })
+    nextFormStep()
+  }
+
+  const validateSteps = () => {
+    if (formStep == 4) {
+      if (publisherType == undefined) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    else if (formStep == 5 && publisherType == "Individual") {
+      if ($publisherFormData.name == "" || $publisherFormData.name == undefined || $publisherFormData.address == "" || $publisherFormData.address == undefined || $publisherFormData.email == "" || $publisherFormData.email == undefined
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    else if (formStep == 5 && publisherType == "Organization") {
+      if ($publisherFormData.name == "" || $publisherFormData.name == undefined || $publisherFormData.address == "" || $publisherFormData.address == undefined || $publisherFormData.logo == "" || $publisherFormData.logo == undefined || $publisherFormData.website == "" || $publisherFormData.website == undefined
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    else{
+      return true
+    }
+  };
 
   const nextFormStep = () => {
-    if (formStep >= 6) {
+    if (formStep >= 7) {
       return;
     } else {
-      setFormStep((currentStep) => currentStep + 1);
+      if (validateSteps()) {
+        setFormStep((currentStep: any) => currentStep + 1);
+      } else {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
+        return;
+      }
     }
   };
 
@@ -66,165 +83,80 @@ const usePublisherCreate = (modal: any) => {
     if (formStep <= 1) {
       return;
     } else {
-      setFormStep((currentStep) => currentStep - 1);
+      setFormStep((currentStep: any) => currentStep - 1);
     }
   };
 
-  const editContract = async (_id: any) => {
-    let interested_events = contractDataRef.current["interested_events"]?.value;
-    interested_events = interested_events.split(",");
-    interested_events = interested_events.map((event: any) => {
-      return event.trim();
-    });
+  const createPublisher = async () => {
 
-    let interested_methods =
-      contractDataRef.current["interested_methods"]?.value;
-    interested_methods = interested_methods.split(",");
-    interested_methods = interested_methods.map((event: any) => {
-      return event.trim();
-    });
-
-    let admins = contractDataRef.current["admins"]?.value;
-    admins = admins.split(",");
-    admins = admins.map((admin: any) => {
-      return admin.toLowerCase().trim();
-    });
-
-    const contractPayload = {
-      name: contractDataRef.current["name"]?.value,
-      description: contractDataRef.current["description"]?.value,
-      address: contractDataRef.current["address"]?.value,
-      chain_id: contractDataRef.current["chain_id"]?.value,
-      slug: contractDataRef.current["slug"]?.value,
-      interested_methods: interested_methods,
-      interested_events: interested_events,
-      read_abi_from: contractDataRef.current["read_abi_from"]?.value,
-      id: _id,
-      admins: admins,
-    };
-
-    // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
-    if (
-      contractPayload.name == undefined ||
-      contractPayload.name == "" ||
-      contractPayload.description == undefined ||
-      contractPayload.description == "" ||
-      contractPayload.address == undefined ||
-      contractPayload.address == "" ||
-      contractPayload.chain_id == undefined ||
-      contractPayload.chain_id == "" ||
-      contractPayload.slug == undefined ||
-      contractPayload.slug == "" ||
-      contractDataRef.current["interested_methods"].value == "" ||
-      contractDataRef.current["interested_methods"].value == undefined ||
-      contractDataRef.current["interested_events"].value == "" ||
-      contractDataRef.current["interested_events"].value == undefined ||
-      contractDataRef.current["admins"].value == "" ||
-      contractDataRef.current["admins"].value == undefined
-    ) {
-      toast({
-        title: "Required fields cannot be empty",
-        status: "warning",
-        duration: 3000,
-        position: "top-right",
-      });
-    } else {
-      console.log("The contract payload data is ", contractPayload);
-      createNewContract(contractPayload).then((res) => {
-        modal.onClose();
+    if (publisherType == "Individual") {
+      let publisherPayload = {
+        name: $publisherFormData.name,
+        address: $publisherFormData.address,
+        email: $publisherFormData.email,
+      }
+      if (publisherPayload.name == undefined || publisherPayload.name == "" || publisherPayload.address == undefined || publisherPayload.address == "" || publisherPayload.email == undefined || publisherPayload.email == "") {
         toast({
-          title: "Contract Edited!!",
-          status: "success",
+          title: "Required fields cannot be empty",
+          status: "warning",
           duration: 3000,
           position: "top-right",
         });
-        router.push(`/search/contracts/${contractPayload.slug}`);
-      });
+      }
+      else {
+        console.log("The contract payload data is ", publisherPayload);
+        createNewPublisher(publisherPayload,"Individual").then((res) => {
+          modal.onClose()
+          toast({
+            title: "Contract created!",
+            status: "success",
+            duration: 3000,
+            position: "top-right"
+          });
+        })
+      }
     }
-  };
-
-  const publishContract = async () => {
-    let interested_events = contractDataRef.current["interested_events"]?.value;
-    interested_events = interested_events.split(",");
-    interested_events = interested_events.map((event: any) => {
-      return event.trim();
-    });
-
-    let interested_methods =
-      contractDataRef.current["interested_methods"]?.value;
-    interested_methods = interested_methods.split(",");
-    interested_methods = interested_methods.map((event: any) => {
-      return event.trim();
-    });
-
-    let admins = contractDataRef.current["admins"]?.value;
-    admins = admins.split(",");
-    admins = admins.map((admin: any) => {
-      return admin.toLowerCase().trim();
-    });
-
-    const contractPayload = {
-      name: contractDataRef.current["name"]?.value,
-      description: contractDataRef.current["description"]?.value,
-      address: contractDataRef.current["address"]?.value,
-      chain_id: contractDataRef.current["chain_id"]?.value,
-      slug: contractDataRef.current["slug"]?.value,
-      interested_methods: interested_methods,
-      interested_events: interested_events,
-      read_abi_from: contractDataRef.current["read_abi_from"]?.value,
-      image: contractDataRef.current["image"]?.value,
-      admins: admins,
-    };
-
-    // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
-    if (
-      contractPayload.name == undefined ||
-      contractPayload.name == "" ||
-      contractPayload.description == undefined ||
-      contractPayload.description == "" ||
-      contractPayload.address == undefined ||
-      contractPayload.address == "" ||
-      contractPayload.chain_id == undefined ||
-      contractPayload.chain_id == "" ||
-      contractPayload.slug == undefined ||
-      contractPayload.slug == "" ||
-      contractPayload.image == undefined ||
-      contractPayload.image == "" ||
-      contractDataRef.current["interested_methods"].value == "" ||
-      contractDataRef.current["interested_methods"].value == undefined ||
-      contractDataRef.current["interested_events"].value == "" ||
-      contractDataRef.current["interested_events"].value == undefined ||
-      contractDataRef.current["admins"].value == "" ||
-      contractDataRef.current["admins"].value == undefined
-    ) {
-      toast({
-        title: "Required fields cannot be empty",
-        status: "warning",
-        duration: 3000,
-        position: "top-right",
-      });
-    } else {
-      console.log("The contract payload data is ", contractPayload);
-      // createNewContract(contractPayload).then((res) => {
-      //   modal.onClose()
-      //   toast({
-      //     title: "Contract created!",
-      //     status: "success",
-      //     duration: 3000,
-      //     position: "top-right"
-      //   });
-      //   router.push(`/search/contracts/${contractPayload.slug}`)
-      // })
+    else if (publisherType == "Organization") {
+      let publisherPayload = {
+        name: $publisherFormData.name,
+        address: $publisherFormData.address,
+        logo: $publisherFormData.logo,
+        website: $publisherFormData.website
+      }
+      if (publisherPayload.name == undefined || publisherPayload.name == "" || publisherPayload.address == undefined || publisherPayload.address == "" || publisherPayload.name == undefined || publisherPayload.name == "" || publisherPayload.logo == undefined || publisherPayload.logo == "" || publisherPayload.website == undefined || publisherPayload.website == "") {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
+      }
+      else {
+        console.log("The contract payload data is ", publisherPayload);
+        createNewPublisher(publisherPayload,"Organization").then((res) => {
+          modal.onClose()
+          toast({
+            title: "Contract created!",
+            status: "success",
+            duration: 3000,
+            position: "top-right"
+          });
+        })
+      }
     }
   };
 
   return {
-    contractDataRef: contractDataRef,
-    publishContract: publishContract,
-    editContract: editContract,
+    createPublisher: createPublisher,
     formStep: formStep,
     nextFormStep: nextFormStep,
     prevFormStep: prevFormStep,
+    publisherType: publisherType,
+    selectPublisher: selectPublisher,
+    $address: $address,
+    setClear: setClear,
+    $publisherFormData: $publisherFormData,
+    $loadPublisherFormData: $loadPublisherFormData
   };
 };
 export default usePublisherCreate;

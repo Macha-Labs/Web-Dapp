@@ -60,6 +60,27 @@ export const createNewContract = async (data: any) => {
   return response.json();
 };
 
+export const createNewPublisher = async (data: any,type: string) => {
+  let url = `${config.metaServer}/indexer/publishers/create`
+  if(type == "Individual"){
+    url = `${config.metaServer}/indexer/publishers/create`
+  }
+  else if(type == "Organization"){
+    url = `${config.metaServer}/indexer/publishers/create?type=org`
+  }
+  console.log(data)
+  const response = await fetch(url,{
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log("new publisher created ", response);
+  return response.json();
+};
+
 export const deleteContract = async (contract_id: any) => {
   const response = await fetch(
     `${config.metaServer}/indexer/contracts/delete/${contract_id}`,
