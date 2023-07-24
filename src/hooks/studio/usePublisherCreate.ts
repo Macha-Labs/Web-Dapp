@@ -17,19 +17,23 @@ const usePublisherCreate = (modal: any) => {
 
 
   useEffect(() => {
-    if($address != null)
-    $loadPublisherFormData({address: $address})
-  },[$address])
+    if ($address != null)
+      $loadPublisherFormData({ address: $address })
+  }, [$address])
 
   const setClear = () => {
     setFormStep(1);
     setPublisherType(undefined)
+    $loadPublisherFormData({
+      name: "",
+      email: "",
+      logo: "",
+      website: ""
+    })
   }
 
   const selectPublisher = (type: string) => {
     setPublisherType(type)
-    $loadPublisherFormData({ publisherType: publisherType })
-    nextFormStep()
   }
 
   const validateSteps = () => {
@@ -56,7 +60,7 @@ const usePublisherCreate = (modal: any) => {
         return true;
       }
     }
-    else{
+    else {
       return true
     }
   };
@@ -104,15 +108,9 @@ const usePublisherCreate = (modal: any) => {
         });
       }
       else {
-        console.log("The contract payload data is ", publisherPayload);
-        createNewPublisher(publisherPayload,"Individual").then((res) => {
-          modal.onClose()
-          toast({
-            title: "Contract created!",
-            status: "success",
-            duration: 3000,
-            position: "top-right"
-          });
+        console.log("The publisher payload data is ", publisherPayload);
+        createNewPublisher(publisherPayload, "Individual").then((res) => {
+          nextFormStep()
         })
       }
     }
@@ -132,15 +130,9 @@ const usePublisherCreate = (modal: any) => {
         });
       }
       else {
-        console.log("The contract payload data is ", publisherPayload);
-        createNewPublisher(publisherPayload,"Organization").then((res) => {
-          modal.onClose()
-          toast({
-            title: "Contract created!",
-            status: "success",
-            duration: 3000,
-            position: "top-right"
-          });
+        console.log("The publisher payload data is ", publisherPayload);
+        createNewPublisher(publisherPayload, "Organization").then((res) => {
+          nextFormStep()
         })
       }
     }

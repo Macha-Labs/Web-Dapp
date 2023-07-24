@@ -19,6 +19,12 @@ const useContractCreate = (modal: any) => {
         $contractFormData.chain_id == "" ||
         $contractFormData.chain_id == undefined
       ) {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
         return false;
       } else {
         return true;
@@ -35,6 +41,12 @@ const useContractCreate = (modal: any) => {
         $contractFormData.image == "" ||
         $contractFormData.description == undefined
       ) {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
         return false;
       } else {
         return true;
@@ -47,6 +59,12 @@ const useContractCreate = (modal: any) => {
         $contractFormData.interested_methods == "" ||
         $contractFormData.interested_methods == undefined
       ) {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
         return false;
       } else {
         return true;

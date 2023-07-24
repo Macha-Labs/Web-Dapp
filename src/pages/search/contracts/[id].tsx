@@ -52,14 +52,13 @@ const Contract = () => {
         {hookContract.contractDetails && (
           <ContractInfoCard
             data={{
-              name: hookContract.contractDetails[0]?.contract?.name,
-              image: hookContract.contractDetails[0]?.contract?.image,
+              name: hookContract.contractDetails?.contract?.name,
+              image: hookContract.contractDetails?.contract?.image,
               state: { status: "Live" },
-              address: hookContract.contractDetails[0]?.contract.address,
-              owner: hookContract.contractDetails[0]?.contract.address,
-              description:
-                hookContract.contractDetails[0]?.contract.description,
-              chain_id: hookContract.contractDetails[0]?.contract.chain_id,
+              address: hookContract.contractDetails?.contract.address,
+              owner: hookContract.contractDetails?.contract.address,
+              description: hookContract.contractDetails?.contract.description,
+              chain_id: hookContract.contractDetails?.contract.chain_id,
             }}
           />
         )}
