@@ -1,22 +1,30 @@
 import { createNewContract } from "@/service/ApiService";
+import useContractFormStore from "@/store/useContractFormStore";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const useContractCreate = (modal: any) => {
-  const contractDataRef = useRef<any>({});
   const toast = useToast();
   const router = useRouter();
-  const [formStep, setFormStep] = useState(1);
+  const [formStep, setFormStep] = useState<any>(1);
+  const $contractFormData = useContractFormStore((state: any) => state.contractFormData);
+  const $loadContractFormData = useContractFormStore((state: any) => state.loadContractFormData);
 
   const validateSteps = () => {
     if (formStep == 1) {
       if (
-        contractDataRef.current["address"]?.value == "" ||
-        contractDataRef.current["address"]?.value == undefined ||
-        contractDataRef.current["chain_id"]?.value == "" ||
-        contractDataRef.current["chain_id"]?.value == undefined
+        $contractFormData.address == "" ||
+        $contractFormData.address == undefined ||
+        $contractFormData.chain_id == "" ||
+        $contractFormData.chain_id == undefined
       ) {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
         return false;
       } else {
         return true;
@@ -24,15 +32,21 @@ const useContractCreate = (modal: any) => {
     }
     if (formStep == 2) {
       if (
-        contractDataRef.current["name"]?.value == "" ||
-        contractDataRef.current["name"]?.value == undefined ||
-        contractDataRef.current["slug"]?.value == "" ||
-        contractDataRef.current["slug"]?.value == undefined ||
-        contractDataRef.current["description"]?.value == "" ||
-        contractDataRef.current["description"]?.value == undefined ||
-        contractDataRef.current["image"]?.value == "" ||
-        contractDataRef.current["image"]?.value == undefined
+        $contractFormData.name == "" ||
+        $contractFormData.name == undefined ||
+        $contractFormData.slug == "" ||
+        $contractFormData.slug == undefined ||
+        $contractFormData.description == "" ||
+        $contractFormData.description == undefined ||
+        $contractFormData.image == "" ||
+        $contractFormData.description == undefined
       ) {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
         return false;
       } else {
         return true;
@@ -40,13 +54,17 @@ const useContractCreate = (modal: any) => {
     }
     if (formStep == 3) {
       if (
-        contractDataRef.current["interested_events"]?.value == "" ||
-        contractDataRef.current["interested_events"]?.value == undefined ||
-        contractDataRef.current["interested_methods"]?.value == "" ||
-        contractDataRef.current["interested_methods"]?.value == undefined ||
-        contractDataRef.current["admins"]?.value == "" ||
-        contractDataRef.current["admins"]?.value == undefined
+        $contractFormData.interested_events == "" ||
+        $contractFormData.interested_events == undefined ||
+        $contractFormData.interested_methods == "" ||
+        $contractFormData.interested_methods == undefined
       ) {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
         return false;
       } else {
         return true;
@@ -59,7 +77,7 @@ const useContractCreate = (modal: any) => {
       return;
     } else {
       if (validateSteps()) {
-        setFormStep((currentStep) => currentStep + 1);
+        setFormStep((currentStep: any) => currentStep + 1);
       } else {
         return;
       }
@@ -70,41 +88,34 @@ const useContractCreate = (modal: any) => {
     if (formStep <= 1) {
       return;
     } else {
-      setFormStep((currentStep) => currentStep - 1);
+      setFormStep((currentStep: any) => currentStep - 1);
     }
   };
 
   const editContract = async (_id: any) => {
-    let interested_events = contractDataRef.current["interested_events"]?.value;
+    let interested_events = $contractFormData.interested_events;
     interested_events = interested_events.split(",");
     interested_events = interested_events.map((event: any) => {
       return event.trim();
     });
 
-    let interested_methods =
-      contractDataRef.current["interested_methods"]?.value;
+    let interested_methods = $contractFormData.interested_methods;
     interested_methods = interested_methods.split(",");
     interested_methods = interested_methods.map((event: any) => {
       return event.trim();
     });
 
-    let admins = contractDataRef.current["admins"]?.value;
-    admins = admins.split(",");
-    admins = admins.map((admin: any) => {
-      return admin.toLowerCase().trim();
-    });
 
     const contractPayload = {
-      name: contractDataRef.current["name"]?.value,
-      description: contractDataRef.current["description"]?.value,
-      address: contractDataRef.current["address"]?.value,
-      chain_id: contractDataRef.current["chain_id"]?.value,
-      slug: contractDataRef.current["slug"]?.value,
+      name: $contractFormData.name,
+      description: $contractFormData.description,    
+      address: $contractFormData.address,
+      chain_id: $contractFormData.chain_id,
+      slug: $contractFormData.slug,
+      read_abi_from: $contractFormData.read_abi_from,
+      image: $contractFormData.image,
       interested_methods: interested_methods,
       interested_events: interested_events,
-      read_abi_from: contractDataRef.current["read_abi_from"]?.value,
-      id: _id,
-      admins: admins,
     };
 
     // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
@@ -119,12 +130,10 @@ const useContractCreate = (modal: any) => {
       contractPayload.chain_id == "" ||
       contractPayload.slug == undefined ||
       contractPayload.slug == "" ||
-      contractDataRef.current["interested_methods"].value == "" ||
-      contractDataRef.current["interested_methods"].value == undefined ||
-      contractDataRef.current["interested_events"].value == "" ||
-      contractDataRef.current["interested_events"].value == undefined ||
-      contractDataRef.current["admins"].value == "" ||
-      contractDataRef.current["admins"].value == undefined
+      $contractFormData.interested_methods == "" ||
+      $contractFormData.interested_methods == undefined ||
+      $contractFormData.interested_events == "" ||
+      $contractFormData.interested_events == undefined
     ) {
       toast({
         title: "Required fields cannot be empty",
@@ -148,36 +157,28 @@ const useContractCreate = (modal: any) => {
   };
 
   const publishContract = async () => {
-    let interested_events = contractDataRef.current["interested_events"]?.value;
+    let interested_events = $contractFormData.interested_events;
     interested_events = interested_events.split(",");
     interested_events = interested_events.map((event: any) => {
       return event.trim();
     });
 
-    let interested_methods =
-      contractDataRef.current["interested_methods"]?.value;
+    let interested_methods = $contractFormData.interested_methods;
     interested_methods = interested_methods.split(",");
     interested_methods = interested_methods.map((event: any) => {
       return event.trim();
     });
 
-    let admins = contractDataRef.current["admins"]?.value;
-    admins = admins.split(",");
-    admins = admins.map((admin: any) => {
-      return admin.toLowerCase().trim();
-    });
-
     const contractPayload = {
-      name: contractDataRef.current["name"]?.value,
-      description: contractDataRef.current["description"]?.value,
-      address: contractDataRef.current["address"]?.value,
-      chain_id: contractDataRef.current["chain_id"]?.value,
-      slug: contractDataRef.current["slug"]?.value,
+      name: $contractFormData.name,
+      description: $contractFormData.description,    
+      address: $contractFormData.address,
+      chain_id: $contractFormData.chain_id,
+      slug: $contractFormData.slug,
+      read_abi_from: $contractFormData.read_abi_from,
+      image: $contractFormData.image,
       interested_methods: interested_methods,
       interested_events: interested_events,
-      read_abi_from: contractDataRef.current["read_abi_from"]?.value,
-      image: contractDataRef.current["image"]?.value,
-      admins: admins,
     };
 
     // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
@@ -194,12 +195,10 @@ const useContractCreate = (modal: any) => {
       contractPayload.slug == "" ||
       contractPayload.image == undefined ||
       contractPayload.image == "" ||
-      contractDataRef.current["interested_methods"].value == "" ||
-      contractDataRef.current["interested_methods"].value == undefined ||
-      contractDataRef.current["interested_events"].value == "" ||
-      contractDataRef.current["interested_events"].value == undefined ||
-      contractDataRef.current["admins"].value == "" ||
-      contractDataRef.current["admins"].value == undefined
+      $contractFormData.interested_methods == "" ||
+      $contractFormData.interested_methods == undefined ||
+      $contractFormData.interested_events == "" ||
+      $contractFormData.interested_events == undefined
     ) {
       toast({
         title: "Required fields cannot be empty",
@@ -209,21 +208,33 @@ const useContractCreate = (modal: any) => {
       });
     } else {
       console.log("The contract payload data is ", contractPayload);
-      // createNewContract(contractPayload).then((res) => {
-      //   modal.onClose()
-      //   toast({
-      //     title: "Contract created!",
-      //     status: "success",
-      //     duration: 3000,
-      //     position: "top-right"
-      //   });
-      //   router.push(`/search/contracts/${contractPayload.slug}`)
-      // })
+      createNewContract(contractPayload).then((res) => {
+        modal.onClose()
+        toast({
+          title: "Contract created!",
+          status: "success",
+          duration: 3000,
+          position: "top-right"
+        });
+        router.push(`/search/contracts/${contractPayload.slug}`)
+        $loadContractFormData({
+          name: "",
+          description: "",    
+          address: "",
+          chain_id: "",
+          slug: "",
+          interested_methods: "",
+          interested_events: "",
+          read_abi_from: "",
+          image: "",
+        })
+      })
     }
   };
 
   return {
-    contractDataRef: contractDataRef,
+    $contractFormData: $contractFormData,
+    $loadContractFormData: $loadContractFormData,
     publishContract: publishContract,
     editContract: editContract,
     formStep: formStep,

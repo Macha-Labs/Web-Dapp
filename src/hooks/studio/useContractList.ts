@@ -4,12 +4,12 @@ const useContractList = () => {
 
     const [contractList, setContractList] = useState<any>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [filterData,setFilteredData] = useState<any>(contractList);
+    const [filterData, setFilteredData] = useState<any>(contractList);
 
     useEffect(() => {
         _fetch()
     }, [])
-    
+
 
     const _fetch = async () => {
         allContracts().then((res: any) => {
@@ -19,19 +19,33 @@ const useContractList = () => {
             setFilteredData(res.data)
         });
     };
-    const handleFilter = (inputValue: string) => {
+
+    const handleSearch = (inputValue: string) => {
         const filtered = contractList.filter((item: any) => {
-          return item.contract.name.toLowerCase().includes(inputValue.toLowerCase());
+            return item.contract.name.toLowerCase().includes(inputValue.toLowerCase());
         });
         setFilteredData(filtered);
-      };
+    };
 
+    const handleFilter = (desired_chain_id: any) => {
+        const filtered = contractList.filter((item: any) => {
+            return parseInt(item.contract.chain_id,10) == parseInt(desired_chain_id,10)
+        })
+        console.log("filtered", filtered)
+        setFilteredData(filtered)
+    }
+
+    const clearFilters = () => {
+        setFilteredData(contractList)
+    }
 
     return {
         contractList: contractList,
         isLoading: isLoading,
+        handleSearch: handleSearch,
+        filterData: filterData,
         handleFilter: handleFilter,
-        filterData: filterData
+        clearFilters: clearFilters
     }
 }
 export default useContractList

@@ -141,6 +141,12 @@ const GlobalIcons: any = {
     "/icons/svg/Base-blue/base-blue-rocket.svg?updatedAt=1686739684462",
   "icon-colored-deploy":
     "/icons/svg/miscellaneous_icons/coloured-deploy.svg?updatedAt=1689916345670",
+  "icon-blue-tick":
+    "/icons/svg/miscellaneous_icons/Blue%20tick.svg?updatedAt=1690176667897",
+  "icon-almost-there":
+    "/icons/svg/miscellaneous_icons/Almost%20there%20icon.svg?updatedAt=1690182854825",
+  "icon-congrats":
+    "/icons/svg/miscellaneous_icons/congrats%20icon.svg?updatedAt=1690182854654",
   "logo-Lens": "/Studio-Logos/lens.svg?updatedAt=1686740026746",
   "logo-Macha": "/Studio-Logos/metawork.svg?updatedAt=1686740613025",
   "logo-Farcaster": "/Studio-Logos/farcaster.svg?updatedAt=1686740612210",

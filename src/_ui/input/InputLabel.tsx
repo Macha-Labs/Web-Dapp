@@ -4,6 +4,7 @@ import { StyledCard } from "@/styles/StyledComponents";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { DragEvent, useRef, useState } from "react";
 import { style as gStyle } from "../../styles/StyledConstants";
+import ButtonNative from "../buttons/ButtonNative";
 import FlexColumn from "../flex/FlexColumn";
 import IconBase from "../icons/IconsBase";
 
@@ -22,6 +23,9 @@ type Props = {
   marginLeft?: string;
   marginBottom?: string;
   marginRight?: string;
+  fileDropMinHeight?: string;
+  inputLogoSize?: string;
+  value?: any
 };
 
 const InputLabel = ({
@@ -29,16 +33,19 @@ const InputLabel = ({
   labelText,
   placeholder,
   defaultValue,
-  onChange = (e?: any) => {},
+  onChange,
   padding,
   style,
   disabled = false,
   elementRef,
   inputType,
   marginTop,
+  value,
   marginLeft,
   marginBottom,
   marginRight,
+  fileDropMinHeight,
+  inputLogoSize
 }: Props) => {
   // for text type inputs
   const inputLabelText = () => {
@@ -69,9 +76,10 @@ const InputLabel = ({
         <StyledCard className="w-100">
           {LayoutInputs({
             id,
-            elementRef,
+            // elementRef,
             placeholder,
             defaultValue,
+            value,
             onChange,
             disabled,
             style,
@@ -82,7 +90,7 @@ const InputLabel = ({
   };
 
   // for uploading attachments
-  const InputLabelFile = () => {
+  const InputLabelDropFile = () => {
     const [dragActive, setDragActive] = useState<any>(false);
     const inputRef = useRef<any>(null);
 
@@ -145,20 +153,21 @@ const InputLabel = ({
                 )"
           bgClip="text"
           lineHeight={1.3}
-          // className="m-b-1"
+        // className="m-b-1"
         >
           {labelText}
         </Heading>
         <Box
           // background="red"
           border="2px dashed #004AD9"
-          minHeight="200px"
+          minHeight={fileDropMinHeight ? fileDropMinHeight : "200px"}
           width="100%"
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
           borderRadius={gStyle.input.borderRadius.default}
+          padding="1rem"
         >
           <input
             ref={inputRef}
@@ -185,7 +194,7 @@ const InputLabel = ({
               <IconBase
                 slug="icon-upload"
                 style={{ marginBottom: "sm" }}
-                size="2xl"
+                size={inputLogoSize ? inputLogoSize : "2xl"}
               />
               <Text className="m-b-0">Drag and drop here </Text>
               <Text
@@ -210,6 +219,49 @@ const InputLabel = ({
     );
   };
 
+  const InputLabelFile = () => {
+    const inputRef = useRef<any>(null);
+
+    const onButtonClick = () => {
+      inputRef.current.click();
+    };
+
+    return (
+      <FlexColumn
+        width="100%"
+        padding={padding}
+        height="fit-content"
+        vrAlign="flex-start"
+        marginTop={marginTop ? marginTop : "sm"}
+      >
+        <Heading
+          as="h6"
+          size="sm"
+          bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+          bgClip="text"
+          lineHeight={1.3}
+        // className="m-b-1"
+        >
+          {labelText}
+        </Heading>  
+        <input
+          ref={inputRef}
+          type="file"
+          id="input-file-upload"
+          // id="upload-file"
+          multiple={false}
+          onChange={onChange}
+          hidden
+        />
+        <ButtonNative onClick={onButtonClick} text="Upload File" iconRight={{slug: "icon-upload"}} variant="state_default_hover" />
+      </FlexColumn>
+    );
+  };
+
   const InputLabelTextArea = () => {
     return (
       <FlexColumn
@@ -219,7 +271,7 @@ const InputLabel = ({
         height="fit-content"
         padding={padding}
         marginTop={marginTop ? marginTop : "sm"}
-        // marginTop={"100px"}
+      // marginTop={"100px"}
       >
         <Heading
           as="h6"
@@ -257,6 +309,8 @@ const InputLabel = ({
 
   if (inputType == "file") {
     return <InputLabelFile />;
+  } else if (inputType == "dropFile") {
+    return <InputLabelDropFile />;
   } else if (inputType == "textArea") {
     return <InputLabelTextArea />;
   } else {

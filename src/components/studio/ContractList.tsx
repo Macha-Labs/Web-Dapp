@@ -7,6 +7,8 @@ import ContractCard from "../cards/ContractCard";
 import InputSearch from "@/_ui/input/InputSearch";
 import { style } from "@/styles/StyledConstants";
 import { useDisclosure, Box } from "@chakra-ui/react";
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
+import chains from "@/data/network";
 
 type Props = {
   metaInfo: any;
@@ -16,16 +18,45 @@ const ContractList = () => {
   const router = useRouter();
   const hookContractList = useContractList();
 
+  let contractFilterOptions = [
+    {
+      value: "All Contracts",
+      leftIcon: "icon-notification",
+      onClick: () => {
+        hookContractList.clearFilters()
+      },
+    },
+  ];
+
+  Object.keys(chains).forEach(key => {
+    contractFilterOptions.push({
+      value: chains[key].chainName,
+      leftIcon: chains[key].chainImage,
+      onClick: () => {
+        hookContractList.handleFilter(key)
+      }
+    })
+  })
+
   const renderComponent = () => {
     return (
       <>
-        <Box width="50%" paddingTop={style.padding.xxl} >
+        <Box style={{ width: "70%", marginTop: `${style.margin.sm}`, height: "fit-content", paddingTop: `${style.padding.xxl}`, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "start" }}>
           <InputSearch
-            marginTop={style.margin.sm}
             size="lg"
             placeholder="Search Studio"
             icon={{ slug: "icon-search" }}
-            onChange={(e: any) => hookContractList.handleFilter(e.target.value)}
+            onChange={(e: any) => hookContractList.handleSearch(e.target.value)}
+          />
+          <ButtonMenu
+            size={"lg"}
+            text={"Filter Contracts"}
+            marginLeft={style.margin.md}
+            icon={{
+              slug: "icon-chevron-down",
+              style: "",
+            }}
+            options={contractFilterOptions}
           />
         </Box>
         <FlexRow
@@ -41,40 +72,40 @@ const ContractList = () => {
               <Loader size="lg" />
             </FlexRow>
           )}
-            <Box width="100vw" display="flex" flexWrap="wrap" paddingLeft={1}>
-              {!hookContractList.isLoading &&
-                hookContractList?.filterData &&
-                hookContractList?.filterData.map((item: any, index: number) => {
-                  console.log("Checking request ", item);
-                  return (
-                    <ContractCard
-                      key={index}
-                      // cardView="horizontal"
-                      height="8rem"
-                      chainId={item?.contract?.chain_id}
-                      address={item?.contract?.address}
-                      heading={item?.contract?.name}
-                      image={
-                        item?.contract?.image
-                          ? item?.contract?.image
-                          : "https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
-                      }
-                      description={item?.contract?.description}
-                      onCardClick={() => {
-                        router.push(
-                          {
-                            pathname: `/search/contracts/[id]`,
-                            query: {
-                              id: item?.contract?.slug,
-                            },
+          <Box width="100vw" display="flex" flexWrap="wrap" paddingLeft={1}>
+            {!hookContractList.isLoading &&
+              hookContractList?.filterData &&
+              hookContractList?.filterData.map((item: any, index: number) => {
+                console.log("Checking request ", item);
+                return (
+                  <ContractCard
+                    key={index}
+                    // cardView="horizontal"
+                    height="8rem"
+                    chainId={item?.contract?.chain_id}
+                    address={item?.contract?.address}
+                    heading={item?.contract?.name}
+                    image={
+                      item?.contract?.image
+                        ? item?.contract?.image
+                        : "https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                    }
+                    description={item?.contract?.description}
+                    onCardClick={() => {
+                      router.push(
+                        {
+                          pathname: `/search/contracts/[id]`,
+                          query: {
+                            id: item?.contract?.slug,
                           },
-                          `/search/contracts/${item?.contract?.slug}`
-                        );
-                      }}
-                    />
-                  );
-                })}
-            </Box>
+                        },
+                        `/search/contracts/${item?.contract?.slug}`
+                      );
+                    }}
+                  />
+                );
+              })}
+          </Box>
         </FlexRow>
       </>
     );

@@ -93,6 +93,25 @@ body {
   font-size: 16px;
 }
 
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background: #00040d;
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: #0f172e;
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: #0f172e;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

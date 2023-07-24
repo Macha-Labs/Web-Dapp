@@ -13,6 +13,7 @@ type Props = {
   type?: string;
   elementRef?: any;
   id?: any;
+  value?: any;
 };
 
 const LayoutInputs = ({
@@ -21,23 +22,24 @@ const LayoutInputs = ({
   style,
   placeholder,
   defaultValue,
-  onChange = (e?: any) => {},
+  onChange,
   disabled,
   required,
   display,
   variant,
   type,
   elementRef,
+  value
 }: Props) => {
   return (
     <div>
       <Input
         id={id}
-        ref={elementRef}
+        value={value}
         key={index}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
         isDisabled={disabled}
         isRequired={required}
         // className="m-b-0-5"

@@ -138,7 +138,7 @@ export const ConnectWalletButton = (props: any) => {
                           style={` marginLeft: "10px" `}
                         />
                       }
-                      height={"35px"}
+                      height={"3rem"}
                     >
                       <FlexRow>
                         <Image src={"../assets/Avatar.svg"} alt="avatar" />
@@ -152,7 +152,7 @@ export const ConnectWalletButton = (props: any) => {
                       </FlexRow>
                     </MenuButton>
                     <MenuList>
-                      <MenuItem onClick={() => {}}>
+                      <MenuItem onClick={() => { }}>
                         <FlexRow hrAlign="space-between">
                           <Image
                             style={{ height: "25px", width: "25px" }}
@@ -205,18 +205,15 @@ export const ConnectWalletButton = (props: any) => {
                             hrAlign="flex-start"
                             width="90%"
                             marginLeft={"sm"}
-                            
                           >
                             {"Register as Publisher"}
-                            
                           </FlexRow>
-
                         </FlexRow>
                       </MenuItem>
                       <CreatePublisherModal
-                              modal={publisherModal}
-                              hookPublisherCreate={hookPublisherCreate}
-                            />
+                        modal={publisherModal}
+                        hookPublisherCreate={hookPublisherCreate}
+                      />
                     </MenuList>
                   </Menu>
                 </div>
