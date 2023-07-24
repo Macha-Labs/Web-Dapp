@@ -4,6 +4,7 @@ import usePublisherFormStore from "@/store/usePublisherFormStore";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import useMacha from "./useMacha";
 
 const usePublisherCreate = (modal: any) => {
   const publisherDataRef = useRef<any>({});
@@ -12,29 +13,32 @@ const usePublisherCreate = (modal: any) => {
   const [formStep, setFormStep] = useState<any>(1);
   const [publisherType, setPublisherType] = useState<any>(undefined);
   const $address = useAuthStore((state: any) => state.address);
-  const $publisherFormData = usePublisherFormStore((state: any) => state.publisherFormData);
-  const $loadPublisherFormData = usePublisherFormStore((state: any) => state.loadPublisherFormData);
-
+  const $publisherFormData = usePublisherFormStore(
+    (state: any) => state.publisherFormData
+  );
+  const $loadPublisherFormData = usePublisherFormStore(
+    (state: any) => state.loadPublisherFormData
+  );
+  const hookMacha = useMacha();
 
   useEffect(() => {
-    if ($address != null)
-      $loadPublisherFormData({ address: $address })
-  }, [$address])
+    if ($address != null) $loadPublisherFormData({ address: $address });
+  }, [$address]);
 
   const setClear = () => {
     setFormStep(1);
-    setPublisherType(undefined)
+    setPublisherType(undefined);
     $loadPublisherFormData({
       name: "",
       email: "",
       logo: "",
-      website: ""
-    })
-  }
+      website: "",
+    });
+  };
 
   const selectPublisher = (type: string) => {
-    setPublisherType(type)
-  }
+    setPublisherType(type);
+  };
 
   const validateSteps = () => {
     if (formStep == 4) {
@@ -43,25 +47,36 @@ const usePublisherCreate = (modal: any) => {
       } else {
         return true;
       }
-    }
-    else if (formStep == 5 && publisherType == "Individual") {
-      if ($publisherFormData.name == "" || $publisherFormData.name == undefined || $publisherFormData.address == "" || $publisherFormData.address == undefined || $publisherFormData.email == "" || $publisherFormData.email == undefined
+    } else if (formStep == 5 && publisherType == "Individual") {
+      if (
+        $publisherFormData.name == "" ||
+        $publisherFormData.name == undefined ||
+        $publisherFormData.address == "" ||
+        $publisherFormData.address == undefined ||
+        $publisherFormData.email == "" ||
+        $publisherFormData.email == undefined
       ) {
         return false;
       } else {
         return true;
       }
-    }
-    else if (formStep == 5 && publisherType == "Organization") {
-      if ($publisherFormData.name == "" || $publisherFormData.name == undefined || $publisherFormData.address == "" || $publisherFormData.address == undefined || $publisherFormData.logo == "" || $publisherFormData.logo == undefined || $publisherFormData.website == "" || $publisherFormData.website == undefined
+    } else if (formStep == 5 && publisherType == "Organization") {
+      if (
+        $publisherFormData.name == "" ||
+        $publisherFormData.name == undefined ||
+        $publisherFormData.address == "" ||
+        $publisherFormData.address == undefined ||
+        $publisherFormData.logo == "" ||
+        $publisherFormData.logo == undefined ||
+        $publisherFormData.website == "" ||
+        $publisherFormData.website == undefined
       ) {
         return false;
       } else {
         return true;
       }
-    }
-    else {
-      return true
+    } else {
+      return true;
     }
   };
 
@@ -92,48 +107,67 @@ const usePublisherCreate = (modal: any) => {
   };
 
   const createPublisher = async () => {
-
     if (publisherType == "Individual") {
       let publisherPayload = {
         name: $publisherFormData.name,
         address: $publisherFormData.address,
         email: $publisherFormData.email,
-      }
-      if (publisherPayload.name == undefined || publisherPayload.name == "" || publisherPayload.address == undefined || publisherPayload.address == "" || publisherPayload.email == undefined || publisherPayload.email == "") {
+        id: "",
+        image: "",
+        ipfsCid: "",
+        type: "Individual",
+      };
+      if (
+        publisherPayload.name == undefined ||
+        publisherPayload.name == "" ||
+        publisherPayload.address == undefined ||
+        publisherPayload.address == "" ||
+        publisherPayload.email == undefined ||
+        publisherPayload.email == ""
+      ) {
         toast({
           title: "Required fields cannot be empty",
           status: "warning",
           duration: 3000,
           position: "top-right",
         });
-      }
-      else {
+      } else {
         console.log("The publisher payload data is ", publisherPayload);
-        createNewPublisher(publisherPayload, "Individual").then((res) => {
-          nextFormStep()
-        })
+        // createNewPublisher(publisherPayload, "Individual").then((res) => {
+        //   nextFormStep()
+        // })
+        hookMacha.createMachaPublisher(publisherPayload);
       }
-    }
-    else if (publisherType == "Organization") {
+    } else if (publisherType == "Organization") {
       let publisherPayload = {
         name: $publisherFormData.name,
         address: $publisherFormData.address,
         logo: $publisherFormData.logo,
-        website: $publisherFormData.website
-      }
-      if (publisherPayload.name == undefined || publisherPayload.name == "" || publisherPayload.address == undefined || publisherPayload.address == "" || publisherPayload.name == undefined || publisherPayload.name == "" || publisherPayload.logo == undefined || publisherPayload.logo == "" || publisherPayload.website == undefined || publisherPayload.website == "") {
+        website: $publisherFormData.website,
+      };
+      if (
+        publisherPayload.name == undefined ||
+        publisherPayload.name == "" ||
+        publisherPayload.address == undefined ||
+        publisherPayload.address == "" ||
+        publisherPayload.name == undefined ||
+        publisherPayload.name == "" ||
+        publisherPayload.logo == undefined ||
+        publisherPayload.logo == "" ||
+        publisherPayload.website == undefined ||
+        publisherPayload.website == ""
+      ) {
         toast({
           title: "Required fields cannot be empty",
           status: "warning",
           duration: 3000,
           position: "top-right",
         });
-      }
-      else {
+      } else {
         console.log("The publisher payload data is ", publisherPayload);
         createNewPublisher(publisherPayload, "Organization").then((res) => {
-          nextFormStep()
-        })
+          nextFormStep();
+        });
       }
     }
   };
@@ -148,7 +182,7 @@ const usePublisherCreate = (modal: any) => {
     $address: $address,
     setClear: setClear,
     $publisherFormData: $publisherFormData,
-    $loadPublisherFormData: $loadPublisherFormData
+    $loadPublisherFormData: $loadPublisherFormData,
   };
 };
 export default usePublisherCreate;
