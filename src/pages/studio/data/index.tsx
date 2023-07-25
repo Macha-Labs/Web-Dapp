@@ -44,10 +44,10 @@ const DashBoard = () => {
       value: "Contracts",
       href: "",
     },
-    {
-      value: "Functions",
-      href: "",
-    },
+    // {
+    //   value: "Functions",
+    //   href: "",
+    // },
   ];
 
   const renderAPIs = () => {
@@ -65,7 +65,6 @@ const DashBoard = () => {
       <>
         <NavBlock marginTop={style.margin["nav"]}>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            {/* <Box cursor={"not-allowed"}> */}
             <FlexRow hrAlign="flex-start" vrAlign="center">
               <Tabs
                 width="fit-content"
@@ -74,22 +73,27 @@ const DashBoard = () => {
                 value={selectedNavTab}
                 onChange={setSelectedNavTab}
               />
+              <Box cursor={"not-allowed"}>
+                <Text className="mb-0" color="#C6C6C6">
+                  Functions
+                </Text>
+              </Box>
             </FlexRow>
-            {/* </Box> */}
-            {selectedNavTab == "Contracts" && (
-              <ButtonNative
-                size="sm"
-                text="Create Contract"
-                variant="state_brand"
-                marginRight="0px"
-                paddingLeft="sm"
-                paddingRight="sm"
-                onClick={() => {
-                  contractModal.onOpen();
-                }}
-              />
-            )}
-            {selectedNavTab == "Functions" && (
+
+            <ButtonNative
+              size="sm"
+              text="Create Contract"
+              variant="state_brand"
+              marginRight="0px"
+              paddingLeft="sm"
+              paddingRight="sm"
+              height="2.5rem"
+              onClick={() => {
+                contractModal.onOpen();
+              }}
+            />
+
+            {/* {selectedNavTab == "Functions" && (
               <ButtonNative
                 size="sm"
                 text="Create Function"
@@ -101,7 +105,7 @@ const DashBoard = () => {
                   metaModal.onOpen();
                 }}
               />
-            )}
+            )} */}
           </FlexRow>
         </NavBlock>
 
