@@ -137,13 +137,23 @@ const usePublisherCreate = (modal: any) => {
         //   nextFormStep()
         // })
         hookMacha.createMachaPublisher(publisherPayload);
+        toast({
+          title: "Publisher Request Submitted",
+          status: "success",
+          duration: 3000,
+          position: "top-right",
+        });
+        modal.onClose()
       }
     } else if (publisherType == "Organization") {
       let publisherPayload = {
         name: $publisherFormData.name,
         address: $publisherFormData.address,
-        logo: $publisherFormData.logo,
-        website: $publisherFormData.website,
+        image: $publisherFormData.logo,
+        email: "",
+        id: "",
+        ipfsCid: "",
+        type: "Organization"
       };
       if (
         publisherPayload.name == undefined ||
@@ -152,11 +162,8 @@ const usePublisherCreate = (modal: any) => {
         publisherPayload.address == "" ||
         publisherPayload.name == undefined ||
         publisherPayload.name == "" ||
-        publisherPayload.logo == undefined ||
-        publisherPayload.logo == "" ||
-        publisherPayload.website == undefined ||
-        publisherPayload.website == ""
-      ) {
+        publisherPayload.image == undefined ||
+        publisherPayload.image == "" ) {
         toast({
           title: "Required fields cannot be empty",
           status: "warning",
@@ -165,9 +172,17 @@ const usePublisherCreate = (modal: any) => {
         });
       } else {
         console.log("The publisher payload data is ", publisherPayload);
-        createNewPublisher(publisherPayload, "Organization").then((res) => {
-          nextFormStep();
+        // createNewPublisher(publisherPayload, "Organization").then((res) => {
+        //   nextFormStep();
+        // });
+        hookMacha.createMachaPublisher(publisherPayload);
+        toast({
+          title: "Publisher Request Submitted",
+          status: "success",
+          duration: 3000,
+          position: "top-right",
         });
+        modal.onClose()
       }
     }
   };

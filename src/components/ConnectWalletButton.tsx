@@ -18,12 +18,14 @@ import {
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import CreatePublisherModal from "./studio/PublisherModal";
 import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
+import useMacha from "@/hooks/studio/useMacha";
 
 export const ConnectWalletButton = (props: any) => {
   const publisherModal = useDisclosure();
   const $address = useAuthStore((state: any) => state.address);
   const $loadAddress = useAuthStore((state: any) => state.loadAddress);
   const hookMachaAuth = useMachaAuth();
+  const hookMacha = useMacha();
   const hookPublisherCreate = usePublisherCreate(publisherModal);
   // console.log("mobile device detection", window.navigator.userAgent);
   return (
@@ -194,7 +196,7 @@ export const ConnectWalletButton = (props: any) => {
                           </FlexRow>
                         </FlexRow>
                       </MenuItem>
-                      <MenuItem
+                      {!hookMacha.publisherExists && <MenuItem
                         onClick={() => {
                           publisherModal.onOpen();
                         }}
@@ -209,7 +211,7 @@ export const ConnectWalletButton = (props: any) => {
                             {"Register as Publisher"}
                           </FlexRow>
                         </FlexRow>
-                      </MenuItem>
+                      </MenuItem>}
                       <CreatePublisherModal
                         modal={publisherModal}
                         hookPublisherCreate={hookPublisherCreate}

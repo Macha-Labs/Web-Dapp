@@ -15,7 +15,7 @@ const useContractTxn = () => {
       console.log("contract txn fetching", res);
       setIsLoading(false)
       setContractTxnDetails(res.data);
-      setFilteredData(res.data);
+      setFilteredData(res.data.reverse());
     });
   };
 

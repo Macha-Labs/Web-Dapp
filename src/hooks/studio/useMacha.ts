@@ -7,37 +7,44 @@ import { PublisherDataInterface } from "@metaworklabs/macha-dev-sdk/lib/interfac
 import { fetchSigner, watchAccount } from "@wagmi/core";
 import { ethers } from "ethers";
 import { useEffect } from "react";
+import { useSigner } from "wagmi";
 
 const useMacha = () => {
   // const $loadMacha = useMachaStore((state: any) => state.loadMacha);
   //   const $signer = useAuthStore((state: any) => state.signer);
   const [publisherExists, setPublisherExists] = useState<boolean>();
-  let signer: any;
-  useEffect(() => {
-    const _fetchSigner = async () => {
-      signer = await fetchSigner();
-    };
-    _fetchSigner();
-    console.log("from usemacha");
-  });
-
+  const { data: signer } = useSigner();
   const $address = useAuthStore((state: any) => state.address);
-  const macha = new Macha({ owner: $address, signer: signer });
+  let macha: Macha;
+
+  useEffect(() => {
+    if(signer){
+      macha = new Macha({ owner: $address, signer: signer });
+      connectMachaPublisher()
+    }
+  },[signer,$address])
+
 
   const createMachaPublisher = async (
     publisherData: PublisherDataInterface
   ) => {
     try {
-      await macha?.createPublisher(publisherData);
+      if(signer){
+        macha = new Macha({ owner: $address, signer: signer })
+        console.log("create publisher called", macha)
+        await macha?.createPublisher(publisherData);
+      }
     } catch (error) {
       console.log("Error in createMachaPublisher", error);
     }
   };
 
   const connectMachaPublisher = async () => {
-    const machaCreated = (await macha?.connectPublisher()) ? true : false;
-    setPublisherExists(machaCreated);
+    const machaCreated: any = (await macha?.connectPublisher());
+    console.log("macha created",machaCreated)
+    setPublisherExists(machaCreated?.data?.data == null ? false : true);
   };
+
   return {
     createMachaPublisher: createMachaPublisher,
     connectMachaPublisher: connectMachaPublisher,

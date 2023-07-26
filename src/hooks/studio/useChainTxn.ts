@@ -15,7 +15,7 @@ const useChainTxn = () => {
       console.log("chain txn fetching", res);
       setIsLoading(false)
       setChainTxnDetails(res.data);
-      setFilteredData(res.data);
+      setFilteredData(res.data.reverse());
       setCursor(res.cursor)
     });
   };

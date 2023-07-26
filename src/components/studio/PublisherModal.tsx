@@ -251,7 +251,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     >
                       Choose the type of publisher account
                     </Text> */}
-                      <Text textAlign="left">For individual plan is good</Text>
+                      {/* <Text textAlign="left">For individual plan is good</Text> */}
                     </Box>
                     <Box
                       style={{

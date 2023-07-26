@@ -173,10 +173,12 @@ const TxnTable = ({ txnData }: Prop) => {
                       justifyContent: "center",
                     }}
                   >
-                    <Avatar
-                      size="xxs"
-                      src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
-                    />
+                    <Box width="2.1rem" height="2.1rem">
+                      <Avatar
+                        size="xxs"
+                        src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                      />
+                    </Box>
                     <Text
                       paddingLeft={2}
                       marginBottom={0}
@@ -200,10 +202,12 @@ const TxnTable = ({ txnData }: Prop) => {
                       justifyContent: "center",
                     }}
                   >
-                    <Avatar
-                      size="xxs"
-                      src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
-                    />
+                    <Box width="2.1rem" height="2.1rem">
+                      <Avatar
+                        size="xxs"
+                        src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                      />
+                    </Box>
                     <Text
                       paddingLeft={2}
                       marginBottom={0}

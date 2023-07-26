@@ -15,6 +15,7 @@ import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import ContractList from "@/components/studio/ContractList";
 import CreatePublisherModal from "@/components/studio/PublisherModal";
 import useContractCreate from "@/hooks/studio/useContractCreate";
+import useMacha from "@/hooks/studio/useMacha";
 import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
@@ -25,15 +26,16 @@ const DashBoard = () => {
   const $address = useAuthStore((state: any) => state.address);
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
   const [exploreMeta, setExploreMeta] = useState<any>([]);
+  const [isPublisher,setIsPublisher] = useState<any>(false);
 
   const fetchmetas = async () => {
     const allMetas = await fetchAllMetas();
-
     setExploreMeta(allMetas.data);
   };
   const contractModal = useDisclosure();
   const metaModal = useDisclosure();
   const hookContractCreate = useContractCreate(contractModal);
+  const hookMacha = useMacha();
 
   useEffect(() => {
     fetchmetas();
@@ -80,7 +82,7 @@ const DashBoard = () => {
               </Box>
             </FlexRow>
 
-            <ButtonNative
+            {hookMacha.publisherExists && <ButtonNative
               size="sm"
               text="Create Contract"
               variant="state_brand"
@@ -91,7 +93,7 @@ const DashBoard = () => {
               onClick={() => {
                 contractModal.onOpen();
               }}
-            />
+            />}
 
             {/* {selectedNavTab == "Functions" && (
               <ButtonNative
