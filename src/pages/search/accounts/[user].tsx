@@ -19,6 +19,7 @@ import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import useAuthStore from "@/store/useAuthStore";
 import { truncateAddress } from "@/helpers";
 import InputSearch from "@/_ui/input/InputSearch";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -186,6 +187,13 @@ const Network = () => {
                     >
                       Transactions in the last 12 hours{" "}
                     </Text>
+                    <Box style={{ display: "flex", alignItems: "end", marginBottom: `${style.margin.md}`, marginTop: `${style.margin.sm}` }}>
+                      <ButtonNative marginRight="sm" onClick={() => { }} text="first" variant="state_default_hover" />
+                      <ButtonNative marginRight="sm" onClick={() => { }} text="Prev" disabled={true} variant="state_default_hover" />
+                      <Text marginRight={style.margin.sm}>Page 1 of 45</Text>
+                      <ButtonNative marginRight="sm" onClick={() => { }} disabled={true} text="Next" variant="state_default_hover" />
+                      <ButtonNative marginRight="sm" onClick={() => { }} text="last" variant="state_default_hover" />
+                    </Box>
                     <Box
                       marginTop="1rem"
                       border={style.table.border.thead}

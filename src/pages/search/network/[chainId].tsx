@@ -131,43 +131,20 @@ const Network = () => {
       <>
         {selectedNavTab == "Transactions" && (
           <>
-            {hookChainTxn.isLoading ? (
-              <FlexRow height="100px">
-                <Loader size="lg" />
-              </FlexRow>
-            ) : (
-              hookChainTxn?.filteredData[0] && (
-                <>
-                  <Box border={style.table.border.thead} borderRadius="20px">
-                    {/* Content for Tab 1 */}
-                    {hookChainTxn?.filteredData[0] && (
-                      <TxnTable txnData={hookChainTxn?.filteredData} />
-                    )}
-                  </Box>
-                  <Box
-                    marginY={10}
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    {hookChainTxn.filteredData.length >= 10 && (
-                      <ButtonNative
-                        variant="state_brand"
-                        marginTop={style.margin["lg"]}
-                        onClick={() =>
-                          hookChainTxn._fetch(router.query.chainId)
-                        }
-                      >
-                        Next
-                      </ButtonNative>
-                    )}
-                  </Box>
-                </>
-              )
-            )}
+            <Box style={{ display: "flex", alignItems: "end", marginBottom: `${style.margin.md}` }}>
+              <ButtonNative marginRight="sm" onClick={() => { }} text="first" variant="state_default_hover" />
+              <ButtonNative marginRight="sm" onClick={() => { }} text="Prev" disabled={true}  variant="state_default_hover" />
+              <Text marginRight={style.margin.sm}>Page 1 of 45</Text>
+              <ButtonNative marginRight="sm" onClick={() => hookChainTxn._fetch(router.query.chainId)} disabled={hookChainTxn.filteredData.length < 10} text="Next" variant="state_default_hover" />
+              <ButtonNative marginRight="sm" onClick={() => { }} text="last" variant="state_default_hover" />
+            </Box>
+            <Box
+              border={style.table.border.thead}
+              borderRadius="20px"
+            >
+              {/* Content for Tab 1 */}
+              {hookChainTxn?.filteredData[0] && <TxnTable txnData={hookChainTxn?.filteredData} />}
+            </Box>
           </>
         )}
       </>
@@ -299,10 +276,7 @@ const Network = () => {
               <Tabs
                 width="fit-content"
                 options={chainNav}
-                gstyle={{
-                  fontSize: `${style.font.h5}`,
-                  marginBottom: `${style.margin.md}`,
-                }}
+                gstyle={{ fontSize: `${style.font.h5}`, marginBottom: `${style.margin.sm}` }}
                 value={selectedNavTab}
                 onChange={setSelectedNavTab}
               />

@@ -76,10 +76,11 @@ const DashBoard = () => {
                 value={selectedNavTab}
                 onChange={setSelectedNavTab}
               />
-              <Box cursor={"not-allowed"}>
-                <Text className="mb-0" color="#C6C6C6">
+              <Box cursor={"not-allowed"} style={{display:"flex", flexDirection: "row"}}>
+                <Text className="mb-0" color="#C6C6C6" marginRight="2px">
                   Functions
                 </Text>
+                <TagNative value="soon" size="sm" variant="grey" />
               </Box>
             </FlexRow>
 

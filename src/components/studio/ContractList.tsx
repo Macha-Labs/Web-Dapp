@@ -21,7 +21,7 @@ const ContractList = () => {
   let contractFilterOptions = [
     {
       value: "All Contracts",
-      leftIcon: "icon-notification",
+      leftIcon: "icon-dashboard",
       onClick: () => {
         hookContractList.clearFilters()
       },
