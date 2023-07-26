@@ -7,6 +7,25 @@ const useTransaction = () => {
   const [methodParams, setMethodParams] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const timeStampConversion = (unix_timestamp: any) => {
+    
+    // Create a new JavaScript Date object based on the timestamp
+    // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+    var date = new Date(unix_timestamp * 1000);
+    // Hours part from the timestamp
+    var hours = date.getHours();
+    // Minutes part from the timestamp
+    var minutes = "0" + date.getMinutes();
+    // Seconds part from the timestamp
+    var seconds = "0" + date.getSeconds();
+
+    // Will display time in 10:30:23 format
+    var formattedTime =
+      hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+    console.log(formattedTime);
+    return formattedTime;
+  };
+
   const _fetch = async (transactionHash: any) => {
     transactionData(transactionHash).then((res: any) => {
       console.log("contract not", res);
@@ -14,7 +33,7 @@ const useTransaction = () => {
       setTransactionDetails([
         {
           key: "Block Hash",
-          value: res.data[0].transaction.block_hash,
+          value:res.data[0].transaction.block_hash,
           src: "https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-Block%20hash.svg?updatedAt=1689916345836",
         },
         {
@@ -29,7 +48,7 @@ const useTransaction = () => {
         },
         {
           key: "Gas Price	",
-          value: parseInt(res.data[0].transaction.gas_price,16),
+          value: parseInt(res.data[0].transaction.gas_price, 16),
           src: "https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-gas-price.svg?updatedAt=1689916350473",
         },
         {
@@ -64,7 +83,7 @@ const useTransaction = () => {
         },
         {
           key: "Time Stamp",
-          value: res.data[0].timestamp,
+          value: timeStampConversion(res.data[0].timestamp),
           src: "https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-timestamp.svg?updatedAt=1689916345664",
         },
       ]);
