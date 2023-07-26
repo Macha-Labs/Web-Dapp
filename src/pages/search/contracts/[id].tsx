@@ -49,7 +49,7 @@ const Contract = () => {
         rightElem={
           <FlexRow width="fit-content">
             {$address && <NavButton />}
-            {<ConnectWalletButton />}
+            {<ConnectWalletButton/>}
           </FlexRow>
         }
       />
