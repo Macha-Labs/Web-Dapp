@@ -48,12 +48,7 @@ const Contract = () => {
         centerElem={<InputSearch />}
         rightElem={
           <FlexRow width="fit-content">
-            {$address && (
-              <NavButton
-                marginRight={style.margin["sm"]}
-                marginLeft={style.margin["sm"]}
-              />
-            )}
+            {$address && <NavButton />}
             {<ConnectWalletButton />}
           </FlexRow>
         }
@@ -172,6 +167,7 @@ const Contract = () => {
               marginTop="1rem"
               border={style.table.border.thead}
               borderRadius="20px"
+              marginBottom={style.margin.xxxl}
             >
               <TxnTable txnData={hookContractTxn?.filteredData} />
             </Box>

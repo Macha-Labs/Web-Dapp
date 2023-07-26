@@ -1,6 +1,8 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
+import InputSearch from "@/_ui/input/InputSearch";
+import NavTop from "@/_ui/nav/NavTop";
 import TableNative from "@/_ui/table/TableNative";
 import {
   timeStampConversion,
@@ -20,10 +22,12 @@ import {
   Th,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { ConnectWalletButton } from "../ConnectWalletButton";
 
 type Prop = {
   txnData: any;
 };
+
 
 const TxnTable = ({ txnData }: Prop) => {
   const router = useRouter();
@@ -171,7 +175,7 @@ const TxnTable = ({ txnData }: Prop) => {
                     </Box>
                   </Box>
                 </Td>
-                <Td style={{ textAlign: "center" }}>
+                <Td style={{ textAlign: "center", paddingBottom: "0" }}>
                   <Box
                     style={{
                       display: "flex",
@@ -200,7 +204,7 @@ const TxnTable = ({ txnData }: Prop) => {
                     </Text>
                   </Box>
                 </Td>
-                <Td style={{ textAlign: "center" }}>
+                <Td style={{ textAlign: "center", paddingBottom: "0" }}>
                   <Box
                     style={{
                       display: "flex",

@@ -12,7 +12,7 @@ import useAuthStore from "@/store/useAuthStore";
 import useMetaStore from "@/store/useMetaStore";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
-import { Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -52,29 +52,33 @@ const SearchResult = () => {
     return (
       <>
         {" "}
-        <NavBlock
-          back={() => {
-            router.back();
-          }}
-        >
-          <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <Heading fontSize={style.font.h5} className="m-b-0">
-              {truncateAddress(id)}
-            </Heading>
-            <ButtonNative
-              textFontSize="h7"
-              size="sm"
-              variant="state_brand"
-              text="Share"
-              marginRight="0px"
-              iconRight={{
-                slug: "icon-base-share",
-                style: { marginLeft: "xxs" },
-                size: "xs"
-              }}
-            />
-          </FlexRow>
-        </NavBlock>
+        <Box style={{paddingTop:"3.2rem", marginTop:"3.2rem"}}>
+          <NavBlock
+            back={() => {
+              router.back();
+            }}
+
+            // paddingTop={style.padding["xxxl"]} marginTop={style.margin["xxxl"]}
+          >
+            <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
+              <Heading fontSize={style.font.h5} className="m-b-0">
+                {truncateAddress(id)}
+              </Heading>
+              <ButtonNative
+                textFontSize="h7"
+                size="sm"
+                variant="state_brand"
+                text="Share"
+                marginRight="0px"
+                iconRight={{
+                  slug: "icon-base-share",
+                  style: { marginLeft: "xxs" },
+                  size: "xs",
+                }}
+              />
+            </FlexRow>
+          </NavBlock>
+        </Box>
         <FlexBody>
           <TxnDetails
             id={currentApiId}

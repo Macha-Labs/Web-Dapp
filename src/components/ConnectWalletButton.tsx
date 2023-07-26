@@ -143,7 +143,7 @@ export const ConnectWalletButton = (props: any) => {
                       height={"3rem"}
                     >
                       <FlexRow>
-                        <Image src={"../assets/Avatar.svg"} alt="avatar" />
+                        {/* <Image src={"../assets/Avatar.svg"} alt="avatar" /> */}
                         <Text
                           marginLeft={style.button.margin.default}
                           fontSize={"sm"}
