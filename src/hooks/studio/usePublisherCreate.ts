@@ -143,7 +143,6 @@ const usePublisherCreate = (modal: any) => {
           duration: 3000,
           position: "top-right",
         });
-        modal.onClose();
       }
     } else if (publisherType == "Organization") {
       let publisherPayload = {
@@ -183,7 +182,6 @@ const usePublisherCreate = (modal: any) => {
           duration: 3000,
           position: "top-right",
         });
-        modal.onClose();
       }
     }
   };

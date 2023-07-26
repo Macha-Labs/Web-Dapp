@@ -13,6 +13,7 @@ import useUserTxn from "@/hooks/studio/useUserTxn";
 import FlexBody from "@/_ui/flex/FlexBody";
 import TxnTable from "@/components/studio/TxnTable";
 import Loader from "@/_ui/loader/Loader";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -160,6 +161,13 @@ const Network = () => {
                     >
                       Transactions in the last 12 hours{" "}
                     </Text>
+                    <Box style={{ display: "flex", alignItems: "end", marginBottom: `${style.margin.md}`, marginTop: `${style.margin.sm}` }}>
+                      <ButtonNative marginRight="sm" onClick={() => { }} text="first" variant="state_default_hover" />
+                      <ButtonNative marginRight="sm" onClick={() => { }} text="Prev" disabled={true} variant="state_default_hover" />
+                      <Text marginRight={style.margin.sm}>Page 1 of 45</Text>
+                      <ButtonNative marginRight="sm" onClick={() => { }} disabled={true} text="Next" variant="state_default_hover" />
+                      <ButtonNative marginRight="sm" onClick={() => { }} text="last" variant="state_default_hover" />
+                    </Box>
                     <Box
                       marginTop="1rem"
                       border={style.table.border.thead}

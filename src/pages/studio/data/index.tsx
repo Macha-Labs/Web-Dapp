@@ -26,7 +26,7 @@ const DashBoard = () => {
   const $address = useAuthStore((state: any) => state.address);
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
   const [exploreMeta, setExploreMeta] = useState<any>([]);
-  const [isPublisher,setIsPublisher] = useState<any>(false);
+  const [isPublisher, setIsPublisher] = useState<any>(false);
 
   const fetchmetas = async () => {
     const allMetas = await fetchAllMetas();
@@ -75,10 +75,11 @@ const DashBoard = () => {
                 value={selectedNavTab}
                 onChange={setSelectedNavTab}
               />
-              <Box cursor={"not-allowed"}>
-                <Text className="mb-0" color="#C6C6C6">
+              <Box cursor={"not-allowed"} style={{display:"flex", flexDirection: "row"}}>
+                <Text className="mb-0" color="#C6C6C6" marginRight="2px">
                   Functions
                 </Text>
+                <TagNative value="soon" size="sm" variant="grey" />
               </Box>
             </FlexRow>
 

@@ -32,6 +32,9 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
             {hookPublisherCreate.formStep == 5 && hookPublisherCreate.publisherType == "Organization" && <Box>
               <Text className="mb-0">Organization Publisher Account </Text>
             </Box>}
+            {(hookPublisherCreate.formStep != 4 && hookPublisherCreate.formStep != 5) && <Box>
+              <Text className="mb-0">Become a Publisher </Text>
+            </Box>}
           </FlexRow>
         }
         footer={
@@ -109,7 +112,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
 
               {hookPublisherCreate.formStep == 6 && (
                 <ButtonNative
-                  variant="state_brand"
+                  variant="state_default_hover"
                   marginTop={style.margin["lg"]}
                   onClick={() => {
                     hookPublisherCreate.setClear()
