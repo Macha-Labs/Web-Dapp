@@ -17,13 +17,38 @@ import chains from "@/data/network";
 import useChainTxn from "@/hooks/studio/useChainTxn";
 import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import NavTop from "@/_ui/nav/NavTop";
+import NavButton from "@/components/buttons/NavButton";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
+import useAuthStore from "@/store/useAuthStore";
+import InputSearch from "@/_ui/input/InputSearch";
 
 const Network = () => {
+  const $address = useAuthStore((state: any) => state.address);
   const hookChainTxn = useChainTxn();
   const router = useRouter();
-  const chainId: any = router.query.chainId
+  const chainId: any = router.query.chainId;
   const isReady = router.isReady;
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Transactions");
+
+  const renderNav = () => {
+    return (
+      <NavTop
+        centerElem={<InputSearch />}
+        rightElem={
+          <FlexRow width="fit-content">
+            {$address && (
+              <NavButton
+                marginRight={style.margin["sm"]}
+                marginLeft={style.margin["sm"]}
+              />
+            )}
+            {<ConnectWalletButton />}
+          </FlexRow>
+        }
+      />
+    );
+  };
 
   useEffect(() => {
     if (isReady) {
@@ -47,105 +72,122 @@ const Network = () => {
   ];
 
   const renderAbout = () => {
-    return <>{selectedNavTab == "About" && <Flex>
-      <Box flex="7" p={4}>
-        {/* Content for column 1 */}
+    return (
+      <>
+        {selectedNavTab == "About" && (
+          <Flex>
+            <Box flex="7" p={4}>
+              {/* Content for column 1 */}
 
-        <Box display="flex" flexDirection="column">
-          <Box display="flex" flexDirection="column">
-            <Text fontWeight={style.fontWeight.dark}>
-              About Ethereum
-            </Text>
-            <Text>
-              Ethereum is a technology that&apos;s home to
-              digital money, global payments, and applications.
-              The community has built a booming digital economy,
-              bold new ways for creators to earn online, and so
-              much more. It&apos;s open to everyone, wherever
-              you are in the world – all you need is the
-              internet.
-            </Text>
-            <Text fontWeight={style.fontWeight.dark}>Team</Text>
-          </Box>
-          <Box>
-            <Text fontWeight={style.fontWeight.dark}>
-              Compatible Wallets
-            </Text>
-            <Box display="flex" flex="flex-wrap">
-              <TagNative size="sm" value="Trust Wallet" />
-              <TagNative size="sm" value="Zeroin" />
-              <TagNative size="sm" value="Tally Ho" />
-              <TagNative size="sm" value="Coinbase Wallet" />
-              <TagNative size="sm" value="Metamask" />
-              <TagNative size="sm" value="Safe" />
+              <Box display="flex" flexDirection="column">
+                <Box display="flex" flexDirection="column">
+                  <Text fontWeight={style.fontWeight.dark}>About Ethereum</Text>
+                  <Text>
+                    Ethereum is a technology that&apos;s home to digital money,
+                    global payments, and applications. The community has built a
+                    booming digital economy, bold new ways for creators to earn
+                    online, and so much more. It&apos;s open to everyone,
+                    wherever you are in the world – all you need is the
+                    internet.
+                  </Text>
+                  <Text fontWeight={style.fontWeight.dark}>Team</Text>
+                </Box>
+                <Box>
+                  <Text fontWeight={style.fontWeight.dark}>
+                    Compatible Wallets
+                  </Text>
+                  <Box display="flex" flex="flex-wrap">
+                    <TagNative size="sm" value="Trust Wallet" />
+                    <TagNative size="sm" value="Zeroin" />
+                    <TagNative size="sm" value="Tally Ho" />
+                    <TagNative size="sm" value="Coinbase Wallet" />
+                    <TagNative size="sm" value="Metamask" />
+                    <TagNative size="sm" value="Safe" />
+                  </Box>
+                </Box>
+              </Box>
             </Box>
-          </Box>
-        </Box>
-      </Box>
-      <Box flex="3" p={4}>
-        {/* Content for column 2 */}
-        <Text fontWeight={style.fontWeight.dark}>
-          Official Links
-        </Text>
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="space-between"
-        >
-          <Link href="github.com/ethereum">
-            github.com/ethereum
-          </Link>
-          <Link href="github.com/ethereum">
-            github.com/ethereum
-          </Link>
-          <Link href="github.com/ethereum">
-            github.com/ethereum
-          </Link>
-        </Box>
-      </Box>
-    </Flex>}</>;
+            <Box flex="3" p={4}>
+              {/* Content for column 2 */}
+              <Text fontWeight={style.fontWeight.dark}>Official Links</Text>
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-between"
+              >
+                <Link href="github.com/ethereum">github.com/ethereum</Link>
+                <Link href="github.com/ethereum">github.com/ethereum</Link>
+                <Link href="github.com/ethereum">github.com/ethereum</Link>
+              </Box>
+            </Box>
+          </Flex>
+        )}
+      </>
+    );
   };
 
   const renderTxns = () => {
-    return <>{selectedNavTab == "Transactions" && <>
-      {hookChainTxn.isLoading ? (
-        <FlexRow height="100px">
-          <Loader size="lg" />
-        </FlexRow>
-      ) :
-        (hookChainTxn?.filteredData[0] &&
+    return (
+      <>
+        {selectedNavTab == "Transactions" && (
           <>
-            <Box
-              border={style.table.border.thead}
-              borderRadius="20px"
-            >
-              {/* Content for Tab 1 */}
-              {hookChainTxn?.filteredData[0] && <TxnTable txnData={hookChainTxn?.filteredData} />}
-            </Box>
-            <Box marginY={10} style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-              {hookChainTxn.filteredData.length >= 10 && <ButtonNative
-                variant="state_brand"
-                marginTop={style.margin["lg"]}
-                onClick={() => hookChainTxn._fetch(router.query.chainId)}
-                >
-                Next
-              </ButtonNative>}
-            </Box>
+            {hookChainTxn.isLoading ? (
+              <FlexRow height="100px">
+                <Loader size="lg" />
+              </FlexRow>
+            ) : (
+              hookChainTxn?.filteredData[0] && (
+                <>
+                  <Box border={style.table.border.thead} borderRadius="20px">
+                    {/* Content for Tab 1 */}
+                    {hookChainTxn?.filteredData[0] && (
+                      <TxnTable txnData={hookChainTxn?.filteredData} />
+                    )}
+                  </Box>
+                  <Box
+                    marginY={10}
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    {hookChainTxn.filteredData.length >= 10 && (
+                      <ButtonNative
+                        variant="state_brand"
+                        marginTop={style.margin["lg"]}
+                        onClick={() =>
+                          hookChainTxn._fetch(router.query.chainId)
+                        }
+                      >
+                        Next
+                      </ButtonNative>
+                    )}
+                  </Box>
+                </>
+              )
+            )}
           </>
         )}
-    </>}</>;
+      </>
+    );
   };
 
   const renderComponent = () => {
     return (
       <>
-        <Box marginTop={style.margin.xxxl}>
+        <Box marginTop={style.margin.xxxl} paddingTop={style.padding.xxs}>
           <>
-            <Box>
+            <Box marginTop={style.margin.xxxl}>
               {/* <Text fontSize="3rem">Interactions</Text> */}
               <Flex justify="space-between">
                 <Box>
-                  <Box display="flex" alignItems="center" marginBottom={style.margin.md}>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    marginBottom={style.margin.md}
+                  >
                     <IconBase
                       size="2xl"
                       slug={chainId && chains[chainId]?.chainImage}
@@ -257,7 +299,10 @@ const Network = () => {
               <Tabs
                 width="fit-content"
                 options={chainNav}
-                gstyle={{ fontSize: `${style.font.h5}`, marginBottom: `${style.margin.md}` }}
+                gstyle={{
+                  fontSize: `${style.font.h5}`,
+                  marginBottom: `${style.margin.md}`,
+                }}
                 value={selectedNavTab}
                 onChange={setSelectedNavTab}
               />
@@ -277,13 +322,14 @@ const Network = () => {
           back={() => {
             router.back();
           }}
+          marginTop={style.margin["nav"]}
         >
           <FlexRow hrAlign="flex-start">
             <Text
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-            //   marginLeft={style.margin.xxs}
+              //   marginLeft={style.margin.xxs}
             >
               {chainId && chains[chainId]?.chainName}
             </Text>
@@ -293,7 +339,13 @@ const Network = () => {
       </>
     );
   };
-  return <FlexWindow view="col" bodyElem={renderBody()}></FlexWindow>;
+  return (
+    <FlexWindow
+      view="col"
+      bodyElem={renderBody()}
+      navElem={renderNav()}
+    ></FlexWindow>
+  );
 };
 
 export default Network;

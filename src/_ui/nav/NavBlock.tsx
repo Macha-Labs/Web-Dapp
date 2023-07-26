@@ -10,7 +10,7 @@ type Props = {
 export default function NavBlock({ children, back, marginTop }: Props) {
   return (
     <div
-      className=""
+      className="nav-block"
       style={{
         background: `${style.input.bg.default}`,
         padding: `${style.nav.padding}`,

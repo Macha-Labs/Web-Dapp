@@ -27,6 +27,7 @@ type Props = {
   marginRight?: string;
   width?: string;
   height?: string;
+  isDisabled?: boolean;
 };
 
 const ButtonMenu = ({
@@ -44,6 +45,7 @@ const ButtonMenu = ({
   marginRight,
   width,
   height,
+  isDisabled,
 }: Props) => {
   return (
     <div
@@ -55,6 +57,7 @@ const ButtonMenu = ({
     >
       <Menu>
         <MenuButton
+          isDisabled={isDisabled}
           variant={"state_default_hover"}
           as={Button}
           style={{
