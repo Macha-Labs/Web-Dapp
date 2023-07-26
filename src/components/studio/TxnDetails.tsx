@@ -97,7 +97,7 @@ function TxnDetails({
               lineHeight={style.font.h1}
               marginTop={style.margin["sm"]}
             >
-              Transacation Details
+              Transaction Details
             </Text>
           </FlexRow>
 

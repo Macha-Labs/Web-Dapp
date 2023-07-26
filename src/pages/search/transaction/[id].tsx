@@ -99,12 +99,14 @@ const SearchResult = () => {
           </FlexRow>
         </NavBlock>
         <FlexBody>
-          <TxnDetails
-            id={currentApiId}
-            transactionDetails={hookTxn.transactionDetails}
-            isLoading={hookTxn.isLoading}
-            methodParams={hookTxn.methodParams}
-          />
+          <Box marginTop={style.margin.xl} paddingTop={style.padding.md}>
+            <TxnDetails
+              id={currentApiId}
+              transactionDetails={hookTxn.transactionDetails}
+              isLoading={hookTxn.isLoading}
+              methodParams={hookTxn.methodParams}
+            />
+          </Box>
         </FlexBody>
       </>
     );
