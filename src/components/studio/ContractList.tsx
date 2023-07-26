@@ -41,31 +41,31 @@ const ContractList = () => {
   const renderComponent = () => {
     return (
       <>
-        {/* <Box style={{ width: "70%", marginTop: `${style.margin.sm}`, height: "fit-content", paddingTop: `${style.padding.xxl}`, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "start" }}>
-          <InputSearch
+        <Box style={{ width: "70%", marginTop: `${style.margin.xxl}`, height: "fit-content", paddingTop: `${style.padding.md}`, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "start" }}>
+          {/* <InputSearch
             size="lg"
             placeholder="Search Studio"
             icon={{ slug: "icon-search" }}
             onChange={(e: any) => hookContractList.handleSearch(e.target.value)}
-          />
+          /> */}
           <ButtonMenu
             size={"lg"}
             text={"Filter Contracts"}
-            marginLeft={style.margin.md}
+            marginLeft={style.margin.xxs}
             icon={{
               slug: "icon-chevron-down",
               style: "",
             }}
             options={contractFilterOptions}
           />
-        </Box> */}
+        </Box>
         <FlexRow
           hrAlign="flex-start"
           width="100%"
-          marginTop="md"
+          // marginTop="md"
           flexWrap="wrap"
           // padding={style.body.padding}
-          paddingTop="xxl"
+          paddingTop="lg"
         >
           {hookContractList.isLoading && (
             <FlexRow height="500px">
