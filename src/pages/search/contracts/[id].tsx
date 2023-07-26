@@ -111,6 +111,13 @@ const Contract = () => {
             >
               Transactions in the last 12 hours{" "}
             </Text>
+            <Box style={{display: "flex", marginTop: `${style.margin.md}`,alignItems: "end"}}>
+              <ButtonNative marginRight="sm" onClick={() => {}} text="first" variant="state_default_hover" />
+              <ButtonNative marginRight="sm" onClick={() => {}} text="" iconRight={{ slug: "icon-chevron" }} variant="state_default_hover" />
+              <Text marginRight={style.margin.sm}>Page 1 of 45</Text>
+              <ButtonNative marginRight="sm" onClick={() => {}} text="" iconRight={{ slug: "icon-chevron-next" }} variant="state_default_hover" />
+              <ButtonNative marginRight="sm" onClick={() => {}} text="last" variant="state_default_hover" />
+            </Box>
             <Box
               marginTop="1rem"
               border={style.table.border.thead}
