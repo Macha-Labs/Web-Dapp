@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { transactionData } from "@/service/ApiService";
 import { ethers } from "ethers";
+import { timeStampConversion } from "@/helpers";
 
 const useTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
@@ -29,7 +30,7 @@ const useTransaction = () => {
         },
         {
           key: "Gas Price	",
-          value: parseInt(res.data[0].transaction.gas_price,16),
+          value: parseInt(res.data[0].transaction.gas_price, 16),
           src: "https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-gas-price.svg?updatedAt=1689916350473",
         },
         {
@@ -64,7 +65,7 @@ const useTransaction = () => {
         },
         {
           key: "Time Stamp",
-          value: res.data[0].timestamp,
+          value: timeStampConversion(res.data[0].timestamp),
           src: "https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-timestamp.svg?updatedAt=1689916345664",
         },
       ]);

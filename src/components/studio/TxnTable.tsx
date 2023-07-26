@@ -1,6 +1,12 @@
+import ButtonNative from "@/_ui/buttons/ButtonNative";
+import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
 import TableNative from "@/_ui/table/TableNative";
-import { truncateAddress, truncateString } from "@/helpers";
+import {
+  timeStampConversion,
+  truncateAddress,
+  truncateString,
+} from "@/helpers";
 import { style } from "@/styles/StyledConstants";
 import {
   Avatar,
@@ -129,7 +135,7 @@ const TxnTable = ({ txnData }: Prop) => {
                       height="1.5rem"
                     />
                     <Text paddingLeft={2} marginBottom={0}>
-                      {item?.timestamp}
+                      {timeStampConversion(item?.timestamp)}
                     </Text>
                   </Box>
                 </Td>
@@ -173,10 +179,12 @@ const TxnTable = ({ txnData }: Prop) => {
                       justifyContent: "center",
                     }}
                   >
-                    <Avatar
-                      size="xxs"
-                      src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
-                    />
+                    <Box width="2.1rem" height="2.1rem">
+                      <Avatar
+                        size="xxs"
+                        src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                      />
+                    </Box>
                     <Text
                       paddingLeft={2}
                       marginBottom={0}
@@ -200,10 +208,12 @@ const TxnTable = ({ txnData }: Prop) => {
                       justifyContent: "center",
                     }}
                   >
-                    <Avatar
-                      size="xxs"
-                      src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
-                    />
+                    <Box width="2.1rem" height="2.1rem">
+                      <Avatar
+                        size="xxs"
+                        src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                      />
+                    </Box>
                     <Text
                       paddingLeft={2}
                       marginBottom={0}

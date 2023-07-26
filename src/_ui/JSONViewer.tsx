@@ -1,5 +1,5 @@
 import { style } from "@/styles/StyledConstants";
-import { Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import IconBase from "./icons/IconsBase";
 
@@ -12,7 +12,7 @@ const JSONViewer = ({ data }: any) => {
       [key]: !expanded[key],
     });
   };
-  
+
   const renderData = (data: any, key: any) => {
     if (Array.isArray(data)) {
       return (
@@ -38,7 +38,7 @@ const JSONViewer = ({ data }: any) => {
             )}
           </span>
           {expanded[key] && (
-            <ul>
+            <ul className="testing-1" style={{ paddingLeft: "0" }}>
               {Object.entries(data).map(([nestedKey, value]) => (
                 <li
                   key={nestedKey}
@@ -47,8 +47,12 @@ const JSONViewer = ({ data }: any) => {
                     marginTop: style.margin["xs"],
                   }}
                 >
-                  <strong>{nestedKey}: </strong>
-                  {renderData(value, `${key}_${nestedKey}`)}
+                  <Flex>
+                    <Box>
+                      <strong>{nestedKey}: </strong>
+                    </Box>
+                    <Box>{renderData(value, `${key}_${nestedKey}`)}</Box>
+                  </Flex>
                 </li>
               ))}
             </ul>

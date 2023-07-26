@@ -15,6 +15,7 @@ import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import ContractList from "@/components/studio/ContractList";
 import CreatePublisherModal from "@/components/studio/PublisherModal";
 import useContractCreate from "@/hooks/studio/useContractCreate";
+import useMacha from "@/hooks/studio/useMacha";
 import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
@@ -25,15 +26,16 @@ const DashBoard = () => {
   const $address = useAuthStore((state: any) => state.address);
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
   const [exploreMeta, setExploreMeta] = useState<any>([]);
+  const [isPublisher,setIsPublisher] = useState<any>(false);
 
   const fetchmetas = async () => {
     const allMetas = await fetchAllMetas();
-
     setExploreMeta(allMetas.data);
   };
   const contractModal = useDisclosure();
   const metaModal = useDisclosure();
   const hookContractCreate = useContractCreate(contractModal);
+  const hookMacha = useMacha();
 
   useEffect(() => {
     fetchmetas();
@@ -44,10 +46,10 @@ const DashBoard = () => {
       value: "Contracts",
       href: "",
     },
-    {
-      value: "Functions",
-      href: "",
-    },
+    // {
+    //   value: "Functions",
+    //   href: "",
+    // },
   ];
 
   const renderAPIs = () => {
@@ -65,7 +67,6 @@ const DashBoard = () => {
       <>
         <NavBlock marginTop={style.margin["nav"]}>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            {/* <Box cursor={"not-allowed"}> */}
             <FlexRow hrAlign="flex-start" vrAlign="center">
               <Tabs
                 width="fit-content"
@@ -74,22 +75,27 @@ const DashBoard = () => {
                 value={selectedNavTab}
                 onChange={setSelectedNavTab}
               />
+              <Box cursor={"not-allowed"}>
+                <Text className="mb-0" color="#C6C6C6">
+                  Functions
+                </Text>
+              </Box>
             </FlexRow>
-            {/* </Box> */}
-            {selectedNavTab == "Contracts" && (
-              <ButtonNative
-                size="sm"
-                text="Create Contract"
-                variant="state_brand"
-                marginRight="0px"
-                paddingLeft="sm"
-                paddingRight="sm"
-                onClick={() => {
-                  contractModal.onOpen();
-                }}
-              />
-            )}
-            {selectedNavTab == "Functions" && (
+
+            {hookMacha.publisherExists && <ButtonNative
+              size="sm"
+              text="Create Contract"
+              variant="state_brand"
+              marginRight="0px"
+              paddingLeft="sm"
+              paddingRight="sm"
+              height="2.5rem"
+              onClick={() => {
+                contractModal.onOpen();
+              }}
+            />}
+
+            {/* {selectedNavTab == "Functions" && (
               <ButtonNative
                 size="sm"
                 text="Create Function"
@@ -101,7 +107,7 @@ const DashBoard = () => {
                   metaModal.onOpen();
                 }}
               />
-            )}
+            )} */}
           </FlexRow>
         </NavBlock>
 

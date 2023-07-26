@@ -190,7 +190,7 @@ const Network = () => {
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-              //   marginLeft={style.margin.xxs}
+            //   marginLeft={style.margin.xxs}
             >
               Ethereum
             </Text>

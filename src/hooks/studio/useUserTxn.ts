@@ -13,7 +13,7 @@ const useUserTxn = () => {
       console.log("user txn fetching", res);
       setIsLoading(false)
       setUserTxnDetails(res.data);
-      setFilteredData(res.data);
+      setFilteredData(res.data.reverse());
     });
   };
 
