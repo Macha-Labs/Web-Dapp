@@ -23,25 +23,25 @@ const ContractList = () => {
       value: "All Contracts",
       leftIcon: "icon-dashboard",
       onClick: () => {
-        hookContractList.clearFilters()
+        hookContractList.clearFilters();
       },
     },
   ];
 
-  Object.keys(chains).forEach(key => {
+  Object.keys(chains).forEach((key) => {
     contractFilterOptions.push({
       value: chains[key].chainName,
       leftIcon: chains[key].chainImage,
       onClick: () => {
-        hookContractList.handleFilter(key)
-      }
-    })
-  })
+        hookContractList.handleFilter(key);
+      },
+    });
+  });
 
   const renderComponent = () => {
     return (
       <>
-        <Box style={{ width: "70%", marginTop: `${style.margin.sm}`, height: "fit-content", paddingTop: `${style.padding.xxl}`, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "start" }}>
+        {/* <Box style={{ width: "70%", marginTop: `${style.margin.sm}`, height: "fit-content", paddingTop: `${style.padding.xxl}`, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "start" }}>
           <InputSearch
             size="lg"
             placeholder="Search Studio"
@@ -58,14 +58,14 @@ const ContractList = () => {
             }}
             options={contractFilterOptions}
           />
-        </Box>
+        </Box> */}
         <FlexRow
           hrAlign="flex-start"
           width="100%"
           marginTop="md"
           flexWrap="wrap"
           // padding={style.body.padding}
-          paddingTop="md"
+          paddingTop="xxl"
         >
           {hookContractList.isLoading && (
             <FlexRow height="500px">
