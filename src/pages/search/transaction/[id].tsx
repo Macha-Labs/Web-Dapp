@@ -2,7 +2,11 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import InputSearch from "@/_ui/input/InputSearch";
 import NavBlock from "@/_ui/nav/NavBlock";
+import NavTop from "@/_ui/nav/NavTop";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
+import NavButton from "@/components/buttons/NavButton";
 import TxnDetails from "@/components/studio/TxnDetails";
 import { getItemFromLocal, setItemOnLocal, truncateAddress } from "@/helpers";
 import useContractTxn from "@/hooks/studio/useContractTxn";
@@ -19,6 +23,7 @@ import { useEffect, useState } from "react";
 const SearchResult = () => {
   const $userMetasMap = useUserStore((state: any) => state.userMetasMap);
   const $userApisMap = useUserStore((state: any) => state.userApisMap);
+  const $address = useAuthStore((state: any) => state.address);
   const [currentApiId, setCurrentApiId] = useState<any>();
   const hookMeta = useMeta();
   const router = useRouter();
@@ -48,37 +53,51 @@ const SearchResult = () => {
 
   const id = router.query.id;
 
+  const renderNav = () => {
+    return (
+      <NavTop
+        centerElem={<InputSearch />}
+        rightElem={
+          <FlexRow width="fit-content">
+            {$address && <NavButton />}
+            {<ConnectWalletButton />}
+          </FlexRow>
+        }
+      />
+    );
+  };
+
   const renderBody = () => {
     return (
       <>
         {" "}
-        <Box style={{paddingTop:"3.2rem", marginTop:"3.2rem"}}>
-          <NavBlock
-            back={() => {
-              router.back();
-            }}
+        <NavBlock
+          marginTop={style.margin["nav"]}
+          back={() => {
+            router.back();
+          }}
 
-            // paddingTop={style.padding["xxxl"]} marginTop={style.margin["xxxl"]}
-          >
-            <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-              <Heading fontSize={style.font.h5} className="m-b-0">
-                {truncateAddress(id)}
-              </Heading>
-              <ButtonNative
-                textFontSize="h7"
-                size="sm"
-                variant="state_brand"
-                text="Share"
-                marginRight="0px"
-                iconRight={{
-                  slug: "icon-base-share",
-                  style: { marginLeft: "xxs" },
-                  size: "xs",
-                }}
-              />
-            </FlexRow>
-          </NavBlock>
-        </Box>
+          // paddingTop={style.padding["xxxl"]} marginTop={style.margin["xxxl"]}
+        >
+          <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
+            <Heading fontSize={style.font.h5} className="m-b-0">
+              {truncateAddress(id)}
+            </Heading>
+            <ButtonNative
+              textFontSize="h7"
+              size="sm"
+              variant="state_brand"
+              text="Share"
+              height="2rem"
+              marginRight="0px"
+              iconRight={{
+                slug: "icon-base-share",
+                style: { marginLeft: "xxs" },
+                size: "xs",
+              }}
+            />
+          </FlexRow>
+        </NavBlock>
         <FlexBody>
           <TxnDetails
             id={currentApiId}
@@ -91,7 +110,13 @@ const SearchResult = () => {
     );
   };
 
-  return <FlexWindow view="col" bodyElem={renderBody()}></FlexWindow>;
+  return (
+    <FlexWindow
+      view="col"
+      bodyElem={renderBody()}
+      navElem={renderNav()}
+    ></FlexWindow>
+  );
 };
 
 export default SearchResult;
