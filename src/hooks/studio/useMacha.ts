@@ -18,20 +18,16 @@ const useMacha = () => {
   let macha: Macha;
 
   useEffect(() => {
-    if(signer){
-      macha = new Macha({ owner: $address, signer: signer });
-      connectMachaPublisher()
-    }
-  },[signer,$address])
-
+    connectMachaPublisher();
+  }, [signer, $address]);
 
   const createMachaPublisher = async (
     publisherData: PublisherDataInterface
   ) => {
     try {
-      if(signer){
-        macha = new Macha({ owner: $address, signer: signer })
-        console.log("create publisher called", macha)
+      if (signer) {
+        macha = new Macha({ owner: $address, signer: signer });
+        console.log("create publisher called", macha);
         await macha?.createPublisher(publisherData);
       }
     } catch (error) {
@@ -40,9 +36,12 @@ const useMacha = () => {
   };
 
   const connectMachaPublisher = async () => {
-    const machaCreated: any = (await macha?.connectPublisher());
-    console.log("macha created",machaCreated)
-    setPublisherExists(machaCreated?.data?.data == null ? false : true);
+    if (signer) {
+      macha = new Macha({ owner: $address, signer: signer });
+      const machaCreated: any = await macha?.connectPublisher();
+      console.log("macha created", machaCreated);
+      setPublisherExists(machaCreated?.data?.data == null ? false : true);
+    }
   };
 
   return {

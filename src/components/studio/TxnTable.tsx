@@ -2,7 +2,11 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
 import TableNative from "@/_ui/table/TableNative";
-import { truncateAddress, truncateString } from "@/helpers";
+import {
+  timeStampConversion,
+  truncateAddress,
+  truncateString,
+} from "@/helpers";
 import { style } from "@/styles/StyledConstants";
 import {
   Avatar,
@@ -131,7 +135,7 @@ const TxnTable = ({ txnData }: Prop) => {
                       height="1.5rem"
                     />
                     <Text paddingLeft={2} marginBottom={0}>
-                      {item?.timestamp}
+                      {timeStampConversion(item?.timestamp)}
                     </Text>
                   </Box>
                 </Td>

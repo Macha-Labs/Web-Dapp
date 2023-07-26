@@ -138,12 +138,12 @@ const usePublisherCreate = (modal: any) => {
         // })
         hookMacha.createMachaPublisher(publisherPayload);
         toast({
-          title: "Publisher Request Submitted",
+          title: "Publisher Request In Process",
           status: "success",
           duration: 3000,
           position: "top-right",
         });
-        modal.onClose()
+        modal.onClose();
       }
     } else if (publisherType == "Organization") {
       let publisherPayload = {
@@ -153,7 +153,7 @@ const usePublisherCreate = (modal: any) => {
         email: "",
         id: "",
         ipfsCid: "",
-        type: "Organization"
+        type: "Organization",
       };
       if (
         publisherPayload.name == undefined ||
@@ -163,7 +163,8 @@ const usePublisherCreate = (modal: any) => {
         publisherPayload.name == undefined ||
         publisherPayload.name == "" ||
         publisherPayload.image == undefined ||
-        publisherPayload.image == "" ) {
+        publisherPayload.image == ""
+      ) {
         toast({
           title: "Required fields cannot be empty",
           status: "warning",
@@ -182,7 +183,7 @@ const usePublisherCreate = (modal: any) => {
           duration: 3000,
           position: "top-right",
         });
-        modal.onClose()
+        modal.onClose();
       }
     }
   };
