@@ -21,7 +21,7 @@ const ApiList = () => {
   const renderComponent = () => {
     return (
       <>
-        <Box width="50%" paddingTop={style.padding.xxl}>
+        {/* <Box width="50%" paddingTop={style.padding.xxl}>
           <InputSearch
             marginTop={style.margin.sm}
             size="lg"
@@ -30,7 +30,7 @@ const ApiList = () => {
             onChange={(e: any) => hookContractList.handleFilter(e.target.value)}
           />
         </Box>
-        {/* <FlexRow
+        <FlexRow
           hrAlign="flex-start"
           width="100%"
           marginTop="md"

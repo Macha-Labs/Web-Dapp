@@ -83,27 +83,6 @@ const Contract = () => {
             }}
           />
         )}
-        {hookContractTxn?.filteredData[0] && (
-          <FlexRow hrAlign="flex-start" vrAlign="center" marginTop="xl">
-            <Box width="40%">
-              <InputSearch
-                width="100%"
-                size="lg"
-                placeholder="Search Studio"
-                icon={{ slug: "icon-search" }}
-                onChange={(e: any) =>
-                  hookContractTxn.setSearchVal(e.target.value)
-                }
-                onKeydown={(e: any) => {
-                  if (e.key === "Enter") {
-                    hookContractTxn.handleFilter(hookContractTxn.searchVal);
-                  }
-                }}
-              />
-            </Box>
-            {/* <ButtonNative marginLeft="lg" variant="state_brand" text="Search" marginRight="0px" onClick={() => hookContractTxn.handleFilter(hookContractTxn.searchVal)} /> */}
-          </FlexRow>
-        )}
         <ContractEditModal
           modal={editModal}
           hookContractCreate={hookContractCreate}
