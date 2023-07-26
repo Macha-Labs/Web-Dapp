@@ -2,6 +2,7 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import InputSearch from "@/_ui/input/InputSearch";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavTop from "@/_ui/nav/NavTop";
 import Tabs from "@/_ui/tabs/Tabs";
@@ -26,7 +27,7 @@ const DashBoard = () => {
   const $address = useAuthStore((state: any) => state.address);
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
   const [exploreMeta, setExploreMeta] = useState<any>([]);
-  const [isPublisher,setIsPublisher] = useState<any>(false);
+  const [isPublisher, setIsPublisher] = useState<any>(false);
 
   const fetchmetas = async () => {
     const allMetas = await fetchAllMetas();
@@ -75,25 +76,28 @@ const DashBoard = () => {
                 value={selectedNavTab}
                 onChange={setSelectedNavTab}
               />
-              <Box cursor={"not-allowed"}>
-                <Text className="mb-0" color="#C6C6C6">
+              <Box cursor={"not-allowed"} style={{display:"flex", flexDirection: "row"}}>
+                <Text className="mb-0" color="#C6C6C6" marginRight="2px">
                   Functions
                 </Text>
+                <TagNative value="soon" size="sm" variant="grey" />
               </Box>
             </FlexRow>
 
-            {hookMacha.publisherExists && <ButtonNative
-              size="sm"
-              text="Create Contract"
-              variant="state_brand"
-              marginRight="0px"
-              paddingLeft="sm"
-              paddingRight="sm"
-              height="2.5rem"
-              onClick={() => {
-                contractModal.onOpen();
-              }}
-            />}
+            {hookMacha.publisherExists && (
+              <ButtonNative
+                size="sm"
+                text="Create Contract"
+                variant="state_brand"
+                marginRight="0px"
+                paddingLeft="sm"
+                paddingRight="sm"
+                height="2.5rem"
+                onClick={() => {
+                  contractModal.onOpen();
+                }}
+              />
+            )}
 
             {/* {selectedNavTab == "Functions" && (
               <ButtonNative
@@ -129,14 +133,10 @@ const DashBoard = () => {
   const renderNav = () => {
     return (
       <NavTop
+        centerElem={<InputSearch />}
         rightElem={
           <FlexRow width="fit-content">
-            {$address && (
-              <NavButton
-                marginRight={style.margin["sm"]}
-                marginLeft={style.margin["sm"]}
-              />
-            )}
+            {$address && <NavButton />}
             {<ConnectWalletButton />}
           </FlexRow>
         }

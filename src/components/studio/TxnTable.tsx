@@ -110,7 +110,7 @@ const TxnTable = ({ txnData }: Prop) => {
                   cursor={style.table.cursor.pointer}
                   onClick={() => {
                     router.push(
-                      `/search/transaction/${item.transaction.txn_hash}`
+                      `/search/transaction/${item?.transaction?.txn_hash}`
                     );
                   }}
                   style={{
@@ -192,7 +192,7 @@ const TxnTable = ({ txnData }: Prop) => {
                       cursor={style.table.cursor.pointer}
                       onClick={() => {
                         router.push(
-                          `/search/accounts/${item.transaction.from}`
+                          `/search/accounts/${item?.transaction?.from}`
                         );
                       }}
                     >
@@ -220,7 +220,9 @@ const TxnTable = ({ txnData }: Prop) => {
                       _hover={{ textDecoration: "underline" }}
                       cursor={style.table.cursor.pointer}
                       onClick={() => {
-                        router.push(`/search/accounts/${item.transaction.to}`);
+                        router.push(
+                          `/search/accounts/${item?.transaction?.to}`
+                        );
                       }}
                     >
                       {truncateAddress(item?.transaction?.to)}

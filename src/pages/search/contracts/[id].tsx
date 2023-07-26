@@ -17,6 +17,9 @@ import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import NavButton from "@/components/buttons/NavButton";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
+import NavTop from "@/_ui/nav/NavTop";
 
 type Props = {
   metaInfo: any;
@@ -39,6 +42,26 @@ const Contract = () => {
     }
   }, [router.query.id]);
 
+  const renderNav = () => {
+    return (
+      <NavTop
+      centerElem={
+        <InputSearch/>
+      }
+        rightElem={
+          <FlexRow width="fit-content">
+            {$address && (
+              <NavButton
+                marginRight={style.margin["sm"]}
+                marginLeft={style.margin["sm"]}
+              />
+            )}
+            {<ConnectWalletButton />}
+          </FlexRow>
+        }
+      />
+    );
+  };
   const renderComponent = () => {
     let options = {
       weekday: "long",
@@ -48,7 +71,7 @@ const Contract = () => {
     };
     console.log("contract details", hookContract?.contractDetails);
     return (
-      <Box paddingTop={style.padding["xxxl"]}>
+      <Box paddingTop={style.padding["xxxl"]} marginTop={style.margin["xxxl"]}>
         {hookContract.contractDetails && (
           <ContractInfoCard
             data={{
@@ -111,12 +134,12 @@ const Contract = () => {
             >
               Transactions in the last 12 hours{" "}
             </Text>
-            <Box style={{display: "flex", marginTop: `${style.margin.md}`,alignItems: "end"}}>
-              <ButtonNative marginRight="sm" onClick={() => {}} text="first" variant="state_default_hover" />
-              <ButtonNative marginRight="sm" onClick={() => {}} text="" iconRight={{ slug: "icon-chevron" }} variant="state_default_hover" />
+            <Box style={{ display: "flex", alignItems: "end", marginBottom: `${style.margin.md}`, marginTop: `${style.margin.sm}` }}>
+              <ButtonNative marginRight="sm" onClick={() => { }} text="first" variant="state_default_hover" />
+              <ButtonNative marginRight="sm" onClick={() => { }} text="Prev" disabled={true} variant="state_default_hover" />
               <Text marginRight={style.margin.sm}>Page 1 of 45</Text>
-              <ButtonNative marginRight="sm" onClick={() => {}} text="" iconRight={{ slug: "icon-chevron-next" }} variant="state_default_hover" />
-              <ButtonNative marginRight="sm" onClick={() => {}} text="last" variant="state_default_hover" />
+              <ButtonNative marginRight="sm" onClick={() => { }} disabled={true} text="Next" variant="state_default_hover" />
+              <ButtonNative marginRight="sm" onClick={() => { }} text="last" variant="state_default_hover" />
             </Box>
             <Box
               marginTop="1rem"
@@ -157,6 +180,7 @@ const Contract = () => {
               back={() => {
                 router.back();
               }}
+              marginTop={style.margin["nav"]}
             >
               <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
                 <FlexRow width="100%" hrAlign="space-between">
@@ -221,7 +245,13 @@ const Contract = () => {
       </>
     );
   };
-  return <FlexWindow view="col" bodyElem={renderBody()}></FlexWindow>;
+  return (
+    <FlexWindow
+      view="col"
+      bodyElem={renderBody()}
+      navElem={renderNav()}
+    ></FlexWindow>
+  );
 };
 
 export default Contract;

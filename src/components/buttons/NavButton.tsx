@@ -9,6 +9,7 @@ type Props = {
   marginLeft?: any;
   marginRight?: any;
   width?: any;
+  isDisabled?: any;
 };
 
 const NavButton = ({ marginLeft, marginRight, width }: Props) => {
@@ -41,28 +42,30 @@ const NavButton = ({ marginLeft, marginRight, width }: Props) => {
   ];
 
   return (
-    // <ButtonMenu
-    //   marginLeft={marginLeft}
-    //   marginRight={marginRight}
-    //   width={width ? width : "100%"}
-    //   text={
-    //     asPath == "/"
-    //       ? "Search"
-    //       : asPath == "/studio/nft"
-    //       ? "NFT Studio"
-    //       : "Data Studio"
-    //   }
-    //   icon={{
-    //     slug: "icon-chevron-down",
-    //     style: ` marginLeft: "10px" `,
-    //   }}
-    //   options={options}
-    // />
-    <Box width={"8rem"}>
-      <Text className="mb-0" fontSize={style.font.h6}>
-        Data Studio
-      </Text>
-    </Box>
+    <ButtonMenu
+      isDisabled={true}
+      marginLeft={marginLeft}
+      marginRight={marginRight}
+      width={width ? width : "100%"}
+      text={
+        asPath == "/"
+          ? "Search"
+          : asPath == "/studio/nft"
+          ? "NFT Studio"
+          : "Data Studio"
+      }
+      icon={{
+        slug: "icon-chevron-down",
+        style: ` marginLeft: "10px" `,
+      }}
+      options={options}
+    />
+
+    // <Box width={"8rem"}>
+    //   <Text className="mb-0" fontSize={style.font.h6}>
+    //     Data Studio
+    //   </Text>
+    // </Box>
   );
 };
 export default NavButton;

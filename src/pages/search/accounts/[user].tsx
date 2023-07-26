@@ -13,9 +13,17 @@ import useUserTxn from "@/hooks/studio/useUserTxn";
 import FlexBody from "@/_ui/flex/FlexBody";
 import TxnTable from "@/components/studio/TxnTable";
 import Loader from "@/_ui/loader/Loader";
+import NavTop from "@/_ui/nav/NavTop";
+import NavButton from "@/components/buttons/NavButton";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
+import useAuthStore from "@/store/useAuthStore";
+import { truncateAddress } from "@/helpers";
+import InputSearch from "@/_ui/input/InputSearch";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const $address = useAuthStore((state: any) => state.address);
   const hookUserTxn = useUserTxn();
   const router = useRouter();
   const handleTabChange = (index: any) => {
@@ -28,10 +36,29 @@ const Network = () => {
     }
   }, [router.query.user]);
 
+  const renderNav = () => {
+    return (
+      <NavTop
+        centerElem={<InputSearch />}
+        rightElem={
+          <FlexRow width="fit-content">
+            {$address && (
+              <NavButton
+                marginRight={style.margin["sm"]}
+                marginLeft={style.margin["sm"]}
+              />
+            )}
+            {<ConnectWalletButton />}
+          </FlexRow>
+        }
+      />
+    );
+  };
+
   const renderComponent = () => {
     return (
       <>
-        <Box marginTop={style.margin.xxxl}>
+        <Box marginTop={style.margin.xxxl} paddingTop={style.padding.xxxl}>
           <>
             <Box>
               {/* <Text fontSize="3rem">Interactions</Text> */}
@@ -160,6 +187,13 @@ const Network = () => {
                     >
                       Transactions in the last 12 hours{" "}
                     </Text>
+                    <Box style={{ display: "flex", alignItems: "end", marginBottom: `${style.margin.md}`, marginTop: `${style.margin.sm}` }}>
+                      <ButtonNative marginRight="sm" onClick={() => { }} text="first" variant="state_default_hover" />
+                      <ButtonNative marginRight="sm" onClick={() => { }} text="Prev" disabled={true} variant="state_default_hover" />
+                      <Text marginRight={style.margin.sm}>Page 1 of 45</Text>
+                      <ButtonNative marginRight="sm" onClick={() => { }} disabled={true} text="Next" variant="state_default_hover" />
+                      <ButtonNative marginRight="sm" onClick={() => { }} text="last" variant="state_default_hover" />
+                    </Box>
                     <Box
                       marginTop="1rem"
                       border={style.table.border.thead}
@@ -184,15 +218,16 @@ const Network = () => {
           back={() => {
             router.back();
           }}
+          marginTop={style.margin["nav"]}
         >
           <FlexRow hrAlign="flex-start">
             <Text
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-            //   marginLeft={style.margin.xxs}
+              //   marginLeft={style.margin.xxs}
             >
-              Ethereum
+              {truncateAddress(router.query.user)}
             </Text>
           </FlexRow>
         </NavBlock>
@@ -200,7 +235,13 @@ const Network = () => {
       </>
     );
   };
-  return <FlexWindow view="col" bodyElem={renderBody()}></FlexWindow>;
+  return (
+    <FlexWindow
+      view="col"
+      bodyElem={renderBody()}
+      navElem={renderNav()}
+    ></FlexWindow>
+  );
 };
 
 export default Network;
