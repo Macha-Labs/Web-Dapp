@@ -34,13 +34,7 @@ const Network = () => {
     if (router.isReady) {
       hookUserTxn._fetch(router.query.user);
     }
-  }, [router.query.user]);
-
-  useEffect(() => {
-    if (router.isReady) {
-      hookUserTxn._fetch(router.query.id)
-    }
-  }, [hookUserTxn.page])
+  }, [router.query.user,hookUserTxn.page]);
 
   const renderNav = () => {
     return (

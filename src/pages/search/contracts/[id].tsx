@@ -40,13 +40,7 @@ const Contract = () => {
       hookContract._fetch(router.query.id),
         hookContractTxn._fetch(router.query.id);
     }
-  }, [router.query.id]);
-
-  useEffect(() => {
-    if (isReady) {
-      hookContractTxn._fetch(router.query.id)
-    }
-  }, [hookContractTxn.page])
+  }, [router.query.id,hookContractTxn.page]);
 
   const renderNav = () => {
     return (

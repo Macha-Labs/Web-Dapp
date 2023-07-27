@@ -49,13 +49,7 @@ const Network = () => {
     if (isReady) {
       hookChainTxn._fetch(router.query.chainId);
     }
-  }, [router.query.chainId]);
-
-  useEffect(() => {
-    if (isReady) {
-      hookChainTxn._fetch(router.query.chainId)
-    }
-  }, [hookChainTxn.page])
+  }, [router.query.chainId,hookChainTxn.page]);
 
   const chainNav: any = [
     {
