@@ -40,7 +40,7 @@ const Contract = () => {
       hookContract._fetch(router.query.id),
         hookContractTxn._fetch(router.query.id);
     }
-  }, [router.query.id,hookContractTxn.page]);
+  }, [router.query.id, hookContractTxn.page]);
 
   const renderNav = () => {
     return (
@@ -90,87 +90,80 @@ const Contract = () => {
           </FlexRow>
         ) : hookContractTxn?.filteredData[0] ? (
           <>
-            <Text
-              mt={style.margin.xl}
-              mb={0}
-              style={{
-                background: `-webkit-linear-gradient(
-            270deg,
-            rgb(25, 124, 236),
-            rgb(0, 74, 217)
-          )`,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              Transactions in the last 12 hours{" "}
-            </Text>
             <Box
               style={{
                 display: "flex",
-                alignItems: "center",
+                alignItems: "",
+                justifyContent: "space-between",
                 marginBottom: `${style.margin.md}`,
                 marginTop: `${style.margin.sm}`,
               }}
             >
-              <ButtonNative
-                marginRight="sm"
-                size="xs"
-                height="2rem"
-                onClick={() => {
-                  if (hookContractTxn.page != 1) {
-                    hookContractTxn.setIsLoading(true)
-                    hookContractTxn.setPage(1)
-                  }
-                }}
-                text="First"
-                disabled={hookContractTxn.page == 1}
-                variant="state_default_hover"
-              />
-              <ButtonNative
-                marginRight="sm"
-                size="xs"
-                height="2rem"
-                onClick={() => {
-                  if (hookContractTxn.page > 1) {
-                    hookContractTxn.setIsLoading(true)
-                    hookContractTxn.setPage(hookContractTxn.page - 1)
-                  }
-                }}
-                text="Prev"
-                disabled={hookContractTxn.page <= 1}
-                variant="state_default_hover"
-              />
-              <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookContractTxn?.page} of {hookContractTxn.totalPages}</Text>
-              <ButtonNative
-                marginRight="sm"
-                size="xs"
-                height="2rem"
-                onClick={() => {
-                  if (hookContractTxn.page < hookContractTxn.totalPages) {
-                    hookContractTxn.setIsLoading(true)
-                    hookContractTxn.setPage(hookContractTxn.page + 1)
-                  }
-                }}
-                disabled={hookContractTxn.page >= hookContractTxn.totalPages}
-                text="Next"
-                variant="state_default_hover"
-              />
-              <ButtonNative
-                marginRight="sm"
-                size="xs"
-                height="2rem"
-                onClick={() => {
-                  if (hookContractTxn.page != hookContractTxn.totalPages) {
-                    hookContractTxn.setIsLoading(true)
-                    hookContractTxn.setPage(hookContractTxn.totalPages)
-                  }
-                }}
-                text="Last"
-                disabled={hookContractTxn.page == hookContractTxn.totalPages}
-                variant="state_default_hover"
-              />
+              <Box style={{
+                display: "flex",
+                alignItems: "center",
+              }}>
+                <ButtonNative
+                  marginRight="sm"
+                  size="xs"
+                  height="2rem"
+                  onClick={() => {
+                    if (hookContractTxn.page != 1) {
+                      hookContractTxn.setIsLoading(true)
+                      hookContractTxn.setPage(1)
+                    }
+                  }}
+                  text="Newest"
+                  disabled={hookContractTxn.page == 1}
+                  variant="state_default_hover"
+                />
+                <ButtonNative
+                  marginRight="sm"
+                  size="xs"
+                  height="2rem"
+                  onClick={() => {
+                    if (hookContractTxn.page > 1) {
+                      hookContractTxn.setIsLoading(true)
+                      hookContractTxn.setPage(hookContractTxn.page - 1)
+                    }
+                  }}
+                  text="Prev"
+                  disabled={hookContractTxn.page <= 1}
+                  variant="state_default_hover"
+                />
+                <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookContractTxn?.page} of {hookContractTxn.totalPages}</Text>
+                <ButtonNative
+                  marginRight="sm"
+                  size="xs"
+                  height="2rem"
+                  onClick={() => {
+                    if (hookContractTxn.page < hookContractTxn.totalPages) {
+                      hookContractTxn.setIsLoading(true)
+                      hookContractTxn.setPage(hookContractTxn.page + 1)
+                    }
+                  }}
+                  disabled={hookContractTxn.page >= hookContractTxn.totalPages}
+                  text="Next"
+                  variant="state_default_hover"
+                />
+                <ButtonNative
+                  marginRight="sm"
+                  size="xs"
+                  height="2rem"
+                  onClick={() => {
+                    if (hookContractTxn.page != hookContractTxn.totalPages) {
+                      hookContractTxn.setIsLoading(true)
+                      hookContractTxn.setPage(hookContractTxn.totalPages)
+                    }
+                  }}
+                  text="Oldest"
+                  disabled={hookContractTxn.page == hookContractTxn.totalPages}
+                  variant="state_default_hover"
+                />
+              </Box>
+              <Box>
+                <Text>Total Txns: {hookContractTxn.totalTxns}</Text>
+              </Box>
             </Box>
             <Box
               marginTop="1rem"

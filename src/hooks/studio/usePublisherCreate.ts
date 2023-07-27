@@ -1,18 +1,15 @@
-import { createNewPublisher } from "@/service/ApiService";
 import useAuthStore from "@/store/useAuthStore";
 import usePublisherFormStore from "@/store/usePublisherFormStore";
 import { useToast } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useMacha from "./useMacha";
 
 const usePublisherCreate = (modal: any) => {
-  const publisherDataRef = useRef<any>({});
   const toast = useToast();
-  const router = useRouter();
   const [formStep, setFormStep] = useState<any>(1);
   const [publisherType, setPublisherType] = useState<any>(undefined);
   const $address = useAuthStore((state: any) => state.address);
+  const [isTransactionPending,setIsTransactionPending] = useState<any>(false);
   const $publisherFormData = usePublisherFormStore(
     (state: any) => state.publisherFormData
   );
@@ -133,16 +130,28 @@ const usePublisherCreate = (modal: any) => {
         });
       } else {
         console.log("The publisher payload data is ", publisherPayload);
-        // createNewPublisher(publisherPayload, "Individual").then((res) => {
-        //   nextFormStep()
-        // })
-        hookMacha.createMachaPublisher(publisherPayload);
+        setIsTransactionPending(true)
         toast({
-          title: "Publisher Request In Process",
-          status: "success",
-          duration: 3000,
+          title: "Please wait for the transaction to confirm",
+          status: "loading",
+          duration: 5000,
           position: "top-right",
         });
+        hookMacha.createMachaPublisher(publisherPayload).then((res: any) => {
+          setIsTransactionPending(false);
+          console.log(res)
+          if(res?.code){
+            toast({
+              title: res.code.code || res?.code,
+              status: "error",
+              duration: 5000,
+              position: "top-right",
+            });
+          }
+          else{
+            nextFormStep()
+          }
+        })
       }
     } else if (publisherType == "Organization") {
       let publisherPayload = {
@@ -172,16 +181,27 @@ const usePublisherCreate = (modal: any) => {
         });
       } else {
         console.log("The publisher payload data is ", publisherPayload);
-        // createNewPublisher(publisherPayload, "Organization").then((res) => {
-        //   nextFormStep();
-        // });
-        hookMacha.createMachaPublisher(publisherPayload);
+        setIsTransactionPending(true)
         toast({
-          title: "Publisher Request Submitted",
-          status: "success",
-          duration: 3000,
+          title: "Please wait for the transaction to confirm",
+          status: "loading",
+          duration: 5000,
           position: "top-right",
         });
+        hookMacha.createMachaPublisher(publisherPayload).then((res: any) => {
+          setIsTransactionPending(false);
+          if(res?.code){
+            toast({
+              title: res.code,
+              status: "error",
+              duration: 5000,
+              position: "top-right",
+            });
+          }
+          else{
+            nextFormStep()
+          }
+        })
       }
     }
   };
@@ -197,6 +217,7 @@ const usePublisherCreate = (modal: any) => {
     setClear: setClear,
     $publisherFormData: $publisherFormData,
     $loadPublisherFormData: $loadPublisherFormData,
+    isTransactionPending: isTransactionPending
   };
 };
 export default usePublisherCreate;

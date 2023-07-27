@@ -27,6 +27,7 @@ const ModalWindow = ({
 }: Props) => {
   return (
     <Modal
+      closeOnOverlayClick={false}
       isCentered
       onClose={event?.onClose}
       isOpen={event?.isOpen}

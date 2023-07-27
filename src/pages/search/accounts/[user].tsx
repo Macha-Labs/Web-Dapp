@@ -1,6 +1,6 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 import { style } from "@/styles/StyledConstants";
-import { Avatar, Divider, Flex, Image, Link, Text } from "@chakra-ui/react";
+import { Avatar, Divider, Flex, Image, Link, Text, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 // import InteractionTable from "@/pages/search/network/InteractionTable";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
@@ -20,12 +20,14 @@ import useAuthStore from "@/store/useAuthStore";
 import { truncateAddress } from "@/helpers";
 import InputSearch from "@/_ui/input/InputSearch";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import IconBase from "@/_ui/icons/IconsBase";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
   const $address = useAuthStore((state: any) => state.address);
   const hookUserTxn = useUserTxn();
   const router = useRouter();
+  const toast = useToast();
   const handleTabChange = (index: any) => {
     setActiveTab(index);
   };
@@ -34,7 +36,7 @@ const Network = () => {
     if (router.isReady) {
       hookUserTxn._fetch(router.query.user);
     }
-  }, [router.query.user,hookUserTxn.page]);
+  }, [router.query.user, hookUserTxn.page]);
 
   const renderNav = () => {
     return (
@@ -73,41 +75,36 @@ const Network = () => {
                     marginBottom={0}
                     marginLeft={style.margin.xxs}
                   >
-                    {router.query.user}
+                    {truncateAddress(router.query.user)}
                   </Text>
+                  <IconBase
+                  slug="icon-copy"
+                  style={{ marginLeft: "sm" }}
+                  onClick={() => {
+                    navigator.clipboard.writeText(String(router.query.user));
+                    toast({
+                      title: "Copied To Clipboard",
+                      status: "success",
+                      duration: 3000,
+                    });
+                  }}
+                />
                 </Box>
               </Flex>
               <Flex
-                justify="space-between"
+                justify="flex-start"
                 border={style.card.border.contract}
                 borderRadius={style.card.borderRadius.default}
               >
                 <Box
-                  flex="1"
+                  // flex="1"
                   p={4}
                   display="flex"
-                  justifyContent="space-between"
+                  justifyContent="flex-start"
                 >
-                  <Box>
-                    <Text marginBottom={0}>Networth</Text>
-                    <Text
-                      fontWeight={style.fontWeight.extraDark}
-                      marginBottom={0}
-                    >
-                      US$0.01
-                    </Text>
-                    <Text>1 ERC-20 tokens</Text>
-                  </Box>
-
-                  <Divider
-                    orientation="vertical"
-                    margin={0}
-                    border={style.card.border.meta}
-                    width={"0px"}
-                  />
                 </Box>
                 <Box
-                  flex="1"
+                  // flex="1"
                   p={4}
                   display="flex"
                   justifyContent="space-between"
@@ -118,47 +115,15 @@ const Network = () => {
                       marginBottom={0}
                       fontWeight={style.fontWeight.extraDark}
                     >
-                      17 Interactions
+                      {hookUserTxn.totalTxns} Interactions
                     </Text>
                   </Box>
-                  <Divider
+                  {/* <Divider
                     orientation="vertical"
                     margin={0}
                     border={style.card.border.meta}
                     width={"0px"}
-                  />
-                </Box>
-                <Box
-                  flex="1"
-                  p={4}
-                  display="flex"
-                  justifyContent="space-between"
-                >
-                  <Box>
-                    <Text marginBottom={0}>Collectibles</Text>
-                    <Text
-                      marginBottom={0}
-                      fontWeight={style.fontWeight.extraDark}
-                    >
-                      0 Pieces
-                    </Text>
-                  </Box>
-                  <Divider
-                    orientation="vertical"
-                    margin={0}
-                    border={style.card.border.meta}
-                    width={"0px"}
-                  />
-                </Box>
-                <Box flex="1" p={4}>
-                  <Text marginBottom={0}>Active Since</Text>
-                  <Text
-                    marginBottom={0}
-                    fontWeight={style.fontWeight.extraDark}
-                  >
-                    Jan 13, 2023
-                  </Text>
-                  <Text>6 months</Text>
+                  /> */}
                 </Box>
               </Flex>
             </Box>
@@ -170,83 +135,80 @@ const Network = () => {
               ) : (
                 hookUserTxn?.filteredData[0] && (
                   <>
-                    <Text
-                      mt={style.margin.lg}
-                      mb={style.margin.lg}
-                      style={{
-                        background: `-webkit-linear-gradient(270deg,rgb(25, 124, 236),rgb(0, 74, 217))`,
-                        WebkitBackgroundClip: "text",
-                        backgroundClip: "text",
-                        color: "transparent",
-                      }}
-                    >
-                      Transactions in the last 12 hours{" "}
-                    </Text>
                     <Box
                       style={{
                         display: "flex",
-                        alignItems: "end",
+                        alignItems: "",
+                        justifyContent: "space-between",
                         marginBottom: `${style.margin.md}`,
-                        marginTop: `${style.margin.sm}`,
+                        marginTop: `${style.margin.lg}`,
                       }}
                     >
-                      <ButtonNative
-                        marginRight="sm"
-                        size="xs"
-                        height="2rem"
-                        onClick={() => {
-                          if (hookUserTxn.page != 1) {
-                            hookUserTxn.setIsLoading(true)
-                            hookUserTxn.setPage(1)
-                          }
-                        }}
-                        text="First"
-                        disabled={hookUserTxn.page == 1}
-                        variant="state_default_hover"
-                      />
-                      <ButtonNative
-                        marginRight="sm"
-                        size="xs"
-                        height="2rem"
-                        onClick={() => {
-                          if (hookUserTxn.page > 1) {
-                            hookUserTxn.setIsLoading(true)
-                            hookUserTxn.setPage(hookUserTxn.page - 1)
-                          }
-                        }}
-                        text="Prev"
-                        disabled={hookUserTxn.page <= 1}
-                        variant="state_default_hover"
-                      />
-                      <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookUserTxn?.page} of {hookUserTxn.totalPages}</Text>
-                      <ButtonNative
-                        marginRight="sm"
-                        size="xs"
-                        height="2rem"
-                        onClick={() => {
-                          if (hookUserTxn.page < hookUserTxn.totalPages) {
-                            hookUserTxn.setIsLoading(true)
-                            hookUserTxn.setPage(hookUserTxn.page + 1)
-                          }
-                        }}
-                        disabled={hookUserTxn.page >= hookUserTxn.totalPages}
-                        text="Next"
-                        variant="state_default_hover"
-                      />
-                      <ButtonNative
-                        marginRight="sm"
-                        size="xs"
-                        height="2rem"
-                        onClick={() => {
-                          if (hookUserTxn.page != hookUserTxn.totalPages) {
-                            hookUserTxn.setIsLoading(true)
-                            hookUserTxn.setPage(hookUserTxn.totalPages)
-                          }
-                        }}
-                        text="Last"
-                        disabled={hookUserTxn.page == hookUserTxn.totalPages}
-                        variant="state_default_hover"
-                      />
+                      <Box style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}>
+                        <ButtonNative
+                          marginRight="sm"
+                          size="xs"
+                          height="2rem"
+                          onClick={() => {
+                            if (hookUserTxn.page != 1) {
+                              hookUserTxn.setIsLoading(true)
+                              hookUserTxn.setPage(1)
+                            }
+                          }}
+                          text="Newest"
+                          disabled={hookUserTxn.page == 1}
+                          variant="state_default_hover"
+                        />
+                        <ButtonNative
+                          marginRight="sm"
+                          size="xs"
+                          height="2rem"
+                          onClick={() => {
+                            if (hookUserTxn.page > 1) {
+                              hookUserTxn.setIsLoading(true)
+                              hookUserTxn.setPage(hookUserTxn.page - 1)
+                            }
+                          }}
+                          text="Prev"
+                          disabled={hookUserTxn.page <= 1}
+                          variant="state_default_hover"
+                        />
+                        <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookUserTxn?.page} of {hookUserTxn.totalPages}</Text>
+                        <ButtonNative
+                          marginRight="sm"
+                          size="xs"
+                          height="2rem"
+                          onClick={() => {
+                            if (hookUserTxn.page < hookUserTxn.totalPages) {
+                              hookUserTxn.setIsLoading(true)
+                              hookUserTxn.setPage(hookUserTxn.page + 1)
+                            }
+                          }}
+                          disabled={hookUserTxn.page >= hookUserTxn.totalPages}
+                          text="Next"
+                          variant="state_default_hover"
+                        />
+                        <ButtonNative
+                          marginRight="sm"
+                          size="xs"
+                          height="2rem"
+                          onClick={() => {
+                            if (hookUserTxn.page != hookUserTxn.totalPages) {
+                              hookUserTxn.setIsLoading(true)
+                              hookUserTxn.setPage(hookUserTxn.totalPages)
+                            }
+                          }}
+                          text="Oldest"
+                          disabled={hookUserTxn.page == hookUserTxn.totalPages}
+                          variant="state_default_hover"
+                        />
+                      </Box>
+                      <Box>
+                        <Text>Total Txns: {hookUserTxn.totalTxns}</Text>
+                      </Box>
                     </Box>
                     <Box
                       marginTop="1rem"
@@ -255,7 +217,7 @@ const Network = () => {
                       marginBottom={style.margin.xxxl}
                     >
                       {/* Content for Tab 1 */}
-                      <TxnTable txnData={hookUserTxn?.filteredData} />
+                      <TxnTable displayFrom={false} txnData={hookUserTxn?.filteredData} />
                     </Box>
                   </>
                 )

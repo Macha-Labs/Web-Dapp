@@ -22,6 +22,7 @@ import NavButton from "@/components/buttons/NavButton";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import useAuthStore from "@/store/useAuthStore";
 import InputSearch from "@/_ui/input/InputSearch";
+import useAlchemy from "@/hooks/studio/useAlchemy";
 
 const Network = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -29,6 +30,7 @@ const Network = () => {
   const router = useRouter();
   const chainId: any = router.query.chainId;
   const isReady = router.isReady;
+  const hookAlchemy = useAlchemy()
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Transactions");
 
   const renderNav = () => {
@@ -48,16 +50,13 @@ const Network = () => {
   useEffect(() => {
     if (isReady) {
       hookChainTxn._fetch(router.query.chainId);
+      hookAlchemy.getLatestBlockByChainId(Number(router.query.chainId))
     }
   }, [router.query.chainId,hookChainTxn.page]);
 
   const chainNav: any = [
     {
       value: "Transactions",
-      href: "#",
-    },
-    {
-      value: "Blocks",
       href: "#",
     },
     {
@@ -143,7 +142,7 @@ const Network = () => {
                     hookChainTxn.setPage(1)
                   }
                 }}
-                text="First"
+                text="Newest"
                 disabled={hookChainTxn.page == 1}
                 variant="state_default_hover"
               />
@@ -186,7 +185,7 @@ const Network = () => {
                     hookChainTxn.setPage(hookChainTxn.totalPages)
                   }
                 }}
-                text="Last"
+                text="oldest"
                 disabled={hookChainTxn.page == hookChainTxn.totalPages}
                 variant="state_default_hover"
               />
@@ -257,61 +256,13 @@ const Network = () => {
                   justifyContent="space-between"
                 >
                   <Box>
-                    <Text marginBottom={0}>Market Cap</Text>
-                    <Text
-                      fontWeight={style.fontWeight.extraDark}
-                      marginBottom={0}
-                    >
-                      $230.79B
-                    </Text>
-                    <Text>120.2M ETH</Text>
-                  </Box>
-
-                  <Divider
-                    orientation="vertical"
-                    margin={0}
-                    border={style.card.border.meta}
-                    width={"0px"}
-                  />
-                </Box>
-                <Box
-                  flex="1"
-                  p={4}
-                  display="flex"
-                  justifyContent="space-between"
-                >
-                  <Box>
                     <Text marginBottom={0}>Interactions</Text>
                     <Text
                       marginBottom={0}
                       fontWeight={style.fontWeight.extraDark}
                     >
-                      1,999,185,792
+                      {hookChainTxn.totalTxns}
                     </Text>
-                    <Text>8.83 interactions per second</Text>
-                  </Box>
-                  <Divider
-                    orientation="vertical"
-                    margin={0}
-                    border={style.card.border.meta}
-                    width={"0px"}
-                  />
-                </Box>
-                <Box
-                  flex="1"
-                  p={4}
-                  display="flex"
-                  justifyContent="space-between"
-                >
-                  <Box>
-                    <Text marginBottom={0}>EHT Price</Text>
-                    <Text
-                      marginBottom={0}
-                      fontWeight={style.fontWeight.extraDark}
-                    >
-                      US$1,920.18
-                    </Text>
-                    <Text>$230.81B</Text>
                   </Box>
                   <Divider
                     orientation="vertical"
@@ -326,9 +277,8 @@ const Network = () => {
                     marginBottom={0}
                     fontWeight={style.fontWeight.extraDark}
                   >
-                    17734045
+                    {hookAlchemy.latestBlock}
                   </Text>
-                  <Text>less than a minute</Text>
                 </Box>
               </Flex>
             </Box>

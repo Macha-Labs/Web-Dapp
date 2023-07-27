@@ -28,10 +28,13 @@ const useMacha = () => {
       if (signer) {
         macha = new Macha({ owner: $address, signer: signer });
         console.log("create publisher called", macha);
-        await macha?.createPublisher(publisherData);
+        const res = await macha?.createPublisher(publisherData);
+        await connectMachaPublisher()
+        return res;
       }
     } catch (error) {
       console.log("Error in createMachaPublisher", error);
+      return error
     }
   };
 

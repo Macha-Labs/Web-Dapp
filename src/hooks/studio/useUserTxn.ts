@@ -9,11 +9,13 @@ const useUserTxn = () => {
   const [searchVal,setSearchVal] = useState<any>("");
   const [page, setPage] = useState<number>(1);
   const [totalPages,setTotalPages] = useState<number>(1)
+  const [totalTxns,setTotalTxns] = useState<any>("");
 
   const _fetch = async (from_address: any) => {
     txnByUserAddress(from_address,page).then((res: any) => {
       console.log("user txn fetching", res);
       setTotalPages(Math.ceil(res.count / 10))
+      setTotalTxns(res.count)
       setIsLoading(false)
       setUserTxnDetails(res.data);
       setFilteredData(res.data);
@@ -39,7 +41,8 @@ const useUserTxn = () => {
     page: page,
     setPage: setPage,
     totalPages: totalPages,
-    _fetch: _fetch
+    _fetch: _fetch,
+    totalTxns: totalTxns
   }
 }
 export default useUserTxn

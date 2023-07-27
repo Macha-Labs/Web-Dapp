@@ -1,11 +1,14 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
+import IconImage from "@/_ui/icons/IconImage";
 import IconBase from "@/_ui/icons/IconsBase";
 import InputLabel from "@/_ui/input/InputLabel";
+import Loader from "@/_ui/loader/Loader";
 // import TableNative from "@/_ui/list/Tablenative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import { deploytoLightHouse, displayImage } from "@/helpers/storage/lightHouseStorage";
+import useMacha from "@/hooks/studio/useMacha";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Image, Text } from "@chakra-ui/react";
 
@@ -15,6 +18,9 @@ type Props = {
 };
 
 const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
+
+  const hookMacha = useMacha()
+
   return (
     <>
       <ModalWindow
@@ -35,6 +41,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
             {(hookPublisherCreate.formStep != 4 && hookPublisherCreate.formStep != 5) && <Box>
               <Text className="mb-0">Become a Publisher </Text>
             </Box>}
+            {(hookPublisherCreate.formStep != 6 && hookPublisherCreate.formStep != 7) && <IconImage slug="icon-close" onClick={() => modal.onClose()} />}
           </FlexRow>
         }
         footer={
@@ -51,9 +58,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 <ButtonNative
                   variant="state_brand"
                   marginTop={style.margin["lg"]}
-                  onClick={() => {
+                  onClick={async () => {
                     hookPublisherCreate.setClear()
                     modal.onClose()
+                    await hookMacha.connectMachaPublisher();
                   }}
                 >
                   Okay
@@ -114,6 +122,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 <ButtonNative
                   variant="state_default_hover"
                   marginTop={style.margin["lg"]}
+                  disabled={hookPublisherCreate.isTransactionPending}
                   onClick={() => {
                     hookPublisherCreate.setClear()
                     modal.onClose()
@@ -128,6 +137,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   variant="state_brand"
                   marginTop={style.margin["lg"]}
                   onClick={hookPublisherCreate.createPublisher}
+                  disabled={hookPublisherCreate.isTransactionPending}
                 >
                   Confirm
                 </ButtonNative>
@@ -141,9 +151,16 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
           hrAlign="space-between"
           height="100%"
         >
-          <Box width="100%">
+          {hookPublisherCreate.isTranactionPending && (
+            <FlexRow height="100px">
+              <Loader size="lg" />
+            </FlexRow>
+          )}
+          {hookPublisherCreate.isTransactionPending ? <FlexRow height="100px">
+            <Loader size="lg" />
+          </FlexRow> : <Box width="100%">
             <FlexColumn hrAlign="space-between" height="55%">
-              {hookPublisherCreate.formStep == 1 && (
+              {(hookPublisherCreate.formStep == 1) && (
                 <>
                   <Box
                     paddingTop={style.padding.xl}
@@ -175,7 +192,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   </Box>
                 </>
               )}
-              {hookPublisherCreate.formStep == 2 && (
+              {(hookPublisherCreate.formStep == 2) && (
                 <>
                   <Box
                     paddingTop={style.padding.xl}
@@ -207,7 +224,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   </Box>
                 </>
               )}
-              {hookPublisherCreate.formStep == 3 && (
+              {(hookPublisherCreate.formStep == 3) && (
                 <>
                   <Box
                     paddingTop={style.padding.xl}
@@ -342,7 +359,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   />
                 </Box>
               )}
-              {(hookPublisherCreate.formStep == 5 && hookPublisherCreate.publisherType == "Organization") && (
+              {((hookPublisherCreate.formStep == 5) && hookPublisherCreate.publisherType == "Organization") && (
                 <Box width="100%">
                   <Text>All * marked fields are required</Text>
                   <InputLabel
@@ -405,7 +422,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   />
                 </Box>
               )}
-              {hookPublisherCreate.formStep == 6 && (
+              {(hookPublisherCreate.formStep == 6) && (
                 <Box
                   backgroundImage="https://ik.imagekit.io/metaworkLabs/Studio/Almost%20there%20image-no%20icon.png?updatedAt=1690181942667"
                   style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
@@ -437,7 +454,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   </Box>
                 </Box>
               )}
-              {hookPublisherCreate.formStep == 7 && (
+              {(hookPublisherCreate.formStep == 7) && (
                 <Box
                   backgroundImage="https://ik.imagekit.io/metaworkLabs/Studio/Almost%20there%20image-no%20icon.png?updatedAt=1690181942667"
                   style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
@@ -470,7 +487,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 </Box>
               )}
             </FlexColumn>
-          </Box>
+          </Box>}
         </FlexColumn>
       </ModalWindow>
     </>

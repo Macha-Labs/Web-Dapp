@@ -1,15 +1,18 @@
 import { Alchemy, Network } from "alchemy-sdk";
+import {useState} from "react";
 
 const useAlchemy = () => {
 
-  const settings = {
-    apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
-    network: Network.ETH_MAINNET, // Replace with your network.
-  };
-
-  const alchemy = new Alchemy(settings);
+  const [latestBlock,setLatestBlock] = useState<any>("");
 
   const alchemyData = async () => {
+    const settings = {
+      apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
+      network: Network.ETH_MAINNET, // Replace with your network.
+    };
+
+    const alchemy = new Alchemy(settings);
+
     // Print owner's wallet address:
     const ownerAddr = "vitalik.eth";
     console.log("fetching NFTs for address:", ownerAddr);
@@ -46,8 +49,20 @@ const useAlchemy = () => {
     console.log("===");
   };
 
+  const getLatestBlockByChainId = async (chain_id: number) => {
+    const settings = {
+      apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
+      network: chain_id == 1 ? Network.ETH_MAINNET : Network.MATIC_MAINNET, // Replace with your network.
+    };
+    const alchemy = new Alchemy(settings);
+    const _latestBlock = await alchemy.core.getBlockNumber();
+    setLatestBlock(_latestBlock)
+  }
+
   return {
-    alchemyData: alchemyData
+    alchemyData: alchemyData,
+    getLatestBlockByChainId: getLatestBlockByChainId,
+    latestBlock: latestBlock
   }
 };
 export default useAlchemy;

@@ -9,11 +9,13 @@ const useChainTxn = () => {
   const [searchVal, setSearchVal] = useState<any>("");
   const [page, setPage] = useState<number>(1);
   const [totalPages,setTotalPages] = useState<number>(1)
+  const [totalTxns,setTotalTxns] = useState<any>("");
 
   const _fetch = async (chain_id: any) => {
+    setIsLoading(true)
     txnByChainId(chain_id, page).then((res: any) => {
       setTotalPages(Math.ceil(res.count / 10))
-      setIsLoading(true)
+      setTotalTxns(res.count)
       console.log("chain txn fetching", res);
       setIsLoading(false)
       setChainTxnDetails(res.data);
@@ -40,7 +42,8 @@ const useChainTxn = () => {
     page: page,
     setPage: setPage,
     totalPages: totalPages,
-    _fetch: _fetch
+    _fetch: _fetch,
+    totalTxns: totalTxns
   }
 }
 export default useChainTxn

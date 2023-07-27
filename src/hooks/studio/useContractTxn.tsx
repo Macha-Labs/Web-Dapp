@@ -9,10 +9,12 @@ const useContractTxn = () => {
   const [searchVal,setSearchVal] = useState<any>("");
   const [page,setPage] = useState<number>(1)
   const [totalPages,setTotalPages] = useState<number>(1)
+  const [totalTxns,setTotalTxns] = useState<any>("");
 
   const _fetch = async (contract_slug: any) => {
     txnDataBySlug(contract_slug,page).then((res: any) => {
       setTotalPages(Math.ceil(res.count / 10))
+      setTotalTxns(res.count)
       console.log("contract txn fetching", res);
       setIsLoading(false)
       setContractTxnDetails(res.data);
@@ -39,7 +41,8 @@ const useContractTxn = () => {
     _fetch: _fetch,
     page: page,
     setPage: setPage,
-    totalPages: totalPages
+    totalPages: totalPages,
+    totalTxns: totalTxns
   }
 }
 export default useContractTxn

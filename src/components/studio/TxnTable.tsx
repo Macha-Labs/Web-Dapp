@@ -26,10 +26,11 @@ import { ConnectWalletButton } from "../ConnectWalletButton";
 
 type Prop = {
   txnData: any;
+  displayFrom?: boolean;
 };
 
 
-const TxnTable = ({ txnData }: Prop) => {
+const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
   const router = useRouter();
 
   return (
@@ -72,7 +73,7 @@ const TxnTable = ({ txnData }: Prop) => {
               >
                 Method Name
               </Th>
-              <Th
+              {displayFrom && <Th
                 style={{
                   textAlign: "center",
                   fontSize: "1rem",
@@ -82,7 +83,7 @@ const TxnTable = ({ txnData }: Prop) => {
                 }}
               >
                 From
-              </Th>
+              </Th>}
               <Th
                 style={{
                   textAlign: "center",
@@ -175,7 +176,7 @@ const TxnTable = ({ txnData }: Prop) => {
                     </Box>
                   </Box>
                 </Td>
-                <Td style={{ textAlign: "center", paddingBottom: "0" }}>
+                {displayFrom && <Td style={{ textAlign: "center", paddingBottom: "0" }}>
                   <Box
                     style={{
                       display: "flex",
@@ -203,7 +204,7 @@ const TxnTable = ({ txnData }: Prop) => {
                       {truncateAddress(item?.transaction?.from)}
                     </Text>
                   </Box>
-                </Td>
+                </Td>}
                 <Td style={{ textAlign: "center", paddingBottom: "0" }}>
                   <Box
                     style={{
