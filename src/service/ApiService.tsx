@@ -29,9 +29,10 @@ export const contractDataBySlug = async (contractSlug: string) => {
   const data = await response.json();
   return data;
 };
-export const txnDataBySlug = async (contractSlug: string) => {
+
+export const txnDataBySlug = async (contractSlug: string,page: number) => {
   const response = await fetch(
-    `${config.metaServer}/indexer/transactions/fetch-by-slug/${contractSlug}`
+    `${config.metaServer}/indexer/transactions/fetch-by-slug/${contractSlug}?page=${page}`
   );
   const data = await response.json();
   return data;
@@ -95,19 +96,16 @@ export const deleteContract = async (contract_id: any) => {
   return response.json();
 };
 
-export const txnByChainId = async (chain_id: any,cursor: any) => {
-  let url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}`
-  if(cursor != 1){
-    url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}?cursor=${cursor}`
-  }
+export const txnByChainId = async (chain_id: any,page: any) => {
+  let url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}?page=${page}`
   const response = await fetch(url);
   const data = await response.json();
   return data;
 };
 
-export const txnByUserAddress = async (from_address: any) => {
+export const txnByUserAddress = async (from_address: any,page: any) => {
   const response = await fetch(
-    `${config.metaServer}/indexer/transactions/fetch-by-user-address/${from_address}`
+    `${config.metaServer}/indexer/transactions/fetch-by-user-address/${from_address}?page=${page}`
   );
   const data = await response.json();
   return data;

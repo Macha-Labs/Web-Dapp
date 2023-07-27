@@ -40,7 +40,7 @@ const Contract = () => {
       hookContract._fetch(router.query.id),
         hookContractTxn._fetch(router.query.id);
     }
-  }, [router.query.id]);
+  }, [router.query.id,hookContractTxn.page]);
 
   const renderNav = () => {
     return (
@@ -49,7 +49,7 @@ const Contract = () => {
         rightElem={
           <FlexRow width="fit-content">
             {$address && <NavButton />}
-            {<ConnectWalletButton/>}
+            {<ConnectWalletButton />}
           </FlexRow>
         }
       />
@@ -109,36 +109,66 @@ const Contract = () => {
             <Box
               style={{
                 display: "flex",
-                alignItems: "end",
+                alignItems: "center",
                 marginBottom: `${style.margin.md}`,
                 marginTop: `${style.margin.sm}`,
               }}
             >
               <ButtonNative
                 marginRight="sm"
-                onClick={() => {}}
-                text="first"
+                size="xs"
+                height="2rem"
+                onClick={() => {
+                  if (hookContractTxn.page != 1) {
+                    hookContractTxn.setIsLoading(true)
+                    hookContractTxn.setPage(1)
+                  }
+                }}
+                text="First"
+                disabled={hookContractTxn.page == 1}
                 variant="state_default_hover"
               />
               <ButtonNative
                 marginRight="sm"
-                onClick={() => {}}
+                size="xs"
+                height="2rem"
+                onClick={() => {
+                  if (hookContractTxn.page > 1) {
+                    hookContractTxn.setIsLoading(true)
+                    hookContractTxn.setPage(hookContractTxn.page - 1)
+                  }
+                }}
                 text="Prev"
-                disabled={true}
+                disabled={hookContractTxn.page <= 1}
                 variant="state_default_hover"
               />
-              <Text marginRight={style.margin.sm}>Page 1 of 45</Text>
+              <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookContractTxn?.page} of {hookContractTxn.totalPages}</Text>
               <ButtonNative
                 marginRight="sm"
-                onClick={() => {}}
-                disabled={true}
+                size="xs"
+                height="2rem"
+                onClick={() => {
+                  if (hookContractTxn.page < hookContractTxn.totalPages) {
+                    hookContractTxn.setIsLoading(true)
+                    hookContractTxn.setPage(hookContractTxn.page + 1)
+                  }
+                }}
+                disabled={hookContractTxn.page >= hookContractTxn.totalPages}
                 text="Next"
                 variant="state_default_hover"
               />
               <ButtonNative
                 marginRight="sm"
-                onClick={() => {}}
-                text="last"
+                size="xs"
+                height="2rem"
+                onClick={() => {
+                  if (hookContractTxn.page != hookContractTxn.totalPages) {
+                    hookContractTxn.setIsLoading(true)
+                    hookContractTxn.setPage(hookContractTxn.totalPages)
+                  }
+                }}
+                text="Last"
+                disabled={hookContractTxn.page == hookContractTxn.totalPages}
                 variant="state_default_hover"
               />
             </Box>

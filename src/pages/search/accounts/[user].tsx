@@ -34,7 +34,7 @@ const Network = () => {
     if (router.isReady) {
       hookUserTxn._fetch(router.query.user);
     }
-  }, [router.query.user]);
+  }, [router.query.user,hookUserTxn.page]);
 
   const renderNav = () => {
     return (
@@ -192,29 +192,59 @@ const Network = () => {
                     >
                       <ButtonNative
                         marginRight="sm"
-                        onClick={() => {}}
-                        text="first"
+                        size="xs"
+                        height="2rem"
+                        onClick={() => {
+                          if (hookUserTxn.page != 1) {
+                            hookUserTxn.setIsLoading(true)
+                            hookUserTxn.setPage(1)
+                          }
+                        }}
+                        text="First"
+                        disabled={hookUserTxn.page == 1}
                         variant="state_default_hover"
                       />
                       <ButtonNative
                         marginRight="sm"
-                        onClick={() => {}}
+                        size="xs"
+                        height="2rem"
+                        onClick={() => {
+                          if (hookUserTxn.page > 1) {
+                            hookUserTxn.setIsLoading(true)
+                            hookUserTxn.setPage(hookUserTxn.page - 1)
+                          }
+                        }}
                         text="Prev"
-                        disabled={true}
+                        disabled={hookUserTxn.page <= 1}
                         variant="state_default_hover"
                       />
-                      <Text marginRight={style.margin.sm}>Page 1 of 45</Text>
+                      <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookUserTxn?.page} of {hookUserTxn.totalPages}</Text>
                       <ButtonNative
                         marginRight="sm"
-                        onClick={() => {}}
-                        disabled={true}
+                        size="xs"
+                        height="2rem"
+                        onClick={() => {
+                          if (hookUserTxn.page < hookUserTxn.totalPages) {
+                            hookUserTxn.setIsLoading(true)
+                            hookUserTxn.setPage(hookUserTxn.page + 1)
+                          }
+                        }}
+                        disabled={hookUserTxn.page >= hookUserTxn.totalPages}
                         text="Next"
                         variant="state_default_hover"
                       />
                       <ButtonNative
                         marginRight="sm"
-                        onClick={() => {}}
-                        text="last"
+                        size="xs"
+                        height="2rem"
+                        onClick={() => {
+                          if (hookUserTxn.page != hookUserTxn.totalPages) {
+                            hookUserTxn.setIsLoading(true)
+                            hookUserTxn.setPage(hookUserTxn.totalPages)
+                          }
+                        }}
+                        text="Last"
+                        disabled={hookUserTxn.page == hookUserTxn.totalPages}
                         variant="state_default_hover"
                       />
                     </Box>
@@ -250,7 +280,7 @@ const Network = () => {
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-              //   marginLeft={style.margin.xxs}
+            //   marginLeft={style.margin.xxs}
             >
               {truncateAddress(router.query.user)}
             </Text>

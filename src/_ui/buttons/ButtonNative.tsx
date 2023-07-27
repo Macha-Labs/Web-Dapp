@@ -30,7 +30,7 @@ type Props = {
 };
 
 export default function ButtonNative({
-  size = "md",
+  size,
   style,
   onClick,
   text,
@@ -57,7 +57,7 @@ export default function ButtonNative({
   return (
     <Button
       isDisabled={disabled ? disabled : false}
-      size={size}
+      size={size ? size : "md"}
       variant={variant}
       isLoading={isLoading}
       loadingText={loadingText}

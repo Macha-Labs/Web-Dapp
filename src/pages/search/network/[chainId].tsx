@@ -49,7 +49,7 @@ const Network = () => {
     if (isReady) {
       hookChainTxn._fetch(router.query.chainId);
     }
-  }, [router.query.chainId]);
+  }, [router.query.chainId,hookChainTxn.page]);
 
   const chainNav: any = [
     {
@@ -124,7 +124,7 @@ const Network = () => {
   const renderTxns = () => {
     return (
       <>
-        {selectedNavTab == "Transactions" && (
+        {selectedNavTab == "Transactions" && !hookChainTxn.isLoading && (
           <>
             <Box
               style={{
@@ -135,29 +135,59 @@ const Network = () => {
             >
               <ButtonNative
                 marginRight="sm"
-                onClick={() => {}}
-                text="first"
+                size="xs"
+                height="2rem"
+                onClick={() => {
+                  if (hookChainTxn.page != 1) {
+                    hookChainTxn.setIsLoading(true)
+                    hookChainTxn.setPage(1)
+                  }
+                }}
+                text="First"
+                disabled={hookChainTxn.page == 1}
                 variant="state_default_hover"
               />
               <ButtonNative
                 marginRight="sm"
-                onClick={() => {}}
+                size="xs"
+                height="2rem"
+                onClick={() => {
+                  if (hookChainTxn.page > 1) {
+                    hookChainTxn.setIsLoading(true)
+                    hookChainTxn.setPage(hookChainTxn.page - 1)
+                  }
+                }}
                 text="Prev"
-                disabled={true}
+                disabled={hookChainTxn.page <= 1}
                 variant="state_default_hover"
               />
-              <Text marginRight={style.margin.sm}>Page 1 of 45</Text>
+              <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookChainTxn?.page} of {hookChainTxn.totalPages}</Text>
               <ButtonNative
                 marginRight="sm"
-                onClick={() => hookChainTxn?._fetch(router.query.chainId)}
-                disabled={hookChainTxn?.filteredData?.length < 10}
+                size="xs"
+                height="2rem"
+                onClick={() => {
+                  if (hookChainTxn.page < hookChainTxn.totalPages) {
+                    hookChainTxn.setIsLoading(true)
+                    hookChainTxn.setPage(hookChainTxn.page + 1)
+                  }
+                }}
+                disabled={hookChainTxn.page >= hookChainTxn.totalPages}
                 text="Next"
                 variant="state_default_hover"
               />
               <ButtonNative
                 marginRight="sm"
-                onClick={() => {}}
-                text="last"
+                size="xs"
+                height="2rem"
+                onClick={() => {
+                  if (hookChainTxn.page != hookChainTxn.totalPages) {
+                    hookChainTxn.setIsLoading(true)
+                    hookChainTxn.setPage(hookChainTxn.totalPages)
+                  }
+                }}
+                text="Last"
+                disabled={hookChainTxn.page == hookChainTxn.totalPages}
                 variant="state_default_hover"
               />
             </Box>
@@ -171,6 +201,11 @@ const Network = () => {
               )}
             </Box>
           </>
+        )}
+        {hookChainTxn.isLoading && (
+          <FlexRow height="100px">
+            <Loader size="lg" />
+          </FlexRow>
         )}
       </>
     );
@@ -331,7 +366,7 @@ const Network = () => {
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-              //   marginLeft={style.margin.xxs}
+            //   marginLeft={style.margin.xxs}
             >
               {chainId && chains[chainId]?.chainName}
             </Text>
