@@ -7,15 +7,16 @@ const useContractTxn = () => {
   const [filteredData, setFilteredData] = useState<any>(contractTxnDetails);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchVal,setSearchVal] = useState<any>("");
-
-  
+  const [page,setPage] = useState<number>(1)
+  const [totalPages,setTotalPages] = useState<number>(1)
 
   const _fetch = async (contract_slug: any) => {
-    txnDataBySlug(contract_slug).then((res: any) => {
+    txnDataBySlug(contract_slug,page).then((res: any) => {
+      setTotalPages(Math.ceil(res.count / 10))
       console.log("contract txn fetching", res);
       setIsLoading(false)
       setContractTxnDetails(res.data);
-      setFilteredData(res.data.reverse());
+      setFilteredData(res.data);
     });
   };
 
@@ -34,7 +35,11 @@ const useContractTxn = () => {
     searchVal: searchVal,
     setSearchVal: setSearchVal,
     isLoading: isLoading,
-    _fetch: _fetch
+    setIsLoading: setIsLoading,
+    _fetch: _fetch,
+    page: page,
+    setPage: setPage,
+    totalPages: totalPages
   }
 }
 export default useContractTxn
