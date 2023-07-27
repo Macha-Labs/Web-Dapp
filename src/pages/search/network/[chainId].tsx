@@ -52,7 +52,7 @@ const Network = () => {
       hookChainTxn._fetch(router.query.chainId);
       hookAlchemy.getLatestBlockByChainId(Number(router.query.chainId))
     }
-  }, [router.query.chainId,hookChainTxn.page]);
+  }, [router.query.chainId, hookChainTxn.page]);
 
   const chainNav: any = [
     {
@@ -75,28 +75,32 @@ const Network = () => {
 
               <Box display="flex" flexDirection="column">
                 <Box display="flex" flexDirection="column">
-                  <Text fontWeight={style.fontWeight.dark}>About Ethereum</Text>
+                  <Text fontWeight={style.fontWeight.dark}>About {chains[chainId].chainName}</Text>
                   <Text>
-                    Ethereum is a technology that&apos;s home to digital money,
-                    global payments, and applications. The community has built a
-                    booming digital economy, bold new ways for creators to earn
-                    online, and so much more. It&apos;s open to everyone,
-                    wherever you are in the world – all you need is the
-                    internet.
+                    {chains[chainId].about}
                   </Text>
+                </Box>
+                <Box display="flex" flexDirection="column">
                   <Text fontWeight={style.fontWeight.dark}>Team</Text>
+                  <Box style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+                    {chains[chainId].team.map((member: any, index: any) => (
+                      <Box key={index} style={{ display: "flex", flexDirection: "row" }}>
+                        <Text style={{ marginRight: `${style.margin.xxs}`, color: "dodgerblue" }}>{member.name}</Text>
+                        <Text style={{ marginRight: `${style.margin.xxs}` }}>{member.designation}</Text>
+                      </Box>
+                    ))}
+                  </Box>
                 </Box>
                 <Box>
                   <Text fontWeight={style.fontWeight.dark}>
                     Compatible Wallets
                   </Text>
                   <Box display="flex" flex="flex-wrap">
-                    <TagNative size="sm" value="Trust Wallet" />
-                    <TagNative size="sm" value="Zeroin" />
-                    <TagNative size="sm" value="Tally Ho" />
-                    <TagNative size="sm" value="Coinbase Wallet" />
-                    <TagNative size="sm" value="Metamask" />
-                    <TagNative size="sm" value="Safe" />
+                    {chains[chainId].wallets.map((wallet: any, index: any) => (
+                      <Link href={wallet.link} target="_blank" key={index}>
+                        <TagNative size="sm" value={wallet.title} />
+                      </Link>
+                    ))}
                   </Box>
                 </Box>
               </Box>
@@ -109,9 +113,9 @@ const Network = () => {
                 flexDirection="column"
                 justifyContent="space-between"
               >
-                <Link href="github.com/ethereum">github.com/ethereum</Link>
-                <Link href="github.com/ethereum">github.com/ethereum</Link>
-                <Link href="github.com/ethereum">github.com/ethereum</Link>
+                {chains[chainId].links.map((link: any, index: any) => (
+                  <Link mb={style.margin.xxs} key={index} target="_blank" href={link.link}>{link.title}</Link>
+                ))}
               </Box>
             </Box>
           </Flex>
@@ -237,10 +241,6 @@ const Network = () => {
                       {chainId && chains[chainId]?.chainName}
                     </Text>
                   </Box>
-                  <Text>
-                    Open source platform to write and distribute decentralized
-                    applications.
-                  </Text>
                 </Box>
                 {/* <Box>Symbols</Box> */}
               </Flex>
