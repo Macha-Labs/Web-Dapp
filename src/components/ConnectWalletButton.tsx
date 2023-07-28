@@ -130,7 +130,7 @@ export const ConnectWalletButton = (props: any) => {
                         <FlexRow hrAlign="space-between">
                           <Image
                             style={{ height: "25px", width: "25px" }}
-                            src="../assets/Avatar.svg"
+                            src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
                             alt=""
                           />
                           {/* <IconImage slug="icon-switchWallet" /> */}

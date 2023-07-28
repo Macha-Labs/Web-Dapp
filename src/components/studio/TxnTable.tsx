@@ -164,7 +164,7 @@ const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
                       }}
                     >
                       <IconBase
-                        slug="icon-colored-deploy"
+                        slug="icon-coloured-deploy"
                         style={{ paddingLeft: "sm" }}
                       />
                       <Text
@@ -189,7 +189,7 @@ const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
                     <Box width="2.1rem" height="2.1rem">
                       <Avatar
                         size="xxs"
-                        src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                        src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
                       />
                     </Box>
                     <Text

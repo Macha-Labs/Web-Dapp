@@ -171,7 +171,7 @@ function TxnDetails({
                   <tbody>
                     <tr>
                       <td style={{ display: "flex", justifyContent: "center" }}>
-                        <Avatar src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873" />
+                        <Avatar src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"/>
                       </td>
                       <td>
                         <FlexRow
@@ -215,7 +215,7 @@ function TxnDetails({
                     </tr>
                     <tr>
                       <td style={{ display: "flex", justifyContent: "center" }}>
-                        <IconBase slug="icon-colored-deploy" size="lg" />
+                        <IconBase slug="icon-coloured-deploy" size="lg" />
                       </td>
                       <td>
                         <FlexRow hrAlign="flex-start">

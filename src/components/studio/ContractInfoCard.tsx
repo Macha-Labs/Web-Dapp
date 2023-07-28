@@ -51,7 +51,7 @@ function ContractInfoCard({ data }: Props) {
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
                 <Image
-                  src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                  src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
                   marginRight={"10px"}
                   alt="avatar"
                 />

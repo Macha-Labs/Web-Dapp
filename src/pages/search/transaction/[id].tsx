@@ -86,7 +86,7 @@ const SearchResult = () => {
               <Heading fontSize={style.font.h5} style={{ marginBottom: "0px", marginRight: `${style.margin.xxs}` }}>
                 {truncateAddress(id)}
               </Heading>
-              {hookTxn.transactionDetails && <TagNative value={hookTxn?.transactionDetails[11].name} variant="grey" />}
+              {/* {hookTxn.transactionDetails && <TagNative value={hookTxn?.transactionDetails[11].name} variant="grey" />} */}
             </Box>
             <ButtonNative
               textFontSize="h7"

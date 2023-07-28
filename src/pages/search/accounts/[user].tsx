@@ -67,7 +67,7 @@ const Network = () => {
                 >
                   <Avatar
                     size="md"
-                    src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                    src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
                   />
                   <Text
                     fontSize={style.font.h2}

@@ -61,7 +61,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Script>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains} theme={darkTheme()}>
-          <IKContext urlEndpoint="https://ik.imagekit.io/metaworkLabs">
+          <IKContext urlEndpoint="https://ik.imagekit.io/macha">
             <AuthProvider>
               <DataProvider>
                 <ChakraProvider theme={theme}>
