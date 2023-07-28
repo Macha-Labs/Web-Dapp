@@ -1,10 +1,11 @@
 import { Box, Text, Image, Flex } from "@chakra-ui/react";
 import FlexRow from "@/_ui/flex/FlexRow";
 import TagNative from "@/_ui/tag/TagNative";
-import { truncateAddress, truncateString } from "@/helpers";
+import { UtcTimeStampConversion, truncateAddress, truncateString } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
 import chains from "@/data/network";
 import IconBase from "@/_ui/icons/IconsBase";
+import { timeStampConversion } from "@/helpers";
 
 type Props = {
   image?: string;
@@ -17,6 +18,7 @@ type Props = {
   height?: any;
   address?: any;
   chainId?: any;
+  createdAt?: any
 };
 
 const ContractCard = ({
@@ -27,7 +29,8 @@ const ContractCard = ({
   onCardClick = (e?: any) => { },
   height,
   address,
-  chainId
+  chainId,
+  createdAt
 }: Props) => {
   return (
     <Box
@@ -100,7 +103,7 @@ const ContractCard = ({
               style={{ fontWeight: `${style.fontWeight.dark}` }}
               lineHeight="0.5rem"
             >
-              20-05-2023
+              {UtcTimeStampConversion(createdAt).date}            
             </Text>
           </div>
         </div>

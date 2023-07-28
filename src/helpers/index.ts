@@ -32,10 +32,10 @@ const helperFile = async (e: any) => {
 export const formatTime = (d: Date | undefined): string =>
   d
     ? d.toLocaleTimeString(undefined, {
-        hour12: true,
-        hour: "numeric",
-        minute: "2-digit",
-      })
+      hour12: true,
+      hour: "numeric",
+      minute: "2-digit",
+    })
     : "";
 
 export const setDate = (d: string) => {
@@ -56,16 +56,58 @@ export const timeStampConversion = (unix_timestamp: any) => {
   // Create a new JavaScript Date object based on the timestamp
   // multiplied by 1000 so that the argument is in milliseconds, not seconds.
   var date = new Date(unix_timestamp * 1000);
-  // Hours part from the timestamp
-  var hours = date.getHours();
-  // Minutes part from the timestamp
-  var minutes = "0" + date.getMinutes();
-  // Seconds part from the timestamp
-  var seconds = "0" + date.getSeconds();
+  if (!isNaN(date.getTime())) {
+    let convertedDate = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+    }).format(date)
 
-  // Will display time in 10:30:23 format
-  var formattedTime =
-    hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
-  // console.log(formattedTime);
-  return formattedTime;
+    let convertedTime = new Intl.DateTimeFormat("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true
+    })?.format(date)
+
+    return {
+      date: convertedDate,
+      time: convertedTime
+    }
+  }
+  else{
+    return {
+      date: "Jul 28, 2023",
+      time: "10:59 AM"
+    }
+  }
+};
+
+export const UtcTimeStampConversion = (utc_time: any) => {
+  // Create a new JavaScript Date object based on the timestamp
+  // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+  var date = new Date(utc_time);
+  if (!isNaN(date.getTime())) {
+    let convertedDate = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+    }).format(date)
+
+    let convertedTime = new Intl.DateTimeFormat("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true
+    })?.format(date)
+
+    return {
+      date: convertedDate,
+      time: convertedTime
+    }
+  }
+  else{
+    return {
+      date: "Jul 28, 2023",
+      time: "10:59 AM"
+    }
+  }
 };

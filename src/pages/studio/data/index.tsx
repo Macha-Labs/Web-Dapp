@@ -133,7 +133,7 @@ const DashBoard = () => {
   const renderNav = () => {
     return (
       <NavTop
-        centerElem={<InputSearch />}
+        centerElem={<InputSearch onChange={() => {}} value="" />}
         rightElem={
           <FlexRow width="fit-content">
             {$address && <NavButton />}

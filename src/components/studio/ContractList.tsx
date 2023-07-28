@@ -80,7 +80,7 @@ const ContractList = () => {
                 return (
                   <ContractCard
                     key={index}
-                    // cardView="horizontal"
+                    createdAt={item?.createdAt}
                     height="8rem"
                     chainId={item?.contract?.chain_id}
                     address={item?.contract?.address}
