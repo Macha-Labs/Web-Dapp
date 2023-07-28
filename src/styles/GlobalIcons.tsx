@@ -147,7 +147,7 @@ const GlobalIcons: any = {
   "icon-coloured-deploy":
     "/icons/svg/miscelleneous/coloured-deploy.svg?updatedAt=1690531994002",
   "icon-blue-tick":
-    "/icons/svg/miscellaneous_icons/Blue%20tick.svg?updatedAt=1690176667897",
+    "/icons/svg/miscelleneous/Blue%20tick.svg?updatedAt=1690553360645",
   "icon-almost-there":
     "studio/database-restore%201.png?updatedAt=1690523918650",
   "icon-congrats": "studio/congrats%20icon.png?updatedAt=1690523918221",

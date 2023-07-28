@@ -137,7 +137,7 @@ const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
                     }}
                   >
                     <Image
-                      src="https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-successful.svg?updatedAt=1689916345779"
+                      src="https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-successful.svg?updatedAt=1690531996993"
                       alt=""
                       height="1.5rem"
                     />
@@ -218,7 +218,7 @@ const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
                     <Box width="2.1rem" height="2.1rem">
                       <Avatar
                         size="xxs"
-                        src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                        src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
                       />
                     </Box>
                     <Text

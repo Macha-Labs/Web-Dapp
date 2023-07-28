@@ -127,7 +127,7 @@ function TxnDetails({
               >
                 {" "}
                 {/* TODO: make dynamic */}
-                {transactionDetails && transactionDetails[10]?.value}
+                {transactionDetails && transactionDetails[9]?.value}
               </Text>
             </Box>
             {/* <Box padding="0% 8% 0% 8%">
@@ -273,7 +273,7 @@ function TxnDetails({
                     </tr>
                     <tr>
                       <td style={{ display: "flex", justifyContent: "center" }}>
-                        <Avatar src="https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873" />{" "}
+                        <Avatar src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826" />{" "}
                       </td>
                       <td>
                         <FlexRow
@@ -411,8 +411,7 @@ function TxnDetails({
                   >
                     <tbody>
                       {transactionDetails.map((item: any) => {
-                        return (
-                          <tr
+                        return (item?.src && <tr
                             key={item._id}
                             style={
                               {
@@ -438,7 +437,7 @@ function TxnDetails({
                                   alignItems: "center",
                                 }}
                               >
-                                <Image
+                                 <Image
                                   src={item.src}
                                   alt="icon"
                                   marginBottom={0}

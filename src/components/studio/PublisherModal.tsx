@@ -219,7 +219,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-Txn%20Hash.svg?updatedAt=1689916345026"
+                        src="https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-Txn%20Hash.svg?updatedAt=1690531994352"
                         alt="txn-icon"
                         height="6rem"
                       />
@@ -251,7 +251,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-Txn%20Hash.svg?updatedAt=1689916345026"
+                        src="https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-Txn%20Hash.svg?updatedAt=1690531994352"
                         alt="txn-icon"
                         height="6rem"
                       />
@@ -283,7 +283,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-Txn%20Hash.svg?updatedAt=1689916345026"
+                        src="https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-Txn%20Hash.svg?updatedAt=1690531994352"
                         alt="txn-icon"
                         height="6rem"
                       />

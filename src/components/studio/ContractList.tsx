@@ -98,7 +98,7 @@ const ContractList = () => {
                     image={
                       item?.contract?.image
                         ? item?.contract?.image
-                        : "https://ik.imagekit.io/metaworkLabs/icons/svg/avatar/Avatar.svg?updatedAt=1685011314873"
+                        : "https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
                     }
                     description={item?.contract?.description}
                     onCardClick={() => {
