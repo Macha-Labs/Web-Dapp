@@ -1,7 +1,16 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import { style } from "@/styles/StyledConstants";
-import { Box, Text } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
+import GetStartedCards from "./GetStartedCards";
 
 const HomeDev = () => {
   return (
@@ -32,6 +41,29 @@ const HomeDev = () => {
           Get started quickly
         </Text>
       </Box>
+
+      <Flex flexWrap="wrap"> 
+        <GetStartedCards
+          title="View Contracts"
+          description="View smart contract that you added or deployed to your dashboard"
+        />
+        <GetStartedCards
+          title="View Contracts"
+          description="View smart contract that you added or deployed to your dashboard"
+        />
+        <GetStartedCards
+          title="View Contracts"
+          description="View smart contract that you added or deployed to your dashboard"
+        />
+        <GetStartedCards
+        title="View Contracts"
+        description="View smart contract that you added or deployed to your dashboard"
+      />
+      <GetStartedCards
+        title="View Contracts"
+        description="View smart contract that you added or deployed to your dashboard"
+      />
+      </Flex>
     </Box>
   );
 };

@@ -130,7 +130,7 @@ function TxnDetails({
                 {transactionDetails && transactionDetails[10]?.value}
               </Text>
             </Box>
-            <Box padding="0% 8% 0% 8%">
+            {/* <Box padding="0% 8% 0% 8%">
               <Text
                 mb={0}
                 style={{
@@ -153,11 +153,11 @@ function TxnDetails({
                 // marginStart={style.margin.xxs}
               >
                 {" "}
-                {/* TODO: make dynamic */}
+                
                 Success
               </Text>
-              {/* TODO: make dynamic */}
-            </Box>
+              
+            </Box> */}
           </FlexRow>
           <FlexRow hrAlign="space-between" vrAlign="flex-start">
             <FlexColumn width="68%" hrAlign="flex-start" vrAlign="flex-start">
