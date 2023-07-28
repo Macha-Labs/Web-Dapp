@@ -30,7 +30,7 @@ const Network = () => {
   const router = useRouter();
   const chainId: any = router.query.chainId;
   const isReady = router.isReady;
-  const hookAlchemy = useAlchemy()
+  const hookAlchemy = useAlchemy();
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Transactions");
 
   const renderNav = () => {
@@ -50,7 +50,7 @@ const Network = () => {
   useEffect(() => {
     if (isReady) {
       hookChainTxn._fetch(router.query.chainId);
-      hookAlchemy.getLatestBlockByChainId(Number(router.query.chainId))
+      hookAlchemy.getLatestBlockByChainId(Number(router.query.chainId));
     }
   }, [router.query.chainId, hookChainTxn.page]);
 
@@ -75,18 +75,36 @@ const Network = () => {
 
               <Box display="flex" flexDirection="column">
                 <Box display="flex" flexDirection="column">
-                  <Text fontWeight={style.fontWeight.dark}>About {chains[chainId].chainName}</Text>
-                  <Text>
-                    {chains[chainId].about}
+                  <Text fontWeight={style.fontWeight.dark}>
+                    About {chains[chainId].chainName}
                   </Text>
+                  <Text>{chains[chainId].about}</Text>
                 </Box>
                 <Box display="flex" flexDirection="column">
                   <Text fontWeight={style.fontWeight.dark}>Team</Text>
-                  <Box style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+                  <Box
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                    }}
+                  >
                     {chains[chainId].team.map((member: any, index: any) => (
-                      <Box key={index} style={{ display: "flex", flexDirection: "row" }}>
-                        <Text style={{ marginRight: `${style.margin.xxs}`, color: "dodgerblue" }}>{member.name}</Text>
-                        <Text style={{ marginRight: `${style.margin.xxs}` }}>{member.designation}</Text>
+                      <Box
+                        key={index}
+                        style={{ display: "flex", flexDirection: "row" }}
+                      >
+                        <Text
+                          style={{
+                            marginRight: `${style.margin.xxs}`,
+                            color: "dodgerblue",
+                          }}
+                        >
+                          {member.name}
+                        </Text>
+                        <Text style={{ marginRight: `${style.margin.xxs}` }}>
+                          {member.designation}
+                        </Text>
                       </Box>
                     ))}
                   </Box>
@@ -114,7 +132,14 @@ const Network = () => {
                 justifyContent="space-between"
               >
                 {chains[chainId].links.map((link: any, index: any) => (
-                  <Link mb={style.margin.xxs} key={index} target="_blank" href={link.link}>{link.title}</Link>
+                  <Link
+                    mb={style.margin.xxs}
+                    key={index}
+                    target="_blank"
+                    href={link.link}
+                  >
+                    {link.title}
+                  </Link>
                 ))}
               </Box>
             </Box>
@@ -142,8 +167,8 @@ const Network = () => {
                 height="2rem"
                 onClick={() => {
                   if (hookChainTxn.page != 1) {
-                    hookChainTxn.setIsLoading(true)
-                    hookChainTxn.setPage(1)
+                    hookChainTxn.setIsLoading(true);
+                    hookChainTxn.setPage(1);
                   }
                 }}
                 text="Newest"
@@ -156,23 +181,25 @@ const Network = () => {
                 height="2rem"
                 onClick={() => {
                   if (hookChainTxn.page > 1) {
-                    hookChainTxn.setIsLoading(true)
-                    hookChainTxn.setPage(hookChainTxn.page - 1)
+                    hookChainTxn.setIsLoading(true);
+                    hookChainTxn.setPage(hookChainTxn.page - 1);
                   }
                 }}
                 text="Prev"
                 disabled={hookChainTxn.page <= 1}
                 variant="state_default_hover"
               />
-              <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookChainTxn?.page} of {hookChainTxn.totalPages}</Text>
+              <Text marginRight={style.margin.sm} marginBottom="0.25rem">
+                Page {hookChainTxn?.page} of {hookChainTxn.totalPages}
+              </Text>
               <ButtonNative
                 marginRight="sm"
                 size="xs"
                 height="2rem"
                 onClick={() => {
                   if (hookChainTxn.page < hookChainTxn.totalPages) {
-                    hookChainTxn.setIsLoading(true)
-                    hookChainTxn.setPage(hookChainTxn.page + 1)
+                    hookChainTxn.setIsLoading(true);
+                    hookChainTxn.setPage(hookChainTxn.page + 1);
                   }
                 }}
                 disabled={hookChainTxn.page >= hookChainTxn.totalPages}
@@ -185,8 +212,8 @@ const Network = () => {
                 height="2rem"
                 onClick={() => {
                   if (hookChainTxn.page != hookChainTxn.totalPages) {
-                    hookChainTxn.setIsLoading(true)
-                    hookChainTxn.setPage(hookChainTxn.totalPages)
+                    hookChainTxn.setIsLoading(true);
+                    hookChainTxn.setPage(hookChainTxn.totalPages);
                   }
                 }}
                 text="oldest"
@@ -316,7 +343,7 @@ const Network = () => {
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-            //   marginLeft={style.margin.xxs}
+              //   marginLeft={style.margin.xxs}
             >
               {chainId && chains[chainId]?.chainName}
             </Text>

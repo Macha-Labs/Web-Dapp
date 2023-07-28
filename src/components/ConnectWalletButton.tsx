@@ -64,10 +64,12 @@ export const ConnectWalletButton = (props: any) => {
                 return (
                   <Button
                     className="w-100"
+                    height="2rem"
                     size={props.size}
                     variant="state_brand"
                     onClick={openConnectModal}
                     borderRadius={style.button.borderRadius.default}
+                    marginLeft={style.margin.xxs}
                   >
                     <Text
                       paddingBottom={"0px"}
@@ -89,43 +91,11 @@ export const ConnectWalletButton = (props: any) => {
               }
               return (
                 <div
-                  style={{ display: "flex", justifyContent: "flex-end" }}
+                  style={{ display: "flex", justifyContent: "flex-end"}}
                   className="w-100"
+                  
                 >
-                  {/* <button
-                    className="w-100"
-                    onClick={openChainModal}
-                    style={{ display: 'flex', alignItems: 'center' }}
-                    type="button"
-                  >
-                    {chain.hasIcon && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: 'hidden',
-                          marginRight: 4,
-                        }}
-                      >
-                        {chain.iconUrl && (
-                          <img
-                            alt={chain.name ?? 'Chain icon'}
-                            src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        )}
-                      </div>
-                    )}
-                    {chain.name}
-                  </button> */}
-                  {/* <button onClick={openAccountModal} type="button">
-                    {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ''}
-                  </button> */}
+              
                   <Menu>
                     <MenuButton
                       variant={"state_default_hover"}

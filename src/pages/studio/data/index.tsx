@@ -137,7 +137,7 @@ const DashBoard = () => {
         rightElem={
           <FlexRow width="fit-content">
             {$address && <NavButton />}
-            {<ConnectWalletButton />}
+            {<ConnectWalletButton/>}
           </FlexRow>
         }
       />
