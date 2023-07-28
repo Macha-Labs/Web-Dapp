@@ -29,8 +29,7 @@ type Prop = {
   displayFrom?: boolean;
 };
 
-
-const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
+const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
   const router = useRouter();
   return (
     <div>
@@ -72,17 +71,19 @@ const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
               >
                 Method Name
               </Th>
-              {displayFrom && <Th
-                style={{
-                  textAlign: "center",
-                  fontSize: "1rem",
-                  paddingTop: "2rem",
-                  paddingBottom: "2rem",
-                  textTransform: "capitalize",
-                }}
-              >
-                From
-              </Th>}
+              {displayFrom && (
+                <Th
+                  style={{
+                    textAlign: "center",
+                    fontSize: "1rem",
+                    paddingTop: "2rem",
+                    paddingBottom: "2rem",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  From
+                </Th>
+              )}
               <Th
                 style={{
                   textAlign: "center",
@@ -107,8 +108,8 @@ const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
             </>
           }
           tbodyChildren={(item: any) => {
-            const dateObj = timeStampConversion(item?.timestamp)
-            const timestamp = `${dateObj.date} ${dateObj.time}`
+            const dateObj = timeStampConversion(item?.timestamp);
+            const timestamp = `${dateObj.date} ${dateObj.time}`;
 
             return (
               <>
@@ -178,35 +179,37 @@ const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
                     </Box>
                   </Box>
                 </Td>
-                {displayFrom && <Td style={{ textAlign: "center", paddingBottom: "0" }}>
-                  <Box
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box width="2.1rem" height="2.1rem">
-                      <Avatar
-                        size="xxs"
-                        src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
-                      />
-                    </Box>
-                    <Text
-                      paddingLeft={2}
-                      marginBottom={0}
-                      _hover={{ textDecoration: "underline" }}
-                      cursor={style.table.cursor.pointer}
-                      onClick={() => {
-                        router.push(
-                          `/search/accounts/${item?.transaction?.from}`
-                        );
+                {displayFrom && (
+                  <Td style={{ textAlign: "center", paddingBottom: "0" }}>
+                    <Box
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
                       }}
                     >
-                      {truncateAddress(item?.transaction?.from)}
-                    </Text>
-                  </Box>
-                </Td>}
+                      <Box width="2.1rem" height="2.1rem">
+                        <Avatar
+                          size="xxs"
+                          src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
+                        />
+                      </Box>
+                      <Text
+                        paddingLeft={2}
+                        marginBottom={0}
+                        _hover={{ textDecoration: "underline" }}
+                        cursor={style.table.cursor.pointer}
+                        onClick={() => {
+                          router.push(
+                            `/search/accounts/${item?.transaction?.from}`
+                          );
+                        }}
+                      >
+                        {truncateAddress(item?.transaction?.from)}
+                      </Text>
+                    </Box>
+                  </Td>
+                )}
                 <Td style={{ textAlign: "center", paddingBottom: "0" }}>
                   <Box
                     style={{
@@ -224,13 +227,13 @@ const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
                     <Text
                       paddingLeft={2}
                       marginBottom={0}
-                      _hover={{ textDecoration: "underline" }}
+                      // _hover={{ textDecoration: "underline" }}
                       cursor={style.table.cursor.pointer}
-                      onClick={() => {
-                        router.push(
-                          `/search/accounts/${item?.transaction?.to}`
-                        );
-                      }}
+                      // onClick={() => {
+                      //   router.push(
+                      //     `/search/accounts/${item?.transaction?.to}`
+                      //   );
+                      // }}
                     >
                       {truncateAddress(item?.transaction?.to)}
                     </Text>

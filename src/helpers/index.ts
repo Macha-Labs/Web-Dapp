@@ -13,10 +13,10 @@ export const truncateString = (address: any, size: any) => {
 };
 
 export const truncateAddress = (address: any) => {
-  if (address) {
-    return address.slice(0, 6) + "..." + address.slice(-4);
+  if (address?.length > 6) {
+    return address?.slice(0, 6) + "..." + address?.slice(-4);
   }
-  return "";
+  return address;
 };
 export const truncateLink = (address: any) => {
   if (address) {
@@ -32,10 +32,10 @@ const helperFile = async (e: any) => {
 export const formatTime = (d: Date | undefined): string =>
   d
     ? d.toLocaleTimeString(undefined, {
-      hour12: true,
-      hour: "numeric",
-      minute: "2-digit",
-    })
+        hour12: true,
+        hour: "numeric",
+        minute: "2-digit",
+      })
     : "";
 
 export const setDate = (d: string) => {
@@ -61,24 +61,23 @@ export const timeStampConversion = (unix_timestamp: any) => {
       year: "numeric",
       month: "short",
       day: "2-digit",
-    }).format(date)
+    }).format(date);
 
     let convertedTime = new Intl.DateTimeFormat("en-US", {
       hour: "2-digit",
       minute: "2-digit",
-      hour12: true
-    })?.format(date)
+      hour12: true,
+    })?.format(date);
 
     return {
       date: convertedDate,
-      time: convertedTime
-    }
-  }
-  else{
+      time: convertedTime,
+    };
+  } else {
     return {
       date: "Jul 28, 2023",
-      time: "10:59 AM"
-    }
+      time: "10:59 AM",
+    };
   }
 };
 
@@ -91,23 +90,22 @@ export const UtcTimeStampConversion = (utc_time: any) => {
       year: "numeric",
       month: "short",
       day: "2-digit",
-    }).format(date)
+    }).format(date);
 
     let convertedTime = new Intl.DateTimeFormat("en-US", {
       hour: "2-digit",
       minute: "2-digit",
-      hour12: true
-    })?.format(date)
+      hour12: true,
+    })?.format(date);
 
     return {
       date: convertedDate,
-      time: convertedTime
-    }
-  }
-  else{
+      time: convertedTime,
+    };
+  } else {
     return {
       date: "Jul 28, 2023",
-      time: "10:59 AM"
-    }
+      time: "10:59 AM",
+    };
   }
 };

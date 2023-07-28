@@ -171,7 +171,7 @@ function TxnDetails({
                   <tbody>
                     <tr>
                       <td style={{ display: "flex", justifyContent: "center" }}>
-                        <Avatar src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"/>
+                        <Avatar src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826" />
                       </td>
                       <td>
                         <FlexRow
@@ -411,51 +411,54 @@ function TxnDetails({
                   >
                     <tbody>
                       {transactionDetails.map((item: any) => {
-                        return (item?.src && <tr
-                            key={item._id}
-                            style={
-                              {
-                                // borderBottom: `${style.card.border.default}`,
-                                // width: "100%",
+                        return (
+                          item?.src && (
+                            <tr
+                              key={item._id}
+                              style={
+                                {
+                                  // borderBottom: `${style.card.border.default}`,
+                                  // width: "100%",
+                                }
                               }
-                            }
-                          >
-                            <td
-                              style={{
-                                paddingTop: `${style.padding["xxs"]}`,
-                                paddingBottom: `${style.padding["xxs"]}`,
-                                width: "fit-content",
-                                fontWeight: `${style.fontWeight.dark}`,
-                                fontSize: `${style.font.h5}`,
-                              }}
                             >
-                              <Box
+                              <td
                                 style={{
                                   paddingTop: `${style.padding["xxs"]}`,
                                   paddingBottom: `${style.padding["xxs"]}`,
-                                  display: "flex",
-                                  alignItems: "center",
+                                  width: "fit-content",
+                                  fontWeight: `${style.fontWeight.dark}`,
+                                  fontSize: `${style.font.h5}`,
                                 }}
                               >
-                                 <Image
-                                  src={item.src}
-                                  alt="icon"
-                                  marginBottom={0}
-                                  height="1.5rem"
-                                  marginRight={2}
-                                />
-                                {item.key}
-                              </Box>
-                            </td>
-                            <td
-                              style={{
-                                color: "grey",
-                                fontWeight: `${style.fontWeight.dark}`,
-                              }}
-                            >
-                              {truncateString(item.value, 25)}
-                            </td>
-                          </tr>
+                                <Box
+                                  style={{
+                                    paddingTop: `${style.padding["xxs"]}`,
+                                    paddingBottom: `${style.padding["xxs"]}`,
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <Image
+                                    src={item.src}
+                                    alt="icon"
+                                    marginBottom={0}
+                                    height="1.5rem"
+                                    marginRight={2}
+                                  />
+                                  {item.key}
+                                </Box>
+                              </td>
+                              <td
+                                style={{
+                                  color: "grey",
+                                  fontWeight: `${style.fontWeight.dark}`,
+                                }}
+                              >
+                                {item.value}
+                              </td>
+                            </tr>
+                          )
                         );
                       })}
                     </tbody>
