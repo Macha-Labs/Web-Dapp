@@ -27,13 +27,16 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
   const hookMacha = useMacha();
   const toast = useToast();
   const $address = useAuthStore((state: any) => state.address);
-  const [lowBalance, setLowBalance] = useState<boolean>(false);
+  const [lowBalance, setLowBalance] = useState<boolean>(true);
   const checkBalance = async () => {
     const balance = await fetchBalance({
       address: $address,
     });
     if (parseInt(balance.formatted) <= 1) {
       setLowBalance(true);
+    }
+    else{
+      setLowBalance(false)
     }
   };
 

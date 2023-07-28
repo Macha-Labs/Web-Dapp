@@ -1,8 +1,11 @@
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import IconBase from "@/_ui/icons/IconsBase";
 import { truncateAddress } from "@/helpers";
+import useMacha from "@/hooks/studio/useMacha";
 import useMachaAuth from "@/hooks/studio/useMachaAuth";
+import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
 import {
@@ -17,17 +20,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import CreatePublisherModal from "./studio/PublisherModal";
-import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
-import useMacha from "@/hooks/studio/useMacha";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import { fetchBalance } from "@wagmi/core";
+import CreatePublisherModal from "./studio/PublisherModal";
 
 export const ConnectWalletButton = (props: any) => {
   const publisherModal = useDisclosure();
   const $address = useAuthStore((state: any) => state.address);
-  const $loadAddress = useAuthStore((state: any) => state.loadAddress);
-  const hookMachaAuth = useMachaAuth();
   const hookMacha = useMacha();
   const hookPublisherCreate = usePublisherCreate(publisherModal);
   const toast = useToast();
@@ -189,9 +187,7 @@ export const ConnectWalletButton = (props: any) => {
                                 });
                               }
                             };
-
                             checkBalance();
-
                             publisherModal.onOpen();
                           }}
                         >

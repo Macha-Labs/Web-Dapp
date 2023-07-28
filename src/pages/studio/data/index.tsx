@@ -9,19 +9,17 @@ import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
-import WalletButton from "@/components/buttons/WalletButton";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
 import ApiList from "@/components/studio/ApiList";
 import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import ContractList from "@/components/studio/ContractList";
 import HomeDev from "@/components/studio/HomeDev";
-import CreatePublisherModal from "@/components/studio/PublisherModal";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import useMacha from "@/hooks/studio/useMacha";
 import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
-import { useDisclosure, Box, Text } from "@chakra-ui/react";
+import { Box, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const DashBoard = () => {
