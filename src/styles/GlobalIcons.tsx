@@ -24,7 +24,7 @@ const GlobalIcons: any = {
   "icon-down":
     "/icons/svg/Base-blue/base-blue-arrowFilled-down.svg?updatedAt=1686047698220",
   "icon-upload":
-    "/icons/svg/Base-blue/base-blue-upload.svg?updatedAt=1686295959354",
+    "icons/svg/Base_blue_icons/base-blue-upload.svg?updatedAt=1690532053209",
   "icon-changeImage":
     "/icons/svg/Base-blue/base-blue-changeImage.svg?updatedAt=1686305923116",
   "icon-right":
@@ -96,14 +96,15 @@ const GlobalIcons: any = {
   "icon-chevron":
     "icons/svg/Base_blue_icons/base-blue-chevronBack.svg?updatedAt=1690532051879",
   "icon-chevron-next":
-    "icons/svg/Dark_icons/dark-chevronNext.svg?updatedAt=1690532111556",
+    "icons/svg/Base_blue_icons/base-blue-chevronNext.svg?updatedAt=1690532057658",
   "icon-chevron-down":
     "icons/svg/Base_blue_icons/base-blue-chevronDown.svg?updatedAt=1690532076761",
   "icon-chevron-up":
     "icons/svg/Base_blue_icons/base-blue-chevronUp.svg?updatedAt=1690532068561",
   "icon-reply":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-replyFilled.svg",
-  "icon-close": "/icons/svg/Base-blue/base-blue-cancel.svg",
+  "icon-close":
+    "icons/svg/Base_blue_icons/base-blue-cancel.svg?updatedAt=1690532060654",
   "icon-attachment":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-attachment.svg",
   "icon-send":
@@ -132,7 +133,8 @@ const GlobalIcons: any = {
     "icons/svg/Base_blue_icons/base-blue-copy.svg?updatedAt=1690532041230",
   "icon-qr":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
-  "icon-user": "icons/svg/Dark_icons/dark-user.svg?updatedAt=1690532103705",
+  "icon-user":
+    "icons/svg/Base_blue_icons/base-blue-user.svg?updatedAt=1690532065895",
   "icon-connections":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-connections.png?updatedAt=1680788697983",
   "icon-chat-edit":
@@ -147,9 +149,8 @@ const GlobalIcons: any = {
   "icon-blue-tick":
     "/icons/svg/miscellaneous_icons/Blue%20tick.svg?updatedAt=1690176667897",
   "icon-almost-there":
-    "/icons/svg/miscellaneous_icons/Almost%20there%20icon.svg?updatedAt=1690182854825",
-  "icon-congrats":
-    "/icons/svg/miscellaneous_icons/congrats%20icon.svg?updatedAt=1690182854654",
+    "studio/database-restore%201.png?updatedAt=1690523918650",
+  "icon-congrats": "studio/congrats%20icon.png?updatedAt=1690523918221",
   "logo-Lens": "/Studio-Logos/lens.svg?updatedAt=1686740026746",
   "logo-Macha": "/Studio-Logos/metawork.svg?updatedAt=1686740613025",
   "logo-Farcaster": "/Studio-Logos/farcaster.svg?updatedAt=1686740612210",

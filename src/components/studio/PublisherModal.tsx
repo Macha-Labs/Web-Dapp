@@ -424,7 +424,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
               )}
               {(hookPublisherCreate.formStep == 6) && (
                 <Box
-                  backgroundImage="https://ik.imagekit.io/metaworkLabs/Studio/Almost%20there%20image-no%20icon.png?updatedAt=1690181942667"
+                  backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
                   style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
                   backgroundSize="100% 100%"
                 >
@@ -456,7 +456,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
               )}
               {(hookPublisherCreate.formStep == 7) && (
                 <Box
-                  backgroundImage="https://ik.imagekit.io/metaworkLabs/Studio/Almost%20there%20image-no%20icon.png?updatedAt=1690181942667"
+                  backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
                   style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
                   backgroundSize="100% 100%"
                 >

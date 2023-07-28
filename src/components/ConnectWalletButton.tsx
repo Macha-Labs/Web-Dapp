@@ -14,12 +14,14 @@ import {
   MenuList,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import CreatePublisherModal from "./studio/PublisherModal";
 import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
 import useMacha from "@/hooks/studio/useMacha";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import { fetchBalance } from "@wagmi/core";
 
 export const ConnectWalletButton = (props: any) => {
   const publisherModal = useDisclosure();
@@ -28,6 +30,7 @@ export const ConnectWalletButton = (props: any) => {
   const hookMachaAuth = useMachaAuth();
   const hookMacha = useMacha();
   const hookPublisherCreate = usePublisherCreate(publisherModal);
+  const toast = useToast();
   // console.log("mobile device detection", window.navigator.userAgent);
   return (
     <ConnectButton.Custom>
@@ -85,18 +88,21 @@ export const ConnectWalletButton = (props: any) => {
               }
               if (chain.unsupported) {
                 return (
-                  <ButtonNative onClick={openChainModal} variant="state_default_hover" height="2rem" marginLeft={style.margin.xxs}>
+                  <ButtonNative
+                    onClick={openChainModal}
+                    variant="state_default_hover"
+                    height="2rem"
+                    marginLeft={style.margin.xxs}
+                  >
                     Wrong network
                   </ButtonNative>
                 );
               }
               return (
                 <div
-                  style={{ display: "flex", justifyContent: "flex-end"}}
+                  style={{ display: "flex", justifyContent: "flex-end" }}
                   className="w-100"
-                  
                 >
-              
                   <Menu>
                     <MenuButton
                       variant={"state_default_hover"}
@@ -112,7 +118,6 @@ export const ConnectWalletButton = (props: any) => {
                         />
                       }
                       height={"2rem"}
-                      
                     >
                       <FlexRow>
                         {/* <Image src={"../assets/Avatar.svg"} alt="avatar" /> */}
@@ -126,7 +131,7 @@ export const ConnectWalletButton = (props: any) => {
                       </FlexRow>
                     </MenuButton>
                     <MenuList>
-                      <MenuItem onClick={() => { }}>
+                      <MenuItem onClick={() => {}}>
                         <FlexRow hrAlign="space-between">
                           <Image
                             style={{ height: "25px", width: "25px" }}
@@ -168,22 +173,40 @@ export const ConnectWalletButton = (props: any) => {
                           </FlexRow>
                         </FlexRow>
                       </MenuItem>
-                      {!hookMacha.publisherExists && <MenuItem
-                        onClick={() => {
-                          publisherModal.onOpen();
-                        }}
-                      >
-                        <FlexRow hrAlign="space-between">
-                          <IconImage slug="icon-user" size="sm" />
-                          <FlexRow
-                            hrAlign="flex-start"
-                            width="90%"
-                            marginLeft={"sm"}
-                          >
-                            {"Register as Publisher"}
+                      {!hookMacha.publisherExists && (
+                        <MenuItem
+                          onClick={() => {
+                            const checkBalance = async () => {
+                              const balance = await fetchBalance({
+                                address: $address,
+                              });
+                              if (parseInt(balance.formatted) <= 1) {
+                                toast({
+                                  title: "You don't have enough balance",
+                                  status: "warning",
+                                  duration: 5000,
+                                  position: "top-right",
+                                });
+                              }
+                            };
+
+                            checkBalance();
+
+                            publisherModal.onOpen();
+                          }}
+                        >
+                          <FlexRow hrAlign="space-between">
+                            <IconImage slug="icon-user" size="sm" />
+                            <FlexRow
+                              hrAlign="flex-start"
+                              width="90%"
+                              marginLeft={"sm"}
+                            >
+                              {"Register as Publisher"}
+                            </FlexRow>
                           </FlexRow>
-                        </FlexRow>
-                      </MenuItem>}
+                        </MenuItem>
+                      )}
                       <CreatePublisherModal
                         modal={publisherModal}
                         hookPublisherCreate={hookPublisherCreate}
