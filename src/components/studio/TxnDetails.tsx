@@ -127,7 +127,7 @@ function TxnDetails({
               >
                 {" "}
                 {/* TODO: make dynamic */}
-                {transactionDetails[10]?.value}
+                {transactionDetails && transactionDetails[10]?.value}
               </Text>
             </Box>
             <Box padding="0% 8% 0% 8%">

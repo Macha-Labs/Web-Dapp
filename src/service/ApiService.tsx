@@ -30,6 +30,14 @@ export const contractDataBySlug = async (contractSlug: string) => {
   return data;
 };
 
+export const contractDataByAddress = async (contractAddress: any) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/contracts/fetch-by-address/${contractAddress}`
+  );
+  const data = await response.json();
+  return data;
+};
+
 export const txnDataBySlug = async (contractSlug: string,page: number) => {
   const response = await fetch(
     `${config.metaServer}/indexer/transactions/fetch-by-slug/${contractSlug}?page=${page}`
