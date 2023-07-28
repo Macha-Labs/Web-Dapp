@@ -14,6 +14,7 @@ import ApiCreateModal from "@/components/studio/ApiCreateModal";
 import ApiList from "@/components/studio/ApiList";
 import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import ContractList from "@/components/studio/ContractList";
+import HomeDev from "@/components/studio/HomeDev";
 import CreatePublisherModal from "@/components/studio/PublisherModal";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import useMacha from "@/hooks/studio/useMacha";
@@ -44,6 +45,10 @@ const DashBoard = () => {
 
   const dashboardNav: any = [
     {
+      value: "Home",
+      href: "",
+    },
+    {
       value: "Contracts",
       href: "",
     },
@@ -61,6 +66,10 @@ const DashBoard = () => {
     return <>{selectedNavTab == "Contracts" && <ContractList />}</>;
   };
 
+  const renderHome = () => {
+    return <>{selectedNavTab == "Home" && <HomeDev />}</>;
+  };
+
   const renderBody = () => {
     if (!$address) return null;
 
@@ -76,7 +85,10 @@ const DashBoard = () => {
                 value={selectedNavTab}
                 onChange={setSelectedNavTab}
               />
-              <Box cursor={"not-allowed"} style={{display:"flex", flexDirection: "row"}}>
+              <Box
+                cursor={"not-allowed"}
+                style={{ display: "flex", flexDirection: "row" }}
+              >
                 <Text className="mb-0" color="#C6C6C6" marginRight="2px">
                   Functions
                 </Text>
@@ -119,6 +131,7 @@ const DashBoard = () => {
           <Box style={{ overflow: "hidden" }}>
             {renderContracts()}
             {renderAPIs()}
+            {renderHome()}
           </Box>
         </FlexBody>
         <ContractCreateModal
