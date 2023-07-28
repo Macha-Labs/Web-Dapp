@@ -26,7 +26,7 @@ import { useEffect, useState } from "react";
 
 const DashBoard = () => {
   const $address = useAuthStore((state: any) => state.address);
-  const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
+  const [selectedNavTab, setSelectedNavTab] = useState<string>("Home");
   const [exploreMeta, setExploreMeta] = useState<any>([]);
   const [isPublisher, setIsPublisher] = useState<any>(false);
 
