@@ -11,6 +11,8 @@ const useTransaction = () => {
   const _fetch = async (transactionHash: any) => {
     transactionData(transactionHash).then((res: any) => {
       console.log("contract not", res);
+      const dateObj = timeStampConversion(res.data?.timestamp)
+      const timestamp = `${dateObj.date} ${dateObj.time}`
       setIsLoading(false);
       setTransactionDetails([
         {
@@ -65,7 +67,7 @@ const useTransaction = () => {
         },
         {
           key: "Time Stamp",
-          value: timeStampConversion(res.data?.timestamp),
+          value: timestamp,
           src: "https://ik.imagekit.io/metaworkLabs/icons/svg/miscellaneous_icons/coloured-square-timestamp.svg?updatedAt=1689916345664",
         },
       ]);

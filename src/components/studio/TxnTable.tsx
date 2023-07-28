@@ -32,7 +32,6 @@ type Prop = {
 
 const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
   const router = useRouter();
-
   return (
     <div>
       {txnData && (
@@ -108,6 +107,9 @@ const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
             </>
           }
           tbodyChildren={(item: any) => {
+            const dateObj = timeStampConversion(item?.timestamp)
+            const timestamp = `${dateObj.date} ${dateObj.time}`
+
             return (
               <>
                 <Td
@@ -140,7 +142,7 @@ const TxnTable = ({ txnData,displayFrom = true }: Prop) => {
                       height="1.5rem"
                     />
                     <Text paddingLeft={2} marginBottom={0}>
-                      {timeStampConversion(item?.timestamp)}
+                      {timestamp}
                     </Text>
                   </Box>
                 </Td>

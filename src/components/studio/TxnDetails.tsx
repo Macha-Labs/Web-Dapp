@@ -127,7 +127,7 @@ function TxnDetails({
               >
                 {" "}
                 {/* TODO: make dynamic */}
-                Jul 8 2023 at 11:30:47 AM
+                {transactionDetails[10]?.value}
               </Text>
             </Box>
             {/* <Box padding="0% 8% 0% 8%">
@@ -454,7 +454,7 @@ function TxnDetails({
                                 fontWeight: `${style.fontWeight.dark}`,
                               }}
                             >
-                              {truncateString(item.value, 20)}
+                              {truncateString(item.value, 25)}
                             </td>
                           </tr>
                         );

@@ -29,7 +29,7 @@ const JSONViewer = ({ data }: any) => {
       );
     } else if (typeof data === "object" && data !== null) {
       return (
-        <div>
+        <div style={{display: "flex", flexDirection: "row"}}>
           <span onClick={() => handleToggle(key)} style={{ cursor: "pointer" }}>
             {expanded[key] ? (
               <IconBase slug="icon-chevron-down" size="md" />
@@ -38,16 +38,16 @@ const JSONViewer = ({ data }: any) => {
             )}
           </span>
           {expanded[key] && (
-            <ul className="testing-1" style={{ paddingLeft: "0" }}>
+            <ul className="testing-1" style={{ paddingLeft: "0", marginLeft: `${style.margin.xxs}` }}>
               {Object.entries(data).map(([nestedKey, value]) => (
                 <li
                   key={nestedKey}
                   style={{
                     listStyleType: "none",
-                    marginTop: style.margin["xs"],
+                    marginBottom: style.margin["xs"],
                   }}
                 >
-                  <Flex>
+                  <Flex justify="flex-start">
                     <Box>
                       <strong>{nestedKey}: </strong>
                     </Box>
