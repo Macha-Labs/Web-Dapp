@@ -11,7 +11,7 @@ const WalletButton = () => {
   const walletOptions = [
     {
       value: truncateAddress($address),
-      img: "../assets/Avatar.svg",
+      img: "https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826",
       // rightIcon: "icon-notification",
       onClick: () => {},
     },
@@ -40,7 +40,7 @@ const WalletButton = () => {
   return (
     <ButtonMenu
       size={"md"}
-      avatar="../assets/Avatar.svg"
+      avatar="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
       text={truncateAddress($address)}
       icon={{
         slug: "icon-chevron-down",

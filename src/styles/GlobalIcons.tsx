@@ -1,12 +1,13 @@
 const GlobalIcons: any = {
+  avatar: "Avatar/avatar-default.svg?updatedAt=1690541873826",
   "icon-dataNetwork":
     "/icons/svg/Base-blue/base-blue-datanetwork.svg?updatedAt=1687155834445",
   "icon-adsNetwork":
     "/icons/svg/Base-blue/base-blue-adsNetwork.svg?updatedAt=1687155834666",
   "icon-disconnectWallet":
-    "/icons/svg/Base-blue/base-blue-walletDisconnect.svg?updatedAt=1686990403912",
+    "icons/svg/Base_blue_icons/base-blue-walletDisconnect.svg?updatedAt=1690540459332",
   "icon-switchWallet":
-    "/icons/svg/Base-blue/base-blue-walletChange.svg?updatedAt=1686990403648",
+    "icons/svg/Base_blue_icons/base-blue-walletChange.svg?updatedAt=1690540459218",
   "icon-filter":
     "/icons/svg/Base-blue/base-blue-filter.svg?updatedAt=1680783869195",
   "icon-compass":
@@ -19,7 +20,7 @@ const GlobalIcons: any = {
     "/icons/svg/Base-blue/base-blue-search24.svg?updatedAt=1687157119887",
   "icon-chat": "/icons/svg/Base-blue/base-blue-chat.svg",
   "icon-dashboard":
-    "/icons/svg/Base-blue/base-blue-dasboardOutlined.svg?updatedAt=1686744027177",
+    "icons/svg/Base_blue_icons/base-blue-dashboard.svg?updatedAt=1690532058663",
   "icon-down":
     "/icons/svg/Base-blue/base-blue-arrowFilled-down.svg?updatedAt=1686047698220",
   "icon-upload":
@@ -92,12 +93,14 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-volume.svg?updatedAt=1680783916154",
   "icon-block-red":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Red_icons/base-red-block.svg?updatedAt=1683699287123",
-  "icon-chevron": "/icons/svg/Base-blue/base-blue-chevronBack.svg",
+  "icon-chevron":
+    "icons/svg/Base_blue_icons/base-blue-chevronBack.svg?updatedAt=1690532051879",
   "icon-chevron-next":
-    "/icons/png/Base-blue_icons/base-blue-chevronNext.png?updatedAt=1680703639925",
-  "icon-chevron-down": "/icons/svg/Base-blue/base-blue-chevronDown.svg",
+    "icons/svg/Dark_icons/dark-chevronNext.svg?updatedAt=1690532111556",
+  "icon-chevron-down":
+    "icons/svg/Base_blue_icons/base-blue-chevronDown.svg?updatedAt=1690532076761",
   "icon-chevron-up":
-    "/icons/svg/Base-blue/base-blue-chevronUp.svg?updatedAt=1680783858756",
+    "icons/svg/Base_blue_icons/base-blue-chevronUp.svg?updatedAt=1690532068561",
   "icon-reply":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-replyFilled.svg",
   "icon-close": "/icons/svg/Base-blue/base-blue-cancel.svg",
@@ -126,11 +129,10 @@ const GlobalIcons: any = {
   "icon-forward":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-forward.svg?updatedAt=1680783869134",
   "icon-copy":
-    "/icons/svg/Base-blue/base-blue-copy.svg?updatedAt=1680783864011",
+    "icons/svg/Base_blue_icons/base-blue-copy.svg?updatedAt=1690532041230",
   "icon-qr":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
-  "icon-user":
-    "/icons/png/Base-blue_icons/base-blue-user.png?updatedAt=1680703669687",
+  "icon-user": "icons/svg/Dark_icons/dark-user.svg?updatedAt=1690532103705",
   "icon-connections":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-connections.png?updatedAt=1680788697983",
   "icon-chat-edit":
@@ -139,8 +141,9 @@ const GlobalIcons: any = {
     "/icons/svg/Base-blue/base-blue-deploy.svg?updatedAt=1686831739162",
   "icon-rocket":
     "/icons/svg/Base-blue/base-blue-rocket.svg?updatedAt=1686739684462",
-  "icon-colored-deploy":
-    "/icons/svg/miscellaneous_icons/coloured-deploy.svg?updatedAt=1689916345670",
+  "icon-deploy": "icons/svg/Dark_icons/dark-deploy.svg?updatedAt=1690532086318",
+  "icon-coloured-deploy":
+    "/icons/svg/miscelleneous/coloured-deploy.svg?updatedAt=1690531994002",
   "icon-blue-tick":
     "/icons/svg/miscellaneous_icons/Blue%20tick.svg?updatedAt=1690176667897",
   "icon-almost-there":
@@ -155,7 +158,7 @@ const GlobalIcons: any = {
   "logo-Sound.xyz": "/Studio-Logos/sound.svg?updatedAt=1686740612486",
   "logo-Paragraph.xyz": "/Studio-Logos/paragraph.svg?updatedAt=1686740612876",
   "logo-MintKudos": "/Studio-Logos/mintcudos.svg?updatedAt=1686740614448",
-  "logo-Ethereum": "/Assets/logo/ethereum-1.svg?updatedAt=1689839758613",
-  "logo-Polygon": "/Assets/logo/polygon.svg?updatedAt=1689840138029",
+  "logo-Ethereum": "studio%20logo/ethereum.svg",
+  "logo-Polygon": "studio%20logo/coloredPolygon.svg?updatedAt=1690524145175",
 };
 export default GlobalIcons;
