@@ -9,6 +9,7 @@ import { style } from "@/styles/StyledConstants";
 import { useDisclosure, Box } from "@chakra-ui/react";
 import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import chains from "@/data/network";
+import { useState } from "react";
 
 type Props = {
   metaInfo: any;
@@ -17,6 +18,7 @@ type Props = {
 const ContractList = () => {
   const router = useRouter();
   const hookContractList = useContractList();
+  const [filterValue, setFilterValue] = useState<any>("All Contracts");
 
   let contractFilterOptions = [
     {
@@ -24,6 +26,7 @@ const ContractList = () => {
       leftIcon: "icon-dashboard",
       onClick: () => {
         hookContractList.clearFilters();
+        setFilterValue("All Contracts");
       },
     },
   ];
@@ -31,9 +34,11 @@ const ContractList = () => {
   Object.keys(chains).forEach((key) => {
     contractFilterOptions.push({
       value: chains[key].chainName,
+
       leftIcon: chains[key].chainImage,
       onClick: () => {
         hookContractList.handleFilter(key);
+        setFilterValue(chains[key].chainName);
       },
     });
   });
@@ -41,16 +46,21 @@ const ContractList = () => {
   const renderComponent = () => {
     return (
       <>
-        <Box style={{ width: "70%", marginTop: `${style.margin.xxl}`, height: "fit-content", paddingTop: `${style.padding.md}`, display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "start" }}>
-          {/* <InputSearch
-            size="lg"
-            placeholder="Search Studio"
-            icon={{ slug: "icon-search" }}
-            onChange={(e: any) => hookContractList.handleSearch(e.target.value)}
-          /> */}
+        <Box
+          style={{
+            width: "70%",
+            marginTop: `${style.margin.xxl}`,
+            height: "fit-content",
+            paddingTop: `${style.padding.md}`,
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "start",
+          }}
+        >
           <ButtonMenu
             size={"lg"}
-            text={"Filter Contracts"}
+            text={filterValue}
             marginLeft={style.margin.xxs}
             icon={{
               slug: "icon-chevron-down",
