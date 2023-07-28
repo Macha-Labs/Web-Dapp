@@ -19,6 +19,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import CreatePublisherModal from "./studio/PublisherModal";
 import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
 import useMacha from "@/hooks/studio/useMacha";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 
 export const ConnectWalletButton = (props: any) => {
   const publisherModal = useDisclosure();
@@ -84,9 +85,9 @@ export const ConnectWalletButton = (props: any) => {
               }
               if (chain.unsupported) {
                 return (
-                  <button onClick={openChainModal} type="button">
+                  <ButtonNative onClick={openChainModal} variant="state_default_hover" height="2rem" marginLeft={style.margin.xxs}>
                     Wrong network
-                  </button>
+                  </ButtonNative>
                 );
               }
               return (

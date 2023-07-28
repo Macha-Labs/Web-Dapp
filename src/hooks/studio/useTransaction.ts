@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { contractDataByAddress, transactionData } from "@/service/ApiService";
-import { ethers } from "ethers";
 import { timeStampConversion } from "@/helpers";
+import { contractDataBySlug, transactionData } from "@/service/ApiService";
+import { useState } from "react";
 
 const useTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
@@ -13,8 +12,8 @@ const useTransaction = () => {
       console.log("contract not", res);
       const dateObj = timeStampConversion(res.data?.timestamp)
       const timestamp = `${dateObj.date} ${dateObj.time}`
-      setIsLoading(false);
-      contractDataByAddress(res?.data?.transaction?.to).then((result) => {
+      contractDataBySlug(res?.data?.transaction?.contract_slug).then((result) => {
+        setIsLoading(false);
         setTransactionDetails([
           {
             key: "Block Hash",
