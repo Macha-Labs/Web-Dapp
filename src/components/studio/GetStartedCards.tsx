@@ -10,9 +10,10 @@ type Props = {
   tag?: any;
   disabled?: boolean;
   onClick?: any;
+  image?: any;
 };
 
-const GetStartedCards = ({ title, imageSrc, description, tag, disabled, onClick }: Props) => {
+const GetStartedCards = ({ title, imageSrc, description, tag, disabled, onClick, image }: Props) => {
   return (
     <Box
       //   maxW="sm"
@@ -22,17 +23,20 @@ const GetStartedCards = ({ title, imageSrc, description, tag, disabled, onClick 
       marginBottom={style.margin.md}
       marginRight={style.margin.sm}
       cursor={disabled ? "not-allowed" : "pointer"}
-      onClick={onClick ? onClick : () => {}}
+      onClick={onClick ? onClick : () => { }}
     >
       {/* <Image src={imageSrc} alt={title} /> */}
 
       <Box p="4">
         <Flex align="baseline"></Flex>
-        <FlexRow hrAlign="flex-start" vrAlign="flex-start">
-          <Text fontWeight={style.fontWeight.dark} mr={style.margin.xxs}>{title}</Text>
+        {image && <Box height="25%">
+          <Image src={image} fit="contain" alt={title} height="100%" />
+        </Box>}
+        <FlexRow hrAlign="flex-start" vrAlign="flex-start" marginTop="sm">
+          <Text fontWeight={style.fontWeight.dark} mb={0} mr={style.margin.xxs}>{title}</Text>
           {tag && <TagNative value={tag} size="sm" marginTop="2px" variant="grey" />}
         </FlexRow>
-        <Text width="20rem" mt="2" color="gray.600">
+        <Text width="20rem" mt={style.margin.sm} color="gray.600">
           {description}
         </Text>
         {/* <Button mt="4" colorScheme="teal" size="sm">

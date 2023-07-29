@@ -42,6 +42,7 @@ export const commonStyle: any = {
   color: {
     p: "#fff",
     h: "#fff",
+    "white.5": "rgb(255,255,255,0.5)"
   },
 };
 

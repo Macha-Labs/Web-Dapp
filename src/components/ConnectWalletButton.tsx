@@ -22,6 +22,7 @@ import {
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { fetchBalance } from "@wagmi/core";
 import CreatePublisherModal from "./studio/PublisherModal";
+import { useDisconnect } from "wagmi";
 
 export const ConnectWalletButton = (props: any) => {
   const publisherModal = useDisclosure();
@@ -29,6 +30,8 @@ export const ConnectWalletButton = (props: any) => {
   const hookMacha = useMacha();
   const hookPublisherCreate = usePublisherCreate(publisherModal);
   const toast = useToast();
+  const { disconnect } = useDisconnect();
+  const $unload = useAuthStore((state: any) => state.unload);
   // console.log("mobile device detection", window.navigator.userAgent);
   return (
     <ConnectButton.Custom>
@@ -129,7 +132,7 @@ export const ConnectWalletButton = (props: any) => {
                       </FlexRow>
                     </MenuButton>
                     <MenuList>
-                      <MenuItem onClick={() => {}}>
+                      <MenuItem onClick={() => { }}>
                         <FlexRow hrAlign="space-between">
                           <Image
                             style={{ height: "25px", width: "25px" }}
@@ -147,7 +150,7 @@ export const ConnectWalletButton = (props: any) => {
                           </FlexRow>
                         </FlexRow>
                       </MenuItem>
-                      <MenuItem onClick={openConnectModal}>
+                      {/* <MenuItem onClick={openAccountModal}>
                         <FlexRow hrAlign="space-between">
                           <IconImage slug="icon-switchWallet" />
                           <FlexRow
@@ -158,8 +161,11 @@ export const ConnectWalletButton = (props: any) => {
                             {"Switch Wallet"}
                           </FlexRow>
                         </FlexRow>
-                      </MenuItem>
-                      <MenuItem onClick={openAccountModal}>
+                      </MenuItem> */}
+                      <MenuItem onClick={() => {
+                        $unload()
+                        disconnect()
+                      }}>
                         <FlexRow hrAlign="space-between">
                           <IconImage slug="icon-disconnectWallet" />
                           <FlexRow
@@ -182,7 +188,7 @@ export const ConnectWalletButton = (props: any) => {
                                 toast({
                                   title: "You don't have enough balance",
                                   status: "warning",
-                                  duration: 5000,
+                                  duration: 10000,
                                   position: "top-right",
                                 });
                               }

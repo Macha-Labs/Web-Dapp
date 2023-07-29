@@ -44,14 +44,14 @@ const JSONViewer = ({ data }: any) => {
                   key={nestedKey}
                   style={{
                     listStyleType: "none",
-                    marginBottom: style.margin["xs"],
+                    marginBottom: style.margin["xxs"],
                   }}
                 >
                   <Flex justify="flex-start">
-                    <Box>
-                      <strong>{nestedKey}: </strong>
+                    <Box mr={2}>
+                      <Text style={{fontSize: `${style.font.h4}`, fontWeight: `${style.fontWeight.dark}`, color: `${style.color["white.5"]}`}}>{`${nestedKey} : `}</Text>
                     </Box>
-                    <Box>{renderData(value, `${key}_${nestedKey}`)}</Box>
+                    <Box><Text style={{fontSize: `${style.font.h4}`}}>{renderData(value, `${key}_${nestedKey}`)}</Text></Box>
                   </Flex>
                 </li>
               ))}
@@ -60,7 +60,7 @@ const JSONViewer = ({ data }: any) => {
         </div>
       );
     } else {
-      return <span>{JSON.stringify(data)}</span>;
+      return <span>{data}</span>;
     }
   };
 

@@ -46,7 +46,7 @@ const HomeDev = () => {
       >
         <Heading>Developer Dashboard</Heading>
         <Text>
-          Macha services enable developers to interact seamlessly with blockchain data through its search protocol
+        The ultimate place for developers to explore smart contracts and it's real time transactions from different blockchain protocols  — all deployable with one click
         </Text>
         {(!hookMacha.isLoading && !hookMacha.publisherExists) && <Box display={"flex"}>
           <ButtonNative onClick={() => {
@@ -58,7 +58,7 @@ const HomeDev = () => {
                 toast({
                   title: "You don't have enough balance",
                   status: "warning",
-                  duration: 5000,
+                  duration: 10000,
                   position: "top-right",
                 });
               }
@@ -77,8 +77,9 @@ const HomeDev = () => {
 
       <Flex flexWrap="wrap">
         <GetStartedCards
+          image="https://ik.imagekit.io/macha/studio/push%20contracts-image.svg?updatedAt=1690613051466"
           title="Start Indexing Contracts"
-          description="View smart contract that you added or deployed to your dashboard"
+          description="Publish your smart contract to accelerate the growth of your protocol and gain exposure to thriving developer community."
           onClick={() => {
             if (hookMacha.publisherExists) {
               contractModal.onOpen()
@@ -96,25 +97,29 @@ const HomeDev = () => {
         />
         <GetStartedCards
           title="Create Functions"
-          description="View smart contract that you added or deployed to your dashboard"
+          image="https://ik.imagekit.io/macha/studio/create%20functions-imageV1.svg?updatedAt=1690615070963"
+          description="Make blazingly fast function calls on contracts to integrate functions in your app with Macha’s SDK."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Abstract Metas"
-          description="View smart contract that you added or deployed to your dashboard"
+          image="https://ik.imagekit.io/macha/studio/abstract%20metas-imagev1.svg?updatedAt=1690615302145"
+          description="Enable users to easily discover your metas, such as Lens profiles, ENS, Nfts, and more, through our multi-chain search protocol."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Graph Playground"
-          description="View smart contract that you added or deployed to your dashboard"
+          image="https://ik.imagekit.io/macha/studio/Graph%20playground.svg?updatedAt=1690616243533"
+          description="Developers can use Macha’s content graph APIs to access and fetch essential user data related to specific contracts."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Explore Documentation"
-          description="View smart contract that you added or deployed to your dashboard"
+          image="https://ik.imagekit.io/macha/studio/explore%20doc-image.svg?updatedAt=1690613051406"
+          description="Check out our doc repository and sign up today to access the fastest API for all developers."
           tag="soon"
           disabled={true}
         />
@@ -129,19 +134,19 @@ const HomeDev = () => {
       <Flex flexWrap="wrap">
         <GetStartedCards
           title="Macha Account SDK"
-          description="View smart contract that you added or deployed to your dashboard"
+          description="Provides to aggregated user profile data."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Macha Meta SDK"
-          description="View smart contract that you added or deployed to your dashboard"
+          description="Integrate to enable users to abstract your metas."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Macha Graph SDK"
-          description="View smart contract that you added or deployed to your dashboard"
+          description="Enables graphQl APIs to fetch macha's indexed data."
           tag="soon"
           disabled={true}
         />

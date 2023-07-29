@@ -92,12 +92,14 @@ const useMachaAuth = () => {
   };
 
   useEffect(() => {
-    console.log("Logging client ", $macha.client); // getting the right value
-    console.log("Logging client metasOwned", $macha.client?.metasOwned); // coming null
-    console.log("Metas Data array ", $macha?.client?.metasOwned?.data); // coming undefined
-    const pending = fetchingMetas();
-    fetchingApis();
-    console.log("pending metas", pending);
+    if($macha){
+      console.log("Logging client ", $macha.client); // getting the right value
+      console.log("Logging client metasOwned", $macha.client?.metasOwned); // coming null
+      console.log("Metas Data array ", $macha?.client?.metasOwned?.data); // coming undefined
+      const pending = fetchingMetas();
+      fetchingApis();
+      console.log("pending metas", pending);
+    }
   }, [$macha]);
 
   const registerClient = async () => {
