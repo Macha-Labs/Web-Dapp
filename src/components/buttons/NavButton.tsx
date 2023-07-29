@@ -26,7 +26,7 @@ const NavButton = ({ marginLeft, marginRight, width }: Props) => {
       },
     },
     {
-      value: "Data Studio",
+      value: "Dev Studio",
       leftIcon: "icon-dataNetwork",
       onClick: () => {
         router.push("/studio/data");
@@ -53,7 +53,7 @@ const NavButton = ({ marginLeft, marginRight, width }: Props) => {
           ? "Search"
           : asPath == "/studio/nft"
           ? "NFT Studio"
-          : "Data Studio"
+          : "Dev Studio"
       }
       icon={{
         slug: "icon-chevron-down",

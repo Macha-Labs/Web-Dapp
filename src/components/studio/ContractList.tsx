@@ -19,6 +19,7 @@ const ContractList = () => {
   const router = useRouter();
   const hookContractList = useContractList();
   const [filterValue, setFilterValue] = useState<any>("All Contracts");
+  const [avatar, setAvatar] = useState<any>("icon-dashboard");
 
   let contractFilterOptions = [
     {
@@ -27,6 +28,7 @@ const ContractList = () => {
       onClick: () => {
         hookContractList.clearFilters();
         setFilterValue("All Contracts");
+        setAvatar("icon-dashboard");
       },
     },
   ];
@@ -39,6 +41,7 @@ const ContractList = () => {
       onClick: () => {
         hookContractList.handleFilter(key);
         setFilterValue(chains[key].chainName);
+        setAvatar(chains[key].chainImage);
       },
     });
   });
@@ -58,6 +61,7 @@ const ContractList = () => {
             alignItems: "start",
           }}
         >
+          
           <ButtonMenu
             size={"lg"}
             text={filterValue}
@@ -67,6 +71,7 @@ const ContractList = () => {
               style: "",
             }}
             options={contractFilterOptions}
+            avatar={avatar}
           />
         </Box>
         <FlexRow

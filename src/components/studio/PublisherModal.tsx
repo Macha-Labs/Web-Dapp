@@ -125,7 +125,13 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   justifyContent: "space-between",
                 }}
               >
-                {hookPublisherCreate.formStep == 1 && <Box></Box>}
+                {hookPublisherCreate.formStep == 1 && (lowBalance ? (
+                    <>
+                    
+                    </>
+                  ) : (
+                    <Box></Box>
+                  ))}
 
                 {hookPublisherCreate.formStep > 1 &&
                   hookPublisherCreate.formStep <= 5 && (
@@ -140,33 +146,23 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </ButtonNative>
                   )}
 
-                {hookPublisherCreate.formStep < 4 && (
-                  <ButtonNative
-                    variant="state_brand"
-                    height="2rem"
-                    width="5rem"
-                    marginTop={style.margin["lg"]}
-                    onClick={hookPublisherCreate.nextFormStep}
-                  >
-                    Next
-                  </ButtonNative>
-                )}
-
-                {hookPublisherCreate.formStep == 4 && (
-                  <ButtonNative
-                    variant="state_brand"
-                    height="2rem"
-                    width="5rem"
-                    marginTop={style.margin["lg"]}
-                    onClick={() => {
-                      hookPublisherCreate.nextFormStep()
-                      checkBalance();
-                      setIsLoading(false)
-                    }}
-                  >
-                    Next
-                  </ButtonNative>
-                )}
+                {hookPublisherCreate.formStep <= 4 &&
+                  (lowBalance ? (
+                    <>
+                    <Text width="100%" textAlign="center">You do not have enough TFIL Balance</Text>
+                    </>
+                  ) : (
+                    <ButtonNative
+                      variant="state_brand"
+                      height="2rem"
+                      width="5rem"
+                      marginTop={style.margin["lg"]}
+                      onClick={hookPublisherCreate.nextFormStep}
+                      disabled={lowBalance}
+                    >
+                      Next
+                    </ButtonNative>
+                  ))}
 
                 {/* {hookPublisherCreate.formStep == 3 && (
                 <ButtonNative
@@ -276,7 +272,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/macha/icons/svg/Dark_icons/dark-database.svg?updatedAt=1690622510489"
+                        src="https://ik.imagekit.io/macha/studio%20logo/coloredIpfs.svg?updatedAt=1690524148908"
                         alt="txn-icon"
                         height="6rem"
                       />
@@ -305,7 +301,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/macha/icons/svg/Dark_icons/dark-upload.svg?updatedAt=1690622510713"
+                        src="https://ik.imagekit.io/macha/studio%20logo/coloredFilecoin.svg?updatedAt=1690524145269"
                         alt="txn-icon"
                         height="6rem"
                       />
@@ -349,10 +345,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           padding: `${style.padding.md}`,
                           display: "flex",
                           alignItems: "center",
-                          border: `${hookPublisherCreate.publisherType == "Individual"
-                            ? "1px solid #197cec"
-                            : style.card.border.contract
-                            }`,
+                          border: `${
+                            hookPublisherCreate.publisherType == "Individual"
+                              ? "1px solid #197cec"
+                              : style.card.border.contract
+                          }`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -389,10 +386,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           cursor: "pointer",
                         }}
                         style={{
-                          border: `${hookPublisherCreate.publisherType == "Organization"
-                            ? "1px solid #197cec"
-                            : style.card.border.contract
-                            }`,
+                          border: `${
+                            hookPublisherCreate.publisherType == "Organization"
+                              ? "1px solid #197cec"
+                              : style.card.border.contract
+                          }`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",
@@ -556,66 +554,78 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       />
                     </Box>
                   )}
-                {(!isLoading && hookPublisherCreate.formStep == 6) && (lowBalance ? <Box
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                  backgroundSize="100% 100%"
-                >
-                  <Box>
-                    <Text
+                {!isLoading &&
+                  hookPublisherCreate.formStep == 6 &&
+                  (lowBalance ? (
+                    <Box
                       style={{
-                        fontWeight: `${style.fontWeight.dark}`,
-                        fontSize: `${style.font.h4}`,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        width: "100%",
                       }}
+                      backgroundSize="100% 100%"
                     >
-                      Insufficient Balance in Wallet
-                    </Text>
-                  </Box>
-                  <Box>
-                    <Text textAlign="center" style={{}}>
-                      Fill in your wallet and try again
-                    </Text>
-                    <Text textAlign="center" style={{}}>
-                      Please visit: <Link href="https://faucet.calibration.fildev.network/funds.html" style={{ textDecoration: "underline" }}>https://faucet.calibration.fildev.network/funds.html</Link>
-                    </Text>
-                  </Box>
-                </Box> : (<Box
-                  backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                  backgroundSize="100% 100%"
-                >
-                  <Box
-                    paddingTop={style.padding.xl}
-                    paddingBottom={style.padding.xl}
-                  >
-                    <IconBase slug="icon-almost-there" size="3xl" />
-                  </Box>
-                  <Box>
-                    <Text
+                      <Box>
+                        <Text
+                          style={{
+                            fontWeight: `${style.fontWeight.dark}`,
+                            fontSize: `${style.font.h4}`,
+                          }}
+                        >
+                          Insufficient Balance in Wallet
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Text textAlign="center" style={{}}>
+                          Fill in your wallet and try again
+                        </Text>
+                        <Text textAlign="center" style={{}}>
+                          Please visit:{" "}
+                          <Link
+                            href="https://faucet.calibration.fildev.network/funds.html"
+                            style={{ textDecoration: "underline" }}
+                          >
+                            https://faucet.calibration.fildev.network/funds.html
+                          </Link>
+                        </Text>
+                      </Box>
+                    </Box>
+                  ) : (
+                    <Box
+                      backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
                       style={{
-                        fontWeight: `${style.fontWeight.dark}`,
-                        fontSize: `${style.font.h4}`,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        width: "100%",
                       }}
+                      backgroundSize="100% 100%"
                     >
-                      Almost There
-                    </Text>
-                  </Box>
-                  <Box display="flex" justifyContent="center">
-                    <Text textAlign="center" style={{ width: "80%" }}>
-                      Cheers to the successful publication on IPFS - a leap into a decentralized and innovative future!
-                    </Text>
-                  </Box>
-                </Box>
-                ))}
+                      <Box
+                        paddingTop={style.padding.xl}
+                        paddingBottom={style.padding.xl}
+                      >
+                        <IconBase slug="icon-almost-there" size="3xl" />
+                      </Box>
+                      <Box>
+                        <Text
+                          style={{
+                            fontWeight: `${style.fontWeight.dark}`,
+                            fontSize: `${style.font.h4}`,
+                          }}
+                        >
+                          Almost There
+                        </Text>
+                      </Box>
+                      <Box display="flex" justifyContent="center">
+                        <Text textAlign="center" style={{ width: "80%" }}>
+                          Cheers to the successful publication on IPFS - a leap
+                          into a decentralized and innovative future!
+                        </Text>
+                      </Box>
+                    </Box>
+                  ))}
                 {hookPublisherCreate.formStep == 7 && (
                   <Box
                     backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"

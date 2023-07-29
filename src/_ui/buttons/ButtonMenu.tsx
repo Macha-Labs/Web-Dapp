@@ -73,7 +73,7 @@ const ButtonMenu = ({
           height={height ? height : "3rem"}
         >
           <FlexRow>
-            {avatar && <img src={avatar} />}
+            {avatar && <IconBase slug={avatar} />}
             <Text
               marginLeft={style.button.margin.default}
               fontSize={"sm"}
