@@ -554,78 +554,66 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       />
                     </Box>
                   )}
-                {!isLoading &&
-                  hookPublisherCreate.formStep == 6 &&
-                  (lowBalance ? (
-                    <Box
+                {(!isLoading && hookPublisherCreate.formStep == 6) && (lowBalance ? <Box
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                  backgroundSize="100% 100%"
+                >
+                  <Box>
+                    <Text
                       style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        width: "100%",
+                        fontWeight: `${style.fontWeight.dark}`,
+                        fontSize: `${style.font.h4}`,
                       }}
-                      backgroundSize="100% 100%"
                     >
-                      <Box>
-                        <Text
-                          style={{
-                            fontWeight: `${style.fontWeight.dark}`,
-                            fontSize: `${style.font.h4}`,
-                          }}
-                        >
-                          Insufficient Balance in Wallet
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text textAlign="center" style={{}}>
-                          Fill in your wallet and try again
-                        </Text>
-                        <Text textAlign="center" style={{}}>
-                          Please visit:{" "}
-                          <Link
-                            href="https://faucet.calibration.fildev.network/funds.html"
-                            style={{ textDecoration: "underline" }}
-                          >
-                            https://faucet.calibration.fildev.network/funds.html
-                          </Link>
-                        </Text>
-                      </Box>
-                    </Box>
-                  ) : (
-                    <Box
-                      backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
+                      Insufficient Balance in Wallet
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text textAlign="center" style={{}}>
+                      Fill in your wallet and try again
+                    </Text>
+                    <Text textAlign="center" style={{}}>
+                      Please visit: <Link target="_blank" href="https://faucet.calibration.fildev.network/funds.html" style={{ textDecoration: "underline" }}>https://faucet.calibration.fildev.network/funds.html</Link>
+                    </Text>
+                  </Box>
+                </Box> : (<Box
+                  backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                  backgroundSize="100% 100%"
+                >
+                  <Box
+                    paddingTop={style.padding.xl}
+                    paddingBottom={style.padding.xl}
+                  >
+                    <IconBase slug="icon-almost-there" size="3xl" />
+                  </Box>
+                  <Box>
+                    <Text
                       style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        width: "100%",
+                        fontWeight: `${style.fontWeight.dark}`,
+                        fontSize: `${style.font.h4}`,
                       }}
-                      backgroundSize="100% 100%"
                     >
-                      <Box
-                        paddingTop={style.padding.xl}
-                        paddingBottom={style.padding.xl}
-                      >
-                        <IconBase slug="icon-almost-there" size="3xl" />
-                      </Box>
-                      <Box>
-                        <Text
-                          style={{
-                            fontWeight: `${style.fontWeight.dark}`,
-                            fontSize: `${style.font.h4}`,
-                          }}
-                        >
-                          Almost There
-                        </Text>
-                      </Box>
-                      <Box display="flex" justifyContent="center">
-                        <Text textAlign="center" style={{ width: "80%" }}>
-                          Cheers to the successful publication on IPFS - a leap
-                          into a decentralized and innovative future!
-                        </Text>
-                      </Box>
-                    </Box>
-                  ))}
+                      Almost There
+                    </Text>
+                  </Box>
+                  <Box display="flex" justifyContent="center">
+                    <Text textAlign="center" style={{ width: "80%" }}>
+                      Cheers to the successful publication on IPFS - a leap into a decentralized and innovative future!
+                    </Text>
+                  </Box>
+                </Box>
+                ))}
                 {hookPublisherCreate.formStep == 7 && (
                   <Box
                     backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
