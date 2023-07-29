@@ -48,7 +48,7 @@ const HomeDev = () => {
         <Text>
           Macha services enable developers to interact seamlessly with blockchain data through its search protocol
         </Text>
-        {!hookMacha.publisherExists && <Box display={"flex"}>
+        {(!hookMacha.isLoading && !hookMacha.publisherExists) && <Box display={"flex"}>
           <ButtonNative onClick={() => {
             const checkBalance = async () => {
               const balance = await fetchBalance({

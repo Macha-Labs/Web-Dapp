@@ -12,10 +12,11 @@ import { useSigner } from "wagmi";
 const useMacha = () => {
   // const $loadMacha = useMachaStore((state: any) => state.loadMacha);
   //   const $signer = useAuthStore((state: any) => state.signer);
-  const [publisherExists, setPublisherExists] = useState<boolean>();
+  const [publisherExists, setPublisherExists] = useState<boolean>(false);
   const { data: signer } = useSigner();
   const $address = useAuthStore((state: any) => state.address);
   let macha: Macha;
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     connectMachaPublisher();
@@ -30,6 +31,7 @@ const useMacha = () => {
         console.log("create publisher called", macha);
         const res = await macha?.createPublisher(publisherData);
         await connectMachaPublisher()
+        window.localStorage.setItem("machaIsPublisher", JSON.stringify(true))
         return res;
       }
     } catch (error) {
@@ -38,19 +40,62 @@ const useMacha = () => {
     }
   };
 
-  const connectMachaPublisher = async () => {
+  const checkMachaPublisher = async () => {
     if (signer) {
       macha = new Macha({ owner: $address, signer: signer });
       const machaCreated: any = await macha?.connectPublisher();
       console.log("macha created", machaCreated);
       setPublisherExists(machaCreated?.data?.data == null ? false : true);
+      const connectedAddress = $address
+      if (machaCreated?.data?.data != null) {
+        let data = null
+        if (window.localStorage !== undefined) {
+          data = window.localStorage.getItem("machaIsPublisher")
+          if (data != null) {
+            data = JSON.parse(data)
+            window.localStorage.setItem("machaIsPublisher", JSON.stringify({
+              ...data,
+              [connectedAddress]: true
+            }))
+          }
+          else {
+            window.localStorage.setItem("machaIsPublisher", JSON.stringify({
+              [connectedAddress]: true
+            }))
+          }
+        }
+      }
     }
-  };
+  }
+
+  const connectMachaPublisher = () => {
+    if (window.localStorage !== undefined) {
+      const data = window.localStorage.getItem("machaIsPublisher");
+      if (data !== null) {
+        console.log("local data", JSON.parse(data))
+        const res = JSON.parse(data)
+        if (res[$address] == true) {
+          setPublisherExists(true)
+        }
+        else {
+          checkMachaPublisher()
+        }
+      }
+      else {
+        checkMachaPublisher()
+      }
+    }
+    else {
+      checkMachaPublisher()
+    }
+    setIsLoading(false)
+  }
 
   return {
     createMachaPublisher: createMachaPublisher,
     connectMachaPublisher: connectMachaPublisher,
     publisherExists: publisherExists,
+    isLoading: isLoading
   };
 };
 
