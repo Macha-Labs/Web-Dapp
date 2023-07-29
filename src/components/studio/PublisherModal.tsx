@@ -580,7 +580,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       Fill in your wallet and try again
                     </Text>
                     <Text textAlign="center" style={{}}>
-                      Please visit: <Link href="https://faucet.calibration.fildev.network/funds.html" style={{ textDecoration: "underline" }}>https://faucet.calibration.fildev.network/funds.html</Link>
+                      Please visit: <Link target="_blank" href="https://faucet.calibration.fildev.network/funds.html" style={{ textDecoration: "underline" }}>https://faucet.calibration.fildev.network/funds.html</Link>
                     </Text>
                   </Box>
                 </Box> : (<Box
