@@ -42,7 +42,7 @@ const Tabs = ({ options, gstyle, icon, value, onChange, width, hrAlign }: Props)
                 >
                   <FlexRow>
                     {icon && <IconImage slug={icon.slug} />}
-                    <Text fontSize={"lg"} fontWeight={600} className="m-b-0">
+                    <Text fontSize={style.font.h4} fontWeight={600} className="m-b-0">
                       {option.value}
                     </Text>
                   </FlexRow>
