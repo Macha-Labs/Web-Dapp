@@ -42,14 +42,17 @@ const HomeDev = () => {
       <Box
         background={style.card.bg.brand}
         borderRadius={style.card.borderRadius.default}
-        padding={style.padding.sm}
+        padding={style.padding.lg}
       >
-        <Heading>Developer Dashboard</Heading>
-        <Text>
-        The ultimate place for developers to explore smart contracts and it's real time transactions from different blockchain protocols  — all deployable with one click
+        <Heading p={0}>Developer Dashboard</Heading>
+        <Text fontSize={style.font.h5}>
+          The ultimate place for developers to explore smart contracts and it&#39;s real time transactions from different blockchain protocols
+        </Text>
+        <Text fontSize={style.font.h5} lineHeight="0rem">
+          — all deployable with one click
         </Text>
         {(!hookMacha.isLoading && !hookMacha.publisherExists) && <Box display={"flex"}>
-          <ButtonNative onClick={() => {
+          <ButtonNative marginTop="xs" onClick={() => {
             const checkBalance = async () => {
               const balance = await fetchBalance({
                 address: $address,
@@ -75,7 +78,7 @@ const HomeDev = () => {
         </Text>
       </Box>
 
-      <Flex flexWrap="wrap">
+      <Flex flexWrap="wrap" paddingLeft={2}>
         <GetStartedCards
           image="https://ik.imagekit.io/macha/studio/push%20contracts-image.svg?updatedAt=1690613051466"
           title="Start Indexing Contracts"
@@ -131,7 +134,7 @@ const HomeDev = () => {
         </Text>
       </Box>
 
-      <Flex flexWrap="wrap">
+      <Flex flexWrap="wrap" paddingLeft={2}>
         <GetStartedCards
           title="Macha Account SDK"
           description="Provides to aggregated user profile data."
@@ -146,7 +149,7 @@ const HomeDev = () => {
         />
         <GetStartedCards
           title="Macha Graph SDK"
-          description="Enables graphQl APIs to fetch macha's indexed data."
+          description="Enables graphQl APIs to fetch macha&#39;s indexed data."
           tag="soon"
           disabled={true}
         />

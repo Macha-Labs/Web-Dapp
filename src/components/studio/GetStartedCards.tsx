@@ -16,8 +16,9 @@ type Props = {
 const GetStartedCards = ({ title, imageSrc, description, tag, disabled, onClick, image }: Props) => {
   return (
     <Box
+      _hover={{border: `${style.card.border.meta}`,transform: "scale(1.01,1.01)"}}
       //   maxW="sm"
-      border={style.card.border.meta}
+      border={style.card.border.default}
       borderRadius={style.card.borderRadius.default}
       overflow="hidden"
       marginBottom={style.margin.md}
@@ -34,9 +35,9 @@ const GetStartedCards = ({ title, imageSrc, description, tag, disabled, onClick,
         </Box>}
         <FlexRow hrAlign="flex-start" vrAlign="flex-start" marginTop="sm">
           <Text fontWeight={style.fontWeight.dark} mb={0} mr={style.margin.xxs}>{title}</Text>
-          {tag && <TagNative value={tag} size="sm" marginTop="2px" variant="grey" />}
+          {tag && <TagNative value={tag} size="sm" marginTop="2px"/>}
         </FlexRow>
-        <Text width="20rem" mt={style.margin.sm} color="gray.600">
+        <Text width="20rem" mt={style.margin.xxs} color="gray.600">
           {description}
         </Text>
         {/* <Button mt="4" colorScheme="teal" size="sm">

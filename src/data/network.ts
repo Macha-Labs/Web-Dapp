@@ -2,7 +2,7 @@ const chains: any = {
     1: {
         chainName: "Ethereum",
         chainImage: "logo-Ethereum",
-        about: `Ethereum is a technology that's home to digital money, global payments, and applications. The community has built a booming digital economy, bold new ways for creators to earn online, and so much more. It's open to everyone, wherever you are in the world – all you need is the internet.`,
+        about: `Ethereum is a technology that&#39;s home to digital money, global payments, and applications. The community has built a booming digital economy, bold new ways for creators to earn online, and so much more. It&#39;s open to everyone, wherever you are in the world – all you need is the internet.`,
         team: [
             {
                 name: "Vitalik Buterin",

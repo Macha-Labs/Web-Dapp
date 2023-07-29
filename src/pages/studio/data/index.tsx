@@ -90,7 +90,7 @@ const DashBoard = () => {
                 <Text className="mb-0" color="#C6C6C6" marginRight="2px">
                   Functions
                 </Text>
-                <TagNative value="soon" size="sm" variant="grey" />
+                <TagNative value="soon" size="sm" />
               </Box>
             </FlexRow>
 

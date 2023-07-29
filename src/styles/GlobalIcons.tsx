@@ -135,10 +135,14 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
   "icon-user":
     "icons/svg/Base_blue_icons/base-blue-user.svg?updatedAt=1690532065895",
+  "icon-dark-user":
+    "/icons/svg/Dark_icons/dark-user.svg?updatedAt=1690532103705",
   "icon-connections":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-connections.png?updatedAt=1680788697983",
   "icon-chat-edit":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-editChat.svg",
+  "icon-dark-enterprise":
+    "/icons/svg/Dark_icons/dark-enterprise-fill.svg?updatedAt=1690622152989",
   "icon-code":
     "/icons/svg/Base-blue/base-blue-deploy.svg?updatedAt=1686831739162",
   "icon-rocket":

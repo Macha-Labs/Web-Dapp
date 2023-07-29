@@ -35,7 +35,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
     if (parseInt(balance.formatted) <= 1) {
       setLowBalance(true);
     }
-    else{
+    else {
       setLowBalance(false)
     }
   };
@@ -52,7 +52,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 <Text className="mb-0">
                   Choose the type of publisher account{" "}
                 </Text>
-                <Text
+                {/* <Text
                   className="mb-0"
                   style={{
                     fontSize: `${style.font.h6}`,
@@ -62,7 +62,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 >
                   For Individual Plan is good when you have, Something like this
                   a text.
-                </Text>
+                </Text> */}
               </Box>
             )}
             {hookPublisherCreate.formStep == 5 &&
@@ -102,6 +102,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
               >
                 <ButtonNative
                   variant="state_brand"
+                  height="2rem"
+                  width="5rem"
                   marginTop={style.margin["lg"]}
                   onClick={async () => {
                     hookPublisherCreate.setClear();
@@ -128,6 +130,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   hookPublisherCreate.formStep <= 5 && (
                     <ButtonNative
                       variant="state_default_hover"
+                      height="2rem"
+                      width="5rem"
                       marginTop={style.margin["lg"]}
                       onClick={hookPublisherCreate.prevFormStep}
                     >
@@ -138,6 +142,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 {hookPublisherCreate.formStep <= 4 && (
                   <ButtonNative
                     variant="state_brand"
+                    height="2rem"
+                    width="5rem"
                     marginTop={style.margin["lg"]}
                     onClick={hookPublisherCreate.nextFormStep}
                   >
@@ -158,6 +164,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 {hookPublisherCreate.formStep == 5 && (
                   <ButtonNative
                     variant="state_brand"
+                    height="2rem"
+                    width="5rem"
                     marginTop={style.margin["lg"]}
                     onClick={() => {
                       hookPublisherCreate.nextFormStep();
@@ -171,6 +179,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 {hookPublisherCreate.formStep == 6 && (
                   <ButtonNative
                     variant="state_default_hover"
+                    height="2rem"
+                    width="5rem"
                     marginTop={style.margin["lg"]}
                     disabled={hookPublisherCreate.isTransactionPending}
                     onClick={() => {
@@ -185,6 +195,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 {hookPublisherCreate.formStep == 6 && (
                   <ButtonNative
                     variant="state_brand"
+                    height="2rem"
+                    width="5rem"
                     marginTop={style.margin["lg"]}
                     onClick={hookPublisherCreate.createPublisher}
                     disabled={
@@ -236,10 +248,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </Box>
                     <Box>
                       <Text textAlign="center" style={{ color: "grey" }}>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Quae aut quos qui? Repudiandae velit incidunt
-                        repellendus ipsa magnam, impedit quo, fugit et corporis
-                        odio est facere, modi porro. Unde, commodi!
+                        Experience On-Chain Transactions with This Flow!
                       </Text>
                     </Box>
                   </>
@@ -263,15 +272,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           fontSize: `${style.font.h4}`,
                         }}
                       >
-                        Welcome to 2nd Slide
+                        Trust in Every Byte
                       </Text>
                     </Box>
                     <Box>
                       <Text textAlign="center" style={{ color: "grey" }}>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Quae aut quos qui? Repudiandae velit incidunt
-                        repellendus ipsa magnam, impedit quo, fugit et corporis
-                        odio est facere, modi porro. Unde, commodi!
+                        Your data is backed up on IPFS, so its always retainable
                       </Text>
                     </Box>
                   </>
@@ -295,15 +301,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           fontSize: `${style.font.h4}`,
                         }}
                       >
-                        Welcome to 3rd step
+                        Take the Leap into Decentralization
                       </Text>
                     </Box>
                     <Box>
                       <Text textAlign="center" style={{ color: "grey" }}>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Quae aut quos qui? Repudiandae velit incidunt
-                        repellendus ipsa magnam, impedit quo, fugit et corporis
-                        odio est facere, modi porro. Unde, commodi!
+                        Register to become a publisher to upload your contract for indexing
                       </Text>
                     </Box>
                   </>
@@ -327,11 +330,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         style={{
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
-                          border: `${
-                            hookPublisherCreate.publisherType == "Individual"
-                              ? "1px solid #197cec"
-                              : style.card.border.contract
-                          }`,
+                          display: "flex",
+                          alignItems: "center",
+                          border: `${hookPublisherCreate.publisherType == "Individual"
+                            ? "1px solid #197cec"
+                            : style.card.border.contract
+                            }`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -342,18 +346,20 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           cursor: "pointer",
                         }}
                       >
-                        <Text
-                          style={{
-                            fontWeight: `${style.fontWeight.dark}`,
-                            fontSize: `${style.font.h4}`,
-                          }}
-                        >
-                          Individual
-                        </Text>
-                        <Text>
-                          For Individual Plan is good when you have, Something
-                          like this a text
-                        </Text>
+                        <IconBase style={{ marginRight: "sm" }} size="2xl" slug="icon-dark-user" />
+                        <Box>
+                          <Text
+                            style={{
+                              fontWeight: `${style.fontWeight.dark}`,
+                              fontSize: `${style.font.h4}`,
+                            }}
+                          >
+                            Individual
+                          </Text>
+                          <Text>
+                            Register as an individual to publish your contract
+                          </Text>
+                        </Box>
                       </Box>
                       <Box
                         _hover={{
@@ -362,31 +368,34 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           cursor: "pointer",
                         }}
                         style={{
-                          border: `${
-                            hookPublisherCreate.publisherType == "Organization"
-                              ? "1px solid #197cec"
-                              : style.card.border.contract
-                          }`,
+                          border: `${hookPublisherCreate.publisherType == "Organization"
+                            ? "1px solid #197cec"
+                            : style.card.border.contract
+                            }`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
+                          display: "flex",
+                          alignItems: "center",
                           marginTop: `${style.margin.sm}`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Organization")
                         }
                       >
-                        <Text
-                          style={{
-                            fontWeight: `${style.fontWeight.dark}`,
-                            fontSize: `${style.font.h4}`,
-                          }}
-                        >
-                          Organization
-                        </Text>
-                        <Text>
-                          For Organization Plan is good when you have, Something
-                          like this a text
-                        </Text>
+                        <IconBase style={{ marginRight: "sm" }} size="2xl" slug="icon-dark-enterprise" />
+                        <Box>
+                          <Text
+                            style={{
+                              fontWeight: `${style.fontWeight.dark}`,
+                              fontSize: `${style.font.h4}`,
+                            }}
+                          >
+                            Organization
+                          </Text>
+                          <Text>
+                            Register as an organization to publish contracts for your company.
+                          </Text>
+                        </Box>
                       </Box>
                     </Box>
                   </>
@@ -430,7 +439,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       />
                     </Box>
                   )}
-                {((hookPublisherCreate.formStep == 5)&&
+                {((hookPublisherCreate.formStep == 5) &&
                   hookPublisherCreate.publisherType == "Organization") && (
                     <Box width="100%">
                       <Text>All * marked fields are required</Text>
