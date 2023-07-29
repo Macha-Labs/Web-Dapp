@@ -106,6 +106,7 @@ export const StyledLi = styled.li`
     -webkit-text-fill-color: transparent;
     text-decoration: underline;
     font-weight: 600;
+    font-size: 1.5rem !important;
   }
 `;
 export const RowHover = styled(StyledRow)`

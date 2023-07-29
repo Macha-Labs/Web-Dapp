@@ -102,7 +102,8 @@ const DashBoard = () => {
                 marginRight="0px"
                 paddingLeft="sm"
                 paddingRight="sm"
-                height="2.5rem"
+                height="2rem"
+                marginBottom="0px"
                 onClick={() => {
                   contractModal.onOpen();
                 }}

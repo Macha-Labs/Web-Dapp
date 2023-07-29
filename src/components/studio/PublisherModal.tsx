@@ -17,6 +17,7 @@ import { Box, Heading, Image, Text, useToast } from "@chakra-ui/react";
 import { fetchBalance } from "@wagmi/core";
 import useAuthStore from "@/store/useAuthStore";
 import { useState } from "react";
+import Link from "next/link";
 
 type Props = {
   modal: any;
@@ -28,6 +29,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
   const toast = useToast();
   const $address = useAuthStore((state: any) => state.address);
   const [lowBalance, setLowBalance] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const checkBalance = async () => {
     const balance = await fetchBalance({
       address: $address,
@@ -138,13 +140,29 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </ButtonNative>
                   )}
 
-                {hookPublisherCreate.formStep <= 4 && (
+                {hookPublisherCreate.formStep < 4 && (
                   <ButtonNative
                     variant="state_brand"
                     height="2rem"
                     width="5rem"
                     marginTop={style.margin["lg"]}
                     onClick={hookPublisherCreate.nextFormStep}
+                  >
+                    Next
+                  </ButtonNative>
+                )}
+
+                {hookPublisherCreate.formStep == 4 && (
+                  <ButtonNative
+                    variant="state_brand"
+                    height="2rem"
+                    width="5rem"
+                    marginTop={style.margin["lg"]}
+                    onClick={() => {
+                      hookPublisherCreate.nextFormStep()
+                      checkBalance();
+                      setIsLoading(false)
+                    }}
                   >
                     Next
                   </ButtonNative>
@@ -168,7 +186,6 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     marginTop={style.margin["lg"]}
                     onClick={() => {
                       hookPublisherCreate.nextFormStep();
-                      checkBalance();
                     }}
                   >
                     Save
@@ -332,11 +349,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           padding: `${style.padding.md}`,
                           display: "flex",
                           alignItems: "center",
-                          border: `${
-                            hookPublisherCreate.publisherType == "Individual"
-                              ? "1px solid #197cec"
-                              : style.card.border.contract
-                          }`,
+                          border: `${hookPublisherCreate.publisherType == "Individual"
+                            ? "1px solid #197cec"
+                            : style.card.border.contract
+                            }`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -373,11 +389,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           cursor: "pointer",
                         }}
                         style={{
-                          border: `${
-                            hookPublisherCreate.publisherType == "Organization"
-                              ? "1px solid #197cec"
-                              : style.card.border.contract
-                          }`,
+                          border: `${hookPublisherCreate.publisherType == "Organization"
+                            ? "1px solid #197cec"
+                            : style.card.border.contract
+                            }`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",
@@ -541,41 +556,66 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       />
                     </Box>
                   )}
-                {hookPublisherCreate.formStep == 6 && (
-                  <Box
-                    backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      width: "100%",
-                    }}
-                    backgroundSize="100% 100%"
-                  >
-                    <Box
-                      paddingTop={style.padding.xl}
-                      paddingBottom={style.padding.xl}
+                {(!isLoading && hookPublisherCreate.formStep == 6) && (lowBalance ? <Box
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                  backgroundSize="100% 100%"
+                >
+                  <Box>
+                    <Text
+                      style={{
+                        fontWeight: `${style.fontWeight.dark}`,
+                        fontSize: `${style.font.h4}`,
+                      }}
                     >
-                      <IconBase slug="icon-almost-there" size="3xl" />
-                    </Box>
-                    <Box>
-                      <Text
-                        style={{
-                          fontWeight: `${style.fontWeight.dark}`,
-                          fontSize: `${style.font.h4}`,
-                        }}
-                      >
-                        Almost There
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Text textAlign="center" style={{}}>
-                        All Publisher Information will be saved on IPFS for
-                        better Operation
-                      </Text>
-                    </Box>
+                      Insufficient Balance in Wallet
+                    </Text>
                   </Box>
-                )}
+                  <Box>
+                    <Text textAlign="center" style={{}}>
+                      Fill in your wallet and try again
+                    </Text>
+                    <Text textAlign="center" style={{}}>
+                      Please visit: <Link href="https://faucet.calibration.fildev.network/funds.html" style={{ textDecoration: "underline" }}>https://faucet.calibration.fildev.network/funds.html</Link>
+                    </Text>
+                  </Box>
+                </Box> : (<Box
+                  backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                  backgroundSize="100% 100%"
+                >
+                  <Box
+                    paddingTop={style.padding.xl}
+                    paddingBottom={style.padding.xl}
+                  >
+                    <IconBase slug="icon-almost-there" size="3xl" />
+                  </Box>
+                  <Box>
+                    <Text
+                      style={{
+                        fontWeight: `${style.fontWeight.dark}`,
+                        fontSize: `${style.font.h4}`,
+                      }}
+                    >
+                      Almost There
+                    </Text>
+                  </Box>
+                  <Box display="flex" justifyContent="center">
+                    <Text textAlign="center" style={{ width: "80%" }}>
+                      Cheers to the successful publication on IPFS - a leap into a decentralized and innovative future!
+                    </Text>
+                  </Box>
+                </Box>
+                ))}
                 {hookPublisherCreate.formStep == 7 && (
                   <Box
                     backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
@@ -605,8 +645,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </Box>
                     <Box>
                       <Text textAlign="center" style={{}}>
-                        Your publisher request has been received. We will get in
-                        touch soon.
+                        Your publisher account has been created successfully.
                       </Text>
                     </Box>
                   </Box>
