@@ -29,6 +29,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
   const toast = useToast();
   const $address = useAuthStore((state: any) => state.address);
   const [lowBalance, setLowBalance] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const checkBalance = async () => {
     const balance = await fetchBalance({
       address: $address,
@@ -139,13 +140,29 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </ButtonNative>
                   )}
 
-                {hookPublisherCreate.formStep <= 4 && (
+                {hookPublisherCreate.formStep < 4 && (
                   <ButtonNative
                     variant="state_brand"
                     height="2rem"
                     width="5rem"
                     marginTop={style.margin["lg"]}
                     onClick={hookPublisherCreate.nextFormStep}
+                  >
+                    Next
+                  </ButtonNative>
+                )}
+
+                {hookPublisherCreate.formStep == 4 && (
+                  <ButtonNative
+                    variant="state_brand"
+                    height="2rem"
+                    width="5rem"
+                    marginTop={style.margin["lg"]}
+                    onClick={() => {
+                      hookPublisherCreate.nextFormStep()
+                      checkBalance();
+                      setIsLoading(false)
+                    }}
                   >
                     Next
                   </ButtonNative>
@@ -169,7 +186,6 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     marginTop={style.margin["lg"]}
                     onClick={() => {
                       hookPublisherCreate.nextFormStep();
-                      checkBalance();
                     }}
                   >
                     Save
@@ -540,7 +556,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       />
                     </Box>
                   )}
-                {hookPublisherCreate.formStep == 6 && (lowBalance ? <Box
+                {(!isLoading && hookPublisherCreate.formStep == 6) && (lowBalance ? <Box
                   style={{
                     display: "flex",
                     flexDirection: "column",
@@ -593,10 +609,9 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       Almost There
                     </Text>
                   </Box>
-                  <Box>
-                    <Text textAlign="center" style={{}}>
-                      All Publisher Information will be saved on IPFS for
-                      better Operation
+                  <Box display="flex" justifyContent="center">
+                    <Text textAlign="center" style={{ width: "80%" }}>
+                      Cheers to the successful publication on IPFS - a leap into a decentralized and innovative future!
                     </Text>
                   </Box>
                 </Box>
@@ -630,8 +645,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </Box>
                     <Box>
                       <Text textAlign="center" style={{}}>
-                        Your publisher request has been received. We will get in
-                        touch soon.
+                        Your publisher account has been created successfully.
                       </Text>
                     </Box>
                   </Box>

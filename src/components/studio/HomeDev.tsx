@@ -137,7 +137,7 @@ const HomeDev = () => {
       <Flex flexWrap="wrap" paddingLeft={2}>
         <GetStartedCards
           title="Macha Account SDK"
-          description="Provides to aggregated user profile data."
+          description="Provides aggregated user profile data."
           tag="soon"
           disabled={true}
         />
