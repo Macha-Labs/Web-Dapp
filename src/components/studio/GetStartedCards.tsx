@@ -13,10 +13,21 @@ type Props = {
   image?: any;
 };
 
-const GetStartedCards = ({ title, imageSrc, description, tag, disabled, onClick, image }: Props) => {
+const GetStartedCards = ({
+  title,
+  imageSrc,
+  description,
+  tag,
+  disabled,
+  onClick,
+  image,
+}: Props) => {
   return (
     <Box
-      _hover={{border: `${style.card.border.meta}`,transform: "scale(1.01,1.01)"}}
+      _hover={{
+        border: `${style.card.border.meta}`,
+        transform: "scale(1.01,1.01)",
+      }}
       //   maxW="sm"
       border={style.card.border.default}
       borderRadius={style.card.borderRadius.default}
@@ -24,20 +35,23 @@ const GetStartedCards = ({ title, imageSrc, description, tag, disabled, onClick,
       marginBottom={style.margin.md}
       marginRight={style.margin.sm}
       cursor={disabled ? "not-allowed" : "pointer"}
-      onClick={onClick ? onClick : () => { }}
+      onClick={onClick ? onClick : () => {}}
     >
       {/* <Image src={imageSrc} alt={title} /> */}
 
       <Box p="4">
-        <Flex align="baseline"></Flex>
-        {image && <Box height="25%">
-          <Image src={image} fit="contain" alt={title} height="100%" />
-        </Box>}
+        {image && (
+          <Box height="25%">
+            <Image src={image} fit="contain" alt={title} height="" width="19rem"/>
+          </Box>
+        )}
         <FlexRow hrAlign="flex-start" vrAlign="flex-start" marginTop="sm">
-          <Text fontWeight={style.fontWeight.dark} mb={0} mr={style.margin.xxs}>{title}</Text>
-          {tag && <TagNative value={tag} size="sm" marginTop="2px"/>}
+          <Text fontWeight={style.fontWeight.dark} mb={0} mr={style.margin.xxs}>
+            {title}
+          </Text>
+          {tag && <TagNative value={tag} size="sm" marginTop="2px" />}
         </FlexRow>
-        <Text width="20rem" mt={style.margin.xxs} color="gray.600">
+        <Text width="19rem" mt={style.margin.xxs} color="gray.600">
           {description}
         </Text>
         {/* <Button mt="4" colorScheme="teal" size="sm">
