@@ -34,9 +34,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
     });
     if (parseInt(balance.formatted) <= 1) {
       setLowBalance(true);
-    }
-    else {
-      setLowBalance(false)
+    } else {
+      setLowBalance(false);
     }
   };
 
@@ -231,7 +230,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-Txn%20Hash.svg?updatedAt=1690531994352"
+                        src="https://ik.imagekit.io/macha/icons/svg/Dark_icons/dark-Txn%20Hash.svg?updatedAt=1690622510375"
                         alt="txn-icon"
                         height="6rem"
                       />
@@ -260,7 +259,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-Txn%20Hash.svg?updatedAt=1690531994352"
+                        src="https://ik.imagekit.io/macha/icons/svg/Dark_icons/dark-database.svg?updatedAt=1690622510489"
                         alt="txn-icon"
                         height="6rem"
                       />
@@ -289,7 +288,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-Txn%20Hash.svg?updatedAt=1690531994352"
+                        src="https://ik.imagekit.io/macha/icons/svg/Dark_icons/dark-upload.svg?updatedAt=1690622510713"
                         alt="txn-icon"
                         height="6rem"
                       />
@@ -306,7 +305,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </Box>
                     <Box>
                       <Text textAlign="center" style={{ color: "grey" }}>
-                        Register to become a publisher to upload your contract for indexing
+                        Register to become a publisher to upload your contract
+                        for indexing
                       </Text>
                     </Box>
                   </>
@@ -332,10 +332,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           padding: `${style.padding.md}`,
                           display: "flex",
                           alignItems: "center",
-                          border: `${hookPublisherCreate.publisherType == "Individual"
-                            ? "1px solid #197cec"
-                            : style.card.border.contract
-                            }`,
+                          border: `${
+                            hookPublisherCreate.publisherType == "Individual"
+                              ? "1px solid #197cec"
+                              : style.card.border.contract
+                          }`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -346,7 +347,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           cursor: "pointer",
                         }}
                       >
-                        <IconBase style={{ marginRight: "sm" }} size="2xl" slug="icon-dark-user" />
+                        <IconBase
+                          style={{ marginRight: "sm" }}
+                          size="2xl"
+                          slug="icon-dark-user"
+                        />
                         <Box>
                           <Text
                             style={{
@@ -368,10 +373,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           cursor: "pointer",
                         }}
                         style={{
-                          border: `${hookPublisherCreate.publisherType == "Organization"
-                            ? "1px solid #197cec"
-                            : style.card.border.contract
-                            }`,
+                          border: `${
+                            hookPublisherCreate.publisherType == "Organization"
+                              ? "1px solid #197cec"
+                              : style.card.border.contract
+                          }`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",
@@ -382,7 +388,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           hookPublisherCreate.selectPublisher("Organization")
                         }
                       >
-                        <IconBase style={{ marginRight: "sm" }} size="2xl" slug="icon-dark-enterprise" />
+                        <IconBase
+                          style={{ marginRight: "sm" }}
+                          size="2xl"
+                          slug="icon-dark-enterprise"
+                        />
                         <Box>
                           <Text
                             style={{
@@ -393,15 +403,16 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                             Organization
                           </Text>
                           <Text>
-                            Register as an organization to publish contracts for your company.
+                            Register as an organization to publish contracts for
+                            your company.
                           </Text>
                         </Box>
                       </Box>
                     </Box>
                   </>
                 )}
-                {(hookPublisherCreate.formStep == 5 &&
-                  hookPublisherCreate.publisherType == "Individual") && (
+                {hookPublisherCreate.formStep == 5 &&
+                  hookPublisherCreate.publisherType == "Individual" && (
                     <Box width="100%">
                       <Text>All * marked fields are required</Text>
                       <InputLabel
@@ -439,8 +450,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       />
                     </Box>
                   )}
-                {((hookPublisherCreate.formStep == 5) &&
-                  hookPublisherCreate.publisherType == "Organization") && (
+                {hookPublisherCreate.formStep == 5 &&
+                  hookPublisherCreate.publisherType == "Organization" && (
                     <Box width="100%">
                       <Text>All * marked fields are required</Text>
                       <InputLabel
