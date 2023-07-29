@@ -28,9 +28,7 @@ const useTransaction = () => {
             },
             {
               key: "Gas Used	",
-              value: `${
-                parseInt(res.data?.transaction.gas_used, 16) / 1000000000
-              } gwei`,
+              value: `${parseInt(res.data?.transaction.gas_used, 16)} `,
               src: "https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-gas-used.svg?updatedAt=1690531997273",
             },
             {
