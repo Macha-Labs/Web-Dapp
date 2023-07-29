@@ -24,7 +24,6 @@ import { useEffect, useState } from "react";
 
 const DashBoard = () => {
   const $address = useAuthStore((state: any) => state.address);
-  const [selectedNavTab, setSelectedNavTab] = useState<string>("Home");
   const [exploreMeta, setExploreMeta] = useState<any>([]);
   const [isPublisher, setIsPublisher] = useState<any>(false);
 
@@ -44,11 +43,11 @@ const DashBoard = () => {
   const dashboardNav: any = [
     {
       value: "Home",
-      href: "",
+      href: "/studio/data/home",
     },
     {
       value: "Contracts",
-      href: "",
+      href: "/studio/data/contract",
     },
     // {
     //   value: "Functions",
@@ -56,21 +55,12 @@ const DashBoard = () => {
     // },
   ];
 
-  const renderAPIs = () => {
-    return <>{selectedNavTab == "Functions" && <ApiList />}</>;
-  };
 
   const renderContracts = () => {
-    return <>{selectedNavTab == "Contracts" && <ContractList />}</>;
-  };
-
-  const renderHome = () => {
-    return <>{selectedNavTab == "Home" && <HomeDev />}</>;
+    return <>{<ContractList />}</>;
   };
 
   const renderBody = () => {
-    if (!$address) return null;
-
     return (
       <>
         <NavBlock marginTop={style.margin["nav"]}>
@@ -80,8 +70,8 @@ const DashBoard = () => {
                 width="fit-content"
                 options={dashboardNav}
                 gstyle={{ fontSize: `${style.font.h5}` }}
-                value={selectedNavTab}
-                onChange={setSelectedNavTab}
+                value={"Contracts"}
+                onChange={() => {}}
               />
               <Box
                 cursor={"not-allowed"}
@@ -94,7 +84,7 @@ const DashBoard = () => {
               </Box>
             </FlexRow>
 
-            {hookMacha.publisherExists && (
+            {($address != null && hookMacha.publisherExists) && (
               <ButtonNative
                 size="sm"
                 text="Create Contract"
@@ -129,8 +119,6 @@ const DashBoard = () => {
         <FlexBody>
           <Box style={{ overflow: "hidden" }}>
             {renderContracts()}
-            {renderAPIs()}
-            {renderHome()}
           </Box>
         </FlexBody>
         <ContractCreateModal
@@ -145,11 +133,11 @@ const DashBoard = () => {
   const renderNav = () => {
     return (
       <NavTop
-        centerElem={<InputSearch onChange={() => {}} value="" />}
+        centerElem={<InputSearch onChange={() => { }} value="" />}
         rightElem={
           <FlexRow width="fit-content">
             {$address && <NavButton />}
-            {<ConnectWalletButton/>}
+            {<ConnectWalletButton />}
           </FlexRow>
         }
       />

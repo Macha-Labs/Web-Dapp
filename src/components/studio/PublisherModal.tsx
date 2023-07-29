@@ -259,12 +259,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           fontSize: `${style.font.h4}`,
                         }}
                       >
-                        Welcome to Publisher
+                        Welcome to Dashboard
                       </Text>
                     </Box>
                     <Box>
                       <Text textAlign="center" style={{ color: "grey" }}>
-                        Experience On-Chain Transactions with This Flow!
+                        Register to upload your contract for indexing
                       </Text>
                     </Box>
                   </>
@@ -322,8 +322,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </Box>
                     <Box>
                       <Text textAlign="center" style={{ color: "grey" }}>
-                        Register to become a publisher to upload your contract
-                        for indexing
+                        Sign the transaction with your wallet, and let&#39;s embark on the journey of indexing your contracts through Macha
                       </Text>
                     </Box>
                   </>
