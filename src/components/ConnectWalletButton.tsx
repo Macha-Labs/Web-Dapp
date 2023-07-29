@@ -91,11 +91,11 @@ export const ConnectWalletButton = (props: any) => {
                 return (
                   <ButtonNative
                     onClick={openChainModal}
-                    variant="state_default_hover"
+                    variant="state_default_warning"
                     height="2rem"
-                    marginLeft={style.margin.xxs}
+                    marginLeft="xxs"
                   >
-                    Wrong network
+                    Wrong Network
                   </ButtonNative>
                 );
               }
@@ -132,7 +132,7 @@ export const ConnectWalletButton = (props: any) => {
                       </FlexRow>
                     </MenuButton>
                     <MenuList>
-                      <MenuItem onClick={() => { }}>
+                      <MenuItem onClick={() => {}}>
                         <FlexRow hrAlign="space-between">
                           <Image
                             style={{ height: "25px", width: "25px" }}
@@ -162,10 +162,12 @@ export const ConnectWalletButton = (props: any) => {
                           </FlexRow>
                         </FlexRow>
                       </MenuItem> */}
-                      <MenuItem onClick={() => {
-                        $unload()
-                        disconnect()
-                      }}>
+                      <MenuItem
+                        onClick={() => {
+                          $unload();
+                          disconnect();
+                        }}
+                      >
                         <FlexRow hrAlign="space-between">
                           <IconImage slug="icon-disconnectWallet" />
                           <FlexRow
@@ -186,7 +188,7 @@ export const ConnectWalletButton = (props: any) => {
                               });
                               if (parseInt(balance.formatted) <= 1) {
                                 toast({
-                                  title: "You don't have enough balance",
+                                  title: "You don't have enough TFIL balance",
                                   status: "warning",
                                   duration: 10000,
                                   position: "top-right",

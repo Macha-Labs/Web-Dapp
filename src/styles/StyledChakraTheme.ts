@@ -192,6 +192,11 @@ const theme = extendTheme({
           },
         },
 
+        state_default_warning: {
+          background: `${style.button.bg.warning}`,
+          border: "1px solid #ffffff",
+        },
+
         state_transparent_to_brand_hover: {
           background: "transparent",
           border: `1px solid transparent`,

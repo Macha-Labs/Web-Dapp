@@ -248,6 +248,7 @@ export const darkStyle = {
       activeTranslucent:
         "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);",
       disabled: "",
+      warning:"#C62424",
     },
     color: "#EFEFEF",
     margin: { default: "5px" },

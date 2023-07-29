@@ -44,7 +44,7 @@ const HomeDev = () => {
         borderRadius={style.card.borderRadius.default}
         padding={style.padding.lg}
       >
-        <Heading p={0}>Developer Dashboard</Heading>
+        <Heading fontSize={style.font.h3} p={0}>Developer Dashboard</Heading>
         <Text fontSize={style.font.h5}>
           The ultimate place for developers to explore smart contracts and it&#39;s real time transactions from different blockchain protocols
         </Text>
@@ -59,7 +59,7 @@ const HomeDev = () => {
               });
               if (parseInt(balance.formatted) <= 1) {
                 toast({
-                  title: "You don't have enough balance",
+                  title: "You don't have enough TFIL balance",
                   status: "warning",
                   duration: 10000,
                   position: "top-right",

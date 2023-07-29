@@ -125,7 +125,13 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   justifyContent: "space-between",
                 }}
               >
-                {hookPublisherCreate.formStep == 1 && <Box></Box>}
+                {hookPublisherCreate.formStep == 1 && (lowBalance ? (
+                    <>
+                    
+                    </>
+                  ) : (
+                    <Box></Box>
+                  ))}
 
                 {hookPublisherCreate.formStep > 1 &&
                   hookPublisherCreate.formStep <= 5 && (
@@ -140,33 +146,23 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </ButtonNative>
                   )}
 
-                {hookPublisherCreate.formStep < 4 && (
-                  <ButtonNative
-                    variant="state_brand"
-                    height="2rem"
-                    width="5rem"
-                    marginTop={style.margin["lg"]}
-                    onClick={hookPublisherCreate.nextFormStep}
-                  >
-                    Next
-                  </ButtonNative>
-                )}
-
-                {hookPublisherCreate.formStep == 4 && (
-                  <ButtonNative
-                    variant="state_brand"
-                    height="2rem"
-                    width="5rem"
-                    marginTop={style.margin["lg"]}
-                    onClick={() => {
-                      hookPublisherCreate.nextFormStep()
-                      checkBalance();
-                      setIsLoading(false)
-                    }}
-                  >
-                    Next
-                  </ButtonNative>
-                )}
+                {hookPublisherCreate.formStep <= 4 &&
+                  (lowBalance ? (
+                    <>
+                    <Text width="100%" textAlign="center">You do not have enough TFIL Balance</Text>
+                    </>
+                  ) : (
+                    <ButtonNative
+                      variant="state_brand"
+                      height="2rem"
+                      width="5rem"
+                      marginTop={style.margin["lg"]}
+                      onClick={hookPublisherCreate.nextFormStep}
+                      disabled={lowBalance}
+                    >
+                      Next
+                    </ButtonNative>
+                  ))}
 
                 {/* {hookPublisherCreate.formStep == 3 && (
                 <ButtonNative
@@ -276,7 +272,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/macha/icons/svg/Dark_icons/dark-database.svg?updatedAt=1690622510489"
+                        src="https://ik.imagekit.io/macha/studio%20logo/coloredIpfs.svg?updatedAt=1690524148908"
                         alt="txn-icon"
                         height="6rem"
                       />
@@ -305,7 +301,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/macha/icons/svg/Dark_icons/dark-upload.svg?updatedAt=1690622510713"
+                        src="https://ik.imagekit.io/macha/studio%20logo/coloredFilecoin.svg?updatedAt=1690524145269"
                         alt="txn-icon"
                         height="6rem"
                       />
@@ -348,10 +344,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           padding: `${style.padding.md}`,
                           display: "flex",
                           alignItems: "center",
-                          border: `${hookPublisherCreate.publisherType == "Individual"
-                            ? "1px solid #197cec"
-                            : style.card.border.contract
-                            }`,
+                          border: `${
+                            hookPublisherCreate.publisherType == "Individual"
+                              ? "1px solid #197cec"
+                              : style.card.border.contract
+                          }`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -388,10 +385,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           cursor: "pointer",
                         }}
                         style={{
-                          border: `${hookPublisherCreate.publisherType == "Organization"
-                            ? "1px solid #197cec"
-                            : style.card.border.contract
-                            }`,
+                          border: `${
+                            hookPublisherCreate.publisherType == "Organization"
+                              ? "1px solid #197cec"
+                              : style.card.border.contract
+                          }`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",
