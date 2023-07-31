@@ -1,12 +1,12 @@
 import lighthouse from "@lighthouse-web3/sdk";
 import { config } from "@/config/index";
 
-const progressCallback = (progressData: any) => {
+export const progressCallback = (progressData: any) => {
   // let percentageDone: any = 100 - (progressData?.total / progressData?.uploaded)?.toFixed(2);
   console.log(progressData);
 };
 
-export const deploytoLightHouse = async (e: any) => {
+export const deploytoLightHouse = async (e: any,progressCallback: any) => {
   // Push file to lighthouse node
   // Both file and folder supported by upload function
   const output = await lighthouse.upload(

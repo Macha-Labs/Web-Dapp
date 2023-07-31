@@ -9,7 +9,8 @@ const usePublisherCreate = (modal: any) => {
   const [formStep, setFormStep] = useState<any>(1);
   const [publisherType, setPublisherType] = useState<any>(undefined);
   const $address = useAuthStore((state: any) => state.address);
-  const [isTransactionPending,setIsTransactionPending] = useState<any>(false);
+  const [isTransactionPending, setIsTransactionPending] = useState<any>(false);
+  const [ipfsLoading, setIpfsLoading] = useState<any>(0);
   const $publisherFormData = usePublisherFormStore(
     (state: any) => state.publisherFormData
   );
@@ -21,6 +22,12 @@ const usePublisherCreate = (modal: any) => {
   useEffect(() => {
     if ($address != null) $loadPublisherFormData({ address: $address });
   }, [$address]);
+
+  const setLoadingCallback = (progressData: any) => {
+    let percentageDone: any = 100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
+    console.log("percentage done: ",percentageDone);
+    setIpfsLoading(percentageDone)
+  }
 
   const setClear = () => {
     setFormStep(1);
@@ -140,7 +147,7 @@ const usePublisherCreate = (modal: any) => {
         hookMacha.createMachaPublisher(publisherPayload).then((res: any) => {
           setIsTransactionPending(false);
           console.log(res)
-          if(res?.code){
+          if (res?.code) {
             toast({
               title: res.code.code || res?.code,
               status: "error",
@@ -148,7 +155,7 @@ const usePublisherCreate = (modal: any) => {
               position: "top-right",
             });
           }
-          else{
+          else {
             nextFormStep()
           }
         })
@@ -190,7 +197,7 @@ const usePublisherCreate = (modal: any) => {
         });
         hookMacha.createMachaPublisher(publisherPayload).then((res: any) => {
           setIsTransactionPending(false);
-          if(res?.code){
+          if (res?.code) {
             toast({
               title: res.code,
               status: "error",
@@ -198,7 +205,7 @@ const usePublisherCreate = (modal: any) => {
               position: "top-right",
             });
           }
-          else{
+          else {
             nextFormStep()
           }
         })
@@ -217,7 +224,10 @@ const usePublisherCreate = (modal: any) => {
     setClear: setClear,
     $publisherFormData: $publisherFormData,
     $loadPublisherFormData: $loadPublisherFormData,
-    isTransactionPending: isTransactionPending
+    isTransactionPending: isTransactionPending,
+    validateSteps: validateSteps,
+    ipfsLoading: ipfsLoading,
+    setLoadingCallback: setLoadingCallback
   };
 };
 export default usePublisherCreate;

@@ -16,7 +16,7 @@ import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Image, Text, useToast } from "@chakra-ui/react";
 import { fetchBalance } from "@wagmi/core";
 import useAuthStore from "@/store/useAuthStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 type Props = {
@@ -29,7 +29,6 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
   const toast = useToast();
   const $address = useAuthStore((state: any) => state.address);
   const [lowBalance, setLowBalance] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const checkBalance = async () => {
     const balance = await fetchBalance({
       address: $address,
@@ -40,6 +39,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
       setLowBalance(false);
     }
   };
+
+  useEffect(() => {
+    if ($address) {
+      checkBalance()
+    }
+  }, [$address])
 
   return (
     <>
@@ -108,8 +113,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   marginTop={style.margin["lg"]}
                   onClick={async () => {
                     hookPublisherCreate.setClear();
-                    modal.onClose();
                     await hookMacha.connectMachaPublisher();
+                    modal.onClose();
                   }}
                 >
                   Okay
@@ -126,12 +131,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 }}
               >
                 {hookPublisherCreate.formStep == 1 && (lowBalance ? (
-                    <>
-                    
-                    </>
-                  ) : (
-                    <Box></Box>
-                  ))}
+                  <>
+
+                  </>
+                ) : (
+                  <Box></Box>
+                ))}
 
                 {hookPublisherCreate.formStep > 1 &&
                   hookPublisherCreate.formStep <= 5 && (
@@ -149,7 +154,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 {hookPublisherCreate.formStep <= 4 &&
                   (lowBalance ? (
                     <>
-                    <Text width="100%" textAlign="center">You do not have enough TFIL Balance</Text>
+                      <Text width="100%" textAlign="center">You do not have enough TFIL Balance</Text>
                     </>
                   ) : (
                     <ButtonNative
@@ -344,11 +349,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           padding: `${style.padding.md}`,
                           display: "flex",
                           alignItems: "center",
-                          border: `${
-                            hookPublisherCreate.publisherType == "Individual"
-                              ? "1px solid #197cec"
-                              : style.card.border.contract
-                          }`,
+                          border: `${hookPublisherCreate.publisherType == "Individual"
+                            ? "1px solid #197cec"
+                            : style.card.border.contract
+                            }`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -385,11 +389,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           cursor: "pointer",
                         }}
                         style={{
-                          border: `${
-                            hookPublisherCreate.publisherType == "Organization"
-                              ? "1px solid #197cec"
-                              : style.card.border.contract
-                          }`,
+                          border: `${hookPublisherCreate.publisherType == "Organization"
+                            ? "1px solid #197cec"
+                            : style.card.border.contract
+                            }`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",
@@ -488,23 +491,29 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         marginTop="sm"
                       />
                       {hookPublisherCreate.$publisherFormData.logo == "" ? (
-                        <InputLabel
-                          inputType="file"
-                          fileDropMinHeight="80px"
-                          inputLogoSize="lg"
-                          labelText="Organization Logo*"
-                          marginTop="sm"
-                          onChange={async (e?: any) => {
-                            if (e.target.files && e.target.files[0]) {
-                              const file = e.target.files[0];
-                              console.log("Selected file:", file);
-                              const cid = await deploytoLightHouse(e);
-                              hookPublisherCreate.$loadPublisherFormData({
-                                logo: displayImage(cid),
-                              });
-                            }
-                          }}
-                        />
+                        <>
+                          <InputLabel
+                            inputType="file"
+                            fileDropMinHeight="80px"
+                            inputLogoSize="lg"
+                            labelText="Organization Logo*"
+                            marginTop="sm"
+                            onChange={async (e?: any) => {
+                              if (e.target.files && e.target.files[0]) {
+                                const file = e.target.files[0];
+                                console.log("Selected file:", file);
+                                const cid = await deploytoLightHouse(e,hookPublisherCreate.setLoadingCallback);
+                                hookPublisherCreate.$loadPublisherFormData({
+                                  logo: displayImage(cid),
+                                });
+                              }
+                            }}
+                          />
+                          {hookPublisherCreate.ipfsLoading != 0  && <Box width="100%" bgColor="#00040d" height={1} mt={style.margin.sm}>
+                            <Box bgColor="#0f172e" width={`${hookPublisherCreate.ipfsLoading}%`} height={1}>
+                            </Box>
+                          </Box>}
+                        </>
                       ) : (
                         <Box>
                           <Heading
@@ -513,10 +522,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                             marginTop={style.margin.md}
                             marginBottom={style.margin.xs}
                             bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
+                              100.07deg,
+                              #2a85ff 0.39%,
+                              #2448c7 73.45%
+                              )"
                             bgClip="text"
                           >
                             Organization Logo
@@ -553,7 +562,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       />
                     </Box>
                   )}
-                {(!isLoading && hookPublisherCreate.formStep == 6) && (lowBalance ? <Box
+                {hookPublisherCreate.formStep == 6 && (lowBalance ? <Box
                   style={{
                     display: "flex",
                     flexDirection: "column",
