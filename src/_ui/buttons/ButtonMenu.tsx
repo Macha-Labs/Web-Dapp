@@ -10,6 +10,7 @@ import {
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
 import IconBase from "../icons/IconsBase";
+import { useState } from "react";
 
 type Props = {
   text?: string;
@@ -47,6 +48,7 @@ const ButtonMenu = ({
   height,
   isDisabled,
 }: Props) => {
+  const [iconOrientation, setIconOrientation] = useState<boolean>(true);
   return (
     <div
       style={{
@@ -57,6 +59,9 @@ const ButtonMenu = ({
     >
       <Menu>
         <MenuButton
+          onClick={() => {
+            setIconOrientation(!iconOrientation);
+          }}
           isDisabled={isDisabled}
           variant={"state_default_hover"}
           as={Button}
@@ -64,10 +69,10 @@ const ButtonMenu = ({
             borderRadius: `${style.card.borderRadius.button}`,
           }}
           rightIcon={
-            icon ? (
+            icon && iconOrientation ? (
               <IconBase slug={icon.slug} size="sm" style={icon.style} />
             ) : (
-              <></>
+              <IconBase slug="icon-chevron-up" size="sm" style={icon.style} />
             )
           }
           height={height ? height : "3rem"}
@@ -88,7 +93,8 @@ const ButtonMenu = ({
             return (
               <MenuItem
                 key={index}
-                onClick={item.onClick ? item.onClick : () => {}}
+                onClick={item.onClick ? ()=>{item.onClick()
+                setIconOrientation(!iconOrientation)} : () => {}}
               >
                 <FlexRow hrAlign="space-between">
                   {item.img && (

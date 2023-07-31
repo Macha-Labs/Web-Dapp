@@ -67,7 +67,7 @@ const Home = () => {
                                 <Text className="mb-0" color="#C6C6C6" marginRight="2px">
                                     Functions
                                 </Text>
-                                <TagNative value="soon" size="sm" />
+                                <TagNative value="soon" lineHeight="0.8rem" size="sm" />
                             </Box>
                         </FlexRow>
 
