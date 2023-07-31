@@ -306,7 +306,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/macha/studio%20logo/coloredFilecoin.svg?updatedAt=1690524145269"
+                        src="https://ik.imagekit.io/macha/studio%20logo/fvm.svg?updatedAt=1690788568643"
                         alt="txn-icon"
                         height="6rem"
                       />
