@@ -244,21 +244,28 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 marginTop="sm"
               />
               {hookContractCreate.$contractFormData.image == "" ?
-                <InputLabel
-                  inputType="dropFile"
-                  fileDropMinHeight="80px"
-                  inputLogoSize="lg"
-                  labelText="Image *"
-                  marginTop="sm"
-                  onChange={async (e?: any) => {
-                    if (e.target.files && e.target.files[0]) {
-                      const file = e.target.files[0];
-                      console.log("Selected file:", file);
-                      const cid = await deploytoLightHouse(e)
-                      hookContractCreate.$loadContractFormData({ image: displayImage(cid) })
-                    }
-                  }}
-                /> : <Box width="100%">
+                <>
+                  <InputLabel
+                    inputType="dropFile"
+                    fileDropMinHeight="80px"
+                    inputLogoSize="lg"
+                    labelText="Image *"
+                    marginTop="sm"
+                    onChange={async (e?: any) => {
+                      if (e.target.files && e.target.files[0]) {
+                        const file = e.target.files[0];
+                        console.log("Selected file:", file);
+                        const cid = await deploytoLightHouse(e, hookContractCreate.setLoadingCallback)
+                        hookContractCreate.$loadContractFormData({ image: displayImage(cid) })
+                      }
+                    }}
+                  />
+                  {hookContractCreate.ipfsLoading != 0 && <Box width="100%" bgColor="#00040d" height={1} mt={style.margin.sm}>
+                    <Box bgColor="#0f172e" width={`${hookContractCreate.ipfsLoading}%`} height={1}>
+                    </Box>
+                  </Box>}
+                </>
+                : <Box width="100%">
                   <Heading
                     as="h6"
                     size="sm"

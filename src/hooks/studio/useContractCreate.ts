@@ -10,6 +10,13 @@ const useContractCreate = (modal: any) => {
   const [formStep, setFormStep] = useState<any>(1);
   const $contractFormData = useContractFormStore((state: any) => state.contractFormData);
   const $loadContractFormData = useContractFormStore((state: any) => state.loadContractFormData);
+  const [ipfsLoading, setIpfsLoading] = useState<any>(0);
+
+  const setLoadingCallback = (progressData: any) => {
+    let percentageDone: any = 100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
+    console.log("percentage done: ",percentageDone);
+    setIpfsLoading(percentageDone)
+  }
 
   const validateSteps = () => {
     if (formStep == 1) {
@@ -240,6 +247,8 @@ const useContractCreate = (modal: any) => {
     formStep: formStep,
     nextFormStep: nextFormStep,
     prevFormStep: prevFormStep,
+    ipfsLoading: ipfsLoading,
+    setLoadingCallback: setLoadingCallback
   };
 };
 export default useContractCreate;
