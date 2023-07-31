@@ -44,7 +44,7 @@ const HomeDev = () => {
         borderRadius={style.card.borderRadius.default}
         padding={style.padding.lg}
       >
-        <Heading fontSize={style.font.h3} p={0}>Developer Dashboard</Heading>
+        <Heading fontSize={style.font.h3} p={0} lineHeight={style.font.h3}>Developer Dashboard</Heading>
         <Text fontSize={style.font.h5}>
           The ultimate place for developers to explore smart contracts and it&#39;s real time transactions from different blockchain protocols
         </Text>

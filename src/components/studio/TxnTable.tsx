@@ -164,10 +164,14 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                         alignItems: "center",
                       }}
                     >
+                      <Flex width="2.1rem" height="2.1rem" justifyContent="center" alignItems="center" >
                       <IconBase
+                        size="lg" 
                         slug="icon-coloured-deploy"
                         style={{ paddingLeft: "sm" }}
                       />
+                      </Flex>
+                      
                       <Text
                         paddingLeft={2}
                         marginBottom={0}
