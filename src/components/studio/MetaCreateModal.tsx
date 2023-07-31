@@ -75,12 +75,12 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
           )}
         </FlexColumn>
         {/* <Link href="/studio/createMeta" style={{ width: "100%" }}> */}
-        <ButtonNative
+        {/* <ButtonNative
           variant="state_brand"
           width="100%"
           onClick={async (e: any) => {
             e.preventDefault();
-            const cid = await deploytoLightHouse(imageEvent);
+            const cid = await deploytoLightHouse(imageEvent,);
             let metaCreateData = {
               name: hookMeta.metaOverview.current["metaName"].value,
               description:
@@ -94,7 +94,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
           }}
         >
           Create Meta
-        </ButtonNative>
+        </ButtonNative> */}
         {/* </Link> */}
       </FlexColumn>
     </ModalSlider>

@@ -138,7 +138,7 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
           </Box>
         </Box>
         <FlexRow>
-          <ButtonNative
+          {/* <ButtonNative
             variant="state_brand"
             width="100%"
             onClick={async (e: any) => {
@@ -156,7 +156,7 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
             }}
           >
             Save Changes
-          </ButtonNative>
+          </ButtonNative> */}
         </FlexRow>
       </FlexColumn>
     </ModalSlider>
