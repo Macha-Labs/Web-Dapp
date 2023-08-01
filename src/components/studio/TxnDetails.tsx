@@ -499,7 +499,11 @@ function TxnDetails({
                     {/* <Text>asdf</Text> */}
 
                     {console.log("this is methodParams", methodParams)}
-                    <JSONViewer data={methodParams} />
+                    {methodParams.length > 0 ? (
+                      <JSONViewer data={methodParams} />
+                    ) : (
+                      <Text marginTop={1}>No Data Found</Text>
+                    )}
                   </>
                 )}
               </Box>

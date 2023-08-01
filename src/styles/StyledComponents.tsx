@@ -105,7 +105,7 @@ export const StyledLi = styled.li`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: underline;
-    font-weight: 600;
+    font-weight: 600 !important;
     font-size: 1.5rem !important;
   }
 `;
