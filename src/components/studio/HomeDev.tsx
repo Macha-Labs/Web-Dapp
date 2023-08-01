@@ -59,7 +59,7 @@ const HomeDev = () => {
               marginTop="xs"
               onClick={() => {
                 const checkBalance = async () => {
-                  try{
+                  try {
                     const balance = await fetchBalance({
                       address: $address,
                     });
@@ -72,7 +72,7 @@ const HomeDev = () => {
                       });
                     }
                   }
-                  catch(err){
+                  catch (err) {
                     console.log(err)
                   }
                 };
@@ -99,6 +99,12 @@ const HomeDev = () => {
           disabled={$address == null}
           onClick={() => {
             if ($address == null) {
+              toast({
+                title: "Please connect your wallet.",
+                status: "info",
+                duration: 3000,
+                position: "top-right",
+              });
               return;
             }
             if (hookMacha.publisherExists) {
