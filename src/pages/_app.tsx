@@ -43,8 +43,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Macha</title>
         <meta property="og:title" content="Macha" />
         <meta name="twitter:site" content="@Macha0x" />
-        <meta name="twitter:card" content="Building Interoperable Web" />
-        <meta property="og:url" content="http://app.macha.ai" />
+        <meta name="twitter:card" content="summary" />
+        <meta property="og:url" content="http://app.macha.ai/studio/data/home" />
         <meta name="description" content="Building Interoperable Web" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:description" content="Building Interoperable Web" />
