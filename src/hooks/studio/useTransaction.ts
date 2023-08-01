@@ -18,7 +18,8 @@ const useTransaction = () => {
           setTransactionDetails([
             {
               key: "Block Hash",
-              value: truncateAddress(res.data?.transaction.block_hash),
+              value: res.data?.transaction.block_hash,
+              truncatedValue: truncateAddress(res.data?.transaction.block_hash),
               src: "https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-Block%20hash.svg?updatedAt=1690531997153",
             },
             {
@@ -40,17 +41,20 @@ const useTransaction = () => {
             },
             {
               key: "From",
-              value: truncateAddress(res.data?.transaction.from),
+              value: res.data?.transaction.from,
+              truncatedValue: truncateAddress(res.data?.transaction.from),
               src: "https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-from.svg?updatedAt=1690531994355",
             },
             {
               key: "To",
-              value: truncateAddress(res.data?.transaction.to),
+              value: res.data?.transaction.to,
+              truncatedValue: truncateAddress(res.data?.transaction.to),
               src: "https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-to.svg?updatedAt=1690531993977",
             },
             {
               key: "Txn Hash	",
-              value: truncateAddress(res.data?.transaction.txn_hash),
+              value: res.data?.transaction.txn_hash,
+              truncatedValue: truncateAddress(res.data?.transaction.txn_hash),
               src: "https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-square-Txn%20Hash.svg?updatedAt=1690531994352",
             },
             {

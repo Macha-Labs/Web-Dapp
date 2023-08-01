@@ -105,6 +105,8 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-replyFilled.svg",
   "icon-close":
     "icons/svg/Base_blue_icons/base-blue-cancel.svg?updatedAt=1690532060654",
+  "icon-twitter":
+    "/icons/svg/Base_blue_icons/base-blue-twitter.svg?updatedAt=1690532073157",
   "icon-attachment":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-attachment.svg",
   "icon-send":

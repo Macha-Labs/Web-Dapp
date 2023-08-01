@@ -1,4 +1,4 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
@@ -9,16 +9,14 @@ import TagNative from "@/_ui/tag/TagNative";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
 import TxnDetails from "@/components/studio/TxnDetails";
+import { config } from "@/config";
 import { getItemFromLocal, setItemOnLocal, truncateAddress } from "@/helpers";
-import useContractTxn from "@/hooks/studio/useContractTxn";
 import useMeta from "@/hooks/studio/useMeta";
 import useTransaction from "@/hooks/studio/useTransaction";
-import { contractDataByAddress, transactionData } from "@/service/ApiService";
 import useAuthStore from "@/store/useAuthStore";
-import useMetaStore from "@/store/useMetaStore";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -30,6 +28,7 @@ const SearchResult = () => {
   const hookMeta = useMeta();
   const router = useRouter();
   const hookTxn = useTransaction();
+  const { asPath } = router;
 
   useEffect(() => {
     if ($userApisMap) {
@@ -69,6 +68,29 @@ const SearchResult = () => {
     );
   };
 
+  const TWITTER_INTENT_URL = 'https://twitter.com/intent/tweet'
+  const TWITTER_HANDLE = 'Macha0x'
+  const twitterShareUrl = new URL(TWITTER_INTENT_URL)
+  const twitterSearch = new URLSearchParams({
+    url: `${config.hostedUrl}/${asPath}`,
+    text: "Check out this transaction on Macha",
+    via: TWITTER_HANDLE,
+  }).toString()
+  twitterShareUrl.search = twitterSearch
+
+
+  let shareOptions = [
+    {
+      value: "Twitter",
+      leftIcon: "icon-twitter",
+      onClick: () => {
+        if (router.isReady) {
+          router.push(twitterShareUrl.href)
+        }
+      },
+    },
+  ];
+
   const renderBody = () => {
     return (
       <>
@@ -88,19 +110,17 @@ const SearchResult = () => {
               </Heading>
               {hookTxn.transactionDetails && <TagNative value={hookTxn?.transactionDetails[10].name} variant="grey" />}
             </Box>
-            <ButtonNative
-              textFontSize="h7"
-              size="sm"
-              variant="state_brand"
-              text="Share"
-              height="2rem"
-              marginRight="0px"
-              iconRight={{
-                slug: "icon-base-share",
-                style: { marginLeft: "xxs" },
-                size: "xs",
-              }}
-            />
+            <Box>
+              <ButtonMenu
+                options={shareOptions}
+                size="sm"
+                variant="state_brand"
+                text="Share"
+                height="2rem"
+                marginRight="0px"
+                icon={{ slug: "icon-base-share" }}
+              />
+            </Box>
           </FlexRow>
         </NavBlock>
         <FlexBody>

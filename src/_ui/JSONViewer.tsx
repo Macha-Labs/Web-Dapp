@@ -2,6 +2,7 @@ import { style } from "@/styles/StyledConstants";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import IconBase from "./icons/IconsBase";
+import { truncateString } from "@/helpers";
 
 const JSONViewer = ({ data }: any) => {
   const [expanded, setExpanded] = useState<any>({});
@@ -51,7 +52,7 @@ const JSONViewer = ({ data }: any) => {
                     <Box mr={2}>
                       <Text style={{fontSize: `${style.font.h4}`, fontWeight: `${style.fontWeight.dark}`, color: `${style.color["white.5"]}`}}>{`${nestedKey} : `}</Text>
                     </Box>
-                    <Box><Text style={{fontSize: `${style.font.h4}`}}>{renderData(value, `${key}_${nestedKey}`)}</Text></Box>
+                    <Box><Text style={{fontSize: `${style.font.h4}`}}>{renderData(truncateString(value,25), `${key}_${nestedKey}`)}</Text></Box>
                   </Flex>
                 </li>
               ))}

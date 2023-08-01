@@ -455,7 +455,7 @@ function TxnDetails({
                                   fontWeight: `${style.fontWeight.dark}`,
                                 }}
                               >
-                                {item.value}
+                                {item?.truncatedValue ? item.truncatedValue : item.value}
                               </td>
                             </tr>
                           )

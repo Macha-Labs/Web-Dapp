@@ -6,6 +6,7 @@ export const config = {
   STREAM_SECRET:
     "czw7rguj3bcpzetr5e2fcx366rq26g38rg6taj9x4gr6h8my3sk25msrx7bcr4we",
   url: "https://metawork-server.herokuapp.com",
+  hostedUrl: "https://app.macha.ai",
   // metaServer: "http://localhost:3080",
   metaServer: "https://metawork-sdk.herokuapp.com",
   // url: "http://localhost:3080",

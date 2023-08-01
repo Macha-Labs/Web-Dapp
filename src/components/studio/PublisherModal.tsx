@@ -28,15 +28,20 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
   const hookMacha = useMacha();
   const toast = useToast();
   const $address = useAuthStore((state: any) => state.address);
-  const [lowBalance, setLowBalance] = useState<boolean>(true);
+  const [lowBalance, setLowBalance] = useState<boolean>(false);
   const checkBalance = async () => {
-    const balance = await fetchBalance({
-      address: $address,
-    });
-    if (parseInt(balance.formatted) <= 1) {
-      setLowBalance(true);
-    } else {
-      setLowBalance(false);
+    try {
+      const balance = await fetchBalance({
+        address: $address,
+      });
+      if (parseInt(balance.formatted) <= 1) {
+        setLowBalance(true);
+      } else {
+        setLowBalance(false);
+      }
+    }
+    catch(err){
+      console.log(err)
     }
   };
 
@@ -502,14 +507,14 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                               if (e.target.files && e.target.files[0]) {
                                 const file = e.target.files[0];
                                 console.log("Selected file:", file);
-                                const cid = await deploytoLightHouse(e,hookPublisherCreate.setLoadingCallback);
+                                const cid = await deploytoLightHouse(e, hookPublisherCreate.setLoadingCallback);
                                 hookPublisherCreate.$loadPublisherFormData({
                                   logo: displayImage(cid),
                                 });
                               }
                             }}
                           />
-                          {hookPublisherCreate.ipfsLoading != 0  && <Box width="100%" bgColor="#00040d" height={1} mt={style.margin.sm}>
+                          {hookPublisherCreate.ipfsLoading != 0 && <Box width="100%" bgColor="#00040d" height={1} mt={style.margin.sm}>
                             <Box bgColor="#0f172e" width={`${hookPublisherCreate.ipfsLoading}%`} height={1}>
                             </Box>
                           </Box>}

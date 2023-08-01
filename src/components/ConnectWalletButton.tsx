@@ -183,16 +183,21 @@ export const ConnectWalletButton = (props: any) => {
                         <MenuItem
                           onClick={() => {
                             const checkBalance = async () => {
-                              const balance = await fetchBalance({
-                                address: $address,
-                              });
-                              if (parseInt(balance.formatted) <= 1) {
-                                toast({
-                                  title: "You don't have enough TFIL balance",
-                                  status: "warning",
-                                  duration: 10000,
-                                  position: "top-right",
+                              try{
+                                const balance = await fetchBalance({
+                                  address: $address,
                                 });
+                                if (parseInt(balance.formatted) <= 1) {
+                                  toast({
+                                    title: "You don't have enough TFIL balance",
+                                    status: "warning",
+                                    duration: 10000,
+                                    position: "top-right",
+                                  });
+                                }
+                              }
+                              catch(err){
+                                console.log(err)
                               }
                             };
                             checkBalance();
