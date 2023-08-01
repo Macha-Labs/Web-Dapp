@@ -27,19 +27,19 @@ export const fetchAllMetas = async () => {
   return data;
 };
 
-export const fetchPendingMeta = async (owner: string) => {
-  const response = await fetch(
-    `${config.metaServer}/api/studio/getMeta/${owner}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    }
-  );
-  console.log("form studio service pending metas", response);
-  return response.json();
-};
+// export const fetchPendingMeta = async (owner: string) => {
+//   const response = await fetch(
+//     `${config.metaServer}/api/studio/getMeta/${owner}`,
+//     {
+//       headers: {
+//         "Content-Type": "application/json",
+//         // 'Content-Type': 'application/x-www-form-urlencoded',
+//       },
+//     }
+//   );
+//   console.log("form studio service pending metas", response);
+//   return response.json();
+// };
 
 export const deleteMetaInit = async (meta: any) => {
   if (meta?.state?.status == "PENDING") {

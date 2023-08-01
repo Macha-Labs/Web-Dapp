@@ -22,7 +22,6 @@ import useAuthStore from "@/store/useAuthStore";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 
 const HomeDev = () => {
-
   const publisherModal = useDisclosure();
   const $address = useAuthStore((state: any) => state.address);
   const hookMacha = useMacha();
@@ -44,32 +43,41 @@ const HomeDev = () => {
         borderRadius={style.card.borderRadius.default}
         padding={style.padding.lg}
       >
-        <Heading fontSize={style.font.h3} p={0} lineHeight={style.font.h3}>Developer Dashboard</Heading>
+        <Heading fontSize={style.font.h3} p={0} lineHeight={style.font.h3}>
+          Developer Dashboard
+        </Heading>
         <Text fontSize={style.font.h5}>
-          The ultimate place for developers to explore smart contracts and it&#39;s real time transactions from different blockchain protocols
+          The ultimate place for developers to explore smart contracts and
+          it&#39;s real time transactions from different blockchain protocols
         </Text>
         <Text fontSize={style.font.h5} lineHeight="0rem">
           — all deployable with one click
         </Text>
-        {($address && !hookMacha.isLoading && !hookMacha.publisherExists) && <Box display={"flex"}>
-          <ButtonNative marginTop="xs" onClick={() => {
-            const checkBalance = async () => {
-              const balance = await fetchBalance({
-                address: $address,
-              });
-              if (parseInt(balance.formatted) <= 1) {
-                toast({
-                  title: "You don't have enough TFIL balance",
-                  status: "warning",
-                  duration: 10000,
-                  position: "top-right",
-                });
-              }
-            };
-            checkBalance();
-            publisherModal.onOpen()
-          }} text="Set a Publisher Account" />
-        </Box>}
+        {$address && !hookMacha.isLoading && !hookMacha.publisherExists && (
+          <Box display={"flex"}>
+            <ButtonNative
+              marginTop="xs"
+              onClick={() => {
+                const checkBalance = async () => {
+                  const balance = await fetchBalance({
+                    address: $address,
+                  });
+                  if (parseInt(balance.formatted) <= 1) {
+                    toast({
+                      title: "You don't have enough TFIL balance",
+                      status: "warning",
+                      duration: 10000,
+                      position: "top-right",
+                    });
+                  }
+                };
+                checkBalance();
+                publisherModal.onOpen();
+              }}
+              text="Set a Publisher Account"
+            />
+          </Box>
+        )}
       </Box>
 
       <Box marginTop={style.margin.xl}>
@@ -80,18 +88,17 @@ const HomeDev = () => {
 
       <Flex flexWrap="wrap" paddingLeft={2}>
         <GetStartedCards
-          image="https://ik.imagekit.io/macha/studio/push%20contracts-imagev4.svg?updatedAt=1690795759462"
+          image="https://ik.imagekit.io/macha/studio/push%20contracts-imagev4.svg?updatedAt=1690633848020"
           title="Start Indexing Contracts"
           description="Publish your smart contract to accelerate the growth of your protocol and gain exposure to thriving developer community."
           disabled={$address == null}
           onClick={() => {
-            if($address == null){
-              return
+            if ($address == null) {
+              return;
             }
             if (hookMacha.publisherExists) {
-              contractModal.onOpen()
-            }
-            else {
+              contractModal.onOpen();
+            } else {
               toast({
                 title: "Please register as a publisher",
                 status: "warning",
@@ -103,28 +110,28 @@ const HomeDev = () => {
         />
         <GetStartedCards
           title="Create Functions"
-          image="https://ik.imagekit.io/macha/studio/create%20functions-imagev4.svg?updatedAt=1690795759078"
+          image="https://ik.imagekit.io/macha/studio/create%20functions-imagev4.svg?updatedAt=1690633848012"
           description="Make blazingly fast function calls on contracts to integrate functions in your app with Macha’s SDK."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Abstract Metas"
-          image="https://ik.imagekit.io/macha/studio/abstract%20metas-imagev4.svg?updatedAt=1690795758790"
+          image="https://ik.imagekit.io/macha/studio/abstract%20metas-imagev4.svg?updatedAt=1690633847892"
           description="Enable users to easily discover your metas, such as Lens profiles, ENS, Nfts, and more, through our multi-chain search protocol."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Graph Playground"
-          image="https://ik.imagekit.io/macha/studio/Graph%20playgroundv4.svg?updatedAt=1690795759190"
+          image="https://ik.imagekit.io/macha/studio/Graph%20playgroundv4.svg?updatedAt=1690633847704"
           description="Developers can use Macha’s content graph APIs to access and fetch essential user data related to specific contracts."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Explore Documentation"
-          image="https://ik.imagekit.io/macha/studio/explore%20doc-imagev4.svg?updatedAt=1690795759261"
+          image="https://ik.imagekit.io/macha/studio/explore%20doc-imagev4.svg?updatedAt=1690633847858"
           description="Check out our doc repository and sign up today to access the fastest API for all developers."
           tag="soon"
           disabled={true}
