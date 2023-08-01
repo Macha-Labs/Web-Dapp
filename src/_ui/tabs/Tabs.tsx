@@ -16,13 +16,23 @@ type Props = {
   hrAlign?: string;
 };
 
-const Tabs = ({ options, gstyle, icon, value, onChange, width, hrAlign }: Props) => {
-
+const Tabs = ({
+  options,
+  gstyle,
+  icon,
+  value,
+  onChange,
+  width,
+  hrAlign,
+}: Props) => {
   return (
     <>
       <ul
         className="navbar-nav d-flex align-items-center flex-row mt-2 mt-md-0"
-        style={{ width: `${width ? width : "100%"}`, justifyContent: `${hrAlign? hrAlign: "flex-start"}`}}
+        style={{
+          width: `${width ? width : "100%"}`,
+          justifyContent: `${hrAlign ? hrAlign : "flex-start"}`,
+        }}
       >
         {options ? (
           options?.map((option: any, idx: any) => {
@@ -33,7 +43,7 @@ const Tabs = ({ options, gstyle, icon, value, onChange, width, hrAlign }: Props)
                 }`}
                 key={idx}
                 onClick={() => onChange(option.value)}
-                style={{ marginRight: `${style.margin["md"]}` }}
+                style={{ marginRight: `${style.margin["md"]}`}}
               >
                 <Link
                   className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0  "
@@ -42,7 +52,11 @@ const Tabs = ({ options, gstyle, icon, value, onChange, width, hrAlign }: Props)
                 >
                   <FlexRow>
                     {icon && <IconImage slug={icon.slug} />}
-                    <Text fontSize={style.font.h5} fontWeight={600} className="m-b-0">
+                    <Text
+                      fontSize={style.font.h5}
+                      fontWeight={value == option.value ? "600":"400"}
+                      className="m-b-0"
+                    >
                       {option.value}
                     </Text>
                   </FlexRow>
