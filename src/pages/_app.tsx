@@ -48,7 +48,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="description" content="Building Interoperable Web" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:description" content="Building Interoperable Web" />
-        <meta property="og:image" content="https://ik.imagekit.io/macha/Landing%20page/home/Landing%20Page%20Preview%20-%20V1.svg?updatedAt=1690804157282" />
+        <meta property="og:image" content="https://ik.imagekit.io/macha/Landing%20page/home/Landing%20Page%20Preview%20-%20V2.png?updatedAt=1690883363620" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <!-- Google tag (gtag.js) --> */}
