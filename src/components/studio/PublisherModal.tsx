@@ -18,6 +18,7 @@ import { fetchBalance } from "@wagmi/core";
 import useAuthStore from "@/store/useAuthStore";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 type Props = {
   modal: any;
@@ -29,6 +30,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
   const toast = useToast();
   const $address = useAuthStore((state: any) => state.address);
   const [lowBalance, setLowBalance] = useState<boolean>(false);
+  const router = useRouter()
   const checkBalance = async () => {
     try {
       const balance = await fetchBalance({
@@ -120,6 +122,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     hookPublisherCreate.setClear();
                     await hookMacha.connectMachaPublisher();
                     modal.onClose();
+                    router.reload()
                   }}
                 >
                   Okay

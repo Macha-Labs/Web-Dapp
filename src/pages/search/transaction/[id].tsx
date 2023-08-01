@@ -72,7 +72,7 @@ const SearchResult = () => {
   const TWITTER_HANDLE = 'Macha0x'
   const twitterShareUrl = new URL(TWITTER_INTENT_URL)
   const twitterSearch = new URLSearchParams({
-    url: `${config.hostedUrl}/${asPath}`,
+    url: `${config.hostedUrl}${asPath}`,
     text: "Check out this transaction on Macha",
     via: TWITTER_HANDLE,
   }).toString()
