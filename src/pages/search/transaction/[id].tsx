@@ -48,7 +48,7 @@ const SearchResult = () => {
 
   useEffect(() => {
     if (router.isReady) {
-      hookTxn._fetch(router.query.id)
+      hookTxn._fetch(router.query.id);
     }
   }, [router.query.id]);
 
@@ -68,16 +68,15 @@ const SearchResult = () => {
     );
   };
 
-  const TWITTER_INTENT_URL = 'https://twitter.com/intent/tweet'
-  const TWITTER_HANDLE = 'Macha0x'
-  const twitterShareUrl = new URL(TWITTER_INTENT_URL)
+  const TWITTER_INTENT_URL = "https://twitter.com/intent/tweet";
+  const TWITTER_HANDLE = "Macha0x";
+  const twitterShareUrl = new URL(TWITTER_INTENT_URL);
   const twitterSearch = new URLSearchParams({
     url: `${config.hostedUrl}${asPath}`,
     text: "Check out this transaction on Macha",
     via: TWITTER_HANDLE,
-  }).toString()
-  twitterShareUrl.search = twitterSearch
-
+  }).toString();
+  twitterShareUrl.search = twitterSearch;
 
   let shareOptions = [
     {
@@ -85,7 +84,8 @@ const SearchResult = () => {
       leftIcon: "icon-twitter",
       onClick: () => {
         if (router.isReady) {
-          router.push(twitterShareUrl.href)
+          window.open(twitterShareUrl.href, "_ blank");
+          // router.push()
         }
       },
     },
@@ -101,14 +101,25 @@ const SearchResult = () => {
             router.back();
           }}
 
-        // paddingTop={style.padding["xxxl"]} marginTop={style.margin["xxxl"]}
+          // paddingTop={style.padding["xxxl"]} marginTop={style.margin["xxxl"]}
         >
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <Box style={{ display: "flex" }}>
-              <Heading fontSize={style.font.h5} style={{ marginBottom: "0px", marginRight: `${style.margin.xxs}` }}>
+              <Heading
+                fontSize={style.font.h5}
+                style={{
+                  marginBottom: "0px",
+                  marginRight: `${style.margin.xxs}`,
+                }}
+              >
                 {truncateAddress(id)}
               </Heading>
-              {hookTxn.transactionDetails && <TagNative value={hookTxn?.transactionDetails[10].name} variant="grey" />}
+              {hookTxn.transactionDetails && (
+                <TagNative
+                  value={hookTxn?.transactionDetails[10].name}
+                  variant="grey"
+                />
+              )}
             </Box>
             <Box>
               <ButtonMenu
