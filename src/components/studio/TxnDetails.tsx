@@ -14,6 +14,7 @@ import {
   Divider,
   Image,
   Text,
+  Tooltip,
   color,
   useRadio,
 } from "@chakra-ui/react";
@@ -455,7 +456,31 @@ function TxnDetails({
                                   fontWeight: `${style.fontWeight.dark}`,
                                 }}
                               >
-                                {item?.truncatedValue ? item.truncatedValue : item.value}
+                                <Tooltip
+                                  label="Click To Copy"
+                                  placement="top-start"
+                                >
+                                  <Box>
+                                    <Text
+                                      marginBottom={"0px"}
+                                      style={{ cursor: "pointer" }}
+                                      onClick={() => {
+                                        navigator.clipboard.writeText(
+                                          item?.value
+                                        );
+                                        toast({
+                                          title: `${item.key} copied To Clipboard`,
+                                          status: "success",
+                                          duration: 3000,
+                                        });
+                                      }}
+                                    >
+                                      {item?.truncatedValue
+                                        ? item.truncatedValue
+                                        : item.value}
+                                    </Text>
+                                  </Box>
+                                </Tooltip>
                               </td>
                             </tr>
                           )
