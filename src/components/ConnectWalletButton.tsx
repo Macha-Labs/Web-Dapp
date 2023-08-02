@@ -23,6 +23,8 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { fetchBalance } from "@wagmi/core";
 import CreatePublisherModal from "./studio/PublisherModal";
 import { useDisconnect } from "wagmi";
+import { useEffect, useState } from "react";
+import FlexColumn from "@/_ui/flex/FlexColumn";
 
 export const ConnectWalletButton = (props: any) => {
   const publisherModal = useDisclosure();
@@ -33,6 +35,27 @@ export const ConnectWalletButton = (props: any) => {
   const { disconnect } = useDisconnect();
   const $unload = useAuthStore((state: any) => state.unload);
   // console.log("mobile device detection", window.navigator.userAgent);
+  const [balance, setBalance] = useState<any>(0.00)
+
+  const checkBalance = async () => {
+    try {
+      const balance = await fetchBalance({
+        address: $address,
+      });
+      setBalance(Number(balance.formatted).toFixed(2))
+    }
+    catch (err) {
+      console.log(err)
+    }
+  };
+
+  useEffect(() => {
+    if ($address) {
+      checkBalance();
+    }
+  }, [$address])
+
+
   return (
     <ConnectButton.Custom>
       {({
@@ -106,11 +129,22 @@ export const ConnectWalletButton = (props: any) => {
                 >
                   <Menu>
                     <MenuButton
+                      width="11rem"
+                      height="3rem"
                       variant={"state_default_hover"}
                       as={Button}
                       style={{
                         borderRadius: `${style.card.borderRadius.button}`,
+                        marginLeft: `${style.margin.sm}`
                       }}
+                      leftIcon={
+                        <Image
+                          src="https://ik.imagekit.io/macha/studio%20logo/coloredFilecoin.svg"
+                          alt="txn-icon"
+                          height="1.75rem"
+                          width="1.75rem"
+                        />
+                      }
                       rightIcon={
                         <IconBase
                           slug="icon-chevron-down"
@@ -118,21 +152,31 @@ export const ConnectWalletButton = (props: any) => {
                           style={` marginLeft: "10px" `}
                         />
                       }
-                      height={"2rem"}
                     >
-                      <FlexRow>
+                      <FlexColumn  >
                         {/* <Image src={"../assets/Avatar.svg"} alt="avatar" /> */}
                         <Text
-                          marginLeft={style.button.margin.default}
                           fontSize={"sm"}
                           className="mb-0"
+                          align="left"
+                          fontWeight="700"
+                          width="80%"
+                        >
+                          {balance} TFIL
+                        </Text>
+                        <Text
+                          fontSize={"xs"}
+                          className="mb-0"
+                          color="#8f8f8f"
+                          fontWeight="500"
+                          width="80%"
                         >
                           {truncateAddress($address)}
                         </Text>
-                      </FlexRow>
+                      </FlexColumn>
                     </MenuButton>
                     <MenuList>
-                      <MenuItem onClick={() => {}}>
+                      <MenuItem onClick={() => { }}>
                         <FlexRow hrAlign="space-between">
                           <Image
                             style={{ height: "25px", width: "25px" }}
@@ -181,26 +225,16 @@ export const ConnectWalletButton = (props: any) => {
                       </MenuItem>
                       {!hookMacha.publisherExists && (
                         <MenuItem
-                          onClick={() => {
-                            const checkBalance = async () => {
-                              try{
-                                const balance = await fetchBalance({
-                                  address: $address,
-                                });
-                                if (parseInt(balance.formatted) <= 1) {
-                                  toast({
-                                    title: "You don't have enough TFIL balance",
-                                    status: "warning",
-                                    duration: 10000,
-                                    position: "top-right",
-                                  });
-                                }
-                              }
-                              catch(err){
-                                console.log(err)
-                              }
-                            };
-                            checkBalance();
+                          onClick={async () => {
+                            await checkBalance();
+                            if (balance <= 1) {
+                              toast({
+                                title: "You don't have enough TFIL balance",
+                                status: "warning",
+                                duration: 10000,
+                                position: "top-right",
+                              });
+                            }
                             publisherModal.onOpen();
                           }}
                         >

@@ -133,6 +133,8 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-forward.svg?updatedAt=1680783869134",
   "icon-copy":
     "icons/svg/Base_blue_icons/base-blue-copy.svg?updatedAt=1690532041230",
+  "icon-filecoin":
+    "https://ik.imagekit.io/macha/studio%20logo/coloredFilecoin.svg?updatedAt=1690524145269",
   "icon-qr":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
   "icon-user":
