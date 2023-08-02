@@ -5,6 +5,12 @@ import { useEffect, useState } from "react";
 import useMacha from "./useMacha";
 
 const usePublisherCreate = (modal: any) => {
+
+  // let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+
+  let regex1 = new RegExp("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/");
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
   const toast = useToast();
   const [formStep, setFormStep] = useState<any>(1);
   const [publisherType, setPublisherType] = useState<any>(undefined);
@@ -52,6 +58,15 @@ const usePublisherCreate = (modal: any) => {
         return true;
       }
     } else if (formStep == 5 && publisherType == "Individual") {
+      if(emailRegex.test($publisherFormData.email)==false){
+        toast({
+          title: "Invalid email ",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
+        return false;
+      }
       if (
         $publisherFormData.name == "" ||
         $publisherFormData.name == undefined ||
