@@ -1,13 +1,12 @@
-import { useState } from "react";
 import useAuthStore from "@/store/useAuthStore";
 import { Macha } from "@metaworklabs/macha-dev-sdk/lib";
-import { AuthInterface } from "@metaworklabs/macha-dev-sdk/lib/interfaces";
 import { PublisherDataInterface } from "@metaworklabs/macha-dev-sdk/lib/interfaces/client";
-
-import { fetchSigner, watchAccount } from "@wagmi/core";
-import { ethers } from "ethers";
+import { useState } from "react";
+import { connect } from '@wagmi/core'
+import { InjectedConnector } from '@wagmi/core/connectors/injected'
 import { useEffect } from "react";
-import { useSigner } from "wagmi";
+import { useAccount, useSigner } from "wagmi";
+import { filecoinCalibration } from "wagmi/chains";
 
 const useMacha = () => {
   // const $loadMacha = useMachaStore((state: any) => state.loadMacha);
@@ -17,6 +16,26 @@ const useMacha = () => {
   const $address = useAuthStore((state: any) => state.address);
   let macha: Macha;
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const {isConnected} = useAccount()
+
+  useEffect(() => {
+    const _fetch = async () => {
+      if(window !== undefined){
+        const res = window.localStorage.getItem("wagmi.connected") ? true : false
+        if(res == true){
+          console.log("reconnecting wallet")
+          if(!isConnected){
+            const result = await connect({
+              connector: new InjectedConnector({
+                chains: [filecoinCalibration]
+              }),
+            })
+          }
+        }
+      }
+    }
+    _fetch()
+  },[])
 
   useEffect(() => {
     connectMachaPublisher();

@@ -176,7 +176,14 @@ export const ConnectWalletButton = (props: any) => {
                       </FlexColumn>
                     </MenuButton>
                     <MenuList>
-                      <MenuItem onClick={() => { }}>
+                      <MenuItem onClick={() => {
+                        navigator.clipboard.writeText($address);
+                        toast({
+                          title: "Copied To Clipboard",
+                          status: "success",
+                          duration: 3000,
+                        });
+                      }}>
                         <FlexRow hrAlign="space-between">
                           <Image
                             style={{ height: "25px", width: "25px" }}

@@ -17,7 +17,7 @@ const JSONViewer = ({ data }: any) => {
   const renderData = (data: any, key: any) => {
     if (Array.isArray(data)) {
       return (
-        <ul>
+        <ul style={{paddingLeft: "0px"}}>
           {data.map((item, index) => (
             <li
               key={index}
@@ -30,16 +30,19 @@ const JSONViewer = ({ data }: any) => {
       );
     } else if (typeof data === "object" && data !== null) {
       return (
-        <div style={{display: "flex", flexDirection: "row"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <span onClick={() => handleToggle(key)} style={{ cursor: "pointer" }}>
             {expanded[key] ? (
               <IconBase slug="icon-chevron-down" size="md" />
             ) : (
+            <Box style={{display: "flex", alignItems: "center"}}>
               <IconBase slug="icon-chevron-next" size="md" />
+              <Text marginBottom={0}>name: {data?.name}</Text>
+            </Box>
             )}
           </span>
           {expanded[key] && (
-            <ul className="testing-1" style={{ paddingLeft: "0", marginLeft: `${style.margin.xxs}` }}>
+            <ul className="testing-1" style={{ }}>
               {Object.entries(data).map(([nestedKey, value]) => (
                 <li
                   key={nestedKey}
@@ -50,9 +53,9 @@ const JSONViewer = ({ data }: any) => {
                 >
                   <Flex justify="flex-start">
                     <Box mr={2}>
-                      <Text style={{fontSize: `${style.font.h4}`, fontWeight: `${style.fontWeight.dark}`, color: `${style.color["white.5"]}`}}>{`${nestedKey} : `}</Text>
+                      <Text style={{ fontSize: `${style.font.h5}`, fontWeight: `${style.fontWeight.dark}`, color: `${style.color["white.5"]}` }}>{`${nestedKey} : `}</Text>
                     </Box>
-                    <Box><Text style={{fontSize: `${style.font.h4}`}}>{renderData(truncateString(value,25), `${key}_${nestedKey}`)}</Text></Box>
+                    <Box><Text style={{ fontSize: `${style.font.h5}` }}>{renderData(truncateString(value, 25), `${key}_${nestedKey}`)}</Text></Box>
                   </Flex>
                 </li>
               ))}

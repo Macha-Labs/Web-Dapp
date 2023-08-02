@@ -22,11 +22,11 @@ export type AuthContextType = {
 export const AuthContext = createContext<AuthContextType>({
   signer: null,
   address: null,
-  connectWallet: () => {},
-  disconnectWallet: () => {},
+  connectWallet: () => { },
+  disconnectWallet: () => { },
   user: null,
-  setUser: (param) => {},
-  isConnected: () => {},
+  setUser: (param) => { },
+  isConnected: () => { },
 });
 
 const AuthProvider = ({ children }: any) => {

@@ -24,6 +24,11 @@ const Custom404 = () => {
         backgroundPosition="top center"
         paddingX={style.padding.sm}
       >
+        <Image
+          src="https://ik.imagekit.io/macha/Metawork%20Logo/macha-image-text-dark%20theme.svg?updatedAt=1690800630857"
+          width={"10rem"}
+          marginBottom={style.margin.xxl}
+        />
         <Text
           marginBottom={style.margin.xl}
           fontSize={style.font.h3}
