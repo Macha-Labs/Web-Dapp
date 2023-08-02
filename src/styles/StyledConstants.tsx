@@ -102,7 +102,7 @@ export const darkStyle = {
     },
     border: {
       default: "1px solid #0a1020",
-      hover: "2px solid rgba(15,23,46,1)",
+      hover: "1px solid #285ddf",
       meta: "1px solid #197cec",
       mcard: "1px solid #353c54",
       contract: "1px solid #061133",
