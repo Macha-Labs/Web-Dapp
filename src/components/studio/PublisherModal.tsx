@@ -125,7 +125,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     router.reload()
                   }}
                 >
-                  Okay
+                  Continue to Dashboard
                 </ButtonNative>
               </Box>
             )}
@@ -658,8 +658,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       </Text>
                     </Box>
                     <Box>
-                      <Text textAlign="center" style={{}}>
+                      <Text textAlign="center">
                         Your publisher account has been created successfully.
+                      </Text>
+                      <Text textAlign="center">
+                        Now you can create contracts on Macha.
                       </Text>
                     </Box>
                   </Box>

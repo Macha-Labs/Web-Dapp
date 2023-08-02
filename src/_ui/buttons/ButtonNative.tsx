@@ -1,4 +1,4 @@
-import { Button, Text } from "@chakra-ui/react";
+import { Button, Text, background } from "@chakra-ui/react";
 
 import { style as gStyle } from "../../styles/StyledConstants";
 import IconBase from "../icons/IconsBase";
@@ -27,6 +27,9 @@ type Props = {
   textFontSize?: string;
   height?: string;
   disabled?: boolean;
+  boxShadowHover?: any
+  border?: any
+  backgroundColorHover?: any
 };
 
 export default function ButtonNative({
@@ -52,10 +55,14 @@ export default function ButtonNative({
   borderRadius,
   textFontSize,
   height,
-  disabled
+  disabled,
+  boxShadowHover,
+  border,
+  backgroundColorHover
 }: Props) {
   return (
     <Button
+      _hover={{boxShadow: `${boxShadowHover}`, backgroundColor: `${backgroundColorHover}`,color: `#004ad9 !important`}}
       isDisabled={disabled ? disabled : false}
       size={size ? size : "md"}
       variant={variant}
@@ -77,6 +84,7 @@ export default function ButtonNative({
       paddingBottom={`${paddingBottom ? gStyle.padding[paddingBottom] : "12px"
         }`}
       borderColor="#14244b"
+      border={border}
       height={height ? height : "3rem"}
     >
       {iconLeft && (
@@ -91,6 +99,7 @@ export default function ButtonNative({
           className="mb-0"
           fontSize={textFontSize ? gStyle.font[textFontSize] : "1rem"}
           marginRight={marginRight ? marginRight : gStyle.margin["xxs"]}
+          color="inherit"
         >
           {text}
         </Text>

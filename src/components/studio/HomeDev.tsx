@@ -56,6 +56,9 @@ const HomeDev = () => {
         {$address && !hookMacha.isLoading && !hookMacha.publisherExists && (
           <Box display={"flex"}>
             <ButtonNative
+              boxShadowHover="4px 4px 24px rgba(0,0,0,0.35)"
+              backgroundColorHover="#A0CDFF"
+              border="1px solid #fff"
               marginTop="xs"
               onClick={() => {
                 const checkBalance = async () => {
