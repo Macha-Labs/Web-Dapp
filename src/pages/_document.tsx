@@ -33,18 +33,24 @@ export default function Document() {
             backgroundPosition="top center"
             paddingX={style.padding.sm}
           >
+            <Image
+              src="https://ik.imagekit.io/macha/Metawork%20Logo/macha-image-text-dark%20theme.svg?updatedAt=1690800630857"
+              width={"10rem"}
+              marginBottom={style.margin.xxl}
+            />
+            <Image
+              src="https://ik.imagekit.io/macha/studio/studio%20mobile%20empty%20state.svg?updatedAt=1690639033750"
+              width={"15rem"}
+              // marginTop={style.margin.xxl}
+            />
             <Text
-              marginBottom={style.margin.xl}
-              fontSize={style.font.h3}
+              marginBottom={style.margin.sm}
+              marginTop={style.margin.xl}
+              fontSize={style.font.h5}
               textAlign={"center"}
             >
               Thanks for visiting!
             </Text>
-            <Image
-              src="https://ik.imagekit.io/macha/studio/studio%20mobile%20empty%20state.svg?updatedAt=1690639033750"
-              width={"15rem"}
-              marginBottom={style.margin.xxl}
-            />
             <Text
               fontSize={style.font.h4}
               textAlign={"center"}
@@ -56,7 +62,7 @@ export default function Document() {
               fontSize={style.font.h4}
               color={style.color["white.5"]}
               textAlign={"center"}
-              marginBottom={style.margin.xl}
+              // marginBottom={style.margin.lg}
             >
               Good news- our mobile app is in the works and will be available
               soon.
