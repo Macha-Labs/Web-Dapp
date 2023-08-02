@@ -63,7 +63,7 @@ const ButtonMenu = ({
             setIconOrientation(!iconOrientation);
           }}
           isDisabled={isDisabled}
-          variant={"state_default_hover"}
+          variant={variant ? variant : "state_default_hover"}
           as={Button}
           style={{
             borderRadius: `${style.card.borderRadius.button}`,

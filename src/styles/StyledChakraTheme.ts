@@ -44,7 +44,7 @@ const theme = extendTheme({
       },
       ".chakra-modal__footer": {
         // background: `${style.modal.bg.contractModal}`,
-        borderTop: `${style.modal.border.default} !important`,
+        // borderTop: `${style.modal.border.default} !important`,
       },
       ".chakra-modal__overlay": {
         opacity: "0.9 !important",

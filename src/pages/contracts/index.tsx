@@ -76,10 +76,10 @@ const DashBoard = () => {
                 cursor={"not-allowed"}
                 style={{ display: "flex", flexDirection: "row" }}
               >
-                <Text className="mb-0" color="#C6C6C6" marginRight="2px">
+                <Text className="mb-0" fontSize={style.font.h5} color="#C6C6C6" marginRight={style.margin.xxs}>
                   Functions
                 </Text>
-                <TagNative value="soon" size="sm" />
+                <TagNative value="soon"  lineHeight="0.8rem" size="sm" />
               </Box>
             </FlexRow>
 

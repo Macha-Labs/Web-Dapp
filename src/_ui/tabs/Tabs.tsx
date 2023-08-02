@@ -53,7 +53,7 @@ const Tabs = ({
                   <FlexRow>
                     {icon && <IconImage slug={icon.slug} />}
                     <Text
-                      fontSize={style.font.h5}
+                      fontSize={value == option.value ? style.font.h4 : style.font.h5}
                       fontWeight={value == option.value ? "600" : "400"}
                       bgGradient={
                         value == option.value

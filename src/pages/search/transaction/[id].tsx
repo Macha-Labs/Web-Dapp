@@ -125,9 +125,8 @@ const SearchResult = () => {
               <ButtonMenu
                 options={shareOptions}
                 size="sm"
-                variant="state_brand"
                 text="Share"
-                height="2rem"
+                height="2.5rem"
                 marginRight="0px"
                 icon={{ slug: "icon-base-share" }}
               />

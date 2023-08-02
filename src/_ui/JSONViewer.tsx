@@ -37,7 +37,7 @@ const JSONViewer = ({ data }: any) => {
             ) : (
             <Box style={{display: "flex", alignItems: "center"}}>
               <IconBase slug="icon-chevron-next" size="md" />
-              <Text marginBottom={0}>name: {data?.name}</Text>
+              <Text style={{ fontSize: `${style.font.h5}`}} marginLeft={style.margin.xxs} marginBottom={0}>{data?.name}</Text>
             </Box>
             )}
           </span>

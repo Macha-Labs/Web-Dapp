@@ -53,7 +53,7 @@ const HomeDev = () => {
         <Text fontSize={style.font.h5} lineHeight="0rem">
           — all deployable with one click
         </Text>
-        {!hookMacha.isLoading && !hookMacha.publisherExists && (
+        {!hookMacha.isLoading && !hookMacha.publisherExists ? (
           <Box display={"flex"}>
             <ButtonNative
               textColorHover="#004ad9"
@@ -95,7 +95,12 @@ const HomeDev = () => {
               text="Set a Publisher Account"
             />
           </Box>
-        )}
+        ) : <Box display={"flex"}>
+          <Button
+            style={{color: "#004ad9", backgroundColor: "#A0CDFF",border: "1px solid #fff", marginTop: `${style.margin.xs}`, cursor: "default"}}
+            onClick={() => {}}
+          >You are a publisher</Button>
+        </Box>}
       </Box>
 
       <Box marginTop={style.margin.xl}>
