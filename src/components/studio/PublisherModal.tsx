@@ -92,7 +92,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
             {hookPublisherCreate.formStep != 4 &&
               hookPublisherCreate.formStep != 5 && (
                 <Box>
-                  <Text className="mb-0">Become a Publisher </Text>
+                  <Text className="mb-0">Create a Publisher Account</Text>
                 </Box>
               )}
             {hookPublisherCreate.formStep != 6 &&
@@ -109,22 +109,35 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   width: "100%",
                   display: "flex",
                   flexDirection: "row",
-                  justifyContent: "center",
+                  justifyContent: "space-between",
                 }}
               >
                 <ButtonNative
+                  variant="state_default_hover"
+                  height="2rem"
+                  width="5.5rem"
+                  marginTop={style.margin["lg"]}
+                  disabled={hookPublisherCreate.isTransactionPending}
+                  onClick={() => {
+                    hookPublisherCreate.setClear();
+                    modal.onClose();
+                  }}
+                >
+                  Skip
+                </ButtonNative>
+                <ButtonNative
                   variant="state_brand"
                   height="2rem"
-                  width="5rem"
+                  width="5.5rem"
                   marginTop={style.margin["lg"]}
                   onClick={async () => {
                     hookPublisherCreate.setClear();
                     await hookMacha.connectMachaPublisher();
                     modal.onClose();
-                    router.reload();
+                    router.push('/contracts')
                   }}
                 >
-                  Continue to Dashboard
+                  Create
                 </ButtonNative>
               </Box>
             )}
@@ -145,7 +158,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     <ButtonNative
                       variant="state_default_hover"
                       height="2rem"
-                      width="5rem"
+                      width="5.5rem"
                       marginTop={style.margin["lg"]}
                       onClick={hookPublisherCreate.prevFormStep}
                     >
@@ -159,7 +172,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       <ButtonNative
                         variant="state_default_hover"
                         height="2rem"
-                        width="5rem"
+                        width="5.5rem"
                         marginTop={style.margin["lg"]}
                         onClick={() => modal.onClose()}
                       >
@@ -189,7 +202,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     <ButtonNative
                       variant="state_brand"
                       height="2rem"
-                      width="5rem"
+                      width="5.5rem"
                       marginTop={style.margin["lg"]}
                       onClick={hookPublisherCreate.nextFormStep}
                       disabled={lowBalance}
@@ -212,7 +225,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   <ButtonNative
                     variant="state_brand"
                     height="2rem"
-                    width="5rem"
+                    width="5.5rem"
                     marginTop={style.margin["lg"]}
                     onClick={() => {
                       hookPublisherCreate.nextFormStep();
@@ -226,7 +239,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   <ButtonNative
                     variant="state_default_hover"
                     height="2rem"
-                    width="5rem"
+                    width="5.5rem"
                     marginTop={style.margin["lg"]}
                     disabled={hookPublisherCreate.isTransactionPending}
                     onClick={() => {
@@ -242,7 +255,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   <ButtonNative
                     variant="state_brand"
                     height="2rem"
-                    width="5rem"
+                    width="5.5rem"
                     marginTop={style.margin["lg"]}
                     onClick={hookPublisherCreate.createPublisher}
                     disabled={
@@ -259,43 +272,48 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
       >
         <FlexColumn width="100%" hrAlign="space-between" height="100%">
           {hookPublisherCreate.isTranactionPending && (
-            <FlexRow height="100px">
-              <Loader size="lg" />
-            </FlexRow>
+            <FlexColumn height="12rem">
+            <Loader size="lg" />
+            <Box marginTop={style.margin.lg}>
+              <Text textAlign="center" mb={0} color="whiteAlpha.800">
+                Please wait for the transaction to confirm.
+              </Text>
+              <Text textAlign="center" marginBottom={style.margin.lg} color="whiteAlpha.800">
+                This usually takes a few minutes.
+              </Text>
+            </Box>
+          </FlexColumn>
           )}
           {hookPublisherCreate.isTransactionPending ? (
-            <FlexRow height="100px">
+            <FlexColumn height="12rem">
               <Loader size="lg" />
-            </FlexRow>
+              <Box marginTop={style.margin.lg}>
+                <Text textAlign="center" mb={0} color="whiteAlpha.800">
+                  Please wait for the transaction to confirm.
+                </Text>
+                <Text textAlign="center" marginBottom={style.margin.lg} color="whiteAlpha.800">
+                  This usually takes a few minutes.
+                </Text>
+              </Box>
+            </FlexColumn>
           ) : (
             <Box width="100%">
-              <FlexColumn hrAlign="space-between" height="55%">
+              <FlexColumn hrAlign="space-between">
                 {hookPublisherCreate.formStep == 1 && (
                   <>
                     <Box
-                      paddingTop={style.padding.xl}
+                      paddingTop={style.padding.xxs}
                       paddingBottom={style.padding.xl}
+                      width="100%"
+                      height="100%"
                     >
+                      <Text>
+                        As a publisher you will get access to the following on Macha Studio
+                      </Text>
                       <Image
-                        src="https://ik.imagekit.io/macha/icons/svg/Dark_icons/dark-Txn%20Hash.svg?updatedAt=1690622510375"
+                        src="https://ik.imagekit.io/macha/studio/publisher%20welcome.svg?updatedAt=1690979405890"
                         alt="txn-icon"
-                        height="6rem"
                       />
-                    </Box>
-                    <Box>
-                      <Text
-                        style={{
-                          fontWeight: `${style.fontWeight.dark}`,
-                          fontSize: `${style.font.h4}`,
-                        }}
-                      >
-                        Welcome to Dashboard
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Text textAlign="center" style={{ color: "grey" }}>
-                        Register to upload your contract for indexing
-                      </Text>
                     </Box>
                   </>
                 )}
@@ -380,11 +398,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           padding: `${style.padding.md}`,
                           display: "flex",
                           alignItems: "center",
-                          border: `${
-                            hookPublisherCreate.publisherType == "Individual"
-                              ? "1px solid #197cec"
-                              : style.card.border.contract
-                          }`,
+                          border: `${hookPublisherCreate.publisherType == "Individual"
+                            ? "1px solid #197cec"
+                            : style.card.border.contract
+                            }`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -421,11 +438,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           cursor: "pointer",
                         }}
                         style={{
-                          border: `${
-                            hookPublisherCreate.publisherType == "Organization"
-                              ? "1px solid #197cec"
-                              : style.card.border.contract
-                          }`,
+                          border: `${hookPublisherCreate.publisherType == "Organization"
+                            ? "1px solid #197cec"
+                            : style.card.border.contract
+                            }`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",
@@ -693,25 +709,26 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   >
                     <Box
                       paddingTop={style.padding.xl}
-                      paddingBottom={style.padding.xl}
+                      paddingBottom={style.padding.md}
                     >
                       <IconBase slug="icon-congrats" size="3xl" />
                     </Box>
                     <Box>
                       <Text
                         style={{
-                          fontWeight: `${style.fontWeight.dark}`,
-                          fontSize: `${style.font.h4}`,
+                          fontWeight: `700`,
+                          fontSize: `${style.font.h2}`,
+                          marginBottom: "1rem"
                         }}
                       >
                         Congrats!
                       </Text>
                     </Box>
                     <Box>
-                      <Text textAlign="center">
+                      <Text textAlign="center" mb={0} color="whiteAlpha.800">
                         Your publisher account has been created successfully.
                       </Text>
-                      <Text textAlign="center">
+                      <Text textAlign="center" marginBottom={style.margin.lg} color="whiteAlpha.800">
                         Now you can create contracts on Macha.
                       </Text>
                     </Box>

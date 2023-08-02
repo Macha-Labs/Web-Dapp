@@ -53,7 +53,7 @@ const HomeDev = () => {
         <Text fontSize={style.font.h5} lineHeight="0rem">
           — all deployable with one click
         </Text>
-        {$address && !hookMacha.isLoading && !hookMacha.publisherExists && (
+        {!hookMacha.isLoading && !hookMacha.publisherExists && (
           <Box display={"flex"}>
             <ButtonNative
               textColorHover="#004ad9"
@@ -80,6 +80,15 @@ const HomeDev = () => {
                     console.log(err)
                   }
                 };
+                if ($address == null) {
+                  toast({
+                    title: "Please connect your wallet.",
+                    status: "info",
+                    duration: 3000,
+                    position: "top-right",
+                  });
+                  return;
+                }
                 checkBalance();
                 publisherModal.onOpen();
               }}

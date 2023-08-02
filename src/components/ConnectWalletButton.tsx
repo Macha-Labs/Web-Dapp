@@ -92,7 +92,7 @@ export const ConnectWalletButton = (props: any) => {
                 return (
                   <Button
                     className="w-100"
-                    height="2rem"
+                    height="3rem"
                     size={props.size}
                     variant="state_brand"
                     onClick={openConnectModal}
