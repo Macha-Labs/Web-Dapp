@@ -175,11 +175,14 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         height="2rem"
                         width="7rem"
                         marginTop={style.margin["lg"]}
+                        onClick={() => {
+                          window.open(
+                            "https://faucet.calibration.fildev.network/funds.html",
+                            "_blank"
+                          );
+                        }}
                       >
-                        <Link href="https://faucet.calibration.fildev.network/funds.html" target="_blank">
-                          {" "}
-                          Get TFIL
-                        </Link>
+                        Get TFIL
                       </ButtonNative>
                     </>
                   ) : (

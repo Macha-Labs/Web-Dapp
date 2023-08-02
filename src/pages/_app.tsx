@@ -30,7 +30,7 @@ const { connectors } = getDefaultWallets({
 });
 
 const wagmiClient = createClient({
-  autoConnect: true,
+  autoConnect: false,
   connectors,
   provider,
 });
@@ -44,11 +44,17 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:title" content="Macha" />
         <meta name="twitter:site" content="@Macha0x" />
         <meta name="twitter:card" content="summary" />
-        <meta property="og:url" content="http://app.macha.ai/studio/data/home" />
+        <meta
+          property="og:url"
+          content="http://app.macha.ai/studio/data/home"
+        />
         <meta name="description" content="Building Interoperable Web" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:description" content="Building Interoperable Web" />
-        <meta property="og:image" content="https://ik.imagekit.io/macha/Landing%20page/home/Landing%20Page%20Preview%20-%20V2.png?updatedAt=1690883363620" />
+        <meta
+          property="og:image"
+          content="https://ik.imagekit.io/macha/Landing%20page/home/Landing%20Page%20Preview%20-%20V2.png?updatedAt=1690883363620"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <!-- Google tag (gtag.js) --> */}
