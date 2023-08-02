@@ -30,6 +30,7 @@ type Props = {
   boxShadowHover?: any
   border?: any
   backgroundColorHover?: any
+  textColorHover?: any
 };
 
 export default function ButtonNative({
@@ -58,11 +59,12 @@ export default function ButtonNative({
   disabled,
   boxShadowHover,
   border,
-  backgroundColorHover
+  backgroundColorHover,
+  textColorHover
 }: Props) {
   return (
     <Button
-      _hover={{boxShadow: `${boxShadowHover}`, backgroundColor: `${backgroundColorHover}`,color: `#004ad9 !important`}}
+      _hover={{boxShadow: `${boxShadowHover}`, backgroundColor: `${backgroundColorHover}`,color: `${textColorHover}`}}
       isDisabled={disabled ? disabled : false}
       size={size ? size : "md"}
       variant={variant}
