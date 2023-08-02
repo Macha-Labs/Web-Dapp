@@ -43,7 +43,7 @@ const Tabs = ({
                 }`}
                 key={idx}
                 onClick={() => onChange(option.value)}
-                style={{ marginRight: `${style.margin["md"]}`}}
+                style={{ marginRight: `${style.margin["md"]}` }}
               >
                 <Link
                   className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0  "
@@ -54,7 +54,13 @@ const Tabs = ({
                     {icon && <IconImage slug={icon.slug} />}
                     <Text
                       fontSize={style.font.h5}
-                      fontWeight={value == option.value ? "600":"400"}
+                      fontWeight={value == option.value ? "600" : "400"}
+                      bgGradient={
+                        value == option.value
+                          ? "linear(100.07deg, #197cec 100%, #004889 100%)"
+                          : "linear(100.07deg, #fff 100%, #fff 100%)"
+                      }
+                      bgClip="text"
                       className="m-b-0"
                     >
                       {option.value}

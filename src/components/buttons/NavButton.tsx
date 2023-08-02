@@ -50,7 +50,7 @@ const NavButton = ({ marginLeft, marginRight, width }: Props) => {
       width={width ? width : "100%"}
       text={
         asPath == "/"
-          ? "Search"
+          ? "Dev Studio"
           : asPath == "/studio/nft"
           ? "NFT Studio"
           : "Dev Studio"
