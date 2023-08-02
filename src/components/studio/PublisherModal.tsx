@@ -124,7 +124,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     router.reload();
                   }}
                 >
-                  Okay
+                  Continue to Dashboard
                 </ButtonNative>
               </Box>
             )}
@@ -175,11 +175,14 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         height="2rem"
                         width="7rem"
                         marginTop={style.margin["lg"]}
+                        onClick={() => {
+                          window.open(
+                            "https://faucet.calibration.fildev.network/funds.html",
+                            "_blank"
+                          );
+                        }}
                       >
-                        <Link href="https://faucet.calibration.fildev.network/funds.html" target="_blank">
-                          {" "}
-                          Get TFIL
-                        </Link>
+                        Get TFIL
                       </ButtonNative>
                     </>
                   ) : (
@@ -705,8 +708,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       </Text>
                     </Box>
                     <Box>
-                      <Text textAlign="center" style={{}}>
+                      <Text textAlign="center">
                         Your publisher account has been created successfully.
+                      </Text>
+                      <Text textAlign="center">
+                        Now you can create contracts on Macha.
                       </Text>
                     </Box>
                   </Box>

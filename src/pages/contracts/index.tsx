@@ -43,18 +43,17 @@ const DashBoard = () => {
   const dashboardNav: any = [
     {
       value: "Home",
-      href: "/studio/data/home",
+      href: "/",
     },
     {
       value: "Contracts",
-      href: "/studio/data/contract",
+      href: "/contracts",
     },
     // {
     //   value: "Functions",
     //   href: "",
     // },
   ];
-
 
   const renderContracts = () => {
     return <>{<ContractList />}</>;
@@ -84,7 +83,7 @@ const DashBoard = () => {
               </Box>
             </FlexRow>
 
-            {($address != null && hookMacha.publisherExists) && (
+            {$address != null && hookMacha.publisherExists && (
               <ButtonNative
                 size="sm"
                 text="Create Contract"
@@ -117,9 +116,7 @@ const DashBoard = () => {
         </NavBlock>
 
         <FlexBody>
-          <Box style={{ overflow: "hidden" }}>
-            {renderContracts()}
-          </Box>
+          <Box style={{ overflow: "hidden" }}>{renderContracts()}</Box>
         </FlexBody>
         <ContractCreateModal
           modal={contractModal}
@@ -133,7 +130,7 @@ const DashBoard = () => {
   const renderNav = () => {
     return (
       <NavTop
-        centerElem={<InputSearch onChange={() => { }} value="" />}
+        centerElem={<InputSearch onChange={() => {}} value="" />}
         rightElem={
           <FlexRow width="fit-content">
             {$address && <NavButton />}

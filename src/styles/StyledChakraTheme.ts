@@ -180,7 +180,7 @@ const theme = extendTheme({
           shadow: `${style.card.shadow.default}`,
           _hover: {
             background: `${style.card.bg.hover}`,
-            border: `1px solid ${style.card.border.hover}`,
+            border: `${style.card.border.hover}`,
             shadow: `${style.card.shadow.hover}`,
           },
         },

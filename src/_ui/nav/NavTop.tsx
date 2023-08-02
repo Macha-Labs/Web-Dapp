@@ -24,7 +24,7 @@ const NavTop = ({ rightElem, centerElem }: Props) => {
       >
         <FlexRow width="100%" hrAlign="space-between" vrAlign="center">
           <FlexRow vrAlign="center" hrAlign="flex-start">
-            <Link href="/studio/data/home">
+            <Link href="/">
               <Image
                 className="headerLogo"
                 src="/assets/Macha-logo-text.svg"

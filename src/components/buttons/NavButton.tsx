@@ -44,13 +44,13 @@ const NavButton = ({ marginLeft, marginRight, width }: Props) => {
   return (
     <ButtonMenu
       isDisabled={true}
-      height="2rem"
+      height="3rem"
       marginLeft={marginLeft}
       marginRight={marginRight}
       width={width ? width : "100%"}
       text={
         asPath == "/"
-          ? "Search"
+          ? "Dev Studio"
           : asPath == "/studio/nft"
           ? "NFT Studio"
           : "Dev Studio"
