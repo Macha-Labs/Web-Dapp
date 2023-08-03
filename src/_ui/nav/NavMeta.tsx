@@ -37,7 +37,7 @@ const NavMeta = ({ rightElem, centerElem }: Props) => {
         >
           <FlexRow hrAlign="space-between" vrAlign="center">
             <FlexRow vrAlign="center" hrAlign="flex-start">
-              <Link href="/explorer">
+              <Link href="/">
                 <Image
                   className="headerLogo"
                   src="/assets/Macha-logo-text.svg"

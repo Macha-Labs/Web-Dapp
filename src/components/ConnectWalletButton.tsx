@@ -220,7 +220,7 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showStudio && (
                         <MenuItem
                           onClick={async () => {
-                            router.push("/");
+                            router.push("/studio");
                           }}
                         >
                           <FlexRow hrAlign="space-between">
@@ -238,7 +238,7 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showExplorer && (
                         <MenuItem
                           onClick={async () => {
-                            router.push("/explorer");
+                            router.push("/");
                           }}
                         >
                           <FlexRow hrAlign="space-between">

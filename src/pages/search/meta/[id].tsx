@@ -70,7 +70,7 @@ const Meta = () => {
           {/* <CardNative height="fit-content" width="100%"></CardNative> */}
           <MCard
             title={hookMeta?.metaData?.meta?.data?.modified?.meta_title}
-            image={hookMeta?.metaData?.meta?.data?.modified?.meta_media}
+            image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
             description={
               hookMeta?.metaData?.meta?.data?.modified?.meta_description
             }

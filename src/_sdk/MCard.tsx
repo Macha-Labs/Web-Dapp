@@ -93,6 +93,7 @@ const MCard = ({
             className="m-b-0"
             fontSize={"md"}
             marginTop={gStyle.margin["xxs"]}
+            width={"15rem"}
           >
             {image
               ? truncateString(description, 200)
