@@ -30,7 +30,13 @@ const CopyableRow = ({ parameter, value, marginTop }: Props) => {
         </Heading>
 
         <FlexRow hrAlign="flex-end" vrAlign="flex-start" width="80%">
-          <Text mb="0" mr={style.margin.sm} width={"90%"}>
+          <Text
+            mb="0"
+            mr={style.margin.sm}
+            width={"90%"}
+            textAlign={"right"}
+            color={style.color["white.5"]}
+          >
             {value}
           </Text>
           <Box width={"5%"}>

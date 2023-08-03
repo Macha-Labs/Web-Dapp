@@ -25,6 +25,7 @@ import CreatePublisherModal from "./studio/PublisherModal";
 import { useDisconnect } from "wagmi";
 import { useEffect, useState } from "react";
 import FlexColumn from "@/_ui/flex/FlexColumn";
+import { useRouter } from "next/router";
 
 export const ConnectWalletButton = (props: any) => {
   const publisherModal = useDisclosure();
@@ -35,6 +36,7 @@ export const ConnectWalletButton = (props: any) => {
   const { disconnect } = useDisconnect();
   const $unload = useAuthStore((state: any) => state.unload);
   // console.log("mobile device detection", window.navigator.userAgent);
+  const router = useRouter();
   const [balance, setBalance] = useState<any>(0.0);
 
   const checkBalance = async () => {
@@ -215,6 +217,42 @@ export const ConnectWalletButton = (props: any) => {
                           </FlexRow>
                         </FlexRow>
                       </MenuItem> */}
+                      {props?.showStudio && (
+                        <MenuItem
+                          onClick={async () => {
+                            router.push("/");
+                          }}
+                        >
+                          <FlexRow hrAlign="space-between">
+                            <IconImage slug="icon-deploy" size="sm" />
+                            <FlexRow
+                              hrAlign="flex-start"
+                              width="90%"
+                              marginLeft={"sm"}
+                            >
+                              Visit Studio
+                            </FlexRow>
+                          </FlexRow>
+                        </MenuItem>
+                      )}
+                      {props?.showExplorer && (
+                        <MenuItem
+                          onClick={async () => {
+                            router.push("/explorer");
+                          }}
+                        >
+                          <FlexRow hrAlign="space-between">
+                            <IconImage slug="icon-deploy" size="sm" />
+                            <FlexRow
+                              hrAlign="flex-start"
+                              width="90%"
+                              marginLeft={"sm"}
+                            >
+                              Visit Explorer
+                            </FlexRow>
+                          </FlexRow>
+                        </MenuItem>
+                      )}
                       <MenuItem
                         onClick={() => {
                           $unload();
@@ -232,33 +270,35 @@ export const ConnectWalletButton = (props: any) => {
                           </FlexRow>
                         </FlexRow>
                       </MenuItem>
-                      {!hookMacha.publisherExists && (
-                        <MenuItem
-                          onClick={async () => {
-                            await checkBalance();
-                            if (balance <= 1) {
-                              toast({
-                                title: "You don't have enough TFIL balance",
-                                status: "warning",
-                                duration: 10000,
-                                position: "top-right",
-                              });
-                            }
-                            publisherModal.onOpen();
-                          }}
-                        >
-                          <FlexRow hrAlign="space-between">
-                            <IconImage slug="icon-user" size="sm" />
-                            <FlexRow
-                              hrAlign="flex-start"
-                              width="90%"
-                              marginLeft={"sm"}
-                            >
-                              {"Register as Publisher"}
+                      {!hookMacha.publisherExists &&
+                        props?.showRegisterPublisher && (
+                          <MenuItem
+                            onClick={async () => {
+                              await checkBalance();
+                              if (balance <= 1) {
+                                toast({
+                                  title: "You don't have enough TFIL balance",
+                                  status: "warning",
+                                  duration: 10000,
+                                  position: "top-right",
+                                });
+                              }
+                              publisherModal.onOpen();
+                            }}
+                          >
+                            <FlexRow hrAlign="space-between">
+                              <IconImage slug="icon-user" size="sm" />
+                              <FlexRow
+                                hrAlign="flex-start"
+                                width="90%"
+                                marginLeft={"sm"}
+                              >
+                                {"Register as Publisher"}
+                              </FlexRow>
                             </FlexRow>
-                          </FlexRow>
-                        </MenuItem>
-                      )}
+                          </MenuItem>
+                        )}
+
                       <CreatePublisherModal
                         modal={publisherModal}
                         hookPublisherCreate={hookPublisherCreate}

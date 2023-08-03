@@ -4,6 +4,8 @@ import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
 import { Box } from "@chakra-ui/react";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
+import IconBase from "../icons/IconsBase";
 
 type Props = {
   rightElem?: any;
@@ -35,7 +37,7 @@ const NavMeta = ({ rightElem, centerElem }: Props) => {
         >
           <FlexRow hrAlign="space-between" vrAlign="center">
             <FlexRow vrAlign="center" hrAlign="flex-start">
-              <Link href="/">
+              <Link href="/explorer">
                 <Image
                   className="headerLogo"
                   src="/assets/Macha-logo-text.svg"
@@ -48,8 +50,21 @@ const NavMeta = ({ rightElem, centerElem }: Props) => {
             </FlexRow>
 
             <FlexRow vrAlign="center" hrAlign="flex-end">
-              {/* <IconImage slug="icon-bell" /> */}
-              {rightElem}
+              <FlexRow width="fit-content">
+                {/* {$address && <NavButton />} */}
+                {
+                  <ConnectWalletButton
+                    showBalance={false}
+                    height="2.2rem"
+                    showStudio={true}
+                  />
+                }
+                <IconBase
+                  slug="icon-dark-search"
+                  size="2rem"
+                  style={{ marginLeft: "xxs" }}
+                />
+              </FlexRow>
             </FlexRow>
           </FlexRow>
         </Box>

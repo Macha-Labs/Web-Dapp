@@ -152,7 +152,9 @@ const GlobalIcons: any = {
     "/icons/svg/Base-blue/base-blue-deploy.svg?updatedAt=1686831739162",
   "icon-rocket":
     "/icons/svg/Base-blue/base-blue-rocket.svg?updatedAt=1686739684462",
-  "icon-deploy": "icons/svg/Dark_icons/dark-deploy.svg?updatedAt=1690532086318",
+  "icon-deploy": "/icons/svg/Base_blue_icons/base-blue-deploy.svg",
+  "icon-dark-deploy":
+    "icons/svg/Dark_icons/dark-deploy.svg?updatedAt=1690532086318",
   "icon-coloured-deploy":
     "/icons/svg/miscelleneous/coloured-deploy.svg?updatedAt=1690531994002",
   "icon-blue-tick":

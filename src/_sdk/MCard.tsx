@@ -6,6 +6,7 @@ import TagNative from "@/_ui/tag/TagNative";
 import IconBase from "@/_ui/icons/IconsBase";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { truncateString } from "@/helpers";
+import { useRouter } from "next/router";
 
 type Props = {
   title?: string;
@@ -18,6 +19,8 @@ type Props = {
   action_name?: string;
   action_type?: string;
   action_value?: string;
+  width?: string;
+  onClick?: any;
 };
 
 const MCard = ({
@@ -31,7 +34,11 @@ const MCard = ({
   action_name,
   action_type,
   action_value,
+  width,
+  onClick,
 }: Props) => {
+  const router = useRouter();
+
   return (
     <Box
       borderRadius={gStyle.card.borderRadius.default}
@@ -40,6 +47,9 @@ const MCard = ({
       padding={style.card.padding.default}
       marginRight={style.margin["lg"]}
       marginBottom={style.margin["lg"]}
+      width={width ? width : "100%"}
+      onClick={onClick}
+      cursor={"pointer"}
     >
       <FlexRow hrAlign="space-between" height="auto" vrAlign="flex-start">
         <TagNative size="sm" value="Live Now" />

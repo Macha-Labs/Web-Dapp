@@ -22,7 +22,21 @@ export const initialiseNewMeta = async (data: metaInit) => {
 };
 
 export const fetchAllMetas = async () => {
-  const response = await fetch(`${config.metaServer}/api/meta/fetchAll`);
+  const response = await fetch(`${config.metaServer}/indexer/meta/fetchAll`);
+  const data = await response.json();
+  return data;
+};
+export const fetchMetaBySlug = async (metaSlug: any) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/metas/fetch-by-slug/${metaSlug}`
+  );
+  const data = await response.json();
+  return data;
+};
+export const fetchMetaByUid = async (uid: any) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/metas/fetch-by-uid/${uid}`
+  );
   const data = await response.json();
   return data;
 };

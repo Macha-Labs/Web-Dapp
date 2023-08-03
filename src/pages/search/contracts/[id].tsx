@@ -20,6 +20,7 @@ import { useEffect } from "react";
 import NavButton from "@/components/buttons/NavButton";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavTop from "@/_ui/nav/NavTop";
+import NavStudio from "@/_ui/nav/NavStudio";
 
 type Props = {
   metaInfo: any;
@@ -43,17 +44,7 @@ const Contract = () => {
   }, [router.query.id, hookContractTxn.page]);
 
   const renderNav = () => {
-    return (
-      <NavTop
-        centerElem={<InputSearch />}
-        rightElem={
-          <FlexRow width="fit-content">
-            {$address && <NavButton />}
-            {<ConnectWalletButton showBalance={true} />}
-          </FlexRow>
-        }
-      />
-    );
+    return <NavStudio />;
   };
   const renderComponent = () => {
     let options = {

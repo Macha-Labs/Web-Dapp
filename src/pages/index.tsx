@@ -4,6 +4,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
 import NavBlock from "@/_ui/nav/NavBlock";
+import NavStudio from "@/_ui/nav/NavStudio";
 import NavTop from "@/_ui/nav/NavTop";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
@@ -119,17 +120,7 @@ const Home = () => {
   };
 
   const renderNav = () => {
-    return (
-      <NavTop
-        centerElem={<InputSearch onChange={() => {}} value="" />}
-        rightElem={
-          <FlexRow width="fit-content">
-            {$address && <NavButton />}
-            {<ConnectWalletButton showBalance={true} />}
-          </FlexRow>
-        }
-      />
-    );
+    return <NavStudio />;
   };
 
   return (
