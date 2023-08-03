@@ -22,7 +22,7 @@ export const initialiseNewMeta = async (data: metaInit) => {
 };
 
 export const fetchAllMetas = async () => {
-  const response = await fetch(`${config.metaServer}/indexer/meta/fetchAll`);
+  const response = await fetch(`${config.metaServer}/indexer/metas/fetchAll`);
   const data = await response.json();
   return data;
 };

@@ -14,7 +14,7 @@ const Explorer = () => {
 
   useEffect(() => {
     if (router.isReady) {
-      hookMetasList._fetch("lens_post");
+      hookMetasList._fetchAll();
     }
   }, []);
 
@@ -31,10 +31,11 @@ const Explorer = () => {
         justifyContent={"center"}
       >
         <FlexRow flexWrap={"wrap"} width="90%" vrAlign="flex-start">
-          {hookMetasList.metaList &&
-            hookMetasList.metaList.map((item: any, index: any) => {
+          {hookMetasList?.metaAll &&
+            hookMetasList?.metaAll?.map((item: any, index: any) => {
               return (
                 <MCard
+                  title={item?.meta?.data?.modified?.meta_title}
                   key={index}
                   image={item?.meta?.data?.modified?.meta_media}
                   width="30%"

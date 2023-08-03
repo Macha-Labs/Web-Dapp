@@ -69,6 +69,7 @@ const Meta = () => {
         <Box width="28%">
           {/* <CardNative height="fit-content" width="100%"></CardNative> */}
           <MCard
+            title={hookMeta?.metaData?.meta?.data?.modified?.meta_title}
             image={hookMeta?.metaData?.meta?.data?.modified?.meta_media}
             description={
               hookMeta?.metaData?.meta?.data?.modified?.meta_description
@@ -144,119 +145,123 @@ const Meta = () => {
                     })}
                 </>
               </CardNative>
-              <CardNative
-                height="fit-content"
-                marginTop="sm"
-                width="100%"
-                header={
-                  <>
-                    <FlexRow hrAlign="space-between">
-                      <Heading fontSize={style.font.h4}>Ipfs Data</Heading>
-                    </FlexRow>
-                  </>
-                }
-              >
-                <Box
-                  background={style.input.bg.default}
-                  padding={style.padding.xs}
-                  border={style.input.border.default}
-                  borderRadius={style.card.borderRadius.image}
-                  marginTop={style.margin["sm"]}
+              {hookMeta?.metaData?.meta?.data?.ipfs && (
+                <CardNative
+                  height="fit-content"
+                  marginTop="sm"
+                  width="100%"
+                  header={
+                    <>
+                      <FlexRow hrAlign="space-between">
+                        <Heading fontSize={style.font.h4}>Ipfs Data</Heading>
+                      </FlexRow>
+                    </>
+                  }
                 >
-                  <FlexRow hrAlign="space-between">
-                    <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
-                      {hookMeta?.metaData &&
-                        Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]}
-                    </Heading>
+                  <Box
+                    background={style.input.bg.default}
+                    padding={style.padding.xs}
+                    border={style.input.border.default}
+                    borderRadius={style.card.borderRadius.image}
+                    marginTop={style.margin["sm"]}
+                  >
+                    <FlexRow hrAlign="space-between">
+                      <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
+                        {hookMeta?.metaData &&
+                          Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]}
+                      </Heading>
 
-                    <FlexRow
-                      hrAlign="flex-end"
-                      vrAlign="flex-start"
-                      width="80%"
-                    >
-                      {toggleIpfs ? (
-                        <IconBase
-                          slug="icon-chevron-up"
-                          onClick={() => {
-                            setToggleIpfs(!toggleIpfs);
-                          }}
-                        />
-                      ) : (
-                        <IconBase
-                          slug="icon-chevron-down"
-                          onClick={() => {
-                            setToggleIpfs(!toggleIpfs);
-                          }}
-                        />
-                      )}
+                      <FlexRow
+                        hrAlign="flex-end"
+                        vrAlign="flex-start"
+                        width="80%"
+                      >
+                        {toggleIpfs ? (
+                          <IconBase
+                            slug="icon-chevron-up"
+                            onClick={() => {
+                              setToggleIpfs(!toggleIpfs);
+                            }}
+                          />
+                        ) : (
+                          <IconBase
+                            slug="icon-chevron-down"
+                            onClick={() => {
+                              setToggleIpfs(!toggleIpfs);
+                            }}
+                          />
+                        )}
+                      </FlexRow>
                     </FlexRow>
-                  </FlexRow>
-                  {toggleIpfs && (
-                    <Box>
-                      {Object.keys(
-                        hookMeta?.metaData?.meta?.data?.ipfs[
-                          Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
-                        ]
-                      ).map((item, index) => {
-                        return (
-                          <Box
-                            display={"flex"}
-                            marginTop={style.margin.sm}
-                            key={index}
-                          >
-                            <Text
-                              mr={style.margin.xs}
-                              width={"20%"}
-                            >{`${item} : `}</Text>
-                            <Text width={"70%"} textAlign={"right"}>
-                              {typeof hookMeta?.metaData?.meta?.data?.ipfs[
-                                Object.keys(
-                                  hookMeta?.metaData?.meta?.data?.ipfs
-                                )[0]
-                              ][item] == "string"
-                                ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                    Object.keys(
-                                      hookMeta?.metaData?.meta?.data?.ipfs
-                                    )[0]
-                                  ][item]
-                                : "[ ]"}
-                            </Text>
+                    {toggleIpfs && (
+                      <Box>
+                        {Object.keys(
+                          hookMeta?.metaData?.meta?.data?.ipfs[
+                            Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
+                          ]
+                        ).map((item, index) => {
+                          return (
                             <Box
-                              width="5%"
                               display={"flex"}
-                              justifyContent={"flex-end"}
+                              marginTop={style.margin.sm}
+                              key={index}
                             >
-                              <IconBase
-                                slug="icon-copy"
-                                onClick={() => {
-                                  navigator.clipboard.writeText(
-                                    typeof hookMeta?.metaData?.meta?.data?.ipfs[
+                              <Text
+                                mr={style.margin.xs}
+                                width={"20%"}
+                              >{`${item} : `}</Text>
+                              <Text width={"70%"} textAlign={"right"}>
+                                {typeof hookMeta?.metaData?.meta?.data?.ipfs[
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data?.ipfs
+                                  )[0]
+                                ][item] == "string"
+                                  ? hookMeta?.metaData?.meta?.data?.ipfs[
                                       Object.keys(
                                         hookMeta?.metaData?.meta?.data?.ipfs
                                       )[0]
-                                    ][item] == "string"
-                                      ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                          Object.keys(
-                                            hookMeta?.metaData?.meta?.data?.ipfs
-                                          )[0]
-                                        ][item]
-                                      : "[ ]"
-                                  );
-                                  toast({
-                                    title: "Copied To Clipboard",
-                                    status: "success",
-                                    duration: 3000,
-                                  });
-                                }}
-                              />
+                                    ][item]
+                                  : "[ ]"}
+                              </Text>
+                              <Box
+                                width="5%"
+                                display={"flex"}
+                                justifyContent={"flex-end"}
+                              >
+                                <IconBase
+                                  slug="icon-copy"
+                                  onClick={() => {
+                                    navigator.clipboard.writeText(
+                                      typeof hookMeta?.metaData?.meta?.data
+                                        ?.ipfs[
+                                        Object.keys(
+                                          hookMeta?.metaData?.meta?.data?.ipfs
+                                        )[0]
+                                      ][item] == "string"
+                                        ? hookMeta?.metaData?.meta?.data?.ipfs[
+                                            Object.keys(
+                                              hookMeta?.metaData?.meta?.data
+                                                ?.ipfs
+                                            )[0]
+                                          ][item]
+                                        : "[ ]"
+                                    );
+                                    toast({
+                                      title: "Copied To Clipboard",
+                                      status: "success",
+                                      duration: 3000,
+                                    });
+                                  }}
+                                />
+                              </Box>
                             </Box>
-                          </Box>
-                        );
-                      })}
-                    </Box>
-                  )}
-                </Box>
-              </CardNative>
+                          );
+                        })}
+                      </Box>
+                    )}
+                  </Box>
+                </CardNative>
+              )}
             </>
           )}
           {tab == "Sources" && (
