@@ -30,12 +30,13 @@ const Explorer = () => {
         display={"flex"}
         justifyContent={"center"}
       >
-        <FlexRow flexWrap={"wrap"} width="90%">
+        <FlexRow flexWrap={"wrap"} width="90%" vrAlign="flex-start">
           {hookMetasList.metaList &&
             hookMetasList.metaList.map((item: any, index: any) => {
               return (
                 <MCard
                   key={index}
+                  image={item?.meta?.data?.modified?.meta_media}
                   width="30%"
                   description={item?.meta?.data?.modified?.meta_description}
                   onClick={() => {

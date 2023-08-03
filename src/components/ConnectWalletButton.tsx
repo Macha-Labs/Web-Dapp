@@ -91,7 +91,7 @@ export const ConnectWalletButton = (props: any) => {
               if (!connected) {
                 return (
                   <Button
-                    className="w-100"
+                    width="11rem"
                     height={props.height ? props.height : "3rem"}
                     size={props.size}
                     variant="state_brand"

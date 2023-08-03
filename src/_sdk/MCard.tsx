@@ -5,7 +5,7 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import TagNative from "@/_ui/tag/TagNative";
 import IconBase from "@/_ui/icons/IconsBase";
 import FlexRow from "@/_ui/flex/FlexRow";
-import { truncateString } from "@/helpers";
+import { helperIPFS, truncateString } from "@/helpers";
 import { useRouter } from "next/router";
 
 type Props = {
@@ -71,7 +71,7 @@ const MCard = ({
           style={{ height: "60%", display: "flex", justifyContent: "center" }}
         >
           <Image
-            src={image}
+            src={helperIPFS(image)}
             alt="coverImage"
             width={"full"}
             objectFit={"cover"}

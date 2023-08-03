@@ -69,15 +69,10 @@ const Meta = () => {
         <Box width="28%">
           {/* <CardNative height="fit-content" width="100%"></CardNative> */}
           <MCard
-            title="Meta"
-            // image="https://bit.ly/dan-abramov"
-            owner_name="Blacke"
-            owner_heading="Gordan"
-            owner_image="https://bit.ly/dan-abramov"
+            image={hookMeta?.metaData?.meta?.data?.modified?.meta_media}
             description={
               hookMeta?.metaData?.meta?.data?.modified?.meta_description
             }
-            action_name="Click Here"
           />
         </Box>
         <Box width="68%">

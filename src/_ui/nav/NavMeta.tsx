@@ -62,7 +62,7 @@ const NavMeta = ({ rightElem, centerElem }: Props) => {
                 <IconBase
                   slug="icon-dark-search"
                   size="2rem"
-                  style={{ marginLeft: "xxs" }}
+                  style={{ marginLeft: "xs" }}
                 />
               </FlexRow>
             </FlexRow>
