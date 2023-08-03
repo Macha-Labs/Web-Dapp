@@ -35,17 +35,16 @@ export const ConnectWalletButton = (props: any) => {
   const { disconnect } = useDisconnect();
   const $unload = useAuthStore((state: any) => state.unload);
   // console.log("mobile device detection", window.navigator.userAgent);
-  const [balance, setBalance] = useState<any>(0.00)
+  const [balance, setBalance] = useState<any>(0.0);
 
   const checkBalance = async () => {
     try {
       const balance = await fetchBalance({
         address: $address,
       });
-      setBalance(Number(balance.formatted).toFixed(2))
-    }
-    catch (err) {
-      console.log(err)
+      setBalance(Number(balance.formatted).toFixed(2));
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -53,8 +52,7 @@ export const ConnectWalletButton = (props: any) => {
     if ($address) {
       checkBalance();
     }
-  }, [$address])
-
+  }, [$address]);
 
   return (
     <ConnectButton.Custom>
@@ -92,7 +90,7 @@ export const ConnectWalletButton = (props: any) => {
                 return (
                   <Button
                     className="w-100"
-                    height="3rem"
+                    height={props.height ? props.height : "3rem"}
                     size={props.size}
                     variant="state_brand"
                     onClick={openConnectModal}
@@ -130,19 +128,19 @@ export const ConnectWalletButton = (props: any) => {
                   <Menu>
                     <MenuButton
                       width="11rem"
-                      height="3rem"
+                      height={props.height ? props.height : "3rem"}
                       variant={"state_default_hover"}
                       as={Button}
                       style={{
                         borderRadius: `${style.card.borderRadius.button}`,
-                        marginLeft: `${style.margin.sm}`
+                        marginLeft: `${style.margin.sm}`,
                       }}
                       leftIcon={
                         <Image
                           src="https://ik.imagekit.io/macha/studio%20logo/coloredFilecoin.svg"
                           alt="txn-icon"
-                          height="1.75rem"
-                          width="1.75rem"
+                          height={props.height ? "1.5rem" : "1.75rem"}
+                          width={props.height ? "1.5rem" : "1.75rem"}
                         />
                       }
                       rightIcon={
@@ -153,17 +151,19 @@ export const ConnectWalletButton = (props: any) => {
                         />
                       }
                     >
-                      <FlexColumn  >
+                      <FlexColumn>
                         {/* <Image src={"../assets/Avatar.svg"} alt="avatar" /> */}
-                        <Text
-                          fontSize={"sm"}
-                          className="mb-0"
-                          align="left"
-                          fontWeight="700"
-                          width="80%"
-                        >
-                          {balance} TFIL
-                        </Text>
+                        {props?.showBalance && (
+                          <Text
+                            fontSize={"sm"}
+                            className="mb-0"
+                            align="left"
+                            fontWeight="700"
+                            width="80%"
+                          >
+                            {balance} TFIL
+                          </Text>
+                        )}
                         <Text
                           fontSize={"xs"}
                           className="mb-0"
@@ -176,14 +176,16 @@ export const ConnectWalletButton = (props: any) => {
                       </FlexColumn>
                     </MenuButton>
                     <MenuList>
-                      <MenuItem onClick={() => {
-                        navigator.clipboard.writeText($address);
-                        toast({
-                          title: "Copied To Clipboard",
-                          status: "success",
-                          duration: 3000,
-                        });
-                      }}>
+                      <MenuItem
+                        onClick={() => {
+                          navigator.clipboard.writeText($address);
+                          toast({
+                            title: "Copied To Clipboard",
+                            status: "success",
+                            duration: 3000,
+                          });
+                        }}
+                      >
                         <FlexRow hrAlign="space-between">
                           <Image
                             style={{ height: "25px", width: "25px" }}

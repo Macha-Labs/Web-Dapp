@@ -49,7 +49,7 @@ const Contract = () => {
         rightElem={
           <FlexRow width="fit-content">
             {$address && <NavButton />}
-            {<ConnectWalletButton />}
+            {<ConnectWalletButton showBalance={true} />}
           </FlexRow>
         }
       />
@@ -99,18 +99,20 @@ const Contract = () => {
                 marginTop: `${style.margin.sm}`,
               }}
             >
-              <Box style={{
-                display: "flex",
-                alignItems: "center",
-              }}>
+              <Box
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
                 <ButtonNative
                   marginRight="sm"
                   size="xs"
                   height="2rem"
                   onClick={() => {
                     if (hookContractTxn.page != 1) {
-                      hookContractTxn.setIsLoading(true)
-                      hookContractTxn.setPage(1)
+                      hookContractTxn.setIsLoading(true);
+                      hookContractTxn.setPage(1);
                     }
                   }}
                   text="Newest"
@@ -123,23 +125,25 @@ const Contract = () => {
                   height="2rem"
                   onClick={() => {
                     if (hookContractTxn.page > 1) {
-                      hookContractTxn.setIsLoading(true)
-                      hookContractTxn.setPage(hookContractTxn.page - 1)
+                      hookContractTxn.setIsLoading(true);
+                      hookContractTxn.setPage(hookContractTxn.page - 1);
                     }
                   }}
                   text="Prev"
                   disabled={hookContractTxn.page <= 1}
                   variant="state_default_hover"
                 />
-                <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookContractTxn?.page} of {hookContractTxn.totalPages}</Text>
+                <Text marginRight={style.margin.sm} marginBottom="0.25rem">
+                  Page {hookContractTxn?.page} of {hookContractTxn.totalPages}
+                </Text>
                 <ButtonNative
                   marginRight="sm"
                   size="xs"
                   height="2rem"
                   onClick={() => {
                     if (hookContractTxn.page < hookContractTxn.totalPages) {
-                      hookContractTxn.setIsLoading(true)
-                      hookContractTxn.setPage(hookContractTxn.page + 1)
+                      hookContractTxn.setIsLoading(true);
+                      hookContractTxn.setPage(hookContractTxn.page + 1);
                     }
                   }}
                   disabled={hookContractTxn.page >= hookContractTxn.totalPages}
@@ -152,8 +156,8 @@ const Contract = () => {
                   height="2rem"
                   onClick={() => {
                     if (hookContractTxn.page != hookContractTxn.totalPages) {
-                      hookContractTxn.setIsLoading(true)
-                      hookContractTxn.setPage(hookContractTxn.totalPages)
+                      hookContractTxn.setIsLoading(true);
+                      hookContractTxn.setPage(hookContractTxn.totalPages);
                     }
                   }}
                   text="Oldest"

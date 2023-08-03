@@ -1,6 +1,14 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 import { style } from "@/styles/StyledConstants";
-import { Avatar, Divider, Flex, Image, Link, Text, useToast } from "@chakra-ui/react";
+import {
+  Avatar,
+  Divider,
+  Flex,
+  Image,
+  Link,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 // import InteractionTable from "@/pages/search/network/InteractionTable";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
@@ -45,7 +53,7 @@ const Network = () => {
         rightElem={
           <FlexRow width="fit-content">
             {$address && <NavButton />}
-            {<ConnectWalletButton />}
+            {<ConnectWalletButton showBalance={true} />}
           </FlexRow>
         }
       />
@@ -78,17 +86,17 @@ const Network = () => {
                     {truncateAddress(router.query.user)}
                   </Text>
                   <IconBase
-                  slug="icon-copy"
-                  style={{ marginLeft: "sm" }}
-                  onClick={() => {
-                    navigator.clipboard.writeText(String(router.query.user));
-                    toast({
-                      title: "Copied To Clipboard",
-                      status: "success",
-                      duration: 3000,
-                    });
-                  }}
-                />
+                    slug="icon-copy"
+                    style={{ marginLeft: "sm" }}
+                    onClick={() => {
+                      navigator.clipboard.writeText(String(router.query.user));
+                      toast({
+                        title: "Copied To Clipboard",
+                        status: "success",
+                        duration: 3000,
+                      });
+                    }}
+                  />
                 </Box>
               </Flex>
               <Flex
@@ -101,8 +109,7 @@ const Network = () => {
                   p={4}
                   display="flex"
                   justifyContent="flex-start"
-                >
-                </Box>
+                ></Box>
                 <Box
                   // flex="1"
                   p={4}
@@ -144,18 +151,20 @@ const Network = () => {
                         marginTop: `${style.margin.lg}`,
                       }}
                     >
-                      <Box style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}>
+                      <Box
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
                         <ButtonNative
                           marginRight="sm"
                           size="xs"
                           height="2rem"
                           onClick={() => {
                             if (hookUserTxn.page != 1) {
-                              hookUserTxn.setIsLoading(true)
-                              hookUserTxn.setPage(1)
+                              hookUserTxn.setIsLoading(true);
+                              hookUserTxn.setPage(1);
                             }
                           }}
                           text="Newest"
@@ -168,23 +177,28 @@ const Network = () => {
                           height="2rem"
                           onClick={() => {
                             if (hookUserTxn.page > 1) {
-                              hookUserTxn.setIsLoading(true)
-                              hookUserTxn.setPage(hookUserTxn.page - 1)
+                              hookUserTxn.setIsLoading(true);
+                              hookUserTxn.setPage(hookUserTxn.page - 1);
                             }
                           }}
                           text="Prev"
                           disabled={hookUserTxn.page <= 1}
                           variant="state_default_hover"
                         />
-                        <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookUserTxn?.page} of {hookUserTxn.totalPages}</Text>
+                        <Text
+                          marginRight={style.margin.sm}
+                          marginBottom="0.25rem"
+                        >
+                          Page {hookUserTxn?.page} of {hookUserTxn.totalPages}
+                        </Text>
                         <ButtonNative
                           marginRight="sm"
                           size="xs"
                           height="2rem"
                           onClick={() => {
                             if (hookUserTxn.page < hookUserTxn.totalPages) {
-                              hookUserTxn.setIsLoading(true)
-                              hookUserTxn.setPage(hookUserTxn.page + 1)
+                              hookUserTxn.setIsLoading(true);
+                              hookUserTxn.setPage(hookUserTxn.page + 1);
                             }
                           }}
                           disabled={hookUserTxn.page >= hookUserTxn.totalPages}
@@ -197,8 +211,8 @@ const Network = () => {
                           height="2rem"
                           onClick={() => {
                             if (hookUserTxn.page != hookUserTxn.totalPages) {
-                              hookUserTxn.setIsLoading(true)
-                              hookUserTxn.setPage(hookUserTxn.totalPages)
+                              hookUserTxn.setIsLoading(true);
+                              hookUserTxn.setPage(hookUserTxn.totalPages);
                             }
                           }}
                           text="Oldest"
@@ -217,7 +231,10 @@ const Network = () => {
                       marginBottom={style.margin.xxxl}
                     >
                       {/* Content for Tab 1 */}
-                      <TxnTable displayFrom={false} txnData={hookUserTxn?.filteredData} />
+                      <TxnTable
+                        displayFrom={false}
+                        txnData={hookUserTxn?.filteredData}
+                      />
                     </Box>
                   </>
                 )
@@ -242,7 +259,7 @@ const Network = () => {
               fontSize={style.font.h7}
               fontWeight="600"
               marginBottom={0}
-            //   marginLeft={style.margin.xxs}
+              //   marginLeft={style.margin.xxs}
             >
               {truncateAddress(router.query.user)}
             </Text>

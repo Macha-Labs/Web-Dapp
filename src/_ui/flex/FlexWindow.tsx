@@ -37,6 +37,9 @@ export const FlexWindow = ({
               top: "0",
               zIndex: "1000",
               width: "100%",
+              background: `${style.body.bg.default}`,
+              display: "flex",
+              justifyContent: "center",
             }}
           >
             {navElem}
@@ -59,7 +62,6 @@ export const FlexWindow = ({
           >
             {bodyElem}
           </div>
-          melE
         </>
       )}
     </div>
