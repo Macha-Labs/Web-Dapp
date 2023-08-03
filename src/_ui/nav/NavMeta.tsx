@@ -30,7 +30,7 @@ const NavMeta = ({ rightElem, centerElem }: Props) => {
             //   margin: "0% 6%",
             // marginTop: `${style.margin.sm}`,
             boxShadow: "0px 24px 64px 0px #000",
-            width: "50%",
+            width: "90%",
           }}
         >
           <FlexRow hrAlign="space-between" vrAlign="center">

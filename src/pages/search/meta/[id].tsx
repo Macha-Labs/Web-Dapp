@@ -1,21 +1,35 @@
+import MCard from "@/_sdk/MCard";
 import CardNative from "@/_ui/cards/CardNative";
 import FlexBody from "@/_ui/flex/FlexBody";
+import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import IconBase from "@/_ui/icons/IconsBase";
 import InputSearch from "@/_ui/input/InputSearch";
 import NavMeta from "@/_ui/nav/NavMeta";
 import Tabs from "@/_ui/tabs/Tabs";
+import TagNative from "@/_ui/tag/TagNative";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
+import CopyableRow from "@/components/meta/CopyableRow";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Avatar, Box, Divider, Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
 const index = () => {
   const $address = useAuthStore((state: any) => state.address);
-  const [tab, setTab] = useState<string>("Meta");
+  const [tab, setTab] = useState<string>("Data");
+  const options = [
+    {
+      href: "",
+      value: "Data",
+    },
+    {
+      href: "",
+      value: "Sources",
+    },
+  ];
 
   const renderNav = () => {
     return (
@@ -38,41 +52,107 @@ const index = () => {
 
   const renderMeta = () => {
     return (
-      <>
-        {tab == "Meta" && (
-          <>
-            <CardNative marginTop="lg" height="fit-content" width="100%">
-              <Heading>Meta Name</Heading>
-            </CardNative>
-          </>
-        )}
-      </>
-    );
-  };
-  const renderHex = () => {
-    return (
-      <>
-        {tab == "Hex Data" && (
-          <>
-            <Text>Hex</Text>
-          </>
-        )}
-      </>
+      <Box display={"flex"} justifyContent={"space-between"}>
+        <Box width="28%">
+          {/* <CardNative height="fit-content" width="100%"></CardNative> */}
+          <MCard
+            title="Meta"
+            // image="https://bit.ly/dan-abramov"
+            owner_name="Blacke"
+            owner_heading="Gordan"
+            owner_image="https://bit.ly/dan-abramov"
+            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi non quis exercitationem culpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio ametculpa nesciunt nihil aut nostrum explicabo reprehenderit optio amet"
+            action_name="Click Here"
+          />
+        </Box>
+        <Box width="68%">
+          <Tabs
+            options={options}
+            onChange={setTab}
+            value={tab}
+            width="fit-content"
+          />
+          {tab == "Data" && (
+            <>
+              <CardNative
+                height="fit-content"
+                marginTop="sm"
+                width="100%"
+                header={
+                  <>
+                    <Heading fontSize={style.font.h4} mb="0px">
+                      Ownership
+                    </Heading>
+                  </>
+                }
+                children={
+                  <>
+                    <FlexRow hrAlign="space-between">
+                      <FlexRow hrAlign="flex-start" width="fit-content">
+                        <Avatar size={"md"} marginRight={style.margin.sm} />
+                        <FlexColumn
+                          width="fit-content"
+                          // hrAlign="flex-start"
+                          vrAlign="flex-start"
+                        >
+                          <Text marginBottom={"0"} textAlign={"left"}>
+                            Meta Name
+                          </Text>
+                          <Text marginBottom={"0"} textAlign={"left"}>
+                            0x26...56
+                          </Text>
+                        </FlexColumn>
+                      </FlexRow>
+                      <TagNative value="owner" size="md" />
+                    </FlexRow>
+                  </>
+                }
+              />
+              <CardNative
+                height="fit-content"
+                marginTop="sm"
+                width="100%"
+                header={
+                  <>
+                    <FlexRow hrAlign="space-between">
+                      <Heading fontSize={style.font.h4}>Hex Data</Heading>
+                      <Text marginBottom={0}>Etherscan</Text>
+                    </FlexRow>
+                  </>
+                }
+                children={
+                  <>
+                    <CopyableRow
+                      parameter="hex"
+                      value="0xf27bf02ab288d71e7ab3c983dd0ed230306a7db55478f463f17dc0e1afa72eca"
+                      // marginTop="sm"
+                    />
+                    <CopyableRow
+                      parameter="decimal"
+                      value="109678689116361077769472367543591223980917984273811490993130346748355335892682"
+                      marginTop="sm"
+                    />
+                    <CopyableRow
+                      parameter="wrapper"
+                      value="wrapped, emancipated"
+                      marginTop="sm"
+                    />
+                  </>
+                }
+              />
+            </>
+          )}
+          {tab == "Sources" && (
+            <>
+              <Text>Sources</Text>
+            </>
+          )}
+        </Box>
+      </Box>
     );
   };
 
   const renderBody = () => {
-    const options = [
-      {
-        href: "",
-        value: "Meta",
-      },
-      {
-        href: "",
-        value: "Hex Data",
-      },
-    ];
-
     return (
       <>
         <FlexBody>
@@ -91,18 +171,12 @@ const index = () => {
                 marginTop: `${style.margin.xxl}`,
                 height: "fit-content",
                 paddingTop: `${style.padding.md}`,
-                width: "50%",
+                width: "90%",
               }}
             >
               {/* <Heading>Meta Name</Heading> */}
-              <Tabs
-                options={options}
-                onChange={setTab}
-                value={tab}
-                width="fit-content"
-              />
+
               {renderMeta()}
-              {renderHex()}
             </Box>
           </Box>
         </FlexBody>
