@@ -17,8 +17,7 @@ import { style } from "@/styles/StyledConstants";
 import { Avatar, Box, Divider, Heading, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
-const index = () => {
-  const $address = useAuthStore((state: any) => state.address);
+const Meta = () => {
   const [tab, setTab] = useState<string>("Data");
   const options = [
     {
@@ -85,29 +84,28 @@ const index = () => {
                     </Heading>
                   </>
                 }
-                children={
-                  <>
-                    <FlexRow hrAlign="space-between">
-                      <FlexRow hrAlign="flex-start" width="fit-content">
-                        <Avatar size={"md"} marginRight={style.margin.sm} />
-                        <FlexColumn
-                          width="fit-content"
-                          // hrAlign="flex-start"
-                          vrAlign="flex-start"
-                        >
-                          <Text marginBottom={"0"} textAlign={"left"}>
-                            Meta Name
-                          </Text>
-                          <Text marginBottom={"0"} textAlign={"left"}>
-                            0x26...56
-                          </Text>
-                        </FlexColumn>
-                      </FlexRow>
-                      <TagNative value="owner" size="md" />
+              >
+                <>
+                  <FlexRow hrAlign="space-between">
+                    <FlexRow hrAlign="flex-start" width="fit-content">
+                      <Avatar size={"md"} marginRight={style.margin.sm} />
+                      <FlexColumn
+                        width="fit-content"
+                        // hrAlign="flex-start"
+                        vrAlign="flex-start"
+                      >
+                        <Text marginBottom={"0"} textAlign={"left"}>
+                          Meta Name
+                        </Text>
+                        <Text marginBottom={"0"} textAlign={"left"}>
+                          0x26...56
+                        </Text>
+                      </FlexColumn>
                     </FlexRow>
-                  </>
-                }
-              />
+                    <TagNative value="owner" size="md" />
+                  </FlexRow>
+                </>
+              </CardNative>
               <CardNative
                 height="fit-content"
                 marginTop="sm"
@@ -120,26 +118,25 @@ const index = () => {
                     </FlexRow>
                   </>
                 }
-                children={
-                  <>
-                    <CopyableRow
-                      parameter="hex"
-                      value="0xf27bf02ab288d71e7ab3c983dd0ed230306a7db55478f463f17dc0e1afa72eca"
-                      // marginTop="sm"
-                    />
-                    <CopyableRow
-                      parameter="decimal"
-                      value="109678689116361077769472367543591223980917984273811490993130346748355335892682"
-                      marginTop="sm"
-                    />
-                    <CopyableRow
-                      parameter="wrapper"
-                      value="wrapped, emancipated"
-                      marginTop="sm"
-                    />
-                  </>
-                }
-              />
+              >
+                <>
+                  <CopyableRow
+                    parameter="hex"
+                    value="0xf27bf02ab288d71e7ab3c983dd0ed230306a7db55478f463f17dc0e1afa72eca"
+                    // marginTop="sm"
+                  />
+                  <CopyableRow
+                    parameter="decimal"
+                    value="109678689116361077769472367543591223980917984273811490993130346748355335892682"
+                    marginTop="sm"
+                  />
+                  <CopyableRow
+                    parameter="wrapper"
+                    value="wrapped, emancipated"
+                    marginTop="sm"
+                  />
+                </>
+              </CardNative>
             </>
           )}
           {tab == "Sources" && (
@@ -194,4 +191,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Meta;
