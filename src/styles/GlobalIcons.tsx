@@ -14,8 +14,9 @@ const GlobalIcons: any = {
     "/icons/svg/Base-blue/base-blue-compass.svg?updatedAt=1680783858784",
   "icon-compass-white":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base_icons/base-compass.svg?updatedAt=1680783662225",
-  "icon-search":
-    "/icons/svg/Base-blue/base-blue-search.svg?updatedAt=1680783899444",
+  "icon-search": "/icons/svg/Base_blue_icons/base-blue-search.svg",
+  "icon-base-search": "/icons/svg/Base_icons/base-search.svg",
+  "icon-dark-search": "/icons/svg/Dark_icons/dark-search.svg",
   "icon-search24":
     "/icons/svg/Base-blue/base-blue-search24.svg?updatedAt=1687157119887",
   "icon-chat": "/icons/svg/Base-blue/base-blue-chat.svg",

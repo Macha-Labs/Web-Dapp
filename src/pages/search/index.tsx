@@ -41,7 +41,7 @@ const Search = () => {
               />
             )}
             <Box>
-            <ConnectWalletButton />
+              <ConnectWalletButton showBalance={true} />
             </Box>
           </FlexRow>
         }

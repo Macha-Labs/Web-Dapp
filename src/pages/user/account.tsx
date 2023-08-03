@@ -112,7 +112,11 @@ const Account = () => {
               marginRight={style.margin["sm"]}
               marginLeft={style.margin["sm"]}
             />
-            {$address ? <WalletButton /> : <ConnectWalletButton />}
+            {$address ? (
+              <WalletButton />
+            ) : (
+              <ConnectWalletButton showBalance={true} />
+            )}
           </FlexRow>
         }
       />

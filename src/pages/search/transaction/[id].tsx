@@ -61,7 +61,7 @@ const SearchResult = () => {
         rightElem={
           <FlexRow width="fit-content">
             {$address && <NavButton />}
-            {<ConnectWalletButton />}
+            {<ConnectWalletButton showBalance={true} />}
           </FlexRow>
         }
       />

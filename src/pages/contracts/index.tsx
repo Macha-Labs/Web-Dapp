@@ -76,10 +76,15 @@ const DashBoard = () => {
                 cursor={"not-allowed"}
                 style={{ display: "flex", flexDirection: "row" }}
               >
-                <Text className="mb-0" fontSize={style.font.h5} color="#C6C6C6" marginRight={style.margin.xxs}>
+                <Text
+                  className="mb-0"
+                  fontSize={style.font.h5}
+                  color="#C6C6C6"
+                  marginRight={style.margin.xxs}
+                >
                   Functions
                 </Text>
-                <TagNative value="soon"  lineHeight="0.8rem" size="sm" />
+                <TagNative value="soon" lineHeight="0.8rem" size="sm" />
               </Box>
             </FlexRow>
 
@@ -134,7 +139,7 @@ const DashBoard = () => {
         rightElem={
           <FlexRow width="fit-content">
             {$address && <NavButton />}
-            {<ConnectWalletButton />}
+            {<ConnectWalletButton showBalance={true} />}
           </FlexRow>
         }
       />
