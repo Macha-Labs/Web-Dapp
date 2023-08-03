@@ -39,7 +39,7 @@ const GetStartedCards = ({
     >
       {/* <Image src={imageSrc} alt={title} /> */}
 
-      <Box p="4">
+      <Box p="4" opacity={disabled ? "0.4" : "1"}>
         {image && (
           <Box height="25%">
             <Image src={image} fit="contain" alt={title} height="" width="19rem"/>
