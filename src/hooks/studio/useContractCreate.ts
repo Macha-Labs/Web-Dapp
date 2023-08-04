@@ -12,14 +12,29 @@ const useContractCreate = (modal: any) => {
   const $loadContractFormData = useContractFormStore((state: any) => state.loadContractFormData);
   const [ipfsLoading, setIpfsLoading] = useState<any>(0);
 
+  const addressRegex = /^0x[a-fA-F0-9]{40}$/
+
   const setLoadingCallback = (progressData: any) => {
     let percentageDone: any = 100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
-    console.log("percentage done: ",percentageDone);
+    console.log("percentage done: ", percentageDone);
     setIpfsLoading(percentageDone)
   }
 
+  useEffect(() => {
+    console.log($contractFormData)
+  },[$contractFormData])
+
   const validateSteps = () => {
     if (formStep == 1) {
+      if ($contractFormData.address != "" && addressRegex.test($contractFormData.address) == false) {
+        toast({
+          title: "Invalid addresss",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
+        return false;
+      }
       if (
         $contractFormData.address == "" ||
         $contractFormData.address == undefined ||
@@ -115,7 +130,7 @@ const useContractCreate = (modal: any) => {
 
     const contractPayload = {
       name: $contractFormData.name,
-      description: $contractFormData.description,    
+      description: $contractFormData.description,
       address: $contractFormData.address,
       chain_id: $contractFormData.chain_id,
       slug: $contractFormData.slug,
@@ -178,7 +193,7 @@ const useContractCreate = (modal: any) => {
 
     const contractPayload = {
       name: $contractFormData.name,
-      description: $contractFormData.description,    
+      description: $contractFormData.description,
       address: $contractFormData.address,
       chain_id: $contractFormData.chain_id,
       slug: $contractFormData.slug,
@@ -226,7 +241,7 @@ const useContractCreate = (modal: any) => {
         router.push(`/search/contracts/${contractPayload.slug}`)
         $loadContractFormData({
           name: "",
-          description: "",    
+          description: "",
           address: "",
           chain_id: "",
           slug: "",

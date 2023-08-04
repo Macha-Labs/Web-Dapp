@@ -142,6 +142,8 @@ const GlobalIcons: any = {
     "icons/svg/Base_blue_icons/base-blue-user.svg?updatedAt=1690532065895",
   "icon-dark-user":
     "/icons/svg/Dark_icons/dark-user.svg?updatedAt=1690532103705",
+  "icon-info":
+    "/icons/svg/Base_blue_icons/base-blue-info.svg?updatedAt=1690532070929",
   "icon-connections":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-connections.png?updatedAt=1680788697983",
   "icon-chat-edit":

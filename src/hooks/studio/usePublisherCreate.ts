@@ -10,6 +10,8 @@ const usePublisherCreate = (modal: any) => {
 
   let regex1 = new RegExp("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/");
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+  const websiteRegex = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/;
 
   const toast = useToast();
   const [formStep, setFormStep] = useState<any>(1);
@@ -31,7 +33,7 @@ const usePublisherCreate = (modal: any) => {
 
   const setLoadingCallback = (progressData: any) => {
     let percentageDone: any = 100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
-    console.log("percentage done: ",percentageDone);
+    console.log("percentage done: ", percentageDone);
     setIpfsLoading(percentageDone)
   }
 
@@ -51,14 +53,14 @@ const usePublisherCreate = (modal: any) => {
   };
 
   const validateSteps = () => {
-    if (formStep == 4) {
+    if (formStep == 3) {
       if (publisherType == undefined) {
         return false;
       } else {
         return true;
       }
-    } else if (formStep == 5 && publisherType == "Individual") {
-      if(emailRegex.test($publisherFormData.email)==false){
+    } else if (formStep == 4 && publisherType == "Individual") {
+      if ($publisherFormData.email != "" && emailRegex.test($publisherFormData.email) == false) {
         toast({
           title: "Invalid email ",
           status: "warning",
@@ -79,7 +81,16 @@ const usePublisherCreate = (modal: any) => {
       } else {
         return true;
       }
-    } else if (formStep == 5 && publisherType == "Organization") {
+    } else if (formStep == 4 && publisherType == "Organization") {
+      if ($publisherFormData.website != "" && websiteRegex.test($publisherFormData.website) == false) {
+        toast({
+          title: "Invalid website ",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
+        return false;
+      }
       if (
         $publisherFormData.name == "" ||
         $publisherFormData.name == undefined ||
@@ -100,19 +111,27 @@ const usePublisherCreate = (modal: any) => {
   };
 
   const nextFormStep = () => {
-    if (formStep >= 7) {
+    if (formStep >= 6) {
       return;
     } else {
       if (validateSteps()) {
         setFormStep((currentStep: any) => currentStep + 1);
       } else {
-        toast({
-          title: "Required fields cannot be empty",
-          status: "warning",
-          duration: 3000,
-          position: "top-right",
-        });
-        return;
+        if (($publisherFormData.email != "" && $publisherFormData.email != undefined) && emailRegex.test($publisherFormData.email) == false) {
+          return;
+        }
+        else if (($publisherFormData.website != "" && $publisherFormData.website != undefined) && websiteRegex.test($publisherFormData.website) == false) {
+          return;
+        }
+        else {
+          toast({
+            title: "Required fields cannot be empty",
+            status: "warning",
+            duration: 3000,
+            position: "top-right",
+          });
+          return;
+        }
       }
     }
   };

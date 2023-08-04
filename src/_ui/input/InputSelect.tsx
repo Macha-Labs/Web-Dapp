@@ -1,6 +1,7 @@
 import { style } from "@/styles/StyledConstants";
-import { Select, Text } from "@chakra-ui/react";
+import { Heading, Select, Text } from "@chakra-ui/react";
 import IconBase from "../icons/IconsBase";
+import FlexColumn from "../flex/FlexColumn";
 
 type Props = {
   placeholder?: string;
@@ -10,12 +11,13 @@ type Props = {
   style?: any;
   options: any[];
   margin?: string;
-  onChangeHandler?: any;
-  elementRef?: any;
+  onChange?: any;
   width?: any;
   childrenComponent?: any;
   defaultValue?: any;
   marginTop?: string;
+  value?: any
+  labelText?: any
 };
 
 const InputSelect = ({
@@ -26,17 +28,38 @@ const InputSelect = ({
   width,
   options,
   margin,
-  onChangeHandler = (e?: any) => {},
-  elementRef,
+  onChange,
   childrenComponent,
   defaultValue,
   marginTop,
+  value,
+  labelText
 }: Props) => {
   // console.log("children", children);
   return (
-    <>
+    <FlexColumn
+      width="100%"
+      vrAlign="flex-start"
+      height="fit-content"
+      hrAlign="flex-start"
+      marginTop={marginTop}
+    >
+      {labelText && (
+        <Heading
+          as="h6"
+          size="sm"
+          bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+          bgClip="text"
+        >
+          {labelText}
+        </Heading>
+      )}
       <Select
-        ref={elementRef}
+        value={value}
         placeholder={placeholder}
         size={size}
         width={width ? width : "100%"}
@@ -49,9 +72,7 @@ const InputSelect = ({
           />
         }
         variant={variant}
-        onChange={(e) => {
-          onChangeHandler(e.target.value);
-        }}
+        onChange={onChange}
         style={{
           background: `${style.input.bg.default}`,
           border: `${style.input.border.default}`,
@@ -78,7 +99,7 @@ const InputSelect = ({
           </>
         )}
       </Select>
-    </>
+    </FlexColumn>
   );
 };
 

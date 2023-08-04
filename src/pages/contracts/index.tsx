@@ -1,30 +1,21 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import InputSearch from "@/_ui/input/InputSearch";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavStudio from "@/_ui/nav/NavStudio";
-import NavTop from "@/_ui/nav/NavTop";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import NavButton from "@/components/buttons/NavButton";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
-import ApiList from "@/components/studio/ApiList";
 import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import ContractList from "@/components/studio/ContractList";
-import HomeDev from "@/components/studio/HomeDev";
 import useContractCreate from "@/hooks/studio/useContractCreate";
-import useMacha from "@/hooks/studio/useMacha";
 import { fetchAllMetas } from "@/service/MetaService";
-import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
 import { Box, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const DashBoard = () => {
-  const $address = useAuthStore((state: any) => state.address);
+
   const [exploreMeta, setExploreMeta] = useState<any>([]);
   const [isPublisher, setIsPublisher] = useState<any>(false);
 
@@ -35,7 +26,7 @@ const DashBoard = () => {
   const contractModal = useDisclosure();
   const metaModal = useDisclosure();
   const hookContractCreate = useContractCreate(contractModal);
-  const hookMacha = useMacha();
+
 
   useEffect(() => {
     fetchmetas();
@@ -44,7 +35,7 @@ const DashBoard = () => {
   const dashboardNav: any = [
     {
       value: "Home",
-      href: "/",
+      href: "/studio",
     },
     {
       value: "Contracts",
@@ -88,22 +79,6 @@ const DashBoard = () => {
                 <TagNative value="soon" lineHeight="0.8rem" size="sm" />
               </Box>
             </FlexRow>
-
-            {$address != null && hookMacha.publisherExists && (
-              <ButtonNative
-                size="sm"
-                text="Create Contract"
-                variant="state_brand"
-                marginRight="0px"
-                paddingLeft="sm"
-                paddingRight="sm"
-                height="2rem"
-                marginBottom="0px"
-                onClick={() => {
-                  contractModal.onOpen();
-                }}
-              />
-            )}
 
             {/* {selectedNavTab == "Functions" && (
               <ButtonNative

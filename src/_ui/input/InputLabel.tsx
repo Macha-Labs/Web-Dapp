@@ -1,7 +1,7 @@
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import LayoutTextArea from "@/layouts/options/LayoutTextArea";
 import { StyledCard } from "@/styles/StyledComponents";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Text, Tooltip, useToast } from "@chakra-ui/react";
 import { DragEvent, useRef, useState } from "react";
 import { style as gStyle } from "../../styles/StyledConstants";
 import ButtonNative from "../buttons/ButtonNative";
@@ -26,6 +26,7 @@ type Props = {
   fileDropMinHeight?: string;
   inputLogoSize?: string;
   value?: any
+  tooltipLabel?: string
 };
 
 const InputLabel = ({
@@ -45,9 +46,12 @@ const InputLabel = ({
   marginBottom,
   marginRight,
   fileDropMinHeight,
-  inputLogoSize
+  inputLogoSize,
+  tooltipLabel
 }: Props) => {
   // for text type inputs
+  const toast = useToast();
+
   const inputLabelText = () => {
     return (
       <FlexColumn
@@ -58,21 +62,36 @@ const InputLabel = ({
         hrAlign="flex-start"
         marginTop={marginTop ? marginTop : ""}
       >
-        {labelText && (
-          <Heading
-            as="h6"
-            size="sm"
-            bgGradient="linear(
+        <Box
+          style={{ display: "flex", flexDirection: "row" }}
+        >
+          {labelText && (
+            <Heading
+              as="h6"
+              size="sm"
+              marginRight={gStyle.margin.xxs}
+              bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-            bgClip="text"
-          >
-            {labelText}
-          </Heading>
-        )}
-
+              bgClip="text"
+            >
+              {labelText}
+            </Heading>
+          )}
+          {tooltipLabel &&
+            <IconBase slug="icon-info" onClick={() => {
+              toast({
+                title: tooltipLabel,
+                status: "info",
+                duration: 7000,
+                position: "top-right",
+                isClosable: true
+              });
+            }} />
+          }
+        </Box>
         <StyledCard className="w-100">
           {LayoutInputs({
             id,
@@ -247,7 +266,7 @@ const InputLabel = ({
         // className="m-b-1"
         >
           {labelText}
-        </Heading>  
+        </Heading>
         <input
           ref={inputRef}
           type="file"
@@ -257,7 +276,7 @@ const InputLabel = ({
           onChange={onChange}
           hidden
         />
-        <ButtonNative onClick={onButtonClick} text="Upload File" iconRight={{slug: "icon-upload"}} variant="state_default_hover" />
+        <ButtonNative onClick={onButtonClick} text="Upload File" iconRight={{ slug: "icon-upload" }} variant="state_default_hover" />
       </FlexColumn>
     );
   };

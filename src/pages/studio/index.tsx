@@ -74,23 +74,6 @@ const Home = () => {
                 <TagNative value="soon" lineHeight="0.8rem" size="sm" />
               </Box>
             </FlexRow>
-
-            {$address != null && hookMacha.publisherExists && (
-              <ButtonNative
-                size="sm"
-                text="Create Contract"
-                variant="state_brand"
-                marginRight="0px"
-                paddingLeft="sm"
-                paddingRight="sm"
-                height="2rem"
-                marginBottom="0px"
-                onClick={() => {
-                  contractModal.onOpen();
-                }}
-              />
-            )}
-
             {/* {selectedNavTab == "Functions" && (
                   <ButtonNative
                     size="sm"

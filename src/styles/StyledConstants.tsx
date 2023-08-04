@@ -44,6 +44,7 @@ export const commonStyle: any = {
     h: "#fff",
     "white.5": "rgb(255,255,255,0.5)",
     "white.7": "rgb(255,255,255,0.7)",
+    disabled: "#354670"
   },
 };
 
@@ -108,6 +109,7 @@ export const darkStyle = {
       mcard: "1px solid #353c54",
       contract: "1px solid #061133",
       publisher: "1px solid rgba(8,78,156,0.5)",
+      disabled: "1px solid #1B2D59"
     },
     borderRadius: {
       default: "20px",

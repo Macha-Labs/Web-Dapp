@@ -10,6 +10,11 @@ import { useDisclosure, Box } from "@chakra-ui/react";
 import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import chains from "@/data/network";
 import { useState } from "react";
+import useAuthStore from "@/store/useAuthStore";
+import useMacha from "@/hooks/studio/useMacha";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
+import ContractCreateModal from "@/components/studio/ContractCreateModal";
+import useContractCreate from "@/hooks/studio/useContractCreate";
 
 type Props = {
   metaInfo: any;
@@ -20,7 +25,10 @@ const ContractList = () => {
   const hookContractList = useContractList();
   const [filterValue, setFilterValue] = useState<any>("All Contracts");
   const [avatar, setAvatar] = useState<any>("icon-dashboard");
-  
+  const $address = useAuthStore((state: any) => state.address);
+  const hookMacha = useMacha();
+  const contractModal = useDisclosure();
+  const hookContractCreate = useContractCreate(contractModal);
 
   let contractFilterOptions = [
     {
@@ -52,17 +60,18 @@ const ContractList = () => {
       <>
         <Box
           style={{
-            width: "70%",
+            width: "100%",
             marginTop: `${style.margin.xxl}`,
             height: "fit-content",
             paddingTop: `${style.padding.md}`,
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            alignItems: "start",
+            alignItems: "center",
           }}
         >
           <ButtonMenu
+            width="fit-content"
             size={"lg"}
             text={filterValue}
             marginLeft={style.margin.xxs}
@@ -73,6 +82,21 @@ const ContractList = () => {
             options={contractFilterOptions}
             avatar={avatar}
           />
+          {$address != null && hookMacha.publisherExists && (
+            <ButtonNative
+              size="sm"
+              text="Create Contract"
+              variant="state_brand"
+              marginRight="0px"
+              paddingLeft="sm"
+              paddingRight="sm"
+              height="3rem"
+              marginBottom="0px"
+              onClick={() => {
+                contractModal.onOpen();
+              }}
+            />
+          )}
         </Box>
         <FlexRow
           hrAlign="flex-start"
@@ -121,6 +145,10 @@ const ContractList = () => {
                 );
               })}
           </Box>
+          <ContractCreateModal
+            modal={contractModal}
+            hookContractCreate={hookContractCreate}
+          />
         </FlexRow>
       </>
     );

@@ -4,6 +4,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconImage from "@/_ui/icons/IconImage";
 import IconBase from "@/_ui/icons/IconsBase";
 import InputLabel from "@/_ui/input/InputLabel";
+import InputSelect from "@/_ui/input/InputSelect";
 // import TableNative from "@/_ui/list/Tablenative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import { deploytoLightHouse, displayImage } from "@/helpers/storage/lightHouseStorage";
@@ -105,21 +106,25 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                     <Text
                       rounded="full"
                       style={{
-                        border: `${style.card.border.meta}`,
+                        border: `${hookContractCreate.formStep == 1 ? style.card.border.meta : style.card.border.default}`,
                         paddingLeft: `${style.padding.xxs}`,
                         paddingRight: `${style.padding.xxs}`,
+                        color: `${hookContractCreate.formStep == 1 ? "" : style.color.disabled}`,
+                        backgroundColor: `${hookContractCreate.formStep == 1 ? "" : "#18203A"}`
                       }}
                     >
                       1
                     </Text>
                   )}
                 </Box>
-                <Text>First</Text>
+                <Text
+                  style={{ color: `${hookContractCreate.formStep == 1 ? "" : style.color.disabled}` }}
+                >First</Text>
               </Box>
               <Divider
                 marginX="8px"
                 border={
-                  hookContractCreate.formStep > 1 && style.card.border.meta
+                  hookContractCreate.formStep > 1 ? style.card.border.meta : style.card.border.disabled
                 }
               />
               <Box
@@ -136,20 +141,24 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                   <Text
                     rounded="full"
                     style={{
-                      border: `${style.card.border.meta}`,
+                      border: `${hookContractCreate.formStep == 2 ? style.card.border.meta : style.card.border.default}`,
                       paddingLeft: `${style.padding.xxs}`,
                       paddingRight: `${style.padding.xxs}`,
+                      color: `${hookContractCreate.formStep == 2 ? "" : style.color.disabled}`,
+                      backgroundColor: `${hookContractCreate.formStep == 2 ? "" : "#18203A"}`
                     }}
                   >
                     2
                   </Text>
                 )}
-                <Text>Second</Text>
+                <Text
+                  style={{ color: `${hookContractCreate.formStep == 2 ? "" : style.color.disabled}` }}
+                >Second</Text>
               </Box>
               <Divider
                 marginX="8px"
                 border={
-                  hookContractCreate.formStep > 2 && style.card.border.meta
+                  hookContractCreate.formStep > 2 ? style.card.border.meta :style.card.border.disabled
                 }
               />
               <Box
@@ -166,15 +175,19 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                   <Text
                     rounded="full"
                     style={{
-                      border: `${style.card.border.meta}`,
+                      border: `${hookContractCreate.formStep == 3 ? style.card.border.meta : style.card.border.default}`,
                       paddingLeft: `${style.padding.xxs}`,
                       paddingRight: `${style.padding.xxs}`,
+                      color: `${hookContractCreate.formStep == 3 ? "" : style.color.disabled}`,
+                      backgroundColor: `${hookContractCreate.formStep == 3 ? "" : "#18203A"}`
                     }}
                   >
                     3
                   </Text>
                 )}
-                <Text>Third</Text>
+                <Text
+                  style={{ color: `${hookContractCreate.formStep == 3 ? "" : style.color.disabled}` }}
+                >Third</Text>
               </Box>
             </Box>
 
@@ -194,24 +207,30 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 value={hookContractCreate.$contractFormData.address}
                 inputType="text"
                 labelText="Address *"
-                placeholder="Address"
+                placeholder="0x0fea00feb84ad311Cc6E9d042f7753484D78f4F0"
                 onChange={(e: any) => hookContractCreate.$loadContractFormData({ address: e.target.value })}
               />
-              <InputLabel
-                value={hookContractCreate.$contractFormData.chain_id}
-                onChange={(e: any) => hookContractCreate.$loadContractFormData({ chain_id: e.target.value })}
-                inputType="text"
-                labelText="Chain Id *"
-                placeholder="Chain Id"
-                marginTop="sm"
+              <InputSelect value={hookContractCreate.$contractFormData.chain_id} placeholder="Chain Id" 
+                defaultValue={1} onChange={(e: any) => hookContractCreate.$loadContractFormData({ chain_id: e.target.value })}
+                marginTop="sm" labelText="Chain Id *" options={[
+                  {
+                    value: 1,
+                    title: "Ethereum"
+                  },
+                  {
+                    value: 137,
+                    title: "Polygon"
+                  }
+                ]}
               />
               <InputLabel
                 value={hookContractCreate.$contractFormData.read_abi_from}
                 onChange={(e: any) => hookContractCreate.$loadContractFormData({ read_abi_from: e.target.value })}
                 inputType="text"
                 labelText="Read ABI From"
-                placeholder="Read ABI From"
+                placeholder="0x04dd2568fb6A1AA9D560b3F450a2bFBA29Cf32ca"
                 marginTop="sm"
+                tooltipLabel="If you are using proxy contracts or have the ABI of the above mentioned contract, please fill up this field for proper indexing."
               />
             </>}
             {hookContractCreate.formStep == 2 && <>
@@ -222,7 +241,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                     onChange={(e: any) => hookContractCreate.$loadContractFormData({ name: e.target.value })}
                     inputType="text"
                     labelText="Contract Name *"
-                    placeholder="Name"
+                    placeholder="ENS"
                   />
                 </Box>
                 <Box width="47%">
@@ -231,7 +250,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                     onChange={(e: any) => hookContractCreate.$loadContractFormData({ slug: e.target.value })}
                     inputType="text"
                     labelText="Slug *"
-                    placeholder="Slug"
+                    placeholder="ens_ethereum"
                   />
                 </Box>
               </Box>
@@ -240,7 +259,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 onChange={(e: any) => hookContractCreate.$loadContractFormData({ description: e.target.value })}
                 inputType="text"
                 labelText="Description *"
-                placeholder="Description"
+                placeholder="Ethereum Name Service on ethereum chain..."
                 marginTop="sm"
               />
               {hookContractCreate.$contractFormData.image == "" ?
@@ -278,7 +297,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 )"
                     bgClip="text"
                   >
-                    Organization Logo
+                    Image
                   </Heading>
                   <Box width="100%" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <Image height={100} width="80%" objectFit="contain" src={hookContractCreate.$contractFormData.image} alt="" />
@@ -291,16 +310,18 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 onChange={(e: any) => hookContractCreate.$loadContractFormData({ interested_methods: e.target.value })}
                 inputType="text"
                 labelText="Interested Methods *"
-                placeholder="Interested Methods"
+                placeholder="register, renew"
                 marginTop="sm"
+                tooltipLabel="You can mention more than one method(s) using comma seperated values."
               />
               <InputLabel
                 value={hookContractCreate.$contractFormData.interested_events}
                 onChange={(e: any) => hookContractCreate.$loadContractFormData({ interested_events: e.target.value })}
                 inputType="text"
                 labelText="Interested Events *"
-                placeholder="Interested Events"
+                placeholder="deposit, withdraw"
                 marginTop="sm"
+                tooltipLabel="You can mention more than one event(s) using comma seperated values."
               />
             </>}
           </FlexColumn>

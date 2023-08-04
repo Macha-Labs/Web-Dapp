@@ -38,12 +38,17 @@ export const contractDataByAddress = async (contractAddress: any) => {
   return data;
 };
 
-export const txnDataBySlug = async (contractSlug: string,page: number) => {
-  const response = await fetch(
-    `${config.metaServer}/indexer/transactions/fetch-by-slug/${contractSlug}?page=${page}`
-  );
-  const data = await response.json();
-  return data;
+export const txnDataBySlug = async (contractSlug: string, page: number) => {
+  try {
+    const response = await fetch(
+      `${config.metaServer}/indexer/transactions/fetch-by-slug/${contractSlug}?page=${page}`
+    );
+    const data = await response.json();
+    return data;
+  }
+  catch(err){
+    console.log(err)
+  }
 };
 
 export const allContracts = async () => {
@@ -69,22 +74,22 @@ export const createNewContract = async (data: any) => {
   return response.json();
 };
 
-export const createNewPublisher = async (data: any,type: string) => {
+export const createNewPublisher = async (data: any, type: string) => {
   let url = `${config.metaServer}/indexer/publishers/create`
-  if(type == "Individual"){
+  if (type == "Individual") {
     url = `${config.metaServer}/indexer/publishers/create`
   }
-  else if(type == "Organization"){
+  else if (type == "Organization") {
     url = `${config.metaServer}/indexer/publishers/create?type=org`
   }
   console.log(data)
-  const response = await fetch(url,{
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
+  const response = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }
   );
   console.log("new publisher created ", response);
   return response.json();
@@ -104,14 +109,14 @@ export const deleteContract = async (contract_id: any) => {
   return response.json();
 };
 
-export const txnByChainId = async (chain_id: any,page: any) => {
+export const txnByChainId = async (chain_id: any, page: any) => {
   let url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}?page=${page}`
   const response = await fetch(url);
   const data = await response.json();
   return data;
 };
 
-export const txnByUserAddress = async (from_address: any,page: any) => {
+export const txnByUserAddress = async (from_address: any, page: any) => {
   const response = await fetch(
     `${config.metaServer}/indexer/transactions/fetch-by-user-address/${from_address}?page=${page}`
   );
