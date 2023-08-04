@@ -28,7 +28,7 @@ const Home = () => {
   const dashboardNav: any = [
     {
       value: "Home",
-      href: "/",
+      href: "/studio",
     },
     {
       value: "Contracts",
