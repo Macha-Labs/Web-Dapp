@@ -33,7 +33,7 @@ const OriginModal = ({
       console.log("Calling request method");
       settingRequestMethod(defaultData?.requestType);
     }
-  }, [defaultData,settingRequestMethod]);
+  }, [defaultData, settingRequestMethod]);
 
   return (
     <ModalSlider
@@ -62,7 +62,7 @@ const OriginModal = ({
         >
           Request Type
         </Heading>
-        <InputSelect
+        {/* <InputSelect
           elementRef={(element: any) =>
             (hookMetaCreate.metaOrigin.current["requestType"] = element)
           }
@@ -74,7 +74,7 @@ const OriginModal = ({
           variant={"state_default_hover"}
 
           // margin="0 0 20px 0"
-        />
+        /> */}
 
         <Heading
           as="h6"
@@ -90,7 +90,7 @@ const OriginModal = ({
           Request Method
         </Heading>
 
-        <InputSelect
+        {/* <InputSelect
           elementRef={(element: any) =>
             (hookMetaCreate.metaOrigin.current["requestMethod"] = element)
           }
@@ -100,7 +100,7 @@ const OriginModal = ({
           icon={{ slug: "icon-chevron-down" }}
           variant={"state_default_hover"}
           // margin="0 0 10px 0"
-        />
+        /> */}
 
         {/* <InputLabel
                   inputType="text"

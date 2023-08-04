@@ -49,12 +49,12 @@ const ApiCreateModal = ({ modal, hookApiCreate }: Props) => {
             >
               {field?.title}
             </Heading>
-            <InputSelect
+            {/* <InputSelect
               elementRef={(element: any) =>
                 (hookApiCreate.apiDataRef.current["requestMethod"] = element)
               }
               options={field?.options}
-            />
+            /> */}
           </FlexColumn>
         );
     }

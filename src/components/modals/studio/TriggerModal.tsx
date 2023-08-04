@@ -35,7 +35,7 @@ const TriggerModal = ({
       console.log("Calling request method");
       settingRequestMethod(defaultData?.requestType);
     }
-  }, [defaultData,settingRequestMethod]);
+  }, [defaultData, settingRequestMethod]);
   return (
     <ModalSlider
       event={modal}
@@ -87,7 +87,7 @@ const TriggerModal = ({
           Request Type
         </Heading>
 
-        <InputSelect
+        {/* <InputSelect
           elementRef={(element: any) =>
             (hookMetaCreate.metaTrigger.current["requestType"] = element)
           }
@@ -98,7 +98,7 @@ const TriggerModal = ({
           icon={{ slug: "icon-chevron-down" }}
           variant={"state_default_hover"}
           // margin="0 0 10px 0"
-        />
+        /> */}
 
         {triggerMethods.length > 0 && (
           <>
@@ -116,7 +116,7 @@ const TriggerModal = ({
             >
               Request Method
             </Heading>
-            <InputSelect
+            {/* <InputSelect
               elementRef={(element: any) =>
                 (hookMetaCreate.metaTrigger.current["requestMethod"] = element)
               }
@@ -126,7 +126,7 @@ const TriggerModal = ({
               icon={{ slug: "icon-chevron-down" }}
               variant={"state_default_hover"}
               margin="0 0 10px 0"
-            />
+            /> */}
           </>
         )}
 

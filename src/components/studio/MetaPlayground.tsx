@@ -30,7 +30,7 @@ function MetaPlayground({ id }: Props) {
         <FlexRow hrAlign="space-between" marginBottom={"md"}>
           {$metaInfo?.data?.metaData?.origin && (
             <>
-              <InputSelect
+              {/* <InputSelect
                 onChangeHandler={setSelectedOrigin}
                 placeholder="Origins"
                 options={$metaInfo?.data?.metaData?.origin}
@@ -52,7 +52,7 @@ function MetaPlayground({ id }: Props) {
                     )}
                   </>
                 }
-              />
+              /> */}
               {/* <InputSelect
               onChangeHandler={setSelectedTrigger}
               placeholder="Triggers"
