@@ -278,7 +278,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                     })
                   }
                 />
-                {/* <InputSelect value={hookContractCreate.$contractFormData.chain_id} placeholder="Chain Id" 
+                <InputSelect value={hookContractCreate.$contractFormData.chain_id} placeholder="Chain Id" 
                 defaultValue={1} onChange={(e: any) => hookContractCreate.$loadContractFormData({ chain_id: e.target.value })}
                 marginTop="sm" labelText="Chain Id *" options={[
                   {
@@ -290,7 +290,7 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                     title: "Polygon"
                   }
                 ]}
-              /> */}
+              />
                 <InputLabel
                   value={hookContractCreate.$contractFormData.read_abi_from}
                   onChange={(e: any) =>
