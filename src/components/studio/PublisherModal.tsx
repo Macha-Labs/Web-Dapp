@@ -179,9 +179,14 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         Close
                       </ButtonNative>
 
-                      <Text width="100%" textAlign="center">
-                        You do not have enough TFIL Balance
-                      </Text>
+                      <Box>
+                        <Text width="100%" textAlign="center" mb={0}>
+                          You do not have enough TFIL Balance
+                        </Text>
+                        <Text fontSize={style.font.h7} textAlign="center" color={style.color["white.5"]} mb={0}>
+                          If you do, please refresh the page and try again.
+                        </Text>
+                      </Box>
 
                       <ButtonNative
                         variant="state_default_hover"
@@ -417,11 +422,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           flexDirection: "column",
                           justifyContent: "space-between",
                           background: "#000a24",
-                          border: `${
-                            hookPublisherCreate.publisherType == "Individual"
+                          border: `${hookPublisherCreate.publisherType == "Individual"
                               ? "1.5px solid #197cec"
                               : style.card.border.publisher
-                          }`,
+                            }`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -475,11 +479,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           width: "48%",
                           background: "#000a24",
                           height: "100%",
-                          border: `${
-                            hookPublisherCreate.publisherType == "Organization"
+                          border: `${hookPublisherCreate.publisherType == "Organization"
                               ? "1.5px solid #197cec"
                               : style.card.border.publisher
-                          }`,
+                            }`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",
