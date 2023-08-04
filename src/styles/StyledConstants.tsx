@@ -42,7 +42,8 @@ export const commonStyle: any = {
   color: {
     p: "#fff",
     h: "#fff",
-    "white.5": "rgb(255,255,255,0.5)"
+    "white.5": "rgb(255,255,255,0.5)",
+    "white.7": "rgb(255,255,255,0.7)",
   },
 };
 
@@ -70,9 +71,9 @@ export const darkStyle = {
   nav: {
     width: "100%",
     height: "75px",
-    bg: { default: "#00040d" },
+    bg: { default: "#00040d", meta: "#000A24" },
     border: { default: "2px solid #0F172E" },
-    padding: "1% 6%",
+    padding: { default: "1% 6%", meta: "1% 2%" },
     margin: "75px",
   },
   list: {
@@ -106,6 +107,7 @@ export const darkStyle = {
       meta: "1px solid #197cec",
       mcard: "1px solid #353c54",
       contract: "1px solid #061133",
+      publisher: "1px solid rgba(8,78,156,0.5)",
     },
     borderRadius: {
       default: "20px",
@@ -248,7 +250,7 @@ export const darkStyle = {
       activeTranslucent:
         "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);",
       disabled: "",
-      warning:"#C62424",
+      warning: "#C62424",
     },
     color: "#EFEFEF",
     margin: { default: "5px" },

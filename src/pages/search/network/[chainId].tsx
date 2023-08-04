@@ -23,6 +23,7 @@ import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import useAuthStore from "@/store/useAuthStore";
 import InputSearch from "@/_ui/input/InputSearch";
 import useAlchemy from "@/hooks/studio/useAlchemy";
+import NavStudio from "@/_ui/nav/NavStudio";
 
 const Network = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -34,17 +35,7 @@ const Network = () => {
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Transactions");
 
   const renderNav = () => {
-    return (
-      <NavTop
-        centerElem={<InputSearch />}
-        rightElem={
-          <FlexRow width="fit-content">
-            {$address && <NavButton />}
-            {<ConnectWalletButton />}
-          </FlexRow>
-        }
-      />
-    );
+    return <NavStudio />;
   };
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
 import NavBlock from "@/_ui/nav/NavBlock";
+import NavStudio from "@/_ui/nav/NavStudio";
 import NavTop from "@/_ui/nav/NavTop";
 import TagNative from "@/_ui/tag/TagNative";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
@@ -55,17 +56,7 @@ const SearchResult = () => {
   const id = router.query.id;
 
   const renderNav = () => {
-    return (
-      <NavTop
-        centerElem={<InputSearch />}
-        rightElem={
-          <FlexRow width="fit-content">
-            {$address && <NavButton />}
-            {<ConnectWalletButton />}
-          </FlexRow>
-        }
-      />
-    );
+    return <NavStudio />;
   };
 
   const TWITTER_INTENT_URL = "https://twitter.com/intent/tweet";

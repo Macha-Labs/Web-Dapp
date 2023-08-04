@@ -11,35 +11,19 @@ import TagNative from "@/_ui/tag/TagNative";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
-import ApiList from "@/components/studio/ApiList";
 import ContractCreateModal from "@/components/studio/ContractCreateModal";
-import ContractList from "@/components/studio/ContractList";
 import HomeDev from "@/components/studio/HomeDev";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import useMacha from "@/hooks/studio/useMacha";
-import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
 import { Box, Text, useDisclosure } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 
-const DashBoard = () => {
-  const $address = useAuthStore((state: any) => state.address);
-  const [exploreMeta, setExploreMeta] = useState<any>([]);
-  const [isPublisher, setIsPublisher] = useState<any>(false);
-
-  const fetchmetas = async () => {
-    const allMetas = await fetchAllMetas();
-    setExploreMeta(allMetas.data);
-  };
+const Home = () => {
+  const hookMacha = useMacha();
   const contractModal = useDisclosure();
   const metaModal = useDisclosure();
   const hookContractCreate = useContractCreate(contractModal);
-  const hookMacha = useMacha();
-
-  useEffect(() => {
-    fetchmetas();
-  }, []);
 
   const dashboardNav: any = [
     {
@@ -56,8 +40,10 @@ const DashBoard = () => {
     // },
   ];
 
-  const renderContracts = () => {
-    return <>{<ContractList />}</>;
+  const $address = useAuthStore((state: any) => state.address);
+
+  const renderHome = () => {
+    return <>{<HomeDev />}</>;
   };
 
   const renderBody = () => {
@@ -70,7 +56,7 @@ const DashBoard = () => {
                 width="fit-content"
                 options={dashboardNav}
                 gstyle={{ fontSize: `${style.font.h5}` }}
-                value={"Contracts"}
+                value={"Home"}
                 onChange={() => {}}
               />
               <Box
@@ -106,23 +92,23 @@ const DashBoard = () => {
             )}
 
             {/* {selectedNavTab == "Functions" && (
-              <ButtonNative
-                size="sm"
-                text="Create Function"
-                variant="state_brand"
-                marginRight="0px"
-                paddingLeft="sm"
-                paddingRight="sm"
-                onClick={() => {
-                  metaModal.onOpen();
-                }}
-              />
-            )} */}
+                  <ButtonNative
+                    size="sm"
+                    text="Create Function"
+                    variant="state_brand"
+                    marginRight="0px"
+                    paddingLeft="sm"
+                    paddingRight="sm"
+                    onClick={() => {
+                      metaModal.onOpen();
+                    }}
+                  />
+                )} */}
           </FlexRow>
         </NavBlock>
 
         <FlexBody>
-          <Box style={{ overflow: "hidden" }}>{renderContracts()}</Box>
+          <Box style={{ overflow: "hidden" }}>{renderHome()}</Box>
         </FlexBody>
         <ContractCreateModal
           modal={contractModal}
@@ -146,5 +132,4 @@ const DashBoard = () => {
     ></FlexWindow>
   );
 };
-
-export default DashBoard;
+export default Home;

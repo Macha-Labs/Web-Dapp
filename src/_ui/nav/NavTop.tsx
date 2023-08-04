@@ -16,7 +16,7 @@ const NavTop = ({ rightElem, centerElem }: Props) => {
         className="py-3"
         style={{
           background: `${style.input.bg.default}`,
-          padding: `${style.nav.padding}`,
+          padding: `${style.nav.padding.default}`,
           width: `${style.nav.width}`,
           height: `${style.nav.height}`,
           borderBottom: `${style.nav.border.default}`,
@@ -24,7 +24,7 @@ const NavTop = ({ rightElem, centerElem }: Props) => {
       >
         <FlexRow width="100%" hrAlign="space-between" vrAlign="center">
           <FlexRow vrAlign="center" hrAlign="flex-start">
-            <Link href="/">
+            <Link href="/studio">
               <Image
                 className="headerLogo"
                 src="/assets/Macha-logo-text.svg"

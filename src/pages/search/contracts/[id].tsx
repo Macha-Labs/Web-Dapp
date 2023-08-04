@@ -20,6 +20,7 @@ import { useEffect } from "react";
 import NavButton from "@/components/buttons/NavButton";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavTop from "@/_ui/nav/NavTop";
+import NavStudio from "@/_ui/nav/NavStudio";
 
 type Props = {
   metaInfo: any;
@@ -43,17 +44,7 @@ const Contract = () => {
   }, [router.query.id, hookContractTxn.page]);
 
   const renderNav = () => {
-    return (
-      <NavTop
-        centerElem={<InputSearch />}
-        rightElem={
-          <FlexRow width="fit-content">
-            {$address && <NavButton />}
-            {<ConnectWalletButton />}
-          </FlexRow>
-        }
-      />
-    );
+    return <NavStudio />;
   };
   const renderComponent = () => {
     let options = {
@@ -99,18 +90,20 @@ const Contract = () => {
                 marginTop: `${style.margin.sm}`,
               }}
             >
-              <Box style={{
-                display: "flex",
-                alignItems: "center",
-              }}>
+              <Box
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
                 <ButtonNative
                   marginRight="sm"
                   size="xs"
                   height="2rem"
                   onClick={() => {
                     if (hookContractTxn.page != 1) {
-                      hookContractTxn.setIsLoading(true)
-                      hookContractTxn.setPage(1)
+                      hookContractTxn.setIsLoading(true);
+                      hookContractTxn.setPage(1);
                     }
                   }}
                   text="Newest"
@@ -123,23 +116,25 @@ const Contract = () => {
                   height="2rem"
                   onClick={() => {
                     if (hookContractTxn.page > 1) {
-                      hookContractTxn.setIsLoading(true)
-                      hookContractTxn.setPage(hookContractTxn.page - 1)
+                      hookContractTxn.setIsLoading(true);
+                      hookContractTxn.setPage(hookContractTxn.page - 1);
                     }
                   }}
                   text="Prev"
                   disabled={hookContractTxn.page <= 1}
                   variant="state_default_hover"
                 />
-                <Text marginRight={style.margin.sm} marginBottom="0.25rem">Page {hookContractTxn?.page} of {hookContractTxn.totalPages}</Text>
+                <Text marginRight={style.margin.sm} marginBottom="0.25rem">
+                  Page {hookContractTxn?.page} of {hookContractTxn.totalPages}
+                </Text>
                 <ButtonNative
                   marginRight="sm"
                   size="xs"
                   height="2rem"
                   onClick={() => {
                     if (hookContractTxn.page < hookContractTxn.totalPages) {
-                      hookContractTxn.setIsLoading(true)
-                      hookContractTxn.setPage(hookContractTxn.page + 1)
+                      hookContractTxn.setIsLoading(true);
+                      hookContractTxn.setPage(hookContractTxn.page + 1);
                     }
                   }}
                   disabled={hookContractTxn.page >= hookContractTxn.totalPages}
@@ -152,8 +147,8 @@ const Contract = () => {
                   height="2rem"
                   onClick={() => {
                     if (hookContractTxn.page != hookContractTxn.totalPages) {
-                      hookContractTxn.setIsLoading(true)
-                      hookContractTxn.setPage(hookContractTxn.totalPages)
+                      hookContractTxn.setIsLoading(true);
+                      hookContractTxn.setPage(hookContractTxn.totalPages);
                     }
                   }}
                   text="Oldest"

@@ -13,7 +13,7 @@ export default function NavBlock({ children, back, marginTop }: Props) {
       className="nav-block"
       style={{
         background: `${style.input.bg.default}`,
-        padding: `${style.nav.padding}`,
+        padding: `${style.nav.padding.default}`,
         width: `100%`,
         borderBottom: `${style.nav.border.default}`,
         position: "fixed",

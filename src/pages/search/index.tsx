@@ -2,6 +2,7 @@ import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import NavStudio from "@/_ui/nav/NavStudio";
 import NavTop from "@/_ui/nav/NavTop";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import NavButton from "@/components/buttons/NavButton";
@@ -29,24 +30,7 @@ const Search = () => {
   }, [$metaInfo]);
 
   const renderNav = () => {
-    return (
-      <NavTop
-        rightElem={
-          <FlexRow hrAlign="flex-end">
-            {$address && (
-              <NavButton
-                marginRight={style.margin["xxs"]}
-                marginLeft={style.margin["xxs"]}
-                width="fit-content"
-              />
-            )}
-            <Box>
-            <ConnectWalletButton />
-            </Box>
-          </FlexRow>
-        }
-      />
-    );
+    return <NavStudio />;
   };
 
   const renderBody = () => {
