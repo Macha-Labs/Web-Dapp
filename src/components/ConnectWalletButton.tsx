@@ -257,6 +257,9 @@ export const ConnectWalletButton = (props: any) => {
                         onClick={() => {
                           $unload();
                           disconnect();
+                          if(window !== undefined){
+                            const res = window.sessionStorage.setItem("macha.connected","false")
+                          }
                         }}
                       >
                         <FlexRow hrAlign="space-between">

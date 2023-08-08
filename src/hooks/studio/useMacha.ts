@@ -21,15 +21,17 @@ const useMacha = () => {
   useEffect(() => {
     const _fetch = async () => {
       if(window !== undefined){
-        const res = window.localStorage.getItem("wagmi.connected") ? true : false
-        if(res == true){
-          console.log("reconnecting wallet")
-          if(!isConnected){
-            const result = await connect({
-              connector: new InjectedConnector({
-                chains: [filecoinCalibration]
-              }),
-            })
+        const res = window.sessionStorage.getItem("macha.connected")
+        if(res){
+          if(JSON.parse(res) == true){
+            console.log("reconnecting wallet")
+            if(!isConnected){
+              const result = await connect({
+                connector: new InjectedConnector({
+                  chains: [filecoinCalibration]
+                }),
+              })
+            }
           }
         }
       }
@@ -40,6 +42,12 @@ const useMacha = () => {
   useEffect(() => {
     connectMachaPublisher();
   }, [signer, $address]);
+
+  useEffect(() => {
+    if(window !== undefined){
+      const res = window.sessionStorage.setItem("macha.connected",JSON.stringify(isConnected))
+    }
+  },[isConnected])
 
   const createMachaPublisher = async (
     publisherData: PublisherDataInterface
