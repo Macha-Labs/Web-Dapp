@@ -9,8 +9,9 @@ import useMachaApi from "@/hooks/studio/useMachaApi";
 import { initialiseNewMeta } from "@/service/MetaService";
 // import { initialiseNewMeta } from "@/service/studio/MetaService";
 import useMetaStore from "@/store/useMetaStore";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Text } from "@chakra-ui/react";
+import { Image, Text } from "@chakra-ui/react";
 
 type Props = {
   modal: any;
@@ -32,7 +33,22 @@ const ClientCreateModal = ({ modal, hookMeta }: Props) => {
         header={
           <FlexRow width="100%" hrAlign="space-between">
             <Text className="mb-0">Client</Text>
-            <IconImage slug="icon-close" onClick={() => modal.onClose()} />
+            <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "5px",
+              cursor: "pointer",
+              width: "fit-content",
+              height: "fit-content",
+              background: `${style.icon.bg.default}`,
+              borderRadius: `${style.icon.borderRadius}`,
+              boxShadow: `${style.icon.shadow.default}`,
+              marginLeft: `${style.margin[style?.marginLeft]}`,
+              marginRight: `${style.margin[style?.marginRight]}`,
+              marginBottom: `${style.margin[style?.marginBottom]}`,
+              marginTop: `${style.margin[style?.marginTop]}`,
+            }} />
           </FlexRow>
         }
         footer={

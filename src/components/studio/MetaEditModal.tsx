@@ -7,6 +7,7 @@ import ModalSlider from "@/_ui/modal/ModalSlider";
 import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
 import { editPendingMeta } from "@/service/MetaService";
 import useMetaStore from "@/store/useMetaStore";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Image, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -34,7 +35,22 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
       header={
         <FlexRow width="100%" hrAlign="space-between">
           <Text className="mb-0">Edit Meta</Text>
-          <IconImage slug="icon-close" onClick={() => metaModal.onClose()} />
+          <Image src={GlobalIcons["icon-close"]} onClick={() => metaModal.onClose()} style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "5px",
+              cursor: "pointer",
+              width: "fit-content",
+              height: "fit-content",
+              background: `${style.icon.bg.default}`,
+              borderRadius: `${style.icon.borderRadius}`,
+              boxShadow: `${style.icon.shadow.default}`,
+              marginLeft: `${style.margin[style?.marginLeft]}`,
+              marginRight: `${style.margin[style?.marginRight]}`,
+              marginBottom: `${style.margin[style?.marginBottom]}`,
+              marginTop: `${style.margin[style?.marginTop]}`,
+            }} />
         </FlexRow>
       }
     >

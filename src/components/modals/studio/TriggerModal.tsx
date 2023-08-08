@@ -1,12 +1,11 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
-import InputSelect from "@/_ui/input/InputSelect";
 import ModalSlider from "@/_ui/modal/ModalSlider";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Heading, Text } from "@chakra-ui/react";
+import { Heading, Image, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 type Props = {
@@ -43,7 +42,22 @@ const TriggerModal = ({
       header={
         <FlexRow width="100%" hrAlign="space-between">
           <Text className="mb-0">{header}</Text>
-          <IconImage slug="icon-close" onClick={() => modal.onClose()} />
+          <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "5px",
+            cursor: "pointer",
+            width: "fit-content",
+            height: "fit-content",
+            background: `${style.icon.bg.default}`,
+            borderRadius: `${style.icon.borderRadius}`,
+            boxShadow: `${style.icon.shadow.default}`,
+            marginLeft: `${style.margin[style?.marginLeft]}`,
+            marginRight: `${style.margin[style?.marginRight]}`,
+            marginBottom: `${style.margin[style?.marginBottom]}`,
+            marginTop: `${style.margin[style?.marginTop]}`,
+          }} />
         </FlexRow>
       }
     >
@@ -58,7 +72,7 @@ const TriggerModal = ({
           labelText="Name"
           placeholder="Trigger Name"
           defaultValue={defaultData?.name}
-          // padding="20px 0px"
+        // padding="20px 0px"
         />
 
         <InputLabel
@@ -69,7 +83,7 @@ const TriggerModal = ({
           labelText="Description"
           placeholder="Description"
           defaultValue={defaultData?.description}
-          // padding="20px 0px"
+        // padding="20px 0px"
         />
 
         <Heading
@@ -139,7 +153,7 @@ const TriggerModal = ({
           defaultValue={defaultData?.requestEndpoint}
           placeholder="Endpoint"
           marginTop="sm"
-          // padding="20px 0px"
+        // padding="20px 0px"
         />
 
         <InputLabel
@@ -150,7 +164,7 @@ const TriggerModal = ({
           labelText="Trigger Schema"
           placeholder="Add your trigger schema"
           defaultValue={defaultData?.requestSchema}
-          // padding="20px 0px"
+        // padding="20px 0px"
         />
 
         <InputLabel
@@ -162,7 +176,7 @@ const TriggerModal = ({
           placeholder="Provide Parameter"
           defaultValue={defaultData?.requestParams}
           marginTop="sm"
-          // padding="20px 0px"
+        // padding="20px 0px"
         />
 
         <FlexRow width="100%" hrAlign="space-between" marginTop={"sm"}>

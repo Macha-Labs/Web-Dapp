@@ -5,8 +5,9 @@ import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import InputSelect from "@/_ui/input/InputSelect";
 import ModalSlider from "@/_ui/modal/ModalSlider";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Heading, Text } from "@chakra-ui/react";
+import { Heading, Image, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 type Props = {
@@ -42,7 +43,22 @@ const OriginModal = ({
       header={
         <FlexRow width="100%" hrAlign="space-between">
           <Text className="mb-0">{header}</Text>
-          <IconImage slug="icon-close" onClick={() => modal.onClose()} />
+          <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "5px",
+            cursor: "pointer",
+            width: "fit-content",
+            height: "fit-content",
+            background: `${style.icon.bg.default}`,
+            borderRadius: `${style.icon.borderRadius}`,
+            boxShadow: `${style.icon.shadow.default}`,
+            marginLeft: `${style.margin[style?.marginLeft]}`,
+            marginRight: `${style.margin[style?.marginRight]}`,
+            marginBottom: `${style.margin[style?.marginBottom]}`,
+            marginTop: `${style.margin[style?.marginTop]}`,
+          }} />
         </FlexRow>
       }
     >
@@ -126,7 +142,7 @@ const OriginModal = ({
           defaultValue={defaultData?.requestEndpoint}
           placeholder="Request Endpoint"
           marginTop="sm"
-          // padding="20px 0px"
+        // padding="20px 0px"
         />
 
         <InputLabel
@@ -138,8 +154,8 @@ const OriginModal = ({
           placeholder="Request Schema"
           defaultValue={defaultData?.requestSchema}
           marginTop="sm"
-          // padding="20px 0p
-          // padding="20px 0px"
+        // padding="20px 0p
+        // padding="20px 0px"
         />
 
         <InputLabel

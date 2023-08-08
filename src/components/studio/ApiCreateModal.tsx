@@ -2,15 +2,14 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
-import InputSelect from "@/_ui/input/InputSelect";
 // import TableNative from "@/_ui/list/Tablenative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import useMachaApi from "@/hooks/studio/useMachaApi";
 import useMetaStore from "@/store/useMetaStore";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Heading, Text } from "@chakra-ui/react";
+import { Heading, Image, Text } from "@chakra-ui/react";
 import CustomTable from "./CustomTable";
 
 type Props = {
@@ -68,7 +67,22 @@ const ApiCreateModal = ({ modal, hookApiCreate }: Props) => {
         header={
           <FlexRow width="100%" hrAlign="space-between">
             <Text className="mb-0"> API</Text>
-            <IconImage slug="icon-close" onClick={() => modal.onClose()} />
+            <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "5px",
+              cursor: "pointer",
+              width: "fit-content",
+              height: "fit-content",
+              background: `${style.icon.bg.default}`,
+              borderRadius: `${style.icon.borderRadius}`,
+              boxShadow: `${style.icon.shadow.default}`,
+              marginLeft: `${style.margin[style?.marginLeft]}`,
+              marginRight: `${style.margin[style?.marginRight]}`,
+              marginBottom: `${style.margin[style?.marginBottom]}`,
+              marginTop: `${style.margin[style?.marginTop]}`,
+            }} />
           </FlexRow>
         }
         footer={

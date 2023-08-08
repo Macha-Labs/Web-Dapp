@@ -1,12 +1,10 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import IconImage from "@/_ui/icons/IconImage";
 import InputLabel from "@/_ui/input/InputLabel";
 import ModalSlider from "@/_ui/modal/ModalSlider";
-import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
-import { initialiseNewMeta } from "@/service/MetaService";
 import useMetaStore from "@/store/useMetaStore";
+import GlobalIcons from "@/styles/GlobalIcons";
+import { style } from "@/styles/StyledConstants";
 import { Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -33,7 +31,22 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
       header={
         <FlexRow width="100%" hrAlign="space-between">
           <Text className="mb-0">Create Meta</Text>
-          <IconImage slug="icon-close" onClick={() => metaModal.onClose()} />
+          <Image src={GlobalIcons["icon-close"]} onClick={() => metaModal.onClose()} style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "5px",
+              cursor: "pointer",
+              width: "fit-content",
+              height: "fit-content",
+              background: `${style.icon.bg.default}`,
+              borderRadius: `${style.icon.borderRadius}`,
+              boxShadow: `${style.icon.shadow.default}`,
+              marginLeft: `${style.margin[style?.marginLeft]}`,
+              marginRight: `${style.margin[style?.marginRight]}`,
+              marginBottom: `${style.margin[style?.marginBottom]}`,
+              marginTop: `${style.margin[style?.marginTop]}`,
+            }} />
         </FlexRow>
       }
     >

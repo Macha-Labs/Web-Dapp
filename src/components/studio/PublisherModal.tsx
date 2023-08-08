@@ -1,7 +1,6 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import IconImage from "@/_ui/icons/IconImage";
 import IconBase from "@/_ui/icons/IconsBase";
 import InputLabel from "@/_ui/input/InputLabel";
 import Loader from "@/_ui/loader/Loader";
@@ -12,13 +11,14 @@ import {
   displayImage,
 } from "@/helpers/storage/lightHouseStorage";
 import useMacha from "@/hooks/studio/useMacha";
+import useAuthStore from "@/store/useAuthStore";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Image, Text, useToast } from "@chakra-ui/react";
 import { fetchBalance } from "@wagmi/core";
-import useAuthStore from "@/store/useAuthStore";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 type Props = {
   modal: any;
@@ -97,7 +97,22 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
               )}
             {hookPublisherCreate.formStep != 5 &&
               hookPublisherCreate.formStep != 6 && (
-                <IconImage slug="icon-close" onClick={() => modal.onClose()} />
+                <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "5px",
+                  cursor: "pointer",
+                  width: "fit-content",
+                  height: "fit-content",
+                  background: `${style.icon.bg.default}`,
+                  borderRadius: `${style.icon.borderRadius}`,
+                  boxShadow: `${style.icon.shadow.default}`,
+                  marginLeft: `${style.margin[style?.marginLeft]}`,
+                  marginRight: `${style.margin[style?.marginRight]}`,
+                  marginBottom: `${style.margin[style?.marginBottom]}`,
+                  marginTop: `${style.margin[style?.marginTop]}`,
+                }} />
               )}
           </FlexRow>
         }

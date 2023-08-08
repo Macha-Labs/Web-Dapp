@@ -11,6 +11,7 @@ import {
   deploytoLightHouse,
   displayImage,
 } from "@/helpers/storage/lightHouseStorage";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Divider, Heading, Image, Text } from "@chakra-ui/react";
 
@@ -28,7 +29,22 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
         header={
           <FlexRow width="100%" hrAlign="space-between">
             <Text className="mb-0">Contract</Text>
-            <IconImage slug="icon-close" onClick={() => modal.onClose()} />
+            <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "5px",
+              cursor: "pointer",
+              width: "fit-content",
+              height: "fit-content",
+              background: `${style.icon.bg.default}`,
+              borderRadius: `${style.icon.borderRadius}`,
+              boxShadow: `${style.icon.shadow.default}`,
+              marginLeft: `${style.margin[style?.marginLeft]}`,
+              marginRight: `${style.margin[style?.marginRight]}`,
+              marginBottom: `${style.margin[style?.marginBottom]}`,
+              marginTop: `${style.margin[style?.marginTop]}`,
+            }} />
           </FlexRow>
         }
         footer={
@@ -109,21 +125,18 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                     <Text
                       rounded="full"
                       style={{
-                        border: `${
-                          hookContractCreate.formStep == 1
+                        border: `${hookContractCreate.formStep == 1
                             ? style.card.border.meta
                             : style.card.border.default
-                        }`,
+                          }`,
                         paddingLeft: `${style.padding.xxs}`,
                         paddingRight: `${style.padding.xxs}`,
-                        color: `${
-                          hookContractCreate.formStep == 1
+                        color: `${hookContractCreate.formStep == 1
                             ? ""
                             : style.color.disabled
-                        }`,
-                        backgroundColor: `${
-                          hookContractCreate.formStep == 1 ? "" : "#18203A"
-                        }`,
+                          }`,
+                        backgroundColor: `${hookContractCreate.formStep == 1 ? "" : "#18203A"
+                          }`,
                       }}
                     >
                       1
@@ -132,11 +145,10 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 </Box>
                 <Text
                   style={{
-                    color: `${
-                      hookContractCreate.formStep == 1
+                    color: `${hookContractCreate.formStep == 1
                         ? ""
                         : style.color.disabled
-                    }`,
+                      }`,
                   }}
                 >
                   First
@@ -164,21 +176,18 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                   <Text
                     rounded="full"
                     style={{
-                      border: `${
-                        hookContractCreate.formStep == 2
+                      border: `${hookContractCreate.formStep == 2
                           ? style.card.border.meta
                           : style.card.border.default
-                      }`,
+                        }`,
                       paddingLeft: `${style.padding.xxs}`,
                       paddingRight: `${style.padding.xxs}`,
-                      color: `${
-                        hookContractCreate.formStep == 2
+                      color: `${hookContractCreate.formStep == 2
                           ? ""
                           : style.color.disabled
-                      }`,
-                      backgroundColor: `${
-                        hookContractCreate.formStep == 2 ? "" : "#18203A"
-                      }`,
+                        }`,
+                      backgroundColor: `${hookContractCreate.formStep == 2 ? "" : "#18203A"
+                        }`,
                     }}
                   >
                     2
@@ -186,11 +195,10 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 )}
                 <Text
                   style={{
-                    color: `${
-                      hookContractCreate.formStep == 2
+                    color: `${hookContractCreate.formStep == 2
                         ? ""
                         : style.color.disabled
-                    }`,
+                      }`,
                   }}
                 >
                   Second
@@ -218,21 +226,18 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                   <Text
                     rounded="full"
                     style={{
-                      border: `${
-                        hookContractCreate.formStep == 3
+                      border: `${hookContractCreate.formStep == 3
                           ? style.card.border.meta
                           : style.card.border.default
-                      }`,
+                        }`,
                       paddingLeft: `${style.padding.xxs}`,
                       paddingRight: `${style.padding.xxs}`,
-                      color: `${
-                        hookContractCreate.formStep == 3
+                      color: `${hookContractCreate.formStep == 3
                           ? ""
                           : style.color.disabled
-                      }`,
-                      backgroundColor: `${
-                        hookContractCreate.formStep == 3 ? "" : "#18203A"
-                      }`,
+                        }`,
+                      backgroundColor: `${hookContractCreate.formStep == 3 ? "" : "#18203A"
+                        }`,
                     }}
                   >
                     3
@@ -240,11 +245,10 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 )}
                 <Text
                   style={{
-                    color: `${
-                      hookContractCreate.formStep == 3
+                    color: `${hookContractCreate.formStep == 3
                         ? ""
                         : style.color.disabled
-                    }`,
+                      }`,
                   }}
                 >
                   Third
@@ -278,19 +282,19 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                     })
                   }
                 />
-                <InputSelect value={hookContractCreate.$contractFormData.chain_id} placeholder="Chain Id" 
-                defaultValue={1} onChange={(e: any) => hookContractCreate.$loadContractFormData({ chain_id: e.target.value })}
-                marginTop="sm" labelText="Chain Id *" options={[
-                  {
-                    value: 1,
-                    title: "Ethereum"
-                  },
-                  {
-                    value: 137,
-                    title: "Polygon"
-                  }
-                ]}
-              />
+                <InputSelect value={hookContractCreate.$contractFormData.chain_id} placeholder="Chain Id"
+                  defaultValue={1} onChange={(e: any) => hookContractCreate.$loadContractFormData({ chain_id: e.target.value })}
+                  marginTop="sm" labelText="Chain Id *" options={[
+                    {
+                      value: 1,
+                      title: "Ethereum"
+                    },
+                    {
+                      value: 137,
+                      title: "Polygon"
+                    }
+                  ]}
+                />
                 <InputLabel
                   value={hookContractCreate.$contractFormData.read_abi_from}
                   onChange={(e: any) =>
