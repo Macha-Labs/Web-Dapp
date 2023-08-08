@@ -54,13 +54,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://ik.imagekit.io/macha/share.png" />
+        <meta property="og:image" content="/assets/share.png" />
         <meta property="og:image:alt" content="Macha.ai" />
         <meta property="og:url" content="https://macha.ai" />
         <meta property="og:site_name" content="Macha" />
         <meta name="twitter:title" content="Macha - Search Infrastructure for New Internet" />
         <meta name="twitter:description" content="Search Infrastructure to search anything from apps and NFTs to protocols and content across multiple chains." />
-        <meta property="twitter:image" content="https://ik.imagekit.io/macha/share.png" />
+        <meta property="twitter:image" content="/assets/share.png" />
         <meta name="twitter:image:width" content="1200" />
         <meta name="twitter:image:height" content="630" />
         <meta name="twitter:image:alt" content="Macha.ai" />

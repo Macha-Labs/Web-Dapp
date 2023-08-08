@@ -29,6 +29,7 @@ import { truncateAddress } from "@/helpers";
 import InputSearch from "@/_ui/input/InputSearch";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import IconBase from "@/_ui/icons/IconsBase";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -80,7 +81,7 @@ const Network = () => {
                 >
                   <Avatar
                     size="md"
-                    src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
+                    src={GlobalIcons["avatar-default"]}
                   />
                   <Text
                     fontSize={style.font.h2}

@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ConnectWalletButton } from "../ConnectWalletButton";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 type Prop = {
   txnData: any;
@@ -138,7 +139,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                     }}
                   >
                     <Image
-                      src="https://ik.imagekit.io/macha/icons/svg/miscelleneous/coloured-successful.svg?updatedAt=1690531996993"
+                      src="/assets/icons/coloured-successful.svg"
                       alt=""
                       height="1.5rem"
                     />
@@ -184,18 +185,19 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                   </Box>
                 </Td>
                 {displayFrom && (
-                  <Td style={{ textAlign: "center", paddingBottom: "0" }}>
+                  <Td style={{ textAlign: "center", paddingBottom: "0", paddingTop: "0" }}>
                     <Box
                       style={{
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "center",
+                        alignItems: "center"
                       }}
                     >
-                      <Box width="2.1rem" height="2.1rem">
+                      <Box width="1.5rem" height="1.5rem">
                         <Avatar
                           size="xxs"
-                          src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
+                          src={GlobalIcons["avatar-default"]}
                         />
                       </Box>
                       <Text
@@ -214,18 +216,19 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                     </Box>
                   </Td>
                 )}
-                <Td style={{ textAlign: "center", paddingBottom: "0" }}>
+                <Td style={{ textAlign: "center", paddingBottom: "0", paddingTop: "0" }}>
                   <Box
                     style={{
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "center",
+                      alignItems: "center"
                     }}
                   >
-                    <Box width="2.1rem" height="2.1rem">
+                    <Box width="1.5rem" height="1.5rem">
                       <Avatar
                         size="xxs"
-                        src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
+                        src={GlobalIcons["avatar-default"]}
                       />
                     </Box>
                     <Text

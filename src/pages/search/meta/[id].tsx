@@ -15,6 +15,7 @@ import NavButton from "@/components/buttons/NavButton";
 import CopyableRow from "@/components/meta/CopyableRow";
 import useMeta from "@/hooks/meta/useMeta";
 import useAuthStore from "@/store/useAuthStore";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {
   Avatar,
@@ -103,7 +104,7 @@ const Meta = () => {
                       <Avatar
                         size={"md"}
                         marginRight={style.margin.sm}
-                        src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
+                        src={GlobalIcons["avatar-default"]}
                       />
                       <FlexColumn
                         width="fit-content"

@@ -1,6 +1,6 @@
 import GlobalIcons from "@/styles/GlobalIcons";
-import { IKImage } from "imagekitio-react";
 import { style as gStyle } from "../../styles/StyledConstants";
+import { Image } from "@chakra-ui/react";
 
 type Props = {
   slug: string;
@@ -31,8 +31,9 @@ function IconBase({ slug, size, onClick, style }: Props) {
       className={style?.className}
       onClick={onClick}
     >
-      <IKImage
-        path={GlobalIcons[slug]}
+      <Image
+        src={GlobalIcons[slug]}
+        alt={slug}
         style={{
           height: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,
           width: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,

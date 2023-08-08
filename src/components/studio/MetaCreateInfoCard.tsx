@@ -53,7 +53,7 @@ function MetaCreateInfoCard({ data }: Props) {
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
                 <Image
-                  src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
+                  src={GlobalIcons["avatar-default"]}
                   marginRight={"10px"}
                   alt="meta-avatar"
                 />

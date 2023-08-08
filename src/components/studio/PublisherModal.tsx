@@ -325,7 +325,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         Macha Studio
                       </Text>
                       <Image
-                        src="https://ik.imagekit.io/macha/studio/publisher%20welcome.svg?updatedAt=1690979405890"
+                        src="https://ik.imagekit.io/macha1/studio/Publisher%20Welcome%20Screen%20banner.svg"
                         alt="txn-icon"
                       />
                     </Box>
@@ -338,7 +338,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingBottom={style.padding.xl}
                     >
                       <Image
-                        src="https://ik.imagekit.io/macha/studio%20logo/coloredIpfs.svg?updatedAt=1690524148908"
+                        src="/assets/icons/coloredIpfs.svg"
                         alt="txn-icon"
                         height="6rem"
                       />
@@ -724,7 +724,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </Box>
                   ) : (
                     <Box
-                      backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
+                      backgroundImage="/assets/Almost-there-bg.svg"
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -759,7 +759,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   ))}
                 {hookPublisherCreate.formStep == 6 && (
                   <Box
-                    backgroundImage="https://ik.imagekit.io/macha/studio/Almost%20there%20image-no%20icon.png?updatedAt=1690523918606"
+                    backgroundImage="/assets/Almost-there-bg.svg"
                     style={{
                       display: "flex",
                       flexDirection: "column",
@@ -772,7 +772,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       paddingTop={style.padding.xl}
                       paddingBottom={style.padding.md}
                     >
-                      <IconBase slug="icon-congrats" size="3xl" />
+                      <IconBase slug="icon-congrats" size="4xl" />
                     </Box>
                     <Box>
                       <Text

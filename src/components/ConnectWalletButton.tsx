@@ -26,6 +26,7 @@ import { useDisconnect } from "wagmi";
 import { useEffect, useState } from "react";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import { useRouter } from "next/router";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 export const ConnectWalletButton = (props: any) => {
   const publisherModal = useDisclosure();
@@ -139,7 +140,7 @@ export const ConnectWalletButton = (props: any) => {
                       }}
                       leftIcon={
                         <Image
-                          src="https://ik.imagekit.io/macha/studio%20logo/coloredFilecoin.svg"
+                          src="/assets/icons/coloredFilecoin.svg"
                           alt="txn-icon"
                           height={props.height ? "1.5rem" : "1.75rem"}
                           width={props.height ? "1.5rem" : "1.75rem"}
@@ -191,7 +192,7 @@ export const ConnectWalletButton = (props: any) => {
                         <FlexRow hrAlign="space-between">
                           <Image
                             style={{ height: "25px", width: "25px" }}
-                            src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
+                            src={GlobalIcons["avatar-default"]}
                             alt=""
                           />
                           {/* <IconImage slug="icon-switchWallet" /> */}
@@ -224,7 +225,7 @@ export const ConnectWalletButton = (props: any) => {
                           }}
                         >
                           <FlexRow hrAlign="space-between">
-                            <IconBase slug="icon-dark-deploy" size="sm" />
+                            <IconBase slug="icon-dark-deploy" size="xl" />
                             <FlexRow
                               hrAlign="flex-start"
                               width="90%"
@@ -242,7 +243,7 @@ export const ConnectWalletButton = (props: any) => {
                           }}
                         >
                           <FlexRow hrAlign="space-between">
-                            <IconBase slug="icon-dark-deploy" size="sm" />
+                            <IconBase slug="icon-dark-deploy" size="xl" />
                             <FlexRow
                               hrAlign="flex-start"
                               width="90%"
@@ -263,7 +264,7 @@ export const ConnectWalletButton = (props: any) => {
                         }}
                       >
                         <FlexRow hrAlign="space-between">
-                          <IconBase slug="icon-dark-disconnectWallet" />
+                          <IconBase slug="icon-dark-disconnectWallet" size="xl" />
                           <FlexRow
                             hrAlign="flex-start"
                             width="90%"

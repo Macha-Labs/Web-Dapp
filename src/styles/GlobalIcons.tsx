@@ -1,5 +1,6 @@
 const GlobalIcons: any = {
   avatar: "Avatar/avatar-default.svg?updatedAt=1690541873826",
+  "avatar-default": "/assets/icons/avatar-default.svg",
   "icon-dataNetwork":
     "/icons/svg/Base-blue/base-blue-datanetwork.svg?updatedAt=1687155834445",
   "icon-adsNetwork":
@@ -7,7 +8,7 @@ const GlobalIcons: any = {
   "icon-disconnectWallet":
     "icons/svg/Base_blue_icons/base-blue-walletDisconnect.svg?updatedAt=1690540459332",
   "icon-dark-disconnectWallet":
-    "icons/svg/Dark_icons/dark-walletDisconnect.svg",
+    "/assets/icons/Dark_icons/dark-walletDisconnect.svg",
   "icon-switchWallet":
     "icons/svg/Base_blue_icons/base-blue-walletChange.svg?updatedAt=1690540459218",
   "icon-filter":
@@ -18,16 +19,16 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base_icons/base-compass.svg?updatedAt=1680783662225",
   "icon-search": "/icons/svg/Base_blue_icons/base-blue-search.svg",
   "icon-base-search": "/icons/svg/Base_icons/base-search.svg",
-  "icon-dark-search": "/icons/svg/Dark_icons/dark-search.svg",
+  "icon-dark-search": "/assets/icons/Dark_icons/dark-search.svg",
   "icon-search24":
     "/icons/svg/Base-blue/base-blue-search24.svg?updatedAt=1687157119887",
   "icon-chat": "/icons/svg/Base-blue/base-blue-chat.svg",
   "icon-dashboard":
-    "icons/svg/Base_blue_icons/base-blue-dashboard.svg?updatedAt=1690532058663",
+    "/assets/icons/Base_blue_icons/base-blue-dashboard.svg",
   "icon-down":
     "/icons/svg/Base-blue/base-blue-arrowFilled-down.svg?updatedAt=1686047698220",
   "icon-upload":
-    "icons/svg/Base_blue_icons/base-blue-upload.svg?updatedAt=1690532053209",
+    "/assets/icons/Base_blue_icons/base-blue-upload.svg",
   "icon-changeImage":
     "/icons/svg/Base-blue/base-blue-changeImage.svg?updatedAt=1686305923116",
   "icon-right":
@@ -97,19 +98,19 @@ const GlobalIcons: any = {
   "icon-block-red":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Red_icons/base-red-block.svg?updatedAt=1683699287123",
   "icon-chevron":
-    "icons/svg/Base_blue_icons/base-blue-chevronBack.svg?updatedAt=1690532051879",
+    "/assets/icons/Base_blue_icons/base-blue-chevronBack.svg",
   "icon-chevron-next":
-    "icons/svg/Base_blue_icons/base-blue-chevronNext.svg?updatedAt=1690532057658",
+    "/assets/icons/Base_blue_icons/base-blue-chevronNext.svg",
   "icon-chevron-down":
-    "icons/svg/Base_blue_icons/base-blue-chevronDown.svg?updatedAt=1690532076761",
+    "/assets/icons/Base_blue_icons/base-blue-chevronDown.svg",
   "icon-chevron-up":
-    "icons/svg/Base_blue_icons/base-blue-chevronUp.svg?updatedAt=1690532068561",
+    "/assets/icons/Base_blue_icons/base-blue-chevronUp.svg",
   "icon-reply":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-replyFilled.svg",
   "icon-close":
-    "icons/svg/Base_blue_icons/base-blue-cancel.svg?updatedAt=1690532060654",
+    "/assets/icons/Base_blue_icons/base-blue-cancel.svg",
   "icon-twitter":
-    "/icons/svg/Base_blue_icons/base-blue-twitter.svg?updatedAt=1690532073157",
+    "/assets/icons/Base_blue_icons/base-blue-twitter.svg",
   "icon-attachment":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-attachment.svg",
   "icon-send":
@@ -131,41 +132,42 @@ const GlobalIcons: any = {
   "icon-share":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-share-1.svg",
   "icon-base-share":
-    "/icons/svg/Base_icons/base-share.svg?updatedAt=1680783709529",
+    "/assets/icons/base-share.svg",
   "icon-forward":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-forward.svg?updatedAt=1680783869134",
   "icon-copy":
-    "icons/svg/Base_blue_icons/base-blue-copy.svg?updatedAt=1690532041230",
+    "/assets/icons/Base_blue_icons/base-blue-copy.svg",
   "icon-filecoin":
-    "https://ik.imagekit.io/macha/studio%20logo/coloredFilecoin.svg?updatedAt=1690524145269",
+    "https://ik.imagekit.io/macha/studio%20logo/coloredFilecoin.svg",
   "icon-qr":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
   "icon-user":
     "icons/svg/Base_blue_icons/base-blue-user.svg?updatedAt=1690532065895",
   "icon-dark-user":
-    "/icons/svg/Dark_icons/dark-user.svg?updatedAt=1690532103705",
+    "/assets/icons/Dark_icons/dark-user.svg",
   "icon-info":
-    "/icons/svg/Base_blue_icons/base-blue-info.svg?updatedAt=1690532070929",
+    "/assets/icons/Base_blue_icons/base-blue-info.svg",
   "icon-connections":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-connections.png?updatedAt=1680788697983",
   "icon-chat-edit":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-editChat.svg",
   "icon-dark-enterprise":
-    "/icons/svg/Dark_icons/dark-enterprise-fill.svg?updatedAt=1690622152989",
+    "/assets/icons/Dark_icons/dark-enterprise-fill.svg",
   "icon-code":
     "/icons/svg/Base-blue/base-blue-deploy.svg?updatedAt=1686831739162",
   "icon-rocket":
     "/icons/svg/Base-blue/base-blue-rocket.svg?updatedAt=1686739684462",
-  "icon-deploy": "/icons/svg/Base_blue_icons/base-blue-deploy.svg",
+  "icon-deploy":
+   "/assets/icons/Base_blue_icons/base-blue-deploy.svg",
   "icon-dark-deploy":
-    "icons/svg/Dark_icons/dark-deploy.svg?updatedAt=1690532086318",
+    "/assets/icons/Dark_icons/dark-deploy.svg",
   "icon-coloured-deploy":
-    "/icons/svg/miscelleneous/coloured-deploy.svg?updatedAt=1690531994002",
+    "/assets/icons/coloured-deploy.svg",
   "icon-blue-tick":
-    "/icons/svg/miscelleneous/Blue%20tick.svg?updatedAt=1690553360645",
+    "/assets/icons/Blue%20tick.svg",
   "icon-almost-there":
-    "studio/database-restore%201.png?updatedAt=1690523918650",
-  "icon-congrats": "studio/congrats%20icon.png?updatedAt=1690523918221",
+    "/assets/icons/database-restore%201.svg",
+  "icon-congrats": "/assets/icons/congrats%20icon.svg",
   "logo-Lens": "/Studio-Logos/lens.svg?updatedAt=1686740026746",
   "logo-Macha": "/Studio-Logos/metawork.svg?updatedAt=1686740613025",
   "logo-Farcaster": "/Studio-Logos/farcaster.svg?updatedAt=1686740612210",
@@ -174,7 +176,7 @@ const GlobalIcons: any = {
   "logo-Sound.xyz": "/Studio-Logos/sound.svg?updatedAt=1686740612486",
   "logo-Paragraph.xyz": "/Studio-Logos/paragraph.svg?updatedAt=1686740612876",
   "logo-MintKudos": "/Studio-Logos/mintcudos.svg?updatedAt=1686740614448",
-  "logo-Ethereum": "studio%20logo/ethereum.svg",
-  "logo-Polygon": "studio%20logo/coloredPolygon.svg?updatedAt=1690524145175",
+  "logo-Ethereum": "/assets/icons/coloredEtherum.svg",
+  "logo-Polygon": "/assets/icons/coloredPolygon.svg",
 };
 export default GlobalIcons;

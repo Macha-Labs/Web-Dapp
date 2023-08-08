@@ -23,6 +23,7 @@ import { useEffect, useState } from "react";
 import { Heading, useToast } from "@chakra-ui/react";
 import Loader from "@/_ui/loader/Loader";
 import JSONViewer from "@/_ui/JSONViewer";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 type Props = {
   id: string;
@@ -172,7 +173,7 @@ function TxnDetails({
                   <tbody>
                     <tr>
                       <td style={{ display: "flex", justifyContent: "center" }}>
-                        <Avatar src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826" />
+                        <Avatar src={GlobalIcons["avatar-default"]} />
                       </td>
                       <td>
                         <FlexRow
@@ -274,7 +275,7 @@ function TxnDetails({
                     </tr>
                     <tr>
                       <td style={{ display: "flex", justifyContent: "center" }}>
-                        <Avatar src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826" />{" "}
+                        <Avatar src={GlobalIcons["avatar-default"]} />{" "}
                       </td>
                       <td>
                         <FlexRow

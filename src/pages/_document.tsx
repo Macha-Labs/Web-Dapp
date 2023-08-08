@@ -27,19 +27,19 @@ export default function Document() {
             flexDir={"column"}
             justifyContent={"center"}
             alignItems={"center"}
-            backgroundImage="url(https://ik.imagekit.io/macha/studio/Studio%20mobile%20empty%20state%20blur.svg)"
+            backgroundImage="url(/assets/Empty-state-Blur.svg)"
             backgroundRepeat="no-repeat"
             backgroundSize="contain"
             backgroundPosition="top center"
             paddingX={style.padding.sm}
           >
             <Image
-              src="https://ik.imagekit.io/macha/Metawork%20Logo/macha-image-text-dark%20theme.svg?updatedAt=1690800630857"
+              src="/assets/Macha-logo-text.svg"
               width={"10rem"}
               marginBottom={style.margin.xxl}
             />
             <Image
-              src="https://ik.imagekit.io/macha/studio/studio%20mobile%20empty%20state.svg?updatedAt=1690639033750"
+              src="/assets/empty-state-illustration - phone.svg"
               width={"15rem"}
               // marginTop={style.margin.xxl}
             />

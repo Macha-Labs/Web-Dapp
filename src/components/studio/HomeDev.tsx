@@ -114,7 +114,7 @@ const HomeDev = () => {
 
       <Flex flexWrap="wrap" paddingLeft={2}>
         <GetStartedCards
-          image="https://ik.imagekit.io/macha/studio/push%20contracts-imagev4.svg?updatedAt=1690633848020"
+          image="https://ik.imagekit.io/macha1/studio/push%20contracts-imagev4.svg"
           title="Start Indexing Contracts"
           description="Publish your smart contract to accelerate the growth of your protocol and gain exposure to thriving developer community."
           disabled={$address == null}
@@ -142,28 +142,28 @@ const HomeDev = () => {
         />
         <GetStartedCards
           title="Create Functions"
-          image="https://ik.imagekit.io/macha/studio/create%20functions-imagev4.svg?updatedAt=1690633848012"
+          image="https://ik.imagekit.io/macha1/studio/create%20functions-imagev4.svg"
           description="Make blazingly fast function calls on contracts to integrate functions in your app with Macha’s SDK."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Abstract Metas"
-          image="https://ik.imagekit.io/macha/studio/abstract%20metas-imagev4.svg?updatedAt=1690633847892"
+          image="https://ik.imagekit.io/macha1/studio/abstract%20metas-imagev4.svg"
           description="Enable users to easily discover your metas, such as Lens profiles, ENS, Nfts, and more, through our multi-chain search protocol."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Graph Playground"
-          image="https://ik.imagekit.io/macha/studio/Graph%20playgroundv4.svg?updatedAt=1690633847704"
+          image="https://ik.imagekit.io/macha1/studio/Graph%20playgroundv4.svg"
           description="Developers can use Macha’s content graph APIs to access and fetch essential user data related to specific contracts."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Explore Documentation"
-          image="https://ik.imagekit.io/macha/studio/explore%20doc-imagev4.svg?updatedAt=1690633847858"
+          image="https://ik.imagekit.io/macha1/studio/explore%20doc-imagev4.svg"
           description="Check out our doc repository and sign up today to access the fastest API for all developers."
           tag="soon"
           disabled={true}

@@ -25,7 +25,7 @@ const Custom404 = () => {
         paddingX={style.padding.sm}
       >
         <Image
-          src="https://ik.imagekit.io/macha/Metawork%20Logo/macha-image-text-dark%20theme.svg?updatedAt=1690800630857"
+          src="/assets/Macha-logo-text.svg"
           width={"10rem"}
           marginBottom={style.margin.xxl}
         />
@@ -37,7 +37,7 @@ const Custom404 = () => {
           404 - Page Not Found
         </Text>
         <Image
-          src="https://ik.imagekit.io/macha/studio/studio%20mobile%20empty%20state.svg?updatedAt=1690639033750"
+          src="/assets/empty-state-illustration - phone.svg"
           width={"15rem"}
           marginBottom={style.margin.xxl}
         />

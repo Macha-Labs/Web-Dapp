@@ -5,6 +5,7 @@ import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
 import chains from "@/data/network";
 import { truncateAddress } from "@/helpers";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Divider, Image, Text, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -32,7 +33,7 @@ function ContractInfoCard({ data }: Props) {
             src={
               data?.image
                 ? data?.image
-                : "https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
+                : GlobalIcons["avatar-default"]
             }
           />
         </FlexColumn>
@@ -50,11 +51,13 @@ function ContractInfoCard({ data }: Props) {
                 Contract Address
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
-                <Image
-                  src="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
-                  marginRight={"10px"}
-                  alt="avatar"
-                />
+                  <Image
+                    src={GlobalIcons["avatar-default"]}
+                    marginRight={"10px"}
+                    alt="avatar"
+                    height="1.5rem"
+                    width="1.5rem"
+                  />
                 <Text className="m-b-0">{truncateAddress(data?.address)}</Text>
                 <IconBase
                   slug="icon-copy"
@@ -114,7 +117,7 @@ function ContractInfoCard({ data }: Props) {
               <Text fontWeight={700} className="m-b-0-5">
                 Chain
               </Text>
-              <Box onClick={() => router.push(`/search/network/${data?.chain_id}`)} cursor="pointer" _hover={{textDecoration: "underline"}}>
+              <Box onClick={() => router.push(`/search/network/${data?.chain_id}`)} cursor="pointer" _hover={{ textDecoration: "underline" }}>
                 <FlexRow vrAlign="center" hrAlign="flex-start">
                   <Text className="m-b-0">{chains[data?.chain_id]?.chainName}</Text>
                   <IconBase slug={chains[data?.chain_id]?.chainImage} style={{ marginLeft: "xxs" }} size="md" />

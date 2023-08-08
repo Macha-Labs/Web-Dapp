@@ -3,6 +3,7 @@ import { truncateAddress } from "@/helpers";
 import useMachaAuth from "@/hooks/studio/useMachaAuth";
 import useAuthStore from "@/store/useAuthStore";
 import { useDisconnect } from "wagmi";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 const WalletButton = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -11,7 +12,7 @@ const WalletButton = () => {
   const walletOptions = [
     {
       value: truncateAddress($address),
-      img: "https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826",
+      img: GlobalIcons["avatar-default"],
       // rightIcon: "icon-notification",
       onClick: () => {},
     },
@@ -40,7 +41,7 @@ const WalletButton = () => {
   return (
     <ButtonMenu
       size={"md"}
-      avatar="https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
+      avatar={GlobalIcons["avatar-default"]}
       text={truncateAddress($address)}
       icon={{
         slug: "icon-chevron-down",

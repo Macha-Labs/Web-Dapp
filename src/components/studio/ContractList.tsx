@@ -15,6 +15,7 @@ import useMacha from "@/hooks/studio/useMacha";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import useContractCreate from "@/hooks/studio/useContractCreate";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 type Props = {
   metaInfo: any;
@@ -127,7 +128,7 @@ const ContractList = () => {
                     image={
                       item?.contract?.image
                         ? item?.contract?.image
-                        : "https://ik.imagekit.io/macha/Avatar/avatar-default.svg?updatedAt=1690541873826"
+                        : GlobalIcons["avatar-default"]
                     }
                     description={item?.contract?.description}
                     onCardClick={() => {
