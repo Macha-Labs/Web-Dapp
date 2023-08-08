@@ -14,10 +14,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { IKContext } from "imagekitio-react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Script from "next/script";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { polygon, filecoinCalibration } from "wagmi/chains";
+import { filecoinCalibration } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import {useEffect} from "react"
 
 const { chains, provider } = configureChains(
   [filecoinCalibration],
@@ -37,6 +39,10 @@ const wagmiClient = createClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   console.log("Rendering >>>>> APP");
+  const router = useRouter()
+  useEffect(() => {
+    console.log("router",router)
+  },[router])
   return (
     <>
       <Head>

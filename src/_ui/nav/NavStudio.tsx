@@ -10,7 +10,7 @@ const NavStudio = () => {
   const $address = useAuthStore((state: any) => state.address);
   return (
     <NavTop
-      centerElem={<InputSearch onChange={() => {}} value="" />}
+      centerElem={<InputSearch onChange={() => { }} value="" />}
       rightElem={
         <FlexRow width="fit-content">
           {$address && <NavButton />}

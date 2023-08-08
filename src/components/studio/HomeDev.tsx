@@ -96,10 +96,13 @@ const HomeDev = () => {
             />
           </Box>
         ) : <Box display={"flex"}>
-          <Button
+          <Text style={{marginTop: `${style.margin.xs}`, marginBottom: "0px", fontSize: `${style.font.h5}`, fontWeight: `${style.fontWeight.dark}`}}>
+          You are a publisher
+          </Text>
+          {/* <Button
             style={{color: "#004ad9", backgroundColor: "#A0CDFF",border: "1px solid #fff", marginTop: `${style.margin.xs}`, cursor: "default"}}
             onClick={() => {}}
-          >You are a publisher</Button>
+          >You are a publisher</Button> */}
         </Box>}
       </Box>
 

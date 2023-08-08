@@ -41,9 +41,12 @@ const Network = () => {
   };
 
   useEffect(() => {
-    if (router.isReady) {
-      hookUserTxn._fetch(router.query.user);
+    const fetch = async () => {
+      if (router.isReady) {
+        await hookUserTxn._fetch(router.query.user);
+      }
     }
+    fetch()
   }, [router.query.user, hookUserTxn.page]);
 
   const renderNav = () => {
@@ -61,8 +64,10 @@ const Network = () => {
   };
 
   const renderComponent = () => {
-    return (
-      <>
+    return (hookUserTxn.isLoading ?
+      <FlexRow height="100vh">
+        <Loader size="lg" />
+      </FlexRow> : (<>
         <Box marginTop={style.margin.xxxl} paddingTop={style.padding.xxxl}>
           <>
             <Box>
@@ -135,114 +140,104 @@ const Network = () => {
               </Flex>
             </Box>
             <Box>
-              {hookUserTxn.isLoading ? (
-                <FlexRow height="100px">
-                  <Loader size="lg" />
-                </FlexRow>
-              ) : (
-                hookUserTxn?.filteredData[0] && (
-                  <>
-                    <Box
-                      style={{
-                        display: "flex",
-                        alignItems: "",
-                        justifyContent: "space-between",
-                        marginBottom: `${style.margin.md}`,
-                        marginTop: `${style.margin.lg}`,
-                      }}
-                    >
-                      <Box
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <ButtonNative
-                          marginRight="sm"
-                          size="xs"
-                          height="2rem"
-                          onClick={() => {
-                            if (hookUserTxn.page != 1) {
-                              hookUserTxn.setIsLoading(true);
-                              hookUserTxn.setPage(1);
-                            }
-                          }}
-                          text="Newest"
-                          disabled={hookUserTxn.page == 1}
-                          variant="state_default_hover"
-                        />
-                        <ButtonNative
-                          marginRight="sm"
-                          size="xs"
-                          height="2rem"
-                          onClick={() => {
-                            if (hookUserTxn.page > 1) {
-                              hookUserTxn.setIsLoading(true);
-                              hookUserTxn.setPage(hookUserTxn.page - 1);
-                            }
-                          }}
-                          text="Prev"
-                          disabled={hookUserTxn.page <= 1}
-                          variant="state_default_hover"
-                        />
-                        <Text
-                          marginRight={style.margin.sm}
-                          marginBottom="0.25rem"
-                        >
-                          Page {hookUserTxn?.page} of {hookUserTxn.totalPages}
-                        </Text>
-                        <ButtonNative
-                          marginRight="sm"
-                          size="xs"
-                          height="2rem"
-                          onClick={() => {
-                            if (hookUserTxn.page < hookUserTxn.totalPages) {
-                              hookUserTxn.setIsLoading(true);
-                              hookUserTxn.setPage(hookUserTxn.page + 1);
-                            }
-                          }}
-                          disabled={hookUserTxn.page >= hookUserTxn.totalPages}
-                          text="Next"
-                          variant="state_default_hover"
-                        />
-                        <ButtonNative
-                          marginRight="sm"
-                          size="xs"
-                          height="2rem"
-                          onClick={() => {
-                            if (hookUserTxn.page != hookUserTxn.totalPages) {
-                              hookUserTxn.setIsLoading(true);
-                              hookUserTxn.setPage(hookUserTxn.totalPages);
-                            }
-                          }}
-                          text="Oldest"
-                          disabled={hookUserTxn.page == hookUserTxn.totalPages}
-                          variant="state_default_hover"
-                        />
-                      </Box>
-                      <Box>
-                        <Text>Total Txns: {hookUserTxn.totalTxns}</Text>
-                      </Box>
-                    </Box>
-                    <Box
-                      marginTop="1rem"
-                      border={style.table.border.thead}
-                      borderRadius="20px"
-                      marginBottom={style.margin.xxxl}
-                    >
-                      {/* Content for Tab 1 */}
-                      <TxnTable
-                        displayFrom={false}
-                        txnData={hookUserTxn?.filteredData}
-                      />
-                    </Box>
-                  </>
-                )
-              )}
+              <Box
+                style={{
+                  display: "flex",
+                  alignItems: "",
+                  justifyContent: "space-between",
+                  marginBottom: `${style.margin.md}`,
+                  marginTop: `${style.margin.lg}`,
+                }}
+              >
+                <Box
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <ButtonNative
+                    marginRight="sm"
+                    size="xs"
+                    height="2rem"
+                    onClick={() => {
+                      if (hookUserTxn.page != 1) {
+                        hookUserTxn.setIsLoading(true);
+                        hookUserTxn.setPage(1);
+                      }
+                    }}
+                    text="Newest"
+                    disabled={hookUserTxn.page == 1}
+                    variant="state_default_hover"
+                  />
+                  <ButtonNative
+                    marginRight="sm"
+                    size="xs"
+                    height="2rem"
+                    onClick={() => {
+                      if (hookUserTxn.page > 1) {
+                        hookUserTxn.setIsLoading(true);
+                        hookUserTxn.setPage(hookUserTxn.page - 1);
+                      }
+                    }}
+                    text="Prev"
+                    disabled={hookUserTxn.page <= 1}
+                    variant="state_default_hover"
+                  />
+                  <Text
+                    marginRight={style.margin.sm}
+                    marginBottom="0.25rem"
+                  >
+                    Page {hookUserTxn?.page} of {hookUserTxn.totalPages}
+                  </Text>
+                  <ButtonNative
+                    marginRight="sm"
+                    size="xs"
+                    height="2rem"
+                    onClick={() => {
+                      if (hookUserTxn.page < hookUserTxn.totalPages) {
+                        hookUserTxn.setIsLoading(true);
+                        hookUserTxn.setPage(hookUserTxn.page + 1);
+                      }
+                    }}
+                    disabled={hookUserTxn.page >= hookUserTxn.totalPages}
+                    text="Next"
+                    variant="state_default_hover"
+                  />
+                  <ButtonNative
+                    marginRight="sm"
+                    size="xs"
+                    height="2rem"
+                    onClick={() => {
+                      if (hookUserTxn.page != hookUserTxn.totalPages) {
+                        hookUserTxn.setIsLoading(true);
+                        hookUserTxn.setPage(hookUserTxn.totalPages);
+                      }
+                    }}
+                    text="Oldest"
+                    disabled={hookUserTxn.page == hookUserTxn.totalPages}
+                    variant="state_default_hover"
+                  />
+                </Box>
+                <Box>
+                  <Text>Total Txns: {hookUserTxn.totalTxns}</Text>
+                </Box>
+              </Box>
+              <Box
+                marginTop="1rem"
+                border={style.table.border.thead}
+                borderRadius="20px"
+                marginBottom={style.margin.xxxl}
+              >
+                {/* Content for Tab 1 */}
+                <TxnTable
+                  displayFrom={false}
+                  txnData={hookUserTxn?.filteredData}
+                />
+              </Box>
             </Box>
           </>
         </Box>
-      </>
+      </>)
     );
   };
   const renderBody = () => {
@@ -259,7 +254,7 @@ const Network = () => {
               fontSize={style.font.h5}
               fontWeight="600"
               marginBottom={0}
-              //   marginLeft={style.margin.xxs}
+            //   marginLeft={style.margin.xxs}
             >
               {truncateAddress(router.query.user)}
             </Text>

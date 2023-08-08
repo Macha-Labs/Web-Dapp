@@ -232,7 +232,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                       paddingLeft={2}
                       marginBottom={0}
                       // _hover={{ textDecoration: "underline" }}
-                      cursor={style.table.cursor.pointer}
+                      // cursor={displayFrom && style.table.cursor.pointer}  
                       // onClick={() => {
                       //   router.push(
                       //     `/search/accounts/${item?.transaction?.to}`
