@@ -224,7 +224,7 @@ export const ConnectWalletButton = (props: any) => {
                           }}
                         >
                           <FlexRow hrAlign="space-between">
-                            <IconImage slug="icon-deploy" size="sm" />
+                            <IconBase slug="icon-dark-deploy" size="sm" />
                             <FlexRow
                               hrAlign="flex-start"
                               width="90%"
@@ -242,7 +242,7 @@ export const ConnectWalletButton = (props: any) => {
                           }}
                         >
                           <FlexRow hrAlign="space-between">
-                            <IconImage slug="icon-deploy" size="sm" />
+                            <IconBase slug="icon-dark-deploy" size="sm" />
                             <FlexRow
                               hrAlign="flex-start"
                               width="90%"
@@ -260,7 +260,7 @@ export const ConnectWalletButton = (props: any) => {
                         }}
                       >
                         <FlexRow hrAlign="space-between">
-                          <IconImage slug="icon-disconnectWallet" />
+                          <IconBase slug="icon-dark-disconnectWallet" />
                           <FlexRow
                             hrAlign="flex-start"
                             width="90%"

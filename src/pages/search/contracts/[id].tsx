@@ -204,7 +204,7 @@ const Contract = () => {
             >
               <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
                 <FlexRow width="100%" hrAlign="space-between">
-                  <Heading fontSize={style.font.h7} className="m-b-0">
+                  <Heading fontSize={style.font.h5} className="m-b-0">
                     {hookContract?.contractDetails &&
                       hookContract?.contractDetails?.contract.name}
                   </Heading>

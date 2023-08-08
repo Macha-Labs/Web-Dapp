@@ -6,6 +6,8 @@ const GlobalIcons: any = {
     "/icons/svg/Base-blue/base-blue-adsNetwork.svg?updatedAt=1687155834666",
   "icon-disconnectWallet":
     "icons/svg/Base_blue_icons/base-blue-walletDisconnect.svg?updatedAt=1690540459332",
+  "icon-dark-disconnectWallet":
+    "icons/svg/Dark_icons/dark-walletDisconnect.svg",
   "icon-switchWallet":
     "icons/svg/Base_blue_icons/base-blue-walletChange.svg?updatedAt=1690540459218",
   "icon-filter":

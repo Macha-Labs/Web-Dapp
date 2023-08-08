@@ -331,7 +331,7 @@ const Network = () => {
         >
           <FlexRow hrAlign="flex-start">
             <Text
-              fontSize={style.font.h7}
+              fontSize={style.font.h5}
               fontWeight="600"
               marginBottom={0}
               //   marginLeft={style.margin.xxs}
