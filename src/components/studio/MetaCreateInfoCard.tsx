@@ -4,6 +4,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
 import { truncateAddress } from "@/helpers";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Divider, Image, Text, useToast } from "@chakra-ui/react";
 
