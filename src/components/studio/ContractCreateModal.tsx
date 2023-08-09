@@ -21,87 +21,109 @@ type Props = {
 };
 
 const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
-  return (
-    <>
-      <ModalWindow
-        event={modal}
-        size="2xl"
-        header={
-          <FlexRow width="100%" hrAlign="space-between">
-            <Text className="mb-0">Contract</Text>
-            <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
+  return (<>
+    <ModalWindow
+      event={modal}
+      size="2xl"
+      header={
+        <FlexRow width="100%" hrAlign="space-between">
+          <Text className="mb-0">Create Contract</Text>
+          <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "5px",
+            cursor: "pointer",
+            width: "fit-content",
+            height: "fit-content",
+            background: `${style.icon.bg.default}`,
+            borderRadius: `${style.icon.borderRadius}`,
+            boxShadow: `${style.icon.shadow.default}`,
+            marginLeft: `${style.margin[style?.marginLeft]}`,
+            marginRight: `${style.margin[style?.marginRight]}`,
+            marginBottom: `${style.margin[style?.marginBottom]}`,
+            marginTop: `${style.margin[style?.marginTop]}`,
+          }} />
+        </FlexRow>
+      }
+      footer={
+        <FlexRow hrAlign="flex-end">
+          <Box
+            style={{
+              width: "100%",
               display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              padding: "5px",
-              cursor: "pointer",
-              width: "fit-content",
-              height: "fit-content",
-              background: `${style.icon.bg.default}`,
-              borderRadius: `${style.icon.borderRadius}`,
-              boxShadow: `${style.icon.shadow.default}`,
-              marginLeft: `${style.margin[style?.marginLeft]}`,
-              marginRight: `${style.margin[style?.marginRight]}`,
-              marginBottom: `${style.margin[style?.marginBottom]}`,
-              marginTop: `${style.margin[style?.marginTop]}`,
-            }} />
-          </FlexRow>
-        }
-        footer={
-          <FlexRow hrAlign="flex-end">
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              {hookContractCreate.formStep == 1 && <Box></Box>}
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            {hookContractCreate.formStep == 1 && <Box></Box>}
 
-              {hookContractCreate.formStep > 1 && (
-                <ButtonNative
-                  variant="state_default_hover"
-                  marginTop={style.margin["lg"]}
-                  onClick={hookContractCreate.prevFormStep}
-                >
-                  Back
-                </ButtonNative>
-              )}
+            {(hookContractCreate.formStep > 1 && hookContractCreate.formStep != 4) && (
+              <ButtonNative
+                variant="state_default_hover"
+                marginTop={style.margin["lg"]}
+                onClick={hookContractCreate.prevFormStep}
+              >
+                Back
+              </ButtonNative>
+            )}
 
-              {hookContractCreate.formStep < 3 && (
-                <ButtonNative
-                  variant="state_brand"
-                  marginTop={style.margin["lg"]}
-                  onClick={hookContractCreate.nextFormStep}
-                >
-                  Next
-                </ButtonNative>
-              )}
+            {hookContractCreate.formStep < 3 && (
+              <ButtonNative
+                variant="state_brand"
+                marginTop={style.margin["lg"]}
+                onClick={hookContractCreate.nextFormStep}
+              >
+                Next
+              </ButtonNative>
+            )}
 
-              {hookContractCreate.formStep == 3 && (
-                <ButtonNative
-                  variant="state_brand"
-                  marginTop={style.margin["lg"]}
-                  onClick={async (e: any) => {
-                    e.preventDefault();
-                    await hookContractCreate.publishContract();
-                  }}
-                >
-                  Create
-                </ButtonNative>
-              )}
-            </Box>
-          </FlexRow>
-        }
+            {hookContractCreate.formStep == 3 && (
+              <ButtonNative
+                variant="state_brand"
+                marginTop={style.margin["lg"]}
+                onClick={async (e: any) => {
+                  e.preventDefault();
+                  await hookContractCreate.publishContract();
+                }}
+              >
+                Create
+              </ButtonNative>
+            )}
+
+            {hookContractCreate.formStep == 4 && (
+              <ButtonNative
+                variant="state_default_hover"
+                marginTop={style.margin["lg"]}
+                onClick={() => {
+                  hookContractCreate.setClear()
+                  modal.onClose()
+                }}
+              >
+                Close
+              </ButtonNative>
+            )}
+            {hookContractCreate.formStep == 4 && (
+              <ButtonNative
+                variant="state_brand"
+                marginTop={style.margin["lg"]}
+                onClick={hookContractCreate.lastStep}
+              >
+                Preview
+              </ButtonNative>
+            )}
+          </Box>
+        </FlexRow>
+      }
+    >
+      <FlexColumn
+        width="100%"
+        hrAlign="space-between"
+        height="100%"
+        padding={style.padding["sm"]}
       >
-        <FlexColumn
-          width="100%"
-          hrAlign="space-between"
-          height="100%"
-          padding={style.padding["sm"]}
-        >
-          <FlexColumn hrAlign="space-between" height="35%">
+        <FlexColumn hrAlign="space-between" height="35%">
+          {hookContractCreate.formStep != 4 && (<>
             <Box
               style={{
                 width: "100%",
@@ -126,14 +148,14 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                       rounded="full"
                       style={{
                         border: `${hookContractCreate.formStep == 1
-                            ? style.card.border.meta
-                            : style.card.border.default
+                          ? style.card.border.meta
+                          : style.card.border.default
                           }`,
                         paddingLeft: `${style.padding.xxs}`,
                         paddingRight: `${style.padding.xxs}`,
                         color: `${hookContractCreate.formStep == 1
-                            ? ""
-                            : style.color.disabled
+                          ? ""
+                          : style.color.disabled
                           }`,
                         backgroundColor: `${hookContractCreate.formStep == 1 ? "" : "#18203A"
                           }`,
@@ -146,8 +168,8 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 <Text
                   style={{
                     color: `${hookContractCreate.formStep == 1
-                        ? ""
-                        : style.color.disabled
+                      ? ""
+                      : style.color.disabled
                       }`,
                   }}
                 >
@@ -177,14 +199,14 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                     rounded="full"
                     style={{
                       border: `${hookContractCreate.formStep == 2
-                          ? style.card.border.meta
-                          : style.card.border.default
+                        ? style.card.border.meta
+                        : style.card.border.default
                         }`,
                       paddingLeft: `${style.padding.xxs}`,
                       paddingRight: `${style.padding.xxs}`,
                       color: `${hookContractCreate.formStep == 2
-                          ? ""
-                          : style.color.disabled
+                        ? ""
+                        : style.color.disabled
                         }`,
                       backgroundColor: `${hookContractCreate.formStep == 2 ? "" : "#18203A"
                         }`,
@@ -196,8 +218,8 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 <Text
                   style={{
                     color: `${hookContractCreate.formStep == 2
-                        ? ""
-                        : style.color.disabled
+                      ? ""
+                      : style.color.disabled
                       }`,
                   }}
                 >
@@ -227,14 +249,14 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                     rounded="full"
                     style={{
                       border: `${hookContractCreate.formStep == 3
-                          ? style.card.border.meta
-                          : style.card.border.default
+                        ? style.card.border.meta
+                        : style.card.border.default
                         }`,
                       paddingLeft: `${style.padding.xxs}`,
                       paddingRight: `${style.padding.xxs}`,
                       color: `${hookContractCreate.formStep == 3
-                          ? ""
-                          : style.color.disabled
+                        ? ""
+                        : style.color.disabled
                         }`,
                       backgroundColor: `${hookContractCreate.formStep == 3 ? "" : "#18203A"
                         }`,
@@ -246,8 +268,8 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                 <Text
                   style={{
                     color: `${hookContractCreate.formStep == 3
-                        ? ""
-                        : style.color.disabled
+                      ? ""
+                      : style.color.disabled
                       }`,
                   }}
                 >
@@ -269,206 +291,247 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
             >
               All * marked fields are required
             </Text>
-            {hookContractCreate.formStep == 1 && (
-              <>
-                <InputLabel
-                  value={hookContractCreate.$contractFormData.address}
-                  inputType="text"
-                  labelText="Address *"
-                  placeholder="0x0fea00feb84ad311Cc6E9d042f7753484D78f4F0"
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      address: e.target.value,
-                    })
+          </>)}
+          {hookContractCreate.formStep == 1 && (
+            <>
+              <InputLabel
+                value={hookContractCreate.$contractFormData.address}
+                inputType="text"
+                labelText="Address *"
+                placeholder="0x0fea00feb84ad311Cc6E9d042f7753484D78f4F0"
+                onChange={(e: any) =>
+                  hookContractCreate.$loadContractFormData({
+                    address: e.target.value,
+                  })
+                }
+              />
+              <InputSelect value={hookContractCreate.$contractFormData.chain_id} placeholder="Chain Id"
+                defaultValue={1} onChange={(e: any) => hookContractCreate.$loadContractFormData({ chain_id: e.target.value })}
+                marginTop="sm" labelText="Chain Id *" options={[
+                  {
+                    value: 1,
+                    title: "Ethereum"
+                  },
+                  {
+                    value: 137,
+                    title: "Polygon"
                   }
-                />
-                <InputSelect value={hookContractCreate.$contractFormData.chain_id} placeholder="Chain Id"
-                  defaultValue={1} onChange={(e: any) => hookContractCreate.$loadContractFormData({ chain_id: e.target.value })}
-                  marginTop="sm" labelText="Chain Id *" options={[
-                    {
-                      value: 1,
-                      title: "Ethereum"
-                    },
-                    {
-                      value: 137,
-                      title: "Polygon"
+                ]}
+              />
+              <InputLabel
+                value={hookContractCreate.$contractFormData.read_abi_from}
+                onChange={(e: any) =>
+                  hookContractCreate.$loadContractFormData({
+                    read_abi_from: e.target.value,
+                  })
+                }
+                inputType="text"
+                labelText="Read ABI From"
+                placeholder="0x04dd2568fb6A1AA9D560b3F450a2bFBA29Cf32ca"
+                marginTop="sm"
+                tooltipLabel="If you are using proxy contracts or have the ABI of the above mentioned contract, please fill up this field for proper indexing."
+              />
+            </>
+          )}
+          {hookContractCreate.formStep == 2 && (
+            <>
+              <Box
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Box width="47%">
+                  <InputLabel
+                    value={hookContractCreate.$contractFormData.name}
+                    onChange={(e: any) =>
+                      hookContractCreate.$loadContractFormData({
+                        name: e.target.value,
+                      })
                     }
-                  ]}
-                />
-                <InputLabel
-                  value={hookContractCreate.$contractFormData.read_abi_from}
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      read_abi_from: e.target.value,
-                    })
-                  }
-                  inputType="text"
-                  labelText="Read ABI From"
-                  placeholder="0x04dd2568fb6A1AA9D560b3F450a2bFBA29Cf32ca"
-                  marginTop="sm"
-                  tooltipLabel="If you are using proxy contracts or have the ABI of the above mentioned contract, please fill up this field for proper indexing."
-                />
-              </>
-            )}
-            {hookContractCreate.formStep == 2 && (
-              <>
-                <Box
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Box width="47%">
-                    <InputLabel
-                      value={hookContractCreate.$contractFormData.name}
-                      onChange={(e: any) =>
-                        hookContractCreate.$loadContractFormData({
-                          name: e.target.value,
-                        })
-                      }
-                      inputType="text"
-                      labelText="Contract Name *"
-                      placeholder="ENS"
-                    />
-                  </Box>
-                  <Box width="47%">
-                    <InputLabel
-                      value={hookContractCreate.$contractFormData.slug}
-                      onChange={(e: any) =>
-                        hookContractCreate.$loadContractFormData({
-                          slug: e.target.value,
-                        })
-                      }
-                      inputType="text"
-                      labelText="Slug *"
-                      placeholder="ens_ethereum"
-                    />
-                  </Box>
+                    inputType="text"
+                    labelText="Contract Name *"
+                    placeholder="ENS"
+                  />
                 </Box>
-                <InputLabel
-                  value={hookContractCreate.$contractFormData.description}
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      description: e.target.value,
-                    })
-                  }
-                  inputType="text"
-                  labelText="Description *"
-                  placeholder="Ethereum Name Service on ethereum chain..."
-                  marginTop="sm"
-                />
-                {hookContractCreate.$contractFormData.image == "" ? (
-                  <>
-                    <InputLabel
-                      inputType="dropFile"
-                      fileDropMinHeight="80px"
-                      inputLogoSize="lg"
-                      labelText="Image *"
-                      marginTop="sm"
-                      onChange={async (e?: any) => {
-                        if (e.target.files && e.target.files[0]) {
-                          const file = e.target.files[0];
-                          console.log("Selected file:", file);
-                          const cid = await deploytoLightHouse(
-                            e,
-                            hookContractCreate.setLoadingCallback
-                          );
-                          hookContractCreate.$loadContractFormData({
-                            image: displayImage(cid),
-                          });
-                        }
-                      }}
-                    />
-                    {hookContractCreate.ipfsLoading != 0 && (
+                <Box width="47%">
+                  <InputLabel
+                    value={hookContractCreate.$contractFormData.slug}
+                    onChange={(e: any) =>
+                      hookContractCreate.$loadContractFormData({
+                        slug: e.target.value,
+                      })
+                    }
+                    inputType="text"
+                    labelText="Slug *"
+                    placeholder="ens_ethereum"
+                  />
+                </Box>
+              </Box>
+              <InputLabel
+                value={hookContractCreate.$contractFormData.description}
+                onChange={(e: any) =>
+                  hookContractCreate.$loadContractFormData({
+                    description: e.target.value,
+                  })
+                }
+                inputType="text"
+                labelText="Description *"
+                placeholder="Ethereum Name Service on ethereum chain..."
+                marginTop="sm"
+              />
+              {hookContractCreate.$contractFormData.image == "" ? (
+                <>
+                  <InputLabel
+                    inputType="dropFile"
+                    fileDropMinHeight="80px"
+                    inputLogoSize="lg"
+                    labelText="Image *"
+                    marginTop="sm"
+                    onChange={async (e?: any) => {
+                      if (e.target.files && e.target.files[0]) {
+                        const file = e.target.files[0];
+                        console.log("Selected file:", file);
+                        const cid = await deploytoLightHouse(
+                          e,
+                          hookContractCreate.setLoadingCallback
+                        );
+                        hookContractCreate.$loadContractFormData({
+                          image: displayImage(cid),
+                        });
+                      }
+                    }}
+                  />
+                  {hookContractCreate.ipfsLoading != 0 && (
+                    <Box
+                      width="100%"
+                      bgColor="#00040d"
+                      height={1}
+                      mt={style.margin.sm}
+                    >
                       <Box
-                        width="100%"
-                        bgColor="#00040d"
+                        bgColor="#0f172e"
+                        width={`${hookContractCreate.ipfsLoading}%`}
                         height={1}
-                        mt={style.margin.sm}
-                      >
-                        <Box
-                          bgColor="#0f172e"
-                          width={`${hookContractCreate.ipfsLoading}%`}
-                          height={1}
-                        ></Box>
-                      </Box>
-                    )}
-                  </>
-                ) : (
-                  <Box width="100%">
-                    <Heading
-                      as="h6"
-                      size="sm"
-                      marginTop={style.margin.md}
-                      marginBottom={style.margin.xs}
-                      bgGradient="linear(
+                      ></Box>
+                    </Box>
+                  )}
+                </>
+              ) : (
+                <Box width="100%">
+                  <Heading
+                    as="h6"
+                    size="sm"
+                    marginTop={style.margin.md}
+                    marginBottom={style.margin.xs}
+                    bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-                      bgClip="text"
-                    >
-                      Image
-                    </Heading>
-                    <Box
-                      width="100%"
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Image
-                        height={100}
-                        width="80%"
-                        objectFit="contain"
-                        src={hookContractCreate.$contractFormData.image}
-                        alt=""
-                      />
-                    </Box>
+                    bgClip="text"
+                  >
+                    Image
+                  </Heading>
+                  <Box
+                    width="100%"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Image
+                      height={100}
+                      width="80%"
+                      objectFit="contain"
+                      src={hookContractCreate.$contractFormData.image}
+                      alt=""
+                    />
                   </Box>
-                )}
-              </>
-            )}
-            {hookContractCreate.formStep == 3 && (
-              <>
-                <InputLabel
-                  value={
-                    hookContractCreate.$contractFormData.interested_methods
-                  }
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      interested_methods: e.target.value,
-                    })
-                  }
-                  inputType="text"
-                  labelText="Interested Methods *"
-                  placeholder="register, renew"
-                  marginTop="sm"
-                  tooltipLabel="You can mention more than one method(s) using comma seperated values."
-                />
-                <InputLabel
-                  value={hookContractCreate.$contractFormData.interested_events}
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      interested_events: e.target.value,
-                    })
-                  }
-                  inputType="text"
-                  labelText="Interested Events *"
-                  placeholder="deposit, withdraw"
-                  marginTop="sm"
-                  tooltipLabel="You can mention more than one event(s) using comma seperated values."
-                />
-              </>
-            )}
-          </FlexColumn>
+                </Box>
+              )}
+            </>
+          )}
+          {hookContractCreate.formStep == 3 && (
+            <>
+              <InputLabel
+                value={
+                  hookContractCreate.$contractFormData.interested_methods
+                }
+                onChange={(e: any) =>
+                  hookContractCreate.$loadContractFormData({
+                    interested_methods: e.target.value,
+                  })
+                }
+                inputType="text"
+                labelText="Interested Methods *"
+                placeholder="register, renew"
+                marginTop="sm"
+                tooltipLabel="You can mention more than one method(s) using comma seperated values."
+              />
+              <InputLabel
+                value={hookContractCreate.$contractFormData.interested_events}
+                onChange={(e: any) =>
+                  hookContractCreate.$loadContractFormData({
+                    interested_events: e.target.value,
+                  })
+                }
+                inputType="text"
+                labelText="Interested Events *"
+                placeholder="deposit, withdraw"
+                marginTop="sm"
+                tooltipLabel="You can mention more than one event(s) using comma seperated values."
+              />
+            </>
+          )}
+          {hookContractCreate.formStep == 4 && (
+            <Box
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Box
+                paddingTop={style.padding.md}
+                paddingBottom={style.padding.md}
+              >
+                <IconBase slug="icon-congrats" size="4xl" />
+              </Box>
+              <Box>
+                <Text
+                  style={{
+                    fontWeight: `700`,
+                    fontSize: `${style.font.h2}`,
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Voila!
+                </Text>
+              </Box>
+              <Box>
+                <Text textAlign="center" mb={0} color="whiteAlpha.800">
+                  You have successfully created your contact on Macha.
+                </Text>
+                <Text
+                  textAlign="center"
+                  marginBottom={style.margin.lg}
+                  color="whiteAlpha.800"
+                >
+                  Wait for approval from our side and your contract will be published.
+                </Text>
+              </Box>
+            </Box>
+          )}
         </FlexColumn>
-      </ModalWindow>
-    </>
+      </FlexColumn>
+    </ModalWindow>
+  </>
   );
 };
 
