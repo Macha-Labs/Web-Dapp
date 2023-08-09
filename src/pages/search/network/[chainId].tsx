@@ -44,8 +44,8 @@ const Network = () => {
         await hookAlchemy.getLatestBlockByChainId(Number(router.query.chainId));
         await hookChainTxn._fetch(router.query.chainId);
       }
-    }
-    fetch()
+    };
+    fetch();
   }, [router.query.chainId, hookChainTxn.page]);
 
   const chainNav: any = [
@@ -69,13 +69,21 @@ const Network = () => {
 
               <Box display="flex" flexDirection="column">
                 <Box display="flex" flexDirection="column">
-                  <Text fontWeight={style.fontWeight.dark} fontSize={style.font.h5}>
+                  <Text
+                    fontWeight={style.fontWeight.dark}
+                    fontSize={style.font.h5}
+                  >
                     About {chains[chainId].chainName}
                   </Text>
                   <Text>{chains[chainId].about}</Text>
                 </Box>
                 <Box display="flex" flexDirection="column">
-                  <Text fontWeight={style.fontWeight.dark} fontSize={style.font.h5}>Team</Text>
+                  <Text
+                    fontWeight={style.fontWeight.dark}
+                    fontSize={style.font.h5}
+                  >
+                    Team
+                  </Text>
                   <Box
                     style={{
                       display: "flex",
@@ -104,7 +112,10 @@ const Network = () => {
                   </Box>
                 </Box>
                 <Box>
-                  <Text fontWeight={style.fontWeight.dark} fontSize={style.font.h5}>
+                  <Text
+                    fontWeight={style.fontWeight.dark}
+                    fontSize={style.font.h5}
+                  >
                     Compatible Wallets
                   </Text>
                   <Box display="flex" flex="flex-wrap">
@@ -119,7 +130,9 @@ const Network = () => {
             </Box>
             <Box flex="3" p={4}>
               {/* Content for column 2 */}
-              <Text fontWeight={style.fontWeight.dark} fontSize={style.font.h5}>Official Links</Text>
+              <Text fontWeight={style.fontWeight.dark} fontSize={style.font.h5}>
+                Official Links
+              </Text>
               <Box
                 display="flex"
                 flexDirection="column"
@@ -231,10 +244,12 @@ const Network = () => {
   };
 
   const renderComponent = () => {
-    return (hookChainTxn.isLoading ? <FlexRow height="100vh">
-      <Loader size="lg" />
-    </FlexRow>
-      : (<>
+    return hookChainTxn.isLoading ? (
+      <FlexRow height="100vh">
+        <Loader size="lg" />
+      </FlexRow>
+    ) : (
+      <>
         <Box marginTop={style.margin.xxxl} paddingTop={style.padding.xxs}>
           <>
             <Box marginTop={style.margin.xxxl}>
@@ -274,7 +289,7 @@ const Network = () => {
                   justifyContent="space-between"
                 >
                   <Box>
-                    <Text marginBottom={0}>Interactions</Text>
+                    <Text marginBottom={0}>Transactions Indexed</Text>
                     <Text
                       marginBottom={0}
                       fontWeight={style.fontWeight.extraDark}
@@ -317,7 +332,7 @@ const Network = () => {
             </Box>
           </>
         </Box>
-      </>)
+      </>
     );
   };
   const renderBody = () => {
@@ -334,7 +349,7 @@ const Network = () => {
               fontSize={style.font.h5}
               fontWeight="600"
               marginBottom={0}
-            //   marginLeft={style.margin.xxs}
+              //   marginLeft={style.margin.xxs}
             >
               {chainId && chains[chainId]?.chainName}
             </Text>

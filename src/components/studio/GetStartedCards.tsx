@@ -42,7 +42,13 @@ const GetStartedCards = ({
       <Box p="4" opacity={disabled ? "0.4" : "1"}>
         {image && (
           <Box height="25%">
-            <Image src={image} fit="contain" alt={title} height="" width="19rem"/>
+            <Image
+              src={image}
+              fit="contain"
+              alt={title}
+              height=""
+              width="19rem"
+            />
           </Box>
         )}
         <FlexRow hrAlign="flex-start" vrAlign="flex-start" marginTop="sm">
@@ -51,7 +57,11 @@ const GetStartedCards = ({
           </Text>
           {tag && <TagNative value={tag} size="sm" marginTop="2px" />}
         </FlexRow>
-        <Text width="19rem" mt={style.margin.xxs} color="gray.600">
+        <Text
+          width="19rem"
+          mt={style.margin.xxs}
+          color={style.color["white.7"]}
+        >
           {description}
         </Text>
         {/* <Button mt="4" colorScheme="teal" size="sm">

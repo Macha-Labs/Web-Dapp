@@ -165,6 +165,9 @@ const Meta = () => {
                     border={style.input.border.default}
                     borderRadius={style.card.borderRadius.image}
                     marginTop={style.margin["sm"]}
+                    onClick={() => {
+                      setToggleIpfs(!toggleIpfs);
+                    }}
                   >
                     <FlexRow hrAlign="space-between">
                       <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
@@ -178,19 +181,9 @@ const Meta = () => {
                         width="80%"
                       >
                         {toggleIpfs ? (
-                          <IconBase
-                            slug="icon-chevron-up"
-                            onClick={() => {
-                              setToggleIpfs(!toggleIpfs);
-                            }}
-                          />
+                          <IconBase slug="icon-chevron-up" />
                         ) : (
-                          <IconBase
-                            slug="icon-chevron-down"
-                            onClick={() => {
-                              setToggleIpfs(!toggleIpfs);
-                            }}
-                          />
+                          <IconBase slug="icon-chevron-down" />
                         )}
                       </FlexRow>
                     </FlexRow>
@@ -290,6 +283,9 @@ const Meta = () => {
                           border={style.input.border.default}
                           borderRadius={style.card.borderRadius.image}
                           marginTop={style.margin["sm"]}
+                          onClick={() => {
+                            setToggleIpfs(!toggleIpfs);
+                          }}
                         >
                           <FlexRow hrAlign="space-between">
                             <Heading
@@ -306,19 +302,9 @@ const Meta = () => {
                               width="80%"
                             >
                               {toggleIpfs ? (
-                                <IconBase
-                                  slug="icon-chevron-up"
-                                  onClick={() => {
-                                    setToggleIpfs(!toggleIpfs);
-                                  }}
-                                />
+                                <IconBase slug="icon-chevron-up" />
                               ) : (
-                                <IconBase
-                                  slug="icon-chevron-down"
-                                  onClick={() => {
-                                    setToggleIpfs(!toggleIpfs);
-                                  }}
-                                />
+                                <IconBase slug="icon-chevron-down" />
                               )}
                             </FlexRow>
                           </FlexRow>
