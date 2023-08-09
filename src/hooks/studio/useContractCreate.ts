@@ -22,7 +22,7 @@ const useContractCreate = (modal: any) => {
 
   useEffect(() => {
     console.log($contractFormData)
-  },[$contractFormData])
+  }, [$contractFormData])
 
   const validateSteps = () => {
     if (formStep == 1) {
@@ -95,7 +95,7 @@ const useContractCreate = (modal: any) => {
   };
 
   const nextFormStep = () => {
-    if (formStep >= 3) {
+    if (formStep >= 4) {
       return;
     } else {
       if (validateSteps()) {
@@ -231,28 +231,38 @@ const useContractCreate = (modal: any) => {
     } else {
       console.log("The contract payload data is ", contractPayload);
       createNewContract(contractPayload).then((res) => {
-        modal.onClose()
         toast({
           title: "Contract created!",
           status: "success",
           duration: 3000,
           position: "top-right"
         });
-        router.push(`/search/contracts/${contractPayload.slug}`)
-        $loadContractFormData({
-          name: "",
-          description: "",
-          address: "",
-          chain_id: "",
-          slug: "",
-          interested_methods: "",
-          interested_events: "",
-          read_abi_from: "",
-          image: "",
-        })
+        nextFormStep()
       })
     }
   };
+
+  const lastStep = () => {
+    const slug = $contractFormData.slug
+    modal.onClose()
+    setClear()
+    router.push(`/search/contracts/${slug}`)
+  }
+
+  const setClear = () => {
+    $loadContractFormData({
+      name: "",
+      description: "",
+      address: "",
+      chain_id: "",
+      slug: "",
+      interested_methods: "",
+      interested_events: "",
+      read_abi_from: "",
+      image: "",
+    })
+    setFormStep(1)
+  }
 
   return {
     $contractFormData: $contractFormData,
@@ -263,7 +273,9 @@ const useContractCreate = (modal: any) => {
     nextFormStep: nextFormStep,
     prevFormStep: prevFormStep,
     ipfsLoading: ipfsLoading,
-    setLoadingCallback: setLoadingCallback
+    setLoadingCallback: setLoadingCallback,
+    lastStep: lastStep,
+    setClear: setClear
   };
 };
 export default useContractCreate;
