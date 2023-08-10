@@ -14,6 +14,7 @@ const useMetaList = () => {
 
   const _fetchAll = () => {
     fetchAllMetas().then((res) => {
+      console.log(res.data,"all metas")
       setMetaAll(res.data);
     });
   };

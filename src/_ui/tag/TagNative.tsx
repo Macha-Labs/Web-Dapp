@@ -1,6 +1,8 @@
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { AddIcon } from "@chakra-ui/icons";
 import {
+  Avatar,
   Tag,
   TagCloseButton,
   TagLabel,
@@ -49,7 +51,7 @@ const TagNative = ({
       marginLeft={marginLeft}
     >
       {icon && icon.align == "left" && (
-        <TagLeftIcon boxSize="12px" as={AddIcon} />
+        <Avatar marginRight={1} boxSize="12px" src={GlobalIcons[icon.slug]} />
       )}
       <TagLabel
         style={{ lineHeight: lineHeight ? lineHeight : "1", fontSize: "12px" }}
@@ -57,7 +59,7 @@ const TagNative = ({
         {value}
       </TagLabel>
       {icon && icon.align == "right" && (
-        <TagRightIcon boxSize="12px" as={AddIcon} />
+        <Avatar marginLeft={1} boxSize="12px" src={GlobalIcons[icon.slug]} />
       )}
       {close && <TagCloseButton />}
     </Tag>
