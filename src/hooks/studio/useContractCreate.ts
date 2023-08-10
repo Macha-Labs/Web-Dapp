@@ -1,8 +1,8 @@
-import { createNewContract } from "@/service/ApiService";
+import { checkUniqueData, createNewContract } from "@/service/ApiService";
 import useContractFormStore from "@/store/useContractFormStore";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useContractCreate = (modal: any) => {
   const toast = useToast();
@@ -20,11 +20,7 @@ const useContractCreate = (modal: any) => {
     setIpfsLoading(percentageDone)
   }
 
-  useEffect(() => {
-    console.log($contractFormData)
-  }, [$contractFormData])
-
-  const validateSteps = () => {
+  const validateSteps = async () => {
     if (formStep == 1) {
       if ($contractFormData.address != "" && addressRegex.test($contractFormData.address) == false) {
         toast({
@@ -49,7 +45,19 @@ const useContractCreate = (modal: any) => {
         });
         return false;
       } else {
-        return true;
+        const res = await checkUniqueData("address", $contractFormData.address)
+        if (res.data == false) {
+          toast({
+            title: "A contract with the same address already exists.",
+            status: "warning",
+            duration: 3000,
+            position: "top-right",
+          });
+          return false
+        }
+        else {
+          return true;
+        }
       }
     }
     if (formStep == 2) {
@@ -71,7 +79,19 @@ const useContractCreate = (modal: any) => {
         });
         return false;
       } else {
-        return true;
+        const res = await checkUniqueData("slug", $contractFormData.slug)
+        if (res.data == false) {
+          toast({
+            title: "A contract with the same slug already exists.",
+            status: "warning",
+            duration: 3000,
+            position: "top-right",
+          });
+          return false
+        }
+        else {
+          return true;
+        }
       }
     }
     if (formStep == 3) {
@@ -94,11 +114,11 @@ const useContractCreate = (modal: any) => {
     }
   };
 
-  const nextFormStep = () => {
+  const nextFormStep = async () => {
     if (formStep >= 4) {
       return;
     } else {
-      if (validateSteps()) {
+      if (await validateSteps()) {
         setFormStep((currentStep: any) => currentStep + 1);
       } else {
         return;

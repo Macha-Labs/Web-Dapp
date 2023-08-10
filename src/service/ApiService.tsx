@@ -124,6 +124,14 @@ export const txnByUserAddress = async (from_address: any, page: any) => {
   return data;
 };
 
+export const checkUniqueData = async (dataType: any, searchData: any) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/contracts/check-data?type=${dataType}&data=${searchData}`
+  );
+  const data = await response.json();
+  return data;
+};
+
 // /indexer/transactions/fetch-by-user-address/:from_address
 
 // /indexer/transactions/fetch-by-chain-id/:chain_id
