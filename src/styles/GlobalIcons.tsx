@@ -107,6 +107,8 @@ const GlobalIcons: any = {
     "/assets/icons/Base_blue_icons/base-blue-chevronUp.svg",
   "icon-reply":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-replyFilled.svg",
+  "icon-dark-close":
+    "/assets/icons/Dark_icons/dark-cancel.svg",
   "icon-close":
     "/assets/icons/Base_blue_icons/base-blue-cancel.svg",
   "icon-twitter":

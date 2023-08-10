@@ -16,6 +16,7 @@ type Props = {
   marginRight?: any;
   marginBottom?: string;
   width?: string;
+  height?: string;
 };
 
 const InputSearch = ({
@@ -32,6 +33,7 @@ const InputSearch = ({
   marginRight,
   marginBottom,
   width,
+  height
 }: Props) => {
   return (
     <InputGroup
@@ -55,6 +57,7 @@ const InputSearch = ({
         onKeyDown={onKeydown ? onKeydown : () => {}}
         _placeholder={{ color: `#132041` }}
         width={width}
+        height={height}
         border={gStyle.input.border.search}
         borderRadius={gStyle.input.borderRadius.default}
       />
