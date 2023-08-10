@@ -75,9 +75,8 @@ const HomeDev = () => {
                         position: "top-right",
                       });
                     }
-                  }
-                  catch (err) {
-                    console.log(err)
+                  } catch (err) {
+                    console.log(err);
                   }
                 };
                 if ($address == null) {
@@ -95,15 +94,24 @@ const HomeDev = () => {
               text="Set a Publisher Account"
             />
           </Box>
-        ) : <Box display={"flex"}>
-          <Text style={{marginTop: `${style.margin.xs}`, marginBottom: "0px", fontSize: `${style.font.h5}`, fontWeight: `${style.fontWeight.dark}`}}>
-          You are a publisher
-          </Text>
-          {/* <Button
+        ) : (
+          <Box display={"flex"}>
+            <Text
+              style={{
+                marginTop: `${style.margin.xs}`,
+                marginBottom: "0px",
+                fontSize: `${style.font.h5}`,
+                fontWeight: `${style.fontWeight.dark}`,
+              }}
+            >
+              You are a publisher
+            </Text>
+            {/* <Button
             style={{color: "#004ad9", backgroundColor: "#A0CDFF",border: "1px solid #fff", marginTop: `${style.margin.xs}`, cursor: "default"}}
             onClick={() => {}}
           >You are a publisher</Button> */}
-        </Box>}
+          </Box>
+        )}
       </Box>
 
       <Box marginTop={style.margin.xl}>
@@ -116,7 +124,7 @@ const HomeDev = () => {
         <GetStartedCards
           image="https://ik.imagekit.io/macha1/studio/push%20contracts-imagev4.svg"
           title="Start Indexing Contracts"
-          description="Publish your smart contract to accelerate the growth of your protocol and gain exposure to thriving developer community."
+          description="Publish your smart contract for growth and developer community exposure."
           disabled={$address == null}
           onClick={() => {
             if ($address == null) {
@@ -143,28 +151,28 @@ const HomeDev = () => {
         <GetStartedCards
           title="Create Functions"
           image="https://ik.imagekit.io/macha1/studio/create%20functions-imagev4.svg"
-          description="Make blazingly fast function calls on contracts to integrate functions in your app with Macha’s SDK."
+          description=" Make fast function calls on contracts to integrate functions in your app"
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Abstract Metas"
           image="https://ik.imagekit.io/macha1/studio/abstract%20metas-imagev4.svg"
-          description="Enable users to easily discover your metas, such as Lens profiles, ENS, Nfts, and more, through our multi-chain search protocol."
+          description="Enable users to discover your metas, like Lens profiles, ENS, Nfts, and more"
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Graph Playground"
           image="https://ik.imagekit.io/macha1/studio/Graph%20playgroundv4.svg"
-          description="Developers can use Macha’s content graph APIs to access and fetch essential user data related to specific contracts."
+          description="Use Macha’s content graph APIs to access user data related to specific contracts."
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Explore Documentation"
           image="https://ik.imagekit.io/macha1/studio/explore%20doc-imagev4.svg"
-          description="Check out our doc repository and sign up today to access the fastest API for all developers."
+          description="Check out our doc repository and sign up to access the fastest API."
           tag="soon"
           disabled={true}
         />
