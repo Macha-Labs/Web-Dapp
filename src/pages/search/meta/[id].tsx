@@ -1,29 +1,28 @@
 import MCard from "@/_sdk/MCard";
-import JSONViewer from "@/_ui/JSONViewer";
 import CardNative from "@/_ui/cards/CardNative";
+import CardSkeleton from "@/_ui/cards/CardSkeleton";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import IconBase from "@/_ui/icons/IconsBase";
-import InputSearch from "@/_ui/input/InputSearch";
 import NavMeta from "@/_ui/nav/NavMeta";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import NavButton from "@/components/buttons/NavButton";
 import CopyableRow from "@/components/meta/CopyableRow";
 import useMeta from "@/hooks/meta/useMeta";
-import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
+
 import {
   Avatar,
   Box,
-  Divider,
   Heading,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
   Text,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -69,13 +68,13 @@ const Meta = () => {
       <Box display={"flex"} justifyContent={"space-between"}>
         <Box width="28%">
           {/* <CardNative height="fit-content" width="100%"></CardNative> */}
-          <MCard
+          {hookMeta.isLoading ? <CardSkeleton /> : <MCard
             title={hookMeta?.metaData?.meta?.data?.modified?.meta_title}
             image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
             description={
               hookMeta?.metaData?.meta?.data?.modified?.meta_description
             }
-          />
+          />}
         </Box>
         <Box width="68%">
           <Tabs
@@ -99,13 +98,16 @@ const Meta = () => {
                 }
               >
                 <>
-                  <FlexRow hrAlign="space-between">
+                  {hookMeta.isLoading ? <FlexRow width="100%" hrAlign="space-between">
+                    <SkeletonCircle />
+                    <Skeleton width="90%">Harsh</Skeleton>
+                  </FlexRow> : <FlexRow hrAlign="space-between">
                     <FlexRow hrAlign="flex-start" width="fit-content">
-                      <Avatar
+                      {hookMeta.isLoading ? <SkeletonCircle height="2rem" marginRight={style.margin.xxs} /> : <Avatar
                         size={"md"}
                         marginRight={style.margin.sm}
                         src={GlobalIcons["avatar-default"]}
-                      />
+                      />}
                       <FlexColumn
                         width="fit-content"
                         // hrAlign="flex-start"
@@ -117,7 +119,7 @@ const Meta = () => {
                       </FlexColumn>
                     </FlexRow>
                     <TagNative value="owner" size="md" />
-                  </FlexRow>
+                  </FlexRow>}
                 </>
               </CardNative>
               <CardNative
@@ -133,7 +135,12 @@ const Meta = () => {
                 }
               >
                 <>
-                  {rawDataKey &&
+                  {hookMeta.isLoading && <FlexColumn>
+                    <Skeleton marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
+                    <Skeleton marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
+                    <Skeleton marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
+                    </FlexColumn>}
+                  {!hookMeta.isLoading && rawDataKey &&
                     rawDataKey.map((item: any, index: any) => {
                       return (
                         <CopyableRow
@@ -191,7 +198,7 @@ const Meta = () => {
                       <Box>
                         {Object.keys(
                           hookMeta?.metaData?.meta?.data?.ipfs[
-                            Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
+                          Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
                           ]
                         ).map((item, index) => {
                           return (
@@ -211,10 +218,10 @@ const Meta = () => {
                                   )[0]
                                 ][item] == "string"
                                   ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                      Object.keys(
-                                        hookMeta?.metaData?.meta?.data?.ipfs
-                                      )[0]
-                                    ][item]
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data?.ipfs
+                                  )[0]
+                                  ][item]
                                   : "[ ]"}
                               </Text>
                               <Box
@@ -233,11 +240,11 @@ const Meta = () => {
                                         )[0]
                                       ][item] == "string"
                                         ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                            Object.keys(
-                                              hookMeta?.metaData?.meta?.data
-                                                ?.ipfs
-                                            )[0]
-                                          ][item]
+                                        Object.keys(
+                                          hookMeta?.metaData?.meta?.data
+                                            ?.ipfs
+                                        )[0]
+                                        ][item]
                                         : "[ ]"
                                     );
                                     toast({

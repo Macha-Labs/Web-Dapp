@@ -2,12 +2,12 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import InputSearch from "@/_ui/input/InputSearch";
 import Loader from "@/_ui/loader/Loader";
 import NavBlock from "@/_ui/nav/NavBlock";
-import ContractInfoCard from "@/components/studio/ContractInfoCard";
+import NavStudio from "@/_ui/nav/NavStudio";
 import ContractDeleteModal from "@/components/studio/ContractDeleteModal";
 import ContractEditModal from "@/components/studio/ContractEditModal";
+import ContractInfoCard from "@/components/studio/ContractInfoCard";
 import TxnTable from "@/components/studio/TxnTable";
 import useContract from "@/hooks/studio/useContract";
 import useContractCreate from "@/hooks/studio/useContractCreate";
@@ -17,10 +17,6 @@ import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import NavButton from "@/components/buttons/NavButton";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import NavTop from "@/_ui/nav/NavTop";
-import NavStudio from "@/_ui/nav/NavStudio";
 
 type Props = {
   metaInfo: any;

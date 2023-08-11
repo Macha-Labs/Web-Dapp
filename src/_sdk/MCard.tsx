@@ -1,12 +1,12 @@
-import FlexColumn from "@/_ui/flex/FlexColumn";
-import { Avatar, Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
-import { style as gStyle, style } from "../styles/StyledConstants";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
-import TagNative from "@/_ui/tag/TagNative";
-import IconBase from "@/_ui/icons/IconsBase";
+import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
+import IconBase from "@/_ui/icons/IconsBase";
+import TagNative from "@/_ui/tag/TagNative";
 import { helperIPFS, truncateString } from "@/helpers";
+import { Avatar, Box, Image, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { style as gStyle, style } from "../styles/StyledConstants";
 
 type Props = {
   title?: string;

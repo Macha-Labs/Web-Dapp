@@ -107,6 +107,8 @@ const GlobalIcons: any = {
     "/assets/icons/Base_blue_icons/base-blue-chevronUp.svg",
   "icon-reply":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-replyFilled.svg",
+  "icon-dark-close":
+    "/assets/icons/Dark_icons/dark-cancel.svg",
   "icon-close":
     "/assets/icons/Base_blue_icons/base-blue-cancel.svg",
   "icon-twitter":
@@ -168,14 +170,15 @@ const GlobalIcons: any = {
   "icon-almost-there":
     "/assets/icons/database-restore%201.svg",
   "icon-congrats": "/assets/icons/congrats%20icon.svg",
-  "logo-Lens": "/Studio-Logos/lens.svg?updatedAt=1686740026746",
-  "logo-Macha": "/Studio-Logos/metawork.svg?updatedAt=1686740613025",
-  "logo-Farcaster": "/Studio-Logos/farcaster.svg?updatedAt=1686740612210",
-  "logo-Poap": "/Studio-Logos/POAP_1_.svg?updatedAt=1686741238781",
-  "logo-Mirror": "/Studio-Logos/mirror-color.svg?updatedAt=1686740614053",
-  "logo-Sound.xyz": "/Studio-Logos/sound.svg?updatedAt=1686740612486",
-  "logo-Paragraph.xyz": "/Studio-Logos/paragraph.svg?updatedAt=1686740612876",
-  "logo-MintKudos": "/Studio-Logos/mintcudos.svg?updatedAt=1686740614448",
+  "logo-Lens": "https://ik.imagekit.io/macha1/studio/Lens.svg",
+  "logo-Ens": "https://ik.imagekit.io/macha1/studio/ENS.svg",
+  "logo-Macha": "/Studio-Logos/metawork.svg",
+  "logo-Farcaster": "/Studio-Logos/farcaster.svg",
+  "logo-Poap": "/Studio-Logos/POAP_1_.svg",
+  "logo-Mirror": "/Studio-Logos/mirror-color.svg",
+  "logo-Sound.xyz": "/Studio-Logos/sound.svg",
+  "logo-Paragraph.xyz": "/Studio-Logos/paragraph.svg",
+  "logo-MintKudos": "/Studio-Logos/mintcudos.svg",
   "logo-Ethereum": "/assets/icons/coloredEtherum.svg",
   "logo-Polygon": "/assets/icons/coloredPolygon.svg",
 };

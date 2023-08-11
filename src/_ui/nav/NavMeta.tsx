@@ -1,11 +1,12 @@
-import Image from "next/image";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
+import { Box, Image } from "@chakra-ui/react";
 import Link from "next/link";
 import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
-import IconImage from "../icons/IconImage";
-import { Box } from "@chakra-ui/react";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import IconBase from "../icons/IconsBase";
+import { useState } from "react"
+import InputSearch from "../input/InputSearch";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 type Props = {
   rightElem?: any;
@@ -13,6 +14,9 @@ type Props = {
 };
 
 const NavMeta = ({ rightElem, centerElem }: Props) => {
+
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
+
   return (
     <>
       <Box
@@ -35,37 +39,31 @@ const NavMeta = ({ rightElem, centerElem }: Props) => {
             width: "90%",
           }}
         >
-          <FlexRow hrAlign="space-between" vrAlign="center">
-            <FlexRow vrAlign="center" hrAlign="flex-start">
-              <Link href="/">
-                <Image
-                  className="headerLogo"
-                  src="/assets/Macha-logo-text.svg"
-                  alt="logo"
-                  width={170}
-                  height={62}
-                  // width={246}
-                />
-              </Link>
-            </FlexRow>
-
-            <FlexRow vrAlign="center" hrAlign="flex-end">
-              <FlexRow width="fit-content">
-                {/* {$address && <NavButton />} */}
-                {
-                  <ConnectWalletButton
-                    showBalance={false}
-                    height="2.2rem"
-                    showStudio={true}
-                  />
-                }
-                <IconBase
-                  slug="icon-dark-search"
-                  size="2rem"
-                  style={{ marginLeft: "xs" }}
-                />
-              </FlexRow>
-            </FlexRow>
+          <FlexRow vrAlign="center" hrAlign="space-between">
+            <Link href="/" style={{ paddingRight: `${style.margin.sm}` }}>
+              <Image
+                className="headerLogo"
+                src="/assets/Macha-logo-text.svg"
+                alt="logo"
+                width={170}
+                height={62}
+              // width={246}
+              />
+            </Link>
+            <Box style={{ display: "flex", alignItems: "center" }} width={isSearchOpen ? "80%" : "fit-content"}>
+              {!isSearchOpen ? <ConnectWalletButton
+                showBalance={false}
+                height="2.2rem"
+                showStudio={true}
+              /> :
+                <InputSearch width="100%" height="2.2rem" />}
+              <Image
+                style={{ marginLeft: `${style.margin.xs}`, cursor: "pointer" }}
+                src={isSearchOpen ? GlobalIcons["icon-dark-close"] : GlobalIcons["icon-dark-search"]}
+                height="2.2rem"
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+              />
+            </Box>
           </FlexRow>
         </Box>
       </Box>

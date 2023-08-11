@@ -44,7 +44,8 @@ export const commonStyle: any = {
     h: "#fff",
     "white.5": "rgb(255,255,255,0.5)",
     "white.7": "rgb(255,255,255,0.7)",
-    disabled: "#354670"
+    disabled: "#354670",
+    bgMain: "#00040d"
   },
 };
 
