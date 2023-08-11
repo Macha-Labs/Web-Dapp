@@ -4,13 +4,14 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavMeta from "@/_ui/nav/NavMeta";
-import TagNative from "@/_ui/tag/TagNative";
+import TagFilter from "@/_ui/tag/TagFilter";
 import useMetaList from "@/hooks/meta/useMetasList";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import CardSkeleton from "@/_ui/cards/CardSkeleton"
 
 const Explorer = () => {
   const hookMetasList = useMetaList();
@@ -38,9 +39,9 @@ const Explorer = () => {
           paddingRight: "7%",
           width: "90%"
         }}>
-          <TagNative icon={{align:"left",slug: ""}} value="All"  lineHeight="1.25rem" />
-          <TagNative icon={{align:"left",slug: "logo-Lens"}} value="Lens"  lineHeight="1.25rem" />
-          <TagNative icon={{align:"left",slug: "logo-Ens"}} value="ENS" lineHeight="1.25rem"  />
+          <TagFilter icon={{align:"left",src: GlobalIcons[""]}} value="All" height="2.2rem" fontSize={style.font.h4} marginRight={style.margin.xs} />
+          <TagFilter icon={{align:"left",src: GlobalIcons["logo-Lens"]}} value="Lens" height="2.2rem" fontSize={style.font.h4} marginRight={style.margin.xs} />
+          <TagFilter icon={{align:"left",src: GlobalIcons["logo-Ens"]}} value="ENS" height="2.2rem" fontSize={style.font.h4} />
         </Box>
         <Box
           paddingTop={style.margin["lg"]}
@@ -49,7 +50,15 @@ const Explorer = () => {
           justifyContent={"center"}
         >
           <FlexRow flexWrap={"wrap"} width="90%" vrAlign="flex-start">
-            {hookMetasList?.metaAll &&
+            {hookMetasList.isLoading && <>
+              <CardSkeleton width="30%" />
+              <CardSkeleton width="30%" />
+              <CardSkeleton width="30%" />
+              <CardSkeleton width="30%" />
+              <CardSkeleton width="30%" />
+              <CardSkeleton width="30%" />
+            </>}
+            {!hookMetasList.isLoading && hookMetasList?.metaAll &&
               hookMetasList?.metaAll?.map((item: any, index: any) => {
                 return (
                   <MCard
