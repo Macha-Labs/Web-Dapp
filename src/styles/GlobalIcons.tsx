@@ -147,6 +147,12 @@ const GlobalIcons: any = {
     "icons/svg/Base_blue_icons/base-blue-user.svg?updatedAt=1690532065895",
   "icon-dark-user":
     "/assets/icons/Dark_icons/dark-user.svg",
+  "icon-dark-add":
+    "/assets/icons/Dark_icons/dark-add.svg",
+  "icon-dark-edit":
+    "/assets/icons/Dark_icons/dark-edit.svg",
+  "icon-dark-delete":
+    "/assets/icons/Dark_icons/dark-delete.svg",
   "icon-info":
     "/assets/icons/Base_blue_icons/base-blue-info.svg",
   "icon-connections":

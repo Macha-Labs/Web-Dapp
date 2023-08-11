@@ -19,6 +19,7 @@ const NavStudio = () => {
               showBalance={true}
               showRegisterPublisher={true}
               showExplorer={true}
+              showContracts={true}
             />
           }
         </FlexRow>

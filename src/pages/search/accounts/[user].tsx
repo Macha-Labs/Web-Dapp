@@ -30,6 +30,7 @@ import InputSearch from "@/_ui/input/InputSearch";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import IconBase from "@/_ui/icons/IconsBase";
 import GlobalIcons from "@/styles/GlobalIcons";
+import NavStudio from "@/_ui/nav/NavStudio";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -52,15 +53,7 @@ const Network = () => {
 
   const renderNav = () => {
     return (
-      <NavTop
-        centerElem={<InputSearch />}
-        rightElem={
-          <FlexRow width="fit-content">
-            {$address && <NavButton />}
-            {<ConnectWalletButton showBalance={true} />}
-          </FlexRow>
-        }
-      />
+      <NavStudio />
     );
   };
 

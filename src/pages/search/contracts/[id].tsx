@@ -42,6 +42,7 @@ const Contract = () => {
   const renderNav = () => {
     return <NavStudio />;
   };
+
   const renderComponent = () => {
     let options = {
       weekday: "long",
@@ -186,6 +187,7 @@ const Contract = () => {
       </Box>
     );
   };
+  
   const renderBody = () => {
     return (
       <>

@@ -236,6 +236,24 @@ export const ConnectWalletButton = (props: any) => {
                           </FlexRow>
                         </MenuItem>
                       )}
+                      {props?.showContracts && (
+                        <MenuItem
+                          onClick={async () => {
+                            router.push("/mycontracts");
+                          }}
+                        >
+                          <FlexRow hrAlign="space-between">
+                            <IconBase slug="icon-dark-deploy" size="xl" />
+                            <FlexRow
+                              hrAlign="flex-start"
+                              width="90%"
+                              marginLeft={"sm"}
+                            >
+                              My Contracts
+                            </FlexRow>
+                          </FlexRow>
+                        </MenuItem>
+                      )}
                       {props?.showExplorer && (
                         <MenuItem
                           onClick={async () => {

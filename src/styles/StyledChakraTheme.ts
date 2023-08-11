@@ -7,7 +7,10 @@ const theme = extendTheme({
   styles: {
     global: {
       html: {
-        background: `${style.color.bgMain} !important`,
+        backgroundColor: `${style.color.bgMain} !important`,
+      },
+      body: {
+        backgroundColor: `${style.color.bgMain} !important`,
       },
       "h1, h2, h3, h4, h5, h6": {
         color: `${style.color.h}`,
