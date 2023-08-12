@@ -135,7 +135,7 @@ const chains: any = {
     },
     10: {
         chainName: "Optimism",
-        chainImage: "logo-optimism",
+        chainImage: "logo-Optimism",
         about: `OP Mainnet is a Layer 2 Optimistic Rollup network designed to utilize the strong security guarantees of Ethereum while reducing its cost and latency.`,
         team: [
             

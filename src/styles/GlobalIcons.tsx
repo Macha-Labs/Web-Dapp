@@ -187,5 +187,6 @@ const GlobalIcons: any = {
   "logo-MintKudos": "/Studio-Logos/mintcudos.svg",
   "logo-Ethereum": "/assets/icons/coloredEtherum.svg",
   "logo-Polygon": "/assets/icons/coloredPolygon.svg",
+  "logo-Optimism": "/assets/icons/optimism.svg",
 };
 export default GlobalIcons;

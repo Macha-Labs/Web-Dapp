@@ -315,6 +315,10 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
                   {
                     value: 137,
                     title: "Polygon"
+                  },
+                  {
+                    value: 10,
+                    title: "Optimism"
                   }
                 ]}
               />
