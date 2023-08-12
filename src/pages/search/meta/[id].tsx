@@ -40,11 +40,11 @@ const Meta = () => {
   const [tab, setTab] = useState<string>("Data");
   const options = [
     {
-      href: "",
+      href: "#",
       value: "Data",
     },
     {
-      href: "",
+      href: "#",
       value: "Sources",
     },
   ];

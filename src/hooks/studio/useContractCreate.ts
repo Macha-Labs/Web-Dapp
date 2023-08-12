@@ -1,4 +1,5 @@
-import { checkUniqueData, createNewContract } from "@/service/ApiService";
+import { checkUniqueData, contractDataBySlug, createNewContract } from "@/service/ApiService";
+import useAuthStore from "@/store/useAuthStore";
 import useContractFormStore from "@/store/useContractFormStore";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -11,6 +12,11 @@ const useContractCreate = (modal: any) => {
   const $contractFormData = useContractFormStore((state: any) => state.contractFormData);
   const $loadContractFormData = useContractFormStore((state: any) => state.loadContractFormData);
   const [ipfsLoading, setIpfsLoading] = useState<any>(0);
+  const $address = useAuthStore((state: any) => state.address);
+
+  useEffect(() => {
+    console.log("contract form data", $contractFormData)
+  }, [$contractFormData])
 
   const addressRegex = /^0x[a-fA-F0-9]{40}$/
 
@@ -114,11 +120,93 @@ const useContractCreate = (modal: any) => {
     }
   };
 
+  const validateEditSteps = async () => {
+    if (formStep == 1) {
+      if ($contractFormData.address != "" && addressRegex.test($contractFormData.address) == false) {
+        toast({
+          title: "Invalid addresss",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
+        return false;
+      }
+      if (
+        $contractFormData.address == "" ||
+        $contractFormData.address == undefined ||
+        $contractFormData.chain_id == "" ||
+        $contractFormData.chain_id == undefined
+      ) {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
+        return false;
+      } else {
+        return true;
+      }
+    }
+    if (formStep == 2) {
+      if (
+        $contractFormData.name == "" ||
+        $contractFormData.name == undefined ||
+        $contractFormData.slug == "" ||
+        $contractFormData.slug == undefined ||
+        $contractFormData.description == "" ||
+        $contractFormData.description == undefined ||
+        $contractFormData.image == "" ||
+        $contractFormData.description == undefined
+      ) {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
+        return false;
+      } else {
+        return true;
+      }
+    }
+    if (formStep == 3) {
+      if (
+        $contractFormData.interested_events == "" ||
+        $contractFormData.interested_events == undefined ||
+        $contractFormData.interested_methods == "" ||
+        $contractFormData.interested_methods == undefined
+      ) {
+        toast({
+          title: "Required fields cannot be empty",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
+        return false;
+      } else {
+        return true;
+      }
+    }
+  };
+
   const nextFormStep = async () => {
     if (formStep >= 4) {
       return;
     } else {
       if (await validateSteps()) {
+        setFormStep((currentStep: any) => currentStep + 1);
+      } else {
+        return;
+      }
+    }
+  };
+
+  const nextFormEditStep = async () => {
+    if (formStep >= 4) {
+      return;
+    } else {
+      if (await validateEditSteps()) {
         setFormStep((currentStep: any) => currentStep + 1);
       } else {
         return;
@@ -147,7 +235,6 @@ const useContractCreate = (modal: any) => {
       return event.trim();
     });
 
-
     const contractPayload = {
       name: $contractFormData.name,
       description: $contractFormData.description,
@@ -158,6 +245,8 @@ const useContractCreate = (modal: any) => {
       image: $contractFormData.image,
       interested_methods: interested_methods,
       interested_events: interested_events,
+      id: _id,
+      ownerAddress: $address
     };
 
     // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
@@ -172,6 +261,8 @@ const useContractCreate = (modal: any) => {
       contractPayload.chain_id == "" ||
       contractPayload.slug == undefined ||
       contractPayload.slug == "" ||
+      contractPayload.image == undefined ||
+      contractPayload.image == "" ||
       $contractFormData.interested_methods == "" ||
       $contractFormData.interested_methods == undefined ||
       $contractFormData.interested_events == "" ||
@@ -194,6 +285,10 @@ const useContractCreate = (modal: any) => {
           position: "top-right",
         });
         router.push(`/search/contracts/${contractPayload.slug}`);
+        if(window !== undefined){
+          window.sessionStorage.removeItem(contractPayload.slug)
+        }
+        setClear()
       });
     }
   };
@@ -221,6 +316,7 @@ const useContractCreate = (modal: any) => {
       image: $contractFormData.image,
       interested_methods: interested_methods,
       interested_events: interested_events,
+      ownerAddress: $address
     };
 
     // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
@@ -295,7 +391,8 @@ const useContractCreate = (modal: any) => {
     ipfsLoading: ipfsLoading,
     setLoadingCallback: setLoadingCallback,
     lastStep: lastStep,
-    setClear: setClear
+    setClear: setClear,
+    nextFormEditStep: nextFormEditStep
   };
 };
 export default useContractCreate;

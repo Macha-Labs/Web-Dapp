@@ -144,7 +144,7 @@ const GlobalIcons: any = {
   "icon-qr":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
   "icon-user":
-    "icons/svg/Base_blue_icons/base-blue-user.svg?updatedAt=1690532065895",
+    "assets/icons/Base_blue_icons/base-blue-user.svg",
   "icon-dark-user":
     "/assets/icons/Dark_icons/dark-user.svg",
   "icon-dark-add":

@@ -21,20 +21,32 @@ export const initialiseNewMeta = async (data: metaInit) => {
   return response.json();
 };
 
-export const fetchAllMetas = async () => {
+export const fetchAllMetas = async (meta_slug?: any) => { 
+  let url = `${config.metaServer}/indexer/metas/fetchAll?limit=30`
+  if(meta_slug){
+    url = `${config.metaServer}/indexer/metas/fetchAll?metaSlug=${meta_slug}`
+  } 
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+};
+
+export const fetchMetaSchemas = async () => {
   const response = await fetch(
-    `${config.metaServer}/indexer/metas/fetchAll?limit=30`
+    `${config.metaServer}/indexer/meta-schemas/fetchAll`
   );
   const data = await response.json();
   return data;
 };
-export const fetchMetaBySlug = async (metaSlug: any) => {
-  const response = await fetch(
-    `${config.metaServer}/indexer/metas/fetch-by-slug/${metaSlug}`
-  );
-  const data = await response.json();
-  return data;
-};
+
+// export const fetchMetaBySlug = async (metaSlug: any) => {
+//   const response = await fetch(
+//     `${config.metaServer}/indexer/metas/fetch-by-slug/${metaSlug}`
+//   );
+//   const data = await response.json();
+//   return data;
+// };
+
 export const fetchMetaByUid = async (uid: any) => {
   const response = await fetch(
     `${config.metaServer}/indexer/metas/fetch-by-uid/${uid}`

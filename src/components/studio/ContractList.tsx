@@ -116,7 +116,6 @@ const ContractList = () => {
             {!hookContractList.isLoading &&
               hookContractList?.filterData &&
               hookContractList?.filterData.map((item: any, index: number) => {
-                console.log("Checking request ", item);
                 return (
                   <ContractCard
                     key={index}

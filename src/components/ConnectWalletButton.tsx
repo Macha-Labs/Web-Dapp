@@ -309,7 +309,7 @@ export const ConnectWalletButton = (props: any) => {
                             }}
                           >
                             <FlexRow hrAlign="space-between">
-                              <IconImage slug="icon-user" size="sm" />
+                              <IconBase slug="icon-dark-user" size="xl" />
                               <FlexRow
                                 hrAlign="flex-start"
                                 width="90%"

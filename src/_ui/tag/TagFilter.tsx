@@ -11,9 +11,10 @@ type Props = {
     marginTop?: any,
     marginBottom?: any
     onClick?: any
+    selected?: boolean
 }
 
-const TagFilter = ({ value, icon, height, width, fontSize, marginLeft, marginBottom, marginRight, marginTop, onClick }: Props) => {
+const TagFilter = ({ value, icon, height, width, fontSize, marginLeft, marginBottom, marginRight, marginTop, onClick,selected }: Props) => {
     return (
         <Box style={{
             display: "flex",
@@ -27,7 +28,7 @@ const TagFilter = ({ value, icon, height, width, fontSize, marginLeft, marginBot
             marginTop: `${marginTop}`,
             marginBottom: `${marginBottom}`,
             background: `${style.card.bg.default}`,
-            border: `${style.card.border.default}`,
+            border: `${selected ? style.card.border.hover :style.card.border.default}`,
             boxShadow: `${style.card.shadow.default}`,
             borderRadius: "100px",
             padding: `${style.padding.sm}`,

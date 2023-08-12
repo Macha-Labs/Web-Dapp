@@ -1,33 +1,36 @@
-import { fetchAllMetas, fetchMetaBySlug } from "@/service/MetaService";
+import { fetchAllMetas, fetchMetaSchemas } from "@/service/MetaService";
 import { useState } from "react";
 
 const useMetaList = () => {
   const [metaList, setMetaList] = useState<any>();
   const [metaAll, setMetaAll] = useState<any>();
+  const [metaSchemas, setMetaSchemas] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const _fetch = (metaSlug: any) => {
-    fetchMetaBySlug(metaSlug).then((res) => {
-      setMetaList(res.data);
-      setIsLoading(false)
-      console.log(res.data, "useMeta");
-    });
-  };
-
-  const _fetchAll = () => {
-    fetchAllMetas().then((res) => {
+  const _fetchAll = (meta_schema?: any) => {
+    setIsLoading(true)
+    fetchAllMetas(meta_schema).then((res) => {
       console.log(res.data,"all metas")
       setMetaAll(res.data);
       setIsLoading(false)
     });
   };
 
+  const _fetchMetaSchemas = () => {
+    fetchMetaSchemas().then((res) => {
+      console.log(res.data,"meta schemas")
+      setMetaSchemas(res.data);
+      setIsLoading(false)
+    });
+  };
+
   return {
-    _fetch: _fetch,
     _fetchAll: _fetchAll,
+    _fetchMetaSchemas: _fetchMetaSchemas,
     metaAll: metaAll,
     metaList: metaList,
-    isLoading: isLoading
+    metaSchemas: metaSchemas,
+    isLoading: isLoading,
   };
 };
 

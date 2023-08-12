@@ -17,12 +17,25 @@ const Explorer = () => {
   const hookMetasList = useMetaList();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [selectedSchema, setSelectedSchema] = useState<string>("All");
 
   useEffect(() => {
     if (router.isReady) {
       hookMetasList._fetchAll();
+      hookMetasList._fetchMetaSchemas();
     }
   }, []);
+
+  useEffect(() => {
+    if (router.isReady) {
+      if(selectedSchema == "All"){
+        hookMetasList._fetchAll();
+      }
+      else{
+        hookMetasList._fetchAll(selectedSchema);
+      }
+    }
+  }, [selectedSchema]);
 
   const renderNav = () => {
     return <NavMeta />;
@@ -39,9 +52,14 @@ const Explorer = () => {
           paddingRight: "7%",
           width: "90%"
         }}>
-          <TagFilter icon={{align:"left",src: GlobalIcons[""]}} value="All" height="2.2rem" fontSize={style.font.h4} marginRight={style.margin.xs} />
-          <TagFilter icon={{align:"left",src: GlobalIcons["logo-Lens"]}} value="Lens" height="2.2rem" fontSize={style.font.h4} marginRight={style.margin.xs} />
-          <TagFilter icon={{align:"left",src: GlobalIcons["logo-Ens"]}} value="ENS" height="2.2rem" fontSize={style.font.h4} />
+          <TagFilter onClick={() => {
+              setSelectedSchema("All")
+            }} icon={{ align: "left", src: GlobalIcons[""] }} value="All" height="2.2rem" fontSize={style.font.h4} marginRight={style.margin.xs} selected={selectedSchema == "All"} />
+          {hookMetasList?.metaSchemas?.map((schema: any,index: any) => (
+            <TagFilter onClick={() => {
+              setSelectedSchema(schema.slug)
+            }} key={index} icon={{ align: "left", src: GlobalIcons[""] }} value={schema.name} height="2.2rem" fontSize={style.font.h4} marginRight={style.margin.xs} selected={selectedSchema == schema.slug} />
+          ))}
         </Box>
         <Box
           paddingTop={style.margin["lg"]}

@@ -1,40 +1,55 @@
-import { contractDataBySlug, deleteContract } from "@/service/ApiService";
+import { contractDataBySlug, contractsByUserAddress, deleteContract } from "@/service/ApiService";
+import useContractFormStore from "@/store/useContractFormStore";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 const useContract = () => {
 
   const [contractDetails, setContractDetails] = useState<any>();
+  const [userContracts, setUserContracts] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const toast = useToast();
   const router = useRouter()
+  const $loadContractFormData = useContractFormStore((state: any) => state.loadContractFormData);
 
   const _fetch = async (contract_slug: any) => {
-    if (window.localStorage !== undefined) {
-      const data = window.localStorage.getItem(contract_slug);
+    if (window.sessionStorage !== undefined) {
+      const data = window.sessionStorage.getItem(contract_slug);
       if (data !== null) {
-        console.log("local data", JSON.parse(data))
         setContractDetails(JSON.parse(data))
         setIsLoading(false)
       }
       else {
         contractDataBySlug(contract_slug).then((res: any) => {
-          console.log("contract fetching", res.data);
-          window.localStorage.setItem(contract_slug,JSON.stringify(res.data))
-          setIsLoading(false)
+          window.sessionStorage.setItem(contract_slug, JSON.stringify(res.data))
           setContractDetails(res.data);
+          setIsLoading(false)
         });
       }
     }
     else {
       contractDataBySlug(contract_slug).then((res: any) => {
-        console.log("contract fetching", res.data);
-        window.localStorage.setItem(contract_slug,res.data)
-        setIsLoading(false)
+        window.sessionStorage.setItem(contract_slug, res.data)
         setContractDetails(res.data);
+        setIsLoading(false)
       });
     }
+  };
+
+  const _fetchEdit = async (contract_slug: any) => {
+    contractDataBySlug(contract_slug).then((res: any) => {
+      window.sessionStorage.setItem(contract_slug, JSON.stringify(res.data))
+      setIsLoading(false)
+      setContractDetails(res.data);
+      $loadContractFormData(res.data.contract)
+      $loadContractFormData({
+        interested_events: res.data.contract.interested_events.join(),
+      })
+      $loadContractFormData({
+        interested_methods: res.data.contract.interested_methods.join(),
+      })
+    });
   };
 
   const contractDelete = async (contract_id: any) => {
@@ -50,11 +65,26 @@ const useContract = () => {
     });
   };
 
+  const _fetchUserContracts = async (userAddress: any) => {
+    contractsByUserAddress(userAddress).then((res: any) => {
+      if(res && res.data){
+        setUserContracts(res.data)
+      }
+      else{
+        setUserContracts(undefined)
+      }
+      setIsLoading(false)
+    })
+  }
+
   return {
     contractDetails: contractDetails,
     isLoading: isLoading,
     _fetch: _fetch,
-    contractDelete: contractDelete
+    contractDelete: contractDelete,
+    _fetchEdit: _fetchEdit,
+    _fetchUserContracts: _fetchUserContracts,
+    userContracts: userContracts
   }
 
 }

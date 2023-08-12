@@ -184,10 +184,10 @@ const ContractCard = ({
                 }}
                 lineHeight="0.5rem"
               >
-                {chains[chainId].chainName}
+                {chains[chainId]?.chainName}
               </Text>
               <Box style={{marginTop: "-10px",marginLeft: "0.25rem"}}>
-                <IconBase slug={chains[chainId].chainImage} size="xs" />
+                <IconBase slug={chains[chainId]?.chainImage} size="xs" />
               </Box>
             </Box>
           </Box>
