@@ -132,6 +132,30 @@ const chains: any = {
                 link: "https://metamask.io/"
             }
         ]
+    },
+    10: {
+        chainName: "Optimism",
+        chainImage: "logo-optimism",
+        about: `OP Mainnet is a Layer 2 Optimistic Rollup network designed to utilize the strong security guarantees of Ethereum while reducing its cost and latency.`,
+        team: [
+            
+        ],
+        links: [
+            {
+                title: "Twitter",
+                link: "https://twitter.com/optimismWeb3"
+            },
+            {
+                title: "optimism.io",
+                link: "https://www.optimism.io/"
+            },
+        ],
+        wallets: [
+            {
+                title: "Metamask",
+                link: "https://metamask.io/"
+            }
+        ]
     }
 }
 
