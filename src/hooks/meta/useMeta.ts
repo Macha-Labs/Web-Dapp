@@ -1,4 +1,4 @@
-import { fetchMetaBySlug, fetchMetaByUid } from "@/service/MetaService";
+import { fetchMetaByUid } from "@/service/MetaService";
 import { useState } from "react";
 
 const useMeta = () => {
