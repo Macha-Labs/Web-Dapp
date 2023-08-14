@@ -59,7 +59,7 @@ const ContractDeleteModal = ({ modal, hookContract }: Props) => {
                                 modal.onClose()
                                 setTimeout(() => {
                                     router.reload()
-                                },2000)
+                                },1000)
                             }}
                         >
                             Delete

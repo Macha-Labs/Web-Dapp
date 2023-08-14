@@ -15,6 +15,7 @@ type Props = {
   footer?: any;
   children?: any;
   style?: any;
+  scrollBehavior?: any
 };
 
 const ModalWindow = ({
@@ -24,6 +25,7 @@ const ModalWindow = ({
   footer,
   children,
   style,
+  scrollBehavior
 }: Props) => {
   return (
     <Modal
@@ -32,6 +34,8 @@ const ModalWindow = ({
       onClose={event?.onClose}
       isOpen={event?.isOpen}
       size={size ? size : "xl"}
+      scrollBehavior={scrollBehavior}
+      blockScrollOnMount={true}
     >
       <ModalOverlay />
       <ModalContent>

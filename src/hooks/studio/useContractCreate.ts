@@ -1,4 +1,4 @@
-import { checkUniqueData, contractDataBySlug, createNewContract } from "@/service/ApiService";
+import { checkUniqueData, createNewContract } from "@/service/ApiService";
 import useAuthStore from "@/store/useAuthStore";
 import useContractFormStore from "@/store/useContractFormStore";
 import { useToast } from "@chakra-ui/react";
@@ -277,18 +277,17 @@ const useContractCreate = (modal: any) => {
     } else {
       console.log("The contract payload data is ", contractPayload);
       createNewContract(contractPayload).then((res) => {
-        modal.onClose();
         toast({
           title: "Contract Edited!!",
           status: "success",
           duration: 3000,
           position: "top-right",
         });
-        router.push(`/search/contracts/${contractPayload.slug}`);
         if(window !== undefined){
           window.sessionStorage.removeItem(contractPayload.slug)
         }
         setClear()
+        router.reload()
       });
     }
   };

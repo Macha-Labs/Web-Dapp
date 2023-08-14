@@ -9,11 +9,13 @@ import useMacha from "@/hooks/studio/useMacha";
 import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContractCard from "../cards/ContractCard";
 import ContractCreateEditModal from "./ContractCreateEditModal";
+import EditContractsModal from "./EditContractsModal";
+import useContract from "@/hooks/studio/useContract";
 
 type Props = {
   metaInfo: any;
@@ -25,9 +27,12 @@ const ContractList = () => {
   const [filterValue, setFilterValue] = useState<any>("All Contracts");
   const [avatar, setAvatar] = useState<any>("icon-dashboard");
   const $address = useAuthStore((state: any) => state.address);
+  const $isConnected = useAuthStore((state: any) => state.isConnected);
   const hookMacha = useMacha();
   const contractModal = useDisclosure();
   const hookContractCreate = useContractCreate(contractModal);
+  const hookContract = useContract();
+  const editContractsModal = useDisclosure()
 
   let contractFilterOptions = [
     {
@@ -53,6 +58,12 @@ const ContractList = () => {
       },
     });
   });
+
+  useEffect(() => {
+    if ($address) {
+      hookContract._fetchUserContracts($address)
+    }
+  }, [$address, $isConnected])
 
   const renderComponent = () => {
     return (
@@ -97,15 +108,56 @@ const ContractList = () => {
             />
           )}
         </Box>
+
+        {<Box
+          background={style.card.bg.brand}
+          marginTop={style.margin.lg}
+          marginLeft={style.margin.xxs}
+          borderRadius={style.card.borderRadius.default}
+          padding={style.padding.lg}
+        >
+          <Heading fontSize={style.font.h3} p={0} lineHeight={style.font.h3}>
+            {(!$address || hookContract.isUserContractsLoading) ? "Your Contracts" : (hookContract.userContracts ? `Contracts created: ${hookContract.userContracts.length}` : "You haven't created any contracts yet.")}
+          </Heading>
+          {$address ? (
+            <Box display={"flex"}>
+              {hookContract.userContracts && <ButtonNative
+                textColorHover="#004ad9"
+                boxShadowHover="4px 4px 24px rgba(0,0,0,0.35)"
+                backgroundColorHover="#A0CDFF"
+                border="1px solid #fff"
+                marginTop="xs"
+                onClick={() => {
+                  hookContract._fetchUserContracts($address).then(() => {
+                    editContractsModal.onOpen()
+                  })
+                }}
+                text="Edit Contracts"
+              />}
+            </Box>
+          ) : (
+            <Box display={"flex"}>
+              <Text
+                style={{
+                  marginTop: `${style.margin.xs}`,
+                  marginBottom: "0px",
+                  fontSize: `${style.font.h5}`,
+                  fontWeight: `${style.fontWeight.dark}`,
+                }}
+              >
+                Please connect your wallet to create or edit contracts
+              </Text>
+            </Box>
+          )}
+        </Box>
+        }
         <FlexRow
           hrAlign="flex-start"
           width="100%"
-          // marginTop="md"
           flexWrap="wrap"
-          // padding={style.body.padding}
           paddingTop="lg"
         >
-          {hookContractList.isLoading && (
+          {(hookContractList.isLoading) && (
             <FlexRow height="500px">
               <Loader size="lg" />
             </FlexRow>
@@ -148,6 +200,7 @@ const ContractList = () => {
             hookContractCreate={hookContractCreate}
             isEdit={false}
           />
+          <EditContractsModal hookContractCreate={hookContractCreate} modal={editContractsModal} hookContract={hookContract} />
         </FlexRow>
       </>
     );

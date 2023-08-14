@@ -70,6 +70,7 @@ const useContract = () => {
   };
 
   const _fetchUserContracts = async (userAddress: any) => {
+    setIsUserContractsLoading(true)
     contractsByUserAddress(userAddress).then((res: any) => {
       if(res && res.data){
         setUserContracts(res.data)
@@ -79,6 +80,7 @@ const useContract = () => {
       }
       setIsUserContractsLoading(false)
     })
+    setIsUserContractsLoading(false)
   }
 
   const setClear = () => {

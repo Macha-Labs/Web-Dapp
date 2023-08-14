@@ -272,26 +272,6 @@ export const ConnectWalletButton = (props: any) => {
                           </FlexRow>
                         </MenuItem>
                       )}
-                      <MenuItem
-                        onClick={() => {
-                          $unload();
-                          disconnect();
-                          if(window !== undefined){
-                            const res = window.sessionStorage.setItem("macha.connected","false")
-                          }
-                        }}
-                      >
-                        <FlexRow hrAlign="space-between">
-                          <IconBase slug="icon-dark-disconnectWallet" size="xl" />
-                          <FlexRow
-                            hrAlign="flex-start"
-                            width="90%"
-                            marginLeft={"sm"}
-                          >
-                            {"Disconnect Wallet"}
-                          </FlexRow>
-                        </FlexRow>
-                      </MenuItem>
                       {!hookMacha.publisherExists &&
                         props?.showRegisterPublisher && (
                           <MenuItem
@@ -320,7 +300,26 @@ export const ConnectWalletButton = (props: any) => {
                             </FlexRow>
                           </MenuItem>
                         )}
-
+                      <MenuItem
+                        onClick={() => {
+                          $unload();
+                          disconnect();
+                          if (window !== undefined) {
+                            const res = window.sessionStorage.setItem("macha.connected", "false")
+                          }
+                        }}
+                      >
+                        <FlexRow hrAlign="space-between">
+                          <IconBase slug="icon-dark-disconnectWallet" size="xl" />
+                          <FlexRow
+                            hrAlign="flex-start"
+                            width="90%"
+                            marginLeft={"sm"}
+                          >
+                            {"Disconnect Wallet"}
+                          </FlexRow>
+                        </FlexRow>
+                      </MenuItem>
                       <CreatePublisherModal
                         modal={publisherModal}
                         hookPublisherCreate={hookPublisherCreate}
