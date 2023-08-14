@@ -13,6 +13,7 @@ import ColoredCard from "@/components/cards/ColoredCard";
 import { exploreModules } from "@/data/studio/constant";
 import useAlchemy from "@/hooks/studio/useAlchemy";
 import { Text } from "@chakra-ui/react";
+import NavLeft from "@/_ui/nav/NavLeft";
 
 export default function Explore() {
   const hookAlchemy = useAlchemy();
@@ -44,7 +45,7 @@ export default function Explore() {
     console.log("exploreMeta", exploreMeta);
     return (
       <>
-        <NavBlock>
+        {/* <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <Tabs
               width="15%"
@@ -54,10 +55,15 @@ export default function Explore() {
               onChange={setSelectedNavTab}
             />
           </FlexRow>
-        </NavBlock>
+        </NavBlock> */}
         <FlexBody>
           <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
-            <Text fontSize={"xl"} fontWeight={600} className="m-b-0">
+            <Text
+              fontSize={"xl"}
+              fontWeight={600}
+              className="m-b-0"
+              marginTop={style.margin.nav}
+            >
               Use Module
             </Text>
             <Text>
@@ -85,7 +91,11 @@ export default function Explore() {
   };
   return (
     <>
-      <FlexWindow navElem={<NavTop />} bodyElem={renderBody()}></FlexWindow>
+      <FlexWindow
+        view="row"
+        navElem={<NavLeft />}
+        bodyElem={renderBody()}
+      ></FlexWindow>
       {/* <Navigation /> */}
     </>
   );

@@ -17,7 +17,7 @@ import { motion } from "framer-motion";
 const Explorer = () => {
   const hookMetasList = useMetaList();
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedSchema, setSelectedSchema] = useState<string>("All");
   const [isCloseHovered, setIsCloseHovered] = useState(false);
 
@@ -30,10 +30,9 @@ const Explorer = () => {
 
   useEffect(() => {
     if (router.isReady) {
-      if(selectedSchema == "All"){
+      if (selectedSchema == "All") {
         hookMetasList._fetchAll();
-      }
-      else{
+      } else {
         hookMetasList._fetchAll(selectedSchema);
       }
     }
@@ -46,25 +45,45 @@ const Explorer = () => {
   const renderBody = () => {
     return (
       <FlexColumn hrAlign="flex-start">
-        <Box style={{
-          display: "flex",
-          paddingTop: `${style.margin.nav}`,
-          justifyContent: "flex-start",
-          paddingLeft: "7%",
-          paddingRight: "7%",
-          width: "90%"
-        }}>
-          <TagFilter onClick={() => {
-              setSelectedSchema("All")
-            }} icon={{ align: "left", src: GlobalIcons[""] }} value="All" height="2.2rem" fontSize={style.font.h4} marginRight={style.margin.xs} selected={selectedSchema == "All"} />
-          {hookMetasList?.metaSchemas?.map((schema: any,index: any) => (
-            <TagFilter onClick={() => {
-              setSelectedSchema(schema.slug)
-            }} key={index} icon={{ align: "left", src: GlobalIcons[""] }} value={schema.name} height="2.2rem" fontSize={style.font.h4} marginRight={style.margin.xs} selected={selectedSchema == schema.slug} />
+        {/* <Box
+          style={{
+            display: "flex",
+            paddingTop: `${style.margin.nav}`,
+            justifyContent: "flex-start",
+            paddingLeft: "7%",
+            paddingRight: "7%",
+            width: "90%",
+          }}
+        >
+          <TagFilter
+            onClick={() => {
+              setSelectedSchema("All");
+            }}
+            icon={{ align: "left", src: GlobalIcons[""] }}
+            value="All"
+            height="2.2rem"
+            fontSize={style.font.h4}
+            marginRight={style.margin.xs}
+            selected={selectedSchema == "All"}
+          />
+          {hookMetasList?.metaSchemas?.map((schema: any, index: any) => (
+            <TagFilter
+              onClick={() => {
+                setSelectedSchema(schema.slug);
+              }}
+              key={index}
+              icon={{ align: "left", src: GlobalIcons[""] }}
+              value={schema.name}
+              height="2.2rem"
+              fontSize={style.font.h4}
+              marginRight={style.margin.xs}
+              selected={selectedSchema == schema.slug}
+            />
           ))}
-        </Box>
+        </Box> */}
         <Box
-          paddingTop={style.margin["lg"]}
+          // paddingTop={style.margin["lg"]}
+          paddingTop={style.margin.nav}
           paddingX={"6%"}
           display={"flex"}
           justifyContent={"center"}
@@ -216,7 +235,7 @@ const Explorer = () => {
   return (
     <FlexWindow
       marginTop={style.nav.margin}
-      view="col"
+      view="row"
       navElem={renderNav()}
       bodyElem={renderBody()}
     ></FlexWindow>
