@@ -1,3 +1,5 @@
+import { Network } from "alchemy-sdk";
+
 export const exploreModules = [
   {
     heading: "Macha Ads",
@@ -179,3 +181,11 @@ export const carouselData = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
 ];
+
+export const alchemyNetworksData: any = {
+  1: Network.ETH_MAINNET,
+  137: Network.MATIC_MAINNET,
+  10: Network.OPT_MAINNET,
+  42161: Network.ARB_MAINNET,
+  592: Network.ASTAR_MAINNET,
+};

@@ -1,9 +1,9 @@
+import { alchemyNetworksData } from "@/data/studio/constant";
 import { Alchemy, Network } from "alchemy-sdk";
-import {useState} from "react";
+import { useState } from "react";
 
 const useAlchemy = () => {
-
-  const [latestBlock,setLatestBlock] = useState<any>("");
+  const [latestBlock, setLatestBlock] = useState<any>("");
 
   const alchemyData = async () => {
     const settings = {
@@ -52,17 +52,17 @@ const useAlchemy = () => {
   const getLatestBlockByChainId = async (chain_id: number) => {
     const settings = {
       apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
-      network: chain_id == 1 ? Network.ETH_MAINNET : Network.MATIC_MAINNET, // Replace with your network.
+      network: alchemyNetworksData[chain_id],
     };
     const alchemy = new Alchemy(settings);
     const _latestBlock = await alchemy.core.getBlockNumber();
-    setLatestBlock(_latestBlock)
-  }
+    setLatestBlock(_latestBlock);
+  };
 
   return {
     alchemyData: alchemyData,
     getLatestBlockByChainId: getLatestBlockByChainId,
-    latestBlock: latestBlock
-  }
+    latestBlock: latestBlock,
+  };
 };
 export default useAlchemy;
