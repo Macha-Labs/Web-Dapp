@@ -30,11 +30,7 @@ function ContractInfoCard({ data }: Props) {
               width: "15rem",
             }}
             alt="contract-info"
-            src={
-              data?.image
-                ? data?.image
-                : GlobalIcons["avatar-default"]
-            }
+            src={data?.image ? data?.image : GlobalIcons["avatar-default"]}
           />
         </FlexColumn>
         <FlexColumn width="100%" hrAlign="flex-start" vrAlign="flex-start">
@@ -51,13 +47,13 @@ function ContractInfoCard({ data }: Props) {
                 Contract Address
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
-                  <Image
-                    src={GlobalIcons["avatar-default"]}
-                    marginRight={"10px"}
-                    alt="avatar"
-                    height="1.5rem"
-                    width="1.5rem"
-                  />
+                <Image
+                  src={GlobalIcons["avatar-default"]}
+                  marginRight={"10px"}
+                  alt="avatar"
+                  height="1.5rem"
+                  width="1.5rem"
+                />
                 <Text className="m-b-0">{truncateAddress(data?.address)}</Text>
                 <IconBase
                   slug="icon-copy"
@@ -78,7 +74,11 @@ function ContractInfoCard({ data }: Props) {
                 Owner
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
-                <Text className="m-b-0">{truncateAddress(data?.owner)}</Text>
+                <Text className="m-b-0">
+                  {data?.owner
+                    ? truncateAddress(data?.owner)
+                    : truncateAddress(data?.address)}
+                </Text>
                 <IconBase
                   slug="icon-copy"
                   style={{ marginLeft: "sm" }}
@@ -117,10 +117,20 @@ function ContractInfoCard({ data }: Props) {
               <Text fontWeight={700} className="m-b-0-5">
                 Chain
               </Text>
-              <Box onClick={() => router.push(`/search/network/${data?.chain_id}`)} cursor="pointer" _hover={{ textDecoration: "underline" }}>
+              <Box
+                onClick={() => router.push(`/search/network/${data?.chain_id}`)}
+                cursor="pointer"
+                _hover={{ textDecoration: "underline" }}
+              >
                 <FlexRow vrAlign="center" hrAlign="flex-start">
-                  <Text className="m-b-0">{chains[data?.chain_id]?.chainName}</Text>
-                  <IconBase slug={chains[data?.chain_id]?.chainImage} style={{ marginLeft: "xxs" }} size="md" />
+                  <Text className="m-b-0">
+                    {chains[data?.chain_id]?.chainName}
+                  </Text>
+                  <IconBase
+                    slug={chains[data?.chain_id]?.chainImage}
+                    style={{ marginLeft: "xxs" }}
+                    size="md"
+                  />
                 </FlexRow>
               </Box>
             </FlexColumn>
