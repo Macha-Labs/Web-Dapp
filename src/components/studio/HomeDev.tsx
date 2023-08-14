@@ -137,6 +137,7 @@ const HomeDev = () => {
               return;
             }
             if (hookMacha.publisherExists) {
+              hookContractCreate.setClear()
               contractModal.onOpen();
             } else {
               toast({

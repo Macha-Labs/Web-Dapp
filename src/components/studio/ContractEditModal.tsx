@@ -27,7 +27,10 @@ const EditContractModal = ({ modal, hookContractCreate, hookContract }: Props) =
       header={
         <FlexRow width="100%" hrAlign="space-between">
           <Text className="mb-0">Edit Contract</Text>
-          <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
+          <Image src={GlobalIcons["icon-close"]} onClick={() => {
+            hookContractCreate.setClear()
+            modal.onClose()
+          }} alt="" style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -117,7 +120,7 @@ const EditContractModal = ({ modal, hookContractCreate, hookContract }: Props) =
         </FlexRow>
       }
     >
-      {!hookContract.isLoading ? (<FlexColumn
+      {!hookContract.isLoading && hookContract.contractDetails ? (<FlexColumn
         width="100%"
         hrAlign="space-between"
         height="100%"
@@ -316,6 +319,10 @@ const EditContractModal = ({ modal, hookContractCreate, hookContract }: Props) =
                   {
                     value: 137,
                     title: "Polygon"
+                  },
+                  {
+                    value: 10,
+                    title: "Optimism"
                   }
                 ]}
               />

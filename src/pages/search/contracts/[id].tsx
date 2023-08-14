@@ -5,7 +5,6 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import Loader from "@/_ui/loader/Loader";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavStudio from "@/_ui/nav/NavStudio";
-import ContractDeleteModal from "@/components/studio/ContractDeleteModal";
 import ContractEditModal from "@/components/studio/ContractEditModal";
 import ContractInfoCard from "@/components/studio/ContractInfoCard";
 import TxnTable from "@/components/studio/TxnTable";
@@ -29,7 +28,6 @@ const Contract = () => {
   const hookContractTxn = useContractTxn();
   const hookContract = useContract();
   const editModal = useDisclosure();
-  const deleteModal = useDisclosure();
   const hookContractCreate = useContractCreate(editModal);
 
   useEffect(() => {
@@ -71,7 +69,6 @@ const Contract = () => {
           hookContractCreate={hookContractCreate}
           hookContract={hookContract}
         />
-        <ContractDeleteModal modal={deleteModal} hookContract={hookContract} />
         {hookContractTxn.isLoading ? (
           <FlexRow height="100px">
             <Loader size="lg" />
@@ -224,21 +221,6 @@ const Contract = () => {
                           variant="state_brand"
                           onClick={() => {
                             editModal.onOpen();
-                          }}
-                        />
-                      )}
-                    {$address &&
-                      hookContract?.contractDetails &&
-                      hookContract?.contractDetails?.contract?.admins?.includes(
-                        $address
-                      ) && (
-                        <ButtonNative
-                          size="sm"
-                          text="Delete Contract"
-                          variant="state_brand"
-                          marginLeft="md"
-                          onClick={() => {
-                            deleteModal.onOpen();
                           }}
                         />
                       )}

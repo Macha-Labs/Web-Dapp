@@ -28,7 +28,12 @@ const CreateContractModal = ({ modal, hookContractCreate }: Props) => {
       header={
         <FlexRow width="100%" hrAlign="space-between">
           <Text className="mb-0">Create Contract</Text>
-          <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
+          <Image src={GlobalIcons["icon-close"]} onClick={() => {
+            hookContractCreate.setClear()
+            modal.onClose()
+          }} 
+          alt=""
+          style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

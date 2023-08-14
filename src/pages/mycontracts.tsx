@@ -4,6 +4,7 @@ import Loader from "@/_ui/loader/Loader";
 import NavStudio from "@/_ui/nav/NavStudio";
 import TagNative from "@/_ui/tag/TagNative";
 import CreateContractModal from "@/components/studio/ContractCreateModal";
+import ContractDeleteModal from "@/components/studio/ContractDeleteModal";
 import EditContractModal from "@/components/studio/ContractEditModal";
 import chains from "@/data/network";
 import { truncateAddress, truncateString } from "@/helpers";
@@ -28,6 +29,7 @@ const RenderBody = () => {
     const editModal = useDisclosure();
     const $address = useAuthStore((state: any) => state.address);
     const router = useRouter()
+    const deleteModal = useDisclosure();
 
     useEffect(() => {
         if ($address) {
@@ -71,7 +73,7 @@ const RenderBody = () => {
                 }}
             >
                 {/* Individual Contract */}
-                {hookContract.isLoading ? <FlexRow height="18rem">
+                {hookContract.isUserContractsLoading ? <FlexRow height="18rem">
                     <Loader size="lg" />
                 </FlexRow> : (
                     hookContract.userContracts ? hookContract.userContracts.map((contract: any, index: any) => (
@@ -115,8 +117,8 @@ const RenderBody = () => {
                                         fontWeight: `${style.fontWeight.dark}`,
                                         cursor: "pointer"
                                     }}
-                                    _hover={{textDecoration: "underline"}}
-                                    onClick={() => router.push(`/search/contracts/${contract?.contract?.slug}`)}
+                                        _hover={{ textDecoration: "underline" }}
+                                        onClick={() => router.push(`/search/contracts/${contract?.contract?.slug}`)}
                                     >
                                         {contract?.contract?.name}
                                     </Text>
@@ -149,6 +151,10 @@ const RenderBody = () => {
                                     </Box>
                                     <Box
                                         style={{ cursor: "pointer" }}
+                                        onClick={() => {
+                                            hookContract._fetchEdit(contract?.contract?.slug)
+                                            deleteModal.onOpen()
+                                        }}
                                     >
                                         <Image src={GlobalIcons["icon-dark-delete"]} />
                                     </Box>
@@ -162,6 +168,7 @@ const RenderBody = () => {
             </Box>
             <CreateContractModal modal={contractModal} hookContractCreate={hookContractCreate} />
             <EditContractModal modal={editModal} hookContractCreate={hookContractCreate} hookContract={hookContract} />
+            <ContractDeleteModal modal={deleteModal} hookContract={hookContract} />
         </Box>
     )
 }
