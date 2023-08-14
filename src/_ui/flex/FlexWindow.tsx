@@ -58,7 +58,7 @@ export const FlexWindow = ({
           </div>
           <div
             className="window-right"
-            style={{ marginLeft: `${style.nav.width}` }}
+            style={{ marginLeft: `${style.nav.widthLeft}` }}
           >
             {bodyElem}
           </div>

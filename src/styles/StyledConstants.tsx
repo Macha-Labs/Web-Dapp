@@ -45,7 +45,7 @@ export const commonStyle: any = {
     "white.5": "rgb(255,255,255,0.5)",
     "white.7": "rgb(255,255,255,0.7)",
     disabled: "#354670",
-    bgMain: "#00040d"
+    bgMain: "#00040d",
   },
 };
 
@@ -72,6 +72,7 @@ export const darkStyle = {
   },
   nav: {
     width: "100%",
+    widthLeft: "5%",
     height: "75px",
     bg: { default: "#00040d", meta: "#000A24" },
     border: { default: "2px solid #0F172E" },
@@ -110,7 +111,7 @@ export const darkStyle = {
       mcard: "1px solid #353c54",
       contract: "1px solid #061133",
       publisher: "1px solid rgba(8,78,156,0.5)",
-      disabled: "1px solid #1B2D59"
+      disabled: "1px solid #1B2D59",
     },
     borderRadius: {
       default: "20px",

@@ -14,7 +14,8 @@ const NavLeft = (props: any) => {
       <FlexRow>
         <div
           style={{
-            width: `${style.nav.width}`,
+            width: `${style.nav.widthLeft}`,
+            zIndex: 10000,
             height: "100vh",
             position: "fixed",
             left: "0",
@@ -42,22 +43,20 @@ const NavLeft = (props: any) => {
           >
             <FlexColumn hrAlign="space-between" vrAlign="center">
               <FlexColumn height="fit-content">
-                <Link href="/studio/explorer">
+                <Link href="/">
                   <IconImage
-                    slug="icon-dashboard"
+                    slug="icon-info"
                     size="md"
                     style={{
                       className: `m-b-1 ${
-                        router.pathname === "/studio/explorer"
-                          ? "state_active"
-                          : "state_hover"
+                        router.pathname === "/" ? "state_active" : "state_hover"
                       } `,
                     }}
                   />
                 </Link>
                 <Link href="/studio/explore">
                   <IconImage
-                    slug="icon-rocket"
+                    slug="icon-info"
                     size="md"
                     style={{
                       className: `m-b-1 ${
@@ -68,14 +67,14 @@ const NavLeft = (props: any) => {
                     }}
                   />
                 </Link>
-                <Link href="/studio/dashboard">
+                <Link href="/studio">
                   <Tooltip label="Chat">
                     <IconImage
-                      slug="icon-code"
+                      slug="icon-info"
                       size="md"
                       style={{
                         className: `m-b-1 ${
-                          router.pathname === "/studio/dashboard"
+                          router.pathname === "/studio"
                             ? "state_active "
                             : "state_hover"
                         } `,
@@ -100,7 +99,7 @@ const NavLeft = (props: any) => {
                 </Link> */}
               </FlexColumn>
 
-              <FlexColumn height="fit-content">
+              {/* <FlexColumn height="fit-content">
                 <IconImage slug="icon-bell" style={{ className: "m-b-1" }} />
                 <Link href="/studio/settings">
                   <Tooltip label="Chat">
@@ -117,7 +116,7 @@ const NavLeft = (props: any) => {
                     />
                   </Tooltip>
                 </Link>
-              </FlexColumn>
+              </FlexColumn> */}
             </FlexColumn>
           </div>
         </div>
