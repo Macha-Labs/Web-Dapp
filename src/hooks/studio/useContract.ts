@@ -40,6 +40,7 @@ const useContract = () => {
   };
 
   const _fetchEdit = async (contract_slug: any) => {
+    setIsLoading(true)
     contractDataBySlug(contract_slug).then((res: any) => {
       window.sessionStorage.setItem(contract_slug, JSON.stringify(res.data))
       setContractDetails(res.data);
@@ -57,7 +58,6 @@ const useContract = () => {
   const contractDelete = async (contract_id: any) => {
     setIsLoading(true)
     deleteContract(contract_id).then((res: any) => {
-      console.log("contract deleting", res.data);
       toast({
         title: "Contract Deleted!!",
         status: "success",

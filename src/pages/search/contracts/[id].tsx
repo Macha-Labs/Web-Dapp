@@ -5,7 +5,7 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import Loader from "@/_ui/loader/Loader";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavStudio from "@/_ui/nav/NavStudio";
-import ContractEditModal from "@/components/studio/ContractEditModal";
+import ContractCreateEditModal from "@/components/studio/ContractCreateEditModal";
 import ContractInfoCard from "@/components/studio/ContractInfoCard";
 import TxnTable from "@/components/studio/TxnTable";
 import useContract from "@/hooks/studio/useContract";
@@ -64,10 +64,11 @@ const Contract = () => {
             }}
           />
         )}
-        <ContractEditModal
+        <ContractCreateEditModal
           modal={editModal}
           hookContractCreate={hookContractCreate}
           hookContract={hookContract}
+          isEdit={true}
         />
         {hookContractTxn.isLoading ? (
           <FlexRow height="100px">

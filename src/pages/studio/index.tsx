@@ -1,17 +1,12 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import InputSearch from "@/_ui/input/InputSearch";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavStudio from "@/_ui/nav/NavStudio";
-import NavTop from "@/_ui/nav/NavTop";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import NavButton from "@/components/buttons/NavButton";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
-import ContractCreateModal from "@/components/studio/ContractCreateModal";
+import ContractCreateEditModal from "@/components/studio/ContractCreateEditModal";
 import HomeDev from "@/components/studio/HomeDev";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import useMacha from "@/hooks/studio/useMacha";
@@ -93,9 +88,10 @@ const Home = () => {
         <FlexBody>
           <Box style={{ overflow: "hidden" }}>{renderHome()}</Box>
         </FlexBody>
-        <ContractCreateModal
+        <ContractCreateEditModal
           modal={contractModal}
           hookContractCreate={hookContractCreate}
+          isEdit={false}
         />
         <ApiCreateModal modal={metaModal} />
       </>

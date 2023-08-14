@@ -1,21 +1,19 @@
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexRow from "@/_ui/flex/FlexRow";
 import Loader from "@/_ui/loader/Loader";
-import MetaCard from "@/components/cards/MetaCard";
-import useContractList from "@/hooks/studio/useContractList";
-import { useRouter } from "next/router";
-import ContractCard from "../cards/ContractCard";
-import InputSearch from "@/_ui/input/InputSearch";
-import { style } from "@/styles/StyledConstants";
-import { useDisclosure, Box } from "@chakra-ui/react";
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import chains from "@/data/network";
-import { useState } from "react";
-import useAuthStore from "@/store/useAuthStore";
-import useMacha from "@/hooks/studio/useMacha";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import ContractCreateModal from "@/components/studio/ContractCreateModal";
 import useContractCreate from "@/hooks/studio/useContractCreate";
+import useContractList from "@/hooks/studio/useContractList";
+import useMacha from "@/hooks/studio/useMacha";
+import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
+import { style } from "@/styles/StyledConstants";
+import { Box, useDisclosure } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import ContractCard from "../cards/ContractCard";
+import ContractCreateEditModal from "./ContractCreateEditModal";
 
 type Props = {
   metaInfo: any;
@@ -145,9 +143,10 @@ const ContractList = () => {
                 );
               })}
           </Box>
-          <ContractCreateModal
+          <ContractCreateEditModal
             modal={contractModal}
             hookContractCreate={hookContractCreate}
+            isEdit={false}
           />
         </FlexRow>
       </>

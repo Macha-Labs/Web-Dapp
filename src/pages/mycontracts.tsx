@@ -3,9 +3,8 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import Loader from "@/_ui/loader/Loader";
 import NavStudio from "@/_ui/nav/NavStudio";
 import TagNative from "@/_ui/tag/TagNative";
-import CreateContractModal from "@/components/studio/ContractCreateModal";
+import ContractCreateEditModal from "@/components/studio/ContractCreateEditModal";
 import ContractDeleteModal from "@/components/studio/ContractDeleteModal";
-import EditContractModal from "@/components/studio/ContractEditModal";
 import chains from "@/data/network";
 import { truncateAddress, truncateString } from "@/helpers";
 import useContract from "@/hooks/studio/useContract";
@@ -166,8 +165,8 @@ const RenderBody = () => {
                         No Contracts Found
                     </Box>)}
             </Box>
-            <CreateContractModal modal={contractModal} hookContractCreate={hookContractCreate} />
-            <EditContractModal modal={editModal} hookContractCreate={hookContractCreate} hookContract={hookContract} />
+            <ContractCreateEditModal modal={contractModal} hookContractCreate={hookContractCreate} isEdit={false} />
+            <ContractCreateEditModal modal={editModal} hookContractCreate={hookContractCreate} hookContract={hookContract} isEdit={true} />
             <ContractDeleteModal modal={deleteModal} hookContract={hookContract} />
         </Box>
     )

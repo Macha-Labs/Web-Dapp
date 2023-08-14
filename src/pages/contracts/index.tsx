@@ -6,7 +6,7 @@ import NavStudio from "@/_ui/nav/NavStudio";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
-import ContractCreateModal from "@/components/studio/ContractCreateModal";
+import ContractCreateEditModal from "@/components/studio/ContractCreateEditModal";
 import ContractList from "@/components/studio/ContractList";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import { fetchAllMetas } from "@/service/MetaService";
@@ -99,9 +99,10 @@ const DashBoard = () => {
         <FlexBody>
           <Box style={{ overflow: "hidden" }}>{renderContracts()}</Box>
         </FlexBody>
-        <ContractCreateModal
+        <ContractCreateEditModal
           modal={contractModal}
           hookContractCreate={hookContractCreate}
+          isEdit={false}
         />
         <ApiCreateModal modal={metaModal} />
       </>

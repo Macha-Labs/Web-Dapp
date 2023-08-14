@@ -7,6 +7,7 @@ import ModalWindow from "@/_ui/modal/ModalWindow";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Image, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 type Props = {
     modal: any;
@@ -15,6 +16,9 @@ type Props = {
 };
 
 const ContractDeleteModal = ({ modal, hookContract }: Props) => {
+
+    const router = useRouter()
+
     return (
         <>
             <ModalWindow
@@ -53,6 +57,9 @@ const ContractDeleteModal = ({ modal, hookContract }: Props) => {
                                 e.preventDefault();
                                 await hookContract.contractDelete(hookContract.contractDetails?._id);
                                 modal.onClose()
+                                setTimeout(() => {
+                                    router.reload()
+                                },2000)
                             }}
                         >
                             Delete
