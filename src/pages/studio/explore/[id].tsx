@@ -1,23 +1,13 @@
 import MCard from "@/_sdk/MCard";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardSkeleton from "@/_ui/cards/CardSkeleton";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import Loader from "@/_ui/loader/Loader";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavStudio from "@/_ui/nav/NavStudio";
-import ContractDeleteModal from "@/components/studio/ContractDeleteModal";
-import ContractEditModal from "@/components/studio/ContractEditModal";
-import ContractInfoCard from "@/components/studio/ContractInfoCard";
-import TxnTable from "@/components/studio/TxnTable";
 import useMetaList from "@/hooks/meta/useMetasList";
-import useContract from "@/hooks/studio/useContract";
-import useContractCreate from "@/hooks/studio/useContractCreate";
-import useContractTxn from "@/hooks/studio/useContractTxn";
-import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
