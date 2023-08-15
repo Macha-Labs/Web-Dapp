@@ -19,7 +19,7 @@ import Script from "next/script";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { filecoinCalibration } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
-import {useEffect} from "react"
+import { useEffect } from "react";
 
 const { chains, provider } = configureChains(
   [filecoinCalibration],
@@ -39,18 +39,27 @@ const wagmiClient = createClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   console.log("Rendering >>>>> APP");
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
-    console.log("router",router)
-  },[router])
+    console.log("router", router);
+  }, [router]);
   return (
     <>
       <Head>
         <title>Macha</title>
-        <meta name="description" content="Search Infrastructure to search anything from apps and NFTs to protocols and content across multiple chains." />
+        <meta
+          name="description"
+          content="Search Infrastructure to search anything from apps and NFTs to protocols and content across multiple chains."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="Macha - Search Infrastructure for New Internet" />
-        <meta property="og:description" content="Search Infrastructure to search anything from apps and NFTs to protocols and content across multiple chains." />
+        <meta
+          property="og:title"
+          content="Macha - Search Infrastructure for New Internet"
+        />
+        <meta
+          property="og:description"
+          content="Search Infrastructure to search anything from apps and NFTs to protocols and content across multiple chains."
+        />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
@@ -58,8 +67,14 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:image:alt" content="Macha.ai" />
         <meta property="og:url" content="https://macha.ai" />
         <meta property="og:site_name" content="Macha" />
-        <meta name="twitter:title" content="Macha - Search Infrastructure for New Internet" />
-        <meta name="twitter:description" content="Search Infrastructure to search anything from apps and NFTs to protocols and content across multiple chains." />
+        <meta
+          name="twitter:title"
+          content="Macha - Search Infrastructure for New Internet"
+        />
+        <meta
+          name="twitter:description"
+          content="Search Infrastructure to search anything from apps and NFTs to protocols and content across multiple chains."
+        />
         <meta property="twitter:image" content="/assets/share.png" />
         <meta name="twitter:image:width" content="1200" />
         <meta name="twitter:image:height" content="630" />

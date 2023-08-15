@@ -10,7 +10,7 @@ export const exploreModules = [
     borderColor: "#011f56",
   },
   {
-    heading: "Lens Posts",
+    heading: "Lens Post",
     description:
       "Search and interact with your Lens frens’ content on Lens Protocol.",
     image: "logo-Lens",
@@ -19,7 +19,7 @@ export const exploreModules = [
     borderColor: "#1f2b11",
   },
   {
-    heading: "Farcaster Network",
+    heading: "ENS Handles",
     description:
       "Search, connect and interact anyone on decentralized social network",
     image: "logo-Farcaster",
@@ -83,7 +83,7 @@ export const dashboardModules = [
     borderColor: "#011f56",
   },
   {
-    heading: "Lens Posts",
+    heading: "Lens Post",
     description:
       "Search and interact with your Lens frens’ content on Lens Protocol.",
     image: "logo-Lens",
@@ -92,7 +92,7 @@ export const dashboardModules = [
     borderColor: "#1f2b11",
   },
   {
-    heading: "Farcaster Network",
+    heading: "ENS Handles",
     description:
       "Search, connect and interact anyone on decentralized social network",
     image: "logo-Farcaster",

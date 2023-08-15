@@ -14,9 +14,13 @@ import { exploreModules } from "@/data/studio/constant";
 import useAlchemy from "@/hooks/studio/useAlchemy";
 import { Text } from "@chakra-ui/react";
 import NavLeft from "@/_ui/nav/NavLeft";
+import useMetaList from "@/hooks/meta/useMetasList";
+import { useRouter } from "next/router";
 
 export default function Explore() {
   const hookAlchemy = useAlchemy();
+  const router = useRouter();
+  const hookMetasList = useMetaList();
   const [exploreMeta, setExploreMeta] = useState<any>([]);
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Your Metas");
 
@@ -31,18 +35,24 @@ export default function Explore() {
     },
   ];
 
-  const fetchmetas = async () => {
-    const allMetas = await fetchAllMetas();
-    setExploreMeta(allMetas.data);
-  };
-
+  // const fetchmetas = async () => {
+  //   const allMetas = await fetchAllMetas();
+  //   setExploreMeta(allMetas.data);
+  // };
   useEffect(() => {
-    fetchmetas();
-    hookAlchemy.alchemyData();
+    if (router.isReady) {
+      hookMetasList._fetchAll();
+      hookMetasList._fetchMetaSchemas();
+    }
   }, []);
 
+  // useEffect(() => {
+  //   fetchmetas();
+  //   hookAlchemy.alchemyData();
+  // }, []);
+
   const renderBody = () => {
-    console.log("exploreMeta", exploreMeta);
+    // console.log("exploreMeta", exploreMeta);
     return (
       <>
         {/* <NavBlock>
@@ -72,15 +82,26 @@ export default function Explore() {
             </Text>
           </FlexColumn>
           <FlexRow hrAlign="flex-start" marginTop={"md"} flexWrap="wrap">
-            {exploreModules.map((item: any, index: number) => {
+            {hookMetasList?.metaSchemas?.map((schema: any, index: any) => {
+              console.log(schema, "schema");
               return (
                 <ColoredCard
                   key={index}
-                  heading={item.heading}
-                  description={item.description}
-                  image={item.image}
-                  bg={item.bg}
-                  borderColor={item.borderColor}
+                  heading={schema.name}
+                  // description={schema.description}
+                  bg={schema.bg}
+                  borderColor={schema.borderColor}
+                  onCardClick={() => {
+                    router.push(
+                      {
+                        pathname: `/studio/explore/[id]`,
+                        query: {
+                          id: schema?.slug,
+                        },
+                      },
+                      `/studio/explore/${schema?.slug}`
+                    );
+                  }}
                 />
               );
             })}

@@ -5,11 +5,11 @@ export const config = {
   STREAM_APIKEY: "s7k8yarexp9g",
   STREAM_SECRET:
     "czw7rguj3bcpzetr5e2fcx366rq26g38rg6taj9x4gr6h8my3sk25msrx7bcr4we",
-  url: "https://metawork-server.herokuapp.com",
+  // url: "https://metawork-server.herokuapp.com",
   hostedUrl: "https://app.macha.ai",
-  // metaServer: "http://localhost:3080",
-  metaServer: "https://metawork-sdk.herokuapp.com",
-  // url: "http://localhost:3080",
+  metaServer: "http://localhost:3080",
+  // metaServer: "https://metawork-sdk.herokuapp.com",
+  url: "http://localhost:3080",
   // metaServer: "https://metawork-server-staging.herokuapp.com/",
   DISCORD_API_ENDPOINT: "https://discord.com/api/v10",
   DISCORD_REDIRECT_URL: "http://localhost:3000/app",
@@ -34,5 +34,5 @@ export const config = {
   LIGHTHOUSE_API_KEY: "369c0ebc-5307-4cad-aa3e-b8a3a7364c2c",
 
   // Google analytics
-  GOOGLE_ANALYTICS_ID: "G-FCQZ64DYYZ",
+  GOOGLE_ANALYTICS_ID: "G-87ZYDKJCR0",
 };

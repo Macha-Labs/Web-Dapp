@@ -1,13 +1,15 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
+import TagNative from "@/_ui/tag/TagNative";
+import { exploreModules } from "@/data/studio/constant";
 import { truncateString } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
 import { Text } from "@chakra-ui/react";
 
 type Props = {
-  image: string;
+  image?: string;
   heading: string;
-  description: string;
+  description?: string;
   tags?: any;
   width?: any;
   cardDirection?: any;
@@ -33,12 +35,17 @@ export default function ColoredCard({
     <>
       <div
         style={{
-          height: "150px",
+          // height: "150px",
           width: "280px",
           border: `${style.card.border.meta}`,
           borderRadius: `${style.card.borderRadius.default}`,
-          background: `${bg}`,
-          borderColor: `${borderColor}`,
+          background: `${
+            exploreModules.find((module) => module.heading === heading)?.bg
+          }`,
+          borderColor: `${
+            exploreModules.find((module) => module.heading === heading)
+              ?.borderColor
+          }`,
           padding: ` ${style.card.padding.default}`,
           marginRight: ` ${style.margin["lg"]}`,
           marginBottom: ` ${style.margin["lg"]}`,
@@ -49,7 +56,7 @@ export default function ColoredCard({
       >
         <div style={{}}>
           <FlexRow hrAlign="flex-start" vrAlign="center">
-            <IconBase slug={image} />
+            {image && <IconBase slug={image} />}
             <Text
               fontSize={"xl"}
               fontWeight={600}
@@ -59,10 +66,16 @@ export default function ColoredCard({
               {heading}
             </Text>
           </FlexRow>
-          <Text className="m-t-0-5" fontWeight={200} fontSize={"sm"}>
-            {truncateString(description, 110)}
+          <Text className="m-t-1" fontWeight={200} fontSize={"sm"}>
+            {truncateString(
+              description
+                ? description
+                : exploreModules.find((module) => module.heading === heading)
+                    ?.description,
+              110
+            )}
           </Text>
-          {/* <FlexRow hrAlign="flex-start" width="100%" height="50px">
+          <FlexRow hrAlign="flex-start" width="100%" height="30px">
             <TagNative
               value="Tag 1"
               variant="state_xmtp"
@@ -76,7 +89,7 @@ export default function ColoredCard({
               size="sm"
               lineHeight="1.5"
             />
-          </FlexRow> */}
+          </FlexRow>
         </div>
       </div>
     </>

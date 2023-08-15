@@ -18,25 +18,26 @@ const Explorer = () => {
   const hookMetasList = useMetaList();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedSchema, setSelectedSchema] = useState<string>("All");
+  // const [selectedSchema, setSelectedSchema] = useState<string>("All");
   const [isCloseHovered, setIsCloseHovered] = useState(false);
+  const [limit, setLimit] = useState<number>(30);
 
   useEffect(() => {
     if (router.isReady) {
       hookMetasList._fetchAll();
-      hookMetasList._fetchMetaSchemas();
+      // hookMetasList._fetchMetaSchemas();
     }
   }, []);
 
-  useEffect(() => {
-    if (router.isReady) {
-      if (selectedSchema == "All") {
-        hookMetasList._fetchAll();
-      } else {
-        hookMetasList._fetchAll(selectedSchema);
-      }
-    }
-  }, [selectedSchema]);
+  // useEffect(() => {
+  //   if (router.isReady) {
+  //     if (selectedSchema == "All") {
+  //       hookMetasList._fetchAll();
+  //     } else {
+  //       hookMetasList._fetchAll(selectedSchema);
+  //     }
+  //   }
+  // }, [selectedSchema]);
 
   const renderNav = () => {
     return <NavMeta />;
@@ -115,6 +116,16 @@ const Explorer = () => {
                   />
                 );
               })}
+            <FlexRow>
+              <ButtonNative
+                variant="state_brand"
+                text="Show More"
+                onClick={() => {
+                  hookMetasList._fetchMore(null, limit + 30);
+                  setLimit(limit + 30);
+                }}
+              />
+            </FlexRow>
           </FlexRow>
           <motion.div
             onMouseEnter={() => {

@@ -21,11 +21,15 @@ export const initialiseNewMeta = async (data: metaInit) => {
   return response.json();
 };
 
-export const fetchAllMetas = async (meta_slug?: any) => { 
-  let url = `${config.metaServer}/indexer/metas/fetchAll?limit=30`
-  if(meta_slug){
-    url = `${config.metaServer}/indexer/metas/fetchAll?metaSlug=${meta_slug}`
-  } 
+export const fetchAllMetas = async (
+  meta_slug?: any,
+  cursor?: any,
+  limit?: any
+) => {
+  let url = `${config.metaServer}/indexer/metas/fetchAll?limit=${
+    limit ? limit : 30
+  }?meta_slug=${meta_slug}?cursor=${cursor}`;
+
   const response = await fetch(url);
   const data = await response.json();
   return data;

@@ -187,7 +187,7 @@ const Contract = () => {
       </Box>
     );
   };
-  
+
   const renderBody = () => {
     return (
       <>
