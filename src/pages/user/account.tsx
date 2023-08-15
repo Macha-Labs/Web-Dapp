@@ -115,7 +115,7 @@ const Account = () => {
             {$address ? (
               <WalletButton />
             ) : (
-              <ConnectWalletButton showBalance={true} showContracts={true} />
+              <ConnectWalletButton showBalance={true} />
             )}
           </FlexRow>
         }

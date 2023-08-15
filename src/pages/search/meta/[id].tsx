@@ -99,11 +99,11 @@ const Meta = () => {
               >
                 <>
                   {hookMeta.isLoading ? <FlexRow width="100%" hrAlign="space-between">
-                    <SkeletonCircle />
-                    <Skeleton width="90%">Harsh</Skeleton>
+                    <SkeletonCircle startColor="#11224A" endColor="#1B377B" />
+                    <Skeleton startColor="#11224A" endColor="#1B377B" width="90%">Harsh</Skeleton>
                   </FlexRow> : <FlexRow hrAlign="space-between">
                     <FlexRow hrAlign="flex-start" width="fit-content">
-                      {hookMeta.isLoading ? <SkeletonCircle height="2rem" marginRight={style.margin.xxs} /> : <Avatar
+                      {hookMeta.isLoading ? <SkeletonCircle startColor="#11224A" endColor="#1B377B" height="2rem" marginRight={style.margin.xxs} /> : <Avatar
                         size={"md"}
                         marginRight={style.margin.sm}
                         src={GlobalIcons["avatar-default"]}
@@ -136,9 +136,9 @@ const Meta = () => {
               >
                 <>
                   {hookMeta.isLoading && <FlexColumn>
-                    <Skeleton marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
-                    <Skeleton marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
-                    <Skeleton marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
+                    <Skeleton startColor="#11224A" endColor="#1B377B" marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
+                    <Skeleton startColor="#11224A" endColor="#1B377B" marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
+                    <Skeleton startColor="#11224A" endColor="#1B377B" marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
                     </FlexColumn>}
                   {!hookMeta.isLoading && rawDataKey &&
                     rawDataKey.map((item: any, index: any) => {

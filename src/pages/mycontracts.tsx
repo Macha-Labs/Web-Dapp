@@ -3,8 +3,8 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import Loader from "@/_ui/loader/Loader";
 import NavStudio from "@/_ui/nav/NavStudio";
 import TagNative from "@/_ui/tag/TagNative";
-import CreateContractModal from "@/components/studio/ContractCreateModal";
-import EditContractModal from "@/components/studio/ContractEditModal";
+import ContractCreateEditModal from "@/components/studio/ContractCreateEditModal";
+import ContractDeleteModal from "@/components/studio/ContractDeleteModal";
 import chains from "@/data/network";
 import { truncateAddress, truncateString } from "@/helpers";
 import useContract from "@/hooks/studio/useContract";
@@ -28,6 +28,7 @@ const RenderBody = () => {
     const editModal = useDisclosure();
     const $address = useAuthStore((state: any) => state.address);
     const router = useRouter()
+    const deleteModal = useDisclosure();
 
     useEffect(() => {
         if ($address) {
@@ -42,126 +43,138 @@ const RenderBody = () => {
                 marginTop: `${style.margin.nav}`
             }}
         >
-            <Box
-                style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center"
-                }}>
-                <Box>
-                    <Text style={{ fontSize: `${style.font.h4}`, fontWeight: `${style.fontWeight.dark}` }}>My Contracts</Text>
-                </Box>
+            {$address ? <>
                 <Box
                     style={{
-                        cursor: "pointer"
-                    }}
-                    onClick={() => contractModal.onOpen()}
-                >
-                    <Image src={GlobalIcons["icon-dark-add"]} />
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                    }}>
+                    <Box>
+                        <Text style={{ fontSize: `${style.font.h4}`, fontWeight: `${style.fontWeight.dark}` }}>My Contracts</Text>
+                    </Box>
+                    <Box
+                        style={{
+                            cursor: "pointer"
+                        }}
+                        onClick={() => contractModal.onOpen()}
+                    >
+                        <Image src={GlobalIcons["icon-dark-add"]} />
+                    </Box>
                 </Box>
-            </Box>
 
-            {/* Contract List */}
-            <Box
-                style={{
-                    marginTop: `${style.margin.md}`,
-                    display: "flex",
-                    flexDirection: "column",
-                }}
-            >
-                {/* Individual Contract */}
-                {hookContract.isLoading ? <FlexRow height="18rem">
-                    <Loader size="lg" />
-                </FlexRow> : (
-                    hookContract.userContracts ? hookContract.userContracts.map((contract: any, index: any) => (
-                        <Box
-                            key={index}
-                            style={{
-                                border: `${style.card.border.default}`,
-                                borderRadius: `${style.card.borderRadius.default}`,
-                                background: `${style.card.bg.default}`,
-                                padding: `${style.padding.sm}`,
-                                display: "flex",
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                alignItems: "flex-start",
-                                height: "14rem",
-                                marginBottom: `${style.margin.md}`
-                            }}
-                        >
-                            <Box>
-                                <Image src={contract?.contract?.image} height="4rem" />
-                            </Box>
+                {/* Contract List */}
+                <Box
+                    style={{
+                        marginTop: `${style.margin.md}`,
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
+                >
+                    {/* Individual Contract */}
+                    {hookContract.isUserContractsLoading ? <FlexRow height="18rem">
+                        <Loader size="lg" />
+                    </FlexRow> : (
+                        hookContract.userContracts ? hookContract.userContracts.map((contract: any, index: any) => (
                             <Box
+                                key={index}
                                 style={{
+                                    border: `${style.card.border.default}`,
+                                    borderRadius: `${style.card.borderRadius.default}`,
+                                    background: `${style.card.bg.default}`,
+                                    padding: `${style.padding.sm}`,
                                     display: "flex",
-                                    flexDirection: "column",
+                                    flexDirection: "row",
                                     justifyContent: "space-between",
                                     alignItems: "flex-start",
-                                    width: "85%"
+                                    height: "14rem",
+                                    marginBottom: `${style.margin.md}`
                                 }}
                             >
-                                <Box style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    paddingBottom: "1.25rem"
-                                }}>
-                                    <Text style={{
-                                        marginBottom: "0",
-                                        marginRight: `${style.margin.xxs}`,
-                                        fontSize: `${style.font.h4}`,
-                                        fontWeight: `${style.fontWeight.dark}`,
-                                        cursor: "pointer"
+                                <Box>
+                                    <Image src={contract?.contract?.image} height="4rem" />
+                                </Box>
+                                <Box
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "space-between",
+                                        alignItems: "flex-start",
+                                        width: "85%"
                                     }}
-                                    _hover={{textDecoration: "underline"}}
-                                    onClick={() => router.push(`/search/contracts/${contract?.contract?.slug}`)}
-                                    >
-                                        {contract?.contract?.name}
-                                    </Text>
-                                    <TagNative value={contract?.contract?.isApproved ? "Approved" : "Pending"} lineHeight="1.25rem" />
-                                </Box>
-                                <Text mb={2}>Created On: {contract?.createdAt}</Text>
-                                <Text mb={2}>Contract ID: {truncateAddress(contract?.contract?.address)}</Text>
-                                <Text mb={2}>Description: {truncateString(contract?.contract?.description, 200)}</Text>
-                            </Box>
-                            <Box
-                                style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    justifyContent: "space-between",
-                                    alignItems: "flex-end",
-                                    height: "100%"
-                                }}
-                            >
-                                <Box style={{
-                                    display: "flex"
-                                }}>
-                                    <Box
-                                        style={{ marginRight: `${style.margin.xxs}`, cursor: "pointer" }}
-                                        onClick={() => {
-                                            hookContract._fetchEdit(contract?.contract?.slug)
-                                            editModal.onOpen()
+                                >
+                                    <Box style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        paddingBottom: "1.25rem"
+                                    }}>
+                                        <Text style={{
+                                            marginBottom: "0",
+                                            marginRight: `${style.margin.xxs}`,
+                                            fontSize: `${style.font.h4}`,
+                                            fontWeight: `${style.fontWeight.dark}`,
+                                            cursor: "pointer"
                                         }}
-                                    >
-                                        <Image src={GlobalIcons["icon-dark-edit"]} />
+                                            _hover={{ textDecoration: "underline" }}
+                                            onClick={() => router.push(`/search/contracts/${contract?.contract?.slug}`)}
+                                        >
+                                            {contract?.contract?.name}
+                                        </Text>
+                                        <TagNative value={contract?.contract?.isApproved ? "Approved" : "Pending"} lineHeight="1.25rem" />
                                     </Box>
-                                    <Box
-                                        style={{ cursor: "pointer" }}
-                                    >
-                                        <Image src={GlobalIcons["icon-dark-delete"]} />
-                                    </Box>
+                                    <Text mb={2}>Created On: {contract?.createdAt}</Text>
+                                    <Text mb={2}>Contract ID: {truncateAddress(contract?.contract?.address)}</Text>
+                                    <Text mb={2}>Description: {truncateString(contract?.contract?.description, 200)}</Text>
                                 </Box>
-                                <Box><Image height="3rem" src={GlobalIcons[chains[contract?.contract?.chain_id].chainImage]} /></Box>
+                                <Box
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "space-between",
+                                        alignItems: "flex-end",
+                                        height: "100%"
+                                    }}
+                                >
+                                    <Box style={{
+                                        display: "flex"
+                                    }}>
+                                        <Box
+                                            style={{ marginRight: `${style.margin.xxs}`, cursor: "pointer" }}
+                                            onClick={() => {
+                                                hookContract._fetchEdit(contract?.contract?.slug)
+                                                editModal.onOpen()
+                                            }}
+                                        >
+                                            <Image src={GlobalIcons["icon-dark-edit"]} />
+                                        </Box>
+                                        <Box
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => {
+                                                hookContract._fetchEdit(contract?.contract?.slug)
+                                                deleteModal.onOpen()
+                                            }}
+                                        >
+                                            <Image src={GlobalIcons["icon-dark-delete"]} />
+                                        </Box>
+                                    </Box>
+                                    <Box><Image height="3rem" src={GlobalIcons[chains[contract?.contract?.chain_id].chainImage]} /></Box>
+                                </Box>
                             </Box>
-                        </Box>
-                    )) : <Box ml={0}>
-                        No Contracts Found
-                    </Box>)}
-            </Box>
-            <CreateContractModal modal={contractModal} hookContractCreate={hookContractCreate} />
-            <EditContractModal modal={editModal} hookContractCreate={hookContractCreate} hookContract={hookContract} />
+                        )) : <Box ml={0}>
+                            No Contracts Found
+                        </Box>)}
+                </Box>
+                <ContractCreateEditModal modal={contractModal} hookContractCreate={hookContractCreate} isEdit={false} />
+                <ContractCreateEditModal modal={editModal} hookContractCreate={hookContractCreate} hookContract={hookContract} isEdit={true} />
+                <ContractDeleteModal modal={deleteModal} hookContract={hookContract} />
+            </> :
+                <>
+                    <Text style={{ fontSize: `${style.font.h4}`, fontWeight: `${style.fontWeight.dark}` }}>My Contracts</Text>
+                    <Text style={{ fontSize: `${style.font.h5}`}}>Please connect your wallet</Text>
+                </>
+            }
         </Box>
     )
 }

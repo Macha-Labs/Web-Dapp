@@ -1,25 +1,21 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import useContractCreate from "@/hooks/studio/useContractCreate";
+import useMacha from "@/hooks/studio/useMacha";
+import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
+import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
 import {
-  Badge,
   Box,
-  Button,
   Flex,
   Heading,
-  Image,
   Text,
   useDisclosure,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
-import React from "react";
-import GetStartedCards from "./GetStartedCards";
-import ContractCreateModal from "@/components/studio/ContractCreateModal";
-import CreatePublisherModal from "./PublisherModal";
-import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
-import useMacha from "@/hooks/studio/useMacha";
 import { fetchBalance } from "@wagmi/core";
-import useAuthStore from "@/store/useAuthStore";
-import useContractCreate from "@/hooks/studio/useContractCreate";
+import ContractCreateEditModal from "./ContractCreateEditModal";
+import GetStartedCards from "./GetStartedCards";
+import CreatePublisherModal from "./PublisherModal";
 
 const HomeDev = () => {
   const publisherModal = useDisclosure();
@@ -137,6 +133,7 @@ const HomeDev = () => {
               return;
             }
             if (hookMacha.publisherExists) {
+              hookContractCreate.setClear()
               contractModal.onOpen();
             } else {
               toast({
@@ -208,9 +205,10 @@ const HomeDev = () => {
         modal={publisherModal}
         hookPublisherCreate={hookPublisherCreate}
       />
-      <ContractCreateModal
+      <ContractCreateEditModal
         modal={contractModal}
         hookContractCreate={hookContractCreate}
+        isEdit={false}
       />
     </Box>
   );

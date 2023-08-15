@@ -146,25 +146,25 @@ const Explorer = () => {
               isOpen
                 ? isCloseHovered
                   ? {
-                      y: -10,
-                      right: 50,
-                      borderRadius: "20px",
-                      height: "50px",
-                      width: "150px",
-                    }
-                  : {
-                      y: -10,
-                      right: 50,
-                      borderRadius: "100%",
-                      height: "50px",
-                      width: "50px",
-                    }
-                : {
-                    y: 0,
-                    borderRadius: `${style.card.borderRadius.default}`,
-                    height: "auto",
-                    width: "auto",
+                    y: -10,
+                    right: 50,
+                    borderRadius: "20px",
+                    height: "50px",
+                    width: "150px",
                   }
+                  : {
+                    y: -10,
+                    right: 50,
+                    borderRadius: "100%",
+                    height: "50px",
+                    width: "50px",
+                  }
+                : {
+                  y: 0,
+                  borderRadius: `${style.card.borderRadius.default}`,
+                  height: "auto",
+                  width: "auto",
+                }
             }
             transition={{ duration: 0.5, ease: "easeOut" }}
             style={{
@@ -216,11 +216,11 @@ const Explorer = () => {
                     <Image
                       src={GlobalIcons["icon-close"]}
                       alt=""
-                      height="0.75rem"
+                      height="1rem"
                     />
                   </Box>
                   <Text
-                    fontSize={style.font.h5}
+                    fontSize={style.font.h6}
                     mb={0}
                     marginRight={style.margin.sm}
                     fontWeight={style.fontWeight.dark}
@@ -229,8 +229,13 @@ const Explorer = () => {
                   </Text>
                   <ButtonNative
                     variant="state_brand"
+                    paddingLeft="xs"
+                    paddingRight="xs"
+                    paddingTop="xs"
+                    paddingBottom="xs"
                     onClick={() => router.push("/studio")}
-                    height="2rem"
+                    height="1.5rem"
+                    textFontSize="h7"
                   >
                     Explore
                   </ButtonNative>

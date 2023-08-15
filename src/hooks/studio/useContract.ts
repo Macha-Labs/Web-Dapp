@@ -2,18 +2,20 @@ import { contractDataBySlug, contractsByUserAddress, deleteContract } from "@/se
 import useContractFormStore from "@/store/useContractFormStore";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react"
+import { useState } from "react";
 
 const useContract = () => {
 
   const [contractDetails, setContractDetails] = useState<any>();
   const [userContracts, setUserContracts] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isUserContractsLoading, setIsUserContractsLoading] = useState<boolean>(true);
   const toast = useToast();
   const router = useRouter()
   const $loadContractFormData = useContractFormStore((state: any) => state.loadContractFormData);
 
   const _fetch = async (contract_slug: any) => {
+    setIsLoading(true)
     if (window.sessionStorage !== undefined) {
       const data = window.sessionStorage.getItem(contract_slug);
       if (data !== null) {
@@ -38,9 +40,9 @@ const useContract = () => {
   };
 
   const _fetchEdit = async (contract_slug: any) => {
+    setIsLoading(true)
     contractDataBySlug(contract_slug).then((res: any) => {
       window.sessionStorage.setItem(contract_slug, JSON.stringify(res.data))
-      setIsLoading(false)
       setContractDetails(res.data);
       $loadContractFormData(res.data.contract)
       $loadContractFormData({
@@ -49,23 +51,26 @@ const useContract = () => {
       $loadContractFormData({
         interested_methods: res.data.contract.interested_methods.join(),
       })
+      setIsLoading(false)
     });
   };
 
   const contractDelete = async (contract_id: any) => {
+    setIsLoading(true)
     deleteContract(contract_id).then((res: any) => {
-      console.log("contract deleting", res.data);
       toast({
         title: "Contract Deleted!!",
         status: "success",
         duration: 3000,
         position: "top-right"
       });
-      router.push('/')
+      setIsLoading(false)
+      setClear()
     });
   };
 
   const _fetchUserContracts = async (userAddress: any) => {
+    setIsUserContractsLoading(true)
     contractsByUserAddress(userAddress).then((res: any) => {
       if(res && res.data){
         setUserContracts(res.data)
@@ -73,8 +78,14 @@ const useContract = () => {
       else{
         setUserContracts(undefined)
       }
-      setIsLoading(false)
+      setIsUserContractsLoading(false)
     })
+    setIsUserContractsLoading(false)
+  }
+
+  const setClear = () => {
+    setContractDetails(undefined)
+    setIsLoading(true)
   }
 
   return {
@@ -84,7 +95,9 @@ const useContract = () => {
     contractDelete: contractDelete,
     _fetchEdit: _fetchEdit,
     _fetchUserContracts: _fetchUserContracts,
-    userContracts: userContracts
+    userContracts: userContracts,
+    setClear: setClear,
+    isUserContractsLoading: isUserContractsLoading
   }
 
 }

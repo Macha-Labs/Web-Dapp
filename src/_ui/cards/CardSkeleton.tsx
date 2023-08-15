@@ -14,7 +14,7 @@ const CardSkeleton = ({ width }: Props) => {
   return (
     <Box
       borderRadius={gStyle.card.borderRadius.default}
-      border={gStyle.card.border.meta}
+      border={gStyle.card.border.default}
       background={gStyle.card.bg.default}
       padding={style.card.padding.default}
       marginRight={style.margin["lg"]}
@@ -22,7 +22,13 @@ const CardSkeleton = ({ width }: Props) => {
       width={width ? width : "100%"}
       cursor={"pointer"}
     >
-      <Skeleton width="100%" height="10rem" marginBottom={style.margin.sm}>
+      <Skeleton
+        startColor="#11224A"
+        endColor="#1B377B"
+        width="100%"
+        height="10rem"
+        marginBottom={style.margin.sm}
+      >
         <Image
           src={"ads"}
           alt="coverImage"
@@ -33,7 +39,13 @@ const CardSkeleton = ({ width }: Props) => {
       </Skeleton>
 
       <FlexColumn height="auto" vrAlign="flex-start">
-        <SkeletonText marginBottom={style.margin.xxs} width="45%" noOfLines={1}>
+        <SkeletonText
+          startColor="#11224A"
+          endColor="#1B377B"
+          marginBottom={style.margin.xxs}
+          width="45%"
+          noOfLines={1}
+        >
           <Text
             className="m-b-0"
             fontSize={"xl"}
@@ -44,7 +56,11 @@ const CardSkeleton = ({ width }: Props) => {
           </Text>
         </SkeletonText>
 
-        <SkeletonText marginBottom={style.margin.sm}>
+        <SkeletonText
+          startColor="#11224A"
+          endColor="#1B377B"
+          marginBottom={style.margin.sm}
+        >
           <Text
             className="m-b-0"
             fontSize={"md"}
@@ -55,14 +71,6 @@ const CardSkeleton = ({ width }: Props) => {
           </Text>
         </SkeletonText>
       </FlexColumn>
-      <Skeleton height="2rem">
-        <ButtonNative
-          text={"lorem"}
-          variant="state_brand"
-          width="100%"
-          marginTop="sm"
-        />
-      </Skeleton>
     </Box>
   );
 };
