@@ -10,7 +10,7 @@ import NavStudio from "@/_ui/nav/NavStudio";
 import ColoredCard from "@/components/cards/ColoredCard";
 import useMetaList from "@/hooks/meta/useMetasList";
 import useAlchemy from "@/hooks/studio/useAlchemy";
-import { Text } from "@chakra-ui/react";
+import { Text, Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 export default function Explore() {
@@ -50,7 +50,10 @@ export default function Explore() {
   const renderBody = () => {
     // console.log("exploreMeta", exploreMeta);
     return (
-      <>
+      <Box
+        paddingTop={style.margin.xl}
+        paddingX={"6%"}
+      >
         {/* <NavBlock>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <Tabs
@@ -62,7 +65,7 @@ export default function Explore() {
             />
           </FlexRow>
         </NavBlock> */}
-        <FlexBody>
+        <FlexBody >
           <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
             <Text
               fontSize={"xl"}
@@ -102,7 +105,7 @@ export default function Explore() {
             })}
           </FlexRow>
         </FlexBody>
-      </>
+      </Box>
     );
   };
 
