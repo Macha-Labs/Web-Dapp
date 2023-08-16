@@ -51,9 +51,13 @@ const MCard = ({
       onClick={onClick}
       cursor={"pointer"}
     >
-      <FlexRow hrAlign="space-between" height="auto" vrAlign="flex-start">
+      <FlexRow
+        hrAlign="space-between"
+        height="auto"
+        vrAlign="flex-start"
+        marginBottom="sm"
+      >
         <TagNative size="sm" value="Live Now" />
-        <IconBase slug="icon-copy" style={{ marginBottom: "sm" }} />
       </FlexRow>
 
       {owner_name && (

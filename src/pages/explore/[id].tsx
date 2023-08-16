@@ -27,20 +27,18 @@ const Explore = () => {
       if (window !== undefined) {
         const data = window.sessionStorage.getItem(`${router.query.id}_page`);
         if (data !== null) {
-          var newLimit = JSON.parse(data) * 30
-          if(newLimit > 300) newLimit = 300;
-          hookMetasList._fetchAll(router.query.id, 1, newLimit)
-          setPageNo(JSON.parse(data))
+          var newLimit = JSON.parse(data) * 30;
+          if (newLimit > 300) newLimit = 300;
+          hookMetasList._fetchAll(router.query.id, 1, newLimit);
+          setPageNo(JSON.parse(data));
+        } else {
+          hookMetasList._fetchAll(router.query.id, pageNo, 30);
         }
-        else {
-          hookMetasList._fetchAll(router.query.id, pageNo, 30)
-        }
-      }
-      else {
-        hookMetasList._fetchAll(router.query.id, pageNo, 30)
+      } else {
+        hookMetasList._fetchAll(router.query.id, pageNo, 30);
       }
     }
-  },[router.query.id])
+  }, [router.query.id]);
 
   const renderNav = () => {
     return <NavStudio />;
@@ -78,21 +76,26 @@ const Explore = () => {
             })}
         </FlexRow>
         <FlexRow marginBottom="lg">
-          <ButtonNative
-            variant="state_brand"
-            text="Show More"
-            onClick={() => {
-              if (router.isReady) {
-                hookMetasList._fetchMore(router.query.id, pageNo + 1, 30);
-                setPageNo(pageNo + 1)
-                if (window !== undefined) {
-                  window.sessionStorage.setItem(`${router.query.id}_page`, JSON.stringify(pageNo + 1))
+          {!hookMetasList.lastPage && (
+            <ButtonNative
+              variant="state_brand"
+              text="Show More"
+              onClick={() => {
+                if (router.isReady) {
+                  hookMetasList._fetchMore(router.query.id, pageNo + 1, 30);
+                  setPageNo(pageNo + 1);
+                  if (window !== undefined) {
+                    window.sessionStorage.setItem(
+                      `${router.query.id}_page`,
+                      JSON.stringify(pageNo + 1)
+                    );
+                  }
                 }
-              }
-            }}
-          />
+              }}
+            />
+          )}
         </FlexRow>
-      </Box >
+      </Box>
     );
   };
 
@@ -110,7 +113,9 @@ const Explore = () => {
             <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
               <FlexRow width="100%" hrAlign="space-between">
                 <Heading fontSize={style.font.h5} className="m-b-0">
-                  {router.isReady ? metaSchemaName[String(router.query.id)] : ""}
+                  {router.isReady
+                    ? metaSchemaName[String(router.query.id)]
+                    : ""}
                 </Heading>
                 <Box
                   style={{
