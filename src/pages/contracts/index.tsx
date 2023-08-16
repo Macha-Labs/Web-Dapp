@@ -24,6 +24,46 @@ import { useEffect, useState } from "react";
 const DashBoard = () => {
   const [exploreMeta, setExploreMeta] = useState<any>([]);
   const [isPublisher, setIsPublisher] = useState<any>(false);
+  const [filterValue, setFilterValue] = useState<any>("All Contracts");
+  const [avatar, setAvatar] = useState<any>("icon-dashboard");
+
+  const $isConnected = useAuthStore((state: any) => state.isConnected);
+  const editContractsModal = useDisclosure();
+
+  const $address = useAuthStore((state: any) => state.address);
+  const hookContractList = useContractList();
+  const hookContract = useContract();
+  const hookMacha = useMacha();
+
+  useEffect(() => {
+    if ($address) {
+      hookContract._fetchUserContracts($address);
+    }
+  }, [$address, $isConnected]);
+
+  let contractFilterOptions = [
+    {
+      value: "All Contracts",
+      leftIcon: "icon-dashboard",
+      onClick: () => {
+        hookContractList.clearFilters();
+        setFilterValue("All Contracts");
+        setAvatar("icon-dashboard");
+      },
+    },
+  ];
+  Object.keys(chains).forEach((key) => {
+    contractFilterOptions.push({
+      value: chains[key].chainName,
+
+      leftIcon: chains[key].chainImage,
+      onClick: () => {
+        hookContractList.handleFilter(key);
+        setFilterValue(chains[key].chainName);
+        setAvatar(chains[key].chainImage);
+      },
+    });
+  });
 
   const fetchmetas = async () => {
     const allMetas = await fetchAllMetas();
@@ -53,46 +93,6 @@ const DashBoard = () => {
   ];
 
   const renderContracts = () => {
-    const [filterValue, setFilterValue] = useState<any>("All Contracts");
-    const [avatar, setAvatar] = useState<any>("icon-dashboard");
-
-    const $isConnected = useAuthStore((state: any) => state.isConnected);
-    const editContractsModal = useDisclosure();
-
-    const $address = useAuthStore((state: any) => state.address);
-    const hookContractList = useContractList();
-    const hookContract = useContract();
-    const hookMacha = useMacha();
-
-    useEffect(() => {
-      if ($address) {
-        hookContract._fetchUserContracts($address);
-      }
-    }, [$address, $isConnected]);
-
-    let contractFilterOptions = [
-      {
-        value: "All Contracts",
-        leftIcon: "icon-dashboard",
-        onClick: () => {
-          hookContractList.clearFilters();
-          setFilterValue("All Contracts");
-          setAvatar("icon-dashboard");
-        },
-      },
-    ];
-    Object.keys(chains).forEach((key) => {
-      contractFilterOptions.push({
-        value: chains[key].chainName,
-
-        leftIcon: chains[key].chainImage,
-        onClick: () => {
-          hookContractList.handleFilter(key);
-          setFilterValue(chains[key].chainName);
-          setAvatar(chains[key].chainImage);
-        },
-      });
-    });
     return (
       <>
         <FlexRow hrAlign="space-between" marginTop="4xl">

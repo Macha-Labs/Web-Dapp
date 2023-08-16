@@ -45,9 +45,11 @@ export default function Explore() {
             </Heading>
           </FlexColumn>
           <FlexRow marginTop={"lg"} hrAlign="flex-start">
-            {Object.keys(chains).map((chain: any) => {
+            {Object.keys(chains).map((chain: any, index) => {
               // console.log(chains[chain]);
-              return <SupportedChains data={chains[chain]} id={chain} />;
+              return (
+                <SupportedChains data={chains[chain]} id={chain} key={index} />
+              );
             })}
           </FlexRow>
         </Box>
