@@ -16,6 +16,7 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import chains from "@/data/network";
 import SupportedChains from "@/components/studio/SupportedChains";
 import ContractList from "@/components/studio/ContractList";
+import useContractList from "@/hooks/studio/useContractList";
 
 export default function Explore() {
   const hookAlchemy = useAlchemy();
@@ -23,6 +24,7 @@ export default function Explore() {
   const hookMetasList = useMetaList();
   const [exploreMeta, setExploreMeta] = useState<any>([]);
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Your Metas");
+  const hookContractList = useContractList();
 
   useEffect(() => {
     if (router.isReady) {
@@ -103,7 +105,7 @@ export default function Explore() {
             </Heading>
           </FlexColumn>
           <FlexRow hrAlign="flex-start" marginTop={"xl"} flexWrap="wrap">
-            <ContractList />
+            <ContractList data={hookContractList.filterData} />
           </FlexRow>
         </Box>
       </Box>

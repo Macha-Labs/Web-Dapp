@@ -43,6 +43,7 @@ const ContractList = ({ openInNewTab, data }: Props) => {
           )}
           <Box width="100vw" display="flex" flexWrap="wrap" paddingLeft={1}>
             {!hookContractList.isLoading &&
+              data &&
               data.map((item: any, index: number) => {
                 // console.log(hookContractList?.filterData, "filered data");
                 return (

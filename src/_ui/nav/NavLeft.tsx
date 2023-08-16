@@ -59,7 +59,7 @@ const NavLeft = (props: any) => {
                       size="lg"
                       style={{
                         className: `m-b-1 ${
-                          router.pathname === "/studio"
+                          router.pathname === "/explore"
                             ? "state_active "
                             : "state_hover"
                         } `,
