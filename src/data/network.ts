@@ -156,6 +156,30 @@ const chains: any = {
                 link: "https://metamask.io/"
             }
         ]
+    },
+    8453: {
+        chainName: "Base",
+        chainImage: "logo-Base",
+        about: `Base is a secure, low-cost, builder-friendly Ethereum L2 built to bring the next billion users onchain.`,
+        team: [
+            
+        ],
+        links: [
+            {
+                title: "Twitter",
+                link: "https://twitter.com/BuildOnBase"
+            },
+            {
+                title: "base.org",
+                link: "https://base.org/"
+            },
+        ],
+        wallets: [
+            {
+                title: "Metamask",
+                link: "https://metamask.io/"
+            }
+        ]
     }
 }
 
