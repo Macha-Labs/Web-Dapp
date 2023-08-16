@@ -20,9 +20,10 @@ import useContract from "@/hooks/studio/useContract";
 type Props = {
   metaInfo?: any;
   openInNewTab?: any;
+  data?: any;
 };
 
-const ContractList = ({ openInNewTab }: Props) => {
+const ContractList = ({ openInNewTab, data }: Props) => {
   const router = useRouter();
 
   const contractModal = useDisclosure();
@@ -42,8 +43,8 @@ const ContractList = ({ openInNewTab }: Props) => {
           )}
           <Box width="100vw" display="flex" flexWrap="wrap" paddingLeft={1}>
             {!hookContractList.isLoading &&
-              hookContractList?.filterData &&
-              hookContractList?.filterData.map((item: any, index: number) => {
+              data.map((item: any, index: number) => {
+                // console.log(hookContractList?.filterData, "filered data");
                 return (
                   <ContractCard
                     key={index}

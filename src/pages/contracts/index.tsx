@@ -87,6 +87,7 @@ const DashBoard = () => {
 
         leftIcon: chains[key].chainImage,
         onClick: () => {
+          // console.log(key, "clicked");
           hookContractList.handleFilter(key);
           setFilterValue(chains[key].chainName);
           setAvatar(chains[key].chainImage);
@@ -187,8 +188,12 @@ const DashBoard = () => {
             )}
           </Box>
         </FlexRow>
-
-        <ContractList openInNewTab={true} />
+        {hookContractList?.filterData && (
+          <ContractList
+            openInNewTab={true}
+            data={hookContractList.filterData}
+          />
+        )}
       </>
     );
   };
