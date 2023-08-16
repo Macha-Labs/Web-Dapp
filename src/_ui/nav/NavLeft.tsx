@@ -25,16 +25,13 @@ const NavLeft = (props: any) => {
             borderRight: `${style.nav.border.default}`,
           }}
         >
-          <div
-            className="body"
-            style={{ padding: "10px 0px", height: " calc(100% - 55px)" }}
-          >
+          <div className="body" style={{ padding: "10px 0px", height: "100%" }}>
             <FlexColumn hrAlign="space-between" vrAlign="center">
               <FlexColumn height="fit-content">
                 <Link href="/">
                   <IconImage
                     slug="icon-home"
-                    size="md"
+                    size="lg"
                     style={{
                       className: `m-b-1 ${
                         router.pathname === "/" ? "state_active" : "state_hover"
@@ -45,7 +42,7 @@ const NavLeft = (props: any) => {
                 {/* <Link href="/feed">
                   <IconImage
                     slug="icon-posts"
-                    size="md"
+                    size="lg"
                     style={{
                       className: `m-b-1 ${
                         router.pathname === "/studio/explore"
@@ -59,7 +56,7 @@ const NavLeft = (props: any) => {
                   <Tooltip label="Chat">
                     <IconImage
                       slug="icon-compass"
-                      size="md"
+                      size="lg"
                       style={{
                         className: `m-b-1 ${
                           router.pathname === "/studio"
@@ -71,6 +68,11 @@ const NavLeft = (props: any) => {
                   </Tooltip>
                 </Link>
               </FlexColumn>
+              <Image
+                src="./assets/Logo.png"
+                height={"40px"}
+                borderRadius={"8px"}
+              />
             </FlexColumn>
           </div>
         </div>

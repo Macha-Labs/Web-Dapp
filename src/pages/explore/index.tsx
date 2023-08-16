@@ -41,25 +41,6 @@ export default function Explore() {
               fontWeight={600}
               className="m-b-0"
             >
-              Explore Chains
-            </Heading>
-          </FlexColumn>
-          <FlexRow marginTop={"lg"} hrAlign="flex-start">
-            {Object.keys(chains).map((chain: any, index) => {
-              // console.log(chains[chain]);
-              return (
-                <SupportedChains data={chains[chain]} id={chain} key={index} />
-              );
-            })}
-          </FlexRow>
-        </Box>
-        <Box marginTop={style.margin.xxxl}>
-          <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
-            <Heading
-              fontSize={style.font.h3}
-              fontWeight={600}
-              className="m-b-0"
-            >
               Discover Meta Content
             </Heading>
           </FlexColumn>
@@ -91,6 +72,26 @@ export default function Explore() {
             })}
           </FlexRow>
         </Box>
+        <Box marginTop={style.margin.xxxl}>
+          <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
+            <Heading
+              fontSize={style.font.h3}
+              fontWeight={600}
+              className="m-b-0"
+            >
+              Explore Chains
+            </Heading>
+          </FlexColumn>
+          <FlexRow marginTop={"lg"} hrAlign="flex-start">
+            {Object.keys(chains).map((chain: any, index) => {
+              // console.log(chains[chain]);
+              return (
+                <SupportedChains data={chains[chain]} id={chain} key={index} />
+              );
+            })}
+          </FlexRow>
+        </Box>
+
         <Box marginTop={style.margin.xxxl}>
           <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
             <Heading

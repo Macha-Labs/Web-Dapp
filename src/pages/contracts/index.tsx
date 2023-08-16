@@ -52,18 +52,6 @@ const DashBoard = () => {
       },
     },
   ];
-  Object.keys(chains).forEach((key) => {
-    contractFilterOptions.push({
-      value: chains[key].chainName,
-
-      leftIcon: chains[key].chainImage,
-      onClick: () => {
-        hookContractList.handleFilter(key);
-        setFilterValue(chains[key].chainName);
-        setAvatar(chains[key].chainImage);
-      },
-    });
-  });
 
   const fetchmetas = async () => {
     const allMetas = await fetchAllMetas();
@@ -93,9 +81,21 @@ const DashBoard = () => {
   ];
 
   const renderContracts = () => {
+    Object.keys(chains).forEach((key) => {
+      contractFilterOptions.push({
+        value: chains[key].chainName,
+
+        leftIcon: chains[key].chainImage,
+        onClick: () => {
+          hookContractList.handleFilter(key);
+          setFilterValue(chains[key].chainName);
+          setAvatar(chains[key].chainImage);
+        },
+      });
+    });
     return (
       <>
-        <FlexRow hrAlign="space-between" marginTop="4xl">
+        <FlexRow hrAlign="space-between" marginTop="4xl" marginBottom={"xl"}>
           <Box
             width={"48%"}
             background={style.card.bg.brand}
@@ -176,7 +176,7 @@ const DashBoard = () => {
                 variant="state_brand"
                 marginRight="0px"
                 paddingLeft="sm"
-                marginLeft={style.margin.xxs}
+                marginLeft={"xxs"}
                 paddingRight="sm"
                 height="3rem"
                 marginBottom="0px"
