@@ -23,12 +23,12 @@ export const initialiseNewMeta = async (data: metaInit) => {
 
 export const fetchAllMetas = async (
   meta_slug?: any,
-  cursor?: any,
+  page_no?: any,
   limit?: any
 ) => {
   let url = `${config.metaServer}/indexer/metas/fetchAll?limit=${
     limit ? limit : 30
-  }${meta_slug ? `&metaSlug=${meta_slug}`: ""}${cursor ? `&cursor=${cursor}` : ""}`;
+  }${meta_slug ? `&metaSlug=${meta_slug}`: ""}${page_no ? `&page=${page_no}` : ""}`
 
   const response = await fetch(url);
   const data = await response.json();

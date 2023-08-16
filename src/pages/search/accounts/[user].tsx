@@ -121,7 +121,7 @@ const Network = () => {
                       marginBottom={0}
                       fontWeight={style.fontWeight.extraDark}
                     >
-                      {hookUserTxn.totalTxns} Interactions
+                      {hookUserTxn.totalTxns.toLocaleString("en-US")} Interactions
                     </Text>
                   </Box>
                   {/* <Divider
@@ -181,7 +181,7 @@ const Network = () => {
                     marginRight={style.margin.sm}
                     marginBottom="0.25rem"
                   >
-                    Page {hookUserTxn?.page} of {hookUserTxn.totalPages}
+                    Page {hookUserTxn?.page} of {hookUserTxn.totalPages.toLocaleString("en-US")}
                   </Text>
                   <ButtonNative
                     marginRight="sm"
@@ -213,7 +213,7 @@ const Network = () => {
                   />
                 </Box>
                 <Box>
-                  <Text>Total Txns: {hookUserTxn.totalTxns}</Text>
+                  <Text>Total Txns: {hookUserTxn.totalTxns.toLocaleString("en-US")}</Text>
                 </Box>
               </Box>
               <Box

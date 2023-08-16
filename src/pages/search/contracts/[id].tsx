@@ -120,7 +120,7 @@ const Contract = () => {
                   variant="state_default_hover"
                 />
                 <Text marginRight={style.margin.sm} marginBottom="0.25rem">
-                  Page {hookContractTxn?.page} of {hookContractTxn.totalPages}
+                  Page {hookContractTxn?.page} of {hookContractTxn.totalPages.toLocaleString("en-US")}
                 </Text>
                 <ButtonNative
                   marginRight="sm"
@@ -152,7 +152,7 @@ const Contract = () => {
                 />
               </Box>
               <Box>
-                <Text>Total Txns: {hookContractTxn.totalTxns}</Text>
+                <Text>Total Txns: {hookContractTxn.totalTxns.toLocaleString("en-US")}</Text>
               </Box>
             </Box>
             <Box

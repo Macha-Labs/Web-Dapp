@@ -20,24 +20,27 @@ type Props = {
 const Explore = () => {
   const router = useRouter();
   const hookMetasList = useMetaList();
-  const [limit, setLimit] = useState<number>(30);
+  const [pageNo, setPageNo] = useState<number>(1);
 
   useEffect(() => {
     if (router.isReady) {
       if (window !== undefined) {
-        const data = window.sessionStorage.getItem(`${router.query.id}_limit`);
+        const data = window.sessionStorage.getItem(`${router.query.id}_page`);
         if (data !== null) {
-          hookMetasList._fetchAll(router.query.id, JSON.parse(data))
+          var newLimit = JSON.parse(data) * 30
+          if(newLimit > 300) newLimit = 300;
+          hookMetasList._fetchAll(router.query.id, 1, newLimit)
+          setPageNo(JSON.parse(data))
         }
         else {
-          hookMetasList._fetchAll(router.query.id)
+          hookMetasList._fetchAll(router.query.id, pageNo, 30)
         }
       }
       else {
-        hookMetasList._fetchAll(router.query.id)
+        hookMetasList._fetchAll(router.query.id, pageNo, 30)
       }
     }
-  }, [router.query.id]);
+  },[router.query.id])
 
   const renderNav = () => {
     return <NavStudio />;
@@ -80,10 +83,10 @@ const Explore = () => {
             text="Show More"
             onClick={() => {
               if (router.isReady) {
-                hookMetasList._fetchMore(router.query.id, limit + 30);
-                setLimit(limit + 30);
+                hookMetasList._fetchMore(router.query.id, pageNo + 1, 30);
+                setPageNo(pageNo + 1)
                 if (window !== undefined) {
-                  window.sessionStorage.setItem(`${router.query.id}_limit`, JSON.stringify(limit + 30))
+                  window.sessionStorage.setItem(`${router.query.id}_page`, JSON.stringify(pageNo + 1))
                 }
               }
             }}

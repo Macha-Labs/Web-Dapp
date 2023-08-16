@@ -197,7 +197,7 @@ const Network = () => {
                 variant="state_default_hover"
               />
               <Text marginRight={style.margin.sm} marginBottom="0.25rem">
-                Page {hookChainTxn?.page} of {hookChainTxn.totalPages}
+                Page {hookChainTxn?.page} of {hookChainTxn.totalPages.toLocaleString("en-US")}
               </Text>
               <ButtonNative
                 marginRight="sm"
@@ -294,7 +294,7 @@ const Network = () => {
                       marginBottom={0}
                       fontWeight={style.fontWeight.extraDark}
                     >
-                      {hookChainTxn.totalTxns}
+                      {hookChainTxn.totalTxns.toLocaleString("en-US")}
                     </Text>
                   </Box>
                   <Divider

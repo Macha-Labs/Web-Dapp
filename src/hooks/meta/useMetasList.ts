@@ -1,35 +1,28 @@
 import { fetchAllMetas, fetchMetaSchemas } from "@/service/MetaService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useMetaList = () => {
-  const [metaList, setMetaList] = useState<any>();
   const [metaAll, setMetaAll] = useState<any>();
   const [metaSchemas, setMetaSchemas] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [cursor, setCursor] = useState<any>();
 
-  const _fetchAll = (meta_schema?: any,limit?: number) => {
+  const _fetchAll = (meta_schema?: any,page_no?: number,limit?: number) => {
     setIsLoading(true);
-    fetchAllMetas(meta_schema,null,limit).then((res) => {
-      console.log(res?.data, "all metas");
+    fetchAllMetas(meta_schema,page_no ? page_no : 1,limit ? limit : 30).then((res) => {
       setMetaAll(res?.data);
-      setCursor(res?.cursor);
       setIsLoading(false);
     });
   };
-  const _fetchMore = (meta_schema?: any, limit?: any) => {
+  const _fetchMore = (meta_schema?: any, page_no?: number, limit?: number) => {
     setIsLoading(true);
-    fetchAllMetas(meta_schema, null, limit).then((res) => {
-      console.log(res?.data, "more metas");
-      setMetaAll(res?.data);
-      setCursor(res?.cursor);
+    fetchAllMetas(meta_schema,page_no ? page_no : 1,limit ? limit : 30).then((res) => {
+      setMetaAll([...metaAll,...res?.data]);
       setIsLoading(false);
     });
   };
 
   const _fetchMetaSchemas = () => {
     fetchMetaSchemas().then((res) => {
-      console.log(res.data, "meta schemas");
       setMetaSchemas(res.data);
       setIsLoading(false);
     });
@@ -40,7 +33,6 @@ const useMetaList = () => {
     _fetchMetaSchemas: _fetchMetaSchemas,
     _fetchMore: _fetchMore,
     metaAll: metaAll,
-    metaList: metaList,
     metaSchemas: metaSchemas,
     isLoading: isLoading,
   };

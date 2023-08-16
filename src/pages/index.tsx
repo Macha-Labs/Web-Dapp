@@ -20,21 +20,24 @@ const Explorer = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   // const [selectedSchema, setSelectedSchema] = useState<string>("All");
   const [isCloseHovered, setIsCloseHovered] = useState(false);
-  const [limit, setLimit] = useState<number>(30);
+  const [pageNo, setPageNo] = useState<number>(1);
 
   useEffect(() => {
     if (router.isReady) {
       if (window !== undefined) {
-        const data = window.sessionStorage.getItem(`all_metas_limit`);
+        const data = window.sessionStorage.getItem(`all_metas_page`);
         if (data !== null) {
-          hookMetasList._fetchAll(null, JSON.parse(data))
+          var newLimit = JSON.parse(data) * 30
+          if(newLimit > 300) newLimit = 300;
+          hookMetasList._fetchAll(null,1,newLimit)
+          setPageNo(JSON.parse(data))
         }
         else {
-          hookMetasList._fetchAll(null)
+          hookMetasList._fetchAll(null,pageNo,30)
         }
       }
       else {
-        hookMetasList._fetchAll(null)
+        hookMetasList._fetchAll(null,pageNo,30)
       }
     }
   }, []);
@@ -135,10 +138,10 @@ const Explorer = () => {
                 variant="state_brand"
                 text="Show More"
                 onClick={() => {
-                  hookMetasList._fetchMore(null, limit + 30);
-                  setLimit(limit + 30);
+                  hookMetasList._fetchMore(null,pageNo+1,30);
+                  setPageNo(pageNo + 1)
                   if (window !== undefined) {
-                    window.sessionStorage.setItem(`all_metas_limit`, JSON.stringify(limit + 30))
+                    window.sessionStorage.setItem(`all_metas_page`, JSON.stringify(pageNo + 1))
                   }
                 }}
               />
