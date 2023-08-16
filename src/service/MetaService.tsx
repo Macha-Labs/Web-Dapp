@@ -28,7 +28,7 @@ export const fetchAllMetas = async (
 ) => {
   let url = `${config.metaServer}/indexer/metas/fetchAll?limit=${
     limit ? limit : 30
-  }?meta_slug=${meta_slug}?cursor=${cursor}`;
+  }${meta_slug ? `&metaSlug=${meta_slug}`: ""}${cursor ? `&cursor=${cursor}` : ""}`;
 
   const response = await fetch(url);
   const data = await response.json();

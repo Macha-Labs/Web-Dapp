@@ -24,7 +24,7 @@ const NavLeft = (props: any) => {
             borderRight: `${style.nav.border.default}`,
           }}
         >
-          <div
+          {/* <div
             className="header m-b-0-5"
             style={{
               height: " 55px",
@@ -36,7 +36,7 @@ const NavLeft = (props: any) => {
                 <Image src="/assets/Logo.png" height={"40px"} />
               </Tooltip>
             </FlexColumn>
-          </div>
+          </div> */}
           <div
             className="body"
             style={{ padding: "10px 0px", height: " calc(100% - 55px)" }}

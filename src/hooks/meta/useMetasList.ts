@@ -8,9 +8,9 @@ const useMetaList = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cursor, setCursor] = useState<any>();
 
-  const _fetchAll = (meta_schema?: any) => {
+  const _fetchAll = (meta_schema?: any,limit?: number) => {
     setIsLoading(true);
-    fetchAllMetas(meta_schema).then((res) => {
+    fetchAllMetas(meta_schema,null,limit).then((res) => {
       console.log(res?.data, "all metas");
       setMetaAll(res?.data);
       setCursor(res?.cursor);
@@ -19,7 +19,7 @@ const useMetaList = () => {
   };
   const _fetchMore = (meta_schema?: any, limit?: any) => {
     setIsLoading(true);
-    fetchAllMetas(meta_schema, cursor, limit).then((res) => {
+    fetchAllMetas(meta_schema, null, limit).then((res) => {
       console.log(res?.data, "more metas");
       setMetaAll(res?.data);
       setCursor(res?.cursor);

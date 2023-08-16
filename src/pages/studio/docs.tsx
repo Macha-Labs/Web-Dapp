@@ -8,6 +8,6 @@ export default function Docs() {
     return <></>;
   };
   return (
-    <FlexWindow leftElem={<NavLeft />} rightElem={renderBody()}></FlexWindow>
+    <FlexWindow navLeft={<NavLeft />} rightElem={renderBody()}></FlexWindow>
   );
 }

@@ -184,7 +184,7 @@ const MyContracts = () => {
     return (<FlexWindow
         view="col"
         bodyElem={<RenderBody />}
-        navElem={renderNav()}
+        navTop={renderNav()}
     ></FlexWindow>
     )
 }

@@ -36,6 +36,7 @@ export default function ColoredCard({
       <div
         style={{
           // height: "150px",
+          cursor: "pointer",
           width: "280px",
           border: `${style.card.border.meta}`,
           borderRadius: `${style.card.borderRadius.default}`,
@@ -60,7 +61,7 @@ export default function ColoredCard({
             <Text
               fontSize={"xl"}
               fontWeight={600}
-              className="m-b-0 m-l-0-5"
+              className="m-b-0 "
               lineHeight={"1rem"}
             >
               {heading}

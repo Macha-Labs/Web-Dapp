@@ -142,7 +142,7 @@ const SearchResult = () => {
     <FlexWindow
       view="col"
       bodyElem={renderBody()}
-      navElem={renderNav()}
+      navTop={renderNav()}
     ></FlexWindow>
   );
 };

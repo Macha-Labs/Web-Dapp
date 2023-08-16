@@ -113,6 +113,6 @@ export default function Settings() {
     );
   };
   return (
-    <FlexWindow leftElem={<NavLeft />} rightElem={renderBody()}></FlexWindow>
+    <FlexWindow navLeft={<NavLeft />} rightElem={renderBody()}></FlexWindow>
   );
 }

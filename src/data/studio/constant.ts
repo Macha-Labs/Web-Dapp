@@ -189,3 +189,8 @@ export const alchemyNetworksData: any = {
   42161: Network.ARB_MAINNET,
   592: Network.ASTAR_MAINNET,
 };
+
+export const metaSchemaName: any = {
+  lens_post: "Lens Posts",
+  ens_ethereum: "ENS Handles"
+};

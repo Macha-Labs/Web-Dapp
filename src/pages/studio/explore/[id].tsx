@@ -1,15 +1,17 @@
 import MCard from "@/_sdk/MCard";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardSkeleton from "@/_ui/cards/CardSkeleton";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavStudio from "@/_ui/nav/NavStudio";
+import { metaSchemaName } from "@/data/studio/constant";
 import useMetaList from "@/hooks/meta/useMetasList";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   metaInfo: any;
@@ -18,9 +20,22 @@ type Props = {
 const Explore = () => {
   const router = useRouter();
   const hookMetasList = useMetaList();
+  const [limit, setLimit] = useState<number>(30);
+
   useEffect(() => {
     if (router.isReady) {
-      hookMetasList._fetchAll(router.query.id);
+      if (window !== undefined) {
+        const data = window.sessionStorage.getItem(`${router.query.id}_limit`);
+        if (data !== null) {
+          hookMetasList._fetchAll(router.query.id, JSON.parse(data))
+        }
+        else {
+          hookMetasList._fetchAll(router.query.id)
+        }
+      }
+      else {
+        hookMetasList._fetchAll(router.query.id)
+      }
     }
   }, [router.query.id]);
 
@@ -59,7 +74,22 @@ const Explore = () => {
               );
             })}
         </FlexRow>
-      </Box>
+        <FlexRow marginBottom="lg">
+          <ButtonNative
+            variant="state_brand"
+            text="Show More"
+            onClick={() => {
+              if (router.isReady) {
+                hookMetasList._fetchMore(router.query.id, limit + 30);
+                setLimit(limit + 30);
+                if (window !== undefined) {
+                  window.sessionStorage.setItem(`${router.query.id}_limit`, JSON.stringify(limit + 30))
+                }
+              }
+            }}
+          />
+        </FlexRow>
+      </Box >
     );
   };
 
@@ -77,7 +107,7 @@ const Explore = () => {
             <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
               <FlexRow width="100%" hrAlign="space-between">
                 <Heading fontSize={style.font.h5} className="m-b-0">
-                  {"Meta schema"}
+                  {router.isReady ? metaSchemaName[String(router.query.id)] : ""}
                 </Heading>
                 <Box
                   style={{
@@ -105,7 +135,7 @@ const Explore = () => {
     <FlexWindow
       view="col"
       bodyElem={renderBody()}
-      navElem={renderNav()}
+      navTop={renderNav()}
     ></FlexWindow>
   );
 };

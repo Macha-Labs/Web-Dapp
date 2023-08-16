@@ -6,7 +6,7 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import IconBase from "@/_ui/icons/IconsBase";
-import NavMeta from "@/_ui/nav/NavMeta";
+import NavStudio from "@/_ui/nav/NavStudio";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
 import CopyableRow from "@/components/meta/CopyableRow";
@@ -20,7 +20,6 @@ import {
   Heading,
   Skeleton,
   SkeletonCircle,
-  SkeletonText,
   Text,
   useToast
 } from "@chakra-ui/react";
@@ -52,7 +51,7 @@ const Meta = () => {
   const toast = useToast();
 
   const renderNav = () => {
-    return <NavMeta />;
+    return <NavStudio />;
   };
 
   const renderMeta = () => {
@@ -403,7 +402,7 @@ const Meta = () => {
     <FlexWindow
       marginTop={style.nav.margin}
       view="col"
-      navElem={renderNav()}
+      navTop={renderNav()}
       bodyElem={renderBody()}
     ></FlexWindow>
   );

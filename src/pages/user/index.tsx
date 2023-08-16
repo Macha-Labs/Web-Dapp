@@ -164,7 +164,6 @@ const User = () => {
           </div>
         </FlexWindow>
       )}
-
       <TemplateAuth />
     </>
   );

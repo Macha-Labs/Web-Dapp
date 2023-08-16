@@ -1,20 +1,16 @@
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import NavBlock from "@/_ui/nav/NavBlock";
-import NavTop from "@/_ui/nav/NavTop";
-import Tabs from "@/_ui/tabs/Tabs";
-import { fetchAllMetas } from "@/service/MetaService";
 import { style } from "@/styles/StyledConstants";
 import { useEffect, useState } from "react";
 
 import FlexColumn from "@/_ui/flex/FlexColumn";
+import NavMeta from "@/_ui/nav/NavMeta";
+import NavStudio from "@/_ui/nav/NavStudio";
 import ColoredCard from "@/components/cards/ColoredCard";
-import { exploreModules } from "@/data/studio/constant";
+import useMetaList from "@/hooks/meta/useMetasList";
 import useAlchemy from "@/hooks/studio/useAlchemy";
 import { Text } from "@chakra-ui/react";
-import NavLeft from "@/_ui/nav/NavLeft";
-import useMetaList from "@/hooks/meta/useMetasList";
 import { useRouter } from "next/router";
 
 export default function Explore() {
@@ -72,7 +68,6 @@ export default function Explore() {
               fontSize={"xl"}
               fontWeight={600}
               className="m-b-0"
-              marginTop={style.margin.nav}
             >
               Use Module
             </Text>
@@ -110,11 +105,21 @@ export default function Explore() {
       </>
     );
   };
+
+  const renderNavLeft = () => {
+    return <NavMeta />;
+  };
+
+  const renderNavTop = () => {
+    return <NavStudio />;
+  };
+
   return (
     <>
       <FlexWindow
-        view="row"
-        navElem={<NavLeft />}
+        view="both"
+        navLeft={renderNavLeft()}
+        navTop={renderNavTop()}
         bodyElem={renderBody()}
       ></FlexWindow>
       {/* <Navigation /> */}

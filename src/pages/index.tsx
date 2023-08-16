@@ -1,18 +1,18 @@
 import MCard from "@/_sdk/MCard";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import CardSkeleton from "@/_ui/cards/CardSkeleton";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavMeta from "@/_ui/nav/NavMeta";
-import TagFilter from "@/_ui/tag/TagFilter";
+import NavStudio from "@/_ui/nav/NavStudio";
 import useMetaList from "@/hooks/meta/useMetasList";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import CardSkeleton from "@/_ui/cards/CardSkeleton";
-import { motion } from "framer-motion";
 
 const Explorer = () => {
   const hookMetasList = useMetaList();
@@ -24,8 +24,18 @@ const Explorer = () => {
 
   useEffect(() => {
     if (router.isReady) {
-      hookMetasList._fetchAll();
-      // hookMetasList._fetchMetaSchemas();
+      if (window !== undefined) {
+        const data = window.sessionStorage.getItem(`all_metas_limit`);
+        if (data !== null) {
+          hookMetasList._fetchAll(null, JSON.parse(data))
+        }
+        else {
+          hookMetasList._fetchAll(null)
+        }
+      }
+      else {
+        hookMetasList._fetchAll(null)
+      }
     }
   }, []);
 
@@ -39,8 +49,12 @@ const Explorer = () => {
   //   }
   // }, [selectedSchema]);
 
-  const renderNav = () => {
+  const renderNavLeft = () => {
     return <NavMeta />;
+  };
+
+  const renderNavTop = () => {
+    return <NavStudio />;
   };
 
   const renderBody = () => {
@@ -116,13 +130,16 @@ const Explorer = () => {
                   />
                 );
               })}
-            <FlexRow>
+            <FlexRow marginBottom="lg">
               <ButtonNative
                 variant="state_brand"
                 text="Show More"
                 onClick={() => {
                   hookMetasList._fetchMore(null, limit + 30);
                   setLimit(limit + 30);
+                  if (window !== undefined) {
+                    window.sessionStorage.setItem(`all_metas_limit`, JSON.stringify(limit + 30))
+                  }
                 }}
               />
             </FlexRow>
@@ -250,9 +267,9 @@ const Explorer = () => {
 
   return (
     <FlexWindow
-      marginTop={style.nav.margin}
-      view="row"
-      navElem={renderNav()}
+      view="both"
+      navLeft={renderNavLeft()}
+      navTop={renderNavTop()}
       bodyElem={renderBody()}
     ></FlexWindow>
   );

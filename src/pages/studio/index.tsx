@@ -106,7 +106,7 @@ const Home = () => {
     <FlexWindow
       marginTop={style.nav.margin}
       view="col"
-      navElem={renderNav()}
+      navTop={renderNav()}
       bodyElem={renderBody()}
     ></FlexWindow>
   );

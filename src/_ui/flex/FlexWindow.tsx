@@ -1,4 +1,5 @@
 import { style } from "@/styles/StyledConstants";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 
 type Props = {
@@ -10,6 +11,8 @@ type Props = {
   marginTop?: any;
   leftElem?: any;
   rightElem?: any;
+  navLeft?: any;
+  navTop?: any;
 };
 
 export const FlexWindow = ({
@@ -17,7 +20,8 @@ export const FlexWindow = ({
   children,
   bodyElem,
   marginTop,
-  navElem,
+  navLeft,
+  navTop
 }: Props) => {
   return (
     <div
@@ -42,7 +46,7 @@ export const FlexWindow = ({
               justifyContent: "center",
             }}
           >
-            {navElem}
+            {navTop}
           </div>
           <div style={{ marginTop: `${marginTop}` }}>{bodyElem}</div>
         </>
@@ -54,7 +58,7 @@ export const FlexWindow = ({
             className="window-left"
             style={{ height: "100vh", position: "fixed", left: "0" }}
           >
-            {navElem}
+            {navLeft}
           </div>
           <div
             className="window-right"
@@ -63,6 +67,34 @@ export const FlexWindow = ({
             {bodyElem}
           </div>
         </>
+      )}
+
+      {view == "both" && (
+        <Box
+          marginTop={style.nav.margin}
+        >
+          <div
+            className="window-left"
+            style={{ height: "100vh", position: "fixed", left: "0", }}
+          >
+            {navLeft}
+          </div>
+          <div
+            className="windowTop"
+            style={{
+              position: "fixed",
+              top: "0",
+              zIndex: "1000",
+              width: "100%",
+              background: `${style.body.bg.default}`,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            {navTop}
+          </div>
+          <div style={{ marginTop: `${marginTop}` }}>{bodyElem}</div>
+        </Box>
       )}
     </div>
   );

@@ -65,7 +65,7 @@ export default function Explorer() {
   };
   return (
     <>
-      <FlexWindow leftElem={<NavLeft />} rightElem={renderBody()}></FlexWindow>
+      <FlexWindow navLeft={<NavLeft />} rightElem={renderBody()}></FlexWindow>
       {/* <Navigation /> */}
     </>
   );
