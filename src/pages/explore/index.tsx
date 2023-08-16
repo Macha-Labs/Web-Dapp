@@ -13,6 +13,9 @@ import useAlchemy from "@/hooks/studio/useAlchemy";
 import { Text, Box, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import NavLeft from "@/_ui/nav/NavLeft";
+import chains from "@/data/network";
+import SupportedChains from "@/components/studio/SupportedChains";
+import ContractList from "@/components/studio/ContractList";
 
 export default function Explore() {
   const hookAlchemy = useAlchemy();
@@ -21,24 +24,9 @@ export default function Explore() {
   const [exploreMeta, setExploreMeta] = useState<any>([]);
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Your Metas");
 
-  const dashboardNav: any = [
-    {
-      value: "Studio",
-      href: "",
-    },
-    {
-      value: "",
-      href: "",
-    },
-  ];
-
-  // const fetchmetas = async () => {
-  //   const allMetas = await fetchAllMetas();
-  //   setExploreMeta(allMetas.data);
-  // };
   useEffect(() => {
     if (router.isReady) {
-      hookMetasList._fetchAll();
+      hookMetasList._fetchMore();
       hookMetasList._fetchMetaSchemas();
     }
   }, []);
@@ -46,38 +34,75 @@ export default function Explore() {
   const renderBody = () => {
     return (
       <Box paddingX={style.padding.xxs}>
-        <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
-          <Heading fontSize={style.font.h3} fontWeight={600} className="m-b-0">
-            Explore
-          </Heading>
-        </FlexColumn>
-        <FlexRow hrAlign="flex-start" marginTop={"md"} flexWrap="wrap">
-          {hookMetasList?.metaSchemas?.map((schema: any, index: any) => {
-            console.log(schema, "schema");
-            return (
-              <MetaCollectionCard
-                key={index}
-                heading={schema.name}
-                tag1={schema.slug}
-                tag2={schema.contract_slug}
-                // description={schema.description}
-                bg={schema.bg}
-                borderColor={schema.borderColor}
-                onCardClick={() => {
-                  router.push(
-                    {
-                      pathname: `/studio/explore/[id]`,
-                      query: {
-                        id: schema?.slug,
+        <Box>
+          <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
+            <Heading
+              fontSize={style.font.h3}
+              fontWeight={600}
+              className="m-b-0"
+            >
+              Explore Chains
+            </Heading>
+          </FlexColumn>
+          <FlexRow marginTop={"lg"} hrAlign="flex-start">
+            {Object.keys(chains).map((chain: any) => {
+              // console.log(chains[chain]);
+              return <SupportedChains data={chains[chain]} id={chain} />;
+            })}
+          </FlexRow>
+        </Box>
+        <Box marginTop={style.margin.xxxl}>
+          <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
+            <Heading
+              fontSize={style.font.h3}
+              fontWeight={600}
+              className="m-b-0"
+            >
+              Discover Meta Content
+            </Heading>
+          </FlexColumn>
+          <FlexRow hrAlign="flex-start" marginTop={"xl"} flexWrap="wrap">
+            {hookMetasList?.metaSchemas?.map((schema: any, index: any) => {
+              console.log(schema, "schema");
+              return (
+                <MetaCollectionCard
+                  key={index}
+                  heading={schema.name}
+                  tag1={schema.slug}
+                  tag2={schema.contract_slug}
+                  // description={schema.description}
+                  bg={schema.bg}
+                  borderColor={schema.borderColor}
+                  onCardClick={() => {
+                    router.push(
+                      {
+                        pathname: `/explore/[id]`,
+                        query: {
+                          id: schema?.slug,
+                        },
                       },
-                    },
-                    `/studio/explore/${schema?.slug}`
-                  );
-                }}
-              />
-            );
-          })}
-        </FlexRow>
+                      `/explore/${schema?.slug}`
+                    );
+                  }}
+                />
+              );
+            })}
+          </FlexRow>
+        </Box>
+        <Box marginTop={style.margin.xxxl}>
+          <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
+            <Heading
+              fontSize={style.font.h3}
+              fontWeight={600}
+              className="m-b-0"
+            >
+              Indexing Contracts
+            </Heading>
+          </FlexColumn>
+          <FlexRow hrAlign="flex-start" marginTop={"xl"} flexWrap="wrap">
+            <ContractList />
+          </FlexRow>
+        </Box>
       </Box>
     );
   };

@@ -24,6 +24,8 @@ import useAuthStore from "@/store/useAuthStore";
 import InputSearch from "@/_ui/input/InputSearch";
 import useAlchemy from "@/hooks/studio/useAlchemy";
 import NavStudio from "@/_ui/nav/NavStudio";
+import NavLeft from "@/_ui/nav/NavLeft";
+import NavMeta from "@/_ui/nav/NavMeta";
 
 const Network = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -197,7 +199,8 @@ const Network = () => {
                 variant="state_default_hover"
               />
               <Text marginRight={style.margin.sm} marginBottom="0.25rem">
-                Page {hookChainTxn?.page} of {hookChainTxn.totalPages.toLocaleString("en-US")}
+                Page {hookChainTxn?.page} of{" "}
+                {hookChainTxn.totalPages.toLocaleString("en-US")}
               </Text>
               <ButtonNative
                 marginRight="sm"
@@ -250,9 +253,9 @@ const Network = () => {
       </FlexRow>
     ) : (
       <>
-        <Box marginTop={style.margin.xxxl} paddingTop={style.padding.xxs}>
+        <Box>
           <>
-            <Box marginTop={style.margin.xxxl}>
+            <Box>
               {/* <Text fontSize="3rem">Interactions</Text> */}
               <Flex justify="space-between">
                 <Box>
@@ -336,34 +339,14 @@ const Network = () => {
     );
   };
   const renderBody = () => {
-    return (
-      <>
-        <NavBlock
-          back={() => {
-            router.back();
-          }}
-          marginTop={style.margin["nav"]}
-        >
-          <FlexRow hrAlign="flex-start">
-            <Text
-              fontSize={style.font.h5}
-              fontWeight="600"
-              marginBottom={0}
-              //   marginLeft={style.margin.xxs}
-            >
-              {chainId && chains[chainId]?.chainName}
-            </Text>
-          </FlexRow>
-        </NavBlock>
-        <FlexBody>{renderComponent()}</FlexBody>
-      </>
-    );
+    return <>{renderComponent()}</>;
   };
   return (
     <FlexWindow
-      view="col"
+      view="both"
       bodyElem={renderBody()}
-      navTop={renderNav()}
+      navTop={<NavMeta />}
+      navLeft={<NavLeft />}
     ></FlexWindow>
   );
 };

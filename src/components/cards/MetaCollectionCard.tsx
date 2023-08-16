@@ -53,7 +53,7 @@ export default function MetaCollectionCard({
           }`,
           padding: ` ${style.card.padding.default}`,
           marginRight: ` ${style.margin["lg"]}`,
-          marginBottom: ` ${style.margin["lg"]}`,
+          // marginBottom: ` ${style.margin["lg"]}`,
         }}
         onClick={() => {
           onCardClick();

@@ -4,6 +4,8 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
 import NavBlock from "@/_ui/nav/NavBlock";
+import NavLeft from "@/_ui/nav/NavLeft";
+import NavMeta from "@/_ui/nav/NavMeta";
 import NavStudio from "@/_ui/nav/NavStudio";
 import NavTop from "@/_ui/nav/NavTop";
 import TagNative from "@/_ui/tag/TagNative";
@@ -85,47 +87,25 @@ const SearchResult = () => {
   const renderBody = () => {
     return (
       <>
-        {" "}
-        <NavBlock
-          marginTop={style.margin["nav"]}
-          back={() => {
-            router.back();
+        <Box
+          paddingX={style.padding.xxs}
+          style={{
+            width: "100%",
+            overflow: "hidden",
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
           }}
-
-          // paddingTop={style.padding["xxxl"]} marginTop={style.margin["xxxl"]}
         >
-          <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <Box style={{ display: "flex" }}>
-              <Heading
-                fontSize={style.font.h5}
-                style={{
-                  marginBottom: "0px",
-                  marginRight: `${style.margin.xxs}`,
-                }}
-              >
-                {truncateAddress(id)}
-              </Heading>
-              {hookTxn.transactionDetails && (
-                <TagNative
-                  value={hookTxn?.transactionDetails[10].name}
-                  variant="grey"
-                />
-              )}
-            </Box>
-            <Box>
-              <ButtonMenu
-                options={shareOptions}
-                size="sm"
-                text="Share"
-                height="2.5rem"
-                marginRight="0px"
-                icon={{ slug: "icon-base-share" }}
-              />
-            </Box>
-          </FlexRow>
-        </NavBlock>
-        <FlexBody>
-          <Box marginTop={style.margin.xl} paddingTop={style.padding.md}>
+          <Box
+            style={{
+              height: "fit-content",
+              width: "100%",
+            }}
+          >
+            {/* <Heading>Meta Name</Heading> */}
+
             <TxnDetails
               id={currentApiId}
               transactionDetails={hookTxn.transactionDetails}
@@ -133,16 +113,17 @@ const SearchResult = () => {
               methodParams={hookTxn.methodParams}
             />
           </Box>
-        </FlexBody>
+        </Box>
       </>
     );
   };
 
   return (
     <FlexWindow
-      view="col"
+      view="both"
       bodyElem={renderBody()}
-      navTop={renderNav()}
+      navTop={<NavMeta />}
+      navLeft={<NavLeft />}
     ></FlexWindow>
   );
 };

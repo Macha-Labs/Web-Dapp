@@ -86,7 +86,8 @@ export const FlexWindow = ({
                 top: "0",
                 padding: "0% 6%",
                 paddingTop: `${style.margin.md}`,
-                // zIndex: "1000",
+                background: "rgb(0, 4, 13)",
+                zIndex: "1000",
                 width: "95%",
                 // background: `${style.body.bg.default}`,
                 display: "flex",
@@ -99,6 +100,7 @@ export const FlexWindow = ({
               className="window-bottom"
               style={{
                 padding: "0% 6%",
+
                 paddingTop: `${style.margin["5xl"]}`,
               }}
             >

@@ -4,6 +4,8 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import Loader from "@/_ui/loader/Loader";
 import NavBlock from "@/_ui/nav/NavBlock";
+import NavLeft from "@/_ui/nav/NavLeft";
+import NavMeta from "@/_ui/nav/NavMeta";
 import NavStudio from "@/_ui/nav/NavStudio";
 import ContractCreateEditModal from "@/components/studio/ContractCreateEditModal";
 import ContractInfoCard from "@/components/studio/ContractInfoCard";
@@ -50,7 +52,7 @@ const Contract = () => {
     };
     console.log("contract details", hookContract?.contractDetails);
     return (
-      <Box paddingTop={style.padding["xxxl"]} marginTop={style.margin["xxxl"]}>
+      <Box>
         {hookContract.contractDetails && (
           <ContractInfoCard
             data={{
@@ -120,7 +122,8 @@ const Contract = () => {
                   variant="state_default_hover"
                 />
                 <Text marginRight={style.margin.sm} marginBottom="0.25rem">
-                  Page {hookContractTxn?.page} of {hookContractTxn.totalPages.toLocaleString("en-US")}
+                  Page {hookContractTxn?.page} of{" "}
+                  {hookContractTxn.totalPages.toLocaleString("en-US")}
                 </Text>
                 <ButtonNative
                   marginRight="sm"
@@ -152,7 +155,10 @@ const Contract = () => {
                 />
               </Box>
               <Box>
-                <Text>Total Txns: {hookContractTxn.totalTxns.toLocaleString("en-US")}</Text>
+                <Text>
+                  Total Txns:{" "}
+                  {hookContractTxn.totalTxns.toLocaleString("en-US")}
+                </Text>
               </Box>
             </Box>
             <Box
@@ -190,54 +196,7 @@ const Contract = () => {
     return (
       <>
         {!hookContract.isLoading ? (
-          <>
-            {" "}
-            <NavBlock
-              back={() => {
-                router.back();
-              }}
-              marginTop={style.margin["nav"]}
-            >
-              <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-                <FlexRow width="100%" hrAlign="space-between">
-                  <Heading fontSize={style.font.h5} className="m-b-0">
-                    {hookContract?.contractDetails &&
-                      hookContract?.contractDetails?.contract.name}
-                  </Heading>
-                  <Box
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "flex-end",
-                    }}
-                  >
-                    {$address &&
-                      hookContract?.contractDetails &&
-                      hookContract?.contractDetails?.contract?.admins?.includes(
-                        $address
-                      ) && (
-                        <ButtonNative
-                          size="sm"
-                          text="Edit Contract"
-                          variant="state_brand"
-                          onClick={() => {
-                            editModal.onOpen();
-                          }}
-                        />
-                      )}
-                  </Box>
-                </FlexRow>
-                {/* <Tabs
-              width="40%"
-              options={options}
-              value={selectedTab}
-              onChange={(value: any) => setSelectedTab(value)}
-              gstyle={{ fontSize: `${style.font.h5}` }}
-            /> */}
-              </FlexRow>
-            </NavBlock>
-            <FlexBody>{renderComponent()}</FlexBody>
-          </>
+          <> {renderComponent()}</>
         ) : (
           <FlexRow height="500px">
             <Loader size="lg" />
@@ -248,9 +207,10 @@ const Contract = () => {
   };
   return (
     <FlexWindow
-      view="col"
+      view="both"
       bodyElem={renderBody()}
-      navTop={renderNav()}
+      navTop={<NavMeta />}
+      navLeft={<NavLeft />}
     ></FlexWindow>
   );
 };

@@ -11,7 +11,7 @@ import NavMeta from "@/_ui/nav/NavMeta";
 import NavStudio from "@/_ui/nav/NavStudio";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
-import CopyableRow from "@/components/meta/CopyableRow";
+import InputCopy from "@/_ui/input/InputCopy";
 import useMeta from "@/hooks/meta/useMeta";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
@@ -194,7 +194,7 @@ const Meta = () => {
                     rawDataKey &&
                     rawDataKey.map((item: any, index: any) => {
                       return (
-                        <CopyableRow
+                        <InputCopy
                           key={index}
                           parameter={item}
                           value={rawDataValue[index]}

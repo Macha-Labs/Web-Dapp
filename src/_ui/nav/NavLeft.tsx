@@ -42,7 +42,7 @@ const NavLeft = (props: any) => {
                     }}
                   />
                 </Link>
-                <Link href="/feed">
+                {/* <Link href="/feed">
                   <IconImage
                     slug="icon-posts"
                     size="md"
@@ -54,7 +54,7 @@ const NavLeft = (props: any) => {
                       } `,
                     }}
                   />
-                </Link>
+                </Link> */}
                 <Link href="/explore">
                   <Tooltip label="Chat">
                     <IconImage

@@ -11,7 +11,7 @@ type Props = {
   marginTop?: string;
 };
 
-const CopyableRow = ({ parameter, value, marginTop }: Props) => {
+const InputCopy = ({ parameter, value, marginTop }: Props) => {
   const toast = useToast();
   return (
     <Box
@@ -58,4 +58,4 @@ const CopyableRow = ({ parameter, value, marginTop }: Props) => {
   );
 };
 
-export default CopyableRow;
+export default InputCopy;
