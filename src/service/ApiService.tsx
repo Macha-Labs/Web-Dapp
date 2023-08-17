@@ -14,6 +14,14 @@ export const transactionData = async (transactionHash: string) => {
   return data;
 };
 
+export const getLatestTransactions = async () => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/transactions/fetchLatest`
+  );
+  const data = await response.json();
+  return data;
+};
+
 export const contractData = async (contractName: string) => {
   const response = await fetch(
     `${config.metaServer}/indexer/transactions/fetch-by-name/${contractName}`
