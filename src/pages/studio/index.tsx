@@ -4,7 +4,6 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavStudio from "@/_ui/nav/NavStudio";
 import Tabs from "@/_ui/tabs/Tabs";
-import TagNative from "@/_ui/tag/TagNative";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
 import ContractCreateEditModal from "@/components/studio/ContractCreateEditModal";
 import HomeDev from "@/components/studio/HomeDev";
@@ -12,13 +11,17 @@ import useContractCreate from "@/hooks/studio/useContractCreate";
 import useMacha from "@/hooks/studio/useMacha";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
-import { Box, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, useDisclosure } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useNetwork, useSwitchNetwork } from "wagmi";
 
 const Home = () => {
   const hookMacha = useMacha();
   const contractModal = useDisclosure();
   const metaModal = useDisclosure();
   const hookContractCreate = useContractCreate(contractModal);
+  const { chain } = useNetwork();
+  const { switchNetwork } = useSwitchNetwork();
 
   const dashboardNav: any = [
     {
@@ -34,6 +37,13 @@ const Home = () => {
     //   href: "",
     // },
   ];
+
+  useEffect(() => {
+    const network = async () => {
+      switchNetwork?.(314159);
+    };
+    chain?.name == "Filecoin Calibration chaindata" ? () => {} : network();
+  }, [chain]);
 
   const $address = useAuthStore((state: any) => state.address);
 

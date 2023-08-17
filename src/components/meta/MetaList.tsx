@@ -2,6 +2,7 @@ import MCard from "@/_sdk/MCard";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardSkeleton from "@/_ui/cards/CardSkeleton";
 import FlexRow from "@/_ui/flex/FlexRow";
+import Loader from "@/_ui/loader/Loader";
 import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
@@ -49,23 +50,27 @@ const MetaList = ({ hookMetasList }: Props) => {
           })}
       </FlexRow>
       <FlexRow marginBottom="lg" height="fit-content">
-        {!hookMetasList.lastPage && (
-          <ButtonNative
-            variant="state_brand"
-            text="Show More"
-            onClick={() => {
-              if (router.isReady) {
-                hookMetasList._fetchMore(router.query.id, 30);
-                hookMetasList.setPageNo(hookMetasList.pageNo + 1);
-                if (window !== undefined) {
-                  window.sessionStorage.setItem(
-                    `${router.query.id ? router.query.id : "All"}_page`,
-                    JSON.stringify(hookMetasList.pageNo + 1)
-                  );
+        {hookMetasList.showMoreLoading ? (
+          <Loader size="sm" />
+        ) : (
+          !hookMetasList.lastPage && (
+            <ButtonNative
+              variant="state_brand"
+              text="Show More"
+              onClick={() => {
+                if (router.isReady) {
+                  if (window !== undefined) {
+                    window.sessionStorage.setItem(
+                      `${router.query.id ? router.query.id : "All"}_page`,
+                      JSON.stringify(hookMetasList.pageNo)
+                    );
+                  }
+
+                  hookMetasList._fetchMore(router.query.id, 30);
                 }
-              }
-            }}
-          />
+              }}
+            />
+          )
         )}
       </FlexRow>
     </Box>

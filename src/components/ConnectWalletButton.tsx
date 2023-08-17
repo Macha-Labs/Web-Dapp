@@ -116,7 +116,7 @@ export const ConnectWalletButton = (props: any) => {
                   <ButtonNative
                     onClick={openChainModal}
                     variant="state_default_warning"
-                    height="2rem"
+                    height="2.5rem"
                     marginLeft="xxs"
                   >
                     Wrong Network
@@ -305,12 +305,18 @@ export const ConnectWalletButton = (props: any) => {
                           $unload();
                           disconnect();
                           if (window !== undefined) {
-                            const res = window.sessionStorage.setItem("macha.connected", "false")
+                            const res = window.sessionStorage.setItem(
+                              "macha.connected",
+                              "false"
+                            );
                           }
                         }}
                       >
                         <FlexRow hrAlign="space-between">
-                          <IconBase slug="icon-dark-disconnectWallet" size="xl" />
+                          <IconBase
+                            slug="icon-dark-disconnectWallet"
+                            size="xl"
+                          />
                           <FlexRow
                             hrAlign="flex-start"
                             width="90%"
