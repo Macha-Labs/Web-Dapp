@@ -21,6 +21,7 @@ type Props = {
   action_value?: string;
   width?: string;
   onClick?: any;
+  slug?: any
 };
 
 const MCard = ({
@@ -36,6 +37,7 @@ const MCard = ({
   action_value,
   width,
   onClick,
+  slug
 }: Props) => {
   const router = useRouter();
 
@@ -59,7 +61,7 @@ const MCard = ({
         vrAlign="flex-start"
         marginBottom="sm"
       >
-        <TagNative size="sm" value="Live Now" />
+        <TagNative size="md" value={slug}  />
       </FlexRow>
 
       {owner_name && (

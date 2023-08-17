@@ -54,7 +54,9 @@ const Explorer = () => {
                             display: "flex",
                             flexDirection: "row",
                             flexWrap: "wrap",
-                            overflow: "hidden"
+                            overflow: "hidden",
+                            height: "fit-content",
+                            padding: "2% 0.5%"
                         }}
                     >
                         {latestTransactions && Object.keys(latestTransactions).map((chain: any) => (

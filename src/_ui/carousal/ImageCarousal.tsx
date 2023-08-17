@@ -42,7 +42,7 @@ const ImageCarousal = () => {
               transform={`translateX(${(index - activeIndex) * 100}%)`}
             >
               <Image src={card.coverImage} alt="Cover Image" w="100%" />
-              <FlexRow>
+              {/* <FlexRow>
                 <Image
                   src={card.profileImage}
                   alt="Profile Image"
@@ -54,7 +54,7 @@ const ImageCarousal = () => {
                   {card.title}
                 </Text>
               </FlexRow>
-              <Text mt={2}>{card.description}</Text>
+              <Text mt={2}>{card.description}</Text> */}
             </Box>
           ))}
         </Box>
@@ -65,7 +65,7 @@ const ImageCarousal = () => {
           style={{ marginLeft: "md" }}
         />
       </FlexRow>
-      <FlexRow hrAlign="center" vrAlign="center" width="100%">
+      {/* <FlexRow hrAlign="center" vrAlign="center" width="100%">
         {carouselData.map((_, index) => (
           <Box
             key={index}
@@ -78,7 +78,7 @@ const ImageCarousal = () => {
             cursor="pointer"
           />
         ))}
-      </FlexRow>
+      </FlexRow> */}
     </Box>
   );
 };

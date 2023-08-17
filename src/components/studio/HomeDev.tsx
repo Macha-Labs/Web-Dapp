@@ -115,7 +115,7 @@ const HomeDev = () => {
 
       <Flex flexWrap="wrap" paddingLeft={2}>
         <GetStartedCards
-          image="https://ik.imagekit.io/macha1/studio/push%20contracts-imagev4.svg"
+          image="/assets/homeDev/push%20contracts-imagev4.svg"
           title="Start Indexing Contracts"
           description="Publish your smart contract for growth and developer community exposure."
           disabled={$address == null}
@@ -144,21 +144,21 @@ const HomeDev = () => {
         />
         <GetStartedCards
           title="Create Functions"
-          image="https://ik.imagekit.io/macha1/studio/create%20functions-imagev4.svg"
+          image="/assets/homeDev/create%20functions-imagev4.svg"
           description=" Make fast function calls on contracts to integrate functions in your app"
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Abstract Metas"
-          image="https://ik.imagekit.io/macha1/studio/abstract%20metas-imagev4.svg"
+          image="/assets/homeDev/abstract%20metas-imagev4.svg"
           description="Enable users to discover your metas, like Lens profiles, ENS, Nfts, and more"
           tag="soon"
           disabled={true}
         />
         <GetStartedCards
           title="Graph Playground"
-          image="https://ik.imagekit.io/macha1/studio/Graph%20playgroundv4.svg"
+          image="/assets/homeDev/Graph%20playgroundv4.svg"
           description="Use Macha’s content graph APIs to access user data related to specific contracts."
           tag="soon"
           disabled={true}
