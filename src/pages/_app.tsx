@@ -20,6 +20,7 @@ import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
 import { filecoinCalibration, polygon } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { useEffect } from "react";
+import Header from "@/_ui/Head/Header";
 
 const { chains, provider } = configureChains(
   [filecoinCalibration, mainnet, polygon],
@@ -45,45 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [router]);
   return (
     <>
-      <Head>
-        <title>Macha</title>
-        <meta
-          name="description"
-          content="Search Infrastructure to search anything from apps and NFTs to protocols and content across multiple chains."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          property="og:title"
-          content="Macha - Search Infrastructure for New Internet"
-        />
-        <meta
-          property="og:description"
-          content="Search Infrastructure to search anything from apps and NFTs to protocols and content across multiple chains."
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/assets/share.png" />
-        <meta property="og:image:alt" content="Macha.ai" />
-        <meta property="og:url" content="https://macha.ai" />
-        <meta property="og:site_name" content="Macha" />
-        <meta
-          name="twitter:title"
-          content="Macha - Search Infrastructure for New Internet"
-        />
-        <meta
-          name="twitter:description"
-          content="Search Infrastructure to search anything from apps and NFTs to protocols and content across multiple chains."
-        />
-        <meta property="twitter:image" content="/assets/share.png" />
-        <meta name="twitter:image:width" content="1200" />
-        <meta name="twitter:image:height" content="630" />
-        <meta name="twitter:image:alt" content="Macha.ai" />
-        <meta name="twitter:site" content="@Macha0x" />
-        <meta name="twitter:creator" content="@Macha0x" />
-        <meta name="twitter:card" content="summary" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Header title="Macha" />
       {/* <!-- Google tag (gtag.js) --> */}
       <Script
         async
