@@ -261,7 +261,7 @@ export const ConnectWalletButton = (props: any) => {
                           }}
                         >
                           <FlexRow hrAlign="space-between">
-                            <IconBase slug="icon-dark-deploy" size="xl" />
+                            <IconBase slug="icon-dark-globe" size="xl" />
                             <FlexRow
                               hrAlign="flex-start"
                               width="90%"

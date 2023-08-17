@@ -37,21 +37,8 @@ const GetStartedCards = ({
       cursor={disabled ? "not-allowed" : "pointer"}
       onClick={onClick ? onClick : () => {}}
     >
-      {/* <Image src={imageSrc} alt={title} /> */}
-
       <Box p="4" opacity={disabled ? "0.4" : "1"}>
-        {image && (
-          <Box height="25%">
-            <Image
-              src={image}
-              fit="contain"
-              alt={title}
-              height=""
-              width="19rem"
-            />
-          </Box>
-        )}
-        <FlexRow hrAlign="flex-start" vrAlign="flex-start" marginTop="sm">
+        <FlexRow hrAlign="flex-start" vrAlign="flex-start" >
           <Text fontWeight={style.fontWeight.dark} mb={0} mr={style.margin.xxs}>
             {title}
           </Text>
@@ -64,9 +51,17 @@ const GetStartedCards = ({
         >
           {description}
         </Text>
-        {/* <Button mt="4" colorScheme="teal" size="sm">
-          View Details
-        </Button> */}
+        {image && (
+          <Box height="25%">
+            <Image
+              src={image}
+              fit="contain"
+              alt={title}
+              height=""
+              width="19rem"
+            />
+          </Box>
+        )}
       </Box>
     </Box>
   );

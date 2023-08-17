@@ -60,6 +60,8 @@ const Explorer = () => {
               flexDirection: "row",
               flexWrap: "wrap",
               overflow: "hidden",
+              height: "fit-content",
+              padding: "2% 0.5%",
             }}
           >
             {latestTransactions &&
