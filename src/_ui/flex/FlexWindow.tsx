@@ -21,7 +21,7 @@ export const FlexWindow = ({
   bodyElem,
   marginTop,
   navLeft,
-  navTop
+  navTop,
 }: Props) => {
   return (
     <div
@@ -70,30 +70,43 @@ export const FlexWindow = ({
       )}
 
       {view == "both" && (
-        <Box
-          marginTop={style.nav.margin}
-        >
-          <div
+        <Box width={"100%"}>
+          <Box
+            width={"5%"}
             className="window-left"
-            style={{ height: "100vh", position: "fixed", left: "0", }}
+            style={{ height: "100vh", position: "fixed", left: "0" }}
           >
             {navLeft}
-          </div>
-          <div
-            className="windowTop"
-            style={{
-              position: "fixed",
-              top: "0",
-              zIndex: "1000",
-              width: "100%",
-              background: `${style.body.bg.default}`,
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            {navTop}
-          </div>
-          <div style={{ marginTop: `${marginTop}` }}>{bodyElem}</div>
+          </Box>
+          <Box width="95%" className="window-right" marginLeft={"5%"}>
+            <div
+              className="windowTop"
+              style={{
+                position: "fixed",
+                top: "0",
+                padding: "0% 6%",
+                paddingTop: `${style.margin.md}`,
+                background: "rgb(0, 4, 13)",
+                zIndex: "1000",
+                width: "95%",
+                // background: `${style.body.bg.default}`,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {navTop}
+            </div>
+            <div
+              className="window-bottom"
+              style={{
+                padding: "0% 6%",
+
+                paddingTop: `${style.margin["5xl"]}`,
+              }}
+            >
+              {bodyElem}
+            </div>
+          </Box>
         </Box>
       )}
     </div>

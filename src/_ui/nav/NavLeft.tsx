@@ -15,38 +15,23 @@ const NavLeft = (props: any) => {
         <div
           style={{
             width: `${style.nav.widthLeft}`,
-            zIndex: 10000,
+            zIndex: 100000,
             height: "100vh",
             position: "fixed",
             left: "0",
             padding: "10px 5px",
+
             background: `${style.nav.bg.default}`,
             borderRight: `${style.nav.border.default}`,
           }}
         >
-          {/* <div
-            className="header m-b-0-5"
-            style={{
-              height: " 55px",
-              padding: "0px",
-            }}
-          >
-            <FlexColumn className="hr-center vr-center h-100">
-              <Tooltip label="Metawork">
-                <Image src="/assets/Logo.png" height={"40px"} />
-              </Tooltip>
-            </FlexColumn>
-          </div> */}
-          <div
-            className="body"
-            style={{ padding: "10px 0px", height: " calc(100% - 55px)" }}
-          >
+          <div className="body" style={{ padding: "10px 0px", height: "100%" }}>
             <FlexColumn hrAlign="space-between" vrAlign="center">
               <FlexColumn height="fit-content">
                 <Link href="/">
                   <IconImage
-                    slug="icon-info"
-                    size="md"
+                    slug="icon-home"
+                    size="lg"
                     style={{
                       className: `m-b-1 ${
                         router.pathname === "/" ? "state_active" : "state_hover"
@@ -54,10 +39,10 @@ const NavLeft = (props: any) => {
                     }}
                   />
                 </Link>
-                <Link href="/studio/explore">
+                {/* <Link href="/feed">
                   <IconImage
-                    slug="icon-info"
-                    size="md"
+                    slug="icon-posts"
+                    size="lg"
                     style={{
                       className: `m-b-1 ${
                         router.pathname === "/studio/explore"
@@ -66,15 +51,15 @@ const NavLeft = (props: any) => {
                       } `,
                     }}
                   />
-                </Link>
-                <Link href="/studio">
+                </Link> */}
+                <Link href="/explore">
                   <Tooltip label="Chat">
                     <IconImage
-                      slug="icon-info"
-                      size="md"
+                      slug="icon-compass"
+                      size="lg"
                       style={{
                         className: `m-b-1 ${
-                          router.pathname === "/studio"
+                          router.pathname === "/explore"
                             ? "state_active "
                             : "state_hover"
                         } `,
@@ -82,41 +67,12 @@ const NavLeft = (props: any) => {
                     />
                   </Tooltip>
                 </Link>
-                {/* <Link href="/studio/docs">
-                  <Tooltip label="Chat">
-                    <IconImage
-                      slug="icon-file"
-                      size="md"
-                      style={{
-                        className: `m-b-1 ${
-                          router.pathname === "/studio/docs"
-                            ? "state_active"
-                            : "state_hover"
-                        } `,
-                      }}
-                    />
-                  </Tooltip>
-                </Link> */}
               </FlexColumn>
-
-              {/* <FlexColumn height="fit-content">
-                <IconImage slug="icon-bell" style={{ className: "m-b-1" }} />
-                <Link href="/studio/settings">
-                  <Tooltip label="Chat">
-                    <IconImage
-                      slug="icon-settings"
-                      size="md"
-                      style={{
-                        className: `m-b-1 ${
-                          router.pathname === "/studio/settings"
-                            ? "state_active"
-                            : "state_hover"
-                        } `,
-                      }}
-                    />
-                  </Tooltip>
-                </Link>
-              </FlexColumn> */}
+              <Image
+                src="./assets/Logo.png"
+                height={"40px"}
+                borderRadius={"8px"}
+              />
             </FlexColumn>
           </div>
         </div>

@@ -10,7 +10,7 @@ import {
   Heading,
   Text,
   useDisclosure,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import { fetchBalance } from "@wagmi/core";
 import ContractCreateEditModal from "./ContractCreateEditModal";
@@ -29,9 +29,8 @@ const HomeDev = () => {
   return (
     <Box
       style={{
-        marginTop: `${style.margin.xxl}`,
+        marginTop: `${style.margin["4xl"]}`,
         height: "fit-content",
-        paddingTop: `${style.padding.md}`,
       }}
     >
       <Box
@@ -46,9 +45,7 @@ const HomeDev = () => {
           The ultimate place for developers to explore smart contracts and
           it&#39;s real time transactions from different blockchain protocols
         </Text>
-        <Text fontSize={style.font.h5} lineHeight="0rem">
-          — all deployable with one click
-        </Text>
+
         {!hookMacha.isLoading && !hookMacha.publisherExists ? (
           <Box display={"flex"}>
             <ButtonNative
@@ -133,7 +130,7 @@ const HomeDev = () => {
               return;
             }
             if (hookMacha.publisherExists) {
-              hookContractCreate.setClear()
+              hookContractCreate.setClear();
               contractModal.onOpen();
             } else {
               toast({
@@ -166,13 +163,6 @@ const HomeDev = () => {
           tag="soon"
           disabled={true}
         />
-        <GetStartedCards
-          title="Explore Documentation"
-          image="https://ik.imagekit.io/macha1/studio/explore%20doc-imagev4.svg"
-          description="Check out our doc repository and sign up to access the fastest API."
-          tag="soon"
-          disabled={true}
-        />
       </Flex>
 
       <Box marginTop={style.margin.xl}>
@@ -183,17 +173,12 @@ const HomeDev = () => {
 
       <Flex flexWrap="wrap" paddingLeft={2}>
         <GetStartedCards
-          title="Macha Account SDK"
+          title="Macha ID SDK"
           description="Provides aggregated user profile data."
           tag="soon"
           disabled={true}
         />
-        <GetStartedCards
-          title="Macha Meta SDK"
-          description="Integrate to enable users to abstract your metas."
-          tag="soon"
-          disabled={true}
-        />
+
         <GetStartedCards
           title="Macha Graph SDK"
           description="Enables graphQl APIs to fetch macha&#39;s indexed data."

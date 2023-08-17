@@ -24,6 +24,7 @@ import { Heading, useToast } from "@chakra-ui/react";
 import Loader from "@/_ui/loader/Loader";
 import JSONViewer from "@/_ui/JSONViewer";
 import GlobalIcons from "@/styles/GlobalIcons";
+import CardNative from "@/_ui/cards/CardNative";
 
 type Props = {
   id: string;
@@ -38,14 +39,20 @@ function TxnDetails({
   methodParams,
 }: Props) {
   const options = [
-    { value: "snapshot", label: "SnapShot" },
-    { value: "poap", label: "POAP" },
-    { value: "paragraph.xyz", label: "Paragraph.xyz" },
+    {
+      href: "#",
+      value: "All Details",
+    },
+    {
+      href: "#",
+      value: "Hex Data",
+    },
   ];
 
   const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
 
+  const [tab, setTab] = useState<string>("All Details");
   const [selectedOption, setSelectedOption] = useState<any>(options[0].value);
   const [detailToggle, setDetailsToggle] = useState<any>(false);
   const [hexToggle, setHexToggle] = useState<any>(false);
@@ -55,28 +62,6 @@ function TxnDetails({
     console.log("Logging $meta ", $metaInfo);
   }, [$metaInfo]);
 
-  // const [query, setQuery] = useState("");
-
-  // const handleInputChange = (e: any) => {
-  //   setQuery(e.target.value);
-  // };
-
-  // const handleKeyPress = (e: any) => {
-  //   if (e.key === "Enter") {
-  //     onSearch(query);
-  //   }
-  // };
-
-  // const handleOptionChange = (e: any) => {
-  //   setSelectedOption(e.target.value);
-  // };
-
-  // const onSearch = async (query: any) => {
-  //   const result = await $meta.fetchMetaOrigin(query, 0);
-  //   console.log("Origin result", result);
-  //   setResultData(result.data);
-  // };
-
   return (
     <>
       {isLoading ? (
@@ -85,84 +70,8 @@ function TxnDetails({
         </FlexRow>
       ) : (
         <>
-          <FlexRow
-            marginTop={"xxl"}
-            hrAlign="space-between"
-            vrAlign="flex-end"
-            marginBottom={"md"}
-            width="68%"
-          >
-            <Text
-              fontSize={style.font.h1}
-              fontWeight={600}
-              className="mb-0"
-              lineHeight={style.font.h1}
-              marginTop={style.margin["sm"]}
-            >
-              Transaction Details
-            </Text>
-          </FlexRow>
-
-          {/* <Divider /> */}
-          <FlexRow hrAlign="start" marginBottom={"xs"}>
-            <Box>
-              <Text
-                mb={0}
-                style={{
-                  background: `-webkit-linear-gradient(
-              270deg,
-              rgb(25, 124, 236),
-              rgb(0, 74, 217)
-            )`,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  fontWeight: `${style.fontWeight.dark}`,
-                }}
-              >
-                CREATED
-              </Text>
-              <Text
-                color="rgba(255,255,255,0.5)"
-                className="mb-0"
-              // marginStart={style.margin.xxs}
-              >
-                {" "}
-                {/* TODO: make dynamic */}
-                {transactionDetails && transactionDetails[9]?.value}
-              </Text>
-            </Box>
-            {/* <Box padding="0% 8% 0% 8%">
-              <Text
-                mb={0}
-                style={{
-                  background: `-webkit-linear-gradient(
-              270deg,
-              rgb(25, 124, 236),
-              rgb(0, 74, 217)
-            )`,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  fontWeight: `${style.fontWeight.dark}`,
-                }}
-              >
-                Status
-              </Text>
-              <Text
-                color="rgba(255,255,255,0.5)"
-                className="mb-0"
-                // marginStart={style.margin.xxs}
-              >
-                {" "}
-                
-                Success
-              </Text>
-              
-            </Box> */}
-          </FlexRow>
           <FlexRow hrAlign="space-between" vrAlign="flex-start">
-            <FlexColumn width="68%" hrAlign="flex-start" vrAlign="flex-start">
+            <FlexColumn width="28%" hrAlign="flex-start" vrAlign="flex-start">
               <Box
                 width={"100%"}
                 border={style.card.border.hover}
@@ -307,248 +216,164 @@ function TxnDetails({
                     </tr>
                   </tbody>
                 </table>
-                {/* <Divider
-              border={style.card.border.meta}
-              marginY={style.margin["sm"]}
-            />
-            <table>
-              <tbody>
-                <tr>
-                  <td
+                <Box marginTop={style.margin.xl}>
+                  <Text
+                    mb={0}
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      width: "48px",
-                      paddingTop: `${style.padding["xxs"]}`,
-                      paddingBottom: `${style.padding["xxs"]}`,
+                      background: `-webkit-linear-gradient(
+              270deg,
+              rgb(25, 124, 236),
+              rgb(0, 74, 217)
+            )`,
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      color: "transparent",
+                      fontWeight: `${style.fontWeight.dark}`,
                     }}
                   >
-                    <IconBase slug="icon-close" />
-                  </td>
-                  <td>
-                    <FlexRow hrAlign="flex-start">
-                      <Text className="mb-0" marginStart={style.margin.sm}>
-                        Transfer
-                      </Text>
-                      <Text className="mb-0" marginLeft={style.margin["xxs"]}>
-                        0.295 ETH
-                      </Text>
-                      <Text
-                        className="mb-0"
-                        color="rgba(255,255,255,0.7)"
-                        marginLeft={style.margin["xxs"]}
-                      >
-                        $ 549.68
-                      </Text>
-                    </FlexRow>
-                  </td>
-                </tr>
-                <tr>
-                  <td
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      width: "48px",
-                      paddingTop: `${style.padding["xxs"]}`,
-                      paddingBottom: `${style.padding["xxs"]}`,
-                    }}
+                    CREATED
+                  </Text>
+                  <Text
+                    color="rgba(255,255,255,0.5)"
+                    className="mb-0"
+                    // marginStart={style.margin.xxs}
                   >
-                    <IconBase slug="icon-close" />
-                  </td>
-                  <td>
-                    <FlexRow hrAlign="flex-start">
-                      <Text className="mb-0" marginStart={style.margin.sm}>
-                        Transfer
-                      </Text>
-                      <Text className="mb-0" marginLeft={style.margin["xxs"]}>
-                        0.295 ETH
-                      </Text>
-                      <Text
-                        className="mb-0"
-                        color="rgba(255,255,255,0.7)"
-                        marginLeft={style.margin["xxs"]}
-                      >
-                        $ 549.68
-                      </Text>
-                    </FlexRow>
-                  </td>
-                </tr>
-              </tbody>
-            </table> */}
-              </Box>
-              <Box
-                width={"100%"}
-                border={style.card.border.hover}
-                borderRadius={style.card.borderRadius.default}
-                padding={style.padding["lg"]}
-                marginTop={style.margin.xl}
-              >
-                <Box
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setDetailsToggle(!detailToggle);
-                  }}
-                >
-                  <FlexRow hrAlign="space-between">
-                    <Text
-                      className="mb-0"
-                      fontSize={style.font.h5}
-                      fontWeight={600}
-                    >
-                      All Details
-                    </Text>
-                    {detailToggle ? (
-                      <IconBase slug="icon-chevron-up" />
-                    ) : (
-                      <IconBase slug="icon-chevron-down" />
-                    )}
-                  </FlexRow>
+                    {" "}
+                    {/* TODO: make dynamic */}
+                    {transactionDetails && transactionDetails[9]?.value}
+                  </Text>
                 </Box>
-                {detailToggle && (
-                  <table
-                    style={{
-                      marginTop: `${style.margin["xl"]}`,
-                      width: "100%",
-                    }}
+              </Box>
+            </FlexColumn>
+            <FlexColumn width="68%" hrAlign="flex-start" vrAlign="flex-start">
+              <Tabs
+                options={options}
+                onChange={setTab}
+                value={tab}
+                width="fit-content"
+              />
+              {tab == "All Details" && (
+                <>
+                  <CardNative
+                    height="fit-content"
+                    marginTop="sm"
+                    width="100%"
+                    header={
+                      <>
+                        <Heading fontSize={style.font.h4} mb="0px">
+                          All Details
+                        </Heading>
+                      </>
+                    }
                   >
-                    <tbody>
-                      {transactionDetails.map((item: any) => {
-                        return (
-                          item?.src && (
-                            <tr
-                              key={item._id}
-                              style={
-                                {
-                                  // borderBottom: `${style.card.border.default}`,
-                                  // width: "100%",
+                    <table
+                      style={{
+                        width: "100%",
+                      }}
+                    >
+                      <tbody>
+                        {transactionDetails.map((item: any) => {
+                          return (
+                            item?.src && (
+                              <tr
+                                key={item._id}
+                                style={
+                                  {
+                                    // borderBottom: `${style.card.border.default}`,
+                                    // width: "100%",
+                                  }
                                 }
-                              }
-                            >
-                              <td
-                                style={{
-                                  paddingTop: `${style.padding["xxs"]}`,
-                                  paddingBottom: `${style.padding["xxs"]}`,
-                                  width: "fit-content",
-                                  fontWeight: `${style.fontWeight.dark}`,
-                                  fontSize: `${style.font.h5}`,
-                                }}
                               >
-                                <Box
+                                <td
                                   style={{
                                     paddingTop: `${style.padding["xxs"]}`,
                                     paddingBottom: `${style.padding["xxs"]}`,
-                                    display: "flex",
-                                    alignItems: "center",
+                                    width: "fit-content",
+                                    fontWeight: `${style.fontWeight.dark}`,
+                                    fontSize: `${style.font.h5}`,
                                   }}
                                 >
-                                  <Image
-                                    src={item.src}
-                                    alt="icon"
-                                    marginBottom={0}
-                                    height="1.5rem"
-                                    marginRight={2}
-                                  />
-                                  {item.key}
-                                </Box>
-                              </td>
-                              <td
-                                style={{
-                                  color: "grey",
-                                  fontWeight: `${style.fontWeight.dark}`,
-                                }}
-                              >
-                                <Tooltip
-                                  label="Click To Copy"
-                                  placement="top-start"
-                                >
-                                  <Box>
-                                    <Text
-                                      marginBottom={"0px"}
-                                      style={{ cursor: "pointer" }}
-                                      onClick={() => {
-                                        navigator.clipboard.writeText(
-                                          item?.value
-                                        );
-                                        toast({
-                                          title: `${item.key} copied To Clipboard`,
-                                          status: "success",
-                                          duration: 3000,
-                                        });
-                                      }}
-                                    >
-                                      {item?.truncatedValue
-                                        ? item.truncatedValue
-                                        : item.value}
-                                    </Text>
+                                  <Box
+                                    style={{
+                                      paddingTop: `${style.padding["xxs"]}`,
+                                      paddingBottom: `${style.padding["xxs"]}`,
+                                      display: "flex",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    <Image
+                                      src={item.src}
+                                      alt="icon"
+                                      marginBottom={0}
+                                      height="1.5rem"
+                                      marginRight={2}
+                                    />
+                                    {item.key}
                                   </Box>
-                                </Tooltip>
-                              </td>
-                            </tr>
-                          )
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                )}
-              </Box>
-              <Box
-                width={"100%"}
-                border={style.card.border.hover}
-                borderRadius={style.card.borderRadius.default}
-                padding={style.padding["lg"]}
-                marginTop={style.margin.xl}
-                marginBottom={style.margin.xxxl}
-              >
-                <Box
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setHexToggle(!hexToggle);
-                  }}
-                >
-                  <FlexRow hrAlign="space-between">
-                    <Text
-                      className="mb-0"
-                      fontSize={style.font.h5}
-                      fontWeight={600}
-                    >
-                      Hex Input Data
-                    </Text>
-                    {hexToggle ? (
-                      <IconBase slug="icon-chevron-up" />
-                    ) : (
-                      <IconBase slug="icon-chevron-down" />
-                    )}
-                  </FlexRow>
-                </Box>
-                {hexToggle && (
-                  <>
-                    {/* <Text>asdf</Text> */}
-
-                    {console.log("this is methodParams", methodParams)}
+                                </td>
+                                <td
+                                  style={{
+                                    color: "grey",
+                                    fontWeight: `${style.fontWeight.dark}`,
+                                  }}
+                                >
+                                  <Tooltip
+                                    label="Click To Copy"
+                                    placement="top-start"
+                                  >
+                                    <Box>
+                                      <Text
+                                        marginBottom={"0px"}
+                                        style={{ cursor: "pointer" }}
+                                        onClick={() => {
+                                          navigator.clipboard.writeText(
+                                            item?.value
+                                          );
+                                          toast({
+                                            title: `${item.key} copied To Clipboard`,
+                                            status: "success",
+                                            duration: 3000,
+                                          });
+                                        }}
+                                      >
+                                        {item?.truncatedValue
+                                          ? item.truncatedValue
+                                          : item.value}
+                                      </Text>
+                                    </Box>
+                                  </Tooltip>
+                                </td>
+                              </tr>
+                            )
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </CardNative>
+                </>
+              )}
+              {tab == "Hex Data" && (
+                <>
+                  <CardNative
+                    height="fit-content"
+                    marginTop="sm"
+                    width="100%"
+                    header={
+                      <>
+                        <Heading fontSize={style.font.h4} mb="0px">
+                          Hex Data
+                        </Heading>
+                      </>
+                    }
+                  >
                     {methodParams.length > 0 ? (
                       <JSONViewer data={methodParams} />
                     ) : (
                       <Text marginTop={1}>No Data Found</Text>
                     )}
-                  </>
-                )}
-              </Box>
-            </FlexColumn>
-            <FlexColumn width="28%" hrAlign="flex-start" vrAlign="flex-start">
-              <Box
-                width={"100%"}
-                // border={style.card.border.hover}
-                // borderRadius={style.card.borderRadius.default}
-                padding={style.padding["lg"]}
-              >
-                <FlexRow>
-                  {/* <Avatar />{" "}
-              <FlexColumn>
-                <Text>0xeb...f7ee</Text>
-                <Text>Ethereum</Text>
-              </FlexColumn>{" "} */}
-                </FlexRow>
-              </Box>
+                  </CardNative>
+                </>
+              )}
             </FlexColumn>
           </FlexRow>
         </>

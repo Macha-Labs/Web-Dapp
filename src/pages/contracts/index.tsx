@@ -1,3 +1,5 @@
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
@@ -8,16 +10,48 @@ import TagNative from "@/_ui/tag/TagNative";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
 import ContractCreateEditModal from "@/components/studio/ContractCreateEditModal";
 import ContractList from "@/components/studio/ContractList";
+import chains from "@/data/network";
+import useContract from "@/hooks/studio/useContract";
 import useContractCreate from "@/hooks/studio/useContractCreate";
+import useContractList from "@/hooks/studio/useContractList";
+import useMacha from "@/hooks/studio/useMacha";
 import { fetchAllMetas } from "@/service/MetaService";
+import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
-import { Box, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const DashBoard = () => {
-
   const [exploreMeta, setExploreMeta] = useState<any>([]);
   const [isPublisher, setIsPublisher] = useState<any>(false);
+  const [filterValue, setFilterValue] = useState<any>("All Contracts");
+  const [avatar, setAvatar] = useState<any>("icon-dashboard");
+
+  const $isConnected = useAuthStore((state: any) => state.isConnected);
+  const editContractsModal = useDisclosure();
+
+  const $address = useAuthStore((state: any) => state.address);
+  const hookContractList = useContractList();
+  const hookContract = useContract();
+  const hookMacha = useMacha();
+
+  useEffect(() => {
+    if ($address) {
+      hookContract._fetchUserContracts($address);
+    }
+  }, [$address, $isConnected]);
+
+  let contractFilterOptions = [
+    {
+      value: "All Contracts",
+      leftIcon: "icon-dashboard",
+      onClick: () => {
+        hookContractList.clearFilters();
+        setFilterValue("All Contracts");
+        setAvatar("icon-dashboard");
+      },
+    },
+  ];
 
   const fetchmetas = async () => {
     const allMetas = await fetchAllMetas();
@@ -26,7 +60,6 @@ const DashBoard = () => {
   const contractModal = useDisclosure();
   const metaModal = useDisclosure();
   const hookContractCreate = useContractCreate(contractModal);
-
 
   useEffect(() => {
     fetchmetas();
@@ -48,7 +81,121 @@ const DashBoard = () => {
   ];
 
   const renderContracts = () => {
-    return <>{<ContractList />}</>;
+    Object.keys(chains).forEach((key) => {
+      contractFilterOptions.push({
+        value: chains[key].chainName,
+
+        leftIcon: chains[key].chainImage,
+        onClick: () => {
+          // console.log(key, "clicked");
+          hookContractList.handleFilter(key);
+          setFilterValue(chains[key].chainName);
+          setAvatar(chains[key].chainImage);
+        },
+      });
+    });
+    return (
+      <>
+        <FlexRow hrAlign="space-between" marginTop="4xl" marginBottom={"xl"}>
+          <Box
+            width={"48%"}
+            background={style.card.bg.brand}
+            borderRadius={style.card.borderRadius.button}
+            padding={style.padding.xs}
+          >
+            <Heading
+              fontSize={style.font.h5}
+              p={0}
+              marginBottom={"0px"}
+              lineHeight={style.font.h3}
+            >
+              {!$address || hookContract.isUserContractsLoading
+                ? "Your Contracts"
+                : hookContract.userContracts
+                ? `Contracts created: ${hookContract.userContracts.length}`
+                : "You haven't created any contracts yet."}
+            </Heading>
+            {$address ? (
+              <Box display={"flex"}>
+                {hookContract.userContracts && (
+                  <ButtonNative
+                    textColorHover="#004ad9"
+                    boxShadowHover="4px 4px 24px rgba(0,0,0,0.35)"
+                    backgroundColorHover="#A0CDFF"
+                    border="1px solid #fff"
+                    marginTop="xs"
+                    onClick={() => {
+                      hookContract._fetchUserContracts($address).then(() => {
+                        editContractsModal.onOpen();
+                      });
+                    }}
+                    text="Edit Contracts"
+                  />
+                )}
+              </Box>
+            ) : (
+              <Box display={"flex"}>
+                <Text
+                  style={{
+                    marginTop: `${style.margin.xs}`,
+                    marginBottom: "0px",
+                    fontSize: `${style.font.h5}`,
+                    fontWeight: `${style.fontWeight.dark}`,
+                  }}
+                >
+                  Please connect your wallet to create or edit contracts
+                </Text>
+              </Box>
+            )}
+          </Box>
+          <Box
+            style={{
+              width: "48%",
+              height: "fit-content",
+
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          >
+            <ButtonMenu
+              width="fit-content"
+              size={"lg"}
+              text={filterValue}
+              icon={{
+                slug: "icon-chevron-down",
+                style: "",
+              }}
+              options={contractFilterOptions}
+              avatar={avatar}
+            />
+            {$address != null && hookMacha.publisherExists && (
+              <ButtonNative
+                size="sm"
+                text="Create Contract"
+                variant="state_brand"
+                marginRight="0px"
+                paddingLeft="sm"
+                marginLeft={"xxs"}
+                paddingRight="sm"
+                height="3rem"
+                marginBottom="0px"
+                onClick={() => {
+                  contractModal.onOpen();
+                }}
+              />
+            )}
+          </Box>
+        </FlexRow>
+        {hookContractList?.filterData && (
+          <ContractList
+            openInNewTab={true}
+            data={hookContractList.filterData}
+          />
+        )}
+      </>
+    );
   };
 
   const renderBody = () => {
@@ -64,35 +211,7 @@ const DashBoard = () => {
                 value={"Contracts"}
                 onChange={() => {}}
               />
-              <Box
-                cursor={"not-allowed"}
-                style={{ display: "flex", flexDirection: "row" }}
-              >
-                <Text
-                  className="mb-0"
-                  fontSize={style.font.h5}
-                  color="#C6C6C6"
-                  marginRight={style.margin.xxs}
-                >
-                  Functions
-                </Text>
-                <TagNative value="soon" lineHeight="0.8rem" size="sm" />
-              </Box>
             </FlexRow>
-
-            {/* {selectedNavTab == "Functions" && (
-              <ButtonNative
-                size="sm"
-                text="Create Function"
-                variant="state_brand"
-                marginRight="0px"
-                paddingLeft="sm"
-                paddingRight="sm"
-                onClick={() => {
-                  metaModal.onOpen();
-                }}
-              />
-            )} */}
           </FlexRow>
         </NavBlock>
 

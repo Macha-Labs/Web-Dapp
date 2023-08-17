@@ -17,9 +17,11 @@ type Props = {
   height?: any;
   bg: any;
   borderColor: any;
+  tag1?: string;
+  tag2?: string;
 };
 
-export default function ColoredCard({
+export default function MetaCollectionCard({
   image,
   heading,
   description,
@@ -30,6 +32,8 @@ export default function ColoredCard({
   width,
   onCardClick = (e?: any) => {},
   height,
+  tag1,
+  tag2,
 }: Props) {
   return (
     <>
@@ -49,7 +53,7 @@ export default function ColoredCard({
           }`,
           padding: ` ${style.card.padding.default}`,
           marginRight: ` ${style.margin["lg"]}`,
-          marginBottom: ` ${style.margin["lg"]}`,
+          // marginBottom: ` ${style.margin["lg"]}`,
         }}
         onClick={() => {
           onCardClick();
@@ -78,14 +82,14 @@ export default function ColoredCard({
           </Text>
           <FlexRow hrAlign="flex-start" width="100%" height="30px">
             <TagNative
-              value="Tag 1"
-              variant="state_xmtp"
+              value={tag1}
+              variant="state_default"
               size="sm"
               lineHeight="1.5"
             />
             <TagNative
-              value="Tag 1"
-              variant="state_xmtp"
+              value={tag2}
+              variant="state_default"
               marginRight="xxs"
               size="sm"
               lineHeight="1.5"

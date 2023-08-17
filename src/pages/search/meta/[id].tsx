@@ -6,10 +6,12 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import IconBase from "@/_ui/icons/IconsBase";
+import NavLeft from "@/_ui/nav/NavLeft";
+import NavMeta from "@/_ui/nav/NavMeta";
 import NavStudio from "@/_ui/nav/NavStudio";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
-import CopyableRow from "@/components/meta/CopyableRow";
+import InputCopy from "@/_ui/input/InputCopy";
 import useMeta from "@/hooks/meta/useMeta";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
@@ -21,7 +23,7 @@ import {
   Skeleton,
   SkeletonCircle,
   Text,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -51,7 +53,7 @@ const Meta = () => {
   const toast = useToast();
 
   const renderNav = () => {
-    return <NavStudio />;
+    return <NavMeta />;
   };
 
   const renderMeta = () => {
@@ -67,13 +69,17 @@ const Meta = () => {
       <Box display={"flex"} justifyContent={"space-between"}>
         <Box width="28%">
           {/* <CardNative height="fit-content" width="100%"></CardNative> */}
-          {hookMeta.isLoading ? <CardSkeleton /> : <MCard
-            title={hookMeta?.metaData?.meta?.data?.modified?.meta_title}
-            image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
-            description={
-              hookMeta?.metaData?.meta?.data?.modified?.meta_description
-            }
-          />}
+          {hookMeta.isLoading ? (
+            <CardSkeleton />
+          ) : (
+            <MCard
+              title={hookMeta?.metaData?.meta?.data?.modified?.meta_title}
+              image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
+              description={
+                hookMeta?.metaData?.meta?.data?.modified?.meta_description
+              }
+            />
+          )}
         </Box>
         <Box width="68%">
           <Tabs
@@ -97,28 +103,47 @@ const Meta = () => {
                 }
               >
                 <>
-                  {hookMeta.isLoading ? <FlexRow width="100%" hrAlign="space-between">
-                    <SkeletonCircle startColor="#11224A" endColor="#1B377B" />
-                    <Skeleton startColor="#11224A" endColor="#1B377B" width="90%">Harsh</Skeleton>
-                  </FlexRow> : <FlexRow hrAlign="space-between">
-                    <FlexRow hrAlign="flex-start" width="fit-content">
-                      {hookMeta.isLoading ? <SkeletonCircle startColor="#11224A" endColor="#1B377B" height="2rem" marginRight={style.margin.xxs} /> : <Avatar
-                        size={"md"}
-                        marginRight={style.margin.sm}
-                        src={GlobalIcons["avatar-default"]}
-                      />}
-                      <FlexColumn
-                        width="fit-content"
-                        // hrAlign="flex-start"
-                        vrAlign="flex-start"
+                  {hookMeta.isLoading ? (
+                    <FlexRow width="100%" hrAlign="space-between">
+                      <SkeletonCircle startColor="#11224A" endColor="#1B377B" />
+                      <Skeleton
+                        startColor="#11224A"
+                        endColor="#1B377B"
+                        width="90%"
                       >
-                        <Text marginBottom={"0"} textAlign={"left"}>
-                          {hookMeta?.metaData?.metaOwner}
-                        </Text>
-                      </FlexColumn>
+                        Harsh
+                      </Skeleton>
                     </FlexRow>
-                    <TagNative value="owner" size="md" />
-                  </FlexRow>}
+                  ) : (
+                    <FlexRow hrAlign="space-between">
+                      <FlexRow hrAlign="flex-start" width="fit-content">
+                        {hookMeta.isLoading ? (
+                          <SkeletonCircle
+                            startColor="#11224A"
+                            endColor="#1B377B"
+                            height="2rem"
+                            marginRight={style.margin.xxs}
+                          />
+                        ) : (
+                          <Avatar
+                            size={"md"}
+                            marginRight={style.margin.sm}
+                            src={GlobalIcons["avatar-default"]}
+                          />
+                        )}
+                        <FlexColumn
+                          width="fit-content"
+                          // hrAlign="flex-start"
+                          vrAlign="flex-start"
+                        >
+                          <Text marginBottom={"0"} textAlign={"left"}>
+                            {hookMeta?.metaData?.metaOwner}
+                          </Text>
+                        </FlexColumn>
+                      </FlexRow>
+                      <TagNative value="owner" size="md" />
+                    </FlexRow>
+                  )}
                 </>
               </CardNative>
               <CardNative
@@ -134,15 +159,42 @@ const Meta = () => {
                 }
               >
                 <>
-                  {hookMeta.isLoading && <FlexColumn>
-                    <Skeleton startColor="#11224A" endColor="#1B377B" marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
-                    <Skeleton startColor="#11224A" endColor="#1B377B" marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
-                    <Skeleton startColor="#11224A" endColor="#1B377B" marginBottom={style.margin.xxs} height="3rem" width="100%">Harsh</Skeleton>
-                    </FlexColumn>}
-                  {!hookMeta.isLoading && rawDataKey &&
+                  {hookMeta.isLoading && (
+                    <FlexColumn>
+                      <Skeleton
+                        startColor="#11224A"
+                        endColor="#1B377B"
+                        marginBottom={style.margin.xxs}
+                        height="3rem"
+                        width="100%"
+                      >
+                        Harsh
+                      </Skeleton>
+                      <Skeleton
+                        startColor="#11224A"
+                        endColor="#1B377B"
+                        marginBottom={style.margin.xxs}
+                        height="3rem"
+                        width="100%"
+                      >
+                        Harsh
+                      </Skeleton>
+                      <Skeleton
+                        startColor="#11224A"
+                        endColor="#1B377B"
+                        marginBottom={style.margin.xxs}
+                        height="3rem"
+                        width="100%"
+                      >
+                        Harsh
+                      </Skeleton>
+                    </FlexColumn>
+                  )}
+                  {!hookMeta.isLoading &&
+                    rawDataKey &&
                     rawDataKey.map((item: any, index: any) => {
                       return (
-                        <CopyableRow
+                        <InputCopy
                           key={index}
                           parameter={item}
                           value={rawDataValue[index]}
@@ -197,7 +249,7 @@ const Meta = () => {
                       <Box>
                         {Object.keys(
                           hookMeta?.metaData?.meta?.data?.ipfs[
-                          Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
+                            Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
                           ]
                         ).map((item, index) => {
                           return (
@@ -217,10 +269,10 @@ const Meta = () => {
                                   )[0]
                                 ][item] == "string"
                                   ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                  Object.keys(
-                                    hookMeta?.metaData?.meta?.data?.ipfs
-                                  )[0]
-                                  ][item]
+                                      Object.keys(
+                                        hookMeta?.metaData?.meta?.data?.ipfs
+                                      )[0]
+                                    ][item]
                                   : "[ ]"}
                               </Text>
                               <Box
@@ -239,11 +291,11 @@ const Meta = () => {
                                         )[0]
                                       ][item] == "string"
                                         ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                        Object.keys(
-                                          hookMeta?.metaData?.meta?.data
-                                            ?.ipfs
-                                        )[0]
-                                        ][item]
+                                            Object.keys(
+                                              hookMeta?.metaData?.meta?.data
+                                                ?.ipfs
+                                            )[0]
+                                          ][item]
                                         : "[ ]"
                                     );
                                     toast({
@@ -369,31 +421,28 @@ const Meta = () => {
   const renderBody = () => {
     return (
       <>
-        <FlexBody>
+        <Box
+          paddingX={style.padding.xxs}
+          style={{
+            width: "100%",
+            overflow: "hidden",
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <Box
             style={{
+              height: "fit-content",
               width: "100%",
-              overflow: "hidden",
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-              alignItems: "center",
             }}
           >
-            <Box
-              style={{
-                marginTop: `${style.margin.xxl}`,
-                height: "fit-content",
-                paddingTop: `${style.padding.md}`,
-                width: "90%",
-              }}
-            >
-              {/* <Heading>Meta Name</Heading> */}
+            {/* <Heading>Meta Name</Heading> */}
 
-              {renderMeta()}
-            </Box>
+            {renderMeta()}
           </Box>
-        </FlexBody>
+        </Box>
       </>
     );
   };
@@ -401,8 +450,9 @@ const Meta = () => {
   return (
     <FlexWindow
       marginTop={style.nav.margin}
-      view="col"
+      view="both"
       navTop={renderNav()}
+      navLeft={<NavLeft />}
       bodyElem={renderBody()}
     ></FlexWindow>
   );
