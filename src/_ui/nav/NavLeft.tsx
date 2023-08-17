@@ -30,7 +30,7 @@ const NavLeft = (props: any) => {
               <FlexColumn height="fit-content">
                 <Link href="/">
                   <IconImage
-                    slug="icon-home"
+                    slug="icon-posts"
                     size="lg"
                     style={{
                       className: `m-b-1 ${
@@ -69,9 +69,10 @@ const NavLeft = (props: any) => {
                 </Link>
               </FlexColumn>
               <Image
-                src="./assets/Logo.png"
+                src="../../assets/Logo.png"
                 height={"40px"}
                 borderRadius={"8px"}
+                alt="logo"
               />
             </FlexColumn>
           </div>

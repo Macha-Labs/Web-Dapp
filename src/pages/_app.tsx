@@ -16,13 +16,13 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
-import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { filecoinCalibration } from "wagmi/chains";
+import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
+import { filecoinCalibration, polygon } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { useEffect } from "react";
 
 const { chains, provider } = configureChains(
-  [filecoinCalibration],
+  [filecoinCalibration, mainnet, polygon],
   [publicProvider()]
 );
 

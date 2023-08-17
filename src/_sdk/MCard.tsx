@@ -42,7 +42,6 @@ const MCard = ({
   return (
     <Box
       borderRadius={gStyle.card.borderRadius.default}
-      border={gStyle.card.border.meta}
       background={gStyle.card.bg.default}
       padding={style.card.padding.default}
       marginRight={style.margin["lg"]}
@@ -50,6 +49,9 @@ const MCard = ({
       width={width ? width : "100%"}
       onClick={onClick}
       cursor={"pointer"}
+      _hover={{
+        border: `${gStyle.card.border.meta}`,
+      }}
     >
       <FlexRow
         hrAlign="space-between"
