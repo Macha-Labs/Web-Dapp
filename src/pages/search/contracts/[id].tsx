@@ -1,3 +1,4 @@
+import Header from "@/_ui/Head/Header";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
@@ -206,12 +207,21 @@ const Contract = () => {
     );
   };
   return (
-    <FlexWindow
-      view="both"
-      bodyElem={renderBody()}
-      navTop={<NavMeta />}
-      navLeft={<NavLeft />}
-    ></FlexWindow>
+    <>
+      <Header
+        title={`Macha | ${
+          hookContract.contractDetails?.contract?.name
+            ? hookContract.contractDetails?.contract?.name
+            : ""
+        }`}
+      />
+      <FlexWindow
+        view="both"
+        bodyElem={renderBody()}
+        navTop={<NavMeta />}
+        navLeft={<NavLeft />}
+      ></FlexWindow>
+    </>
   );
 };
 
