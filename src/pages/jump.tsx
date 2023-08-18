@@ -1,11 +1,11 @@
 import MCard from "@/_sdk/MCard";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
-import ImageCarousal from "@/_ui/carousal/ImageCarousal";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import CollectorCard from "@/components/cards/CollectorsCard";
 import GraphCard from "@/components/cards/GraphCard";
 import SongCard from "@/components/cards/SongCard";
+import CarouselSlide from "@/components/studio/CarouselSlide";
 import chains from "@/data/network";
 import { truncateAddress } from "@/helpers";
 import { getLatestTransactions } from "@/service/ApiService";
@@ -13,6 +13,9 @@ import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import IconImage from "@/_ui/icons/IconImage";
 
 const Explorer = () => {
   const [latestTransactions, setLatestTransactions] = useState<any>();
@@ -153,7 +156,78 @@ const Explorer = () => {
           >
             Discover new music and prove you were there first
           </Text>
-          <ImageCarousal />
+          {/* <ImageCarousal /> */}
+          <Carousel
+            autoPlay
+            // showIndicators={false}
+            showArrows={false}
+            showStatus={false}
+            infiniteLoop
+            interval={2500}
+            // renderArrowPrev={(onClickHandler, hasPrev) =>
+            //   hasPrev && (
+            //     <Box
+            //       style={{
+            //         position: "absolute",
+            //         zIndex: 2,
+            //         top: "calc(50% - 15px)",
+            //         cursor: "pointer",
+            //         left: "15px"
+            //       }}
+            //       onClick={onClickHandler}
+            //     >
+            //       <IconImage
+            //         slug="icon-chevron"
+            //         size="sm"
+            //       />
+            //     </Box>
+            //   )
+            // }
+            // renderArrowNext={(onClickHandler, hasNext) =>
+            //   hasNext && (
+            //     <Box
+            //       style={{
+            //         position: "absolute",
+            //         zIndex: 2,
+            //         top: "calc(50% - 15px)",
+            //         cursor: "pointer",
+            //         right: "15px"
+            //       }}
+            //       onClick={onClickHandler}
+            //     >
+            //       <IconImage
+            //         slug="icon-chevron-next"
+            //         size="sm"
+            //       />
+            //     </Box>
+            //   )
+            // }
+          >
+            <CarouselSlide
+              title="LENS"
+              description="POSTS • PROFILES • CHATS"
+              avatarImage={GlobalIcons["logo-Lens"]}
+              bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
+              bgBlur="/assets/explore/lens%20carousal%20bg%20blur.svg"
+              bannerImage="/assets/explore/lens%20carousal%20right%20full%20image.svg"
+            />
+            <CarouselSlide
+              title="POAP"
+              description="MINT • DROP • CONNECT"
+              avatarImage={GlobalIcons["logo-Poap"]}
+              bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
+              bgBlur="/assets/explore/lens%20carousal%20bg%20blur.svg"
+              bannerImage="/assets/explore/poap%20carousal%20right%20full%20image.svg"
+            />
+            <CarouselSlide
+              title="MIRROR"
+              description="BLOGS • NFTs • MINT"
+              avatarImage={GlobalIcons["logo-Mirror"]}
+              bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
+              bgBlur="/assets/explore/lens%20carousal%20bg%20blur.svg"
+              bannerImage="/assets/explore/mirror%20carousal%20right%20full%20image.svg"
+            />
+          </Carousel>
         </Box>
         <FlexRow vrAlign="center" hrAlign="space-between" marginBottom="sm">
           <Text
@@ -486,7 +560,7 @@ const Explorer = () => {
                 p={0}
                 lineHeight={style.font.h3}
               >
-                Shape the future of Web3
+                Explore the future of Search
               </Heading>
               <Text fontSize={style.font.h5} mb={0}>
                 Join the revolution by exploring the on chain transactions of
@@ -503,7 +577,7 @@ const Explorer = () => {
                   backgroundColorHover="#A0CDFF"
                   border="1px solid #fff"
                   marginTop="xs"
-                  text="Join Now"
+                  text="Become a Publisher"
                 />
               </Box>
             </Box>

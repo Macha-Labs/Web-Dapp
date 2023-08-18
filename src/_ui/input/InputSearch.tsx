@@ -17,6 +17,7 @@ type Props = {
   marginBottom?: string;
   width?: string;
   height?: string;
+  defaultValue?: string
 };
 
 const InputSearch = ({
@@ -33,7 +34,8 @@ const InputSearch = ({
   marginRight,
   marginBottom,
   width,
-  height
+  height,
+  defaultValue
 }: Props) => {
   return (
     <InputGroup
@@ -52,6 +54,7 @@ const InputSearch = ({
         type={type}
         placeholder={placeholder}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange ? onChange : () => {}}
         size={size}
         onKeyDown={onKeydown ? onKeydown : () => {}}
