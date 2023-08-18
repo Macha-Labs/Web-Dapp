@@ -22,6 +22,22 @@ export const getLatestTransactions = async () => {
   return data;
 };
 
+export const searchAllMetas = async (searchTerm: string) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/metas/fetch-by-search/${searchTerm}?limit=30`
+  );
+  if(response.status == 200){
+    console.log("response search api",response)
+    const data = await response.json();
+    return data;
+  }
+  else{
+    return {
+      error: "Not found"
+    }
+  }
+};
+
 export const contractData = async (contractName: string) => {
   const response = await fetch(
     `${config.metaServer}/indexer/transactions/fetch-by-name/${contractName}`

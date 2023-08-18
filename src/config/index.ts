@@ -1,22 +1,18 @@
 export const config = {
   WEB3STORAGE_TOKEN:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDUwMkRmQzQyODIwZWM1RDhFOTEwRjgxYzI3Mjk5NzcxZjk3Q2Q2MjEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjA4OTk0MzU4NTQsIm5hbWUiOiJUZXN0VG9rZW4ifQ.z3E0zHpfF1xSibdvLC35sH8JY9xf3rYiY_l_MkUgjDM",
-  STREAM_APPID: "1239221",
-  STREAM_APIKEY: "s7k8yarexp9g",
-  STREAM_SECRET:
-    "czw7rguj3bcpzetr5e2fcx366rq26g38rg6taj9x4gr6h8my3sk25msrx7bcr4we",
   hostedUrl: "https://app.macha.ai",
   url: "https://metawork-server.herokuapp.com",
-  metaServer: "https://metawork-sdk.herokuapp.com",
+
+  // Production 
+  // metaServer: "https://metawork-sdk.herokuapp.com",
+
+  // Staging 
+  metaServer: "https://metawork-server-staging.herokuapp.com",
+
+
   // metaServer: "http://localhost:3080",
   // url: "http://localhost:3080",
-  DISCORD_API_ENDPOINT: "https://discord.com/api/v10",
-  DISCORD_REDIRECT_URL: "http://localhost:3000/app",
-  DISCORD_CLIENT_ID: "1019347765395996804",
-  DISCORD_CLIENT_SECRET: "K8LEEtVuHx8SFh0T2mgAAknf8BmNsD2k",
-  DISCORD_BOT_TOKEN:
-    "MTAxOTM0Nzc2NTM5NTk5NjgwNA.GtzYAD.zPzVHFzJZUCmVFEL0oY1canp4GtQTfoGnXe6Qc",
-  DISCORD_IMAGE_URL: "https://cdn.discordapp.com",
 
   // Infura
   INFURA_PROJECT_ID: "2G872KumLlSMQ2eh6KNYAd9lVVB",

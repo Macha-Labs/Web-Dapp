@@ -73,6 +73,7 @@ const Meta = () => {
           ) : (
             <MCard
               title={hookMeta?.metaData?.meta?.data?.modified?.meta_title}
+              slug={hookMeta?.metaData?.meta_schema?.name}
               image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
               description={
                 hookMeta?.metaData?.meta?.data?.modified?.meta_description
