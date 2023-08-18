@@ -26,6 +26,7 @@ import useAlchemy from "@/hooks/studio/useAlchemy";
 import NavStudio from "@/_ui/nav/NavStudio";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
+import Header from "@/_ui/Head/Header";
 
 const Network = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -342,12 +343,15 @@ const Network = () => {
     return <>{renderComponent()}</>;
   };
   return (
-    <FlexWindow
-      view="both"
-      bodyElem={renderBody()}
-      navTop={<NavMeta />}
-      navLeft={<NavLeft />}
-    ></FlexWindow>
+    <>
+      <Header title={`Macha | ${chains[chainId]?.chainName}`} />
+      <FlexWindow
+        view="both"
+        bodyElem={renderBody()}
+        navTop={<NavMeta />}
+        navLeft={<NavLeft />}
+      ></FlexWindow>
+    </>
   );
 };
 

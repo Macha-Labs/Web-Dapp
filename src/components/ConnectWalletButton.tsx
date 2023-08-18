@@ -22,11 +22,12 @@ import {
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { fetchBalance } from "@wagmi/core";
 import CreatePublisherModal from "./studio/PublisherModal";
-import { useDisconnect } from "wagmi";
+import { useDisconnect, useNetwork } from "wagmi";
 import { useEffect, useState } from "react";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import { useRouter } from "next/router";
 import GlobalIcons from "@/styles/GlobalIcons";
+import chains from "@/data/network";
 
 export const ConnectWalletButton = (props: any) => {
   const publisherModal = useDisclosure();
@@ -39,6 +40,8 @@ export const ConnectWalletButton = (props: any) => {
   // console.log("mobile device detection", window.navigator.userAgent);
   const router = useRouter();
   const [balance, setBalance] = useState<any>(0.0);
+  const { chain } = useNetwork();
+  const chainId = chain?.id;
 
   const checkBalance = async () => {
     try {
@@ -140,7 +143,9 @@ export const ConnectWalletButton = (props: any) => {
                       }}
                       leftIcon={
                         <Image
-                          src="/assets/icons/coloredFilecoin.svg"
+                          src={
+                            chainId && GlobalIcons[chains[chainId].chainImage]
+                          }
                           alt="txn-icon"
                           height={props.height ? "1.5rem" : "1.75rem"}
                           width={props.height ? "1.5rem" : "1.75rem"}

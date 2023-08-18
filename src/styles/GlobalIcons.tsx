@@ -168,5 +168,6 @@ const GlobalIcons: any = {
   "logo-Polygon": "/assets/icons/coloredPolygon.svg",
   "logo-Optimism": "/assets/icons/optimism.svg",
   "logo-Base": "/assets/icons/logo-base.svg",
+  "logo-filecoin": "/assets/icons/coloredFilecoin.svg",
 };
 export default GlobalIcons;
