@@ -40,7 +40,7 @@ const MetaList = ({ hookMetasList }: Props) => {
                 title={item?.meta?.data?.modified?.meta_title}
                 key={index}
                 image={item?.meta?.data?.modified?.meta_image}
-                slug={item?.meta?.slug}
+                slug={item?.meta_schema?.name}
                 width="30%"
                 description={item?.meta?.data?.modified?.meta_description}
                 onClick={() => {

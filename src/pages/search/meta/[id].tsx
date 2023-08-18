@@ -37,7 +37,6 @@ const Meta = () => {
     }
   }, [router.query.id]);
   const [toggleIpfs, setToggleIpfs] = useState<boolean>(false);
-
   const [tab, setTab] = useState<string>("Data");
   const options = [
     {
@@ -168,7 +167,7 @@ const Meta = () => {
                         height="3rem"
                         width="100%"
                       >
-                        Harsh
+                        Macha
                       </Skeleton>
                       <Skeleton
                         startColor="#11224A"
@@ -177,7 +176,7 @@ const Meta = () => {
                         height="3rem"
                         width="100%"
                       >
-                        Harsh
+                        Macha
                       </Skeleton>
                       <Skeleton
                         startColor="#11224A"
@@ -186,7 +185,7 @@ const Meta = () => {
                         height="3rem"
                         width="100%"
                       >
-                        Harsh
+                        Macha
                       </Skeleton>
                     </FlexColumn>
                   )}
@@ -223,9 +222,6 @@ const Meta = () => {
                     border={style.input.border.default}
                     borderRadius={style.card.borderRadius.image}
                     marginTop={style.margin["sm"]}
-                    onClick={() => {
-                      setToggleIpfs(!toggleIpfs);
-                    }}
                   >
                     <FlexRow hrAlign="space-between">
                       <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
@@ -233,23 +229,29 @@ const Meta = () => {
                           Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]}
                       </Heading>
 
-                      <FlexRow
-                        hrAlign="flex-end"
-                        vrAlign="flex-start"
-                        width="80%"
+                      <Box
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          alignItems: "flex-start",
+                          width: "80%"
+                        }}
+                        onClick={() => {
+                          setToggleIpfs(!toggleIpfs);
+                        }}
                       >
                         {toggleIpfs ? (
                           <IconBase slug="icon-chevron-up" />
                         ) : (
                           <IconBase slug="icon-chevron-down" />
                         )}
-                      </FlexRow>
+                      </Box>
                     </FlexRow>
                     {toggleIpfs && (
                       <Box>
                         {Object.keys(
                           hookMeta?.metaData?.meta?.data?.ipfs[
-                            Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
+                          Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
                           ]
                         ).map((item, index) => {
                           return (
@@ -269,10 +271,10 @@ const Meta = () => {
                                   )[0]
                                 ][item] == "string"
                                   ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                      Object.keys(
-                                        hookMeta?.metaData?.meta?.data?.ipfs
-                                      )[0]
-                                    ][item]
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data?.ipfs
+                                  )[0]
+                                  ][item]
                                   : "[ ]"}
                               </Text>
                               <Box
@@ -291,11 +293,11 @@ const Meta = () => {
                                         )[0]
                                       ][item] == "string"
                                         ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                            Object.keys(
-                                              hookMeta?.metaData?.meta?.data
-                                                ?.ipfs
-                                            )[0]
-                                          ][item]
+                                        Object.keys(
+                                          hookMeta?.metaData?.meta?.data
+                                            ?.ipfs
+                                        )[0]
+                                        ][item]
                                         : "[ ]"
                                     );
                                     toast({
@@ -341,9 +343,6 @@ const Meta = () => {
                           border={style.input.border.default}
                           borderRadius={style.card.borderRadius.image}
                           marginTop={style.margin["sm"]}
-                          onClick={() => {
-                            setToggleIpfs(!toggleIpfs);
-                          }}
                         >
                           <FlexRow hrAlign="space-between">
                             <Heading
@@ -354,58 +353,66 @@ const Meta = () => {
                               {source[Object.keys(source)[0]]}
                             </Heading>
 
-                            <FlexRow
-                              hrAlign="flex-end"
-                              vrAlign="flex-start"
-                              width="80%"
+                            <Box
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-end",
+                                alignItems: "flex-start",
+                                width: "80%"
+                              }}
+                              onClick={() => {
+                                setToggleIpfs(!toggleIpfs);
+                              }}
                             >
                               {toggleIpfs ? (
                                 <IconBase slug="icon-chevron-up" />
                               ) : (
                                 <IconBase slug="icon-chevron-down" />
                               )}
-                            </FlexRow>
-                          </FlexRow>
-                          {toggleIpfs && (
-                            <Box>
-                              {Object.keys(source).map((item, index) => {
-                                return (
-                                  <Box
-                                    key={index}
-                                    display={"flex"}
-                                    marginTop={style.margin.sm}
-                                  >
-                                    <Text
-                                      mr={style.margin.xs}
-                                      width={"20%"}
-                                    >{`${item} : `}</Text>
-                                    <Text width={"70%"} textAlign={"right"}>
-                                      {source[item]}
-                                    </Text>
-                                    <Box
-                                      width="5%"
-                                      display={"flex"}
-                                      justifyContent={"flex-end"}
-                                    >
-                                      <IconBase
-                                        slug="icon-copy"
-                                        onClick={() => {
-                                          navigator.clipboard.writeText(
-                                            source[item]
-                                          );
-                                          toast({
-                                            title: "Copied To Clipboard",
-                                            status: "success",
-                                            duration: 3000,
-                                          });
-                                        }}
-                                      />
-                                    </Box>
-                                  </Box>
-                                );
-                              })}
                             </Box>
-                          )}
+                          </FlexRow>
+                          {
+                            toggleIpfs && (
+                              <Box>
+                                {Object.keys(source).map((item, index) => {
+                                  return (
+                                    <Box
+                                      key={index}
+                                      display={"flex"}
+                                      marginTop={style.margin.sm}
+                                    >
+                                      <Text
+                                        mr={style.margin.xs}
+                                        width={"20%"}
+                                      >{`${item} : `}</Text>
+                                      <Text width={"70%"} textAlign={"right"}>
+                                        {source[item]}
+                                      </Text>
+                                      <Box
+                                        width="5%"
+                                        display={"flex"}
+                                        justifyContent={"flex-end"}
+                                      >
+                                        <IconBase
+                                          slug="icon-copy"
+                                          onClick={() => {
+                                            navigator.clipboard.writeText(
+                                              source[item]
+                                            );
+                                            toast({
+                                              title: "Copied To Clipboard",
+                                              status: "success",
+                                              duration: 3000,
+                                            });
+                                          }}
+                                        />
+                                      </Box>
+                                    </Box>
+                                  );
+                                })}
+                              </Box>
+                            )
+                          }
                         </Box>
                       );
                     }
@@ -414,7 +421,7 @@ const Meta = () => {
             </>
           )}
         </Box>
-      </Box>
+      </Box >
     );
   };
 
