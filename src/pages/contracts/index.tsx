@@ -20,6 +20,7 @@ import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useNetwork, useSwitchNetwork } from "wagmi";
 
 const DashBoard = () => {
   const [exploreMeta, setExploreMeta] = useState<any>([]);
@@ -34,12 +35,21 @@ const DashBoard = () => {
   const hookContractList = useContractList();
   const hookContract = useContract();
   const hookMacha = useMacha();
+  const { chain } = useNetwork();
+  const { switchNetwork } = useSwitchNetwork();
 
   useEffect(() => {
     if ($address) {
       hookContract._fetchUserContracts($address);
     }
   }, [$address, $isConnected]);
+
+  useEffect(() => {
+    const network = async () => {
+      switchNetwork?.(314159);
+    };
+    chain?.name == "Filecoin Calibration chaindata" ? () => {} : network();
+  }, [chain]);
 
   let contractFilterOptions = [
     {

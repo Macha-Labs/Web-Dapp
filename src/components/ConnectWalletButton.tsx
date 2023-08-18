@@ -58,7 +58,7 @@ export const ConnectWalletButton = (props: any) => {
     if ($address) {
       checkBalance();
     }
-  }, [$address]);
+  }, [$address, chainId]);
 
   return (
     <ConnectButton.Custom>
