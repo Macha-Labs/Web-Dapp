@@ -20,14 +20,14 @@ const SupportedChains = ({ data, id }: Props) => {
       }}
       width={"15%"}
     >
-      <FlexColumn width="fit-content">
+      <FlexColumn width="fit-content" vrAlign="center">
         <Image
           src={GlobalIcons[data.chainImage]}
           height={style.icon.sizes["3xl"]}
           alt="img"
           marginBottom={style.margin.sm}
         />
-        <Heading fontSize={style.font.h5}>{data.chainName}</Heading>
+        <Heading fontSize={style.font.h5} textAlign="center" height="2rem">{data.chainName}</Heading>
       </FlexColumn>
     </Box>
   );

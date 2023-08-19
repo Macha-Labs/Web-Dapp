@@ -21,9 +21,8 @@ const CarouselSlide = ({ bgGrid, bgBlur, bannerImage, avatarImage, title, descri
                 background: `url(${bgGrid})`,
                 backdropFilter: "",
                 borderRadius: `${style.card.borderRadius.default}`,
-                marginTop: `${style.margin.xxl}`,
                 backgroundSize: "90%",
-                height: `40rem`,
+                height: `30rem`,
                 overflow: "hidden"
             }}
         >
@@ -48,7 +47,12 @@ const CarouselSlide = ({ bgGrid, bgBlur, bannerImage, avatarImage, title, descri
                             width: "80%"
                         }}
                     >
-                        <Box>
+                        <Box
+                            // _hover={{
+                            //     transform: "scale(1.1,1.1)",
+                            //     transition: "all 0.2s cubic-bezier(0.64, 0.04, 0.35, 1)"
+                            // }}
+                        >
                             <Image src={avatarImage} height="9rem" />
                         </Box>
                         <Box
@@ -88,7 +92,12 @@ const CarouselSlide = ({ bgGrid, bgBlur, bannerImage, avatarImage, title, descri
                         />
                     </Box>
                 </Box>
-                <Box height="100%" width="45%">
+                <Box height="100%" width="45%"
+                    _hover={{
+                        transform: "scale(1.05,1.05)",
+                        transition: "all 0.2s cubic-bezier(0.64, 0.04, 0.35, 1)"
+                    }}
+                >
                     <Image src={bannerImage} height="100%" />
                 </Box>
             </Box>

@@ -18,8 +18,10 @@ import useContractList from "@/hooks/studio/useContractList";
 import useMacha from "@/hooks/studio/useMacha";
 import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import { Box, Button, ButtonGroup, Heading, IconButton, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNetwork, useSwitchNetwork } from "wagmi";
 
@@ -48,7 +50,7 @@ const DashBoard = () => {
     const network = async () => {
       switchNetwork?.(314159);
     };
-    chain?.name == "Filecoin Calibration chaindata" ? () => {} : network();
+    chain?.name == "Filecoin Calibration chaindata" ? () => { } : network();
   }, [chain]);
 
   let contractFilterOptions = [
@@ -107,7 +109,7 @@ const DashBoard = () => {
     return (
       <>
         <FlexRow hrAlign="space-between" marginTop="4xl" marginBottom={"xl"}>
-          <Box
+          {$address ? <Box
             width={"48%"}
             background={style.card.bg.brand}
             borderRadius={style.card.borderRadius.button}
@@ -119,45 +121,16 @@ const DashBoard = () => {
               marginBottom={"0px"}
               lineHeight={style.font.h3}
             >
-              {!$address || hookContract.isUserContractsLoading
-                ? "Your Contracts"
-                : hookContract.userContracts
-                ? `Contracts created: ${hookContract.userContracts.length}`
-                : "You haven't created any contracts yet."}
+              <ButtonGroup size='sm' isAttached variant='outline' colorScheme="white">
+                <Button>Contracts created: {hookContract.userContracts ? hookContract.userContracts.length : 0}</Button>
+                <IconButton isLoading={hookContract.isUserContractsLoading} aria-label='Add to friends' icon={<Image height="1.5rem" src={GlobalIcons["icon-base-edit"]} alt="edit-contracts" onClick={() => {
+                  hookContract._fetchUserContracts($address).then(() => {
+                    editContractsModal.onOpen();
+                  });
+                }} />} />
+              </ButtonGroup>
             </Heading>
-            {$address ? (
-              <Box display={"flex"}>
-                {hookContract.userContracts && (
-                  <ButtonNative
-                    textColorHover="#004ad9"
-                    boxShadowHover="4px 4px 24px rgba(0,0,0,0.35)"
-                    backgroundColorHover="#A0CDFF"
-                    border="1px solid #fff"
-                    marginTop="xs"
-                    onClick={() => {
-                      hookContract._fetchUserContracts($address).then(() => {
-                        editContractsModal.onOpen();
-                      });
-                    }}
-                    text="Edit Contracts"
-                  />
-                )}
-              </Box>
-            ) : (
-              <Box display={"flex"}>
-                <Text
-                  style={{
-                    marginTop: `${style.margin.xs}`,
-                    marginBottom: "0px",
-                    fontSize: `${style.font.h5}`,
-                    fontWeight: `${style.fontWeight.dark}`,
-                  }}
-                >
-                  Please connect your wallet to create or edit contracts
-                </Text>
-              </Box>
-            )}
-          </Box>
+          </Box> : <Box></Box>}
           <Box
             style={{
               width: "48%",
@@ -219,7 +192,7 @@ const DashBoard = () => {
                 options={dashboardNav}
                 gstyle={{ fontSize: `${style.font.h5}` }}
                 value={"Contracts"}
-                onChange={() => {}}
+                onChange={() => { }}
               />
             </FlexRow>
           </FlexRow>

@@ -100,7 +100,6 @@ export const FlexWindow = ({
               className="window-bottom"
               style={{
                 padding: "0% 6%",
-
                 paddingTop: `${style.margin["5xl"]}`,
               }}
             >

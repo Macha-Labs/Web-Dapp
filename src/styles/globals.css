@@ -1,5 +1,22 @@
-::-webkit-scrollbar {
-  /* display: none; */
+
+::-webkit-scrollbar{
+  width: 10px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0f172e !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #00040d !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0f172ec1 !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 :root {
@@ -93,28 +110,6 @@ body {
   font-size: 16px;
 }
 
-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-body::-webkit-scrollbar-track {
-  background: #00040d;
-}
-
-/* Handle */
-body::-webkit-scrollbar-thumb {
-  background: #0f172e;
-}
-
-/* Handle on hover */
-body::-webkit-scrollbar-thumb:hover {
-  background: #0f172e;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
 
 /* small screen */
 @media only screen and (min-width: 480px) {

@@ -32,12 +32,13 @@ const GetStartedCards = ({
       border={style.card.border.default}
       borderRadius={style.card.borderRadius.default}
       overflow="hidden"
+      width="30%"
       marginBottom={style.margin.md}
       marginRight={style.margin.sm}
       cursor={disabled ? "not-allowed" : "pointer"}
       onClick={onClick ? onClick : () => {}}
     >
-      <Box p="4" opacity={disabled ? "0.4" : "1"}>
+      <Box p="4" opacity={disabled ? "0.4" : "1"} width="100%">
         <FlexRow hrAlign="flex-start" vrAlign="flex-start" >
           <Text fontWeight={style.fontWeight.dark} mb={0} mr={style.margin.xxs}>
             {title}
@@ -45,7 +46,7 @@ const GetStartedCards = ({
           {tag && <TagNative value={tag} size="sm" marginTop="2px" />}
         </FlexRow>
         <Text
-          width="19rem"
+          width="100%"
           mt={style.margin.xxs}
           color={style.color["white.7"]}
         >
@@ -58,7 +59,7 @@ const GetStartedCards = ({
               fit="contain"
               alt={title}
               height=""
-              width="19rem"
+              width="100%"
             />
           </Box>
         )}

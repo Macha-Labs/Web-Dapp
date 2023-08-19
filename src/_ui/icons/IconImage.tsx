@@ -19,7 +19,7 @@ function IconImage({ slug, size, onClick, style }: Props) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "10px",
+        padding: "8px",
         cursor: "pointer",
         width: "fit-content",
         height: "fit-content",

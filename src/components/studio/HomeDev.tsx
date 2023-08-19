@@ -33,7 +33,7 @@ const HomeDev = () => {
         height: "fit-content",
       }}
     >
-      <Box
+      {$address && <Box
         background={style.card.bg.brand}
         borderRadius={style.card.borderRadius.default}
         padding={style.padding.lg}
@@ -99,13 +99,9 @@ const HomeDev = () => {
             >
               You are a publisher
             </Text>
-            {/* <Button
-            style={{color: "#004ad9", backgroundColor: "#A0CDFF",border: "1px solid #fff", marginTop: `${style.margin.xs}`, cursor: "default"}}
-            onClick={() => {}}
-          >You are a publisher</Button> */}
           </Box>
         )}
-      </Box>
+      </Box>}
 
       <Box marginTop={style.margin.xl}>
         <Text fontSize={style.font.h3} fontWeight={style.fontWeight.dark}>
@@ -157,15 +153,21 @@ const HomeDev = () => {
           disabled={true}
         />
         <GetStartedCards
-          title="Graph Playground"
+          title="Macha Graph SDK"
           image="/assets/homeDev/Graph%20playgroundv4.svg"
           description="Use Macha’s content graph APIs to access user data related to specific contracts."
           tag="soon"
           disabled={true}
         />
+        <GetStartedCards
+          title="Macha ID SDK"
+          description="Provides aggregated user profile data."
+          tag="soon"
+          disabled={true}
+        />
       </Flex>
 
-      <Box marginTop={style.margin.xl}>
+      {/* <Box marginTop={style.margin.xl}>
         <Text fontSize={style.font.h3} fontWeight={style.fontWeight.dark}>
           Upcoming SDKs
         </Text>
@@ -173,19 +175,12 @@ const HomeDev = () => {
 
       <Flex flexWrap="wrap" paddingLeft={2}>
         <GetStartedCards
-          title="Macha ID SDK"
-          description="Provides aggregated user profile data."
-          tag="soon"
-          disabled={true}
-        />
-
-        <GetStartedCards
           title="Macha Graph SDK"
           description="Enables graphQl APIs to fetch macha&#39;s indexed data."
           tag="soon"
           disabled={true}
         />
-      </Flex>
+      </Flex> */}
       <CreatePublisherModal
         modal={publisherModal}
         hookPublisherCreate={hookPublisherCreate}

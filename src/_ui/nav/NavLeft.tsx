@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import FlexColumn from "../flex/FlexColumn";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
+import useAuthStore from "@/store/useAuthStore";
 
 const NavLeft = (props: any) => {
   const router = useRouter();
@@ -28,10 +29,21 @@ const NavLeft = (props: any) => {
           <div className="body" style={{ padding: "10px 0px", height: "100%" }}>
             <FlexColumn hrAlign="space-between" vrAlign="center">
               <FlexColumn height="fit-content">
+                <Link href="/home">
+                  <IconImage
+                    slug={router.pathname === "/home" ? "icon-home" : "icon-home-outline"}
+                    size="md"
+                    style={{
+                      className: `m-b-1 ${
+                        router.pathname === "/home" ? "state_active" : "state_hover"
+                      } `,
+                    }}
+                  />
+                </Link>
                 <Link href="/">
                   <IconImage
-                    slug="icon-posts"
-                    size="lg"
+                    slug={router.pathname === "/" ? "icon-posts" : "icon-posts-outline"}
+                    size="md"
                     style={{
                       className: `m-b-1 ${
                         router.pathname === "/" ? "state_active" : "state_hover"
@@ -55,8 +67,8 @@ const NavLeft = (props: any) => {
                 <Link href="/explore">
                   <Tooltip label="Chat">
                     <IconImage
-                      slug="icon-compass"
-                      size="lg"
+                      slug={router.pathname === "/explore" ? "icon-compass" : "icon-compass-outline"}
+                      size="md"
                       style={{
                         className: `m-b-1 ${
                           router.pathname === "/explore"

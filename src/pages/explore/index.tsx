@@ -1,22 +1,20 @@
-import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import { style } from "@/styles/StyledConstants";
 import { useEffect, useState } from "react";
 
 import FlexColumn from "@/_ui/flex/FlexColumn";
+import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
-import NavStudio from "@/_ui/nav/NavStudio";
 import MetaCollectionCard from "@/components/cards/MetaCollectionCard";
+import ContractList from "@/components/studio/ContractList";
+import SupportedChains from "@/components/studio/SupportedChains";
+import chains from "@/data/network";
 import useMetaList from "@/hooks/meta/useMetasList";
 import useAlchemy from "@/hooks/studio/useAlchemy";
-import { Text, Box, Heading } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import NavLeft from "@/_ui/nav/NavLeft";
-import chains from "@/data/network";
-import SupportedChains from "@/components/studio/SupportedChains";
-import ContractList from "@/components/studio/ContractList";
 import useContractList from "@/hooks/studio/useContractList";
+import { Box, Heading } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 export default function Explore() {
   const hookAlchemy = useAlchemy();
