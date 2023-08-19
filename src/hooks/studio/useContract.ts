@@ -1,7 +1,6 @@
 import { contractDataBySlug, contractsByUserAddress, deleteContract } from "@/service/ApiService";
 import useContractFormStore from "@/store/useContractFormStore";
 import { useToast } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import { useState } from "react";
 
 const useContract = () => {
@@ -11,7 +10,6 @@ const useContract = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isUserContractsLoading, setIsUserContractsLoading] = useState<boolean>(true);
   const toast = useToast();
-  const router = useRouter()
   const $loadContractFormData = useContractFormStore((state: any) => state.loadContractFormData);
 
   const _fetch = async (contract_slug: any) => {

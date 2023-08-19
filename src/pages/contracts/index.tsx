@@ -10,6 +10,7 @@ import TagNative from "@/_ui/tag/TagNative";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
 import ContractCreateEditModal from "@/components/studio/ContractCreateEditModal";
 import ContractList from "@/components/studio/ContractList";
+import EditContractsModal from "@/components/studio/EditContractsModal";
 import chains from "@/data/network";
 import useContract from "@/hooks/studio/useContract";
 import useContractCreate from "@/hooks/studio/useContractCreate";
@@ -30,7 +31,6 @@ const DashBoard = () => {
 
   const $isConnected = useAuthStore((state: any) => state.isConnected);
   const editContractsModal = useDisclosure();
-
   const $address = useAuthStore((state: any) => state.address);
   const hookContractList = useContractList();
   const hookContract = useContract();
@@ -232,6 +232,11 @@ const DashBoard = () => {
           modal={contractModal}
           hookContractCreate={hookContractCreate}
           isEdit={false}
+        />
+        <EditContractsModal
+          modal={editContractsModal}
+          hookContract={hookContract}
+          hookContractCreate={hookContractCreate}
         />
         <ApiCreateModal modal={metaModal} />
       </>

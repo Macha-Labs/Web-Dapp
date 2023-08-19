@@ -69,7 +69,7 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
                 </FlexRow>
             }
         >
-            {(hookContract.isUserContractsLoading) ? (
+            {hookContract.isUserContractsLoading ? (
                 <FlexRow height="18rem">
                     <Loader size="lg" />
                 </FlexRow>
