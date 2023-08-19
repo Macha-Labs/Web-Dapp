@@ -160,24 +160,21 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                       style={{
                         display: "flex",
                         flexDirection: "row",
-                        justifyContent: "space-between",
+                        justifyContent: "flex-start",
                         width: "50%",
                         alignItems: "center",
                       }}
                     >
-                      <Flex width="2.1rem" height="2.1rem" justifyContent="center" alignItems="center" >
-                      <IconBase
-                        size="lg" 
-                        slug="icon-coloured-deploy"
-                        style={{ paddingLeft: "sm" }}
+                      <Image
+                        alt=""
+                        height="1.5rem"
+                        src={GlobalIcons["icon-coloured-deploy"]}
                       />
-                      </Flex>
-                      
                       <Text
-                        paddingLeft={2}
+                        marginLeft={style.padding.xs}
                         marginBottom={0}
                         width="80%"
-                        textAlign="center"
+                        textAlign="left"
                       >
                         {truncateString(item?.transaction?.method_name, 20)}
                       </Text>
@@ -234,13 +231,13 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                     <Text
                       paddingLeft={2}
                       marginBottom={0}
-                      // _hover={{ textDecoration: "underline" }}
-                      // cursor={displayFrom && style.table.cursor.pointer}  
-                      // onClick={() => {
-                      //   router.push(
-                      //     `/search/accounts/${item?.transaction?.to}`
-                      //   );
-                      // }}
+                    // _hover={{ textDecoration: "underline" }}
+                    // cursor={displayFrom && style.table.cursor.pointer}  
+                    // onClick={() => {
+                    //   router.push(
+                    //     `/search/accounts/${item?.transaction?.to}`
+                    //   );
+                    // }}
                     >
                       {truncateAddress(item?.transaction?.to)}
                     </Text>

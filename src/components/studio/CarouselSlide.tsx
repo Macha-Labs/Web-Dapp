@@ -19,24 +19,24 @@ const CarouselSlide = ({ bgGrid, bgBlur, bannerImage, avatarImage, title, descri
         <Box
             style={{
                 background: `url(${bgGrid})`,
+                backdropFilter: "",
                 borderRadius: `${style.card.borderRadius.default}`,
                 marginTop: `${style.margin.xxl}`,
                 backgroundSize: "90%",
                 height: `40rem`,
-                overflow: "visible"
+                overflow: "hidden"
             }}
         >
             <Box
                 style={{
                     display: "flex",
-                    justifyContent: "space-around",
+                    justifyContent: "center",
                     alignItems: "center",
                     background: `url(${bgBlur})`,
                     height: "100%",
-                    backgroundSize: "80%",
-                    backgroundPosition: "90% 50%",
+                    backgroundSize: "130% 160%",
+                    backgroundPosition: "0% 50%",
                     backgroundRepeat: "no-repeat",
-                    padding: `0% ${style.padding.xxl}`,
                 }}
             >
                 <Box width="50%">
@@ -44,31 +44,33 @@ const CarouselSlide = ({ bgGrid, bgBlur, bannerImage, avatarImage, title, descri
                         style={{
                             display: "flex",
                             alignItems: "center",
+                            justifyContent: "flex-start",
                             width: "80%"
                         }}
                     >
-                        <Box
-                            width="30%"
-                        >
+                        <Box>
                             <Image src={avatarImage} height="9rem" />
                         </Box>
                         <Box
-                            marginLeft={style.margin.sm}
                             width="70%"
+                            textAlign="left"
+                            marginLeft={style.margin.lg}
                         >
                             <Heading
-                                fontSize={style.font.h3}
+                                fontSize={"3rem"}
                                 p={0}
-                                lineHeight={style.font.h3}
+                                lineHeight={style.font.h1}
+                                mb={style.margin.lg}
+                                letterSpacing={1}
                             >
                                 {title}
                             </Heading>
-                            <Text fontSize={style.font.h5} mb={0}>
+                            <Text fontSize={style.font.h3} mb={0} fontWeight={style.fontWeight.light} letterSpacing={1}>
                                 {description}
                             </Text>
                         </Box>
                     </Box>
-                    <Box display={"flex"} width="80%" justifyContent={"flex-start"}>
+                    <Box display={"flex"} marginTop={style.margin.md} width="50%" justifyContent={"flex-start"}>
                         <ButtonNative
                             size="lg"
                             variant="state_brand"
@@ -76,12 +78,17 @@ const CarouselSlide = ({ bgGrid, bgBlur, bannerImage, avatarImage, title, descri
                             border="1px solid #fff"
                             marginTop="xs"
                             textFontSize="h4"
+                            paddingBottom="sm"
+                            paddingTop="sm"
+                            paddingLeft="sm"
+                            paddingRight="sm"
                             onClick={onClick ? onClick : () => { }}
                             text={buttonText ? buttonText : "View Contract Now"}
+                            borderColorWhite={false}
                         />
                     </Box>
                 </Box>
-                <Box height="100%">
+                <Box height="100%" width="45%">
                     <Image src={bannerImage} height="100%" />
                 </Box>
             </Box>

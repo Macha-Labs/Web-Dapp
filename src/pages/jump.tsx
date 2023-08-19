@@ -13,9 +13,8 @@ import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import IconImage from "@/_ui/icons/IconImage";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Explorer = () => {
   const [latestTransactions, setLatestTransactions] = useState<any>();
@@ -158,12 +157,13 @@ const Explorer = () => {
           </Text>
           {/* <ImageCarousal /> */}
           <Carousel
-            autoPlay
+            // autoPlay
             // showIndicators={false}
             showArrows={false}
             showStatus={false}
+            stopOnHover={true}
             infiniteLoop
-            interval={2500}
+            interval={3000}
             // renderArrowPrev={(onClickHandler, hasPrev) =>
             //   hasPrev && (
             //     <Box

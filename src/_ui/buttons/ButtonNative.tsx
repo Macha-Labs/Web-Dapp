@@ -31,6 +31,7 @@ type Props = {
   border?: any
   backgroundColorHover?: any
   textColorHover?: any
+  borderColorWhite?: boolean
 };
 
 export default function ButtonNative({
@@ -60,7 +61,8 @@ export default function ButtonNative({
   boxShadowHover,
   border,
   backgroundColorHover,
-  textColorHover
+  textColorHover,
+  borderColorWhite = true
 }: Props) {
   return (
     <Button
@@ -86,7 +88,7 @@ export default function ButtonNative({
       paddingBottom={`${paddingBottom ? gStyle.padding[paddingBottom] : "12px"
         }`}
       borderColor="#14244b"
-      border={border}
+      border={borderColorWhite ? border : ""}
       height={height ? height : "3rem"}
     >
       {iconLeft && (
