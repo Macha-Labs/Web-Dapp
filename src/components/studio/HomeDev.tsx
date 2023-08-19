@@ -163,6 +163,7 @@ const HomeDev = () => {
           title="Macha ID SDK"
           description="Provides aggregated user profile data."
           tag="soon"
+          image="/assets/homeDev/Macha%20ID%20SDK.svg"
           disabled={true}
         />
       </Flex>
