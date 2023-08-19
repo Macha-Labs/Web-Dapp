@@ -54,7 +54,7 @@ export const exploreModules = [
     borderColor: "#212122",
   },
   {
-    heading: "POAP NFTs",
+    heading: "Poap NFT",
     description: "Mint, drop and collect POAPs, A bookmark to your memories.",
     image: "logo-Poap",
     onClick: () => {},

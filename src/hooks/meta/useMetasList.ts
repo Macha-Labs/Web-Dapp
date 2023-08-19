@@ -28,7 +28,7 @@ const useMetaList = () => {
   };
 
   const _fetchMetaSchemas = () => {
-    fetchMetaSchemas().then((res) => {
+    fetchMetaSchemas().then((res:any) => {
       setMetaSchemas(res.data);
       setIsLoading(false);
     });
