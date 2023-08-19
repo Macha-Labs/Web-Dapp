@@ -72,7 +72,7 @@ const MotionBar = () => {
         </Box>
       ) : isOpen && isCloseHovered ? (
         <Box overflow={"hidden"} cursor="pointer">
-          <Text marginBottom={"0px"} width="6.35rem">
+          <Text marginBottom={"0px"} width="6.5rem" fontSize={`${style.font.h6}`}>
             Explore studio
           </Text>
         </Box>
