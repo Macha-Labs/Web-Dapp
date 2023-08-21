@@ -110,26 +110,27 @@ const DashBoard = () => {
       <>
         <FlexRow hrAlign="space-between" marginTop="4xl" marginBottom={"xl"}>
           {$address ? <Box
-            width={"48%"}
-            background={style.card.bg.brand}
-            borderRadius={style.card.borderRadius.button}
-            padding={style.padding.xs}
+            padding={`${style.padding.xs} 0.5%`}
           >
-            <Heading
-              fontSize={style.font.h5}
-              p={0}
-              marginBottom={"0px"}
-              lineHeight={style.font.h3}
-            >
-              <ButtonGroup size='sm' isAttached variant='outline' colorScheme="white">
-                <Button>Contracts created: {hookContract.userContracts ? hookContract.userContracts.length : 0}</Button>
-                <IconButton isLoading={hookContract.isUserContractsLoading} aria-label='Add to friends' icon={<Image height="1.5rem" src={GlobalIcons["icon-base-edit"]} alt="edit-contracts" onClick={() => {
-                  hookContract._fetchUserContracts($address).then(() => {
-                    editContractsModal.onOpen();
-                  });
-                }} />} />
-              </ButtonGroup>
-            </Heading>
+            <ButtonGroup
+              _hover={{
+                background: `${style.card.bg.hover}`,
+                border: `${style.card.border.hover}`,
+                shadow: `${style.card.shadow.hover}`,
+              }}
+              style={{
+                background: `${style.card.bg.default}`,
+                border: `${style.card.border.default}`,
+                boxShadow: `${style.card.shadow.default}`,
+                borderRadius: `${style.card.borderRadius.button}`
+              }} size='sm' isAttached variant='outline' colorScheme="white">
+              <Button>Contracts created: {hookContract.userContracts ? hookContract.userContracts.length : 0}</Button>
+              <IconButton isLoading={hookContract.isUserContractsLoading} aria-label='Add to friends' icon={<Image height="1.5rem" src={GlobalIcons["icon-base-edit"]} alt="edit-contracts" onClick={() => {
+                hookContract._fetchUserContracts($address).then(() => {
+                  editContractsModal.onOpen();
+                });
+              }} />} />
+            </ButtonGroup>
           </Box> : <Box></Box>}
           <Box
             style={{

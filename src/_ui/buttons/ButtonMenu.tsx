@@ -68,13 +68,11 @@ const ButtonMenu = ({
               style={{
                 borderRadius: `${style.card.borderRadius.button}`,
               }}
-              rightIcon={
-                icon && isOpen ? (
-                  <IconBase slug="icon-chevron-up" size="sm" style={icon.style} />
-                ) : (
-                  <IconBase slug={icon.slug} size="sm" style={icon.style} />
-                )
-              }
+              rightIcon={icon && isOpen ? (
+                <IconBase slug="icon-chevron-up" size="sm" style={icon.style} />
+              ) : (
+                isDisabled ?  <></> : <IconBase slug={icon.slug} size="sm" style={icon.style} />
+              )}
               height={height ? height : "3rem"}
             >
               <FlexRow>

@@ -20,21 +20,21 @@ const NavButton = ({ marginLeft, marginRight, width }: Props) => {
   const options = [
     {
       value: "Search",
-      leftIcon: "icon-search24",
+      // leftIcon: "icon-search24",
       onClick: () => {
         router.push("/");
       },
     },
     {
       value: "Dev Studio",
-      leftIcon: "icon-dataNetwork",
+      // leftIcon: "icon-dataNetwork",
       onClick: () => {
         router.push("/studio/data");
       },
     },
     {
       value: "Nft Studio",
-      leftIcon: "icon-adsNetwork",
+      // leftIcon: "icon-adsNetwork",
       onClick: () => {
         router.push("/studio/nft");
       },
