@@ -21,7 +21,16 @@ import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { AddIcon } from "@chakra-ui/icons";
-import { Box, Button, ButtonGroup, Heading, IconButton, Image, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Heading,
+  IconButton,
+  Image,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNetwork, useSwitchNetwork } from "wagmi";
 
@@ -50,7 +59,7 @@ const DashBoard = () => {
     const network = async () => {
       switchNetwork?.(314159);
     };
-    chain?.name == "Filecoin Calibration chaindata" ? () => { } : network();
+    chain?.name == "Filecoin Calibration chaindata" ? () => {} : network();
   }, [chain]);
 
   let contractFilterOptions = [
@@ -109,29 +118,63 @@ const DashBoard = () => {
     return (
       <>
         <FlexRow hrAlign="space-between" marginTop="4xl" marginBottom={"xl"}>
-          {$address ? <Box
-            padding={`${style.padding.xs} 0.5%`}
-          >
-            <ButtonGroup
-              _hover={{
-                background: `${style.card.bg.hover}`,
-                border: `${style.card.border.hover}`,
-                shadow: `${style.card.shadow.hover}`,
-              }}
-              style={{
-                background: `${style.card.bg.default}`,
-                border: `${style.card.border.default}`,
-                boxShadow: `${style.card.shadow.default}`,
-                borderRadius: `${style.card.borderRadius.button}`
-              }} size='sm' isAttached variant='outline' colorScheme="white">
-              <Button>Contracts created: {hookContract.userContracts ? hookContract.userContracts.length : 0}</Button>
-              <IconButton isLoading={hookContract.isUserContractsLoading} aria-label='Add to friends' icon={<Image height="1.5rem" src={GlobalIcons["icon-base-edit"]} alt="edit-contracts" onClick={() => {
-                hookContract._fetchUserContracts($address).then(() => {
-                  editContractsModal.onOpen();
-                });
-              }} />} />
-            </ButtonGroup>
-          </Box> : <Box></Box>}
+          {$address ? (
+            <Box>
+              <ButtonGroup
+                _hover={{
+                  background: `${style.card.bg.hover}`,
+                  border: `${style.card.border.hover}`,
+                  shadow: `${style.card.shadow.hover}`,
+                }}
+                style={{
+                  background: `${style.card.bg.default}`,
+                  // border: `${style.card.border.default}`,
+                  boxShadow: `${style.card.shadow.default}`,
+                  borderRadius: `${style.card.borderRadius.button}`,
+                }}
+                size="sm"
+                isAttached
+                variant="outline"
+                colorScheme="white"
+              >
+                <Button
+                  borderColor="#0a1020"
+                  borderRadius={`${style.card.borderRadius.button}`}
+                  _hover={
+                    {
+                      // border: `${style.card.border.hover}`,
+                    }
+                  }
+                >
+                  Contracts created:{" "}
+                  {hookContract.userContracts
+                    ? hookContract.userContracts.length
+                    : 0}
+                </Button>
+                <IconButton
+                  isLoading={hookContract.isUserContractsLoading}
+                  borderRadius={`${style.card.borderRadius.button}`}
+                  borderColor="#0a1020"
+                  aria-label="Add to friends"
+                  // _hover={{ border: `${style.card.border.hover}` }}
+                  icon={
+                    <Image
+                      height="1.5rem"
+                      src={GlobalIcons["icon-base-edit"]}
+                      alt="edit-contracts"
+                      onClick={() => {
+                        hookContract._fetchUserContracts($address).then(() => {
+                          editContractsModal.onOpen();
+                        });
+                      }}
+                    />
+                  }
+                />
+              </ButtonGroup>
+            </Box>
+          ) : (
+            <Box></Box>
+          )}
           <Box
             style={{
               width: "48%",
@@ -193,7 +236,7 @@ const DashBoard = () => {
                 options={dashboardNav}
                 gstyle={{ fontSize: `${style.font.h5}` }}
                 value={"Contracts"}
-                onChange={() => { }}
+                onChange={() => {}}
               />
             </FlexRow>
           </FlexRow>
