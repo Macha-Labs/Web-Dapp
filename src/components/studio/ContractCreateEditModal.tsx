@@ -403,6 +403,22 @@ const ContractCreateEditModal = ({
                 />
               </>
             )}
+            {hookContractCreate.formStep == 1.5 && (
+              <>
+                <InputLabel
+                  value={hookContractCreate.$contractFormData.contract_abi}
+                  inputType="textArea"
+                  labelText="Contract ABI"
+                  placeholder=" To enable your verification , you can enter your RBI manually here "
+                  onChange={(e: any) => {
+                    e.preventDefault();
+                    hookContractCreate.$loadContractFormData({
+                      contract_abi: e.target.value,
+                    });
+                  }}
+                />
+              </>
+            )}
             {hookContractCreate.formStep == 2 && (
               <>
                 <Box

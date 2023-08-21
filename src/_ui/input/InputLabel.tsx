@@ -25,8 +25,8 @@ type Props = {
   marginRight?: string;
   fileDropMinHeight?: string;
   inputLogoSize?: string;
-  value?: any
-  tooltipLabel?: string
+  value?: any;
+  tooltipLabel?: string;
 };
 
 const InputLabel = ({
@@ -47,7 +47,7 @@ const InputLabel = ({
   marginRight,
   fileDropMinHeight,
   inputLogoSize,
-  tooltipLabel
+  tooltipLabel,
 }: Props) => {
   // for text type inputs
   const toast = useToast();
@@ -62,9 +62,7 @@ const InputLabel = ({
         hrAlign="flex-start"
         marginTop={marginTop ? marginTop : ""}
       >
-        <Box
-          style={{ display: "flex", flexDirection: "row" }}
-        >
+        <Box style={{ display: "flex", flexDirection: "row" }}>
           {labelText && (
             <Heading
               as="h6"
@@ -80,17 +78,20 @@ const InputLabel = ({
               {labelText}
             </Heading>
           )}
-          {tooltipLabel &&
-            <IconBase slug="icon-info" onClick={() => {
-              toast({
-                title: tooltipLabel,
-                status: "info",
-                duration: 7000,
-                position: "top-right",
-                isClosable: true
-              });
-            }} />
-          }
+          {tooltipLabel && (
+            <IconBase
+              slug="icon-info"
+              onClick={() => {
+                toast({
+                  title: tooltipLabel,
+                  status: "info",
+                  duration: 7000,
+                  position: "top-right",
+                  isClosable: true,
+                });
+              }}
+            />
+          )}
         </Box>
         <StyledCard className="w-100">
           {LayoutInputs({
@@ -172,7 +173,7 @@ const InputLabel = ({
                 )"
           bgClip="text"
           lineHeight={1.3}
-        // className="m-b-1"
+          // className="m-b-1"
         >
           {labelText}
         </Heading>
@@ -263,7 +264,7 @@ const InputLabel = ({
                 )"
           bgClip="text"
           lineHeight={1.3}
-        // className="m-b-1"
+          // className="m-b-1"
         >
           {labelText}
         </Heading>
@@ -276,7 +277,12 @@ const InputLabel = ({
           onChange={onChange}
           hidden
         />
-        <ButtonNative onClick={onButtonClick} text="Upload File" iconRight={{ slug: "icon-upload" }} variant="state_default_hover" />
+        <ButtonNative
+          onClick={onButtonClick}
+          text="Upload File"
+          iconRight={{ slug: "icon-upload" }}
+          variant="state_default_hover"
+        />
       </FlexColumn>
     );
   };
@@ -290,7 +296,7 @@ const InputLabel = ({
         height="fit-content"
         padding={padding}
         marginTop={marginTop ? marginTop : "sm"}
-      // marginTop={"100px"}
+        // marginTop={"100px"}
       >
         <Heading
           as="h6"
@@ -307,7 +313,9 @@ const InputLabel = ({
 
         <StyledCard className="w-100">
           {LayoutTextArea({
-            elementRef,
+            id,
+            // elementRef,
+            value,
             placeholder,
             defaultValue,
             onChange,

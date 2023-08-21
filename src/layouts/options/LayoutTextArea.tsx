@@ -10,29 +10,34 @@ type Props = {
   required?: boolean;
   display?: string;
   variant?: string;
+  value?: any;
   elementRef?: any;
+  id?: any;
 };
 
 const LayoutTextArea = ({
   index,
-  style,
+  id,
   placeholder,
   defaultValue,
-  onChange = (e?: any) => {},
+  onChange,
   disabled,
   required,
   display,
   variant,
   elementRef,
+  value,
 }: Props) => {
   return (
     <div>
       <Textarea
-        ref={elementRef}
+        id={id}
+        // ref={elementRef}
+        value={value}
         key={index}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
         isDisabled={disabled}
         isRequired={required}
         // className="m-b-0"

@@ -3,7 +3,7 @@ import { create } from "zustand";
 const useContractFormStore = create((set) => ({
   contractFormData: {
     name: "",
-    description: "",    
+    description: "",
     address: "",
     chain_id: "",
     slug: "",
@@ -11,8 +11,12 @@ const useContractFormStore = create((set) => ({
     interested_events: "",
     read_abi_from: "",
     image: "",
+    contract_abi: "",
   },
-  loadContractFormData: (data: any) => set((state: any) => ({contractFormData: {...state.contractFormData,...data}}))
+  loadContractFormData: (data: any) =>
+    set((state: any) => ({
+      contractFormData: { ...state.contractFormData, ...data },
+    })),
 }));
 
 export default useContractFormStore;

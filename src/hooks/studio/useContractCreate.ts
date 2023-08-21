@@ -1,4 +1,9 @@
-import { checkUniqueData, createNewContract } from "@/service/ApiService";
+import {
+  checkUniqueData,
+  createNewContract,
+  etherscanVerification,
+  polygoncanVerification,
+} from "@/service/ApiService";
 import useAuthStore from "@/store/useAuthStore";
 import useContractFormStore from "@/store/useContractFormStore";
 import { useToast } from "@chakra-ui/react";
@@ -9,26 +14,34 @@ const useContractCreate = (modal: any) => {
   const toast = useToast();
   const router = useRouter();
   const [formStep, setFormStep] = useState<any>(1);
-  const $contractFormData = useContractFormStore((state: any) => state.contractFormData);
-  const $loadContractFormData = useContractFormStore((state: any) => state.loadContractFormData);
+  const $contractFormData = useContractFormStore(
+    (state: any) => state.contractFormData
+  );
+  const $loadContractFormData = useContractFormStore(
+    (state: any) => state.loadContractFormData
+  );
   const [ipfsLoading, setIpfsLoading] = useState<any>(0);
   const $address = useAuthStore((state: any) => state.address);
 
   useEffect(() => {
-    console.log("contract form data", $contractFormData)
-  }, [$contractFormData])
+    console.log("contract form data", $contractFormData);
+  }, [$contractFormData]);
 
-  const addressRegex = /^0x[a-fA-F0-9]{40}$/
+  const addressRegex = /^0x[a-fA-F0-9]{40}$/;
 
   const setLoadingCallback = (progressData: any) => {
-    let percentageDone: any = 100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
+    let percentageDone: any =
+      100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
     console.log("percentage done: ", percentageDone);
-    setIpfsLoading(percentageDone)
-  }
+    setIpfsLoading(percentageDone);
+  };
 
   const validateSteps = async () => {
     if (formStep == 1) {
-      if ($contractFormData.address != "" && addressRegex.test($contractFormData.address) == false) {
+      if (
+        $contractFormData.address != "" &&
+        addressRegex.test($contractFormData.address) == false
+      ) {
         toast({
           title: "Invalid addresss",
           status: "warning",
@@ -51,7 +64,7 @@ const useContractCreate = (modal: any) => {
         });
         return false;
       } else {
-        const res = await checkUniqueData("address", $contractFormData.address)
+        const res = await checkUniqueData("address", $contractFormData.address);
         if (res.data == false) {
           toast({
             title: "A contract with the same address already exists.",
@@ -59,15 +72,58 @@ const useContractCreate = (modal: any) => {
             duration: 3000,
             position: "top-right",
           });
-          return false
-        }
-        else {
-          if($contractFormData.read_abi_from  != "" && $contractFormData.read_abi_from == undefined){
-            
+          return false;
+        } else {
+          if (
+            $contractFormData.read_abi_from != "" &&
+            $contractFormData.read_abi_from != undefined
+          ) {
+            if ($contractFormData.chain_id == 1) {
+              const res = await etherscanVerification(
+                $contractFormData.read_abi_from
+              );
+              if (res?.status == 1) return true;
+              else {
+                setFormStep(1.5);
+                return false;
+              }
+            } else if ($contractFormData.chain_id == 137) {
+              const res = await polygoncanVerification(
+                $contractFormData.read_abi_from
+              );
+              if (res?.status == 1) return true;
+              else {
+                setFormStep(1.5);
+                return false;
+              }
+            }
+          } else {
+            if ($contractFormData.chain_id == 1) {
+              const res = await etherscanVerification(
+                $contractFormData.address
+              );
+              if (res?.status == 1) return true;
+              else {
+                setFormStep(1.5);
+                return false;
+              }
+            } else if ($contractFormData.chain_id == 137) {
+              const res = await polygoncanVerification(
+                $contractFormData.address
+              );
+              if (res?.status == 1) return true;
+              else {
+                setFormStep(1.5);
+                return false;
+              }
+            }
           }
           return true;
         }
       }
+    }
+    if (formStep == 1.5) {
+      return true;
     }
     if (formStep == 2) {
       if (
@@ -88,7 +144,7 @@ const useContractCreate = (modal: any) => {
         });
         return false;
       } else {
-        const res = await checkUniqueData("slug", $contractFormData.slug)
+        const res = await checkUniqueData("slug", $contractFormData.slug);
         if (res.data == false) {
           toast({
             title: "A contract with the same slug already exists.",
@@ -96,9 +152,8 @@ const useContractCreate = (modal: any) => {
             duration: 3000,
             position: "top-right",
           });
-          return false
-        }
-        else {
+          return false;
+        } else {
           return true;
         }
       }
@@ -125,7 +180,10 @@ const useContractCreate = (modal: any) => {
 
   const validateEditSteps = async () => {
     if (formStep == 1) {
-      if ($contractFormData.address != "" && addressRegex.test($contractFormData.address) == false) {
+      if (
+        $contractFormData.address != "" &&
+        addressRegex.test($contractFormData.address) == false
+      ) {
         toast({
           title: "Invalid addresss",
           status: "warning",
@@ -198,7 +256,13 @@ const useContractCreate = (modal: any) => {
       return;
     } else {
       if (await validateSteps()) {
-        setFormStep((currentStep: any) => currentStep + 1);
+        if (formStep == 1.5) {
+          console.log(formStep);
+          setFormStep(2);
+        } else {
+          console.log(formStep);
+          setFormStep((currentStep: any) => currentStep + 1);
+        }
       } else {
         return;
       }
@@ -220,6 +284,8 @@ const useContractCreate = (modal: any) => {
   const prevFormStep = () => {
     if (formStep <= 1) {
       return;
+    } else if (formStep == 1.5) {
+      setFormStep(1);
     } else {
       setFormStep((currentStep: any) => currentStep - 1);
     }
@@ -249,7 +315,7 @@ const useContractCreate = (modal: any) => {
       interested_methods: interested_methods,
       interested_events: interested_events,
       id: _id,
-      ownerAddress: $address
+      ownerAddress: $address,
     };
 
     // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
@@ -286,11 +352,11 @@ const useContractCreate = (modal: any) => {
           duration: 3000,
           position: "top-right",
         });
-        if(window !== undefined){
-          window.sessionStorage.removeItem(contractPayload.slug)
+        if (window !== undefined) {
+          window.sessionStorage.removeItem(contractPayload.slug);
         }
-        setClear()
-        router.reload()
+        setClear();
+        router.reload();
       });
     }
   };
@@ -318,7 +384,7 @@ const useContractCreate = (modal: any) => {
       image: $contractFormData.image,
       interested_methods: interested_methods,
       interested_events: interested_events,
-      ownerAddress: $address
+      ownerAddress: $address,
     };
 
     // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
@@ -353,19 +419,19 @@ const useContractCreate = (modal: any) => {
           title: "Contract created!",
           status: "success",
           duration: 3000,
-          position: "top-right"
+          position: "top-right",
         });
-        nextFormStep()
-      })
+        nextFormStep();
+      });
     }
   };
 
   const lastStep = () => {
-    const slug = $contractFormData.slug
-    modal.onClose()
-    setClear()
-    router.push(`/search/contracts/${slug}`)
-  }
+    const slug = $contractFormData.slug;
+    modal.onClose();
+    setClear();
+    router.push(`/search/contracts/${slug}`);
+  };
 
   const setClear = () => {
     $loadContractFormData({
@@ -378,9 +444,9 @@ const useContractCreate = (modal: any) => {
       interested_events: "",
       read_abi_from: "",
       image: "",
-    })
-    setFormStep(1)
-  }
+    });
+    setFormStep(1);
+  };
 
   return {
     $contractFormData: $contractFormData,
@@ -394,7 +460,7 @@ const useContractCreate = (modal: any) => {
     setLoadingCallback: setLoadingCallback,
     lastStep: lastStep,
     setClear: setClear,
-    nextFormEditStep: nextFormEditStep
+    nextFormEditStep: nextFormEditStep,
   };
 };
 export default useContractCreate;

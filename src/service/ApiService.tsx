@@ -30,20 +30,18 @@ export const getAllTransactions = async () => {
   return data;
 };
 
-
 export const searchAllMetas = async (searchTerm: string) => {
   const response = await fetch(
     `${config.metaServer}/indexer/metas/fetch-by-search/${searchTerm}?limit=30`
   );
-  if(response.status == 200){
-    console.log("response search api",response)
+  if (response.status == 200) {
+    console.log("response search api", response);
     const data = await response.json();
     return data;
-  }
-  else{
+  } else {
     return {
-      error: "Not found"
-    }
+      error: "Not found",
+    };
   }
 };
 
@@ -59,13 +57,12 @@ export const contractsByUserAddress = async (userAddress: string) => {
   const response = await fetch(
     `${config.metaServer}/indexer/contracts/user-contracts/${userAddress}`
   );
-  try{
+  try {
     const data = await response.json();
     return data;
-  }
-  catch(err){
+  } catch (err) {
     console.log(err);
-    return undefined
+    return undefined;
   }
 };
 
@@ -92,9 +89,8 @@ export const txnDataBySlug = async (contractSlug: string, page: number) => {
     );
     const data = await response.json();
     return data;
-  }
-  catch (err) {
-    console.log(err)
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -122,22 +118,20 @@ export const createNewContract = async (data: any) => {
 };
 
 export const createNewPublisher = async (data: any, type: string) => {
-  let url = `${config.metaServer}/indexer/publishers/create`
+  let url = `${config.metaServer}/indexer/publishers/create`;
   if (type == "Individual") {
-    url = `${config.metaServer}/indexer/publishers/create`
+    url = `${config.metaServer}/indexer/publishers/create`;
+  } else if (type == "Organization") {
+    url = `${config.metaServer}/indexer/publishers/create?type=org`;
   }
-  else if (type == "Organization") {
-    url = `${config.metaServer}/indexer/publishers/create?type=org`
-  }
-  console.log(data)
+  console.log(data);
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     },
-  }
-  );
+  });
   console.log("new publisher created ", response);
   return response.json();
 };
@@ -157,16 +151,15 @@ export const deleteContract = async (contract_id: any) => {
 };
 
 export const txnByChainId = async (chain_id: any, page: any) => {
-  let url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}?page=${page}`
+  let url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}?page=${page}`;
   const response = await fetch(url);
-  if(response.status == 200){
+  if (response.status == 200) {
     const data = await response.json();
     return data;
-  }
-  else{
+  } else {
     return {
-      error: "Not found"
-    }
+      error: "Not found",
+    };
   }
 };
 
@@ -186,7 +179,23 @@ export const checkUniqueData = async (dataType: any, searchData: any) => {
   return data;
 };
 
+export const etherscanVerification = async (contractAddress: any) => {
+  const res = await fetch(
+    `https://api.etherscan.io/api?module=contract&action=getabi&address=${contractAddress}&apikey=${config.ETHERSCAN_API_KEY}`
+  );
+  const data = await res.json();
+  console.log(data);
+  return data;
+};
+export const polygoncanVerification = async (contractAddress: any) => {
+  const res = await fetch(
+    `https://api.polygonscan.com/api?module=contract&action=getabi&address=${contractAddress}&apikey=${config.POLYGONSCAN_API_KEY}`
+  );
+  const data = await res.json();
+  console.log(data);
+  return data;
+};
+
 // /indexer/transactions/fetch-by-user-address/:from_address
 
 // /indexer/transactions/fetch-by-chain-id/:chain_id
-
