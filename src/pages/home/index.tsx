@@ -3,16 +3,15 @@ import { style } from "@/styles/StyledConstants";
 
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
+import Marquee from "@/components/Marquee/Marquee";
+import TransactionCard from "@/components/cards/TransactionCard";
 import CarouselSlide from "@/components/studio/CarouselSlide";
+import useTransaction from "@/hooks/studio/useTransaction";
 import GlobalIcons from "@/styles/GlobalIcons";
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Marquee from "@/components/Marquee/Marquee";
-import { useState, useEffect } from "react"
-import { getAllTransactions } from "@/service/ApiService";
-import TransactionCard from "@/components/cards/TransactionCard";
-import useTransaction from "@/hooks/studio/useTransaction";
 
 
 export default function Home() {

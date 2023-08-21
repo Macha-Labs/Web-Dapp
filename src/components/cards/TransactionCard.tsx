@@ -5,6 +5,8 @@ import GlobalIcons from "@/styles/GlobalIcons"
 import { style } from "@/styles/StyledConstants"
 import { Avatar, Box, Image, Text } from "@chakra-ui/react"
 import Link from "next/link"
+import { useEffect } from "react"
+import createWeb3Avatar from 'web3-avatar';
 
 type Props = {
     from: string,
@@ -16,6 +18,10 @@ type Props = {
 }
 
 const TransactionCard = ({ from, to, method_name, timestamp, chain_id, txn_hash }: Props) => {
+
+    useEffect(() => {
+        createWeb3Avatar(`#avatar${txn_hash}`, from)
+    },[])
 
     return (
         <Link href={`/search/transaction/${txn_hash}`} style={{
@@ -38,7 +44,7 @@ const TransactionCard = ({ from, to, method_name, timestamp, chain_id, txn_hash 
             >
                 <FlexRow hrAlign="flex-start">
                     <Box>
-                        <Avatar src={GlobalIcons["avatar-default"]} size="sm" />
+                        <Box height={style.icon.sizes.xl} width={style.icon.sizes.xl} id={`avatar${txn_hash}`}></Box>
                     </Box>
                     <Box
                         style={{
