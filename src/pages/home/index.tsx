@@ -103,7 +103,7 @@ export default function Home() {
                         body={
                             <>
                                 {hookTransaction.latestTransactions.map((transaction: any) => (
-                                    <TransactionCard key={transaction._id} from={transaction.transaction.from} to={transaction?.transaction?.to} chain_id={transaction?.transaction?.chain_id} method_name={transaction?.transaction?.method_name} timestamp={transaction?.timestamp} />
+                                    <TransactionCard key={transaction._id} from={transaction.transaction.from} to={transaction?.transaction?.to} chain_id={transaction?.transaction?.chain_id} method_name={transaction?.transaction?.method_name} timestamp={transaction?.timestamp} txn_hash={transaction?.transaction?.txn_hash} />
                                 ))}
                             </>
                         }
