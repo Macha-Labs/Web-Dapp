@@ -62,6 +62,9 @@ const useContractCreate = (modal: any) => {
           return false
         }
         else {
+          if($contractFormData.read_abi_from  != "" && $contractFormData.read_abi_from == undefined){
+            
+          }
           return true;
         }
       }
