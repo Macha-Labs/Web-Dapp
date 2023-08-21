@@ -177,6 +177,28 @@ const chains: any = {
       },
     ],
   },
+  314: {
+    chainName: "Filecoin Mainnet",
+    chainImage: "logo-filecoin",
+    about: `Mainnet is the live production network that all nodes on the Filecoin network are connected to. It never resets.`,
+    team: [],
+    links: [
+      {
+        title: "Twitter",
+        link: "https://twitter.com/Filecoin",
+      },
+      {
+        title: "filecoin.io",
+        link: "https://filecoin.io/",
+      },
+    ],
+    wallets: [
+      {
+        title: "Metamask",
+        link: "https://metamask.io/",
+      },
+    ],
+  },
   314159: {
     chainName: "Filecoin Calibration Testnet",
     chainImage: "logo-filecoin",

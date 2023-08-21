@@ -5,15 +5,26 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import CarouselSlide from "@/components/studio/CarouselSlide";
 import GlobalIcons from "@/styles/GlobalIcons";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Marquee from "@/components/Marquee/Marquee";
+import { useState, useEffect } from "react"
+import { getAllTransactions } from "@/service/ApiService";
+import TransactionCard from "@/components/cards/TransactionCard";
+import useTransaction from "@/hooks/studio/useTransaction";
+
 
 export default function Home() {
+    const hookTransaction = useTransaction()
+
+    useEffect(() => {
+        hookTransaction._fetchLatestTransactions()
+    }, []);
 
     const renderBody = () => {
         return (
-            <Box paddingX={style.padding.xxs}>
+            <Box paddingX={style.padding.xxs} marginBottom={style.margin.nav}>
                 <Carousel
                     autoPlay
                     // showIndicators={false}
@@ -86,6 +97,19 @@ export default function Home() {
                         bannerImage="/assets/explore/mirror%20carousal%20right%20full%20image.svg"
                     />
                 </Carousel>
+                {hookTransaction.latestTransactions &&
+                    <Marquee
+                        speed={50000}
+                        body={
+                            <>
+                                {hookTransaction.latestTransactions.map((transaction: any) => (
+                                    <TransactionCard key={transaction._id} from={transaction.transaction.from} to={transaction?.transaction?.to} chain_id={transaction?.transaction?.chain_id} method_name={transaction?.transaction?.method_name} timestamp={transaction?.timestamp} />
+                                ))}
+                            </>
+                        }
+                    >
+                    </Marquee>
+                }
             </Box>
         );
     };

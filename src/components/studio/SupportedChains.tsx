@@ -18,16 +18,21 @@ const SupportedChains = ({ data, id }: Props) => {
       onClick={() => {
         router.push(`/search/network/${id}`);
       }}
-      width={"15%"}
+      width={"20%"}
+      border={style.card.border.meta}
+      marginX={style.margin.sm}
+      marginTop={style.margin.sm}
+      padding={style.padding.sm}
+      borderRadius={style.card.borderRadius.default}
     >
-      <FlexColumn width="fit-content" vrAlign="center">
+      <FlexColumn width="100%" vrAlign="center" hrAlign="center">
         <Image
           src={GlobalIcons[data.chainImage]}
           height={style.icon.sizes["3xl"]}
           alt="img"
           marginBottom={style.margin.sm}
         />
-        <Heading fontSize={style.font.h5} textAlign="center" height="2rem">{data.chainName}</Heading>
+        <Heading fontSize={style.font.h5} textAlign="center" height="2.5rem">{data.chainName}</Heading>
       </FlexColumn>
     </Box>
   );

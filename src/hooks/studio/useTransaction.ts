@@ -1,9 +1,11 @@
 import { timeStampConversion, truncateAddress } from "@/helpers";
-import { contractDataBySlug, transactionData } from "@/service/ApiService";
+import { contractDataBySlug, getAllTransactions, transactionData } from "@/service/ApiService";
 import { useState } from "react";
 
 const useTransaction = () => {
   const [transactionDetails, setTransactionDetails] = useState<any>();
+  const [latestTransactions, setLatestTransactions] = useState<any>();
+
   const [methodParams, setMethodParams] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -34,9 +36,8 @@ const useTransaction = () => {
             },
             {
               key: "Gas Price	",
-              value: `${
-                parseInt(res.data?.transaction.gas_price, 16) / 1000000000
-              } gwei`,
+              value: `${parseInt(res.data?.transaction.gas_price, 16) / 1000000000
+                } gwei`,
               src: "/assets/icons/coloured-square-gas-price.svg",
             },
             {
@@ -88,11 +89,24 @@ const useTransaction = () => {
     });
   };
 
+  const _fetchLatestTransactions = async () => {
+    getAllTransactions().then((res: any) => {
+      if (res.data) {
+        console.log(res.data, "latest txn");
+        setLatestTransactions(res.data);
+      } else {
+        console.log("Couldnt fetch");
+      }
+    });
+  }
+
   return {
     transactionDetails: transactionDetails,
     methodParams: methodParams,
     isLoading: isLoading,
     _fetch: _fetch,
+    _fetchLatestTransactions: _fetchLatestTransactions,
+    latestTransactions: latestTransactions
   };
 };
 

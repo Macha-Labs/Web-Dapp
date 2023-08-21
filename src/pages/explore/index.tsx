@@ -82,7 +82,7 @@ export default function Explore() {
               Explore Chains
             </Heading>
           </FlexColumn>
-          <FlexRow marginTop={"lg"} hrAlign="flex-start">
+          <FlexRow marginTop={"lg"} hrAlign="flex-start" flexWrap="wrap">
             {Object.keys(chains).map((chain: any, index) => {
               // console.log(chains[chain]);
               return (

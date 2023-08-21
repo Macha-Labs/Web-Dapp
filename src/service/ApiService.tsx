@@ -22,6 +22,15 @@ export const getLatestTransactions = async () => {
   return data;
 };
 
+export const getAllTransactions = async () => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/transactions/fetchAll`
+  );
+  const data = await response.json();
+  return data;
+};
+
+
 export const searchAllMetas = async (searchTerm: string) => {
   const response = await fetch(
     `${config.metaServer}/indexer/metas/fetch-by-search/${searchTerm}?limit=30`
@@ -150,8 +159,15 @@ export const deleteContract = async (contract_id: any) => {
 export const txnByChainId = async (chain_id: any, page: any) => {
   let url = `${config.metaServer}/indexer/transactions/fetch-by-chain-id/${chain_id}?page=${page}`
   const response = await fetch(url);
-  const data = await response.json();
-  return data;
+  if(response.status == 200){
+    const data = await response.json();
+    return data;
+  }
+  else{
+    return {
+      error: "Not found"
+    }
+  }
 };
 
 export const txnByUserAddress = async (from_address: any, page: any) => {

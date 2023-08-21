@@ -14,12 +14,17 @@ const useChainTxn = () => {
   const _fetch = async (chain_id: any) => {
     setIsLoading(true)
     txnByChainId(chain_id, page).then((res: any) => {
-      setTotalPages(Math.ceil(res.count / 10))
-      setTotalTxns(res.count)
-      console.log("chain txn fetching", res);
-      setIsLoading(false)
-      setChainTxnDetails(res.data);
-      setFilteredData(res.data);
+      if(res.error){
+        setIsLoading(false)
+      }
+      else{
+        setTotalPages(Math.ceil(res.count / 10))
+        setTotalTxns(res.count)
+        console.log("chain txn fetching", res);
+        setIsLoading(false)
+        setChainTxnDetails(res.data);
+        setFilteredData(res.data);
+      }
     });
   };
 

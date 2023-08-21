@@ -5,29 +5,11 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import CollectorCard from "@/components/cards/CollectorsCard";
 import GraphCard from "@/components/cards/GraphCard";
 import SongCard from "@/components/cards/SongCard";
-import CarouselSlide from "@/components/studio/CarouselSlide";
-import chains from "@/data/network";
-import { truncateAddress } from "@/helpers";
-import { getLatestTransactions } from "@/service/ApiService";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-
 
 const Explorer = () => {
-  const [latestTransactions, setLatestTransactions] = useState<any>();
-
-  useEffect(() => {
-    getLatestTransactions().then((res) => {
-      if (res.data) {
-        console.log(res.data, "latest txn");
-        setLatestTransactions(res.data);
-      } else {
-        console.log("Couldnt fetch");
-      }
-    });
-  }, []);
 
   return (
     <FlexColumn hrAlign="flex-start" width="100%">
@@ -65,22 +47,19 @@ const Explorer = () => {
               padding: "2% 0.5%",
             }}
           >
-            {latestTransactions &&
-              Object.keys(latestTransactions).map((chain: any) => (
-                <GraphCard
-                  key={chain}
-                  image={GlobalIcons[chains[chain].chainImage]}
-                  user={truncateAddress(
-                    latestTransactions[chain]?.transaction?.from
-                  )}
-                  title={truncateAddress(
-                    latestTransactions[chain]?.transaction?.to
-                  )}
-                  tag={truncateAddress(
-                    latestTransactions[chain]?.transaction?.txn_hash
-                  )}
-                />
-              ))}
+            {/* <GraphCard
+                   key={chain}
+                   image={GlobalIcons[chains[chain].chainImage]}
+                   user={truncateAddress(
+                     latestTransactions[chain]?.transaction?.from
+                   )}
+                   title={truncateAddress(
+                     latestTransactions[chain]?.transaction?.to
+                   )}
+                   tag={truncateAddress(
+                     latestTransactions[chain]?.transaction?.txn_hash
+                   )}
+                 />    */}
           </Box>
         </Box>
         <Box

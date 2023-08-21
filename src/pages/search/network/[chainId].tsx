@@ -69,7 +69,6 @@ const Network = () => {
           <Flex>
             <Box flex="7">
               {/* Content for column 1 */}
-
               <Box display="flex" flexDirection="column">
                 <Box display="flex" flexDirection="column">
                   <Text
@@ -252,91 +251,109 @@ const Network = () => {
       <FlexRow height="100vh">
         <Loader size="lg" />
       </FlexRow>
-    ) : (
-      <>
-        <Box>
-          <>
-            <Box>
-              {/* <Text fontSize="3rem">Interactions</Text> */}
-              <Flex justify="space-between">
-                <Box>
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    marginBottom={style.margin.md}
-                  >
-                    <IconBase
-                      size="2xl"
-                      slug={chainId && chains[chainId]?.chainImage}
-                    />
-                    <Text
-                      fontSize={style.font.h1}
-                      fontWeight="600"
-                      marginBottom={0}
-                      marginLeft={style.margin.xxs}
-                    >
-                      {chainId && chains[chainId]?.chainName}
-                    </Text>
-                  </Box>
-                </Box>
-                {/* <Box>Symbols</Box> */}
-              </Flex>
-              <Flex
-                justify="space-between"
-                border={style.card.border.contract}
-                borderRadius={style.card.borderRadius.default}
-              >
-                <Box
-                  flex="1"
-                  p={4}
-                  display="flex"
-                  justifyContent="space-between"
-                >
-                  <Box>
-                    <Text marginBottom={0}>Transactions Indexed</Text>
-                    <Text
-                      marginBottom={0}
-                      fontWeight={style.fontWeight.extraDark}
-                    >
-                      {hookChainTxn.totalTxns.toLocaleString("en-US")}
-                    </Text>
-                  </Box>
-                  <Divider
-                    orientation="vertical"
-                    margin={0}
-                    border={style.card.border.meta}
-                    width={"0px"}
-                  />
-                </Box>
-                <Box flex="1" p={4}>
-                  <Text marginBottom={0}>Latest Block</Text>
-                  <Text
-                    marginBottom={0}
-                    fontWeight={style.fontWeight.extraDark}
-                  >
-                    {hookAlchemy.latestBlock}
-                  </Text>
-                </Box>
-              </Flex>
-            </Box>
-            <Box marginTop={style.margin.md}>
-              <Tabs
-                width="fit-content"
-                options={chainNav}
-                gstyle={{
-                  fontSize: `${style.font.h5}`,
-                  marginBottom: `${style.margin.sm}`,
-                }}
-                value={selectedNavTab}
-                onChange={setSelectedNavTab}
+    ) : (hookChainTxn.contractTxnDetails != undefined ? <>
+      <Box>
+        <Flex justify="space-between">
+          <Box>
+            <Box
+              display="flex"
+              alignItems="center"
+              marginBottom={style.margin.md}
+            >
+              <IconBase
+                size="2xl"
+                slug={chainId && chains[chainId]?.chainImage}
               />
-              {/* <Divider /> */}
-              {renderTxns()}
-              {renderAbout()}
+              <Text
+                fontSize={style.font.h1}
+                fontWeight="600"
+                marginBottom={0}
+                marginLeft={style.margin.xxs}
+              >
+                {chainId && chains[chainId]?.chainName}
+              </Text>
             </Box>
-          </>
+          </Box>
+          {/* <Box>Symbols</Box> */}
+        </Flex>
+        <Flex
+          justify="space-between"
+          border={style.card.border.contract}
+          borderRadius={style.card.borderRadius.default}
+        >
+          <Box
+            flex="1"
+            p={4}
+            display="flex"
+            justifyContent="space-between"
+          >
+            <Box>
+              <Text marginBottom={0}>Transactions Indexed</Text>
+              <Text
+                marginBottom={0}
+                fontWeight={style.fontWeight.extraDark}
+              >
+                {hookChainTxn.totalTxns.toLocaleString("en-US")}
+              </Text>
+            </Box>
+            <Divider
+              orientation="vertical"
+              margin={0}
+              border={style.card.border.meta}
+              width={"0px"}
+            />
+          </Box>
+          <Box flex="1" p={4}>
+            <Text marginBottom={0}>Latest Block</Text>
+            <Text
+              marginBottom={0}
+              fontWeight={style.fontWeight.extraDark}
+            >
+              {hookAlchemy.latestBlock}
+            </Text>
+          </Box>
+        </Flex>
+      </Box>
+      <Box marginTop={style.margin.md}>
+        <Tabs
+          width="fit-content"
+          options={chainNav}
+          gstyle={{
+            fontSize: `${style.font.h5}`,
+            marginBottom: `${style.margin.sm}`,
+          }}
+          value={selectedNavTab}
+          onChange={setSelectedNavTab}
+        />
+        {/* <Divider /> */}
+        {renderTxns()}
+        {renderAbout()}
+      </Box>
+    </> : <Box>
+      <Flex justify="space-between">
+        <Box>
+          <Box
+            display="flex"
+            alignItems="center"
+            marginBottom={style.margin.md}
+          >
+            <IconBase
+              size="2xl"
+              slug={chainId && chains[chainId]?.chainImage}
+            />
+            <Text
+              fontSize={style.font.h1}
+              fontWeight="600"
+              marginBottom={0}
+              marginLeft={style.margin.xxs}
+            >
+              {chainId && chains[chainId]?.chainName}
+            </Text>
+          </Box>
         </Box>
-      </>
+        {/* <Box>Symbols</Box> */}
+      </Flex>
+    </Box>
     );
   };
   const renderBody = () => {
