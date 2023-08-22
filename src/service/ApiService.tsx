@@ -187,9 +187,25 @@ export const etherscanVerification = async (contractAddress: any) => {
   console.log(data);
   return data;
 };
-export const polygoncanVerification = async (contractAddress: any) => {
+export const polygonScanVerification = async (contractAddress: any) => {
   const res = await fetch(
     `https://api.polygonscan.com/api?module=contract&action=getabi&address=${contractAddress}&apikey=${config.POLYGONSCAN_API_KEY}`
+  );
+  const data = await res.json();
+  console.log(data);
+  return data;
+};
+export const baseScanVerification = async (contractAddress: any) => {
+  const res = await fetch(
+    `https://api.basescan.org/api?module=contract&action=getabi&address=${contractAddress}&apikey=${config.BASESCAN_API_KEY}`
+  );
+  const data = await res.json();
+  console.log(data);
+  return data;
+};
+export const opScanVerification = async (contractAddress: any) => {
+  const res = await fetch(
+    `https://api-optimistic.etherscan.io/api?module=contract&action=getabi&address=${contractAddress}&apikey=${config.OPSCAN_API_KEY}`
   );
   const data = await res.json();
   console.log(data);

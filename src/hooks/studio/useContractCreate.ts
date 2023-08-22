@@ -1,8 +1,10 @@
 import {
+  baseScanVerification,
   checkUniqueData,
   createNewContract,
   etherscanVerification,
-  polygoncanVerification,
+  opScanVerification,
+  polygonScanVerification,
 } from "@/service/ApiService";
 import useAuthStore from "@/store/useAuthStore";
 import useContractFormStore from "@/store/useContractFormStore";
@@ -34,6 +36,38 @@ const useContractCreate = (modal: any) => {
       100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
     console.log("percentage done: ", percentageDone);
     setIpfsLoading(percentageDone);
+  };
+
+  const chainVerification = async (address: any) => {
+    if ($contractFormData.chain_id == 1) {
+      const res = await etherscanVerification(address);
+      if (res?.status == 1) return true;
+      else {
+        setFormStep(1.5);
+        return false;
+      }
+    } else if ($contractFormData.chain_id == 137) {
+      const res = await polygonScanVerification(address);
+      if (res?.status == 1) return true;
+      else {
+        setFormStep(1.5);
+        return false;
+      }
+    } else if ($contractFormData.chain_id == 8453) {
+      const res = await baseScanVerification(address);
+      if (res?.status == 1) return true;
+      else {
+        setFormStep(1.5);
+        return false;
+      }
+    } else if ($contractFormData.chain_id == 10) {
+      const res = await opScanVerification(address);
+      if (res?.status == 1) return true;
+      else {
+        setFormStep(1.5);
+        return false;
+      }
+    }
   };
 
   const validateSteps = async () => {
@@ -78,45 +112,9 @@ const useContractCreate = (modal: any) => {
             $contractFormData.read_abi_from != "" &&
             $contractFormData.read_abi_from != undefined
           ) {
-            if ($contractFormData.chain_id == 1) {
-              const res = await etherscanVerification(
-                $contractFormData.read_abi_from
-              );
-              if (res?.status == 1) return true;
-              else {
-                setFormStep(1.5);
-                return false;
-              }
-            } else if ($contractFormData.chain_id == 137) {
-              const res = await polygoncanVerification(
-                $contractFormData.read_abi_from
-              );
-              if (res?.status == 1) return true;
-              else {
-                setFormStep(1.5);
-                return false;
-              }
-            }
+            chainVerification($contractFormData.read_abi_from);
           } else {
-            if ($contractFormData.chain_id == 1) {
-              const res = await etherscanVerification(
-                $contractFormData.address
-              );
-              if (res?.status == 1) return true;
-              else {
-                setFormStep(1.5);
-                return false;
-              }
-            } else if ($contractFormData.chain_id == 137) {
-              const res = await polygoncanVerification(
-                $contractFormData.address
-              );
-              if (res?.status == 1) return true;
-              else {
-                setFormStep(1.5);
-                return false;
-              }
-            }
+            chainVerification($contractFormData.address);
           }
           return true;
         }
