@@ -52,6 +52,7 @@ const TransactionCard = ({
               size="2.5rem"
               name={`${txn_hash}${from}${to}`}
               variant="pixel"
+              colors={["#021E62", "#197CEC", "#231F20", "#5BA1FF", "#5BA1FF"]}
             />
           </Box>
           <Box
