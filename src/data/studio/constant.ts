@@ -45,7 +45,7 @@ export const exploreModules = [
     borderColor: "#00264f",
   },
   {
-    heading: "Sound Audio",
+    heading: "Sound Music",
     description:
       "Discover new amazing music of your favorite artists/Unearth captivating new music from your beloved artists.",
     image: "logo-Sound.xyz",

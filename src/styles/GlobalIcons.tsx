@@ -165,7 +165,6 @@ const GlobalIcons: any = {
   "logo-Farcaster": "/Studio-Logos/farcaster.svg",
   "logo-Poap": "/assets/icons/POAP.svg",
   "logo-Mirror": "/assets/icons/Mirror.svg",
-  "logo-Sound.xyz": "/Studio-Logos/sound.svg",
   "logo-Paragraph.xyz": "/Studio-Logos/paragraph.svg",
   "logo-MintKudos": "/Studio-Logos/mintcudos.svg",
   "logo-Ethereum": "/assets/icons/coloredEtherum.svg",
@@ -175,5 +174,6 @@ const GlobalIcons: any = {
   "logo-filecoin": "/assets/icons/coloredFilecoin.svg",
   "logo-Ens": "/assets/icons/ENS.svg",
   "logo-Layer3": "/assets/icons/layer3.jpg",
+  "logo-Sound.xyz": "/assets/icons/sound.svg",
 };
 export default GlobalIcons;

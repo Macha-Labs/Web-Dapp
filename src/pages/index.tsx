@@ -175,7 +175,7 @@ export default function Home() {
         </Box>
         <FlexRow marginTop={"4xl"} hrAlign="space-between">
           <Heading mb="0px" fontSize={style.font.h3} fontWeight={600}>
-            Latest POAP this week
+            Latest POAP indexed
           </Heading>
           <ButtonNative
             height="2rem"
