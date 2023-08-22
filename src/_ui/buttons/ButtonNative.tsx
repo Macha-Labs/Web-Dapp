@@ -27,11 +27,11 @@ type Props = {
   textFontSize?: string;
   height?: string;
   disabled?: boolean;
-  boxShadowHover?: any
-  border?: any
-  backgroundColorHover?: any
-  textColorHover?: any
-  borderColorWhite?: boolean
+  boxShadowHover?: any;
+  border?: any;
+  backgroundColorHover?: any;
+  textColorHover?: any;
+  borderColorWhite?: boolean;
 };
 
 export default function ButtonNative({
@@ -62,11 +62,15 @@ export default function ButtonNative({
   border,
   backgroundColorHover,
   textColorHover,
-  borderColorWhite = true
+  borderColorWhite = true,
 }: Props) {
   return (
     <Button
-      _hover={{boxShadow: `${boxShadowHover}`, backgroundColor: `${backgroundColorHover}`,color: `${textColorHover}`}}
+      _hover={{
+        boxShadow: `${boxShadowHover}`,
+        backgroundColor: `${backgroundColorHover}`,
+        color: `${textColorHover}`,
+      }}
       isDisabled={disabled ? disabled : false}
       size={size ? size : "md"}
       variant={variant}
@@ -78,15 +82,17 @@ export default function ButtonNative({
       marginBottom={`${marginBottom ? gStyle.margin[marginBottom] : "0px"}`}
       marginRight={`${marginRight ? gStyle.margin[marginRight] : "0px"}`}
       marginLeft={`${marginLeft ? gStyle.margin[marginLeft] : "0px"}`}
-      borderRadius={`${borderRadius
-        ? gStyle.button.borderRadius[borderRadius]
-        : gStyle.button.borderRadius.default
-        }`}
+      borderRadius={`${
+        borderRadius
+          ? gStyle.button.borderRadius[borderRadius]
+          : gStyle.button.borderRadius.default
+      }`}
       paddingRight={`${paddingRight ? gStyle.padding[paddingRight] : "12px"}`}
       paddingLeft={`${paddingLeft ? gStyle.padding[paddingLeft] : "12px"}`}
       paddingTop={`${paddingTop ? gStyle.padding[paddingTop] : "12px"}`}
-      paddingBottom={`${paddingBottom ? gStyle.padding[paddingBottom] : "12px"
-        }`}
+      paddingBottom={`${
+        paddingBottom ? gStyle.padding[paddingBottom] : "12px"
+      }`}
       borderColor="#14244b"
       border={borderColorWhite ? border : ""}
       height={height ? height : "3rem"}

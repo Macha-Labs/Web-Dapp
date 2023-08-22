@@ -27,7 +27,6 @@ export default function Explore() {
   useEffect(() => {
     if (router.isReady) {
       hookMetasList._fetchMore();
-      hookMetasList._fetchMetaSchemas();
     }
   }, []);
 
@@ -35,44 +34,6 @@ export default function Explore() {
     return (
       <Box paddingX={style.padding.xxs}>
         <Box>
-          <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
-            <Heading
-              fontSize={style.font.h3}
-              fontWeight={600}
-              className="m-b-0"
-            >
-              Discover Meta Content
-            </Heading>
-          </FlexColumn>
-          <FlexRow hrAlign="flex-start" marginTop={"xl"} flexWrap="wrap">
-            {hookMetasList?.metaSchemas?.map((schema: any, index: any) => {
-              console.log(schema, "schema");
-              return (
-                <MetaCollectionCard
-                  key={index}
-                  heading={schema.name}
-                  tag1={schema.slug}
-                  tag2={schema.contract_slug}
-                  // description={schema.description}
-                  bg={schema.bg}
-                  borderColor={schema.borderColor}
-                  onCardClick={() => {
-                    router.push(
-                      {
-                        pathname: `/explore/[id]`,
-                        query: {
-                          id: schema?.slug,
-                        },
-                      },
-                      `/explore/${schema?.slug}`
-                    );
-                  }}
-                />
-              );
-            })}
-          </FlexRow>
-        </Box>
-        <Box marginTop={style.margin.xxxl}>
           <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
             <Heading
               fontSize={style.font.h3}

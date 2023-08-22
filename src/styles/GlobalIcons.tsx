@@ -44,10 +44,8 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-volume.svg?updatedAt=1680783916154",
   "icon-select":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-multiselect.svg?updatedAt=1680783884757",
-  "icon-edit":
-    "/assets/icons/Base_blue_icons/base-blue-edit.svg",
-  "icon-base-edit":
-    "/assets/icons/base-edit.svg",
+  "icon-edit": "/assets/icons/Base_blue_icons/base-blue-edit.svg",
+  "icon-base-edit": "/assets/icons/base-edit.svg",
   "icon-photo":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-image.svg?updatedAt=1680783874121",
   "icon-video":
@@ -103,8 +101,10 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-replyFilled.svg",
   "icon-dark-close": "/assets/icons/Dark_icons/dark-cancel.svg",
   "icon-close": "/assets/icons/Base_blue_icons/base-blue-cancel.svg",
-  "icon-home-outline": "/assets/icons/Base_blue_icons/base-blue-homeOutlined.svg",
-  "icon-compass-outline": "/assets/icons/Base_blue_icons/base-blue-compassOutlined.svg",
+  "icon-home-outline":
+    "/assets/icons/Base_blue_icons/base-blue-homeOutlined.svg",
+  "icon-compass-outline":
+    "/assets/icons/Base_blue_icons/base-blue-compassOutlined.svg",
   "icon-posts-outline": "/assets/icons/Base_blue_icons/base-blue-posts.svg",
   "icon-posts": "/assets/icons/Base_blue_icons/base-blue-postsFilled.svg",
   "icon-home": "/assets/icons/Base_blue_icons/base-blue-home.svg",
@@ -161,7 +161,6 @@ const GlobalIcons: any = {
   "icon-almost-there": "/assets/icons/database-restore%201.svg",
   "icon-congrats": "/assets/icons/congrats%20icon.svg",
   "logo-Lens": "/assets/icons/Lens.svg",
-  "logo-Ens": "/assets/icons/ENS.svg",
   "logo-Macha": "/Studio-Logos/metawork.svg",
   "logo-Farcaster": "/Studio-Logos/farcaster.svg",
   "logo-Poap": "/assets/icons/POAP.svg",
@@ -174,5 +173,7 @@ const GlobalIcons: any = {
   "logo-Optimism": "/assets/icons/optimism.svg",
   "logo-Base": "/assets/icons/logo-base.svg",
   "logo-filecoin": "/assets/icons/coloredFilecoin.svg",
+  "logo-Ens": "/assets/icons/ENS.svg",
+  "logo-Layer3": "/assets/icons/layer3.jpg",
 };
 export default GlobalIcons;

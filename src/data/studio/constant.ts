@@ -22,7 +22,7 @@ export const exploreModules = [
     heading: "ENS Handles",
     description:
       "Search, connect and interact anyone on decentralized social network",
-    image: "logo-Farcaster",
+    image: "logo-Ens",
     onClick: () => {},
     bg: "#0d0914",
     borderColor: "#2a184d",
@@ -67,6 +67,14 @@ export const exploreModules = [
     description:
       "Create, send, and mint Kudos to celebrate your community’s achievements",
     image: "logo-MintKudos",
+    onClick: () => {},
+    bg: "#1c2724",
+    borderColor: "#2b3c37",
+  },
+  {
+    heading: "Layer3 Quests",
+    description: "Search quests, bounties and rewards from Layer3",
+    image: "logo-Layer3",
     onClick: () => {},
     bg: "#1c2724",
     borderColor: "#2b3c37",
@@ -192,5 +200,5 @@ export const alchemyNetworksData: any = {
 
 export const metaSchemaName: any = {
   lens_post: "Lens Posts",
-  ens_ethereum: "ENS Handles"
+  ens_ethereum: "ENS Handles",
 };

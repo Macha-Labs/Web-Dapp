@@ -10,7 +10,6 @@ import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Text } from "@chakra-ui/react";
 
 const Explorer = () => {
-
   return (
     <FlexColumn hrAlign="flex-start" width="100%">
       <Box
