@@ -29,24 +29,34 @@ const NavLeft = (props: any) => {
           <div className="body" style={{ padding: "10px 0px", height: "100%" }}>
             <FlexColumn hrAlign="space-between" vrAlign="center">
               <FlexColumn height="fit-content">
-                <Link href="/home">
-                  <IconImage
-                    slug={router.pathname === "/home" ? "icon-home" : "icon-home-outline"}
-                    size="md"
-                    style={{
-                      className: `m-b-1 ${
-                        router.pathname === "/home" ? "state_active" : "state_hover"
-                      } `,
-                    }}
-                  />
-                </Link>
                 <Link href="/">
                   <IconImage
-                    slug={router.pathname === "/" ? "icon-posts" : "icon-posts-outline"}
+                    slug={
+                      router.pathname === "/"
+                        ? "icon-home"
+                        : "icon-home-outline"
+                    }
                     size="md"
                     style={{
                       className: `m-b-1 ${
                         router.pathname === "/" ? "state_active" : "state_hover"
+                      } `,
+                    }}
+                  />
+                </Link>
+                <Link href="/feed">
+                  <IconImage
+                    slug={
+                      router.pathname === "/feed"
+                        ? "icon-posts"
+                        : "icon-posts-outline"
+                    }
+                    size="md"
+                    style={{
+                      className: `m-b-1 ${
+                        router.pathname === "/feed"
+                          ? "state_active"
+                          : "state_hover"
                       } `,
                     }}
                   />
@@ -67,7 +77,11 @@ const NavLeft = (props: any) => {
                 <Link href="/explore">
                   <Tooltip label="Chat">
                     <IconImage
-                      slug={router.pathname === "/explore" ? "icon-compass" : "icon-compass-outline"}
+                      slug={
+                        router.pathname === "/explore"
+                          ? "icon-compass"
+                          : "icon-compass-outline"
+                      }
                       size="md"
                       style={{
                         className: `m-b-1 ${
