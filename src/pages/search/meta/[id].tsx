@@ -27,6 +27,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 
 const Meta = () => {
   const hookMeta = useMeta();
@@ -82,12 +83,20 @@ const Meta = () => {
           )}
         </Box>
         <Box width="68%">
-          <Tabs
-            options={options}
-            onChange={setTab}
-            value={tab}
-            width="fit-content"
-          />
+          <FlexRow hrAlign="space-between" height="fit-content">
+            <Tabs
+              options={options}
+              onChange={setTab}
+              value={tab}
+              width="fit-content"
+            />
+            <ButtonNative
+              text="Share On XMTP"
+              height="2.5rem"
+              variant="state_default_hover"
+              onClick={() => {}}
+            />
+          </FlexRow>
           {tab == "Data" && (
             <>
               <CardNative
@@ -235,7 +244,7 @@ const Meta = () => {
                           display: "flex",
                           justifyContent: "flex-end",
                           alignItems: "flex-start",
-                          width: "80%"
+                          width: "80%",
                         }}
                         onClick={() => {
                           setToggleIpfs(!toggleIpfs);
@@ -252,7 +261,7 @@ const Meta = () => {
                       <Box>
                         {Object.keys(
                           hookMeta?.metaData?.meta?.data?.ipfs[
-                          Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
+                            Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
                           ]
                         ).map((item, index) => {
                           return (
@@ -272,10 +281,10 @@ const Meta = () => {
                                   )[0]
                                 ][item] == "string"
                                   ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                  Object.keys(
-                                    hookMeta?.metaData?.meta?.data?.ipfs
-                                  )[0]
-                                  ][item]
+                                      Object.keys(
+                                        hookMeta?.metaData?.meta?.data?.ipfs
+                                      )[0]
+                                    ][item]
                                   : "[ ]"}
                               </Text>
                               <Box
@@ -294,11 +303,11 @@ const Meta = () => {
                                         )[0]
                                       ][item] == "string"
                                         ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                        Object.keys(
-                                          hookMeta?.metaData?.meta?.data
-                                            ?.ipfs
-                                        )[0]
-                                        ][item]
+                                            Object.keys(
+                                              hookMeta?.metaData?.meta?.data
+                                                ?.ipfs
+                                            )[0]
+                                          ][item]
                                         : "[ ]"
                                     );
                                     toast({
@@ -359,7 +368,7 @@ const Meta = () => {
                                 display: "flex",
                                 justifyContent: "flex-end",
                                 alignItems: "flex-start",
-                                width: "80%"
+                                width: "80%",
                               }}
                               onClick={() => {
                                 setToggleIpfs(!toggleIpfs);
@@ -372,48 +381,46 @@ const Meta = () => {
                               )}
                             </Box>
                           </FlexRow>
-                          {
-                            toggleIpfs && (
-                              <Box>
-                                {Object.keys(source).map((item, index) => {
-                                  return (
+                          {toggleIpfs && (
+                            <Box>
+                              {Object.keys(source).map((item, index) => {
+                                return (
+                                  <Box
+                                    key={index}
+                                    display={"flex"}
+                                    marginTop={style.margin.sm}
+                                  >
+                                    <Text
+                                      mr={style.margin.xs}
+                                      width={"20%"}
+                                    >{`${item} : `}</Text>
+                                    <Text width={"70%"} textAlign={"right"}>
+                                      {source[item]}
+                                    </Text>
                                     <Box
-                                      key={index}
+                                      width="5%"
                                       display={"flex"}
-                                      marginTop={style.margin.sm}
+                                      justifyContent={"flex-end"}
                                     >
-                                      <Text
-                                        mr={style.margin.xs}
-                                        width={"20%"}
-                                      >{`${item} : `}</Text>
-                                      <Text width={"70%"} textAlign={"right"}>
-                                        {source[item]}
-                                      </Text>
-                                      <Box
-                                        width="5%"
-                                        display={"flex"}
-                                        justifyContent={"flex-end"}
-                                      >
-                                        <IconBase
-                                          slug="icon-copy"
-                                          onClick={() => {
-                                            navigator.clipboard.writeText(
-                                              source[item]
-                                            );
-                                            toast({
-                                              title: "Copied To Clipboard",
-                                              status: "success",
-                                              duration: 3000,
-                                            });
-                                          }}
-                                        />
-                                      </Box>
+                                      <IconBase
+                                        slug="icon-copy"
+                                        onClick={() => {
+                                          navigator.clipboard.writeText(
+                                            source[item]
+                                          );
+                                          toast({
+                                            title: "Copied To Clipboard",
+                                            status: "success",
+                                            duration: 3000,
+                                          });
+                                        }}
+                                      />
                                     </Box>
-                                  );
-                                })}
-                              </Box>
-                            )
-                          }
+                                  </Box>
+                                );
+                              })}
+                            </Box>
+                          )}
                         </Box>
                       );
                     }
@@ -422,7 +429,7 @@ const Meta = () => {
             </>
           )}
         </Box>
-      </Box >
+      </Box>
     );
   };
 

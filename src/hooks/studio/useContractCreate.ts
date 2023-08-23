@@ -1,3 +1,4 @@
+import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
 import {
   baseScanVerification,
   checkUniqueData,
@@ -255,7 +256,17 @@ const useContractCreate = (modal: any) => {
     } else {
       if (await validateSteps()) {
         if (formStep == 1.5) {
-          console.log(formStep);
+          const blob = new Blob(
+            [JSON.stringify($contractFormData.contract_abi)],
+            {
+              type: "application/json",
+            }
+          );
+          const files = [new File([blob], "file.json")];
+          // const syntheticEvent = createFileInputChangeEvent(file);
+          // let e = { target: { files: [files[0]] } };
+          // const cid = await deploytoLightHouse(files[0], setLoadingCallback);
+          // console.log(cid);
           setFormStep(2);
         } else {
           console.log(formStep);
