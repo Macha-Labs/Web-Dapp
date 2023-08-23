@@ -37,7 +37,7 @@ export default function Home() {
     return (
       <Box paddingX={style.padding.xxs} marginBottom={style.margin.nav}>
         <Carousel
-          autoPlay
+          // autoPlay
           // showIndicators={false}
           showArrows={false}
           showStatus={false}
@@ -84,18 +84,41 @@ export default function Home() {
           // }
         >
           <CarouselSlide
-            title="LENS"
-            description="POSTS • PROFILES • CHATS"
-            avatarImage={GlobalIcons["logo-Lens"]}
-            bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
-            bgBlur="/assets/explore/lens%20carousal%20bg%20blur.svg"
-            bannerImage="/assets/explore/lens%20carousal%20right%20full%20image.svg"
+            title="Explore From MACHA"
+            description="POSTS • PROFILES • BLOGS"
+            avatarImage={GlobalIcons["logo-Macha-circular"]}
+            // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
+            bgGrid=""
+            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+            bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
+            buttonText="Explore"
           />
           <CarouselSlide
+            title="View From Contracts"
+            description="LENS • MIRROR • POAP"
+            avatarImage={GlobalIcons["base-SDK"]}
+            // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
+            bgGrid=""
+            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+            bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
+            buttonText="View Contracts Now"
+          />
+          <CarouselSlide
+            title="Discover From Chains"
+            description="TRANSACTIONS • INDEXING • CHAINS"
+            avatarImage={GlobalIcons["base-chain"]}
+            // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
+            bgGrid=""
+            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+            bannerImage="/assets/explore/home-carousal-3-hero-image.svg"
+            buttonText="View Chains"
+          />
+          {/* <CarouselSlide
             title="POAP"
             description="MINT • DROP • CONNECT"
             avatarImage={GlobalIcons["logo-Poap"]}
-            bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
+            // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
+            bgGrid=""
             bgBlur="/assets/explore/lens%20carousal%20bg%20blur.svg"
             bannerImage="/assets/explore/poap%20carousal%20right%20full%20image.svg"
           />
@@ -103,10 +126,11 @@ export default function Home() {
             title="MIRROR"
             description="BLOGS • NFTs • MINT"
             avatarImage={GlobalIcons["logo-Mirror"]}
-            bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
+            bgGrid=""
+            // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
             bgBlur="/assets/explore/lens%20carousal%20bg%20blur.svg"
             bannerImage="/assets/explore/mirror%20carousal%20right%20full%20image.svg"
-          />
+          /> */}
         </Carousel>
         {hookTransaction.latestTransactions && (
           <Marquee

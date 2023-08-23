@@ -161,7 +161,8 @@ const GlobalIcons: any = {
   "icon-almost-there": "/assets/icons/database-restore%201.svg",
   "icon-congrats": "/assets/icons/congrats%20icon.svg",
   "logo-Lens": "/assets/icons/Lens.svg",
-  "logo-Macha": "/Studio-Logos/metawork.svg",
+  "logo-Macha": "/assets/metawork.svg",
+  "logo-Macha-circular":"/assets/metawork-circular.svg",
   "logo-Farcaster": "/Studio-Logos/farcaster.svg",
   "logo-Poap": "/assets/icons/POAP.svg",
   "logo-Mirror": "/assets/icons/Mirror.svg",
@@ -175,5 +176,7 @@ const GlobalIcons: any = {
   "logo-Ens": "/assets/icons/ENS.svg",
   "logo-Layer3": "/assets/icons/layer3.jpg",
   "logo-Sound.xyz": "/assets/icons/sound.svg",
+  "base-chain":"/assets/explore/chain.svg",
+  "base-SDK":"/assets/explore/SDK.svg",
 };
 export default GlobalIcons;
