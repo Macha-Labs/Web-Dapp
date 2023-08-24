@@ -479,10 +479,12 @@ const ContractCreateEditModal = ({
                       marginTop="sm"
                       onChange={async (e?: any) => {
                         if (e.target.files && e.target.files[0]) {
-                          const file = e.target.files[0];
-                          console.log("Selected file:", file);
+                          // const file = e.target.files[0];
+                          // console.log("Selected file:", file);
+                          // const element = document.createElement("a");
+                          // element.href = URL.createObjectURL(file);
                           const cid = await deploytoLightHouse(
-                            e,
+                            e.target.files,
                             hookContractCreate.setLoadingCallback
                           );
                           hookContractCreate.$loadContractFormData({

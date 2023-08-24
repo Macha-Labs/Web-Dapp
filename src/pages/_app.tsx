@@ -21,6 +21,7 @@ import { filecoinCalibration, polygon } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { useEffect } from "react";
 import Header from "@/_ui/Head/Header";
+import { XMTPProvider } from "@xmtp/react-sdk";
 
 const { chains, provider } = configureChains(
   [filecoinCalibration, mainnet, polygon],
@@ -66,7 +67,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <AuthProvider>
               <DataProvider>
                 <ChakraProvider theme={theme}>
-                  <Component {...pageProps} />
+                  <XMTPProvider>
+                    <Component {...pageProps} />
+                  </XMTPProvider>
                 </ChakraProvider>
               </DataProvider>
             </AuthProvider>

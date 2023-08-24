@@ -282,6 +282,8 @@ const InputLabel = ({
           text="Upload File"
           iconRight={{ slug: "icon-upload" }}
           variant="state_default_hover"
+          height="2.5rem"
+          width="100%"
         />
       </FlexColumn>
     );
