@@ -202,3 +202,5 @@ export const metaSchemaName: any = {
   lens_post: "Lens Posts",
   ens_ethereum: "ENS Handles",
 };
+
+export const tagList: any = ["tag1", "tag2", "tag3"];

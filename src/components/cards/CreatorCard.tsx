@@ -3,26 +3,71 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import InputLabel from "@/_ui/input/InputLabel";
 import chains from "@/data/network";
+import { tagList } from "@/data/studio/constant";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, Input, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import {
+  Box,
+  Heading,
+  Image,
+  Input,
+  List,
+  ListItem,
+  Tag,
+  TagCloseButton,
+  Text,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 
 const CreatorCard = () => {
   const [inputType, setInputType] = useState<string>("");
   const [step, setStep] = useState<number>(1);
   const [tags, setTags] = useState<any>([]);
+  const [tagString, setTagString] = useState<string>();
+  const [suggestions, setSuggestions] = useState<any>([]);
+
+  useEffect(() => {
+    console.log("tags", tags);
+  }, [tags]);
+
+  const handleTagRemove = (tag: any) => {
+    const temp = tags;
+    temp.splice(tags.indexOf(tag), 1);
+    console.log("temp", temp);
+    setTags([...temp]);
+  };
+  const handleTagAdd = (tagToAdd: any) => {
+    if (!tags.includes(tagToAdd)) {
+      setTags([...tags, tagToAdd]);
+    }
+    setTagString("");
+    setSuggestions([]);
+  };
+  const handleInputChange = (e: any) => {
+    const value = e.target.value;
+    setTagString(value);
+
+    if (value === "") {
+      setSuggestions([]); // Clear suggestions when input is empty
+    } else {
+      // Generate suggestions based on value (you can replace this with your own logic)
+      const newSuggestions = ["tag1", "tag2", "tag3"].filter((tag) =>
+        tag.includes(value)
+      );
+      setSuggestions(newSuggestions);
+    }
+  };
   return (
     <Box
       height={"85vh"}
       border={style.card.border.meta}
       borderRadius={style.card.borderRadius.button}
-      overflow={"hidden"}
+      // overflow={"hidden"}
       marginBottom={style.margin.xxxl}
       boxShadow={style.card.shadow.default}
     >
-      <FlexRow height="fit-content">
-        <Box width={"40%"} height={"fit-content"}>
+      <FlexRow height="85vh">
+        <Box width={"40%"} height={"100%"}>
           {step == 1 && (
             <Image
               height={"85vh"}
@@ -99,15 +144,69 @@ const CreatorCard = () => {
                   >
                     Select
                   </Heading>
-                  <FlexRow>{tags.map(() => {})}</FlexRow>
+                  <FlexRow flexWrap={"wrap"} hrAlign="flex-start">
+                    {tags.map((item: any) => {
+                      return (
+                        <Tag
+                          marginRight={style.margin.xxs}
+                          key={`label-${item}`}
+                          // variant={"grey"}
+                          marginBottom={style.margin.sm}
+                          // marginTop={style.margin.sm}
+                        >
+                          <Text marginBottom={"0px"}>{item}</Text>
+
+                          <TagCloseButton
+                            onClick={() => {
+                              handleTagRemove(item);
+                            }}
+                          />
+                        </Tag>
+                      );
+                    })}
+                  </FlexRow>
                   <Input
                     type="text"
+                    value={tagString}
+                    onChange={handleInputChange}
+                    padding={style.padding.xxs}
                     onKeyDown={(e: any) => {
                       if (e.key === "Enter") {
-                        setTags([...tags, e.target.value]);
+                        handleTagAdd(tagString);
                       }
                     }}
                   />
+                  <Box position={"relative"} width={"100%"}>
+                    {suggestions.length > 0 && (
+                      <List
+                        styleType="none"
+                        // backgroundColor="#000511"
+                        backgroundColor="#020A21"
+                        width={"100%"}
+                        borderRadius="5px"
+                        boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
+                        padding="10px"
+                        marginTop="5px"
+                        zIndex="1"
+                        position="absolute"
+                        top="0"
+                      >
+                        {suggestions.map((suggestion: any) => (
+                          <ListItem
+                            key={suggestion}
+                            padding="5px 10px"
+                            margin="5px 0"
+                            borderRadius="3px"
+                            cursor="pointer"
+                            _hover={{ backgroundColor: "#00040d" }}
+                            onClick={() => handleTagAdd(suggestion)}
+                          >
+                            {suggestion}
+                          </ListItem>
+                        ))}
+                      </List>
+                    )}
+                  </Box>
                 </FlexColumn>
               </>
             )}
