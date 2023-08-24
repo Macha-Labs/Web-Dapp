@@ -5,12 +5,13 @@ import InputLabel from "@/_ui/input/InputLabel";
 import chains from "@/data/network";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 const CreatorCard = () => {
   const [inputType, setInputType] = useState<string>("");
   const [step, setStep] = useState<number>(1);
+  const [tags, setTags] = useState<any>([]);
   return (
     <Box
       height={"85vh"}
@@ -71,18 +72,44 @@ const CreatorCard = () => {
               </FlexRow>
             )}
             {step == 2 && (
-              <InputLabel
-                // value={hookContractCreate.$contractFormData.contract_abi}
-                inputType="textArea"
-                labelText="Share context in 150 Words"
-                placeholder="Give a  description of your post "
-                // onChange={(e: any) => {
-                //   e.preventDefault();
-                //   hookContractCreate.$loadContractFormData({
-                //     contract_abi: e.target.value,
-                //   });
-                // }}
-              />
+              <>
+                <InputLabel
+                  // value={hookContractCreate.$contractFormData.contract_abi}
+                  inputType="textArea"
+                  labelText="Share context in 150 Words"
+                  placeholder="Give a  description of your post "
+                  // onChange={(e: any) => {
+                  //   e.preventDefault();
+                  //   hookContractCreate.$loadContractFormData({
+                  //     contract_abi: e.target.value,
+                  //   });
+                  // }}
+                />
+                <FlexColumn vrAlign="flex-start" marginTop={"sm"}>
+                  <Heading
+                    as="h6"
+                    size="sm"
+                    marginRight={style.margin.xxs}
+                    bgGradient="linear(
+                  100.07deg,
+                  #2a85ff 0.39%,
+                  #2448c7 73.45%
+                )"
+                    bgClip="text"
+                  >
+                    Select
+                  </Heading>
+                  <FlexRow>{tags.map(() => {})}</FlexRow>
+                  <Input
+                    type="text"
+                    onKeyDown={(e: any) => {
+                      if (e.key === "Enter") {
+                        setTags([...tags, e.target.value]);
+                      }
+                    }}
+                  />
+                </FlexColumn>
+              </>
             )}
 
             {/* <FlexRow></FlexRow> */}
