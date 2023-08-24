@@ -20,6 +20,15 @@ export const deploytoLightHouse = async (e: any, progressCallback: any) => {
   return output.data.Hash;
 };
 
+export const uploadTextToLighthouse = async (text: string) => {
+  const response = await lighthouse.uploadBuffer(
+    text,
+    config.LIGHTHOUSE_API_KEY
+  );
+  console.log("https://gateway.lighthouse.storage/ipfs/" + response.data.Hash);
+  return response.data.Hash;
+};
+
 export const displayImage = (cid: string) => {
   return `https://gateway.lighthouse.storage/ipfs/${cid}`;
 };

@@ -22,11 +22,11 @@ export type AuthContextType = {
 export const AuthContext = createContext<AuthContextType>({
   signer: null,
   address: null,
-  connectWallet: () => { },
-  disconnectWallet: () => { },
+  connectWallet: () => {},
+  disconnectWallet: () => {},
   user: null,
-  setUser: (param) => { },
-  isConnected: () => { },
+  setUser: (param) => {},
+  isConnected: () => {},
 });
 
 const AuthProvider = ({ children }: any) => {
@@ -55,15 +55,15 @@ const AuthProvider = ({ children }: any) => {
   const _fetchUserFromDB = async () => {
     if (address) {
       // fetching the userData from the Database
-      findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
-        user.setDb(data);
-        logger(
-          "auth",
-          "AuthProvider._fetchUserFromDB",
-          "Response from findOrCreateUser",
-          [data]
-        );
-      });
+      // findOrCreateUser({ address: address.toLowerCase() }).then((data: any) => {
+      //   user.setDb(data);
+      //   logger(
+      //     "auth",
+      //     "AuthProvider._fetchUserFromDB",
+      //     "Response from findOrCreateUser",
+      //     [data]
+      //   );
+      // });
     }
   };
 
