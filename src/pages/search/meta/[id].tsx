@@ -108,7 +108,7 @@ const Meta = () => {
               value={tab}
               width="fit-content"
             />
-            <ButtonNative
+            {/* <ButtonNative
               text="Connect to XMTP"
               height="2.5rem"
               variant="state_default_hover"
@@ -131,7 +131,7 @@ const Meta = () => {
                 await sendMessage.sendMessage(conversations[0], "hey");
                 console.log("sent");
               }}
-            />
+            /> */}
           </FlexRow>
           {tab == "Data" && (
             <>
