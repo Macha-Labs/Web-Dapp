@@ -409,6 +409,7 @@ const ContractCreateEditModal = ({
               <>
                 <InputLabel
                   value={hookContractCreate.contractAbi}
+                  // value=""
                   inputType="textArea"
                   labelText="Contract ABI"
                   placeholder=" To enable your verification , you can enter your ABI manually here "
