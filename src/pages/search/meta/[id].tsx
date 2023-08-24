@@ -26,17 +26,35 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import {
+  useClient,
+  useConversations,
+  useMessages,
+  useSendMessage,
+} from "@xmtp/react-sdk";
+import useAuthStore from "@/store/useAuthStore";
 
 const Meta = () => {
   const hookMeta = useMeta();
   const router = useRouter();
+  const { initialize } = useClient();
+  const { conversations } = useConversations();
+  const sendMessage = useSendMessage();
+  const $signer = useAuthStore((state: any) => state.signer);
+
+  const handleConnect = useCallback(async () => {
+    console.log($signer);
+    await initialize({ signer: $signer });
+    console.log(await initialize({ signer: $signer }));
+  }, [initialize, $signer]);
   useEffect(() => {
     if (router.isReady) {
       hookMeta._fetch(router.query.id);
     }
   }, [router.query.id]);
+
   const [toggleIpfs, setToggleIpfs] = useState<boolean>(false);
   const [tab, setTab] = useState<string>("Data");
   const options = [
@@ -91,10 +109,28 @@ const Meta = () => {
               width="fit-content"
             />
             <ButtonNative
-              text="Share On XMTP"
+              text="Connect to XMTP"
               height="2.5rem"
               variant="state_default_hover"
-              onClick={() => {}}
+              onClick={handleConnect}
+            />
+            <ButtonNative
+              text="Fetch XMTP Conversations"
+              height="2.5rem"
+              variant="state_default_hover"
+              onClick={() => {
+                console.log("conversations :  ", conversations);
+              }}
+            />
+            <ButtonNative
+              text="Snd msg to 1st conv"
+              height="2.5rem"
+              variant="state_default_hover"
+              onClick={async () => {
+                console.log("sending ...");
+                await sendMessage.sendMessage(conversations[0], "hey");
+                console.log("sent");
+              }}
             />
           </FlexRow>
           {tab == "Data" && (

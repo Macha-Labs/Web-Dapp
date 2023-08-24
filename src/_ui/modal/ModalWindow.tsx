@@ -15,7 +15,7 @@ type Props = {
   footer?: any;
   children?: any;
   style?: any;
-  scrollBehavior?: any
+  scrollBehavior?: any;
 };
 
 const ModalWindow = ({
@@ -25,7 +25,7 @@ const ModalWindow = ({
   footer,
   children,
   style,
-  scrollBehavior
+  scrollBehavior,
 }: Props) => {
   return (
     <Modal

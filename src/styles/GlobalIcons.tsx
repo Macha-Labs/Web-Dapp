@@ -160,6 +160,7 @@ const GlobalIcons: any = {
   "icon-blue-tick": "/assets/icons/Blue%20tick.svg",
   "icon-almost-there": "/assets/icons/database-restore%201.svg",
   "icon-congrats": "/assets/icons/congrats%20icon.svg",
+  "icon-add": "/assets/icons/base-blue-add.svg",
   "logo-Lens": "/assets/icons/Lens.svg",
   "logo-Macha": "/Studio-Logos/metawork.svg",
   "logo-Farcaster": "/Studio-Logos/farcaster.svg",

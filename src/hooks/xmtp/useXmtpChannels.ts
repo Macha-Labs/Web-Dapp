@@ -2,14 +2,12 @@ import { logger } from "@/helpers/logger";
 import { AuthContext } from "@/providers/AuthProvider";
 import { Channel$ } from "@/schema/channel";
 import { useContext, useEffect, useState } from "react";
-import useLensProfileList from "../lens/useLensProfileList";
 
 const useXmtpChannels = () => {
   console.log('Rendering >>>>> useXmtpChannels');
   const authContext = useContext(AuthContext);
   const [allConversations, setAllConversations] = useState<any>();
   const [rawConversations, setRawConversations] = useState<any>();
-  const hookLensProfileList = useLensProfileList();
 
 
   useEffect(() => {

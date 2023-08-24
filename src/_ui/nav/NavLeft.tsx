@@ -94,12 +94,31 @@ const NavLeft = (props: any) => {
                   </Tooltip>
                 </Link>
               </FlexColumn>
-              <Image
-                src="../../assets/Logo.png"
-                height={"40px"}
-                borderRadius={"8px"}
-                alt="logo"
-              />
+              <FlexColumn height="fit-content">
+                <Link href="/create">
+                  <Tooltip label="Create">
+                    <IconImage
+                      slug={
+                        router.pathname === "/create" ? "icon-add" : "icon-add"
+                      }
+                      size="md"
+                      style={{
+                        className: `m-b-1 ${
+                          router.pathname === "/create"
+                            ? "state_active "
+                            : "state_hover"
+                        } `,
+                      }}
+                    />
+                  </Tooltip>
+                </Link>
+                <Image
+                  src="../../assets/Logo.png"
+                  height={"40px"}
+                  borderRadius={"8px"}
+                  alt="logo"
+                />
+              </FlexColumn>
             </FlexColumn>
           </div>
         </div>
