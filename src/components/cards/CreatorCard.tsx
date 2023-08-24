@@ -4,6 +4,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import InputLabel from "@/_ui/input/InputLabel";
 import chains from "@/data/network";
 import { tagList } from "@/data/studio/constant";
+import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {
@@ -16,45 +17,43 @@ import {
   Tag,
   TagCloseButton,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
 const CreatorCard = () => {
-  const [inputType, setInputType] = useState<string>("");
-  const [step, setStep] = useState<number>(1);
-  const [tags, setTags] = useState<any>([]);
-  const [tagString, setTagString] = useState<string>();
-  const [suggestions, setSuggestions] = useState<any>([]);
+
+  const hookCreatorCreate = useCreatorCreate()
 
   useEffect(() => {
-    console.log("tags", tags);
-  }, [tags]);
+    console.log("hookCreatorCreate.tags", hookCreatorCreate.tags);
+  }, [hookCreatorCreate.tags]);
 
   const handleTagRemove = (tag: any) => {
-    const temp = tags;
-    temp.splice(tags.indexOf(tag), 1);
+    const temp = hookCreatorCreate.tags;
+    temp.splice(hookCreatorCreate.tags.indexOf(tag), 1);
     console.log("temp", temp);
-    setTags([...temp]);
+    hookCreatorCreate.setTags([...temp]);
   };
   const handleTagAdd = (tagToAdd: any) => {
-    if (!tags.includes(tagToAdd)) {
-      setTags([...tags, tagToAdd]);
+    if (!hookCreatorCreate.tags.includes(tagToAdd)) {
+      hookCreatorCreate.setTags([...hookCreatorCreate.tags, tagToAdd]);
     }
-    setTagString("");
-    setSuggestions([]);
+    hookCreatorCreate.setTagString("");
+    hookCreatorCreate.setSuggestions([]);
   };
   const handleInputChange = (e: any) => {
     const value = e.target.value;
-    setTagString(value);
+    hookCreatorCreate.setTagString(value);
 
     if (value === "") {
-      setSuggestions([]); // Clear suggestions when input is empty
+      hookCreatorCreate.setSuggestions([]); // Clear hookCreatorCreate.suggestions when input is empty
     } else {
-      // Generate suggestions based on value (you can replace this with your own logic)
+      // Generate hookCreatorCreate.suggestions based on value (you can replace this with your own logic)
       const newSuggestions = ["tag1", "tag2", "tag3"].filter((tag) =>
         tag.includes(value)
       );
-      setSuggestions(newSuggestions);
+      hookCreatorCreate.setSuggestions(newSuggestions);
     }
   };
   return (
@@ -68,7 +67,7 @@ const CreatorCard = () => {
     >
       <FlexRow height="85vh">
         <Box width={"40%"} height={"100%"}>
-          {step == 1 && (
+          {hookCreatorCreate.step == 1 && (
             <Image
               height={"85vh"}
               src="/assets/CreateContentStarting.png"
@@ -79,7 +78,7 @@ const CreatorCard = () => {
               borderBottomLeftRadius={style.card.borderRadius.button}
             />
           )}
-          {step == 2 && (
+          {hookCreatorCreate.step == 2 && (
             <Image
               height={"85vh"}
               src="/assets/CreateContentIPFS.png"
@@ -93,18 +92,23 @@ const CreatorCard = () => {
         </Box>
         <Box width={"60%"} padding={style.padding.xxxl} height={"100%"}>
           <FlexColumn hrAlign="flex-start" height="100%">
-            {step == 1 && <Heading>Get started as a Creator</Heading>}
-            {step == 2 && <Heading>Select Network and Upload to IPFS</Heading>}
-            {step == 2 && (
+            {hookCreatorCreate.step == 1 && <Heading fontSize={style.font.h3}>Get started as a Creator</Heading>}
+            {hookCreatorCreate.step == 2 && <Heading fontSize={style.font.h3}>Select Network and Upload to IPFS</Heading>}
+            {hookCreatorCreate.step == 2 && (
               <FlexRow marginBottom={"md"} marginTop={"md"}>
                 {Object.keys(chains).map((chain: any, index) => {
-                  console.log("chains", chains[chain]);
                   return (
                     <Box
                       borderRadius={"50%"}
+                      onClick={() => {
+                        hookCreatorCreate.$loadCreatorFormData({
+                          chain_id: chain
+                        })
+                      }}
                       padding={style.padding.xxs}
-                      border={style.card.border.default}
+                      border={hookCreatorCreate.$creatorFormData.chain_id == chain ? style.card.border.meta : style.input.border.default}
                       marginX={style.margin.xxs}
+                      cursor="pointer"
                       _hover={{ border: `${style.card.border.meta}` }}
                     >
                       <Image
@@ -116,19 +120,19 @@ const CreatorCard = () => {
                 })}
               </FlexRow>
             )}
-            {step == 2 && (
+            {hookCreatorCreate.step == 2 && (
               <>
                 <InputLabel
-                  // value={hookContractCreate.$contractFormData.contract_abi}
+                  value={hookCreatorCreate.$creatorFormData.description}
                   inputType="textArea"
                   labelText="Share context in 150 Words"
                   placeholder="Give a  description of your post "
-                  // onChange={(e: any) => {
-                  //   e.preventDefault();
-                  //   hookContractCreate.$loadContractFormData({
-                  //     contract_abi: e.target.value,
-                  //   });
-                  // }}
+                  onChange={(e: any) => {
+                    let valueTextArea = e.target.value
+                    hookCreatorCreate.$loadCreatorFormData({
+                      description: valueTextArea,
+                    });
+                  }}
                 />
                 <FlexColumn vrAlign="flex-start" marginTop={"sm"}>
                   <Heading
@@ -145,17 +149,16 @@ const CreatorCard = () => {
                     Select
                   </Heading>
                   <FlexRow flexWrap={"wrap"} hrAlign="flex-start">
-                    {tags.map((item: any) => {
+                    {hookCreatorCreate.tags.map((item: any) => {
                       return (
                         <Tag
                           marginRight={style.margin.xxs}
                           key={`label-${item}`}
                           // variant={"grey"}
                           marginBottom={style.margin.sm}
-                          // marginTop={style.margin.sm}
+                        // marginTop={style.margin.sm}
                         >
                           <Text marginBottom={"0px"}>{item}</Text>
-
                           <TagCloseButton
                             onClick={() => {
                               handleTagRemove(item);
@@ -167,17 +170,17 @@ const CreatorCard = () => {
                   </FlexRow>
                   <Input
                     type="text"
-                    value={tagString}
+                    value={hookCreatorCreate.tagString}
                     onChange={handleInputChange}
                     padding={style.padding.xxs}
                     onKeyDown={(e: any) => {
                       if (e.key === "Enter") {
-                        handleTagAdd(tagString);
+                        handleTagAdd(hookCreatorCreate.tagString);
                       }
                     }}
                   />
                   <Box position={"relative"} width={"100%"}>
-                    {suggestions.length > 0 && (
+                    {hookCreatorCreate.suggestions.length > 0 && (
                       <List
                         styleType="none"
                         // backgroundColor="#000511"
@@ -191,7 +194,7 @@ const CreatorCard = () => {
                         position="absolute"
                         top="0"
                       >
-                        {suggestions.map((suggestion: any) => (
+                        {hookCreatorCreate.suggestions.map((suggestion: any) => (
                           <ListItem
                             key={suggestion}
                             padding="5px 10px"
@@ -212,21 +215,21 @@ const CreatorCard = () => {
             )}
 
             {/* <FlexRow></FlexRow> */}
-            {step == 1 && (
+            {hookCreatorCreate.step == 1 && (
               <FlexRow hrAlign="space-between" marginTop={"lg"}>
                 <Box
                   // height="200px"
                   width={"45%"}
                   padding={style.padding.sm}
                   borderRadius={style.card.borderRadius.button}
-                  border={style.input.border.default}
+                  border={hookCreatorCreate.inputType == "Upload" ? style.card.border.meta : style.input.border.default}
                   display={"flex"}
                   justifyContent={"center"}
                   alignItems={"center"}
                   flexDir={"column"}
                   _hover={{ border: `${style.card.border.meta}` }}
                   onClick={() => {
-                    setInputType("Upload");
+                    hookCreatorCreate.setInputType("Upload");
                   }}
                 >
                   <Image src="/assets/CreatorUploadImage.svg" />
@@ -239,14 +242,14 @@ const CreatorCard = () => {
                   width={"45%"}
                   padding={style.padding.sm}
                   borderRadius={style.card.borderRadius.button}
-                  border={style.input.border.default}
+                  border={hookCreatorCreate.inputType == "Link" ? style.card.border.meta : style.input.border.default}
                   display={"flex"}
                   justifyContent={"center"}
                   alignItems={"center"}
                   _hover={{ border: `${style.card.border.meta}` }}
                   flexDir={"column"}
                   onClick={() => {
-                    setInputType("Link");
+                    hookCreatorCreate.setInputType("Link");
                   }}
                 >
                   <Image src="/assets/CreatorAddLink.svg" />
@@ -256,10 +259,10 @@ const CreatorCard = () => {
                 </Box>
               </FlexRow>
             )}
-            {step == 1 && (
+            {hookCreatorCreate.step == 1 && (
               <>
                 {" "}
-                {inputType == "Upload" && (
+                {hookCreatorCreate.inputType == "Upload" && (
                   <>
                     <InputLabel
                       inputType="file"
@@ -267,35 +270,35 @@ const CreatorCard = () => {
                       inputLogoSize="lg"
                       //   labelText="Image"
                       marginTop="sm"
-                      //   onChange={async (e?: any) => {
-                      //     if (e.target.files && e.target.files[0]) {
-                      //       // const file = e.target.files[0];
-                      //       // console.log("Selected file:", file);
-                      //       // const element = document.createElement("a");
-                      //       // element.href = URL.createObjectURL(file);
-                      //       const cid = await deploytoLightHouse(
-                      //         e.target.files,
-                      //         hookContractCreate.setLoadingCallback
-                      //       );
-                      //       hookContractCreate.$loadContractFormData({
-                      //         image: displayImage(cid),
-                      //       });
-                      //     }
-                      //   }}
+                    //   onChange={async (e?: any) => {
+                    //     if (e.target.files && e.target.files[0]) {
+                    //       // const file = e.target.files[0];
+                    //       // console.log("Selected file:", file);
+                    //       // const element = document.createElement("a");
+                    //       // element.href = URL.createObjectURL(file);
+                    //       const cid = await deploytoLightHouse(
+                    //         e.target.files,
+                    //         hookCreatorCreate.setLoadingCallback
+                    //       );
+                    //       hookCreatorCreate.$loadCreatorFormData({
+                    //         image: displayImage(cid),
+                    //       });
+                    //     }
+                    //   }}
                     />
                   </>
                 )}
-                {inputType == "Link" && (
+                {hookCreatorCreate.inputType == "Link" && (
                   <>
                     <InputLabel
-                      //   value={""}
-                      //   onChange={(e: any) =>
-                      //     hookContractCreate.$loadContractFormData({
-                      //       name: e.target.value,
-                      //     })
-                      //   }
+                      value={hookCreatorCreate.$creatorFormData.link}
+                      onChange={(e: any) =>
+                        hookCreatorCreate.$loadCreatorFormData({
+                          link: e.target.value,
+                        })
+                      }
                       inputType="text"
-                      //   labelText="Link"
+                      // labelText="Link"
                       placeholder="Paste Link Here"
                       marginTop="sm"
                     />
@@ -304,7 +307,7 @@ const CreatorCard = () => {
               </>
             )}
 
-            {step == 1 && (
+            {hookCreatorCreate.step == 1 && (
               <ButtonNative
                 textFontSize="h5"
                 height="3.5rem"
@@ -313,11 +316,11 @@ const CreatorCard = () => {
                 text="Select Network and Publish to IPFS"
                 variant="state_default_hover"
                 onClick={() => {
-                  setStep(2);
+                  hookCreatorCreate.nextFormStep();
                 }}
               />
             )}
-            {step == 2 && (
+            {hookCreatorCreate.step == 2 && (
               <ButtonNative
                 textFontSize="h5"
                 height="3.5rem"
@@ -326,7 +329,7 @@ const CreatorCard = () => {
                 text="Sign in and publish"
                 variant="state_brand"
                 onClick={() => {
-                  setStep(1);
+                  hookCreatorCreate.nextFormStep();
                 }}
               />
             )}

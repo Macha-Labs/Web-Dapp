@@ -21,16 +21,59 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import MetaCollectionCard from "@/components/cards/MetaCollectionCard";
 import GraphCard from "@/components/cards/GraphCard";
 import { exploreModules } from "@/data/studio/constant";
+import { getAllTransactions } from "@/service/ApiService";
+import { fetchAllMetas, fetchMetaSchemas } from "@/service/MetaService";
 
-export default function Home() {
+export async function getServerSideProps() {
+  let allTransactions: any = []
+  let allMetas: any = []
+  let allMetaSchemas: any = []
+
+  const resAllTransactions = await getAllTransactions()
+  if (resAllTransactions.data) {
+    console.log(resAllTransactions.data, "latest txn");
+    allTransactions = resAllTransactions.data
+  } else {
+    console.log("Couldnt fetch all transactions");
+  }
+
+  const resAllMetas = await fetchAllMetas("poap_nft", 1, 9)
+  if (resAllMetas.data) {
+    console.log(resAllMetas.data, "all metass");
+    allMetas = {
+      data: resAllMetas.data,
+      lastPage: resAllMetas.lastPage
+    }
+  } else {
+    console.log("Couldnt fetch all metas");
+  }
+
+  const resAllMetaSchemas = await fetchMetaSchemas()
+  if (resAllMetaSchemas.data) {
+    console.log(resAllMetaSchemas.data, "all metas schemas");
+    allMetaSchemas = resAllMetaSchemas.data
+  } else {
+    console.log("Couldnt fetch all meta schemas");
+  }
+
+  return {
+    props: {
+      allTransactions: allTransactions,
+      allMetas: allMetas,
+      allMetaSchemas: allMetaSchemas
+    }
+  }
+}
+
+export default function Home({ allTransactions,allMetas,allMetaSchemas }: any) {
   const hookTransaction = useTransaction();
   const hookMetasList = useMetaList();
   const router = useRouter();
 
   useEffect(() => {
-    hookTransaction._fetchLatestTransactions();
-    hookMetasList._fetchMore("poap_nft", 9);
-    hookMetasList._fetchMetaSchemas();
+    hookTransaction.setLatestTransactions(allTransactions)
+    hookMetasList.initialLoadAllMetas(allMetas.data,allMetas.lastPage)
+    hookMetasList.initialLoadMetaSchemas(allMetaSchemas)
   }, []);
 
   const renderBody = () => {
@@ -44,44 +87,44 @@ export default function Home() {
           stopOnHover={true}
           infiniteLoop
           interval={3000}
-          // renderArrowPrev={(onClickHandler, hasPrev) =>
-          //   hasPrev && (
-          //     <Box
-          //       style={{
-          //         position: "absolute",
-          //         zIndex: 2,
-          //         top: "calc(50% - 15px)",
-          //         cursor: "pointer",
-          //         left: "15px"
-          //       }}
-          //       onClick={onClickHandler}
-          //     >
-          //       <IconImage
-          //         slug="icon-chevron"
-          //         size="sm"
-          //       />
-          //     </Box>
-          //   )
-          // }
-          // renderArrowNext={(onClickHandler, hasNext) =>
-          //   hasNext && (
-          //     <Box
-          //       style={{
-          //         position: "absolute",
-          //         zIndex: 2,
-          //         top: "calc(50% - 15px)",
-          //         cursor: "pointer",
-          //         right: "15px"
-          //       }}
-          //       onClick={onClickHandler}
-          //     >
-          //       <IconImage
-          //         slug="icon-chevron-next"
-          //         size="sm"
-          //       />
-          //     </Box>
-          //   )
-          // }
+        // renderArrowPrev={(onClickHandler, hasPrev) =>
+        //   hasPrev && (
+        //     <Box
+        //       style={{
+        //         position: "absolute",
+        //         zIndex: 2,
+        //         top: "calc(50% - 15px)",
+        //         cursor: "pointer",
+        //         left: "15px"
+        //       }}
+        //       onClick={onClickHandler}
+        //     >
+        //       <IconImage
+        //         slug="icon-chevron"
+        //         size="sm"
+        //       />
+        //     </Box>
+        //   )
+        // }
+        // renderArrowNext={(onClickHandler, hasNext) =>
+        //   hasNext && (
+        //     <Box
+        //       style={{
+        //         position: "absolute",
+        //         zIndex: 2,
+        //         top: "calc(50% - 15px)",
+        //         cursor: "pointer",
+        //         right: "15px"
+        //       }}
+        //       onClick={onClickHandler}
+        //     >
+        //       <IconImage
+        //         slug="icon-chevron-next"
+        //         size="sm"
+        //       />
+        //     </Box>
+        //   )
+        // }
         >
           <CarouselSlide
             title="LENS"

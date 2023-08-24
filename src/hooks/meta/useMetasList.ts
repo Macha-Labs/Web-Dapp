@@ -9,7 +9,7 @@ const useMetaList = () => {
   const [lastPage, setLastPage] = useState<boolean>(false);
   const [pageNo, setPageNo] = useState<number>(1);
 
-  const _fetchMore = (meta_schema?: any, limit?: number) => {
+  const _fetchMore = async (meta_schema?: any, limit?: number) => {
     console.log("pageNo", pageNo);
     if (pageNo == 1) {
       setIsLoading(true);
@@ -17,7 +17,7 @@ const useMetaList = () => {
       setIsLoading(false);
       setShowMoreLoading(true);
     }
-    fetchAllMetas(meta_schema, pageNo, limit ? limit : 30).then((res) => {
+    await fetchAllMetas(meta_schema, pageNo, limit ? limit : 30).then((res) => {
       console.log("allmetas", res);
       setMetaAll(metaAll ? [...metaAll, ...res?.data] : res?.data);
       setPageNo(pageNo + 1);
@@ -27,11 +27,24 @@ const useMetaList = () => {
     });
   };
 
-  const _fetchMetaSchemas = () => {
-    fetchMetaSchemas().then((res:any) => {
+  const initialLoadAllMetas = (all_metas: any, last_page: any) => {
+    setMetaAll(all_metas);
+    setPageNo(pageNo + 1);
+    setLastPage(last_page);
+    setIsLoading(false);
+    setShowMoreLoading(false);
+  }
+
+  const _fetchMetaSchemas = async () => {
+    await fetchMetaSchemas().then((res: any) => {
       setMetaSchemas(res.data);
       setIsLoading(false);
     });
+  };
+
+  const initialLoadMetaSchemas = async (meta_schemas: any) => {
+      setMetaSchemas(meta_schemas);
+      setIsLoading(false);
   };
 
   return {
@@ -44,6 +57,8 @@ const useMetaList = () => {
     pageNo: pageNo,
     setPageNo: setPageNo,
     showMoreLoading: showMoreLoading,
+    initialLoadAllMetas: initialLoadAllMetas,
+    initialLoadMetaSchemas: initialLoadMetaSchemas
   };
 };
 
