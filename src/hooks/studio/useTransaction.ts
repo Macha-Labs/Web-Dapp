@@ -106,7 +106,9 @@ const useTransaction = () => {
     isLoading: isLoading,
     _fetch: _fetch,
     _fetchLatestTransactions: _fetchLatestTransactions,
-    latestTransactions: latestTransactions
+    latestTransactions: latestTransactions,
+    setTransactionDetails: setTransactionDetails,
+    setLatestTransactions: setLatestTransactions
   };
 };
 
