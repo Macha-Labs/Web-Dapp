@@ -14,28 +14,16 @@ const useContract = () => {
 
   const _fetch = async (contract_slug: any) => {
     setIsLoading(true)
-    if (window.sessionStorage !== undefined) {
-      const data = window.sessionStorage.getItem(contract_slug);
-      if (data !== null) {
-        setContractDetails(JSON.parse(data))
-        setIsLoading(false)
-      }
-      else {
-        contractDataBySlug(contract_slug).then((res: any) => {
-          window.sessionStorage.setItem(contract_slug, JSON.stringify(res.data))
-          setContractDetails(res.data);
-          setIsLoading(false)
-        });
-      }
-    }
-    else {
-      contractDataBySlug(contract_slug).then((res: any) => {
-        window.sessionStorage.setItem(contract_slug, res.data)
-        setContractDetails(res.data);
-        setIsLoading(false)
-      });
-    }
-  };
+    contractDataBySlug(contract_slug).then((res: any) => {
+      setContractDetails(res.data);
+      setIsLoading(false)
+    });
+  }
+
+  const initialLoad = (contract_data: any) => {
+    setContractDetails(contract_data)
+    setIsLoading(false)
+  }
 
   const _fetchEdit = async (contract_slug: any) => {
     setIsLoading(true)
@@ -70,10 +58,10 @@ const useContract = () => {
   const _fetchUserContracts = async (userAddress: any) => {
     setIsUserContractsLoading(true)
     contractsByUserAddress(userAddress).then((res: any) => {
-      if(res && res.data){
+      if (res && res.data) {
         setUserContracts(res.data)
       }
-      else{
+      else {
         setUserContracts(undefined)
       }
       setIsUserContractsLoading(false)
@@ -95,7 +83,8 @@ const useContract = () => {
     _fetchUserContracts: _fetchUserContracts,
     userContracts: userContracts,
     setClear: setClear,
-    isUserContractsLoading: isUserContractsLoading
+    isUserContractsLoading: isUserContractsLoading,
+    initialLoad: initialLoad
   }
 
 }
