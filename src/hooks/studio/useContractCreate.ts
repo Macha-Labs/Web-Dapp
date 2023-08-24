@@ -1,4 +1,4 @@
-import { deploytoLightHouse } from "@/helpers/storage/lightHouseStorage";
+import { uploadTextToLighthouse } from "@/helpers/storage/lightHouseStorage";
 import {
   baseScanVerification,
   checkUniqueData,
@@ -17,6 +17,7 @@ const useContractCreate = (modal: any) => {
   const toast = useToast();
   const router = useRouter();
   const [formStep, setFormStep] = useState<any>(1);
+  const [contractAbi, setContractAbi] = useState("");
   const $contractFormData = useContractFormStore(
     (state: any) => state.contractFormData
   );
@@ -256,17 +257,8 @@ const useContractCreate = (modal: any) => {
     } else {
       if (await validateSteps()) {
         if (formStep == 1.5) {
-          const blob = new Blob(
-            [JSON.stringify($contractFormData.contract_abi)],
-            {
-              type: "application/json",
-            }
-          );
-          const file = new File([blob], "file.json");
-          // const syntheticEvent = createFileInputChangeEvent(file);
-          // let e = { target: { files: [files[0]] } };
-          const cid = await deploytoLightHouse(file, setLoadingCallback);
-          console.log(cid);
+          console.log("calling lighthouse", $loadContractFormData.contract_abi);
+          uploadTextToLighthouse(contractAbi);
           setFormStep(2);
         } else {
           console.log(formStep);
@@ -470,6 +462,8 @@ const useContractCreate = (modal: any) => {
     lastStep: lastStep,
     setClear: setClear,
     nextFormEditStep: nextFormEditStep,
+    contractAbi: contractAbi,
+    setContractAbi: setContractAbi,
   };
 };
 export default useContractCreate;

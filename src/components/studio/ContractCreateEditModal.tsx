@@ -7,6 +7,7 @@ import InputSelect from "@/_ui/input/InputSelect";
 import Loader from "@/_ui/loader/Loader";
 // import TableNative from "@/_ui/list/Tablenative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
+import { config } from "@/config";
 import {
   deploytoLightHouse,
   displayImage,
@@ -14,6 +15,7 @@ import {
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Divider, Heading, Image, Text } from "@chakra-ui/react";
+import { useState } from "react";
 
 type Props = {
   modal: any;
@@ -406,15 +408,12 @@ const ContractCreateEditModal = ({
             {hookContractCreate.formStep == 1.5 && (
               <>
                 <InputLabel
-                  value={hookContractCreate.$contractFormData.contract_abi}
+                  value={hookContractCreate.contractAbi}
                   inputType="textArea"
                   labelText="Contract ABI"
-                  placeholder=" To enable your verification , you can enter your RBI manually here "
-                  onChange={(e: any) => {
-                    e.preventDefault();
-                    hookContractCreate.$loadContractFormData({
-                      contract_abi: e.target.value,
-                    });
+                  placeholder=" To enable your verification , you can enter your ABI manually here "
+                  onChange={async (e: any) => {
+                    hookContractCreate.setContractAbi(e.target.value);
                   }}
                 />
               </>
