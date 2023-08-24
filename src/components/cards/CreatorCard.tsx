@@ -22,8 +22,7 @@ import {
 import React, { useEffect, useState } from "react";
 
 const CreatorCard = () => {
-
-  const hookCreatorCreate = useCreatorCreate()
+  const hookCreatorCreate = useCreatorCreate();
 
   useEffect(() => {
     console.log("hookCreatorCreate.tags", hookCreatorCreate.tags);
@@ -92,21 +91,34 @@ const CreatorCard = () => {
         </Box>
         <Box width={"60%"} padding={style.padding.xxxl} height={"100%"}>
           <FlexColumn hrAlign="flex-start" height="100%">
-            {hookCreatorCreate.step == 1 && <Heading fontSize={style.font.h3}>Get started as a Creator</Heading>}
-            {hookCreatorCreate.step == 2 && <Heading fontSize={style.font.h3}>Select Network and Upload to IPFS</Heading>}
+            {hookCreatorCreate.step == 1 && (
+              <Heading fontSize={style.font.h3}>
+                Get started as a Creator
+              </Heading>
+            )}
+            {hookCreatorCreate.step == 2 && (
+              <Heading fontSize={style.font.h3}>
+                Select Network and Upload to IPFS
+              </Heading>
+            )}
             {hookCreatorCreate.step == 2 && (
               <FlexRow marginBottom={"md"} marginTop={"md"}>
                 {Object.keys(chains).map((chain: any, index) => {
                   return (
                     <Box
+                      key={index}
                       borderRadius={"50%"}
                       onClick={() => {
                         hookCreatorCreate.$loadCreatorFormData({
-                          chain_id: chain
-                        })
+                          chain_id: chain,
+                        });
                       }}
                       padding={style.padding.xxs}
-                      border={hookCreatorCreate.$creatorFormData.chain_id == chain ? style.card.border.meta : style.input.border.default}
+                      border={
+                        hookCreatorCreate.$creatorFormData.chain_id == chain
+                          ? style.card.border.meta
+                          : style.input.border.default
+                      }
                       marginX={style.margin.xxs}
                       cursor="pointer"
                       _hover={{ border: `${style.card.border.meta}` }}
@@ -128,7 +140,7 @@ const CreatorCard = () => {
                   labelText="Share context in 150 Words"
                   placeholder="Give a  description of your post "
                   onChange={(e: any) => {
-                    let valueTextArea = e.target.value
+                    let valueTextArea = e.target.value;
                     hookCreatorCreate.$loadCreatorFormData({
                       description: valueTextArea,
                     });
@@ -156,7 +168,7 @@ const CreatorCard = () => {
                           key={`label-${item}`}
                           // variant={"grey"}
                           marginBottom={style.margin.sm}
-                        // marginTop={style.margin.sm}
+                          // marginTop={style.margin.sm}
                         >
                           <Text marginBottom={"0px"}>{item}</Text>
                           <TagCloseButton
@@ -194,19 +206,21 @@ const CreatorCard = () => {
                         position="absolute"
                         top="0"
                       >
-                        {hookCreatorCreate.suggestions.map((suggestion: any) => (
-                          <ListItem
-                            key={suggestion}
-                            padding="5px 10px"
-                            margin="5px 0"
-                            borderRadius="3px"
-                            cursor="pointer"
-                            _hover={{ backgroundColor: "#00040d" }}
-                            onClick={() => handleTagAdd(suggestion)}
-                          >
-                            {suggestion}
-                          </ListItem>
-                        ))}
+                        {hookCreatorCreate.suggestions.map(
+                          (suggestion: any) => (
+                            <ListItem
+                              key={suggestion}
+                              padding="5px 10px"
+                              margin="5px 0"
+                              borderRadius="3px"
+                              cursor="pointer"
+                              _hover={{ backgroundColor: "#00040d" }}
+                              onClick={() => handleTagAdd(suggestion)}
+                            >
+                              {suggestion}
+                            </ListItem>
+                          )
+                        )}
                       </List>
                     )}
                   </Box>
@@ -222,7 +236,11 @@ const CreatorCard = () => {
                   width={"45%"}
                   padding={style.padding.sm}
                   borderRadius={style.card.borderRadius.button}
-                  border={hookCreatorCreate.inputType == "Upload" ? style.card.border.meta : style.input.border.default}
+                  border={
+                    hookCreatorCreate.inputType == "Upload"
+                      ? style.card.border.meta
+                      : style.input.border.default
+                  }
                   display={"flex"}
                   justifyContent={"center"}
                   alignItems={"center"}
@@ -242,7 +260,11 @@ const CreatorCard = () => {
                   width={"45%"}
                   padding={style.padding.sm}
                   borderRadius={style.card.borderRadius.button}
-                  border={hookCreatorCreate.inputType == "Link" ? style.card.border.meta : style.input.border.default}
+                  border={
+                    hookCreatorCreate.inputType == "Link"
+                      ? style.card.border.meta
+                      : style.input.border.default
+                  }
                   display={"flex"}
                   justifyContent={"center"}
                   alignItems={"center"}
@@ -270,21 +292,21 @@ const CreatorCard = () => {
                       inputLogoSize="lg"
                       //   labelText="Image"
                       marginTop="sm"
-                    //   onChange={async (e?: any) => {
-                    //     if (e.target.files && e.target.files[0]) {
-                    //       // const file = e.target.files[0];
-                    //       // console.log("Selected file:", file);
-                    //       // const element = document.createElement("a");
-                    //       // element.href = URL.createObjectURL(file);
-                    //       const cid = await deploytoLightHouse(
-                    //         e.target.files,
-                    //         hookCreatorCreate.setLoadingCallback
-                    //       );
-                    //       hookCreatorCreate.$loadCreatorFormData({
-                    //         image: displayImage(cid),
-                    //       });
-                    //     }
-                    //   }}
+                      //   onChange={async (e?: any) => {
+                      //     if (e.target.files && e.target.files[0]) {
+                      //       // const file = e.target.files[0];
+                      //       // console.log("Selected file:", file);
+                      //       // const element = document.createElement("a");
+                      //       // element.href = URL.createObjectURL(file);
+                      //       const cid = await deploytoLightHouse(
+                      //         e.target.files,
+                      //         hookCreatorCreate.setLoadingCallback
+                      //       );
+                      //       hookCreatorCreate.$loadCreatorFormData({
+                      //         image: displayImage(cid),
+                      //       });
+                      //     }
+                      //   }}
                     />
                   </>
                 )}
