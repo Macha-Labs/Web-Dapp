@@ -90,7 +90,9 @@ export default function Home() {
             // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
             bgGrid=""
             bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-            bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
+            
+            // bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
+            bannerImage="/assets/explore/home_carousal_1_hero_image.svg"
             buttonText="Explore"
           />
           <CarouselSlide
@@ -100,7 +102,8 @@ export default function Home() {
             // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
             bgGrid=""
             bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-            bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
+            // bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
+            bannerImage="/assets/explore/home_carousal_2_hero_image.svg"
             buttonText="View Contracts Now"
           />
           <CarouselSlide
@@ -110,7 +113,7 @@ export default function Home() {
             // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
             bgGrid=""
             bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-            bannerImage="/assets/explore/home-carousal-3-hero-image.svg"
+            bannerImage="/assets/explore/home_carousal_3_hero_image.svg"
             buttonText="View Chains"
           />
           {/* <CarouselSlide
