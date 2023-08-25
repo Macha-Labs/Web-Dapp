@@ -112,7 +112,6 @@ const HomeDev = () => {
           image="/assets/homeDev/push%20contracts-imagev4.svg"
           title="Indexers"
           description="Publish your smart contract for growth and developer community exposure."
-          disabled={$address == null}
           onClick={() => {
             router.push("/indexers");
           }}
