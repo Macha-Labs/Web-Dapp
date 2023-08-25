@@ -15,9 +15,6 @@ type Props = {
   height?: any;
 };
 
-
-
-
 export default function MetaCard({
   image,
   heading,
@@ -34,24 +31,24 @@ export default function MetaCard({
       <>
         <div
           style={{
-            height: `${height ? height :"fit-content"}`,
+            height: `${height ? height : "fit-content"}`,
             width: "22rem",
             border: `${style.card.border.meta}`,
             borderRadius: `${style.card.borderRadius.default}`,
-            background: `${style.card.bg.meta}`,
+            background: `${style.card.bg.default}`,
             padding: ` ${style.card.padding.default}`,
             display: "flex",
             flexDirection: "row",
             marginRight: ` ${style.margin["sm"]}`,
             marginBottom: ` ${style.margin["sm"]}`,
-            cursor: `${style.card.cursor.default}`
+            cursor: `${style.card.cursor.default}`,
           }}
           onClick={() => {
             onCardClick();
           }}
         >
           {image && (
-            <div style={{ width: "35%" , marginRight: style.margin.sm}}>
+            <div style={{ width: "35%", marginRight: style.margin.sm }}>
               <Image
                 src={image}
                 alt="meta-card-image"
@@ -96,7 +93,7 @@ export default function MetaCard({
             width: "250px",
             border: `${style.card.border.meta}`,
             borderRadius: `${style.card.borderRadius.default}`,
-            background: `${style.card.bg.meta}`,
+            background: `${style.card.bg.default}`,
             padding: ` ${style.card.padding.default}`,
             marginRight: ` ${style.margin["lg"]}`,
             marginBottom: ` ${style.margin["lg"]}`,
@@ -117,7 +114,7 @@ export default function MetaCard({
             />
           </div>
           <div style={{ height: "50%", marginTop: `${style.margin["sm"]}` }}>
-            <Text  lineHeight="1rem" fontSize={"2xl"} fontWeight={600}>
+            <Text lineHeight="1rem" fontSize={"2xl"} fontWeight={600}>
               {truncateString(heading, 15)}
             </Text>
             <Text height="2rem">{truncateString(description, 50)}</Text>

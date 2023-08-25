@@ -50,7 +50,7 @@ const GetStartedCards = ({
           </Heading>
           {tag && <TagNative value={tag} size="sm" marginTop="2px" />}
         </FlexRow>
-        <Text width="100%" mt={style.margin.xxs} color={style.color["white.7"]}>
+        <Text width="100%" mt={style.margin.sm} color={style.color["white.7"]}>
           {description}
         </Text>
         {image && (

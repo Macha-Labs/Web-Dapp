@@ -14,7 +14,6 @@ const GlobalIcons: any = {
   "icon-filter":
     "/icons/svg/Base-blue/base-blue-filter.svg?updatedAt=1680783869195",
 
-  "icon-search": "/icons/svg/Base_blue_icons/base-blue-search.svg",
   "icon-base-search": "/icons/svg/Base_icons/base-search.svg",
   "icon-dark-search": "/assets/icons/Dark_icons/dark-search.svg",
   "icon-search24":
@@ -158,6 +157,7 @@ const GlobalIcons: any = {
   "icon-dark-globe": "/assets/icons/Dark_icons/dark-globe.svg",
   "icon-coloured-deploy": "/assets/icons/coloured-deploy.svg",
   "icon-blue-tick": "/assets/icons/Blue%20tick.svg",
+  "icon-search": "/assets/icons/base-blue-search.svg",
   "icon-almost-there": "/assets/icons/database-restore%201.svg",
   "icon-congrats": "/assets/icons/congrats%20icon.svg",
   "icon-add": "/assets/icons/base-blue-add.svg",

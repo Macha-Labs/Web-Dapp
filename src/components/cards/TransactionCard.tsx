@@ -33,17 +33,25 @@ const TransactionCard = ({
       }}
     >
       <Box
+        _hover={{
+          transform: "scale(1.01,1.01)",
+          border: "1px solid #197cec !important",
+        }}
         style={{
           display: "flex",
           flexDirection: "row",
           width: "20rem",
-          border: `${style.card.border.meta}`,
+          border: `${style.card.border.default}`,
           borderRadius: `${style.card.borderRadius.button}`,
           padding: `${style.padding.xs}`,
           justifyContent: "flex-start",
           alignItems: "center",
           height: "5rem",
           boxShadow: `${style.card.shadow.default}`,
+          background: `${style.card.bg.default}`,
+          transitionTimingFunction: "ease-in-out",
+          transitionProperty: " transform ",
+          transitionDuration: "600ms",
         }}
       >
         <FlexRow hrAlign="flex-start">

@@ -211,6 +211,14 @@ export const opScanVerification = async (contractAddress: any) => {
   console.log(data);
   return data;
 };
+export const contractsOfChain = async (chainId: any) => {
+  const res = await fetch(
+    `${config.metaServer}/indexer/contracts/fetch-by-chain/${chainId}`
+  );
+  const data = await res.json();
+  console.log(data);
+  return data;
+};
 
 // /indexer/transactions/fetch-by-user-address/:from_address
 

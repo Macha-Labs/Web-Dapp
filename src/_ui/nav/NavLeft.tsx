@@ -32,14 +32,29 @@ const NavLeft = (props: any) => {
                 <Link href="/">
                   <IconImage
                     slug={
-                      router.pathname === "/"
-                        ? "icon-home"
-                        : "icon-home-outline"
+                      router.pathname === "/" ? "icon-search" : "icon-search"
                     }
                     size="md"
                     style={{
                       className: `m-b-1 ${
                         router.pathname === "/" ? "state_active" : "state_hover"
+                      } `,
+                    }}
+                  />
+                </Link>
+                <Link href="/explore">
+                  <IconImage
+                    slug={
+                      router.pathname === "/explore"
+                        ? "icon-compass"
+                        : "icon-compass-outline"
+                    }
+                    size="md"
+                    style={{
+                      className: `m-b-1 ${
+                        router.pathname === "/explore"
+                          ? "state_active"
+                          : "state_hover"
                       } `,
                     }}
                   />
@@ -60,38 +75,6 @@ const NavLeft = (props: any) => {
                       } `,
                     }}
                   />
-                </Link>
-                {/* <Link href="/feed">
-                  <IconImage
-                    slug="icon-posts"
-                    size="lg"
-                    style={{
-                      className: `m-b-1 ${
-                        router.pathname === "/studio/explore"
-                          ? "state_active"
-                          : "state_hover"
-                      } `,
-                    }}
-                  />
-                </Link> */}
-                <Link href="/explore">
-                  <Tooltip label="Chat">
-                    <IconImage
-                      slug={
-                        router.pathname === "/explore"
-                          ? "icon-compass"
-                          : "icon-compass-outline"
-                      }
-                      size="md"
-                      style={{
-                        className: `m-b-1 ${
-                          router.pathname === "/explore"
-                            ? "state_active "
-                            : "state_hover"
-                        } `,
-                      }}
-                    />
-                  </Tooltip>
                 </Link>
               </FlexColumn>
               <FlexColumn height="fit-content">
