@@ -29,8 +29,8 @@ const Home = () => {
       href: "/studio",
     },
     {
-      value: "Contracts",
-      href: "/contracts",
+      value: "Indexers",
+      href: "/indexers",
     },
     // {
     //   value: "Functions",
