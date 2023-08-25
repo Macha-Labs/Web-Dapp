@@ -44,13 +44,22 @@ const Search = () => {
           justifyContent={"center"}
         >
           <Image
-            className="headerLogo"
+            // className=""
             src="/assets/MACHALogo.svg"
             alt="logo"
             width={255}
             height={93}
             // width={246}
-            marginBottom={style.margin.xxl}
+            // marginBottom={style.margin.sm}
+          />
+          <Image
+            // className="headerLogo"
+            src="/assets/title.png"
+            alt="logo"
+            // width={255}
+            // height={93}
+            // width={246}
+            marginBottom={style.margin.sm}
           />
           <SearchHeader />
         </Box>
