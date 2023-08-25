@@ -31,7 +31,6 @@ const useContractList = () => {
   };
 
   const handleFilter = (desired_chain_id: any) => {
-    _fetch();
     const filtered = contractList?.filter((item: any) => {
       // console.log(item.contract.chain_id, "  ", desired_chain_id);
       return (
