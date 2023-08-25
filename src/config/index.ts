@@ -8,9 +8,9 @@ export const config = {
   // metaServer: "https://metawork-sdk.herokuapp.com",
 
   // Staging
-  // metaServer: "https://metawork-server-staging.herokuapp.com",
+  metaServer: "https://metawork-server-staging.herokuapp.com",
 
-  metaServer: "http://localhost:3080",
+  // metaServer: "http://localhost:3080",
   // url: "http://localhost:3080",
 
   // Infura
