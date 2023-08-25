@@ -1,5 +1,6 @@
 import lighthouse from "@lighthouse-web3/sdk";
 import { config } from "@/config/index";
+import { IUploadProgressCallback } from "@lighthouse-web3/sdk/dist/types";
 
 export const progressCallback = (progressData: any) => {
   // let percentageDone: any = 100 - (progressData?.total / progressData?.uploaded)?.toFixed(2);
@@ -11,6 +12,7 @@ export const deploytoLightHouse = async (e: any, progressCallback: any) => {
     e,
     config.LIGHTHOUSE_API_KEY,
     false,
+    undefined,
     progressCallback
   );
   console.log("File Status:", output);
