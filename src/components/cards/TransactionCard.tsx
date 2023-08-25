@@ -33,6 +33,10 @@ const TransactionCard = ({
       }}
     >
       <Box
+        _hover={{
+          transform: "scale(1.01,1.01)",
+          border: "1px solid #197cec !important",
+        }}
         style={{
           display: "flex",
           flexDirection: "row",
@@ -45,6 +49,9 @@ const TransactionCard = ({
           height: "5rem",
           boxShadow: `${style.card.shadow.default}`,
           background: `${style.card.bg.default}`,
+          transitionTimingFunction: "ease-in-out",
+          transitionProperty: " transform ",
+          transitionDuration: "600ms",
         }}
       >
         <FlexRow hrAlign="flex-start">

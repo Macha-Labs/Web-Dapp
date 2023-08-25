@@ -2,8 +2,9 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
+import SearchHeader from "@/components/search/SearchHeader";
 import { style } from "@/styles/StyledConstants";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 
 import { useEffect } from "react";
 
@@ -23,11 +24,11 @@ const Search = () => {
       <FlexColumn
         hrAlign="flex-start"
         vrAlign="flex-start"
-        padding="1.5rem 0rem"
+        padding="3rem 0rem"
         height="100vh"
       >
         <Box
-          border={style.card.border.meta}
+          border={style.card.border.default}
           backgroundImage="url(../assets/icons/searchbg.svg)"
           backgroundPosition="center"
           backgroundRepeat="no-repeat"
@@ -36,11 +37,22 @@ const Search = () => {
           width={"100%"}
           borderRadius={style.card.borderRadius.button}
           // marginTop={style.margin.md}
-          // paddingTop={style.margin.navBoth}
+          // paddingTop={style.padding.xxl}
           display={"flex"}
+          alignItems={"center"}
+          flexDir={"column"}
           justifyContent={"center"}
         >
-          {/* <Text>macha</Text> */}
+          <Image
+            className="headerLogo"
+            src="/assets/MACHALogo.svg"
+            alt="logo"
+            width={255}
+            height={93}
+            // width={246}
+            marginBottom={style.margin.xxl}
+          />
+          <SearchHeader />
         </Box>
       </FlexColumn>
     );

@@ -29,6 +29,7 @@ import NavMeta from "@/_ui/nav/NavMeta";
 import Header from "@/_ui/Head/Header";
 import useContractList from "@/hooks/studio/useContractList";
 import ContractList from "@/components/studio/ContractList";
+import useChainContracts from "@/hooks/studio/useChainContracts";
 
 const Network = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -39,6 +40,7 @@ const Network = () => {
   const hookAlchemy = useAlchemy();
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
   const hookContractList = useContractList();
+  const hookChainContracts = useChainContracts();
 
   const renderNav = () => {
     return <NavStudio />;
@@ -71,11 +73,17 @@ const Network = () => {
   ];
 
   const renderContracts = () => {
-    console.log("chain contracts", hookContractList?.filterData);
+    // console.log("chain contracts", hookContractList?.filterData);
+    // console.log(hookChainContracts.contracts);
     return (
-      hookContractList?.filterData && (
-        <ContractList openInNewTab={true} data={hookContractList.filterData} />
-      )
+      <>
+        {selectedNavTab == "Contracts" && hookChainContracts?.contracts && (
+          <ContractList
+            openInNewTab={false}
+            data={hookChainContracts.contracts}
+          />
+        )}
+      </>
     );
   };
 

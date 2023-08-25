@@ -14,6 +14,10 @@ const SupportedChains = ({ data, id }: Props) => {
   const router = useRouter();
   return (
     <Box
+      _hover={{
+        transform: "scale(1.01,1.01)",
+        border: "1px solid #197cec !important",
+      }}
       cursor={"pointer"}
       onClick={() => {
         router.push(`/search/network/${id}`);
@@ -25,6 +29,11 @@ const SupportedChains = ({ data, id }: Props) => {
       marginTop={style.margin.sm}
       padding={style.padding.sm}
       borderRadius={style.card.borderRadius.default}
+      style={{
+        transitionTimingFunction: "ease-in-out",
+        transitionProperty: " transform ",
+        transitionDuration: "600ms",
+      }}
     >
       <FlexColumn width="100%" vrAlign="center" hrAlign="center">
         <Image

@@ -42,7 +42,7 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
             <Link href="/" style={{ paddingRight: `${style.margin.sm}` }}>
               <Image
                 className="headerLogo"
-                src="/assets/Macha-logo-text.svg"
+                src="/assets/MACHALogotext.svg"
                 alt="logo"
                 width={170}
                 height={62}
@@ -56,7 +56,7 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
               {!isSearchOpen ? (
                 <ConnectWalletButton
                   showBalance={false}
-                  height="2.2rem"
+                  // height="2.2rem"
                   showStudio={true}
                 />
               ) : (
