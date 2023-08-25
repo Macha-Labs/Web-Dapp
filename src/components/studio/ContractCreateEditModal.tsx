@@ -7,7 +7,6 @@ import InputSelect from "@/_ui/input/InputSelect";
 import Loader from "@/_ui/loader/Loader";
 // import TableNative from "@/_ui/list/Tablenative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
-import { config } from "@/config";
 import {
   deploytoLightHouse,
   displayImage,
@@ -15,7 +14,6 @@ import {
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Divider, Heading, Image, Text } from "@chakra-ui/react";
-import { useState } from "react";
 
 type Props = {
   modal: any;
@@ -149,7 +147,7 @@ const ContractCreateEditModal = ({
       }
     >
       {isEdit &&
-      (hookContract.isLoading || hookContract.contractDetails == undefined) ? (
+        (hookContract.isLoading || hookContract.contractDetails == undefined) ? (
         <FlexRow height="18rem">
           <Loader size="lg" />
         </FlexRow>
@@ -186,21 +184,18 @@ const ContractCreateEditModal = ({
                         <Text
                           rounded="full"
                           style={{
-                            border: `${
-                              hookContractCreate.formStep == 1
+                            border: `${hookContractCreate.formStep == 1
                                 ? style.card.border.meta
                                 : style.card.border.default
-                            }`,
+                              }`,
                             paddingLeft: `${style.padding.xxs}`,
                             paddingRight: `${style.padding.xxs}`,
-                            color: `${
-                              hookContractCreate.formStep == 1
+                            color: `${hookContractCreate.formStep == 1
                                 ? ""
                                 : style.color.disabled
-                            }`,
-                            backgroundColor: `${
-                              hookContractCreate.formStep == 1 ? "" : "#18203A"
-                            }`,
+                              }`,
+                            backgroundColor: `${hookContractCreate.formStep == 1 ? "" : "#18203A"
+                              }`,
                           }}
                         >
                           1
@@ -209,11 +204,10 @@ const ContractCreateEditModal = ({
                     </Box>
                     <Text
                       style={{
-                        color: `${
-                          hookContractCreate.formStep == 1
+                        color: `${hookContractCreate.formStep == 1
                             ? ""
                             : style.color.disabled
-                        }`,
+                          }`,
                       }}
                     >
                       First
@@ -241,21 +235,18 @@ const ContractCreateEditModal = ({
                       <Text
                         rounded="full"
                         style={{
-                          border: `${
-                            hookContractCreate.formStep == 2
+                          border: `${hookContractCreate.formStep == 2
                               ? style.card.border.meta
                               : style.card.border.default
-                          }`,
+                            }`,
                           paddingLeft: `${style.padding.xxs}`,
                           paddingRight: `${style.padding.xxs}`,
-                          color: `${
-                            hookContractCreate.formStep == 2
+                          color: `${hookContractCreate.formStep == 2
                               ? ""
                               : style.color.disabled
-                          }`,
-                          backgroundColor: `${
-                            hookContractCreate.formStep == 2 ? "" : "#18203A"
-                          }`,
+                            }`,
+                          backgroundColor: `${hookContractCreate.formStep == 2 ? "" : "#18203A"
+                            }`,
                         }}
                       >
                         2
@@ -263,11 +254,10 @@ const ContractCreateEditModal = ({
                     )}
                     <Text
                       style={{
-                        color: `${
-                          hookContractCreate.formStep == 2
+                        color: `${hookContractCreate.formStep == 2
                             ? ""
                             : style.color.disabled
-                        }`,
+                          }`,
                       }}
                     >
                       Second
@@ -295,21 +285,18 @@ const ContractCreateEditModal = ({
                       <Text
                         rounded="full"
                         style={{
-                          border: `${
-                            hookContractCreate.formStep == 3
+                          border: `${hookContractCreate.formStep == 3
                               ? style.card.border.meta
                               : style.card.border.default
-                          }`,
+                            }`,
                           paddingLeft: `${style.padding.xxs}`,
                           paddingRight: `${style.padding.xxs}`,
-                          color: `${
-                            hookContractCreate.formStep == 3
+                          color: `${hookContractCreate.formStep == 3
                               ? ""
                               : style.color.disabled
-                          }`,
-                          backgroundColor: `${
-                            hookContractCreate.formStep == 3 ? "" : "#18203A"
-                          }`,
+                            }`,
+                          backgroundColor: `${hookContractCreate.formStep == 3 ? "" : "#18203A"
+                            }`,
                         }}
                       >
                         3
@@ -317,11 +304,10 @@ const ContractCreateEditModal = ({
                     )}
                     <Text
                       style={{
-                        color: `${
-                          hookContractCreate.formStep == 3
+                        color: `${hookContractCreate.formStep == 3
                             ? ""
                             : style.color.disabled
-                        }`,
+                          }`,
                       }}
                     >
                       Third
@@ -344,7 +330,10 @@ const ContractCreateEditModal = ({
                 </Text>
               </>
             )}
-            {hookContractCreate.formStep == 1 && (
+            {hookContractCreate.isLoading && <FlexRow height="12rem">
+              <Loader size="lg" />
+            </FlexRow>}
+            {hookContractCreate.formStep == 1 && !hookContractCreate.isLoading && (
               <>
                 <InputLabel
                   value={hookContractCreate.$contractFormData.address}
@@ -405,21 +394,23 @@ const ContractCreateEditModal = ({
                 />
               </>
             )}
-            {hookContractCreate.formStep == 1.5 && (
+            {hookContractCreate.formStep == 1.5 && !hookContractCreate.isLoading && (
               <>
                 <InputLabel
-                  value={hookContractCreate.contractAbi}
+                  value={hookContractCreate.$contractFormData.contract_abi}
                   // value=""
                   inputType="textArea"
                   labelText="Contract ABI"
                   placeholder=" To enable your verification , you can enter your ABI manually here "
                   onChange={async (e: any) => {
-                    hookContractCreate.setContractAbi(e.target.value);
+                    hookContractCreate.$loadContractFormData({
+                      contract_abi: e.target.value,
+                    })
                   }}
                 />
               </>
             )}
-            {hookContractCreate.formStep == 2 && (
+            {hookContractCreate.formStep == 2 && !hookContractCreate.isLoading && (
               <>
                 <Box
                   style={{
@@ -544,7 +535,7 @@ const ContractCreateEditModal = ({
                 )}
               </>
             )}
-            {hookContractCreate.formStep == 3 && (
+            {hookContractCreate.formStep == 3 && !hookContractCreate.isLoading && (
               <>
                 <InputLabel
                   value={
@@ -576,7 +567,7 @@ const ContractCreateEditModal = ({
                 />
               </>
             )}
-            {hookContractCreate.formStep == 4 && (
+            {hookContractCreate.formStep == 4 && !hookContractCreate.isLoading && (
               <Box
                 style={{
                   display: "flex",

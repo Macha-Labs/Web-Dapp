@@ -17,7 +17,7 @@ const useContractCreate = (modal: any) => {
   const toast = useToast();
   const router = useRouter();
   const [formStep, setFormStep] = useState<any>(1);
-  const [contractAbi, setContractAbi] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const $contractFormData = useContractFormStore(
     (state: any) => state.contractFormData
   );
@@ -41,32 +41,49 @@ const useContractCreate = (modal: any) => {
   };
 
   const chainVerification = async (address: any) => {
+    setIsLoading(true)
     if ($contractFormData.chain_id == 1) {
       const res = await etherscanVerification(address);
-      if (res?.status == 1) return true;
+      if (res?.status == 1) {
+        setIsLoading(false)
+        return true;
+      }
       else {
         setFormStep(1.5);
+        setIsLoading(false)
         return false;
       }
     } else if ($contractFormData.chain_id == 137) {
       const res = await polygonScanVerification(address);
-      if (res?.status == 1) return true;
+      if (res?.status == 1) {
+        setIsLoading(false)
+        return true;
+      }
       else {
         setFormStep(1.5);
+        setIsLoading(false)
         return false;
       }
     } else if ($contractFormData.chain_id == 8453) {
       const res = await baseScanVerification(address);
-      if (res?.status == 1) return true;
+      if (res?.status == 1) {
+        setIsLoading(false)
+        return true;
+      }
       else {
         setFormStep(1.5);
+        setIsLoading(false)
         return false;
       }
     } else if ($contractFormData.chain_id == 10) {
       const res = await opScanVerification(address);
-      if (res?.status == 1) return true;
+      if (res?.status == 1) {
+        setIsLoading(false)
+        return true;
+      }
       else {
         setFormStep(1.5);
+        setIsLoading(false)
         return false;
       }
     }
@@ -114,15 +131,26 @@ const useContractCreate = (modal: any) => {
             $contractFormData.read_abi_from != "" &&
             $contractFormData.read_abi_from != undefined
           ) {
-            chainVerification($contractFormData.read_abi_from);
+            return chainVerification($contractFormData.read_abi_from);
           } else {
-            chainVerification($contractFormData.address);
+            return chainVerification($contractFormData.address);
           }
-          return true;
         }
       }
     }
     if (formStep == 1.5) {
+      if (
+        $contractFormData.contract_abi == "" ||
+        $contractFormData.contract_abi == undefined
+      ) {
+        toast({
+          title: "Contract not verified. Please provide the ABI",
+          status: "warning",
+          duration: 3000,
+          position: "top-right",
+        });
+        return false
+      }
       return true;
     }
     if (formStep == 2) {
@@ -258,7 +286,7 @@ const useContractCreate = (modal: any) => {
       if (await validateSteps()) {
         if (formStep == 1.5) {
           console.log("calling lighthouse", $loadContractFormData.contract_abi);
-          uploadTextToLighthouse(contractAbi);
+          uploadTextToLighthouse($contractFormData.contractAbi);
           setFormStep(2);
         } else {
           console.log(formStep);
@@ -287,6 +315,8 @@ const useContractCreate = (modal: any) => {
       return;
     } else if (formStep == 1.5) {
       setFormStep(1);
+    } else if (formStep == 2 && $contractFormData.contract_abi != "") {
+        setFormStep(1.5)
     } else {
       setFormStep((currentStep: any) => currentStep - 1);
     }
@@ -386,6 +416,7 @@ const useContractCreate = (modal: any) => {
       interested_methods: interested_methods,
       interested_events: interested_events,
       ownerAddress: $address,
+      contract_abi: $contractFormData.contract_abi,
     };
 
     // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
@@ -462,8 +493,7 @@ const useContractCreate = (modal: any) => {
     lastStep: lastStep,
     setClear: setClear,
     nextFormEditStep: nextFormEditStep,
-    contractAbi: contractAbi,
-    setContractAbi: setContractAbi,
+    isLoading: isLoading
   };
 };
 export default useContractCreate;
