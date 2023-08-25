@@ -10,22 +10,25 @@ import { useRouter } from "next/router";
 
 const NavStudio = () => {
   const $address = useAuthStore((state: any) => state.address);
-  const hookSearch = useSearch()
-  const router = useRouter()
+  const hookSearch = useSearch();
+  const router = useRouter();
   return (
     <NavTop
-      centerElem={<InputSearch defaultValue={hookSearch.searchString} value={hookSearch.searchString} onChange={(e: any) => hookSearch.setSearchString(e.target.value)}
-        onKeydown={(e: any) => {
-          if (e.key === 'Enter') {
-            e.preventDefault()
-            router.push(`/search/${hookSearch.searchString}`)
-          }
-        }}
-      />
+      centerElem={
+        <InputSearch
+          defaultValue={hookSearch.searchString}
+          value={hookSearch.searchString}
+          onChange={(e: any) => hookSearch.setSearchString(e.target.value)}
+          onKeydown={(e: any) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              router.push(`/search/${hookSearch.searchString}`);
+            }
+          }}
+        />
       }
       rightElem={
         <FlexRow width="fit-content">
-          {$address && <NavButton />}
           {
             <ConnectWalletButton
               showBalance={true}

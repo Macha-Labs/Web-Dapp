@@ -92,8 +92,8 @@ const DashBoard = () => {
       href: "/studio",
     },
     {
-      value: "Contracts",
-      href: "/contracts",
+      value: "Indexers",
+      href: "/indexers",
     },
     // {
     //   value: "Functions",
@@ -235,7 +235,7 @@ const DashBoard = () => {
                 width="fit-content"
                 options={dashboardNav}
                 gstyle={{ fontSize: `${style.font.h5}` }}
-                value={"Contracts"}
+                value={"Indexers"}
                 onChange={() => {}}
               />
             </FlexRow>
