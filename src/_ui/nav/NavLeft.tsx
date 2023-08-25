@@ -1,14 +1,18 @@
 import { style } from "@/styles/StyledConstants";
-import { Image, Tooltip } from "@chakra-ui/react";
+import { Image, Tooltip, useDisclosure } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import FlexColumn from "../flex/FlexColumn";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
 import useAuthStore from "@/store/useAuthStore";
+import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
+import CreatorModal from "@/components/studio/CreatorModal";
 
 const NavLeft = (props: any) => {
   const router = useRouter();
+  const creatorModal = useDisclosure();
+  const hookCreatorCreate = useCreatorCreate();
 
   return (
     <>
@@ -36,9 +40,8 @@ const NavLeft = (props: any) => {
                     }
                     size="md"
                     style={{
-                      className: `m-b-1 ${
-                        router.pathname === "/" ? "state_active" : "state_hover"
-                      } `,
+                      className: `m-b-1 ${router.pathname === "/" ? "state_active" : "state_hover"
+                        } `,
                     }}
                   />
                 </Link>
@@ -51,11 +54,10 @@ const NavLeft = (props: any) => {
                     }
                     size="md"
                     style={{
-                      className: `m-b-1 ${
-                        router.pathname === "/explore"
-                          ? "state_active"
-                          : "state_hover"
-                      } `,
+                      className: `m-b-1 ${router.pathname === "/explore"
+                        ? "state_active"
+                        : "state_hover"
+                        } `,
                     }}
                   />
                 </Link>
@@ -68,33 +70,30 @@ const NavLeft = (props: any) => {
                     }
                     size="md"
                     style={{
-                      className: `m-b-1 ${
-                        router.pathname === "/feed"
-                          ? "state_active"
-                          : "state_hover"
-                      } `,
+                      className: `m-b-1 ${router.pathname === "/feed"
+                        ? "state_active"
+                        : "state_hover"
+                        } `,
                     }}
                   />
                 </Link>
               </FlexColumn>
               <FlexColumn height="fit-content">
-                <Link href="/create">
-                  <Tooltip label="Create">
-                    <IconImage
-                      slug={
-                        router.pathname === "/create" ? "icon-add" : "icon-add"
-                      }
-                      size="md"
-                      style={{
-                        className: `m-b-1 ${
-                          router.pathname === "/create"
-                            ? "state_active "
-                            : "state_hover"
-                        } `,
-                      }}
-                    />
-                  </Tooltip>
-                </Link>
+                <IconImage
+                  onClick={() => {
+                    creatorModal.onOpen()
+                  }}
+                  slug={
+                    router.pathname === "/create" ? "icon-add" : "icon-add"
+                  }
+                  size="md"
+                  style={{
+                    className: `m-b-1 ${router.pathname === "/create"
+                      ? "state_active "
+                      : "state_hover"
+                      } `,
+                  }}
+                />
                 <Image
                   src="../../assets/Logo.png"
                   height={"40px"}
@@ -105,6 +104,7 @@ const NavLeft = (props: any) => {
             </FlexColumn>
           </div>
         </div>
+        <CreatorModal modal={creatorModal} hookCreatorCreate={hookCreatorCreate} />
       </FlexRow>
     </>
   );

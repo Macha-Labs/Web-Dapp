@@ -1,4 +1,5 @@
 import useCreatorFormStore from "@/store/useCreatorFormStore";
+import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 
 const useCreatorCreate = () => {
@@ -7,6 +8,7 @@ const useCreatorCreate = () => {
     const [tags, setTags] = useState<any>([]);
     const [tagString, setTagString] = useState<string>();
     const [suggestions, setSuggestions] = useState<any>([]);
+    const toast = useToast()
     const $creatorFormData = useCreatorFormStore(
         (state: any) => state.creatorFormData
     );
@@ -29,10 +31,22 @@ const useCreatorCreate = () => {
     const validateSteps = () => {
         if (step == 1) {
             if (inputType == "" || inputType == undefined) {
+                toast({
+                    title: "Please select the preferred option.",
+                    status: "warning",
+                    duration: 3000,
+                    position: "top-right",
+                  });
                 return false
             }
             else {
                 if ($creatorFormData.link == "" || $creatorFormData.link == undefined) {
+                    toast({
+                        title: "Image cannot be empty.",
+                        status: "warning",
+                        duration: 3000,
+                        position: "top-right",
+                      });
                     return false
                 }
                 else {
@@ -42,13 +56,14 @@ const useCreatorCreate = () => {
         }
     };
 
-
-    const lastStep = () => {
-
-    };
-
     const setClear = () => {
-
+        $loadCreatorFormData({
+            link: "",
+            description: "",
+            chain_id: "",
+            tags: "",
+        });
+        setStep(1)
     };
 
     return {
@@ -64,7 +79,8 @@ const useCreatorCreate = () => {
         setInputType: setInputType,
         nextFormStep: nextFormStep,
         $creatorFormData: $creatorFormData,
-        $loadCreatorFormData: $loadCreatorFormData
+        $loadCreatorFormData: $loadCreatorFormData,
+        setClear: setClear
     };
 };
 export default useCreatorCreate;

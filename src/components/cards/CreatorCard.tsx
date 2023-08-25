@@ -3,7 +3,6 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import InputLabel from "@/_ui/input/InputLabel";
 import chains from "@/data/network";
-import { tagList } from "@/data/studio/constant";
 import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
@@ -16,12 +15,11 @@ import {
   ListItem,
   Tag,
   TagCloseButton,
-  Text,
-  Textarea,
+  Text
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-const CreatorCard = () => {
+const CreatorCard = ({modal} : any) => {
   const hookCreatorCreate = useCreatorCreate();
 
   useEffect(() => {
@@ -58,12 +56,38 @@ const CreatorCard = () => {
   return (
     <Box
       height={"85vh"}
-      border={style.card.border.meta}
+      // border={style.card.border.meta}
       borderRadius={style.card.borderRadius.button}
       // overflow={"hidden"}
-      marginBottom={style.margin.xxxl}
+      position="relative"
       boxShadow={style.card.shadow.default}
     >
+      <Box style={{
+        position: "absolute",
+        right: "-2.4rem",
+        top: "-1.3rem"
+      }}>
+        <Image
+          src={GlobalIcons["icon-close"]}
+          onClick={() => {
+            hookCreatorCreate.setClear();
+            modal.onClose();
+          }}
+          alt=""
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "7px",
+            cursor: "pointer",
+            width: "2rem",
+            height: "2rem",
+            background: `${style.icon.bg.default}`,
+            borderRadius: "50%",
+            boxShadow: `${style.icon.shadow.default}`,
+          }}
+        />
+      </Box>
       <FlexRow height="85vh">
         <Box width={"40%"} height={"100%"}>
           {hookCreatorCreate.step == 1 && (
@@ -168,7 +192,7 @@ const CreatorCard = () => {
                           key={`label-${item}`}
                           // variant={"grey"}
                           marginBottom={style.margin.sm}
-                          // marginTop={style.margin.sm}
+                        // marginTop={style.margin.sm}
                         >
                           <Text marginBottom={"0px"}>{item}</Text>
                           <TagCloseButton
@@ -292,21 +316,21 @@ const CreatorCard = () => {
                       inputLogoSize="lg"
                       //   labelText="Image"
                       marginTop="sm"
-                      //   onChange={async (e?: any) => {
-                      //     if (e.target.files && e.target.files[0]) {
-                      //       // const file = e.target.files[0];
-                      //       // console.log("Selected file:", file);
-                      //       // const element = document.createElement("a");
-                      //       // element.href = URL.createObjectURL(file);
-                      //       const cid = await deploytoLightHouse(
-                      //         e.target.files,
-                      //         hookCreatorCreate.setLoadingCallback
-                      //       );
-                      //       hookCreatorCreate.$loadCreatorFormData({
-                      //         image: displayImage(cid),
-                      //       });
-                      //     }
-                      //   }}
+                    //   onChange={async (e?: any) => {
+                    //     if (e.target.files && e.target.files[0]) {
+                    //       // const file = e.target.files[0];
+                    //       // console.log("Selected file:", file);
+                    //       // const element = document.createElement("a");
+                    //       // element.href = URL.createObjectURL(file);
+                    //       const cid = await deploytoLightHouse(
+                    //         e.target.files,
+                    //         hookCreatorCreate.setLoadingCallback
+                    //       );
+                    //       hookCreatorCreate.$loadCreatorFormData({
+                    //         image: displayImage(cid),
+                    //       });
+                    //     }
+                    //   }}
                     />
                   </>
                 )}
