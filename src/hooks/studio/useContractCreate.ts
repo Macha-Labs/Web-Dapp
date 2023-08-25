@@ -18,6 +18,7 @@ const useContractCreate = (modal: any) => {
   const router = useRouter();
   const [formStep, setFormStep] = useState<any>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [contractAbiText, setContractAbiText] = useState<string>("");
   const $contractFormData = useContractFormStore(
     (state: any) => state.contractFormData
   );
@@ -140,8 +141,8 @@ const useContractCreate = (modal: any) => {
     }
     if (formStep == 1.5) {
       if (
-        $contractFormData.contract_abi == "" ||
-        $contractFormData.contract_abi == undefined
+        contractAbiText == "" ||
+        contractAbiText == undefined
       ) {
         toast({
           title: "Contract not verified. Please provide the ABI",
@@ -285,8 +286,10 @@ const useContractCreate = (modal: any) => {
     } else {
       if (await validateSteps()) {
         if (formStep == 1.5) {
-          console.log("calling lighthouse", $loadContractFormData.contract_abi);
-          uploadTextToLighthouse($contractFormData.contractAbi);
+          const resContractAbi = await uploadTextToLighthouse(contractAbiText);
+          $loadContractFormData({
+            contract_abi: resContractAbi
+          })
           setFormStep(2);
         } else {
           console.log(formStep);
@@ -315,7 +318,7 @@ const useContractCreate = (modal: any) => {
       return;
     } else if (formStep == 1.5) {
       setFormStep(1);
-    } else if (formStep == 2 && $contractFormData.contract_abi != "") {
+    } else if (formStep == 2 && contractAbiText != "") {
         setFormStep(1.5)
     } else {
       setFormStep((currentStep: any) => currentStep - 1);
@@ -493,7 +496,9 @@ const useContractCreate = (modal: any) => {
     lastStep: lastStep,
     setClear: setClear,
     nextFormEditStep: nextFormEditStep,
-    isLoading: isLoading
+    isLoading: isLoading,
+    contractAbiText: contractAbiText,
+    setContractAbiText: setContractAbiText
   };
 };
 export default useContractCreate;

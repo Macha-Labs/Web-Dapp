@@ -397,15 +397,13 @@ const ContractCreateEditModal = ({
             {hookContractCreate.formStep == 1.5 && !hookContractCreate.isLoading && (
               <>
                 <InputLabel
-                  value={hookContractCreate.$contractFormData.contract_abi}
+                  value={hookContractCreate.contractAbiText}
                   // value=""
                   inputType="textArea"
                   labelText="Contract ABI"
                   placeholder=" To enable your verification , you can enter your ABI manually here "
                   onChange={async (e: any) => {
-                    hookContractCreate.$loadContractFormData({
-                      contract_abi: e.target.value,
-                    })
+                    hookContractCreate.setContractAbiText(e.target.value)
                   }}
                 />
               </>

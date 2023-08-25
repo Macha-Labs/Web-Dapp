@@ -1,4 +1,4 @@
-// import lighthouse from "@lighthouse-web3/sdk";
+import lighthouse from "@lighthouse-web3/sdk";
 import { config } from "@/config/index";
 
 export const progressCallback = (progressData: any) => {
@@ -7,28 +7,28 @@ export const progressCallback = (progressData: any) => {
 };
 
 export const deploytoLightHouse = async (e: any, progressCallback: any) => {
-  // const output = await lighthouse.upload(
-  //   e,
-  //   config.LIGHTHOUSE_API_KEY,
-  //   false,
-  //   progressCallback
-  // );
-  // console.log("File Status:", output);
-  // console.log(
-  //   "Visit at https://gateway.lighthouse.storage/ipfs/" + output.data.Hash
-  // );
-  return null;
+  const output = await lighthouse.upload(
+    e,
+    config.LIGHTHOUSE_API_KEY,
+    false,
+    progressCallback
+  );
+  console.log("File Status:", output);
+  console.log(
+    "Visit at https://gateway.lighthouse.storage/ipfs/" + output.data.Hash
+  );
+  return output.data.Hash;
 };
 
 export const uploadTextToLighthouse = async (text: string) => {
-  // const response = await lighthouse.uploadBuffer(
-  //   text,
-  //   config.LIGHTHOUSE_API_KEY
-  // );
-  // console.log("https://gateway.lighthouse.storage/ipfs/" + response.data.Hash);
-  return null;
+  const response = await lighthouse.uploadBuffer(
+    text,
+    config.LIGHTHOUSE_API_KEY
+  );
+  console.log("https://gateway.lighthouse.storage/ipfs/" + response.data.Hash);
+  return response.data.Hash;
 };
 
-export const displayImage = (cid: string | null) => {
-  return cid ? `https://gateway.lighthouse.storage/ipfs/${cid}` : null;
+export const displayImage = (cid: string) => {
+  return `https://gateway.lighthouse.storage/ipfs/${cid}`;
 };
