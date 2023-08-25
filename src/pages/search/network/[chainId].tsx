@@ -27,6 +27,8 @@ import NavStudio from "@/_ui/nav/NavStudio";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import Header from "@/_ui/Head/Header";
+import useContractList from "@/hooks/studio/useContractList";
+import ContractList from "@/components/studio/ContractList";
 
 const Network = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -35,7 +37,8 @@ const Network = () => {
   const chainId: any = router.query.chainId;
   const isReady = router.isReady;
   const hookAlchemy = useAlchemy();
-  const [selectedNavTab, setSelectedNavTab] = useState<string>("Transactions");
+  const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
+  const hookContractList = useContractList();
 
   const renderNav = () => {
     return <NavStudio />;
@@ -46,12 +49,17 @@ const Network = () => {
       if (isReady) {
         await hookAlchemy.getLatestBlockByChainId(Number(router.query.chainId));
         await hookChainTxn._fetch(router.query.chainId);
+        await hookContractList.handleFilter(chainId);
       }
     };
     fetch();
   }, [router.query.chainId, hookChainTxn.page]);
 
   const chainNav: any = [
+    {
+      value: "Contracts",
+      href: "#",
+    },
     {
       value: "Transactions",
       href: "#",
@@ -61,6 +69,15 @@ const Network = () => {
       href: "#",
     },
   ];
+
+  const renderContracts = () => {
+    console.log("chain contracts", hookContractList?.filterData);
+    return (
+      hookContractList?.filterData && (
+        <ContractList openInNewTab={true} data={hookContractList.filterData} />
+      )
+    );
+  };
 
   const renderAbout = () => {
     return (
@@ -251,7 +268,77 @@ const Network = () => {
       <FlexRow height="100vh">
         <Loader size="lg" />
       </FlexRow>
-    ) : (hookChainTxn.contractTxnDetails != undefined ? <>
+    ) : hookChainTxn.contractTxnDetails != undefined ? (
+      <>
+        <Box>
+          <Flex justify="space-between">
+            <Box>
+              <Box
+                display="flex"
+                alignItems="center"
+                marginBottom={style.margin.md}
+              >
+                <IconBase
+                  size="2xl"
+                  slug={chainId && chains[chainId]?.chainImage}
+                />
+                <Text
+                  fontSize={style.font.h1}
+                  fontWeight="600"
+                  marginBottom={0}
+                  marginLeft={style.margin.xxs}
+                >
+                  {chainId && chains[chainId]?.chainName}
+                </Text>
+              </Box>
+            </Box>
+            {/* <Box>Symbols</Box> */}
+          </Flex>
+          <Flex
+            justify="space-between"
+            border={style.card.border.contract}
+            borderRadius={style.card.borderRadius.default}
+          >
+            <Box flex="1" p={4} display="flex" justifyContent="space-between">
+              <Box>
+                <Text marginBottom={0}>Transactions Indexed</Text>
+                <Text marginBottom={0} fontWeight={style.fontWeight.extraDark}>
+                  {hookChainTxn.totalTxns.toLocaleString("en-US")}
+                </Text>
+              </Box>
+              <Divider
+                orientation="vertical"
+                margin={0}
+                border={style.card.border.meta}
+                width={"0px"}
+              />
+            </Box>
+            <Box flex="1" p={4}>
+              <Text marginBottom={0}>Latest Block</Text>
+              <Text marginBottom={0} fontWeight={style.fontWeight.extraDark}>
+                {hookAlchemy.latestBlock}
+              </Text>
+            </Box>
+          </Flex>
+        </Box>
+        <Box marginTop={style.margin.md}>
+          <Tabs
+            width="fit-content"
+            options={chainNav}
+            gstyle={{
+              fontSize: `${style.font.h5}`,
+              marginBottom: `${style.margin.sm}`,
+            }}
+            value={selectedNavTab}
+            onChange={setSelectedNavTab}
+          />
+          {/* <Divider /> */}
+          {renderTxns()}
+          {renderAbout()}
+          {renderContracts()}
+        </Box>
+      </>
+    ) : (
       <Box>
         <Flex justify="space-between">
           <Box>
@@ -276,84 +363,7 @@ const Network = () => {
           </Box>
           {/* <Box>Symbols</Box> */}
         </Flex>
-        <Flex
-          justify="space-between"
-          border={style.card.border.contract}
-          borderRadius={style.card.borderRadius.default}
-        >
-          <Box
-            flex="1"
-            p={4}
-            display="flex"
-            justifyContent="space-between"
-          >
-            <Box>
-              <Text marginBottom={0}>Transactions Indexed</Text>
-              <Text
-                marginBottom={0}
-                fontWeight={style.fontWeight.extraDark}
-              >
-                {hookChainTxn.totalTxns.toLocaleString("en-US")}
-              </Text>
-            </Box>
-            <Divider
-              orientation="vertical"
-              margin={0}
-              border={style.card.border.meta}
-              width={"0px"}
-            />
-          </Box>
-          <Box flex="1" p={4}>
-            <Text marginBottom={0}>Latest Block</Text>
-            <Text
-              marginBottom={0}
-              fontWeight={style.fontWeight.extraDark}
-            >
-              {hookAlchemy.latestBlock}
-            </Text>
-          </Box>
-        </Flex>
       </Box>
-      <Box marginTop={style.margin.md}>
-        <Tabs
-          width="fit-content"
-          options={chainNav}
-          gstyle={{
-            fontSize: `${style.font.h5}`,
-            marginBottom: `${style.margin.sm}`,
-          }}
-          value={selectedNavTab}
-          onChange={setSelectedNavTab}
-        />
-        {/* <Divider /> */}
-        {renderTxns()}
-        {renderAbout()}
-      </Box>
-    </> : <Box>
-      <Flex justify="space-between">
-        <Box>
-          <Box
-            display="flex"
-            alignItems="center"
-            marginBottom={style.margin.md}
-          >
-            <IconBase
-              size="2xl"
-              slug={chainId && chains[chainId]?.chainImage}
-            />
-            <Text
-              fontSize={style.font.h1}
-              fontWeight="600"
-              marginBottom={0}
-              marginLeft={style.margin.xxs}
-            >
-              {chainId && chains[chainId]?.chainName}
-            </Text>
-          </Box>
-        </Box>
-        {/* <Box>Symbols</Box> */}
-      </Flex>
-    </Box>
     );
   };
   const renderBody = () => {

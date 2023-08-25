@@ -37,13 +37,14 @@ const TransactionCard = ({
           display: "flex",
           flexDirection: "row",
           width: "20rem",
-          border: `${style.card.border.meta}`,
+          border: `${style.card.border.default}`,
           borderRadius: `${style.card.borderRadius.button}`,
           padding: `${style.padding.xs}`,
           justifyContent: "flex-start",
           alignItems: "center",
           height: "5rem",
           boxShadow: `${style.card.shadow.default}`,
+          background: `${style.card.bg.default}`,
         }}
       >
         <FlexRow hrAlign="flex-start">

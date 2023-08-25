@@ -15,10 +15,12 @@ type Props = {
   search?: boolean;
 };
 
-const NavMeta = ({ rightElem, centerElem,search }: Props) => {
-  const [isSearchOpen, setIsSearchOpen] = useState<boolean>( search ? search : false);
-  const hookSearch = useSearch()
-  const router = useRouter()
+const NavMeta = ({ rightElem, centerElem, search }: Props) => {
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(
+    search ? search : false
+  );
+  const hookSearch = useSearch();
+  const router = useRouter();
 
   return (
     <>
@@ -58,14 +60,23 @@ const NavMeta = ({ rightElem, centerElem,search }: Props) => {
                   showStudio={true}
                 />
               ) : (
-                <InputSearch width="100%" height="2.2rem" defaultValue={hookSearch.searchString} value={hookSearch.searchString} onChange={(e: any) => hookSearch.setSearchString(e.target.value)} onKeydown={(e: any) => {
-                  if(e.key === 'Enter'){
-                    e.preventDefault()
-                    router.push(`/search/${hookSearch.searchString}`)
+                <InputSearch
+                  width="100%"
+                  height="2.2rem"
+                  defaultValue={hookSearch.searchString}
+                  value={hookSearch.searchString}
+                  onChange={(e: any) =>
+                    hookSearch.setSearchString(e.target.value)
                   }
-                }} />
+                  onKeydown={(e: any) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      router.push(`/search/${hookSearch.searchString}`);
+                    }
+                  }}
+                />
               )}
-              <Image
+              {/* <Image
                 style={{ marginLeft: `${style.margin.xs}`, cursor: "pointer" }}
                 src={
                   isSearchOpen
@@ -74,7 +85,7 @@ const NavMeta = ({ rightElem, centerElem,search }: Props) => {
                 }
                 height="2.2rem"
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-              />
+              /> */}
             </Box>
           </FlexRow>
         </Box>

@@ -19,7 +19,8 @@ const SupportedChains = ({ data, id }: Props) => {
         router.push(`/search/network/${id}`);
       }}
       width={"20%"}
-      border={style.card.border.meta}
+      border={style.card.border.default}
+      background={style.card.bg.default}
       marginX={style.margin.sm}
       marginTop={style.margin.sm}
       padding={style.padding.sm}
@@ -32,7 +33,9 @@ const SupportedChains = ({ data, id }: Props) => {
           alt="img"
           marginBottom={style.margin.sm}
         />
-        <Heading fontSize={style.font.h5} textAlign="center" height="2.5rem">{data.chainName}</Heading>
+        <Heading fontSize={style.font.h5} textAlign="center" height="2.5rem">
+          {data.chainName}
+        </Heading>
       </FlexColumn>
     </Box>
   );
