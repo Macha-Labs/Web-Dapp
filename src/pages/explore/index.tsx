@@ -26,60 +26,59 @@ import { fetchAllMetas, fetchMetaSchemas } from "@/service/MetaService";
 import SupportedChains from "@/components/studio/SupportedChains";
 import chains from "@/data/network";
 
-export async function getServerSideProps() {
-  let allTransactions: any = [];
-  let allMetas: any = [];
-  let allMetaSchemas: any = [];
+// export async function getServerSideProps() {
+//   let allTransactions: any = [];
+//   let allMetas: any = [];
+//   let allMetaSchemas: any = [];
 
-  const resAllTransactions = await getAllTransactions();
-  if (resAllTransactions.data) {
-    console.log(resAllTransactions.data, "latest txn");
-    allTransactions = resAllTransactions.data;
-  } else {
-    console.log("Couldnt fetch all transactions");
-  }
+//   const resAllTransactions = await getAllTransactions();
+//   if (resAllTransactions.data) {
+//     console.log(resAllTransactions.data, "latest txn");
+//     allTransactions = resAllTransactions.data;
+//   } else {
+//     console.log("Couldnt fetch all transactions");
+//   }
 
-  const resAllMetas = await fetchAllMetas("poap_nft", 1, 9);
-  if (resAllMetas.data) {
-    console.log(resAllMetas.data, "all metass");
-    allMetas = {
-      data: resAllMetas.data,
-      lastPage: resAllMetas.lastPage,
-    };
-  } else {
-    console.log("Couldnt fetch all metas");
-  }
+//   const resAllMetas = await fetchAllMetas("poap_nft", 1, 9);
+//   if (resAllMetas.data) {
+//     console.log(resAllMetas.data, "all metass");
+//     allMetas = {
+//       data: resAllMetas.data,
+//       lastPage: resAllMetas.lastPage,
+//     };
+//   } else {
+//     console.log("Couldnt fetch all metas");
+//   }
 
-  const resAllMetaSchemas = await fetchMetaSchemas();
-  if (resAllMetaSchemas.data) {
-    console.log(resAllMetaSchemas.data, "all metas schemas");
-    allMetaSchemas = resAllMetaSchemas.data;
-  } else {
-    console.log("Couldnt fetch all meta schemas");
-  }
+//   const resAllMetaSchemas = await fetchMetaSchemas();
+//   if (resAllMetaSchemas.data) {
+//     console.log(resAllMetaSchemas.data, "all metas schemas");
+//     allMetaSchemas = resAllMetaSchemas.data;
+//   } else {
+//     console.log("Couldnt fetch all meta schemas");
+//   }
 
-  return {
-    props: {
-      allTransactions: allTransactions,
-      allMetas: allMetas,
-      allMetaSchemas: allMetaSchemas,
-    },
-  };
-}
+//   return {
+//     props: {
+//       allTransactions: allTransactions,
+//       allMetas: allMetas,
+//       allMetaSchemas: allMetaSchemas,
+//     },
+//   };
+// }
 
-export default function Home({
-  allTransactions,
-  allMetas,
-  allMetaSchemas,
-}: any) {
+export default function Home() {
   const hookTransaction = useTransaction();
   const hookMetasList = useMetaList();
   const router = useRouter();
 
   useEffect(() => {
-    hookTransaction.setLatestTransactions(allTransactions);
-    hookMetasList.initialLoadAllMetas(allMetas.data, allMetas.lastPage);
-    hookMetasList.initialLoadMetaSchemas(allMetaSchemas);
+    hookTransaction._fetchLatestTransactions();
+    hookMetasList._fetchMore("poap_nft", 9);
+    hookMetasList._fetchMetaSchemas();
+    // hookTransaction.setLatestTransactions(allTransactions);
+    // hookMetasList.initialLoadAllMetas(allMetas.data, allMetas.lastPage);
+    // hookMetasList.initialLoadMetaSchemas(allMetaSchemas);
   }, []);
 
   const renderBody = () => {

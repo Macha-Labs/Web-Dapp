@@ -22,26 +22,26 @@ type Props = {
   metaInfo: any;
 };
 
-export async function getServerSideProps(context: any) {
-  let contractSlug = context.params.id
-  let contract: any = {}
+// export async function getServerSideProps(context: any) {
+//   let contractSlug = context.params.id
+//   let contract: any = {}
 
-  const resContract = await contractDataBySlug(contractSlug)
-  if (resContract.data) {
-    console.log(resContract.data, "contract");
-    contract = resContract.data
-  } else {
-    console.log("Couldnt fetch contract");
-  }
+//   const resContract = await contractDataBySlug(contractSlug)
+//   if (resContract.data) {
+//     console.log(resContract.data, "contract");
+//     contract = resContract.data
+//   } else {
+//     console.log("Couldnt fetch contract");
+//   }
 
-  return {
-    props: {
-      contract_data: contract
-    }
-  }
-}
+//   return {
+//     props: {
+//       contract_data: contract
+//     }
+//   }
+// }
 
-const Contract = ({contract_data}: any) => {
+const Contract = () => {
   const router = useRouter();
   const isReady = router.isReady;
   const hookContractTxn = useContractTxn();
@@ -50,8 +50,8 @@ const Contract = ({contract_data}: any) => {
   const hookContractCreate = useContractCreate(editModal);
 
   useEffect(() => {
-    hookContract.initialLoad(contract_data)
     if (isReady) {
+      hookContract._fetch(router.query.id);
       hookContractTxn._fetch(router.query.id);
     }
   }, [router.query.id, hookContractTxn.page]);
@@ -225,10 +225,10 @@ const Contract = ({contract_data}: any) => {
   return (
     <>
       <Header
-        title={`Macha | ${hookContract.contractDetails?.contract?.name
-          ? hookContract.contractDetails?.contract?.name
-          : ""
-          }`}
+        title={hookContract.contractDetails?.contract?.name
+          ? `Macha | ${hookContract.contractDetails?.contract?.name}`
+          : "Macha"
+          }
       />
       <FlexWindow
         view="both"

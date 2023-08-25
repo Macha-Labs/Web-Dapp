@@ -13,12 +13,28 @@ const useContract = () => {
   const $loadContractFormData = useContractFormStore((state: any) => state.loadContractFormData);
 
   const _fetch = async (contract_slug: any) => {
-    setIsLoading(true)
-    contractDataBySlug(contract_slug).then((res: any) => {
-      setContractDetails(res.data);
-      setIsLoading(false)
-    });
-  }
+    if (window.sessionStorage !== undefined) {
+      const data = window.sessionStorage.getItem(contract_slug);
+      if (data !== null) {
+        setContractDetails(JSON.parse(data))
+        setIsLoading(false)
+      }
+      else {
+        contractDataBySlug(contract_slug).then((res: any) => {
+          window.sessionStorage.setItem(contract_slug, JSON.stringify(res.data))
+          setContractDetails(res.data);
+          setIsLoading(false)
+        });
+      }
+    }
+    else {
+      contractDataBySlug(contract_slug).then((res: any) => {
+        window.sessionStorage.setItem(contract_slug, res.data)
+        setContractDetails(res.data);
+        setIsLoading(false)
+      });
+    }
+  };
 
   const initialLoad = (contract_data: any) => {
     setContractDetails(contract_data)
