@@ -44,6 +44,7 @@
     "omit-deep": "^0.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-is": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.8.1",
     "react-virtualized-auto-sizer": "^1.0.7",
