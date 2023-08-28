@@ -87,8 +87,8 @@ const CreatorCard = ({ modal }: any) => {
             />
           )}
         </Box>
-        <Box width={"60%"} padding={style.padding.xxxl} height={"100%"} overflowY="scroll">
-          <FlexColumn hrAlign="flex-start" height="100%">
+        <Box width={"60%"} padding={style.padding.xxxl} height={"100%"} overflowY="scroll" className="no-scrollbar">
+          <FlexColumn hrAlign="flex-start" height="99%">
             {hookCreatorCreate.step == 1 && (
               <Heading fontSize={style.font.h3}>
                 Get started as a Creator
@@ -124,6 +124,7 @@ const CreatorCard = ({ modal }: any) => {
                       <Image
                         src={GlobalIcons[chains[chain].chainImage]}
                         height={"50px"}
+                        width={"50px"}
                       />
                     </Box>
                   );
