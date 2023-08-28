@@ -24,7 +24,7 @@ const Search = () => {
       <FlexColumn
         hrAlign="flex-start"
         vrAlign="flex-start"
-        padding="3rem 0rem"
+        padding="1rem 0rem"
         height="100vh"
       >
         <Box
@@ -41,14 +41,15 @@ const Search = () => {
           display={"flex"}
           alignItems={"center"}
           flexDir={"column"}
-          justifyContent={"center"}
+          paddingTop={style.margin["4xl"]}
+          justifyContent={"flex-start"}
         >
           <Image
             // className=""
             src="/assets/MACHALogo.svg"
             alt="logo"
-            width={255}
-            height={93}
+            width={212}
+            height={78}
             // width={246}
             // marginBottom={style.margin.sm}
           />
@@ -72,6 +73,7 @@ const Search = () => {
       view="both"
       navLeft={renderNavLeft()}
       // navTop={renderNavTop()}
+      padding="0% 1%"
       bodyElem={renderBody()}
       noPaddingTop={true}
     ></FlexWindow>

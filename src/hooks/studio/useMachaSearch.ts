@@ -1,3 +1,4 @@
+import { UserStream$ } from "@/schema/user";
 import useMetaStore from "@/store/useMetaStore";
 import { useState } from "react";
 
@@ -11,6 +12,7 @@ const useMachaSearch = () => {
   const [query, setQuery] = useState("");
   const [resultData, setResultData] = useState<any>({});
   const [selectedOption, setSelectedOption] = useState(options[0].value);
+
   const $meta = useMetaStore((state: any) => state.meta);
 
   const handleInputChange = (e: any) => {
@@ -19,7 +21,7 @@ const useMachaSearch = () => {
 
   const onSearch = async (query: any) => {
     // console.log("query", query);
-    const result = await $meta?.fetchMetaOrigin(query, 0);
+    // const result = await $meta?.fetchMetaOrigin(query, 0);
     // console.log("Origin result", result);
     // setResultData(result.data);
   };

@@ -14,6 +14,7 @@ type Props = {
   navLeft?: any;
   navTop?: any;
   noPaddingTop?: boolean;
+  padding?: any;
 };
 
 export const FlexWindow = ({
@@ -24,6 +25,7 @@ export const FlexWindow = ({
   navLeft,
   navTop,
   noPaddingTop,
+  padding,
 }: Props) => {
   return (
     <div
@@ -87,7 +89,7 @@ export const FlexWindow = ({
                 style={{
                   position: "fixed",
                   top: "0",
-                  padding: "0% 6%",
+                  padding: `${padding ? padding : "0% 3%"}`,
                   paddingTop: `${style.margin.md}`,
                   background: "rgb(0, 4, 13)",
                   zIndex: "1000",
@@ -103,7 +105,7 @@ export const FlexWindow = ({
             <div
               className="window-bottom"
               style={{
-                padding: "0% 6%",
+                padding: `${padding ? padding : "0% 3%"}`,
                 paddingTop: `${noPaddingTop ? "0px" : style.margin["5xl"]}`,
               }}
             >
