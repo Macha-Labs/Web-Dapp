@@ -26,16 +26,35 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import ButtonNative from "@/_ui/buttons/ButtonNative";
+import {
+  useClient,
+  useConversations,
+  useMessages,
+  useSendMessage,
+} from "@xmtp/react-sdk";
+import useAuthStore from "@/store/useAuthStore";
 
 const Meta = () => {
   const hookMeta = useMeta();
   const router = useRouter();
+  const { initialize } = useClient();
+  const { conversations } = useConversations();
+  const sendMessage = useSendMessage();
+  const $signer = useAuthStore((state: any) => state.signer);
+
+  const handleConnect = useCallback(async () => {
+    console.log($signer);
+    await initialize({ signer: $signer });
+    console.log(await initialize({ signer: $signer }));
+  }, [initialize, $signer]);
   useEffect(() => {
     if (router.isReady) {
       hookMeta._fetch(router.query.id);
     }
   }, [router.query.id]);
+
   const [toggleIpfs, setToggleIpfs] = useState<boolean>(false);
   const [tab, setTab] = useState<string>("Data");
   const options = [
@@ -82,12 +101,38 @@ const Meta = () => {
           )}
         </Box>
         <Box width="68%">
-          <Tabs
-            options={options}
-            onChange={setTab}
-            value={tab}
-            width="fit-content"
-          />
+          <FlexRow hrAlign="space-between" height="fit-content">
+            <Tabs
+              options={options}
+              onChange={setTab}
+              value={tab}
+              width="fit-content"
+            />
+            {/* <ButtonNative
+              text="Connect to XMTP"
+              height="2.5rem"
+              variant="state_default_hover"
+              onClick={handleConnect}
+            />
+            <ButtonNative
+              text="Fetch XMTP Conversations"
+              height="2.5rem"
+              variant="state_default_hover"
+              onClick={() => {
+                console.log("conversations :  ", conversations);
+              }}
+            />
+            <ButtonNative
+              text="Snd msg to 1st conv"
+              height="2.5rem"
+              variant="state_default_hover"
+              onClick={async () => {
+                console.log("sending ...");
+                await sendMessage.sendMessage(conversations[0], "hey");
+                console.log("sent");
+              }}
+            /> */}
+          </FlexRow>
           {tab == "Data" && (
             <>
               <CardNative
@@ -235,7 +280,7 @@ const Meta = () => {
                           display: "flex",
                           justifyContent: "flex-end",
                           alignItems: "flex-start",
-                          width: "80%"
+                          width: "80%",
                         }}
                         onClick={() => {
                           setToggleIpfs(!toggleIpfs);
@@ -252,7 +297,7 @@ const Meta = () => {
                       <Box>
                         {Object.keys(
                           hookMeta?.metaData?.meta?.data?.ipfs[
-                          Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
+                            Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
                           ]
                         ).map((item, index) => {
                           return (
@@ -272,10 +317,10 @@ const Meta = () => {
                                   )[0]
                                 ][item] == "string"
                                   ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                  Object.keys(
-                                    hookMeta?.metaData?.meta?.data?.ipfs
-                                  )[0]
-                                  ][item]
+                                      Object.keys(
+                                        hookMeta?.metaData?.meta?.data?.ipfs
+                                      )[0]
+                                    ][item]
                                   : "[ ]"}
                               </Text>
                               <Box
@@ -294,11 +339,11 @@ const Meta = () => {
                                         )[0]
                                       ][item] == "string"
                                         ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                        Object.keys(
-                                          hookMeta?.metaData?.meta?.data
-                                            ?.ipfs
-                                        )[0]
-                                        ][item]
+                                            Object.keys(
+                                              hookMeta?.metaData?.meta?.data
+                                                ?.ipfs
+                                            )[0]
+                                          ][item]
                                         : "[ ]"
                                     );
                                     toast({
@@ -359,7 +404,7 @@ const Meta = () => {
                                 display: "flex",
                                 justifyContent: "flex-end",
                                 alignItems: "flex-start",
-                                width: "80%"
+                                width: "80%",
                               }}
                               onClick={() => {
                                 setToggleIpfs(!toggleIpfs);
@@ -372,48 +417,46 @@ const Meta = () => {
                               )}
                             </Box>
                           </FlexRow>
-                          {
-                            toggleIpfs && (
-                              <Box>
-                                {Object.keys(source).map((item, index) => {
-                                  return (
+                          {toggleIpfs && (
+                            <Box>
+                              {Object.keys(source).map((item, index) => {
+                                return (
+                                  <Box
+                                    key={index}
+                                    display={"flex"}
+                                    marginTop={style.margin.sm}
+                                  >
+                                    <Text
+                                      mr={style.margin.xs}
+                                      width={"20%"}
+                                    >{`${item} : `}</Text>
+                                    <Text width={"70%"} textAlign={"right"}>
+                                      {source[item]}
+                                    </Text>
                                     <Box
-                                      key={index}
+                                      width="5%"
                                       display={"flex"}
-                                      marginTop={style.margin.sm}
+                                      justifyContent={"flex-end"}
                                     >
-                                      <Text
-                                        mr={style.margin.xs}
-                                        width={"20%"}
-                                      >{`${item} : `}</Text>
-                                      <Text width={"70%"} textAlign={"right"}>
-                                        {source[item]}
-                                      </Text>
-                                      <Box
-                                        width="5%"
-                                        display={"flex"}
-                                        justifyContent={"flex-end"}
-                                      >
-                                        <IconBase
-                                          slug="icon-copy"
-                                          onClick={() => {
-                                            navigator.clipboard.writeText(
-                                              source[item]
-                                            );
-                                            toast({
-                                              title: "Copied To Clipboard",
-                                              status: "success",
-                                              duration: 3000,
-                                            });
-                                          }}
-                                        />
-                                      </Box>
+                                      <IconBase
+                                        slug="icon-copy"
+                                        onClick={() => {
+                                          navigator.clipboard.writeText(
+                                            source[item]
+                                          );
+                                          toast({
+                                            title: "Copied To Clipboard",
+                                            status: "success",
+                                            duration: 3000,
+                                          });
+                                        }}
+                                      />
                                     </Box>
-                                  );
-                                })}
-                              </Box>
-                            )
-                          }
+                                  </Box>
+                                );
+                              })}
+                            </Box>
+                          )}
                         </Box>
                       );
                     }
@@ -422,7 +465,7 @@ const Meta = () => {
             </>
           )}
         </Box>
-      </Box >
+      </Box>
     );
   };
 

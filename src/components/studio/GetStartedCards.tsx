@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { style } from "@/styles/StyledConstants";
 import TagNative from "@/_ui/tag/TagNative";
 import FlexRow from "@/_ui/flex/FlexRow";
@@ -39,17 +39,18 @@ const GetStartedCards = ({
       onClick={onClick ? onClick : () => {}}
     >
       <Box p="4" opacity={disabled ? "0.4" : "1"} width="100%">
-        <FlexRow hrAlign="flex-start" vrAlign="flex-start" >
-          <Text fontWeight={style.fontWeight.dark} mb={0} mr={style.margin.xxs}>
+        <FlexRow hrAlign="flex-start" vrAlign="flex-start">
+          <Heading
+            fontSize={style.font.h4}
+            fontWeight={style.fontWeight.dark}
+            mb={0}
+            mr={style.margin.xxs}
+          >
             {title}
-          </Text>
+          </Heading>
           {tag && <TagNative value={tag} size="sm" marginTop="2px" />}
         </FlexRow>
-        <Text
-          width="100%"
-          mt={style.margin.xxs}
-          color={style.color["white.7"]}
-        >
+        <Text width="100%" mt={style.margin.sm} color={style.color["white.7"]}>
           {description}
         </Text>
         {image && (

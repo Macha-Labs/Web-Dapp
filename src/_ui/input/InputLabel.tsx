@@ -173,7 +173,7 @@ const InputLabel = ({
                 )"
           bgClip="text"
           lineHeight={1.3}
-          // className="m-b-1"
+        // className="m-b-1"
         >
           {labelText}
         </Heading>
@@ -264,7 +264,7 @@ const InputLabel = ({
                 )"
           bgClip="text"
           lineHeight={1.3}
-          // className="m-b-1"
+        // className="m-b-1"
         >
           {labelText}
         </Heading>
@@ -282,6 +282,8 @@ const InputLabel = ({
           text="Upload File"
           iconRight={{ slug: "icon-upload" }}
           variant="state_default_hover"
+          height="2.5rem"
+          width="100%"
         />
       </FlexColumn>
     );
@@ -296,7 +298,7 @@ const InputLabel = ({
         height="fit-content"
         padding={padding}
         marginTop={marginTop ? marginTop : "sm"}
-        // marginTop={"100px"}
+      // marginTop={"100px"}
       >
         <Heading
           as="h6"
@@ -310,8 +312,7 @@ const InputLabel = ({
         >
           {labelText}
         </Heading>
-
-        <StyledCard className="w-100">
+        <Box w="100%">
           {LayoutTextArea({
             id,
             // elementRef,
@@ -321,15 +322,7 @@ const InputLabel = ({
             onChange,
             disabled,
           })}
-          {/* <LayoutInputs
-            elementRef={elementRef}
-            placeholder={placeholder}
-            defaultValue={defaultValue}
-            onChange={onChange}
-            disabled={disabled}
-            style={{ class: "" }}
-          /> */}
-        </StyledCard>
+        </Box>
       </FlexColumn>
     );
   };
@@ -339,7 +332,7 @@ const InputLabel = ({
   } else if (inputType == "dropFile") {
     return <InputLabelDropFile />;
   } else if (inputType == "textArea") {
-    return <InputLabelTextArea />;
+    return InputLabelTextArea();
   } else {
     return inputLabelText();
   }

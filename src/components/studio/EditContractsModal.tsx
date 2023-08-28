@@ -29,7 +29,7 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
         <ModalWindow
             scrollBehavior="inside"
             event={modal}
-            size="3xl"
+            size="4xl"
             header={
                 <FlexRow width="100%" hrAlign="space-between">
                     <Text className="mb-0">My Contracts</Text>
@@ -97,41 +97,46 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
                                 marginBottom: `${style.margin.md}`
                             }}
                         >
-                            <Box marginRight={style.margin.sm}>
-                                <Image src={contract?.contract?.image} height="4rem" />
-                            </Box>
-                            <Box
-                                style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    justifyContent: "space-between",
-                                    alignItems: "flex-start",
-                                    width: "85%"
-                                }}
-                            >
-                                <Box style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    paddingBottom: "1.25rem"
-                                }}>
-                                    <Text style={{
-                                        marginBottom: "0",
-                                        marginRight: `${style.margin.xxs}`,
-                                        fontSize: `${style.font.h4}`,
-                                        fontWeight: `${style.fontWeight.dark}`,
-                                        cursor: "pointer"
-                                    }}
-                                        _hover={{ textDecoration: "underline" }}
-                                        onClick={() => router.push(`/search/contracts/${contract?.contract?.slug}`)}
-                                    >
-                                        {contract?.contract?.name}
-                                    </Text>
-                                    <TagNative value={contract?.contract?.isApproved ? "Approved" : "Pending"} lineHeight="1.25rem" />
+                            <Box width="80%" style={{
+                                display: "flex",
+                                flexDirection: "row",
+                            }}>
+                                <Box marginRight={style.margin.sm}>
+                                    <Image src={contract?.contract?.image} height="4rem" width="4rem" />
                                 </Box>
-                                <Text mb={2}>Created On: {contract?.createdAt}</Text>
-                                <Text mb={2}>Contract ID: {truncateAddress(contract?.contract?.address)}</Text>
-                                <Text mb={2}>Description: {truncateString(contract?.contract?.description, 100)}</Text>
+                                <Box
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "space-between",
+                                        alignItems: "flex-start",
+                                        width: "70%"
+                                    }}
+                                >
+                                    <Box style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        paddingBottom: "1.25rem"
+                                    }}>
+                                        <Text style={{
+                                            marginBottom: "0",
+                                            marginRight: `${style.margin.xxs}`,
+                                            fontSize: `${style.font.h4}`,
+                                            fontWeight: `${style.fontWeight.dark}`,
+                                            cursor: "pointer"
+                                        }}
+                                            _hover={{ textDecoration: "underline" }}
+                                            onClick={() => router.push(`/search/contracts/${contract?.contract?.slug}`)}
+                                        >
+                                            {contract?.contract?.name}
+                                        </Text>
+                                        <TagNative value={contract?.contract?.isApproved ? "Approved" : "Pending"} lineHeight="1.25rem" />
+                                    </Box>
+                                    <Text mb={2}>Created On: {contract?.createdAt}</Text>
+                                    <Text mb={2}>Contract ID: {truncateAddress(contract?.contract?.address)}</Text>
+                                    <Text mb={2}>Description: {truncateString(contract?.contract?.description, 100)}</Text>
+                                </Box>
                             </Box>
                             <Box
                                 style={{
@@ -139,7 +144,8 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
                                     flexDirection: "column",
                                     justifyContent: "space-between",
                                     alignItems: "flex-end",
-                                    height: "100%"
+                                    height: "100%",
+                                    width: "20%"
                                 }}
                             >
                                 <Box style={{

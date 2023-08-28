@@ -14,16 +14,26 @@ const SupportedChains = ({ data, id }: Props) => {
   const router = useRouter();
   return (
     <Box
+      _hover={{
+        transform: "scale(1.01,1.01)",
+        border: "1px solid #197cec !important",
+      }}
       cursor={"pointer"}
       onClick={() => {
         router.push(`/search/network/${id}`);
       }}
       width={"20%"}
-      border={style.card.border.meta}
+      border={style.card.border.default}
+      background={style.card.bg.default}
       marginX={style.margin.sm}
       marginTop={style.margin.sm}
       padding={style.padding.sm}
       borderRadius={style.card.borderRadius.default}
+      style={{
+        transitionTimingFunction: "ease-in-out",
+        transitionProperty: " transform ",
+        transitionDuration: "600ms",
+      }}
     >
       <FlexColumn width="100%" vrAlign="center" hrAlign="center">
         <Image
@@ -32,7 +42,9 @@ const SupportedChains = ({ data, id }: Props) => {
           alt="img"
           marginBottom={style.margin.sm}
         />
-        <Heading fontSize={style.font.h5} textAlign="center" height="2.5rem">{data.chainName}</Heading>
+        <Heading fontSize={style.font.h5} textAlign="center" height="2.5rem">
+          {data.chainName}
+        </Heading>
       </FlexColumn>
     </Box>
   );

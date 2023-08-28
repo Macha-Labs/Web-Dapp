@@ -6,7 +6,10 @@ const useContractList = () => {
   const [filterData, setFilteredData] = useState<any>(contractList);
 
   useEffect(() => {
-    _fetch();
+    const fetch = async () => {
+      await _fetch();
+    };
+    fetch();
   }, []);
 
   const _fetch = async () => {
@@ -28,13 +31,13 @@ const useContractList = () => {
   };
 
   const handleFilter = (desired_chain_id: any) => {
-    const filtered = contractList.filter((item: any) => {
-      console.log(item.contract.chain_id, "  ", desired_chain_id);
+    const filtered = contractList?.filter((item: any) => {
+      // console.log(item.contract.chain_id, "  ", desired_chain_id);
       return (
         parseInt(item.contract.chain_id, 10) == parseInt(desired_chain_id, 10)
       );
     });
-    console.log("filtered", filtered);
+    // console.log("filtered", filtered);
     setFilteredData(filtered);
   };
 

@@ -19,7 +19,6 @@ const NavTop = ({ rightElem, centerElem }: Props) => {
           padding: `${style.nav.padding.default}`,
           width: `${style.nav.width}`,
           height: `${style.nav.height}`,
-          borderBottom: `${style.nav.border.default}`,
         }}
       >
         <FlexRow width="100%" hrAlign="space-between" vrAlign="center">

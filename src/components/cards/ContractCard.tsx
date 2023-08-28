@@ -1,7 +1,11 @@
 import { Box, Text, Image, Flex } from "@chakra-ui/react";
 import FlexRow from "@/_ui/flex/FlexRow";
 import TagNative from "@/_ui/tag/TagNative";
-import { UtcTimeStampConversion, truncateAddress, truncateString } from "@/helpers";
+import {
+  UtcTimeStampConversion,
+  truncateAddress,
+  truncateString,
+} from "@/helpers";
 import { style } from "@/styles/StyledConstants";
 import chains from "@/data/network";
 import IconBase from "@/_ui/icons/IconsBase";
@@ -18,7 +22,7 @@ type Props = {
   height?: any;
   address?: any;
   chainId?: any;
-  createdAt?: any
+  createdAt?: any;
 };
 
 const ContractCard = ({
@@ -26,11 +30,11 @@ const ContractCard = ({
   heading,
   description,
   tags,
-  onCardClick = (e?: any) => { },
+  onCardClick = (e?: any) => {},
   height,
   address,
   chainId,
-  createdAt
+  createdAt,
 }: Props) => {
   return (
     <Box
@@ -39,11 +43,11 @@ const ContractCard = ({
         border: "1px solid #197cec !important",
       }}
       style={{
-        height: "17rem",
-        width: "21.5rem",
+        height: "20rem",
+        width: "25%",
         border: `${style.card.border.contract}`,
         borderRadius: `${style.card.borderRadius.default}`,
-        background: `${style.card.bg.meta}`,
+        background: `${style.card.bg.default}`,
         padding: ` ${style.padding.md}`,
         display: "flex",
         flexDirection: "column",
@@ -53,7 +57,7 @@ const ContractCard = ({
         justifyContent: "space-between",
         transitionTimingFunction: "ease-in-out",
         transitionProperty: " transform ",
-        transitionDuration: "600ms"
+        transitionDuration: "600ms",
       }}
       onClick={() => {
         onCardClick();
@@ -68,7 +72,7 @@ const ContractCard = ({
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            marginBottom: `${style.margin.xs}`
+            marginBottom: `${style.margin.xs}`,
             // paddingRight: `${style.padding.xs}`,
           }}
         >
@@ -103,7 +107,7 @@ const ContractCard = ({
               style={{ fontWeight: `${style.fontWeight.dark}` }}
               lineHeight="0.5rem"
             >
-              {UtcTimeStampConversion(createdAt).date}            
+              {UtcTimeStampConversion(createdAt).date}
             </Text>
           </div>
         </div>
@@ -175,18 +179,24 @@ const ContractCard = ({
             >
               Chain:
             </Text>
-            <Box style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+            <Box
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
               <Text
                 style={{
                   fontWeight: `${style.fontWeight.dark}`,
                   marginBottom: "0px",
-                  marginTop: "-10px"
+                  marginTop: "-10px",
                 }}
                 lineHeight="0.5rem"
               >
                 {chains[chainId]?.chainName}
               </Text>
-              <Box style={{marginTop: "-10px",marginLeft: "0.25rem"}}>
+              <Box style={{ marginTop: "-10px", marginLeft: "0.25rem" }}>
                 <IconBase slug={chains[chainId]?.chainImage} size="xs" />
               </Box>
             </Box>

@@ -6,7 +6,6 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import Tabs from "@/_ui/tabs/Tabs";
 import { style } from "@/styles/StyledConstants";
 import { useState } from "react";
-
 import MCard from "@/_sdk/MCard";
 import useNftData from "@/hooks/studio/useNftData";
 import { Text } from "@chakra-ui/react";

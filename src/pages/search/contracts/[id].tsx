@@ -1,10 +1,8 @@
 import Header from "@/_ui/Head/Header";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
-import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import Loader from "@/_ui/loader/Loader";
-import NavBlock from "@/_ui/nav/NavBlock";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import NavStudio from "@/_ui/nav/NavStudio";
@@ -14,9 +12,9 @@ import TxnTable from "@/components/studio/TxnTable";
 import useContract from "@/hooks/studio/useContract";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import useContractTxn from "@/hooks/studio/useContractTxn";
-import useAuthStore from "@/store/useAuthStore";
+import { contractDataBySlug } from "@/service/ApiService";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Text, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -24,8 +22,26 @@ type Props = {
   metaInfo: any;
 };
 
+// export async function getServerSideProps(context: any) {
+//   let contractSlug = context.params.id
+//   let contract: any = {}
+
+//   const resContract = await contractDataBySlug(contractSlug)
+//   if (resContract.data) {
+//     console.log(resContract.data, "contract");
+//     contract = resContract.data
+//   } else {
+//     console.log("Couldnt fetch contract");
+//   }
+
+//   return {
+//     props: {
+//       contract_data: contract
+//     }
+//   }
+// }
+
 const Contract = () => {
-  const $address = useAuthStore((state: any) => state.address);
   const router = useRouter();
   const isReady = router.isReady;
   const hookContractTxn = useContractTxn();
@@ -35,8 +51,8 @@ const Contract = () => {
 
   useEffect(() => {
     if (isReady) {
-      hookContract._fetch(router.query.id),
-        hookContractTxn._fetch(router.query.id);
+      hookContract._fetch(router.query.id);
+      hookContractTxn._fetch(router.query.id);
     }
   }, [router.query.id, hookContractTxn.page]);
 
@@ -51,7 +67,7 @@ const Contract = () => {
       month: "long",
       day: "numeric",
     };
-    console.log("contract details", hookContract?.contractDetails);
+
     return (
       <Box>
         {hookContract.contractDetails && (
@@ -209,11 +225,10 @@ const Contract = () => {
   return (
     <>
       <Header
-        title={`Macha | ${
-          hookContract.contractDetails?.contract?.name
-            ? hookContract.contractDetails?.contract?.name
-            : ""
-        }`}
+        title={hookContract.contractDetails?.contract?.name
+          ? `Macha | ${hookContract.contractDetails?.contract?.name}`
+          : "Macha"
+          }
       />
       <FlexWindow
         view="both"
