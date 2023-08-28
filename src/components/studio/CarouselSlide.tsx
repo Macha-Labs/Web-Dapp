@@ -49,13 +49,15 @@ const CarouselSlide = ({
           backgroundRepeat: "no-repeat",
         }}
       >
-        <Box width="50%">
+        <Box width="50%"
+        style={{marginLeft:`${style.margin.md}`,}}>
           <Box
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-start",
               width: "100%",
+              // marginLeft: `${style.margin.sm}`,
             }}
           >
             <Box
