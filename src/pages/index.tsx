@@ -24,7 +24,7 @@ const Search = () => {
       <FlexColumn
         hrAlign="flex-start"
         vrAlign="flex-start"
-        padding="3rem 0rem"
+        padding="1rem 0rem"
         height="100vh"
       >
         <Box
@@ -41,7 +41,8 @@ const Search = () => {
           display={"flex"}
           alignItems={"center"}
           flexDir={"column"}
-          justifyContent={"center"}
+          paddingTop={style.margin["xxxl"]}
+          justifyContent={"flex-start"}
         >
           <Image
             // className=""
@@ -72,6 +73,7 @@ const Search = () => {
       view="both"
       navLeft={renderNavLeft()}
       // navTop={renderNavTop()}
+      padding="0% 1%"
       bodyElem={renderBody()}
       noPaddingTop={true}
     ></FlexWindow>
