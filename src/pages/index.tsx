@@ -41,15 +41,15 @@ const Search = () => {
           display={"flex"}
           alignItems={"center"}
           flexDir={"column"}
-          paddingTop={style.margin["xxxl"]}
+          paddingTop={style.margin["4xl"]}
           justifyContent={"flex-start"}
         >
           <Image
             // className=""
             src="/assets/MACHALogo.svg"
             alt="logo"
-            width={255}
-            height={93}
+            width={212}
+            height={78}
             // width={246}
             // marginBottom={style.margin.sm}
           />

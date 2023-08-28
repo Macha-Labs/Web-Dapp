@@ -44,8 +44,8 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
                 className="headerLogo"
                 src="/assets/MACHALogotext.svg"
                 alt="logo"
-                width={170}
-                height={62}
+                width={128}
+                height={47}
                 // width={246}
               />
             </Link>
