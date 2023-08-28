@@ -62,7 +62,12 @@ const CarouselSlide = ({
             //     transition: "all 0.2s cubic-bezier(0.64, 0.04, 0.35, 1)"
             // }}
             >
-              <Image borderRadius="full" src={avatarImage} height="9rem" alt="avatarImage"/>
+              <Image
+                borderRadius="full"
+                src={avatarImage}
+                height="9rem"
+                alt="avatarImage"
+              />
             </Box>
             <Box width="90%" textAlign="left" marginLeft={style.margin.lg}>
               <Heading
@@ -111,15 +116,17 @@ const CarouselSlide = ({
         <Box
           height="100%"
           width="80%"
-        //   style={{
-        //    marginRight:`${style.margin.md}`,
-        //   }}
+          style={{
+            //  marginRight:`${style.margin.md}`,
+            marginRight: "-1rem",
+            marginTop: "9rem",
+          }}
           _hover={{
             transform: "scale(1.05,1.05)",
             transition: "all 0.2s cubic-bezier(0.64, 0.04, 0.35, 1)",
           }}
         >
-          <Image src={bannerImage} height="100%" alt="bannerImage"/>
+          <Image src={bannerImage} height="100%" alt="bannerImage" />
         </Box>
       </Box>
     </Box>
