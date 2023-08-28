@@ -35,6 +35,7 @@ const useMachaSearch = () => {
   const handleOptionChange = (e: any) => {
     setSelectedOption(e.target.value);
   };
+  
   return {
     handleInputChange: handleInputChange,
     onSearch: onSearch,
