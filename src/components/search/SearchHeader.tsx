@@ -122,7 +122,7 @@ const SearchHeader = ({ options }: Props) => {
                   e.preventDefault()
                 }}
                 onClick={() => {
-                  router.push('/search/ens_handles')
+                  router.push('/search/ens_ethereum')
                   setShowSuggestions(false)
                 }}
                 _hover={{
