@@ -8,6 +8,8 @@ const useCreatorCreate = () => {
     const [tags, setTags] = useState<any>([]);
     const [tagString, setTagString] = useState<string>();
     const [suggestions, setSuggestions] = useState<any>([]);
+    const [ipfsLoading, setIpfsLoading] = useState<any>(0);
+    const [imageName, setImageName] = useState<any>();
     const toast = useToast()
     const $creatorFormData = useCreatorFormStore(
         (state: any) => state.creatorFormData
@@ -36,7 +38,7 @@ const useCreatorCreate = () => {
                     status: "warning",
                     duration: 3000,
                     position: "top-right",
-                  });
+                });
                 return false
             }
             else {
@@ -46,7 +48,7 @@ const useCreatorCreate = () => {
                         status: "warning",
                         duration: 3000,
                         position: "top-right",
-                      });
+                    });
                     return false
                 }
                 else {
@@ -66,6 +68,41 @@ const useCreatorCreate = () => {
         setStep(1)
     };
 
+    const setLoadingCallback = (progressData: any) => {
+        let percentageDone: any =
+            100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
+        console.log("percentage done: ", percentageDone);
+        setIpfsLoading(percentageDone);
+    };
+
+    const handleTagRemove = (tag: any) => {
+        const temp = tags;
+        temp.splice(tags.indexOf(tag), 1);
+        console.log("temp", temp);
+        setTags([...temp]);
+      };
+      const handleTagAdd = (tagToAdd: any) => {
+        if (!tags.includes(tagToAdd)) {
+          setTags([...tags, tagToAdd]);
+        }
+        setTagString("");
+        setSuggestions([]);
+      };
+      const handleInputChange = (e: any) => {
+        const value = e.target.value;
+        setTagString(value);
+    
+        if (value === "") {
+          setSuggestions([]); // Clear hookCreatorCreate.suggestions when input is empty
+        } else {
+          // Generate hookCreatorCreate.suggestions based on value (you can replace this with your own logic)
+          const newSuggestions = ["tag1", "tag2", "tag3"].filter((tag) =>
+            tag.includes(value)
+          );
+          setSuggestions(newSuggestions);
+        }
+      };
+
     return {
         tags: tags,
         setTags: setTags,
@@ -73,6 +110,8 @@ const useCreatorCreate = () => {
         setTagString: setTagString,
         suggestions: suggestions,
         setSuggestions: setSuggestions,
+        ipfsLoading: ipfsLoading,
+        setLoadingCallback: setLoadingCallback,
         step: step,
         setStep: setStep,
         inputType: inputType,
@@ -80,6 +119,11 @@ const useCreatorCreate = () => {
         nextFormStep: nextFormStep,
         $creatorFormData: $creatorFormData,
         $loadCreatorFormData: $loadCreatorFormData,
+        imageName: imageName,
+        setImageName: setImageName,
+        handleTagAdd: handleTagAdd,
+        handleTagRemove: handleTagRemove,
+        handleInputChange: handleInputChange,
         setClear: setClear
     };
 };
