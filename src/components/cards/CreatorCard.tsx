@@ -3,6 +3,7 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import InputLabel from "@/_ui/input/InputLabel";
 import chains from "@/data/network";
+import { deploytoLightHouse, displayImage } from "@/helpers/storage/lightHouseStorage";
 import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
@@ -19,40 +20,13 @@ import {
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 
-const CreatorCard = ({modal} : any) => {
+const CreatorCard = ({ modal }: any) => {
   const hookCreatorCreate = useCreatorCreate();
 
   useEffect(() => {
     console.log("hookCreatorCreate.tags", hookCreatorCreate.tags);
   }, [hookCreatorCreate.tags]);
 
-  const handleTagRemove = (tag: any) => {
-    const temp = hookCreatorCreate.tags;
-    temp.splice(hookCreatorCreate.tags.indexOf(tag), 1);
-    console.log("temp", temp);
-    hookCreatorCreate.setTags([...temp]);
-  };
-  const handleTagAdd = (tagToAdd: any) => {
-    if (!hookCreatorCreate.tags.includes(tagToAdd)) {
-      hookCreatorCreate.setTags([...hookCreatorCreate.tags, tagToAdd]);
-    }
-    hookCreatorCreate.setTagString("");
-    hookCreatorCreate.setSuggestions([]);
-  };
-  const handleInputChange = (e: any) => {
-    const value = e.target.value;
-    hookCreatorCreate.setTagString(value);
-
-    if (value === "") {
-      hookCreatorCreate.setSuggestions([]); // Clear hookCreatorCreate.suggestions when input is empty
-    } else {
-      // Generate hookCreatorCreate.suggestions based on value (you can replace this with your own logic)
-      const newSuggestions = ["tag1", "tag2", "tag3"].filter((tag) =>
-        tag.includes(value)
-      );
-      hookCreatorCreate.setSuggestions(newSuggestions);
-    }
-  };
   return (
     <Box
       height={"85vh"}
@@ -113,8 +87,8 @@ const CreatorCard = ({modal} : any) => {
             />
           )}
         </Box>
-        <Box width={"60%"} padding={style.padding.xxxl} height={"100%"}>
-          <FlexColumn hrAlign="flex-start" height="100%">
+        <Box width={"60%"} padding={style.padding.xxxl} height={"100%"} overflowY="scroll" className="no-scrollbar">
+          <FlexColumn hrAlign="flex-start" height="99%">
             {hookCreatorCreate.step == 1 && (
               <Heading fontSize={style.font.h3}>
                 Get started as a Creator
@@ -150,6 +124,7 @@ const CreatorCard = ({modal} : any) => {
                       <Image
                         src={GlobalIcons[chains[chain].chainImage]}
                         height={"50px"}
+                        width={"50px"}
                       />
                     </Box>
                   );
@@ -197,7 +172,7 @@ const CreatorCard = ({modal} : any) => {
                           <Text marginBottom={"0px"}>{item}</Text>
                           <TagCloseButton
                             onClick={() => {
-                              handleTagRemove(item);
+                              hookCreatorCreate.handleTagRemove(item);
                             }}
                           />
                         </Tag>
@@ -207,11 +182,11 @@ const CreatorCard = ({modal} : any) => {
                   <Input
                     type="text"
                     value={hookCreatorCreate.tagString}
-                    onChange={handleInputChange}
+                    onChange={hookCreatorCreate.handleInputChange}
                     padding={style.padding.xxs}
                     onKeyDown={(e: any) => {
                       if (e.key === "Enter") {
-                        handleTagAdd(hookCreatorCreate.tagString);
+                        hookCreatorCreate.handleTagAdd(hookCreatorCreate.tagString);
                       }
                     }}
                   />
@@ -239,7 +214,7 @@ const CreatorCard = ({modal} : any) => {
                               borderRadius="3px"
                               cursor="pointer"
                               _hover={{ backgroundColor: "#00040d" }}
-                              onClick={() => handleTagAdd(suggestion)}
+                              onClick={() => hookCreatorCreate.handleTagAdd(suggestion)}
                             >
                               {suggestion}
                             </ListItem>
@@ -309,30 +284,86 @@ const CreatorCard = ({modal} : any) => {
               <>
                 {" "}
                 {hookCreatorCreate.inputType == "Upload" && (
-                  <>
+                  (hookCreatorCreate.$creatorFormData.link == "" ? <>
                     <InputLabel
                       inputType="file"
                       fileDropMinHeight="80px"
                       inputLogoSize="lg"
                       //   labelText="Image"
                       marginTop="sm"
-                    //   onChange={async (e?: any) => {
-                    //     if (e.target.files && e.target.files[0]) {
-                    //       // const file = e.target.files[0];
-                    //       // console.log("Selected file:", file);
-                    //       // const element = document.createElement("a");
-                    //       // element.href = URL.createObjectURL(file);
-                    //       const cid = await deploytoLightHouse(
-                    //         e.target.files,
-                    //         hookCreatorCreate.setLoadingCallback
-                    //       );
-                    //       hookCreatorCreate.$loadCreatorFormData({
-                    //         image: displayImage(cid),
-                    //       });
-                    //     }
-                    //   }}
+                      onChange={async (e?: any) => {
+                        if (e.target.files && e.target.files[0]) {
+                          // const file = e.target.files[0];
+                          // console.log("Selected file:", e.target.files[0].name);
+                          if (e.target.files[0].name) {
+                            hookCreatorCreate.setImageName(e.target.files[0].name)
+                          }
+                          // const element = document.createElement("a");
+                          // element.href = URL.createObjectURL(file);
+                          const cid = await deploytoLightHouse(
+                            e.target.files,
+                            hookCreatorCreate.setLoadingCallback
+                          );
+                          hookCreatorCreate.$loadCreatorFormData({
+                            link: displayImage(cid),
+                          });
+                        }
+                      }}
                     />
-                  </>
+                    {hookCreatorCreate.ipfsLoading != 0 && (
+                      <Box
+                        width="100%"
+                        bgColor="#00040d"
+                        height={1}
+                        mt={style.margin.sm}
+                      >
+                        <Box
+                          bgColor="#0f172e"
+                          width={`${hookCreatorCreate.ipfsLoading}%`}
+                          height={1}
+                        ></Box>
+                      </Box>
+                    )}
+                  </> : (
+                    <Box width="100%">
+                      <Heading
+                        as="h6"
+                        size="sm"
+                        marginTop={style.margin.md}
+                        marginBottom={style.margin.xs}
+                        bgGradient="linear(
+                          100.07deg,
+                          #2a85ff 0.39%,
+                          #2448c7 73.45%
+                        )"
+                        bgClip="text"
+                      >
+                        Image
+                      </Heading>
+                      <Box
+                        width="100%"
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Image
+                          height={100}
+                          width="80%"
+                          objectFit="contain"
+                          src={hookCreatorCreate.$creatorFormData.link}
+                          alt=""
+                        />
+                        {hookCreatorCreate.imageName && (
+                          <Text mb={0} mt={style.margin.xxs}>
+                            {hookCreatorCreate.imageName}
+                          </Text>
+                        )}
+                      </Box>
+                    </Box>
+                  ))
                 )}
                 {hookCreatorCreate.inputType == "Link" && (
                   <>
@@ -357,7 +388,7 @@ const CreatorCard = ({modal} : any) => {
               <ButtonNative
                 textFontSize="h5"
                 height="3.5rem"
-                marginTop={"xxl"}
+                marginTop={"lg"}
                 width="100%"
                 text="Select Network and Publish to IPFS"
                 variant="state_default_hover"

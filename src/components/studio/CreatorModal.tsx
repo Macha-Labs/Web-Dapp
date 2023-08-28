@@ -18,7 +18,7 @@ const CreatorModal = ({
     return (
         <ModalWindow
             event={modal}
-            size="5xl"
+            size="6xl"
         >
             <CreatorCard modal={modal} />
         </ModalWindow>

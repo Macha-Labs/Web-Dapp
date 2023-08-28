@@ -1,94 +1,157 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
-import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
-import useMachaSearch from "@/hooks/studio/useMachaSearch";
+import useSearch from "@/hooks/studio/useSearch";
 import { style } from "@/styles/StyledConstants";
 import {
   Box,
-  Input,
   InputGroup,
   InputRightElement,
-  Select,
+  Text
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { useRef, useState } from "react";
 
 type Props = {
   options?: any;
 };
 
 const SearchHeader = ({ options }: Props) => {
-  const hookMachaSearch = useMachaSearch();
+  const hookSearch = useSearch();
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const searchRef = useRef(null);
-
-  useEffect(() => {
-    // if (document && document.activeElement == searchRef.current) {
-    //   setShowSuggestions(true);
-    //   console.log("element has focus");
-    // } else {
-    //   setShowSuggestions(false);
-    //   console.log("element does NOT have focus");
-    // }
-  });
+  const router = useRouter()
 
   return (
     <>
       <FlexColumn width="50%" height="fit-content">
-        <InputGroup>
-          <input
-            value={hookMachaSearch.query}
-            type="text"
-            ref={searchRef}
-            className="searchHeader"
-            onChange={hookMachaSearch.handleInputChange}
-            onKeyPress={hookMachaSearch.handleKeyPress}
-            placeholder="Try Spectacular Search Now"
-            style={{
-              height: "5rem",
-              borderRadius: `${style.card.borderRadius.default}`,
-              fontSize: `${style.font.h4}`,
-              paddingRight: `${style.padding.xl}`,
-              paddingLeft: `${style.padding.xl}`,
-              background: `${style.input.bg.default}`,
-              border: `${style.input.border.default}`,
-              width: "100%",
-            }}
-            onFocus={() => setShowSuggestions(true)}
-            onBlur={() => setShowSuggestions(false)}
-          />
-          {/* <Input
-          height={"5rem"}
-          type="text"
-          value={hookMachaSearch.query}
-          size={"lg"}
-          borderRadius={style.card.borderRadius.default}
-          fontSize={style.font.h4}
-          onChange={hookMachaSearch.handleInputChange}
-          onKeyPress={hookMachaSearch.handleKeyPress}
-          placeholder="Try Spectacular Search Now"
-          paddingX={style.padding.xl}
-          ref={searchRef}
-        /> */}
-          <InputRightElement width="4.5rem" pointerEvents="none">
-            <IconBase slug="icon-search" />
-          </InputRightElement>
-        </InputGroup>
-        {showSuggestions && (
+        <InputGroup
+          onFocus={() => setShowSuggestions(true)}
+          onBlur={() => {
+            setShowSuggestions(false)
+          }}
+          flexDirection="column"
+          size="md"
+        >
           <Box
-            height={"10rem"}
-            width={"100%"}
-            marginTop={style.margin.sm}
-            borderRadius={style.card.borderRadius.default}
-            background={style.card.bg.default}
-          ></Box>
-        )}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "100%"
+            }}
+          >
+            <input
+              value={hookSearch.searchString}
+              type="text"
+              ref={searchRef}
+              className="searchHeader"
+              onChange={(e: any) => hookSearch.setSearchString(e.target.value)}
+              onKeyDown={(e: any) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  router.push(`/search/${hookSearch.searchString}`);
+                }
+              }}
+              placeholder="Try Spectacular Search Now"
+              style={{
+                height: "5rem",
+                borderRadius: `${style.card.borderRadius.default}`,
+                fontSize: `${style.font.h4}`,
+                paddingRight: `${style.padding.xl}`,
+                paddingLeft: `${style.padding.xl}`,
+                background: `${style.input.bg.default}`,
+                border: `${style.input.border.default}`,
+                width: "100%",
+              }}
+            />
+            <InputRightElement alignItems="start">
+              <Box style={{
+                height: "5rem",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: `${style.margin.sm}`
+              }}>
+                <IconBase slug="icon-search" />
+              </Box>
+            </InputRightElement>
+          </Box>
+          {showSuggestions && (
+            <Box
+              width={"100%"}
+              marginTop={style.margin.sm}
+              borderRadius={style.card.borderRadius.default}
+              background={style.card.bg.default}
+              boxShadow="-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)"
+              border="1px solid rgba(15, 23, 46, 1) !important"
+              paddingY={style.padding.xxs}
+              overflow="hidden"
+            >
+              <Box
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  alignItems: "center",
+                  paddingRight: `${style.padding.xs}`,
+                  paddingLeft: `${style.padding.xs}`,
+                  paddingTop: `${style.padding.xxs}`,
+                }}>
+                <Text mb={style.margin.xxs} fontSize={style.font.h7} color={style.color["white.5"]}>Trending Searches</Text>
+              </Box>
+              <Box
+                onMouseDown={(e) => {
+                  e.preventDefault()
+                }}
+                onClick={() => {
+                  router.push('/search/lens_post')
+                  setShowSuggestions(false)
+                }}
+                _hover={{
+                  cursor: "pointer",
+                  backgroundColor: "#00040d"
+                }}
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  alignItems: "center",
+                  padding: `${style.padding.xxs} ${style.padding.xs}`,
+                }}>
+                <Text mb={0} fontSize={style.font.h6}>Lens Posts</Text>
+              </Box>
+              <Box
+                onMouseDown={(e) => {
+                  e.preventDefault()
+                }}
+                onClick={() => {
+                  router.push('/search/ens_handles')
+                  setShowSuggestions(false)
+                }}
+                _hover={{
+                  cursor: "pointer",
+                  backgroundColor: "#00040d"
+                }}
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  alignItems: "center",
+                  padding: `${style.padding.xxs} ${style.padding.xs}`,
+                }}>
+                <Text mb={0} fontSize={style.font.h6}>Ens Handles</Text>
+              </Box>
+            </Box>
+          )}
+        </InputGroup>
       </FlexColumn>
       <style jsx>{`
         .searchHeader {
           border: 1px solid #0f172e !important;
         }
-        input[type="text"]:focus {
+        .searchHeader:focus {
+          box-shadow: -1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6);
           border: 1px solid rgba(15, 23, 46, 1) !important;
+          outline: none !important;
+        }
+        .searchHeader:focus-visible {
+          outline: none !important;
         }
         .searchHeader:hover {
           background: linear-gradient(
