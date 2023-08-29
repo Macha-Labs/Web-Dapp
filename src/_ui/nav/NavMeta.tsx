@@ -71,7 +71,7 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
                   onKeydown={(e: any) => {
                     if (e.key === "Enter") {
                       e.preventDefault();
-                      router.push(`/search/${hookSearch.searchString}`);
+                      router.push(`/search?search=${hookSearch.searchString}`);
                     }
                   }}
                 />

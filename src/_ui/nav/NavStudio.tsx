@@ -22,7 +22,7 @@ const NavStudio = () => {
           onKeydown={(e: any) => {
             if (e.key === "Enter") {
               e.preventDefault();
-              router.push(`/search/${hookSearch.searchString}`);
+              router.push(`/search?search=${hookSearch.searchString}`);
             }
           }}
         />

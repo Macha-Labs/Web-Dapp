@@ -48,7 +48,7 @@ const SearchHeader = ({ options }: Props) => {
               onKeyDown={(e: any) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
-                  router.push(`/search/${hookSearch.searchString}`);
+                  router.push(`/search?search=${hookSearch.searchString}`);
                 }
               }}
               placeholder="Try Spectacular Search Now"
@@ -102,7 +102,7 @@ const SearchHeader = ({ options }: Props) => {
                   e.preventDefault()
                 }}
                 onClick={() => {
-                  router.push('/search/lens_post')
+                  router.push('/search?search=lens_post')
                   setShowSuggestions(false)
                 }}
                 _hover={{
@@ -122,7 +122,7 @@ const SearchHeader = ({ options }: Props) => {
                   e.preventDefault()
                 }}
                 onClick={() => {
-                  router.push('/search/ens_ethereum')
+                  router.push('/search?search=ens_ethereum')
                   setShowSuggestions(false)
                 }}
                 _hover={{

@@ -19,9 +19,10 @@ const Search = () => {
 
     useEffect(() => {
         if (router.isReady) {
-            hookSearch._fetch(String(router.query.searchString))
+            // console.log(router.query.search)
+            hookSearch._fetch(String(router.query.search))
         }
-    }, [router.query.searchString]);
+    }, [router.query.search]);
 
     const renderNavLeft = () => {
         return <NavLeft />;
