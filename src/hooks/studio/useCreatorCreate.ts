@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import { useState } from "react";
 import MachaMeta_ABI from "@/data/ABI/MachaMeta_ABI.json";
 import { uploadTextToLighthouse } from "@/helpers/storage/lightHouseStorage";
+import useAuthStore from "@/store/useAuthStore";
 
 const useCreatorCreate = () => {
   const [inputType, setInputType] = useState<string>("");
@@ -17,15 +18,17 @@ const useCreatorCreate = () => {
   const [provider, setProvider] = useState<any>();
   const [signer, setSigner] = useState<any>();
   const [contract, setContract] = useState<any>();
-
   const $creatorFormData = useCreatorFormStore(
     (state: any) => state.creatorFormData
   );
   const $loadCreatorFormData = useCreatorFormStore(
     (state: any) => state.loadCreatorFormData
   );
+  const $address = useAuthStore((state: any) => state.address);
+
 
   const submit = async () => {
+    if(!$address) return
     if (typeof window !== "undefined" && window.ethereum) {
       const provider = new ethers.providers.Web3Provider(
         window.ethereum as ethers.providers.ExternalProvider
@@ -37,7 +40,8 @@ const useCreatorCreate = () => {
         signer
       );
       console.log("contractData", contract);
-
+      console.log("signer",signer)
+      console.log("provider",provider)
       const tempMetaCID = {
         link: $creatorFormData.link,
         description: $creatorFormData.description,
@@ -53,8 +57,8 @@ const useCreatorCreate = () => {
       const systemCID = await uploadTextToLighthouse(
         JSON.stringify(tempSystemCID)
       );
-
-      contract.uploadMeta([metaCID],[systemCID],{gasLimit:50});
+      // const gasPrice = await provider.getGasPr()
+      contract.uploadMeta([metaCID],[systemCID],{gasLimit: 360038800});
     }
   };
 
