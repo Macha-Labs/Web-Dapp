@@ -18,10 +18,11 @@ import {
   TagCloseButton,
   Text
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const CreatorCard = ({ modal }: any) => {
   const hookCreatorCreate = useCreatorCreate();
+  
 
   useEffect(() => {
     console.log("hookCreatorCreate.tags", hookCreatorCreate.tags);
@@ -406,7 +407,8 @@ const CreatorCard = ({ modal }: any) => {
                 text="Sign in and publish"
                 variant="state_brand"
                 onClick={() => {
-                  hookCreatorCreate.nextFormStep();
+                  // hookCreatorCreate.nextFormStep();
+                  hookCreatorCreate.submit();
                 }}
               />
             )}
