@@ -436,6 +436,50 @@ const CreatorCard = ({ modal }: any) => {
                   }}
                 />
               )}
+              {hookCreatorCreate.step == 3 && (
+                <Box
+                  backgroundImage="/assets/Content_Success_Modal_bg.svg"
+                  width="100%"
+                  height="100%"
+                >
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    flexDirection="column"
+                  >
+                    <Text fontSize={`${style.font.h3}`}>Congrats!</Text>
+                    <Text>Meta Creation was successful.</Text>
+                    <Text>
+                      You can view all your metas <Text>here</Text>
+                    </Text>
+                  </Box>
+                  <Box display="flex" justifyContent="space-between">
+                    <ButtonNative
+                      textFontSize="h5"
+                      height="3.5rem"
+                      marginTop={"xxl"}
+                      width="100%"
+                      text="Close"
+                      variant="state_default_hover"
+                      onClick={() => {
+                        modal.onClose();
+                      }}
+                    />
+                    <ButtonNative
+                      textFontSize="h5"
+                      height="3.5rem"
+                      marginTop={"xxl"}
+                      width="100%"
+                      text="View Metas"
+                      variant="state_brand"
+                      onClick={() => {
+                        console.log("submit clicked");
+                      }}
+                    />
+                  </Box>
+                </Box>
+              )}
             </FlexColumn>
           )}
         </Box>
