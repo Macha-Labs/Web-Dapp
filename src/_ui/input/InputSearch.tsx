@@ -17,7 +17,7 @@ type Props = {
   marginBottom?: string;
   width?: string;
   height?: string;
-  defaultValue?: string
+  defaultValue?: string;
 };
 
 const InputSearch = ({
@@ -35,7 +35,7 @@ const InputSearch = ({
   marginBottom,
   width,
   height,
-  defaultValue
+  defaultValue,
 }: Props) => {
   return (
     <InputGroup
@@ -44,6 +44,7 @@ const InputSearch = ({
       marginBottom={marginBottom ? marginBottom : "0px"}
       marginLeft={marginLeft ? marginLeft : "2px"}
       marginRight={marginRight ? marginRight : "0px"}
+      height={"50px"}
     >
       {icon && (
         <InputLeftElement pointerEvents="none">
@@ -60,7 +61,7 @@ const InputSearch = ({
         onKeyDown={onKeydown ? onKeydown : () => {}}
         _placeholder={{ color: `#132041` }}
         width={width}
-        height={height}
+        height={"50px"}
         border={gStyle.input.border.search}
         borderRadius={gStyle.input.borderRadius.default}
       />
