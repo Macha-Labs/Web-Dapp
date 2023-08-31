@@ -2,12 +2,7 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
 import useSearch from "@/hooks/studio/useSearch";
 import { style } from "@/styles/StyledConstants";
-import {
-  Box,
-  InputGroup,
-  InputRightElement,
-  Text
-} from "@chakra-ui/react";
+import { Box, InputGroup, InputRightElement, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 
@@ -19,7 +14,7 @@ const SearchHeader = ({ options }: Props) => {
   const hookSearch = useSearch();
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const searchRef = useRef(null);
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <>
@@ -27,7 +22,7 @@ const SearchHeader = ({ options }: Props) => {
         <InputGroup
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => {
-            setShowSuggestions(false)
+            setShowSuggestions(false);
           }}
           flexDirection="column"
           size="md"
@@ -36,7 +31,7 @@ const SearchHeader = ({ options }: Props) => {
             style={{
               display: "flex",
               flexDirection: "row",
-              width: "100%"
+              width: "100%",
             }}
           >
             <input
@@ -64,13 +59,15 @@ const SearchHeader = ({ options }: Props) => {
               }}
             />
             <InputRightElement alignItems="start">
-              <Box style={{
-                height: "5rem",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginRight: `${style.margin.sm}`
-              }}>
+              <Box
+                style={{
+                  height: "5rem",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginRight: `${style.margin.sm}`,
+                }}
+              >
                 <IconBase slug="icon-search" />
               </Box>
             </InputRightElement>
@@ -94,48 +91,102 @@ const SearchHeader = ({ options }: Props) => {
                   paddingRight: `${style.padding.xs}`,
                   paddingLeft: `${style.padding.xs}`,
                   paddingTop: `${style.padding.xxs}`,
-                }}>
-                <Text mb={style.margin.xxs} fontSize={style.font.h7} color={style.color["white.5"]}>Trending Searches</Text>
+                }}
+              >
+                <Text
+                  mb={style.margin.xxs}
+                  fontSize={style.font.h7}
+                  color={style.color["white.5"]}
+                >
+                  Trending Searches
+                </Text>
               </Box>
               <Box
                 onMouseDown={(e) => {
-                  e.preventDefault()
+                  e.preventDefault();
                 }}
                 onClick={() => {
-                  router.push('/search?search=lens_post')
-                  setShowSuggestions(false)
+                  router.push("/search?search=lens_post");
+                  setShowSuggestions(false);
                 }}
                 _hover={{
                   cursor: "pointer",
-                  backgroundColor: "#00040d"
+                  backgroundColor: "#00040d",
                 }}
                 style={{
                   display: "flex",
                   width: "100%",
                   alignItems: "center",
                   padding: `${style.padding.xxs} ${style.padding.xs}`,
-                }}>
-                <Text mb={0} fontSize={style.font.h6}>Lens Posts</Text>
+                }}
+              >
+                <Text mb={0} fontSize={style.font.h6}>
+                  Lens Posts
+                </Text>
               </Box>
               <Box
                 onMouseDown={(e) => {
-                  e.preventDefault()
+                  e.preventDefault();
                 }}
                 onClick={() => {
-                  router.push('/search?search=ens_ethereum')
-                  setShowSuggestions(false)
+                  router.push("/search?search=ens_ethereum");
+                  setShowSuggestions(false);
                 }}
                 _hover={{
                   cursor: "pointer",
-                  backgroundColor: "#00040d"
+                  backgroundColor: "#00040d",
                 }}
                 style={{
                   display: "flex",
                   width: "100%",
                   alignItems: "center",
                   padding: `${style.padding.xxs} ${style.padding.xs}`,
-                }}>
-                <Text mb={0} fontSize={style.font.h6}>Ens Handles</Text>
+                }}
+              >
+                <Text mb={0} fontSize={style.font.h6}>
+                  Ens Handles
+                </Text>
+              </Box>
+              <Box
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  alignItems: "center",
+                  paddingRight: `${style.padding.xs}`,
+                  paddingLeft: `${style.padding.xs}`,
+                  paddingTop: `${style.padding.xxs}`,
+                }}
+              >
+                <Text
+                  mb={style.margin.xxs}
+                  fontSize={style.font.h7}
+                  color={style.color["white.5"]}
+                >
+                  Explore More
+                </Text>
+              </Box>
+              <Box
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                }}
+                onClick={() => {
+                  router.push("/feed");
+                  setShowSuggestions(false);
+                }}
+                _hover={{
+                  cursor: "pointer",
+                  backgroundColor: "#00040d",
+                }}
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  alignItems: "center",
+                  padding: `${style.padding.xxs} ${style.padding.xs}`,
+                }}
+              >
+                <Text mb={0} fontSize={style.font.h6}>
+                  View content across web3
+                </Text>
               </Box>
             </Box>
           )}
@@ -146,7 +197,8 @@ const SearchHeader = ({ options }: Props) => {
           border: 1px solid #0f172e !important;
         }
         .searchHeader:focus {
-          box-shadow: -1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6);
+          box-shadow: -1px 1px 4px rgba(17, 108, 230, 0.6),
+            1px -1px 4px rgba(17, 108, 230, 0.6);
           border: 1px solid rgba(15, 23, 46, 1) !important;
           outline: none !important;
         }

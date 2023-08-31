@@ -1,10 +1,12 @@
-import useCreatorFormStore from "@/store/useCreatorFormStore";
-import { useToast } from "@chakra-ui/react";
-import { ethers } from "ethers";
-import { useState } from "react";
+import { config } from "@/config";
 import MachaMeta_ABI from "@/data/ABI/MachaMeta_ABI.json";
 import { uploadTextToLighthouse } from "@/helpers/storage/lightHouseStorage";
 import useAuthStore from "@/store/useAuthStore";
+import useCreatorFormStore from "@/store/useCreatorFormStore";
+import { useToast } from "@chakra-ui/react";
+import { ethers } from "ethers";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const useCreatorCreate = () => {
   const [inputType, setInputType] = useState<string>("");
@@ -15,9 +17,11 @@ const useCreatorCreate = () => {
   const [ipfsLoading, setIpfsLoading] = useState<any>(0);
   const [imageName, setImageName] = useState<any>();
   const toast = useToast();
+  const [isLoading, setIsLoading] = useState<any>(false);
   const [provider, setProvider] = useState<any>();
   const [signer, setSigner] = useState<any>();
   const [contract, setContract] = useState<any>();
+  const router = useRouter();
   const $creatorFormData = useCreatorFormStore(
     (state: any) => state.creatorFormData
   );
@@ -26,22 +30,38 @@ const useCreatorCreate = () => {
   );
   const $address = useAuthStore((state: any) => state.address);
 
-
+  const checkEvent = async () => {
+    const provider = new ethers.providers.Web3Provider(
+      window.ethereum as ethers.providers.ExternalProvider
+    );
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      config.MACHA_DATA_CONTRACT_ADDRESS,
+      MachaMeta_ABI,
+      signer
+    );
+    contract.on("event_FileUploaded", (metaId, sender, metaCid) => {
+      setIsLoading(false);
+      console.log("meta Created", metaId, sender, metaCid);
+      // router.push(`/user/${metaCid}`);
+    });
+  };
   const submit = async () => {
-    if(!$address) return
+    // if (!$address) return;
+    setIsLoading(true);
     if (typeof window !== "undefined" && window.ethereum) {
       const provider = new ethers.providers.Web3Provider(
         window.ethereum as ethers.providers.ExternalProvider
       );
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
-        "0x7fc1139bBFd13bd63b9fc2D51E4834583371dAB1",
+        config.MACHA_DATA_CONTRACT_ADDRESS,
         MachaMeta_ABI,
         signer
       );
       console.log("contractData", contract);
-      console.log("signer",signer)
-      console.log("provider",provider)
+      console.log("signer", signer);
+      console.log("provider", provider);
       const tempMetaCID = {
         link: $creatorFormData.link,
         description: $creatorFormData.description,
@@ -58,7 +78,9 @@ const useCreatorCreate = () => {
         JSON.stringify(tempSystemCID)
       );
       // const gasPrice = await provider.getGasPr()
-      contract.uploadMeta([metaCID],[systemCID],{gasLimit: 360038800});
+
+      contract.uploadMeta([metaCID], [systemCID], { gasLimit: 360038800 });
+      checkEvent();
     }
   };
 
@@ -168,6 +190,7 @@ const useCreatorCreate = () => {
     handleTagRemove: handleTagRemove,
     handleInputChange: handleInputChange,
     setClear: setClear,
+    isLoading: isLoading,
   };
 };
 export default useCreatorCreate;

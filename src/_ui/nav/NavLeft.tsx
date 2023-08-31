@@ -40,8 +40,9 @@ const NavLeft = (props: any) => {
                     }
                     size="md"
                     style={{
-                      className: `m-b-1 ${router.pathname === "/" ? "state_active" : "state_hover"
-                        } `,
+                      className: `m-b-1 ${
+                        router.pathname === "/" ? "state_active" : "state_hover"
+                      } `,
                     }}
                   />
                 </Link>
@@ -54,44 +55,43 @@ const NavLeft = (props: any) => {
                     }
                     size="md"
                     style={{
-                      className: `m-b-1 ${router.pathname === "/explore"
-                        ? "state_active"
-                        : "state_hover"
-                        } `,
+                      className: `m-b-1 ${
+                        router.pathname === "/explore"
+                          ? "state_active"
+                          : "state_hover"
+                      } `,
                     }}
                   />
                 </Link>
-                <Link href="/feed">
-                  <IconImage
-                    slug={
-                      router.pathname === "/feed"
-                        ? "icon-posts"
-                        : "icon-posts-outline"
-                    }
-                    size="md"
-                    style={{
-                      className: `m-b-1 ${router.pathname === "/feed"
-                        ? "state_active"
+
+                <IconImage
+                  onClick={() => {
+                    creatorModal.onOpen();
+                  }}
+                  slug={router.pathname === "/create" ? "icon-add" : "icon-add"}
+                  size="md"
+                  style={{
+                    className: `m-b-1 ${
+                      router.pathname === "/create"
+                        ? "state_active "
                         : "state_hover"
-                        } `,
-                    }}
-                  />
-                </Link>
+                    } `,
+                  }}
+                />
               </FlexColumn>
               <FlexColumn height="fit-content">
                 <IconImage
                   onClick={() => {
-                    creatorModal.onOpen()
+                    router.push("/user");
                   }}
-                  slug={
-                    router.pathname === "/create" ? "icon-add" : "icon-add"
-                  }
+                  slug={router.pathname === "/user" ? "icon-add" : "icon-add"}
                   size="md"
                   style={{
-                    className: `m-b-1 ${router.pathname === "/create"
-                      ? "state_active "
-                      : "state_hover"
-                      } `,
+                    className: `m-b-1 ${
+                      router.pathname === "/user"
+                        ? "state_active "
+                        : "state_hover"
+                    } `,
                   }}
                 />
                 <Image
@@ -104,7 +104,10 @@ const NavLeft = (props: any) => {
             </FlexColumn>
           </div>
         </div>
-        <CreatorModal modal={creatorModal} hookCreatorCreate={hookCreatorCreate} />
+        <CreatorModal
+          modal={creatorModal}
+          hookCreatorCreate={hookCreatorCreate}
+        />
       </FlexRow>
     </>
   );
