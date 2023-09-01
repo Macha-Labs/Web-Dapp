@@ -45,6 +45,7 @@ const InputSearch = ({
       marginLeft={marginLeft ? marginLeft : "2px"}
       marginRight={marginRight ? marginRight : "0px"}
       height={"50px"}
+      width={width}
     >
       {icon && (
         <InputLeftElement pointerEvents="none">
@@ -60,7 +61,7 @@ const InputSearch = ({
         size={size}
         onKeyDown={onKeydown ? onKeydown : () => {}}
         _placeholder={{ color: `#132041` }}
-        width={width}
+        // width={width}
         height={"50px"}
         border={gStyle.input.border.search}
         borderRadius={gStyle.input.borderRadius.default}

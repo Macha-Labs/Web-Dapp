@@ -5,7 +5,14 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import chains from "@/data/network";
@@ -15,18 +22,36 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import UserAssetCard from "@/components/cards/UserAssetCard";
 import UserContentCard from "@/components/cards/UserContentCard";
 import UserAssetsModal from "@/components/studio/UserAssetsModal";
-
+import useMetaList from "@/hooks/meta/useMetasList";
+import MetaList from "@/components/meta/MetaList";
+import InputSearch from "@/_ui/input/InputSearch";
+import MetaUserList from "@/components/meta/MetaUserList";
+import useUserMeta from "@/hooks/studio/useUserMeta";
 
 const User = () => {
+  const userAssetsModal = useDisclosure();
+  const router = useRouter();
+  const hookMetasList = useMetaList();
 
-  const userAssetsModal = useDisclosure()
+  useEffect(() => {
+    if (router.isReady) {
+      if (window !== undefined) {
+        const data = window.sessionStorage.getItem(`all_metas_page`);
+        if (data !== null) {
+          var newLimit = JSON.parse(data) * 30;
+          if (newLimit > 300) newLimit = 300;
+          hookMetasList._fetchMore(null, newLimit);
+        } else {
+          hookMetasList._fetchMore(null, 30);
+        }
+      } else {
+        hookMetasList._fetchMore(null, 30);
+      }
+    }
+  }, []);
 
   const renderNavLeft = () => {
     return <NavLeft />;
-  };
-
-  const renderNavTop = () => {
-    return <NavMeta search={true} />;
   };
 
   const UserInfo = () => {
@@ -61,12 +86,12 @@ const User = () => {
                 alt="avatar-default"
               />
             </Box>
-            <FlexRow hrAlign="space-between" paddingLeft="xxl" paddingRight="xxl">
-              <Box
-                display={"flex"}
-                width="25%"
-                alignItems={"center"}
-              >
+            <FlexRow
+              hrAlign="space-between"
+              paddingLeft="xxl"
+              paddingRight="xxl"
+            >
+              <Box display={"flex"} width="25%" alignItems={"center"}>
                 <Box
                   display={"flex"}
                   flexDir={"column"}
@@ -74,7 +99,11 @@ const User = () => {
                   alignItems={"center"}
                   paddingRight={`${style.padding.md}`}
                 >
-                  <Text fontSize={`${style.font.h4}`} fontWeight={style.fontWeight.dark} marginBottom="0px">
+                  <Text
+                    fontSize={`${style.font.h4}`}
+                    fontWeight={style.fontWeight.dark}
+                    marginBottom="0px"
+                  >
                     950
                   </Text>
                   <Text marginBottom="0px">Followers</Text>
@@ -85,7 +114,11 @@ const User = () => {
                   justifyContent={"center"}
                   alignItems={"center"}
                 >
-                  <Text fontSize={`${style.font.h4}`} fontWeight={style.fontWeight.dark} marginBottom="0px">
+                  <Text
+                    fontSize={`${style.font.h4}`}
+                    fontWeight={style.fontWeight.dark}
+                    marginBottom="0px"
+                  >
                     950
                   </Text>
                   <Text marginBottom="0px">Following</Text>
@@ -122,26 +155,26 @@ const User = () => {
             </FlexRow>
           </FlexColumn>
         </Box>
-        <Flex marginTop={`${style.margin.xxl}`}>
-          <Box width="60%" marginRight="10px">
-            <Text
-              fontSize={`${style.font.h4}`}
+        <FlexRow marginTop="xxl" hrAlign="space-between">
+          <Box width="55%" marginRight="10px">
+            <Heading
+              fontSize={`${style.font.h3}`}
               fontWeight={`${style.fontWeight.dark}`}
             >
               My Assets
-            </Text>
-            <Flex marginTop={`${style.margin.xl}`}>
-              <UserAssetCard 
+            </Heading>
+            <Flex marginTop={`${style.margin.lg}`}>
+              <UserAssetCard
                 title="34"
                 description="Tokens"
                 icon="/assets/icons/brand-token.svg"
               />
-              <UserAssetCard 
+              <UserAssetCard
                 title="7"
                 description="Domains"
                 icon="/assets/icons/brand-globe.svg"
               />
-              <UserAssetCard 
+              <UserAssetCard
                 title="36"
                 description="NFTs Claimed"
                 icon="/assets/icons/brand-bolt.svg"
@@ -149,15 +182,16 @@ const User = () => {
             </Flex>
           </Box>
           <Box width="40%">
-            <Text
-              fontSize={`${style.font.h4}`}
+            <Heading
+              fontSize={`${style.font.h3}`}
               fontWeight={`${style.fontWeight.dark}`}
             >
               Recommendations
-            </Text>
+            </Heading>
             <Box
               flex="1"
-              marginTop={`${style.margin.xl}`}
+              height={"18rem"}
+              marginTop={`${style.margin.lg}`}
               borderRadius={style.card.borderRadius.default}
               border={style.card.border.default}
               overflow="hidden"
@@ -173,7 +207,7 @@ const User = () => {
                 interval={3000}
               >
                 <CarouselSlide
-                  height="12rem"
+                  height="18rem"
                   title="Explore From MACHA"
                   description="POSTS • PROFILES • BLOGS"
                   headingFontSize={style.font.h6}
@@ -186,7 +220,7 @@ const User = () => {
                   buttonText="Explore"
                 />
                 <CarouselSlide
-                  height="12rem"
+                  height="18rem"
                   title="View From Contracts"
                   description="LENS • MIRROR • POAP"
                   headingFontSize={style.font.h6}
@@ -199,7 +233,7 @@ const User = () => {
                   buttonText="View Contracts Now"
                 />
                 <CarouselSlide
-                  height="12rem"
+                  height="18rem"
                   title="Discover From Chains"
                   headingFontSize={style.font.h6}
                   descriptionFontSize={style.font.h7}
@@ -214,24 +248,50 @@ const User = () => {
               </Carousel>
             </Box>
           </Box>
-        </Flex>
-
-        <Text
-          fontSize={`${style.font.h4}`}
-          fontWeight={`${style.fontWeight.dark}`}
-          marginTop={`${style.margin.xxl}`}
-        >
-          My Content
-        </Text>
-
-        <FlexRow hrAlign="space-between">
-          <Box width="50%" cursor="pointer" marginRight={style.margin.sm} onClick={() => userAssetsModal.onOpen()}>
-            <UserContentCard title="NFT" description="45" />
-          </Box>
-          <Box width="50%" cursor="pointer" onClick={() => userAssetsModal.onOpen()}>
-            <UserContentCard title="NFT" description="45" />
-          </Box>
         </FlexRow>
+
+        <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
+          <Heading
+            fontSize={`${style.font.h3}`}
+            fontWeight={`${style.fontWeight.dark}`}
+            marginTop={`${style.margin.xxl}`}
+          >
+            Collections
+          </Heading>
+
+          <FlexRow hrAlign="flex-start" marginTop="lg">
+            <Box
+              width="20%"
+              cursor="pointer"
+              marginRight={style.margin.sm}
+              onClick={() => userAssetsModal.onOpen()}
+            >
+              <UserContentCard title="NFT" description="45" />
+            </Box>
+            <Box
+              width="20%"
+              cursor="pointer"
+              onClick={() => userAssetsModal.onOpen()}
+            >
+              <UserContentCard title="NFT" description="45" />
+            </Box>
+          </FlexRow>
+        </FlexColumn>
+
+        <FlexColumn vrAlign="flex-start">
+          <FlexRow hrAlign="space-between" marginTop="xxl" marginBottom={"lg"}>
+            <Heading
+              fontSize={`${style.font.h3}`}
+              fontWeight={`${style.fontWeight.dark}`}
+              marginBottom={"0px"}
+            >
+              Feed
+            </Heading>
+            <InputSearch width="25%" height="40px" placeholder="Search Meta" />
+          </FlexRow>
+          <MetaUserList hookData={useUserMeta} />
+        </FlexColumn>
+
         <UserAssetsModal modal={userAssetsModal} />
       </>
     );

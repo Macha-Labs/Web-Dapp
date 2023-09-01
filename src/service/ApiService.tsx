@@ -220,6 +220,15 @@ export const contractsOfChain = async (chainId: any) => {
   return data;
 };
 
+export const userMetaByAddress = async (address: any) => {
+  const res = await fetch(
+    `${config.metaServer}/indexer/metas/fetch-by-user/${address}`
+  );
+  const data = await res.json();
+  console.log("userMetas", data);
+  return data;
+};
+
 // /indexer/transactions/fetch-by-user-address/:from_address
 
 // /indexer/transactions/fetch-by-chain-id/:chain_id

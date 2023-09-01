@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 
 const useMetaList = () => {
   const [metaAll, setMetaAll] = useState<any>();
-  const [metaSchemas, setMetaSchemas] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [metaSchemas, setMetaSchemas] = useState<any>();
   const [showMoreLoading, setShowMoreLoading] = useState<boolean>(true);
   const [lastPage, setLastPage] = useState<boolean>(false);
   const [pageNo, setPageNo] = useState<number>(1);
@@ -33,7 +33,7 @@ const useMetaList = () => {
     setLastPage(last_page);
     setIsLoading(false);
     setShowMoreLoading(false);
-  }
+  };
 
   const _fetchMetaSchemas = async () => {
     await fetchMetaSchemas().then((res: any) => {
@@ -43,8 +43,8 @@ const useMetaList = () => {
   };
 
   const initialLoadMetaSchemas = async (meta_schemas: any) => {
-      setMetaSchemas(meta_schemas);
-      setIsLoading(false);
+    setMetaSchemas(meta_schemas);
+    setIsLoading(false);
   };
 
   return {
@@ -58,7 +58,7 @@ const useMetaList = () => {
     setPageNo: setPageNo,
     showMoreLoading: showMoreLoading,
     initialLoadAllMetas: initialLoadAllMetas,
-    initialLoadMetaSchemas: initialLoadMetaSchemas
+    initialLoadMetaSchemas: initialLoadMetaSchemas,
   };
 };
 
