@@ -8,7 +8,15 @@ import TransactionCard from "@/components/cards/TransactionCard";
 import CarouselSlide from "@/components/studio/CarouselSlide";
 import useTransaction from "@/hooks/studio/useTransaction";
 import GlobalIcons from "@/styles/GlobalIcons";
-import { Box, Button, Heading, Image, Text, Tooltip } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
 import Tabs from "@/_ui/tabs/Tabs";
 import { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
@@ -28,6 +36,7 @@ import SupportedChains from "@/components/studio/SupportedChains";
 import chains from "@/data/network";
 import CardNative from "@/_ui/cards/CardNative";
 import JSONViewer from "@/_ui/JSONViewer";
+import SearchHeader from "@/components/search/SearchHeader";
 
 export default function Home() {
   const options: any = [
@@ -40,13 +49,15 @@ export default function Home() {
       value: "Recommended NFTs",
     },
   ];
-  const [tab, setTab] = useState<string>("All Details");
-  const [selectedOption, setSelectedOption] = useState<any>(options[0].value);
+  const [tab, setTab] = useState<string>("My NFTs");
+  const [activeButton, setActiveButton] = useState<string>("button1");
+  const handleButtonClick = (buttonName: string) => {
+    setActiveButton(buttonName);
+  };
   const hookMetasList = useMetaList();
   const router = useRouter();
   useEffect(() => {
-    
-    hookMetasList._fetchMore("poap_nft", 9);
+    // hookMetasList._fetchMore("poap_nft", 9);
     hookMetasList._fetchMetaSchemas();
     // hookTransaction.setLatestTransactions(allTransactions);
     // hookMetasList.initialLoadAllMetas(allMetas.data, allMetas.lastPage);
@@ -114,6 +125,58 @@ export default function Home() {
           )}
           {tab == "Recommended NFTs" && (
             <>
+              <Flex width="100%" justify="space-between" p={4}>
+                <Flex>
+                  <Button
+                    width="9rem"
+                    height="3rem"
+                    //   size={props.size}
+                    variant={
+                      activeButton === "button1"
+                        ? "state_brand"
+                        : "state_transparent"
+                    }
+                    //   onClick={openConnectModal}
+                    onClick={() => handleButtonClick("button1")}
+                    borderRadius={style.button.borderRadius.default}
+                    marginLeft={style.margin.xxs}
+                  >
+                    <Text
+                      paddingBottom={"0px"}
+                      marginBottom="0px"
+                      fontSize={`${style.font.h6}`}
+                      style={{ marginBottom: "0px", paddingBottom: "0px" }}
+                    >
+                      Protocol - NFTs
+                    </Text>
+                  </Button>
+                  <Button
+                    width="9rem"
+                    height="3rem"
+                    //   size={props.size}
+                    variant={
+                      activeButton === "button2"
+                        ? "state_brand"
+                        : "state_transparent"
+                    }
+                    // variant="state_transparent"
+                    onClick={() => handleButtonClick("button2")}
+                    borderRadius={style.button.borderRadius.default}
+                    marginLeft={style.margin.xxs}
+                  >
+                    <Text
+                      paddingBottom={"0px"}
+                      marginBottom="0px"
+                      fontSize={`${style.font.h6}`}
+                      style={{ marginBottom: "0px", paddingBottom: "0px" }}
+                    >
+                      Chain - NFTs
+                    </Text>
+                  </Button>
+                </Flex>
+                <SearchHeader />
+              </Flex>
+
               <FlexRow hrAlign="flex-start" marginTop={"xl"} flexWrap="wrap">
                 {hookMetasList?.metaSchemas?.map((schema: any, index: any) => {
                   console.log(schema, "schema");
