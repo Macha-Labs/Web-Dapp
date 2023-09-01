@@ -285,7 +285,7 @@ export const darkStyle = {
     },
 
     border: {
-      thead: "2px solid #1b2d59",
+      thead: "1px solid #1b2d59",
     },
     Th: {
       borderBottomColor: "#14244b",
