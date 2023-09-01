@@ -25,6 +25,7 @@ import { getAllTransactions } from "@/service/ApiService";
 import { fetchAllMetas, fetchMetaSchemas } from "@/service/MetaService";
 import SupportedChains from "@/components/studio/SupportedChains";
 import chains from "@/data/network";
+import CardNative from "@/_ui/cards/CardNative";
 
 // export async function getServerSideProps() {
 //   let allTransactions: any = [];
@@ -182,8 +183,11 @@ export default function Home() {
             }
           ></Marquee>
         )}
-        <Box marginTop={style.margin.xl}>
-          <FlexColumn hrAlign="flex-start " vrAlign="flex-start">
+        <CardNative
+          height="fit-content"
+          marginTop="xl"
+          width="100%"
+          header={
             <Heading
               fontSize={style.font.h3}
               fontWeight={600}
@@ -191,22 +195,28 @@ export default function Home() {
             >
               Explore Chains
             </Heading>
-          </FlexColumn>
-          <FlexRow marginTop={"lg"} hrAlign="flex-start" flexWrap="wrap">
-            {Object.keys(chains).map((chain: any, index) => {
-              // console.log(chains[chain]);
-              return (
-                <SupportedChains data={chains[chain]} id={chain} key={index} />
-              );
-            })}
-          </FlexRow>
-        </Box>
-        <Box>
-          <FlexColumn
-            hrAlign="flex-start "
-            vrAlign="flex-start"
-            marginTop={"4xl"}
-          >
+          }
+        >
+          <Box>
+            <FlexRow hrAlign="flex-start" flexWrap="wrap">
+              {Object.keys(chains).map((chain: any, index) => {
+                // console.log(chains[chain]);
+                return (
+                  <SupportedChains
+                    data={chains[chain]}
+                    id={chain}
+                    key={index}
+                  />
+                );
+              })}
+            </FlexRow>
+          </Box>
+        </CardNative>
+        <CardNative
+          height="fit-content"
+          marginTop="xl"
+          width="100%"
+          header={
             <Heading
               fontSize={style.font.h3}
               fontWeight={600}
@@ -214,7 +224,8 @@ export default function Home() {
             >
               Discover Meta Content
             </Heading>
-          </FlexColumn>
+          }
+        >
           <FlexRow hrAlign="flex-start" marginTop={"xl"} flexWrap="wrap">
             {hookMetasList?.metaSchemas?.map((schema: any, index: any) => {
               console.log(schema, "schema");
@@ -245,44 +256,45 @@ export default function Home() {
               );
             })}
           </FlexRow>
-        </Box>
-        <FlexRow marginTop={"4xl"} hrAlign="space-between">
-          <Heading mb="0px" fontSize={style.font.h3} fontWeight={600}>
-            Latest POAP indexed
-          </Heading>
-          <ButtonNative
-            height="2rem"
-            text="see all"
-            marginRight="0px"
-            variant="state_brand"
-            onClick={() => {
-              router.push("/explore/poap_nft");
-            }}
-          />
-        </FlexRow>
-        <FlexRow flexWrap={"wrap"} hrAlign="flex-start">
-          {!hookMetasList.isLoading &&
-            hookMetasList?.metaAll &&
-            hookMetasList?.metaAll?.map((item: any, index: any) => {
-              console.log(item, "item");
-              return (
-                <CollectorCard
-                  name={item?.meta?.data?.modified?.meta_title}
-                  key={index}
-                  image={item?.meta?.data?.modified?.meta_image}
-                  //   image={item?.meta?.data?.modified?.meta_image}
-                  //   slug={item?.meta_schema?.name}
-                  width="31%"
-                  tag={item?.meta?.data?.modified?.meta_description}
-                  //   artists="7 artists backed"
-                  //   description={item?.meta?.data?.modified?.meta_description}
-                  onClick={() => {
-                    router.push(`/search/meta/${item?._id}`);
-                  }}
-                />
-              );
-            })}
-        </FlexRow>
+        </CardNative>
+        <CardNative
+          height="fit-content"
+          marginTop="xl"
+          width="100%"
+          header={
+            <Heading
+              fontSize={style.font.h3}
+              fontWeight={600}
+              className="m-b-0"
+            >
+              Latest POAP indexed
+            </Heading>
+          }
+        >
+          <FlexRow flexWrap={"wrap"} hrAlign="flex-start">
+            {!hookMetasList.isLoading &&
+              hookMetasList?.metaAll &&
+              hookMetasList?.metaAll?.map((item: any, index: any) => {
+                console.log(item, "item");
+                return (
+                  <CollectorCard
+                    name={item?.meta?.data?.modified?.meta_title}
+                    key={index}
+                    image={item?.meta?.data?.modified?.meta_image}
+                    //   image={item?.meta?.data?.modified?.meta_image}
+                    //   slug={item?.meta_schema?.name}
+                    width="31%"
+                    tag={item?.meta?.data?.modified?.meta_description}
+                    //   artists="7 artists backed"
+                    //   description={item?.meta?.data?.modified?.meta_description}
+                    onClick={() => {
+                      router.push(`/search/meta/${item?._id}`);
+                    }}
+                  />
+                );
+              })}
+          </FlexRow>
+        </CardNative>
       </Box>
     );
   };

@@ -6,23 +6,26 @@ type Props = {
   icon: string;
   title: string;
   description?: string;
+  onClick?: any;
 };
 
-const UserAssetCard = ({ title, description, icon }: Props) => {
+const AssetCard = ({ title, description, icon, onClick }: Props) => {
   return (
     <Box
-      height="18rem"
+      height="20rem"
       flex="1"
       borderRadius={style.card.borderRadius.default}
       background={style.card.bg.overview}
       marginRight="10px"
       border={style.card.border.default}
       //   paddingLeft={`${style.padding.md}`}
+      cursor={"pointer"}
       padding={`${style.padding.sm}`}
       display="flex"
       flexDirection={"column"}
       alignItems={"flex-start"}
       justifyContent={"space-between"}
+      onClick={onClick}
     >
       <Image src={icon} alt="brandToken" height="50px" />
       <Box width={"100%"}>
@@ -41,4 +44,4 @@ const UserAssetCard = ({ title, description, icon }: Props) => {
     </Box>
   );
 };
-export default UserAssetCard;
+export default AssetCard;

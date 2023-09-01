@@ -19,7 +19,7 @@ import chains from "@/data/network";
 import CarouselSlide from "@/components/studio/CarouselSlide";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import UserAssetCard from "@/components/cards/UserAssetCard";
+import AssetCard from "@/components/cards/AssetCard";
 import UserContentCard from "@/components/cards/UserContentCard";
 import UserAssetsModal from "@/components/studio/UserAssetsModal";
 import useMetaList from "@/hooks/meta/useMetasList";
@@ -27,34 +27,21 @@ import MetaList from "@/components/meta/MetaList";
 import InputSearch from "@/_ui/input/InputSearch";
 import MetaUserList from "@/components/meta/MetaUserList";
 import useUserMeta from "@/hooks/studio/useUserMeta";
+import { truncateAddress } from "@/helpers";
+import TokenRow from "@/components/studio/TokenRow";
+import TokenModal from "@/components/studio/TokenModal";
 
 const User = () => {
   const userAssetsModal = useDisclosure();
   const router = useRouter();
-  const hookMetasList = useMetaList();
-
-  useEffect(() => {
-    if (router.isReady) {
-      if (window !== undefined) {
-        const data = window.sessionStorage.getItem(`all_metas_page`);
-        if (data !== null) {
-          var newLimit = JSON.parse(data) * 30;
-          if (newLimit > 300) newLimit = 300;
-          hookMetasList._fetchMore(null, newLimit);
-        } else {
-          hookMetasList._fetchMore(null, 30);
-        }
-      } else {
-        hookMetasList._fetchMore(null, 30);
-      }
-    }
-  }, []);
+  const tokenModal = useDisclosure();
 
   const renderNavLeft = () => {
     return <NavLeft />;
   };
 
   const UserInfo = () => {
+    const userAddress = router.query.userId;
     return (
       <>
         <Box
@@ -67,7 +54,7 @@ const User = () => {
             <Box
               height="15rem"
               width={"100%"}
-              background={"red"}
+              background={"white"}
               borderTopRadius={style.card.borderRadius.default}
             ></Box>
             <Box
@@ -132,7 +119,7 @@ const User = () => {
                 width="50%"
               >
                 <Text fontSize={`${style.font.h4}`}>Aakash Taneja</Text>
-                <Text marginBottom="0px">0x70...7470</Text>
+                <Text marginBottom="0px">{truncateAddress(userAddress)}</Text>
               </Box>
               <Box display={"flex"} width="25%">
                 {Object.keys(chains).map((chain: any, index) => {
@@ -164,17 +151,20 @@ const User = () => {
               My Assets
             </Heading>
             <Flex marginTop={`${style.margin.lg}`}>
-              <UserAssetCard
+              <AssetCard
                 title="34"
                 description="Tokens"
                 icon="/assets/icons/brand-token.svg"
+                onClick={() => {
+                  tokenModal.onOpen();
+                }}
               />
-              <UserAssetCard
+              {/* <UserAssetCard
                 title="7"
                 description="Domains"
                 icon="/assets/icons/brand-globe.svg"
-              />
-              <UserAssetCard
+              /> */}
+              <AssetCard
                 title="36"
                 description="NFTs Claimed"
                 icon="/assets/icons/brand-bolt.svg"
@@ -190,7 +180,7 @@ const User = () => {
             </Heading>
             <Box
               flex="1"
-              height={"18rem"}
+              height={"20rem"}
               marginTop={`${style.margin.lg}`}
               borderRadius={style.card.borderRadius.default}
               border={style.card.border.default}
@@ -207,7 +197,7 @@ const User = () => {
                 interval={3000}
               >
                 <CarouselSlide
-                  height="18rem"
+                  height="20rem"
                   title="Explore From MACHA"
                   description="POSTS • PROFILES • BLOGS"
                   headingFontSize={style.font.h6}
@@ -220,7 +210,7 @@ const User = () => {
                   buttonText="Explore"
                 />
                 <CarouselSlide
-                  height="18rem"
+                  height="20rem"
                   title="View From Contracts"
                   description="LENS • MIRROR • POAP"
                   headingFontSize={style.font.h6}
@@ -233,7 +223,7 @@ const User = () => {
                   buttonText="View Contracts Now"
                 />
                 <CarouselSlide
-                  height="18rem"
+                  height="20rem"
                   title="Discover From Chains"
                   headingFontSize={style.font.h6}
                   descriptionFontSize={style.font.h7}
@@ -250,7 +240,11 @@ const User = () => {
           </Box>
         </FlexRow>
 
-        <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
+        {/* <FlexColumn>
+          <TokenRow />
+        </FlexColumn> */}
+
+        {/* <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
           <Heading
             fontSize={`${style.font.h3}`}
             fontWeight={`${style.fontWeight.dark}`}
@@ -276,7 +270,7 @@ const User = () => {
               <UserContentCard title="NFT" description="45" />
             </Box>
           </FlexRow>
-        </FlexColumn>
+        </FlexColumn> */}
 
         <FlexColumn vrAlign="flex-start">
           <FlexRow hrAlign="space-between" marginTop="xxl" marginBottom={"lg"}>
@@ -293,6 +287,7 @@ const User = () => {
         </FlexColumn>
 
         <UserAssetsModal modal={userAssetsModal} />
+        <TokenModal modal={tokenModal} />
       </>
     );
   };
