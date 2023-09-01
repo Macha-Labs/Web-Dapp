@@ -41,7 +41,7 @@ const CardNative = ({
         width: width ? `${width}` : "100%",
         borderRadius: ` ${style.card.borderRadius.default}`,
         border: `${border ? border : style.card.border.default}`,
-        background: ` ${bg ? bg : style.card.bg.overview}`,
+        background: ` ${bg ? bg : ""}`,
         boxShadow: ` ${style.card.shadow.default} `,
         margin: margin ? style?.margin[margin] : "0rem",
         marginLeft: `${style.margin[marginLeft]}`,
