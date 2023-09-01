@@ -31,7 +31,7 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
             background: "#000511",
             padding: `${style.nav.padding.meta}`,
             height: `${style.nav.height}`,
-            borderBottom: `${style.nav.border.default}`,
+            border: `${style.nav.border.default}`,
             borderRadius: `${style.card.borderRadius.default}`,
 
             boxShadow: "0px 24px 64px 0px #000",

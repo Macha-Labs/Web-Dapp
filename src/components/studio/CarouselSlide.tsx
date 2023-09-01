@@ -13,8 +13,8 @@ type Props = {
   buttonText?: string;
   bgGrid: string;
   height?: string;
-  headingFontSize?: string
-  descriptionFontSize?: string
+  headingFontSize?: string;
+  descriptionFontSize?: string;
 };
 
 const CarouselSlide = ({
@@ -28,7 +28,7 @@ const CarouselSlide = ({
   descriptionFontSize,
   onClick,
   buttonText,
-  height
+  height,
 }: Props) => {
   return (
     <Box
@@ -41,6 +41,7 @@ const CarouselSlide = ({
         backgroundSize: "90%",
         height: `${height ? height : "28rem"}`,
         overflow: "hidden",
+        border: `${style.card.border.default}`,
       }}
     >
       <Box
@@ -55,8 +56,7 @@ const CarouselSlide = ({
           backgroundRepeat: "no-repeat",
         }}
       >
-        <Box width="50%"
-        style={{marginLeft:`${style.margin.md}`,}}>
+        <Box width="50%" style={{ marginLeft: `${style.margin.md}` }}>
           <Box
             style={{
               display: "flex",
@@ -86,7 +86,9 @@ const CarouselSlide = ({
                 {title}
               </Heading>
               <Text
-                fontSize={descriptionFontSize ? descriptionFontSize : style.font.h7}
+                fontSize={
+                  descriptionFontSize ? descriptionFontSize : style.font.h7
+                }
                 mb={0}
                 fontWeight={style.fontWeight.light}
                 letterSpacing={1}

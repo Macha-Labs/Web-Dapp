@@ -50,6 +50,7 @@ const MCard = ({
       marginLeft={style.margin["sm"]}
       marginBottom={style.margin["lg"]}
       width={width ? width : "100%"}
+      border={gStyle.card.border.default}
       onClick={onClick}
       cursor={"pointer"}
       flexWrap={"wrap"}
