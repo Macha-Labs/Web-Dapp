@@ -17,7 +17,7 @@ export const commonStyle: any = {
     extraDark: "800",
   },
   margin: {
-    xxxs:"0.2rem",
+    xxxs: "0.2rem",
     xxs: "0.5rem",
     xs: "1rem",
     sm: "1.2rem",
@@ -68,7 +68,7 @@ export const darkStyle = {
   },
   window: {},
   body: {
-    bg: { default: "#00040d" },
+    bg: { default: "#000000" },
     padding: "1% 6%",
     margin: { top: "50px" },
     paddingTop: "80px",

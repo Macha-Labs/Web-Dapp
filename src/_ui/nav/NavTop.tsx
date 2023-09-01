@@ -15,7 +15,7 @@ const NavTop = ({ rightElem, centerElem }: Props) => {
       <nav
         className="py-3"
         style={{
-          background: `${style.input.bg.default}`,
+          background: "#060606",
           padding: `${style.nav.padding.default}`,
           width: `${style.nav.width}`,
           height: `${style.nav.height}`,

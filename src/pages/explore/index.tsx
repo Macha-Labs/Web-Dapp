@@ -262,13 +262,20 @@ export default function Home() {
           marginTop="xl"
           width="100%"
           header={
-            <Heading
-              fontSize={style.font.h3}
-              fontWeight={600}
-              className="m-b-0"
-            >
-              Latest POAP indexed
-            </Heading>
+            <FlexRow hrAlign="space-between">
+              <Heading mb="0px" fontSize={style.font.h3} fontWeight={600}>
+                Latest POAP indexed
+              </Heading>
+              <ButtonNative
+                height="2rem"
+                text="see all"
+                marginRight="0px"
+                variant="state_brand"
+                onClick={() => {
+                  router.push("/explore/poap_nft");
+                }}
+              />
+            </FlexRow>
           }
         >
           <FlexRow flexWrap={"wrap"} hrAlign="flex-start">

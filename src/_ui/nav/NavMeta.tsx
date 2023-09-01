@@ -28,7 +28,7 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
         <Box
           // className="py-3"
           style={{
-            background: `${style.nav.bg.meta}`,
+            background: "#060606",
             padding: `${style.nav.padding.meta}`,
             height: `${style.nav.height}`,
             borderBottom: `${style.nav.border.default}`,
