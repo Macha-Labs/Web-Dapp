@@ -451,5 +451,5 @@ a {
   transition-timing-function: ease-in-out;
   transition-property: all;
   transition-duration: 1s;
-  background: red;
+  background: linear-gradient(129.54deg, #0629a6, #74b2f9);
 }

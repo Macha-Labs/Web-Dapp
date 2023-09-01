@@ -45,7 +45,7 @@ export const FlexWindow = ({
               top: "0",
               zIndex: "1000",
               width: "100%",
-              background: `${style.body.bg.default}`,
+              background: "#000",
               display: "flex",
               justifyContent: "center",
             }}
@@ -91,7 +91,7 @@ export const FlexWindow = ({
                   top: "0",
                   padding: `${padding ? padding : "0% 3%"}`,
                   paddingTop: `${style.margin.md}`,
-                  background: "rgb(0, 4, 13)",
+                  background: "#000",
                   zIndex: "1000",
                   width: "95%",
                   // background: `${style.body.bg.default}`,
