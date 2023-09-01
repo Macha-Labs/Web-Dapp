@@ -4,9 +4,11 @@ import { uploadTextToLighthouse } from "@/helpers/storage/lightHouseStorage";
 import useAuthStore from "@/store/useAuthStore";
 import useCreatorFormStore from "@/store/useCreatorFormStore";
 import { useToast } from "@chakra-ui/react";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useAccount } from "wagmi";
 
 const useCreatorCreate = () => {
   const [inputType, setInputType] = useState<string>("");
@@ -18,6 +20,7 @@ const useCreatorCreate = () => {
   const [imageName, setImageName] = useState<any>();
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<any>(false);
+  const { openConnectModal } = useConnectModal();
   const [provider, setProvider] = useState<any>();
   const [signer, setSigner] = useState<any>();
   const [contract, setContract] = useState<any>();
@@ -28,7 +31,7 @@ const useCreatorCreate = () => {
   const $loadCreatorFormData = useCreatorFormStore(
     (state: any) => state.loadCreatorFormData
   );
-  const $address = useAuthStore((state: any) => state.address);
+  const {address} = useAccount()
 
   const checkEvent = async () => {
     const provider = new ethers.providers.Web3Provider(
@@ -47,40 +50,46 @@ const useCreatorCreate = () => {
     });
   };
   const submit = async () => {
-    // if (!$address) return;
-    setIsLoading(true);
-    if (typeof window !== "undefined" && window.ethereum) {
-      const provider = new ethers.providers.Web3Provider(
-        window.ethereum as ethers.providers.ExternalProvider
-      );
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(
-        config.MACHA_DATA_CONTRACT_ADDRESS,
-        MachaMeta_ABI,
-        signer
-      );
-      console.log("contractData", contract);
-      console.log("signer", signer);
-      console.log("provider", provider);
-      const tempMetaCID = {
-        link: $creatorFormData.link,
-        description: $creatorFormData.description,
-        chain_id: $creatorFormData.chain_id,
-      };
-      const metaCID = await uploadTextToLighthouse(JSON.stringify(tempMetaCID));
-
-      const tempSystemCID = {
-        updatedAt: Date.now(),
-        timeStamp: Date.now(),
-        origin: "Macha WebApp",
-      };
-      const systemCID = await uploadTextToLighthouse(
-        JSON.stringify(tempSystemCID)
-      );
-      // const gasPrice = await provider.getGasPr()
-
-      contract.uploadMeta([metaCID], [systemCID], { gasLimit: 360038800 });
-      checkEvent();
+    if (!address){
+      if(openConnectModal){
+        openConnectModal()
+      }
+    }
+    if(address){
+      setIsLoading(true);
+      if (typeof window !== "undefined" && window.ethereum) {
+        const provider = new ethers.providers.Web3Provider(
+          window.ethereum as ethers.providers.ExternalProvider
+        );
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          config.MACHA_DATA_CONTRACT_ADDRESS,
+          MachaMeta_ABI,
+          signer
+        );
+        console.log("contractData", contract);
+        console.log("signer", signer);
+        console.log("provider", provider);
+        const tempMetaCID = {
+          link: $creatorFormData.link,
+          description: $creatorFormData.description,
+          chain_id: $creatorFormData.chain_id,
+        };
+        const metaCID = await uploadTextToLighthouse(JSON.stringify(tempMetaCID));
+  
+        const tempSystemCID = {
+          updatedAt: Date.now(),
+          timeStamp: Date.now(),
+          origin: "Macha WebApp",
+        };
+        const systemCID = await uploadTextToLighthouse(
+          JSON.stringify(tempSystemCID)
+        );
+        // const gasPrice = await provider.getGasPr()
+  
+        contract.uploadMeta([metaCID], [systemCID], { gasLimit: 360038800 });
+        checkEvent();
+      }
     }
   };
 
@@ -191,6 +200,7 @@ const useCreatorCreate = () => {
     handleInputChange: handleInputChange,
     setClear: setClear,
     isLoading: isLoading,
+    address: address
   };
 };
 export default useCreatorCreate;
