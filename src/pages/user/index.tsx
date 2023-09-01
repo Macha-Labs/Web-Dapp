@@ -5,21 +5,21 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import chains from "@/data/network";
+import CarouselSlide from "@/components/studio/CarouselSlide";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import UserAssetCard from "@/components/cards/UserAssetCard";
+import UserContentCard from "@/components/cards/UserContentCard";
+import UserAssetsModal from "@/components/studio/UserAssetsModal";
+
 
 const User = () => {
-  const router = useRouter();
-  //   const hookSearch = useSearch();
 
-  useEffect(() => {
-    if (router.isReady) {
-      // console.log(router.query.search)
-      //   hookSearch._fetch(String(router.query.search));
-    }
-  }, [router.query.search]);
+  const userAssetsModal = useDisclosure()
 
   const renderNavLeft = () => {
     return <NavLeft />;
@@ -61,11 +61,10 @@ const User = () => {
                 alt="avatar-default"
               />
             </Box>
-            <FlexRow hrAlign="space-between">
+            <FlexRow hrAlign="space-between" paddingLeft="xxl" paddingRight="xxl">
               <Box
                 display={"flex"}
                 width="25%"
-                justifyContent={"center"}
                 alignItems={"center"}
               >
                 <Box
@@ -75,7 +74,7 @@ const User = () => {
                   alignItems={"center"}
                   paddingRight={`${style.padding.md}`}
                 >
-                  <Text fontSize={`${style.font.h4}`} marginBottom="0px">
+                  <Text fontSize={`${style.font.h4}`} fontWeight={style.fontWeight.dark} marginBottom="0px">
                     950
                   </Text>
                   <Text marginBottom="0px">Followers</Text>
@@ -86,7 +85,7 @@ const User = () => {
                   justifyContent={"center"}
                   alignItems={"center"}
                 >
-                  <Text fontSize={`${style.font.h4}`} marginBottom="0px">
+                  <Text fontSize={`${style.font.h4}`} fontWeight={style.fontWeight.dark} marginBottom="0px">
                     950
                   </Text>
                   <Text marginBottom="0px">Following</Text>
@@ -132,96 +131,21 @@ const User = () => {
               My Assets
             </Text>
             <Flex marginTop={`${style.margin.xl}`}>
-              <Box
-                flex="1"
-                borderRadius={style.card.borderRadius.default}
-                background={style.card.bg.overview}
-                marginRight="10px"
-                border={style.card.border.default}
-                paddingLeft={`${style.padding.md}`}
-                paddingTop={`${style.padding.sm}`}
-              >
-                <Image
-                  src="/assets/icons/brand-token.svg"
-                  alt="brandToken"
-                  marginBottom={style.margin.xxl}
-                />
-                <Text fontSize={`${style.font.h4}`} marginBottom="0px">
-                  34
-                </Text>
-                <Flex>
-                  <Box
-                    flex="1.5"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                  >
-                    <Text>Tokens</Text>
-                  </Box>
-                  <Box flex="1" justifyContent="flex-end" alignItems="end">
-                    End
-                  </Box>
-                </Flex>
-              </Box>
-              <Box
-                flex="1"
-                marginRight="10px"
-                borderRadius={style.card.borderRadius.default}
-                background={style.card.bg.overview}
-                border={style.card.border.default}
-                paddingLeft={`${style.padding.md}`}
-                paddingTop={`${style.padding.sm}`}
-              >
-                <Image
-                  src="/assets/icons/brand-globe.svg"
-                  alt="brandGlobe"
-                  marginBottom={style.margin.xxl}
-                />
-                <Text fontSize={`${style.font.h4}`} marginBottom="0px">
-                  7
-                </Text>
-                <Flex>
-                  <Box
-                    flex="1.5"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                  >
-                    <Text>Domains</Text>
-                  </Box>
-                  <Box flex="1" justifyContent="flex-end" alignItems="end">
-                    End
-                  </Box>
-                </Flex>
-              </Box>
-              <Box
-                flex="1"
-                borderRadius={style.card.borderRadius.default}
-                background={style.card.bg.overview}
-                border={style.card.border.default}
-                paddingLeft={`${style.padding.md}`}
-                paddingTop={`${style.padding.sm}`}
-              >
-                <Image
-                  src="/assets/icons/brand-bolt.svg"
-                  alt="brandBolt"
-                  marginBottom={style.margin.xxl}
-                />
-                <Text fontSize={`${style.font.h4}`} marginBottom="0px">
-                  36
-                </Text>
-                <Flex>
-                  <Box
-                    flex="1.5"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                  >
-                    <Text>NFTs Claimed</Text>
-                  </Box>
-                  <Box flex="1" justifyContent="flex-end" alignItems="end">
-                    End
-                  </Box>
-                </Flex>
-                {/* <Text>NFTs Claimed</Text> */}
-              </Box>
+              <UserAssetCard 
+                title="34"
+                description="Tokens"
+                icon="/assets/icons/brand-token.svg"
+              />
+              <UserAssetCard 
+                title="7"
+                description="Domains"
+                icon="/assets/icons/brand-globe.svg"
+              />
+              <UserAssetCard 
+                title="36"
+                description="NFTs Claimed"
+                icon="/assets/icons/brand-bolt.svg"
+              />
             </Flex>
           </Box>
           <Box width="40%">
@@ -233,12 +157,62 @@ const User = () => {
             </Text>
             <Box
               flex="1"
-              height="100px"
-              borderRadius={style.card.borderRadius.default}
-              background={style.card.bg.overview}
               marginTop={`${style.margin.xl}`}
+              borderRadius={style.card.borderRadius.default}
               border={style.card.border.default}
-            ></Box>
+              overflow="hidden"
+            >
+              <Carousel
+                autoPlay
+                // showIndicators={false}
+                showArrows={false}
+                showStatus={false}
+                stopOnHover={true}
+                showThumbs={false}
+                infiniteLoop
+                interval={3000}
+              >
+                <CarouselSlide
+                  height="12rem"
+                  title="Explore From MACHA"
+                  description="POSTS • PROFILES • BLOGS"
+                  headingFontSize={style.font.h6}
+                  descriptionFontSize={style.font.h7}
+                  avatarImage={GlobalIcons["logo-Macha-circular"]}
+                  // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
+                  bgGrid=""
+                  bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+                  bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
+                  buttonText="Explore"
+                />
+                <CarouselSlide
+                  height="12rem"
+                  title="View From Contracts"
+                  description="LENS • MIRROR • POAP"
+                  headingFontSize={style.font.h6}
+                  descriptionFontSize={style.font.h7}
+                  avatarImage={GlobalIcons["base-SDK"]}
+                  // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
+                  bgGrid=""
+                  bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+                  bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
+                  buttonText="View Contracts Now"
+                />
+                <CarouselSlide
+                  height="12rem"
+                  title="Discover From Chains"
+                  headingFontSize={style.font.h6}
+                  descriptionFontSize={style.font.h7}
+                  description="TRANSACTIONS • INDEXING • CHAINS"
+                  avatarImage={GlobalIcons["base-chain"]}
+                  // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
+                  bgGrid=""
+                  bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+                  bannerImage="/assets/explore/home-carousal-3-hero-image.svg"
+                  buttonText="View Chains"
+                />
+              </Carousel>
+            </Box>
           </Box>
         </Flex>
 
@@ -251,37 +225,14 @@ const User = () => {
         </Text>
 
         <FlexRow hrAlign="space-between">
-          <FlexColumn width="50%">
-            <Box borderRadius={style.card.borderRadius.default} width="100%">
-              <FlexRow>
-                <FlexColumn>
-                  <Box bg="white"></Box>
-                </FlexColumn>
-                <FlexColumn hrAlign="space-between">
-                  <Box bg="blue"></Box>
-                  <Box bg="red"></Box>
-                </FlexColumn>
-              </FlexRow>
-            </Box>
-            <Text>NFTs</Text>
-            <Text>45</Text>
-          </FlexColumn>
-          <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="50%">
-            <Box borderRadius={style.card.borderRadius.default} width="100%">
-              <FlexRow>
-                <FlexColumn marginRight="xxxs">
-                  <Box bg="white" height="10rem" width="60%">sadasd</Box>
-                </FlexColumn>
-                <FlexColumn hrAlign="space-between">
-                  <Box bg="blue" height="5rem" width="40%" marginBottom={`${style.margin.xxxs}`}>sdsada</Box>
-                  <Box bg="red" height="5rem" width="40%">asfasf</Box>
-                </FlexColumn>
-              </FlexRow>
-            </Box>
-            <Text marginBottom="0px" marginTop={`${style.margin.md}`}>NFTs</Text>
-            <Text marginBottom="0px">45</Text>
-          </FlexColumn>
+          <Box width="50%" cursor="pointer" marginRight={style.margin.sm} onClick={() => userAssetsModal.onOpen()}>
+            <UserContentCard title="NFT" description="45" />
+          </Box>
+          <Box width="50%" cursor="pointer" onClick={() => userAssetsModal.onOpen()}>
+            <UserContentCard title="NFT" description="45" />
+          </Box>
         </FlexRow>
+        <UserAssetsModal modal={userAssetsModal} />
       </>
     );
   };

@@ -23,8 +23,8 @@ const TableNative = ({ data, tbodyChildren, theadChildren }: Prop) => {
               {theadChildren}
             </Tr>
           </Thead>
-          <Tbody>
-            {data?.map((item: any) => {
+          <Tbody overflow= "hidden">
+            {data?.map((item: any,index: any) => {
               return (
                 <Tr
                   _hover={{

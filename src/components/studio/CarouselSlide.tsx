@@ -12,6 +12,9 @@ type Props = {
   onClick?: any;
   buttonText?: string;
   bgGrid: string;
+  height?: string;
+  headingFontSize?: string
+  descriptionFontSize?: string
 };
 
 const CarouselSlide = ({
@@ -21,8 +24,11 @@ const CarouselSlide = ({
   avatarImage,
   title,
   description,
+  headingFontSize,
+  descriptionFontSize,
   onClick,
   buttonText,
+  height
 }: Props) => {
   return (
     <Box
@@ -33,7 +39,7 @@ const CarouselSlide = ({
           " 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
         borderRadius: `${style.card.borderRadius.default}`,
         backgroundSize: "90%",
-        height: `28rem`,
+        height: `${height ? height : "28rem"}`,
         overflow: "hidden",
       }}
     >
@@ -60,12 +66,7 @@ const CarouselSlide = ({
               // marginLeft: `${style.margin.sm}`,
             }}
           >
-            <Box
-            // _hover={{
-            //     transform: "scale(1.1,1.1)",
-            //     transition: "all 0.2s cubic-bezier(0.64, 0.04, 0.35, 1)"
-            // }}
-            >
+            <Box>
               <Image
                 borderRadius="full"
                 src={avatarImage}
@@ -75,7 +76,7 @@ const CarouselSlide = ({
             </Box>
             <Box width="90%" textAlign="left" marginLeft={style.margin.lg}>
               <Heading
-                fontSize={"2.2rem"}
+                fontSize={headingFontSize ? headingFontSize : "2.2rem"}
                 p={0}
                 // lineHeight={style.font.h1}
                 lineHeight={"2.5rem"}
@@ -85,7 +86,7 @@ const CarouselSlide = ({
                 {title}
               </Heading>
               <Text
-                fontSize={style.font.h7}
+                fontSize={descriptionFontSize ? descriptionFontSize : style.font.h7}
                 mb={0}
                 fontWeight={style.fontWeight.light}
                 letterSpacing={1}
@@ -94,7 +95,7 @@ const CarouselSlide = ({
               </Text>
             </Box>
           </Box>
-          <Box
+          {/* <Box
             display={"flex"}
             marginTop={style.margin.md}
             width="70%"
@@ -115,7 +116,7 @@ const CarouselSlide = ({
               text={buttonText ? buttonText : "View Contract Now"}
               borderColorWhite={false}
             />
-          </Box>
+          </Box> */}
         </Box>
         <Box
           height="100%"
