@@ -13,12 +13,20 @@ const CollectorCard = ({ name, tag, artists, width, onClick, image }: any) => {
         justifyContent: "flex-start",
         alignItems: "center",
         width: `${width}`,
-        paddingTop: `${style.padding.sm}`,
-        paddingRight: "2%",
+        padding: `${style.padding.sm}`,
+
+        marginRight: `${style.margin.sm}`,
         borderRadius: `${style.card.borderRadius.default}`,
-        marginBottom: `${style.margin.xl}`,
-        // background: `${style.card.bg.default}`,
+        marginTop: `${style.margin.xl}`,
+        border: `${style.card.border.default}`,
         cursor: "pointer",
+        transitionTimingFunction: "ease-in-out",
+        transitionProperty: " transform ",
+        transitionDuration: "600ms",
+      }}
+      _hover={{
+        border: `${style.card.border.hover} !important`,
+        background: `${style.card.bg.default}!important`,
       }}
       onClick={onClick}
     >

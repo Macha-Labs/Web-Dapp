@@ -18,6 +18,7 @@ const NavStudio = () => {
         <InputSearch
           defaultValue={hookSearch.searchString}
           value={hookSearch.searchString}
+          height="50px"
           onChange={(e: any) => hookSearch.setSearchString(e.target.value)}
           onKeydown={(e: any) => {
             if (e.key === "Enter") {

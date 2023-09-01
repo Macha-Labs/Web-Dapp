@@ -80,7 +80,7 @@ const NavLeft = (props: any) => {
                 />
               </FlexColumn>
               <FlexColumn height="fit-content">
-                <IconImage
+                {/* <IconImage
                   onClick={() => {
                     router.push("/user");
                   }}
@@ -93,7 +93,7 @@ const NavLeft = (props: any) => {
                         : "state_hover"
                     } `,
                   }}
-                />
+                /> */}
                 <Image
                   src="../../assets/Logo.png"
                   height={"40px"}
