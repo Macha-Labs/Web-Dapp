@@ -494,7 +494,7 @@ const CreatorCard = ({ modal }: any) => {
                           height="3.5rem"
                           marginTop={"xxl"}
                           width="100%"
-                          text="Sign in and publish"
+                          text={hookCreatorCreate.address ? "Publish" : "Sign in and publish"}
                           variant="state_brand"
                           onClick={() => {
                             console.log("submit clicked");

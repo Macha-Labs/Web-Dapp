@@ -21,17 +21,15 @@ const useCreatorCreate = () => {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<any>(false);
   const { openConnectModal } = useConnectModal();
-  const [provider, setProvider] = useState<any>();
-  const [signer, setSigner] = useState<any>();
-  const [contract, setContract] = useState<any>();
-  const router = useRouter();
   const $creatorFormData = useCreatorFormStore(
     (state: any) => state.creatorFormData
   );
   const $loadCreatorFormData = useCreatorFormStore(
     (state: any) => state.loadCreatorFormData
   );
-  const {address} = useAccount()
+  const { address } = useAccount()
+
+  const linkRegex = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/;
 
   const checkEvent = async () => {
     const provider = new ethers.providers.Web3Provider(
@@ -50,13 +48,32 @@ const useCreatorCreate = () => {
       // router.push(`/user/${metaCid}`);
     });
   };
+
   const submit = async () => {
-    if (!address){
-      if(openConnectModal){
+    if ($creatorFormData.chain_id == "") {
+      toast({
+        title: "Please select a network.",
+        status: "warning",
+        duration: 3000,
+        position: "top-right",
+      });
+      return;
+    }
+    if ($creatorFormData.description == "") {
+      toast({
+        title: "Description cannot be empty.",
+        status: "warning",
+        duration: 3000,
+        position: "top-right",
+      });
+      return;
+    }
+    if (!address) {
+      if (openConnectModal) {
         openConnectModal()
       }
     }
-    if(address){
+    if (address) {
       setIsLoading(true);
       if (typeof window !== "undefined" && window.ethereum) {
         const provider = new ethers.providers.Web3Provider(
@@ -77,7 +94,7 @@ const useCreatorCreate = () => {
           chain_id: $creatorFormData.chain_id,
         };
         const metaCID = await uploadTextToLighthouse(JSON.stringify(tempMetaCID));
-  
+
         const tempSystemCID = {
           updatedAt: Date.now(),
           timeStamp: Date.now(),
@@ -87,9 +104,19 @@ const useCreatorCreate = () => {
           JSON.stringify(tempSystemCID)
         );
         // const gasPrice = await provider.getGasPr()
-  
-        contract.uploadMeta([metaCID], [systemCID], { gasLimit: 360038800 });
-        checkEvent();
+        try{
+          await contract.uploadMeta([metaCID], [systemCID], { gasLimit: 360038800 });
+          checkEvent();
+        }
+        catch(error: any){
+          toast({
+            title: error.code,
+            status: "warning",
+            duration: 5000,
+            position: "top-right",
+          });
+          setIsLoading(false)
+        }
       }
     }
   };
@@ -126,6 +153,15 @@ const useCreatorCreate = () => {
           });
           return false;
         } else {
+          if (linkRegex.test($creatorFormData.link) == false) {
+            toast({
+              title: "Invalid link.",
+              status: "warning",
+              duration: 3000,
+              position: "top-right",
+            });
+            return
+          }
           return true;
         }
       }
