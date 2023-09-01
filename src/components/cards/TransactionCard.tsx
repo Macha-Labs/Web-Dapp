@@ -30,12 +30,14 @@ const TransactionCard = ({
       style={{
         marginRight: `${style.margin.sm}`,
         marginTop: `${style.margin.sm}`,
+        marginBottom: `${style.margin.sm}`,
       }}
     >
       <Box
         _hover={{
           transform: "scale(1.01,1.01)",
           border: "1px solid #197cec !important",
+          boxShadow: "-0.15px 0.15px 28px 0px #004AD9",
         }}
         style={{
           display: "flex",
@@ -47,10 +49,10 @@ const TransactionCard = ({
           justifyContent: "flex-start",
           alignItems: "center",
           height: "5rem",
-          boxShadow: `${style.card.shadow.default}`,
+          // boxShadow: `${style.card.shadow.default}`,
           background: `${style.card.bg.default}`,
           transitionTimingFunction: "ease-in-out",
-          transitionProperty: " transform ",
+          transitionProperty: " all ",
           transitionDuration: "600ms",
         }}
       >

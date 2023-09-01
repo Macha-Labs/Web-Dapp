@@ -55,7 +55,11 @@ const User = () => {
             <Box
               height="15rem"
               width={"100%"}
-              background={"white"}
+              background={`-webkit-linear-gradient(
+              120deg,
+              #74B2F9,
+              #0629A6
+            )`}
               borderTopRadius={style.card.borderRadius.default}
             ></Box>
             <Box
@@ -167,7 +171,7 @@ const User = () => {
               /> */}
               <AssetCard
                 title="36"
-                description="NFTs Claimed"
+                description="XPs"
                 icon="/assets/icons/brand-bolt.svg"
               />
             </Flex>

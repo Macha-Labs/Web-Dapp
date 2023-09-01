@@ -1,6 +1,6 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 import { style } from "@/styles/StyledConstants";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 
 type Props = {
   icon: string;
@@ -12,6 +12,7 @@ type Props = {
 const AssetCard = ({ title, description, icon, onClick }: Props) => {
   return (
     <Box
+      className="assetCardHover"
       height="20rem"
       flex="1"
       borderRadius={style.card.borderRadius.default}
@@ -34,7 +35,13 @@ const AssetCard = ({ title, description, icon, onClick }: Props) => {
         </Text>
         <FlexRow hrAlign="space-between" height="fit-content">
           <Box display="flex" justifyContent="flex-start" alignItems="center">
-            <Text marginBottom={"0px"}>{description}</Text>
+            <Heading
+              fontSize={style.font.h3}
+              fontWeight={"600"}
+              marginBottom={"0px"}
+            >
+              {description}
+            </Heading>
           </Box>
           <Box display="flex" justifyContent="flex-end" alignItems="end">
             <Text marginBottom={"0px"}> End</Text>

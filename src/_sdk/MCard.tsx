@@ -54,8 +54,14 @@ const MCard = ({
       onClick={onClick}
       cursor={"pointer"}
       flexWrap={"wrap"}
+      style={{
+        transitionTimingFunction: "ease-in-out",
+        transitionProperty: "all",
+        transitionDuration: "600ms",
+      }}
       _hover={{
         border: `${gStyle.card.border.meta}`,
+        boxShadow: "-0.15px 0.15px 28px 0px #004AD9",
       }}
     >
       <FlexRow

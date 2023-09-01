@@ -17,6 +17,7 @@ const SupportedChains = ({ data, id }: Props) => {
       _hover={{
         transform: "scale(1.01,1.01)",
         border: "1px solid #197cec !important",
+        boxShadow: "-0.15px 0.15px 28px 0px #004AD9",
       }}
       cursor={"pointer"}
       onClick={() => {
@@ -31,7 +32,7 @@ const SupportedChains = ({ data, id }: Props) => {
       borderRadius={style.card.borderRadius.default}
       style={{
         transitionTimingFunction: "ease-in-out",
-        transitionProperty: " transform ",
+        transitionProperty: "all ",
         transitionDuration: "600ms",
       }}
     >
