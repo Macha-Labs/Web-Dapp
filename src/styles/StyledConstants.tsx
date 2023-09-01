@@ -17,6 +17,7 @@ export const commonStyle: any = {
     extraDark: "800",
   },
   margin: {
+    xxxs:"0.2rem",
     xxs: "0.5rem",
     xs: "1rem",
     sm: "1.2rem",
