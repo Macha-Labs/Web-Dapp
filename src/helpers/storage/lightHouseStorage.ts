@@ -12,8 +12,8 @@ export const deploytoLightHouse = async (e: any, progressCallback: any) => {
     e,
     config.LIGHTHOUSE_API_KEY,
     false,
-    undefined,
-    progressCallback
+    undefined
+    // progressCallback
   );
   console.log("File Status:", output);
   console.log(
