@@ -45,6 +45,7 @@ const useCreatorCreate = () => {
     );
     contract.on("event_FileUploaded", (metaId, sender, metaCid) => {
       setIsLoading(false);
+      setStep(3);
       console.log("meta Created", metaId, sender, metaCid);
       // router.push(`/user/${metaCid}`);
     });
