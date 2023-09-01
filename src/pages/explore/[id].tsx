@@ -1,5 +1,6 @@
 import MCard from "@/_sdk/MCard";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import CardNative from "@/_ui/cards/CardNative";
 import CardSkeleton from "@/_ui/cards/CardSkeleton";
 import FlexBody from "@/_ui/flex/FlexBody";
 import FlexRow from "@/_ui/flex/FlexRow";
@@ -53,7 +54,15 @@ const Explore = () => {
   const renderBody = () => {
     return (
       <>
-        <> {renderComponent()}</>
+        <CardNative
+          header={
+            <>
+              <Heading fontSize={style.font.h3}>Discover</Heading>
+            </>
+          }
+        >
+          <> {renderComponent()}</>
+        </CardNative>
       </>
     );
   };

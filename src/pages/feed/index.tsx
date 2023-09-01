@@ -1,3 +1,4 @@
+import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavLeft from "@/_ui/nav/NavLeft";
@@ -6,7 +7,7 @@ import MotionBar from "@/components/MotionBar";
 import MetaList from "@/components/meta/MetaList";
 import useMetaList from "@/hooks/meta/useMetasList";
 import { style } from "@/styles/StyledConstants";
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -42,17 +43,25 @@ const Explorer = () => {
 
   const renderBody = () => {
     return (
-      <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-        <Box
-          // paddingTop={style.margin["lg"]}
-          paddingTop={style.margin.navBoth}
-          display={"flex"}
-          justifyContent={"center"}
-        >
-          <MetaList hookMetasList={hookMetasList} />
-          <MotionBar />
-        </Box>
-      </FlexColumn>
+      <CardNative
+        header={
+          <>
+            <Heading fontSize={style.font.h3}>Discover On Web3</Heading>
+          </>
+        }
+      >
+        <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
+          <Box
+            // paddingTop={style.margin["lg"]}
+            paddingTop={style.margin.navBoth}
+            display={"flex"}
+            justifyContent={"center"}
+          >
+            <MetaList hookMetasList={hookMetasList} />
+            <MotionBar />
+          </Box>
+        </FlexColumn>
+      </CardNative>
     );
   };
 

@@ -30,6 +30,7 @@ import useUserMeta from "@/hooks/studio/useUserMeta";
 import { truncateAddress } from "@/helpers";
 import TokenRow from "@/components/studio/TokenRow";
 import TokenModal from "@/components/studio/TokenModal";
+import CardNative from "@/_ui/cards/CardNative";
 
 const User = () => {
   const userAssetsModal = useDisclosure();
@@ -144,12 +145,12 @@ const User = () => {
         </Box>
         <FlexRow marginTop="xxl" hrAlign="space-between">
           <Box width="55%" marginRight="10px">
-            <Heading
+            {/* <Heading
               fontSize={`${style.font.h3}`}
               fontWeight={`${style.fontWeight.dark}`}
             >
               My Assets
-            </Heading>
+            </Heading> */}
             <Flex marginTop={`${style.margin.lg}`}>
               <AssetCard
                 title="34"
@@ -172,12 +173,12 @@ const User = () => {
             </Flex>
           </Box>
           <Box width="40%">
-            <Heading
+            {/* <Heading
               fontSize={`${style.font.h3}`}
               fontWeight={`${style.fontWeight.dark}`}
             >
               Recommendations
-            </Heading>
+            </Heading> */}
             <Box
               flex="1"
               height={"20rem"}
@@ -273,17 +274,29 @@ const User = () => {
         </FlexColumn> */}
 
         <FlexColumn vrAlign="flex-start">
-          <FlexRow hrAlign="space-between" marginTop="xxl" marginBottom={"lg"}>
-            <Heading
-              fontSize={`${style.font.h3}`}
-              fontWeight={`${style.fontWeight.dark}`}
-              marginBottom={"0px"}
-            >
-              Feed
-            </Heading>
-            <InputSearch width="25%" height="40px" placeholder="Search Meta" />
-          </FlexRow>
-          <MetaUserList hookData={useUserMeta} />
+          <CardNative
+            marginTop="xxl"
+            header={
+              <>
+                <FlexRow hrAlign="space-between">
+                  <Heading
+                    fontSize={`${style.font.h3}`}
+                    fontWeight={`${style.fontWeight.dark}`}
+                    marginBottom={"0px"}
+                  >
+                    Feed
+                  </Heading>
+                  <InputSearch
+                    width="25%"
+                    height="40px"
+                    placeholder="Search Meta"
+                  />
+                </FlexRow>
+              </>
+            }
+          >
+            <MetaUserList hookData={useUserMeta} />
+          </CardNative>
         </FlexColumn>
 
         <UserAssetsModal modal={userAssetsModal} />
