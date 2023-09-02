@@ -9,7 +9,14 @@ import useMacha from "@/hooks/studio/useMacha";
 import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ContractCard from "../cards/ContractCard";
@@ -41,36 +48,39 @@ const ContractList = ({ openInNewTab, data }: Props) => {
               <Loader size="lg" />
             </FlexRow>
           )}
-          <Box width="100vw" display="flex" flexWrap="wrap" paddingLeft={1}>
+          <Grid templateColumns="repeat(4,1fr)" gap="10px" width="100%" paddingLeft={1}>
+            {/* <Box width="100vw" display="flex" flexWrap="wrap" paddingLeft={1}> */}
             {!hookContractList.isLoading &&
               data &&
               data.map((item: any, index: number) => {
                 // console.log(hookContractList?.filterData, "filered data");
                 return (
-                  <ContractCard
-                    key={index}
-                    createdAt={item?.createdAt}
-                    height="8rem"
-                    chainId={item?.contract?.chain_id}
-                    address={item?.contract?.address}
-                    heading={item?.contract?.name}
-                    image={
-                      item?.contract?.image
-                        ? item?.contract?.image
-                        : GlobalIcons["avatar-default"]
-                    }
-                    description={item?.contract?.description}
-                    onCardClick={() => {
-                      window.open(
-                        `/search/contracts/${item?.contract?.slug}`,
-                        `${openInNewTab ? "_blank" : "_self"}`
-                      );
-                      console.log(router.basePath, "url");
-                    }}
-                  />
+                  <GridItem key={index} colSpan={1}>
+                    <ContractCard
+                      key={index}
+                      createdAt={item?.createdAt}
+                      height="8rem"
+                      chainId={item?.contract?.chain_id}
+                      address={item?.contract?.address}
+                      heading={item?.contract?.name}
+                      image={
+                        item?.contract?.image
+                          ? item?.contract?.image
+                          : GlobalIcons["avatar-default"]
+                      }
+                      description={item?.contract?.description}
+                      onCardClick={() => {
+                        window.open(
+                          `/search/contracts/${item?.contract?.slug}`,
+                          `${openInNewTab ? "_blank" : "_self"}`
+                        );
+                        console.log(router.basePath, "url");
+                      }}
+                    />
+                  </GridItem>
                 );
               })}
-          </Box>
+          </Grid>
           <ContractCreateEditModal
             modal={contractModal}
             hookContractCreate={hookContractCreate}

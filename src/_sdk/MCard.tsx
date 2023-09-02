@@ -46,14 +46,14 @@ const MCard = ({
       borderRadius={gStyle.card.borderRadius.default}
       background="#030c1a"
       padding={style.card.padding.default}
-      marginRight={style.margin["sm"]}
-      marginLeft={style.margin["sm"]}
-      marginBottom={style.margin["lg"]}
-      width={width ? width : "100%"}
+      // marginRight={style.margin["sm"]}
+      // marginLeft={style.margin["sm"]}
+      // marginBottom={style.margin["lg"]}
+      // width={width ? width : "100%"}
       border={gStyle.card.border.default}
       onClick={onClick}
       cursor={"pointer"}
-      flexWrap={"wrap"}
+      // flexWrap={"wrap"}
       style={{
         transitionTimingFunction: "ease-in-out",
         transitionProperty: "all",
@@ -105,18 +105,21 @@ const MCard = ({
         >
           {title}
         </Text>
-        {description && (
-          <Text
-            className="m-b-0"
-            fontSize={"md"}
-            marginTop={gStyle.margin["xxs"]}
-            width={"100%"}
-          >
-            {image
-              ? truncateString(description, 200)
-              : truncateString(description, 500)}
-          </Text>
-        )}
+        <Box width="15rem">
+          {description && (
+            <Text
+              className="m-b-0"
+              fontSize={"md"}
+              marginTop={gStyle.margin["xxs"]}
+            >
+              {
+                image
+                ? truncateString(description, 200)
+                : truncateString(description, 500)
+              }
+            </Text>
+          )}
+        </Box>
       </FlexColumn>
       {action_name && (
         <ButtonNative
