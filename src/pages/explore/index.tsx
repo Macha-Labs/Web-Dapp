@@ -1,9 +1,7 @@
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import { style } from "@/styles/StyledConstants";
-
 import ButtonNative from "@/_ui/buttons/ButtonNative";
-import FlexColumn from "@/_ui/flex/FlexColumn";
+import CardNative from "@/_ui/cards/CardNative";
 import FlexRow from "@/_ui/flex/FlexRow";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import Marquee from "@/components/Marquee/Marquee";
@@ -12,30 +10,19 @@ import GraphCard from "@/components/cards/GraphCard";
 import TransactionCard from "@/components/cards/TransactionCard";
 import CarouselSlide from "@/components/studio/CarouselSlide";
 import SupportedChains from "@/components/studio/SupportedChains";
+import LeaderboardTable from "@/components/table/LeaderboardTable";
+import UserXpTable from "@/components/table/UserXpTable";
 import chains from "@/data/network";
 import { exploreModules } from "@/data/studio/constant";
 import useMetaList from "@/hooks/meta/useMetasList";
 import useTransaction from "@/hooks/studio/useTransaction";
 import GlobalIcons from "@/styles/GlobalIcons";
+import { style } from "@/styles/StyledConstants";
 import { Box, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import FlexRow from "@/_ui/flex/FlexRow";
-import CollectorCard from "@/components/cards/CollectorsCard";
-import useMetaList from "@/hooks/meta/useMetasList";
-import { useRouter } from "next/router";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import FlexColumn from "@/_ui/flex/FlexColumn";
-import MetaCollectionCard from "@/components/cards/MetaCollectionCard";
-import GraphCard from "@/components/cards/GraphCard";
-import { exploreModules } from "@/data/studio/constant";
-import { getAllTransactions } from "@/service/ApiService";
-import { fetchAllMetas, fetchMetaSchemas } from "@/service/MetaService";
-import SupportedChains from "@/components/studio/SupportedChains";
-import chains from "@/data/network";
-import CardNative from "@/_ui/cards/CardNative";
 
 // export async function getServerSideProps() {
 //   let allTransactions: any = [];
@@ -193,6 +180,44 @@ export default function Home() {
             }
           ></Marquee>
         )}
+        <Box style={{
+          display: 'flex',
+          flexDirection: "row"
+        }}>
+          <CardNative
+            height="fit-content"
+            marginTop="xl"
+            width="50%"
+            marginRight="lg"
+            header={
+              <Heading
+                fontSize={style.font.h3}
+                fontWeight={600}
+                className="m-b-0"
+              >
+                Leaderboard - Top 30
+              </Heading>
+            }
+          >
+            <LeaderboardTable />
+          </CardNative>
+          <CardNative
+            height="fit-content"
+            marginTop="xl"
+            width="50%"
+            header={
+              <Heading
+                fontSize={style.font.h3}
+                fontWeight={600}
+                className="m-b-0"
+              >
+                Earn Rewards
+              </Heading>
+            }
+          >
+            <UserXpTable />
+          </CardNative>
+        </Box>
         <CardNative
           height="fit-content"
           marginTop="xl"

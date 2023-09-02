@@ -1,19 +1,14 @@
 import TableNative from "@/_ui/table/TableNative";
 import { truncateAddress } from "@/helpers";
-import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Image, Td, Text, Th } from "@chakra-ui/react";
+import { Box, Td, Text, Th } from "@chakra-ui/react";
 import Avatar from "boring-avatars";
 
 const LeaderboardTable = () => {
     return (
-        <Box
-            marginTop="1rem"
-            border={style.nav.border.default}
-            borderRadius="20px"
-            marginBottom={style.margin.md}
-        >
+        <Box>
             <TableNative
+                theadBottomBorder="none"
                 data={[
                     {
                         user_address: "0x3265476456",
@@ -68,15 +63,15 @@ const LeaderboardTable = () => {
                 ]}
                 theadChildren={
                     <>
-                        <Box width="80%" display="flex" alignItems="center">
+                        <Box display="flex" alignItems="center" width="80%">
                             <Th
                                 style={{
-                                    textAlign: "center",
+                                    textAlign: "left",
                                     fontSize: "1.25rem",
-                                    paddingTop: "2rem",
-                                    paddingBottom: "2rem",
                                     textTransform: "capitalize",
-                                    width: "20%"
+                                    color: "#8f8f8f",
+                                    fontWeight: "500",
+                                    paddingLeft: `${style.padding.xs}`,
                                 }}
                             >
                                 Rank
@@ -84,11 +79,11 @@ const LeaderboardTable = () => {
                             <Th
                                 style={{
                                     fontSize: "1.25rem",
-                                    paddingTop: "2rem",
                                     textAlign: "center",
-                                    paddingBottom: "2rem",
                                     textTransform: "capitalize",
-                                    width: "30%"
+                                    color: "#8f8f8f",
+                                    fontWeight: "500",
+                                    paddingLeft: `${style.padding.xxs}`
                                 }}
                             >
                                 Address
@@ -98,9 +93,9 @@ const LeaderboardTable = () => {
                             style={{
                                 textAlign: "center",
                                 fontSize: "1.25rem",
-                                paddingTop: "2rem",
-                                paddingBottom: "2rem",
                                 textTransform: "capitalize",
+                                color: "#8f8f8f",
+                                fontWeight: "500",
                             }}
                         >
                             XP
@@ -110,25 +105,16 @@ const LeaderboardTable = () => {
                 tbodyChildren={(item: any, index: any) => {
                     return (
                         <>
-                            <Box width="80%" display="flex" alignItems="center">
-                                <Td style={{ textAlign: "center", padding: `${style.padding.sm}`, width: "20%" }}>
-                                    <Box
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            justifyContent: "center",
-                                            alignItems: "center"
-                                        }}
+                            <Box display="flex" alignItems="center" width="80%">
+                                <Td style={{ textAlign: "center", padding: `${style.padding.xxs}`, width: "50%" }}>
+                                    <Text
+                                        marginBottom={0}
+                                        fontSize={style.font.h4}
                                     >
-                                        <Text
-                                            marginBottom={0}
-                                            fontSize={style.font.h4}
-                                        >
-                                            #{item?.rank}
-                                        </Text>
-                                    </Box>
+                                        #{item?.rank}
+                                    </Text>
                                 </Td>
-                                <Td style={{ padding: `${style.padding.sm}`, width: "70%" }}>
+                                <Td style={{ padding: `${style.padding.sm}` }}>
                                     <Box
                                         style={{
                                             display: "flex",
@@ -150,7 +136,7 @@ const LeaderboardTable = () => {
                                     </Box>
                                 </Td>
                             </Box>
-                            <Td style={{ textAlign: "center", padding: `${style.padding.sm}`, width: "15%" }}>
+                            <Td style={{ textAlign: "center", padding: `${style.padding.sm}` }}>
                                 <Box
                                     style={{
                                         display: "flex",
@@ -161,7 +147,7 @@ const LeaderboardTable = () => {
                                 >
                                     <Box>
                                         <Text mb={0}
-                                        fontSize={style.font.h4}>{item?.xp}</Text>
+                                            fontSize={style.font.h4}>{item?.xp}</Text>
                                     </Box>
                                 </Box>
                             </Td>
