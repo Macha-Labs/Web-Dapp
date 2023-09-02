@@ -25,7 +25,7 @@ const SupportedChains = ({ data, id }: Props) => {
       }}
       width={"20%"}
       border={style.card.border.default}
-      background={style.card.bg.default}
+      background="#030c1a"
       marginX={style.margin.sm}
       marginTop={style.margin.sm}
       padding={style.padding.sm}

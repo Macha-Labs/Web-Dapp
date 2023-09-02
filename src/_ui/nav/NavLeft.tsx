@@ -26,7 +26,7 @@ const NavLeft = (props: any) => {
             left: "0",
             padding: "10px 5px",
 
-            background: "#000511",
+            background: "#030c1a",
             borderRight: `${style.nav.border.default}`,
           }}
         >

@@ -12,7 +12,7 @@ export default function NavBlock({ children, back, marginTop }: Props) {
     <div
       className="nav-block"
       style={{
-        background: `${style.input.bg.default}`,
+        background: `#030c1a`,
         padding: `${style.nav.padding.default}`,
         width: `100%`,
         borderBottom: `${style.nav.border.default}`,

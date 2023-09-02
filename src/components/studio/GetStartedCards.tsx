@@ -29,8 +29,9 @@ const GetStartedCards = ({
         transform: "scale(1.01,1.01)",
       }}
       //   maxW="sm"
-      border={style.card.border.default}
+      border={style.card.border.card}
       borderRadius={style.card.borderRadius.default}
+      background={"#030c1a"}
       overflow="hidden"
       width="30%"
       marginBottom={style.margin.md}

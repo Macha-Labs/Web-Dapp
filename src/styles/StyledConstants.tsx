@@ -68,7 +68,7 @@ export const darkStyle = {
   },
   window: {},
   body: {
-    bg: { default: "#000000" },
+    bg: { default: "#000511" },
     padding: "1% 6%",
     margin: { top: "50px" },
     paddingTop: "80px",
@@ -110,6 +110,7 @@ export const darkStyle = {
     },
     border: {
       default: "1px solid #0a1020",
+      card: "1px solid #102540",
       hover: "1px solid #285ddf",
       meta: "1px solid #197cec",
       mcard: "1px solid #353c54",

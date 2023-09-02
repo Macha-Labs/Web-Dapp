@@ -47,9 +47,9 @@ const User = () => {
       <>
         <Box
           borderRadius={style.card.borderRadius.default}
-          background={style.card.bg.overview}
+          background="#030c1a"
           paddingBottom={`${style.padding.lg}`}
-          border={style.card.border.default}
+          border={style.card.border.card}
         >
           <FlexColumn>
             <Box
@@ -176,7 +176,7 @@ const User = () => {
               />
             </Flex>
           </Box>
-          <Box width="40%">
+          <Box width="45%">
             {/* <Heading
               fontSize={`${style.font.h3}`}
               fontWeight={`${style.fontWeight.dark}`}
@@ -188,7 +188,7 @@ const User = () => {
               height={"20rem"}
               marginTop={`${style.margin.lg}`}
               borderRadius={style.card.borderRadius.default}
-              border={style.card.border.default}
+              border={style.card.border.card}
               overflow="hidden"
             >
               <Carousel

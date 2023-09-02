@@ -50,7 +50,7 @@ const TransactionCard = ({
           alignItems: "center",
           height: "5rem",
           // boxShadow: `${style.card.shadow.default}`,
-          background: `${style.card.bg.default}`,
+          background: `#030c1a`,
           transitionTimingFunction: "ease-in-out",
           transitionProperty: " all ",
           transitionDuration: "600ms",

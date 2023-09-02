@@ -44,7 +44,7 @@ const MCard = ({
   return (
     <Box
       borderRadius={gStyle.card.borderRadius.default}
-      background={gStyle.card.bg.default}
+      background="#030c1a"
       padding={style.card.padding.default}
       marginRight={style.margin["sm"]}
       marginLeft={style.margin["sm"]}

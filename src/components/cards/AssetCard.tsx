@@ -16,9 +16,9 @@ const AssetCard = ({ title, description, icon, onClick }: Props) => {
       height="20rem"
       flex="1"
       borderRadius={style.card.borderRadius.default}
-      background={style.card.bg.overview}
+      background="#030c1a"
       marginRight="10px"
-      border={style.card.border.default}
+      border={style.card.border.card}
       //   paddingLeft={`${style.padding.md}`}
       cursor={"pointer"}
       padding={`${style.padding.sm}`}
