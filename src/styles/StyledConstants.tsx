@@ -109,7 +109,7 @@ export const darkStyle = {
       brand: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
     },
     border: {
-      default: "1px solid #0a1020",
+      default: "1px solid #111a34",
       card: "1px solid #102540",
       hover: "1px solid #285ddf",
       meta: "1px solid #197cec",
