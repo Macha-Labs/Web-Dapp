@@ -17,7 +17,7 @@ export const commonStyle: any = {
     extraDark: "800",
   },
   margin: {
-    xxxs:"0.2rem",
+    xxxs: "0.2rem",
     xxs: "0.5rem",
     xs: "1rem",
     sm: "1.2rem",
@@ -68,7 +68,7 @@ export const darkStyle = {
   },
   window: {},
   body: {
-    bg: { default: "#00040d" },
+    bg: { default: "#000511" },
     padding: "1% 6%",
     margin: { top: "50px" },
     paddingTop: "80px",
@@ -97,7 +97,7 @@ export const darkStyle = {
   },
   card: {
     bg: {
-      default: "#020A21",
+      default: "#000511",
       // default:
       //   " linear-gradient(129.54deg, rgba(13, 33, 71, 0.66) 9.17%, rgba(11, 32, 73, 0.15) 94.25%)",
       highlight:
@@ -105,11 +105,12 @@ export const darkStyle = {
       hover:
         "linear-gradient(141.09deg, rgba(13, 25, 65, 0.5) 11.08%, rgba(0, 20, 60, 0.38) 89.68%)",
 
-      overview: "#020a21",
+      overview: "#000511",
       brand: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
     },
     border: {
       default: "1px solid #0a1020",
+      card: "1px solid #102540",
       hover: "1px solid #285ddf",
       meta: "1px solid #197cec",
       mcard: "1px solid #353c54",
@@ -183,11 +184,11 @@ export const darkStyle = {
     bg: {
       default: "#020A21",
       overlay: "#00040d",
-      contractModal: "linear-gradient(147deg, #000B2D 0%, #010510 94.96%)",
+      contractModal: "#030c1a",
     },
     border: {
       default: "1px solid #0F172E",
-      contract: "2px solid #0a1020",
+      contract: "1px solid #102540",
       hover: "2px solid rgba(15,23,46,1)",
       meta: "1px solid #197cec",
       mcard: "1px solid #353c54",

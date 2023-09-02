@@ -40,8 +40,8 @@ const CardNative = ({
         height: `${height}`,
         width: width ? `${width}` : "100%",
         borderRadius: ` ${style.card.borderRadius.default}`,
-        border: `${border ? border : style.card.border.default}`,
-        background: ` ${bg ? bg : style.card.bg.overview}`,
+        border: `${border ? border : style.card.border.card}`,
+        background: ` ${bg ? bg : "#030c1a"}`,
         boxShadow: ` ${style.card.shadow.default} `,
         margin: margin ? style?.margin[margin] : "0rem",
         marginLeft: `${style.margin[marginLeft]}`,
@@ -59,7 +59,7 @@ const CardNative = ({
             mb="0px"
             width={"100%"}
             alignSelf={"flex-end"}
-            borderColor={"#14244B"}
+            borderColor={"#102540"}
           />
         </Box>
       )}

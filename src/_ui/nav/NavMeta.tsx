@@ -28,10 +28,10 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
         <Box
           // className="py-3"
           style={{
-            background: `${style.nav.bg.meta}`,
+            background: "#030c1a",
             padding: `${style.nav.padding.meta}`,
             height: `${style.nav.height}`,
-            borderBottom: `${style.nav.border.default}`,
+            border: `${style.nav.border.default}`,
             borderRadius: `${style.card.borderRadius.default}`,
 
             boxShadow: "0px 24px 64px 0px #000",

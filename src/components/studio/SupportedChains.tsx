@@ -17,6 +17,7 @@ const SupportedChains = ({ data, id }: Props) => {
       _hover={{
         transform: "scale(1.01,1.01)",
         border: "1px solid #197cec !important",
+        boxShadow: "-0.15px 0.15px 28px 0px #004AD9",
       }}
       cursor={"pointer"}
       onClick={() => {
@@ -24,14 +25,14 @@ const SupportedChains = ({ data, id }: Props) => {
       }}
       width={"20%"}
       border={style.card.border.default}
-      background={style.card.bg.default}
+      background="#030c1a"
       marginX={style.margin.sm}
       marginTop={style.margin.sm}
       padding={style.padding.sm}
       borderRadius={style.card.borderRadius.default}
       style={{
         transitionTimingFunction: "ease-in-out",
-        transitionProperty: " transform ",
+        transitionProperty: "all ",
         transitionDuration: "600ms",
       }}
     >

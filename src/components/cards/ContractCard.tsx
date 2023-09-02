@@ -45,9 +45,9 @@ const ContractCard = ({
       style={{
         height: "20rem",
         width: "25%",
-        border: `${style.card.border.contract}`,
+        border: `${style.card.border.card}`,
         borderRadius: `${style.card.borderRadius.default}`,
-        background: `${style.card.bg.default}`,
+        background: `#030c1a`,
         padding: ` ${style.padding.md}`,
         display: "flex",
         flexDirection: "column",

@@ -1,29 +1,27 @@
 import { ethers } from "ethers";
 import MachaMeta_ABI from "@/data/ABI/MachaMeta_ABI.json";
 import { config } from "@/config";
+import { userMetaByAddress } from "@/service/ApiService";
+import { useState } from "react";
 
 type Props = {
-  metaId: any;
+  userAdderss: string;
 };
 
-const useMetaDelete = () => {
-  const deleteMeta = async ({ metaId }: Props) => {
-    const provider = new ethers.providers.Web3Provider(
-      window.ethereum as ethers.providers.ExternalProvider
-    );
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(
-      config.MACHA_DATA_CONTRACT_ADDRESS,
-      MachaMeta_ABI,
-      signer
-    );
+const useUserMeta = () => {
+  const [userMeta, setUserMeta] = useState<any>();
 
-    console.log(await contract.meteId);
+  const fetchMetas = async (userAdderss: string) => {
+    await userMetaByAddress(userAdderss).then((res) => {
+      console.log("response form useUserMeta", res.data);
+      setUserMeta(res.data);
+    });
   };
 
   return {
-    deleteMeta: deleteMeta,
+    fetchMetas: fetchMetas,
+    userMeta: userMeta,
   };
 };
 
-export default useMetaDelete;
+export default useUserMeta;

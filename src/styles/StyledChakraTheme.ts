@@ -43,7 +43,7 @@ const theme = extendTheme({
       },
       ".chakra-modal__header": {
         // background: `${style.modal.bg.contractModal}`,
-        borderBottom: `${style.modal.border.default} !important`,
+        borderBottom: `${style.modal.border.contract} !important`,
       },
       ".chakra-modal__footer": {
         // background: `${style.modal.bg.contractModal}`,

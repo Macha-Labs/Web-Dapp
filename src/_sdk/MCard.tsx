@@ -21,7 +21,7 @@ type Props = {
   action_value?: string;
   width?: string;
   onClick?: any;
-  slug?: any
+  slug?: any;
 };
 
 const MCard = ({
@@ -37,22 +37,31 @@ const MCard = ({
   action_value,
   width,
   onClick,
-  slug
+  slug,
 }: Props) => {
   const router = useRouter();
 
   return (
     <Box
       borderRadius={gStyle.card.borderRadius.default}
-      background={gStyle.card.bg.default}
+      background="#030c1a"
       padding={style.card.padding.default}
-      marginRight={style.margin["lg"]}
+      marginRight={style.margin["sm"]}
+      marginLeft={style.margin["sm"]}
       marginBottom={style.margin["lg"]}
       width={width ? width : "100%"}
+      border={gStyle.card.border.default}
       onClick={onClick}
       cursor={"pointer"}
+      flexWrap={"wrap"}
+      style={{
+        transitionTimingFunction: "ease-in-out",
+        transitionProperty: "all",
+        transitionDuration: "600ms",
+      }}
       _hover={{
         border: `${gStyle.card.border.meta}`,
+        boxShadow: "-0.15px 0.15px 28px 0px #004AD9",
       }}
     >
       <FlexRow
@@ -61,7 +70,7 @@ const MCard = ({
         vrAlign="flex-start"
         marginBottom="sm"
       >
-        <TagNative size="md" value={slug}  />
+        <TagNative size="md" value={slug} />
       </FlexRow>
 
       {owner_name && (
