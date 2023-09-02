@@ -21,12 +21,12 @@ const CollectorCard = ({ name, tag, artists, width, onClick, image }: any) => {
         border: `${style.card.border.default}`,
         cursor: "pointer",
         transitionTimingFunction: "ease-in-out",
-        transitionProperty: " transform ",
+        transitionProperty: " all ",
         transitionDuration: "600ms",
       }}
       _hover={{
         border: `${style.card.border.hover} !important`,
-        background: `${style.card.bg.default}!important`,
+        boxShadow: "-0.15px 0.15px 28px 0px #004AD9",
       }}
       onClick={onClick}
     >

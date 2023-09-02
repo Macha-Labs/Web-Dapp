@@ -184,11 +184,11 @@ export const darkStyle = {
     bg: {
       default: "#020A21",
       overlay: "#00040d",
-      contractModal: "linear-gradient(147deg, #000B2D 0%, #010510 94.96%)",
+      contractModal: "#030c1a",
     },
     border: {
       default: "1px solid #0F172E",
-      contract: "2px solid #0a1020",
+      contract: "1px solid #102540",
       hover: "2px solid rgba(15,23,46,1)",
       meta: "1px solid #197cec",
       mcard: "1px solid #353c54",
