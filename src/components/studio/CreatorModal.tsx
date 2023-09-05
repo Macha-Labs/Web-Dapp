@@ -5,6 +5,7 @@ import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Image } from "@chakra-ui/react";
 import CreatorCard from "../cards/CreatorCard";
+import NftCard from "../cards/NftCard";
 
 type Props = {
     modal: any;
@@ -20,7 +21,8 @@ const CreatorModal = ({
             event={modal}
             size="6xl"
         >
-            <CreatorCard modal={modal} />
+            <NftCard/>
+            {/* <CreatorCard modal={modal} /> */}
         </ModalWindow>
     );
 };

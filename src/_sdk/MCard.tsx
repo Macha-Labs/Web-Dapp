@@ -22,6 +22,7 @@ type Props = {
   width?: string;
   onClick?: any;
   slug?: any;
+  cardHeight?: any;
 };
 
 const MCard = ({
@@ -38,11 +39,13 @@ const MCard = ({
   width,
   onClick,
   slug,
+  cardHeight,
 }: Props) => {
   const router = useRouter();
 
   return (
     <Box
+      height={cardHeight ? cardHeight : "auto"}
       borderRadius={gStyle.card.borderRadius.default}
       background="#030c1a"
       padding={style.card.padding.default}
@@ -112,11 +115,9 @@ const MCard = ({
               fontSize={"md"}
               marginTop={gStyle.margin["xxs"]}
             >
-              {
-                image
+              {image
                 ? truncateString(description, 200)
-                : truncateString(description, 500)
-              }
+                : truncateString(description, 500)}
             </Text>
           )}
         </Box>
