@@ -1,10 +1,12 @@
+import FlexRow from "@/_ui/flex/FlexRow";
 import TableNative from "@/_ui/table/TableNative";
 import { truncateAddress } from "@/helpers";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
-import { Box, Td, Text, Th } from "@chakra-ui/react";
+import { Box, Image, Td, Text, Th } from "@chakra-ui/react";
 import Avatar from "boring-avatars";
 import { ConnectWalletButton } from "../ConnectWalletButton";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 const UserXpTable = () => {
     const $address = useAuthStore((state: any) => state.address);
@@ -20,84 +22,86 @@ const UserXpTable = () => {
                     theadBottomBorder="none"
                     data={[
                         {
-                            user_address: "0x3265476456",
-                            xp: "262,500",
-                            rank: 1
+                            quest: "Own a .lens handle",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Lens"
                         },
                         {
-                            user_address: "0x3265476456",
-                            xp: "262,500",
-                            rank: 2
+                            quest: "Publish to Mirror.xyz",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Mirror"
                         },
                         {
-                            user_address: "0x3265476456",
-                            xp: "262,500",
-                            rank: 3
+                            quest: "POAP",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Poap"
                         },
                         {
-                            user_address: "0x3265476456",
-                            xp: "262,500",
-                            rank: 4
+                            quest: "LENS",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Lens"
                         },
                         {
-                            user_address: "0x3265476456",
-                            xp: "262,500",
-                            rank: 5
+                            quest: "Sound.xyz",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Sound.xyz"
                         },
                         {
-                            user_address: "0x3265476456",
-                            xp: "262,500",
-                            rank: 6
+                            quest: "Own a .lens handle",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Lens"
                         },
                         {
-                            user_address: "0x3265476456",
-                            xp: "262,500",
-                            rank: 7
+                            quest: "Own a .lens handle",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Lens"
                         },
                         {
-                            user_address: "0x3265476456",
-                            xp: "262,500",
-                            rank: 8
+                            quest: "Own a .lens handle",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Lens"
                         },
                         {
-                            user_address: "0x3265476456",
-                            xp: "262,500",
-                            rank: 9
+                            quest: "Own a .lens handle",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Lens"
                         },
                         {
-                            user_address: "0x3265476456",
-                            xp: "262,500",
-                            rank: 10
+                            quest: "Own a .lens handle",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Lens"
+                        },
+                        {
+                            quest: "Own a .lens handle",
+                            xp: "10",
+                            status: "claimed",
+                            image: "logo-Lens"
                         },
                     ]}
                     theadChildren={
                         <>
-                            <Box display="flex" alignItems="center" width="80%">
-                                <Th
-                                    style={{
-                                        textAlign: "left",
-                                        fontSize: "1.25rem",
-                                        textTransform: "capitalize",
-                                        color: "#8f8f8f",
-                                        fontWeight: "500",
-                                        paddingLeft: `${style.padding.xs}`,
-                                    }}
-                                >
-                                    Rank
-                                </Th>
-                                <Th
-                                    style={{
-                                        fontSize: "1.25rem",
-                                        textAlign: "center",
-                                        textTransform: "capitalize",
-                                        color: "#8f8f8f",
-                                        fontWeight: "500",
-                                        paddingLeft: `${style.padding.xxs}`
-                                    }}
-                                >
-                                    Address
-                                </Th>
-                            </Box>
+                            <Th
+                                style={{
+                                    textAlign: "left",
+                                    fontSize: "1.25rem",
+                                    textTransform: "capitalize",
+                                    color: "#8f8f8f",
+                                    fontWeight: "500",
+                                    paddingLeft: `${style.padding.xxs}`,
+                                }}
+                            >
+                                Quest
+                            </Th>
                             <Th
                                 style={{
                                     textAlign: "center",
@@ -107,58 +111,27 @@ const UserXpTable = () => {
                                     fontWeight: "500",
                                 }}
                             >
-                                XP
+                                <FlexRow>
+                                    <Text mb={0} color="#8f8f8f" fontWeight="500">XP</Text>
+                                    <Image src={GlobalIcons["icon-bolt"]} />
+                                </FlexRow>
                             </Th>
                         </>
                     }
                     tbodyChildren={(item: any, index: any) => {
                         return (
                             <>
-                                <Box display="flex" alignItems="center" width="80%">
-                                    <Td style={{ textAlign: "center", padding: `${style.padding.xxs}`, width: "50%" }}>
-                                        <Text
-                                            marginBottom={0}
-                                            fontSize={style.font.h4}
-                                        >
-                                            #{item?.rank}
-                                        </Text>
-                                    </Td>
-                                    <Td style={{ padding: `${style.padding.sm}` }}>
-                                        <Box
-                                            style={{
-                                                display: "flex",
-                                                flexDirection: "row",
-                                                alignItems: "center"
-                                            }}
-                                        >
-                                            <Box width="2rem" height="2rem" marginRight={style.margin.xxs}>
-                                                <Avatar size="2rem" name={item?.user_address} />
-                                            </Box>
-                                            <Text
-                                                paddingLeft={2}
-                                                fontSize={style.font.h4}
-                                                marginBottom={0}
-                                                fontWeight={style.fontWeight.dark}
-                                            >
-                                                {truncateAddress(item?.user_address)}
-                                            </Text>
-                                        </Box>
-                                    </Td>
-                                </Box>
+                                <Td style={{ textAlign: "left", padding: `${style.padding.xxs}` }}>
+                                    <FlexRow hrAlign="flex-start">
+                                        <Image src={GlobalIcons[item.image]} height="2rem" marginRight={style.margin.xs} />
+                                        <Text fontSize={style.font.h4} mb={0}>{item?.quest}</Text>
+                                    </FlexRow>
+                                </Td>
                                 <Td style={{ textAlign: "center", padding: `${style.padding.sm}` }}>
-                                    <Box
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            justifyContent: "center",
-                                            alignItems: "center"
-                                        }}
-                                    >
-                                        <Box>
-                                            <Text mb={0}
-                                                fontSize={style.font.h4}>{item?.xp}</Text>
-                                        </Box>
-                                    </Box>
+                                    <FlexRow>
+                                        <Text mb={0}>{item?.xp}</Text>
+                                        <Image src={GlobalIcons["icon-bolt"]} />
+                                    </FlexRow>
                                 </Td>
                             </>
                         );

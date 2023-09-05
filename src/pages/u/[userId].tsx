@@ -1,8 +1,18 @@
+import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import InputSearch from "@/_ui/input/InputSearch";
 import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
+import AssetCard from "@/components/cards/AssetCard";
+import MetaUserList from "@/components/meta/MetaUserList";
+import CarouselSlide from "@/components/studio/CarouselSlide";
+import TokenModal from "@/components/studio/TokenModal";
+import UserAssetsModal from "@/components/studio/UserAssetsModal";
+import UserXPModal from "@/components/studio/UserXPModal";
+import chains from "@/data/network";
+import { truncateAddress } from "@/helpers";
+import useUserMeta from "@/hooks/studio/useUserMeta";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {
@@ -14,26 +24,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import chains from "@/data/network";
-import CarouselSlide from "@/components/studio/CarouselSlide";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import AssetCard from "@/components/cards/AssetCard";
-import UserContentCard from "@/components/cards/UserContentCard";
-import UserAssetsModal from "@/components/studio/UserAssetsModal";
-import useMetaList from "@/hooks/meta/useMetasList";
-import MetaList from "@/components/meta/MetaList";
-import InputSearch from "@/_ui/input/InputSearch";
-import MetaUserList from "@/components/meta/MetaUserList";
-import useUserMeta from "@/hooks/studio/useUserMeta";
-import { truncateAddress } from "@/helpers";
-import TokenRow from "@/components/studio/TokenRow";
-import TokenModal from "@/components/studio/TokenModal";
-import CardNative from "@/_ui/cards/CardNative";
 
 const User = () => {
   const userAssetsModal = useDisclosure();
+  const userXPModal = useDisclosure();
   const router = useRouter();
   const tokenModal = useDisclosure();
 
@@ -173,6 +169,9 @@ const User = () => {
                 title="36"
                 description="XPs"
                 icon="/assets/icons/brand-bolt.svg"
+                onClick={() => {
+                  userXPModal.onOpen()
+                }}
               />
             </Flex>
           </Box>
@@ -304,6 +303,7 @@ const User = () => {
         </FlexColumn>
 
         <UserAssetsModal modal={userAssetsModal} />
+        <UserXPModal modal={userXPModal} />
         <TokenModal modal={tokenModal} />
       </>
     );

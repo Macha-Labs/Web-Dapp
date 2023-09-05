@@ -18,7 +18,7 @@ import useMetaList from "@/hooks/meta/useMetasList";
 import useTransaction from "@/hooks/studio/useTransaction";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
@@ -190,13 +190,16 @@ export default function Home() {
             width="50%"
             marginRight="lg"
             header={
-              <Heading
-                fontSize={style.font.h3}
-                fontWeight={600}
-                className="m-b-0"
-              >
-                Leaderboard - Top 30
-              </Heading>
+              <FlexRow hrAlign="space-between">
+                <Heading
+                  fontSize={style.font.h3}
+                  fontWeight={600}
+                  className="m-b-0"
+                >
+                  Leaderboard - Top 30
+                </Heading>
+                <Image src={GlobalIcons["icon-search"]} cursor="pointer" />
+              </FlexRow>
             }
           >
             <LeaderboardTable />
@@ -206,13 +209,16 @@ export default function Home() {
             marginTop="xl"
             width="50%"
             header={
-              <Heading
-                fontSize={style.font.h3}
-                fontWeight={600}
-                className="m-b-0"
-              >
-                Earn Rewards
-              </Heading>
+              <FlexRow hrAlign="space-between">
+                <Heading
+                  fontSize={style.font.h3}
+                  fontWeight={600}
+                  className="m-b-0"
+                >
+                  Earn Rewards
+                </Heading>
+                <Image src={GlobalIcons["icon-search"]} cursor="pointer" />
+              </FlexRow>
             }
           >
             <UserXpTable />

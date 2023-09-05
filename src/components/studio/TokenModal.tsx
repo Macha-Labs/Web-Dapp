@@ -2,11 +2,9 @@ import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import FlexRow from "@/_ui/flex/FlexRow";
 import InputSearch from "@/_ui/input/InputSearch";
 import ModalWindow from "@/_ui/modal/ModalWindow";
-import TableNative from "@/_ui/table/TableNative";
-import { truncateAddress } from "@/helpers";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Avatar, Box, Image, MenuButton, Td, Text, Th } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import TokenRow from "./TokenRow";
 
 type Props = {
