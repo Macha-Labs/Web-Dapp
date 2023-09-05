@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import chains from "@/data/network";
 import CarouselSlide from "@/components/studio/CarouselSlide";
 import { Carousel } from "react-responsive-carousel";
@@ -28,15 +28,29 @@ import InputSearch from "@/_ui/input/InputSearch";
 import MetaUserList from "@/components/meta/MetaUserList";
 import useUserMeta from "@/hooks/studio/useUserMeta";
 import { truncateAddress } from "@/helpers";
-import TokenRow from "@/components/studio/TokenRow";
 import TokenModal from "@/components/studio/TokenModal";
 import CardNative from "@/_ui/cards/CardNative";
+import useAlchemy from "@/hooks/studio/useAlchemy";
 
 const User = () => {
+  const hookAlchemy = useAlchemy();
+  console.log("get Nft by address", hookAlchemy.nftByAddress);
   const userAssetsModal = useDisclosure();
   const router = useRouter();
   const tokenModal = useDisclosure();
+  const [isOwner,setIsOwner] = useState<boolean>(false);
+  useEffect(() => {
+    const fetch = async () => {
+      if (router.isReady) {
+        await hookAlchemy.getNftsByAddress(
+          "0x165CD37b4C644C2921454429E7F9358d18A45e14"
+        );
+      }
+    };
+    fetch();
+  }, []);
 
+  
   const renderNavLeft = () => {
     return <NavLeft />;
   };

@@ -7,6 +7,7 @@ import chains from "@/data/network";
 import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style as gStyle, style } from "../../styles/StyledConstants";
+// import { getAllNfts } from "@/service/ApiService";
 
 type Props = {
   heading?: string;
@@ -43,8 +44,15 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import MCard from "@/_sdk/MCard";
+import { Alchemy } from "alchemy-sdk";
+import { config } from "../../config";
+import { Router } from "react-router-dom";
+import { useRouter } from "next/router";
+import useAlchemy from "@/hooks/studio/useAlchemy";
 
 const NftCard = ({ heading, subHeading, image, state }: Props) => {
+  const router = useRouter();
+
   return (
     <FlexRow hrAlign="space-between">
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
@@ -57,21 +65,21 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
             padding={style.padding.md}
           >
             <Text
-              fontSize={style.font.h3}
-              lineHeight={"1.5rem"}
+              fontSize={style.font.h1}
+              lineHeight={"2.2rem"}
               marginBottom={0}
               fontWeight={style.fontWeight.dark}
             >
-              Claim NFT
+              {heading}
             </Text>
             <Text
-              fontSize={style.font.h3}
-              lineHeight={"1.8rem"}
-              // marginBottom={0}
+              fontSize={style.font.h1}
+              lineHeight={"2.2rem"}
+              marginBottom={style.margin.xxl}
               marginTop={0}
               fontWeight={style.fontWeight.dark}
             >
-              Own your Macha Profile
+              {subHeading}
             </Text>
 
             <MCard
@@ -88,12 +96,12 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
 
             <Text
               marginBottom={0}
-              fontSize={style.font.h6}
-              marginTop={style.margin.sm}
+              fontSize={style.font.h5}
+              marginTop={style.margin.md}
             >
               Select Network
             </Text>
-            <Box display={"flex"} width="50%">
+            <Box display={"flex"} width="50%" marginBottom={style.margin.sm}>
               {Object.keys(chains).map((chain: any, index) => {
                 return (
                   <Box
@@ -111,7 +119,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
                 );
               })}
             </Box>
-            <Text fontSize={style.font.h6} mb="0">
+            <Text fontSize={style.font.h5} mb="0">
               It will take just 2 mins to setup profile and discover your own
               chain content like ENS, Lens and more.
             </Text>
@@ -119,7 +127,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
             <ButtonNative
               text="Claim NFT"
               variant="state_brand"
-              width="7rem"
+              width="8rem"
               marginTop="xs"
             />
           </Box>
@@ -149,7 +157,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
               {subHeading}
             </Text>
 
-            <FlexColumn >
+            <FlexColumn>
               <FlexRow vrAlign="flex-start" marginBottom="lg">
                 <Image
                   src="./assets/Blue_tick.svg"
@@ -183,79 +191,6 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
             </FlexColumn>
           </Box>
         )}
-        {/* <Box
-          borderRadius={gStyle.card.borderRadius.default}
-          border={gStyle.card.border.default}
-          width="100%"
-          height="80%"
-          padding={style.padding.md}
-        >
-          <Text
-            fontSize={style.font.h1}
-            marginBottom={0}
-            fontWeight={style.fontWeight.dark}
-          >
-            {heading}
-          </Text>
-          <Text
-            fontSize={style.font.h3}
-            lineHeight={"1.8rem"}
-            // marginBottom={0}
-            marginTop={0}
-            fontWeight={style.fontWeight.dark}
-          >
-            {subHeading}
-          </Text>
-
-          <MCard
-            title=""
-            image="../../../../assets/Claim_Macha_Nft.png"
-            slug="Macha NFT"
-            width="18rem"
-            // cardHeight="8rem"
-            description="This Soul Bound Token is NFT delivered to address 0xCB811.. as proof of owning Macha Profile"
-            onClick={() => {
-              // router.push(`/search/meta/${item?._id}`);
-            }}
-          />
-
-          <Text
-            marginBottom={0}
-            fontSize={style.font.h6}
-            marginTop={style.margin.sm}
-          >
-            Select Network
-          </Text>
-          <Box display={"flex"} width="50%">
-            {Object.keys(chains).map((chain: any, index) => {
-              return (
-                <Box
-                  key={index}
-                  borderRadius={"50%"}
-                  paddingX={style.padding.xxs}
-                >
-                  <Image
-                    src={GlobalIcons[chains[chain].chainImage]}
-                    height={"50px"}
-                    width={"50px"}
-                    alt=""
-                  />
-                </Box>
-              );
-            })}
-          </Box>
-          <Text fontSize={style.font.h6} mb="0">
-            It will take just 2 mins to setup profile and discover your own
-            chain content like ENS, Lens and more.
-          </Text>
-
-          <ButtonNative
-            text="Claim NFT"
-            variant="state_brand"
-            width="7rem"
-            marginTop="xs"
-          />
-        </Box> */}
       </FlexColumn>
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
         <Box

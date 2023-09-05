@@ -22,6 +22,12 @@ const CreatorModal = ({ modal, hookCreatorCreate }: Props) => {
         // image="./assets/No_NFT_Claimed_Right.png"
         image="./assets/Quest_Rules_Right.png"
       />
+      <NftCard
+        heading="Claim NFT"
+        subHeading="Own your Macha Profile"
+        state={true}
+        image="./assets/No_NFT_Claimed_Right.png"
+      />
       {/* <CreatorCard modal={modal} /> */}
     </ModalWindow>
   );
