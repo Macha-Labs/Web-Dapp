@@ -76,7 +76,7 @@ const MCard = ({
       // marginRight={style.margin["sm"]}
       // marginLeft={style.margin["sm"]}
       // marginBottom={style.margin["lg"]}
-      // width={width ? width : "100%"}
+      width={width ? width : "auto"}
       border={gStyle.card.border.default}
       onClick={onClick}
       cursor={"pointer"}
@@ -137,7 +137,13 @@ const MCard = ({
 
       {image && (
         <div
-          style={{ height: "60%", display: "flex", justifyContent: "center" }}
+          style={{
+            height: "60%",
+            maxHeight: "12rem",
+            maxWidth: "70%",
+            display: "flex",
+            justifyContent: "center",
+          }}
         >
           <Image
             src={helperIPFS(image)}
