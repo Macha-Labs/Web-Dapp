@@ -7,21 +7,25 @@ type Prop = {
   theadChildren: any,
   tbodyChildren: any,
   height?: string,
-  theadBottomBorder?: string
+  theadBottomBorder?: string,
+  overflow?: any,
+  theadBackground?: string,
+  theadSticky?: boolean
 }
 
-const TableNative = ({ data, tbodyChildren, theadChildren,height, theadBottomBorder}: Prop) => {
+const TableNative = ({ data, tbodyChildren, theadChildren,height, theadBottomBorder,overflow,theadBackground,theadSticky}: Prop) => {
 
   return (
     <div>
       <TableContainer
         width="100%"
+        overflowY={overflow ? overflow : "hidden"}
         height={height && height}
-        overflow="hidden"
+        overflowX="hidden"
         // rounded={"md"}
       >
-        <Table style={{ overflow: "hidden"}} variant="unstyled" colorScheme="whiteAlpha" size="md">
-          <Thead borderBottom={theadBottomBorder ? theadBottomBorder : style.nav.border.default} position="sticky" top={0} zIndex="docked">
+        <Table variant="unstyled" colorScheme="whiteAlpha" size="md">
+          <Thead position="sticky" top={0} zIndex="docked" background={theadBackground} borderBottom={theadBottomBorder ? theadBottomBorder : style.nav.border.default}>
             <Tr>
               {theadChildren}
             </Tr>

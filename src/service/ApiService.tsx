@@ -102,6 +102,14 @@ export const allContracts = async () => {
   return data;
 };
 
+export const allXPRewards = async () => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/XP/info/fetchAll`
+  );
+  const data = await response.json();
+  return data;
+};
+
 export const createNewContract = async (data: any) => {
   const response = await fetch(
     `${config.metaServer}/indexer/contracts/edit-upload`,

@@ -8,6 +8,9 @@ const LeaderboardTable = () => {
     return (
         <Box>
             <TableNative
+                height="20rem"
+                overflow="scroll"
+                theadBackground={style.modal.bg.contractModal}
                 theadBottomBorder="none"
                 data={[
                     {
@@ -63,32 +66,30 @@ const LeaderboardTable = () => {
                 ]}
                 theadChildren={
                     <>
-                        <Box display="flex" alignItems="center" width="80%">
-                            <Th
-                                style={{
-                                    textAlign: "left",
-                                    fontSize: "1.25rem",
-                                    textTransform: "capitalize",
-                                    color: "#8f8f8f",
-                                    fontWeight: "500",
-                                    paddingLeft: `${style.padding.xs}`,
-                                }}
-                            >
-                                Rank
-                            </Th>
-                            <Th
-                                style={{
-                                    fontSize: "1.25rem",
-                                    textAlign: "center",
-                                    textTransform: "capitalize",
-                                    color: "#8f8f8f",
-                                    fontWeight: "500",
-                                    paddingLeft: `${style.padding.xxs}`
-                                }}
-                            >
-                                Address
-                            </Th>
-                        </Box>
+                        <Th
+                            style={{
+                                textAlign: "left",
+                                fontSize: "1.25rem",
+                                textTransform: "capitalize",
+                                color: "#8f8f8f",
+                                fontWeight: "500",
+                                marginLeft: `${style.padding.sm}`,
+                            }}
+                        >
+                            Rank
+                        </Th>
+                        <Th
+                            style={{
+                                fontSize: "1.25rem",
+                                textAlign: "center",
+                                textTransform: "capitalize",
+                                color: "#8f8f8f",
+                                fontWeight: "500",
+                                paddingLeft: `${style.padding.xxs}`
+                            }}
+                        >
+                            Address
+                        </Th>
                         <Th
                             style={{
                                 textAlign: "center",
@@ -105,37 +106,35 @@ const LeaderboardTable = () => {
                 tbodyChildren={(item: any, index: any) => {
                     return (
                         <>
-                            <Box display="flex" alignItems="center" width="80%">
-                                <Td style={{ textAlign: "center", padding: `${style.padding.xxs}`, width: "50%" }}>
-                                    <Text
-                                        marginBottom={0}
-                                        fontSize={style.font.h4}
-                                    >
-                                        #{item?.rank}
-                                    </Text>
-                                </Td>
-                                <Td style={{ padding: `${style.padding.sm}` }}>
-                                    <Box
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            alignItems: "center"
-                                        }}
-                                    >
-                                        <Box width="2rem" height="2rem" marginRight={style.margin.xxs}>
-                                            <Avatar size="2rem" name={item?.user_address} />
-                                        </Box>
-                                        <Text
-                                            paddingLeft={2}
-                                            fontSize={style.font.h4}
-                                            marginBottom={0}
-                                            fontWeight={style.fontWeight.dark}
-                                        >
-                                            {truncateAddress(item?.user_address)}
-                                        </Text>
+                            <Td style={{ textAlign: "center", paddingLeft: `0px` }}>
+                                <Text
+                                    marginBottom={0}
+                                    fontSize={style.font.h4}
+                                >
+                                    #{item?.rank}
+                                </Text>
+                            </Td>
+                            <Td style={{ paddingLeft: `${style.padding.xxs}` }}>
+                                <Box
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        alignItems: "center"
+                                    }}
+                                >
+                                    <Box width="2rem" height="2rem" marginRight={style.margin.xxs}>
+                                        <Avatar size="2rem" name={item?.user_address} />
                                     </Box>
-                                </Td>
-                            </Box>
+                                    <Text
+                                        paddingLeft={2}
+                                        fontSize={style.font.h4}
+                                        marginBottom={0}
+                                        fontWeight={style.fontWeight.dark}
+                                    >
+                                        {truncateAddress(item?.user_address)}
+                                    </Text>
+                                </Box>
+                            </Td>
                             <Td style={{ textAlign: "center", padding: `${style.padding.sm}` }}>
                                 <Box
                                     style={{
@@ -146,8 +145,7 @@ const LeaderboardTable = () => {
                                     }}
                                 >
                                     <Box>
-                                        <Text mb={0}
-                                            fontSize={style.font.h4}>{item?.xp}</Text>
+                                        <Text mb={0} fontSize={style.font.h4}>{item?.xp}</Text>
                                     </Box>
                                 </Box>
                             </Td>
