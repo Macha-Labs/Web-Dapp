@@ -19,6 +19,9 @@ const UserXpTable = () => {
                 filter={!$address ? "blur(10px)" : ""}
             >
                 <TableNative
+                    height="20rem"
+                    overflow="scroll"
+                    theadBackground={style.modal.bg.contractModal}
                     theadBottomBorder="none"
                     data={[
                         {
@@ -97,7 +100,7 @@ const UserXpTable = () => {
                                     textTransform: "capitalize",
                                     color: "#8f8f8f",
                                     fontWeight: "500",
-                                    paddingLeft: `${style.padding.xxs}`,
+                                    paddingLeft: `${style.padding.xs}`,
                                 }}
                             >
                                 Quest
@@ -121,13 +124,13 @@ const UserXpTable = () => {
                     tbodyChildren={(item: any, index: any) => {
                         return (
                             <>
-                                <Td style={{ textAlign: "left", padding: `${style.padding.xxs}` }}>
+                                <Td style={{ textAlign: "left", padding: `${style.margin.xs}` }}>
                                     <FlexRow hrAlign="flex-start">
                                         <Image src={GlobalIcons[item.image]} height="2rem" marginRight={style.margin.xs} />
                                         <Text fontSize={style.font.h4} mb={0}>{item?.quest}</Text>
                                     </FlexRow>
                                 </Td>
-                                <Td style={{ textAlign: "center", padding: `${style.padding.sm}` }}>
+                                <Td style={{ textAlign: "center", padding: `${style.padding.xxs}` }}>
                                     <FlexRow>
                                         <Text mb={0}>{item?.xp}</Text>
                                         <Image src={GlobalIcons["icon-bolt"]} />
