@@ -34,11 +34,11 @@ const MetaList = ({ hookMetasList }: Props) => {
               <GridItem key={index} colSpan={1}>
                 {/* <Box bg="white" border="1px solid #000000">adsa</Box> */}
                 <MCard
-                  music={item?.meta?.data?.modified?.meta_audio.substr(
-                  5,
-                  item?.meta?.data?.modified?.meta_audio.length - 5
-                )}
-                title={item?.meta?.data?.modified?.meta_title}
+                  music={item?.meta?.data?.modified?.meta_audio?.substr(
+                    5,
+                    item?.meta?.data?.modified?.meta_audio.length - 5
+                  )}
+                  title={item?.meta?.data?.modified?.meta_title}
                   key={index}
                   image={item?.meta?.data?.modified?.meta_image}
                   slug={item?.meta_schema?.name}
