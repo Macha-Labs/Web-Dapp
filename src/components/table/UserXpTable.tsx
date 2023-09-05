@@ -65,7 +65,7 @@ const UserXpTable = () => {
                                 <>
                                     <Td style={{ textAlign: "left", padding: `${style.margin.xs}` }}>
                                         <FlexRow hrAlign="flex-start">
-                                            <Image src={item?.chainId ? GlobalIcons[chains[item?.chainId].chainImage] : GlobalIcons["logo-Lens"]} height="2rem" marginRight={style.margin.xs} />
+                                            <Image src={item?.chainId ? GlobalIcons[chains[item?.chainId].chainImage] : GlobalIcons["avatar-default"]} height="2rem" marginRight={style.margin.xs} />
                                             <Text fontSize={style.font.h4} mb={0}>{item?.title}</Text>
                                         </FlexRow>
                                     </Td>
