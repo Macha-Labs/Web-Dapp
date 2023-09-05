@@ -219,7 +219,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
         >
           <Image
             src={image}
-            alt="right image"
+            alt="right image"            
             objectFit="cover"
             w="100%"
             h="100%"
