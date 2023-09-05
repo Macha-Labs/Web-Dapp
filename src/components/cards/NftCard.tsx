@@ -52,39 +52,45 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
           <Box
             borderRadius={gStyle.card.borderRadius.default}
             border={gStyle.card.border.default}
-            width="100%"
-            height="80%"
+            width="98%"
+            height="90vh"
             padding={style.padding.md}
           >
             <Text
-              fontSize={style.font.h1}
+              fontSize={style.font.h3}
+              lineHeight={"1.5rem"}
               marginBottom={0}
               fontWeight={style.fontWeight.dark}
             >
-              {heading}
+              Claim NFT
             </Text>
             <Text
-              fontSize={style.font.h1}
-              marginBottom={0}
+              fontSize={style.font.h3}
+              lineHeight={"1.8rem"}
+              // marginBottom={0}
               marginTop={0}
               fontWeight={style.fontWeight.dark}
             >
-              {subHeading}
+              Own your Macha Profile
             </Text>
-            <Box>
-              <MCard
-                title=""
-                image="./assets/NFT_card_hero_image.png"
-                slug="Macha NFT"
-                // width="30%"
-                cardHeight="8rem"
-                description="This Soul Bound Token is NFT delivered to address 0xCB811.. as proof of owning Macha Profile"
-                onClick={() => {
-                  // router.push(`/search/meta/${item?._id}`);
-                }}
-              />
-            </Box>
-            <Text marginBottom={0} fontSize={style.font.h5}>
+
+            <MCard
+              title=""
+              image="./assets/Claim_Macha_Nft.png"
+              slug="Macha NFT"
+              width="18rem"
+              // cardHeight="8rem"
+              description="This Soul Bound Token is NFT delivered to address 0xCB811.. as proof of owning Macha Profile"
+              onClick={() => {
+                // router.push(/search/meta/${item?._id});
+              }}
+            />
+
+            <Text
+              marginBottom={0}
+              fontSize={style.font.h6}
+              marginTop={style.margin.sm}
+            >
               Select Network
             </Text>
             <Box display={"flex"} width="50%">
@@ -97,15 +103,15 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
                   >
                     <Image
                       src={GlobalIcons[chains[chain].chainImage]}
-                      // height={"50px"}
-                      // width={"50px"}
+                      height={"50px"}
+                      width={"50px"}
                       alt=""
                     />
                   </Box>
                 );
               })}
             </Box>
-            <Text fontSize={style.font.h5}>
+            <Text fontSize={style.font.h6} mb="0">
               It will take just 2 mins to setup profile and discover your own
               chain content like ENS, Lens and more.
             </Text>
@@ -114,7 +120,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
               text="Claim NFT"
               variant="state_brand"
               width="7rem"
-              marginTop="sm"
+              marginTop="xs"
             />
           </Box>
         ) : (
@@ -122,45 +128,59 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
             borderRadius={gStyle.card.borderRadius.default}
             border={gStyle.card.border.default}
             width="100%"
-            height="80%"
+            height="90vh"
             padding={style.padding.md}
           >
             <Text
               fontSize={style.font.h1}
               marginBottom={0}
               fontWeight={style.fontWeight.dark}
+              lineHeight="2.2rem"
             >
               {heading}
             </Text>
             <Text
               fontSize={style.font.h1}
-              marginBottom={0}
               marginTop={0}
               fontWeight={style.fontWeight.dark}
+              marginBottom={style.margin.xxl}
+              lineHeight="2.2rem"
             >
               {subHeading}
             </Text>
 
-            <Box>
-              <FlexRow>
-                <Image src="./assets/Blue_tick.svg" alt="blue_tick" width="20%" />
+            <FlexColumn >
+              <FlexRow vrAlign="flex-start" marginBottom="lg">
+                <Image
+                  src="./assets/Blue_tick.svg"
+                  alt="blue_tick"
+                  width="10%"
+                />
                 <Text fontSize={style.font.h5}>
                   Supercharged search algorithms by text and image models.
                 </Text>
               </FlexRow>
-              <Box>
-                <Image src="./assets/Blue_tick.svg" alt="blue_tick" />
-                <Text>
+              <FlexRow vrAlign="flex-start" marginBottom="lg">
+                <Image
+                  src="./assets/Blue_tick.svg"
+                  alt="blue_tick"
+                  width="10%"
+                />
+                <Text fontSize={style.font.h5}>
                   Supercharged search algorithms by text and image models.
                 </Text>
-              </Box>
-              <Box>
-                <Image src="./assets/Blue_tick.svg" alt="blue_tick" />
-                <Text>
+              </FlexRow>
+              <FlexRow vrAlign="flex-start" marginBottom="lg">
+                <Image
+                  src="./assets/Blue_tick.svg"
+                  alt="blue_tick"
+                  width="10%"
+                />
+                <Text fontSize={style.font.h5}>
                   Supercharged search algorithms by text and image models.
                 </Text>
-              </Box>
-            </Box>
+              </FlexRow>
+            </FlexColumn>
           </Box>
         )}
         {/* <Box
