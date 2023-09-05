@@ -136,24 +136,30 @@ const Meta = () => {
           </FlexRow>
           {tab == "Data" && (
             <>
-              <CardNative
-                height="fit-content"
-                marginTop="sm"
-                width="100%"
-                header={
+              {hookMeta?.metaData?.meta?.data?.modified?.meta_audio && (
+                <CardNative
+                  height="fit-content"
+                  marginTop="sm"
+                  width="100%"
+                  header={
+                    <>
+                      <Heading fontSize={style.font.h4} mb="0px">
+                        Music
+                      </Heading>
+                    </>
+                  }
+                >
                   <>
-                    <Heading fontSize={style.font.h4} mb="0px">
-                      Music
-                    </Heading>
+                    <MusicPlayer
+                      audioUrl={`https://arweave.net/${hookMeta?.metaData?.meta?.data?.modified?.meta_audio?.substr(
+                        5,
+                        hookMeta?.metaData?.meta?.data?.modified?.meta_audio
+                          .length - 5
+                      )}`}
+                    />
                   </>
-                }
-              >
-                <>
-                  <MusicPlayer
-                    audioUrl={`https://arweave.net/sT25lF0LnM2JNYrfWZGveYAWDNFzhfjVqJL69d_1mmI`}
-                  />
-                </>
-              </CardNative>
+                </CardNative>
+              )}
               <CardNative
                 height="fit-content"
                 marginTop="sm"
