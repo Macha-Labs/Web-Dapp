@@ -12,6 +12,7 @@ import UserAssetsModal from "@/components/studio/UserAssetsModal";
 import UserXPModal from "@/components/studio/UserXPModal";
 import chains from "@/data/network";
 import { truncateAddress } from "@/helpers";
+import useAlchemy from "@/hooks/studio/useAlchemy";
 import useUserMeta from "@/hooks/studio/useUserMeta";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
@@ -24,14 +25,28 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const User = () => {
+  const hookAlchemy = useAlchemy();
+  console.log("get Nft by address", hookAlchemy.nftByAddress);
   const userAssetsModal = useDisclosure();
   const userXPModal = useDisclosure();
   const router = useRouter();
   const tokenModal = useDisclosure();
+  const [isOwner, setIsOwner] = useState<boolean>(false);
+  useEffect(() => {
+    const fetch = async () => {
+      if (router.isReady) {
+        await hookAlchemy.getNftsByAddress(
+          "0x165CD37b4C644C2921454429E7F9358d18A45e14"
+        );
+      }
+    };
+    fetch();
+  }, []);
 
   const renderNavLeft = () => {
     return <NavLeft />;
@@ -170,7 +185,7 @@ const User = () => {
                 description="XPs"
                 icon="/assets/icons/brand-bolt.svg"
                 onClick={() => {
-                  userXPModal.onOpen()
+                  userXPModal.onOpen();
                 }}
               />
             </Flex>

@@ -3,7 +3,7 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardSkeleton from "@/_ui/cards/CardSkeleton";
 import FlexRow from "@/_ui/flex/FlexRow";
 import Loader from "@/_ui/loader/Loader";
-import { Box } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -15,13 +15,8 @@ type Props = {
 const MetaList = ({ hookMetasList }: Props) => {
   const router = useRouter();
   return (
-    <Box>
-      <FlexRow
-        flexWrap={"wrap"}
-        width="100%"
-        vrAlign="flex-start"
-        height="fit-content"
-      >
+    <Box width="100%">
+      <Grid templateColumns="repeat(3,1fr)" gap="10px" width="100%">
         {hookMetasList.isLoading && (
           <>
             <CardSkeleton width="30%" />
@@ -36,24 +31,27 @@ const MetaList = ({ hookMetasList }: Props) => {
           hookMetasList?.metaAll &&
           hookMetasList?.metaAll?.map((item: any, index: any) => {
             return (
-              <MCard
-                music={item?.meta?.data?.modified?.meta_audio?.substr(
-                  5,
-                  item?.meta?.data?.modified?.meta_audio.length - 5
-                )}
-                title={item?.meta?.data?.modified?.meta_title}
-                key={index}
-                image={item?.meta?.data?.modified?.meta_image}
-                slug={item?.meta_schema?.name}
-                width="30%"
-                description={item?.meta?.data?.modified?.meta_description}
-                onClick={() => {
-                  router.push(`/search/meta/${item?._id}`);
-                }}
-              />
+              <GridItem key={index} colSpan={1}>
+                {/* <Box bg="white" border="1px solid #000000">adsa</Box> */}
+                <MCard
+                  music={item?.meta?.data?.modified?.meta_audio?.substr(
+                    5,
+                    item?.meta?.data?.modified?.meta_audio.length - 5
+                  )}
+                  title={item?.meta?.data?.modified?.meta_title}
+                  key={index}
+                  image={item?.meta?.data?.modified?.meta_image}
+                  slug={item?.meta_schema?.name}
+                  // width="30%"
+                  description={item?.meta?.data?.modified?.meta_description}
+                  onClick={() => {
+                    router.push(`/search/meta/${item?._id}`);
+                  }}
+                />
+              </GridItem>
             );
           })}
-      </FlexRow>
+      </Grid>
       <FlexRow marginBottom="lg" height="fit-content">
         {hookMetasList.showMoreLoading ? (
           <Loader size="sm" />

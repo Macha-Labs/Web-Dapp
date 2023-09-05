@@ -43,8 +43,8 @@ const ContractCard = ({
         border: "1px solid #197cec !important",
       }}
       style={{
-        height: "20rem",
-        width: "25%",
+        height: "25rem",
+        // width: "25%",
         border: `${style.card.border.card}`,
         borderRadius: `${style.card.borderRadius.default}`,
         background: `#030c1a`,
@@ -66,7 +66,7 @@ const ContractCard = ({
       {image && (
         <div
           style={{
-            width: "100%",
+            // width: "100%",
             marginRight: style.margin.sm,
             height: "30%",
             display: "flex",
@@ -81,9 +81,10 @@ const ContractCard = ({
             src={image}
             alt="meta-card-image"
             height={"4.5rem"}
-            width={"4.5rem"}
+            // width={"4.5rem"}
             objectFit={"contain"}
             borderRadius={style.card.borderRadius.default}
+            marginRight="0.5rem"
           />
           <div style={{ textAlign: "right" }}>
             <Text
@@ -100,12 +101,13 @@ const ContractCard = ({
                 fontWeight: `${style.fontWeight.dark}`,
               }}
               lineHeight="1rem"
+              marginBottom={0}
             >
               Created on
             </Text>
             <Text
-              style={{ fontWeight: `${style.fontWeight.dark}` }}
-              lineHeight="0.5rem"
+              style={{ fontWeight: `${style.fontWeight.dark}`, fontSize:`${style.font.h7}` }}
+              lineHeight="1rem"
             >
               {UtcTimeStampConversion(createdAt).date}
             </Text>
@@ -115,7 +117,7 @@ const ContractCard = ({
 
       <div
         style={{
-          width: "100%",
+          // width: "100%",
           height: "70%",
           paddingTop: `${style.padding.xxs}`,
           display: "flex",
@@ -128,12 +130,14 @@ const ContractCard = ({
         </Text>
         <Text
           lineHeight="1.5rem"
-          style={{ height: "2.5rem", marginBottom: `${style.margin.sm}` }}
+          style={{ height: "3rem", marginBottom: `${style.margin.sm}` }}
         >
           {truncateString(description, 100)}{" "}
         </Text>
         <FlexRow hrAlign="space-between">
-          <Box style={{ display: "flex", flexDirection: "column" }}>
+          <Box
+            style={{ display: "flex", flexDirection: "column", width: "50%" }}
+          >
             <Text
               style={{
                 background: `-webkit-linear-gradient(
@@ -155,35 +159,53 @@ const ContractCard = ({
               style={{
                 fontWeight: `${style.fontWeight.dark}`,
                 marginBottom: "0.5rem",
+                fontSize: `${style.font.h7}`,
               }}
               lineHeight="0.5rem"
             >
               {truncateAddress(address)}
             </Text>
           </Box>
-          <Box style={{ display: "flex", flexDirection: "column" }}>
-            <Text
-              style={{
-                background: `-webkit-linear-gradient(
-                270deg,
-                rgb(25, 124, 236),
-                rgb(0, 74, 217)
-                )`,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                fontWeight: `${style.fontWeight.dark}`,
-                marginBottom: `1.2rem`,
-              }}
-              lineHeight="1rem"
-            >
-              Chain:
-            </Text>
+          <Box
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "50%",
+              justifyContent: "flex-end",
+            }}
+          >
             <Box
               style={{
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Text
+                style={{
+                  background: `-webkit-linear-gradient(
+                270deg,
+                rgb(25, 124, 236),
+                rgb(0, 74, 217)
+                )`,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  fontWeight: `${style.fontWeight.dark}`,
+                  marginBottom: `1.2rem`,
+                }}
+                lineHeight="1rem"
+              >
+                Chain:
+              </Text>
+            </Box>
+            <Box
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "flex-end",
               }}
             >
               <Text
@@ -191,6 +213,7 @@ const ContractCard = ({
                   fontWeight: `${style.fontWeight.dark}`,
                   marginBottom: "0px",
                   marginTop: "-10px",
+                  fontSize: `${style.font.h7}`,
                 }}
                 lineHeight="0.5rem"
               >
@@ -203,7 +226,11 @@ const ContractCard = ({
           </Box>
         </FlexRow>
 
-        <FlexRow height="fit-content" hrAlign="flex-start" width="100%">
+        <FlexRow
+          height="fit-content"
+          hrAlign="flex-start"
+          //  width="100%"
+        >
           {tags?.map((tag: string, index: number) => {
             return (
               <TagNative

@@ -66,7 +66,7 @@ const CardNative = ({
 
       {children && (
         <Box
-          style={{ padding: `${style.card.padding.overview}` }}
+          style={{ padding: `${style.padding.sm}` }}
           onClick={onClick}
         >
           {children}
