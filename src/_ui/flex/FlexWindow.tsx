@@ -91,7 +91,7 @@ export const FlexWindow = ({
                   top: "0",
                   padding: `${padding ? padding : "0% 3%"}`,
                   paddingTop: `${style.margin.md}`,
-                  background: "#000",
+                  background: "#000511",
                   zIndex: "1000",
                   width: "95%",
                   // background: `${style.body.bg.default}`,

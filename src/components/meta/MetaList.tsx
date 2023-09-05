@@ -19,12 +19,12 @@ const MetaList = ({ hookMetasList }: Props) => {
       <Grid templateColumns="repeat(3,1fr)" gap="10px" width="100%">
         {hookMetasList.isLoading && (
           <>
-            <CardSkeleton width="30%" />
-            <CardSkeleton width="30%" />
-            <CardSkeleton width="30%" />
-            <CardSkeleton width="30%" />
-            <CardSkeleton width="30%" />
-            <CardSkeleton width="30%" />
+            <CardSkeleton width="100%" />
+            <CardSkeleton width="100%" />
+            <CardSkeleton width="100%" />
+            <CardSkeleton width="100%" />
+            <CardSkeleton width="100%" />
+            <CardSkeleton width="100%" />
           </>
         )}
         {!hookMetasList.isLoading &&

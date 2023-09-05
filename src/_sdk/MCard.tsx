@@ -141,8 +141,6 @@ const MCard = ({
         <div
           style={{
             height: "60%",
-            maxHeight: "12rem",
-            maxWidth: "70%",
             display: "flex",
             justifyContent: "center",
           }}

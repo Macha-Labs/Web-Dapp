@@ -8,7 +8,7 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import useSearch from "@/hooks/studio/useSearch";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading, Grid, GridItem, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 import { useEffect } from "react";
@@ -49,13 +49,7 @@ const Search = () => {
             width="100%"
             justifyContent={"center"}
           >
-            <FlexRow
-              flexWrap={"wrap"}
-              width="100%"
-              vrAlign="flex-start"
-              hrAlign="flex-start"
-              height="fit-content"
-            >
+            <Grid templateColumns="repeat(3,1fr)" gap="10px" width="100%">
               {hookSearch.isLoading && (
                 <FlexRow height="200px" width="80vw">
                   <Loader size="lg" />
@@ -64,24 +58,25 @@ const Search = () => {
               {!hookSearch.isLoading &&
                 (hookSearch.searchResults.length !== 0 ? (
                   hookSearch.searchResults.map((item: any, index: any) => (
-                    <MCard
-                      title={item?.meta?.data?.modified?.meta_title}
-                      key={index}
-                      image={item?.meta?.data?.modified?.meta_image}
-                      slug={item?.meta_schema?.name}
-                      width="30%"
-                      description={item?.meta?.data?.modified?.meta_description}
-                      onClick={() => {
-                        router.push(`/search/meta/${item?._id}`);
-                      }}
-                    />
+                    <GridItem key={index} colSpan={1}>
+                      <MCard
+                        title={item?.meta?.data?.modified?.meta_title}
+                        key={index}
+                        image={item?.meta?.data?.modified?.meta_image}
+                        slug={item?.meta_schema?.name}
+                        description={item?.meta?.data?.modified?.meta_description}
+                        onClick={() => {
+                          router.push(`/search/meta/${item?._id}`);
+                        }}
+                      />
+                    </GridItem>
                   ))
                 ) : (
                   <Box>
                     <Text>No results found</Text>
                   </Box>
                 ))}
-            </FlexRow>
+            </Grid>
           </Box>
         </FlexColumn>
       </CardNative>

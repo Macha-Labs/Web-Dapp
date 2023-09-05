@@ -65,6 +65,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
             width="98%"
             height="90vh"
             padding={style.padding.md}
+            overflowY="scroll"
           >
             <Text
               fontSize={style.font.h1}
