@@ -37,7 +37,7 @@ const MetaList = ({ hookMetasList }: Props) => {
           hookMetasList?.metaAll?.map((item: any, index: any) => {
             return (
               <MCard
-                music={item?.meta?.data?.modified?.meta_audio.substr(
+                music={item?.meta?.data?.modified?.meta_audio?.substr(
                   5,
                   item?.meta?.data?.modified?.meta_audio.length - 5
                 )}

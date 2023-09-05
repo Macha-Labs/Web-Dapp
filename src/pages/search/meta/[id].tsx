@@ -35,6 +35,7 @@ import {
   useSendMessage,
 } from "@xmtp/react-sdk";
 import useAuthStore from "@/store/useAuthStore";
+import MusicPlayer from "@/components/studio/MusicPlayer";
 
 const Meta = () => {
   const hookMeta = useMeta();
@@ -135,6 +136,24 @@ const Meta = () => {
           </FlexRow>
           {tab == "Data" && (
             <>
+              <CardNative
+                height="fit-content"
+                marginTop="sm"
+                width="100%"
+                header={
+                  <>
+                    <Heading fontSize={style.font.h4} mb="0px">
+                      Music
+                    </Heading>
+                  </>
+                }
+              >
+                <>
+                  <MusicPlayer
+                    audioUrl={`https://arweave.net/sT25lF0LnM2JNYrfWZGveYAWDNFzhfjVqJL69d_1mmI`}
+                  />
+                </>
+              </CardNative>
               <CardNative
                 height="fit-content"
                 marginTop="sm"
