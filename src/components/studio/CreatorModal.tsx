@@ -8,23 +8,23 @@ import CreatorCard from "../cards/CreatorCard";
 import NftCard from "../cards/NftCard";
 
 type Props = {
-    modal: any;
-    hookCreatorCreate: any
+  modal: any;
+  hookCreatorCreate: any;
 };
 
-const CreatorModal = ({
-    modal,
-    hookCreatorCreate
-}: Props) => {
-    return (
-        <ModalWindow
-            event={modal}
-            size="6xl"
-        >
-            <NftCard/>
-            {/* <CreatorCard modal={modal} /> */}
-        </ModalWindow>
-    );
+const CreatorModal = ({ modal, hookCreatorCreate }: Props) => {
+  return (
+    <ModalWindow event={modal} size="6xl">
+      <NftCard
+        heading="Rules on how a"
+        subHeading="Quest Reward is calculated ?"
+        state={false}
+        // image="./assets/No_NFT_Claimed_Right.png"
+        image="./assets/Quest_Rules_Right.png"
+      />
+      {/* <CreatorCard modal={modal} /> */}
+    </ModalWindow>
+  );
 };
 
 export default CreatorModal;

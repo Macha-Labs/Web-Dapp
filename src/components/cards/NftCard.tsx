@@ -4,10 +4,29 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import InputLabel from "@/_ui/input/InputLabel";
 import Loader from "@/_ui/loader/Loader";
 import chains from "@/data/network";
-
 import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style as gStyle, style } from "../../styles/StyledConstants";
+
+type Props = {
+  heading?: string;
+  subHeading?: string;
+  image?: string;
+  state?: boolean;
+  floorPrice?: string;
+  description?: string;
+  owner_name?: string;
+  owner_image?: string;
+  owner_heading?: string;
+  action_name?: string;
+  action_type?: string;
+  action_value?: string;
+  width?: string;
+  onClick?: any;
+  slug?: any;
+  cardHeight?: any;
+  music?: any;
+};
 
 import {
   Box,
@@ -25,11 +44,126 @@ import {
 import { useEffect, useState } from "react";
 import MCard from "@/_sdk/MCard";
 
-const NftCard = ({ modal }: any) => {
+const NftCard = ({ heading, subHeading, image, state }: Props) => {
   return (
     <FlexRow hrAlign="space-between">
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-        <Box
+        {state ? (
+          <Box
+            borderRadius={gStyle.card.borderRadius.default}
+            border={gStyle.card.border.default}
+            width="100%"
+            height="80%"
+            padding={style.padding.md}
+          >
+            <Text
+              fontSize={style.font.h1}
+              marginBottom={0}
+              fontWeight={style.fontWeight.dark}
+            >
+              {heading}
+            </Text>
+            <Text
+              fontSize={style.font.h1}
+              marginBottom={0}
+              marginTop={0}
+              fontWeight={style.fontWeight.dark}
+            >
+              {subHeading}
+            </Text>
+            <Box>
+              <MCard
+                title=""
+                image="./assets/NFT_card_hero_image.png"
+                slug="Macha NFT"
+                // width="30%"
+                cardHeight="8rem"
+                description="This Soul Bound Token is NFT delivered to address 0xCB811.. as proof of owning Macha Profile"
+                onClick={() => {
+                  // router.push(`/search/meta/${item?._id}`);
+                }}
+              />
+            </Box>
+            <Text marginBottom={0} fontSize={style.font.h5}>
+              Select Network
+            </Text>
+            <Box display={"flex"} width="50%">
+              {Object.keys(chains).map((chain: any, index) => {
+                return (
+                  <Box
+                    key={index}
+                    borderRadius={"50%"}
+                    paddingX={style.padding.xxs}
+                  >
+                    <Image
+                      src={GlobalIcons[chains[chain].chainImage]}
+                      // height={"50px"}
+                      // width={"50px"}
+                      alt=""
+                    />
+                  </Box>
+                );
+              })}
+            </Box>
+            <Text fontSize={style.font.h5}>
+              It will take just 2 mins to setup profile and discover your own
+              chain content like ENS, Lens and more.
+            </Text>
+
+            <ButtonNative
+              text="Claim NFT"
+              variant="state_brand"
+              width="7rem"
+              marginTop="sm"
+            />
+          </Box>
+        ) : (
+          <Box
+            borderRadius={gStyle.card.borderRadius.default}
+            border={gStyle.card.border.default}
+            width="100%"
+            height="80%"
+            padding={style.padding.md}
+          >
+            <Text
+              fontSize={style.font.h1}
+              marginBottom={0}
+              fontWeight={style.fontWeight.dark}
+            >
+              {heading}
+            </Text>
+            <Text
+              fontSize={style.font.h1}
+              marginBottom={0}
+              marginTop={0}
+              fontWeight={style.fontWeight.dark}
+            >
+              {subHeading}
+            </Text>
+
+            <Box>
+              <FlexRow>
+                <Image src="./assets/Blue_tick.svg" alt="blue_tick" width="20%" />
+                <Text fontSize={style.font.h5}>
+                  Supercharged search algorithms by text and image models.
+                </Text>
+              </FlexRow>
+              <Box>
+                <Image src="./assets/Blue_tick.svg" alt="blue_tick" />
+                <Text>
+                  Supercharged search algorithms by text and image models.
+                </Text>
+              </Box>
+              <Box>
+                <Image src="./assets/Blue_tick.svg" alt="blue_tick" />
+                <Text>
+                  Supercharged search algorithms by text and image models.
+                </Text>
+              </Box>
+            </Box>
+          </Box>
+        )}
+        {/* <Box
           borderRadius={gStyle.card.borderRadius.default}
           border={gStyle.card.border.default}
           width="100%"
@@ -41,7 +175,7 @@ const NftCard = ({ modal }: any) => {
             marginBottom={0}
             fontWeight={style.fontWeight.dark}
           >
-            Claim NFT
+            {heading}
           </Text>
           <Text
             fontSize={style.font.h1}
@@ -49,7 +183,7 @@ const NftCard = ({ modal }: any) => {
             marginTop={0}
             fontWeight={style.fontWeight.dark}
           >
-            Own your Macha Profile
+            {subHeading}
           </Text>
           <Box>
             <MCard
@@ -96,7 +230,7 @@ const NftCard = ({ modal }: any) => {
             width="7rem"
             marginTop="sm"
           />
-        </Box>
+        </Box> */}
       </FlexColumn>
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
         <Box
@@ -105,7 +239,13 @@ const NftCard = ({ modal }: any) => {
           width="100%"
           height="80%"
         >
-          sgdsgds
+          <Image
+            src={image}
+            alt="right image"
+            objectFit="cover"
+            w="100%"
+            h="100%"
+          />
         </Box>
       </FlexColumn>
     </FlexRow>

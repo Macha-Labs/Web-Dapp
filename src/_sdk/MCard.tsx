@@ -112,6 +112,7 @@ const MCard = ({
                 onClick={(e) => {
                   stopAudio(e);
                 }}
+                alt="icon-pause"
               />
             ) : (
               <Image
@@ -119,6 +120,7 @@ const MCard = ({
                 onClick={(e) => {
                   playAudio(e);
                 }}
+                alt="icon-play"
               />
             )}
           </>
