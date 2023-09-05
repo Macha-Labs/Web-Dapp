@@ -7,6 +7,8 @@ import { helperIPFS, truncateString } from "@/helpers";
 import { Avatar, Box, Image, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { style as gStyle, style } from "../styles/StyledConstants";
+import GlobalIcons from "@/styles/GlobalIcons";
+import { useRef, useState } from "react";
 
 type Props = {
   title?: string;
@@ -23,6 +25,7 @@ type Props = {
   onClick?: any;
   slug?: any;
   cardHeight?: any;
+  music?: any;
 };
 
 const MCard = ({
@@ -40,8 +43,29 @@ const MCard = ({
   onClick,
   slug,
   cardHeight,
+  music,
 }: Props) => {
   const router = useRouter();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  const playAudio = (e: any) => {
+    setIsPlaying(true);
+    e.stopPropagation();
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  };
+  const stopAudio = (e: any) => {
+    setIsPlaying(false);
+    e.stopPropagation();
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  };
+  const handleAudioEnded = () => {
+    setIsPlaying(false); // Update isPlaying to false when audio ends
+  };
 
   return (
     <Box
@@ -74,6 +98,31 @@ const MCard = ({
         marginBottom="sm"
       >
         <TagNative size="md" value={slug} />
+        {/* <AudioPlayer /> */}
+        {music && (
+          <>
+            <audio
+              ref={audioRef}
+              onEnded={handleAudioEnded}
+              src={`https://arweave.net/${music}`}
+            ></audio>
+            {isPlaying ? (
+              <Image
+                src={GlobalIcons["icon-pause"]}
+                onClick={(e) => {
+                  stopAudio(e);
+                }}
+              />
+            ) : (
+              <Image
+                src={GlobalIcons["icon-play"]}
+                onClick={(e) => {
+                  playAudio(e);
+                }}
+              />
+            )}
+          </>
+        )}
       </FlexRow>
 
       {owner_name && (
