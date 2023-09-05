@@ -2,6 +2,9 @@ export const helperIPFS = (ipfsLink: any) => {
   if (ipfsLink && ipfsLink.startsWith("ipfs://")) {
     return `https://ipfs.io/ipfs/${ipfsLink.split("ipfs://")[1]}`;
   }
+  if (ipfsLink && ipfsLink.startsWith("ar://")) {
+    return `https://arweave.net/${ipfsLink.split("ar://")[1]}`;
+  }
   return ipfsLink;
 };
 
