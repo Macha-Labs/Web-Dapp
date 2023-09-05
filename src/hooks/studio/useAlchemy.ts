@@ -69,7 +69,7 @@ const useAlchemy = () => {
     const alchemy = new Alchemy(settings);
     const nfts = await alchemy.nft.getNftsForOwner(address);
     console.log("NFT REQUIRED DATA" + nfts);
-    setNftByAddress(nfts);
+    setNftByAddress(nfts.ownedNfts);
     setIsLoading(false);
   };
 
@@ -79,7 +79,7 @@ const useAlchemy = () => {
     latestBlock: latestBlock,
     getNftsByAddress: getNftsByAddress,
     nftByAddress: nftByAddress,
-    isLoading:isLoading,
+    isLoading: isLoading,
   };
 };
 export default useAlchemy;

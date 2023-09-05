@@ -8,8 +8,11 @@ import IconImage from "../icons/IconImage";
 import useAuthStore from "@/store/useAuthStore";
 import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import CreatorModal from "@/components/studio/CreatorModal";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 const NavLeft = (props: any) => {
+  const $address = useAuthStore((state: any) => state.address);
+  const { openConnectModal } = useConnectModal();
   const router = useRouter();
   const creatorModal = useDisclosure();
   const hookCreatorCreate = useCreatorCreate();
@@ -80,25 +83,40 @@ const NavLeft = (props: any) => {
                 />
               </FlexColumn>
               <FlexColumn height="fit-content">
-                {/* <IconImage
+                <IconImage
                   onClick={() => {
-                    router.push("/user");
+                    if ($address) {
+                      router.push(`/u/${$address}`);
+                    } else {
+                      if (openConnectModal) {
+                        openConnectModal();
+                      }
+                      // router.push(`/u/${$address}`);
+                    }
                   }}
-                  slug={router.pathname === "/user" ? "icon-add" : "icon-add"}
+                  slug={
+                    "icon-user"
+                    // router.pathname === `/u/${$address}`
+                    //   ? "icon-user"
+                    //   : "icon-user"
+                  }
                   size="md"
                   style={{
                     className: `m-b-1 ${
-                      router.pathname === "/user"
+                      router.pathname === `/u/${$address}`
                         ? "state_active "
                         : "state_hover"
                     } `,
                   }}
-                /> */}
+                />
                 <Image
                   src="../../assets/Logo.png"
                   height={"40px"}
                   borderRadius={"8px"}
                   alt="logo"
+                  onClick={() => {
+                    router.push("/");
+                  }}
                 />
               </FlexColumn>
             </FlexColumn>

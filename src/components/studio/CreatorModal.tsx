@@ -15,20 +15,7 @@ type Props = {
 const CreatorModal = ({ modal, hookCreatorCreate }: Props) => {
   return (
     <ModalWindow event={modal} size="6xl">
-      <NftCard
-        heading="Rules on how a"
-        subHeading="Quest Reward is calculated ?"
-        state={false}
-        // image="./assets/No_NFT_Claimed_Right.png"
-        image="./assets/Quest_Rules_Right.png"
-      />
-      <NftCard
-        heading="Claim NFT"
-        subHeading="Own your Macha Profile"
-        state={true}
-        image="./assets/No_NFT_Claimed_Right.png"
-      />
-      {/* <CreatorCard modal={modal} /> */}
+      <CreatorCard modal={modal} />
     </ModalWindow>
   );
 };
