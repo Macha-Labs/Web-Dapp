@@ -46,15 +46,13 @@ const User = () => {
   const [isOwner, setIsOwner] = useState<boolean>(false);
   useEffect(() => {
     const fetch = async () => {
-      // if (router.isReady) {
-      if ($address) {
-        await hookAlchemy.getNftsByAddress($address);
+      if (router.isReady) {
+        await hookAlchemy.getNftsByAddress(router.query.userId);
+        console.log("check hookAlchemy ", hookAlchemy.nftByAddress);
       }
-      // console.log("check hookAlchemy ", hookAlchemy.nftByAddress);
-      // }
     };
     fetch();
-  }, [$address]);
+  }, [router.query.userId]);
 
   useEffect(() => {
     console.log("get Nft by address", hookAlchemy.nftByAddress);
@@ -356,7 +354,7 @@ const User = () => {
                 heading="Claim NFT"
                 subHeading="Own your Macha Profile"
                 state={true}
-                image="./assets/No_NFT_Claimed_Right.png"
+                image="/assets/No_NFT_Claimed_Right.png"
               />
             )}
           </>
