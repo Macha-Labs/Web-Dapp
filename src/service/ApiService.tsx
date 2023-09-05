@@ -1,3 +1,4 @@
+import { Alchemy } from "alchemy-sdk";
 import { config } from "../config";
 
 export const fetchAllApis = async () => {
@@ -236,6 +237,35 @@ export const userMetaByAddress = async (address: any) => {
   console.log("userMetas", data);
   return data;
 };
+
+export const getAllNfts = async (address: any) => {
+  const alchemy = new Alchemy(config);
+  const nfts = await alchemy.nft.getNftsForOwner(address);
+  console.log(nfts);
+  return nfts;
+};
+
+// const main = async () => {
+//   // Get all NFTs
+//   const nfts = await alchemy.nft.getNftsForOwner("elanhapern.eth");
+//   // Print NFTs
+//   console.log(nfts);
+// };
+
+// const runMain = async () => {
+//   try {
+//     await main();
+//     process.exit(0);
+//   } catch (error) {
+//     console.log(error);
+//     process.exit(1);
+//   }
+// };
+
+// runMain();
+
+
+
 
 // /indexer/transactions/fetch-by-user-address/:from_address
 

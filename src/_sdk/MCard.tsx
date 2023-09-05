@@ -24,6 +24,7 @@ type Props = {
   width?: string;
   onClick?: any;
   slug?: any;
+  cardHeight?: any;
   music?: any;
 };
 
@@ -41,6 +42,7 @@ const MCard = ({
   width,
   onClick,
   slug,
+  cardHeight,
   music,
 }: Props) => {
   const router = useRouter();
@@ -67,17 +69,18 @@ const MCard = ({
 
   return (
     <Box
+      height={cardHeight ? cardHeight : "auto"}
       borderRadius={gStyle.card.borderRadius.default}
       background="#030c1a"
       padding={style.card.padding.default}
-      marginRight={style.margin["sm"]}
-      marginLeft={style.margin["sm"]}
-      marginBottom={style.margin["lg"]}
-      width={width ? width : "100%"}
+      // marginRight={style.margin["sm"]}
+      // marginLeft={style.margin["sm"]}
+      // marginBottom={style.margin["lg"]}
+      width={width ? width : "auto"}
       border={gStyle.card.border.default}
       onClick={onClick}
       cursor={"pointer"}
-      flexWrap={"wrap"}
+      // flexWrap={"wrap"}
       style={{
         transitionTimingFunction: "ease-in-out",
         transitionProperty: "all",
@@ -109,6 +112,7 @@ const MCard = ({
                 onClick={(e) => {
                   stopAudio(e);
                 }}
+                alt="icon-pause"
               />
             ) : (
               <Image
@@ -116,6 +120,7 @@ const MCard = ({
                 onClick={(e) => {
                   playAudio(e);
                 }}
+                alt="icon-play"
               />
             )}
           </>
@@ -134,7 +139,13 @@ const MCard = ({
 
       {image && (
         <div
-          style={{ height: "60%", display: "flex", justifyContent: "center" }}
+          style={{
+            height: "60%",
+            maxHeight: "12rem",
+            maxWidth: "70%",
+            display: "flex",
+            justifyContent: "center",
+          }}
         >
           <Image
             src={helperIPFS(image)}
@@ -154,18 +165,19 @@ const MCard = ({
         >
           {title}
         </Text>
-        {description && (
-          <Text
-            className="m-b-0"
-            fontSize={"md"}
-            marginTop={gStyle.margin["xxs"]}
-            width={"100%"}
-          >
-            {image
-              ? truncateString(description, 200)
-              : truncateString(description, 500)}
-          </Text>
-        )}
+        <Box width="15rem">
+          {description && (
+            <Text
+              className="m-b-0"
+              fontSize={"md"}
+              marginTop={gStyle.margin["xxs"]}
+            >
+              {image
+                ? truncateString(description, 200)
+                : truncateString(description, 500)}
+            </Text>
+          )}
+        </Box>
       </FlexColumn>
       {action_name && (
         <ButtonNative

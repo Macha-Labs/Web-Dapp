@@ -4,6 +4,8 @@ import { useState } from "react";
 
 const useAlchemy = () => {
   const [latestBlock, setLatestBlock] = useState<any>("");
+  const [nftByAddress, setNftByAddress] = useState<any>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const alchemyData = async () => {
     const settings = {
@@ -59,10 +61,25 @@ const useAlchemy = () => {
     setLatestBlock(_latestBlock);
   };
 
+  const getNftsByAddress = async (address: any) => {
+    const settings = {
+      apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
+      network: alchemyNetworksData[1],
+    };
+    const alchemy = new Alchemy(settings);
+    const nfts = await alchemy.nft.getNftsForOwner(address);
+    console.log("NFT REQUIRED DATA" , nfts);
+    setNftByAddress(nfts.ownedNfts);
+    setIsLoading(false);
+  };
+
   return {
     alchemyData: alchemyData,
     getLatestBlockByChainId: getLatestBlockByChainId,
     latestBlock: latestBlock,
+    getNftsByAddress: getNftsByAddress,
+    nftByAddress: nftByAddress,
+    isLoading: isLoading,
   };
 };
 export default useAlchemy;

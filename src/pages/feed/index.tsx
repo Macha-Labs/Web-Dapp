@@ -56,6 +56,7 @@ const Explorer = () => {
             paddingTop={style.margin.navBoth}
             display={"flex"}
             justifyContent={"center"}
+            width="100%"
           >
             <MetaList hookMetasList={hookMetasList} />
             <MotionBar />
