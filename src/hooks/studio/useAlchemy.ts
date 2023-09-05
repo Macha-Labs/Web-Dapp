@@ -68,7 +68,7 @@ const useAlchemy = () => {
     };
     const alchemy = new Alchemy(settings);
     const nfts = await alchemy.nft.getNftsForOwner(address);
-    console.log("NFT REQUIRED DATA" + nfts);
+    console.log("NFT REQUIRED DATA" , nfts);
     setNftByAddress(nfts.ownedNfts);
     setIsLoading(false);
   };

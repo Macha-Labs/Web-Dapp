@@ -1,10 +1,18 @@
+import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import InputSearch from "@/_ui/input/InputSearch";
 import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
+import UserAssetsModal from "@/components/studio/UserAssetsModal";
+import UserXPModal from "@/components/studio/UserXPModal";
+import chains from "@/data/network";
+import { truncateAddress } from "@/helpers";
+import useAlchemy from "@/hooks/studio/useAlchemy";
+import useUserMeta from "@/hooks/studio/useUserMeta";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
+import { config } from "@/config";
 import {
   Box,
   Flex,
@@ -14,27 +22,17 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import chains from "@/data/network";
-import CarouselSlide from "@/components/studio/CarouselSlide";
+import { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import AssetCard from "@/components/cards/AssetCard";
-import UserContentCard from "@/components/cards/UserContentCard";
-import UserAssetsModal from "@/components/studio/UserAssetsModal";
-import useMetaList from "@/hooks/meta/useMetasList";
-import MetaList from "@/components/meta/MetaList";
-import InputSearch from "@/_ui/input/InputSearch";
-import MetaUserList from "@/components/meta/MetaUserList";
-import useUserMeta from "@/hooks/studio/useUserMeta";
-import { truncateAddress } from "@/helpers";
-import TokenModal from "@/components/studio/TokenModal";
-import CardNative from "@/_ui/cards/CardNative";
-import useAlchemy from "@/hooks/studio/useAlchemy";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import useAuthStore from "@/store/useAuthStore";
+import AssetCard from "@/components/cards/AssetCard";
+import CarouselSlide from "@/components/studio/CarouselSlide";
+import MetaUserList from "@/components/meta/MetaUserList";
+import TokenModal from "@/components/studio/TokenModal";
 import NftCard from "@/components/cards/NftCard";
 import Loader from "@/_ui/loader/Loader";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 
 const User = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -42,16 +40,16 @@ const User = () => {
   const hookAlchemy = useAlchemy();
 
   const userAssetsModal = useDisclosure();
+  const userXPModal = useDisclosure();
   const router = useRouter();
   const tokenModal = useDisclosure();
   const [isOwner, setIsOwner] = useState<boolean>(false);
   useEffect(() => {
     const fetch = async () => {
       // if (router.isReady) {
-
-      await hookAlchemy.getNftsByAddress(
-        "0x165CD37b4C644C2921454429E7F9358d18A45e14"
-      );
+      if ($address) {
+        await hookAlchemy.getNftsByAddress($address);
+      }
       // console.log("check hookAlchemy ", hookAlchemy.nftByAddress);
       // }
     };
@@ -63,7 +61,10 @@ const User = () => {
     if (hookAlchemy.nftByAddress && hookAlchemy.nftByAddress[0]) {
       hookAlchemy.nftByAddress.map((nft: any) => {
         if (
-          nft.contract.address == "0x000386e3f7559d9b6a2f5c46b4ad1a9587d59dc3"
+          nft.contract.address ==
+            config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS ||
+          nft.contract.address == config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS ||
+          nft.contract.address == config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS
         ) {
           setIsOwner(true);
         }
@@ -213,6 +214,9 @@ const User = () => {
                         title="36"
                         description="XPs"
                         icon="/assets/icons/brand-bolt.svg"
+                        onClick={() => {
+                          userXPModal.onOpen();
+                        }}
                       />
                     </Flex>
                   </Box>
@@ -344,6 +348,7 @@ const User = () => {
                 </FlexColumn>
 
                 <UserAssetsModal modal={userAssetsModal} />
+                <UserXPModal modal={userXPModal} />
                 <TokenModal modal={tokenModal} />
               </>
             ) : (

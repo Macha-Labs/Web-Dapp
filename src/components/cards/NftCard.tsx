@@ -49,8 +49,10 @@ import { config } from "../../config";
 import { Router } from "react-router-dom";
 import { useRouter } from "next/router";
 import useAlchemy from "@/hooks/studio/useAlchemy";
+import useNftMint from "@/hooks/studio/useNftMint";
 
 const NftCard = ({ heading, subHeading, image, state }: Props) => {
+  const hookNftMint = useNftMint();
   const router = useRouter();
 
   return (
@@ -108,6 +110,16 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
                     key={index}
                     borderRadius={"50%"}
                     paddingX={style.padding.xxs}
+                    onClick={() => {
+                      hookNftMint.setChainId(chain);
+                    }}
+                    border={
+                      hookNftMint.chainId == chain
+                        ? style.card.border.meta
+                        : style.input.border.default
+                    }
+                    cursor="pointer"
+                    _hover={{ border: `${style.card.border.meta}` }}
                   >
                     <Image
                       src={GlobalIcons[chains[chain].chainImage]}
@@ -126,6 +138,11 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
 
             <ButtonNative
               text="Claim NFT"
+              onClick={() => {
+                console.log("submit clicked");
+                // hookCreatorCreate.nextFormStep();
+                hookNftMint.submit();
+              }}
               variant="state_brand"
               width="8rem"
               marginTop="xs"
@@ -197,6 +214,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
           borderRadius={gStyle.card.borderRadius.default}
           border={gStyle.card.border.default}
           width="98%"
+          height={"90vh"}
           overflow={"hidden"}
         >
           <Image
