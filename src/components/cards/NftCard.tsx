@@ -86,7 +86,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
 
             <MCard
               title=""
-              image="./assets/Claim_Macha_Nft.png"
+              image="/assets/Claim_Macha_Nft.png"
               slug="Macha NFT"
               width="18rem"
               // cardHeight="8rem"
@@ -177,7 +177,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
             <FlexColumn>
               <FlexRow vrAlign="flex-start" marginBottom="lg">
                 <Image
-                  src="./assets/Blue_tick.svg"
+                  src="/assets/Blue_tick.svg"
                   alt="blue_tick"
                   width="10%"
                 />
@@ -187,7 +187,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
               </FlexRow>
               <FlexRow vrAlign="flex-start" marginBottom="lg">
                 <Image
-                  src="./assets/Blue_tick.svg"
+                  src="/assets/Blue_tick.svg"
                   alt="blue_tick"
                   width="10%"
                 />
@@ -197,7 +197,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
               </FlexRow>
               <FlexRow vrAlign="flex-start" marginBottom="lg">
                 <Image
-                  src="./assets/Blue_tick.svg"
+                  src="/assets/Blue_tick.svg"
                   alt="blue_tick"
                   width="10%"
                 />
@@ -219,7 +219,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
         >
           <Image
             src={image}
-            alt="right image"
+            alt="right image"            
             objectFit="cover"
             w="100%"
             h="100%"

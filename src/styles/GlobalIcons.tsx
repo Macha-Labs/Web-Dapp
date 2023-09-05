@@ -138,7 +138,7 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/macha/studio%20logo/coloredFilecoin.svg",
   "icon-qr":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
-  "icon-user": "assets/icons/Base_blue_icons/base-blue-user.svg",
+  "icon-user": "/assets/icons/Base_blue_icons/base-blue-user.svg",
   "icon-dark-user": "/assets/icons/Dark_icons/dark-user.svg",
   "icon-dark-add": "/assets/icons/Dark_icons/dark-add.svg",
   "icon-dark-edit": "/assets/icons/Dark_icons/dark-edit.svg",
