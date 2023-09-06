@@ -24,10 +24,12 @@ import {
   TagCloseButton,
   Text,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const CreatorCard = ({ modal }: any) => {
   const hookCreatorCreate = useCreatorCreate();
+  const router = useRouter();
 
   useEffect(() => {
     console.log("hookCreatorCreate.tags", hookCreatorCreate.tags);
@@ -112,10 +114,17 @@ const CreatorCard = ({ modal }: any) => {
                         height="3.5rem"
                         marginTop={"xxl"}
                         width="9rem"
-                        text="View Metas"
+                        text="View Meta"
                         variant="state_brand"
                         onClick={() => {
-                          console.log("submit clicked");
+                          if (hookCreatorCreate.createdMetaCid) {
+                            router.push(`/search/meta/${hookCreatorCreate.createdMetaCid}`)
+                            hookCreatorCreate.setClear();
+                            modal.onClose();
+                          }
+                          else{
+                            router.push('/explore')
+                          }
                         }}
                       />
                     </Box>

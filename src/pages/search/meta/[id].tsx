@@ -77,7 +77,7 @@ const Meta = () => {
     let rawDataKey;
     let rawDataValue: any;
 
-    if (hookMeta?.metaData) {
+    if (hookMeta?.metaData?.meta?.data?.raw) {
       rawDataKey = Object.keys(hookMeta?.metaData?.meta?.data?.raw);
       rawDataValue = Object.values(hookMeta?.metaData?.meta?.data?.raw);
     }
@@ -91,7 +91,7 @@ const Meta = () => {
           ) : (
             <MCard
               title={hookMeta?.metaData?.meta?.data?.modified?.meta_title}
-              slug={hookMeta?.metaData?.meta_schema?.name}
+              slug={hookMeta?.metaData?.meta_schema ? hookMeta?.metaData?.meta_schema?.name : hookMeta?.metaData?.meta_tags && hookMeta?.metaData?.meta_tags.length != 0 ? hookMeta?.metaData?.meta_tags[0] : ""}
               image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
               description={
                 hookMeta?.metaData?.meta?.data?.modified?.meta_description
@@ -102,7 +102,12 @@ const Meta = () => {
         <Box width="68%">
           <FlexRow hrAlign="space-between" height="fit-content">
             <Tabs
-              options={options}
+              options={hookMeta?.metaData?.meta?.sources ? options : [
+                {
+                  href: "#",
+                  value: "Data",
+                },
+              ]}
               onChange={setTab}
               value={tab}
               width="fit-content"
@@ -214,7 +219,7 @@ const Meta = () => {
                   )}
                 </>
               </CardNative>
-              <CardNative
+              {hookMeta?.metaData?.meta?.data?.raw && <CardNative
                 height="fit-content"
                 marginTop="sm"
                 width="100%"
@@ -272,7 +277,7 @@ const Meta = () => {
                       );
                     })}
                 </>
-              </CardNative>
+              </CardNative>}
               {hookMeta?.metaData?.meta?.data?.ipfs && (
                 <CardNative
                   height="fit-content"
@@ -392,9 +397,233 @@ const Meta = () => {
                   </Box>
                 </CardNative>
               )}
+              {hookMeta?.metaData?.meta?.data?.erc721A_module && (
+                <CardNative
+                  height="fit-content"
+                  marginTop="sm"
+                  width="100%"
+                  header={
+                    <>
+                      <FlexRow hrAlign="space-between">
+                        <Heading fontSize={style.font.h4}>erc721A Module</Heading>
+                      </FlexRow>
+                    </>
+                  }
+                >
+                  <Box
+                    padding={style.padding.xs}
+                  >
+                    <FlexRow hrAlign="space-between">
+                      <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
+                        {hookMeta?.metaData &&
+                          Object.keys(hookMeta?.metaData?.meta?.data?.erc721A_module)[0]}
+                      </Heading>
+
+                      <Box
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          alignItems: "flex-start",
+                          width: "80%",
+                        }}
+                        onClick={() => {
+                          setToggleIpfs(!toggleIpfs);
+                        }}
+                      >
+                        {toggleIpfs ? (
+                          <IconBase slug="icon-chevron-up" />
+                        ) : (
+                          <IconBase slug="icon-chevron-down" />
+                        )}
+                      </Box>
+                    </FlexRow>
+                    {toggleIpfs && (
+                      <Box>
+                        {Object.keys(
+                          hookMeta?.metaData?.meta?.data?.erc721A_module[
+                          Object.keys(hookMeta?.metaData?.meta?.data?.erc721A_module)[0]
+                          ]
+                        ).map((item, index) => {
+                          return (
+                            <Box
+                              display={"flex"}
+                              key={index}
+                              marginTop={style.margin.sm}
+                              paddingBottom={index != Object.keys(
+                                hookMeta?.metaData?.meta?.data?.erc721A_module[
+                                Object.keys(hookMeta?.metaData?.meta?.data?.erc721A_module)[0]
+                                ]
+                              ).length - 1 && style.margin.xxs}
+                              borderBottom={index != Object.keys(
+                                hookMeta?.metaData?.meta?.data?.erc721A_module[
+                                Object.keys(hookMeta?.metaData?.meta?.data?.erc721A_module)[0]
+                                ]
+                              ).length - 1 && style.card.border.card}
+                            >
+                              <Text
+                                mr={style.margin.xs}
+                                width={"20%"}
+                              >{`${item} : `}</Text>
+                              <Text width={"70%"} textAlign={"right"}>
+                                {truncateString(typeof hookMeta?.metaData?.meta?.data?.erc721A_module[
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data?.erc721A_module
+                                  )[0]
+                                ][item] == "string"
+                                  ? hookMeta?.metaData?.meta?.data?.erc721A_module[
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data?.erc721A_module
+                                  )[0]
+                                  ][item]
+                                  : "[...]", 50)}
+                              </Text>
+                              <Box
+                                width="6%"
+                                display={"flex"}
+                                justifyContent={"flex-end"}
+                                marginLeft={style.margin.xxs}
+                              >
+                                <Button size="xs" width="100%"
+                                  onClick={() => {
+                                    navigator.clipboard.writeText(
+                                      JSON.stringify(hookMeta?.metaData?.meta?.data
+                                        ?.erc721A_module[
+                                        Object.keys(
+                                          hookMeta?.metaData?.meta?.data?.erc721A_module
+                                        )[0]
+                                      ][item])
+                                    );
+                                    toast({
+                                      title: "Copied To Clipboard",
+                                      status: "success",
+                                      duration: 3000,
+                                    });
+                                  }}
+                                >Copy</Button>
+                              </Box>
+                            </Box>
+                          );
+                        })}
+                      </Box>
+                    )}
+                  </Box>
+                </CardNative>
+              )}
+              {hookMeta?.metaData?.meta?.data?.erc721_module && (
+                <CardNative
+                  height="fit-content"
+                  marginTop="sm"
+                  width="100%"
+                  header={
+                    <>
+                      <FlexRow hrAlign="space-between">
+                        <Heading fontSize={style.font.h4}>erc721 Module</Heading>
+                      </FlexRow>
+                    </>
+                  }
+                >
+                  <Box
+                    padding={style.padding.xs}
+                  >
+                    <FlexRow hrAlign="space-between">
+                      <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
+                        {hookMeta?.metaData &&
+                          Object.keys(hookMeta?.metaData?.meta?.data?.erc721_module)[0]}
+                      </Heading>
+
+                      <Box
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          alignItems: "flex-start",
+                          width: "80%",
+                        }}
+                        onClick={() => {
+                          setToggleIpfs(!toggleIpfs);
+                        }}
+                      >
+                        {toggleIpfs ? (
+                          <IconBase slug="icon-chevron-up" />
+                        ) : (
+                          <IconBase slug="icon-chevron-down" />
+                        )}
+                      </Box>
+                    </FlexRow>
+                    {toggleIpfs && (
+                      <Box>
+                        {Object.keys(
+                          hookMeta?.metaData?.meta?.data?.erc721_module[
+                          Object.keys(hookMeta?.metaData?.meta?.data?.erc721_module)[0]
+                          ]
+                        ).map((item, index) => {
+                          return (
+                            <Box
+                              display={"flex"}
+                              key={index}
+                              marginTop={style.margin.sm}
+                              paddingBottom={index != Object.keys(
+                                hookMeta?.metaData?.meta?.data?.erc721_module[
+                                Object.keys(hookMeta?.metaData?.meta?.data?.erc721_module)[0]
+                                ]
+                              ).length - 1 && style.margin.xxs}
+                              borderBottom={index != Object.keys(
+                                hookMeta?.metaData?.meta?.data?.erc721_module[
+                                Object.keys(hookMeta?.metaData?.meta?.data?.erc721_module)[0]
+                                ]
+                              ).length - 1 && style.card.border.card}
+                            >
+                              <Text
+                                mr={style.margin.xs}
+                                width={"20%"}
+                              >{`${item} : `}</Text>
+                              <Text width={"70%"} textAlign={"right"}>
+                                {truncateString(typeof hookMeta?.metaData?.meta?.data?.erc721_module[
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data?.erc721_module
+                                  )[0]
+                                ][item] == "string"
+                                  ? hookMeta?.metaData?.meta?.data?.erc721_module[
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data?.erc721_module
+                                  )[0]
+                                  ][item]
+                                  : "[...]", 50)}
+                              </Text>
+                              <Box
+                                width="6%"
+                                display={"flex"}
+                                justifyContent={"flex-end"}
+                                marginLeft={style.margin.xxs}
+                              >
+                                <Button size="xs" width="100%"
+                                  onClick={() => {
+                                    navigator.clipboard.writeText(
+                                      JSON.stringify(hookMeta?.metaData?.meta?.data
+                                        ?.erc721_module[
+                                        Object.keys(
+                                          hookMeta?.metaData?.meta?.data?.erc721_module
+                                        )[0]
+                                      ][item])
+                                    );
+                                    toast({
+                                      title: "Copied To Clipboard",
+                                      status: "success",
+                                      duration: 3000,
+                                    });
+                                  }}
+                                >Copy</Button>
+                              </Box>
+                            </Box>
+                          );
+                        })}
+                      </Box>
+                    )}
+                  </Box>
+                </CardNative>
+              )}
             </>
           )}
-          {tab == "Sources" && (
+          {(tab == "Sources" && hookMeta?.metaData?.meta?.sources) && (
             <>
               <CardNative
                 height="fit-content"
@@ -408,7 +637,7 @@ const Meta = () => {
                   </>
                 }
               >
-                {hookMeta?.metaData &&
+                {hookMeta?.metaData?.meta?.sources &&
                   hookMeta?.metaData?.meta?.sources.map(
                     (source: any, index: any) => {
                       return (

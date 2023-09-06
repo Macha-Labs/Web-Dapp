@@ -32,7 +32,7 @@ const InputCopy = ({ parameter, value, marginTop,lastChild,firstChild }: Props) 
             textAlign={"right"}
             color={style.color["white.5"]}
           >
-            {truncateString(value, 50)}
+            {truncateString(JSON.stringify(value), 50)}
           </Text>
           <Box width={"7%"}>
             <Button size="xs" width="100%"

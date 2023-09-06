@@ -59,6 +59,14 @@ export const fetchMetaByUid = async (uid: any) => {
   return data;
 };
 
+export const fetchMetaByIpfsCid = async (cid: any) => {
+  const response = await fetch(
+    `http://gateway.lighthouse.storage/ipfs/${cid}`
+  );
+  const data = await response.json();
+  return data;
+};
+
 // export const fetchPendingMeta = async (owner: string) => {
 //   const response = await fetch(
 //     `${config.metaServer}/api/studio/getMeta/${owner}`,

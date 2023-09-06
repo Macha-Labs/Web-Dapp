@@ -27,7 +27,7 @@ const UserXpTable = () => {
                     <TableNative
                         height="20rem"
                         disabled={!$address}
-                        overflow="scroll"
+                        overflow={$address && "scroll"}
                         theadBackground={style.modal.bg.contractModal}
                         theadBottomBorder="none"
                         data={hookXP.XPList}

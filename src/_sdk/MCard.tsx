@@ -97,7 +97,7 @@ const MCard = ({
         vrAlign="flex-start"
         marginBottom="sm"
       >
-        <TagNative size="md" value={slug} />
+        <TagNative size="md" value={slug} lineHeight="1.5rem" />
         {/* <AudioPlayer /> */}
         {music && (
           <>

@@ -7,7 +7,7 @@ import { useToast } from "@chakra-ui/react";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
 const useCreatorCreate = () => {
@@ -21,6 +21,8 @@ const useCreatorCreate = () => {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<any>(false);
   const { openConnectModal } = useConnectModal();
+  const [createdMetaCid,setCreatedMetaCid] = useState<any>()
+  const $address = useAuthStore((state: any) => state.address);
   const $creatorFormData = useCreatorFormStore(
     (state: any) => state.creatorFormData
   );
@@ -30,6 +32,10 @@ const useCreatorCreate = () => {
   const { address } = useAccount()
 
   const linkRegex = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/;
+
+  useEffect(() => {
+    console.log("creator form data")
+  },[$creatorFormData])
 
   const checkEvent = async () => {
     const provider = new ethers.providers.Web3Provider(
@@ -45,6 +51,7 @@ const useCreatorCreate = () => {
       setIsLoading(false);
       setStep(3);
       console.log("meta Created", metaId, sender, metaCid);
+      setCreatedMetaCid(metaCid)
       // router.push(`/user/${metaCid}`);
     });
   };
@@ -92,6 +99,8 @@ const useCreatorCreate = () => {
           link: $creatorFormData.link,
           description: $creatorFormData.description,
           chain_id: $creatorFormData.chain_id,
+          owner: $address,
+          tags: tags.join()
         };
         const metaCID = await uploadTextToLighthouse(JSON.stringify(tempMetaCID));
 
@@ -105,7 +114,8 @@ const useCreatorCreate = () => {
         );
         // const gasPrice = await provider.getGasPr()
         try{
-          await contract.uploadMeta([metaCID], [systemCID], { gasLimit: 360038800 });
+          const res = await contract.uploadMeta([metaCID], [systemCID], { gasLimit: 360038800 });
+          console.log(res)
           checkEvent();
         }
         catch(error: any){
@@ -237,7 +247,8 @@ const useCreatorCreate = () => {
     handleInputChange: handleInputChange,
     setClear: setClear,
     isLoading: isLoading,
-    address: address
+    address: address,
+    createdMetaCid: createdMetaCid
   };
 };
 export default useCreatorCreate;
