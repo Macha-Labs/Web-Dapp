@@ -1,3 +1,5 @@
+import { Network } from "alchemy-sdk";
+
 const chains: any = {
   1: {
     chainName: "Ethereum",
@@ -17,6 +19,7 @@ const chains: any = {
         designation: "Executive Director",
       },
     ],
+    rpcUrl: "https://mainnet.infura.io/v3/",
     links: [
       {
         title: "github.com/ethereum",
@@ -69,6 +72,7 @@ const chains: any = {
         link: "https://safe.global/",
       },
     ],
+    alchemyChain: Network.ETH_MAINNET
   },
   137: {
     chainName: "Polygon",
@@ -116,6 +120,7 @@ const chains: any = {
         designation: "Co-founder, Polygon Miden",
       },
     ],
+    rpcUrl: "https://polygon-rpc.com",
     links: [
       {
         title: "Twitter",
@@ -132,12 +137,14 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    alchemyChain: Network.MATIC_MAINNET
   },
   10: {
     chainName: "Optimism",
     chainImage: "logo-Optimism",
     about: `OP Mainnet is a Layer 2 Optimistic Rollup network designed to utilize the strong security guarantees of Ethereum while reducing its cost and latency.`,
     team: [],
+    rpcUrl: "https://optimism.meowrpc.com",
     links: [
       {
         title: "Twitter",
@@ -154,12 +161,14 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    alchemyChain: Network.OPT_MAINNET
   },
   8453: {
     chainName: "Base",
     chainImage: "logo-Base",
     about: `Base is a secure, low-cost, builder-friendly Ethereum L2 built to bring the next billion users onchain.`,
     team: [],
+    rpcUrl: "https://base.publicnode.com",
     links: [
       {
         title: "Twitter",
@@ -176,12 +185,14 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    alchemyChain: Network.ETH_GOERLI
   },
   314: {
     chainName: "Filecoin Mainnet",
     chainImage: "logo-filecoin",
     about: `Mainnet is the live production network that all nodes on the Filecoin network are connected to. It never resets.`,
     team: [],
+    rpcUrl: "https://api.node.glif.io",
     links: [
       {
         title: "Twitter",
@@ -198,12 +209,14 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    alchemyChain: Network.ETH_GOERLI
   },
   314159: {
     chainName: "Filecoin Calibration Testnet",
     chainImage: "logo-filecoin",
     about: `The Filecoin testnet is a live test network for interoperable implementations of the Filecoin protocol.`,
     team: [],
+    rpcUrl: "https://filecoin-calibration.chainup.net/rpc/v1",
     links: [
       {
         title: "Twitter",
@@ -220,12 +233,14 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    alchemyChain: Network.ETH_GOERLI
   },
   80001: {
     chainName: "Polygon Mumbai Testnet",
     chainImage: "logo-Polygon",
     about: `The Polygon testnet is a live test network for interoperable implementations of the Polygon protocol.`,
     team: [],
+    rpcUrl: "https://endpoints.omniatech.io/v1/matic/mumbai/public",
     links: [
       {
         title: "Twitter",
@@ -242,6 +257,7 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    alchemyChain: Network.MATIC_MUMBAI
   },
   5: {
     chainName: "Goerli",
@@ -261,6 +277,7 @@ const chains: any = {
         designation: "Executive Director",
       },
     ],
+    rpcUrl: "https://ethereum-goerli.publicnode.com",
     links: [
       {
         title: "github.com/ethereum",
@@ -313,6 +330,7 @@ const chains: any = {
         link: "https://safe.global/",
       },
     ],
+    alchemyChain: Network.ETH_GOERLI
   },
 };
 

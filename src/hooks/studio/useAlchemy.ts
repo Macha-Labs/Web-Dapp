@@ -61,10 +61,10 @@ const useAlchemy = () => {
     setLatestBlock(_latestBlock);
   };
 
-  const getNftsByAddress = async (address: any) => {
+  const getNftsByAddress = async (address: any,chain: any) => {
     const settings = {
       apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
-      network: alchemyNetworksData[80001],
+      network: chain,
     };
     const alchemy = new Alchemy(settings);
     const nfts = await alchemy.nft.getNftsForOwner(address);

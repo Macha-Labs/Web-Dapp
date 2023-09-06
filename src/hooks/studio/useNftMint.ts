@@ -1,17 +1,36 @@
 import { config } from "@/config";
+import MachaSBT_ABI from "@/data/ABI/MachaSBT_ABI.json";
+import chains from "@/data/network";
 import { useToast } from "@chakra-ui/react";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { ethers } from "ethers";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { useAccount } from "wagmi";
-import MachaSBT_ABI from "@/data/ABI/MachaSBT_ABI.json";
+import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
+const networks = chains
 
 const useNftMint = () => {
   const [chainId, setChainId] = useState<any>();
   const toast = useToast();
   const { openConnectModal } = useConnectModal();
   const { address } = useAccount();
-
+  const [isLoading,setIsLoading] = useState<boolean>(false);
+  const { chains ,switchNetwork } = useSwitchNetwork({
+    onSuccess(){
+      submit()
+    },
+    onError(){
+      toast({
+        title: `Please configure ${networks[chainId].chainName} in your wallet.`,
+        status: "warning",
+        duration: 5000,
+        position: "top-right",
+      });
+    }
+  });
+  const { chain } = useNetwork();
+  const router = useRouter()
+  
   const submit = async () => {
     if (chainId == "") {
       toast({
@@ -28,7 +47,16 @@ const useNftMint = () => {
         openConnectModal();
       }
     }
+
     if (address) {
+      console.log("chain", chain)
+      if (chain) {
+        if (Number(chainId) !== chain.id) {
+          console.log("wagmi chains",chains)
+          switchNetwork?.(Number(chainId))
+          return
+        }
+      }
       if (typeof window !== "undefined" && window.ethereum) {
         const provider = new ethers.providers.Web3Provider(
           window.ethereum as ethers.providers.ExternalProvider
@@ -38,8 +66,8 @@ const useNftMint = () => {
           chainId == 1
             ? config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS
             : chainId == 80001
-            ? config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS
-            : config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS,
+              ? config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS
+              : config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS,
           MachaSBT_ABI,
           signer
         );
@@ -48,7 +76,11 @@ const useNftMint = () => {
         console.log("provider", provider);
 
         try {
-          await contract.safeMint();
+          const res = await contract.safeMint();
+          setIsLoading(true)
+          await res.wait()
+          setIsLoading(false)
+          router.reload()
         } catch (error: any) {
           toast({
             title: error.code,
@@ -65,6 +97,7 @@ const useNftMint = () => {
     chainId: chainId,
     setChainId: setChainId,
     submit: submit,
+    isLoading: isLoading
   };
 };
 

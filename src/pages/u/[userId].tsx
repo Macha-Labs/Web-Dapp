@@ -3,16 +3,24 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
+import Loader from "@/_ui/loader/Loader";
 import NavLeft from "@/_ui/nav/NavLeft";
+import NavMeta from "@/_ui/nav/NavMeta";
+import AssetCard from "@/components/cards/AssetCard";
+import NftCard from "@/components/cards/NftCard";
+import MetaUserList from "@/components/meta/MetaUserList";
+import CarouselSlide from "@/components/studio/CarouselSlide";
+import TokenModal from "@/components/studio/TokenModal";
 import UserAssetsModal from "@/components/studio/UserAssetsModal";
 import UserXPModal from "@/components/studio/UserXPModal";
+import { config } from "@/config";
 import chains from "@/data/network";
 import { truncateAddress } from "@/helpers";
 import useAlchemy from "@/hooks/studio/useAlchemy";
 import useUserMeta from "@/hooks/studio/useUserMeta";
+import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { config } from "@/config";
 import {
   Box,
   Flex,
@@ -21,26 +29,15 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Network } from "alchemy-sdk";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import useAuthStore from "@/store/useAuthStore";
-import AssetCard from "@/components/cards/AssetCard";
-import CarouselSlide from "@/components/studio/CarouselSlide";
-import MetaUserList from "@/components/meta/MetaUserList";
-import TokenModal from "@/components/studio/TokenModal";
-import NftCard from "@/components/cards/NftCard";
-import Loader from "@/_ui/loader/Loader";
 import { useAccount } from "wagmi";
-import NavMeta from "@/_ui/nav/NavMeta";
 
 const User = () => {
-  const $address = useAuthStore((state: any) => state.address);
-
   const hookAlchemy = useAlchemy();
-
   const userAssetsModal = useDisclosure();
   const userXPModal = useDisclosure();
   const router = useRouter();
@@ -57,7 +54,9 @@ const User = () => {
   useEffect(() => {
     const fetch = async () => {
       if (router.isReady) {
-        await hookAlchemy.getNftsByAddress(router.query.userId);
+        Object.keys(chains).map(async (chain: any) => {
+          await hookAlchemy.getNftsByAddress(router.query.userId,chains[chain].alchemyChain);
+        })
         console.log("check hookAlchemy ", hookAlchemy.nftByAddress);
         console.log(
           router.query.userId && router.query.userId.toString().toLowerCase(),
@@ -81,16 +80,16 @@ const User = () => {
     if (hookAlchemy.nftByAddress && hookAlchemy.nftByAddress[0]) {
       hookAlchemy.nftByAddress.map((nft: any) => {
         if (
-          nft.contract.address ==
-            config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS ||
-          nft.contract.address == config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS ||
-          nft.contract.address == config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS
+          nft.contract.address.toLowerCase() ==
+            config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS.toLowerCase() ||
+          nft.contract.address.toLowerCase() == config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS.toLowerCase() ||
+          nft.contract.address.toLowerCase() == config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS.toLowerCase()
         ) {
           setHasNft(true);
         }
       });
     }
-  }, [hookAlchemy.nftByAddress, $address]);
+  }, [hookAlchemy.nftByAddress, address]);
 
   const renderNavLeft = () => {
     return <NavLeft />;
@@ -200,8 +199,8 @@ const User = () => {
                               >
                                 <Image
                                   src={GlobalIcons[chains[chain].chainImage]}
-                                  height={"50px"}
-                                  width={"50px"}
+                                  height={"5rem"}
+                                  width={"5rem"}
                                   alt=""
                                 />
                               </Box>
