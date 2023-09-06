@@ -79,6 +79,14 @@ export const exploreModules = [
     bg: "#1c2724",
     borderColor: "#2b3c37",
   },
+  {
+    heading: "Sound.xyz",
+    description: "Listen and discover music from Sound.xyz",
+    image: "logo-Sound.xyz",
+    onClick: () => {},
+    bg: "#1c2724",
+    borderColor: "#2b3c37",
+  },
 ];
 
 export const dashboardModules = [
