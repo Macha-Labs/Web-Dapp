@@ -148,7 +148,7 @@ const MCard = ({
           <Image
             src={helperIPFS(image)}
             alt="coverImage"
-            width={"full"}
+            width={"min-content"}
             objectFit={"cover"}
             borderRadius={gStyle.card.borderRadius.default}
           />
@@ -163,19 +163,20 @@ const MCard = ({
         >
           {title}
         </Text>
-        <Box width="15rem">
-          {description && (
-            <Text
-              className="m-b-0"
-              fontSize={"md"}
-              marginTop={gStyle.margin["xxs"]}
-            >
-              {image
-                ? truncateString(description, 200)
-                : truncateString(description, 500)}
-            </Text>
-          )}
-        </Box>
+        {/* <Box width="15rem"> */}
+        {description && (
+          <Text
+            className="m-b-0"
+            maxW={"20rem"}
+            fontSize={"md"}
+            marginTop={gStyle.margin["xxs"]}
+          >
+            {image
+              ? truncateString(description, 200)
+              : truncateString(description, 500)}
+          </Text>
+        )}
+        {/* </Box> */}
       </FlexColumn>
       {action_name && (
         <ButtonNative
