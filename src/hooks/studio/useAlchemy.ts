@@ -64,7 +64,7 @@ const useAlchemy = () => {
   const getNftsByAddress = async (address: any) => {
     const settings = {
       apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
-      network: alchemyNetworksData[1],
+      network: alchemyNetworksData[80001],
     };
     const alchemy = new Alchemy(settings);
     const nfts = await alchemy.nft.getNftsForOwner(address);

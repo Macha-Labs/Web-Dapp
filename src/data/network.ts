@@ -221,6 +221,99 @@ const chains: any = {
       },
     ],
   },
+  80001: {
+    chainName: "Polygon Mumbai Testnet",
+    chainImage: "logo-Polygon",
+    about: `The Polygon testnet is a live test network for interoperable implementations of the Polygon protocol.`,
+    team: [],
+    links: [
+      {
+        title: "Twitter",
+        link: "https://twitter.com/0xPolygon",
+      },
+      {
+        title: "polygon.technology",
+        link: "https://polygon.technology/",
+      },
+    ],
+    wallets: [
+      {
+        title: "Metamask",
+        link: "https://metamask.io/",
+      },
+    ],
+  },
+  5: {
+    chainName: "Goerli",
+    chainImage: "logo-Ethereum",
+    about: `Ethereum is a technology that's home to digital money, global payments, and applications. The community has built a booming digital economy, bold new ways for creators to earn online, and so much more. It's open to everyone, wherever you are in the world – all you need is the internet.`,
+    team: [
+      {
+        name: "Vitalik Buterin",
+        designation: "Founder",
+      },
+      {
+        name: "Péter Szilágyi",
+        designation: "Core Developer",
+      },
+      {
+        name: "Aya Miyaguchi",
+        designation: "Executive Director",
+      },
+    ],
+    links: [
+      {
+        title: "github.com/ethereum",
+        link: "https://github.com/ethereum",
+      },
+      {
+        title: "Discord",
+        link: "https://discord.gg/CetY6Y4",
+      },
+      {
+        title: "Reddit",
+        link: "https://www.reddit.com/r/ethereum",
+      },
+      {
+        title: "Twitter",
+        link: "https://twitter.com/ethereum",
+      },
+      {
+        title: "ethereum.foundation",
+        link: "https://ethereum.foundation/",
+      },
+      {
+        title: "ethereum.org",
+        link: "https://ethereum.org/en/",
+      },
+    ],
+    wallets: [
+      {
+        title: "Trust Wallet",
+        link: "https://trustwallet.com/",
+      },
+      {
+        title: "Zerion",
+        link: "https://zerion.io/",
+      },
+      {
+        title: "Tally Ho",
+        link: "https://tallyho.org/",
+      },
+      {
+        title: "Coinbase Wallet",
+        link: "https://wallet.coinbase.com/",
+      },
+      {
+        title: "Metamask",
+        link: "https://metamask.io/",
+      },
+      {
+        title: "Safe",
+        link: "https://safe.global/",
+      },
+    ],
+  },
 };
 
 export default chains;
