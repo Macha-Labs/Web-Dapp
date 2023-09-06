@@ -1,41 +1,39 @@
 import MCard from "@/_sdk/MCard";
 import CardNative from "@/_ui/cards/CardNative";
 import CardSkeleton from "@/_ui/cards/CardSkeleton";
-import FlexBody from "@/_ui/flex/FlexBody";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import IconBase from "@/_ui/icons/IconsBase";
+import InputCopy from "@/_ui/input/InputCopy";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
-import NavStudio from "@/_ui/nav/NavStudio";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
-import InputCopy from "@/_ui/input/InputCopy";
 import useMeta from "@/hooks/meta/useMeta";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 
+import MusicPlayer from "@/components/studio/MusicPlayer";
+import { truncateString } from "@/helpers";
+import useAuthStore from "@/store/useAuthStore";
 import {
   Avatar,
   Box,
+  Button,
   Heading,
   Skeleton,
   SkeletonCircle,
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useEffect, useState, useCallback } from "react";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import {
   useClient,
   useConversations,
-  useMessages,
-  useSendMessage,
+  useSendMessage
 } from "@xmtp/react-sdk";
-import useAuthStore from "@/store/useAuthStore";
-import MusicPlayer from "@/components/studio/MusicPlayer";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
 
 const Meta = () => {
   const hookMeta = useMeta();
@@ -268,7 +266,8 @@ const Meta = () => {
                           key={index}
                           parameter={item}
                           value={rawDataValue[index]}
-                          marginTop="sm"
+                          lastChild={index == rawDataKey.length - 1}
+                          firstChild={index == 0}
                         />
                       );
                     })}
@@ -288,11 +287,7 @@ const Meta = () => {
                   }
                 >
                   <Box
-                    background={style.input.bg.default}
                     padding={style.padding.xs}
-                    border={style.input.border.default}
-                    borderRadius={style.card.borderRadius.image}
-                    marginTop={style.margin["sm"]}
                   >
                     <FlexRow hrAlign="space-between">
                       <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
@@ -322,39 +317,49 @@ const Meta = () => {
                       <Box>
                         {Object.keys(
                           hookMeta?.metaData?.meta?.data?.ipfs[
-                            Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
+                          Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
                           ]
                         ).map((item, index) => {
                           return (
                             <Box
                               display={"flex"}
-                              marginTop={style.margin.sm}
                               key={index}
+                              marginTop={style.margin.sm}
+                              paddingBottom={index != Object.keys(
+                                hookMeta?.metaData?.meta?.data?.ipfs[
+                                Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
+                                ]
+                              ).length - 1 && style.margin.xxs}
+                              borderBottom={index != Object.keys(
+                                hookMeta?.metaData?.meta?.data?.ipfs[
+                                Object.keys(hookMeta?.metaData?.meta?.data?.ipfs)[0]
+                                ]
+                              ).length - 1 && style.card.border.card}
                             >
                               <Text
                                 mr={style.margin.xs}
                                 width={"20%"}
                               >{`${item} : `}</Text>
                               <Text width={"70%"} textAlign={"right"}>
-                                {typeof hookMeta?.metaData?.meta?.data?.ipfs[
+                                {truncateString(typeof hookMeta?.metaData?.meta?.data?.ipfs[
                                   Object.keys(
                                     hookMeta?.metaData?.meta?.data?.ipfs
                                   )[0]
                                 ][item] == "string"
                                   ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                      Object.keys(
-                                        hookMeta?.metaData?.meta?.data?.ipfs
-                                      )[0]
-                                    ][item]
-                                  : "[ ]"}
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data?.ipfs
+                                  )[0]
+                                  ][item]
+                                  : "[ ]", 50)}
                               </Text>
                               <Box
-                                width="5%"
+                                width="6%"
                                 display={"flex"}
                                 justifyContent={"flex-end"}
+                                marginLeft={style.margin.xxs}
                               >
-                                <IconBase
-                                  slug="icon-copy"
+                                <Button size="xs" width="100%"
                                   onClick={() => {
                                     navigator.clipboard.writeText(
                                       typeof hookMeta?.metaData?.meta?.data
@@ -364,11 +369,11 @@ const Meta = () => {
                                         )[0]
                                       ][item] == "string"
                                         ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                            Object.keys(
-                                              hookMeta?.metaData?.meta?.data
-                                                ?.ipfs
-                                            )[0]
-                                          ][item]
+                                        Object.keys(
+                                          hookMeta?.metaData?.meta?.data
+                                            ?.ipfs
+                                        )[0]
+                                        ][item]
                                         : "[ ]"
                                     );
                                     toast({
@@ -377,7 +382,7 @@ const Meta = () => {
                                       duration: 3000,
                                     });
                                   }}
-                                />
+                                >Copy</Button>
                               </Box>
                             </Box>
                           );
@@ -409,11 +414,7 @@ const Meta = () => {
                       return (
                         <Box
                           key={index}
-                          background={style.input.bg.default}
                           padding={style.padding.xs}
-                          border={style.input.border.default}
-                          borderRadius={style.card.borderRadius.image}
-                          marginTop={style.margin["sm"]}
                         >
                           <FlexRow hrAlign="space-between">
                             <Heading
@@ -450,21 +451,23 @@ const Meta = () => {
                                     key={index}
                                     display={"flex"}
                                     marginTop={style.margin.sm}
+                                    paddingBottom={index != Object.keys(source).length - 1 && style.margin.xxs}
+                                    borderBottom={index != Object.keys(source).length - 1 && style.card.border.card}
                                   >
                                     <Text
                                       mr={style.margin.xs}
                                       width={"20%"}
                                     >{`${item} : `}</Text>
                                     <Text width={"70%"} textAlign={"right"}>
-                                      {source[item]}
+                                      {truncateString(source[item], 50)}
                                     </Text>
                                     <Box
-                                      width="5%"
+                                      width="6%"
                                       display={"flex"}
                                       justifyContent={"flex-end"}
+                                      marginLeft={style.margin.xxs}
                                     >
-                                      <IconBase
-                                        slug="icon-copy"
+                                      <Button size="xs" width="100%"
                                         onClick={() => {
                                           navigator.clipboard.writeText(
                                             source[item]
@@ -475,7 +478,7 @@ const Meta = () => {
                                             duration: 3000,
                                           });
                                         }}
-                                      />
+                                      >Copy</Button>
                                     </Box>
                                   </Box>
                                 );
@@ -505,17 +508,17 @@ const Meta = () => {
             display: "flex",
             justifyContent: "center",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <Box
             style={{
               height: "fit-content",
               width: "100%",
+              paddingBottom: `${style.margin["xxxl"]}`
             }}
           >
             {/* <Heading>Meta Name</Heading> */}
-
             {renderMeta()}
           </Box>
         </Box>
@@ -525,6 +528,7 @@ const Meta = () => {
 
   return (
     <FlexWindow
+      background="#000"
       marginTop={style.nav.margin}
       view="both"
       navTop={renderNav()}

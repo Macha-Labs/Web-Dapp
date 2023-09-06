@@ -15,6 +15,7 @@ type Props = {
   navTop?: any;
   noPaddingTop?: boolean;
   padding?: any;
+  background?: any
 };
 
 export const FlexWindow = ({
@@ -26,6 +27,7 @@ export const FlexWindow = ({
   navTop,
   noPaddingTop,
   padding,
+  background
 }: Props) => {
   return (
     <div
@@ -34,7 +36,7 @@ export const FlexWindow = ({
         position: "relative",
         width: "100vw",
         minHeight: "100vh",
-        background: `${style.body.bg.default}`,
+        background: `${background ? background : style.body.bg.default}`,
       }}
     >
       {view == "col" && (

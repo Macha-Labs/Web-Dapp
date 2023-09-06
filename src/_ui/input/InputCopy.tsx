@@ -1,28 +1,23 @@
 import FlexRow from "@/_ui/flex/FlexRow";
-import IconBase from "@/_ui/icons/IconsBase";
-import { truncateAddress } from "@/helpers";
+import { truncateString } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Text, useToast } from "@chakra-ui/react";
-import React from "react";
+import { Box, Button, Heading, Text, useToast } from "@chakra-ui/react";
 
 type Props = {
   parameter?: string;
   value?: any;
   marginTop?: string;
+  lastChild?: boolean
+  firstChild?: boolean
 };
 
-const InputCopy = ({ parameter, value, marginTop }: Props) => {
+const InputCopy = ({ parameter, value, marginTop,lastChild,firstChild }: Props) => {
   const toast = useToast();
   return (
     <Box
-      background={style.input.bg.default}
-      padding={style.padding.xs}
-      border={style.input.border.default}
-      borderRadius={style.card.borderRadius.image}
-      marginTop={marginTop ? style.margin[marginTop] : "0px"}
-      _hover={{
-        background: `${style.input.bg.active}`,
-      }}
+      marginTop={!firstChild && style.margin.md}
+      paddingBottom={!lastChild && style.margin.md}
+      borderBottom={!lastChild && style.card.border.card}
     >
       <FlexRow hrAlign="space-between">
         <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
@@ -37,10 +32,20 @@ const InputCopy = ({ parameter, value, marginTop }: Props) => {
             textAlign={"right"}
             color={style.color["white.5"]}
           >
-            {value}
+            {truncateString(value, 50)}
           </Text>
-          <Box width={"5%"}>
-            <IconBase
+          <Box width={"7%"}>
+            <Button size="xs" width="100%"
+              onClick={() => {
+                navigator.clipboard.writeText(value);
+                toast({
+                  title: "Copied To Clipboard",
+                  status: "success",
+                  duration: 3000,
+                });
+              }}
+            >Copy</Button>
+            {/* <IconBase
               slug="icon-copy"
               onClick={() => {
                 navigator.clipboard.writeText(value);
@@ -50,7 +55,7 @@ const InputCopy = ({ parameter, value, marginTop }: Props) => {
                   duration: 3000,
                 });
               }}
-            />
+            /> */}
           </Box>
         </FlexRow>
       </FlexRow>
