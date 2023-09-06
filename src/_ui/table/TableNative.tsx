@@ -10,10 +10,11 @@ type Prop = {
   theadBottomBorder?: string,
   overflow?: any,
   theadBackground?: string,
-  theadSticky?: boolean
+  theadSticky?: boolean,
+  disabled?: boolean
 }
 
-const TableNative = ({ data, tbodyChildren, theadChildren,height, theadBottomBorder,overflow,theadBackground,theadSticky}: Prop) => {
+const TableNative = ({ data, tbodyChildren, theadChildren,height, theadBottomBorder,overflow,theadBackground,disabled}: Prop) => {
 
   return (
     <div>
@@ -35,9 +36,9 @@ const TableNative = ({ data, tbodyChildren, theadChildren,height, theadBottomBor
               return (
                 <Tr
                   _hover={{
-                    transform: "scale(1.01,1.01)",
-                    transition: "all 0.2s cubic-bezier(0.64, 0.04, 0.35, 1)",
-                    background: `${style.table.bg.hover}`,
+                    transform: `${!disabled ?  "scale(1.01,1.01)" : ""}`,
+                    transition: `${!disabled ? "all 0.2s cubic-bezier(0.64, 0.04, 0.35, 1)" : ""}`,
+                    background: `${!disabled ? style.table.bg.hover : ""}`,
                   }}
                   key={item._id}
                 >
