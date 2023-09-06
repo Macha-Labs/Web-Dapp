@@ -14,12 +14,12 @@ const useNftMint = () => {
   const toast = useToast();
   const { openConnectModal } = useConnectModal();
   const { address } = useAccount();
-  const [isLoading,setIsLoading] = useState<boolean>(false);
-  const { chains ,switchNetwork } = useSwitchNetwork({
-    onSuccess(){
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { chains, switchNetwork } = useSwitchNetwork({
+    onSuccess() {
       submit()
     },
-    onError(){
+    onError() {
       toast({
         title: `Please configure ${networks[chainId].chainName} in your wallet.`,
         status: "warning",
@@ -30,7 +30,7 @@ const useNftMint = () => {
   });
   const { chain } = useNetwork();
   const router = useRouter()
-  
+
   const submit = async () => {
     if (chainId == "") {
       toast({
@@ -52,7 +52,7 @@ const useNftMint = () => {
       console.log("chain", chain)
       if (chain) {
         if (Number(chainId) !== chain.id) {
-          console.log("wagmi chains",chains)
+          console.log("wagmi chains", chains)
           switchNetwork?.(Number(chainId))
           return
         }
@@ -63,7 +63,7 @@ const useNftMint = () => {
         );
         const signer = provider.getSigner();
         const contract = new ethers.Contract(
-          chainId == 1
+          chainId == 314159
             ? config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS
             : chainId == 80001
               ? config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS
