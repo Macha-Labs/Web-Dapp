@@ -17,14 +17,14 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
-import { filecoinCalibration, polygon } from "wagmi/chains";
+import { filecoinCalibration, polygon, polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { useEffect } from "react";
 import Header from "@/_ui/Head/Header";
 import { XMTPProvider } from "@xmtp/react-sdk";
 
 const { chains, provider } = configureChains(
-  [filecoinCalibration, mainnet, polygon],
+  [filecoinCalibration, mainnet, polygon, polygonMumbai],
   [publicProvider()]
 );
 
