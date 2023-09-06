@@ -61,7 +61,7 @@ export const fetchMetaByUid = async (uid: any) => {
 
 export const fetchMetaByIpfsCid = async (cid: any) => {
   const response = await fetch(
-    `http://gateway.lighthouse.storage/ipfs/${cid}`
+    `https://gateway.lighthouse.storage/ipfs/${cid}`
   );
   const data = await response.json();
   return data;
