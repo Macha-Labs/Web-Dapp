@@ -674,7 +674,7 @@ const User = () => {
                 <NavMeta />
                 <Box marginTop={style.margin.lg}>
                   <FlexRow hrAlign="center">
-                    <Image src="" alt="no user found" />
+                    <Image src="/assets/user-search-empty-state.svg" alt="no user found" />
                   </FlexRow>
                   <Text textAlign="center" fontSize={style.font.h2} marginTop={style.margin.lg}>
                     Oops! No user Found
