@@ -694,7 +694,7 @@ const User = () => {
                         paddingRight="xs"
                         paddingTop="sm"
                         paddingBottom="sm"
-                        onClick={() => router.push("/studio")}
+                        onClick={() => router.push("/")}
                         height="2rem"
                         textFontSize="h7"
                       >
