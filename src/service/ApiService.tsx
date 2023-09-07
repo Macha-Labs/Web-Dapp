@@ -114,6 +114,12 @@ export const leaderBoardData = async () => {
   return data;
 };
 
+export const fetchUserXPRewards = async (userAddress: any) => {
+  const response = await fetch(`${config.metaServer}/indexer/user/fetch?address=${userAddress}`);
+  const data = await response.json();
+  return data;
+};
+
 export const createNewContract = async (data: any) => {
   const response = await fetch(
     `${config.metaServer}/indexer/contracts/edit-upload`,

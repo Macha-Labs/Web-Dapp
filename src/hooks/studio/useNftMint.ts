@@ -5,9 +5,10 @@ import { useToast } from "@chakra-ui/react";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 import useUserCreate from "./useUserCreate";
+import useXP from "./useXP";
 const networks = chains;
 
 const useNftMint = () => {
@@ -16,7 +17,16 @@ const useNftMint = () => {
   const { openConnectModal } = useConnectModal();
   const { address } = useAccount();
   const hookUserCreate = useUserCreate();
+  const hookXP = useXP()
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter()
+  useEffect(() => {
+    const f = async () => {
+      await hookXP._fetch()
+    }
+    f();
+  },[])
+
   const { chains, switchNetwork } = useSwitchNetwork({
     onSuccess() {
       submit();
@@ -31,7 +41,6 @@ const useNftMint = () => {
     },
   });
   const { chain } = useNetwork();
-  const router = useRouter();
 
   const submit = async () => {
     if (chainId == "") {
@@ -59,6 +68,7 @@ const useNftMint = () => {
           return;
         }
       }
+
       if (typeof window !== "undefined" && window.ethereum) {
         const provider = new ethers.providers.Web3Provider(
           window.ethereum as ethers.providers.ExternalProvider
@@ -86,16 +96,20 @@ const useNftMint = () => {
           await provider.getTransactionReceipt(res.hash).then((res) => {
             tokenId = parseInt(res.logs[0].topics[3], 16);
           });
+          const filteredChains = hookXP?.XPList?.filter((task: any) => task.owner == "Macha" && task.chainId == chainId)
+          const taskId = filteredChains[0]._id
           await hookUserCreate.createUser(
             chain?.name,
             chainId,
             res?.hash,
             Date.now(),
-            tokenId
+            tokenId,
+            taskId ? taskId : null
           );
           setIsLoading(false);
-          // router.reload();
+          router.reload();
         } catch (error: any) {
+          console.log(error)
           toast({
             title: error.code,
             status: "warning",

@@ -8,7 +8,8 @@ const useUserCreate = () => {
     chainId: any,
     txnHash: any,
     timeStamp: any,
-    tokenId: any
+    tokenId: any,
+    taskId: any
   ) => {
     const usePayLoad = {
       address: address,
@@ -19,6 +20,7 @@ const useUserCreate = () => {
           txn_hash: txnHash,
           timeStamp: timeStamp,
           tokenId: tokenId,
+          taskId: taskId
         },
       ],
     };

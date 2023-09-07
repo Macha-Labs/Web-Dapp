@@ -2,86 +2,29 @@ import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import FlexRow from "@/_ui/flex/FlexRow";
 import InputSearch from "@/_ui/input/InputSearch";
 import ModalWindow from "@/_ui/modal/ModalWindow";
+import TagNative from "@/_ui/tag/TagNative";
+import chains from "@/data/network";
+import useXP from "@/hooks/studio/useXP";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Image, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
-import TokenRow from "./TokenRow";
-import TagNative from "@/_ui/tag/TagNative";
+import { useEffect } from "react";
+import { useAccount } from "wagmi";
 
 type Props = {
     modal: any;
 };
 
 const UserXPModal = ({ modal }: Props) => {
+    const hookXP = useXP()
+    const {address,isConnected} = useAccount()
 
-    const data = [
-        {
-            quest: "Own a .lens handle",
-            xp: "10",
-            status: "claimed",
-            image: "logo-Lens"
-        },
-        {
-            quest: "Publish to Mirror.xyz",
-            xp: "10",
-            status: "unclaimed",
-            image: "logo-Mirror"
-        },
-        {
-            quest: "POAP",
-            xp: "10",
-            status: "claimed",
-            image: "logo-Poap"
-        },
-        {
-            quest: "LENS",
-            xp: "10",
-            status: "unclaimed",
-            image: "logo-Lens"
-        },
-        {
-            quest: "Sound.xyz",
-            xp: "10",
-            status: "claimed",
-            image: "logo-Sound.xyz"
-        },
-        {
-            quest: "Own a .lens handle",
-            xp: "10",
-            status: "claimed",
-            image: "logo-Lens"
-        },
-        {
-            quest: "Own a .lens handle",
-            xp: "10",
-            status: "unclaimed",
-            image: "logo-Lens"
-        },
-        {
-            quest: "Own a .lens handle",
-            xp: "10",
-            status: "claimed",
-            image: "logo-Lens"
-        },
-        {
-            quest: "Own a .lens handle",
-            xp: "10",
-            status: "unclaimed",
-            image: "logo-Lens"
-        },
-        {
-            quest: "Own a .lens handle",
-            xp: "10",
-            status: "claimed",
-            image: "logo-Lens"
-        },
-        {
-            quest: "Own a .lens handle",
-            xp: "10",
-            status: "unclaimed",
-            image: "logo-Lens"
-        },
-    ]
+    useEffect(() => {
+        if(address && isConnected){
+            hookXP._fetch()
+            hookXP._fetchUserXP(address)
+        }
+    },[address])
 
     return (
         <ModalWindow
@@ -183,7 +126,7 @@ const UserXPModal = ({ modal }: Props) => {
                             Your Rewarded XPs
                         </Text>
                         <FlexRow hrAlign="center" width="15%">
-                            <Text mb={0}>75</Text>
+                            <Text mb={0}>{hookXP?.userXPList ? hookXP?.userXPList?.points : 0}</Text>
                             <Image src={GlobalIcons["icon-bolt"]} />
                         </FlexRow>
                     </FlexRow>
@@ -253,7 +196,7 @@ const UserXPModal = ({ modal }: Props) => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {data.map((item, index) => (
+                            {hookXP.XPList && hookXP.XPList.map((item: any, index: any) => (
                                 <Tr justifyContent="space-between" key={index}>
                                     <Td
                                         style={{
@@ -269,8 +212,8 @@ const UserXPModal = ({ modal }: Props) => {
                                         }}
                                     >
                                         <FlexRow hrAlign="flex-start">
-                                            <Image src={GlobalIcons[item.image]} height="2rem" marginRight={style.margin.xs} />
-                                            <Text fontSize={style.font.h4} mb={0}>{item?.quest}</Text>
+                                            <Image src={item.chainId ?  GlobalIcons[chains[item.chainId]?.chainImage] : GlobalIcons["avatar-default"]} height="2rem" marginRight={style.margin.xs} />
+                                            <Text fontSize={style.font.h4} mb={0}>{item?.title}</Text>
                                         </FlexRow>
                                     </Td>
                                     <Box style={{
@@ -290,10 +233,10 @@ const UserXPModal = ({ modal }: Props) => {
                                                 borderCollapse: "separate",
                                                 borderSpacing: "0 1rem",
                                                 marginRight: `0.1rem`,
-                                                width: "50%"
+                                                width: "60%"
                                             }}
                                         >
-                                            <TagNative variant={item?.status != "claimed" ? "state_xmtp" : ""} value={item?.status == "claimed" ? "Claimed" : "Claim Now"} />
+                                            <TagNative variant={item?.status != "claimed" ? "state_xmtp" : ""} value={item?.status == "claimed" ? "Claimed" : "Claim"} />
                                         </Td>
                                         <Td
                                             style={{
@@ -308,7 +251,7 @@ const UserXPModal = ({ modal }: Props) => {
                                             }}
                                         >
                                             <FlexRow>
-                                                <Text mb={0}>{item?.xp}</Text>
+                                                <Text mb={0}>{item?.points}</Text>
                                                 <Image src={GlobalIcons["icon-bolt"]} />
                                             </FlexRow>
                                         </Td>

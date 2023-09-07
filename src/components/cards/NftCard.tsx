@@ -37,13 +37,13 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
   const hookNftMint = useNftMint();
 
   return (
-    <FlexRow hrAlign="space-between" height="115vh">
+    <FlexRow hrAlign="space-between" height="125vh">
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
         {!hookNftMint.isLoading ? (
           <>
             {state ? (
               <CardNative
-                height="115vh"
+                height="125vh"
                 width="98%"
                 header={
                   <>
