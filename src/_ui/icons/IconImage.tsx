@@ -6,13 +6,14 @@ import GlobalIcons from "@/styles/GlobalIcons";
 import { Image } from "@chakra-ui/react";
 
 type Props = {
-  slug: string;
+  slug?: string;
   size?: string;
   onClick?: any;
   style?: any;
+  image?: any;
 };
 
-function IconImage({ slug, size, onClick, style }: Props) {
+function IconImage({ slug, size, onClick, style, image }: Props) {
   return (
     <div
       style={{
@@ -35,7 +36,7 @@ function IconImage({ slug, size, onClick, style }: Props) {
       onClick={onClick}
     >
       <Image
-        src={GlobalIcons[slug]}
+        src={image ? image : slug && GlobalIcons[slug]}
         style={{
           height: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,
           width: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,

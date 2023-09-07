@@ -81,6 +81,7 @@ export const darkStyle = {
     border: { default: "2px solid #0F172E" },
     padding: { default: "1% 6%", meta: "1% 2%" },
     margin: "75px",
+    marginM: "120px",
   },
   list: {
     padding: "5px",

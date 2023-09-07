@@ -55,8 +55,11 @@ const User = () => {
     const fetch = async () => {
       if (router.isReady) {
         Object.keys(chains).map(async (chain: any) => {
-          await hookAlchemy.getNftsByAddress(router.query.userId,chains[chain].alchemyChain);
-        })
+          await hookAlchemy.getNftsByAddress(
+            router.query.userId,
+            chains[chain].alchemyChain
+          );
+        });
         console.log("check hookAlchemy ", hookAlchemy.nftByAddress);
         console.log(
           router.query.userId && router.query.userId.toString().toLowerCase(),
@@ -82,8 +85,10 @@ const User = () => {
         if (
           nft.contract.address.toLowerCase() ==
             config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS.toLowerCase() ||
-          nft.contract.address.toLowerCase() == config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS.toLowerCase() ||
-          nft.contract.address.toLowerCase() == config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS.toLowerCase()
+          nft.contract.address.toLowerCase() ==
+            config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS.toLowerCase() ||
+          nft.contract.address.toLowerCase() ==
+            config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS.toLowerCase()
         ) {
           setHasNft(true);
         }
@@ -377,8 +382,8 @@ const User = () => {
                 </>
               ) : (
                 <NftCard
-                  heading="Claim NFT"
-                  subHeading="Own your Macha Profile"
+                  heading="Macha NFT"
+                  // subHeading=""
                   state={true}
                   image="/assets/No_NFT_Claimed_Right.png"
                 />

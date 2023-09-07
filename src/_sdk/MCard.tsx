@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { style as gStyle, style } from "../styles/StyledConstants";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { useRef, useState } from "react";
+import MusicPlayer from "@/components/studio/MusicPlayer";
 
 type Props = {
   title?: string;
@@ -26,6 +27,8 @@ type Props = {
   slug?: any;
   cardHeight?: any;
   music?: any;
+  titleMaxw?: any;
+  musicplayer?: any;
 };
 
 const MCard = ({
@@ -43,7 +46,9 @@ const MCard = ({
   onClick,
   slug,
   cardHeight,
+  titleMaxw,
   music,
+  musicplayer,
 }: Props) => {
   const router = useRouter();
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -143,6 +148,7 @@ const MCard = ({
             height: "60%",
             display: "flex",
             justifyContent: "center",
+            marginBottom: `${style.margin.sm}`,
           }}
         >
           <Image
@@ -154,6 +160,24 @@ const MCard = ({
           />
         </div>
       )}
+
+      {musicplayer && (
+        <>
+          {" "}
+          {console.log(
+            "musicplayer",
+            musicplayer.substr(5, musicplayer.length - 5)
+          )}
+          <MusicPlayer
+            key={musicplayer}
+            audioUrl={`https://arweave.net/${musicplayer.substr(
+              5,
+              musicplayer.length - 5
+            )}`}
+          />
+        </>
+      )}
+
       <FlexColumn height="auto" vrAlign="flex-start">
         <Text
           className="m-b-0"
@@ -167,7 +191,7 @@ const MCard = ({
         {description && (
           <Text
             className="m-b-0"
-            maxW={"20rem"}
+            maxW={titleMaxw ? titleMaxw : "20rem"}
             fontSize={"md"}
             marginTop={gStyle.margin["xxs"]}
           >

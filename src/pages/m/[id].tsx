@@ -22,6 +22,7 @@ import {
   Box,
   Button,
   Heading,
+  Image,
   Skeleton,
   SkeletonCircle,
   Text,
@@ -30,14 +31,18 @@ import {
 import { useClient, useConversations, useSendMessage } from "@xmtp/react-sdk";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
+import InputSearch from "@/_ui/input/InputSearch";
+import useSearch from "@/hooks/studio/useSearch";
 
-const Meta = () => {
+const MetaCopy = () => {
   const hookMeta = useMeta();
   const router = useRouter();
   const { initialize } = useClient();
   const { conversations } = useConversations();
   const sendMessage = useSendMessage();
   const $signer = useAuthStore((state: any) => state.signer);
+  const hookSearch = useSearch();
 
   const handleConnect = useCallback(async () => {
     console.log($signer);
@@ -74,7 +79,77 @@ const Meta = () => {
   const toast = useToast();
 
   const renderNav = () => {
-    return <NavMeta />;
+    return (
+      <>
+        <Box
+          width={"100%"}
+          display={"flex"}
+          justifyContent={"center"}
+          padding="0% 12%"
+        >
+          <Box
+            // className="py-3"
+            style={{
+              //   background: "#030c1a",
+              //   padding: `${style.nav.padding.meta}`,
+              marginTop: `${style.margin.sm}`,
+              marginBottom: `${style.margin.sm}`,
+
+              height: `${style.nav.height}`,
+              //   border: `${style.nav.border.default}`,
+              //   borderRadius: `${style.card.borderRadius.default}`,
+
+              //   boxShadow: "0px 24px 64px 0px #000",
+              width: "100%",
+            }}
+          >
+            <FlexRow vrAlign="center" hrAlign="space-between">
+              <Link href="/">
+                <Image
+                  className="headerLogo"
+                  src="/assets/MACHALogotext.svg"
+                  alt="logo"
+                  width={128}
+                  height={47}
+                  // width={246}
+                />
+              </Link>
+              <Box
+                style={{ display: "flex", alignItems: "center" }}
+                width={"20%"}
+              >
+                <InputSearch
+                  width="100%"
+                  height="2.2rem"
+                  defaultValue={hookSearch.searchString}
+                  value={hookSearch.searchString}
+                  onChange={(e: any) =>
+                    hookSearch.setSearchString(e.target.value)
+                  }
+                  onKeydown={(e: any) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      router.push(`/search?search=${hookSearch.searchString}`);
+                    }
+                  }}
+                />
+
+                {/* <Image
+                style={{ marginLeft: `${style.margin.xs}`, cursor: "pointer" }}
+                src={
+                  isSearchOpen
+                    ? GlobalIcons["icon-dark-close"]
+                    : GlobalIcons["icon-dark-search"]
+                }
+                height="2.2rem"
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+              /> */}
+              </Box>
+            </FlexRow>
+          </Box>
+        </Box>
+      </>
+    );
   };
 
   const renderMeta = () => {
@@ -749,7 +824,8 @@ const Meta = () => {
     return (
       <>
         <Box
-          paddingX={style.padding.xxs}
+          padding="1% 12%"
+          marginTop={style.margin.xxl}
           style={{
             width: "100%",
             overflow: "hidden",
@@ -779,17 +855,17 @@ const Meta = () => {
   return (
     <FlexWindow
       background="#000"
-      marginTop={style.nav.margin}
-      view="both"
+      marginTop={style.nav.marginM}
+      view="col"
       noPaddingTop={true}
-      // navTop={renderNav()}
+      navTop={renderNav()}
       navLeft={<NavLeft />}
       bodyElem={renderBody()}
     ></FlexWindow>
   );
 };
 
-export default Meta;
+export default MetaCopy;
 {
   /* <ButtonNative
               text="Connect to XMTP"

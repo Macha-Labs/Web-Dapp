@@ -37,7 +37,16 @@ const NavLeft = (props: any) => {
             <FlexColumn hrAlign="space-between" vrAlign="center">
               <FlexColumn height="fit-content">
                 <Link href="/">
-                  <IconImage
+                  <Image
+                    src="../../assets/Logo.png"
+                    height={"40px"}
+                    borderRadius={"8px"}
+                    alt="logo"
+                    onClick={() => {
+                      router.push("/");
+                    }}
+                  />
+                  {/* <IconImage
                     slug={
                       router.pathname === "/" ? "icon-search" : "icon-search"
                     }
@@ -47,8 +56,24 @@ const NavLeft = (props: any) => {
                         router.pathname === "/" ? "state_active" : "state_hover"
                       } `,
                     }}
-                  />
+                  /> */}
                 </Link>
+              </FlexColumn>
+              <FlexColumn height="fit-content">
+                <IconImage
+                  onClick={() => {
+                    creatorModal.onOpen();
+                  }}
+                  slug={router.pathname === "/create" ? "icon-add" : "icon-add"}
+                  size="md"
+                  style={{
+                    className: `m-b-1 ${
+                      router.pathname === "/create"
+                        ? "state_active "
+                        : "state_hover"
+                    } `,
+                  }}
+                />
                 <Link href="/explore">
                   <IconImage
                     slug={
@@ -66,23 +91,6 @@ const NavLeft = (props: any) => {
                     }}
                   />
                 </Link>
-
-                <IconImage
-                  onClick={() => {
-                    creatorModal.onOpen();
-                  }}
-                  slug={router.pathname === "/create" ? "icon-add" : "icon-add"}
-                  size="md"
-                  style={{
-                    className: `m-b-1 ${
-                      router.pathname === "/create"
-                        ? "state_active "
-                        : "state_hover"
-                    } `,
-                  }}
-                />
-              </FlexColumn>
-              <FlexColumn height="fit-content">
                 <IconImage
                   onClick={() => {
                     if ($address) {
@@ -107,15 +115,6 @@ const NavLeft = (props: any) => {
                         ? "state_active "
                         : "state_hover"
                     } `,
-                  }}
-                />
-                <Image
-                  src="../../assets/Logo.png"
-                  height={"40px"}
-                  borderRadius={"8px"}
-                  alt="logo"
-                  onClick={() => {
-                    router.push("/");
                   }}
                 />
               </FlexColumn>

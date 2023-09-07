@@ -65,14 +65,22 @@ const CardNative = ({
       )}
 
       {children && (
-        <Box
-          style={{ padding: `${style.padding.sm}` }}
-          onClick={onClick}
-        >
+        <Box style={{ padding: `${style.padding.sm}` }} onClick={onClick}>
           {children}
         </Box>
       )}
-      {footer && <Box>{footer}</Box>}
+      {footer && (
+        <Box>
+          <Divider
+            mt="0px"
+            mb="0px"
+            width={"100%"}
+            alignSelf={"flex-end"}
+            borderColor={"#102540"}
+          />
+          <Box padding={style.padding.sm}>{footer}</Box>
+        </Box>
+      )}
     </Box>
   );
 };
