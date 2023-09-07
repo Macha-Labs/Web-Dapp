@@ -7,17 +7,19 @@ import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
-const networks = chains
+import useUserCreate from "./useUserCreate";
+const networks = chains;
 
 const useNftMint = () => {
   const [chainId, setChainId] = useState<any>();
   const toast = useToast();
   const { openConnectModal } = useConnectModal();
   const { address } = useAccount();
+  const hookUserCreate = useUserCreate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { chains, switchNetwork } = useSwitchNetwork({
     onSuccess() {
-      submit()
+      submit();
     },
     onError() {
       toast({
@@ -26,10 +28,10 @@ const useNftMint = () => {
         duration: 5000,
         position: "top-right",
       });
-    }
+    },
   });
   const { chain } = useNetwork();
-  const router = useRouter()
+  const router = useRouter();
 
   const submit = async () => {
     if (chainId == "") {
@@ -49,12 +51,12 @@ const useNftMint = () => {
     }
 
     if (address) {
-      console.log("chain", chain)
+      console.log("chain", chain);
       if (chain) {
         if (Number(chainId) !== chain.id) {
-          console.log("wagmi chains", chains)
-          switchNetwork?.(Number(chainId))
-          return
+          console.log("wagmi chains", chains);
+          switchNetwork?.(Number(chainId));
+          return;
         }
       }
       if (typeof window !== "undefined" && window.ethereum) {
@@ -66,8 +68,8 @@ const useNftMint = () => {
           chainId == 314159
             ? config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS
             : chainId == 80001
-              ? config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS
-              : config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS,
+            ? config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS
+            : config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS,
           MachaSBT_ABI,
           signer
         );
@@ -77,10 +79,22 @@ const useNftMint = () => {
 
         try {
           const res = await contract.safeMint();
-          setIsLoading(true)
-          await res.wait()
-          setIsLoading(false)
-          router.reload()
+          setIsLoading(true);
+          await res.wait();
+          console.log("res nftmint", res);
+          let tokenId;
+          await provider.getTransactionReceipt(res.hash).then((res) => {
+            tokenId = parseInt(res.logs[0].topics[3], 16);
+          });
+          await hookUserCreate.createUser(
+            chain?.name,
+            chainId,
+            res?.hash,
+            Date.now(),
+            tokenId
+          );
+          setIsLoading(false);
+          // router.reload();
         } catch (error: any) {
           toast({
             title: error.code,
@@ -97,7 +111,7 @@ const useNftMint = () => {
     chainId: chainId,
     setChainId: setChainId,
     submit: submit,
-    isLoading: isLoading
+    isLoading: isLoading,
   };
 };
 

@@ -104,9 +104,7 @@ export const allContracts = async () => {
 };
 
 export const allXPRewards = async () => {
-  const response = await fetch(
-    `${config.metaServer}/indexer/XP/info/fetchAll`
-  );
+  const response = await fetch(`${config.metaServer}/indexer/XP/info/fetchAll`);
   const data = await response.json();
   return data;
 };
@@ -245,6 +243,21 @@ export const getAllNfts = async (address: any) => {
   return nfts;
 };
 
+export const createUserInDB = async (data: any) => {
+  let url = `${config.metaServer}/indexer/user/claimToken`;
+
+  console.log(data);
+  const response = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  console.log("new publisher created ", response);
+  return response.json();
+};
+
 // const main = async () => {
 //   // Get all NFTs
 //   const nfts = await alchemy.nft.getNftsForOwner("elanhapern.eth");
@@ -263,9 +276,6 @@ export const getAllNfts = async (address: any) => {
 // };
 
 // runMain();
-
-
-
 
 // /indexer/transactions/fetch-by-user-address/:from_address
 
