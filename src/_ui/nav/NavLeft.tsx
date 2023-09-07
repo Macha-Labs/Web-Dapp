@@ -1,17 +1,17 @@
+import CreatorModal from "@/components/studio/CreatorModal";
+import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import { style } from "@/styles/StyledConstants";
-import { Image, Tooltip, useDisclosure } from "@chakra-ui/react";
+import { Image, useDisclosure } from "@chakra-ui/react";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAccount } from "wagmi";
 import FlexColumn from "../flex/FlexColumn";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
-import useAuthStore from "@/store/useAuthStore";
-import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
-import CreatorModal from "@/components/studio/CreatorModal";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 const NavLeft = (props: any) => {
-  const $address = useAuthStore((state: any) => state.address);
+  const {address} = useAccount()
   const { openConnectModal } = useConnectModal();
   const router = useRouter();
   const creatorModal = useDisclosure();
@@ -93,8 +93,8 @@ const NavLeft = (props: any) => {
                 </Link>
                 <IconImage
                   onClick={() => {
-                    if ($address) {
-                      router.push(`/u/${$address}`);
+                    if (address) {
+                      router.push(`/u/${address}`);
                     } else {
                       if (openConnectModal) {
                         openConnectModal();
@@ -111,7 +111,7 @@ const NavLeft = (props: any) => {
                   size="md"
                   style={{
                     className: `m-b-1 ${
-                      router.pathname === `/u/${$address}`
+                      router.pathname === `/u/${address}`
                         ? "state_active "
                         : "state_hover"
                     } `,

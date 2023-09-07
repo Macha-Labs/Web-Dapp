@@ -15,7 +15,7 @@ const useXP = () => {
 
   const _fetchUserXP = async (address: any) => {
     const res = await fetchUserXPRewards(address)
-    console.log("user xp data",res)
+    setUserXPList(res.data)
   }
 
   return {
