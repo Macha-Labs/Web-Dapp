@@ -1,10 +1,24 @@
 import TableNative from "@/_ui/table/TableNative";
 import { truncateAddress } from "@/helpers";
+import { leaderBoardData } from "@/service/ApiService";
 import { style } from "@/styles/StyledConstants";
 import { Box, Td, Text, Th } from "@chakra-ui/react";
 import Avatar from "boring-avatars";
+import { useEffect, useState } from "react";
 
 const LeaderboardTable = () => {
+  const [leaderBoardTableData, setLeaderBoardTableData] = useState<any>();
+  useEffect(() => {
+    leaderBoardData().then((res) => {
+      console.log(res.data);
+      setLeaderBoardTableData(
+        res.data.sort((a: any, b: any) => {
+          return b?.points - a?.points;
+        })
+      );
+    });
+  }, []);
+
   return (
     <Box>
       <TableNative
@@ -12,58 +26,7 @@ const LeaderboardTable = () => {
         overflow="scroll"
         theadBackground={style.modal.bg.contractModal}
         theadBottomBorder="none"
-        data={[
-          {
-            user_address: "0x3265476456",
-            xp: "262,500",
-            rank: 1,
-          },
-          {
-            user_address: "0x3265476456",
-            xp: "262,500",
-            rank: 2,
-          },
-          {
-            user_address: "0x3265476456",
-            xp: "262,500",
-            rank: 3,
-          },
-          {
-            user_address: "0x3265476456",
-            xp: "262,500",
-            rank: 4,
-          },
-          {
-            user_address: "0x3265476456",
-            xp: "262,500",
-            rank: 5,
-          },
-          {
-            user_address: "0x3265476456",
-            xp: "262,500",
-            rank: 6,
-          },
-          {
-            user_address: "0x3265476456",
-            xp: "262,500",
-            rank: 7,
-          },
-          {
-            user_address: "0x3265476456",
-            xp: "262,500",
-            rank: 8,
-          },
-          {
-            user_address: "0x3265476456",
-            xp: "262,500",
-            rank: 9,
-          },
-          {
-            user_address: "0x3265476456",
-            xp: "262,500",
-            rank: 10,
-          },
-        ]}
+        data={leaderBoardTableData}
         theadChildren={
           <>
             <Th
@@ -108,7 +71,7 @@ const LeaderboardTable = () => {
             <>
               <Td style={{ textAlign: "center", paddingLeft: `0px` }}>
                 <Text marginBottom={0} fontSize={style.font.h4}>
-                  #{item?.rank}
+                  #{index + 1}
                 </Text>
               </Td>
               <Td style={{ paddingLeft: `${style.padding.xxs}` }}>
@@ -124,7 +87,7 @@ const LeaderboardTable = () => {
                     height="2rem"
                     marginRight={style.margin.xxs}
                   >
-                    <Avatar size="2rem" name={item?.user_address} />
+                    <Avatar size="2rem" name={item?.address} />
                   </Box>
                   <Text
                     paddingLeft={2}
@@ -132,7 +95,7 @@ const LeaderboardTable = () => {
                     marginBottom={0}
                     fontWeight={style.fontWeight.dark}
                   >
-                    {truncateAddress(item?.user_address)}
+                    {truncateAddress(item?.address)}
                   </Text>
                 </Box>
               </Td>
@@ -149,7 +112,7 @@ const LeaderboardTable = () => {
                 >
                   <Box>
                     <Text mb={0} fontSize={style.font.h4}>
-                      {item?.xp}
+                      {item?.points}
                     </Text>
                   </Box>
                 </Box>

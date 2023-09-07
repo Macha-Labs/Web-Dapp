@@ -108,6 +108,11 @@ export const allXPRewards = async () => {
   const data = await response.json();
   return data;
 };
+export const leaderBoardData = async () => {
+  const response = await fetch(`${config.metaServer}/indexer/user/fetchAll`);
+  const data = await response.json();
+  return data;
+};
 
 export const createNewContract = async (data: any) => {
   const response = await fetch(
