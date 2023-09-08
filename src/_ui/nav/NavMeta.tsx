@@ -1,14 +1,11 @@
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import useSearch from "@/hooks/studio/useSearch";
-import GlobalIcons from "@/styles/GlobalIcons";
-import { Box, Image } from "@chakra-ui/react";
-import Link from "next/link";
+import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
 import InputSearch from "../input/InputSearch";
-import SearchInput from "@/components/search/SearchInput";
 
 type Props = {
   rightElem?: any;
@@ -39,45 +36,29 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
             width: "100%",
           }}
         >
-          <FlexRow vrAlign="center" hrAlign="space-between">
-            <SearchInput searchWidth="50%" />
+          <FlexRow vrAlign="space-between" hrAlign="space-between">
+            <InputSearch
+              width="30%"
+              height="2.2rem"
+              defaultValue={hookSearch.searchString}
+              value={hookSearch.searchString}
+              onChange={(e: any) => hookSearch.setSearchString(e.target.value)}
+              onKeydown={(e: any) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  router.push(`/search?search=${hookSearch.searchString}`);
+                }
+              }}
+            />
             <Box
               style={{ display: "flex", alignItems: "center" }}
-              width={isSearchOpen ? "80%" : "fit-content"}
+              width={"fit-content"}
             >
-              {!isSearchOpen ? (
-                <ConnectWalletButton
-                  showBalance={false}
-                  // height="2.2rem"
-                  showStudio={true}
-                />
-              ) : (
-                <InputSearch
-                  width="100%"
-                  height="2.2rem"
-                  defaultValue={hookSearch.searchString}
-                  value={hookSearch.searchString}
-                  onChange={(e: any) =>
-                    hookSearch.setSearchString(e.target.value)
-                  }
-                  onKeydown={(e: any) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      router.push(`/search?search=${hookSearch.searchString}`);
-                    }
-                  }}
-                />
-              )}
-              {/* <Image
-                style={{ marginLeft: `${style.margin.xs}`, cursor: "pointer" }}
-                src={
-                  isSearchOpen
-                    ? GlobalIcons["icon-dark-close"]
-                    : GlobalIcons["icon-dark-search"]
-                }
-                height="2.2rem"
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-              /> */}
+              <ConnectWalletButton
+                showBalance={false}
+                // height="2.2rem"
+                showStudio={true}
+              />
             </Box>
           </FlexRow>
         </Box>

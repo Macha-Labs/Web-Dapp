@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const useXP = () => {
   const [XPList, setXPList] = useState<any>();
-  const [userXPList,setUserXPList] = useState<any>();
+  const [userXPList, setUserXPList] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const _fetch = async () => {
@@ -14,9 +14,10 @@ const useXP = () => {
   };
 
   const _fetchUserXP = async (address: any) => {
-    const res = await fetchUserXPRewards(address)
-    setUserXPList(res.data)
-  }
+    const res = await fetchUserXPRewards(address);
+    console.log(res, "userXP");
+    setUserXPList(res.data);
+  };
 
   return {
     _fetch: _fetch,

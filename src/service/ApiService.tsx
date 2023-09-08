@@ -106,6 +106,7 @@ export const allContracts = async () => {
 export const allXPRewards = async () => {
   const response = await fetch(`${config.metaServer}/indexer/XP/info/fetchAll`);
   const data = await response.json();
+  console.log("xpData", data);
   return data;
 };
 export const leaderBoardData = async () => {
@@ -115,7 +116,9 @@ export const leaderBoardData = async () => {
 };
 
 export const fetchUserXPRewards = async (userAddress: any) => {
-  const response = await fetch(`${config.metaServer}/indexer/user/fetch?address=${userAddress}`);
+  const response = await fetch(
+    `${config.metaServer}/indexer/user/fetch?address=${userAddress}`
+  );
   const data = await response.json();
   return data;
 };

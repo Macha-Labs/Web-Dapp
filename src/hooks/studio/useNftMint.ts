@@ -17,15 +17,15 @@ const useNftMint = () => {
   const { openConnectModal } = useConnectModal();
   const { address } = useAccount();
   const hookUserCreate = useUserCreate();
-  const hookXP = useXP()
+  const hookXP = useXP();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
     const f = async () => {
-      await hookXP._fetch()
-    }
+      await hookXP._fetch();
+    };
     f();
-  },[])
+  }, []);
 
   const { chains, switchNetwork } = useSwitchNetwork({
     onSuccess() {
@@ -96,8 +96,10 @@ const useNftMint = () => {
           await provider.getTransactionReceipt(res.hash).then((res) => {
             tokenId = parseInt(res.logs[0].topics[3], 16);
           });
-          const filteredChains = hookXP?.XPList?.filter((task: any) => task.project == "macha" && task.chainId == chainId)
-          const taskId = filteredChains[0]._id
+          const filteredChains = hookXP?.XPList?.filter(
+            (task: any) => task.project == "macha" && task.chainId == chainId
+          );
+          const taskId = filteredChains[0]._id;
           await hookUserCreate.createUser(
             chain?.name,
             chainId,
@@ -107,9 +109,9 @@ const useNftMint = () => {
             taskId ? taskId : null
           );
           setIsLoading(false);
-          router.reload();
+          // router.reload();
         } catch (error: any) {
-          console.log(error)
+          console.log(error);
           toast({
             title: error.code,
             status: "warning",

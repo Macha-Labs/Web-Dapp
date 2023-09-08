@@ -148,7 +148,7 @@ const User = () => {
                                 <Image
                                   src={
                                     GlobalIcons[
-                                      chains[reward.chainId].chainImage
+                                      chains[reward?.chainId]?.chainImage
                                     ]
                                   }
                                   height={"2rem"}
@@ -166,7 +166,7 @@ const User = () => {
                     <Box width="55%" marginRight="10px">
                       <Flex marginTop={`${style.margin.lg}`}>
                         <AssetCard
-                          title={hookXP?.userXPList?.points}
+                          title={hookXP?.userXPList?.xps_earned}
                           description="XPs"
                           icon="/assets/icons/brand-bolt.svg"
                           onClick={() => {
@@ -342,7 +342,9 @@ const User = () => {
                             >
                               <Image
                                 src={
-                                  GlobalIcons[chains[reward.chainId].chainImage]
+                                  GlobalIcons[
+                                    chains[reward?.chainId]?.chainImage
+                                  ]
                                 }
                                 height={"2rem"}
                                 width={"2rem"}
@@ -372,7 +374,7 @@ const User = () => {
                   icon="/assets/icons/brand-globe.svg"
                 /> */}
                       <AssetCard
-                        title={hookXP?.userXPList?.points}
+                        title={hookXP?.userXPList?.xps_earned}
                         description="XPs"
                         icon="/assets/icons/brand-bolt.svg"
                         onClick={() => {

@@ -118,7 +118,7 @@ const LeaderboardTable = () => {
                 >
                   <Box>
                     <Text mb={0} fontSize={style.font.h4}>
-                      {item?.points}
+                      {item?.xps_earned}
                     </Text>
                   </Box>
                 </Box>

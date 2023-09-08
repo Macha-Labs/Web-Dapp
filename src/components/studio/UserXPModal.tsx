@@ -139,7 +139,7 @@ const UserXPModal = ({ modal }: Props) => {
             </Text>
             <FlexRow hrAlign="center" width="15%">
               <Text mb={0}>
-                {hookXP?.userXPList ? hookXP?.userXPList?.points : 0}
+                {hookXP?.userXPList ? hookXP?.userXPList?.xps_earned : 0}
               </Text>
               <Image src={GlobalIcons["icon-bolt"]} />
             </FlexRow>

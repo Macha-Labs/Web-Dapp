@@ -13,16 +13,14 @@ const useUserCreate = () => {
   ) => {
     const usePayLoad = {
       address: address,
-      claims: [
-        {
-          chain: chain,
-          chainId: chainId,
-          txn_hash: txnHash,
-          timeStamp: timeStamp,
-          tokenId: tokenId,
-          taskId: taskId
-        },
-      ],
+      claims: {
+        chain: chain,
+        chainId: chainId,
+        txn_hash: txnHash,
+        timeStamp: timeStamp,
+        tokenId: tokenId,
+        taskId: taskId,
+      },
     };
 
     createUserInDB(usePayLoad).then((res) => {
