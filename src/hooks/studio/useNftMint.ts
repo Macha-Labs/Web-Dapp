@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 import useUserCreate from "./useUserCreate";
 import useXP from "./useXP";
+import useAlchemy from "./useAlchemy";
+import { contractAddresses } from "@/data/xpContractAddresses";
 const networks = chains;
 
 const useNftMint = () => {
@@ -20,6 +22,9 @@ const useNftMint = () => {
   const hookXP = useXP();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const hookAlchemy = useAlchemy()
+  const [userEarnedXPs,setUserEarnedXPs] = useState<number>(0);
+
   useEffect(() => {
     const f = async () => {
       await hookXP._fetch();
@@ -108,6 +113,13 @@ const useNftMint = () => {
             tokenId,
             taskId ? taskId : null
           );
+          hookAlchemy.nftByAddress.forEach((nft: any) => {
+            Object.keys(contractAddresses).forEach((contract_address: any) => {
+              if(nft.contract.address == contractAddresses[contract_address]){
+                setUserEarnedXPs(userEarnedXPs + 10)
+              }
+            })
+          })
           setIsLoading(false);
           // router.reload();
         } catch (error: any) {

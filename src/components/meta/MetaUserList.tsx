@@ -25,7 +25,7 @@ const MetaUserList = ({ hookData }: Props) => {
     }
   }, []);
   return (
-    <Box marginLeft={"-1.2rem"} marginRight={"-1.2rem"}>
+    <Box marginLeft={"-1.2rem"} marginRight={"-1.2rem"} width="100%">
       {hookUserMeta?.userMeta && hookUserMeta?.userMeta.length !== 0 ? (
         <>
           <Grid templateColumns="repeat(3,1fr)" gap="10px" width="100%">
@@ -49,14 +49,12 @@ const MetaUserList = ({ hookData }: Props) => {
           </Grid>
         </>
       ) : (
-        <>
-          <FlexColumn width="100%" hrAlign="center" vrAlign="center">
-            <Image src="/assets/user-feed-empty-state.svg" />
-            <Text fontSize={style.font.h3} fontWeight={style.fontWeight.dark}>The feed is currently empty</Text>
-            <Text mb={0}>Ready to share your Macha stories?</Text>
-            <Text>This is where it all begins</Text>
-          </FlexColumn>
-        </>
+        <FlexColumn width="100%" hrAlign="center" vrAlign="center">
+          <Image src="/assets/user-feed-empty-state.svg" />
+          <Text fontSize={style.font.h3} fontWeight={style.fontWeight.dark}>The feed is currently empty</Text>
+          <Text mb={0}>Ready to share your Macha stories?</Text>
+          <Text>This is where it all begins</Text>
+        </FlexColumn>
       )}
     </Box>
   );

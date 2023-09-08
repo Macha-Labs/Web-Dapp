@@ -180,6 +180,7 @@ const GlobalIcons: any = {
   "logo-Ens": "/assets/icons/ENS.svg",
   "logo-Layer3": "/assets/icons/layer3.jpg",
   "logo-Sound.xyz": "/assets/icons/sound.svg",
+  "logo-Unstoppable": "/assets/icons/unstoppable-domains.svg",
   "base-chain": "/assets/explore/chain.svg",
   "base-SDK": "/assets/explore/SDK.svg",
 };

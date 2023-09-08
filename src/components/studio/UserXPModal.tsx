@@ -41,7 +41,7 @@ const UserXPModal = ({ modal }: Props) => {
   return (
     <ModalWindow
       event={modal}
-      size="2xl"
+      size="3xl"
       header={
         <>
           <Box

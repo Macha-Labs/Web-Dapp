@@ -107,7 +107,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
                   // overflowY="scroll"
                 >
                   <CardNative hrAlign={"center"} width="fit-content">
-                    <Image src="/assets/Claim_Macha_Nft.png" height="20rem" />
+                    <Image src="/assets/Claim_Macha_Nft.png" height="15rem" />
                   </CardNative>
                 </Box>
                 <Text

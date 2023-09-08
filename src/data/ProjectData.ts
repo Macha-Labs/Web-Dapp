@@ -5,5 +5,5 @@ export const projectSlugToLogo: any = {
   lens: "logo-Lens",
   sound: "logo-Sound.xyz",
   mirror: "logo-Mirror",
-  unstoppable: "",
+  unstoppable: "logo-Unstoppable",
 };
