@@ -188,6 +188,29 @@ const SearchHeader = ({ options }: Props) => {
                   View content across web3
                 </Text>
               </Box>
+              <Box
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                }}
+                onClick={() => {
+                  router.push("/explore/sound_nft");
+                  setShowSuggestions(false);
+                }}
+                _hover={{
+                  cursor: "pointer",
+                  backgroundColor: "#00040d",
+                }}
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  alignItems: "center",
+                  padding: `${style.padding.xxs} ${style.padding.xs}`,
+                }}
+              >
+                <Text mb={0} fontSize={style.font.h6}>
+                  Trending Music
+                </Text>
+              </Box>
             </Box>
           )}
         </InputGroup>

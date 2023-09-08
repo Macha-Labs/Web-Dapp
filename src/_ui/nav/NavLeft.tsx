@@ -11,7 +11,7 @@ import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
 
 const NavLeft = (props: any) => {
-  const {address} = useAccount()
+  const { address } = useAccount();
   const { openConnectModal } = useConnectModal();
   const router = useRouter();
   const creatorModal = useDisclosure();
@@ -60,7 +60,7 @@ const NavLeft = (props: any) => {
                 </Link>
               </FlexColumn>
               <FlexColumn height="fit-content">
-                <IconImage
+                {/* <IconImage
                   onClick={() => {
                     creatorModal.onOpen();
                   }}
@@ -73,7 +73,7 @@ const NavLeft = (props: any) => {
                         : "state_hover"
                     } `,
                   }}
-                />
+                /> */}
                 <Link href="/explore">
                   <IconImage
                     slug={

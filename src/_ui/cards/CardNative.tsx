@@ -37,7 +37,7 @@ const CardNative = ({
   return (
     <Box
       style={{
-        height: `${height}`,
+        height: height ? `${height}` : "100%",
         width: width ? `${width}` : "100%",
         borderRadius: ` ${style.card.borderRadius.default}`,
         border: `${border ? border : style.card.border.card}`,

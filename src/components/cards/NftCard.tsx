@@ -32,21 +32,36 @@ import useNftMint from "@/hooks/studio/useNftMint";
 import { Box, Image, Text } from "@chakra-ui/react";
 import Loader from "@/_ui/loader/Loader";
 import CardNative from "@/_ui/cards/CardNative";
+import ButtonMenu from "@/_ui/buttons/ButtonMenu";
+import { useState } from "react";
 
 const NftCard = ({ heading, subHeading, image, state }: Props) => {
   const hookNftMint = useNftMint();
+  const [chainValue, setChainValue] = useState<any>("Select Chain");
+  const [avatar, setAvatar] = useState<any>("avatar-default");
+  let chainFilterOptions: any = [];
+  Object.keys(chains).forEach((key) => {
+    chainFilterOptions.push({
+      value: chains[key].chainName,
+
+      leftIcon: chains[key].chainImage,
+      onClick: () => {
+        setChainValue(chains[key].chainName);
+        setAvatar(chains[key].chainImage);
+      },
+    });
+  });
 
   return (
-    <FlexRow hrAlign="space-between" height="125vh">
+    <FlexRow hrAlign="space-between" height="90vh" overFlow={"hidden"}>
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
         {!hookNftMint.isLoading ? (
           <>
             {state ? (
               <CardNative
-                height="125vh"
                 width="98%"
                 header={
-                  <>
+                  <FlexRow hrAlign="space-between">
                     <Text
                       fontSize={style.font.h3}
                       // lineHeight={"2.2rem"}
@@ -55,7 +70,18 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
                     >
                       {heading}
                     </Text>
-                  </>
+                    <ButtonMenu
+                      width="fit-content"
+                      size={"lg"}
+                      text={chainValue}
+                      icon={{
+                        slug: "icon-chevron-down",
+                        style: "",
+                      }}
+                      options={chainFilterOptions}
+                      avatar={avatar}
+                    />
+                  </FlexRow>
                 }
                 footer={
                   <ButtonNative
@@ -89,46 +115,6 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
                     }}
                   />
 
-                  <Text
-                    // marginBottom={0}
-                    fontSize={style.font.h5}
-                    marginTop={style.margin.md}
-                  >
-                    Select Network
-                  </Text>
-                  <Box
-                    display={"flex"}
-                    width="95%"
-                    marginBottom={style.margin.sm}
-                  >
-                    {Object.keys(chains).map((chain: any, index) => {
-                      return (
-                        <Box
-                          key={index}
-                          borderRadius={"50%"}
-                          paddingX={style.padding.xxs}
-                          onClick={() => {
-                            hookNftMint.setChainId(chain);
-                          }}
-                          border={
-                            hookNftMint.chainId == chain
-                              ? style.card.border.meta
-                              : style.input.border.default
-                          }
-                          marginRight={style.margin.xxs}
-                          cursor="pointer"
-                          _hover={{ border: `${style.card.border.meta}` }}
-                        >
-                          <Image
-                            src={GlobalIcons[chains[chain].chainImage]}
-                            height={"50px"}
-                            width={"50px"}
-                            alt=""
-                          />
-                        </Box>
-                      );
-                    })}
-                  </Box>
                   <Text fontSize={style.font.h5} mb="0">
                     It will take just 2 mins to setup profile and discover your
                     own chain content like ENS, Lens and more.
