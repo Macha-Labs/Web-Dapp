@@ -93,6 +93,7 @@ const NavLeft = (props: any) => {
                   </Link>
 
                   <Box
+                    cursor={"pointer"}
                     display={"flex"}
                     alignItems={"center"}
                     justifyContent={"flex-start"}

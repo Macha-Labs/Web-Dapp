@@ -54,7 +54,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
   });
 
   return (
-    <FlexRow hrAlign="space-between" height="90vh" overFlow={"hidden"}>
+    <FlexRow hrAlign="space-between" height="92vh" overFlow={"hidden"}>
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
         {!hookNftMint.isLoading ? (
           <>
@@ -125,7 +125,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
                 borderRadius={gStyle.card.borderRadius.default}
                 border={gStyle.card.border.default}
                 width="100%"
-                height="90vh"
+                height="92vh"
                 padding={style.padding.md}
               >
                 <Text

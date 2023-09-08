@@ -21,6 +21,7 @@ type Prop = {
   theadSticky?: boolean;
   disabled?: boolean;
   width?: any;
+  bodyRowOnClick?: any;
 };
 
 const TableNative = ({
@@ -33,6 +34,7 @@ const TableNative = ({
   theadBackground,
   disabled,
   width,
+  bodyRowOnClick,
 }: Prop) => {
   return (
     <div style={{ width: `${width}` }}>
@@ -59,6 +61,10 @@ const TableNative = ({
             {data?.map((item: any, index: any) => {
               return (
                 <Tr
+                  cursor={"pointer"}
+                  onClick={() => {
+                    bodyRowOnClick(item);
+                  }}
                   _hover={{
                     transform: `${!disabled ? "scale(1.01,1.01)" : ""}`,
                     transition: `${

@@ -4,6 +4,7 @@ import { leaderBoardData } from "@/service/ApiService";
 import { style } from "@/styles/StyledConstants";
 import { Box, Td, Text, Th } from "@chakra-ui/react";
 import Avatar from "boring-avatars";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const LeaderboardTable = () => {
@@ -19,6 +20,8 @@ const LeaderboardTable = () => {
     });
   }, []);
 
+  const router = useRouter();
+
   return (
     <Box width={"100%"}>
       <TableNative
@@ -27,6 +30,9 @@ const LeaderboardTable = () => {
         theadBackground={style.modal.bg.contractModal}
         theadBottomBorder="none"
         data={leaderBoardTableData}
+        bodyRowOnClick={(item: any) => {
+          router.push(`/u/${item?.address}`);
+        }}
         theadChildren={
           <>
             <Th
