@@ -365,7 +365,7 @@ const User = () => {
 
                   <UserAssetsModal modal={userAssetsModal} />
                   <UserXPModal modal={userXPModal} />
-                  <TokenModal modal={tokenModal} />
+                  <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} />
                 </>
               ) : (
                 <NftCard
@@ -497,7 +497,7 @@ const User = () => {
               </Heading> */}
                       <Flex marginTop={`${style.margin.lg}`}>
                         <AssetCard
-                          title="34"
+                          title={String(hookAlchemy.nftByAddress.length)}
                           description="Tokens"
                           icon="/assets/icons/brand-token.svg"
                           onClick={() => {
@@ -650,7 +650,7 @@ const User = () => {
 
                   <UserAssetsModal modal={userAssetsModal} />
                   <UserXPModal modal={userXPModal} />
-                  <TokenModal modal={tokenModal} />
+                  <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} />
                 </>
               ) : (
                 <>

@@ -6,12 +6,14 @@ import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Image, Text } from "@chakra-ui/react";
 import TokenRow from "./TokenRow";
+import useAlchemy from "@/hooks/studio/useAlchemy";
 
 type Props = {
   modal: any;
+  hookAlchemy: any;
 };
 
-const TokenModal = ({ modal }: Props) => {
+const TokenModal = ({ modal, hookAlchemy }: Props) => {
   return (
     <ModalWindow
       event={modal}
@@ -74,10 +76,10 @@ const TokenModal = ({ modal }: Props) => {
         </>
       }
     >
-      <Box marginTop="1rem" marginBottom={style.margin.md}>
-        <TokenRow />
-        <TokenRow />
-        <TokenRow />
+      <Box marginTop="1rem" marginBottom={style.margin.md} overflowY="scroll" height="20rem">
+        {hookAlchemy.nftByAddress.map((nft: any, index: any) => {
+          return <TokenRow key={index} title={nft.contract.name} symbol={nft.contract.symbol} tokenId={nft.tokenId} type={nft.contract.tokenType} />
+        })}
       </Box>
     </ModalWindow>
   );
