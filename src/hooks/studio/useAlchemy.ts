@@ -1,11 +1,13 @@
 import { alchemyNetworksData } from "@/data/studio/constant";
 import { Alchemy, Network } from "alchemy-sdk";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 const useAlchemy = () => {
   const [latestBlock, setLatestBlock] = useState<any>("");
   const [nftByAddress, setNftByAddress] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [searchFilteredNftsByAddress, setSearchFilteredNftsByAddress] = useState<any>(nftByAddress);
+  const [searchString, setSearchString] = useState<any>("");
 
   const alchemyData = async () => {
     const settings = {
@@ -14,41 +16,6 @@ const useAlchemy = () => {
     };
 
     const alchemy = new Alchemy(settings);
-
-    // Print owner's wallet address:
-    const ownerAddr = "vitalik.eth";
-    console.log("fetching NFTs for address:", ownerAddr);
-    console.log("...");
-
-    const nftsForOwner = await alchemy.nft.getNftsForOwner("vitalik.eth");
-    console.log("number of NFTs found:", nftsForOwner.totalCount);
-    console.log("...");
-
-    // Print contract address and tokenId for each NFT:
-    for (const nft of nftsForOwner.ownedNfts) {
-      console.log("===");
-      console.log("contract address:", nft.contract.address);
-      console.log("token ID:", nft.tokenId);
-    }
-    console.log("===");
-
-    // Fetch metadata for a particular NFT:
-    console.log("fetching metadata for a Crypto Coven NFT...");
-    const response = await alchemy.nft.getNftMetadata(
-      "0x5180db8F5c931aaE63c74266b211F580155ecac8",
-      "1590"
-    );
-
-    // Uncomment this line to see the full api response:
-    console.log(response);
-
-    // Print some commonly used fields:
-    console.log("NFT name: ", response.title);
-    console.log("token type: ", response.tokenType);
-    // console.log("tokenUri: ", response.tokenUri.gateway);
-    // console.log("image url: ", response.rawMetadata.image);
-    console.log("time last updated: ", response.timeLastUpdated);
-    console.log("===");
   };
 
   const getLatestBlockByChainId = async (chain_id: number) => {
@@ -76,6 +43,7 @@ const useAlchemy = () => {
       const nftArrays = await Promise.all(nftPromises);
       const combinedNfts = nftArrays.flat(); // Flatten the arrays
       setNftByAddress(combinedNfts);
+      setSearchFilteredNftsByAddress(combinedNfts)
       setIsLoading(false);
     } catch (error) {
       // Handle errors here
@@ -84,6 +52,17 @@ const useAlchemy = () => {
     }
   };
 
+  const handleSearch = (inputValue: string) => {
+    const filtered = nftByAddress.filter((item: any) => {
+      return item.contract.name.toLowerCase().includes(inputValue.toLowerCase());
+    });
+    setSearchFilteredNftsByAddress(filtered);
+  };
+
+  useEffect(() => {
+    handleSearch(searchString)
+  },[searchString])
+
   return {
     alchemyData: alchemyData,
     getLatestBlockByChainId: getLatestBlockByChainId,
@@ -91,6 +70,10 @@ const useAlchemy = () => {
     getNftsByAddress: getNftsByAddress,
     nftByAddress: nftByAddress,
     isLoading: isLoading,
+    handleSearch: handleSearch,
+    searchString: searchString,
+    searchFilteredNftsByAddress: searchFilteredNftsByAddress,
+    setSearchString: setSearchString
   };
 };
 export default useAlchemy;

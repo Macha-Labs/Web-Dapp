@@ -19,7 +19,7 @@ const MetaUserList = ({ hookData }: Props) => {
 
   useEffect(() => {
     if (router.isReady) {
-      hookUserMeta?.fetchMetas("0x57b7bf6f792a6181ec5afb88ce7bce330a9d1b67");
+      hookUserMeta?.fetchMetas(String(router.query.userId));
     }
   }, []);
   return (

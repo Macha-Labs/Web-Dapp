@@ -6,7 +6,6 @@ import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Image, Text } from "@chakra-ui/react";
 import TokenRow from "./TokenRow";
-import useAlchemy from "@/hooks/studio/useAlchemy";
 
 type Props = {
   modal: any;
@@ -14,6 +13,9 @@ type Props = {
 };
 
 const TokenModal = ({ modal, hookAlchemy }: Props) => {
+
+
+  
   return (
     <ModalWindow
       event={modal}
@@ -59,7 +61,11 @@ const TokenModal = ({ modal, hookAlchemy }: Props) => {
               <InputSearch
                 height="40px"
                 placeholder="Search Token"
+                value={hookAlchemy.searchString}
                 marginRight={style.margin.sm}
+                onChange={(e :any) => {
+                  hookAlchemy.setSearchString(e.target.value)
+                }}
               />
               <ButtonMenu
                 width="40%"
@@ -77,7 +83,7 @@ const TokenModal = ({ modal, hookAlchemy }: Props) => {
       }
     >
       <Box marginTop="1rem" marginBottom={style.margin.md} overflowY="scroll" height="20rem">
-        {hookAlchemy.nftByAddress.map((nft: any, index: any) => {
+        {hookAlchemy.searchFilteredNftsByAddress.map((nft: any, index: any) => {
           return <TokenRow key={index} title={nft.contract.name} symbol={nft.contract.symbol} tokenId={nft.tokenId} type={nft.contract.tokenType} />
         })}
       </Box>

@@ -96,7 +96,7 @@ const useNftMint = () => {
           await provider.getTransactionReceipt(res.hash).then((res) => {
             tokenId = parseInt(res.logs[0].topics[3], 16);
           });
-          const filteredChains = hookXP?.XPList?.filter((task: any) => task.owner == "Macha" && task.chainId == chainId)
+          const filteredChains = hookXP?.XPList?.filter((task: any) => task.project == "macha" && task.chainId == chainId)
           const taskId = filteredChains[0]._id
           await hookUserCreate.createUser(
             chain?.name,

@@ -28,23 +28,22 @@ const AssetCard = ({ title, description, icon, onClick }: Props) => {
       justifyContent={"space-between"}
       onClick={onClick}
     >
-      <Image src={icon} alt="brandToken" height="50px" />
       <Box width={"100%"}>
-        <Text fontSize={`${style.font.h4}`} marginBottom="0px">
-          {title}
-        </Text>
-        <FlexRow hrAlign="space-between" height="fit-content">
+        <FlexRow hrAlign="space-between" height="fit-content" vrAlign="flex-start">
+          <FlexRow hrAlign="flex-start">
+            <Image src={icon} alt="brandToken" height="50px" marginRight={style.margin.xxs}/>
+            <Text fontSize={`${style.font.h4}`} marginBottom="0px">
+              {description}
+            </Text>
+          </FlexRow>
           <Box display="flex" justifyContent="flex-start" alignItems="center">
             <Heading
-              fontSize={style.font.h3}
+              fontSize={style.font.h1}
               fontWeight={"600"}
               marginBottom={"0px"}
             >
-              {description}
+              {title}
             </Heading>
-          </Box>
-          <Box display="flex" justifyContent="flex-end" alignItems="end">
-            <Text marginBottom={"0px"}> End</Text>
           </Box>
         </FlexRow>
       </Box>
