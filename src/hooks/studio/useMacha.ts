@@ -6,7 +6,7 @@ import { connect } from "@wagmi/core";
 import { InjectedConnector } from "@wagmi/core/connectors/injected";
 import { useEffect } from "react";
 import { useAccount, useSigner } from "wagmi";
-import { filecoinCalibration, polygon, mainnet } from "wagmi/chains";
+import { filecoinCalibration, polygon, mainnet, polygonMumbai, optimism, filecoin, goerli } from "wagmi/chains";
 
 const useMacha = () => {
   // const $loadMacha = useMachaStore((state: any) => state.loadMacha);
@@ -28,7 +28,7 @@ const useMacha = () => {
             if (!isConnected) {
               const result = await connect({
                 connector: new InjectedConnector({
-                  chains: [filecoinCalibration, mainnet, polygon],
+                  chains: [filecoinCalibration, mainnet, polygon, polygonMumbai,goerli,optimism,filecoin],
                 }),
               });
             }
