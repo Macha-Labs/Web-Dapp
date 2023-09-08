@@ -5,10 +5,10 @@ export const config = {
   url: "https://metawork-server.herokuapp.com",
 
   // Production
-  metaServer: "https://metawork-sdk.herokuapp.com",
+  // metaServer: "https://metawork-sdk.herokuapp.com",
 
   // Staging
-  // metaServer: "https://metawork-server-staging.herokuapp.com",
+  metaServer: "https://metawork-server-staging.herokuapp.com",
 
   // metaServer: "http://localhost:3080",
   // url: "http://localhost:3080",
@@ -41,7 +41,7 @@ export const config = {
   MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS:
     "0x4Ca8E7f7a7E17aAB16e4D45098d919252E4AE976",
   MACHA_MUMBAI_SBT_CONTRACT_ADDRESS:
-    "0x4E88cdDC0993F3DcFA0BcB9C26Ca6B0A08525486",
+    "0x58F58c9B389e2E5103bD31A8aF34Ff28613047A3",
   MACHA_GOERLI_SBT_CONTRACT_ADDRESS:
     "0xceaF021219FE5A045419404f5cb7E303E9Ff4F84",
 };

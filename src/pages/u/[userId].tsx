@@ -10,7 +10,6 @@ import AssetCard from "@/components/cards/AssetCard";
 import NftCard from "@/components/cards/NftCard";
 import MetaUserList from "@/components/meta/MetaUserList";
 import CarouselSlide from "@/components/studio/CarouselSlide";
-import TokenModal from "@/components/studio/TokenModal";
 import UserAssetsModal from "@/components/studio/UserAssetsModal";
 import UserXPModal from "@/components/studio/UserXPModal";
 import { config } from "@/config";
@@ -101,7 +100,6 @@ const User = () => {
                   <Box
                     borderRadius={style.card.borderRadius.default}
                     background="#030c1a"
-                    paddingBottom={`${style.padding.lg}`}
                     border={style.card.border.card}
                   >
                     <FlexColumn>
@@ -109,80 +107,31 @@ const User = () => {
                         height="15rem"
                         width={"100%"}
                         background={`-webkit-linear-gradient(
-              120deg,
-              #74B2F9,
-              #0629A6
-            )`}
+                          120deg,
+                          #74B2F9,
+                          #0629A6
+                        )`}
                         borderTopRadius={style.card.borderRadius.default}
                       ></Box>
-                      <Box
-                        width={"10rem"}
-                        height={"10rem"}
-                        marginTop={"-7rem"}
-                        borderRadius={"50%"}
-                        background={"green"}
-                        marginBottom={`${style.margin.sm}`}
-                      >
-                        <Image
-                          src={GlobalIcons["avatar-default"]}
-                          height={"100%"}
-                          width={"100%"}
-                          objectFit={"cover"}
-                          alt="avatar-default"
-                        />
-                      </Box>
                       <FlexRow
                         hrAlign="space-between"
-                        paddingLeft="xxl"
-                        paddingRight="xxl"
+                        paddingLeft="xl"
+                        paddingRight="xl"
+                        paddingTop="md"
+                        paddingBottom="md"
                       >
-                        <Box display={"flex"} width="25%" alignItems={"center"}>
-                          <Box
-                            display={"flex"}
-                            flexDir={"column"}
-                            justifyContent={"center"}
-                            alignItems={"center"}
-                            paddingRight={`${style.padding.md}`}
-                          >
-                            <Text
-                              fontSize={`${style.font.h4}`}
-                              fontWeight={style.fontWeight.dark}
-                              marginBottom="0px"
-                            >
-                              -
-                            </Text>
-                            <Text marginBottom="0px">Followers</Text>
-                          </Box>
-                          <Box
-                            display={"flex"}
-                            flexDir={"column"}
-                            justifyContent={"center"}
-                            alignItems={"center"}
-                          >
-                            <Text
-                              fontSize={`${style.font.h4}`}
-                              fontWeight={style.fontWeight.dark}
-                              marginBottom="0px"
-                            >
-                              -
-                            </Text>
-                            <Text marginBottom="0px">Following</Text>
-                          </Box>
-                        </Box>
-                        <Box
-                          display={"flex"}
-                          flexDir={"column"}
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                          width="50%"
-                        >
-                          <Text fontSize={`${style.font.h4}`}>
+                        <FlexRow width="fit-content">
+                          <Image
+                            src={GlobalIcons["avatar-default"]}
+                            height={"4rem"}
+                            width={"4rem"}
+                            objectFit={"cover"}
+                            alt="avatar-default"
+                          />
+                          <Text fontSize={`${style.font.h4}`} mb={0} marginLeft={style.margin.xxs}>
                             {truncateAddress(userAddress)}
                           </Text>
-                          {/* <Text marginBottom="0px">
-                            Macha User
-                          </Text> */}
-                        </Box>
+                        </FlexRow>
                         <Box display={"flex"} justifyContent="flex-end" width="25%">
                           {hookXP?.userXPList?.claims?.map((reward: any, index: any) => (
                             <Box
@@ -204,26 +153,7 @@ const User = () => {
                   </Box>
                   <FlexRow marginTop="xxl" hrAlign="space-between">
                     <Box width="55%" marginRight="10px">
-                      {/* <Heading
-              fontSize={`${style.font.h3}`}
-              fontWeight={`${style.fontWeight.dark}`}
-            >
-              My Assets
-            </Heading> */}
                       <Flex marginTop={`${style.margin.lg}`}>
-                        <AssetCard
-                          title={String(hookAlchemy.nftByAddress.length)}
-                          description="Tokens"
-                          icon="/assets/icons/brand-token.svg"
-                          onClick={() => {
-                            tokenModal.onOpen();
-                          }}
-                        />
-                        {/* <UserAssetCard
-                title="7"
-                description="Domains"
-                icon="/assets/icons/brand-globe.svg"
-              /> */}
                         <AssetCard
                           title={hookXP?.userXPList?.points}
                           description="XPs"
@@ -237,12 +167,6 @@ const User = () => {
                       </Flex>
                     </Box>
                     <Box width="45%">
-                      {/* <Heading
-              fontSize={`${style.font.h3}`}
-              fontWeight={`${style.fontWeight.dark}`}
-            >
-              Recommendations
-            </Heading> */}
                       <Box
                         flex="1"
                         height={"20rem"}
@@ -305,38 +229,6 @@ const User = () => {
                     </Box>
                   </FlexRow>
 
-                  {/* <FlexColumn>
-          <TokenRow />
-        </FlexColumn> */}
-
-                  {/* <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-          <Heading
-            fontSize={`${style.font.h3}`}
-            fontWeight={`${style.fontWeight.dark}`}
-            marginTop={`${style.margin.xxl}`}
-          >
-            Collections
-          </Heading>
-
-          <FlexRow hrAlign="flex-start" marginTop="lg">
-            <Box
-              width="20%"
-              cursor="pointer"
-              marginRight={style.margin.sm}
-              onClick={() => userAssetsModal.onOpen()}
-            >
-              <UserContentCard title="NFT" description="45" />
-            </Box>
-            <Box
-              width="20%"
-              cursor="pointer"
-              onClick={() => userAssetsModal.onOpen()}
-            >
-              <UserContentCard title="NFT" description="45" />
-            </Box>
-          </FlexRow>
-        </FlexColumn> */}
-
                   <FlexColumn vrAlign="flex-start">
                     <CardNative
                       marginTop="xxl"
@@ -365,7 +257,7 @@ const User = () => {
 
                   <UserAssetsModal modal={userAssetsModal} />
                   <UserXPModal modal={userXPModal} />
-                  <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} />
+                  {/* <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} /> */}
                 </>
               ) : (
                 <NftCard
@@ -389,7 +281,6 @@ const User = () => {
                   <Box
                     borderRadius={style.card.borderRadius.default}
                     background="#030c1a"
-                    paddingBottom={`${style.padding.lg}`}
                     border={style.card.border.card}
                   >
                     <FlexColumn>
@@ -397,77 +288,31 @@ const User = () => {
                         height="15rem"
                         width={"100%"}
                         background={`-webkit-linear-gradient(
-                120deg,
-                #74B2F9,
-                #0629A6
-              )`}
+                          120deg,
+                          #74B2F9,
+                          #0629A6
+                        )`}
                         borderTopRadius={style.card.borderRadius.default}
                       ></Box>
-                      <Box
-                        width={"10rem"}
-                        height={"10rem"}
-                        marginTop={"-7rem"}
-                        borderRadius={"50%"}
-                        background={"green"}
-                        marginBottom={`${style.margin.sm}`}
-                      >
-                        <Image
-                          src={GlobalIcons["avatar-default"]}
-                          height={"100%"}
-                          width={"100%"}
-                          objectFit={"cover"}
-                          alt="avatar-default"
-                        />
-                      </Box>
                       <FlexRow
                         hrAlign="space-between"
-                        paddingLeft="xxl"
-                        paddingRight="xxl"
+                        paddingLeft="xl"
+                        paddingRight="xl"
+                        paddingTop="md"
+                        paddingBottom="md"
                       >
-                        <Box display={"flex"} width="25%" alignItems={"center"}>
-                          <Box
-                            display={"flex"}
-                            flexDir={"column"}
-                            justifyContent={"center"}
-                            alignItems={"center"}
-                            paddingRight={`${style.padding.md}`}
-                          >
-                            <Text
-                              fontSize={`${style.font.h4}`}
-                              fontWeight={style.fontWeight.dark}
-                              marginBottom="0px"
-                            >
-                              -
-                            </Text>
-                            <Text marginBottom="0px">Followers</Text>
-                          </Box>
-                          <Box
-                            display={"flex"}
-                            flexDir={"column"}
-                            justifyContent={"center"}
-                            alignItems={"center"}
-                          >
-                            <Text
-                              fontSize={`${style.font.h4}`}
-                              fontWeight={style.fontWeight.dark}
-                              marginBottom="0px"
-                            >
-                              -
-                            </Text>
-                            <Text marginBottom="0px">Following</Text>
-                          </Box>
-                        </Box>
-                        <Box
-                          display={"flex"}
-                          flexDir={"column"}
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                          width="50%"
-                        >
-                          <Text fontSize={`${style.font.h4}`}>
+                        <FlexRow width="fit-content">
+                          <Image
+                            src={GlobalIcons["avatar-default"]}
+                            height={"4rem"}
+                            width={"4rem"}
+                            objectFit={"cover"}
+                            alt="avatar-default"
+                          />
+                          <Text fontSize={`${style.font.h4}`} mb={0} marginLeft={style.margin.xxs}>
                             {truncateAddress(userAddress)}
                           </Text>
-                        </Box>
+                        </FlexRow>
                         <Box display={"flex"} justifyContent="flex-end" width="25%">
                           {hookXP?.userXPList?.claims?.map((reward: any, index: any) => (
                             <Box
@@ -489,21 +334,16 @@ const User = () => {
                   </Box>
                   <FlexRow marginTop="xxl" hrAlign="space-between">
                     <Box width="55%" marginRight="10px">
-                      {/* <Heading
-                fontSize={`${style.font.h3}`}
-                fontWeight={`${style.fontWeight.dark}`}
-              >
-                My Assets
-              </Heading> */}
+
                       <Flex marginTop={`${style.margin.lg}`}>
-                        <AssetCard
+                        {/* <AssetCard
                           title={String(hookAlchemy.nftByAddress.length)}
                           description="Tokens"
                           icon="/assets/icons/brand-token.svg"
                           onClick={() => {
                             tokenModal.onOpen();
                           }}
-                        />
+                        /> */}
                         {/* <UserAssetCard
                   title="7"
                   description="Domains"
@@ -526,7 +366,7 @@ const User = () => {
                 fontSize={`${style.font.h3}`}
                 fontWeight={`${style.fontWeight.dark}`}
               >
-                Recommendations
+                Recommations
               </Heading> */}
                       <Box
                         flex="1"
@@ -650,7 +490,7 @@ const User = () => {
 
                   <UserAssetsModal modal={userAssetsModal} />
                   <UserXPModal modal={userXPModal} />
-                  <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} />
+                  {/* <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} /> */}
                 </>
               ) : (
                 <>

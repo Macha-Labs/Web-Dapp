@@ -84,50 +84,11 @@ export default function Home() {
       <Box paddingX={style.padding.xxs} marginBottom={style.margin.nav}>
         <Carousel
           autoPlay
-          // showIndicators={false}
           showArrows={false}
           showStatus={false}
           stopOnHover={true}
           infiniteLoop
           interval={3000}
-        // renderArrowPrev={(onClickHandler, hasPrev) =>
-        //   hasPrev && (
-        //     <Box
-        //       style={{
-        //         position: "absolute",
-        //         zIndex: 2,
-        //         top: "calc(50% - 15px)",
-        //         cursor: "pointer",
-        //         left: "15px"
-        //       }}
-        //       onClick={onClickHandler}
-        //     >
-        //       <IconImage
-        //         slug="icon-chevron"
-        //         size="sm"
-        //       />
-        //     </Box>
-        //   )
-        // }
-        // renderArrowNext={(onClickHandler, hasNext) =>
-        //   hasNext && (
-        //     <Box
-        //       style={{
-        //         position: "absolute",
-        //         zIndex: 2,
-        //         top: "calc(50% - 15px)",
-        //         cursor: "pointer",
-        //         right: "15px"
-        //       }}
-        //       onClick={onClickHandler}
-        //     >
-        //       <IconImage
-        //         slug="icon-chevron-next"
-        //         size="sm"
-        //       />
-        //     </Box>
-        //   )
-        // }
         >
           <CarouselSlide
             title="Explore From MACHA"
