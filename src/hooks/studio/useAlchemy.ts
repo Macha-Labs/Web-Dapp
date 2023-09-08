@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const useAlchemy = () => {
   const [latestBlock, setLatestBlock] = useState<any>("");
-  const [nftByAddress, setNftByAddress] = useState<any>();
+  const [nftByAddress, setNftByAddress] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const alchemyData = async () => {
@@ -61,16 +61,20 @@ const useAlchemy = () => {
     setLatestBlock(_latestBlock);
   };
 
-  const getNftsByAddress = async (address: any,chain: any) => {
-    const settings = {
-      apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
-      network: chain,
-    };
-    const alchemy = new Alchemy(settings);
-    const nfts = await alchemy.nft.getNftsForOwner(address);
-    console.log("NFT REQUIRED DATA" , nfts);
-    setNftByAddress(nfts.ownedNfts);
-    setIsLoading(false);
+  const getNftsByAddress = async (address: any,chains: any) => {
+    Object.keys(chains).map(async (chain: any) => {
+      const settings = {
+        apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
+        network: chains[chain].alchemyChain,
+      };
+      const alchemy = new Alchemy(settings);
+      alchemy.nft.getNftsForOwner(address).then((nfts: any) => {
+        console.log("NFT REQUIRED DATA" , nfts);
+        setNftByAddress([...nftByAddress,...nfts.ownedNfts]); 
+        console.log("hook alchemy nft By Address ",nftByAddress,"chains", chains[chain].chainName)
+        setIsLoading(false);
+      })
+    })
   };
 
   return {

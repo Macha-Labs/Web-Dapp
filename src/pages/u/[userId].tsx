@@ -51,13 +51,10 @@ const User = () => {
   useEffect(() => {
     const fetch = async () => {
       hookXP._fetchUserXP(router.query.userId)
-      Object.keys(chains).map(async (chain: any) => {
-        await hookAlchemy.getNftsByAddress(
-          router.query.userId,
-          chains[chain].alchemyChain
-        );
-      });
-
+      await hookAlchemy.getNftsByAddress(
+        router.query.userId,
+        chains
+      );
       if (
         router.query.userId &&
         router.query.userId.toString().toLowerCase() == address?.toLowerCase()
@@ -65,7 +62,7 @@ const User = () => {
         setIsOwner(true);
       }
     }
-    if(router.isReady){
+    if (router.isReady) {
       fetch();
     }
   }, [router.query.userId, address]);
@@ -86,7 +83,7 @@ const User = () => {
         }
       });
     }
-  }, [hookAlchemy.nftByAddress, address]);
+  }, [hookAlchemy.nftByAddress, router.query.userId]);
 
   const renderNavLeft = () => {
     return <NavLeft />;
@@ -215,7 +212,7 @@ const User = () => {
             </Heading> */}
                       <Flex marginTop={`${style.margin.lg}`}>
                         <AssetCard
-                          title="34"
+                          title={String(hookAlchemy.nftByAddress.length)}
                           description="Tokens"
                           icon="/assets/icons/brand-token.svg"
                           onClick={() => {
@@ -472,7 +469,7 @@ const User = () => {
                           </Text>
                         </Box>
                         <Box display={"flex"} justifyContent="flex-end" width="25%">
-                        {hookXP?.userXPList?.claims?.map((reward: any, index: any) => (
+                          {hookXP?.userXPList?.claims?.map((reward: any, index: any) => (
                             <Box
                               key={index}
                               borderRadius={"50%"}
