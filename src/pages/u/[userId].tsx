@@ -1,3 +1,4 @@
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
@@ -519,7 +520,37 @@ const User = () => {
             ) : (
               <>
                 <NavMeta />
-                <Box>No user profile</Box>
+                <Box marginTop={style.margin.lg}>
+                  <FlexRow hrAlign="center">
+                    <Image src="/assets/user-search-empty-state.svg" alt="no user found" />
+                  </FlexRow>
+                  <Text textAlign="center" fontSize={style.font.h2} marginTop={style.margin.lg}>
+                    Oops! No user Found
+                  </Text>
+                  <FlexRow hrAlign="center" vrAlign="center">
+                    <FlexColumn>
+                      <Text textAlign="center" marginBottom="0">
+                        The user you are looking from may not have claimed any
+                        NFT yet,
+                      </Text>
+                      <Text textAlign="center" marginTop="0" marginBottom={style.margin.xl}>
+                        making them undiscoverable.
+                      </Text>
+                      <ButtonNative
+                        variant="state_brand"
+                        paddingLeft="xs"
+                        paddingRight="xs"
+                        paddingTop="sm"
+                        paddingBottom="sm"
+                        onClick={() => router.push("/")}
+                        height="2rem"
+                        textFontSize="h7"
+                      >
+                        Back to Search
+                      </ButtonNative>
+                    </FlexColumn>
+                  </FlexRow>
+                </Box>
               </>
             )}
           </>
