@@ -15,7 +15,7 @@ type Props = {
   navTop?: any;
   noPaddingTop?: boolean;
   padding?: any;
-  background?: any
+  background?: any;
 };
 
 export const FlexWindow = ({
@@ -27,7 +27,7 @@ export const FlexWindow = ({
   navTop,
   noPaddingTop,
   padding,
-  background
+  background,
 }: Props) => {
   return (
     <div
@@ -78,13 +78,13 @@ export const FlexWindow = ({
       {view == "both" && (
         <Box width={"100%"}>
           <Box
-            width={"5%"}
+            width={"15%"}
             className="window-left"
             style={{ height: "100vh", position: "fixed", left: "0" }}
           >
             {navLeft}
           </Box>
-          <Box width="95%" className="window-right" marginLeft={"5%"}>
+          <Box width="85%" className="window-right" marginLeft={"15%"}>
             {navTop && (
               <div
                 className="windowTop"
@@ -92,10 +92,10 @@ export const FlexWindow = ({
                   position: "fixed",
                   top: "0",
                   padding: `${padding ? padding : "0% 3%"}`,
-                  paddingTop: `${style.margin.md}`,
+                  paddingTop: `${style.margin.xs}`,
                   zIndex: "1000",
-                  width: "95%",
-                  // background: `${style.body.bg.default}`,
+                  width: "85%",
+                  background: `${style.body.bg.default}`,
                   display: "flex",
                   justifyContent: "center",
                 }}

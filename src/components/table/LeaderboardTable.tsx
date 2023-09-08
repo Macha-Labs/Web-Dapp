@@ -20,7 +20,7 @@ const LeaderboardTable = () => {
   }, []);
 
   return (
-    <Box>
+    <Box width={"100%"}>
       <TableNative
         height="20rem"
         overflow="scroll"

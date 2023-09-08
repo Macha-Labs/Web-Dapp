@@ -8,6 +8,7 @@ import { style } from "@/styles/StyledConstants";
 import { Box, Image, Td, Text, Th } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { ConnectWalletButton } from "../ConnectWalletButton";
+import { projectSlugToLogo } from "@/data/ProjectData";
 
 const UserXpTable = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -18,14 +19,16 @@ const UserXpTable = () => {
   }, []);
 
   return (
-    <Box position="relative">
+    <Box position="relative" width={"100%"}>
       <>
         <Box
           opacity={!$address ? "0.4" : 1}
+          width={"100%"}
           filter={!$address ? "blur(10px)" : ""}
         >
           <TableNative
             height="20rem"
+            width={"100%"}
             disabled={!$address}
             overflow={$address && "scroll"}
             theadBackground={style.modal.bg.contractModal}
@@ -43,7 +46,7 @@ const UserXpTable = () => {
                     paddingLeft: `${style.padding.xs}`,
                   }}
                 >
-                  Quest
+                  Activities
                 </Th>
                 <Th
                   style={{
@@ -71,11 +74,7 @@ const UserXpTable = () => {
                   >
                     <FlexRow hrAlign="flex-start">
                       <Image
-                        src={
-                          item?.chainId
-                            ? GlobalIcons[chains[item?.chainId].chainImage]
-                            : GlobalIcons["avatar-default"]
-                        }
+                        src={GlobalIcons[projectSlugToLogo[item?.project]]}
                         height="2rem"
                         marginRight={style.margin.xs}
                       />

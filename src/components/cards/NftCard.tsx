@@ -46,6 +46,7 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
 
       leftIcon: chains[key].chainImage,
       onClick: () => {
+        hookNftMint.setChainId(key);
         setChainValue(chains[key].chainName);
         setAvatar(chains[key].chainImage);
       },
@@ -98,28 +99,26 @@ const NftCard = ({ heading, subHeading, image, state }: Props) => {
                 }
               >
                 <Box
-                  // width="98%"
+                  width="100%"
                   height="100%"
+                  display={"flex"}
+                  justifyContent={"center"}
                   // padding={style.padding.md}
                   // overflowY="scroll"
                 >
-                  <MCard
-                    title=""
-                    image="/assets/Claim_Macha_Nft.png"
-                    slug="Macha NFT"
-                    width="18rem"
-                    // cardHeight="8rem"
-                    description="This Soul Bound Token is NFT delivered to address 0xCB811.. as proof of owning Macha Profile"
-                    onClick={() => {
-                      // router.push(/search/meta/${item?._id});
-                    }}
-                  />
-
-                  <Text fontSize={style.font.h5} mb="0">
-                    It will take just 2 mins to setup profile and discover your
-                    own chain content like ENS, Lens and more.
-                  </Text>
+                  <CardNative hrAlign={"center"} width="fit-content">
+                    <Image src="/assets/Claim_Macha_Nft.png" height="20rem" />
+                  </CardNative>
                 </Box>
+                <Text
+                  fontSize={style.font.h5}
+                  mb="0"
+                  textAlign={"center"}
+                  marginTop={style.margin.sm}
+                >
+                  It will take just 2 mins to setup profile and discover your
+                  own chain content like ENS, Lens and more.
+                </Text>
               </CardNative>
             ) : (
               <Box

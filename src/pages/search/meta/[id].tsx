@@ -757,7 +757,7 @@ const Meta = () => {
             justifyContent: "center",
             flexDirection: "column",
             alignItems: "center",
-            paddingTop: `${style.padding.sm}`,
+            // paddingTop: `${style.padding.sm}`,
             paddingBottom: `${style.padding.sm}`,
           }}
         >
@@ -781,8 +781,8 @@ const Meta = () => {
       background="#000"
       marginTop={style.nav.margin}
       view="both"
-      noPaddingTop={true}
-      // navTop={renderNav()}
+      // noPaddingTop={true}
+      navTop={renderNav()}
       navLeft={<NavLeft />}
       bodyElem={renderBody()}
     ></FlexWindow>

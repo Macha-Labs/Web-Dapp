@@ -16,6 +16,7 @@ type Props = {
   marginRight?: any;
   marginTop?: any;
   marginBottom?: any;
+  hrAlign?: any;
 };
 
 const CardNative = ({
@@ -33,6 +34,7 @@ const CardNative = ({
   marginBottom,
   header,
   footer,
+  hrAlign,
 }: Props) => {
   return (
     <Box
@@ -49,6 +51,9 @@ const CardNative = ({
         marginTop: `${style.margin[marginTop]}`,
         marginBottom: `${style.margin[marginBottom]}`,
         padding: padding ? `${padding}` : "0px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
       }}
     >
       {header && (
@@ -65,12 +70,25 @@ const CardNative = ({
       )}
 
       {children && (
-        <Box style={{ padding: `${style.padding.sm}` }} onClick={onClick}>
+        <Box
+          style={{
+            padding: `${style.padding.sm}`,
+            display: "flex",
+            flexDirection: "column",
+            // flex: "1",
+            alignItems: hrAlign ? hrAlign : "flex-start",
+          }}
+          onClick={onClick}
+        >
           {children}
         </Box>
       )}
       {footer && (
-        <Box>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"flex-end"}
+        >
           <Divider
             mt="0px"
             mb="0px"

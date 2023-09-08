@@ -64,7 +64,7 @@ export default function FlexRow({
         marginBottom: marginBottom ? `${gstyle.margin[marginBottom]}` : "0px",
         marginRight: marginRight ? `${gstyle.margin[marginRight]}` : "0px",
         position: position ? position : "static",
-        overflow: overFlow ? overFlow : "auto",
+        overflow: overFlow ? overFlow : "visible",
       }}
     >
       {children}

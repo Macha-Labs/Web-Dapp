@@ -90,44 +90,44 @@ export default function Home() {
           stopOnHover={true}
           infiniteLoop
           interval={3000}
-        // renderArrowPrev={(onClickHandler, hasPrev) =>
-        //   hasPrev && (
-        //     <Box
-        //       style={{
-        //         position: "absolute",
-        //         zIndex: 2,
-        //         top: "calc(50% - 15px)",
-        //         cursor: "pointer",
-        //         left: "15px"
-        //       }}
-        //       onClick={onClickHandler}
-        //     >
-        //       <IconImage
-        //         slug="icon-chevron"
-        //         size="sm"
-        //       />
-        //     </Box>
-        //   )
-        // }
-        // renderArrowNext={(onClickHandler, hasNext) =>
-        //   hasNext && (
-        //     <Box
-        //       style={{
-        //         position: "absolute",
-        //         zIndex: 2,
-        //         top: "calc(50% - 15px)",
-        //         cursor: "pointer",
-        //         right: "15px"
-        //       }}
-        //       onClick={onClickHandler}
-        //     >
-        //       <IconImage
-        //         slug="icon-chevron-next"
-        //         size="sm"
-        //       />
-        //     </Box>
-        //   )
-        // }
+          // renderArrowPrev={(onClickHandler, hasPrev) =>
+          //   hasPrev && (
+          //     <Box
+          //       style={{
+          //         position: "absolute",
+          //         zIndex: 2,
+          //         top: "calc(50% - 15px)",
+          //         cursor: "pointer",
+          //         left: "15px"
+          //       }}
+          //       onClick={onClickHandler}
+          //     >
+          //       <IconImage
+          //         slug="icon-chevron"
+          //         size="sm"
+          //       />
+          //     </Box>
+          //   )
+          // }
+          // renderArrowNext={(onClickHandler, hasNext) =>
+          //   hasNext && (
+          //     <Box
+          //       style={{
+          //         position: "absolute",
+          //         zIndex: 2,
+          //         top: "calc(50% - 15px)",
+          //         cursor: "pointer",
+          //         right: "15px"
+          //       }}
+          //       onClick={onClickHandler}
+          //     >
+          //       <IconImage
+          //         slug="icon-chevron-next"
+          //         size="sm"
+          //       />
+          //     </Box>
+          //   )
+          // }
         >
           <CarouselSlide
             title="Explore From MACHA"
@@ -180,17 +180,19 @@ export default function Home() {
             }
           ></Marquee>
         )}
-        <Box style={{
-          display: 'flex',
-          flexDirection: "row"
-        }}>
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
           <CardNative
             height="fit-content"
             marginTop="xl"
             width="50%"
             marginRight="lg"
             header={
-              <FlexRow hrAlign="space-between">
+              <FlexRow hrAlign="space-between" overFlow={"hidden"}>
                 <Heading
                   fontSize={style.font.h3}
                   fontWeight={600}

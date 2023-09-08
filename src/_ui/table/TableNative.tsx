@@ -20,6 +20,7 @@ type Prop = {
   theadBackground?: string;
   theadSticky?: boolean;
   disabled?: boolean;
+  width?: any;
 };
 
 const TableNative = ({
@@ -31,9 +32,10 @@ const TableNative = ({
   overflow,
   theadBackground,
   disabled,
+  width,
 }: Prop) => {
   return (
-    <div>
+    <div style={{ width: `${width}` }}>
       <TableContainer
         width="100%"
         overflowY={overflow ? overflow : "hidden"}
