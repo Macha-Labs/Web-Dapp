@@ -271,6 +271,18 @@ export const createUserInDB = async (data: any) => {
   console.log("new publisher created ", response);
   return response.json();
 };
+export const updateXpInDB = async (data: any) => {
+  let url = `${config.metaServer}/indexer/user/XP/update`;
+  const response = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  console.log("xp updated", response);
+  return response.json();
+};
 
 // const main = async () => {
 //   // Get all NFTs

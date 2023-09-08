@@ -1,12 +1,13 @@
 import { alchemyNetworksData } from "@/data/studio/constant";
 import { Alchemy, Network } from "alchemy-sdk";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const useAlchemy = () => {
   const [latestBlock, setLatestBlock] = useState<any>("");
   const [nftByAddress, setNftByAddress] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [searchFilteredNftsByAddress, setSearchFilteredNftsByAddress] = useState<any>(nftByAddress);
+  const [searchFilteredNftsByAddress, setSearchFilteredNftsByAddress] =
+    useState<any>(nftByAddress);
   const [searchString, setSearchString] = useState<any>("");
 
   const alchemyData = async () => {
@@ -27,6 +28,12 @@ const useAlchemy = () => {
     const _latestBlock = await alchemy.core.getBlockNumber();
     setLatestBlock(_latestBlock);
   };
+  // const verifyNftOwner = (owner:string,contractAddress:string)=>{
+  //   const settings = {
+  //     apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
+  //     network: alchemyNetworksData[chain_id],
+  //   };
+  // }
 
   const getNftsByAddress = async (address: any, chains: any) => {
     const nftPromises = Object.keys(chains).map(async (chain: any) => {
@@ -43,7 +50,7 @@ const useAlchemy = () => {
       const nftArrays = await Promise.all(nftPromises);
       const combinedNfts = nftArrays.flat(); // Flatten the arrays
       setNftByAddress(combinedNfts);
-      setSearchFilteredNftsByAddress(combinedNfts)
+      setSearchFilteredNftsByAddress(combinedNfts);
       setIsLoading(false);
     } catch (error) {
       // Handle errors here
@@ -54,14 +61,16 @@ const useAlchemy = () => {
 
   const handleSearch = (inputValue: string) => {
     const filtered = nftByAddress.filter((item: any) => {
-      return item.contract.name.toLowerCase().includes(inputValue.toLowerCase());
+      return item.contract.name
+        .toLowerCase()
+        .includes(inputValue.toLowerCase());
     });
     setSearchFilteredNftsByAddress(filtered);
   };
 
   useEffect(() => {
-    handleSearch(searchString)
-  },[searchString])
+    handleSearch(searchString);
+  }, [searchString]);
 
   return {
     alchemyData: alchemyData,
@@ -73,7 +82,7 @@ const useAlchemy = () => {
     handleSearch: handleSearch,
     searchString: searchString,
     searchFilteredNftsByAddress: searchFilteredNftsByAddress,
-    setSearchString: setSearchString
+    setSearchString: setSearchString,
   };
 };
 export default useAlchemy;

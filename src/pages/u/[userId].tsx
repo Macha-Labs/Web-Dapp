@@ -139,7 +139,7 @@ const User = () => {
                           justifyContent="flex-end"
                           width="25%"
                         >
-                          {hookXP?.userXPList?.claims?.map(
+                          {/* {hookXP?.userXPList?.claims?.map(
                             (reward: any, index: any) => (
                               <Box
                                 key={index}
@@ -158,7 +158,7 @@ const User = () => {
                                 />
                               </Box>
                             )
-                          )}
+                          )} */}
                         </Box>
                       </FlexRow>
                     </FlexColumn>
@@ -334,7 +334,7 @@ const User = () => {
                         justifyContent="flex-end"
                         width="25%"
                       >
-                        {hookXP?.userXPList?.claims?.map(
+                        {/* {hookXP?.userXPList?.claims?.map(
                           (reward: any, index: any) => (
                             <Box
                               key={index}
@@ -353,7 +353,7 @@ const User = () => {
                               />
                             </Box>
                           )
-                        )}
+                        )} */}
                       </Box>
                     </FlexRow>
                   </FlexColumn>
@@ -522,9 +522,16 @@ const User = () => {
                 <NavMeta />
                 <Box marginTop={style.margin.lg}>
                   <FlexRow hrAlign="center">
-                    <Image src="/assets/user-search-empty-state.svg" alt="no user found" />
+                    <Image
+                      src="/assets/user-search-empty-state.svg"
+                      alt="no user found"
+                    />
                   </FlexRow>
-                  <Text textAlign="center" fontSize={style.font.h2} marginTop={style.margin.lg}>
+                  <Text
+                    textAlign="center"
+                    fontSize={style.font.h2}
+                    marginTop={style.margin.lg}
+                  >
                     Oops! No user Found
                   </Text>
                   <FlexRow hrAlign="center" vrAlign="center">
@@ -533,7 +540,11 @@ const User = () => {
                         The user you are looking from may not have claimed any
                         NFT yet,
                       </Text>
-                      <Text textAlign="center" marginTop="0" marginBottom={style.margin.xl}>
+                      <Text
+                        textAlign="center"
+                        marginTop="0"
+                        marginBottom={style.margin.xl}
+                      >
                         making them undiscoverable.
                       </Text>
                       <ButtonNative

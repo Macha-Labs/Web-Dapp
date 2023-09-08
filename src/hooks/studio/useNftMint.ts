@@ -11,6 +11,7 @@ import useUserCreate from "./useUserCreate";
 import useXP from "./useXP";
 import useAlchemy from "./useAlchemy";
 import { contractAddresses } from "@/data/xpContractAddresses";
+import { updateXpInDB } from "@/service/ApiService";
 const networks = chains;
 
 const useNftMint = () => {
@@ -22,8 +23,8 @@ const useNftMint = () => {
   const hookXP = useXP();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-  const hookAlchemy = useAlchemy()
-  const [userEarnedXPs,setUserEarnedXPs] = useState<number>(0);
+  const hookAlchemy = useAlchemy();
+  const [userEarnedXPs, setUserEarnedXPs] = useState<number>(0);
 
   useEffect(() => {
     const f = async () => {
@@ -115,11 +116,13 @@ const useNftMint = () => {
           );
           hookAlchemy.nftByAddress.forEach((nft: any) => {
             Object.keys(contractAddresses).forEach((contract_address: any) => {
-              if(nft.contract.address == contractAddresses[contract_address]){
-                setUserEarnedXPs(userEarnedXPs + 10)
+              if (nft.contract.address == contractAddresses[contract_address]) {
+                setUserEarnedXPs(userEarnedXPs + 10);
               }
-            })
-          })
+            });
+          });
+          console.log("userearnerxp0", userEarnedXPs);
+          // await updateXpInDB({ address: address, newXp: userEarnedXPs });
           setIsLoading(false);
           // router.reload();
         } catch (error: any) {
