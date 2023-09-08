@@ -45,22 +45,19 @@ const User = () => {
   // checks whether the user searched and our address is same or not
   const [isOwner, setIsOwner] = useState<boolean>(false);
   const { address } = useAccount();
-  const hookXP = useXP()
+  const hookXP = useXP();
 
   useEffect(() => {
     const fetch = async () => {
-      hookXP._fetchUserXP(router.query.userId)
-      await hookAlchemy.getNftsByAddress(
-        router.query.userId,
-        chains
-      );
+      hookXP._fetchUserXP(router.query.userId);
+      await hookAlchemy.getNftsByAddress(router.query.userId, chains);
       if (
         router.query.userId &&
         router.query.userId.toString().toLowerCase() == address?.toLowerCase()
       ) {
         setIsOwner(true);
       }
-    }
+    };
     if (router.isReady) {
       fetch();
     }
@@ -72,11 +69,11 @@ const User = () => {
       hookAlchemy.nftByAddress.map((nft: any) => {
         if (
           nft.contract.address.toLowerCase() ==
-          config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS.toLowerCase() ||
+            config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS.toLowerCase() ||
           nft.contract.address.toLowerCase() ==
-          config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS.toLowerCase() ||
+            config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS.toLowerCase() ||
           nft.contract.address.toLowerCase() ==
-          config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS.toLowerCase()
+            config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS.toLowerCase()
         ) {
           setHasNft(true);
         }
@@ -128,25 +125,39 @@ const User = () => {
                             objectFit={"cover"}
                             alt="avatar-default"
                           />
-                          <Text fontSize={`${style.font.h4}`} mb={0} marginLeft={style.margin.xxs}>
+                          <Text
+                            fontSize={`${style.font.h4}`}
+                            mb={0}
+                            marginLeft={style.margin.xxs}
+                          >
                             {truncateAddress(userAddress)}
                           </Text>
                         </FlexRow>
-                        <Box display={"flex"} justifyContent="flex-end" width="25%">
-                          {hookXP?.userXPList?.claims?.map((reward: any, index: any) => (
-                            <Box
-                              key={index}
-                              borderRadius={"50%"}
-                              paddingX={style.padding.xxs}
-                            >
-                              <Image
-                                src={GlobalIcons[chains[reward.chainId].chainImage]}
-                                height={"2rem"}
-                                width={"2rem"}
-                                alt=""
-                              />
-                            </Box>
-                          ))}
+                        <Box
+                          display={"flex"}
+                          justifyContent="flex-end"
+                          width="25%"
+                        >
+                          {hookXP?.userXPList?.claims?.map(
+                            (reward: any, index: any) => (
+                              <Box
+                                key={index}
+                                borderRadius={"50%"}
+                                paddingX={style.padding.xxs}
+                              >
+                                <Image
+                                  src={
+                                    GlobalIcons[
+                                      chains[reward.chainId].chainImage
+                                    ]
+                                  }
+                                  height={"2rem"}
+                                  width={"2rem"}
+                                  alt=""
+                                />
+                              </Box>
+                            )
+                          )}
                         </Box>
                       </FlexRow>
                     </FlexColumn>
@@ -274,69 +285,80 @@ const User = () => {
             </FlexColumn>
           )
         ) : // {hasNft ? Box : No user found}
-          !hookAlchemy.isLoading ? (
-            <>
-              {hasNft ? (
-                <>
-                  <Box
-                    borderRadius={style.card.borderRadius.default}
-                    background="#030c1a"
-                    border={style.card.border.card}
-                  >
-                    <FlexColumn>
-                      <Box
-                        height="15rem"
-                        width={"100%"}
-                        background={`-webkit-linear-gradient(
+        !hookAlchemy.isLoading ? (
+          <>
+            {hasNft ? (
+              <>
+                <Box
+                  borderRadius={style.card.borderRadius.default}
+                  background="#030c1a"
+                  border={style.card.border.card}
+                >
+                  <FlexColumn>
+                    <Box
+                      height="15rem"
+                      width={"100%"}
+                      background={`-webkit-linear-gradient(
                           120deg,
                           #74B2F9,
                           #0629A6
                         )`}
-                        borderTopRadius={style.card.borderRadius.default}
-                      ></Box>
-                      <FlexRow
-                        hrAlign="space-between"
-                        paddingLeft="xl"
-                        paddingRight="xl"
-                        paddingTop="md"
-                        paddingBottom="md"
+                      borderTopRadius={style.card.borderRadius.default}
+                    ></Box>
+                    <FlexRow
+                      hrAlign="space-between"
+                      paddingLeft="xl"
+                      paddingRight="xl"
+                      paddingTop="md"
+                      paddingBottom="md"
+                    >
+                      <FlexRow width="fit-content">
+                        <Image
+                          src={GlobalIcons["avatar-default"]}
+                          height={"4rem"}
+                          width={"4rem"}
+                          objectFit={"cover"}
+                          alt="avatar-default"
+                        />
+                        <Text
+                          fontSize={`${style.font.h4}`}
+                          mb={0}
+                          marginLeft={style.margin.xxs}
+                        >
+                          {truncateAddress(userAddress)}
+                        </Text>
+                      </FlexRow>
+                      <Box
+                        display={"flex"}
+                        justifyContent="flex-end"
+                        width="25%"
                       >
-                        <FlexRow width="fit-content">
-                          <Image
-                            src={GlobalIcons["avatar-default"]}
-                            height={"4rem"}
-                            width={"4rem"}
-                            objectFit={"cover"}
-                            alt="avatar-default"
-                          />
-                          <Text fontSize={`${style.font.h4}`} mb={0} marginLeft={style.margin.xxs}>
-                            {truncateAddress(userAddress)}
-                          </Text>
-                        </FlexRow>
-                        <Box display={"flex"} justifyContent="flex-end" width="25%">
-                          {hookXP?.userXPList?.claims?.map((reward: any, index: any) => (
+                        {hookXP?.userXPList?.claims?.map(
+                          (reward: any, index: any) => (
                             <Box
                               key={index}
                               borderRadius={"50%"}
                               paddingX={style.padding.xxs}
                             >
                               <Image
-                                src={GlobalIcons[chains[reward.chainId].chainImage]}
+                                src={
+                                  GlobalIcons[chains[reward.chainId].chainImage]
+                                }
                                 height={"2rem"}
                                 width={"2rem"}
                                 alt=""
                               />
                             </Box>
-                          ))}
-                        </Box>
-                      </FlexRow>
-                    </FlexColumn>
-                  </Box>
-                  <FlexRow marginTop="xxl" hrAlign="space-between">
-                    <Box width="55%" marginRight="10px">
-
-                      <Flex marginTop={`${style.margin.lg}`}>
-                        {/* <AssetCard
+                          )
+                        )}
+                      </Box>
+                    </FlexRow>
+                  </FlexColumn>
+                </Box>
+                <FlexRow marginTop="xxl" hrAlign="space-between">
+                  <Box width="55%" marginRight="10px">
+                    <Flex marginTop={`${style.margin.lg}`}>
+                      {/* <AssetCard
                           title={String(hookAlchemy.nftByAddress.length)}
                           description="Tokens"
                           icon="/assets/icons/brand-token.svg"
@@ -344,97 +366,97 @@ const User = () => {
                             tokenModal.onOpen();
                           }}
                         /> */}
-                        {/* <UserAssetCard
+                      {/* <UserAssetCard
                   title="7"
                   description="Domains"
                   icon="/assets/icons/brand-globe.svg"
                 /> */}
-                        <AssetCard
-                          title={hookXP?.userXPList?.points}
-                          description="XPs"
-                          icon="/assets/icons/brand-bolt.svg"
-                          onClick={() => {
-                            if (isOwner) {
-                              userXPModal.onOpen();
-                            }
-                          }}
-                        />
-                      </Flex>
-                    </Box>
-                    <Box width="45%">
-                      {/* <Heading
+                      <AssetCard
+                        title={hookXP?.userXPList?.points}
+                        description="XPs"
+                        icon="/assets/icons/brand-bolt.svg"
+                        onClick={() => {
+                          if (isOwner) {
+                            userXPModal.onOpen();
+                          }
+                        }}
+                      />
+                    </Flex>
+                  </Box>
+                  <Box width="45%">
+                    {/* <Heading
                 fontSize={`${style.font.h3}`}
                 fontWeight={`${style.fontWeight.dark}`}
               >
                 Recommations
               </Heading> */}
-                      <Box
-                        flex="1"
-                        height={"20rem"}
-                        marginTop={`${style.margin.lg}`}
-                        borderRadius={style.card.borderRadius.default}
-                        border={style.card.border.card}
-                        overflow="hidden"
+                    <Box
+                      flex="1"
+                      height={"20rem"}
+                      marginTop={`${style.margin.lg}`}
+                      borderRadius={style.card.borderRadius.default}
+                      border={style.card.border.card}
+                      overflow="hidden"
+                    >
+                      <Carousel
+                        autoPlay
+                        // showIndicators={false}
+                        showArrows={false}
+                        showStatus={false}
+                        stopOnHover={true}
+                        showThumbs={false}
+                        infiniteLoop
+                        interval={3000}
                       >
-                        <Carousel
-                          autoPlay
-                          // showIndicators={false}
-                          showArrows={false}
-                          showStatus={false}
-                          stopOnHover={true}
-                          showThumbs={false}
-                          infiniteLoop
-                          interval={3000}
-                        >
-                          <CarouselSlide
-                            height="20rem"
-                            title="Explore From MACHA"
-                            description="POSTS • PROFILES • BLOGS"
-                            headingFontSize={style.font.h6}
-                            descriptionFontSize={style.font.h7}
-                            avatarImage={GlobalIcons["logo-Macha-circular"]}
-                            // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
-                            bgGrid=""
-                            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-                            bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
-                            buttonText="Explore"
-                          />
-                          <CarouselSlide
-                            height="20rem"
-                            title="View From Contracts"
-                            description="LENS • MIRROR • POAP"
-                            headingFontSize={style.font.h6}
-                            descriptionFontSize={style.font.h7}
-                            avatarImage={GlobalIcons["base-SDK"]}
-                            // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
-                            bgGrid=""
-                            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-                            bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
-                            buttonText="View Contracts Now"
-                          />
-                          <CarouselSlide
-                            height="20rem"
-                            title="Discover From Chains"
-                            headingFontSize={style.font.h6}
-                            descriptionFontSize={style.font.h7}
-                            description="TRANSACTIONS • INDEXING • CHAINS"
-                            avatarImage={GlobalIcons["base-chain"]}
-                            // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
-                            bgGrid=""
-                            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-                            bannerImage="/assets/explore/home-carousal-3-hero-image.svg"
-                            buttonText="View Chains"
-                          />
-                        </Carousel>
-                      </Box>
+                        <CarouselSlide
+                          height="20rem"
+                          title="Explore From MACHA"
+                          description="POSTS • PROFILES • BLOGS"
+                          headingFontSize={style.font.h6}
+                          descriptionFontSize={style.font.h7}
+                          avatarImage={GlobalIcons["logo-Macha-circular"]}
+                          // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
+                          bgGrid=""
+                          bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+                          bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
+                          buttonText="Explore"
+                        />
+                        <CarouselSlide
+                          height="20rem"
+                          title="View From Contracts"
+                          description="LENS • MIRROR • POAP"
+                          headingFontSize={style.font.h6}
+                          descriptionFontSize={style.font.h7}
+                          avatarImage={GlobalIcons["base-SDK"]}
+                          // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
+                          bgGrid=""
+                          bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+                          bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
+                          buttonText="View Contracts Now"
+                        />
+                        <CarouselSlide
+                          height="20rem"
+                          title="Discover From Chains"
+                          headingFontSize={style.font.h6}
+                          descriptionFontSize={style.font.h7}
+                          description="TRANSACTIONS • INDEXING • CHAINS"
+                          avatarImage={GlobalIcons["base-chain"]}
+                          // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
+                          bgGrid=""
+                          bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+                          bannerImage="/assets/explore/home-carousal-3-hero-image.svg"
+                          buttonText="View Chains"
+                        />
+                      </Carousel>
                     </Box>
-                  </FlexRow>
+                  </Box>
+                </FlexRow>
 
-                  {/* <FlexColumn>
+                {/* <FlexColumn>
             <TokenRow />
           </FlexColumn> */}
 
-                  {/* <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
+                {/* <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
             <Heading
               fontSize={`${style.font.h3}`}
               fontWeight={`${style.fontWeight.dark}`}
@@ -462,48 +484,48 @@ const User = () => {
             </FlexRow>
           </FlexColumn> */}
 
-                  <FlexColumn vrAlign="flex-start">
-                    <CardNative
-                      marginTop="xxl"
-                      header={
-                        <>
-                          <FlexRow hrAlign="space-between">
-                            <Heading
-                              fontSize={`${style.font.h3}`}
-                              fontWeight={`${style.fontWeight.dark}`}
-                              marginBottom={"0px"}
-                            >
-                              Feed
-                            </Heading>
-                            <InputSearch
-                              width="25%"
-                              height="40px"
-                              placeholder="Search Meta"
-                            />
-                          </FlexRow>
-                        </>
-                      }
-                    >
-                      <MetaUserList hookData={useUserMeta} />
-                    </CardNative>
-                  </FlexColumn>
+                <FlexColumn vrAlign="flex-start">
+                  <CardNative
+                    marginTop="xxl"
+                    header={
+                      <>
+                        <FlexRow hrAlign="space-between">
+                          <Heading
+                            fontSize={`${style.font.h3}`}
+                            fontWeight={`${style.fontWeight.dark}`}
+                            marginBottom={"0px"}
+                          >
+                            Feed
+                          </Heading>
+                          <InputSearch
+                            width="25%"
+                            height="40px"
+                            placeholder="Search Meta"
+                          />
+                        </FlexRow>
+                      </>
+                    }
+                  >
+                    <MetaUserList hookData={useUserMeta} />
+                  </CardNative>
+                </FlexColumn>
 
-                  <UserAssetsModal modal={userAssetsModal} />
-                  <UserXPModal modal={userXPModal} />
-                  {/* <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} /> */}
-                </>
-              ) : (
-                <>
-                  <NavMeta />
-                  <Box>No user profile</Box>
-                </>
-              )}
-            </>
-          ) : (
-            <FlexColumn>
-              <Loader size="lg" />
-            </FlexColumn>
-          )}
+                <UserAssetsModal modal={userAssetsModal} />
+                <UserXPModal modal={userXPModal} />
+                {/* <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} /> */}
+              </>
+            ) : (
+              <>
+                <NavMeta />
+                <Box>No user profile</Box>
+              </>
+            )}
+          </>
+        ) : (
+          <FlexColumn>
+            <Loader size="lg" />
+          </FlexColumn>
+        )}
       </>
     );
   };

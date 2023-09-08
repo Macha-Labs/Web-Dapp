@@ -141,17 +141,19 @@ export default function Home() {
             }
           ></Marquee>
         )}
-        <Box style={{
-          display: 'flex',
-          flexDirection: "row"
-        }}>
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
           <CardNative
             height="fit-content"
             marginTop="xl"
             width="50%"
             marginRight="lg"
             header={
-              <FlexRow hrAlign="space-between">
+              <FlexRow hrAlign="space-between" overFlow={"hidden"}>
                 <Heading
                   fontSize={style.font.h3}
                   fontWeight={600}

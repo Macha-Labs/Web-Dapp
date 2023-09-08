@@ -27,7 +27,7 @@ export const commonStyle: any = {
     xxl: "3.2rem",
     xxxl: "4rem",
     "4xl": "6rem",
-    "5xl": "10rem",
+    "5xl": "8rem",
     nav: "70px",
     subnav: "60px",
   },
@@ -75,7 +75,7 @@ export const darkStyle = {
   },
   nav: {
     width: "100%",
-    widthLeft: "5%",
+    widthLeft: "15%",
     height: "75px",
     bg: { default: "#00040d", meta: "#000A24" },
     border: { default: "2px solid #0F172E" },

@@ -17,7 +17,8 @@ type Props = {
   paddingRight?: string;
   paddingTop?: string;
   paddingBottom?: string;
-  position?: any
+  position?: any;
+  overFlow?: any;
 };
 
 export default function FlexRow({
@@ -37,7 +38,8 @@ export default function FlexRow({
   paddingLeft,
   paddingRight,
   paddingTop,
-  position
+  position,
+  overFlow,
 }: Props) {
   return (
     <div
@@ -61,7 +63,8 @@ export default function FlexRow({
         marginLeft: marginLeft ? `${gstyle.margin[marginLeft]}` : "0px",
         marginBottom: marginBottom ? `${gstyle.margin[marginBottom]}` : "0px",
         marginRight: marginRight ? `${gstyle.margin[marginRight]}` : "0px",
-        position: position ? position : "static"
+        position: position ? position : "static",
+        overflow: overFlow ? overFlow : "visible",
       }}
     >
       {children}

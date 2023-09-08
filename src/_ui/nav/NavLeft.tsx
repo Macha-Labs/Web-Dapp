@@ -1,7 +1,7 @@
 import CreatorModal from "@/components/studio/CreatorModal";
 import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import { style } from "@/styles/StyledConstants";
-import { Image, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading, Image, useDisclosure } from "@chakra-ui/react";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -11,7 +11,7 @@ import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
 
 const NavLeft = (props: any) => {
-  const {address} = useAccount()
+  const { address } = useAccount();
   const { openConnectModal } = useConnectModal();
   const router = useRouter();
   const creatorModal = useDisclosure();
@@ -38,9 +38,10 @@ const NavLeft = (props: any) => {
               <FlexColumn height="fit-content">
                 <Link href="/">
                   <Image
-                    src="../../assets/Logo.png"
-                    height={"40px"}
-                    borderRadius={"8px"}
+                    src="../../assets/MACHALogotext.svg"
+                    height={"30px"}
+                    marginTop={style.margin.sm}
+                    // borderRadius={"8px"}
                     alt="logo"
                     onClick={() => {
                       router.push("/");
@@ -59,65 +60,82 @@ const NavLeft = (props: any) => {
                   /> */}
                 </Link>
               </FlexColumn>
-              <FlexColumn height="fit-content">
-                <IconImage
-                  onClick={() => {
-                    creatorModal.onOpen();
-                  }}
-                  slug={router.pathname === "/create" ? "icon-add" : "icon-add"}
-                  size="md"
-                  style={{
-                    className: `m-b-1 ${
-                      router.pathname === "/create"
-                        ? "state_active "
-                        : "state_hover"
-                    } `,
-                  }}
-                />
-                <Link href="/explore">
-                  <IconImage
-                    slug={
-                      router.pathname === "/explore"
-                        ? "icon-compass"
-                        : "icon-compass-outline"
-                    }
-                    size="md"
-                    style={{
-                      className: `m-b-1 ${
-                        router.pathname === "/explore"
-                          ? "state_active"
-                          : "state_hover"
-                      } `,
-                    }}
-                  />
-                </Link>
-                <IconImage
-                  onClick={() => {
-                    if (address) {
-                      router.push(`/u/${address}`);
-                    } else {
-                      if (openConnectModal) {
-                        openConnectModal();
+              <Box width={"75%"} marginX={"auto"}>
+                <FlexColumn height="fit-content" vrAlign="flex-start">
+                  <Link
+                    href="/explore"
+                    style={{ marginBottom: style.margin.sm }}
+                  >
+                    <FlexRow>
+                      <IconImage
+                        slug={
+                          router.pathname === "/explore"
+                            ? "icon-compass"
+                            : "icon-compass-outline"
+                        }
+                        size="md"
+                        style={{
+                          className: ` ${
+                            router.pathname === "/explore"
+                              ? "state_active"
+                              : "state_hover"
+                          } `,
+                        }}
+                      />
+                      <Heading
+                        fontSize={style.font.h5}
+                        marginBottom={"0px"}
+                        marginLeft={style.margin.xxs}
+                      >
+                        Explore
+                      </Heading>
+                    </FlexRow>
+                  </Link>
+
+                  <Box
+                    cursor={"pointer"}
+                    display={"flex"}
+                    alignItems={"center"}
+                    justifyContent={"flex-start"}
+                    onClick={() => {
+                      if (address) {
+                        router.push(`/u/${address}`);
+                      } else {
+                        if (openConnectModal) {
+                          openConnectModal();
+                        }
+                        // router.push(`/u/${$address}`);
                       }
-                      // router.push(`/u/${$address}`);
-                    }
-                  }}
-                  slug={
-                    "icon-user"
-                    // router.pathname === `/u/${$address}`
-                    //   ? "icon-user"
-                    //   : "icon-user"
-                  }
-                  size="md"
-                  style={{
-                    className: `m-b-1 ${
-                      router.pathname === `/u/${address}`
-                        ? "state_active "
-                        : "state_hover"
-                    } `,
-                  }}
-                />
-              </FlexColumn>
+                    }}
+                  >
+                    <FlexRow>
+                      <IconImage
+                        slug={
+                          "icon-user"
+                          // router.pathname === `/u/${$address}`
+                          //   ? "icon-user"
+                          //   : "icon-user"
+                        }
+                        size="md"
+                        style={{
+                          className: `${
+                            router.pathname === `/u/${address}`
+                              ? "state_active "
+                              : "state_hover"
+                          } `,
+                        }}
+                      />
+                      <Heading
+                        fontSize={style.font.h5}
+                        marginBottom={"0px"}
+                        marginLeft={style.margin.xxs}
+                      >
+                        Profile
+                      </Heading>
+                    </FlexRow>
+                  </Box>
+                </FlexColumn>
+              </Box>
             </FlexColumn>
           </div>
         </div>

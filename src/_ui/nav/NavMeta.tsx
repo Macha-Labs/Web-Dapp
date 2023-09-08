@@ -8,6 +8,7 @@ import { useState } from "react";
 import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
 import InputSearch from "../input/InputSearch";
+import SearchInput from "@/components/search/SearchInput";
 
 type Props = {
   rightElem?: any;
@@ -39,16 +40,7 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
           }}
         >
           <FlexRow vrAlign="center" hrAlign="space-between">
-            <Link href="/" style={{ paddingRight: `${style.margin.sm}` }}>
-              <Image
-                className="headerLogo"
-                src="/assets/MACHALogotext.svg"
-                alt="logo"
-                width={128}
-                height={47}
-                // width={246}
-              />
-            </Link>
+            <SearchInput searchWidth="50%" />
             <Box
               style={{ display: "flex", alignItems: "center" }}
               width={isSearchOpen ? "80%" : "fit-content"}
