@@ -96,11 +96,11 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
   }, [hookAlchemy.nftByAddress, router.query.userId]);
 
   useEffect(() => {
-    if (address && isConnected) {
-      hookXP._fetch();
-      hookXP._fetchUserXP(address);
-    }
-  }, [address]);
+    // if (address && isConnected) {
+    hookXP._fetch();
+    // hookXP._fetchUserXP(address);
+    // }
+  }, []);
 
   return (
     <FlexRow hrAlign="space-between" height="92vh" overFlow={"hidden"}>
@@ -226,7 +226,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                   </Text>
                   <FlexRow hrAlign="center" width="15%">
                     <Text mb={0}>
-                      {hookXP?.userXPList ? hookXP?.userXPList?.xps_earned : 0}
+                      {/* {hookXP?.userXPList ? hookXP?.userXPList?.xps_earned : 0} */}
                     </Text>
                     <Image src={GlobalIcons["icon-bolt"]} />
                   </FlexRow>
@@ -234,7 +234,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
               </>
             }
           >
-            <Box marginTop="1rem" marginBottom={style.margin.md}>
+            <Box marginTop="1rem" marginBottom={style.margin.md} width={"100%"}>
               <TableContainer rounded={"md"} height="400px" overflowY="scroll">
                 <Table variant="unstyled" colorScheme="whiteAlpha" size="sm">
                   <Thead
@@ -259,46 +259,39 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                       >
                         Activities
                       </Th>
-                      <Box
+
+                      <Th
                         style={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          alignItems: "center",
+                          paddingTop: "20px",
+                          paddingBottom: "20px",
+                          textAlign: "center",
+                          color: "white",
+                          fontWeight: "600",
+                          fontSize: style.font.h6,
+                          borderCollapse: "separate",
+                          borderSpacing: "0 1rem",
+                          width: "50%",
                         }}
                       >
-                        <Th
-                          style={{
-                            paddingTop: "20px",
-                            paddingBottom: "20px",
-                            textAlign: "center",
-                            color: "white",
-                            fontWeight: "600",
-                            fontSize: style.font.h6,
-                            borderCollapse: "separate",
-                            borderSpacing: "0 1rem",
-                            width: "50%",
-                          }}
-                        >
-                          Status
-                        </Th>
-                        <Th
-                          style={{
-                            paddingTop: "20px",
-                            paddingBottom: "20px",
-                            textAlign: "center",
-                            color: "white",
-                            fontWeight: "600",
-                            fontSize: style.font.h6,
-                            borderCollapse: "separate",
-                            borderSpacing: "0 1rem",
-                          }}
-                        >
-                          <FlexRow>
-                            <Text mb={0}>XP</Text>
-                            <Image src={GlobalIcons["icon-bolt"]} />
-                          </FlexRow>
-                        </Th>
-                      </Box>
+                        Status
+                      </Th>
+                      <Th
+                        style={{
+                          paddingTop: "20px",
+                          paddingBottom: "20px",
+                          textAlign: "center",
+                          color: "white",
+                          fontWeight: "600",
+                          fontSize: style.font.h6,
+                          borderCollapse: "separate",
+                          borderSpacing: "0 1rem",
+                        }}
+                      >
+                        <FlexRow>
+                          <Text mb={0}>XP</Text>
+                          <Image src={GlobalIcons["icon-bolt"]} />
+                        </FlexRow>
+                      </Th>
                     </Tr>
                   </Thead>
                   <Tbody>
