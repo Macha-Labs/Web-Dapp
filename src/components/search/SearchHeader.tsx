@@ -83,6 +83,8 @@ const SearchHeader = ({ options }: Props) => {
               border="1px solid rgba(15, 23, 46, 1) !important"
               paddingY={style.padding.xxs}
               overflow="hidden"
+              position={"absolute"}
+              top="20"
             >
               <Box overflow={"scroll"} height={"15rem"}>
                 <Box
