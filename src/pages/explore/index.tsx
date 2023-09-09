@@ -141,52 +141,6 @@ export default function Home() {
             }
           ></Marquee>
         )}
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <CardNative
-            height="fit-content"
-            marginTop="xl"
-            width="50%"
-            marginRight="lg"
-            header={
-              <FlexRow hrAlign="space-between" overFlow={"hidden"}>
-                <Heading
-                  fontSize={style.font.h3}
-                  fontWeight={600}
-                  className="m-b-0"
-                >
-                  Leaderboard - Top 30
-                </Heading>
-                <Image src={GlobalIcons["icon-search"]} cursor="pointer" />
-              </FlexRow>
-            }
-          >
-            <LeaderboardTable />
-          </CardNative>
-          <CardNative
-            height="fit-content"
-            marginTop="xl"
-            width="50%"
-            header={
-              <FlexRow hrAlign="space-between">
-                <Heading
-                  fontSize={style.font.h3}
-                  fontWeight={600}
-                  className="m-b-0"
-                >
-                  Earn Rewards
-                </Heading>
-                <Image src={GlobalIcons["icon-search"]} cursor="pointer" />
-              </FlexRow>
-            }
-          >
-            <UserXpTable />
-          </CardNative>
-        </Box>
 
         <CardNative
           height="fit-content"
