@@ -39,31 +39,31 @@ const Tabs = ({
             return (
               <StyledLi
                 className={`nav-item  ${
-                  value === option.value ? "active" : ""
+                  value === option?.value ? "active" : ""
                 }`}
                 key={idx}
-                onClick={() => onChange(option.value)}
+                onClick={() => onChange(option?.value)}
                 style={{ marginRight: `${style.margin["md"]}` }}
               >
                 <Link
                   className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0  "
-                  href={option.href}
+                  href={option?.href ? option?.href : ""}
                   style={gstyle}
                 >
                   <FlexRow>
                     {icon && <IconImage slug={icon.slug} />}
                     <Text
                       fontSize={style.font.h5}
-                      fontWeight={value == option.value ? "600" : "400"}
+                      fontWeight={value == option?.value ? "600" : "400"}
                       bgGradient={
-                        value == option.value
+                        value == option?.value
                           ? "linear(100.07deg, #197cec 100%, #004889 100%)"
                           : "linear(100.07deg, #fff 100%, #fff 100%)"
                       }
                       bgClip="text"
                       className="m-b-0"
                     >
-                      {option.value}
+                      {option?.value}
                     </Text>
                   </FlexRow>
                 </Link>

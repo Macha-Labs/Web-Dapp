@@ -78,13 +78,13 @@ export const FlexWindow = ({
       {view == "both" && (
         <Box width={"100%"}>
           <Box
-            width={"15%"}
+            width={"5%"}
             className="window-left"
             style={{ height: "100vh", position: "fixed", left: "0" }}
           >
             {navLeft}
           </Box>
-          <Box width="85%" className="window-right" marginLeft={"15%"}>
+          <Box width="95%" className="window-right" marginLeft={"5%"}>
             {navTop && (
               <div
                 className="windowTop"
@@ -94,7 +94,7 @@ export const FlexWindow = ({
                   padding: `${padding ? padding : "0% 3%"}`,
                   paddingTop: `${style.margin.xs}`,
                   zIndex: "1000",
-                  width: "85%",
+                  width: "95%",
                   background: `${style.body.bg.default}`,
                   display: "flex",
                   justifyContent: "center",

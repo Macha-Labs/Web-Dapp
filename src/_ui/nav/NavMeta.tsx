@@ -1,6 +1,6 @@
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import useSearch from "@/hooks/studio/useSearch";
-import { Box } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { style } from "../../styles/StyledConstants";
@@ -36,30 +36,30 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
             width: "100%",
           }}
         >
-          <FlexRow vrAlign="space-between" hrAlign="space-between">
-            <InputSearch
-              width="30%"
-              height="2.2rem"
-              defaultValue={hookSearch.searchString}
-              value={hookSearch.searchString}
-              onChange={(e: any) => hookSearch.setSearchString(e.target.value)}
-              onKeydown={(e: any) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  router.push(`/search?search=${hookSearch.searchString}`);
+          <FlexRow vrAlign="center" hrAlign="space-between">
+            <Image height="30px" src="/assets/macha-image-text.svg" />
+            <FlexRow hrAlign="flex-end">
+              <InputSearch
+                width="30%"
+                height="2.2rem"
+                defaultValue={hookSearch.searchString}
+                value={hookSearch.searchString}
+                onChange={(e: any) =>
+                  hookSearch.setSearchString(e.target.value)
                 }
-              }}
-            />
-            <Box
-              style={{ display: "flex", alignItems: "center" }}
-              width={"fit-content"}
-            >
+                onKeydown={(e: any) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    router.push(`/search?search=${hookSearch.searchString}`);
+                  }
+                }}
+              />
               <ConnectWalletButton
                 showBalance={false}
                 // height="2.2rem"
                 showStudio={true}
               />
-            </Box>
+            </FlexRow>
           </FlexRow>
         </Box>
       </Box>

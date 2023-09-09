@@ -56,33 +56,35 @@ const CardNative = ({
         justifyContent: "space-between",
       }}
     >
-      {header && (
-        <Box>
-          <Box padding={style.padding.sm}>{header}</Box>
-          <Divider
-            mt="0px"
-            mb="0px"
-            width={"100%"}
-            alignSelf={"flex-end"}
-            borderColor={"#102540"}
-          />
-        </Box>
-      )}
+      <Box>
+        {header && (
+          <Box>
+            <Box padding={style.padding.sm}>{header}</Box>
+            <Divider
+              mt="0px"
+              mb="0px"
+              width={"100%"}
+              alignSelf={"flex-end"}
+              borderColor={"#102540"}
+            />
+          </Box>
+        )}
 
-      {children && (
-        <Box
-          style={{
-            padding: `${style.padding.sm}`,
-            display: "flex",
-            flexDirection: "column",
-            // flex: "1",
-            alignItems: hrAlign ? hrAlign : "flex-start",
-          }}
-          onClick={onClick}
-        >
-          {children}
-        </Box>
-      )}
+        {children && (
+          <Box
+            style={{
+              padding: `${style.padding.sm}`,
+              display: "flex",
+              flexDirection: "column",
+              // flex: "1",
+              alignItems: hrAlign ? hrAlign : "flex-start",
+            }}
+            onClick={onClick}
+          >
+            {children}
+          </Box>
+        )}
+      </Box>
       {footer && (
         <Box
           display={"flex"}
