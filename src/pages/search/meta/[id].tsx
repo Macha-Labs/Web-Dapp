@@ -650,7 +650,10 @@ const Meta = () => {
                             padding={style.padding.xs}
                             width={"100%"}
                           >
-                            <FlexRow hrAlign="space-between">
+                            <FlexRow
+                              hrAlign="space-between"
+                              height="fit-content"
+                            >
                               <Heading
                                 mb="0"
                                 fontSize={style.font.h6}
