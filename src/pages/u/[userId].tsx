@@ -27,6 +27,7 @@ import {
   Heading,
   Image,
   Text,
+  useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -88,6 +89,8 @@ const User = () => {
 
   const UserInfo = () => {
     const userAddress = router.query.userId;
+    const { colorMode } = useColorMode()
+
     return (
       <>
         {isOwner ? (
@@ -97,7 +100,7 @@ const User = () => {
                 <>
                   <Box
                     borderRadius={style.card.borderRadius.default}
-                    background="#030c1a"
+                    background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
                     border={style.card.border.card}
                   >
                     <FlexColumn>
@@ -127,6 +130,7 @@ const User = () => {
                             alt="avatar-default"
                           />
                           <Text
+                            color={colorMode == "light" ? "#000" : ""}
                             fontSize={`${style.font.h4}`}
                             mb={0}
                             marginLeft={style.margin.xxs}
@@ -248,6 +252,7 @@ const User = () => {
                         <>
                           <FlexRow hrAlign="space-between">
                             <Heading
+                              color={colorMode == "light" ? "#000" : ""}
                               fontSize={`${style.font.h3}`}
                               fontWeight={`${style.fontWeight.dark}`}
                               marginBottom={"0px"}
@@ -290,7 +295,7 @@ const User = () => {
                 <>
                   <Box
                     borderRadius={style.card.borderRadius.default}
-                    background="#030c1a"
+                    background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
                     border={style.card.border.card}
                   >
                     <FlexColumn>
@@ -320,6 +325,7 @@ const User = () => {
                             alt="avatar-default"
                           />
                           <Text
+                            color={colorMode == "light" ? "#000" : ""}
                             fontSize={`${style.font.h4}`}
                             mb={0}
                             marginLeft={style.margin.xxs}
@@ -418,7 +424,7 @@ const User = () => {
                             avatarImage={GlobalIcons["logo-Macha-circular"]}
                             // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
                             bgGrid=""
-                            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+                            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
                             bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
                             buttonText="Explore"
                           />
@@ -431,7 +437,7 @@ const User = () => {
                             avatarImage={GlobalIcons["base-SDK"]}
                             // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
                             bgGrid=""
-                            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+                            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
                             bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
                             buttonText="View Contracts Now"
                           />
@@ -444,7 +450,7 @@ const User = () => {
                             avatarImage={GlobalIcons["base-chain"]}
                             // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
                             bgGrid=""
-                            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
+                            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
                             bannerImage="/assets/explore/home-carousal-3-hero-image.svg"
                             buttonText="View Chains"
                           />
@@ -492,6 +498,7 @@ const User = () => {
                         <>
                           <FlexRow hrAlign="space-between">
                             <Heading
+                              color={colorMode == "light" ? "#000" : ""}
                               fontSize={`${style.font.h3}`}
                               fontWeight={`${style.fontWeight.dark}`}
                               marginBottom={"0px"}
@@ -521,11 +528,12 @@ const User = () => {
                   <Box marginTop={style.margin.lg}>
                     <FlexRow hrAlign="center">
                       <Image
-                        src="/assets/user-search-empty-state.svg"
+                        src={colorMode == "light" ? "/assets/userSearch-emptyState_light.svg" : "/assets/user-search-empty-state.svg"}
                         alt="no user found"
                       />
                     </FlexRow>
                     <Text
+                      color={colorMode == "light" ? "#000" : ""}
                       textAlign="center"
                       fontSize={style.font.h2}
                       marginTop={style.margin.lg}
@@ -534,11 +542,12 @@ const User = () => {
                     </Text>
                     <FlexRow hrAlign="center" vrAlign="center">
                       <FlexColumn>
-                        <Text textAlign="center" marginBottom="0">
+                        <Text color={colorMode == "light" ? "#000" : ""} textAlign="center" marginBottom="0">
                           The user you are looking from may not have claimed any
                           NFT yet,
                         </Text>
                         <Text
+                          color={colorMode == "light" ? "#000" : ""}
                           textAlign="center"
                           marginTop="0"
                           marginBottom={style.margin.xl}

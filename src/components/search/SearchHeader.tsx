@@ -2,7 +2,7 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
 import useSearch from "@/hooks/studio/useSearch";
 import { style } from "@/styles/StyledConstants";
-import { Box, InputGroup, InputRightElement, Text } from "@chakra-ui/react";
+import { Box, InputGroup, InputRightElement, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import SearchRow from "./SearchRow";
@@ -16,7 +16,8 @@ const SearchHeader = ({ options }: Props) => {
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const searchRef = useRef(null);
   const router = useRouter();
-
+  const {colorMode} = useColorMode()
+  
   return (
     <>
       <FlexColumn width="50%" height="fit-content">
@@ -54,7 +55,7 @@ const SearchHeader = ({ options }: Props) => {
                 fontSize: `${style.font.h4}`,
                 paddingRight: `${style.padding.xl}`,
                 paddingLeft: `${style.padding.xl}`,
-                background: `${style.input.bg.default}`,
+                background: `${colorMode == "light" ? "rgba(255,255,255,1)" : style.input.bg.default}`,
                 border: `${style.input.border.default}`,
                 width: "100%",
               }}

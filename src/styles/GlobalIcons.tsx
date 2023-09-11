@@ -140,6 +140,8 @@ const GlobalIcons: any = {
   "icon-qr":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
   "icon-user": "/assets/icons/Base_blue_icons/base-blue-user.svg",
+  "icon-user-outline": "/assets/icons/user-outline.svg",
+  "icon-brand-user": "/assets/icons/brand-user.svg",
   "icon-dark-user": "/assets/icons/Dark_icons/dark-user.svg",
   "icon-dark-add": "/assets/icons/Dark_icons/dark-add.svg",
   "icon-dark-edit": "/assets/icons/Dark_icons/dark-edit.svg",
@@ -160,6 +162,8 @@ const GlobalIcons: any = {
   "icon-coloured-deploy": "/assets/icons/coloured-deploy.svg",
   "icon-blue-tick": "/assets/icons/Blue%20tick.svg",
   "icon-search": "/assets/icons/base-blue-search.svg",
+  "icon-search-outline": "/assets/icons/search-outline.svg",
+  "icon-brand-search": "/assets/icons/brand-search.svg",
   "icon-play": "/assets/icons/base-blue-play.svg",
   "icon-pause": "/assets/icons/base-blue-pause.svg",
   "icon-almost-there": "/assets/icons/database-restore%201.svg",

@@ -67,14 +67,11 @@ const NavLeft = (props: any) => {
                     <FlexRow>
                       <IconImage
                         slug={
-                          router.pathname === "/"
-                            ? "icon-search"
-                            : "icon-search"
+                          router.pathname === "/" ? "icon-search" : "icon-search"
                         }
                         size="md"
                         style={{
-                          className: ` ${
-                            router.pathname === "/"
+                          className: ` ${router.pathname === "/"
                               ? "state_active"
                               : "state_hover"
                             } `,
@@ -109,8 +106,8 @@ const NavLeft = (props: any) => {
                         size="md"
                         style={{
                           className: `${router.pathname === `/u/${address}`
-                              ? "state_active "
-                              : "state_hover"
+                            ? "state_active "
+                            : "state_hover"
                             } `,
                         }}
                       />

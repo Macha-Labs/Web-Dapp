@@ -31,7 +31,7 @@ const CarouselSlide = ({
   height,
 }: Props) => {
 
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode()
 
   return (
     <Box
@@ -63,7 +63,7 @@ const CarouselSlide = ({
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "flex-start",
+              justifyContent: "flex-start ",
               width: "100%",
               // marginLeft: `${style.margin.sm}`,
             }}
@@ -78,6 +78,7 @@ const CarouselSlide = ({
             </Box>
             <Box width="90%" textAlign="left" marginLeft={style.margin.lg}>
               <Heading
+                color={colorMode == "light" ? "#000" : ""}
                 fontSize={headingFontSize ? headingFontSize : "2.2rem"}
                 p={0}
                 // lineHeight={style.font.h1}
@@ -88,6 +89,7 @@ const CarouselSlide = ({
                 {title}
               </Heading>
               <Text
+                color={colorMode == "light" ? "#000" : ""}
                 fontSize={
                   descriptionFontSize ? descriptionFontSize : style.font.h7
                 }

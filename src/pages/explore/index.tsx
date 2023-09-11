@@ -91,8 +91,8 @@ export default function Home() {
             avatarImage={GlobalIcons["logo-Macha-circular"]}
             // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
             bgGrid=""
-            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-            bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
+            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+            bannerImage={"/assets/explore/home-carousal-1-hero-image.svg"}
             buttonText="Explore"
           />
           <CarouselSlide
@@ -101,8 +101,8 @@ export default function Home() {
             avatarImage={GlobalIcons["base-SDK"]}
             // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
             bgGrid=""
-            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-            bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
+            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+            bannerImage={"/assets/explore/home-carousal-2-hero-image.svg"}
             buttonText="View Contracts Now"
           />
           <CarouselSlide
@@ -111,8 +111,8 @@ export default function Home() {
             avatarImage={GlobalIcons["base-chain"]}
             // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
             bgGrid=""
-            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-            bannerImage="/assets/explore/home-carousal-3-hero-image.svg"
+            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+            bannerImage={"/assets/explore/home-carousal-3-hero-image.svg"}
             buttonText="View Chains"
           />
         </Carousel>
