@@ -4,14 +4,22 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import NftCard from "@/components/cards/NftCard";
 import { style } from "@/styles/StyledConstants";
-import { Box } from "@chakra-ui/react";
+import { Box, useColorMode } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 
 const Claim = () => {
+  const { colorMode } = useColorMode();
   const renderBody = () => {
     return (
       <Box paddingTop={style.padding.sm}>
-        <NftCard heading="Macha NFT" image="/assets/No_NFT_Claimed_Right.png" />
+        <NftCard
+          heading="Macha NFT"
+          image={
+            colorMode == "light"
+              ? "/assets/NoNftClaimed-rightBanner.svg"
+              : "/assets/No_NFT_Claimed_Right.png"
+          }
+        />
       </Box>
     );
   };

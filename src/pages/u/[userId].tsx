@@ -71,11 +71,11 @@ const User = () => {
       hookAlchemy.nftByAddress.map((nft: any) => {
         if (
           nft.contract.address.toLowerCase() ==
-          config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS.toLowerCase() ||
+            config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS.toLowerCase() ||
           nft.contract.address.toLowerCase() ==
-          config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS.toLowerCase() ||
+            config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS.toLowerCase() ||
           nft.contract.address.toLowerCase() ==
-          config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS.toLowerCase()
+            config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS.toLowerCase()
         ) {
           setHasNft(true);
         }
@@ -89,7 +89,7 @@ const User = () => {
 
   const UserInfo = () => {
     const userAddress = router.query.userId;
-    const { colorMode } = useColorMode()
+    const { colorMode } = useColorMode();
 
     return (
       <>
@@ -100,7 +100,9 @@ const User = () => {
                 <>
                   <Box
                     borderRadius={style.card.borderRadius.default}
-                    background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
+                    background={
+                      colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"
+                    }
                     border={style.card.border.card}
                   >
                     <FlexColumn>
@@ -279,7 +281,11 @@ const User = () => {
               ) : (
                 <NftCard
                   heading="Macha NFT"
-                  image="/assets/No_NFT_Claimed_Right.png"
+                  image={
+                    colorMode == "light"
+                      ? "/assets/No_NFT_Claimed_Right.png"
+                      : "/assets/NoNftClaimed-rightBanner.svg"
+                  }
                 />
               )}
             </>
@@ -289,20 +295,22 @@ const User = () => {
             </FlexColumn>
           )
         ) : // {hasNft ? Box : No user found}
-          !hookAlchemy.isLoading ? (
-            <>
-              {hasNft ? (
-                <>
-                  <Box
-                    borderRadius={style.card.borderRadius.default}
-                    background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
-                    border={style.card.border.card}
-                  >
-                    <FlexColumn>
-                      <Box
-                        height="15rem"
-                        width={"100%"}
-                        background={`-webkit-linear-gradient(
+        !hookAlchemy.isLoading ? (
+          <>
+            {hasNft ? (
+              <>
+                <Box
+                  borderRadius={style.card.borderRadius.default}
+                  background={
+                    colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"
+                  }
+                  border={style.card.border.card}
+                >
+                  <FlexColumn>
+                    <Box
+                      height="15rem"
+                      width={"100%"}
+                      background={`-webkit-linear-gradient(
                           120deg,
                           #74B2F9,
                           #0629A6
@@ -358,14 +366,14 @@ const User = () => {
                             </Box>
                           )
                         )} */}
-                        </Box>
-                      </FlexRow>
-                    </FlexColumn>
-                  </Box>
-                  <FlexRow marginTop="xxl" hrAlign="space-between">
-                    <Box width="55%" marginRight="10px">
-                      <Flex marginTop={`${style.margin.lg}`}>
-                        {/* <AssetCard
+                      </Box>
+                    </FlexRow>
+                  </FlexColumn>
+                </Box>
+                <FlexRow marginTop="xxl" hrAlign="space-between">
+                  <Box width="55%" marginRight="10px">
+                    <Flex marginTop={`${style.margin.lg}`}>
+                      {/* <AssetCard
                           title={String(hookAlchemy.nftByAddress.length)}
                           description="Tokens"
                           icon="/assets/icons/brand-token.svg"
@@ -373,97 +381,109 @@ const User = () => {
                             tokenModal.onOpen();
                           }}
                         /> */}
-                        {/* <UserAssetCard
+                      {/* <UserAssetCard
                   title="7"
                   description="Domains"
                   icon="/assets/icons/brand-globe.svg"
                 /> */}
-                        <AssetCard
-                          title={hookXP?.userXPList?.xps_earned}
-                          description="XPs"
-                          icon="/assets/icons/brand-bolt.svg"
-                          onClick={() => {
-                            if (isOwner) {
-                              userXPModal.onOpen();
-                            }
-                          }}
-                        />
-                      </Flex>
-                    </Box>
-                    <Box width="45%">
-                      {/* <Heading
+                      <AssetCard
+                        title={hookXP?.userXPList?.xps_earned}
+                        description="XPs"
+                        icon="/assets/icons/brand-bolt.svg"
+                        onClick={() => {
+                          if (isOwner) {
+                            userXPModal.onOpen();
+                          }
+                        }}
+                      />
+                    </Flex>
+                  </Box>
+                  <Box width="45%">
+                    {/* <Heading
                 fontSize={`${style.font.h3}`}
                 fontWeight={`${style.fontWeight.dark}`}
               >
                 Recommations
               </Heading> */}
-                      <Box
-                        flex="1"
-                        height={"20rem"}
-                        marginTop={`${style.margin.lg}`}
-                        borderRadius={style.card.borderRadius.default}
-                        border={style.card.border.card}
-                        overflow="hidden"
+                    <Box
+                      flex="1"
+                      height={"20rem"}
+                      marginTop={`${style.margin.lg}`}
+                      borderRadius={style.card.borderRadius.default}
+                      border={style.card.border.card}
+                      overflow="hidden"
+                    >
+                      <Carousel
+                        autoPlay
+                        // showIndicators={false}
+                        showArrows={false}
+                        showStatus={false}
+                        stopOnHover={true}
+                        showThumbs={false}
+                        infiniteLoop
+                        interval={3000}
                       >
-                        <Carousel
-                          autoPlay
-                          // showIndicators={false}
-                          showArrows={false}
-                          showStatus={false}
-                          stopOnHover={true}
-                          showThumbs={false}
-                          infiniteLoop
-                          interval={3000}
-                        >
-                          <CarouselSlide
-                            height="20rem"
-                            title="Explore From MACHA"
-                            description="POSTS • PROFILES • BLOGS"
-                            headingFontSize={style.font.h6}
-                            descriptionFontSize={style.font.h7}
-                            avatarImage={GlobalIcons["logo-Macha-circular"]}
-                            // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
-                            bgGrid=""
-                            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
-                            bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
-                            buttonText="Explore"
-                          />
-                          <CarouselSlide
-                            height="20rem"
-                            title="View From Contracts"
-                            description="LENS • MIRROR • POAP"
-                            headingFontSize={style.font.h6}
-                            descriptionFontSize={style.font.h7}
-                            avatarImage={GlobalIcons["base-SDK"]}
-                            // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
-                            bgGrid=""
-                            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
-                            bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
-                            buttonText="View Contracts Now"
-                          />
-                          <CarouselSlide
-                            height="20rem"
-                            title="Discover From Chains"
-                            headingFontSize={style.font.h6}
-                            descriptionFontSize={style.font.h7}
-                            description="TRANSACTIONS • INDEXING • CHAINS"
-                            avatarImage={GlobalIcons["base-chain"]}
-                            // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
-                            bgGrid=""
-                            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
-                            bannerImage="/assets/explore/home-carousal-3-hero-image.svg"
-                            buttonText="View Chains"
-                          />
-                        </Carousel>
-                      </Box>
+                        <CarouselSlide
+                          height="20rem"
+                          title="Explore From MACHA"
+                          description="POSTS • PROFILES • BLOGS"
+                          headingFontSize={style.font.h6}
+                          descriptionFontSize={style.font.h7}
+                          avatarImage={GlobalIcons["logo-Macha-circular"]}
+                          // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
+                          bgGrid=""
+                          bgBlur={
+                            colorMode == "light"
+                              ? "/assets/explore/home_carousal_hero_bg_light.svg"
+                              : "/assets/explore/home-carousal-1-hero-bg.svg"
+                          }
+                          bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
+                          buttonText="Explore"
+                        />
+                        <CarouselSlide
+                          height="20rem"
+                          title="View From Contracts"
+                          description="LENS • MIRROR • POAP"
+                          headingFontSize={style.font.h6}
+                          descriptionFontSize={style.font.h7}
+                          avatarImage={GlobalIcons["base-SDK"]}
+                          // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
+                          bgGrid=""
+                          bgBlur={
+                            colorMode == "light"
+                              ? "/assets/explore/home_carousal_hero_bg_light.svg"
+                              : "/assets/explore/home-carousal-1-hero-bg.svg"
+                          }
+                          bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
+                          buttonText="View Contracts Now"
+                        />
+                        <CarouselSlide
+                          height="20rem"
+                          title="Discover From Chains"
+                          headingFontSize={style.font.h6}
+                          descriptionFontSize={style.font.h7}
+                          description="TRANSACTIONS • INDEXING • CHAINS"
+                          avatarImage={GlobalIcons["base-chain"]}
+                          // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
+                          bgGrid=""
+                          bgBlur={
+                            colorMode == "light"
+                              ? "/assets/explore/home_carousal_hero_bg_light.svg"
+                              : "/assets/explore/home-carousal-1-hero-bg.svg"
+                          }
+                          bannerImage="/assets/explore/home-carousal-3-hero-image.svg"
+                          buttonText="View Chains"
+                        />
+                      </Carousel>
                     </Box>
-                  </FlexRow>
+                  </Box>
+                </FlexRow>
 
-                  {/* <FlexColumn>
+                {/* <FlexColumn>
             <TokenRow />
           </FlexColumn> */}
 
-                  {/* <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
+                {/* <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
             <Heading
               fontSize={`${style.font.h3}`}
               fontWeight={`${style.fontWeight.dark}`}
@@ -517,66 +537,100 @@ const User = () => {
                       <MetaUserList hookData={useUserMeta} />
                     </CardNative>
                   </FlexColumn>
+                <FlexColumn vrAlign="flex-start">
+                  <CardNative
+                    marginTop="xxl"
+                    header={
+                      <>
+                        <FlexRow hrAlign="space-between">
+                          <Heading
+                            color={colorMode == "light" ? "#000" : ""}
+                            fontSize={`${style.font.h3}`}
+                            fontWeight={`${style.fontWeight.dark}`}
+                            marginBottom={"0px"}
+                          >
+                            Feed
+                          </Heading>
+                          <InputSearch
+                            width="25%"
+                            height="40px"
+                            placeholder="Search Meta"
+                          />
+                        </FlexRow>
+                      </>
+                    }
+                  >
+                    <MetaUserList hookData={useUserMeta} />
+                  </CardNative>
+                </FlexColumn>
 
-                  <UserAssetsModal modal={userAssetsModal} />
-                  <UserXPModal modal={userXPModal} />
-                  {/* <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} /> */}
-                </>
-              ) : (
-                <>
-                  <NavMeta />
-                  <Box marginTop={style.margin.lg}>
-                    <FlexRow hrAlign="center">
-                      <Image
-                        src={colorMode == "light" ? "/assets/userSearch-emptyState_light.svg" : "/assets/user-search-empty-state.svg"}
-                        alt="no user found"
-                      />
-                    </FlexRow>
-                    <Text
-                      color={colorMode == "light" ? "#3d3d3d" : ""}
-                      textAlign="center"
-                      fontSize={style.font.h2}
-                      marginTop={style.margin.lg}
-                    >
-                      Oops! No user Found
-                    </Text>
-                    <FlexRow hrAlign="center" vrAlign="center">
-                      <FlexColumn>
-                        <Text color={colorMode == "light" ? "#3d3d3d" : ""} textAlign="center" marginBottom="0">
-                          The user you are looking from may not have claimed any
-                          NFT yet,
-                        </Text>
-                        <Text
-                          color={colorMode == "light" ? "#3d3d3d" : ""}
-                          textAlign="center"
-                          marginTop="0"
-                          marginBottom={style.margin.xl}
-                        >
-                          making them undiscoverable.
-                        </Text>
-                        <ButtonNative
-                          variant="state_brand"
-                          paddingLeft="xs"
-                          paddingRight="xs"
-                          paddingTop="sm"
-                          paddingBottom="sm"
-                          onClick={() => router.push("/")}
-                          height="2rem"
-                          textFontSize="h7"
-                        >
-                          Back to Search
-                        </ButtonNative>
-                      </FlexColumn>
-                    </FlexRow>
-                  </Box>
-                </>
-              )}
-            </>
-          ) : (
-            <FlexColumn>
-              <Loader size="lg" />
-            </FlexColumn>
-          )}
+                <UserAssetsModal modal={userAssetsModal} />
+                <UserXPModal modal={userXPModal} />
+                {/* <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} /> */}
+              </>
+            ) : (
+              <>
+                <NavMeta />
+                <Box marginTop={style.margin.lg}>
+                  <FlexRow hrAlign="center">
+                    <Image
+                      src={
+                        colorMode == "light"
+                          ? "/assets/userSearch-emptyState_light.svg"
+                          : "/assets/user-search-empty-state.svg"
+                      }
+                      alt="no user found"
+                    />
+                  </FlexRow>
+                  <Text
+                    color={colorMode == "light" ? "#000" : ""}
+                    textAlign="center"
+                    fontSize={style.font.h2}
+                    marginTop={style.margin.lg}
+                  >
+                    Oops! No user Found
+                  </Text>
+                  <FlexRow hrAlign="center" vrAlign="center">
+                    <FlexColumn>
+                      <Text
+                        color={colorMode == "light" ? "#000" : ""}
+                        textAlign="center"
+                        marginBottom="0"
+                      >
+                        The user you are looking from may not have claimed any
+                        NFT yet,
+                      </Text>
+                      <Text
+                        color={colorMode == "light" ? "#000" : ""}
+                        textAlign="center"
+                        marginTop="0"
+                        marginBottom={style.margin.xl}
+                      >
+                        making them undiscoverable.
+                      </Text>
+                      <ButtonNative
+                        variant="state_brand"
+                        paddingLeft="xs"
+                        paddingRight="xs"
+                        paddingTop="sm"
+                        paddingBottom="sm"
+                        onClick={() => router.push("/")}
+                        height="2rem"
+                        textFontSize="h7"
+                      >
+                        Back to Search
+                      </ButtonNative>
+                    </FlexColumn>
+                  </FlexRow>
+                </Box>
+              </>
+            )}
+          </>
+        ) : (
+          <FlexColumn>
+            <Loader size="lg" />
+          </FlexColumn>
+        )}
       </>
     );
   };

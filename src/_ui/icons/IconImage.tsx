@@ -41,6 +41,7 @@ function IconImage({ slug, size, onClick, style, image }: Props) {
           height: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,
           width: size ? gStyle.icon.sizes[size] : gStyle?.icon.sizes.default,
         }}
+        alt="slug"
       />
       <style jsx>{`
         .state_active {

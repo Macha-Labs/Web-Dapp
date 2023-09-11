@@ -37,7 +37,7 @@ const CardNative = ({
   hrAlign,
 }: Props) => {
 
-  const {colorMode} = useColorMode()
+  const {colorMode} = useColorMode();
 
   return (
     <Box

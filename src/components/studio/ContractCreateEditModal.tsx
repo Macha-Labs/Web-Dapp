@@ -338,7 +338,7 @@ const ContractCreateEditModal = ({
                 <InputLabel
                   value={hookContractCreate.$contractFormData.address}
                   inputType="text"
-                  labelText="Address *"
+                  labelText="Contract Address *"
                   placeholder="0x0fea00feb84ad311Cc6E9d042f7753484D78f4F0"
                   onChange={(e: any) =>
                     hookContractCreate.$loadContractFormData({

@@ -6,11 +6,13 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
 import IconBase from "../icons/IconsBase";
 import { useState } from "react";
+import Image from "next/image";
 
 type Props = {
   text?: string;
@@ -49,6 +51,7 @@ const ButtonMenu = ({
   isDisabled,
 }: Props) => {
   const [iconOrientation, setIconOrientation] = useState<boolean>(true);
+  const {colorMode} = useColorMode();
   return (
     <div
       style={{
@@ -65,14 +68,27 @@ const ButtonMenu = ({
               isDisabled={isDisabled}
               variant={variant ? variant : "state_default_hover"}
               as={Button}
+              // backgroundColor: `${colorMode == "light" ? "#ffffff" : ""}`,
+              // backgroundColor={colorMode == "light" ? "#ffffff" : ""}
               style={{
                 borderRadius: `${style.card.borderRadius.button}`,
+                backgroundColor: `${
+                  colorMode == "light" ? "#ffffff" : ""
+                }`,
               }}
-              rightIcon={icon && isOpen ? (
-                <IconBase slug="icon-chevron-up" size="sm" style={icon.style} />
-              ) : (
-                isDisabled ?  <></> : <IconBase slug={icon.slug} size="sm" style={icon.style} />
-              )}
+              rightIcon={
+                icon && isOpen ? (
+                  <IconBase
+                    slug="icon-chevron-up"
+                    size="sm"
+                    style={icon.style}
+                  />
+                ) : isDisabled ? (
+                  <></>
+                ) : (
+                  <IconBase slug={icon.slug} size="sm" style={icon.style} />
+                )
+              }
               height={height ? height : "3rem"}
             >
               <FlexRow>
@@ -81,6 +97,7 @@ const ButtonMenu = ({
                   marginLeft={style.button.margin.default}
                   fontSize={"sm"}
                   className="mb-0"
+                  color={colorMode == "light" ? "#000" : ""}
                 >
                   {text}
                 </Text>
@@ -91,22 +108,36 @@ const ButtonMenu = ({
                 return (
                   <MenuItem
                     key={index}
-                    onClick={item.onClick ? () => {
-                      item.onClick()
-                      setIconOrientation(!iconOrientation)
-                    } : () => { }}
+                    onClick={
+                      item.onClick
+                        ? () => {
+                            item.onClick();
+                            setIconOrientation(!iconOrientation);
+                          }
+                        : () => {}
+                    }
                   >
                     <FlexRow hrAlign="space-between">
                       {item.img && (
-                        <img
+                        <Image
                           style={{ height: "25px", width: "25px" }}
                           src={item.img}
+                          alt="item.img"
                         />
+                        // <img
+                        //   style={{ height: "25px", width: "25px" }}
+                        //   src={item.img}
+                        //   alt="item.img"
+                        // />
                       )}
                       {item.leftIcon && (
                         <IconBase slug={item.leftIcon} size={size} style={{}} />
                       )}
-                      <FlexRow hrAlign="flex-start" width="90%" marginLeft={"sm"}>
+                      <FlexRow
+                        hrAlign="flex-start"
+                        width="90%"
+                        marginLeft={"sm"}
+                      >
                         {item.value}
                         {item.rightIcon && <IconImage slug={item.rightIcon} />}
                       </FlexRow>
