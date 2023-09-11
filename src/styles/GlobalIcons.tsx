@@ -46,6 +46,7 @@ const GlobalIcons: any = {
   "icon-select":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-multiselect.svg?updatedAt=1680783884757",
   "icon-edit": "/assets/icons/Base_blue_icons/base-blue-edit.svg",
+  "icon-base-edit-light": "/assets/icons/edit-lightMode.svg",
   "icon-base-edit": "/assets/icons/base-edit.svg",
   "icon-photo":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-image.svg?updatedAt=1680783874121",

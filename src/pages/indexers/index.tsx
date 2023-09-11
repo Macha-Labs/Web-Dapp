@@ -6,7 +6,6 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavBlock from "@/_ui/nav/NavBlock";
 import NavStudio from "@/_ui/nav/NavStudio";
 import Tabs from "@/_ui/tabs/Tabs";
-import TagNative from "@/_ui/tag/TagNative";
 import ApiCreateModal from "@/components/studio/ApiCreateModal";
 import ContractCreateEditModal from "@/components/studio/ContractCreateEditModal";
 import ContractList from "@/components/studio/ContractList";
@@ -20,16 +19,14 @@ import { fetchAllMetas } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { AddIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   ButtonGroup,
-  Heading,
   IconButton,
   Image,
-  Text,
-  useDisclosure,
+  useColorMode,
+  useDisclosure
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNetwork, useSwitchNetwork } from "wagmi";
@@ -48,6 +45,7 @@ const DashBoard = () => {
   const hookMacha = useMacha();
   const { chain } = useNetwork();
   const { switchNetwork } = useSwitchNetwork();
+  const {colorMode} = useColorMode()
 
   useEffect(() => {
     if ($address) {
@@ -123,13 +121,13 @@ const DashBoard = () => {
               <ButtonGroup
                 _hover={{
                   background: `${style.card.bg.hover}`,
-                  border: `${style.card.border.hover}`,
+                  border: `${colorMode == "light" ? "" : style.card.border.hover}`,
                   shadow: `${style.card.shadow.hover}`,
                 }}
                 style={{
-                  background: `${style.card.bg.default}`,
+                  background: `${colorMode == "light" ? "#ffff" : style.card.bg.default}`,
                   // border: `${style.card.border.default}`,
-                  boxShadow: `${style.card.shadow.default}`,
+                  boxShadow: `${colorMode == "light" ? "" : style.card.shadow.default}`,
                   borderRadius: `${style.card.borderRadius.button}`,
                 }}
                 size="sm"
@@ -138,7 +136,8 @@ const DashBoard = () => {
                 colorScheme="white"
               >
                 <Button
-                  borderColor="#0a1020"
+                  color={colorMode == "light" ? "#3d3d3d" : ""}
+                  borderColor={colorMode == "light" ? "#e2e2e2" : "#0a1020"}
                   borderRadius={`${style.card.borderRadius.button}`}
                   _hover={
                     {
@@ -154,13 +153,13 @@ const DashBoard = () => {
                 <IconButton
                   isLoading={hookContract.isUserContractsLoading}
                   borderRadius={`${style.card.borderRadius.button}`}
-                  borderColor="#0a1020"
+                  borderColor={colorMode == "light" ? "#e2e2e2" : "#0a1020"}
                   aria-label="Add to friends"
                   // _hover={{ border: `${style.card.border.hover}` }}
                   icon={
                     <Image
                       height="1.5rem"
-                      src={GlobalIcons["icon-base-edit"]}
+                      src={colorMode == "light" ? GlobalIcons["icon-base-edit-light"] : GlobalIcons["icon-base-edit"]}
                       alt="edit-contracts"
                       onClick={() => {
                         hookContract._fetchUserContracts($address).then(() => {

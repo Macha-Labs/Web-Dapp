@@ -14,7 +14,7 @@ const FlexBody = ({ header, children, gstyle }: Props) => {
     <>
       <div
         style={{
-          background: `${colorMode == "light" ? "f2f5fd" : style.body.bg.default}`,
+          background: `${colorMode == "light" ? "#f2f5fd" : style.body.bg.default}`,
         }}
       >
         {header}
