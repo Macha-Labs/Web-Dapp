@@ -284,7 +284,7 @@ const User = () => {
                   image={
                     colorMode == "light"
                       ? "/assets/No_NFT_Claimed_Right.png"
-                      : "NoNftClaimed-rightBanner"
+                      : "/assets/NoNftClaimed-rightBanner.svg"
                   }
                 />
               )}
