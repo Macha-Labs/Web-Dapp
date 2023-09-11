@@ -8,7 +8,7 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import useSearch from "@/hooks/studio/useSearch";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Heading, Grid, GridItem, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 import { useEffect } from "react";
@@ -16,6 +16,7 @@ import { useEffect } from "react";
 const Search = () => {
   const router = useRouter();
   const hookSearch = useSearch();
+  const {colorMode} = useColorMode()
 
   useEffect(() => {
     if (router.isReady) {
@@ -37,7 +38,7 @@ const Search = () => {
       <CardNative
         header={
           <>
-            <Heading fontSize={style.font.h3}>Search results</Heading>
+            <Heading color={colorMode == "light" ? "#282828" : ""} fontSize={style.font.h3}>Search results</Heading>
           </>
         }
       >
@@ -73,7 +74,7 @@ const Search = () => {
                   ))
                 ) : (
                   <Box>
-                    <Text>No results found</Text>
+                    <Text color={colorMode == "light" ? "#282828" : ""}>No results found</Text>
                   </Box>
                 ))}
             </Grid>

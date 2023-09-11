@@ -11,7 +11,7 @@ import useContractCreate from "@/hooks/studio/useContractCreate";
 import useMacha from "@/hooks/studio/useMacha";
 import useAuthStore from "@/store/useAuthStore";
 import { style } from "@/styles/StyledConstants";
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Box, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useNetwork, useSwitchNetwork } from "wagmi";
 
@@ -22,6 +22,7 @@ const Home = () => {
   const hookContractCreate = useContractCreate(contractModal);
   const { chain } = useNetwork();
   const { switchNetwork } = useSwitchNetwork();
+  const {colorMode} = useColorMode()
 
   const dashboardNav: any = [
     {
@@ -45,8 +46,6 @@ const Home = () => {
     chain?.name == "Filecoin Calibration chaindata" ? () => {} : network();
   }, [chain]);
 
-  const $address = useAuthStore((state: any) => state.address);
-
   const renderHome = () => {
     return <>{<HomeDev />}</>;
   };
@@ -60,7 +59,7 @@ const Home = () => {
               <Tabs
                 width="fit-content"
                 options={dashboardNav}
-                gstyle={{ fontSize: `${style.font.h5}` }}
+                gstyle={{ fontSize: `${style.font.h5}`, background: `${colorMode == "light" ? "#ffff" : ""}` }}
                 value={"Home"}
                 onChange={() => {}}
               />

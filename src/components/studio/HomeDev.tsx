@@ -9,6 +9,7 @@ import {
   Flex,
   Heading,
   Text,
+  useColorMode,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -27,6 +28,7 @@ const HomeDev = () => {
   const contractModal = useDisclosure();
   const hookContractCreate = useContractCreate(contractModal);
   const router = useRouter();
+  const {colorMode} = useColorMode()
 
   return (
     <Box

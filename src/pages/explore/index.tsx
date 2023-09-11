@@ -149,6 +149,7 @@ export default function Home() {
               <ButtonNative
                 height="2rem"
                 text="see all"
+                marginLeft="0px"
                 marginRight="0px"
                 variant="state_brand"
                 onClick={() => {

@@ -544,7 +544,7 @@ const User = () => {
                       <>
                         <FlexRow hrAlign="space-between">
                           <Heading
-                            color={colorMode == "light" ? "#000" : ""}
+                            color={colorMode == "light" ? "#3d3d3d" : ""}
                             fontSize={`${style.font.h3}`}
                             fontWeight={`${style.fontWeight.dark}`}
                             marginBottom={"0px"}
@@ -583,7 +583,7 @@ const User = () => {
                     />
                   </FlexRow>
                   <Text
-                    color={colorMode == "light" ? "#000" : ""}
+                    color={colorMode == "light" ? "#3d3d3d" : ""}
                     textAlign="center"
                     fontSize={style.font.h2}
                     marginTop={style.margin.lg}
@@ -593,7 +593,7 @@ const User = () => {
                   <FlexRow hrAlign="center" vrAlign="center">
                     <FlexColumn>
                       <Text
-                        color={colorMode == "light" ? "#000" : ""}
+                        color={colorMode == "light" ? "#3d3d3d" : ""}
                         textAlign="center"
                         marginBottom="0"
                       >
@@ -601,7 +601,7 @@ const User = () => {
                         NFT yet,
                       </Text>
                       <Text
-                        color={colorMode == "light" ? "#000" : ""}
+                        color={colorMode == "light" ? "#3d3d3d" : ""}
                         textAlign="center"
                         marginTop="0"
                         marginBottom={style.margin.xl}

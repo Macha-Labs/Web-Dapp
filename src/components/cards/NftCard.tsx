@@ -247,7 +247,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                     top={0}
                     zIndex="docked"
                     background={style.modal.bg.contractModal}
-                    borderBottom={style.modal.border.contract}
+                    borderBottom={colorMode == "light" ? "1px solid #e2e2e2" : style.modal.border.contract}
                   >
                     <Tr justifyContent="space-between">
                       <Th
@@ -423,7 +423,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
         <Box
           borderRadius={gStyle.card.borderRadius.default}
-          border={gStyle.card.border.default}
+          border={colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default}
           width="98%"
           height={"100%"}
           overflow={"hidden"}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
+import { useColorMode } from "@chakra-ui/react";
 
 type Props = {
   rightElem?: any;
@@ -10,12 +11,15 @@ type Props = {
 };
 
 const NavTop = ({ rightElem, centerElem }: Props) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <>
       <nav
         className="py-3"
         style={{
-          background: `#030c1a`,
+          background: `${colorMode == "light" ? "#ffff"  : "#030c1a"}`,
           padding: `${style.nav.padding.default}`,
           width: `${style.nav.width}`,
           height: `${style.nav.height}`,
@@ -26,7 +30,7 @@ const NavTop = ({ rightElem, centerElem }: Props) => {
             <Link href="/studio">
               <Image
                 className="headerLogo"
-                src="/assets/Macha-logo-text.svg"
+                src={colorMode == "light" ? "/assets/Macha-logo-text-light.svg" : "/assets/Macha-logo-text.svg"}
                 alt="logo"
                 width={170}
                 height={62}

@@ -66,7 +66,7 @@ const ButtonMenu = ({
             <MenuButton
               isActive={isOpen}
               isDisabled={isDisabled}
-              variant={variant ? variant : "state_default_hover"}
+              variant={variant ? variant : colorMode == "light" ? "state_default_hover_light" : "state_default_hover"}
               as={Button}
               // backgroundColor: `${colorMode == "light" ? "#ffffff" : ""}`,
               // backgroundColor={colorMode == "light" ? "#ffffff" : ""}
@@ -86,7 +86,7 @@ const ButtonMenu = ({
                 ) : isDisabled ? (
                   <></>
                 ) : (
-                  <IconBase slug={icon.slug} size="sm" style={icon.style} />
+                  <IconBase slug={icon.slug} size="sm" style={icon.style}/>
                 )
               }
               height={height ? height : "3rem"}

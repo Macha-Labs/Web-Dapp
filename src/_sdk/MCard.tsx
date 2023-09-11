@@ -1,15 +1,14 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
+import MusicPlayer from "@/components/studio/MusicPlayer";
 import { helperIPFS, truncateString } from "@/helpers";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { Avatar, Box, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { style as gStyle, style } from "../styles/StyledConstants";
-import GlobalIcons from "@/styles/GlobalIcons";
 import { useRef, useState } from "react";
-import MusicPlayer from "@/components/studio/MusicPlayer";
+import { style as gStyle, style } from "../styles/StyledConstants";
 
 type Props = {
   title?: string;
@@ -103,7 +102,7 @@ const MCard = ({
         vrAlign="flex-start"
         marginBottom="sm"
       >
-        <TagNative size="md" value={slug} lineHeight="1.5rem" />
+        <TagNative size="md" value={slug} lineHeight="1.5rem"  />
         {/* <AudioPlayer /> */}
         {music && (
           <>

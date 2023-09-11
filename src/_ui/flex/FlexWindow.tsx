@@ -39,7 +39,7 @@ export const FlexWindow = ({
         position: "relative",
         width: "100vw",
         minHeight: "100vh",
-        background: `${background ? background : colorMode == "light" ? style.body.bgLight.default  : style.body.bg.default}`,
+        background: `${colorMode == "light" ? "#f2f5fd"  : style.body.bg.default}`,
       }}
     >
       {view == "col" && (

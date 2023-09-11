@@ -195,6 +195,16 @@ const theme = extendTheme({
             shadow: `${style.card.shadow.hover}`,
           },
         },
+        state_default_hover_light: {
+          background: `${style.card.bg.default}`,
+          border: `1px solid #e2e2e2`,
+          shadow: `${style.card.shadow.default}`,
+          // _hover: {
+          //   background: `${style.card.bg.hover}`,
+          //   border: `${style.card.border.hover}`,
+          //   shadow: `${style.card.shadow.hover}`,
+          // },
+        },
         state_default_to_brand: {
           background: `${style.button.bg.default}`,
           _hover: {

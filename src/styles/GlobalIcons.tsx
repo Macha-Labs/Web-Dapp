@@ -111,6 +111,8 @@ const GlobalIcons: any = {
   "icon-home": "/assets/icons/Base_blue_icons/base-blue-home.svg",
   "icon-compass": "/assets/icons/Base_blue_icons/base-blue-compass.svg",
   "icon-twitter": "/assets/icons/Base_blue_icons/base-blue-twitter.svg",
+  "icon-light-mode": "/assets/icons/base-lightMode.svg",
+  "icon-dark-mode": "/assets/icons/base-darkMode.svg",
   "icon-attachment":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-attachment.svg",
   "icon-send":

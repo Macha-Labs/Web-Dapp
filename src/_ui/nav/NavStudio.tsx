@@ -1,17 +1,18 @@
-import React from "react";
+import { ConnectWalletButton } from "@/components/ConnectWalletButton";
+import useSearch from "@/hooks/studio/useSearch";
+import { Box, Image, useColorMode } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import FlexRow from "../flex/FlexRow";
 import InputSearch from "../input/InputSearch";
 import NavTop from "./NavTop";
-import FlexRow from "../flex/FlexRow";
-import NavButton from "@/components/buttons/NavButton";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import useAuthStore from "@/store/useAuthStore";
-import useSearch from "@/hooks/studio/useSearch";
-import { useRouter } from "next/router";
+import GlobalIcons from "@/styles/GlobalIcons";
+import { style } from "@/styles/StyledConstants";
 
 const NavStudio = () => {
-  const $address = useAuthStore((state: any) => state.address);
   const hookSearch = useSearch();
   const router = useRouter();
+  const {colorMode, toggleColorMode} = useColorMode()
+
   return (
     <NavTop
       centerElem={
@@ -30,13 +31,23 @@ const NavStudio = () => {
       }
       rightElem={
         <FlexRow width="fit-content">
-          {
-            <ConnectWalletButton
-              showBalance={true}
-              showRegisterPublisher={true}
-              showExplorer={true}
-            />
-          }
+
+          <ConnectWalletButton
+            showBalance={true}
+            showRegisterPublisher={true}
+            showExplorer={true}
+          />
+          <Box
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              toggleColorMode();
+            }}
+          >
+            <FlexRow >
+              <Image src={colorMode == "light" ? GlobalIcons["icon-dark-mode"] : GlobalIcons["icon-light-mode"]} height="2rem" width="3rem" marginLeft={style.margin.xxs} />
+            </FlexRow>
+          </Box>
+
         </FlexRow>
       }
     />

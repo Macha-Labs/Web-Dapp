@@ -1,4 +1,5 @@
 import { style } from "@/styles/StyledConstants";
+import { useColorMode } from "@chakra-ui/react";
 
 type Props = {
   header?: any;
@@ -7,11 +8,13 @@ type Props = {
 };
 
 const FlexBody = ({ header, children, gstyle }: Props) => {
+  const { colorMode } = useColorMode()
+
   return (
     <>
       <div
         style={{
-          background: `${style.body.bg.default}`,
+          background: `${colorMode == "light" ? "f2f5fd" : style.body.bg.default}`,
         }}
       >
         {header}
