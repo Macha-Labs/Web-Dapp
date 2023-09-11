@@ -49,7 +49,7 @@ const useNftMint = () => {
   const { chain } = useNetwork();
 
   const submit = async () => {
-    if (chainId == "") {
+    if (!chainId) {
       toast({
         title: "Please select a network.",
         status: "warning",

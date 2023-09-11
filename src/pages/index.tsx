@@ -66,20 +66,6 @@ const Search = () => {
             marginBottom={style.margin.sm}
           />
           <SearchHeader />
-          <Box zIndex={0}>
-            <ButtonNative
-              onClick={() => {
-                router.push("/xps");
-              }}
-              marginRight="0px"
-              iconLeft={{
-                slug: "icon-brand-bolt",
-              }}
-              text={"XPs LeaderBoard"}
-              variant="state_default_hover"
-              marginTop="5xl"
-            />
-          </Box>
         </Box>
       </FlexColumn>
     );

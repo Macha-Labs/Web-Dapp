@@ -55,10 +55,16 @@ const CardNative = ({
         flexDirection: "column",
         justifyContent: "space-between",
       }}
+      className="cardNative_container"
     >
-      <Box>
+      <Box
+        height={"100%"}
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent={"flex-start"}
+      >
         {header && (
-          <Box>
+          <Box className="cardNative_header">
             <Box padding={style.padding.sm}>{header}</Box>
             <Divider
               mt="0px"
@@ -77,9 +83,11 @@ const CardNative = ({
               display: "flex",
               flexDirection: "column",
               // flex: "1",
+              height: "100%",
               alignItems: hrAlign ? hrAlign : "flex-start",
             }}
             onClick={onClick}
+            className="cardNative_children"
           >
             {children}
           </Box>

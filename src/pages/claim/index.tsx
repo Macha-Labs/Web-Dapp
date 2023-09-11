@@ -10,7 +10,7 @@ import React, { useEffect } from "react";
 const Claim = () => {
   const renderBody = () => {
     return (
-      <Box paddingTop={style.padding.sm}>
+      <Box>
         <NftCard heading="Macha NFT" image="/assets/No_NFT_Claimed_Right.png" />
       </Box>
     );
@@ -19,8 +19,8 @@ const Claim = () => {
     <FlexWindow
       view="both"
       bodyElem={renderBody()}
-      //   navTop={<NavMeta />}
-      noPaddingTop={true}
+      navTop={<NavMeta />}
+      // noPaddingTop={true}
       navLeft={<NavLeft />}
     />
   );

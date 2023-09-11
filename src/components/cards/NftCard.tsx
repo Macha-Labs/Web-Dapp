@@ -6,8 +6,17 @@ import { style as gStyle, style } from "../../styles/StyledConstants";
 
 import ButtonMenu from "@/_ui/buttons/ButtonMenu";
 import CardNative from "@/_ui/cards/CardNative";
+import InputSearch from "@/_ui/input/InputSearch";
 import Loader from "@/_ui/loader/Loader";
+import Tabs from "@/_ui/tabs/Tabs";
+import TagNative from "@/_ui/tag/TagNative";
+import { config } from "@/config";
+import { projectSlugToLogo } from "@/data/ProjectData";
+import useAlchemy from "@/hooks/studio/useAlchemy";
 import useNftMint from "@/hooks/studio/useNftMint";
+import useUserMeta from "@/hooks/studio/useUserMeta";
+import useXP from "@/hooks/studio/useXP";
+import GlobalIcons from "@/styles/GlobalIcons";
 import {
   Box,
   Image,
@@ -20,17 +29,13 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import useAlchemy from "@/hooks/studio/useAlchemy";
-import { config } from "@/config";
 import { useRouter } from "next/router";
-import GlobalIcons from "@/styles/GlobalIcons";
-import { projectSlugToLogo } from "@/data/ProjectData";
-import TagNative from "@/_ui/tag/TagNative";
-import useXP from "@/hooks/studio/useXP";
+import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
-import UserXpTable from "../table/UserXpTable";
-import InputSearch from "@/_ui/input/InputSearch";
+import MetaUserList from "../meta/MetaUserList";
+import TokenRow from "../studio/TokenRow";
+import { truncateAddress } from "@/helpers";
+import Avatar from "boring-avatars";
 
 // import { getAllNfts } from "@/service/ApiService";
 
@@ -60,8 +65,34 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
   const hookAlchemy = useAlchemy();
   const router = useRouter();
   const [hasNft, setHasNft] = useState<boolean>(false);
+  const [selectedTab, setSelectedTab] = useState<any>("Tokens");
+  const [tokenLoading, setTokenLoading] = useState<boolean>();
+  const [nftLoading, setNftLoading] = useState<boolean>();
+
+  const [chainId, setChainId] = useState<any>(1);
   const hookXP = useXP();
-  const { address, isConnected } = useAccount();
+  const { address } = useAccount();
+
+  const hookUserMeta = useUserMeta();
+
+  const options: any = [
+    {
+      value: "Tokens",
+      href: "#",
+    },
+    {
+      value: "NFTs",
+      href: "#",
+    },
+    {
+      value: "Meta",
+      href: "#",
+    },
+    {
+      value: "XPs",
+      href: "#",
+    },
+  ];
 
   let chainFilterOptions: any = [];
   Object.keys(chains).forEach((key) => {
@@ -71,6 +102,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
       leftIcon: chains[key].chainImage,
       onClick: () => {
         hookNftMint.setChainId(key);
+        setChainId(key);
         setChainValue(chains[key].chainName);
         setAvatar(chains[key].chainImage);
       },
@@ -79,6 +111,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
 
   useEffect(() => {
     console.log("get Nft by address", hookAlchemy.nftByAddress);
+    setNftLoading(true);
     if (hookAlchemy.nftByAddress && hookAlchemy.nftByAddress[0]) {
       hookAlchemy.nftByAddress.map((nft: any) => {
         if (
@@ -91,315 +124,478 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
         ) {
           setHasNft(true);
         }
+        setNftLoading(false);
       });
     }
-  }, [hookAlchemy.nftByAddress, router.query.userId]);
+  }, [hookAlchemy.nftByAddress, address]);
 
   useEffect(() => {
-    // if (address && isConnected) {
-    hookXP._fetch();
-    // hookXP._fetchUserXP(address);
-    // }
-  }, []);
+    const fetch = async () => {
+      await hookAlchemy.getNftsByAddress(address, chains);
+      await hookXP._fetch();
+    };
+    fetch();
+  }, [address]);
+
+  useEffect(() => {
+    setTokenLoading(true);
+    if (address) {
+      const fetchToken = async () => {
+        await hookAlchemy.fetchTokensByAddress(chainId, address);
+        setTokenLoading(false);
+      };
+      fetchToken();
+    }
+  }, [chainId, address]);
 
   return (
-    <FlexRow hrAlign="space-between" height="92vh" overFlow={"hidden"}>
-      <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-        {hasNft ? (
-          <>
-            {!hookNftMint.isLoading ? (
-              <>
+    <FlexRow hrAlign="space-between" height="80vh" overFlow={"hidden"}>
+      {nftLoading ? (
+        <FlexColumn height="100%">
+          <Loader size="sm" />
+        </FlexColumn>
+      ) : (
+        <FlexRow height="100%">
+          <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="30%">
+            <FlexColumn height="100%" hrAlign="flex-start">
+              {!hasNft ? (
+                <>
+                  <Box
+                    borderRadius={gStyle.card.borderRadius.default}
+                    border={gStyle.card.border.default}
+                    width="98%"
+                    height={"100%"}
+                    overflow={"hidden"}
+                  >
+                    <Image
+                      src={image}
+                      alt="right image"
+                      objectFit="cover"
+                      w="100%"
+                      h="100%"
+                    />
+                  </Box>
+                </>
+              ) : (
+                <CardNative width="98%">
+                  <FlexColumn hrAlign="flex-start">
+                    <Box height={"10rem"}>
+                      <Avatar name={address} size={"sm"} />
+                    </Box>
+                    <FlexRow hrAlign="center" height="fit-content">
+                      <Text
+                        fontSize={style.font.h4}
+                        fontWeight={style.fontWeight.dark}
+                        marginTop={style.margin.sm}
+                        textAlign={"center"}
+                      >
+                        {truncateAddress(address)}
+                      </Text>
+                    </FlexRow>
+                  </FlexColumn>
+                </CardNative>
+              )}
+            </FlexColumn>
+          </FlexColumn>
+          <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="70%">
+            <FlexColumn height="100%" hrAlign="flex-start">
+              {!hasNft ? (
+                <>
+                  {!hookNftMint.isLoading ? (
+                    <>
+                      <CardNative
+                        width="98%"
+                        header={
+                          <FlexRow hrAlign="space-between">
+                            <Text
+                              fontSize={style.font.h3}
+                              // lineHeight={"2.2rem"}
+                              marginBottom={0}
+                              fontWeight={style.fontWeight.dark}
+                            >
+                              {heading}
+                            </Text>
+                            <ButtonMenu
+                              width="fit-content"
+                              size={"lg"}
+                              text={chainValue}
+                              icon={{
+                                slug: "icon-chevron-down",
+                                style: "",
+                              }}
+                              options={chainFilterOptions}
+                              avatar={avatar}
+                            />
+                          </FlexRow>
+                        }
+                        footer={
+                          <ButtonNative
+                            text="Claim NFT and own your Macha Profile"
+                            onClick={() => {
+                              console.log("submit clicked");
+                              // hookCreatorCreate.nextFormStep();
+                              hookNftMint.submit();
+                            }}
+                            variant="state_brand"
+                            width="100%"
+                            marginTop="xs"
+                          />
+                        }
+                      >
+                        <Box
+                          width="100%"
+                          height="100%"
+                          display={"flex"}
+                          justifyContent={"center"}
+                          // padding={style.padding.md}
+                          // overflowY="scroll"
+                        >
+                          <CardNative hrAlign={"center"} width="fit-content">
+                            <Image
+                              src="/assets/Claim_Macha_Nft.png"
+                              height="15rem"
+                            />
+                          </CardNative>
+                        </Box>
+                        <Text
+                          fontSize={style.font.h5}
+                          mb="0"
+                          textAlign={"center"}
+                          marginTop={style.margin.sm}
+                        >
+                          It will take just 2 mins to setup profile and discover
+                          your own chain content like ENS, Lens and more.
+                        </Text>
+                      </CardNative>
+                    </>
+                  ) : (
+                    <FlexColumn height="40rem">
+                      <Loader size="lg" />
+                      <Text mt={style.margin.sm} fontSize={style.font.h5}>
+                        Please wait patiently while the transaction is
+                        confirmed.
+                      </Text>
+                    </FlexColumn>
+                  )}
+                </>
+              ) : (
                 <CardNative
                   width="98%"
                   header={
-                    <FlexRow hrAlign="space-between">
-                      <Text
-                        fontSize={style.font.h3}
-                        // lineHeight={"2.2rem"}
-                        marginBottom={0}
-                        fontWeight={style.fontWeight.dark}
-                      >
-                        {heading}
-                      </Text>
-                      <ButtonMenu
-                        width="fit-content"
-                        size={"lg"}
-                        text={chainValue}
-                        icon={{
-                          slug: "icon-chevron-down",
-                          style: "",
-                        }}
-                        options={chainFilterOptions}
-                        avatar={avatar}
-                      />
-                    </FlexRow>
+                    <>
+                      <FlexRow hrAlign="space-between">
+                        <FlexRow hrAlign="flex-start">
+                          <Text
+                            mb={0}
+                            fontSize={style.font.h4}
+                            fontWeight={style.fontWeight.dark}
+                            marginRight={style.margin.xl}
+                          >
+                            Earn Rewards
+                          </Text>
+                          <Tabs
+                            width="fit-content"
+                            options={options}
+                            gstyle={{ fontSize: `${style.font.h5}` }}
+                            value={selectedTab}
+                            onChange={(value: any) => {
+                              setSelectedTab(value);
+                            }}
+                          />
+                        </FlexRow>
+                        <FlexRow>
+                          <InputSearch
+                            height="40px"
+                            placeholder="Search Token"
+                            marginLeft={style.margin.sm}
+                          />
+                        </FlexRow>
+                      </FlexRow>
+                    </>
                   }
                   footer={
-                    <ButtonNative
-                      text="Claim NFT and own your Macha Profile"
-                      onClick={() => {
-                        console.log("submit clicked");
-                        // hookCreatorCreate.nextFormStep();
-                        hookNftMint.submit();
-                      }}
-                      variant="state_brand"
-                      width="100%"
-                      marginTop="xs"
-                    />
+                    <>
+                      <FlexRow hrAlign="space-between">
+                        <Text
+                          mb={0}
+                          fontSize={style.font.h4}
+                          fontWeight={style.fontWeight.dark}
+                          width="50%"
+                        >
+                          {selectedTab == "XPs"
+                            ? "Your Rewarded XPs"
+                            : selectedTab == "Tokens"
+                            ? "Your Total Tokens"
+                            : selectedTab == "NFTs"
+                            ? "Your Total NFTs"
+                            : "Your Total Metas"}
+                        </Text>
+                        <FlexRow hrAlign="center" width="15%">
+                          {/* <Text mb={0}>0</Text> */}
+                        </FlexRow>
+                      </FlexRow>
+                    </>
                   }
                 >
-                  <Box
-                    width="100%"
-                    height="100%"
-                    display={"flex"}
-                    justifyContent={"center"}
-                    // padding={style.padding.md}
-                    // overflowY="scroll"
-                  >
-                    <CardNative hrAlign={"center"} width="fit-content">
-                      <Image src="/assets/Claim_Macha_Nft.png" height="15rem" />
-                    </CardNative>
-                  </Box>
-                  <Text
-                    fontSize={style.font.h5}
-                    mb="0"
-                    textAlign={"center"}
-                    marginTop={style.margin.sm}
-                  >
-                    It will take just 2 mins to setup profile and discover your
-                    own chain content like ENS, Lens and more.
-                  </Text>
-                </CardNative>
-              </>
-            ) : (
-              <FlexColumn height="40rem">
-                <Loader size="lg" />
-                <Text mt={style.margin.sm} fontSize={style.font.h5}>
-                  Please wait patiently while the transaction is confirmed.
-                </Text>
-              </FlexColumn>
-            )}
-          </>
-        ) : (
-          <CardNative
-            width="98%"
-            header={
-              <>
-                <FlexRow hrAlign="space-between">
-                  <Text
-                    mb={0}
-                    fontSize={style.font.h4}
-                    fontWeight={style.fontWeight.dark}
-                  >
-                    Earn Rewards
-                  </Text>
-                  <FlexRow width="50%">
-                    <ButtonMenu
-                      width="40%"
-                      size={"lg"}
-                      text="Highest"
-                      icon={{
-                        slug: "icon-chevron-down",
-                        style: "",
-                      }}
-                      options={[]}
-                    />
-                    <InputSearch
-                      height="40px"
-                      placeholder="Search Token"
-                      marginLeft={style.margin.sm}
-                    />
-                  </FlexRow>
-                </FlexRow>
-              </>
-            }
-            footer={
-              <>
-                <FlexRow hrAlign="space-between">
-                  <Text
-                    mb={0}
-                    fontSize={style.font.h4}
-                    fontWeight={style.fontWeight.dark}
-                    width="50%"
-                  >
-                    Your Rewarded XPs
-                  </Text>
-                  <FlexRow hrAlign="center" width="15%">
-                    <Text mb={0}>
-                      {/* {hookXP?.userXPList ? hookXP?.userXPList?.xps_earned : 0} */}
-                    </Text>
-                    <Image src={GlobalIcons["icon-bolt"]} />
-                  </FlexRow>
-                </FlexRow>
-              </>
-            }
-          >
-            <Box marginTop="1rem" marginBottom={style.margin.md} width={"100%"}>
-              <TableContainer rounded={"md"} height="400px" overflowY="scroll">
-                <Table variant="unstyled" colorScheme="whiteAlpha" size="sm">
-                  <Thead
-                    position="sticky"
-                    top={0}
-                    zIndex="docked"
-                    background={style.modal.bg.contractModal}
-                    borderBottom={style.modal.border.contract}
-                  >
-                    <Tr justifyContent="space-between">
-                      <Th
-                        style={{
-                          paddingTop: "20px",
-                          paddingBottom: "20px",
-                          textAlign: "left",
-                          color: "white",
-                          fontWeight: "600",
-                          fontSize: style.font.h6,
-                          borderCollapse: "separate",
-                          borderSpacing: "0 1rem",
-                        }}
-                      >
-                        Activities
-                      </Th>
+                  <FlexColumn hrAlign="flex-start">
+                    {selectedTab == "XPs" && (
+                      <>
+                        <Box
+                          marginTop="1rem"
+                          marginBottom={style.margin.md}
+                          width={"100%"}
+                        >
+                          <TableContainer
+                            rounded={"md"}
+                            height="400px"
+                            overflowY="scroll"
+                          >
+                            <Table
+                              variant="unstyled"
+                              colorScheme="whiteAlpha"
+                              size="sm"
+                            >
+                              <Thead
+                                position="sticky"
+                                top={0}
+                                zIndex="docked"
+                                background={style.modal.bg.contractModal}
+                                borderBottom={style.modal.border.contract}
+                              >
+                                <Tr justifyContent="space-between">
+                                  <Th
+                                    style={{
+                                      paddingTop: "20px",
+                                      paddingBottom: "20px",
+                                      textAlign: "left",
+                                      color: "white",
+                                      fontWeight: "600",
+                                      fontSize: style.font.h6,
+                                      borderCollapse: "separate",
+                                      borderSpacing: "0 1rem",
+                                    }}
+                                  >
+                                    Activities
+                                  </Th>
 
-                      <Th
-                        style={{
-                          paddingTop: "20px",
-                          paddingBottom: "20px",
-                          textAlign: "center",
-                          color: "white",
-                          fontWeight: "600",
-                          fontSize: style.font.h6,
-                          borderCollapse: "separate",
-                          borderSpacing: "0 1rem",
-                          width: "50%",
-                        }}
-                      >
-                        Status
-                      </Th>
-                      <Th
-                        style={{
-                          paddingTop: "20px",
-                          paddingBottom: "20px",
-                          textAlign: "center",
-                          color: "white",
-                          fontWeight: "600",
-                          fontSize: style.font.h6,
-                          borderCollapse: "separate",
-                          borderSpacing: "0 1rem",
-                        }}
-                      >
-                        <FlexRow>
-                          <Text mb={0}>XP</Text>
-                          <Image src={GlobalIcons["icon-bolt"]} />
+                                  <Th
+                                    style={{
+                                      paddingTop: "20px",
+                                      paddingBottom: "20px",
+                                      textAlign: "center",
+                                      color: "white",
+                                      fontWeight: "600",
+                                      fontSize: style.font.h6,
+                                      borderCollapse: "separate",
+                                      borderSpacing: "0 1rem",
+                                      width: "50%",
+                                    }}
+                                  >
+                                    Status
+                                  </Th>
+                                  <Th
+                                    style={{
+                                      paddingTop: "20px",
+                                      paddingBottom: "20px",
+                                      textAlign: "center",
+                                      color: "white",
+                                      fontWeight: "600",
+                                      fontSize: style.font.h6,
+                                      borderCollapse: "separate",
+                                      borderSpacing: "0 1rem",
+                                    }}
+                                  >
+                                    <FlexRow>
+                                      <Text mb={0}>XP</Text>
+                                      <Image src={GlobalIcons["icon-bolt"]} />
+                                    </FlexRow>
+                                  </Th>
+                                </Tr>
+                              </Thead>
+                              <Tbody>
+                                {hookXP.XPList &&
+                                  hookXP.XPList.map((item: any, index: any) => (
+                                    <Tr
+                                      justifyContent="space-between"
+                                      key={index}
+                                    >
+                                      <Td
+                                        style={{
+                                          paddingTop: "20px",
+                                          paddingBottom: "20px",
+                                          textAlign: "center",
+                                          color: "white",
+                                          fontWeight: "600",
+                                          fontSize: style.font.h6,
+                                          borderCollapse: "separate",
+                                          borderSpacing: "0 1rem",
+                                        }}
+                                      >
+                                        <FlexRow hrAlign="flex-start">
+                                          <Image
+                                            src={
+                                              GlobalIcons[
+                                                projectSlugToLogo[item?.project]
+                                              ]
+                                            }
+                                            height="2rem"
+                                            marginRight={style.margin.xs}
+                                          />
+                                          <Text fontSize={style.font.h4} mb={0}>
+                                            {item?.title}
+                                          </Text>
+                                        </FlexRow>
+                                      </Td>
+                                      <Box
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "flex-end",
+                                          alignItems: "center",
+                                        }}
+                                      >
+                                        <Td
+                                          style={{
+                                            paddingTop: "20px",
+                                            paddingBottom: "20px",
+                                            textAlign: "center",
+                                            justifyContent: "center",
+                                            color: "white",
+                                            fontWeight: "600",
+                                            fontSize: style.font.h6,
+                                            borderCollapse: "separate",
+                                            borderSpacing: "0 1rem",
+                                            marginRight: `0.1rem`,
+                                            width: "60%",
+                                          }}
+                                        >
+                                          <TagNative
+                                            variant={
+                                              item?.status != "claimed"
+                                                ? "state_xmtp"
+                                                : ""
+                                            }
+                                            value={
+                                              item?.status == "claimed"
+                                                ? "Claimed"
+                                                : "Claim"
+                                            }
+                                          />
+                                        </Td>
+                                        <Td
+                                          style={{
+                                            paddingTop: "20px",
+                                            paddingBottom: "20px",
+                                            textAlign: "center",
+                                            color: "white",
+                                            fontWeight: "600",
+                                            fontSize: style.font.h6,
+                                            borderCollapse: "separate",
+                                            borderSpacing: "0 1rem",
+                                          }}
+                                        >
+                                          <FlexRow>
+                                            <Text mb={0}>{item?.points}</Text>
+                                            <Image
+                                              src={GlobalIcons["icon-bolt"]}
+                                            />
+                                          </FlexRow>
+                                        </Td>
+                                      </Box>
+                                    </Tr>
+                                  ))}
+                              </Tbody>
+                            </Table>
+                          </TableContainer>
+                        </Box>
+                      </>
+                    )}
+
+                    {selectedTab == "NFTs" && (
+                      <>
+                        <Box
+                          marginTop="1rem"
+                          marginBottom={style.margin.md}
+                          overflowY="auto"
+                          height="20rem"
+                          width={"100%"}
+                        >
+                          {hookAlchemy.nftByAddress.map(
+                            (nft: any, index: any) => {
+                              return (
+                                <TokenRow
+                                  key={index}
+                                  title={nft.contract.name}
+                                  symbol={nft.contract.symbol}
+                                  tokenId={nft.tokenId}
+                                  type={nft.contract.tokenType}
+                                />
+                              );
+                            }
+                          )}
+                        </Box>
+                      </>
+                    )}
+
+                    {selectedTab == "Tokens" && (
+                      <FlexColumn>
+                        <FlexRow hrAlign="space-between" height="fit-content">
+                          <Text
+                            fontSize={style.font.h3}
+                            // lineHeight={"2.2rem"}
+                            marginBottom={0}
+                            fontWeight={style.fontWeight.dark}
+                          >
+                            Select a chain
+                          </Text>
+                          <ButtonMenu
+                            width="fit-content"
+                            size={"lg"}
+                            text={chainValue}
+                            icon={{
+                              slug: "icon-chevron-down",
+                              style: "",
+                            }}
+                            options={chainFilterOptions}
+                            avatar={avatar}
+                          />
                         </FlexRow>
-                      </Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {hookXP.XPList &&
-                      hookXP.XPList.map((item: any, index: any) => (
-                        <Tr justifyContent="space-between" key={index}>
-                          <Td
-                            style={{
-                              paddingTop: "20px",
-                              paddingBottom: "20px",
-                              textAlign: "center",
-                              color: "white",
-                              fontWeight: "600",
-                              fontSize: style.font.h6,
-                              borderCollapse: "separate",
-                              borderSpacing: "0 1rem",
-                            }}
-                          >
-                            <FlexRow hrAlign="flex-start">
-                              <Image
-                                src={
-                                  GlobalIcons[projectSlugToLogo[item?.project]]
+                        {tokenLoading ? (
+                          <FlexColumn height="100%">
+                            <Loader size="sm" />
+                          </FlexColumn>
+                        ) : (
+                          <FlexColumn height="100%" hrAlign="flex-start">
+                            {hookAlchemy?.userTokens &&
+                              hookAlchemy?.userTokens.map(
+                                (token: any, index: any) => {
+                                  return (
+                                    <TokenRow
+                                      key={index}
+                                      title={token.name}
+                                      symbol={token.symbol}
+                                      tokenId={token.balance}
+                                      image={token.logo}
+                                    />
+                                  );
                                 }
-                                height="2rem"
-                                marginRight={style.margin.xs}
-                              />
-                              <Text fontSize={style.font.h4} mb={0}>
-                                {item?.title}
-                              </Text>
-                            </FlexRow>
-                          </Td>
-                          <Box
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-end",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Td
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "20px",
-                                textAlign: "center",
-                                justifyContent: "center",
-                                color: "white",
-                                fontWeight: "600",
-                                fontSize: style.font.h6,
-                                borderCollapse: "separate",
-                                borderSpacing: "0 1rem",
-                                marginRight: `0.1rem`,
-                                width: "60%",
-                              }}
-                            >
-                              <TagNative
-                                variant={
-                                  item?.status != "claimed" ? "state_xmtp" : ""
-                                }
-                                value={
-                                  item?.status == "claimed"
-                                    ? "Claimed"
-                                    : "Claim"
-                                }
-                              />
-                            </Td>
-                            <Td
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "20px",
-                                textAlign: "center",
-                                color: "white",
-                                fontWeight: "600",
-                                fontSize: style.font.h6,
-                                borderCollapse: "separate",
-                                borderSpacing: "0 1rem",
-                              }}
-                            >
-                              <FlexRow>
-                                <Text mb={0}>{item?.points}</Text>
-                                <Image src={GlobalIcons["icon-bolt"]} />
-                              </FlexRow>
-                            </Td>
-                          </Box>
-                        </Tr>
-                      ))}
-                  </Tbody>
-                </Table>
-              </TableContainer>
-            </Box>
-          </CardNative>
-        )}
-      </FlexColumn>
-      <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-        <Box
-          borderRadius={gStyle.card.borderRadius.default}
-          border={gStyle.card.border.default}
-          width="98%"
-          height={"100%"}
-          overflow={"hidden"}
-        >
-          <Image
-            src={image}
-            alt="right image"
-            objectFit="cover"
-            w="100%"
-            h="100%"
-          />
-        </Box>
-      </FlexColumn>
+                              )}
+                          </FlexColumn>
+                        )}
+                      </FlexColumn>
+                    )}
+
+                    {selectedTab == "Meta" && (
+                      <>
+                        <MetaUserList hookData={hookUserMeta} />
+                      </>
+                    )}
+                  </FlexColumn>
+                </CardNative>
+              )}
+            </FlexColumn>
+          </FlexColumn>
+        </FlexRow>
+      )}
     </FlexRow>
   );
 };
