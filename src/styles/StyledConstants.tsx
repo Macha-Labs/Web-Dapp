@@ -69,6 +69,7 @@ export const darkStyle = {
   window: {},
   body: {
     bg: { default: "#000511" },
+    bgLight: { default: "rgba(230, 238, 248, 1)" },
     padding: "1% 6%",
     margin: { top: "50px" },
     paddingTop: "80px",
@@ -78,10 +79,12 @@ export const darkStyle = {
     widthLeft: "5%",
     height: "75px",
     bg: { default: "#00040d", meta: "#000A24" },
-    border: { default: "2px solid #0F172E" },
+    border: { default: "2px solid #0F172E", light: "1px solid rgba(226, 226, 226, 1)" },
     padding: { default: "1% 6%", meta: "1% 2%" },
     margin: "75px",
     marginM: "120px",
+    navLeftBg: "#030c1a",
+    navLeftBgLight: "rgba(255, 255, 255, 1)",
   },
   list: {
     padding: "5px",

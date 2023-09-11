@@ -3,7 +3,7 @@ import chains from "@/data/network";
 import { timeStampConversion, truncateAddress } from "@/helpers";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text, useColorMode } from "@chakra-ui/react";
 import Avatar from "boring-avatars";
 import Link from "next/link";
 
@@ -24,13 +24,16 @@ const TransactionCard = ({
   chain_id,
   txn_hash,
 }: Props) => {
+
+  const {colorMode} = useColorMode();
+
   return (
     <Link
       href={`/search/transaction/${txn_hash}`}
       style={{
         marginRight: `${style.margin.sm}`,
         marginTop: `${style.margin.sm}`,
-        marginBottom: `${style.margin.sm}`,
+        marginBottom: `${style.margin.sm}`
       }}
     >
       <Box
@@ -43,14 +46,14 @@ const TransactionCard = ({
           display: "flex",
           flexDirection: "row",
           width: "20rem",
-          border: `${style.card.border.default}`,
+          border: `${colorMode == "light" ? "" : style.card.border.default}`,
           borderRadius: `${style.card.borderRadius.button}`,
           padding: `${style.padding.xs}`,
           justifyContent: "flex-start",
           alignItems: "center",
           height: "5rem",
           // boxShadow: `${style.card.shadow.default}`,
-          background: `#030c1a`,
+          background: `${colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}`,
           transitionTimingFunction: "ease-in-out",
           transitionProperty: " all ",
           transitionDuration: "600ms",
@@ -76,12 +79,12 @@ const TransactionCard = ({
             }}
           >
             <FlexRow hrAlign="flex-start" height="100%">
-              <Text mb={0} mr={2} fontSize={style.font.h7}>
+              <Text color={colorMode == "light" ? "#000" : ""} mb={0} mr={2} fontSize={style.font.h7}>
                 {truncateAddress(from)}
               </Text>
               <Text
                 mb={0}
-                color={style.color["white.7"]}
+                color={colorMode == "light" ?  "rgba(0,0,0,0.7)" : style.color["white.7"]}
                 fontSize={style.font.h7}
               >
                 {timeStampConversion(timestamp).time}
@@ -100,13 +103,13 @@ const TransactionCard = ({
               </Text>
               <Text
                 mb={0}
-                color={style.color["white.7"]}
+                color={colorMode == "light" ?  "rgba(0,0,0,0.7)" : style.color["white.7"]}
                 mr={1}
                 fontSize={style.font.h7}
               >
                 to
               </Text>
-              <Text mb={0} fontSize={style.font.h7}>
+              <Text color={colorMode == "light" ? "#000" : ""} mb={0} fontSize={style.font.h7}>
                 {truncateAddress(to)}
               </Text>
             </FlexRow>

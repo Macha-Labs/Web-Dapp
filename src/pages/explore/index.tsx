@@ -6,19 +6,13 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import Marquee from "@/components/Marquee/Marquee";
 import CollectorCard from "@/components/cards/CollectorsCard";
-import GraphCard from "@/components/cards/GraphCard";
 import TransactionCard from "@/components/cards/TransactionCard";
 import CarouselSlide from "@/components/studio/CarouselSlide";
-import SupportedChains from "@/components/studio/SupportedChains";
-import LeaderboardTable from "@/components/table/LeaderboardTable";
-import UserXpTable from "@/components/table/UserXpTable";
-import chains from "@/data/network";
-import { exploreModules } from "@/data/studio/constant";
 import useMetaList from "@/hooks/meta/useMetasList";
 import useTransaction from "@/hooks/studio/useTransaction";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image } from "@chakra-ui/react";
+import { Box, Heading, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
@@ -69,6 +63,7 @@ export default function Home() {
   const hookTransaction = useTransaction();
   const hookMetasList = useMetaList();
   const router = useRouter();
+  const {colorMode} = useColorMode()
 
   useEffect(() => {
     hookTransaction._fetchLatestTransactions();
@@ -96,8 +91,8 @@ export default function Home() {
             avatarImage={GlobalIcons["logo-Macha-circular"]}
             // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
             bgGrid=""
-            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-            bannerImage="/assets/explore/home-carousal-1-hero-image.svg"
+            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+            bannerImage={"/assets/explore/home-carousal-1-hero-image.svg"}
             buttonText="Explore"
           />
           <CarouselSlide
@@ -106,8 +101,8 @@ export default function Home() {
             avatarImage={GlobalIcons["base-SDK"]}
             // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
             bgGrid=""
-            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-            bannerImage="/assets/explore/home-carousal-2-hero-image.svg"
+            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+            bannerImage={"/assets/explore/home-carousal-2-hero-image.svg"}
             buttonText="View Contracts Now"
           />
           <CarouselSlide
@@ -116,8 +111,8 @@ export default function Home() {
             avatarImage={GlobalIcons["base-chain"]}
             // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
             bgGrid=""
-            bgBlur="/assets/explore/home-carousal-1-hero-bg.svg"
-            bannerImage="/assets/explore/home-carousal-3-hero-image.svg"
+            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+            bannerImage={"/assets/explore/home-carousal-3-hero-image.svg"}
             buttonText="View Chains"
           />
         </Carousel>
@@ -148,7 +143,7 @@ export default function Home() {
           width="100%"
           header={
             <FlexRow hrAlign="space-between">
-              <Heading mb="0px" fontSize={style.font.h3} fontWeight={600}>
+              <Heading color={colorMode == "light" ? "#000" : ""} mb="0px" fontSize={style.font.h3} fontWeight={600}>
                 Latest POAP indexed
               </Heading>
               <ButtonNative

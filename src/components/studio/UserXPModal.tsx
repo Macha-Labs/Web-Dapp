@@ -265,10 +265,10 @@ const UserXPModal = ({ modal }: Props) => {
                       >
                         <TagNative
                           variant={
-                            item?.status != "claimed" ? "state_xmtp" : ""
+                            hookXP.userXPList && hookXP.userXPList[item?._id] == true ? "" : "state_xmtp"
                           }
                           value={
-                            item?.status == "claimed" ? "Claimed" : "Claim"
+                            hookXP.userXPList && hookXP.userXPList[item?._id] == true ? "Claimed" : "Claim"
                           }
                         />
                       </Td>

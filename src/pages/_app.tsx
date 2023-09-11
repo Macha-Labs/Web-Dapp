@@ -1,3 +1,4 @@
+import Header from "@/_ui/Head/Header";
 import { config } from "@/config/index";
 import AuthProvider from "@/providers/AuthProvider";
 import { DataProvider } from "@/providers/DataProvider";
@@ -10,18 +11,16 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
+import { XMTPProvider } from "@xmtp/react-sdk";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { IKContext } from "imagekitio-react";
 import type { AppProps } from "next/app";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
-import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
-import { filecoinCalibration, polygon, polygonMumbai,goerli,optimism,filecoin } from "wagmi/chains";
-import { publicProvider } from "wagmi/providers/public";
 import { useEffect } from "react";
-import Header from "@/_ui/Head/Header";
-import { XMTPProvider } from "@xmtp/react-sdk";
+import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
+import { filecoin, filecoinCalibration, goerli, optimism, polygon, polygonMumbai } from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider } = configureChains(
   [filecoinCalibration, mainnet, polygon, polygonMumbai,goerli,optimism,filecoin],

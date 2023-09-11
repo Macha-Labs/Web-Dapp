@@ -72,10 +72,11 @@ const chains: any = {
         link: "https://safe.global/",
       },
     ],
+    allowMinting: false,
     alchemyChain: Network.ETH_MAINNET
   },
   137: {
-    chainName: "Polygon",
+    chainName: "Polygon Mainnet",
     chainImage: "logo-Polygon",
     about: `Polygon is a web3 scaling platform that allows developers to build secure high-throughput apps on Ethereum while minimizing costs to end-users.`,
     team: [
@@ -137,6 +138,7 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    allowMinting: true,
     alchemyChain: Network.MATIC_MAINNET
   },
   10: {
@@ -161,6 +163,7 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    allowMinting: false,
     alchemyChain: Network.OPT_MAINNET
   },
   8453: {
@@ -185,6 +188,7 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    allowMinting: false,
     alchemyChain: Network.ETH_GOERLI
   },
   314: {
@@ -209,6 +213,7 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    allowMinting: false,
     alchemyChain: Network.ETH_GOERLI
   },
   314159: {
@@ -233,6 +238,7 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    allowMinting: false,
     alchemyChain: Network.ETH_GOERLI
   },
   80001: {
@@ -257,6 +263,7 @@ const chains: any = {
         link: "https://metamask.io/",
       },
     ],
+    allowMinting: true,
     alchemyChain: Network.MATIC_MUMBAI
   },
   5: {
@@ -330,6 +337,7 @@ const chains: any = {
         link: "https://safe.global/",
       },
     ],
+    allowMinting: true,
     alchemyChain: Network.ETH_GOERLI
   },
 };

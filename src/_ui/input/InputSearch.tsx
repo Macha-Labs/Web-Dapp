@@ -1,4 +1,4 @@
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { Input, InputGroup, InputLeftElement, useColorMode } from "@chakra-ui/react";
 import IconBase from "../icons/IconsBase";
 import { style as gStyle } from "../../styles/StyledConstants";
 
@@ -37,6 +37,9 @@ const InputSearch = ({
   height,
   defaultValue,
 }: Props) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <InputGroup
       className={style?.className}
@@ -54,6 +57,7 @@ const InputSearch = ({
       )}
       <Input
         type={type}
+        background={colorMode == "light" ? "rgba(255,255,255,1)" : gStyle.input.bg.default}
         placeholder={placeholder}
         value={value}
         defaultValue={defaultValue}

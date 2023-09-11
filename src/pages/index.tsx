@@ -5,14 +5,12 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import SearchHeader from "@/components/search/SearchHeader";
 import { style } from "@/styles/StyledConstants";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-
-import { useEffect } from "react";
-import { useAccount } from "wagmi";
 
 const Search = () => {
   const router = useRouter();
+  const {colorMode} = useColorMode()
 
   const renderNavLeft = () => {
     return <NavLeft />;
@@ -27,18 +25,18 @@ const Search = () => {
       <FlexColumn
         hrAlign="flex-start"
         vrAlign="flex-start"
-        padding="1rem 0rem"
+        padding="0rem 0rem"
         height="100vh"
       >
         <Box
-          border={style.card.border.default}
-          backgroundImage="url(../assets/icons/searchbg.svg)"
+          border={colorMode ? "" : style.card.border.default}
+          backgroundImage={colorMode == "light" ? "url(/assets/explore/searchbg_light.svg)" : "url(/assets/icons/searchbg.svg)"}
           backgroundPosition="center"
           backgroundRepeat="no-repeat"
           backgroundSize="cover"
           height="100%"
           width={"100%"}
-          borderRadius={style.card.borderRadius.button}
+          // borderRadius={style.card.borderRadius.button}
           // marginTop={style.margin.md}
           // paddingTop={style.padding.xxl}
           display={"flex"}
@@ -58,7 +56,7 @@ const Search = () => {
           />
           <Image
             // className="headerLogo"
-            src="/assets/title.png"
+            src={colorMode == "light" ? "/assets/explore/search-home-title-light.svg" : "/assets/title.png"}
             alt="logo"
             // width={255}
             // height={93}
@@ -76,7 +74,7 @@ const Search = () => {
                 slug: "icon-brand-bolt",
               }}
               text={"XPs LeaderBoard"}
-              variant="state_default_hover"
+              variant={colorMode == "light" ? "state_brand" : "state_default_hover"}
               marginTop="5xl"
             />
           </Box>
@@ -90,7 +88,7 @@ const Search = () => {
       view="both"
       navLeft={renderNavLeft()}
       // navTop={renderNavTop()}
-      padding="0% 1%"
+      padding="0% 0%"
       bodyElem={renderBody()}
       noPaddingTop={true}
     ></FlexWindow>

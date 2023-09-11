@@ -1,5 +1,5 @@
 import { style } from "@/styles/StyledConstants";
-import { Box } from "@chakra-ui/react";
+import { Box, useColorMode } from "@chakra-ui/react";
 import React from "react";
 
 type Props = {
@@ -29,6 +29,9 @@ export const FlexWindow = ({
   padding,
   background,
 }: Props) => {
+
+  const { colorMode } = useColorMode()
+
   return (
     <div
       className="window"
@@ -36,7 +39,7 @@ export const FlexWindow = ({
         position: "relative",
         width: "100vw",
         minHeight: "100vh",
-        background: `${background ? background : style.body.bg.default}`,
+        background: `${background ? background : colorMode == "light" ? style.body.bgLight.default  : style.body.bg.default}`,
       }}
     >
       {view == "col" && (
@@ -95,7 +98,7 @@ export const FlexWindow = ({
                   paddingTop: `${style.margin.xs}`,
                   zIndex: "1000",
                   width: "95%",
-                  background: `${style.body.bg.default}`,
+                  background: `${colorMode == "light" ? style.body.bgLight.default : style.body.bg.default}`,
                   display: "flex",
                   justifyContent: "center",
                 }}

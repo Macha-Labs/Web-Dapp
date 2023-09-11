@@ -1,14 +1,10 @@
 import MCard from "@/_sdk/MCard";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import CardSkeleton from "@/_ui/cards/CardSkeleton";
 import FlexColumn from "@/_ui/flex/FlexColumn";
-import FlexRow from "@/_ui/flex/FlexRow";
-import Loader from "@/_ui/loader/Loader";
 import useUserMeta from "@/hooks/studio/useUserMeta";
 import { style } from "@/styles/StyledConstants";
-import { Box, Grid, GridItem, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 type Props = {
   data?: any;
@@ -18,7 +14,7 @@ type Props = {
 const MetaUserList = ({ hookData }: Props) => {
   const router = useRouter();
   const hookUserMeta = useUserMeta();
-
+  const { colorMode } = useColorMode()
   useEffect(() => {
     if (router.isReady) {
       hookUserMeta?.fetchMetas(String(router.query.userId));
@@ -50,10 +46,10 @@ const MetaUserList = ({ hookData }: Props) => {
         </>
       ) : (
         <FlexColumn width="100%" hrAlign="center" vrAlign="center">
-          <Image src="/assets/user-feed-empty-state.svg" />
-          <Text fontSize={style.font.h3} fontWeight={style.fontWeight.dark}>The feed is currently empty</Text>
-          <Text mb={0}>Ready to share your Macha stories?</Text>
-          <Text>This is where it all begins</Text>
+          <Image src={colorMode == "light" ? "/assets/userFeed-emptyState_light.svg" : "/assets/user-feed-empty-state.svg"} />
+          <Text color={colorMode == "light" ? "#000" : ""} fontSize={style.font.h3} fontWeight={style.fontWeight.dark}>The feed is currently empty</Text>
+          <Text color={colorMode == "light" ? "#000" : ""} mb={0}>Ready to share your Macha stories?</Text>
+          <Text color={colorMode == "light" ? "#000" : ""} >This is where it all begins</Text>
         </FlexColumn>
       )}
     </Box>

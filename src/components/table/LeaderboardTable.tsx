@@ -2,12 +2,14 @@ import TableNative from "@/_ui/table/TableNative";
 import { truncateAddress } from "@/helpers";
 import { leaderBoardData } from "@/service/ApiService";
 import { style } from "@/styles/StyledConstants";
-import { Box, Td, Text, Th } from "@chakra-ui/react";
+import { Box, Td, Text, Th, useColorMode } from "@chakra-ui/react";
 import Avatar from "boring-avatars";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const LeaderboardTable = () => {
+  const {colorMode} = useColorMode()
+
   const [leaderBoardTableData, setLeaderBoardTableData] = useState<any>();
   useEffect(() => {
     leaderBoardData().then((res) => {
@@ -27,7 +29,7 @@ const LeaderboardTable = () => {
       <TableNative
         height="25rem"
         overflow="scroll"
-        theadBackground={style.modal.bg.contractModal}
+        theadBackground={colorMode == "light" ? "rgba(255,255,255,1)" : style.modal.bg.contractModal}
         theadBottomBorder="none"
         data={leaderBoardTableData}
         bodyRowOnClick={(item: any) => {
@@ -40,7 +42,7 @@ const LeaderboardTable = () => {
                 textAlign: "left",
                 fontSize: "1.25rem",
                 textTransform: "capitalize",
-                color: "#8f8f8f",
+                color: `${colorMode == "light" ? "#000" : "#8f8f8f"}`,
                 fontWeight: "500",
                 marginLeft: `${style.padding.sm}`,
               }}
@@ -52,9 +54,9 @@ const LeaderboardTable = () => {
                 fontSize: "1.25rem",
                 textAlign: "center",
                 textTransform: "capitalize",
-                color: "#8f8f8f",
                 fontWeight: "500",
                 paddingLeft: `${style.padding.xxs}`,
+                color: `${colorMode == "light" ? "#000" : "#8f8f8f"}`,
               }}
             >
               Address
@@ -64,8 +66,8 @@ const LeaderboardTable = () => {
                 textAlign: "center",
                 fontSize: "1.25rem",
                 textTransform: "capitalize",
-                color: "#8f8f8f",
                 fontWeight: "500",
+                color: `${colorMode == "light" ? "#000" : "#8f8f8f"}`,
               }}
             >
               XP
@@ -76,7 +78,7 @@ const LeaderboardTable = () => {
           return (
             <>
               <Td style={{ textAlign: "center", paddingLeft: `0px` }}>
-                <Text marginBottom={0} fontSize={style.font.h4}>
+                <Text color={colorMode == "light" ? "#000" : "#8f8f8f"} marginBottom={0} fontSize={style.font.h4}>
                   #{index + 1}
                 </Text>
               </Td>
@@ -100,6 +102,7 @@ const LeaderboardTable = () => {
                     fontSize={style.font.h4}
                     marginBottom={0}
                     fontWeight={style.fontWeight.dark}
+                    color={colorMode == "light" ? "#000" : "#8f8f8f"}
                   >
                     {truncateAddress(item?.address)}
                   </Text>
@@ -117,7 +120,7 @@ const LeaderboardTable = () => {
                   }}
                 >
                   <Box>
-                    <Text mb={0} fontSize={style.font.h4}>
+                    <Text mb={0} fontSize={style.font.h4} color={colorMode == "light" ? "#000" : "#8f8f8f"}>
                       {item?.xps_earned}
                     </Text>
                   </Box>
