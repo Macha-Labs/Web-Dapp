@@ -16,8 +16,8 @@ const Claim = () => {
           heading="Macha NFT"
           image={
             colorMode == "light"
-            ? "/assets/No_NFT_Claimed_Right.png"
-            : "/assets/NoNftClaimed-rightBanner.svg"
+            ? "/assets/NoNftClaimed-rightBanner.svg"
+            : "/assets/No_NFT_Claimed_Right.png"
           }
         />
       </Box>
