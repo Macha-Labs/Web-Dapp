@@ -1,3 +1,4 @@
+import { config } from "@/config";
 import { alchemyNetworksData } from "@/data/studio/constant";
 import { Alchemy, Network } from "alchemy-sdk";
 import { useState, useEffect } from "react";
@@ -12,7 +13,7 @@ const useAlchemy = () => {
 
   const alchemyData = async () => {
     const settings = {
-      apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
+      apiKey: config.ALCHEMY_API_KEY, // Replace with your Alchemy API Key.
       network: Network.ETH_MAINNET, // Replace with your network.
     };
 
@@ -21,7 +22,7 @@ const useAlchemy = () => {
 
   const getLatestBlockByChainId = async (chain_id: number) => {
     const settings = {
-      apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
+      apiKey: config.ALCHEMY_API_KEY, // Replace with your Alchemy API Key.
       network: alchemyNetworksData[chain_id],
     };
     const alchemy = new Alchemy(settings);
@@ -30,7 +31,7 @@ const useAlchemy = () => {
   };
   // const verifyNftOwner = (owner:string,contractAddress:string)=>{
   //   const settings = {
-  //     apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
+  //     apiKey: config.ALCHEMY_API_KEY, // Replace with your Alchemy API Key.
   //     network: alchemyNetworksData[chain_id],
   //   };
   // }

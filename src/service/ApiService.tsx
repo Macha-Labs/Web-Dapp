@@ -274,7 +274,7 @@ export const createUserInDB = async (data: any) => {
 export const updateXpInDB = async (data: any) => {
   let url = `${config.metaServer}/indexer/user/XP/update`;
   const response = await fetch(url, {
-    method: "POST",
+    method: "PUT",
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",

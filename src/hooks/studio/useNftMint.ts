@@ -1,17 +1,17 @@
 import { config } from "@/config";
 import MachaSBT_ABI from "@/data/ABI/MachaSBT_ABI.json";
+import { checkUserXP } from "@/data/UserXPEarned";
 import chains from "@/data/network";
+import { updateXpInDB } from "@/service/ApiService";
 import { useToast } from "@chakra-ui/react";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
+import useAlchemy from "./useAlchemy";
 import useUserCreate from "./useUserCreate";
 import useXP from "./useXP";
-import useAlchemy from "./useAlchemy";
-import { contractAddresses } from "@/data/xpContractAddresses";
-import { updateXpInDB } from "@/service/ApiService";
 const networks = chains;
 
 const useNftMint = () => {
@@ -49,7 +49,7 @@ const useNftMint = () => {
   const { chain } = useNetwork();
 
   const submit = async () => {
-    if (chainId == "") {
+    if (!chainId) {
       toast({
         title: "Please select a network.",
         status: "warning",
@@ -84,8 +84,8 @@ const useNftMint = () => {
           chainId == 314159
             ? config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS
             : chainId == 80001
-            ? config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS
-            : config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS,
+              ? config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS
+              : config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS,
           MachaSBT_ABI,
           signer
         );
@@ -114,17 +114,20 @@ const useNftMint = () => {
             tokenId,
             taskId ? taskId : null
           );
-          hookAlchemy.nftByAddress.forEach((nft: any) => {
-            Object.keys(contractAddresses).forEach((contract_address: any) => {
-              if (nft.contract.address == contractAddresses[contract_address]) {
-                setUserEarnedXPs(userEarnedXPs + 10);
-              }
-            });
-          });
-          console.log("userearnerxp0", userEarnedXPs);
-          // await updateXpInDB({ address: address, newXp: userEarnedXPs });
+          const responsePromises = Object.keys(checkUserXP).map(async (taskId: any) => {
+            return await checkUserXP[taskId](address)
+          })
+          const resolvedPromises = await Promise.all(responsePromises)
+          let totalPoints = 0
+          resolvedPromises.map((isNftOwner: any) => {
+            if(isNftOwner == true){
+              totalPoints = totalPoints + 10
+            }
+          })
+          setUserEarnedXPs(totalPoints)
+          await updateXpInDB({ address: address, newXp: totalPoints });
           setIsLoading(false);
-          // router.reload();
+          router.reload();
         } catch (error: any) {
           console.log(error);
           toast({

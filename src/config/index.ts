@@ -5,10 +5,10 @@ export const config = {
   url: "https://metawork-server.herokuapp.com",
 
   // Production
-  metaServer: "https://metawork-sdk.herokuapp.com",
+  // metaServer: "https://metawork-sdk.herokuapp.com",
 
   // Staging
-  // metaServer: "https://metawork-server-staging.herokuapp.com",
+  metaServer: "https://metawork-server-staging.herokuapp.com",
 
   // metaServer: "http://localhost:3080",
   // url: "http://localhost:3080",
@@ -26,6 +26,7 @@ export const config = {
 
   // Lighthouse - Polygon Mainnet
   LIGHTHOUSE_API_KEY: "369c0ebc-5307-4cad-aa3e-b8a3a7364c2c",
+  ALCHEMY_API_KEY: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-",
 
   // Google analytics
   GOOGLE_ANALYTICS_ID: "G-87ZYDKJCR0",
@@ -42,6 +43,8 @@ export const config = {
     "0x4Ca8E7f7a7E17aAB16e4D45098d919252E4AE976",
   MACHA_MUMBAI_SBT_CONTRACT_ADDRESS:
     "0x58F58c9B389e2E5103bD31A8aF34Ff28613047A3",
+  MACHA_POLYGON_MAINNET_SBT_CONTRACT_ADDRESS:
+    "0x91200E0d9E18D4b350Be923D35C8d18A4f297084",
   MACHA_GOERLI_SBT_CONTRACT_ADDRESS:
     "0xf190a8BE4305A79af9390dA264835ec2Af8ad694",
 };
