@@ -58,7 +58,6 @@ const Tabs = ({
                     <Text
                       style={{
                         color: `${colorMode == "light" ? "#9FABC8" : ""}`,
-                        fontWeight: `${colorMode == "light" ? 700 : ""}`
                       }}
                       fontSize={style.font.h5}
                       fontWeight={value == option?.value ? "600" : "400"}

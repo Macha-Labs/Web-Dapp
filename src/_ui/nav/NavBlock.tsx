@@ -19,7 +19,7 @@ export default function NavBlock({ children, back, marginTop }: Props) {
         background: `${colorMode == "light" ? "#ffff" : "#030c1a"}`,
         padding: `${style.nav.padding.default}`,
         width: `100%`,
-        borderBottom: `${style.nav.border.default}`,
+        borderBottom: `${colorMode == "light" ? "1px solid rgba(162,184,215,0.49)" : style.nav.border.default}`,
         position: "fixed",
         height: "60px",
         top: 0,

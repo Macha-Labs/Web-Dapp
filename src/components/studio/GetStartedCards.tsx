@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, Text, useColorMode } from "@chakra-ui/react";
 import { style } from "@/styles/StyledConstants";
 import TagNative from "@/_ui/tag/TagNative";
 import FlexRow from "@/_ui/flex/FlexRow";
@@ -22,6 +22,9 @@ const GetStartedCards = ({
   onClick,
   image,
 }: Props) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <Box
       _hover={{
@@ -29,9 +32,9 @@ const GetStartedCards = ({
         transform: "scale(1.01,1.01)",
       }}
       //   maxW="sm"
-      border={style.card.border.card}
+      border={colorMode == "light" ? "1px solid #e2e2e2"  : style.card.border.card}
       borderRadius={style.card.borderRadius.default}
-      background={"#030c1a"}
+      background={colorMode == "light" ? "#ffff" : "#030c1a"}
       overflow="hidden"
       width="30%"
       marginBottom={style.margin.md}
@@ -42,6 +45,7 @@ const GetStartedCards = ({
       <Box p="4" opacity={disabled ? "0.4" : "1"} width="100%">
         <FlexRow hrAlign="flex-start" vrAlign="flex-start">
           <Heading
+            color={colorMode == 'light' ? "#282828" : ""}
             fontSize={style.font.h4}
             fontWeight={style.fontWeight.dark}
             mb={0}
@@ -51,7 +55,8 @@ const GetStartedCards = ({
           </Heading>
           {tag && <TagNative value={tag} size="sm" marginTop="2px" />}
         </FlexRow>
-        <Text width="100%" mt={style.margin.sm} color={style.color["white.7"]}>
+        <Text 
+            color={colorMode == 'light' ? "#3d3d3d" : style.color["white.7"]} width="100%" mt={style.margin.sm}>
           {description}
         </Text>
         {image && (

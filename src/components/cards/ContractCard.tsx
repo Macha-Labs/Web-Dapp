@@ -1,4 +1,4 @@
-import { Box, Text, Image, Flex } from "@chakra-ui/react";
+import { Box, Text, Image, Flex, useColorMode } from "@chakra-ui/react";
 import FlexRow from "@/_ui/flex/FlexRow";
 import TagNative from "@/_ui/tag/TagNative";
 import {
@@ -30,12 +30,15 @@ const ContractCard = ({
   heading,
   description,
   tags,
-  onCardClick = (e?: any) => {},
+  onCardClick = (e?: any) => { },
   height,
   address,
   chainId,
   createdAt,
 }: Props) => {
+
+  const { colorMode } = useColorMode()
+
   return (
     <Box
       _hover={{
@@ -45,9 +48,9 @@ const ContractCard = ({
       style={{
         height: "25rem",
         // width: "25%",
-        border: `${style.card.border.card}`,
+        border: `${colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.card}`,
         borderRadius: `${style.card.borderRadius.default}`,
-        background: `#030c1a`,
+        background: `${colorMode == "light" ? "#ffff" : "#030c1a"}`,
         padding: ` ${style.padding.md}`,
         display: "flex",
         flexDirection: "column",
@@ -89,24 +92,21 @@ const ContractCard = ({
           <div style={{ textAlign: "right" }}>
             <Text
               style={{
-                background: `-webkit-linear-gradient(
-              270deg,
-              rgb(25, 124, 236),
-              rgb(0, 74, 217)
-            )`,
+                background: "-webkit-linear-gradient(270deg, rgb(25, 124, 236),rgb(0, 74, 217))",
+                color: "transparent",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
-                color: "transparent",
-
                 fontWeight: `${style.fontWeight.dark}`,
               }}
               lineHeight="1rem"
               marginBottom={0}
+
             >
               Created on
             </Text>
             <Text
-              style={{ fontWeight: `${style.fontWeight.dark}`, fontSize:`${style.font.h7}` }}
+              color={colorMode == "light" ? "#3d3d3d" : ""}
+              style={{ fontWeight: `${style.fontWeight.dark}`, fontSize: `${style.font.h7}` }}
               lineHeight="1rem"
             >
               {UtcTimeStampConversion(createdAt).date}
@@ -125,10 +125,10 @@ const ContractCard = ({
           justifyContent: "flex-end",
         }}
       >
-        <Text lineHeight="1.25rem" fontSize={"2xl"} fontWeight={600}>
+        <Text color={colorMode == "light" ? "#3d3d3d" : ""} lineHeight="1.25rem" fontSize={"2xl"} fontWeight={600}>
           {truncateString(heading, 10)}
         </Text>
-        <Text
+        <Text color={colorMode == "light" ? "#3d3d3d" : ""}
           lineHeight="1.5rem"
           style={{ height: "3rem", marginBottom: `${style.margin.sm}` }}
         >
@@ -140,14 +140,10 @@ const ContractCard = ({
           >
             <Text
               style={{
-                background: `-webkit-linear-gradient(
-                270deg,
-                rgb(25, 124, 236),
-                rgb(0, 74, 217)
-                )`,
+                background: "-webkit-linear-gradient(270deg, rgb(25, 124, 236),rgb(0, 74, 217))",
+                color: "transparent",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
-                color: "transparent",
                 fontWeight: `${style.fontWeight.dark}`,
                 marginBottom: `0.8rem`,
               }}
@@ -156,6 +152,7 @@ const ContractCard = ({
               Contract Address:
             </Text>
             <Text
+              color={colorMode == "light" ? "#3d3d3d" : ""}
               style={{
                 fontWeight: `${style.fontWeight.dark}`,
                 marginBottom: "0.5rem",
@@ -184,14 +181,10 @@ const ContractCard = ({
             >
               <Text
                 style={{
-                  background: `-webkit-linear-gradient(
-                270deg,
-                rgb(25, 124, 236),
-                rgb(0, 74, 217)
-                )`,
+                  background: "-webkit-linear-gradient(270deg, rgb(25, 124, 236),rgb(0, 74, 217))",
+                  color: "transparent",
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
-                  color: "transparent",
                   fontWeight: `${style.fontWeight.dark}`,
                   marginBottom: `1.2rem`,
                 }}
@@ -209,6 +202,7 @@ const ContractCard = ({
               }}
             >
               <Text
+                color={colorMode == "light" ? "#3d3d3d" : ""}
                 style={{
                   fontWeight: `${style.fontWeight.dark}`,
                   marginBottom: "0px",
@@ -229,7 +223,7 @@ const ContractCard = ({
         <FlexRow
           height="fit-content"
           hrAlign="flex-start"
-          //  width="100%"
+        //  width="100%"
         >
           {tags?.map((tag: string, index: number) => {
             return (

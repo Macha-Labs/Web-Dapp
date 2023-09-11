@@ -1,28 +1,18 @@
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexRow from "@/_ui/flex/FlexRow";
 import Loader from "@/_ui/loader/Loader";
-import chains from "@/data/network";
+import useContract from "@/hooks/studio/useContract";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import useContractList from "@/hooks/studio/useContractList";
-import useMacha from "@/hooks/studio/useMacha";
-import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
-import { style } from "@/styles/StyledConstants";
 import {
-  Box,
   Grid,
   GridItem,
-  Heading,
-  Text,
-  useDisclosure,
+  useDisclosure
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import ContractCard from "../cards/ContractCard";
 import ContractCreateEditModal from "./ContractCreateEditModal";
 import EditContractsModal from "./EditContractsModal";
-import useContract from "@/hooks/studio/useContract";
 
 type Props = {
   metaInfo?: any;
