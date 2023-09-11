@@ -1,7 +1,7 @@
 import CreatorModal from "@/components/studio/CreatorModal";
 import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading, Image, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,6 +16,7 @@ const NavLeft = (props: any) => {
   const router = useRouter();
   const creatorModal = useDisclosure();
   const hookCreatorCreate = useCreatorCreate();
+  const { colorMode, toggleColorMode } = useColorMode()
 
   return (
     <>
@@ -28,9 +29,8 @@ const NavLeft = (props: any) => {
             position: "fixed",
             left: "0",
             padding: "10px 5px",
-
-            background: "#030c1a",
-            borderRight: `${style.nav.border.default}`,
+            background: `${colorMode == "light" ? style.nav.navLeftBgLight : style.nav.navLeftBg}`,
+            borderRight: `${colorMode == "light" ? style.nav.border.light : style.nav.border.default}`,
           }}
         >
           <div className="body" style={{ padding: "10px 0px", height: "100%" }}>
@@ -49,6 +49,20 @@ const NavLeft = (props: any) => {
               </FlexColumn>
               <Box width={"100%"} marginX={"auto"}>
                 <FlexColumn height="fit-content" vrAlign="center">
+                  <Box style={{ marginBottom: style.margin.sm }} onClick={() => {
+                    toggleColorMode()
+                  }}>
+                    <FlexRow>
+                      <IconImage
+                        slug={
+                          router.pathname === "/"
+                            ? "icon-search"
+                            : "icon-search"
+                        }
+                        size="md"
+                      />
+                    </FlexRow>
+                  </Box>
                   <Link href="/" style={{ marginBottom: style.margin.sm }}>
                     <FlexRow>
                       <IconImage
@@ -63,12 +77,11 @@ const NavLeft = (props: any) => {
                             router.pathname === "/"
                               ? "state_active"
                               : "state_hover"
-                          } `,
+                            } `,
                         }}
                       />
                     </FlexRow>
                   </Link>
-
                   <Box
                     cursor={"pointer"}
                     display={"flex"}
@@ -95,11 +108,10 @@ const NavLeft = (props: any) => {
                         }
                         size="md"
                         style={{
-                          className: `${
-                            router.pathname === `/u/${address}`
+                          className: `${router.pathname === `/u/${address}`
                               ? "state_active "
                               : "state_hover"
-                          } `,
+                            } `,
                         }}
                       />
                     </FlexRow>

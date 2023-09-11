@@ -1,6 +1,6 @@
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import useSearch from "@/hooks/studio/useSearch";
-import { Box, Image } from "@chakra-ui/react";
+import { Box, useColorMode, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { style } from "../../styles/StyledConstants";
@@ -19,6 +19,7 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
   );
   const hookSearch = useSearch();
   const router = useRouter();
+  const { colorMode } = useColorMode()
 
   return (
     <>
@@ -26,13 +27,12 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
         <Box
           // className="py-3"
           style={{
-            background: "#030c1a",
             padding: `${style.nav.padding.meta}`,
             height: `${style.nav.height}`,
-            border: `${style.nav.border.default}`,
+            background: `${colorMode == "light" ? style.nav.navLeftBgLight : style.nav.navLeftBg}`,
+            border: `${colorMode == "light" ? style.nav.border.light : style.nav.border.default}`,
             borderRadius: `${style.card.borderRadius.default}`,
-
-            boxShadow: "0px 24px 64px 0px #000",
+            boxShadow: `${colorMode == "light" ? "" : "0px 24px 64px 0px #000"}`,
             width: "100%",
           }}
         >

@@ -1,8 +1,8 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexRow from "@/_ui/flex/FlexRow";
+import theme from "@/styles/StyledChakraTheme";
 import { style } from "@/styles/StyledConstants";
-import { Box, Button, Image, Text } from "@chakra-ui/react";
-import { Html, Head, Main, NextScript } from "next/document";
+import { Box, Button, ColorModeScript, Image, Text } from "@chakra-ui/react";
+import { Head, Html, Main, NextScript } from "next/document";
 import Link from "next/link";
 
 export default function Document() {
@@ -41,7 +41,7 @@ export default function Document() {
             <Image
               src="/assets/empty-state-illustration - phone.svg"
               width={"15rem"}
-              // marginTop={style.margin.xxl}
+            // marginTop={style.margin.xxl}
             />
             <Text
               marginBottom={style.margin.sm}
@@ -62,7 +62,7 @@ export default function Document() {
               fontSize={style.font.h4}
               color={style.color["white.5"]}
               textAlign={"center"}
-              // marginBottom={style.margin.lg}
+            // marginBottom={style.margin.lg}
             >
               Good news- our mobile app is in the works and will be available
               soon.
@@ -93,6 +93,7 @@ export default function Document() {
             },
           }}
         >
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />
         </Box>

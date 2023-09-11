@@ -1,10 +1,13 @@
 import { truncateString } from "@/helpers";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text, useColorMode } from "@chakra-ui/react";
 import Avatar from "boring-avatars";
 
 const CollectorCard = ({ name, tag, artists, width, onClick, image }: any) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <Box
       style={{
@@ -14,7 +17,6 @@ const CollectorCard = ({ name, tag, artists, width, onClick, image }: any) => {
         alignItems: "center",
         width: `${width}`,
         padding: `${style.padding.sm}`,
-
         marginRight: `${style.margin.sm}`,
         borderRadius: `${style.card.borderRadius.default}`,
         marginTop: `${style.margin.xl}`,
@@ -43,15 +45,15 @@ const CollectorCard = ({ name, tag, artists, width, onClick, image }: any) => {
         <Avatar size="2.5rem" name={name} variant="pixel" />
       )}
       <Box>
-        <Text style={{ fontSize: `${style.font.h6}`, marginBottom: "0px" }}>
+        <Text color={colorMode == "light" ? "#000" : ""} style={{ fontSize: `${style.font.h6}`, marginBottom: "0px" }}>
           {name}
         </Text>
         {tag ? (
-          <Text style={{ fontSize: `${style.font.h5}`, marginBottom: "0px" }}>
+          <Text color={colorMode == "light" ? "#000" : ""} style={{ fontSize: `${style.font.h5}`, marginBottom: "0px" }}>
             {truncateString(tag, 40)}
           </Text>
         ) : (
-          <Text mb="0px">NA</Text>
+          <Text color={colorMode == "light" ? "#000" : ""} mb="0px">NA</Text>
         )}
       </Box>
     </Box>

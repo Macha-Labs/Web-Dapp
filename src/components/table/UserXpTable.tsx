@@ -5,7 +5,7 @@ import useXP from "@/hooks/studio/useXP";
 import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Image, Td, Text, Th } from "@chakra-ui/react";
+import { Box, Image, Td, Text, Th, useColorMode } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { ConnectWalletButton } from "../ConnectWalletButton";
 import { projectSlugToLogo } from "@/data/ProjectData";
@@ -13,6 +13,7 @@ import { projectSlugToLogo } from "@/data/ProjectData";
 const UserXpTable = () => {
   const $address = useAuthStore((state: any) => state.address);
   const hookXP = useXP();
+  const { colorMode } = useColorMode()
 
   useEffect(() => {
     hookXP._fetch();
@@ -31,7 +32,7 @@ const UserXpTable = () => {
             width={"100%"}
             disabled={!$address}
             overflow={$address && "scroll"}
-            theadBackground={style.modal.bg.contractModal}
+            theadBackground={colorMode == "light" ? "rgba(255,255,255,1)" : style.modal.bg.contractModal}
             theadBottomBorder="none"
             data={hookXP.XPList}
             theadChildren={
@@ -41,7 +42,7 @@ const UserXpTable = () => {
                     textAlign: "left",
                     fontSize: "1.25rem",
                     textTransform: "capitalize",
-                    color: "#8f8f8f",
+                    color: `${colorMode == "light" ? "#000" : "#8f8f8f"}`,
                     fontWeight: "500",
                     paddingLeft: `${style.padding.xs}`,
                   }}
@@ -53,7 +54,7 @@ const UserXpTable = () => {
                     textAlign: "center",
                     fontSize: "1.25rem",
                     textTransform: "capitalize",
-                    color: "#8f8f8f",
+                    color: `${colorMode == "light" ? "#000" : "#8f8f8f"}`,
                     fontWeight: "500",
                   }}
                 >
@@ -78,7 +79,7 @@ const UserXpTable = () => {
                         height="2rem"
                         marginRight={style.margin.xs}
                       />
-                      <Text fontSize={style.font.h4} mb={0}>
+                      <Text color={colorMode == "light" ? "#000" : "#8f8f8f"} fontSize={style.font.h4} mb={0}>
                         {item?.title}
                       </Text>
                     </FlexRow>
@@ -90,7 +91,7 @@ const UserXpTable = () => {
                     }}
                   >
                     <FlexRow>
-                      <Text mb={0}>{item?.points}</Text>
+                      <Text color={colorMode == "light" ? "#000" : "#8f8f8f"} mb={0}>{item?.points}</Text>
                       <Image src={GlobalIcons["icon-bolt"]} />
                     </FlexRow>
                   </Td>

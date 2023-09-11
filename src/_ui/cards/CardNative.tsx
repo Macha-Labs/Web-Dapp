@@ -1,5 +1,5 @@
 import { style } from "@/styles/StyledConstants";
-import { Box, Divider } from "@chakra-ui/react";
+import { Box, Divider, useColorMode } from "@chakra-ui/react";
 
 type Props = {
   header?: any;
@@ -36,6 +36,9 @@ const CardNative = ({
   footer,
   hrAlign,
 }: Props) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <Box
       style={{
@@ -43,7 +46,7 @@ const CardNative = ({
         width: width ? `${width}` : "100%",
         borderRadius: ` ${style.card.borderRadius.default}`,
         border: `${border ? border : style.card.border.card}`,
-        background: ` ${bg ? bg : "#030c1a"}`,
+        background: ` ${colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}`,
         boxShadow: ` ${style.card.shadow.default} `,
         margin: margin ? style?.margin[margin] : "0rem",
         marginLeft: `${style.margin[marginLeft]}`,

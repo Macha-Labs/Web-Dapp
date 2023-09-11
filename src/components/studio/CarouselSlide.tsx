@@ -1,7 +1,7 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Text, useColorMode } from "@chakra-ui/react";
 
 type Props = {
   bgBlur: string;
@@ -30,13 +30,15 @@ const CarouselSlide = ({
   buttonText,
   height,
 }: Props) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <Box
       style={{
-        background: `url(${bgGrid})`,
+        background: `${colorMode == "light" ? "rgba(242, 245, 253, 1)" : ""}`,
         backdropFilter: "",
-        boxShadow:
-          " 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
         borderRadius: `${style.card.borderRadius.default}`,
         backgroundSize: "90%",
         height: `${height ? height : "28rem"}`,

@@ -7,10 +7,13 @@ import LeaderboardTable from "@/components/table/LeaderboardTable";
 import UserXpTable from "@/components/table/UserXpTable";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image } from "@chakra-ui/react";
+import { Box, Heading, Image, useColorMode } from "@chakra-ui/react";
 import React from "react";
 
-const xps = () => {
+const Xps = () => {
+
+  const {colorMode} = useColorMode()
+  
   const renderBody = () => {
     return (
       <Box
@@ -27,6 +30,7 @@ const xps = () => {
           header={
             <FlexRow hrAlign="space-between" overFlow={"hidden"}>
               <Heading
+                color={colorMode == "light" ? "#000" : ""}
                 fontSize={style.font.h3}
                 fontWeight={600}
                 className="m-b-0"
@@ -46,6 +50,7 @@ const xps = () => {
           header={
             <FlexRow hrAlign="space-between">
               <Heading
+                color={colorMode == "light" ? "#000" : ""}
                 fontSize={style.font.h3}
                 fontWeight={600}
                 className="m-b-0"
@@ -72,4 +77,4 @@ const xps = () => {
   );
 };
 
-export default xps;
+export default Xps;
