@@ -38,39 +38,45 @@ const Tabs = ({
         {options ? (
           options?.map((option: any, idx: any) => {
             return (
-              <ButtonNative
-                key={idx}
-                onClick={() => onChange(option?.value)}
-                marginRight="xs"
-                variant={
-                  value == option?.value ? "state_brand" : "state_default_hover"
-                }
-                height="2.2rem"
-              >
-                <Link
-                  className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0  "
-                  href={option?.href ? option?.href : ""}
-                  style={gstyle}
-                >
-                  <FlexRow>
-                    {icon && <IconImage slug={icon.slug} />}
-                    <Text
-                      fontSize={style.font.h5}
-                      fontWeight={value == option?.value ? "600" : "400"}
-                      // bgGradient={
-                      //   value == option?.value
-                      //     ? "linear(100.07deg, #197cec 100%, #004889 100%)"
-                      //     : "linear(100.07deg, #fff 100%, #fff 100%)"
-                      // }
-                      // bgClip="text"
-                      color="#fff"
-                      className="m-b-0"
+              <>
+                {option && (
+                  <ButtonNative
+                    key={idx}
+                    onClick={() => onChange(option?.value)}
+                    marginRight="xs"
+                    variant={
+                      value == option?.value
+                        ? "state_brand"
+                        : "state_transparent_hover"
+                    }
+                    height="2.2rem"
+                  >
+                    <Link
+                      className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0  "
+                      href={option?.href ? option?.href : ""}
+                      style={gstyle}
                     >
-                      {option?.value}
-                    </Text>
-                  </FlexRow>
-                </Link>
-              </ButtonNative>
+                      <FlexRow>
+                        {icon && <IconImage slug={icon.slug} />}
+                        <Text
+                          fontSize={style.font.h5}
+                          fontWeight={value == option?.value ? "600" : "400"}
+                          // bgGradient={
+                          //   value == option?.value
+                          //     ? "linear(100.07deg, #197cec 100%, #004889 100%)"
+                          //     : "linear(100.07deg, #fff 100%, #fff 100%)"
+                          // }
+                          // bgClip="text"
+                          color="#fff"
+                          className="m-b-0"
+                        >
+                          {option?.value}
+                        </Text>
+                      </FlexRow>
+                    </Link>
+                  </ButtonNative>
+                )}
+              </>
             );
           })
         ) : (

@@ -77,7 +77,7 @@ const NavLeft = (props: any) => {
                     justifyContent={"flex-start"}
                     onClick={() => {
                       if (address) {
-                        router.push(`/claim`);
+                        router.push(`/profile`);
                       } else {
                         if (openConnectModal) {
                           openConnectModal();

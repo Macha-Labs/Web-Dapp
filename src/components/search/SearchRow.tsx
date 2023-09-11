@@ -1,9 +1,9 @@
 import { style } from "@/styles/StyledConstants";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 
-const SearchRow = ({ text, onClick }: any) => {
+const SearchRow = ({ text, onClick, image }: any) => {
   return (
     <Box
       onMouseDown={(e) => {
@@ -22,11 +22,13 @@ const SearchRow = ({ text, onClick }: any) => {
         padding: `${style.padding.xxs} ${style.padding.xs}`,
         borderRadius: `${style.card.borderRadius.button}`,
         border: `${style.card.border.transparent}`,
+        justifyContent: "space-between",
       }}
     >
-      <Text mb={0} fontSize={style.font.h6}>
+      <Heading fontWeight={400} mb={0} fontSize={style.font.h6}>
         {text}
-      </Text>
+      </Heading>
+      <Image height="30px" src={image} marginRight={style.margin.xxs} />
     </Box>
   );
 };

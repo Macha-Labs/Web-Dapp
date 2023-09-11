@@ -6,6 +6,7 @@ import { Box, InputGroup, InputRightElement, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import SearchRow from "./SearchRow";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 type Props = {
   options?: any;
@@ -73,7 +74,7 @@ const SearchHeader = ({ options }: Props) => {
               </Box>
             </InputRightElement>
           </Box>
-          {showSuggestions && (
+          {!showSuggestions && (
             <Box
               width={"100%"}
               marginTop={style.margin.sm}
@@ -111,6 +112,7 @@ const SearchHeader = ({ options }: Props) => {
                 </Box>
 
                 <SearchRow
+                  image={GlobalIcons["logo-Lens"]}
                   text="Lens Posts"
                   onClick={() => {
                     router.push("/search?search=lens_post");
@@ -118,6 +120,7 @@ const SearchHeader = ({ options }: Props) => {
                   }}
                 />
                 <SearchRow
+                  image={GlobalIcons["logo-Ens"]}
                   text="Ens Handles"
                   onClick={() => {
                     router.push("/search?search=ens_ethereum");
@@ -125,6 +128,7 @@ const SearchHeader = ({ options }: Props) => {
                   }}
                 />
                 <SearchRow
+                  image={GlobalIcons["logo-Sound.xyz"]}
                   text="Sound.xyz Music"
                   onClick={() => {
                     router.push("/explore/sound_nft");
