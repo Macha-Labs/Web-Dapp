@@ -86,7 +86,11 @@ const SearchHeader = ({ options }: Props) => {
               position={"absolute"}
               top="20"
             >
-              <Box overflow={"scroll"} height={"15rem"}>
+              <Box
+                overflow={"scroll"}
+                height={"15rem"}
+                paddingX={style.padding.xs}
+              >
                 <Box
                   style={{
                     display: "flex",

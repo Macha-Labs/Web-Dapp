@@ -41,6 +41,7 @@ const NavLeft = (props: any) => {
                     src="../../assets/Logo.png"
                     height={"40px"}
                     alt="logo"
+                    borderRadius={style.card.borderRadius.button}
                     onClick={() => {
                       router.push("/");
                     }}
@@ -76,7 +77,7 @@ const NavLeft = (props: any) => {
                     justifyContent={"flex-start"}
                     onClick={() => {
                       if (address) {
-                        router.push(`/u/${address}`);
+                        router.push(`/claim`);
                       } else {
                         if (openConnectModal) {
                           openConnectModal();

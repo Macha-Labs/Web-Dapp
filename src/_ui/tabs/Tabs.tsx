@@ -1,10 +1,11 @@
 import { StyledLi } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
-import { Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
+import ButtonNative from "../buttons/ButtonNative";
 
 type Props = {
   options: any;
@@ -37,13 +38,14 @@ const Tabs = ({
         {options ? (
           options?.map((option: any, idx: any) => {
             return (
-              <StyledLi
-                className={`nav-item  ${
-                  value === option?.value ? "active" : ""
-                }`}
+              <ButtonNative
                 key={idx}
                 onClick={() => onChange(option?.value)}
-                style={{ marginRight: `${style.margin["md"]}` }}
+                marginRight="xs"
+                variant={
+                  value == option?.value ? "state_brand" : "state_default_hover"
+                }
+                height="2.2rem"
               >
                 <Link
                   className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0  "
@@ -55,19 +57,20 @@ const Tabs = ({
                     <Text
                       fontSize={style.font.h5}
                       fontWeight={value == option?.value ? "600" : "400"}
-                      bgGradient={
-                        value == option?.value
-                          ? "linear(100.07deg, #197cec 100%, #004889 100%)"
-                          : "linear(100.07deg, #fff 100%, #fff 100%)"
-                      }
-                      bgClip="text"
+                      // bgGradient={
+                      //   value == option?.value
+                      //     ? "linear(100.07deg, #197cec 100%, #004889 100%)"
+                      //     : "linear(100.07deg, #fff 100%, #fff 100%)"
+                      // }
+                      // bgClip="text"
+                      color="#fff"
                       className="m-b-0"
                     >
                       {option?.value}
                     </Text>
                   </FlexRow>
                 </Link>
-              </StyledLi>
+              </ButtonNative>
             );
           })
         ) : (

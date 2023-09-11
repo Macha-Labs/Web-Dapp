@@ -13,7 +13,7 @@ const SearchRow = ({ text, onClick }: any) => {
       _hover={{
         cursor: "pointer",
         backgroundColor: "#030c1a",
-        border: `${style.card.border.default}`,
+        border: `${style.card.border.default}!important`,
       }}
       style={{
         display: "flex",
@@ -21,6 +21,7 @@ const SearchRow = ({ text, onClick }: any) => {
         alignItems: "center",
         padding: `${style.padding.xxs} ${style.padding.xs}`,
         borderRadius: `${style.card.borderRadius.button}`,
+        border: `${style.card.border.transparent}`,
       }}
     >
       <Text mb={0} fontSize={style.font.h6}>
