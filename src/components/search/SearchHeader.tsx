@@ -74,7 +74,7 @@ const SearchHeader = ({ options }: Props) => {
               </Box>
             </InputRightElement>
           </Box>
-          {!showSuggestions && (
+          {showSuggestions && (
             <Box
               width={"100%"}
               marginTop={style.margin.sm}
@@ -132,6 +132,14 @@ const SearchHeader = ({ options }: Props) => {
                   text="Sound.xyz Music"
                   onClick={() => {
                     router.push("/explore/sound_nft");
+                    setShowSuggestions(false);
+                  }}
+                />
+                <SearchRow
+                  image={GlobalIcons["logo-Poap"]}
+                  text="Poap Nfts"
+                  onClick={() => {
+                    router.push("/explore/poap_nft");
                     setShowSuggestions(false);
                   }}
                 />

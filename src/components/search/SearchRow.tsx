@@ -28,7 +28,7 @@ const SearchRow = ({ text, onClick, image }: any) => {
       <Heading fontWeight={400} mb={0} fontSize={style.font.h6}>
         {text}
       </Heading>
-      <Image height="30px" src={image} marginRight={style.margin.xxs} />
+      <Image height="30px" src={image} />
     </Box>
   );
 };

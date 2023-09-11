@@ -102,7 +102,23 @@ const MCard = ({
         vrAlign="flex-start"
         marginBottom="sm"
       >
-        <TagNative size="md" value={slug} lineHeight="1.5rem" />
+        <TagNative
+          icon={{
+            align: "left",
+            slug: `${
+              slug == "Lens Post"
+                ? "logo-Lens"
+                : slug == "Poap NFT"
+                ? "logo-Poap"
+                : slug == "ENS Handles"
+                ? "logo-Ens"
+                : "logo-Sound.xyz"
+            }`,
+          }}
+          size="md"
+          value={slug}
+          lineHeight="1.5rem"
+        />
         {/* <AudioPlayer /> */}
         {music && (
           <>
