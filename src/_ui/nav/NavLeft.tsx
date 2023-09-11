@@ -1,7 +1,13 @@
 import CreatorModal from "@/components/studio/CreatorModal";
 import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, useColorMode, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Image,
+  useColorMode,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,7 +22,7 @@ const NavLeft = (props: any) => {
   const router = useRouter();
   const creatorModal = useDisclosure();
   const hookCreatorCreate = useCreatorCreate();
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <>
@@ -29,8 +35,16 @@ const NavLeft = (props: any) => {
             position: "fixed",
             left: "0",
             padding: "10px 5px",
-            background: `${colorMode == "light" ? style.nav.navLeftBgLight : style.nav.navLeftBg}`,
-            borderRight: `${colorMode == "light" ? style.nav.border.light : style.nav.border.default}`,
+            background: `${
+              colorMode == "light"
+                ? style.nav.navLeftBgLight
+                : style.nav.navLeftBg
+            }`,
+            borderRight: `${
+              colorMode == "light"
+                ? style.nav.border.light
+                : style.nav.border.default
+            }`,
           }}
         >
           <div className="body" style={{ padding: "10px 0px", height: "100%" }}>
@@ -49,9 +63,12 @@ const NavLeft = (props: any) => {
               </FlexColumn>
               <Box width={"100%"} marginX={"auto"}>
                 <FlexColumn height="fit-content" vrAlign="center">
-                  <Box style={{ marginBottom: style.margin.sm }} onClick={() => {
-                    toggleColorMode()
-                  }}>
+                  {/* <Box
+                    style={{ marginBottom: style.margin.sm }}
+                    onClick={() => {
+                      toggleColorMode();
+                    }}
+                  >
                     <FlexRow>
                       <IconImage
                         slug={
@@ -62,22 +79,25 @@ const NavLeft = (props: any) => {
                         size="md"
                       />
                     </FlexRow>
-                  </Box>
+                  </Box> */}
                   <Link href="/" style={{ marginBottom: style.margin.sm }}>
                     <FlexRow>
-                      <IconImage
+                    {colorMode == "light" ? <Image src="/assets/icons/brand-search.svg" alt="brand-search"/>: <IconImage
                         slug={
-                          router.pathname === "/" ? "icon-search" : "icon-search"
-                          
+                          router.pathname === "/"
+                            ? "icon-search"
+                            : "icon-search"
                         }
                         size="md"
                         style={{
-                          className: ` ${router.pathname === "/"
+                          className: ` ${
+                            router.pathname === "/"
                               ? "state_active"
                               : "state_hover"
-                            } `, 
+                          } `,
                         }}
-                      />
+                      />}
+                      
                     </FlexRow>
                   </Link>
                   <Box
@@ -106,11 +126,30 @@ const NavLeft = (props: any) => {
                         }
                         size="md"
                         style={{
-                          className: `${router.pathname === `/u/${address}`
-                            ? "state_active "
-                            : "state_hover"
-                            } `,
+                          className: `${
+                            router.pathname === `/u/${address}`
+                              ? "state_active "
+                              : "state_hover"
+                          } `,
                         }}
+                      />
+                    </FlexRow>
+                  </Box>
+                  <Box
+                    style={{ marginBottom: style.margin.sm }}
+                    onClick={() => {
+                      toggleColorMode();
+                    }}
+                    marginTop="1rem"
+                  >
+                    <FlexRow>
+                      <IconImage
+                        slug={
+                          router.pathname === "/"
+                            ? "icon-search"
+                            : "icon-search"
+                        }
+                        size="md"
                       />
                     </FlexRow>
                   </Box>
