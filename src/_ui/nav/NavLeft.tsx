@@ -38,57 +38,34 @@ const NavLeft = (props: any) => {
               <FlexColumn height="fit-content">
                 <Link href="/">
                   <Image
-                    src="../../assets/MACHALogotext.svg"
-                    height={"30px"}
-                    marginTop={style.margin.sm}
-                    // borderRadius={"8px"}
+                    src="../../assets/Logo.png"
+                    height={"40px"}
                     alt="logo"
                     onClick={() => {
                       router.push("/");
                     }}
                   />
-                  {/* <IconImage
-                    slug={
-                      router.pathname === "/" ? "icon-search" : "icon-search"
-                    }
-                    size="md"
-                    style={{
-                      className: `m-b-1 ${
-                        router.pathname === "/" ? "state_active" : "state_hover"
-                      } `,
-                    }}
-                  /> */}
                 </Link>
               </FlexColumn>
-              <Box width={"75%"} marginX={"auto"}>
-                <FlexColumn height="fit-content" vrAlign="flex-start">
-                  <Link
-                    href="/explore"
-                    style={{ marginBottom: style.margin.sm }}
-                  >
+              <Box width={"100%"} marginX={"auto"}>
+                <FlexColumn height="fit-content" vrAlign="center">
+                  <Link href="/" style={{ marginBottom: style.margin.sm }}>
                     <FlexRow>
                       <IconImage
                         slug={
-                          router.pathname === "/explore"
-                            ? "icon-compass"
-                            : "icon-compass-outline"
+                          router.pathname === "/"
+                            ? "icon-search"
+                            : "icon-search"
                         }
                         size="md"
                         style={{
                           className: ` ${
-                            router.pathname === "/explore"
+                            router.pathname === "/"
                               ? "state_active"
                               : "state_hover"
                           } `,
                         }}
                       />
-                      <Heading
-                        fontSize={style.font.h5}
-                        marginBottom={"0px"}
-                        marginLeft={style.margin.xxs}
-                      >
-                        Explore
-                      </Heading>
                     </FlexRow>
                   </Link>
 
@@ -125,13 +102,6 @@ const NavLeft = (props: any) => {
                           } `,
                         }}
                       />
-                      <Heading
-                        fontSize={style.font.h5}
-                        marginBottom={"0px"}
-                        marginLeft={style.margin.xxs}
-                      >
-                        Profile
-                      </Heading>
                     </FlexRow>
                   </Box>
                 </FlexColumn>

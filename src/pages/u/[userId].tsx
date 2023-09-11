@@ -274,8 +274,6 @@ const User = () => {
               ) : (
                 <NftCard
                   heading="Macha NFT"
-                  // subHeading=""
-                  state={true}
                   image="/assets/No_NFT_Claimed_Right.png"
                 />
               )}

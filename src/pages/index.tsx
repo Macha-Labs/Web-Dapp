@@ -1,3 +1,4 @@
+import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavLeft from "@/_ui/nav/NavLeft";
@@ -5,11 +6,13 @@ import NavMeta from "@/_ui/nav/NavMeta";
 import SearchHeader from "@/components/search/SearchHeader";
 import { style } from "@/styles/StyledConstants";
 import { Box, Image, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 import { useEffect } from "react";
+import { useAccount } from "wagmi";
 
 const Search = () => {
-  useEffect(() => {}, []);
+  const router = useRouter();
 
   const renderNavLeft = () => {
     return <NavLeft />;
@@ -63,6 +66,20 @@ const Search = () => {
             marginBottom={style.margin.sm}
           />
           <SearchHeader />
+          <Box zIndex={0}>
+            <ButtonNative
+              onClick={() => {
+                router.push("/xps");
+              }}
+              marginRight="0px"
+              iconLeft={{
+                slug: "icon-brand-bolt",
+              }}
+              text={"XPs LeaderBoard"}
+              variant="state_default_hover"
+              marginTop="5xl"
+            />
+          </Box>
         </Box>
       </FlexColumn>
     );
