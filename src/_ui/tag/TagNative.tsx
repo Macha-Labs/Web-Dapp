@@ -62,7 +62,7 @@ const TagNative = ({
           fontSize: "12px",
         }}
       >
-        <Text color={colorMode == "light" ? "#000" : ""} mb={0}>
+        <Text color="#fff" mb={0}>
           {value}
         </Text>
       </TagLabel>

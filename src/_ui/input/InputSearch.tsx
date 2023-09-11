@@ -56,6 +56,7 @@ const InputSearch = ({
         </InputLeftElement>
       )}
       <Input
+        color={colorMode == "light" ? `#3d3d3d` :`#fff`}
         variant=""
         type={type}
         background={colorMode == "light" ? "#f2f5fd" : gStyle.input.bg.default}

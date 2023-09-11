@@ -53,7 +53,7 @@ export const ConnectWalletButton = (props: any) => {
     }
   };
 
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     if ($address) {
@@ -135,7 +135,11 @@ export const ConnectWalletButton = (props: any) => {
                     <MenuButton
                       width="11rem"
                       height={props.height ? props.height : "3rem"}
-                      variant={colorMode == "light" ? "state_light" : "state_default_hover"}
+                      variant={
+                        colorMode == "light"
+                          ? "state_light"
+                          : "state_default_hover"
+                      }
                       as={Button}
                       style={{
                         borderRadius: `${style.card.borderRadius.button}`,
@@ -185,12 +189,12 @@ export const ConnectWalletButton = (props: any) => {
                     </MenuButton>
                     <MenuList
                       style={{
-                        background: `${colorMode == "light" ? "#ffff" : ""}`
+                        background: `${colorMode == "light" ? "#ffff" : ""}`,
                       }}
                     >
                       <MenuItem
                         style={{
-                          background: `${colorMode == "light" ? "#ffff" : ""}`
+                          background: `${colorMode == "light" ? "#ffff" : ""}`,
                         }}
                         onClick={() => {
                           navigator.clipboard.writeText($address);
@@ -213,7 +217,12 @@ export const ConnectWalletButton = (props: any) => {
                             width="90%"
                             marginLeft={"sm"}
                           >
-                            {truncateAddress($address)}
+                            <Text
+                              color={colorMode == "light" ? "#000" : ""}
+                              mb={0}
+                            >
+                              {truncateAddress($address)}
+                            </Text>
                             {/* <IconImage slug="icon-switchWallet" /> */}
                           </FlexRow>
                         </FlexRow>
@@ -233,7 +242,9 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showStudio && (
                         <MenuItem
                           style={{
-                            background: `${colorMode == "light" ? "#ffff" : ""}`
+                            background: `${
+                              colorMode == "light" ? "#ffff" : ""
+                            }`,
                           }}
                           onClick={async () => {
                             router.push("/studio");
@@ -246,7 +257,12 @@ export const ConnectWalletButton = (props: any) => {
                               width="90%"
                               marginLeft={"sm"}
                             >
-                              Visit Studio
+                              <Text
+                                color={colorMode == "light" ? "#000" : ""}
+                                mb={0}
+                              >
+                                Visit Studio
+                              </Text>
                             </FlexRow>
                           </FlexRow>
                         </MenuItem>
@@ -254,7 +270,9 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showContracts && (
                         <MenuItem
                           style={{
-                            background: `${colorMode == "light" ? "#ffff" : ""}`
+                            background: `${
+                              colorMode == "light" ? "#ffff" : ""
+                            }`,
                           }}
                           onClick={async () => {
                             router.push("/mycontracts");
@@ -275,7 +293,9 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showExplorer && (
                         <MenuItem
                           style={{
-                            background: `${colorMode == "light" ? "#ffff" : ""}`
+                            background: `${
+                              colorMode == "light" ? "#ffff" : ""
+                            }`,
                           }}
                           onClick={async () => {
                             router.push("/");
@@ -297,7 +317,9 @@ export const ConnectWalletButton = (props: any) => {
                         props?.showRegisterPublisher && (
                           <MenuItem
                             style={{
-                              background: `${colorMode == "light" ? "#ffff" : ""}`
+                              background: `${
+                                colorMode == "light" ? "#ffff" : ""
+                              }`,
                             }}
                             onClick={async () => {
                               await checkBalance();
@@ -349,7 +371,10 @@ export const ConnectWalletButton = (props: any) => {
                             width="90%"
                             marginLeft={"sm"}
                           >
-                            <Text mb={0} color={colorMode == "light" ? "#00000" : ""}>
+                            <Text
+                              mb={0}
+                              color={colorMode == "light" ? "#000" : ""}
+                            >
                               {"Disconnect Wallet"}
                             </Text>
                           </FlexRow>

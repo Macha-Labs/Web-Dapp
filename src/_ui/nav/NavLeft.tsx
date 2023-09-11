@@ -36,14 +36,16 @@ const NavLeft = (props: any) => {
             position: "fixed",
             left: "0",
             padding: "10px 5px",
-            background: `${colorMode == "light"
+            background: `${
+              colorMode == "light"
                 ? style.nav.navLeftBgLight
                 : style.nav.navLeftBg
-              }`,
-            borderRight: `${colorMode == "light"
+            }`,
+            borderRight: `${
+              colorMode == "light"
                 ? style.nav.border.light
                 : style.nav.border.default
-              }`,
+            }`,
           }}
         >
           <div className="body" style={{ padding: "10px 0px", height: "100%" }}>
@@ -81,21 +83,29 @@ const NavLeft = (props: any) => {
                   </Box> */}
                   <Link href="/" style={{ marginBottom: style.margin.sm }}>
                     <FlexRow>
-                      {colorMode == "light" ? <Image src="/assets/icons/brand-search.svg" alt="brand-search" /> : <IconImage
-                        slug={
-                          router.pathname === "/"
-                            ? "icon-search"
-                            : "icon-search"
-                        }
-                        size="md"
-                        style={{
-                          className: ` ${router.pathname === "/"
-                              ? "state_active"
-                              : "state_hover"
+                      {colorMode == "light" ? (
+                        <Image
+                          src="/assets/icons/brand-search.svg"
+                          alt="brand-search"
+                          width="2rem"
+                        />
+                      ) : (
+                        <IconImage
+                          slug={
+                            router.pathname === "/"
+                              ? "icon-search"
+                              : "icon-search"
+                          }
+                          size="md"
+                          style={{
+                            className: ` ${
+                              router.pathname === "/"
+                                ? "state_active"
+                                : "state_hover"
                             } `,
-                        }}
-                      />}
-
+                          }}
+                        />
+                      )}
                     </FlexRow>
                   </Link>
                   <Box
@@ -115,21 +125,30 @@ const NavLeft = (props: any) => {
                     }}
                   >
                     <FlexRow>
-                      <IconImage
-                        slug={
-                          "icon-user"
-                          // router.pathname === `/u/${$address}`
-                          //   ? "icon-user"
-                          //   : "icon-user"
-                        }
-                        size="md"
-                        style={{
-                          className: `${router.pathname === `/u/${address}`
-                              ? "state_active "
-                              : "state_hover"
+                      {colorMode == "light" ? (
+                        <Image
+                          src="/assets/icons/brand-user.svg"
+                          width="2rem"
+                          alt="brand-user"
+                        />
+                      ) : (
+                        <IconImage
+                          slug={
+                            "icon-user"
+                            // router.pathname === `/u/${$address}`
+                            //   ? "icon-user"
+                            //   : "icon-user"
+                          }
+                          size="md"
+                          style={{
+                            className: `${
+                              router.pathname === `/u/${address}`
+                                ? "state_active "
+                                : "state_hover"
                             } `,
-                        }}
-                      />
+                          }}
+                        />
+                      )}
                     </FlexRow>
                   </Box>
                   <Box
@@ -140,7 +159,16 @@ const NavLeft = (props: any) => {
                     marginTop="1rem"
                   >
                     <FlexRow>
-                      <Image src= {colorMode == "light" ? GlobalIcons["icon-dark-mode"] : GlobalIcons["icon-light-mode"]} height="2.5rem" width="2.5rem"/>
+                      <Image
+                        alt="theme-change"
+                        src={
+                          colorMode == "light"
+                            ? GlobalIcons["icon-dark-mode"]
+                            : GlobalIcons["icon-light-mode"]
+                        }
+                        height="2.5rem"
+                        width="2.5rem"
+                      />
                     </FlexRow>
                   </Box>
                 </FlexColumn>

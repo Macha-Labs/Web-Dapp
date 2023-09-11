@@ -1,4 +1,4 @@
-import { Button, Text, background } from "@chakra-ui/react";
+import { Button, Text, background, useColorMode } from "@chakra-ui/react";
 
 import { style as gStyle } from "../../styles/StyledConstants";
 import IconBase from "../icons/IconsBase";
@@ -64,6 +64,7 @@ export default function ButtonNative({
   textColorHover,
   borderColorWhite = true,
 }: Props) {
+  const {colorMode} = useColorMode();
   return (
     <Button
       _hover={{
@@ -110,7 +111,8 @@ export default function ButtonNative({
           fontSize={textFontSize ? gStyle.font[textFontSize] : "1rem"}
           marginLeft={marginLeft ? marginLeft : gStyle.margin["xxs"]}
           marginRight={marginRight ? marginRight : gStyle.margin["xxs"]}
-          color="#ffff"
+          color={colorMode == "light" ? "#000" : ""}
+
         >
           {text}
         </Text>

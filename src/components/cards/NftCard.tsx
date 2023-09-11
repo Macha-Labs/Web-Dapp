@@ -160,7 +160,11 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                     // overflowY="scroll"
                   >
                     <CardNative hrAlign={"center"} width="fit-content">
-                      <Image src="/assets/Claim_Macha_Nft.png" height="15rem" alt="icon-bolt"/>
+                      <Image
+                        src="/assets/Claim_Macha_Nft.png"
+                        height="15rem"
+                        alt="icon-bolt"
+                      />
                     </CardNative>
                   </Box>
                   <Text
@@ -233,7 +237,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                     <Text mb={0} color={colorMode == "light" ? "#000" : ""}>
                       {/* {hookXP?.userXPList ? hookXP?.userXPList?.xps_earned : 0} */}
                     </Text>
-                    <Image src={GlobalIcons["icon-bolt"]} alt="icon-bolt"/>
+                    <Image src={GlobalIcons["icon-bolt"]} alt="icon-bolt" />
                   </FlexRow>
                 </FlexRow>
               </>
@@ -247,7 +251,11 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                     top={0}
                     zIndex="docked"
                     background={style.modal.bg.contractModal}
-                    borderBottom={colorMode == "light" ? "1px solid #e2e2e2" : style.modal.border.contract}
+                    borderBottom={
+                      colorMode == "light"
+                        ? "1px solid #e2e2e2"
+                        : style.modal.border.contract
+                    }
                   >
                     <Tr justifyContent="space-between">
                       <Th
@@ -316,7 +324,10 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                           >
                             XP
                           </Text>
-                          <Image src={GlobalIcons["icon-bolt"]} alt="icon-bolt" />
+                          <Image
+                            src={GlobalIcons["icon-bolt"]}
+                            alt="icon-bolt"
+                          />
                         </FlexRow>
                       </Th>
                     </Tr>
@@ -362,54 +373,53 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                               alignItems: "center",
                             }}
                           > */}
-                            <Td
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "20px",
-                                textAlign: "center",
-                                justifyContent: "center",
-                                color: "white",
-                                fontWeight: "600",
-                                fontSize: style.font.h6,
-                                borderCollapse: "separate",
-                                borderSpacing: "0 1rem",
-                                marginRight: `0.1rem`,
-                                width: "60%",
-                              }}
+                          <Td
+                            style={{
+                              paddingTop: "20px",
+                              paddingBottom: "20px",
+                              textAlign: "center",
+                              justifyContent: "center",
+                              color: "white",
+                              fontWeight: "600",
+                              fontSize: style.font.h6,
+                              borderCollapse: "separate",
+                              borderSpacing: "0 1rem",
+                              marginRight: `0.1rem`,
+                              width: "60%",
+                            }}
+                          >
+                            <Text
+                              color={colorMode == "light" ? "#000" : ""}
+                              mb={0}
                             >
-                              <TagNative
-                                variant={
-                                  item?.status != "claimed" ? "state_xmtp" : ""
-                                }
-                                value={
-                                  item?.status == "claimed"
-                                    ? "Claimed"
-                                    : "Claim"
-                                }
+                              {item?.status =="claimed" ? "Claimed" : "Claim"}
+                            </Text>
+                          </Td>
+                          <Td
+                            style={{
+                              paddingTop: "20px",
+                              paddingBottom: "20px",
+                              textAlign: "center",
+                              color: "white",
+                              fontWeight: "600",
+                              fontSize: style.font.h6,
+                              borderCollapse: "separate",
+                              borderSpacing: "0 1rem",
+                            }}
+                          >
+                            <FlexRow>
+                              <Text
+                                color={colorMode == "light" ? "#000" : ""}
+                                mb={0}
+                              >
+                                {item?.points}
+                              </Text>
+                              <Image
+                                src={GlobalIcons["icon-bolt"]}
+                                alt="icon-bolt"
                               />
-                            </Td>
-                            <Td
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "20px",
-                                textAlign: "center",
-                                color: "white",
-                                fontWeight: "600",
-                                fontSize: style.font.h6,
-                                borderCollapse: "separate",
-                                borderSpacing: "0 1rem",
-                              }}
-                            >
-                              <FlexRow>
-                                <Text
-                                  color={colorMode == "light" ? "#000" : ""}
-                                  mb={0}
-                                >
-                                  {item?.points}
-                                </Text>
-                                <Image src={GlobalIcons["icon-bolt"]} alt="icon-bolt" />
-                              </FlexRow>
-                            </Td>
+                            </FlexRow>
+                          </Td>
                           {/* </Box> */}
                         </Tr>
                       ))}
@@ -423,7 +433,11 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
       <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
         <Box
           borderRadius={gStyle.card.borderRadius.default}
-          border={colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default}
+          border={
+            colorMode == "light"
+              ? "1px solid #e2e2e2"
+              : gStyle.card.border.default
+          }
           width="98%"
           height={"100%"}
           overflow={"hidden"}

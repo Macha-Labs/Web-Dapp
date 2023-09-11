@@ -283,8 +283,8 @@ const User = () => {
                   heading="Macha NFT"
                   image={
                     colorMode == "light"
-                      ? "/assets/No_NFT_Claimed_Right.png"
-                      : "/assets/NoNftClaimed-rightBanner.svg"
+                      ? "/assets/NoNftClaimed-rightBanner.svg"
+                      : "/assets/No_NFT_Claimed_Right.png"
                   }
                 />
               )}
@@ -315,38 +315,38 @@ const User = () => {
                           #74B2F9,
                           #0629A6
                         )`}
-                        borderTopRadius={style.card.borderRadius.default}
-                      ></Box>
-                      <FlexRow
-                        hrAlign="space-between"
-                        paddingLeft="xl"
-                        paddingRight="xl"
-                        paddingTop="md"
-                        paddingBottom="md"
-                      >
-                        <FlexRow width="fit-content">
-                          <Image
-                            src={GlobalIcons["avatar-default"]}
-                            height={"4rem"}
-                            width={"4rem"}
-                            objectFit={"cover"}
-                            alt="avatar-default"
-                          />
-                          <Text
-                            color={colorMode == "light" ? "#3d3d3d" : ""}
-                            fontSize={`${style.font.h4}`}
-                            mb={0}
-                            marginLeft={style.margin.xxs}
-                          >
-                            {truncateAddress(userAddress)}
-                          </Text>
-                        </FlexRow>
-                        <Box
-                          display={"flex"}
-                          justifyContent="flex-end"
-                          width="25%"
+                      borderTopRadius={style.card.borderRadius.default}
+                    ></Box>
+                    <FlexRow
+                      hrAlign="space-between"
+                      paddingLeft="xl"
+                      paddingRight="xl"
+                      paddingTop="md"
+                      paddingBottom="md"
+                    >
+                      <FlexRow width="fit-content">
+                        <Image
+                          src={GlobalIcons["avatar-default"]}
+                          height={"4rem"}
+                          width={"4rem"}
+                          objectFit={"cover"}
+                          alt="avatar-default"
+                        />
+                        <Text
+                          color={colorMode == "light" ? "#3d3d3d" : ""}
+                          fontSize={`${style.font.h4}`}
+                          mb={0}
+                          marginLeft={style.margin.xxs}
                         >
-                          {/* {hookXP?.userXPList?.claims?.map(
+                          {truncateAddress(userAddress)}
+                        </Text>
+                      </FlexRow>
+                      <Box
+                        display={"flex"}
+                        justifyContent="flex-end"
+                        width="25%"
+                      >
+                        {/* {hookXP?.userXPList?.claims?.map(
                           (reward: any, index: any) => (
                             <Box
                               key={index}
@@ -511,32 +511,32 @@ const User = () => {
             </FlexRow>
           </FlexColumn> */}
 
-                  <FlexColumn vrAlign="flex-start">
-                    <CardNative
-                      marginTop="xxl"
-                      header={
-                        <>
-                          <FlexRow hrAlign="space-between">
-                            <Heading
-                              color={colorMode == "light" ? "#3d3d3d" : ""}
-                              fontSize={`${style.font.h3}`}
-                              fontWeight={`${style.fontWeight.dark}`}
-                              marginBottom={"0px"}
-                            >
-                              Feed
-                            </Heading>
-                            <InputSearch
-                              width="25%"
-                              height="40px"
-                              placeholder="Search Meta"
-                            />
-                          </FlexRow>
-                        </>
-                      }
-                    >
-                      <MetaUserList hookData={useUserMeta} />
-                    </CardNative>
-                  </FlexColumn>
+                <FlexColumn vrAlign="flex-start">
+                  <CardNative
+                    marginTop="xxl"
+                    header={
+                      <>
+                        <FlexRow hrAlign="space-between">
+                          <Heading
+                            color={colorMode == "light" ? "#3d3d3d" : ""}
+                            fontSize={`${style.font.h3}`}
+                            fontWeight={`${style.fontWeight.dark}`}
+                            marginBottom={"0px"}
+                          >
+                            Feed
+                          </Heading>
+                          <InputSearch
+                            width="25%"
+                            height="40px"
+                            placeholder="Search Meta"
+                          />
+                        </FlexRow>
+                      </>
+                    }
+                  >
+                    <MetaUserList hookData={useUserMeta} />
+                  </CardNative>
+                </FlexColumn>
                 <FlexColumn vrAlign="flex-start">
                   <CardNative
                     marginTop="xxl"
