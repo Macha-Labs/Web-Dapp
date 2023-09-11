@@ -8,6 +8,8 @@ import {
   TagLabel,
   TagLeftIcon,
   TagRightIcon,
+  Text,
+  useColorMode,
 } from "@chakra-ui/react";
 
 type Props = {
@@ -38,6 +40,7 @@ const TagNative = ({
   marginTop,
   lineHeight,
 }: Props) => {
+  const { colorMode } = useColorMode();
   return (
     <Tag
       size={size}
@@ -54,9 +57,14 @@ const TagNative = ({
         <Avatar marginRight={1} boxSize="12px" src={GlobalIcons[icon.slug]} />
       )}
       <TagLabel
-        style={{ lineHeight: lineHeight ? lineHeight : "1", fontSize: "12px" }}
+        style={{
+          lineHeight: lineHeight ? lineHeight : "1",
+          fontSize: "12px",
+        }}
       >
-        {value}
+        <Text color={colorMode == "light" ? "#000" : ""} mb={0}>
+          {value}
+        </Text>
       </TagLabel>
       {icon && icon.align == "right" && (
         <Avatar marginLeft={1} boxSize="12px" src={GlobalIcons[icon.slug]} />

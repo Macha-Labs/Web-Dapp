@@ -19,6 +19,7 @@ import {
   Th,
   Thead,
   Tr,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import useAlchemy from "@/hooks/studio/useAlchemy";
@@ -62,10 +63,11 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
   const [hasNft, setHasNft] = useState<boolean>(false);
   const hookXP = useXP();
   const { address, isConnected } = useAccount();
+  const { colorMode } = useColorMode();
 
   let chainFilterOptions: any = [];
   Object.keys(chains).forEach((key) => {
-    if(chains[key].allowMinting){
+    if (chains[key].allowMinting) {
       chainFilterOptions.push({
         value: chains[key].chainName,
         leftIcon: chains[key].chainImage,
@@ -191,6 +193,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                     mb={0}
                     fontSize={style.font.h4}
                     fontWeight={style.fontWeight.dark}
+                    color={colorMode == "light" ? "#000" : ""}
                   >
                     Earn Rewards
                   </Text>
@@ -222,11 +225,12 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                     fontSize={style.font.h4}
                     fontWeight={style.fontWeight.dark}
                     width="50%"
+                    color={colorMode == "light" ? "#000" : ""}
                   >
                     Your Rewarded XPs
                   </Text>
                   <FlexRow hrAlign="center" width="15%">
-                    <Text mb={0}>
+                    <Text mb={0} color={colorMode == "light" ? "#000" : ""}>
                       {/* {hookXP?.userXPList ? hookXP?.userXPList?.xps_earned : 0} */}
                     </Text>
                     <Image src={GlobalIcons["icon-bolt"]} />
@@ -256,9 +260,14 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                           fontSize: style.font.h6,
                           borderCollapse: "separate",
                           borderSpacing: "0 1rem",
+                          backgroundColor: `${
+                            colorMode == "light" ? "#ffffff" : ""
+                          }`,
                         }}
                       >
-                        Activities
+                        <Text color={colorMode == "light" ? "#000" : ""} mb={0}>
+                          Activities
+                        </Text>
                       </Th>
 
                       <Th
@@ -272,9 +281,18 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                           borderCollapse: "separate",
                           borderSpacing: "0 1rem",
                           width: "50%",
+                          backgroundColor: `${
+                            colorMode == "light" ? "#ffffff" : ""
+                          }`,
                         }}
                       >
-                        Status
+                        <Text
+                          color={colorMode == "light" ? "#000" : ""}
+                          mb={0}
+                          textAlign="left"
+                        >
+                          Status
+                        </Text>
                       </Th>
                       <Th
                         style={{
@@ -286,10 +304,18 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                           fontSize: style.font.h6,
                           borderCollapse: "separate",
                           borderSpacing: "0 1rem",
+                          backgroundColor: `${
+                            colorMode == "light" ? "#ffffff" : ""
+                          }`,
                         }}
                       >
                         <FlexRow>
-                          <Text mb={0}>XP</Text>
+                          <Text
+                            color={colorMode == "light" ? "#000" : ""}
+                            mb={0}
+                          >
+                            XP
+                          </Text>
                           <Image src={GlobalIcons["icon-bolt"]} />
                         </FlexRow>
                       </Th>
@@ -318,8 +344,13 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                                 }
                                 height="2rem"
                                 marginRight={style.margin.xs}
+                                alt="item.project"
                               />
-                              <Text fontSize={style.font.h4} mb={0}>
+                              <Text
+                                fontSize={style.font.h6}
+                                mb={0}
+                                color={colorMode == "light" ? "#000" : ""}
+                              >
                                 {item?.title}
                               </Text>
                             </FlexRow>
@@ -370,7 +401,12 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                               }}
                             >
                               <FlexRow>
-                                <Text mb={0}>{item?.points}</Text>
+                                <Text
+                                  color={colorMode == "light" ? "#000" : ""}
+                                  mb={0}
+                                >
+                                  {item?.points}
+                                </Text>
                                 <Image src={GlobalIcons["icon-bolt"]} />
                               </FlexRow>
                             </Td>

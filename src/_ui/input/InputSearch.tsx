@@ -64,7 +64,7 @@ const InputSearch = ({
         onChange={onChange ? onChange : () => {}}
         size={size}
         onKeyDown={onKeydown ? onKeydown : () => {}}
-        _placeholder={{ color: `#132041` }}
+        _placeholder={colorMode =="light" ? { color: `#132041` } : { color: `#ffffff` }}
         // width={width}
         height={"50px"}
         border={gStyle.input.border.search}
