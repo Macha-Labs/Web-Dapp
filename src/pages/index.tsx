@@ -5,11 +5,8 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import SearchHeader from "@/components/search/SearchHeader";
 import { style } from "@/styles/StyledConstants";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-
-import { useEffect } from "react";
-import { useAccount } from "wagmi";
 
 const Search = () => {
   const router = useRouter();
