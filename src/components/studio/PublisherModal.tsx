@@ -97,22 +97,26 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
               )}
             {hookPublisherCreate.formStep != 5 &&
               hookPublisherCreate.formStep != 6 && (
-                <Image src={GlobalIcons["icon-close"]} onClick={() => modal.onClose()} style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: "5px",
-                  cursor: "pointer",
-                  width: "fit-content",
-                  height: "fit-content",
-                  background: `${style.icon.bg.default}`,
-                  borderRadius: `${style.icon.borderRadius}`,
-                  boxShadow: `${style.icon.shadow.default}`,
-                  marginLeft: `${style.margin[style?.marginLeft]}`,
-                  marginRight: `${style.margin[style?.marginRight]}`,
-                  marginBottom: `${style.margin[style?.marginBottom]}`,
-                  marginTop: `${style.margin[style?.marginTop]}`,
-                }} />
+                <Image
+                  src={GlobalIcons["icon-close"]}
+                  onClick={() => modal.onClose()}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "5px",
+                    cursor: "pointer",
+                    width: "fit-content",
+                    height: "fit-content",
+                    background: `${style.icon.bg.default}`,
+                    borderRadius: `${style.icon.borderRadius}`,
+                    boxShadow: `${style.icon.shadow.default}`,
+                    marginLeft: `${style.margin[style?.marginLeft]}`,
+                    marginRight: `${style.margin[style?.marginRight]}`,
+                    marginBottom: `${style.margin[style?.marginBottom]}`,
+                    marginTop: `${style.margin[style?.marginTop]}`,
+                  }}
+                />
               )}
           </FlexRow>
         }
@@ -149,7 +153,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     hookPublisherCreate.setClear();
                     await hookMacha.connectMachaPublisher();
                     modal.onClose();
-                    router.push("/contracts");
+                    router.push("/indexers");
                   }}
                 >
                   Create
@@ -198,7 +202,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         <Text width="100%" textAlign="center" mb={0}>
                           You do not have enough TFIL Balance
                         </Text>
-                        <Text fontSize={style.font.h7} textAlign="center" color={style.color["white.5"]} mb={0}>
+                        <Text
+                          fontSize={style.font.h7}
+                          textAlign="center"
+                          color={style.color["white.5"]}
+                          mb={0}
+                        >
                           If you do, please refresh the page and try again.
                         </Text>
                       </Box>
@@ -437,10 +446,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           flexDirection: "column",
                           justifyContent: "space-between",
                           background: "#000a24",
-                          border: `${hookPublisherCreate.publisherType == "Individual"
+                          border: `${
+                            hookPublisherCreate.publisherType == "Individual"
                               ? "1.5px solid #197cec"
                               : style.card.border.publisher
-                            }`,
+                          }`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -494,10 +504,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           width: "48%",
                           background: "#000a24",
                           height: "100%",
-                          border: `${hookPublisherCreate.publisherType == "Organization"
+                          border: `${
+                            hookPublisherCreate.publisherType == "Organization"
                               ? "1.5px solid #197cec"
                               : style.card.border.publisher
-                            }`,
+                          }`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",

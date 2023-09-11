@@ -147,7 +147,7 @@ const ContractCreateEditModal = ({
       }
     >
       {isEdit &&
-        (hookContract.isLoading || hookContract.contractDetails == undefined) ? (
+      (hookContract.isLoading || hookContract.contractDetails == undefined) ? (
         <FlexRow height="18rem">
           <Loader size="lg" />
         </FlexRow>
@@ -184,18 +184,21 @@ const ContractCreateEditModal = ({
                         <Text
                           rounded="full"
                           style={{
-                            border: `${hookContractCreate.formStep == 1
+                            border: `${
+                              hookContractCreate.formStep == 1
                                 ? style.card.border.meta
                                 : style.card.border.default
-                              }`,
+                            }`,
                             paddingLeft: `${style.padding.xxs}`,
                             paddingRight: `${style.padding.xxs}`,
-                            color: `${hookContractCreate.formStep == 1
+                            color: `${
+                              hookContractCreate.formStep == 1
                                 ? ""
                                 : style.color.disabled
-                              }`,
-                            backgroundColor: `${hookContractCreate.formStep == 1 ? "" : "#18203A"
-                              }`,
+                            }`,
+                            backgroundColor: `${
+                              hookContractCreate.formStep == 1 ? "" : "#18203A"
+                            }`,
                           }}
                         >
                           1
@@ -204,10 +207,11 @@ const ContractCreateEditModal = ({
                     </Box>
                     <Text
                       style={{
-                        color: `${hookContractCreate.formStep == 1
+                        color: `${
+                          hookContractCreate.formStep == 1
                             ? ""
                             : style.color.disabled
-                          }`,
+                        }`,
                       }}
                     >
                       First
@@ -235,18 +239,21 @@ const ContractCreateEditModal = ({
                       <Text
                         rounded="full"
                         style={{
-                          border: `${hookContractCreate.formStep == 2
+                          border: `${
+                            hookContractCreate.formStep == 2
                               ? style.card.border.meta
                               : style.card.border.default
-                            }`,
+                          }`,
                           paddingLeft: `${style.padding.xxs}`,
                           paddingRight: `${style.padding.xxs}`,
-                          color: `${hookContractCreate.formStep == 2
+                          color: `${
+                            hookContractCreate.formStep == 2
                               ? ""
                               : style.color.disabled
-                            }`,
-                          backgroundColor: `${hookContractCreate.formStep == 2 ? "" : "#18203A"
-                            }`,
+                          }`,
+                          backgroundColor: `${
+                            hookContractCreate.formStep == 2 ? "" : "#18203A"
+                          }`,
                         }}
                       >
                         2
@@ -254,10 +261,11 @@ const ContractCreateEditModal = ({
                     )}
                     <Text
                       style={{
-                        color: `${hookContractCreate.formStep == 2
+                        color: `${
+                          hookContractCreate.formStep == 2
                             ? ""
                             : style.color.disabled
-                          }`,
+                        }`,
                       }}
                     >
                       Second
@@ -285,18 +293,21 @@ const ContractCreateEditModal = ({
                       <Text
                         rounded="full"
                         style={{
-                          border: `${hookContractCreate.formStep == 3
+                          border: `${
+                            hookContractCreate.formStep == 3
                               ? style.card.border.meta
                               : style.card.border.default
-                            }`,
+                          }`,
                           paddingLeft: `${style.padding.xxs}`,
                           paddingRight: `${style.padding.xxs}`,
-                          color: `${hookContractCreate.formStep == 3
+                          color: `${
+                            hookContractCreate.formStep == 3
                               ? ""
                               : style.color.disabled
-                            }`,
-                          backgroundColor: `${hookContractCreate.formStep == 3 ? "" : "#18203A"
-                            }`,
+                          }`,
+                          backgroundColor: `${
+                            hookContractCreate.formStep == 3 ? "" : "#18203A"
+                          }`,
                         }}
                       >
                         3
@@ -304,10 +315,11 @@ const ContractCreateEditModal = ({
                     )}
                     <Text
                       style={{
-                        color: `${hookContractCreate.formStep == 3
+                        color: `${
+                          hookContractCreate.formStep == 3
                             ? ""
                             : style.color.disabled
-                          }`,
+                        }`,
                       }}
                     >
                       Third
@@ -330,282 +342,291 @@ const ContractCreateEditModal = ({
                 </Text>
               </>
             )}
-            {hookContractCreate.isLoading && <FlexRow height="12rem">
-              <Loader size="lg" />
-            </FlexRow>}
-            {hookContractCreate.formStep == 1 && !hookContractCreate.isLoading && (
-              <>
-                <InputLabel
-                  value={hookContractCreate.$contractFormData.address}
-                  inputType="text"
-                  labelText="Address *"
-                  placeholder="0x0fea00feb84ad311Cc6E9d042f7753484D78f4F0"
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      address: e.target.value,
-                    })
-                  }
-                />
-                <InputSelect
-                  value={
-                    isEdit
-                      ? Number(hookContractCreate.$contractFormData.chain_id)
-                      : hookContractCreate.$contractFormData.chain_id
-                  }
-                  placeholder="Chain Id"
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      chain_id: e.target.value,
-                    })
-                  }
-                  marginTop="sm"
-                  labelText="Chain Id *"
-                  options={[
-                    {
-                      value: 1,
-                      title: "Ethereum",
-                    },
-                    {
-                      value: 137,
-                      title: "Polygon",
-                    },
-                    {
-                      value: 10,
-                      title: "Optimism",
-                    },
-                    {
-                      value: 8453,
-                      title: "Base",
-                    },
-                  ]}
-                />
-                <InputLabel
-                  value={hookContractCreate.$contractFormData.read_abi_from}
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      read_abi_from: e.target.value,
-                    })
-                  }
-                  inputType="text"
-                  labelText="Read ABI From"
-                  placeholder="0x04dd2568fb6A1AA9D560b3F450a2bFBA29Cf32ca"
-                  marginTop="sm"
-                  tooltipLabel="If you are using proxy contracts or have the ABI of the above mentioned contract, please fill up this field for proper indexing."
-                />
-              </>
+            {hookContractCreate.isLoading && (
+              <FlexRow height="12rem">
+                <Loader size="lg" />
+              </FlexRow>
             )}
-            {hookContractCreate.formStep == 1.5 && !hookContractCreate.isLoading && (
-              <>
-                <InputLabel
-                  value={hookContractCreate.contractAbiText}
-                  // value=""
-                  inputType="textArea"
-                  labelText="Contract ABI"
-                  placeholder=" To enable your verification , you can enter your ABI manually here "
-                  onChange={async (e: any) => {
-                    hookContractCreate.setContractAbiText(e.target.value)
-                  }}
-                />
-              </>
-            )}
-            {hookContractCreate.formStep == 2 && !hookContractCreate.isLoading && (
-              <>
-                <Box
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Box width="47%">
-                    <InputLabel
-                      value={hookContractCreate.$contractFormData.name}
-                      onChange={(e: any) =>
-                        hookContractCreate.$loadContractFormData({
-                          name: e.target.value,
-                        })
-                      }
-                      inputType="text"
-                      labelText="Contract Name *"
-                      placeholder="ENS"
-                    />
-                  </Box>
-                  <Box width="47%">
-                    <InputLabel
-                      value={hookContractCreate.$contractFormData.slug}
-                      onChange={(e: any) =>
-                        hookContractCreate.$loadContractFormData({
-                          slug: e.target.value,
-                        })
-                      }
-                      inputType="text"
-                      labelText="Slug *"
-                      placeholder="ens_ethereum"
-                    />
-                  </Box>
-                </Box>
-                <InputLabel
-                  value={hookContractCreate.$contractFormData.description}
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      description: e.target.value,
-                    })
-                  }
-                  inputType="text"
-                  labelText="Description *"
-                  placeholder="Ethereum Name Service on ethereum chain..."
-                  marginTop="sm"
-                />
-                {hookContractCreate.$contractFormData.image == "" ? (
-                  <>
-                    <InputLabel
-                      inputType="dropFile"
-                      fileDropMinHeight="80px"
-                      inputLogoSize="lg"
-                      labelText="Image *"
-                      marginTop="sm"
-                      onChange={async (e?: any) => {
-                        if (e.target.files && e.target.files[0]) {
-                          // const file = e.target.files[0];
-                          // console.log("Selected file:", file);
-                          // const element = document.createElement("a");
-                          // element.href = URL.createObjectURL(file);
-                          const cid = await deploytoLightHouse(
-                            e.target.files,
-                            hookContractCreate.setLoadingCallback
-                          );
+            {hookContractCreate.formStep == 1 &&
+              !hookContractCreate.isLoading && (
+                <>
+                  <InputLabel
+                    value={hookContractCreate.$contractFormData.address}
+                    inputType="text"
+                    labelText="Contract Address *"
+                    placeholder="0x0fea00feb84ad311Cc6E9d042f7753484D78f4F0"
+                    onChange={(e: any) =>
+                      hookContractCreate.$loadContractFormData({
+                        address: e.target.value,
+                      })
+                    }
+                  />
+                  <InputSelect
+                    value={
+                      isEdit
+                        ? Number(hookContractCreate.$contractFormData.chain_id)
+                        : hookContractCreate.$contractFormData.chain_id
+                    }
+                    placeholder="Chain Id"
+                    onChange={(e: any) =>
+                      hookContractCreate.$loadContractFormData({
+                        chain_id: e.target.value,
+                      })
+                    }
+                    marginTop="sm"
+                    labelText="Chain Id *"
+                    options={[
+                      {
+                        value: 1,
+                        title: "Ethereum",
+                      },
+                      {
+                        value: 137,
+                        title: "Polygon",
+                      },
+                      {
+                        value: 10,
+                        title: "Optimism",
+                      },
+                      {
+                        value: 8453,
+                        title: "Base",
+                      },
+                    ]}
+                  />
+                  <InputLabel
+                    value={hookContractCreate.$contractFormData.read_abi_from}
+                    onChange={(e: any) =>
+                      hookContractCreate.$loadContractFormData({
+                        read_abi_from: e.target.value,
+                      })
+                    }
+                    inputType="text"
+                    labelText="Read ABI From"
+                    placeholder="0x04dd2568fb6A1AA9D560b3F450a2bFBA29Cf32ca"
+                    marginTop="sm"
+                    tooltipLabel="If you are using proxy contracts or have the ABI of the above mentioned contract, please fill up this field for proper indexing."
+                  />
+                </>
+              )}
+            {hookContractCreate.formStep == 1.5 &&
+              !hookContractCreate.isLoading && (
+                <>
+                  <InputLabel
+                    value={hookContractCreate.contractAbiText}
+                    // value=""
+                    inputType="textArea"
+                    labelText="Contract ABI"
+                    placeholder=" To enable your verification , you can enter your ABI manually here "
+                    onChange={async (e: any) => {
+                      hookContractCreate.setContractAbiText(e.target.value);
+                    }}
+                  />
+                </>
+              )}
+            {hookContractCreate.formStep == 2 &&
+              !hookContractCreate.isLoading && (
+                <>
+                  <Box
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Box width="47%">
+                      <InputLabel
+                        value={hookContractCreate.$contractFormData.name}
+                        onChange={(e: any) =>
                           hookContractCreate.$loadContractFormData({
-                            image: displayImage(cid),
-                          });
+                            name: e.target.value,
+                          })
                         }
-                      }}
-                    />
-                    {hookContractCreate.ipfsLoading != 0 && (
-                      <Box
-                        width="100%"
-                        bgColor="#00040d"
-                        height={1}
-                        mt={style.margin.sm}
-                      >
+                        inputType="text"
+                        labelText="Contract Name *"
+                        placeholder="ENS"
+                      />
+                    </Box>
+                    <Box width="47%">
+                      <InputLabel
+                        value={hookContractCreate.$contractFormData.slug}
+                        onChange={(e: any) =>
+                          hookContractCreate.$loadContractFormData({
+                            slug: e.target.value,
+                          })
+                        }
+                        inputType="text"
+                        labelText="Slug *"
+                        placeholder="ens_ethereum"
+                      />
+                    </Box>
+                  </Box>
+                  <InputLabel
+                    value={hookContractCreate.$contractFormData.description}
+                    onChange={(e: any) =>
+                      hookContractCreate.$loadContractFormData({
+                        description: e.target.value,
+                      })
+                    }
+                    inputType="text"
+                    labelText="Description *"
+                    placeholder="Ethereum Name Service on ethereum chain..."
+                    marginTop="sm"
+                  />
+                  {hookContractCreate.$contractFormData.image == "" ? (
+                    <>
+                      <InputLabel
+                        inputType="dropFile"
+                        fileDropMinHeight="80px"
+                        inputLogoSize="lg"
+                        labelText="Image *"
+                        marginTop="sm"
+                        onChange={async (e?: any) => {
+                          if (e.target.files && e.target.files[0]) {
+                            // const file = e.target.files[0];
+                            // console.log("Selected file:", file);
+                            // const element = document.createElement("a");
+                            // element.href = URL.createObjectURL(file);
+                            const cid = await deploytoLightHouse(
+                              e.target.files,
+                              hookContractCreate.setLoadingCallback
+                            );
+                            hookContractCreate.$loadContractFormData({
+                              image: displayImage(cid),
+                            });
+                          }
+                        }}
+                      />
+                      {hookContractCreate.ipfsLoading != 0 && (
                         <Box
-                          bgColor="#0f172e"
-                          width={`${hookContractCreate.ipfsLoading}%`}
+                          width="100%"
+                          bgColor="#00040d"
                           height={1}
-                        ></Box>
-                      </Box>
-                    )}
-                  </>
-                ) : (
-                  <Box width="100%">
-                    <Heading
-                      as="h6"
-                      size="sm"
-                      marginTop={style.margin.md}
-                      marginBottom={style.margin.xs}
-                      bgGradient="linear(
+                          mt={style.margin.sm}
+                        >
+                          <Box
+                            bgColor="#0f172e"
+                            width={`${hookContractCreate.ipfsLoading}%`}
+                            height={1}
+                          ></Box>
+                        </Box>
+                      )}
+                    </>
+                  ) : (
+                    <Box width="100%">
+                      <Heading
+                        as="h6"
+                        size="sm"
+                        marginTop={style.margin.md}
+                        marginBottom={style.margin.xs}
+                        bgGradient="linear(
                   100.07deg,
                   #2a85ff 0.39%,
                   #2448c7 73.45%
                 )"
-                      bgClip="text"
-                    >
-                      Image
-                    </Heading>
-                    <Box
-                      width="100%"
+                        bgClip="text"
+                      >
+                        Image
+                      </Heading>
+                      <Box
+                        width="100%"
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Image
+                          height={100}
+                          width="80%"
+                          objectFit="contain"
+                          src={hookContractCreate.$contractFormData.image}
+                          alt=""
+                        />
+                      </Box>
+                    </Box>
+                  )}
+                </>
+              )}
+            {hookContractCreate.formStep == 3 &&
+              !hookContractCreate.isLoading && (
+                <>
+                  <InputLabel
+                    value={
+                      hookContractCreate.$contractFormData.interested_methods
+                    }
+                    onChange={(e: any) =>
+                      hookContractCreate.$loadContractFormData({
+                        interested_methods: e.target.value,
+                      })
+                    }
+                    inputType="text"
+                    labelText="Interested Methods *"
+                    placeholder="register, renew"
+                    marginTop="sm"
+                    tooltipLabel="You can mention more than one method(s) using comma seperated values."
+                  />
+                  <InputLabel
+                    value={
+                      hookContractCreate.$contractFormData.interested_events
+                    }
+                    onChange={(e: any) =>
+                      hookContractCreate.$loadContractFormData({
+                        interested_events: e.target.value,
+                      })
+                    }
+                    inputType="text"
+                    labelText="Interested Events *"
+                    placeholder="deposit, withdraw"
+                    marginTop="sm"
+                    tooltipLabel="You can mention more than one event(s) using comma seperated values."
+                  />
+                </>
+              )}
+            {hookContractCreate.formStep == 4 &&
+              !hookContractCreate.isLoading && (
+                <Box
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box
+                    paddingTop={style.padding.md}
+                    paddingBottom={style.padding.md}
+                  >
+                    <IconBase slug="icon-congrats" size="4xl" />
+                  </Box>
+                  <Box>
+                    <Text
                       style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        fontWeight: `700`,
+                        fontSize: `${style.font.h2}`,
+                        marginBottom: "1rem",
                       }}
                     >
-                      <Image
-                        height={100}
-                        width="80%"
-                        objectFit="contain"
-                        src={hookContractCreate.$contractFormData.image}
-                        alt=""
-                      />
-                    </Box>
+                      Voila!
+                    </Text>
                   </Box>
-                )}
-              </>
-            )}
-            {hookContractCreate.formStep == 3 && !hookContractCreate.isLoading && (
-              <>
-                <InputLabel
-                  value={
-                    hookContractCreate.$contractFormData.interested_methods
-                  }
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      interested_methods: e.target.value,
-                    })
-                  }
-                  inputType="text"
-                  labelText="Interested Methods *"
-                  placeholder="register, renew"
-                  marginTop="sm"
-                  tooltipLabel="You can mention more than one method(s) using comma seperated values."
-                />
-                <InputLabel
-                  value={hookContractCreate.$contractFormData.interested_events}
-                  onChange={(e: any) =>
-                    hookContractCreate.$loadContractFormData({
-                      interested_events: e.target.value,
-                    })
-                  }
-                  inputType="text"
-                  labelText="Interested Events *"
-                  placeholder="deposit, withdraw"
-                  marginTop="sm"
-                  tooltipLabel="You can mention more than one event(s) using comma seperated values."
-                />
-              </>
-            )}
-            {hookContractCreate.formStep == 4 && !hookContractCreate.isLoading && (
-              <Box
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  width: "100%",
-                }}
-              >
-                <Box
-                  paddingTop={style.padding.md}
-                  paddingBottom={style.padding.md}
-                >
-                  <IconBase slug="icon-congrats" size="4xl" />
+                  <Box>
+                    <Text textAlign="center" mb={0} color="whiteAlpha.800">
+                      You have successfully created your contact on Macha.
+                    </Text>
+                    <Text
+                      textAlign="center"
+                      marginBottom={style.margin.lg}
+                      color="whiteAlpha.800"
+                    >
+                      Wait for approval from our side and your contract will be
+                      published.
+                    </Text>
+                  </Box>
                 </Box>
-                <Box>
-                  <Text
-                    style={{
-                      fontWeight: `700`,
-                      fontSize: `${style.font.h2}`,
-                      marginBottom: "1rem",
-                    }}
-                  >
-                    Voila!
-                  </Text>
-                </Box>
-                <Box>
-                  <Text textAlign="center" mb={0} color="whiteAlpha.800">
-                    You have successfully created your contact on Macha.
-                  </Text>
-                  <Text
-                    textAlign="center"
-                    marginBottom={style.margin.lg}
-                    color="whiteAlpha.800"
-                  >
-                    Wait for approval from our side and your contract will be
-                    published.
-                  </Text>
-                </Box>
-              </Box>
-            )}
+              )}
           </FlexColumn>
         </FlexColumn>
       )}
