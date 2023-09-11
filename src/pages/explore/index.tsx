@@ -143,7 +143,7 @@ export default function Home() {
           width="100%"
           header={
             <FlexRow hrAlign="space-between">
-              <Heading color={colorMode == "light" ? "#000" : ""} mb="0px" fontSize={style.font.h3} fontWeight={600}>
+              <Heading color={colorMode == "light" ? "#3d3d3d" : ""} mb="0px" fontSize={style.font.h3} fontWeight={600}>
                 Latest POAP indexed
               </Heading>
               <ButtonNative

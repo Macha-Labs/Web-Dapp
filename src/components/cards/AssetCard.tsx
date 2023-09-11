@@ -34,13 +34,13 @@ const AssetCard = ({ title, description, icon, onClick }: Props) => {
         <FlexRow hrAlign="space-between" height="fit-content" vrAlign="flex-start">
           <FlexRow hrAlign="flex-start">
             <Image src={icon} alt="brandToken" height="50px" marginRight={style.margin.xxs} />
-            <Text color={colorMode == "light" ? "#000" : ""} fontSize={`${style.font.h4}`} marginBottom="0px">
+            <Text color={colorMode == "light" ? "#3d3d3d" : ""} fontSize={`${style.font.h4}`} marginBottom="0px">
               {description}
             </Text>
           </FlexRow>
           <Box display="flex" justifyContent="flex-start" alignItems="center">
             <Heading
-              color={colorMode == "light" ? "#000" : ""}
+              color={colorMode == "light" ? "#3d3d3d" : ""}
               fontSize={style.font.h1}
               fontWeight={"600"}
               marginBottom={"0px"}

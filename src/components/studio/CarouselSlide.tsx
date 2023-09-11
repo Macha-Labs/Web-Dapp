@@ -43,7 +43,7 @@ const CarouselSlide = ({
         backgroundSize: "90%",
         height: `${height ? height : "28rem"}`,
         overflow: "hidden",
-        border: `${style.card.border.default}`,
+        border: `${colorMode == "light" ? "#e2e2e2" : style.card.border.default}`,
       }}
     >
       <Box
@@ -78,7 +78,7 @@ const CarouselSlide = ({
             </Box>
             <Box width="90%" textAlign="left" marginLeft={style.margin.lg}>
               <Heading
-                color={colorMode == "light" ? "#000" : ""}
+                color={colorMode == "light" ? "#3d3d3d" : ""}
                 fontSize={headingFontSize ? headingFontSize : "2.2rem"}
                 p={0}
                 // lineHeight={style.font.h1}
@@ -89,7 +89,7 @@ const CarouselSlide = ({
                 {title}
               </Heading>
               <Text
-                color={colorMode == "light" ? "#000" : ""}
+                color={colorMode == "light" ? "#3d3d3d" : ""}
                 fontSize={
                   descriptionFontSize ? descriptionFontSize : style.font.h7
                 }

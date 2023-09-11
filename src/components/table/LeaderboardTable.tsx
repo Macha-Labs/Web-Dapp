@@ -42,7 +42,7 @@ const LeaderboardTable = () => {
                 textAlign: "left",
                 fontSize: "1.25rem",
                 textTransform: "capitalize",
-                color: `${colorMode == "light" ? "#000" : "#8f8f8f"}`,
+                color: `${colorMode == "light" ? "#3d3d3d" : "#8f8f8f"}`,
                 fontWeight: "500",
                 marginLeft: `${style.padding.sm}`,
               }}
@@ -56,7 +56,7 @@ const LeaderboardTable = () => {
                 textTransform: "capitalize",
                 fontWeight: "500",
                 paddingLeft: `${style.padding.xxs}`,
-                color: `${colorMode == "light" ? "#000" : "#8f8f8f"}`,
+                color: `${colorMode == "light" ? "#3d3d3d" : "#8f8f8f"}`,
               }}
             >
               Address
@@ -67,7 +67,7 @@ const LeaderboardTable = () => {
                 fontSize: "1.25rem",
                 textTransform: "capitalize",
                 fontWeight: "500",
-                color: `${colorMode == "light" ? "#000" : "#8f8f8f"}`,
+                color: `${colorMode == "light" ? "#3d3d3d" : "#8f8f8f"}`,
               }}
             >
               XP
@@ -78,7 +78,7 @@ const LeaderboardTable = () => {
           return (
             <>
               <Td style={{ textAlign: "center", paddingLeft: `0px` }}>
-                <Text color={colorMode == "light" ? "#000" : "#8f8f8f"} marginBottom={0} fontSize={style.font.h4}>
+                <Text color={colorMode == "light" ? "#3d3d3d" : "#8f8f8f"} marginBottom={0} fontSize={style.font.h4}>
                   #{index + 1}
                 </Text>
               </Td>
@@ -102,7 +102,7 @@ const LeaderboardTable = () => {
                     fontSize={style.font.h4}
                     marginBottom={0}
                     fontWeight={style.fontWeight.dark}
-                    color={colorMode == "light" ? "#000" : "#8f8f8f"}
+                    color={colorMode == "light" ? "#3d3d3d" : "#8f8f8f"}
                   >
                     {truncateAddress(item?.address)}
                   </Text>
@@ -120,7 +120,7 @@ const LeaderboardTable = () => {
                   }}
                 >
                   <Box>
-                    <Text mb={0} fontSize={style.font.h4} color={colorMode == "light" ? "#000" : "#8f8f8f"}>
+                    <Text mb={0} fontSize={style.font.h4} color={colorMode == "light" ? "#3d3d3d" : "#8f8f8f"}>
                       {item?.xps_earned}
                     </Text>
                   </Box>

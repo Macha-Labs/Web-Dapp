@@ -20,7 +20,7 @@ const CollectorCard = ({ name, tag, artists, width, onClick, image }: any) => {
         marginRight: `${style.margin.sm}`,
         borderRadius: `${style.card.borderRadius.default}`,
         marginTop: `${style.margin.xl}`,
-        border: `${style.card.border.default}`,
+        border: `${colorMode == "light" ? "1px solid #e2e2e2" :  style.card.border.default}`,
         cursor: "pointer",
         transitionTimingFunction: "ease-in-out",
         transitionProperty: " all ",
@@ -45,15 +45,15 @@ const CollectorCard = ({ name, tag, artists, width, onClick, image }: any) => {
         <Avatar size="2.5rem" name={name} variant="pixel" />
       )}
       <Box>
-        <Text color={colorMode == "light" ? "#000" : ""} style={{ fontSize: `${style.font.h6}`, marginBottom: "0px" }}>
+        <Text color={colorMode == "light" ? "3d3d3d0" : ""} style={{ fontSize: `${style.font.h6}`, marginBottom: "0px" }}>
           {name}
         </Text>
         {tag ? (
-          <Text color={colorMode == "light" ? "#000" : ""} style={{ fontSize: `${style.font.h5}`, marginBottom: "0px" }}>
+          <Text color={colorMode == "light" ? "#3d3d3d" : ""} style={{ fontSize: `${style.font.h5}`, marginBottom: "0px" }}>
             {truncateString(tag, 40)}
           </Text>
         ) : (
-          <Text color={colorMode == "light" ? "#000" : ""} mb="0px">NA</Text>
+          <Text color={colorMode == "light" ? "#3d3d3d" : ""} mb="0px">NA</Text>
         )}
       </Box>
     </Box>

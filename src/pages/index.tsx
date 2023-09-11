@@ -74,7 +74,7 @@ const Search = () => {
                 slug: "icon-brand-bolt",
               }}
               text={"XPs LeaderBoard"}
-              variant={colorMode == "light" ? "state_brand" : "state_default_hover"}
+              variant={colorMode == "light" ? "state_light" : "state_default_hover"}
               marginTop="5xl"
             />
           </Box>

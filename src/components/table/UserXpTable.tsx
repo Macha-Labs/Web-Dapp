@@ -42,7 +42,7 @@ const UserXpTable = () => {
                     textAlign: "left",
                     fontSize: "1.25rem",
                     textTransform: "capitalize",
-                    color: `${colorMode == "light" ? "#000" : "#8f8f8f"}`,
+                    color: `${colorMode == "light" ? "#3d3d3d" : "#8f8f8f"}`,
                     fontWeight: "500",
                     paddingLeft: `${style.padding.xs}`,
                   }}
@@ -54,7 +54,7 @@ const UserXpTable = () => {
                     textAlign: "center",
                     fontSize: "1.25rem",
                     textTransform: "capitalize",
-                    color: `${colorMode == "light" ? "#000" : "#8f8f8f"}`,
+                    color: `${colorMode == "light" ? "#3d3d3d" : "#8f8f8f"}`,
                     fontWeight: "500",
                   }}
                 >
@@ -79,7 +79,7 @@ const UserXpTable = () => {
                         height="2rem"
                         marginRight={style.margin.xs}
                       />
-                      <Text color={colorMode == "light" ? "#000" : "#8f8f8f"} fontSize={style.font.h4} mb={0}>
+                      <Text color={colorMode == "light" ? "#3d3d3d" : "#8f8f8f"} fontSize={style.font.h4} mb={0}>
                         {item?.title}
                       </Text>
                     </FlexRow>
@@ -91,7 +91,7 @@ const UserXpTable = () => {
                     }}
                   >
                     <FlexRow>
-                      <Text color={colorMode == "light" ? "#000" : "#8f8f8f"} mb={0}>{item?.points}</Text>
+                      <Text color={colorMode == "light" ? "#3d3d3d" : "#8f8f8f"} mb={0}>{item?.points}</Text>
                       <Image src={GlobalIcons["icon-bolt"]} />
                     </FlexRow>
                   </Td>

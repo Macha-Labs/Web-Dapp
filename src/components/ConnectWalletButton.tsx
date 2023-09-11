@@ -1,12 +1,13 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import IconImage from "@/_ui/icons/IconImage";
 import IconBase from "@/_ui/icons/IconsBase";
+import chains from "@/data/network";
 import { truncateAddress } from "@/helpers";
 import useMacha from "@/hooks/studio/useMacha";
-import useMachaAuth from "@/hooks/studio/useMachaAuth";
 import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
 import useAuthStore from "@/store/useAuthStore";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {
   Button,
@@ -16,18 +17,16 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useColorMode,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { fetchBalance } from "@wagmi/core";
-import CreatePublisherModal from "./studio/PublisherModal";
-import { useDisconnect, useNetwork } from "wagmi";
-import { useEffect, useState } from "react";
-import FlexColumn from "@/_ui/flex/FlexColumn";
 import { useRouter } from "next/router";
-import GlobalIcons from "@/styles/GlobalIcons";
-import chains from "@/data/network";
+import { useEffect, useState } from "react";
+import { useDisconnect, useNetwork } from "wagmi";
+import CreatePublisherModal from "./studio/PublisherModal";
 
 export const ConnectWalletButton = (props: any) => {
   const publisherModal = useDisclosure();
@@ -53,6 +52,8 @@ export const ConnectWalletButton = (props: any) => {
       console.log(err);
     }
   };
+
+  const {colorMode} = useColorMode()
 
   useEffect(() => {
     if ($address) {
@@ -134,7 +135,7 @@ export const ConnectWalletButton = (props: any) => {
                     <MenuButton
                       width="11rem"
                       height={props.height ? props.height : "3rem"}
-                      variant={"state_default_hover"}
+                      variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                       as={Button}
                       style={{
                         borderRadius: `${style.card.borderRadius.button}`,

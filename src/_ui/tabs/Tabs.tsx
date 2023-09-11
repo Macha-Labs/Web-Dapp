@@ -1,6 +1,6 @@
 import { StyledLi } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
-import { Text } from "@chakra-ui/react";
+import { Text, useColorMode } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import FlexRow from "../flex/FlexRow";
@@ -25,6 +25,9 @@ const Tabs = ({
   width,
   hrAlign,
 }: Props) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <>
       <ul
@@ -53,12 +56,14 @@ const Tabs = ({
                   <FlexRow>
                     {icon && <IconImage slug={icon.slug} />}
                     <Text
+                      style={{
+                        color: `${colorMode == "light" ? "#9FABC8" : ""}`,
+                        fontWeight: `${colorMode == "light" ? 700 : ""}`
+                      }}
                       fontSize={style.font.h5}
                       fontWeight={value == option?.value ? "600" : "400"}
                       bgGradient={
-                        value == option?.value
-                          ? "linear(100.07deg, #197cec 100%, #004889 100%)"
-                          : "linear(100.07deg, #fff 100%, #fff 100%)"
+                        value == option?.value ? colorMode == "light" ? "linear(100.07deg, #282828 100%, #282828 100%)" : "linear(100.07deg, #197cec 100%, #004889 100%)" : "linear(100.07deg, #fff 100%, #fff 100%)"
                       }
                       bgClip="text"
                       className="m-b-0"

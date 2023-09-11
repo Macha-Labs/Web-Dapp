@@ -1,19 +1,21 @@
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import useSearch from "@/hooks/studio/useSearch";
-import { Box, useColorMode, Image } from "@chakra-ui/react";
+import { Box, useColorMode, Image, InputLeftElement, InputGroup } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
 import InputSearch from "../input/InputSearch";
+import IconBase from "../icons/IconsBase";
 
 type Props = {
   rightElem?: any;
   centerElem?: any;
   search?: boolean;
+  showLogo?: boolean;
 };
 
-const NavMeta = ({ rightElem, centerElem, search }: Props) => {
+const NavMeta = ({ rightElem, centerElem, search, showLogo }: Props) => {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(
     search ? search : false
   );
@@ -37,11 +39,25 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
           }}
         >
           <FlexRow vrAlign="center" hrAlign="space-between">
-            <Image height="30px" src="/assets/macha-image-text.svg" />
-            <FlexRow hrAlign="flex-end">
+            {showLogo && <Image height="30px" src="/assets/macha-image-text.svg" />}
+            <FlexRow hrAlign={showLogo ? "flex-end" : "space-between"}>
+              {/* <InputGroup> */}
+              {/* <InputLeftElement alignItems="start">
+                  <Box
+                    style={{
+                      height: "3rem",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginLeft: `${style.margin.xxs}`,
+                    }}
+                  >
+                    <IconBase slug="icon-search" size="sm" />
+                  </Box>
+                </InputLeftElement> */}
               <InputSearch
                 width="30%"
-                height="2.2rem"
+                height="1rem"
                 defaultValue={hookSearch.searchString}
                 value={hookSearch.searchString}
                 onChange={(e: any) =>
@@ -54,6 +70,7 @@ const NavMeta = ({ rightElem, centerElem, search }: Props) => {
                   }
                 }}
               />
+              {/* </InputGroup> */}
               <ConnectWalletButton
                 showBalance={false}
                 // height="2.2rem"

@@ -2,7 +2,7 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
 import useSearch from "@/hooks/studio/useSearch";
 import { style } from "@/styles/StyledConstants";
-import { Box, InputGroup, InputRightElement, Text, useColorMode } from "@chakra-ui/react";
+import { Box, InputGroup, InputLeftElement, InputRightElement, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import SearchRow from "./SearchRow";
@@ -16,8 +16,8 @@ const SearchHeader = ({ options }: Props) => {
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const searchRef = useRef(null);
   const router = useRouter();
-  const {colorMode} = useColorMode()
-  
+  const { colorMode } = useColorMode()
+
   return (
     <>
       <FlexColumn width="50%" height="fit-content">
@@ -36,6 +36,19 @@ const SearchHeader = ({ options }: Props) => {
               width: "100%",
             }}
           >
+            <InputLeftElement alignItems="start">
+              <Box
+                style={{
+                  height: "5rem",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginLeft: `${style.margin.sm}`,
+                }}
+              >
+                <IconBase slug="icon-search" size="3xl" />
+              </Box>
+            </InputLeftElement>
             <input
               value={hookSearch.searchString}
               type="text"
@@ -51,28 +64,19 @@ const SearchHeader = ({ options }: Props) => {
               placeholder="Try Spectacular Search Now"
               style={{
                 height: "5rem",
+                color: `${colorMode == "light" ? "#E2E2E2" : ""}`,
                 borderRadius: `${style.card.borderRadius.default}`,
                 fontSize: `${style.font.h4}`,
                 paddingRight: `${style.padding.xl}`,
-                paddingLeft: `${style.padding.xl}`,
+                paddingLeft: `${style.padding.xxl}`,
                 background: `${colorMode == "light" ? "rgba(255,255,255,1)" : style.input.bg.default}`,
-                border: `${style.input.border.default}`,
+                border: `${colorMode == "light" ? "" : style.input.border.default}`,
                 width: "100%",
               }}
             />
-            <InputRightElement alignItems="start">
-              <Box
-                style={{
-                  height: "5rem",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginRight: `${style.margin.sm}`,
-                }}
-              >
-                <IconBase slug="icon-search" />
-              </Box>
-            </InputRightElement>
+            {/* <InputRightElement alignItems="start">
+              
+            </InputRightElement> */}
           </Box>
           {showSuggestions && (
             <Box
@@ -81,7 +85,7 @@ const SearchHeader = ({ options }: Props) => {
               borderRadius={style.card.borderRadius.default}
               background={style.card.bg.default}
               boxShadow="-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)"
-              border="1px solid rgba(15, 23, 46, 1) !important"
+              border={colorMode == "light" ? "" : "1px solid rgba(15, 23, 46, 1) !important"}
               paddingY={style.padding.xxs}
               overflow="hidden"
               position={"absolute"}
@@ -176,7 +180,7 @@ const SearchHeader = ({ options }: Props) => {
       </FlexColumn>
       <style jsx>{`
         .searchHeader {
-          border: 1px solid #0f172e !important;
+          
         }
         .searchHeader:focus {
           box-shadow: -1px 1px 4px rgba(17, 108, 230, 0.6),

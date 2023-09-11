@@ -14,7 +14,6 @@ import useMeta from "@/hooks/meta/useMeta";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 
-import MusicPlayer from "@/components/studio/MusicPlayer";
 import { truncateString } from "@/helpers";
 import useAuthStore from "@/store/useAuthStore";
 import {
@@ -25,6 +24,7 @@ import {
   Skeleton,
   SkeletonCircle,
   Text,
+  useColorMode,
   useToast,
 } from "@chakra-ui/react";
 import { useClient, useConversations, useSendMessage } from "@xmtp/react-sdk";
@@ -53,7 +53,7 @@ const Meta = () => {
   const [toggleIpfs, setToggleIpfs] = useState<boolean>(false);
   const [tab, setTab] = useState<string>("Ownership");
   const options = [];
-
+  const { colorMode } = useColorMode()
   const toast = useToast();
 
   const renderNav = () => {
@@ -86,8 +86,8 @@ const Meta = () => {
                   ? hookMeta?.metaData?.meta_schema?.name
                   : hookMeta?.metaData?.meta_tags &&
                     hookMeta?.metaData?.meta_tags.length != 0
-                  ? hookMeta?.metaData?.meta_tags[0]
-                  : ""
+                    ? hookMeta?.metaData?.meta_tags[0]
+                    : ""
               }
               image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
               description={
@@ -174,7 +174,7 @@ const Meta = () => {
                             // hrAlign="flex-start"
                             vrAlign="flex-start"
                           >
-                            <Text marginBottom={"0"} textAlign={"left"}>
+                            <Text color={colorMode == "light" ? "#282828" : ""} marginBottom={"0"} textAlign={"left"}>
                               {hookMeta?.metaData?.metaOwner}
                             </Text>
                           </FlexColumn>
@@ -245,7 +245,7 @@ const Meta = () => {
                   {hookMeta?.metaData?.meta?.data?.ipfs && (
                     <Box padding={style.padding.xs}>
                       <FlexRow hrAlign="space-between">
-                        <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
+                        <Heading color={colorMode == "light" ? "#282828" : ""} mb="0" fontSize={style.font.h6} width={"20%"}>
                           {hookMeta?.metaData &&
                             Object.keys(
                               hookMeta?.metaData?.meta?.data?.ipfs
@@ -274,9 +274,9 @@ const Meta = () => {
                         <Box>
                           {Object.keys(
                             hookMeta?.metaData?.meta?.data?.ipfs[
-                              Object.keys(
-                                hookMeta?.metaData?.meta?.data?.ipfs
-                              )[0]
+                            Object.keys(
+                              hookMeta?.metaData?.meta?.data?.ipfs
+                            )[0]
                             ]
                           ).map((item, index) => {
                             return (
@@ -286,32 +286,33 @@ const Meta = () => {
                                 marginTop={style.margin.sm}
                                 paddingBottom={
                                   index !=
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data?.ipfs[
                                     Object.keys(
-                                      hookMeta?.metaData?.meta?.data?.ipfs[
-                                        Object.keys(
-                                          hookMeta?.metaData?.meta?.data?.ipfs
-                                        )[0]
-                                      ]
-                                    ).length -
-                                      1 && style.margin.xxs
+                                      hookMeta?.metaData?.meta?.data?.ipfs
+                                    )[0]
+                                    ]
+                                  ).length -
+                                  1 && style.margin.xxs
                                 }
                                 borderBottom={
                                   index !=
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data?.ipfs[
                                     Object.keys(
-                                      hookMeta?.metaData?.meta?.data?.ipfs[
-                                        Object.keys(
-                                          hookMeta?.metaData?.meta?.data?.ipfs
-                                        )[0]
-                                      ]
-                                    ).length -
-                                      1 && style.card.border.card
+                                      hookMeta?.metaData?.meta?.data?.ipfs
+                                    )[0]
+                                    ]
+                                  ).length -
+                                  1 && style.card.border.card
                                 }
                               >
                                 <Text
+                                  color={colorMode == "light" ? "#282828" : ""}
                                   mr={style.margin.xs}
                                   width={"20%"}
                                 >{`${item} : `}</Text>
-                                <Text width={"70%"} textAlign={"right"}>
+                                <Text width={"70%"} textAlign={"right"} color={colorMode == "light" ? "#282828" : ""}>
                                   {truncateString(
                                     typeof hookMeta?.metaData?.meta?.data?.ipfs[
                                       Object.keys(
@@ -319,10 +320,10 @@ const Meta = () => {
                                       )[0]
                                     ][item] == "string"
                                       ? hookMeta?.metaData?.meta?.data?.ipfs[
-                                          Object.keys(
-                                            hookMeta?.metaData?.meta?.data?.ipfs
-                                          )[0]
-                                        ][item]
+                                      Object.keys(
+                                        hookMeta?.metaData?.meta?.data?.ipfs
+                                      )[0]
+                                      ][item]
                                       : "[ ]",
                                     50
                                   )}
@@ -336,6 +337,8 @@ const Meta = () => {
                                   <Button
                                     size="xs"
                                     width="100%"
+                                    color={"#ffff"}
+                                    backgroundColor={colorMode == "light" ? "#197cec" : ""}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
                                         typeof hookMeta?.metaData?.meta?.data
@@ -345,12 +348,12 @@ const Meta = () => {
                                           )[0]
                                         ][item] == "string"
                                           ? hookMeta?.metaData?.meta?.data
-                                              ?.ipfs[
-                                              Object.keys(
-                                                hookMeta?.metaData?.meta?.data
-                                                  ?.ipfs
-                                              )[0]
-                                            ][item]
+                                            ?.ipfs[
+                                          Object.keys(
+                                            hookMeta?.metaData?.meta?.data
+                                              ?.ipfs
+                                          )[0]
+                                          ][item]
                                           : "[ ]"
                                       );
                                       toast({
@@ -378,7 +381,7 @@ const Meta = () => {
                   {hookMeta?.metaData?.meta?.data?.erc721A_module && (
                     <Box padding={style.padding.xs}>
                       <FlexRow hrAlign="space-between">
-                        <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
+                        <Heading color={colorMode == "light" ? "#282828" : ""} mb="0" fontSize={style.font.h6} width={"20%"}>
                           {hookMeta?.metaData &&
                             Object.keys(
                               hookMeta?.metaData?.meta?.data?.erc721A_module
@@ -407,9 +410,9 @@ const Meta = () => {
                         <Box>
                           {Object.keys(
                             hookMeta?.metaData?.meta?.data?.erc721A_module[
-                              Object.keys(
-                                hookMeta?.metaData?.meta?.data?.erc721A_module
-                              )[0]
+                            Object.keys(
+                              hookMeta?.metaData?.meta?.data?.erc721A_module
+                            )[0]
                             ]
                           ).map((item, index) => {
                             return (
@@ -419,32 +422,33 @@ const Meta = () => {
                                 marginTop={style.margin.sm}
                                 paddingBottom={
                                   index !=
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data
+                                      ?.erc721A_module[
                                     Object.keys(
                                       hookMeta?.metaData?.meta?.data
-                                        ?.erc721A_module[
-                                        Object.keys(
-                                          hookMeta?.metaData?.meta?.data
-                                            ?.erc721A_module
-                                        )[0]
-                                      ]
-                                    ).length -
-                                      1 && style.margin.xxs
+                                        ?.erc721A_module
+                                    )[0]
+                                    ]
+                                  ).length -
+                                  1 && style.margin.xxs
                                 }
                                 borderBottom={
                                   index !=
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data
+                                      ?.erc721A_module[
                                     Object.keys(
                                       hookMeta?.metaData?.meta?.data
-                                        ?.erc721A_module[
-                                        Object.keys(
-                                          hookMeta?.metaData?.meta?.data
-                                            ?.erc721A_module
-                                        )[0]
-                                      ]
-                                    ).length -
-                                      1 && style.card.border.card
+                                        ?.erc721A_module
+                                    )[0]
+                                    ]
+                                  ).length -
+                                  1 && style.card.border.card
                                 }
                               >
                                 <Text
+                                  color={colorMode == "light" ? "#282828" : ""}
                                   mr={style.margin.xs}
                                   width={"20%"}
                                 >{`${item} : `}</Text>
@@ -458,12 +462,12 @@ const Meta = () => {
                                       )[0]
                                     ][item] == "string"
                                       ? hookMeta?.metaData?.meta?.data
-                                          ?.erc721A_module[
-                                          Object.keys(
-                                            hookMeta?.metaData?.meta?.data
-                                              ?.erc721A_module
-                                          )[0]
-                                        ][item]
+                                        ?.erc721A_module[
+                                      Object.keys(
+                                        hookMeta?.metaData?.meta?.data
+                                          ?.erc721A_module
+                                      )[0]
+                                      ][item]
                                       : "[...]",
                                     50
                                   )}
@@ -477,15 +481,17 @@ const Meta = () => {
                                   <Button
                                     size="xs"
                                     width="100%"
+                                    color={"#ffff"}
+                                    backgroundColor={colorMode == "light" ? "#197cec" : ""}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
                                         JSON.stringify(
                                           hookMeta?.metaData?.meta?.data
                                             ?.erc721A_module[
-                                            Object.keys(
-                                              hookMeta?.metaData?.meta?.data
-                                                ?.erc721A_module
-                                            )[0]
+                                          Object.keys(
+                                            hookMeta?.metaData?.meta?.data
+                                              ?.erc721A_module
+                                          )[0]
                                           ][item]
                                         )
                                       );
@@ -514,7 +520,7 @@ const Meta = () => {
                   {hookMeta?.metaData?.meta?.data?.erc721_module && (
                     <Box padding={style.padding.xs}>
                       <FlexRow hrAlign="space-between">
-                        <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
+                        <Heading color={colorMode == "light" ? "#282828" : ""} mb="0" fontSize={style.font.h6} width={"20%"}>
                           {hookMeta?.metaData &&
                             Object.keys(
                               hookMeta?.metaData?.meta?.data?.erc721_module
@@ -543,9 +549,9 @@ const Meta = () => {
                         <Box>
                           {Object.keys(
                             hookMeta?.metaData?.meta?.data?.erc721_module[
-                              Object.keys(
-                                hookMeta?.metaData?.meta?.data?.erc721_module
-                              )[0]
+                            Object.keys(
+                              hookMeta?.metaData?.meta?.data?.erc721_module
+                            )[0]
                             ]
                           ).map((item, index) => {
                             return (
@@ -555,36 +561,37 @@ const Meta = () => {
                                 marginTop={style.margin.sm}
                                 paddingBottom={
                                   index !=
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data
+                                      ?.erc721_module[
                                     Object.keys(
                                       hookMeta?.metaData?.meta?.data
-                                        ?.erc721_module[
-                                        Object.keys(
-                                          hookMeta?.metaData?.meta?.data
-                                            ?.erc721_module
-                                        )[0]
-                                      ]
-                                    ).length -
-                                      1 && style.margin.xxs
+                                        ?.erc721_module
+                                    )[0]
+                                    ]
+                                  ).length -
+                                  1 && style.margin.xxs
                                 }
                                 borderBottom={
                                   index !=
+                                  Object.keys(
+                                    hookMeta?.metaData?.meta?.data
+                                      ?.erc721_module[
                                     Object.keys(
                                       hookMeta?.metaData?.meta?.data
-                                        ?.erc721_module[
-                                        Object.keys(
-                                          hookMeta?.metaData?.meta?.data
-                                            ?.erc721_module
-                                        )[0]
-                                      ]
-                                    ).length -
-                                      1 && style.card.border.card
+                                        ?.erc721_module
+                                    )[0]
+                                    ]
+                                  ).length -
+                                  1 && style.card.border.card
                                 }
                               >
                                 <Text
+                                  color={colorMode == "light" ? "#282828" : ""}
                                   mr={style.margin.xs}
                                   width={"20%"}
                                 >{`${item} : `}</Text>
-                                <Text width={"70%"} textAlign={"right"}>
+                                <Text color={colorMode == "light" ? "#282828" : ""} width={"70%"} textAlign={"right"}>
                                   {truncateString(
                                     typeof hookMeta?.metaData?.meta?.data
                                       ?.erc721_module[
@@ -594,12 +601,12 @@ const Meta = () => {
                                       )[0]
                                     ][item] == "string"
                                       ? hookMeta?.metaData?.meta?.data
-                                          ?.erc721_module[
-                                          Object.keys(
-                                            hookMeta?.metaData?.meta?.data
-                                              ?.erc721_module
-                                          )[0]
-                                        ][item]
+                                        ?.erc721_module[
+                                      Object.keys(
+                                        hookMeta?.metaData?.meta?.data
+                                          ?.erc721_module
+                                      )[0]
+                                      ][item]
                                       : "[...]",
                                     50
                                   )}
@@ -613,15 +620,17 @@ const Meta = () => {
                                   <Button
                                     size="xs"
                                     width="100%"
+                                    color={"#ffff"}
+                                    backgroundColor={colorMode == "light" ? "#197cec" : ""}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
                                         JSON.stringify(
                                           hookMeta?.metaData?.meta?.data
                                             ?.erc721_module[
-                                            Object.keys(
-                                              hookMeta?.metaData?.meta?.data
-                                                ?.erc721_module
-                                            )[0]
+                                          Object.keys(
+                                            hookMeta?.metaData?.meta?.data
+                                              ?.erc721_module
+                                          )[0]
                                           ][item]
                                         )
                                       );
@@ -658,6 +667,7 @@ const Meta = () => {
                           >
                             <FlexRow hrAlign="space-between">
                               <Heading
+                                color={colorMode == "light" ? "#282828" : ""}
                                 mb="0"
                                 fontSize={style.font.h6}
                                 width={"20%"}
@@ -693,20 +703,21 @@ const Meta = () => {
                                       marginTop={style.margin.sm}
                                       paddingBottom={
                                         index !=
-                                          Object.keys(source).length - 1 &&
+                                        Object.keys(source).length - 1 &&
                                         style.margin.xxs
                                       }
                                       borderBottom={
                                         index !=
-                                          Object.keys(source).length - 1 &&
+                                        Object.keys(source).length - 1 &&
                                         style.card.border.card
                                       }
                                     >
                                       <Text
+                                        color={colorMode == "light" ? "#282828" : ""}
                                         mr={style.margin.xs}
                                         width={"20%"}
                                       >{`${item} : `}</Text>
-                                      <Text width={"70%"} textAlign={"right"}>
+                                      <Text width={"70%"} textAlign={"right"} color={colorMode == "light" ? "#282828" : ""}>
                                         {truncateString(source[item], 50)}
                                       </Text>
                                       <Box
@@ -718,6 +729,8 @@ const Meta = () => {
                                         <Button
                                           size="xs"
                                           width="100%"
+                                          color={"#ffff"}
+                                          backgroundColor={colorMode == "light" ? "#197cec" : ""}
                                           onClick={() => {
                                             navigator.clipboard.writeText(
                                               source[item]
@@ -783,7 +796,7 @@ const Meta = () => {
 
   return (
     <FlexWindow
-      background="#000"
+      background={colorMode == "light" ? "" : "#000"}
       marginTop={style.nav.margin}
       view="both"
       // noPaddingTop={true}

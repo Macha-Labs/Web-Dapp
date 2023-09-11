@@ -120,6 +120,14 @@ const theme = extendTheme({
             bg: `${style.input.bg.default}`,
           },
         },
+        light: {
+          bg: `${style.input.bg.default}`,
+          _focusVisible: {
+            border: ``,
+            bg: ``,
+            shadow: `${style.input.shadow.hover}`,
+          }
+        },
       },
       defaultProps: {
         size: "md",
@@ -212,8 +220,13 @@ const theme = extendTheme({
         },
         state_brand: {
           background: `${style.button.bg.active}`,
-          color: "#FF",
+          color: "#fff",
           // padding: "0.5rem",
+        },
+        state_light: {
+          background: `rgba(255,255,255,1)`,
+          color: "#3d3d3d",
+          border: "1px solid #e2e2e2"
         },
         state_brand_hover: {
           background: `${style.button.bg.activeTranslucent}`,
@@ -315,6 +328,23 @@ const theme = extendTheme({
       baseStyle: {
         list: {
           bg: `${style.dropdown.bg.default}`,
+          border: `${style.dropdown.border}`,
+          minW: "5xs",
+          zIndex: 1000,
+        },
+        item: {
+          bg: `${style.button.bg.default}`,
+          _hover: {
+            bg: `${style.button.bg.hover}`,
+          },
+          _focus: {
+            bg: `${style.button.bg.default}`,
+          },
+        },
+      },
+      lightStyle: {
+        list: {
+          bg: `rgba(255,255,255,1)`,
           border: `${style.dropdown.border}`,
           minW: "5xs",
           zIndex: 1000,

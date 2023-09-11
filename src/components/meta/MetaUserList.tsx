@@ -47,9 +47,9 @@ const MetaUserList = ({ hookData }: Props) => {
       ) : (
         <FlexColumn width="100%" hrAlign="center" vrAlign="center">
           <Image src={colorMode == "light" ? "/assets/userFeed-emptyState_light.svg" : "/assets/user-feed-empty-state.svg"} />
-          <Text color={colorMode == "light" ? "#000" : ""} fontSize={style.font.h3} fontWeight={style.fontWeight.dark}>The feed is currently empty</Text>
-          <Text color={colorMode == "light" ? "#000" : ""} mb={0}>Ready to share your Macha stories?</Text>
-          <Text color={colorMode == "light" ? "#000" : ""} >This is where it all begins</Text>
+          <Text color={colorMode == "light" ? "#3d3d3d" : ""} fontSize={style.font.h3} fontWeight={style.fontWeight.dark}>The feed is currently empty</Text>
+          <Text color={colorMode == "light" ? "#3d3d3d" : ""} mb={0}>Ready to share your Macha stories?</Text>
+          <Text color={colorMode == "light" ? "#3d3d3d" : ""} >This is where it all begins</Text>
         </FlexColumn>
       )}
     </Box>

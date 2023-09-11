@@ -4,7 +4,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
 import { helperIPFS, truncateString } from "@/helpers";
-import { Avatar, Box, Image, Text } from "@chakra-ui/react";
+import { Avatar, Box, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { style as gStyle, style } from "../styles/StyledConstants";
 import GlobalIcons from "@/styles/GlobalIcons";
@@ -71,18 +71,19 @@ const MCard = ({
   const handleAudioEnded = () => {
     setIsPlaying(false); // Update isPlaying to false when audio ends
   };
+  const {colorMode} = useColorMode()
 
   return (
     <Box
       height={cardHeight ? cardHeight : "auto"}
       borderRadius={gStyle.card.borderRadius.default}
-      background="#030c1a"
+      background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
       padding={style.card.padding.default}
       // marginRight={style.margin["sm"]}
       // marginLeft={style.margin["sm"]}
       // marginBottom={style.margin["lg"]}
       width={width ? width : "auto"}
-      border={gStyle.card.border.default}
+      border={colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default}
       onClick={onClick}
       cursor={"pointer"}
       // flexWrap={"wrap"}
@@ -136,8 +137,8 @@ const MCard = ({
         <FlexRow height="fit-content" hrAlign="flex-start" marginBottom={"xs"}>
           <Avatar src={owner_image} />
           <FlexColumn vrAlign="flex-start" marginLeft={"xxs"}>
-            <Text mb="0">{owner_name}</Text>
-            <Text mb="0">{owner_heading}</Text>
+            <Text  color={colorMode == "light" ? "#282828" : ""} mb="0">{owner_name}</Text>
+            <Text  color={colorMode == "light" ? "#282828" : ""} mb="0">{owner_heading}</Text>
           </FlexColumn>
         </FlexRow>
       )}
@@ -178,8 +179,8 @@ const MCard = ({
         </>
       )}
 
-      <FlexColumn height="auto" vrAlign="flex-start">
-        <Text
+      <FlexColumn height="auto" vrAlign="flex-start" padding="0% 3%">
+        <Text color={colorMode == "light" ? "#282828" : ""} 
           className="m-b-0"
           fontSize={"xl"}
           fontWeight={600}
@@ -189,7 +190,8 @@ const MCard = ({
         </Text>
         {/* <Box width="15rem"> */}
         {description && (
-          <Text
+          <Text color={colorMode == "light" ? "#282828" : ""} 
+            
             className="m-b-0"
             maxW={titleMaxw ? titleMaxw : "20rem"}
             fontSize={"md"}

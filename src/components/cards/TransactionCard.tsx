@@ -79,7 +79,7 @@ const TransactionCard = ({
             }}
           >
             <FlexRow hrAlign="flex-start" height="100%">
-              <Text color={colorMode == "light" ? "#000" : ""} mb={0} mr={2} fontSize={style.font.h7}>
+              <Text color={colorMode == "light" ? "#3d3d3d" : ""} mb={0} mr={2} fontSize={style.font.h7}>
                 {truncateAddress(from)}
               </Text>
               <Text
@@ -109,7 +109,7 @@ const TransactionCard = ({
               >
                 to
               </Text>
-              <Text color={colorMode == "light" ? "#000" : ""} mb={0} fontSize={style.font.h7}>
+              <Text color={colorMode == "light" ? "#3d3d3d" : ""} mb={0} fontSize={style.font.h7}>
                 {truncateAddress(to)}
               </Text>
             </FlexRow>

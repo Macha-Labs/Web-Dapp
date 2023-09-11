@@ -1,7 +1,7 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 import { truncateString } from "@/helpers";
 import { style } from "@/styles/StyledConstants";
-import { Box, Button, Heading, Text, useToast } from "@chakra-ui/react";
+import { Box, Button, Heading, Text, useColorMode, useToast } from "@chakra-ui/react";
 
 type Props = {
   parameter?: string;
@@ -18,7 +18,9 @@ const InputCopy = ({
   lastChild,
   firstChild,
 }: Props) => {
+
   const toast = useToast();
+  const {colorMode} = useColorMode()
   return (
     <Box
       marginTop={!firstChild && style.margin.md}
@@ -27,7 +29,7 @@ const InputCopy = ({
       width={"100%"}
     >
       <FlexRow hrAlign="space-between">
-        <Heading mb="0" fontSize={style.font.h6} width={"20%"}>
+        <Heading color={colorMode == "light" ? "#282828" : ""} mb="0" fontSize={style.font.h6} width={"20%"}>
           {parameter}
         </Heading>
 
@@ -37,7 +39,7 @@ const InputCopy = ({
             mr={style.margin.sm}
             width={"90%"}
             textAlign={"right"}
-            color={style.color["white.5"]}
+            color={colorMode == "light" ? "#282828" : style.color["white.5"]}
           >
             {truncateString(JSON.stringify(value), 50)}
           </Text>
@@ -45,6 +47,8 @@ const InputCopy = ({
             <Button
               size="xs"
               width="100%"
+              color={"#ffff"}
+              backgroundColor={colorMode == "light" ? "#197cec" : ""}
               onClick={() => {
                 navigator.clipboard.writeText(value);
                 toast({

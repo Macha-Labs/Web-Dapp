@@ -56,18 +56,19 @@ const InputSearch = ({
         </InputLeftElement>
       )}
       <Input
+        variant=""
         type={type}
-        background={colorMode == "light" ? "rgba(255,255,255,1)" : gStyle.input.bg.default}
+        background={colorMode == "light" ? "#f2f5fd" : gStyle.input.bg.default}
         placeholder={placeholder}
         value={value}
         defaultValue={defaultValue}
         onChange={onChange ? onChange : () => {}}
         size={size}
         onKeyDown={onKeydown ? onKeydown : () => {}}
-        _placeholder={{ color: `#132041` }}
+        _placeholder={{ color: colorMode == "light" ? `#e2e2e2` :`#132041` }}
         // width={width}
         height={"50px"}
-        border={gStyle.input.border.search}
+        border={colorMode == "light" ? "" : gStyle.input.border.search}
         borderRadius={gStyle.input.borderRadius.default}
       />
     </InputGroup>
