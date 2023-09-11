@@ -21,6 +21,7 @@ const GlobalIcons: any = {
   "icon-chat": "/icons/svg/Base-blue/base-blue-chat.svg",
   "icon-dashboard": "/assets/icons/Base_blue_icons/base-blue-dashboard.svg",
   "icon-bolt": "/assets/icons/Base_blue_icons/base-blue-bolt.svg",
+  "icon-brand-bolt": "/assets/icons/brand-bolt.svg",
   "icon-down":
     "/icons/svg/Base-blue/base-blue-arrowFilled-down.svg?updatedAt=1686047698220",
   "icon-upload": "/assets/icons/Base_blue_icons/base-blue-upload.svg",

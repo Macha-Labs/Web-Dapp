@@ -81,7 +81,6 @@ export const ConnectWalletButton = (props: any) => {
           (!authenticationStatus || authenticationStatus === "authenticated");
         return (
           <div
-            className="w-100"
             {...(!ready && {
               "aria-hidden": true,
               style: {

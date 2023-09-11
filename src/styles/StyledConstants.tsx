@@ -75,7 +75,7 @@ export const darkStyle = {
   },
   nav: {
     width: "100%",
-    widthLeft: "15%",
+    widthLeft: "5%",
     height: "75px",
     bg: { default: "#00040d", meta: "#000A24" },
     border: { default: "2px solid #0F172E" },

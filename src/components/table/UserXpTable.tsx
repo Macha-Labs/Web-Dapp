@@ -27,7 +27,7 @@ const UserXpTable = () => {
           filter={!$address ? "blur(10px)" : ""}
         >
           <TableNative
-            height="20rem"
+            height="25rem"
             width={"100%"}
             disabled={!$address}
             overflow={$address && "scroll"}

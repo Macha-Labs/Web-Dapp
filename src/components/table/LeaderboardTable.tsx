@@ -25,7 +25,7 @@ const LeaderboardTable = () => {
   return (
     <Box width={"100%"}>
       <TableNative
-        height="20rem"
+        height="25rem"
         overflow="scroll"
         theadBackground={style.modal.bg.contractModal}
         theadBottomBorder="none"

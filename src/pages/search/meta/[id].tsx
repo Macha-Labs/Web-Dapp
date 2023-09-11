@@ -52,24 +52,7 @@ const Meta = () => {
 
   const [toggleIpfs, setToggleIpfs] = useState<boolean>(false);
   const [tab, setTab] = useState<string>("Ownership");
-  const options = [
-    {
-      href: "#",
-      value: "Ownership",
-    },
-    {
-      href: "#",
-      value: "Hex Data",
-    },
-    {
-      href: "#",
-      value: "erc721A Module",
-    },
-    {
-      href: "#",
-      value: "Sources",
-    },
-  ];
+  const options = [];
 
   const toast = useToast();
 
@@ -118,14 +101,32 @@ const Meta = () => {
             header={
               <Tabs
                 options={
-                  hookMeta?.metaData?.meta?.sources
-                    ? options
-                    : [
-                        {
-                          href: "#",
-                          value: "Data",
-                        },
-                      ]
+                  // hookMeta?.metaData?.meta?.sources
+                  //   ? options
+                  //   : [
+                  //       {
+                  //         href: "#",
+                  //         value: "Data",
+                  //       },
+                  //     ]
+                  [
+                    {
+                      href: "#",
+                      value: "Ownership",
+                    },
+                    hookMeta?.metaData?.meta?.data?.raw && {
+                      href: "#",
+                      value: "Hex Data",
+                    },
+                    hookMeta?.metaData?.meta?.data?.erc721_module && {
+                      href: "#",
+                      value: "erc721A Module",
+                    },
+                    hookMeta?.metaData?.meta?.sources && {
+                      href: "#",
+                      value: "Sources",
+                    },
+                  ]
                 }
                 onChange={setTab}
                 value={tab}
@@ -650,7 +651,11 @@ const Meta = () => {
                     hookMeta?.metaData?.meta?.sources.map(
                       (source: any, index: any) => {
                         return (
-                          <Box key={index} padding={style.padding.xs}>
+                          <Box
+                            key={index}
+                            padding={style.padding.xs}
+                            width={"100%"}
+                          >
                             <FlexRow hrAlign="space-between">
                               <Heading
                                 mb="0"

@@ -5,6 +5,7 @@ import { style } from "@/styles/StyledConstants";
 import { Box, InputGroup, InputRightElement, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+import SearchRow from "./SearchRow";
 
 type Props = {
   options?: any;
@@ -82,134 +83,91 @@ const SearchHeader = ({ options }: Props) => {
               border="1px solid rgba(15, 23, 46, 1) !important"
               paddingY={style.padding.xxs}
               overflow="hidden"
+              position={"absolute"}
+              top="20"
             >
-              <Box
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  alignItems: "center",
-                  paddingRight: `${style.padding.xs}`,
-                  paddingLeft: `${style.padding.xs}`,
-                  paddingTop: `${style.padding.xxs}`,
-                }}
-              >
-                <Text
-                  mb={style.margin.xxs}
-                  fontSize={style.font.h7}
-                  color={style.color["white.5"]}
+              <Box overflow={"scroll"} height={"15rem"}>
+                <Box
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    alignItems: "center",
+                    paddingRight: `${style.padding.xs}`,
+                    paddingLeft: `${style.padding.xs}`,
+                    paddingTop: `${style.padding.xxs}`,
+                  }}
                 >
-                  Trending Searches
-                </Text>
-              </Box>
-              <Box
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                }}
-                onClick={() => {
-                  router.push("/search?search=lens_post");
-                  setShowSuggestions(false);
-                }}
-                _hover={{
-                  cursor: "pointer",
-                  backgroundColor: "#00040d",
-                }}
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  alignItems: "center",
-                  padding: `${style.padding.xxs} ${style.padding.xs}`,
-                }}
-              >
-                <Text mb={0} fontSize={style.font.h6}>
-                  Lens Posts
-                </Text>
-              </Box>
-              <Box
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                }}
-                onClick={() => {
-                  router.push("/search?search=ens_ethereum");
-                  setShowSuggestions(false);
-                }}
-                _hover={{
-                  cursor: "pointer",
-                  backgroundColor: "#00040d",
-                }}
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  alignItems: "center",
-                  padding: `${style.padding.xxs} ${style.padding.xs}`,
-                }}
-              >
-                <Text mb={0} fontSize={style.font.h6}>
-                  Ens Handles
-                </Text>
-              </Box>
-              <Box
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  alignItems: "center",
-                  paddingRight: `${style.padding.xs}`,
-                  paddingLeft: `${style.padding.xs}`,
-                  paddingTop: `${style.padding.xxs}`,
-                }}
-              >
-                <Text
-                  mb={style.margin.xxs}
-                  fontSize={style.font.h7}
-                  color={style.color["white.5"]}
+                  <Text
+                    mb={style.margin.xxs}
+                    fontSize={style.font.h7}
+                    color={style.color["white.5"]}
+                  >
+                    Trending Searches
+                  </Text>
+                </Box>
+
+                <SearchRow
+                  text="Lens Posts"
+                  onClick={() => {
+                    router.push("/search?search=lens_post");
+                    setShowSuggestions(false);
+                  }}
+                />
+                <SearchRow
+                  text="Ens Handles"
+                  onClick={() => {
+                    router.push("/search?search=ens_ethereum");
+                    setShowSuggestions(false);
+                  }}
+                />
+                <SearchRow
+                  text="Sound.xyz Music"
+                  onClick={() => {
+                    router.push("/explore/sound_nft");
+                    setShowSuggestions(false);
+                  }}
+                />
+                <Box
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    alignItems: "center",
+                    paddingRight: `${style.padding.xs}`,
+                    paddingLeft: `${style.padding.xs}`,
+                    paddingTop: `${style.padding.xxs}`,
+                  }}
                 >
-                  Explore More
-                </Text>
-              </Box>
-              <Box
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                }}
-                onClick={() => {
-                  router.push("/feed");
-                  setShowSuggestions(false);
-                }}
-                _hover={{
-                  cursor: "pointer",
-                  backgroundColor: "#00040d",
-                }}
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  alignItems: "center",
-                  padding: `${style.padding.xxs} ${style.padding.xs}`,
-                }}
-              >
-                <Text mb={0} fontSize={style.font.h6}>
-                  View content across web3
-                </Text>
-              </Box>
-              <Box
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                }}
-                onClick={() => {
-                  router.push("/explore/sound_nft");
-                  setShowSuggestions(false);
-                }}
-                _hover={{
-                  cursor: "pointer",
-                  backgroundColor: "#00040d",
-                }}
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  alignItems: "center",
-                  padding: `${style.padding.xxs} ${style.padding.xs}`,
-                }}
-              >
-                <Text mb={0} fontSize={style.font.h6}>
-                  Trending Music
-                </Text>
+                  <Text
+                    mb={style.margin.xxs}
+                    fontSize={style.font.h7}
+                    color={style.color["white.5"]}
+                  >
+                    Explore More
+                  </Text>
+                </Box>
+
+                <SearchRow
+                  text="View content across web3"
+                  onClick={() => {
+                    router.push("/feed");
+                    setShowSuggestions(false);
+                  }}
+                />
+
+                <SearchRow
+                  text="Explore Chains"
+                  onClick={() => {
+                    router.push("/chains");
+                    setShowSuggestions(false);
+                  }}
+                />
+                <SearchRow
+                  text="Explore Metas"
+                  onClick={() => {
+                    router.push("/metas");
+                    setShowSuggestions(false);
+                  }}
+                />
               </Box>
             </Box>
           )}
