@@ -160,7 +160,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                     // overflowY="scroll"
                   >
                     <CardNative hrAlign={"center"} width="fit-content">
-                      <Image src="/assets/Claim_Macha_Nft.png" height="15rem" />
+                      <Image src="/assets/Claim_Macha_Nft.png" height="15rem" alt="icon-bolt"/>
                     </CardNative>
                   </Box>
                   <Text
@@ -233,7 +233,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                     <Text mb={0} color={colorMode == "light" ? "#000" : ""}>
                       {/* {hookXP?.userXPList ? hookXP?.userXPList?.xps_earned : 0} */}
                     </Text>
-                    <Image src={GlobalIcons["icon-bolt"]} />
+                    <Image src={GlobalIcons["icon-bolt"]} alt="icon-bolt"/>
                   </FlexRow>
                 </FlexRow>
               </>
@@ -280,7 +280,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                           fontSize: style.font.h6,
                           borderCollapse: "separate",
                           borderSpacing: "0 1rem",
-                          width: "50%",
+                          width: "30%",
                           backgroundColor: `${
                             colorMode == "light" ? "#ffffff" : ""
                           }`,
@@ -289,7 +289,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                         <Text
                           color={colorMode == "light" ? "#000" : ""}
                           mb={0}
-                          textAlign="left"
+                          // textAlign="left"
                         >
                           Status
                         </Text>
@@ -316,7 +316,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                           >
                             XP
                           </Text>
-                          <Image src={GlobalIcons["icon-bolt"]} />
+                          <Image src={GlobalIcons["icon-bolt"]} alt="icon-bolt" />
                         </FlexRow>
                       </Th>
                     </Tr>
@@ -355,13 +355,13 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                               </Text>
                             </FlexRow>
                           </Td>
-                          <Box
+                          {/* <Box
                             style={{
                               display: "flex",
                               justifyContent: "flex-end",
                               alignItems: "center",
                             }}
-                          >
+                          > */}
                             <Td
                               style={{
                                 paddingTop: "20px",
@@ -407,10 +407,10 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                                 >
                                   {item?.points}
                                 </Text>
-                                <Image src={GlobalIcons["icon-bolt"]} />
+                                <Image src={GlobalIcons["icon-bolt"]} alt="icon-bolt" />
                               </FlexRow>
                             </Td>
-                          </Box>
+                          {/* </Box> */}
                         </Tr>
                       ))}
                   </Tbody>
