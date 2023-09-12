@@ -76,13 +76,13 @@ const theme = extendTheme({
         height: "100%!important",
       },
       ".css-1jec974 >option": {
-        background: `${mode("#ffff",`${style.input.bg.default}`)}`,
+        background: `${mode("#ffff", style.input.bg.default)} !important`,
       },
       ".css-2t0ktt": {
         borderRadius: `${style.input.borderRadius.default}!important`,
       },
       ".css-7p9xsp >option": {
-        background: `${style.input.bg.default}!important`,
+        background: `${mode("#ffff", style.input.bg.default)} !important`,
       },
 
       ".css-1bki5fo::placeholder": {
@@ -90,7 +90,7 @@ const theme = extendTheme({
         paddingLeft: "5px",
       },
       ".css-12793pk >option": {
-        background: `${style.input.bg.default}!important`,
+        background: `${mode("#ffff", `${style.input.bg.default}`)} !important`,
         border: "0px",
       },
     },
@@ -99,44 +99,10 @@ const theme = extendTheme({
   components: {
     Input: {
       baseStyle: {
-        field: {
-          bg: `${mode("#ffff",style.input.bg.default)}`,
-          border: `${style.input.border.default}`,
-          _hover: {
-            border: `${style.input.border.active}`,
-            bg: `${style.input.bg.active}`,
-          },
-          _focusVisible: {
-            border: `${style.input.border.active}`,
-            bg: `${style.input.bg.active}`,
-            shadow: `${style.input.shadow.hover}`,
-          },
-        },
+        borderRadius: "10px"
       },
       variants: {
         normal: {
-          field: {
-            bg: `${style.input.bg.default}`,
-          },
-        },
-        light: {
-          bg: `#ffff`,
-          color: "#3d3d3d !important",
-          _focusVisible: {
-            border: ``,
-            bg: ``,
-            shadow: `${style.input.shadow.hover}`,
-          }
-        },
-      },
-      defaultProps: {
-        size: "md",
-        variant: "normal",
-      },
-    },
-    TextArea: {
-      Input: {
-        baseStyle: {
           field: {
             bg: `${style.input.bg.default}`,
             border: `${style.input.border.default}`,
@@ -151,11 +117,62 @@ const theme = extendTheme({
             },
           },
         },
+        light: {
+          field: {
+            bg: "#ffff",
+            color: "#3d3d3d !important",
+            border: ``,
+            _hover: {
+              bg: "#fffff"
+            },
+            _focusVisible: {
+              bg: "#ffff",
+              shadow: `${style.input.shadow.hover}`,
+            },
+          },
+        },
+      },
+      defaultProps: {
+        size: "md",
+        variant: "normal",
+      },
+    },
+    TextArea: {
+      Input: {
+        baseStyle: {
+          field: {
+
+          },
+        },
         variants: {
           normal: {
             field: {
               bg: `${style.input.bg.default}`,
+              border: `${style.input.border.default}`,
+              _hover: {
+                border: `${style.input.border.active}`,
+                bg: `${style.input.bg.active}`,
+              },
+              _focusVisible: {
+                border: `${style.input.border.active}`,
+                bg: `${style.input.bg.active}`,
+                shadow: `${style.input.shadow.hover}`,
+              },
             },
+            light: {
+              field: {
+                bg: "#ffff",
+                color: "#3d3d3d !important",
+                border: ``,
+                _hover: {
+                  bg: "#fffff"
+                },
+                _focusVisible: {
+                  bg: "#ffff",
+                  shadow: `${style.input.shadow.hover}`,
+                },
+              },
+            }
           },
         },
         defaultProps: {
@@ -171,7 +188,6 @@ const theme = extendTheme({
         },
       },
     },
-
     Button: {
       baseStyle: {
         background: `${style.button.bg.default}`,
@@ -196,6 +212,7 @@ const theme = extendTheme({
           },
         },
         state_default_hover_light: {
+          color: "#3d3d3d",
           background: `${style.card.bg.default}`,
           border: `1px solid #e2e2e2`,
           shadow: `${style.card.shadow.default}`,

@@ -1,5 +1,5 @@
 import { style } from "@/styles/StyledConstants";
-import { Heading, Select, Text } from "@chakra-ui/react";
+import { Heading, Select, Text, useColorMode } from "@chakra-ui/react";
 import IconBase from "../icons/IconsBase";
 import FlexColumn from "../flex/FlexColumn";
 
@@ -35,6 +35,7 @@ const InputSelect = ({
   value,
   labelText
 }: Props) => {
+  const {colorMode} = useColorMode()
   // console.log("children", children);
   return (
     <FlexColumn
@@ -59,7 +60,6 @@ const InputSelect = ({
         </Heading>
       )}
       <Select
-        value={value}
         placeholder={placeholder}
         size={size}
         width={width ? width : "100%"}
@@ -74,8 +74,9 @@ const InputSelect = ({
         variant={variant}
         onChange={onChange}
         style={{
-          background: `${style.input.bg.default}`,
+          background: `${colorMode == "light" ? "#ffff" : style.input.bg.default}`,
           border: `${style.input.border.default}`,
+          color: `${colorMode == "light" ? "#3d3d3d" : ""}`
         }}
         margin={margin}
       >
@@ -89,7 +90,7 @@ const InputSelect = ({
                   key={index}
                   value={item?.value}
                   style={{
-                    background: `${style.input.bg.default}`,
+                    background: `${colorMode == "light" ?  "#ffff" : style.input.bg.default}`,
                   }}
                 >
                   <Text> {item.title}</Text>

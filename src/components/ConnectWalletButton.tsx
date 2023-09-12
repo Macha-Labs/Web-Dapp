@@ -251,7 +251,7 @@ export const ConnectWalletButton = (props: any) => {
                           }}
                         >
                           <FlexRow hrAlign="space-between">
-                            <IconBase slug="icon-dark-deploy" size="xl" />
+                            <IconBase slug={colorMode == "light" ? "icon-deploy-light" : "icon-dark-deploy"} size="xl" />
                             <FlexRow
                               hrAlign="flex-start"
                               width="90%"
@@ -300,7 +300,7 @@ export const ConnectWalletButton = (props: any) => {
                           }}
                         >
                           <FlexRow hrAlign="space-between">
-                            <IconBase slug="icon-dark-globe" size="xl" />
+                            <IconBase slug={colorMode == "light" ? "icon-light-globe" : "icon-dark-globe"} size="xl" />
                             <FlexRow
                               hrAlign="flex-start"
                               width="90%"
@@ -337,7 +337,7 @@ export const ConnectWalletButton = (props: any) => {
                             }}
                           >
                             <FlexRow hrAlign="space-between">
-                              <IconBase slug="icon-dark-user" size="xl" />
+                              <IconBase slug={colorMode == "light" ? "icon-user-outline" : "icon-dark-user"} size="xl" />
                               <FlexRow
                                 hrAlign="flex-start"
                                 width="90%"
@@ -370,7 +370,7 @@ export const ConnectWalletButton = (props: any) => {
                       >
                         <FlexRow hrAlign="space-between">
                           <IconBase
-                            slug="icon-dark-disconnectWallet"
+                            slug={colorMode == "light" ? "icon-light-disconnectWallet" : "icon-dark-disconnectWallet"}
                             size="xl"
                           />
                           <FlexRow

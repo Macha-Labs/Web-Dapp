@@ -81,7 +81,7 @@ const ContractCreateEditModal = ({
             {hookContractCreate.formStep > 1 &&
               hookContractCreate.formStep != 4 && (
                 <ButtonNative
-                  variant="state_default_hover"
+                  variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                   marginTop={style.margin["lg"]}
                   onClick={hookContractCreate.prevFormStep}
                 >
@@ -126,7 +126,7 @@ const ContractCreateEditModal = ({
 
             {hookContractCreate.formStep == 4 && (
               <ButtonNative
-                variant="state_default_hover"
+              variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                 marginTop={style.margin["lg"]}
                 onClick={() => {
                   hookContractCreate.setClear();
@@ -345,7 +345,7 @@ const ContractCreateEditModal = ({
               !hookContractCreate.isLoading && (
                 <>
                   <InputLabel
-                    variant="light"
+                    variant={colorMode == "light" ? "light" : "normal"}
                     value={hookContractCreate.$contractFormData.address}
                     inputType="text"
                     labelText="Contract Address *"
@@ -390,6 +390,7 @@ const ContractCreateEditModal = ({
                     ]}
                   />
                   <InputLabel
+                    variant={colorMode == "light" ? "light" : "normal"}
                     value={hookContractCreate.$contractFormData.read_abi_from}
                     onChange={(e: any) =>
                       hookContractCreate.$loadContractFormData({
@@ -408,6 +409,7 @@ const ContractCreateEditModal = ({
               !hookContractCreate.isLoading && (
                 <>
                   <InputLabel
+                    variant={colorMode == "light" ? "light" : "normal"}
                     value={hookContractCreate.contractAbiText}
                     // value=""
                     inputType="textArea"
@@ -433,6 +435,7 @@ const ContractCreateEditModal = ({
                   >
                     <Box width="47%">
                       <InputLabel
+                        variant={colorMode == "light" ? "light" : "normal"}
                         value={hookContractCreate.$contractFormData.name}
                         onChange={(e: any) =>
                           hookContractCreate.$loadContractFormData({
@@ -446,6 +449,7 @@ const ContractCreateEditModal = ({
                     </Box>
                     <Box width="47%">
                       <InputLabel
+                        variant={colorMode == "light" ? "light" : "normal"}
                         value={hookContractCreate.$contractFormData.slug}
                         onChange={(e: any) =>
                           hookContractCreate.$loadContractFormData({
@@ -459,6 +463,7 @@ const ContractCreateEditModal = ({
                     </Box>
                   </Box>
                   <InputLabel
+                    variant={colorMode == "light" ? "light" : "normal"}
                     value={hookContractCreate.$contractFormData.description}
                     onChange={(e: any) =>
                       hookContractCreate.$loadContractFormData({
@@ -473,6 +478,7 @@ const ContractCreateEditModal = ({
                   {hookContractCreate.$contractFormData.image == "" ? (
                     <>
                       <InputLabel
+                        variant={colorMode == "light" ? "light" : "normal"}
                         inputType="dropFile"
                         fileDropMinHeight="80px"
                         inputLogoSize="lg"
@@ -549,6 +555,7 @@ const ContractCreateEditModal = ({
               !hookContractCreate.isLoading && (
                 <>
                   <InputLabel
+                    variant={colorMode == "light" ? "light" : "normal"}
                     value={
                       hookContractCreate.$contractFormData.interested_methods
                     }
@@ -564,6 +571,7 @@ const ContractCreateEditModal = ({
                     tooltipLabel="You can mention more than one method(s) using comma seperated values."
                   />
                   <InputLabel
+                    variant={colorMode == "light" ? "light" : "normal"}
                     value={
                       hookContractCreate.$contractFormData.interested_events
                     }
@@ -598,6 +606,7 @@ const ContractCreateEditModal = ({
                   </Box>
                   <Box>
                     <Text
+                      color={colorMode == "light" ? "#282828" : ""}
                       style={{
                         fontWeight: `700`,
                         fontSize: `${style.font.h2}`,
@@ -608,13 +617,13 @@ const ContractCreateEditModal = ({
                     </Text>
                   </Box>
                   <Box>
-                    <Text textAlign="center" mb={0} color="whiteAlpha.800">
+                    <Text color={colorMode == "light" ? "#282828" : "whiteAlpha.800"} textAlign="center" mb={0}>
                       You have successfully created your contact on Macha.
                     </Text>
                     <Text
+                      color={colorMode == "light" ? "#282828" : "whiteAlpha.800"}
                       textAlign="center"
                       marginBottom={style.margin.lg}
-                      color="whiteAlpha.800"
                     >
                       Wait for approval from our side and your contract will be
                       published.
