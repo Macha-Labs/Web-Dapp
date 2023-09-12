@@ -1,9 +1,10 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 import { style } from "@/styles/StyledConstants";
-import { Box, Button, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Image, Text, useColorMode } from "@chakra-ui/react";
 import Link from "next/link";
 
 const Custom404 = () => {
+  const { colorMode } = useColorMode();
   return (
     <Box
       bg={"#000"}
@@ -53,13 +54,15 @@ const Custom404 = () => {
             <Button
               style={{
                 background: `${style.button.bg.active}`,
-                color: "#FF",
+                // color: "#FF",
               }}
               padding={style.padding.sm}
               borderRadius={style.button.borderRadius.default}
               height={"2rem"}
             >
-              Head back home
+              <Text color={colorMode == "light" ? "#fff" : ""} mb={0}>
+                Head back home
+              </Text>
             </Button>
           </Link>
         </FlexRow>

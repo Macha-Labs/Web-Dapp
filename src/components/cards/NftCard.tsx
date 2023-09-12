@@ -76,7 +76,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
   const [chainId, setChainId] = useState<any>(1);
   const hookXP = useXP();
   const { address } = useAccount();
-
+  const { colorMode } = useColorMode();
   const hookUserMeta = useUserMeta();
 
   const options: any = [
@@ -213,6 +213,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                             fontWeight={style.fontWeight.dark}
                             marginTop={style.margin.sm}
                             textAlign={"center"}
+                            color={colorMode == "light" ? "3d3d3d" : ""}
                           >
                             {truncateAddress(address)}
                           </Text>
@@ -237,6 +238,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                                   // lineHeight={"2.2rem"}
                                   marginBottom={0}
                                   fontWeight={style.fontWeight.dark}
+                                  color={colorMode == "light" ? "#3d3d3d" : ""}
                                 >
                                   {heading}
                                 </Text>
@@ -292,6 +294,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                               margin="auto"
                               marginTop={style.margin.sm}
                               width={"70%"}
+                              color={colorMode == "light" ? "#3d3d3d" : ""}
                             >
                               It will take just 2 mins to setup profile and
                               discover your own chain content like ENS, Lens and
