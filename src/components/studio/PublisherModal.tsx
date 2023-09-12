@@ -214,7 +214,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       </Box>
 
                       <ButtonNative
-                        variant={colorMode == "light" ? "state_light" : "state_default_hover"}
+                        variant={colorMode == "light" ? "state_brand" : "state_default_hover"}
                         height="2rem"
                         width="7rem"
                         marginTop={style.margin["lg"]}
@@ -450,7 +450,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           flexDirection: "column",
                           justifyContent: "space-between",
                           background: `${colorMode == "light" ? "" :  "#000a24"}`,
-                          border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" :  "" : hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" :  style.card.border.publisher}`,
+                          border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" :  "1px solid #e2e2e2" : hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" :  style.card.border.publisher}`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -506,7 +506,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           width: "48%",
                           background: `${colorMode == "light" ? "" :  "#000a24"}`,
                           height: "100%",
-                          border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" :  "" : hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" :  style.card.border.publisher}`,
+                          border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" :  "1px solid #e2e2e2"   : hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" :  style.card.border.publisher}`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",
