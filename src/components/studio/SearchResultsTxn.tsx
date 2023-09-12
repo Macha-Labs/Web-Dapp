@@ -35,9 +35,9 @@ import ContractList from "./ContractList";
 import useContractList from "@/hooks/studio/useContractList";
 
 type Props = {
-  id: string;
-  transactionDetails: any;
-  isLoading: any;
+  id?: string;
+  transactionDetails?: any;
+  isLoading?: any;
   methodParams?: any;
 };
 function SearchResultsTxn({
