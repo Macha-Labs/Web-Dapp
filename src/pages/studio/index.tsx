@@ -22,7 +22,7 @@ const Home = () => {
   const hookContractCreate = useContractCreate(contractModal);
   const { chain } = useNetwork();
   const { switchNetwork } = useSwitchNetwork();
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode();
 
   const dashboardNav: any = [
     {
@@ -59,7 +59,10 @@ const Home = () => {
               <Tabs
                 width="fit-content"
                 options={dashboardNav}
-                gstyle={{ fontSize: `${style.font.h5}`, background: `${colorMode == "light" ? "#ffff" : ""}` }}
+                gstyle={{
+                  fontSize: `${style.font.h5}`,
+                  // background: `${colorMode == "light" ? "#ffff" : ""}`,
+                }}
                 value={"Home"}
                 onChange={() => {}}
               />
