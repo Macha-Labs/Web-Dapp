@@ -167,6 +167,7 @@ export const ConnectWalletButton = (props: any) => {
                         {/* <Image src={"../assets/Avatar.svg"} alt="avatar" /> */}
                         {props?.showBalance && (
                           <Text
+                            color={colorMode == "light" ? "#000" : ""}
                             fontSize={"sm"}
                             className="mb-0"
                             align="left"
@@ -242,9 +243,8 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showStudio && (
                         <MenuItem
                           style={{
-                            background: `${
-                              colorMode == "light" ? "#ffff" : ""
-                            }`,
+                            background: `${colorMode == "light" ? "#ffff" : ""
+                              }`,
                           }}
                           onClick={async () => {
                             router.push("/studio");
@@ -270,9 +270,8 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showContracts && (
                         <MenuItem
                           style={{
-                            background: `${
-                              colorMode == "light" ? "#ffff" : ""
-                            }`,
+                            background: `${colorMode == "light" ? "#ffff" : ""
+                              }`,
                           }}
                           onClick={async () => {
                             router.push("/mycontracts");
@@ -293,9 +292,8 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showExplorer && (
                         <MenuItem
                           style={{
-                            background: `${
-                              colorMode == "light" ? "#ffff" : ""
-                            }`,
+                            background: `${colorMode == "light" ? "#ffff" : ""
+                              }`,
                           }}
                           onClick={async () => {
                             router.push("/");
@@ -308,7 +306,12 @@ export const ConnectWalletButton = (props: any) => {
                               width="90%"
                               marginLeft={"sm"}
                             >
-                              Visit Explorer
+                              <Text
+                                mb={0}
+                                color={colorMode == "light" ? "#000" : ""}
+                              >
+                                Visit Explorer
+                              </Text>
                             </FlexRow>
                           </FlexRow>
                         </MenuItem>
@@ -317,9 +320,8 @@ export const ConnectWalletButton = (props: any) => {
                         props?.showRegisterPublisher && (
                           <MenuItem
                             style={{
-                              background: `${
-                                colorMode == "light" ? "#ffff" : ""
-                              }`,
+                              background: `${colorMode == "light" ? "#ffff" : ""
+                                }`,
                             }}
                             onClick={async () => {
                               await checkBalance();
@@ -341,7 +343,12 @@ export const ConnectWalletButton = (props: any) => {
                                 width="90%"
                                 marginLeft={"sm"}
                               >
-                                {"Register as Publisher"}
+                                <Text
+                                  mb={0}
+                                  color={colorMode == "light" ? "#000" : ""}
+                                >
+                                  {"Register as Publisher"}
+                                </Text>
                               </FlexRow>
                             </FlexRow>
                           </MenuItem>

@@ -13,7 +13,7 @@ import {
 } from "@/helpers/storage/lightHouseStorage";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Divider, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Divider, Heading, Image, Text, useColorMode } from "@chakra-ui/react";
 
 type Props = {
   modal: any;
@@ -28,13 +28,16 @@ const ContractCreateEditModal = ({
   hookContract,
   isEdit,
 }: Props) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <ModalWindow
       event={modal}
       size="2xl"
       header={
         <FlexRow width="100%" hrAlign="space-between">
-          <Text className="mb-0">
+          <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="mb-0">
             {isEdit ? "Edit Contract" : "Create Contract"}
           </Text>
           <Image
@@ -52,7 +55,7 @@ const ContractCreateEditModal = ({
               cursor: "pointer",
               width: "fit-content",
               height: "fit-content",
-              background: `${style.icon.bg.default}`,
+              background: `${colorMode == "light" ? "" : style.icon.bg.default}`,
               borderRadius: `${style.icon.borderRadius}`,
               boxShadow: `${style.icon.shadow.default}`,
               marginLeft: `${style.margin[style?.marginLeft]}`,

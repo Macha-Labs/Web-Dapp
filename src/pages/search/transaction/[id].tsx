@@ -1,25 +1,16 @@
-import ButtonMenu from "@/_ui/buttons/ButtonMenu";
-import FlexBody from "@/_ui/flex/FlexBody";
-import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import InputSearch from "@/_ui/input/InputSearch";
-import NavBlock from "@/_ui/nav/NavBlock";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import NavStudio from "@/_ui/nav/NavStudio";
-import NavTop from "@/_ui/nav/NavTop";
-import TagNative from "@/_ui/tag/TagNative";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import NavButton from "@/components/buttons/NavButton";
 import TxnDetails from "@/components/studio/TxnDetails";
 import { config } from "@/config";
-import { getItemFromLocal, setItemOnLocal, truncateAddress } from "@/helpers";
+import { getItemFromLocal, setItemOnLocal } from "@/helpers";
 import useMeta from "@/hooks/studio/useMeta";
 import useTransaction from "@/hooks/studio/useTransaction";
 import useAuthStore from "@/store/useAuthStore";
 import useUserStore from "@/store/useUserStore";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, useToast } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 

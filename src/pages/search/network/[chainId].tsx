@@ -1,38 +1,30 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 
 import { style } from "@/styles/StyledConstants";
-import { Divider, Flex, Link, Text } from "@chakra-ui/react";
+import { Divider, Flex, Link, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 // import InteractionTable from "@/pages/search/network/InteractionTable";
+import Header from "@/_ui/Head/Header";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
-import FlexBody from "@/_ui/flex/FlexBody";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import IconBase from "@/_ui/icons/IconsBase";
 import Loader from "@/_ui/loader/Loader";
-import NavBlock from "@/_ui/nav/NavBlock";
-import Tabs from "@/_ui/tabs/Tabs";
-import TagNative from "@/_ui/tag/TagNative";
-import TxnTable from "@/components/studio/TxnTable";
-import chains from "@/data/network";
-import useChainTxn from "@/hooks/studio/useChainTxn";
-import { Box } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import NavTop from "@/_ui/nav/NavTop";
-import NavButton from "@/components/buttons/NavButton";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import useAuthStore from "@/store/useAuthStore";
-import InputSearch from "@/_ui/input/InputSearch";
-import useAlchemy from "@/hooks/studio/useAlchemy";
-import NavStudio from "@/_ui/nav/NavStudio";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
-import Header from "@/_ui/Head/Header";
-import useContractList from "@/hooks/studio/useContractList";
+import NavStudio from "@/_ui/nav/NavStudio";
+import Tabs from "@/_ui/tabs/Tabs";
+import TagNative from "@/_ui/tag/TagNative";
 import ContractList from "@/components/studio/ContractList";
+import TxnTable from "@/components/studio/TxnTable";
+import chains from "@/data/network";
+import useAlchemy from "@/hooks/studio/useAlchemy";
 import useChainContracts from "@/hooks/studio/useChainContracts";
+import useChainTxn from "@/hooks/studio/useChainTxn";
+import useContractList from "@/hooks/studio/useContractList";
+import { Box } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 const Network = () => {
-  const $address = useAuthStore((state: any) => state.address);
   const hookChainTxn = useChainTxn();
   const router = useRouter();
   const chainId: any = router.query.chainId;
@@ -41,6 +33,7 @@ const Network = () => {
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
   const hookContractList = useContractList();
   const hookChainContracts = useChainContracts();
+  const { colorMode } = useColorMode()
 
   const renderNav = () => {
     return <NavStudio />;
@@ -97,15 +90,17 @@ const Network = () => {
               <Box display="flex" flexDirection="column">
                 <Box display="flex" flexDirection="column">
                   <Text
+                    color={colorMode == "light" ? "#3d3d3d" : ""}
                     fontWeight={style.fontWeight.dark}
                     fontSize={style.font.h5}
                   >
                     About {chains[chainId].chainName}
                   </Text>
-                  <Text>{chains[chainId].about}</Text>
+                  <Text color={colorMode == "light" ? "#3d3d3d" : ""} >{chains[chainId].about}</Text>
                 </Box>
                 <Box display="flex" flexDirection="column">
                   <Text
+                    color={colorMode == "light" ? "#3d3d3d" : ""}
                     fontWeight={style.fontWeight.dark}
                     fontSize={style.font.h5}
                   >
@@ -126,12 +121,12 @@ const Network = () => {
                         <Text
                           style={{
                             marginRight: `${style.margin.xxs}`,
-                            color: "dodgerblue",
+                            color: `${colorMode == "light" ? "#3d3d3d" : "dodgerblue"}`,
                           }}
                         >
                           {member.name}
                         </Text>
-                        <Text style={{ marginRight: `${style.margin.xxs}` }}>
+                        <Text color={colorMode == "light" ? "#3d3d3d" : ""} style={{ marginRight: `${style.margin.xxs}` }}>
                           {member.designation}
                         </Text>
                       </Box>
@@ -140,6 +135,7 @@ const Network = () => {
                 </Box>
                 <Box>
                   <Text
+                    color={colorMode == "light" ? "#3d3d3d" : ""}
                     fontWeight={style.fontWeight.dark}
                     fontSize={style.font.h5}
                   >
@@ -157,7 +153,7 @@ const Network = () => {
             </Box>
             <Box flex="3" p={4}>
               {/* Content for column 2 */}
-              <Text fontWeight={style.fontWeight.dark} fontSize={style.font.h5}>
+              <Text color={colorMode == "light" ? "#3d3d3d" : ""} fontWeight={style.fontWeight.dark} fontSize={style.font.h5}>
                 Official Links
               </Text>
               <Box
@@ -171,6 +167,7 @@ const Network = () => {
                     key={index}
                     target="_blank"
                     href={link.link}
+                    color={colorMode == "light" ? "#3d3d3d" : ""}
                   >
                     {link.title}
                   </Link>
@@ -207,7 +204,7 @@ const Network = () => {
                 }}
                 text="Newest"
                 disabled={hookChainTxn.page == 1}
-                variant="state_default_hover"
+                variant={colorMode == "light" ? "state_light" : "state_default_hover"}
               />
               <ButtonNative
                 marginRight="sm"
@@ -221,9 +218,10 @@ const Network = () => {
                 }}
                 text="Prev"
                 disabled={hookChainTxn.page <= 1}
-                variant="state_default_hover"
+                variant={colorMode == "light" ? "state_light" : "state_default_hover"}
+
               />
-              <Text marginRight={style.margin.sm} marginBottom="0.25rem">
+              <Text color={colorMode == "light" ? "#3d3d3d" : ""}  marginRight={style.margin.sm} marginBottom="0.25rem">
                 Page {hookChainTxn?.page} of{" "}
                 {hookChainTxn.totalPages.toLocaleString("en-US")}
               </Text>
@@ -239,7 +237,8 @@ const Network = () => {
                 }}
                 disabled={hookChainTxn.page >= hookChainTxn.totalPages}
                 text="Next"
-                variant="state_default_hover"
+                variant={colorMode == "light" ? "state_light" : "state_default_hover"}
+
               />
               <ButtonNative
                 marginRight="sm"
@@ -253,13 +252,13 @@ const Network = () => {
                 }}
                 text="Oldest"
                 disabled={hookChainTxn.page == hookChainTxn.totalPages}
-                variant="state_default_hover"
+                variant={colorMode == "light" ? "state_light" : "state_default_hover"}
+
               />
             </Box>
             <Box
               border={style?.table?.border?.thead}
               borderRadius="20px"
-              marginBottom={style.margin.xxxl}
             >
               {hookChainTxn?.filteredData && (
                 <TxnTable txnData={hookChainTxn?.filteredData} />
@@ -291,6 +290,7 @@ const Network = () => {
                   slug={chainId && chains[chainId]?.chainImage}
                 />
                 <Text
+                  color={colorMode == "light" ? "#3d3d3d" : ""} 
                   fontSize={style.font.h1}
                   fontWeight="600"
                   marginBottom={0}
@@ -309,8 +309,8 @@ const Network = () => {
           >
             <Box flex="1" p={4} display="flex" justifyContent="space-between">
               <Box>
-                <Text marginBottom={0}>Transactions Indexed</Text>
-                <Text marginBottom={0} fontWeight={style.fontWeight.extraDark}>
+                <Text color={colorMode == "light" ? "#3d3d3d" : ""}  marginBottom={0}>Transactions Indexed</Text>
+                <Text color={colorMode == "light" ? "#3d3d3d" : ""}  marginBottom={0} fontWeight={style.fontWeight.extraDark}>
                   {hookChainTxn.totalTxns.toLocaleString("en-US")}
                 </Text>
               </Box>
@@ -322,8 +322,8 @@ const Network = () => {
               />
             </Box>
             <Box flex="1" p={4}>
-              <Text marginBottom={0}>Latest Block</Text>
-              <Text marginBottom={0} fontWeight={style.fontWeight.extraDark}>
+              <Text color={colorMode == "light" ? "#3d3d3d" : ""}  marginBottom={0}>Latest Block</Text>
+              <Text color={colorMode == "light" ? "#3d3d3d" : ""}  marginBottom={0} fontWeight={style.fontWeight.extraDark}>
                 {hookAlchemy.latestBlock}
               </Text>
             </Box>

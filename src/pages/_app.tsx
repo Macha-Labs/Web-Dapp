@@ -4,7 +4,7 @@ import AuthProvider from "@/providers/AuthProvider";
 import { DataProvider } from "@/providers/DataProvider";
 import "@/styles/globals.css";
 import theme from "@/styles/StyledChakraTheme";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, ThemeProvider } from "@chakra-ui/react";
 import {
   darkTheme,
   getDefaultWallets,
@@ -66,9 +66,11 @@ export default function App({ Component, pageProps }: AppProps) {
             <AuthProvider>
               <DataProvider>
                 <ChakraProvider theme={theme}>
+                  <ThemeProvider theme={theme}>
                   <XMTPProvider>
                     <Component {...pageProps} />
                   </XMTPProvider>
+                  </ThemeProvider>
                 </ChakraProvider>
               </DataProvider>
             </AuthProvider>

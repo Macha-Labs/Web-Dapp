@@ -198,12 +198,17 @@ const SearchHeader = ({ options }: Props) => {
         .searchHeader {
           
         }
-        .searchHeader:focus {
+        ${colorMode == "light" ? `.searchHeader:focus {
+          box-shadow: -1px 1px 4px rgba(17, 108, 230, 0.6),
+            1px -1px 4px rgba(17, 108, 230, 0.6);
+          outline: none !important;
+        }` : `.searchHeader:focus {
           box-shadow: -1px 1px 4px rgba(17, 108, 230, 0.6),
             1px -1px 4px rgba(17, 108, 230, 0.6);
           border: 1px solid rgba(15, 23, 46, 1) !important;
           outline: none !important;
-        }
+        }`}
+        
         .searchHeader:focus-visible {
           outline: none !important;
         }

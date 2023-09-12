@@ -1,5 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import { style } from "./StyledConstants";
+import { mode } from '@chakra-ui/theme-tools';
 
 const theme = extendTheme({
   initialColorMode: "system",
@@ -33,9 +34,7 @@ const theme = extendTheme({
       },
       ".chakra-modal__content": {
         // borderLeft: `${style.modal.border.default} !important`,
-        background: `${style.modal.bg.contractModal} !important`,
         borderRadius: `${style.modal.borderRadius}!important`,
-        border: `${style.modal.border.contract}!important`,
       },
       ".chakra-modal__body": {
         // background: `${style.modal.bg.contractModal}`,
@@ -43,7 +42,7 @@ const theme = extendTheme({
       },
       ".chakra-modal__header": {
         // background: `${style.modal.bg.contractModal}`,
-        borderBottom: `${style.modal.border.contract} !important`,
+        // borderBottom: `${style.modal.border.contract} !important`,
       },
       ".chakra-modal__footer": {
         // background: `${style.modal.bg.contractModal}`,
@@ -237,7 +236,7 @@ const theme = extendTheme({
         },
         state_brand: {
           background: `${style.button.bg.active}`,
-          color: "#fff",
+          color: "#ffff",
           // padding: "0.5rem",
         },
         state_light: {
@@ -329,7 +328,7 @@ const theme = extendTheme({
       variants: {
         state_brand: {
           background: `${style.button.bg.active}`,
-          color: "#FF",
+          color: "#ffff",
         },
         state_xmtp: {
           opacity: "0.95",

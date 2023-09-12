@@ -98,7 +98,7 @@ export const FlexWindow = ({
                   paddingTop: `${style.margin.xs}`,
                   zIndex: "1000",
                   width: "95%",
-                  background: `${colorMode == "light" ? style.body.bgLight.default : style.body.bg.default}`,
+                  background: `${colorMode == "light" ? "#f2f5fd" : style.body.bg.default}`,
                   display: "flex",
                   justifyContent: "center",
                 }}

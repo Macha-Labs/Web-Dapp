@@ -1,30 +1,26 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
+import JSONViewer from "@/_ui/JSONViewer";
+import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
+import Loader from "@/_ui/loader/Loader";
 import Tabs from "@/_ui/tabs/Tabs";
-import TagNative from "@/_ui/tag/TagNative";
-import { truncateAddress, truncateString } from "@/helpers";
-import useTransaction from "@/hooks/studio/useTransaction";
+import { truncateAddress } from "@/helpers";
 import useMetaStore from "@/store/useMetaStore";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {
   Avatar,
   Box,
   Divider,
+  Heading,
   Image,
   Text,
   Tooltip,
-  color,
-  useRadio,
+  useColorMode,
+  useToast
 } from "@chakra-ui/react";
-import { fetchTransaction } from "@wagmi/core";
 import { useEffect, useState } from "react";
-import { Heading, useToast } from "@chakra-ui/react";
-import Loader from "@/_ui/loader/Loader";
-import JSONViewer from "@/_ui/JSONViewer";
-import GlobalIcons from "@/styles/GlobalIcons";
-import CardNative from "@/_ui/cards/CardNative";
 
 type Props = {
   id: string;
@@ -48,15 +44,10 @@ function TxnDetails({
       value: "Hex Data",
     },
   ];
-
-  const $meta = useMetaStore((state: any) => state.meta);
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
 
   const [tab, setTab] = useState<string>("All Details");
-  const [selectedOption, setSelectedOption] = useState<any>(options[0].value);
-  const [detailToggle, setDetailsToggle] = useState<any>(false);
-  const [hexToggle, setHexToggle] = useState<any>(false);
-  const [resultData, setResultData] = useState<any>({});
+  const { colorMode } = useColorMode()
   const toast = useToast();
   useEffect(() => {
     console.log("Logging $meta ", $metaInfo);
@@ -74,7 +65,7 @@ function TxnDetails({
             <FlexColumn width="28%" hrAlign="flex-start" vrAlign="flex-start">
               <Box
                 width={"100%"}
-                border={style.card.border.hover}
+                border={colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.hover}
                 borderRadius={style.card.borderRadius.default}
                 padding={style.padding["lg"]}
               >
@@ -90,7 +81,7 @@ function TxnDetails({
                           marginLeft={"sm"}
                           hrAlign="flex-start"
                         >
-                          <Text className="mb-0">
+                          <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="mb-0">
                             {transactionDetails &&
                               truncateAddress(transactionDetails[4]?.value)}
                           </Text>
@@ -126,11 +117,11 @@ function TxnDetails({
                     </tr>
                     <tr>
                       <td style={{ display: "flex", justifyContent: "center" }}>
-                        <IconBase slug="icon-coloured-deploy" size="lg" />
+                        <IconBase slug={colorMode == "light" ? "icon-deploy-light" : "icon-coloured-deploy"} size="lg" />
                       </td>
                       <td>
                         <FlexRow hrAlign="flex-start">
-                          <Text className="mb-0" marginStart={style.margin.sm}>
+                          <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="mb-0" marginStart={style.margin.sm}>
                             Method
                           </Text>
                           <Text
@@ -156,6 +147,7 @@ function TxnDetails({
                             {transactionDetails && transactionDetails[7]?.value}
                           </Text>
                           <Text
+                            color={colorMode == "light" ? "#3d3d3d" : ""}
                             className="mb-0"
                             marginLeft={style.margin["xxs"]}
                           >
@@ -192,7 +184,7 @@ function TxnDetails({
                           marginLeft={"sm"}
                           hrAlign="flex-start"
                         >
-                          <Text className="mb-0" textAlign="left">
+                          <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="mb-0" textAlign="left">
                             {transactionDetails &&
                               truncateAddress(transactionDetails[5]?.value)}
                           </Text>
@@ -234,9 +226,9 @@ function TxnDetails({
                     CREATED
                   </Text>
                   <Text
-                    color="rgba(255,255,255,0.5)"
+                    color={colorMode == "light" ? "#3d3d3d" : "rgba(255,255,255,0.5)"}
                     className="mb-0"
-                    // marginStart={style.margin.xxs}
+                  // marginStart={style.margin.xxs}
                   >
                     {" "}
                     {/* TODO: make dynamic */}
@@ -260,7 +252,7 @@ function TxnDetails({
                     width="100%"
                     header={
                       <>
-                        <Heading fontSize={style.font.h4} mb="0px">
+                        <Heading color={colorMode == "light" ? "#3d3d3d" : ""} fontSize={style.font.h4} mb="0px">
                           All Details
                         </Heading>
                       </>
@@ -302,13 +294,15 @@ function TxnDetails({
                                     }}
                                   >
                                     <Image
-                                      src={item.src}
+                                      src={colorMode == "light" ? item.srcLight : item.src}
                                       alt="icon"
                                       marginBottom={0}
                                       height="1.5rem"
                                       marginRight={2}
                                     />
-                                    {item.key}
+                                    <Text mb={0} color={colorMode == "light" ? "#3d3d3d" : ""}>
+                                      {item.key}
+                                    </Text>
                                   </Box>
                                 </td>
                                 <td
@@ -323,6 +317,7 @@ function TxnDetails({
                                   >
                                     <Box>
                                       <Text
+                                        color={colorMode == "light" ? "#3d3d3d" : ""}
                                         marginBottom={"0px"}
                                         style={{ cursor: "pointer" }}
                                         onClick={() => {
@@ -360,7 +355,7 @@ function TxnDetails({
                     width="100%"
                     header={
                       <>
-                        <Heading fontSize={style.font.h4} mb="0px">
+                        <Heading color={colorMode == "light" ? "#282828" : ""} fontSize={style.font.h4} mb="0px">
                           Hex Data
                         </Heading>
                       </>
@@ -369,7 +364,7 @@ function TxnDetails({
                     {methodParams.length > 0 ? (
                       <JSONViewer data={methodParams} />
                     ) : (
-                      <Text marginTop={1}>No Data Found</Text>
+                      <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginTop={1}>No Data Found</Text>
                     )}
                   </CardNative>
                 </>

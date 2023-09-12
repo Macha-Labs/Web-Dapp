@@ -76,7 +76,7 @@ export default function Home() {
 
   const renderBody = () => {
     return (
-      <Box paddingX={style.padding.xxs} marginBottom={style.margin.nav}>
+      <Box paddingX={style.padding.xxs} paddingBottom={style.margin.nav}>
         <Carousel
           autoPlay
           showArrows={false}

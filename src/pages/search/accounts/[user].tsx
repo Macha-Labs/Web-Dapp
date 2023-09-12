@@ -2,35 +2,27 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import { style } from "@/styles/StyledConstants";
 import {
   Avatar,
-  Divider,
   Flex,
-  Image,
-  Link,
   Text,
-  useToast,
+  useColorMode,
+  useToast
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 // import InteractionTable from "@/pages/search/network/InteractionTable";
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import NavBlock from "@/_ui/nav/NavBlock";
-import TagNative from "@/_ui/tag/TagNative";
-import InteractionTable from "@/components/studio/InteractionTable";
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import useUserTxn from "@/hooks/studio/useUserTxn";
-import FlexBody from "@/_ui/flex/FlexBody";
-import TxnTable from "@/components/studio/TxnTable";
-import Loader from "@/_ui/loader/Loader";
-import NavTop from "@/_ui/nav/NavTop";
-import NavButton from "@/components/buttons/NavButton";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import useAuthStore from "@/store/useAuthStore";
-import { truncateAddress } from "@/helpers";
-import InputSearch from "@/_ui/input/InputSearch";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import FlexBody from "@/_ui/flex/FlexBody";
+import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import IconBase from "@/_ui/icons/IconsBase";
-import GlobalIcons from "@/styles/GlobalIcons";
+import Loader from "@/_ui/loader/Loader";
+import NavBlock from "@/_ui/nav/NavBlock";
 import NavStudio from "@/_ui/nav/NavStudio";
+import TxnTable from "@/components/studio/TxnTable";
+import { truncateAddress } from "@/helpers";
+import useUserTxn from "@/hooks/studio/useUserTxn";
+import useAuthStore from "@/store/useAuthStore";
+import GlobalIcons from "@/styles/GlobalIcons";
+import { Box } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -41,6 +33,7 @@ const Network = () => {
   const handleTabChange = (index: any) => {
     setActiveTab(index);
   };
+  const { colorMode } = useColorMode()
 
   useEffect(() => {
     const fetch = async () => {
@@ -77,6 +70,7 @@ const Network = () => {
                     src={GlobalIcons["avatar-default"]}
                   />
                   <Text
+                    color={colorMode == "light" ? "#3d3d3d" : ""}
                     fontSize={style.font.h2}
                     fontWeight="600"
                     marginBottom={0}
@@ -116,8 +110,9 @@ const Network = () => {
                   justifyContent="space-between"
                 >
                   <Box>
-                    <Text marginBottom={0}>Activity</Text>
+                    <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginBottom={0}>Activity</Text>
                     <Text
+                      color={colorMode == "light" ? "#3d3d3d" : ""}
                       marginBottom={0}
                       fontWeight={style.fontWeight.extraDark}
                     >
@@ -161,7 +156,8 @@ const Network = () => {
                     }}
                     text="Newest"
                     disabled={hookUserTxn.page == 1}
-                    variant="state_default_hover"
+                    variant={colorMode == "light" ? "state_light" : "state_default_hover"}
+
                   />
                   <ButtonNative
                     marginRight="sm"
@@ -175,9 +171,11 @@ const Network = () => {
                     }}
                     text="Prev"
                     disabled={hookUserTxn.page <= 1}
-                    variant="state_default_hover"
+                    variant={colorMode == "light" ? "state_light" : "state_default_hover"}
+
                   />
                   <Text
+                    color={colorMode == "light" ? "#3d3d3d" : ""}
                     marginRight={style.margin.sm}
                     marginBottom="0.25rem"
                   >
@@ -195,7 +193,8 @@ const Network = () => {
                     }}
                     disabled={hookUserTxn.page >= hookUserTxn.totalPages}
                     text="Next"
-                    variant="state_default_hover"
+                    variant={colorMode == "light" ? "state_light" : "state_default_hover"}
+
                   />
                   <ButtonNative
                     marginRight="sm"
@@ -209,11 +208,11 @@ const Network = () => {
                     }}
                     text="Oldest"
                     disabled={hookUserTxn.page == hookUserTxn.totalPages}
-                    variant="state_default_hover"
+                    variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                   />
                 </Box>
                 <Box>
-                  <Text>Total Txns: {hookUserTxn.totalTxns.toLocaleString("en-US")}</Text>
+                  <Text color={colorMode == "light" ? "#3d3d3d" : ""} >Total Txns: {hookUserTxn.totalTxns.toLocaleString("en-US")}</Text>
                 </Box>
               </Box>
               <Box

@@ -7,6 +7,7 @@ import {
   Th,
   Thead,
   Tr,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -36,6 +37,9 @@ const TableNative = ({
   width,
   bodyRowOnClick,
 }: Prop) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <div style={{ width: `${width}` }}>
       <TableContainer
@@ -72,7 +76,7 @@ const TableNative = ({
                         ? "all 0.2s cubic-bezier(0.64, 0.04, 0.35, 1)"
                         : ""
                     }`,
-                    background: `${!disabled ? style.table.bg.hover : ""}`,
+                    background: `${!disabled ? colorMode == "light" ? "linear-gradient(141.09deg, rgba(242,245,253) 100%, rgba(242,245,253) 100%)" :  style.table.bg.hover  : ""}`,
                   }}
                   key={item._id}
                 >

@@ -12,9 +12,8 @@ import TxnTable from "@/components/studio/TxnTable";
 import useContract from "@/hooks/studio/useContract";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import useContractTxn from "@/hooks/studio/useContractTxn";
-import { contractDataBySlug } from "@/service/ApiService";
 import { style } from "@/styles/StyledConstants";
-import { Box, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -48,6 +47,7 @@ const Contract = () => {
   const hookContract = useContract();
   const editModal = useDisclosure();
   const hookContractCreate = useContractCreate(editModal);
+  const {colorMode} = useColorMode()
 
   useEffect(() => {
     if (isReady) {
@@ -69,7 +69,7 @@ const Contract = () => {
     };
 
     return (
-      <Box>
+      <Box paddingBottom={style.margin.xxxl}>
         {hookContract.contractDetails && (
           <ContractInfoCard
             data={{
@@ -122,7 +122,7 @@ const Contract = () => {
                   }}
                   text="Newest"
                   disabled={hookContractTxn.page == 1}
-                  variant="state_default_hover"
+                  variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                 />
                 <ButtonNative
                   marginRight="sm"
@@ -136,9 +136,9 @@ const Contract = () => {
                   }}
                   text="Prev"
                   disabled={hookContractTxn.page <= 1}
-                  variant="state_default_hover"
+                  variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                 />
-                <Text marginRight={style.margin.sm} marginBottom="0.25rem">
+                <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginRight={style.margin.sm} marginBottom="0.25rem">
                   Page {hookContractTxn?.page} of{" "}
                   {hookContractTxn.totalPages.toLocaleString("en-US")}
                 </Text>
@@ -154,7 +154,7 @@ const Contract = () => {
                   }}
                   disabled={hookContractTxn.page >= hookContractTxn.totalPages}
                   text="Next"
-                  variant="state_default_hover"
+                  variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                 />
                 <ButtonNative
                   marginRight="sm"
@@ -168,11 +168,11 @@ const Contract = () => {
                   }}
                   text="Oldest"
                   disabled={hookContractTxn.page == hookContractTxn.totalPages}
-                  variant="state_default_hover"
+                  variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                 />
               </Box>
               <Box>
-                <Text>
+                <Text color={colorMode == "light" ? "#3d3d3d" : ""}>
                   Total Txns:{" "}
                   {hookContractTxn.totalTxns.toLocaleString("en-US")}
                 </Text>
@@ -182,7 +182,6 @@ const Contract = () => {
               marginTop="1rem"
               border={style.table.border.thead}
               borderRadius="20px"
-              marginBottom={style.margin.xxxl}
             >
               <TxnTable txnData={hookContractTxn?.filteredData} />
             </Box>
@@ -190,6 +189,7 @@ const Contract = () => {
         ) : (
           <Text
             mt={style.margin.xl}
+            color={colorMode == "light" ? "#3d3d3d" : ""}
             mb={0}
             style={{
               background: `-webkit-linear-gradient(

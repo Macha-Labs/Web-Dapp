@@ -1,9 +1,8 @@
+import { useColorMode } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
-import IconImage from "../icons/IconImage";
-import { useColorMode } from "@chakra-ui/react";
 
 type Props = {
   rightElem?: any;

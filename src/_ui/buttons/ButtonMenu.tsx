@@ -51,7 +51,7 @@ const ButtonMenu = ({
   isDisabled,
 }: Props) => {
   const [iconOrientation, setIconOrientation] = useState<boolean>(true);
-  const {colorMode} = useColorMode();
+  const { colorMode } = useColorMode();
   return (
     <div
       style={{
@@ -72,9 +72,8 @@ const ButtonMenu = ({
               // backgroundColor={colorMode == "light" ? "#ffffff" : ""}
               style={{
                 borderRadius: `${style.card.borderRadius.button}`,
-                backgroundColor: `${
-                  colorMode == "light" ? "#ffffff" : ""
-                }`,
+                backgroundColor: `${colorMode == "light" ? "#ffffff" : ""
+                  }`,
               }}
               rightIcon={
                 icon && isOpen ? (
@@ -86,7 +85,7 @@ const ButtonMenu = ({
                 ) : isDisabled ? (
                   <></>
                 ) : (
-                  <IconBase slug={icon.slug} size="sm" style={icon.style}/>
+                  <IconBase slug={icon.slug} size="sm" style={icon.style} />
                 )
               }
               height={height ? height : "3rem"}
@@ -103,18 +102,25 @@ const ButtonMenu = ({
                 </Text>
               </FlexRow>
             </MenuButton>
-            <MenuList>
+            <MenuList
+              style={{
+                background: `${colorMode == "light" ? "#ffff" : ""}`,
+              }}
+            >
               {options.map((item, index) => {
                 return (
                   <MenuItem
+                    style={{
+                      background: `${colorMode == "light" ? "#ffff" : ""}`,
+                    }}
                     key={index}
                     onClick={
                       item.onClick
                         ? () => {
-                            item.onClick();
-                            setIconOrientation(!iconOrientation);
-                          }
-                        : () => {}
+                          item.onClick();
+                          setIconOrientation(!iconOrientation);
+                        }
+                        : () => { }
                     }
                   >
                     <FlexRow hrAlign="space-between">
@@ -138,7 +144,12 @@ const ButtonMenu = ({
                         width="90%"
                         marginLeft={"sm"}
                       >
-                        {item.value}
+                        <Text
+                          color={colorMode == "light" ? "#000" : ""}
+                          mb={0}
+                        >
+                          {item.value}
+                        </Text>
                         {item.rightIcon && <IconImage slug={item.rightIcon} />}
                       </FlexRow>
                     </FlexRow>

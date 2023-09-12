@@ -150,6 +150,8 @@ const GlobalIcons: any = {
   "icon-dark-edit": "/assets/icons/Dark_icons/dark-edit.svg",
   "icon-dark-delete": "/assets/icons/Dark_icons/dark-delete.svg",
   "icon-info": "/assets/icons/Base_blue_icons/base-blue-info.svg",
+  "icon-delete-light": "/assets/icons/delete-light.svg",
+  "icon-edit-light": "/assets/icons/edit-light.svg",
   "icon-connections":
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-connections.png?updatedAt=1680788697983",
   "icon-chat-edit":
@@ -160,6 +162,7 @@ const GlobalIcons: any = {
   "icon-rocket":
     "/icons/svg/Base-blue/base-blue-rocket.svg?updatedAt=1686739684462",
   "icon-deploy": "/assets/icons/Base_blue_icons/base-blue-deploy.svg",
+  "icon-deploy-light": "/assets/icons/deploy-light.svg",
   "icon-dark-deploy": "/assets/icons/Dark_icons/dark-deploy.svg",
   "icon-dark-globe": "/assets/icons/Dark_icons/dark-globe.svg",
   "icon-coloured-deploy": "/assets/icons/coloured-deploy.svg",

@@ -5,7 +5,9 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useColorMode,
 } from "@chakra-ui/react";
+import { style } from "@/styles/StyledConstants";
 
 type Props = {
   event: any;
@@ -24,9 +26,11 @@ const ModalWindow = ({
   header,
   footer,
   children,
-  style,
   scrollBehavior,
 }: Props) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <Modal
       closeOnOverlayClick={false}
@@ -38,15 +42,13 @@ const ModalWindow = ({
       blockScrollOnMount={true}
     >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent
+        bg={colorMode == "light" ? "#ffff" : style.modal.bg.contractModal}
+        border={colorMode == "light" ? "1px solid #e2e2e2" : style.modal.border.contract}
+      >
         {header && (
           <ModalHeader
-          // marginTop="9rem"
-          // sx={{
-          //   "@media screen and (min-width: 1280px)": {
-          //     marginTop: "5rem",
-          //   },
-          // }}
+            borderBottom={colorMode == "light" ? "1px solid #e2e2e2" : style.modal.border.contract}
           >
             {header}
           </ModalHeader>

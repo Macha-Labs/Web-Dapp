@@ -1,29 +1,21 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import FlexRow from "@/_ui/flex/FlexRow";
-import IconBase from "@/_ui/icons/IconsBase";
-import InputSearch from "@/_ui/input/InputSearch";
-import NavTop from "@/_ui/nav/NavTop";
 import TableNative from "@/_ui/table/TableNative";
 import {
   timeStampConversion,
   truncateAddress,
   truncateString,
 } from "@/helpers";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {
   Avatar,
   Box,
-  Divider,
-  Flex,
   Image,
-  Stack,
   Td,
   Text,
   Th,
+  useColorMode
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { ConnectWalletButton } from "../ConnectWalletButton";
-import GlobalIcons from "@/styles/GlobalIcons";
 
 type Prop = {
   txnData: any;
@@ -31,6 +23,7 @@ type Prop = {
 };
 
 const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
+  const {colorMode} = useColorMode()
   const router = useRouter();
   return (
     <div>
@@ -40,6 +33,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
           theadChildren={
             <>
               <Th
+                color={colorMode == "light" ? "#3d3d3d" : ""}
                 style={{
                   textAlign: "center",
                   fontSize: "1rem",
@@ -51,6 +45,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                 Txn Hash
               </Th>
               <Th
+                color={colorMode == "light" ? "#3d3d3d" : ""}
                 style={{
                   textAlign: "center",
                   fontSize: "1rem",
@@ -62,6 +57,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                 Time of Creation
               </Th>
               <Th
+                color={colorMode == "light" ? "#3d3d3d" : ""}
                 style={{
                   textAlign: "center",
                   fontSize: "1rem",
@@ -74,6 +70,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
               </Th>
               {displayFrom && (
                 <Th
+                  color={colorMode == "light" ? "#3d3d3d" : ""}
                   style={{
                     textAlign: "center",
                     fontSize: "1rem",
@@ -86,6 +83,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                 </Th>
               )}
               <Th
+                color={colorMode == "light" ? "#3d3d3d" : ""}
                 style={{
                   textAlign: "center",
                   fontSize: "1rem",
@@ -115,6 +113,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
             return (
               <>
                 <Td
+                  color={colorMode == "light" ? "#3d3d3d" : ""}
                   _hover={{ textDecoration: "underline" }}
                   cursor={style.table.cursor.pointer}
                   onClick={() => {
@@ -130,7 +129,8 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                 >
                   {truncateAddress(item?.transaction?.txn_hash)}
                 </Td>
-                <Td style={{ textAlign: "center" }}>
+                <Td
+                  color={colorMode == "light" ? "#3d3d3d" : ""} style={{ textAlign: "center" }}>
                   <Box
                     style={{
                       display: "flex",
@@ -139,16 +139,17 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                     }}
                   >
                     <Image
-                      src="/assets/icons/coloured-successful.svg"
+                      src={colorMode == "light" ?  "/assets/icons/successful-light.svg" : "/assets/icons/coloured-successful.svg"}
                       alt=""
                       height="1.5rem"
                     />
-                    <Text paddingLeft={2} marginBottom={0}>
+                    <Text color={colorMode == "light" ? "#3d3d3d" : ""} paddingLeft={2} marginBottom={0}>
                       {timestamp}
                     </Text>
                   </Box>
                 </Td>
-                <Td style={{ textAlign: "center" }}>
+                <Td
+                  color={colorMode == "light" ? "#3d3d3d" : ""} style={{ textAlign: "center" }}>
                   <Box
                     style={{
                       display: "flex",
@@ -168,9 +169,10 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                       <Image
                         alt=""
                         height="1.5rem"
-                        src={GlobalIcons["icon-coloured-deploy"]}
+                        src={colorMode == "light" ? "/assets/icons/deploy-light.svg" : GlobalIcons["icon-coloured-deploy"]}
                       />
                       <Text
+                        color={colorMode == "light" ? "#3d3d3d" : ""}
                         marginLeft={style.padding.xs}
                         marginBottom={0}
                         width="80%"
@@ -182,7 +184,8 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                   </Box>
                 </Td>
                 {displayFrom && (
-                  <Td style={{ textAlign: "center", paddingBottom: "0", paddingTop: "0" }}>
+                  <Td
+                    color={colorMode == "light" ? "#3d3d3d" : ""} style={{ textAlign: "center", paddingBottom: "0", paddingTop: "0" }}>
                     <Box
                       style={{
                         display: "flex",
@@ -198,6 +201,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                         />
                       </Box>
                       <Text
+                        color={colorMode == "light" ? "#3d3d3d" : ""}
                         paddingLeft={2}
                         marginBottom={0}
                         _hover={{ textDecoration: "underline" }}
@@ -213,7 +217,8 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                     </Box>
                   </Td>
                 )}
-                <Td style={{ textAlign: "center", paddingBottom: "0", paddingTop: "0" }}>
+                <Td
+                  color={colorMode == "light" ? "#3d3d3d" : ""} style={{ textAlign: "center", paddingBottom: "0", paddingTop: "0" }}>
                   <Box
                     style={{
                       display: "flex",
@@ -229,6 +234,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                       />
                     </Box>
                     <Text
+                      color={colorMode == "light" ? "#3d3d3d" : ""}
                       paddingLeft={2}
                       marginBottom={0}
                     // _hover={{ textDecoration: "underline" }}

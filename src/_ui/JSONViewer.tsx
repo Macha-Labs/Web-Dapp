@@ -1,12 +1,12 @@
 import { style } from "@/styles/StyledConstants";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorMode } from "@chakra-ui/react";
 import React, { useState } from "react";
 import IconBase from "./icons/IconsBase";
 import { truncateString } from "@/helpers";
 
 const JSONViewer = ({ data }: any) => {
   const [expanded, setExpanded] = useState<any>({});
-
+  const {colorMode} = useColorMode()
   const handleToggle = (key: any) => {
     setExpanded({
       ...expanded,
@@ -21,7 +21,7 @@ const JSONViewer = ({ data }: any) => {
           {data.map((item, index) => (
             <li
               key={index}
-              style={{ listStyleType: "none", marginTop: style.margin["xs"] }}
+              style={{ listStyleType: "none", marginTop: style.margin["xs"], color: `${colorMode == "light" ? "#3d3d3d" : ""}` }}
             >
               {renderData(item, `${key}_${index}`)}
             </li>
@@ -37,7 +37,7 @@ const JSONViewer = ({ data }: any) => {
             ) : (
             <Box style={{display: "flex", alignItems: "center"}}>
               <IconBase slug="icon-chevron-next" size="md" />
-              <Text style={{ fontSize: `${style.font.h5}`}} marginLeft={style.margin.xxs} marginBottom={0}>{data?.name}</Text>
+              <Text color={colorMode == "light" ? "#3d3d3d" : ""} style={{ fontSize: `${style.font.h5}`}} marginLeft={style.margin.xxs} marginBottom={0}>{data?.name}</Text>
             </Box>
             )}
           </span>
@@ -53,9 +53,9 @@ const JSONViewer = ({ data }: any) => {
                 >
                   <Flex justify="flex-start">
                     <Box mr={2}>
-                      <Text style={{ fontSize: `${style.font.h5}`, fontWeight: `${style.fontWeight.dark}`, color: `${style.color["white.5"]}` }}>{`${nestedKey} : `}</Text>
+                      <Text color={colorMode == "light" ? "#3d3d3d" : ""} style={{ fontSize: `${style.font.h5}`, fontWeight: `${style.fontWeight.dark}`, color: `${style.color["white.5"]}` }}>{`${nestedKey} : `}</Text>
                     </Box>
-                    <Box><Text style={{ fontSize: `${style.font.h5}` }}>{renderData(truncateString(value, 25), `${key}_${nestedKey}`)}</Text></Box>
+                    <Box><Text color={colorMode == "light" ? "#3d3d3d" : ""} style={{ fontSize: `${style.font.h5}` }}>{renderData(truncateString(value, 25), `${key}_${nestedKey}`)}</Text></Box>
                   </Flex>
                 </li>
               ))}
@@ -64,7 +64,9 @@ const JSONViewer = ({ data }: any) => {
         </div>
       );
     } else {
-      return <span>{data}</span>;
+      return <span style={{
+        color: `${colorMode == "light" ? "#3d3d3d" : ""}`
+      }}>{data}</span>;
     }
   };
 
@@ -77,7 +79,7 @@ const JSONViewer = ({ data }: any) => {
         overflow: "auto",
         height: "500px",
         width: "100%",
-
+        color: `${colorMode == "light" ? "#3d3d3d" : ""}`
         // borderRadius: `${style.card.borderRadius.default}`,
         // padding: "20px",
         // marginLeft: `${style.margin.sm}`,

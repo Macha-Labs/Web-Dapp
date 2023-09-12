@@ -70,7 +70,7 @@ const Tabs = ({
                           //     : "linear(100.07deg, #fff 100%, #fff 100%)"
                           // }
                           // bgClip="text"
-                          color="#fff"
+                          color={colorMode == "light" ? value != option?.value ? "#282828" : "#ffff" : "#fff"}
                           className="m-b-0"
                         >
                           {option?.value}

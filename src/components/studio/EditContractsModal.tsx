@@ -8,7 +8,7 @@ import chains from "@/data/network";
 import { truncateAddress, truncateString } from "@/helpers";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Image, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import ContractCreateEditModal from "./ContractCreateEditModal";
 import ContractDeleteModal from "./ContractDeleteModal";
@@ -20,11 +20,10 @@ type Props = {
 };
 
 const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) => {
-
     const editModal = useDisclosure();
     const router = useRouter()
     const deleteModal = useDisclosure();
-
+    const { colorMode } = useColorMode()
     return (
         <ModalWindow
             scrollBehavior="inside"
@@ -32,7 +31,7 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
             size="4xl"
             header={
                 <FlexRow width="100%" hrAlign="space-between">
-                    <Text className="mb-0">My Contracts</Text>
+                    <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="mb-0">My Contracts</Text>
                     <Image src={GlobalIcons["icon-close"]} onClick={() => {
                         modal.onClose()
                     }}
@@ -45,7 +44,7 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
                             cursor: "pointer",
                             width: "fit-content",
                             height: "fit-content",
-                            background: `${style.icon.bg.default}`,
+                            background: `${colorMode == "light" ? "#ffff" : style.icon.bg.default}`,
                             borderRadius: `${style.icon.borderRadius}`,
                             boxShadow: `${style.icon.shadow.default}`,
                             marginLeft: `${style.margin[style?.marginLeft]}`,
@@ -84,9 +83,9 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
                         <Box
                             key={index}
                             style={{
-                                border: `${style.card.border.default}`,
+                                border: `${colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.default}`,
                                 borderRadius: `${style.card.borderRadius.default}`,
-                                background: `${style.card.bg.default}`,
+                                background: `${colorMode == "light" ? "" : style.card.bg.default}`,
                                 padding: `${style.padding.sm}`,
                                 display: "flex",
                                 width: "100%",
@@ -119,13 +118,15 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
                                         justifyContent: "center",
                                         paddingBottom: "1.25rem"
                                     }}>
-                                        <Text style={{
-                                            marginBottom: "0",
-                                            marginRight: `${style.margin.xxs}`,
-                                            fontSize: `${style.font.h4}`,
-                                            fontWeight: `${style.fontWeight.dark}`,
-                                            cursor: "pointer"
-                                        }}
+                                        <Text
+                                            color={colorMode == "light" ? "#3d3d3d" : ""}
+                                            style={{
+                                                marginBottom: "0",
+                                                marginRight: `${style.margin.xxs}`,
+                                                fontSize: `${style.font.h4}`,
+                                                fontWeight: `${style.fontWeight.dark}`,
+                                                cursor: "pointer"
+                                            }}
                                             _hover={{ textDecoration: "underline" }}
                                             onClick={() => router.push(`/search/contracts/${contract?.contract?.slug}`)}
                                         >
@@ -133,9 +134,15 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
                                         </Text>
                                         <TagNative value={contract?.contract?.isApproved ? "Approved" : "Pending"} lineHeight="1.25rem" />
                                     </Box>
-                                    <Text mb={2}>Created On: {contract?.createdAt}</Text>
-                                    <Text mb={2}>Contract ID: {truncateAddress(contract?.contract?.address)}</Text>
-                                    <Text mb={2}>Description: {truncateString(contract?.contract?.description, 100)}</Text>
+                                    <Text
+                                        color={colorMode == "light" ? "#3d3d3d" : ""}
+                                        mb={2}>Created On: {contract?.createdAt}</Text>
+                                    <Text
+                                        color={colorMode == "light" ? "#3d3d3d" : ""}
+                                        mb={2}>Contract ID: {truncateAddress(contract?.contract?.address)}</Text>
+                                    <Text
+                                        color={colorMode == "light" ? "#3d3d3d" : ""}
+                                        mb={2}>Description: {truncateString(contract?.contract?.description, 100)}</Text>
                                 </Box>
                             </Box>
                             <Box
@@ -158,7 +165,7 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
                                             editModal.onOpen()
                                         }}
                                     >
-                                        <Image src={GlobalIcons["icon-dark-edit"]} />
+                                        <Image src={colorMode == "light" ? GlobalIcons["icon-edit-light"] : GlobalIcons["icon-dark-edit"]} />
                                     </Box>
                                     <Box
                                         style={{ cursor: "pointer" }}
@@ -167,7 +174,7 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
                                             deleteModal.onOpen()
                                         }}
                                     >
-                                        <Image src={GlobalIcons["icon-dark-delete"]} />
+                                        <Image src={colorMode == "light" ? GlobalIcons["icon-delete-light"] : GlobalIcons["icon-dark-delete"]} />
                                     </Box>
                                 </Box>
                                 <Box><Image height="3rem" src={GlobalIcons[chains[contract?.contract?.chain_id].chainImage]} /></Box>
@@ -176,7 +183,9 @@ const EditContractsModal = ({ modal, hookContract, hookContractCreate }: Props) 
                             <ContractDeleteModal modal={deleteModal} hookContract={hookContract} />
                         </Box>
                     )) : <Box ml={0}>
-                        No Contracts Found
+                        <Text color={colorMode == "light" ? "#3d3d3d" : ""} mb={0}>
+                            No Contracts Found
+                        </Text>
                     </Box>}
                 </FlexColumn>
             )}
