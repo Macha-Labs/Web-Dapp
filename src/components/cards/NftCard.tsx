@@ -113,9 +113,10 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
   });
 
   useEffect(() => {
-    console.log("get Nft by address", hookAlchemy.nftByAddress);
-    setNftLoading(true);
+    // console.log("called coz nftbyaddresschange change");
+    // console.log("get Nft by address", hookAlchemy.nftByAddress);
     if (hookAlchemy.nftByAddress && hookAlchemy.nftByAddress[0]) {
+      setNftLoading(true);
       hookAlchemy.nftByAddress.map((nft: any) => {
         if (
           nft.contract.address.toLowerCase() ==
@@ -129,15 +130,20 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
         }
         setNftLoading(false);
       });
+    } else {
+      setHasNft(false);
     }
-  }, [hookAlchemy.nftByAddress, address]);
+  }, [hookAlchemy.nftByAddress]);
 
   useEffect(() => {
-    const fetch = async () => {
-      await hookAlchemy.getNftsByAddress(address, chains);
-      await hookXP._fetch();
-    };
-    fetch();
+    console.log("called coz addresss change", address);
+    if (address) {
+      const fetch = async () => {
+        await hookAlchemy.getNftsByAddress(address, chains);
+        await hookXP._fetch();
+      };
+      fetch();
+    }
   }, [address]);
 
   useEffect(() => {
