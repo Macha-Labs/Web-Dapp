@@ -34,6 +34,8 @@ const LayoutTextArea = ({
     <div>
       <Textarea
         background={colorMode == "light" ? "#fff" : style.input.bg.default}
+        color={colorMode == "light" ? "#3d3d3d" : "#fff"}
+        border={colorMode == "light" ? "1px solid #e2e2e2" : style.input.border.default}
         id={id}
         // ref={elementRef}
         value={value}

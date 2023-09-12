@@ -138,39 +138,41 @@ const theme = extendTheme({
       },
     },
     TextArea: {
-
-      baseStyle: {
-        field: {
-
+      variants: {
+        normal: {
+          field: {
+            bg: `${style.input.bg.default}`,
+            border: `${style.input.border.default}`,
+            _hover: {
+              border: `${style.input.border.active}`,
+              bg: `${style.input.bg.active}`,
+            },
+            _focusVisible: {
+              border: `${style.input.border.active}`,
+              bg: `${style.input.bg.active}`,
+              shadow: `${style.input.shadow.hover}`,
+            },
+          },
+        },
+        light: {
+          field: {
+            bg: "#ffff",
+            color: "#3d3d3d !important",
+            border: ``,
+            _hover: {
+              bg: "#fffff"
+            },
+            _focusVisible: {
+              bg: "#ffff",
+              shadow: `${style.input.shadow.hover}`,
+            },
+          },
         },
       },
-      variants: {
-        // normal: {
-        //   background: `${style.input.bg.default} !important`,
-        //   color: "#ffff !important",
-        //   border: `${style.input.border.default}`,
-        //   _hover: {
-        //     border: `${style.input.border.active}`,
-        //     bg: `${style.input.bg.active}`,
-        //   },
-        //   _focusVisible: {
-        //     border: `${style.input.border.active}`,
-        //     bg: `${style.input.bg.active}`,
-        //     shadow: `${style.input.shadow.hover}`,
-        //   },
-        // },
-        // light: {
-        //   bg: "#ffff !important",
-        //   color: "#3d3d3d !important",
-        //   border: `1px solid #e2e2e2`,
-        //   _hover: {
-        //     bg: "#fffff"
-        //   },
-        //   _focusVisible: {
-        //     bg: "#ffff",
-        //     shadow: `${style.input.shadow.hover}`,
-        //   },
-        // }
+      baseStyle: {
+        field: {
+          borderRadius: "10px"
+        },
       },
       defaultProps: {
         size: "md",
