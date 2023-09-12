@@ -2,7 +2,14 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
 import useSearch from "@/hooks/studio/useSearch";
 import { style } from "@/styles/StyledConstants";
-import { Box, InputGroup, InputLeftElement, InputRightElement, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import SearchRow from "./SearchRow";
@@ -17,7 +24,7 @@ const SearchHeader = ({ options }: Props) => {
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const searchRef = useRef(null);
   const router = useRouter();
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
 
   return (
     <>
@@ -70,8 +77,14 @@ const SearchHeader = ({ options }: Props) => {
                 fontSize: `${style.font.h4}`,
                 paddingRight: `${style.padding.xl}`,
                 paddingLeft: `${style.padding.xxl}`,
-                background: `${colorMode == "light" ? "rgba(255,255,255,1)" : style.input.bg.default}`,
-                border: `${colorMode == "light" ? "" : style.input.border.default}`,
+                background: `${
+                  colorMode == "light"
+                    ? "rgba(255,255,255,1)"
+                    : style.input.bg.default
+                }`,
+                border: `${
+                  colorMode == "light" ? "" : style.input.border.default
+                }`,
                 width: "100%",
               }}
             />
@@ -84,13 +97,18 @@ const SearchHeader = ({ options }: Props) => {
               width={"100%"}
               marginTop={style.margin.sm}
               borderRadius={style.card.borderRadius.default}
-              background={style.card.bg.default}
+              background={colorMode == "light" ? "#fff" : style.card.bg.default}
               boxShadow="-1px 1px 4px rgba(17, 108, 230, 0.6),1px -1px 4px rgba(17, 108, 230, 0.6)"
-              border={colorMode == "light" ? "" : "1px solid rgba(15, 23, 46, 1) !important"}
+              border={
+                colorMode == "light"
+                  ? ""
+                  : "1px solid rgba(15, 23, 46, 1) !important"
+              }
               paddingY={style.padding.xxs}
               overflow="hidden"
               position={"absolute"}
               top="20"
+              zIndex={200}
             >
               <Box
                 overflow={"scroll"}
@@ -110,7 +128,9 @@ const SearchHeader = ({ options }: Props) => {
                   <Text
                     mb={style.margin.xxs}
                     fontSize={style.font.h7}
-                    color={style.color["white.5"]}
+                    color={
+                      colorMode == "light" ? "#3d3d3d" : style.color["white.5"]
+                    }
                   >
                     Trending Searches
                   </Text>
@@ -196,19 +216,20 @@ const SearchHeader = ({ options }: Props) => {
       </FlexColumn>
       <style jsx>{`
         .searchHeader {
-          
         }
-        ${colorMode == "light" ? `.searchHeader:focus {
+        ${colorMode == "light"
+          ? `.searchHeader:focus {
           box-shadow: -1px 1px 4px rgba(17, 108, 230, 0.6),
             1px -1px 4px rgba(17, 108, 230, 0.6);
           outline: none !important;
-        }` : `.searchHeader:focus {
+        }`
+          : `.searchHeader:focus {
           box-shadow: -1px 1px 4px rgba(17, 108, 230, 0.6),
             1px -1px 4px rgba(17, 108, 230, 0.6);
           border: 1px solid rgba(15, 23, 46, 1) !important;
           outline: none !important;
         }`}
-        
+
         .searchHeader:focus-visible {
           outline: none !important;
         }
