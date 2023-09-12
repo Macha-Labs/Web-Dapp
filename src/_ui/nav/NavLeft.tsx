@@ -84,25 +84,33 @@ const NavLeft = (props: any) => {
                   </Box> */}
                   <Link href="/" style={{ marginBottom: style.margin.sm }}>
                     <FlexRow>
-                      <IconImage
-                        slug={
-                          colorMode == "light"
-                            ? router.pathname === `/`
-                              ? "icon-brand-search"
-                              : "icon-search-outline"
-                            : router.pathname === `/`
-                            ? "icon-search"
-                            : "icon-dark-search"
-                        }
-                        size="md"
-                        style={{
-                          className: `${
-                            router.pathname === `/u/${address}`
-                              ? "state_active "
-                              : "state_hover"
-                          } `,
-                        }}
-                      />
+                      {colorMode == "light" ? (
+                        router.pathname === `/` ? (
+                          <Image
+                            width="2rem"
+                            src="/assets/icons/brand-search.svg"
+                            alt="brand-search"
+                          />
+                        ) : (
+                          <Image
+                            width="2rem"
+                            src="/assets/icons/search-outline.svg"
+                            alt="search-outline"
+                          />
+                        )
+                      ) : router.pathname === `/` ? (
+                        <Image
+                          width="2rem"
+                          src="/assets/icons/base-blue-search.svg"
+                          alt="icon-user"
+                        />
+                      ) : (
+                        <Image
+                          width="2rem"
+                          src="/assets/icons/Dark_icons/dark-search.svg"
+                          alt="icon-dark-user"
+                        />
+                      )}
                     </FlexRow>
                   </Link>
                   <Box
@@ -121,8 +129,36 @@ const NavLeft = (props: any) => {
                       }
                     }}
                   >
-                    {/* src="/assets/icons/brand-user.svg" */}
                     <FlexRow>
+                      {colorMode == "light" ? (
+                        router.pathname === `/profile` ? (
+                          <Image
+                            width="2rem"
+                            src="/assets/icons/brand-user.svg"
+                            alt="brand-user"
+                          />
+                        ) : (
+                          <Image
+                            width="2rem"
+                            src="/assets/icons/user-outline.svg"
+                            alt="user-outline"
+                          />
+                        )
+                      ) : router.pathname === `/profile` ? (
+                        <Image
+                          width="2rem"
+                          src="/assets/icons/Base_blue_icons/base-blue-user.svg"
+                          alt="icon-user"
+                        />
+                      ) : (
+                        <Image
+                          width="2rem"
+                          src="/assets/icons/Dark_icons/dark-user.svg"
+                          alt="icon-dark-user"
+                        />
+                      )}
+                    </FlexRow>
+                    {/* <FlexRow>
                       <IconImage
                         slug={
                           colorMode == "light"
@@ -134,15 +170,8 @@ const NavLeft = (props: any) => {
                             : "icon-dark-user"
                         }
                         size="md"
-                        style={{
-                          className: `${
-                            router.pathname === `/u/${address}`
-                              ? "state_active "
-                              : "state_hover"
-                          } `,
-                        }}
                       />
-                    </FlexRow>
+                    </FlexRow> */}
                   </Box>
                   <Box
                     style={{ cursor: "pointer" }}
