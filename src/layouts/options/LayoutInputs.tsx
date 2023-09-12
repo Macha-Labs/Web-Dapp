@@ -1,4 +1,4 @@
-import { Input } from "@chakra-ui/react";
+import { Input, useColorMode } from "@chakra-ui/react";
 
 type Props = {
   index?: number;
@@ -31,6 +31,9 @@ const LayoutInputs = ({
   elementRef,
   value
 }: Props) => {
+
+  const {colorMode} = useColorMode()
+
   return (
     <div>
       <Input
@@ -47,7 +50,6 @@ const LayoutInputs = ({
         variant={variant}
         type={type}
         style={style}
-        _placeholder={{ color: "#132041" }}
       />
     </div>
   );

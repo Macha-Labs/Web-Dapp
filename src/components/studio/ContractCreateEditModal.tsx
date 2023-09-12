@@ -29,7 +29,7 @@ const ContractCreateEditModal = ({
   isEdit,
 }: Props) => {
 
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode()
 
   return (
     <ModalWindow
@@ -150,7 +150,7 @@ const ContractCreateEditModal = ({
       }
     >
       {isEdit &&
-      (hookContract.isLoading || hookContract.contractDetails == undefined) ? (
+        (hookContract.isLoading || hookContract.contractDetails == undefined) ? (
         <FlexRow height="18rem">
           <Loader size="lg" />
         </FlexRow>
@@ -185,23 +185,20 @@ const ContractCreateEditModal = ({
                         <IconBase size="xl" slug="icon-blue-tick" />
                       ) : (
                         <Text
+                          color={colorMode == "light" ? "#3d3d3d" : ""}
                           rounded="full"
                           style={{
-                            border: `${
-                              hookContractCreate.formStep == 1
-                                ? style.card.border.meta
-                                : style.card.border.default
-                            }`,
+                            border: `${hookContractCreate.formStep == 1
+                              ? style.card.border.meta
+                              : style.card.border.default
+                              }`,
                             paddingLeft: `${style.padding.xxs}`,
                             paddingRight: `${style.padding.xxs}`,
-                            color: `${
-                              hookContractCreate.formStep == 1
-                                ? ""
-                                : style.color.disabled
-                            }`,
-                            backgroundColor: `${
-                              hookContractCreate.formStep == 1 ? "" : "#18203A"
-                            }`,
+                            color: `${hookContractCreate.formStep == 1
+                              ? ""
+                              : style.color.disabled
+                              }`,
+                            backgroundColor: `${hookContractCreate.formStep == 3 ? "" : colorMode == "light" ? "" : "#18203A"}`,
                           }}
                         >
                           1
@@ -209,12 +206,12 @@ const ContractCreateEditModal = ({
                       )}
                     </Box>
                     <Text
+                      color={colorMode == "light" ? "#3d3d3d" : ""}
                       style={{
-                        color: `${
-                          hookContractCreate.formStep == 1
-                            ? ""
-                            : style.color.disabled
-                        }`,
+                        color: `${hookContractCreate.formStep == 1
+                          ? ""
+                          : style.color.disabled
+                          }`,
                       }}
                     >
                       First
@@ -240,35 +237,32 @@ const ContractCreateEditModal = ({
                       <IconBase size="xl" slug="icon-blue-tick" />
                     ) : (
                       <Text
+                        color={colorMode == "light" ? "#3d3d3d" : ""}
                         rounded="full"
                         style={{
-                          border: `${
-                            hookContractCreate.formStep == 2
-                              ? style.card.border.meta
-                              : style.card.border.default
-                          }`,
+                          border: `${hookContractCreate.formStep == 2
+                            ? style.card.border.meta
+                            : style.card.border.default
+                            }`,
                           paddingLeft: `${style.padding.xxs}`,
                           paddingRight: `${style.padding.xxs}`,
-                          color: `${
-                            hookContractCreate.formStep == 2
-                              ? ""
-                              : style.color.disabled
-                          }`,
-                          backgroundColor: `${
-                            hookContractCreate.formStep == 2 ? "" : "#18203A"
-                          }`,
+                          color: `${hookContractCreate.formStep == 2
+                            ? ""
+                            : style.color.disabled
+                            }`,
+                          backgroundColor: `${hookContractCreate.formStep == 3 ? "" : colorMode == "light" ? "" : "#18203A"}`,
                         }}
                       >
                         2
                       </Text>
                     )}
                     <Text
+                      color={colorMode == "light" ? "#3d3d3d" : ""}
                       style={{
-                        color: `${
-                          hookContractCreate.formStep == 2
-                            ? ""
-                            : style.color.disabled
-                        }`,
+                        color: `${hookContractCreate.formStep == 2
+                          ? ""
+                          : style.color.disabled
+                          }`,
                       }}
                     >
                       Second
@@ -294,35 +288,32 @@ const ContractCreateEditModal = ({
                       <IconBase size="xl" slug="icon-blue-tick" />
                     ) : (
                       <Text
+                        color={colorMode == "light" ? "#3d3d3d" : ""}
                         rounded="full"
                         style={{
-                          border: `${
-                            hookContractCreate.formStep == 3
-                              ? style.card.border.meta
-                              : style.card.border.default
-                          }`,
+                          border: `${hookContractCreate.formStep == 3
+                            ? style.card.border.meta
+                            : style.card.border.default
+                            }`,
                           paddingLeft: `${style.padding.xxs}`,
                           paddingRight: `${style.padding.xxs}`,
-                          color: `${
-                            hookContractCreate.formStep == 3
-                              ? ""
-                              : style.color.disabled
-                          }`,
-                          backgroundColor: `${
-                            hookContractCreate.formStep == 3 ? "" : "#18203A"
-                          }`,
+                          color: `${hookContractCreate.formStep == 3
+                            ? ""
+                            : style.color.disabled
+                            }`,
+                          backgroundColor: `${hookContractCreate.formStep == 3 ? "" : colorMode == "light" ? "" : "#18203A"}`,
                         }}
                       >
                         3
                       </Text>
                     )}
                     <Text
+                      color={colorMode == "light" ? "#3d3d3d" : ""}
                       style={{
-                        color: `${
-                          hookContractCreate.formStep == 3
-                            ? ""
-                            : style.color.disabled
-                        }`,
+                        color: `${hookContractCreate.formStep == 3
+                          ? ""
+                          : style.color.disabled
+                          }`,
                       }}
                     >
                       Third
@@ -354,6 +345,7 @@ const ContractCreateEditModal = ({
               !hookContractCreate.isLoading && (
                 <>
                   <InputLabel
+                    variant="light"
                     value={hookContractCreate.$contractFormData.address}
                     inputType="text"
                     labelText="Contract Address *"
