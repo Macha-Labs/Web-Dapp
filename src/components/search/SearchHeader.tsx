@@ -111,7 +111,7 @@ const SearchHeader = ({ options }: Props) => {
               zIndex={200}
             >
               <Box
-                overflow={"scroll"}
+                overflowY={"scroll"}
                 height={"15rem"}
                 paddingX={style.padding.xs}
               >
@@ -233,14 +233,17 @@ const SearchHeader = ({ options }: Props) => {
         .searchHeader:focus-visible {
           outline: none !important;
         }
-        .searchHeader:hover {
+
+        ${colorMode == "light"
+          ? ""
+          : `.searchHeader:hover {
           background: linear-gradient(
             141.09deg,
             rgba(10, 19, 51, 0.5) 11.08%,
             rgba(0, 15, 44, 0.38) 89.68%
           ) !important;
           border: 1px solid rgba(15, 23, 46, 1) !important;
-        }
+        }`}
       `}</style>
     </>
   );
