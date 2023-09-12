@@ -119,6 +119,7 @@ const DashBoard = () => {
           {$address ? (
             <Box>
               <ButtonGroup
+              marginLeft="5px"
                 _hover={{
                   background: `${style.card.bg.hover}`,
                   border: `${colorMode == "light" ? "" : style.card.border.hover}`,

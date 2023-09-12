@@ -1,7 +1,7 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Text, useColorMode } from "@chakra-ui/react";
 import React from "react";
 
 const TokenRow = ({
@@ -12,6 +12,7 @@ const TokenRow = ({
   tokenId,
   type,
 }: any) => {
+  const { colorMode } = useColorMode();
   return (
     <>
       <FlexRow
@@ -34,6 +35,7 @@ const TokenRow = ({
             <Image
               borderRadius={"50%"}
               src={image ? image : "/assets/token-placeholder.jpeg"}
+              alt="token-placeholder"
             />
           </Box>
           <Box>
@@ -42,10 +44,16 @@ const TokenRow = ({
               marginBottom={1}
               fontWeight={style.fontWeight.dark}
               fontSize={style.font.h6}
+              color={colorMode == "light" ? "#3d3d3d" : ""}
             >
               {title}
             </Heading>
-            <Text paddingLeft={2} marginBottom={0} fontSize={style.font.h7}>
+            <Text
+              paddingLeft={2}
+              marginBottom={0}
+              fontSize={style.font.h7}
+              color={colorMode == "light" ? "#3d3d3d" : ""}
+            >
               {symbol}
             </Text>
           </Box>
@@ -57,10 +65,16 @@ const TokenRow = ({
               marginBottom={1}
               fontWeight={style.fontWeight.dark}
               fontSize={style.font.h6}
+              color={colorMode == "light" ? "#3d3d3d" : ""}
             >
               {tokenId}
             </Heading>
-            <Text paddingLeft={2} marginBottom={0} fontSize={style.font.h7}>
+            <Text
+              paddingLeft={2}
+              marginBottom={0}
+              fontSize={style.font.h7}
+              color={colorMode == "light" ? "#3d3d3d" : ""}
+            >
               {type}
             </Text>
           </Box>
