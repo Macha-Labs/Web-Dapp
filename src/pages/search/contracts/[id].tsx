@@ -180,7 +180,7 @@ const Contract = () => {
             </Box>
             <Box
               marginTop="1rem"
-              border={style.table.border.thead}
+              border={colorMode == "light" ? "1px solid #e2e2e2" : style.table.border.thead}
               borderRadius="20px"
             >
               <TxnTable txnData={hookContractTxn?.filteredData} />

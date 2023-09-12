@@ -332,6 +332,9 @@ const Meta = () => {
                                     size="xs"
                                     width="100%"
                                     color={"#ffff"}
+                                    _hover={{
+                                      background: `${colorMode == "light" ? "" : ""}`
+                                    }}
                                     backgroundColor={colorMode == "light" ? "#197cec" : ""}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
@@ -476,6 +479,9 @@ const Meta = () => {
                                     size="xs"
                                     width="100%"
                                     color={"#ffff"}
+                                    _hover={{
+                                      background: `${colorMode == "light" ? "" : ""}`
+                                    }}
                                     backgroundColor={colorMode == "light" ? "#197cec" : ""}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
@@ -615,6 +621,9 @@ const Meta = () => {
                                     size="xs"
                                     width="100%"
                                     color={"#ffff"}
+                                    _hover={{
+                                      background: `${colorMode == "light" ? "" : ""}`
+                                    }}
                                     backgroundColor={colorMode == "light" ? "#197cec" : ""}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
@@ -727,6 +736,9 @@ const Meta = () => {
                                           size="xs"
                                           width="100%"
                                           color={"#ffff"}
+                                          _hover={{
+                                            background: `${colorMode == "light" ? "" : ""}`
+                                          }}
                                           backgroundColor={colorMode == "light" ? "#197cec" : ""}
                                           onClick={() => {
                                             navigator.clipboard.writeText(

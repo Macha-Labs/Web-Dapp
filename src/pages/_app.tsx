@@ -8,6 +8,7 @@ import { ChakraProvider, ThemeProvider } from "@chakra-ui/react";
 import {
   darkTheme,
   getDefaultWallets,
+  lightTheme,
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -21,9 +22,10 @@ import { useEffect } from "react";
 import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
 import { filecoin, filecoinCalibration, goerli, optimism, polygon, polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import { mode } from '@chakra-ui/theme-tools';
 
 const { chains, provider } = configureChains(
-  [filecoinCalibration, mainnet, polygon, polygonMumbai,goerli,optimism,filecoin],
+  [filecoinCalibration, mainnet, polygon, polygonMumbai, goerli, optimism, filecoin],
   [publicProvider()]
 );
 
@@ -61,21 +63,21 @@ export default function App({ Component, pageProps }: AppProps) {
         gtag('config', '${config.GOOGLE_ANALYTICS_ID}');`}
       </Script>
       <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains} theme={darkTheme()}>
-          <IKContext urlEndpoint="https://ik.imagekit.io/macha">
-            <AuthProvider>
-              <DataProvider>
-                <ChakraProvider theme={theme}>
-                  <ThemeProvider theme={theme}>
-                  <XMTPProvider>
-                    <Component {...pageProps} />
-                  </XMTPProvider>
-                  </ThemeProvider>
-                </ChakraProvider>
-              </DataProvider>
-            </AuthProvider>
-          </IKContext>
-        </RainbowKitProvider>
+        <ChakraProvider theme={theme}>
+          <ThemeProvider theme={theme}>
+            <RainbowKitProvider chains={chains} theme={darkTheme()}>
+              <IKContext urlEndpoint="https://ik.imagekit.io/macha">
+                <AuthProvider>
+                  <DataProvider>
+                    <XMTPProvider>
+                      <Component {...pageProps} />
+                    </XMTPProvider>
+                  </DataProvider>
+                </AuthProvider>
+              </IKContext>
+            </RainbowKitProvider>
+          </ThemeProvider>
+        </ChakraProvider>
       </WagmiConfig>
     </>
   );

@@ -22,13 +22,13 @@ const theme = extendTheme({
       "*::placeholder": {
         color: `${style.colorPlaceholder}`,
       },
-      textarea: {
-        border: `${style.input.border.default} !important`,
-        color: `${style.colorInput} !important`,
-        background: `${style.input.bg.default} !important`,
-        paddingLeft: "0.5rem !important",
-        paddingRight: "0.5rem !important",
-      },
+      // textarea: {
+      //   border: `${style.input.border.default} !important`,
+      //   color: `${style.colorInput} !important`,
+      //   background: `${mode("#fff","#000511")} !important`,
+      //   paddingLeft: "0.5rem !important",
+      //   paddingRight: "0.5rem !important",
+      // },
       "input:focus": {
         background: "#000",
       },
@@ -138,54 +138,43 @@ const theme = extendTheme({
       },
     },
     TextArea: {
-      Input: {
-        baseStyle: {
-          field: {
 
-          },
-        },
-        variants: {
-          normal: {
-            field: {
-              bg: `${style.input.bg.default}`,
-              border: `${style.input.border.default}`,
-              _hover: {
-                border: `${style.input.border.active}`,
-                bg: `${style.input.bg.active}`,
-              },
-              _focusVisible: {
-                border: `${style.input.border.active}`,
-                bg: `${style.input.bg.active}`,
-                shadow: `${style.input.shadow.hover}`,
-              },
-            },
-            light: {
-              field: {
-                bg: "#ffff",
-                color: "#3d3d3d !important",
-                border: ``,
-                _hover: {
-                  bg: "#fffff"
-                },
-                _focusVisible: {
-                  bg: "#ffff",
-                  shadow: `${style.input.shadow.hover}`,
-                },
-              },
-            }
-          },
-        },
-        defaultProps: {
-          size: "md",
-          variant: "normal",
+      baseStyle: {
+        field: {
+
         },
       },
       variants: {
-        normal: {
-          field: {
-            bg: `${style.input.bg.default}`,
-          },
-        },
+        // normal: {
+        //   background: `${style.input.bg.default} !important`,
+        //   color: "#ffff !important",
+        //   border: `${style.input.border.default}`,
+        //   _hover: {
+        //     border: `${style.input.border.active}`,
+        //     bg: `${style.input.bg.active}`,
+        //   },
+        //   _focusVisible: {
+        //     border: `${style.input.border.active}`,
+        //     bg: `${style.input.bg.active}`,
+        //     shadow: `${style.input.shadow.hover}`,
+        //   },
+        // },
+        // light: {
+        //   bg: "#ffff !important",
+        //   color: "#3d3d3d !important",
+        //   border: `1px solid #e2e2e2`,
+        //   _hover: {
+        //     bg: "#fffff"
+        //   },
+        //   _focusVisible: {
+        //     bg: "#ffff",
+        //     shadow: `${style.input.shadow.hover}`,
+        //   },
+        // }
+      },
+      defaultProps: {
+        size: "md",
+        variant: "normal",
       },
     },
     Button: {

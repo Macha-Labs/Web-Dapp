@@ -221,7 +221,7 @@ const Network = () => {
                 variant={colorMode == "light" ? "state_light" : "state_default_hover"}
 
               />
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""}  marginRight={style.margin.sm} marginBottom="0.25rem">
+              <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginRight={style.margin.sm} marginBottom="0.25rem">
                 Page {hookChainTxn?.page} of{" "}
                 {hookChainTxn.totalPages.toLocaleString("en-US")}
               </Text>
@@ -257,7 +257,7 @@ const Network = () => {
               />
             </Box>
             <Box
-              border={style?.table?.border?.thead}
+              border={colorMode == "light" ? "1px solid #e2e2e2" : style.table.border.thead}
               borderRadius="20px"
             >
               {hookChainTxn?.filteredData && (
@@ -290,7 +290,7 @@ const Network = () => {
                   slug={chainId && chains[chainId]?.chainImage}
                 />
                 <Text
-                  color={colorMode == "light" ? "#3d3d3d" : ""} 
+                  color={colorMode == "light" ? "#3d3d3d" : ""}
                   fontSize={style.font.h1}
                   fontWeight="600"
                   marginBottom={0}
@@ -304,13 +304,14 @@ const Network = () => {
           </Flex>
           <Flex
             justify="space-between"
-            border={style.card.border.contract}
+            background={colorMode == "light" ? "#fff" : ""}
+            border={colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.contract}
             borderRadius={style.card.borderRadius.default}
           >
             <Box flex="1" p={4} display="flex" justifyContent="space-between">
               <Box>
-                <Text color={colorMode == "light" ? "#3d3d3d" : ""}  marginBottom={0}>Transactions Indexed</Text>
-                <Text color={colorMode == "light" ? "#3d3d3d" : ""}  marginBottom={0} fontWeight={style.fontWeight.extraDark}>
+                <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginBottom={0}>Transactions Indexed</Text>
+                <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginBottom={0} fontWeight={style.fontWeight.extraDark}>
                   {hookChainTxn.totalTxns.toLocaleString("en-US")}
                 </Text>
               </Box>
@@ -322,8 +323,8 @@ const Network = () => {
               />
             </Box>
             <Box flex="1" p={4}>
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""}  marginBottom={0}>Latest Block</Text>
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""}  marginBottom={0} fontWeight={style.fontWeight.extraDark}>
+              <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginBottom={0}>Latest Block</Text>
+              <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginBottom={0} fontWeight={style.fontWeight.extraDark}>
                 {hookAlchemy.latestBlock}
               </Text>
             </Box>

@@ -1,4 +1,5 @@
-import { Textarea } from "@chakra-ui/react";
+import { style } from "@/styles/StyledConstants";
+import { Textarea, useColorMode } from "@chakra-ui/react";
 
 type Props = {
   index?: number;
@@ -28,9 +29,11 @@ const LayoutTextArea = ({
   elementRef,
   value,
 }: Props) => {
+  const {colorMode} = useColorMode()
   return (
     <div>
       <Textarea
+        background={colorMode == "light" ? "#fff" : style.input.bg.default}
         id={id}
         // ref={elementRef}
         value={value}

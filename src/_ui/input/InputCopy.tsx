@@ -46,6 +46,9 @@ const InputCopy = ({
           <Box width={"7%"}>
             <Button
               size="xs"
+              _hover={{
+                background: `${colorMode == "light" ? "" : ""}`
+              }}
               width="100%"
               color={"#ffff"}
               backgroundColor={colorMode == "light" ? "#197cec" : ""}
