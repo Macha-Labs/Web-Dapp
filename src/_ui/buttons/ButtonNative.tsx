@@ -32,6 +32,7 @@ type Props = {
   backgroundColorHover?: any;
   textColorHover?: any;
   borderColorWhite?: boolean;
+  textColor?:any;
 };
 
 export default function ButtonNative({
@@ -63,6 +64,7 @@ export default function ButtonNative({
   backgroundColorHover,
   textColorHover,
   borderColorWhite = true,
+  textColor,
 }: Props) {
   const { colorMode } = useColorMode();
   return (
@@ -111,7 +113,6 @@ export default function ButtonNative({
           fontSize={textFontSize ? gStyle.font[textFontSize] : "1rem"}
           marginLeft={marginLeft ? marginLeft : gStyle.margin["xxs"]}
           marginRight={marginRight ? marginRight : gStyle.margin["xxs"]}
-          color={colorMode == "light" ? "#3d3d3d" : "#fff"}
         >
           {text}
         </Text>

@@ -23,7 +23,7 @@ const useTransaction = () => {
               value: res.data?.transaction.block_hash,
               truncatedValue: truncateAddress(res.data?.transaction.block_hash),
               src: "/assets/icons/coloured-square-Block%20hash.svg",
-              srcLight: "/assets/icons/square-Block%20hash-light.svg",
+              srcLight: "/assets/icons/square-Block-hash-light.svg",
             },
             {
               key: "Block Number",

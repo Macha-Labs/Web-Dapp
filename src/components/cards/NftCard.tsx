@@ -213,7 +213,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                             fontWeight={style.fontWeight.dark}
                             marginTop={style.margin.sm}
                             textAlign={"center"}
-                            color={colorMode == "light" ? "3d3d3d" : ""}
+                            color={colorMode == "light" ? "#3d3d3d" : ""}
                           >
                             {truncateAddress(address)}
                           </Text>
@@ -305,7 +305,11 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                       ) : (
                         <FlexColumn height="40rem">
                           <Loader size="lg" />
-                          <Text mt={style.margin.sm} fontSize={style.font.h5}>
+                          <Text
+                            mt={style.margin.sm}
+                            fontSize={style.font.h5}
+                            color={colorMode == "light" ? "#3d3d3d" : ""}
+                          >
                             Please wait patiently while the transaction is
                             confirmed.
                           </Text>
@@ -347,6 +351,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                               fontSize={style.font.h4}
                               fontWeight={style.fontWeight.dark}
                               width="50%"
+                              color={colorMode == "light" ? "#3d3d3d" : ""}
                             >
                               {selectedTab == "XPs"
                                 ? "Your Rewarded XPs"
@@ -357,7 +362,11 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                                 : "Your Total Metas"}
                             </Text>
                             <FlexRow hrAlign="center" width="15%">
-                              <Heading mb={0} fontSize={style.font.h4}>
+                              <Heading
+                                mb={0}
+                                fontSize={style.font.h4}
+                                color={colorMode == "light" ? "#3d3d3d" : ""}
+                              >
                                 {selectedTab == "Tokens"
                                   ? hookAlchemy?.userTokens &&
                                     hookAlchemy?.userTokens.length
@@ -594,6 +603,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                                 // lineHeight={"2.2rem"}
                                 marginBottom={0}
                                 fontWeight={style.fontWeight.dark}
+                                color={colorMode == "light" ? "#3d3d3d" : ""}
                               >
                                 Your Tokens on Network
                               </Heading>

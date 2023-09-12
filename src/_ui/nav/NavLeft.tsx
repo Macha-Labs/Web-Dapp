@@ -84,29 +84,25 @@ const NavLeft = (props: any) => {
                   </Box> */}
                   <Link href="/" style={{ marginBottom: style.margin.sm }}>
                     <FlexRow>
-                      {colorMode == "light" ? (
-                        <Image
-                          src="/assets/icons/brand-search.svg"
-                          alt="brand-search"
-                          width="2rem"
-                        />
-                      ) : (
-                        <IconImage
-                          slug={
-                            router.pathname === "/"
-                              ? "icon-search"
-                              : "icon-search"
-                          }
-                          size="md"
-                          style={{
-                            className: ` ${
-                              router.pathname === "/"
-                                ? "state_active"
-                                : "state_hover"
-                            } `,
-                          }}
-                        />
-                      )}
+                      <IconImage
+                        slug={
+                          colorMode == "light"
+                            ? router.pathname === `/`
+                              ? "icon-brand-search"
+                              : "icon-search-outline"
+                            : router.pathname === `/`
+                            ? "icon-search"
+                            : "icon-dark-search"
+                        }
+                        size="md"
+                        style={{
+                          className: `${
+                            router.pathname === `/u/${address}`
+                              ? "state_active "
+                              : "state_hover"
+                          } `,
+                        }}
+                      />
                     </FlexRow>
                   </Link>
                   <Box
@@ -125,31 +121,27 @@ const NavLeft = (props: any) => {
                       }
                     }}
                   >
+                    {/* src="/assets/icons/brand-user.svg" */}
                     <FlexRow>
-                      {colorMode == "light" ? (
-                        <Image
-                          src="/assets/icons/brand-user.svg"
-                          width="2rem"
-                          alt="brand-user"
-                        />
-                      ) : (
-                        <IconImage
-                          slug={
-                            "icon-user"
-                            // router.pathname === `/u/${$address}`
-                            //   ? "icon-user"
-                            //   : "icon-user"
-                          }
-                          size="md"
-                          style={{
-                            className: `${
-                              router.pathname === `/u/${address}`
-                                ? "state_active "
-                                : "state_hover"
-                            } `,
-                          }}
-                        />
-                      )}
+                      <IconImage
+                        slug={
+                          colorMode == "light"
+                            ? router.pathname === `/profile`
+                              ? "icon-brand-user"
+                              : "icon-user-outline"
+                            : router.pathname === `/profile`
+                            ? "icon-user"
+                            : "icon-dark-user"
+                        }
+                        size="md"
+                        style={{
+                          className: `${
+                            router.pathname === `/u/${address}`
+                              ? "state_active "
+                              : "state_hover"
+                          } `,
+                        }}
+                      />
                     </FlexRow>
                   </Box>
                   <Box

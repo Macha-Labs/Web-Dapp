@@ -208,6 +208,7 @@ const Network = () => {
               />
               <ButtonNative
                 marginRight="sm"
+                // textColor="#3d3d3d"
                 size="xs"
                 height="2rem"
                 onClick={() => {
@@ -229,6 +230,7 @@ const Network = () => {
                 marginRight="sm"
                 size="xs"
                 height="2rem"
+                
                 onClick={() => {
                   if (hookChainTxn.page < hookChainTxn.totalPages) {
                     hookChainTxn.setIsLoading(true);

@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 
 const Search = () => {
   const router = useRouter();
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode();
 
   const renderNavLeft = () => {
     return <NavLeft />;
@@ -30,7 +30,11 @@ const Search = () => {
       >
         <Box
           border={colorMode ? "" : style.card.border.default}
-          backgroundImage={colorMode == "light" ? "url(/assets/explore/searchbg_light.svg)" : "url(/assets/icons/searchbg.svg)"}
+          backgroundImage={
+            colorMode == "light"
+              ? "url(/assets/explore/searchbg_light.svg)"
+              : "url(/assets/icons/searchbg.svg)"
+          }
           backgroundPosition="center"
           backgroundRepeat="no-repeat"
           backgroundSize="cover"
@@ -56,7 +60,11 @@ const Search = () => {
           />
           <Image
             // className="headerLogo"
-            src={colorMode == "light" ? "/assets/explore/search-home-title-light.svg" : "/assets/title.png"}
+            src={
+              colorMode == "light"
+                ? "/assets/explore/search-home-title-light.svg"
+                : "/assets/title.png"
+            }
             alt="logo"
             // width={255}
             // height={93}
@@ -64,20 +72,6 @@ const Search = () => {
             marginBottom={style.margin.sm}
           />
           <SearchHeader />
-          <Box zIndex={0}>
-            <ButtonNative
-              onClick={() => {
-                router.push("/xps");
-              }}
-              marginRight="0px"
-              iconLeft={{
-                slug: "icon-brand-bolt",
-              }}
-              text={"XPs LeaderBoard"}
-              variant={colorMode == "light" ? "state_light" : "state_default_hover"}
-              marginTop="5xl"
-            />
-          </Box>
         </Box>
       </FlexColumn>
     );
