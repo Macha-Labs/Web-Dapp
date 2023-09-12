@@ -1,9 +1,10 @@
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 
 const SearchRow = ({ text, onClick, image }: any) => {
+  const {colorMode} = useColorMode();
   return (
     <Box
       onMouseDown={(e) => {
@@ -12,7 +13,7 @@ const SearchRow = ({ text, onClick, image }: any) => {
       onClick={onClick}
       _hover={{
         cursor: "pointer",
-        backgroundColor: "#030c1a",
+        backgroundColor: `${colorMode == "light" ? "" : "#030c1a"}`,
         border: `${style.card.border.default}!important`,
       }}
       style={{
@@ -25,7 +26,7 @@ const SearchRow = ({ text, onClick, image }: any) => {
         justifyContent: "space-between",
       }}
     >
-      <Heading fontWeight={400} mb={0} fontSize={style.font.h6}>
+      <Heading fontWeight={400} mb={0} fontSize={style.font.h6} color={colorMode=="light" ?"#3d3d3d":""}>
         {text}
       </Heading>
       <Image height="30px" src={image} />
