@@ -1,7 +1,7 @@
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import LayoutTextArea from "@/layouts/options/LayoutTextArea";
 import { StyledCard } from "@/styles/StyledComponents";
-import { Box, Heading, Text, useToast } from "@chakra-ui/react";
+import { Box, Heading, Text, useColorMode, useToast } from "@chakra-ui/react";
 import { DragEvent, useRef, useState } from "react";
 import { style as gStyle } from "../../styles/StyledConstants";
 import ButtonNative from "../buttons/ButtonNative";
@@ -53,6 +53,7 @@ const InputLabel = ({
 }: Props) => {
   // for text type inputs
   const toast = useToast();
+  const { colorMode } = useColorMode()
 
   const inputLabelText = () => {
     return (
@@ -219,7 +220,7 @@ const InputLabel = ({
                 style={{ marginBottom: "sm" }}
                 size={inputLogoSize ? inputLogoSize : "2xl"}
               />
-              <Text className="m-b-0">Drag and drop here </Text>
+              <Text color={colorMode == 'light' ? "#3d3d3d" : ""} className="m-b-0">Drag and drop here </Text>
               <Text
                 bgGradient="linear(
                   100.07deg,
@@ -232,7 +233,7 @@ const InputLabel = ({
               >
                 Or
               </Text>
-              <Text onClick={onButtonClick} className="m-b-0">
+              <Text color={colorMode == 'light' ? "#3d3d3d" : ""} onClick={onButtonClick} className="m-b-0">
                 Browse Files
               </Text>
             </FlexColumn>
@@ -281,10 +282,10 @@ const InputLabel = ({
           hidden
         />
         <ButtonNative
+          variant={colorMode == "light" ? "state_light" : "state_default_hover"}
           onClick={onButtonClick}
           text="Upload File"
           iconRight={{ slug: "icon-upload" }}
-          variant="state_default_hover"
           height="2.5rem"
           width="100%"
         />
@@ -319,6 +320,7 @@ const InputLabel = ({
           {LayoutTextArea({
             id,
             // elementRef,
+            variant,
             value,
             placeholder,
             defaultValue,

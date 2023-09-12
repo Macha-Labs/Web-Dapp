@@ -14,7 +14,7 @@ import useMacha from "@/hooks/studio/useMacha";
 import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, Text, useToast } from "@chakra-ui/react";
+import { Box, Heading, Image, Text, useColorMode, useToast } from "@chakra-ui/react";
 import { fetchBalance } from "@wagmi/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -31,6 +31,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
   const $address = useAuthStore((state: any) => state.address);
   const [lowBalance, setLowBalance] = useState<boolean>(false);
   const router = useRouter();
+  const { colorMode } = useColorMode()
   const checkBalance = async () => {
     try {
       const balance = await fetchBalance({
@@ -61,7 +62,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
           <FlexRow width="100%" hrAlign="space-between">
             {hookPublisherCreate.formStep == 3 && (
               <Box>
-                <Text className="mb-0">
+                <Text color={colorMode == "light" ? "#282828" : ""} className="mb-0">
                   Choose the type of publisher account{" "}
                 </Text>
                 {/* <Text
@@ -80,19 +81,19 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
             {hookPublisherCreate.formStep == 4 &&
               hookPublisherCreate.publisherType == "Individual" && (
                 <Box>
-                  <Text className="mb-0">Individual Publisher Account </Text>
+                  <Text color={colorMode == "light" ? "#282828" : ""} className="mb-0">Individual Publisher Account </Text>
                 </Box>
               )}
             {hookPublisherCreate.formStep == 4 &&
               hookPublisherCreate.publisherType == "Organization" && (
                 <Box>
-                  <Text className="mb-0">Organization Publisher Account </Text>
+                  <Text color={colorMode == "light" ? "#282828" : ""} className="mb-0">Organization Publisher Account </Text>
                 </Box>
               )}
             {hookPublisherCreate.formStep != 3 &&
               hookPublisherCreate.formStep != 4 && (
                 <Box>
-                  <Text className="mb-0">Create a Publisher Account</Text>
+                  <Text color={colorMode == "light" ? "#282828" : ""} className="mb-0">Create a Publisher Account</Text>
                 </Box>
               )}
             {hookPublisherCreate.formStep != 5 &&
@@ -108,7 +109,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     cursor: "pointer",
                     width: "fit-content",
                     height: "fit-content",
-                    background: `${style.icon.bg.default}`,
+                    background: `${colorMode == "light" ? "" : style.icon.bg.default}`,
                     borderRadius: `${style.icon.borderRadius}`,
                     boxShadow: `${style.icon.shadow.default}`,
                     marginLeft: `${style.margin[style?.marginLeft]}`,
@@ -132,7 +133,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 }}
               >
                 <ButtonNative
-                  variant="state_default_hover"
+                  variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                   height="2rem"
                   width="5.5rem"
                   marginTop={style.margin["lg"]}
@@ -145,7 +146,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   Skip
                 </ButtonNative>
                 <ButtonNative
-                  variant="state_brand"
+                  variant={"state_brand"}
                   height="2rem"
                   width="5.5rem"
                   marginTop={style.margin["lg"]}
@@ -175,7 +176,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 {hookPublisherCreate.formStep > 1 &&
                   hookPublisherCreate.formStep <= 4 && (
                     <ButtonNative
-                      variant="state_default_hover"
+                      variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                       height="2rem"
                       width="5.5rem"
                       marginTop={style.margin["lg"]}
@@ -189,7 +190,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                   (lowBalance ? (
                     <>
                       <ButtonNative
-                        variant="state_default_hover"
+                        variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                         height="2rem"
                         width="5.5rem"
                         marginTop={style.margin["lg"]}
@@ -199,21 +200,21 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       </ButtonNative>
 
                       <Box>
-                        <Text width="100%" textAlign="center" mb={0}>
+                        <Text color={colorMode == "light" ? "#282828" : ""} width="100%" textAlign="center" mb={0}>
                           You do not have enough TFIL Balance
                         </Text>
                         <Text
                           fontSize={style.font.h7}
                           textAlign="center"
-                          color={style.color["white.5"]}
                           mb={0}
+                          color={colorMode == "light" ? "#282828" : style.color["white.5"]}
                         >
                           If you do, please refresh the page and try again.
                         </Text>
                       </Box>
 
                       <ButtonNative
-                        variant="state_default_hover"
+                        variant={colorMode == "light" ? "state_brand" : "state_default_hover"}
                         height="2rem"
                         width="7rem"
                         marginTop={style.margin["lg"]}
@@ -266,7 +267,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
 
                 {hookPublisherCreate.formStep == 5 && (
                   <ButtonNative
-                    variant="state_default_hover"
+                    variant={colorMode == "light" ? "state_light" : "state_default_hover"}
                     height="2rem"
                     width="5.5rem"
                     marginTop={style.margin["lg"]}
@@ -304,13 +305,13 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
             <FlexColumn height="12rem">
               <Loader size="lg" />
               <Box marginTop={style.margin.lg}>
-                <Text textAlign="center" mb={0} color="whiteAlpha.800">
+                <Text color={colorMode == "light" ? "#282828" : "whiteAlpha.800"} textAlign="center" mb={0} >
                   Please wait for the transaction to confirm.
                 </Text>
                 <Text
+                  color={colorMode == "light" ? "#282828" : "whiteAlpha.800"}
                   textAlign="center"
                   marginBottom={style.margin.lg}
-                  color="whiteAlpha.800"
                 >
                   This usually takes a few minutes.
                 </Text>
@@ -321,13 +322,13 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
             <FlexColumn height="12rem">
               <Loader size="lg" />
               <Box marginTop={style.margin.lg}>
-                <Text textAlign="center" mb={0} color="whiteAlpha.800">
+                <Text textAlign="center" mb={0} color={colorMode == "light" ? "#282828" : "whiteAlpha.800"}>
                   Please wait for the transaction to confirm.
                 </Text>
                 <Text
                   textAlign="center"
                   marginBottom={style.margin.lg}
-                  color="whiteAlpha.800"
+                  color={colorMode == "light" ? "#282828" : "whiteAlpha.800"}
                 >
                   This usually takes a few minutes.
                 </Text>
@@ -344,12 +345,12 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       width="100%"
                       height="100%"
                     >
-                      <Text>
+                      <Text color={colorMode == "light" ? "#282828" : ""}>
                         As a publisher you will get access to the following on
                         Macha Studio
                       </Text>
                       <Image
-                        src="https://ik.imagekit.io/macha1/studio/Publisher%20Welcome%20Screen%20banner.svg"
+                        src={colorMode == "light" ? "/assets/publisher-intro.svg" :  "/assets/publisher-intro-dark.svg"}
                         alt="txn-icon"
                       />
                     </Box>
@@ -369,6 +370,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </Box>
                     <Box>
                       <Text
+                        color={colorMode == "light" ? "#282828" : ""}
                         style={{
                           fontWeight: `${style.fontWeight.dark}`,
                           fontSize: `${style.font.h4}`,
@@ -383,6 +385,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         textAlign="center"
                         style={{ color: "grey" }}
                         marginBottom={0}
+                        color={colorMode == "light" ? "#282828" : ""}
                       >
                         Your data is backed up on IPFS, so its always
                         retainable.
@@ -390,6 +393,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       <Text
                         textAlign="center"
                         style={{ color: `${style.color["white.7"]}` }}
+                        color={colorMode == "light" ? "#282828" : ""}
                       >
                         Sign in with your wallet and start the journey of
                         indexing through Macha
@@ -445,12 +449,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           width: "48%",
                           flexDirection: "column",
                           justifyContent: "space-between",
-                          background: "#000a24",
-                          border: `${
-                            hookPublisherCreate.publisherType == "Individual"
-                              ? "1.5px solid #197cec"
-                              : style.card.border.publisher
-                          }`,
+                          background: `${colorMode == "light" ? "" :  "#000a24"}`,
+                          border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" :  "1px solid #e2e2e2" : hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" :  style.card.border.publisher}`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -476,6 +476,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           alignItems={"center"}
                         >
                           <Text
+                            color={colorMode == "light" ? "#282828" : ""}
                             textAlign={"center"}
                             marginBottom="0"
                             style={{
@@ -486,6 +487,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                             Individual
                           </Text>
                           <Text
+                            color={colorMode == "light" ? "#282828" : ""}
                             marginBottom={0}
                             textAlign={"center"}
                             height={"4rem"}
@@ -502,13 +504,9 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         }}
                         style={{
                           width: "48%",
-                          background: "#000a24",
+                          background: `${colorMode == "light" ? "" :  "#000a24"}`,
                           height: "100%",
-                          border: `${
-                            hookPublisherCreate.publisherType == "Organization"
-                              ? "1.5px solid #197cec"
-                              : style.card.border.publisher
-                          }`,
+                          border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" :  "1px solid #e2e2e2"   : hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" :  style.card.border.publisher}`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",
@@ -540,6 +538,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           justifyContent={"flex-end"}
                         >
                           <Text
+                            color={colorMode == "light" ? "#282828" : ""}
                             marginBottom="0"
                             textAlign={"center"}
                             style={{
@@ -550,6 +549,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                             Organization
                           </Text>
                           <Text
+                            color={colorMode == "light" ? "#282828" : ""}
                             marginBottom={"0px"}
                             textAlign={"center"}
                             height={"4rem"}
@@ -567,6 +567,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     <Box width="100%">
                       <Text>All * marked fields are required</Text>
                       <InputLabel
+                      variant={colorMode == "light" ? "light" : "normal"}
                         value={hookPublisherCreate.$publisherFormData.name}
                         inputType="text"
                         labelText="Name *"
@@ -579,6 +580,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         marginTop="sm"
                       />
                       <InputLabel
+                      variant={colorMode == "light" ? "light" : "normal"}
                         value={hookPublisherCreate.$address}
                         inputType="text"
                         labelText="Wallet Address *"
@@ -588,6 +590,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         disabled
                       />
                       <InputLabel
+                      variant={colorMode == "light" ? "light" : "normal"}
                         value={hookPublisherCreate.$publisherFormData.email}
                         onChange={(e: any) =>
                           hookPublisherCreate.$loadPublisherFormData({
@@ -604,8 +607,9 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 {hookPublisherCreate.formStep == 4 &&
                   hookPublisherCreate.publisherType == "Organization" && (
                     <Box width="100%">
-                      <Text>All * marked fields are required</Text>
+                      <Text color={colorMode == "light" ? "#282828" : ""}>All * marked fields are required</Text>
                       <InputLabel
+                        variant={colorMode == "light" ? "light" : "normal"}
                         value={hookPublisherCreate.$publisherFormData.address}
                         inputType="text"
                         labelText="Wallet Address *"
@@ -615,6 +619,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         disabled
                       />
                       <InputLabel
+                        variant={colorMode == "light" ? "light" : "normal"}
                         value={hookPublisherCreate.$publisherFormData.name}
                         onChange={(e: any) =>
                           hookPublisherCreate.$loadPublisherFormData({
@@ -629,6 +634,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       {hookPublisherCreate.$publisherFormData.logo == "" ? (
                         <>
                           <InputLabel
+                            variant={colorMode == "light" ? "light" : "normal"}
                             inputType="file"
                             fileDropMinHeight="80px"
                             inputLogoSize="lg"
@@ -698,6 +704,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         </Box>
                       )}
                       <InputLabel
+                        variant={colorMode == "light" ? "light" : "normal"}
                         value={hookPublisherCreate.$publisherFormData.website}
                         onChange={(e: any) =>
                           hookPublisherCreate.$loadPublisherFormData({
@@ -724,6 +731,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     >
                       <Box>
                         <Text
+                          color={colorMode == "light" ? "#282828" : ""}
                           style={{
                             fontWeight: `${style.fontWeight.dark}`,
                             fontSize: `${style.font.h4}`,
@@ -733,12 +741,13 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         </Text>
                       </Box>
                       <Box>
-                        <Text textAlign="center" style={{}}>
+                        <Text color={colorMode == "light" ? "#282828" : ""} textAlign="center" style={{}}>
                           Fill in your wallet and try again
                         </Text>
-                        <Text textAlign="center" style={{}}>
+                        <Text color={colorMode == "light" ? "#282828" : ""} textAlign="center" style={{}}>
                           Please visit:{" "}
                           <Link
+                            color={colorMode == "light" ? "#282828" : ""}
                             target="_blank"
                             href="https://faucet.calibration.fildev.network/funds.html"
                             style={{ textDecoration: "underline" }}
@@ -750,7 +759,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </Box>
                   ) : (
                     <Box
-                      backgroundImage="/assets/Almost-there-bg.svg"
+                      backgroundImage={ "/assets/Almost-there-bg.svg"}
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -763,10 +772,11 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         paddingTop={style.padding.xl}
                         paddingBottom={style.padding.xl}
                       >
-                        <IconBase slug="icon-almost-there" size="3xl" />
+                        <IconBase slug={colorMode == "light" ? "icon-almost-there-light" : "icon-almost-there"} size="3xl" />
                       </Box>
                       <Box>
                         <Text
+                          color={colorMode == "light" ? "#282828" : ""}
                           style={{
                             fontWeight: `${style.fontWeight.dark}`,
                             fontSize: `${style.font.h4}`,
@@ -776,7 +786,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         </Text>
                       </Box>
                       <Box display="flex" justifyContent="center">
-                        <Text textAlign="center" style={{ width: "80%" }}>
+                        <Text color={colorMode == "light" ? "#282828" : ""} textAlign="center" style={{ width: "80%" }}>
                           Cheers to the successful publication on IPFS - a leap
                           into a decentralized and innovative future!
                         </Text>
@@ -802,6 +812,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </Box>
                     <Box>
                       <Text
+                        color={colorMode == "light" ? "#282828" : ""}
                         style={{
                           fontWeight: `700`,
                           fontSize: `${style.font.h2}`,
@@ -812,13 +823,13 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       </Text>
                     </Box>
                     <Box>
-                      <Text textAlign="center" mb={0} color="whiteAlpha.800">
+                      <Text color={colorMode == "light" ? "#282828" : "whiteAlpha.800"} textAlign="center" mb={0}>
                         Your publisher account has been created successfully.
                       </Text>
                       <Text
                         textAlign="center"
                         marginBottom={style.margin.lg}
-                        color="whiteAlpha.800"
+                        color={colorMode == "light" ? "#282828" : "whiteAlpha.800"}
                       >
                         Now you can create contracts on Macha.
                       </Text>

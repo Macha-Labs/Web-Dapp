@@ -9,6 +9,8 @@ const GlobalIcons: any = {
     "icons/svg/Base_blue_icons/base-blue-walletDisconnect.svg?updatedAt=1690540459332",
   "icon-dark-disconnectWallet":
     "/assets/icons/Dark_icons/dark-walletDisconnect.svg",
+  "icon-light-disconnectWallet":
+    "/assets/icons/walletDisconnect-light.svg",
   "icon-switchWallet":
     "icons/svg/Base_blue_icons/base-blue-walletChange.svg?updatedAt=1690540459218",
   "icon-filter":
@@ -165,6 +167,7 @@ const GlobalIcons: any = {
   "icon-deploy-light": "/assets/icons/deploy-light.svg",
   "icon-dark-deploy": "/assets/icons/Dark_icons/dark-deploy.svg",
   "icon-dark-globe": "/assets/icons/Dark_icons/dark-globe.svg",
+  "icon-light-globe": "/assets/icons/globe-light.svg",
   "icon-coloured-deploy": "/assets/icons/coloured-deploy.svg",
   "icon-blue-tick": "/assets/icons/Blue%20tick.svg",
   "icon-search": "/assets/icons/base-blue-search.svg",
@@ -173,6 +176,7 @@ const GlobalIcons: any = {
   "icon-play": "/assets/icons/base-blue-play.svg",
   "icon-pause": "/assets/icons/base-blue-pause.svg",
   "icon-almost-there": "/assets/icons/database-restore%201.svg",
+  "icon-almost-there-light": "/assets/icons/Almost-there-light.svg",
   "icon-congrats": "/assets/icons/congrats%20icon.svg",
   "icon-add": "/assets/icons/base-blue-add.svg",
   "logo-Lens": "/assets/icons/Lens.svg",
