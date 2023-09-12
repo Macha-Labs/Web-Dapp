@@ -53,7 +53,7 @@ const JSONViewer = ({ data }: any) => {
                 >
                   <Flex justify="flex-start">
                     <Box mr={2}>
-                      <Text color={colorMode == "light" ? "#3d3d3d" : ""} style={{ fontSize: `${style.font.h5}`, fontWeight: `${style.fontWeight.dark}`, color: `${style.color["white.5"]}` }}>{`${nestedKey} : `}</Text>
+                      <Text color={colorMode == "light" ? "#3d3d3d" : style.color["white.5"]} style={{ fontSize: `${style.font.h5}`, fontWeight: `${style.fontWeight.dark}` }}>{`${nestedKey} : `}</Text>
                     </Box>
                     <Box><Text color={colorMode == "light" ? "#3d3d3d" : ""} style={{ fontSize: `${style.font.h5}` }}>{renderData(truncateString(value, 25), `${key}_${nestedKey}`)}</Text></Box>
                   </Flex>

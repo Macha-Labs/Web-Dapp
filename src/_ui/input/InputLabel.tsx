@@ -1,7 +1,7 @@
 import LayoutInputs from "@/layouts/options/LayoutInputs";
 import LayoutTextArea from "@/layouts/options/LayoutTextArea";
 import { StyledCard } from "@/styles/StyledComponents";
-import { Box, Heading, Text, Tooltip, useToast } from "@chakra-ui/react";
+import { Box, Heading, Text, useToast } from "@chakra-ui/react";
 import { DragEvent, useRef, useState } from "react";
 import { style as gStyle } from "../../styles/StyledConstants";
 import ButtonNative from "../buttons/ButtonNative";
@@ -27,6 +27,7 @@ type Props = {
   inputLogoSize?: string;
   value?: any;
   tooltipLabel?: string;
+  variant?: string
 };
 
 const InputLabel = ({
@@ -48,6 +49,7 @@ const InputLabel = ({
   fileDropMinHeight,
   inputLogoSize,
   tooltipLabel,
+  variant
 }: Props) => {
   // for text type inputs
   const toast = useToast();
@@ -103,6 +105,7 @@ const InputLabel = ({
             onChange,
             disabled,
             style,
+            variant
           })}
         </StyledCard>
       </FlexColumn>

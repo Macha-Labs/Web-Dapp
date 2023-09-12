@@ -67,7 +67,9 @@ const TableNative = ({
                 <Tr
                   cursor={"pointer"}
                   onClick={() => {
-                    bodyRowOnClick(item);
+                    if(bodyRowOnClick){
+                      bodyRowOnClick(item);
+                    }
                   }}
                   _hover={{
                     transform: `${!disabled ? "scale(1.01,1.01)" : ""}`,

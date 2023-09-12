@@ -76,7 +76,7 @@ const theme = extendTheme({
         height: "100%!important",
       },
       ".css-1jec974 >option": {
-        background: `${style.input.bg.default}!important`,
+        background: `${mode("#ffff",`${style.input.bg.default}`)}`,
       },
       ".css-2t0ktt": {
         borderRadius: `${style.input.borderRadius.default}!important`,
@@ -100,7 +100,7 @@ const theme = extendTheme({
     Input: {
       baseStyle: {
         field: {
-          bg: `${style.input.bg.default}`,
+          bg: `${mode("#ffff",style.input.bg.default)}`,
           border: `${style.input.border.default}`,
           _hover: {
             border: `${style.input.border.active}`,
@@ -120,7 +120,8 @@ const theme = extendTheme({
           },
         },
         light: {
-          bg: `${style.input.bg.default}`,
+          bg: `#ffff`,
+          color: "#3d3d3d !important",
           _focusVisible: {
             border: ``,
             bg: ``,
