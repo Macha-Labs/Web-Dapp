@@ -100,34 +100,24 @@ const Meta = () => {
           <CardNative
             header={
               <Tabs
-                options={
-                  // hookMeta?.metaData?.meta?.sources
-                  //   ? options
-                  //   : [
-                  //       {
-                  //         href: "#",
-                  //         value: "Data",
-                  //       },
-                  //     ]
-                  [
-                    {
-                      href: "#",
-                      value: "Ownership",
-                    },
-                    hookMeta?.metaData?.meta?.data?.raw && {
-                      href: "#",
-                      value: "Hex Data",
-                    },
-                    hookMeta?.metaData?.meta?.data?.erc721_module && {
-                      href: "#",
-                      value: "erc721A Module",
-                    },
-                    hookMeta?.metaData?.meta?.sources && {
-                      href: "#",
-                      value: "Sources",
-                    },
-                  ]
-                }
+                options={[
+                  {
+                    href: "#",
+                    value: "Ownership",
+                  },
+                  hookMeta?.metaData?.meta?.data?.raw && {
+                    href: "#",
+                    value: "Hex Data",
+                  },
+                  hookMeta?.metaData?.meta?.data?.erc721_module && {
+                    href: "#",
+                    value: "erc721A Module",
+                  },
+                  hookMeta?.metaData?.meta?.sources && {
+                    href: "#",
+                    value: "Sources",
+                  },
+                ]}
                 onChange={setTab}
                 value={tab}
                 width="fit-content"
@@ -137,7 +127,7 @@ const Meta = () => {
             <>
               {tab == "Ownership" && (
                 <>
-                  <>
+                  <FlexColumn hrAlign="flex-start">
                     {hookMeta.isLoading ? (
                       <FlexRow width="100%" hrAlign="space-between">
                         <SkeletonCircle
@@ -153,8 +143,12 @@ const Meta = () => {
                         </Skeleton>
                       </FlexRow>
                     ) : (
-                      <FlexRow hrAlign="space-between">
-                        <FlexRow hrAlign="flex-start" width="fit-content">
+                      <FlexRow hrAlign="space-between" height="fit-content">
+                        <FlexRow
+                          hrAlign="flex-start"
+                          width="fit-content"
+                          height="fit-content"
+                        >
                           {hookMeta.isLoading ? (
                             <SkeletonCircle
                               startColor="#11224A"
@@ -182,7 +176,7 @@ const Meta = () => {
                         <TagNative value="owner" size="md" />
                       </FlexRow>
                     )}
-                  </>
+                  </FlexColumn>
                 </>
               )}
 
@@ -665,7 +659,10 @@ const Meta = () => {
                             padding={style.padding.xs}
                             width={"100%"}
                           >
-                            <FlexRow hrAlign="space-between">
+                            <FlexRow
+                              hrAlign="space-between"
+                              height="fit-content"
+                            >
                               <Heading
                                 color={colorMode == "light" ? "#282828" : ""}
                                 mb="0"

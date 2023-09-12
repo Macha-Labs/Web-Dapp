@@ -6,6 +6,7 @@ import { Box, InputGroup, InputLeftElement, InputRightElement, Text, useColorMod
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import SearchRow from "./SearchRow";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 type Props = {
   options?: any;
@@ -91,7 +92,11 @@ const SearchHeader = ({ options }: Props) => {
               position={"absolute"}
               top="20"
             >
-              <Box overflow={"scroll"} height={"15rem"}>
+              <Box
+                overflow={"scroll"}
+                height={"15rem"}
+                paddingX={style.padding.xs}
+              >
                 <Box
                   style={{
                     display: "flex",
@@ -112,6 +117,7 @@ const SearchHeader = ({ options }: Props) => {
                 </Box>
 
                 <SearchRow
+                  image={GlobalIcons["logo-Lens"]}
                   text="Lens Posts"
                   onClick={() => {
                     router.push("/search?search=lens_post");
@@ -119,6 +125,7 @@ const SearchHeader = ({ options }: Props) => {
                   }}
                 />
                 <SearchRow
+                  image={GlobalIcons["logo-Ens"]}
                   text="Ens Handles"
                   onClick={() => {
                     router.push("/search?search=ens_ethereum");
@@ -126,9 +133,18 @@ const SearchHeader = ({ options }: Props) => {
                   }}
                 />
                 <SearchRow
+                  image={GlobalIcons["logo-Sound.xyz"]}
                   text="Sound.xyz Music"
                   onClick={() => {
                     router.push("/explore/sound_nft");
+                    setShowSuggestions(false);
+                  }}
+                />
+                <SearchRow
+                  image={GlobalIcons["logo-Poap"]}
+                  text="Poap Nfts"
+                  onClick={() => {
+                    router.push("/explore/poap_nft");
                     setShowSuggestions(false);
                   }}
                 />

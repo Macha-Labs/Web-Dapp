@@ -4,10 +4,23 @@ import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 
-const TokenRow = ({ title, description, image, symbol, tokenId, type }: any) => {
+const TokenRow = ({
+  title,
+  description,
+  image,
+  symbol,
+  tokenId,
+  type,
+}: any) => {
   return (
     <>
-      <FlexRow paddingTop="sm" paddingBottom="sm" height="fit-content" paddingLeft="sm" paddingRight="sm">
+      <FlexRow
+        paddingTop="sm"
+        paddingBottom="sm"
+        height="fit-content"
+        paddingLeft="sm"
+        paddingRight="sm"
+      >
         <Box
           style={{
             display: "flex",
@@ -18,7 +31,10 @@ const TokenRow = ({ title, description, image, symbol, tokenId, type }: any) => 
           width={"100%"}
         >
           <Box width="3rem" height="3rem">
-            <Image borderRadius={"50%"} src="/assets/token-placeholder.jpeg" />
+            <Image
+              borderRadius={"50%"}
+              src={image ? image : "/assets/token-placeholder.jpeg"}
+            />
           </Box>
           <Box>
             <Heading

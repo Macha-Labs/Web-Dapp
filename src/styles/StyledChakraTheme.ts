@@ -205,6 +205,13 @@ const theme = extendTheme({
           //   shadow: `${style.card.shadow.hover}`,
           // },
         },
+        state_transparent_hover: {
+          background: "transparent !important",
+          border: `${style.card.border.transparent}!important`,
+          _hover: {
+            border: `${style.card.border.default}!important`,
+          },
+        },
         state_default_to_brand: {
           background: `${style.button.bg.default}`,
           _hover: {

@@ -121,6 +121,7 @@ export const darkStyle = {
       contract: "1px solid #061133",
       publisher: "1px solid rgba(8,78,156,0.5)",
       disabled: "1px solid #1B2D59",
+      transparent: "1px solid transparent",
     },
     borderRadius: {
       default: "20px",

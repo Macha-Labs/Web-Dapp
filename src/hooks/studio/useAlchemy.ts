@@ -10,6 +10,7 @@ const useAlchemy = () => {
   const [searchFilteredNftsByAddress, setSearchFilteredNftsByAddress] =
     useState<any>(nftByAddress);
   const [searchString, setSearchString] = useState<any>("");
+  const [userTokens, setUserTokens] = useState<any>();
 
   const alchemyData = async () => {
     const settings = {
@@ -69,6 +70,17 @@ const useAlchemy = () => {
     setSearchFilteredNftsByAddress(filtered);
   };
 
+  const fetchTokensByAddress = async (chainId: any, userAddress: any) => {
+    const settings = {
+      apiKey: "vnA-7rIYqhwArKLfBN_qAu7XCquJ0Sw-", // Replace with your Alchemy API Key.
+      network: alchemyNetworksData[chainId],
+    };
+    const alchemy = new Alchemy(settings);
+    let response = await alchemy.core.getTokensForOwner(userAddress);
+    console.log("userTokens", response);
+    setUserTokens(response.tokens);
+  };
+
   useEffect(() => {
     handleSearch(searchString);
   }, [searchString]);
@@ -84,6 +96,8 @@ const useAlchemy = () => {
     searchString: searchString,
     searchFilteredNftsByAddress: searchFilteredNftsByAddress,
     setSearchString: setSearchString,
+    fetchTokensByAddress: fetchTokensByAddress,
+    userTokens: userTokens,
   };
 };
 export default useAlchemy;

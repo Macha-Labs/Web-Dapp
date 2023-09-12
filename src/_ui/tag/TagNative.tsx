@@ -52,9 +52,10 @@ const TagNative = ({
       marginRight={style.margin[marginRight]}
       marginBottom={marginBottom}
       marginLeft={marginLeft}
+      paddingY={"3px"}
     >
       {icon && icon.align == "left" && (
-        <Avatar marginRight={1} boxSize="12px" src={GlobalIcons[icon.slug]} />
+        <Avatar marginRight={1} boxSize="20px" src={GlobalIcons[icon.slug]} />
       )}
       <TagLabel
         style={{

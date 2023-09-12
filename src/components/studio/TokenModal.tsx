@@ -13,9 +13,6 @@ type Props = {
 };
 
 const TokenModal = ({ modal, hookAlchemy }: Props) => {
-
-
-  
   return (
     <ModalWindow
       event={modal}
@@ -63,8 +60,8 @@ const TokenModal = ({ modal, hookAlchemy }: Props) => {
                 placeholder="Search Token"
                 value={hookAlchemy.searchString}
                 marginRight={style.margin.sm}
-                onChange={(e :any) => {
-                  hookAlchemy.setSearchString(e.target.value)
+                onChange={(e: any) => {
+                  hookAlchemy.setSearchString(e.target.value);
                 }}
               />
               <ButtonMenu
@@ -81,13 +78,7 @@ const TokenModal = ({ modal, hookAlchemy }: Props) => {
           </FlexRow>
         </>
       }
-    >
-      <Box marginTop="1rem" marginBottom={style.margin.md} overflowY="scroll" height="20rem">
-        {hookAlchemy.searchFilteredNftsByAddress.map((nft: any, index: any) => {
-          return <TokenRow key={index} title={nft.contract.name} symbol={nft.contract.symbol} tokenId={nft.tokenId} type={nft.contract.tokenType} />
-        })}
-      </Box>
-    </ModalWindow>
+    ></ModalWindow>
   );
 };
 export default TokenModal;

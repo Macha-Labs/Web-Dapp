@@ -27,7 +27,7 @@ const Claim = () => {
     <FlexWindow
       view="both"
       bodyElem={renderBody()}
-      //   navTop={<NavMeta />}
+      // navTop={<NavMeta />}
       noPaddingTop={true}
       navLeft={<NavLeft />}
     />

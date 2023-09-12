@@ -330,16 +330,18 @@ const Network = () => {
           </Flex>
         </Box>
         <Box marginTop={style.margin.md}>
-          <Tabs
-            width="fit-content"
-            options={chainNav}
-            gstyle={{
-              fontSize: `${style.font.h5}`,
-              marginBottom: `${style.margin.sm}`,
-            }}
-            value={selectedNavTab}
-            onChange={setSelectedNavTab}
-          />
+          <Box marginBottom={style.margin.sm}>
+            <Tabs
+              width="fit-content"
+              options={chainNav}
+              gstyle={{
+                fontSize: `${style.font.h5}`,
+                // marginBottom: `${style.margin.sm}`,
+              }}
+              value={selectedNavTab}
+              onChange={setSelectedNavTab}
+            />
+          </Box>
           {/* <Divider /> */}
           {renderTxns()}
           {renderAbout()}
