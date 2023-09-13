@@ -70,8 +70,8 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
   const router = useRouter();
   const [hasNft, setHasNft] = useState<boolean>(false);
   const [selectedTab, setSelectedTab] = useState<any>("Tokens");
-  const [tokenLoading, setTokenLoading] = useState<boolean>();
-  const [nftLoading, setNftLoading] = useState<boolean>();
+  const [tokenLoading, setTokenLoading] = useState<boolean>(true);
+  const [nftLoading, setNftLoading] = useState<boolean>(true);
 
   const [chainId, setChainId] = useState<any>(1);
   const hookXP = useXP();
@@ -134,6 +134,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
         setNftLoading(false);
       });
     } else {
+      setNftLoading(false)
       setHasNft(false);
     }
   }, [hookAlchemy.nftByAddress]);
@@ -177,7 +178,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
         </FlexColumn>
       ) : (
         <FlexColumn height="100%">
-          {nftLoading ? (
+          {nftLoading || tokenLoading ? (
             <FlexColumn height="100%">
               <Loader size="sm" />
             </FlexColumn>

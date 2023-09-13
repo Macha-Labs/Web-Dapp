@@ -107,7 +107,7 @@ const CardNative = ({
             mb="0px"
             width={"100%"}
             alignSelf={"flex-end"}
-            borderColor={colorMode == "light" ? "1px solid #e2e2e2" : "#102540"}
+            borderColor={colorMode == "light" ? "#e2e2e2" : "#102540"}
           />
           <Box padding={style.padding.sm}>{footer}</Box>
         </Box>

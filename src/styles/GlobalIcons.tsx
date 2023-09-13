@@ -146,6 +146,7 @@ const GlobalIcons: any = {
     "https://ik.imagekit.io/metaworkLabs/icons/png/Base-blue_icons/base-blue-qrCode.png?updatedAt=1683807162532",
   "icon-user": "/assets/icons/Base_blue_icons/base-blue-user.svg",
   "icon-user-outline": "/assets/icons/user-outline.svg",
+  "icon-publisher-outline-light": "/assets/icons/publisher-outline-light.svg",
   "icon-brand-user": "/assets/icons/brand-user.svg",
   "icon-dark-user": "/assets/icons/Dark_icons/dark-user.svg",
   "icon-dark-add": "/assets/icons/Dark_icons/dark-add.svg",
