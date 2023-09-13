@@ -71,12 +71,9 @@ const InputLabel = ({
               as="h6"
               size="sm"
               marginRight={gStyle.margin.xxs}
-              bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-              bgClip="text"
+              bgGradient={colorMode == "light" ? "" : "linear(100.07deg,#2a85ff 0.39%,#2448c7 73.45%)"}
+              bgClip={colorMode == "light" ?  "" : "text"}
+              color={colorMode == "light" ? "#3d3d3d" : ""}
             >
               {labelText}
             </Heading>
@@ -170,12 +167,9 @@ const InputLabel = ({
         <Heading
           as="h6"
           size="sm"
-          bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-          bgClip="text"
+          bgGradient={colorMode == "light" ? "" : "linear(100.07deg,#2a85ff 0.39%,#2448c7 73.45%)"}
+          bgClip={colorMode == "light" ?  "" : "text"}
+          color={colorMode == "light" ? "#3d3d3d" : ""}
           lineHeight={1.3}
         // className="m-b-1"
         >
@@ -222,12 +216,9 @@ const InputLabel = ({
               />
               <Text color={colorMode == 'light' ? "#3d3d3d" : ""} className="m-b-0">Drag and drop here </Text>
               <Text
-                bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-                bgClip="text"
+                 bgGradient={colorMode == "light" ? "" : "linear(100.07deg,#2a85ff 0.39%,#2448c7 73.45%)"}
+                 bgClip={colorMode == "light" ?  "" : "text"}
+                 color={colorMode == "light" ? "#3d3d3d" : ""}
                 fontWeight={600}
                 className="m-b-0"
               >
@@ -261,12 +252,9 @@ const InputLabel = ({
         <Heading
           as="h6"
           size="sm"
-          bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-          bgClip="text"
+          bgGradient={colorMode == "light" ? "" : "linear(100.07deg,#2a85ff 0.39%,#2448c7 73.45%)"}
+          bgClip={colorMode == "light" ?  "" : "text"}
+          color={colorMode == "light" ? "#3d3d3d" : ""}
           lineHeight={1.3}
         // className="m-b-1"
         >
@@ -307,12 +295,9 @@ const InputLabel = ({
         <Heading
           as="h6"
           size="sm"
-          bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-          bgClip="text"
+          bgGradient={colorMode == "light" ? "" : "linear(100.07deg,#2a85ff 0.39%,#2448c7 73.45%)"}
+          bgClip={colorMode == "light" ?  "" : "text"}
+          color={colorMode == "light" ? "#3d3d3d" : ""}
         >
           {labelText}
         </Heading>

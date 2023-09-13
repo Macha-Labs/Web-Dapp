@@ -350,7 +350,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         Macha Studio
                       </Text>
                       <Image
-                        src={colorMode == "light" ? "/assets/publisher-intro.svg" :  "/assets/publisher-intro-dark.svg"}
+                        src={colorMode == "light" ? "/assets/publisher-intro.svg" : "/assets/publisher-intro-dark.svg"}
                         alt="txn-icon"
                       />
                     </Box>
@@ -449,8 +449,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           width: "48%",
                           flexDirection: "column",
                           justifyContent: "space-between",
-                          background: `${colorMode == "light" ? "" :  "#000a24"}`,
-                          border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" :  "1px solid #e2e2e2" : hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" :  style.card.border.publisher}`,
+                          background: `${colorMode == "light" ? "" : "#000a24"}`,
+                          border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" : "1px solid #e2e2e2" : hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" : style.card.border.publisher}`,
                         }}
                         onClick={() =>
                           hookPublisherCreate.selectPublisher("Individual")
@@ -504,9 +504,9 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         }}
                         style={{
                           width: "48%",
-                          background: `${colorMode == "light" ? "" :  "#000a24"}`,
+                          background: `${colorMode == "light" ? "" : "#000a24"}`,
                           height: "100%",
-                          border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" :  "1px solid #e2e2e2"   : hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" :  style.card.border.publisher}`,
+                          border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" : "1px solid #e2e2e2" : hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" : style.card.border.publisher}`,
                           borderRadius: `${style.card.borderRadius.default}`,
                           padding: `${style.padding.md}`,
                           display: "flex",
@@ -567,7 +567,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     <Box width="100%">
                       <Text>All * marked fields are required</Text>
                       <InputLabel
-                      variant={colorMode == "light" ? "light" : "normal"}
+                        variant={colorMode == "light" ? "light" : "normal"}
                         value={hookPublisherCreate.$publisherFormData.name}
                         inputType="text"
                         labelText="Name *"
@@ -580,7 +580,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         marginTop="sm"
                       />
                       <InputLabel
-                      variant={colorMode == "light" ? "light" : "normal"}
+                        variant={colorMode == "light" ? "light" : "normal"}
                         value={hookPublisherCreate.$address}
                         inputType="text"
                         labelText="Wallet Address *"
@@ -590,7 +590,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         disabled
                       />
                       <InputLabel
-                      variant={colorMode == "light" ? "light" : "normal"}
+                        variant={colorMode == "light" ? "light" : "normal"}
                         value={hookPublisherCreate.$publisherFormData.email}
                         onChange={(e: any) =>
                           hookPublisherCreate.$loadPublisherFormData({
@@ -759,7 +759,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     </Box>
                   ) : (
                     <Box
-                      backgroundImage={ "/assets/Almost-there-bg.svg"}
+                      backgroundImage={"/assets/Almost-there-bg.svg"}
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -767,6 +767,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         width: "100%",
                       }}
                       backgroundSize="100% 100%"
+                      borderRadius="20px"
                     >
                       <Box
                         paddingTop={style.padding.xl}
@@ -803,6 +804,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                       width: "100%",
                     }}
                     backgroundSize="100% 100%"
+                    borderRadius="20px"
                   >
                     <Box
                       paddingTop={style.padding.xl}

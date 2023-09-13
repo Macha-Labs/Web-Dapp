@@ -49,12 +49,9 @@ const InputSelect = ({
         <Heading
           as="h6"
           size="sm"
-          bgGradient="linear(
-                  100.07deg,
-                  #2a85ff 0.39%,
-                  #2448c7 73.45%
-                )"
-          bgClip="text"
+          bgGradient={colorMode == "light" ? "" : "linear(100.07deg,#2a85ff 0.39%,#2448c7 73.45%)"}
+          bgClip={colorMode == "light" ?  "" : "text"}
+          color={colorMode == "light" ? "#3d3d3d" : ""}
         >
           {labelText}
         </Heading>

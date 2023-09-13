@@ -20,7 +20,7 @@ const SearchResults = () => {
   const renderBody = () => {
     return (
       <Box paddingX={style.padding.xxs}>
-        <SearchResultsTxn/>
+        <SearchResultsTxn />
       </Box>
     );
   };

@@ -1,4 +1,4 @@
-import { Spinner } from "@chakra-ui/react";
+import { Spinner, useColorMode } from "@chakra-ui/react";
 
 type Props = {
   size: string;
@@ -9,6 +9,7 @@ type Props = {
 };
 
 const Loader = (props: Props) => {
-  return <Spinner {...props} />;
+  const {colorMode} = useColorMode()
+  return <Spinner color={colorMode == "light" ? "#282828" : ""} {...props} />;
 };
 export default Loader;

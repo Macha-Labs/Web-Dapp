@@ -409,7 +409,7 @@ const ContractCreateEditModal = ({
               !hookContractCreate.isLoading && (
                 <>
                   <InputLabel
-                    variant={colorMode == "light" ? "light" : "normal"}
+                    // variant={colorMode == "light" ? "light" : "normal"}
                     value={hookContractCreate.contractAbiText}
                     // value=""
                     inputType="textArea"

@@ -26,6 +26,7 @@ import {
   Skeleton,
   SkeletonCircle,
   Text,
+  useColorMode,
   useToast,
 } from "@chakra-ui/react";
 import { useClient, useConversations, useSendMessage } from "@xmtp/react-sdk";
@@ -77,6 +78,7 @@ const MetaCopy = () => {
   ];
 
   const toast = useToast();
+  const {colorMode} = useColorMode()
 
   const renderNav = () => {
     return (
@@ -410,6 +412,9 @@ const MetaCopy = () => {
                                   <Button
                                     size="xs"
                                     width="100%"
+                                    _hover={{
+                background: `${colorMode == "light" ? "" : ""}`
+              }}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
                                         typeof hookMeta?.metaData?.meta?.data
@@ -551,6 +556,9 @@ const MetaCopy = () => {
                                   <Button
                                     size="xs"
                                     width="100%"
+                                    _hover={{
+                                      background: `${colorMode == "light" ? "" : ""}`
+                                    }}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
                                         JSON.stringify(
@@ -687,6 +695,9 @@ const MetaCopy = () => {
                                   <Button
                                     size="xs"
                                     width="100%"
+                                    _hover={{
+                                      background: `${colorMode == "light" ? "" : ""}`
+                                    }}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
                                         JSON.stringify(
@@ -787,6 +798,9 @@ const MetaCopy = () => {
                                       >
                                         <Button
                                           size="xs"
+                                          _hover={{
+                                            background: `${colorMode == "light" ? "" : ""}`
+                                          }}
                                           width="100%"
                                           onClick={() => {
                                             navigator.clipboard.writeText(

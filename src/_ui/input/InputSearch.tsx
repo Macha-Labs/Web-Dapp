@@ -56,6 +56,9 @@ const InputSearch = ({
         </InputLeftElement>
       )}
       <Input
+        _focus={{
+          background: `${colorMode == "light" ? "#f2f5fd" : ""}`
+        }}
         color={colorMode == "light" ? `#3d3d3d` :`#fff`}
         variant=""
         type={type}
