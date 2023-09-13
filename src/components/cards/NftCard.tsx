@@ -187,7 +187,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                     <>
                       <Box
                         borderRadius={gStyle.card.borderRadius.default}
-                        border={gStyle.card.border.default}
+                        border={colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default}
                         width="98%"
                         height={"100%"}
                         overflow={"hidden"}

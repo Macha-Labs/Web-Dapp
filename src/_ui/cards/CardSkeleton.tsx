@@ -4,18 +4,19 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
 import { style as gStyle, style } from "@/styles/StyledConstants";
-import { Box, Image, Skeleton, SkeletonText, Text } from "@chakra-ui/react";
+import { Box, Image, Skeleton, SkeletonText, Text, useColorMode } from "@chakra-ui/react";
 
 type Props = {
   width?: string;
 };
 
 const CardSkeleton = ({ width }: Props) => {
+  const {colorMode} = useColorMode();
   return (
     <Box
       borderRadius={gStyle.card.borderRadius.default}
-      border={gStyle.card.border.default}
-      background={gStyle.card.bg.default}
+      border={colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default}
+      background={colorMode == "light" ? "#ffff" : gStyle.card.bg.default}
       padding={style.card.padding.default}
       marginRight={style.margin["lg"]}
       marginBottom={style.margin["lg"]}

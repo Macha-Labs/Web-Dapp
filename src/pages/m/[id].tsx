@@ -868,7 +868,7 @@ const MetaCopy = () => {
 
   return (
     <FlexWindow
-      background="#000"
+      // background="#000"
       marginTop={style.nav.marginM}
       view="col"
       noPaddingTop={true}

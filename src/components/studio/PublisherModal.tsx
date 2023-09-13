@@ -465,7 +465,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           <IconBase
                             // style={{ marginRight: "sm" }}
                             size="2xl"
-                            slug="icon-dark-user"
+                            slug={colorMode == "light" ? "icon-brand-user" : "icon-dark-user"}
                           />
                         </Box>
                         <Box
@@ -528,7 +528,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           <IconBase
                             // style={{ marginRight: "sm" }}
                             size="2xl"
-                            slug="icon-dark-enterprise"
+                            slug={colorMode == "light" ? "icon-light-enterprise" : "icon-dark-enterprise"}
                           />
                         </Box>
                         <Box

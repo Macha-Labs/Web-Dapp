@@ -111,8 +111,9 @@ export default function ButtonNative({
         <Text
           className="mb-0"
           fontSize={textFontSize ? gStyle.font[textFontSize] : "1rem"}
-          marginLeft={marginLeft ? marginLeft : gStyle.margin["xxs"]}
-          marginRight={marginRight ? marginRight : gStyle.margin["xxs"]}
+          marginLeft={gStyle.margin["xxs"]}
+          marginRight={gStyle.margin["xxs"]}
+          color="inherit"
         >
           {text}
         </Text>

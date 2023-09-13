@@ -159,6 +159,7 @@ const GlobalIcons: any = {
   "icon-chat-edit":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-editChat.svg",
   "icon-dark-enterprise": "/assets/icons/Dark_icons/dark-enterprise-fill.svg",
+  "icon-light-enterprise": "/assets/icons/brand-enterprise-fill.svg",
   "icon-code":
     "/icons/svg/Base-blue/base-blue-deploy.svg?updatedAt=1686831739162",
   "icon-rocket":

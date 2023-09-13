@@ -209,7 +209,7 @@ const ContractCard = ({
                   marginTop: "-10px",
                   fontSize: `${style.font.h7}`,
                 }}
-                lineHeight="0.5rem"
+                lineHeight="1rem"
               >
                 {chains[chainId]?.chainName}
               </Text>
