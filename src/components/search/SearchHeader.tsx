@@ -72,7 +72,7 @@ const SearchHeader = ({ options }: Props) => {
               placeholder="Try Spectacular Search Now"
               style={{
                 height: "5rem",
-                color: `${colorMode == "light" ? "#E2E2E2" : ""}`,
+                color: `${colorMode == "light" ? "#3d3d3d" : ""}`,
                 borderRadius: `${style.card.borderRadius.default}`,
                 fontSize: `${style.font.h4}`,
                 paddingRight: `${style.padding.xl}`,
@@ -181,7 +181,9 @@ const SearchHeader = ({ options }: Props) => {
                   <Text
                     mb={style.margin.xxs}
                     fontSize={style.font.h7}
-                    color={style.color["white.5"]}
+                    color={
+                      colorMode == "light" ? "#3d3d3d" : style.color["white.5"]
+                    }
                   >
                     Explore More
                   </Text>
@@ -243,6 +245,7 @@ const SearchHeader = ({ options }: Props) => {
             rgba(0, 15, 44, 0.38) 89.68%
           ) !important;
           border: 1px solid rgba(15, 23, 46, 1) !important;
+          box-shadow: -7.993527412414551px 7.993527412414551px 15.987054824829102px 0px rgba(0, 0, 0, 0.2) !important;
         }`}
       `}</style>
     </>

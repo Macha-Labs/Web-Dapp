@@ -66,14 +66,19 @@ const ButtonMenu = ({
             <MenuButton
               isActive={isOpen}
               isDisabled={isDisabled}
-              variant={variant ? variant : colorMode == "light" ? "state_default_hover_light" : "state_default_hover"}
+              variant={
+                variant
+                  ? variant
+                  : colorMode == "light"
+                  ? "state_default_hover_light"
+                  : "state_default_hover"
+              }
               as={Button}
               // backgroundColor: `${colorMode == "light" ? "#ffffff" : ""}`,
               // backgroundColor={colorMode == "light" ? "#ffffff" : ""}
               style={{
                 borderRadius: `${style.card.borderRadius.button}`,
-                backgroundColor: `${colorMode == "light" ? "#ffffff" : ""
-                  }`,
+                backgroundColor: `${colorMode == "light" ? "#ffffff" : ""}`,
               }}
               rightIcon={
                 icon && isOpen ? (
@@ -105,6 +110,7 @@ const ButtonMenu = ({
             <MenuList
               style={{
                 background: `${colorMode == "light" ? "#ffff" : ""}`,
+                border:`${colorMode=="light" ? "1px solid #e2e2e2" : ""}`,
               }}
             >
               {options.map((item, index) => {
@@ -117,10 +123,10 @@ const ButtonMenu = ({
                     onClick={
                       item.onClick
                         ? () => {
-                          item.onClick();
-                          setIconOrientation(!iconOrientation);
-                        }
-                        : () => { }
+                            item.onClick();
+                            setIconOrientation(!iconOrientation);
+                          }
+                        : () => {}
                     }
                   >
                     <FlexRow hrAlign="space-between">
@@ -144,10 +150,7 @@ const ButtonMenu = ({
                         width="90%"
                         marginLeft={"sm"}
                       >
-                        <Text
-                          color={colorMode == "light" ? "#000" : ""}
-                          mb={0}
-                        >
+                        <Text color={colorMode == "light" ? "#000" : ""} mb={0}>
                           {item.value}
                         </Text>
                         {item.rightIcon && <IconImage slug={item.rightIcon} />}

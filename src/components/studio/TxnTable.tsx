@@ -31,6 +31,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
         <TableNative
           data={txnData}
           theadBottomBorder={colorMode == "light" ? "2px solid #e2e2e2" : ""}
+          
           theadChildren={
             <>
               <Th

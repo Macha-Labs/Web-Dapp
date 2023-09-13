@@ -7,7 +7,14 @@ import chains from "@/data/network";
 import { truncateAddress } from "@/helpers";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Divider, Image, Text, useColorMode, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Image,
+  Text,
+  useColorMode,
+  useToast,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 type Props = {
@@ -18,7 +25,7 @@ function ContractInfoCard({ data }: Props) {
   console.log("metadata", data);
   const toast = useToast();
   const router = useRouter();
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode();
 
   return (
     <CardNative>
@@ -36,15 +43,26 @@ function ContractInfoCard({ data }: Props) {
         </FlexColumn>
         <FlexColumn width="100%" hrAlign="flex-start" vrAlign="flex-start">
           <FlexRow vrAlign="center" width="fit-content">
-            <Text color={colorMode == "light" ? "#282828" : ""} className="m-b-0 me-2" fontSize={"4xl"} fontWeight={700}>
+            <Text
+              color={colorMode == "light" ? "#282828" : ""}
+              className="m-b-0 me-2"
+              fontSize={"4xl"}
+              fontWeight={700}
+            >
               {data?.name}
             </Text>
           </FlexRow>
-          <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="m-b-0">{data?.description}</Text>
-          <Divider borderColor="#004ad9" />
+          <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="m-b-0">
+            {data?.description}
+          </Text>
+          <Divider borderColor={colorMode == "light" ? "#e2e2e2" : "#004ad9"} />
           <FlexRow width="100%" hrAlign="space-between">
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""} fontWeight={700} className="m-b-0-5">
+              <Text
+                color={colorMode == "light" ? "#3d3d3d" : ""}
+                fontWeight={700}
+                className="m-b-0-5"
+              >
                 Contract Address
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
@@ -55,7 +73,12 @@ function ContractInfoCard({ data }: Props) {
                   height="1.5rem"
                   width="1.5rem"
                 />
-                <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="m-b-0">{truncateAddress(data?.address)}</Text>
+                <Text
+                  color={colorMode == "light" ? "#3d3d3d" : ""}
+                  className="m-b-0"
+                >
+                  {truncateAddress(data?.address)}
+                </Text>
                 <IconBase
                   slug="icon-copy"
                   style={{ marginLeft: "sm" }}
@@ -71,11 +94,18 @@ function ContractInfoCard({ data }: Props) {
               </FlexRow>
             </FlexColumn>
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""} fontWeight={700} className="m-b-0-5">
+              <Text
+                color={colorMode == "light" ? "#3d3d3d" : ""}
+                fontWeight={700}
+                className="m-b-0-5"
+              >
                 Owner
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
-                <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="m-b-0">
+                <Text
+                  color={colorMode == "light" ? "#3d3d3d" : ""}
+                  className="m-b-0"
+                >
                   {data?.owner
                     ? truncateAddress(data?.owner)
                     : truncateAddress(data?.address)}
@@ -95,11 +125,20 @@ function ContractInfoCard({ data }: Props) {
               </FlexRow>
             </FlexColumn>
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""} fontWeight={700} className="m-b-0-5">
+              <Text
+                color={colorMode == "light" ? "#3d3d3d" : ""}
+                fontWeight={700}
+                className="m-b-0-5"
+              >
                 Chain ID
               </Text>
               <FlexRow vrAlign="center" hrAlign="flex-start">
-                <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="m-b-0">{data?.chain_id}</Text>
+                <Text
+                  color={colorMode == "light" ? "#3d3d3d" : ""}
+                  className="m-b-0"
+                >
+                  {data?.chain_id}
+                </Text>
                 <IconBase
                   slug="icon-copy"
                   style={{ marginLeft: "sm" }}
@@ -115,7 +154,11 @@ function ContractInfoCard({ data }: Props) {
               </FlexRow>
             </FlexColumn>
             <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""} fontWeight={700} className="m-b-0-5">
+              <Text
+                color={colorMode == "light" ? "#3d3d3d" : ""}
+                fontWeight={700}
+                className="m-b-0-5"
+              >
                 Chain
               </Text>
               <Box
@@ -124,7 +167,10 @@ function ContractInfoCard({ data }: Props) {
                 _hover={{ textDecoration: "underline" }}
               >
                 <FlexRow vrAlign="center" hrAlign="flex-start">
-                  <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="m-b-0">
+                  <Text
+                    color={colorMode == "light" ? "#3d3d3d" : ""}
+                    className="m-b-0"
+                  >
                     {chains[data?.chain_id]?.chainName}
                   </Text>
                   <IconBase

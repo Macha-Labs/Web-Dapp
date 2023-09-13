@@ -1,12 +1,6 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 import { style } from "@/styles/StyledConstants";
-import {
-  Avatar,
-  Flex,
-  Text,
-  useColorMode,
-  useToast
-} from "@chakra-ui/react";
+import { Avatar, Flex, Text, useColorMode, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 // import InteractionTable from "@/pages/search/network/InteractionTable";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
@@ -33,28 +27,28 @@ const Network = () => {
   const handleTabChange = (index: any) => {
     setActiveTab(index);
   };
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     const fetch = async () => {
       if (router.isReady) {
         await hookUserTxn._fetch(router.query.user);
       }
-    }
-    fetch()
+    };
+    fetch();
   }, [router.query.user, hookUserTxn.page]);
 
   const renderNav = () => {
-    return (
-      <NavStudio />
-    );
+    return <NavStudio />;
   };
 
   const renderComponent = () => {
-    return (hookUserTxn.isLoading ?
+    return hookUserTxn.isLoading ? (
       <FlexRow height="100vh">
         <Loader size="lg" />
-      </FlexRow> : (<>
+      </FlexRow>
+    ) : (
+      <>
         <Box marginTop={style.margin.xxxl} paddingTop={style.padding.xxxl}>
           <>
             <Box>
@@ -65,10 +59,7 @@ const Network = () => {
                   alignItems="center"
                   marginBottom={style.margin.lg}
                 >
-                  <Avatar
-                    size="md"
-                    src={GlobalIcons["avatar-default"]}
-                  />
+                  <Avatar size="md" src={GlobalIcons["avatar-default"]} />
                   <Text
                     color={colorMode == "light" ? "#3d3d3d" : ""}
                     fontSize={style.font.h2}
@@ -94,7 +85,11 @@ const Network = () => {
               </Flex>
               <Flex
                 justify="flex-start"
-                border={style.card.border.contract}
+                border={
+                  colorMode == "light"
+                    ? "2px solid #e2e2e2"
+                    : style.card.border.contract
+                }
                 borderRadius={style.card.borderRadius.default}
               >
                 <Box
@@ -110,13 +105,19 @@ const Network = () => {
                   justifyContent="space-between"
                 >
                   <Box>
-                    <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginBottom={0}>Activity</Text>
+                    <Text
+                      color={colorMode == "light" ? "#3d3d3d" : ""}
+                      marginBottom={0}
+                    >
+                      Activity
+                    </Text>
                     <Text
                       color={colorMode == "light" ? "#3d3d3d" : ""}
                       marginBottom={0}
                       fontWeight={style.fontWeight.extraDark}
                     >
-                      {hookUserTxn.totalTxns.toLocaleString("en-US")} Interactions
+                      {hookUserTxn.totalTxns.toLocaleString("en-US")}{" "}
+                      Interactions
                     </Text>
                   </Box>
                   {/* <Divider
@@ -156,8 +157,11 @@ const Network = () => {
                     }}
                     text="Newest"
                     disabled={hookUserTxn.page == 1}
-                    variant={colorMode == "light" ? "state_light" : "state_default_hover"}
-
+                    variant={
+                      colorMode == "light"
+                        ? "state_light"
+                        : "state_default_hover"
+                    }
                   />
                   <ButtonNative
                     marginRight="sm"
@@ -171,15 +175,19 @@ const Network = () => {
                     }}
                     text="Prev"
                     disabled={hookUserTxn.page <= 1}
-                    variant={colorMode == "light" ? "state_light" : "state_default_hover"}
-
+                    variant={
+                      colorMode == "light"
+                        ? "state_light"
+                        : "state_default_hover"
+                    }
                   />
                   <Text
                     color={colorMode == "light" ? "#3d3d3d" : ""}
                     marginRight={style.margin.sm}
                     marginBottom="0.25rem"
                   >
-                    Page {hookUserTxn?.page} of {hookUserTxn.totalPages.toLocaleString("en-US")}
+                    Page {hookUserTxn?.page} of{" "}
+                    {hookUserTxn.totalPages.toLocaleString("en-US")}
                   </Text>
                   <ButtonNative
                     marginRight="sm"
@@ -193,8 +201,11 @@ const Network = () => {
                     }}
                     disabled={hookUserTxn.page >= hookUserTxn.totalPages}
                     text="Next"
-                    variant={colorMode == "light" ? "state_light" : "state_default_hover"}
-
+                    variant={
+                      colorMode == "light"
+                        ? "state_light"
+                        : "state_default_hover"
+                    }
                   />
                   <ButtonNative
                     marginRight="sm"
@@ -208,16 +219,26 @@ const Network = () => {
                     }}
                     text="Oldest"
                     disabled={hookUserTxn.page == hookUserTxn.totalPages}
-                    variant={colorMode == "light" ? "state_light" : "state_default_hover"}
+                    variant={
+                      colorMode == "light"
+                        ? "state_light"
+                        : "state_default_hover"
+                    }
                   />
                 </Box>
                 <Box>
-                  <Text color={colorMode == "light" ? "#3d3d3d" : ""} >Total Txns: {hookUserTxn.totalTxns.toLocaleString("en-US")}</Text>
+                  <Text color={colorMode == "light" ? "#3d3d3d" : ""}>
+                    Total Txns: {hookUserTxn.totalTxns.toLocaleString("en-US")}
+                  </Text>
                 </Box>
               </Box>
               <Box
                 marginTop="1rem"
-                border={colorMode == "light" ? "1px solid #e2e2e2" : style.table.border.thead}
+                border={
+                  colorMode == "light"
+                    ? "1px solid #e2e2e2"
+                    : style.table.border.thead
+                }
                 borderRadius="20px"
                 marginBottom={style.margin.xxxl}
               >
@@ -230,7 +251,7 @@ const Network = () => {
             </Box>
           </>
         </Box>
-      </>)
+      </>
     );
   };
   const renderBody = () => {
@@ -247,7 +268,7 @@ const Network = () => {
               fontSize={style.font.h5}
               fontWeight="600"
               marginBottom={0}
-            //   marginLeft={style.margin.xxs}
+              //   marginLeft={style.margin.xxs}
             >
               {truncateAddress(router.query.user)}
             </Text>

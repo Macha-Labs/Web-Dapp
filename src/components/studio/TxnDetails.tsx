@@ -18,7 +18,7 @@ import {
   Text,
   Tooltip,
   useColorMode,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -47,7 +47,7 @@ function TxnDetails({
   const $metaInfo = useMetaStore((state: any) => state.metaInfo);
 
   const [tab, setTab] = useState<string>("All Details");
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
   const toast = useToast();
   useEffect(() => {
     console.log("Logging $meta ", $metaInfo);
@@ -65,9 +65,14 @@ function TxnDetails({
             <FlexColumn width="28%" hrAlign="flex-start" vrAlign="flex-start">
               <Box
                 width={"100%"}
-                border={colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.hover}
+                border={
+                  colorMode == "light"
+                    ? "1px solid #e2e2e2"
+                    : style.card.border.hover
+                }
                 borderRadius={style.card.borderRadius.default}
                 padding={style.padding["lg"]}
+                backgroundColor={colorMode == "light" ? "#fff" : ""}
               >
                 <table>
                   <tbody>
@@ -81,7 +86,10 @@ function TxnDetails({
                           marginLeft={"sm"}
                           hrAlign="flex-start"
                         >
-                          <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="mb-0">
+                          <Text
+                            color={colorMode == "light" ? "#3d3d3d" : ""}
+                            className="mb-0"
+                          >
                             {transactionDetails &&
                               truncateAddress(transactionDetails[4]?.value)}
                           </Text>
@@ -117,11 +125,22 @@ function TxnDetails({
                     </tr>
                     <tr>
                       <td style={{ display: "flex", justifyContent: "center" }}>
-                        <IconBase slug={colorMode == "light" ? "icon-deploy-light" : "icon-coloured-deploy"} size="lg" />
+                        <IconBase
+                          slug={
+                            colorMode == "light"
+                              ? "icon-deploy-light"
+                              : "icon-coloured-deploy"
+                          }
+                          size="lg"
+                        />
                       </td>
                       <td>
                         <FlexRow hrAlign="flex-start">
-                          <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="mb-0" marginStart={style.margin.sm}>
+                          <Text
+                            color={colorMode == "light" ? "#3d3d3d" : ""}
+                            className="mb-0"
+                            marginStart={style.margin.sm}
+                          >
                             Method
                           </Text>
                           <Text
@@ -184,7 +203,11 @@ function TxnDetails({
                           marginLeft={"sm"}
                           hrAlign="flex-start"
                         >
-                          <Text color={colorMode == "light" ? "#3d3d3d" : ""} className="mb-0" textAlign="left">
+                          <Text
+                            color={colorMode == "light" ? "#3d3d3d" : ""}
+                            className="mb-0"
+                            textAlign="left"
+                          >
                             {transactionDetails &&
                               truncateAddress(transactionDetails[5]?.value)}
                           </Text>
@@ -226,9 +249,11 @@ function TxnDetails({
                     CREATED
                   </Text>
                   <Text
-                    color={colorMode == "light" ? "#3d3d3d" : "rgba(255,255,255,0.5)"}
+                    color={
+                      colorMode == "light" ? "#3d3d3d" : "rgba(255,255,255,0.5)"
+                    }
                     className="mb-0"
-                  // marginStart={style.margin.xxs}
+                    // marginStart={style.margin.xxs}
                   >
                     {" "}
                     {/* TODO: make dynamic */}
@@ -252,7 +277,11 @@ function TxnDetails({
                     width="100%"
                     header={
                       <>
-                        <Heading color={colorMode == "light" ? "#3d3d3d" : ""} fontSize={style.font.h4} mb="0px">
+                        <Heading
+                          color={colorMode == "light" ? "#3d3d3d" : ""}
+                          fontSize={style.font.h4}
+                          mb="0px"
+                        >
                           All Details
                         </Heading>
                       </>
@@ -294,13 +323,22 @@ function TxnDetails({
                                     }}
                                   >
                                     <Image
-                                      src={colorMode == "light" ? item.srcLight : item.src}
+                                      src={
+                                        colorMode == "light"
+                                          ? item.srcLight
+                                          : item.src
+                                      }
                                       alt="icon"
                                       marginBottom={0}
                                       height="1.5rem"
                                       marginRight={2}
                                     />
-                                    <Text mb={0} color={colorMode == "light" ? "#3d3d3d" : ""}>
+                                    <Text
+                                      mb={0}
+                                      color={
+                                        colorMode == "light" ? "#3d3d3d" : ""
+                                      }
+                                    >
                                       {item.key}
                                     </Text>
                                   </Box>
@@ -317,7 +355,9 @@ function TxnDetails({
                                   >
                                     <Box>
                                       <Text
-                                        color={colorMode == "light" ? "#3d3d3d" : ""}
+                                        color={
+                                          colorMode == "light" ? "#3d3d3d" : ""
+                                        }
                                         marginBottom={"0px"}
                                         style={{ cursor: "pointer" }}
                                         onClick={() => {
@@ -355,7 +395,11 @@ function TxnDetails({
                     width="100%"
                     header={
                       <>
-                        <Heading color={colorMode == "light" ? "#282828" : ""} fontSize={style.font.h4} mb="0px">
+                        <Heading
+                          color={colorMode == "light" ? "#282828" : ""}
+                          fontSize={style.font.h4}
+                          mb="0px"
+                        >
                           Hex Data
                         </Heading>
                       </>
@@ -364,7 +408,12 @@ function TxnDetails({
                     {methodParams.length > 0 ? (
                       <JSONViewer data={methodParams} />
                     ) : (
-                      <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginTop={1}>No Data Found</Text>
+                      <Text
+                        color={colorMode == "light" ? "#3d3d3d" : ""}
+                        marginTop={1}
+                      >
+                        No Data Found
+                      </Text>
                     )}
                   </CardNative>
                 </>

@@ -183,6 +183,7 @@ export const ConnectWalletButton = (props: any) => {
                           color="#8f8f8f"
                           fontWeight="500"
                           width="80%"
+                          marginRight={style.margin.xs}
                         >
                           {truncateAddress($address)}
                         </Text>

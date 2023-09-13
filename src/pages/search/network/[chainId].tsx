@@ -33,7 +33,7 @@ const Network = () => {
   const [selectedNavTab, setSelectedNavTab] = useState<string>("Contracts");
   const hookContractList = useContractList();
   const hookChainContracts = useChainContracts();
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
 
   const renderNav = () => {
     return <NavStudio />;
@@ -96,7 +96,9 @@ const Network = () => {
                   >
                     About {chains[chainId].chainName}
                   </Text>
-                  <Text color={colorMode == "light" ? "#3d3d3d" : ""} >{chains[chainId].about}</Text>
+                  <Text color={colorMode == "light" ? "#3d3d3d" : ""}>
+                    {chains[chainId].about}
+                  </Text>
                 </Box>
                 <Box display="flex" flexDirection="column">
                   <Text
@@ -121,12 +123,17 @@ const Network = () => {
                         <Text
                           style={{
                             marginRight: `${style.margin.xxs}`,
-                            color: `${colorMode == "light" ? "#3d3d3d" : "dodgerblue"}`,
+                            color: `${
+                              colorMode == "light" ? "#3d3d3d" : "dodgerblue"
+                            }`,
                           }}
                         >
                           {member.name}
                         </Text>
-                        <Text color={colorMode == "light" ? "#3d3d3d" : ""} style={{ marginRight: `${style.margin.xxs}` }}>
+                        <Text
+                          color={colorMode == "light" ? "#3d3d3d" : ""}
+                          style={{ marginRight: `${style.margin.xxs}` }}
+                        >
                           {member.designation}
                         </Text>
                       </Box>
@@ -153,7 +160,11 @@ const Network = () => {
             </Box>
             <Box flex="3" p={4}>
               {/* Content for column 2 */}
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""} fontWeight={style.fontWeight.dark} fontSize={style.font.h5}>
+              <Text
+                color={colorMode == "light" ? "#3d3d3d" : ""}
+                fontWeight={style.fontWeight.dark}
+                fontSize={style.font.h5}
+              >
                 Official Links
               </Text>
               <Box
@@ -204,7 +215,9 @@ const Network = () => {
                 }}
                 text="Newest"
                 disabled={hookChainTxn.page == 1}
-                variant={colorMode == "light" ? "state_light" : "state_default_hover"}
+                variant={
+                  colorMode == "light" ? "state_light" : "state_default_hover"
+                }
               />
               <ButtonNative
                 marginRight="sm"
@@ -219,10 +232,15 @@ const Network = () => {
                 }}
                 text="Prev"
                 disabled={hookChainTxn.page <= 1}
-                variant={colorMode == "light" ? "state_light" : "state_default_hover"}
-
+                variant={
+                  colorMode == "light" ? "state_light" : "state_default_hover"
+                }
               />
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginRight={style.margin.sm} marginBottom="0.25rem">
+              <Text
+                color={colorMode == "light" ? "#3d3d3d" : ""}
+                marginRight={style.margin.sm}
+                marginBottom="0.25rem"
+              >
                 Page {hookChainTxn?.page} of{" "}
                 {hookChainTxn.totalPages.toLocaleString("en-US")}
               </Text>
@@ -230,7 +248,6 @@ const Network = () => {
                 marginRight="sm"
                 size="xs"
                 height="2rem"
-                
                 onClick={() => {
                   if (hookChainTxn.page < hookChainTxn.totalPages) {
                     hookChainTxn.setIsLoading(true);
@@ -239,8 +256,9 @@ const Network = () => {
                 }}
                 disabled={hookChainTxn.page >= hookChainTxn.totalPages}
                 text="Next"
-                variant={colorMode == "light" ? "state_light" : "state_default_hover"}
-
+                variant={
+                  colorMode == "light" ? "state_light" : "state_default_hover"
+                }
               />
               <ButtonNative
                 marginRight="sm"
@@ -254,12 +272,17 @@ const Network = () => {
                 }}
                 text="Oldest"
                 disabled={hookChainTxn.page == hookChainTxn.totalPages}
-                variant={colorMode == "light" ? "state_light" : "state_default_hover"}
-
+                variant={
+                  colorMode == "light" ? "state_light" : "state_default_hover"
+                }
               />
             </Box>
             <Box
-              border={colorMode == "light" ? "1px solid #e2e2e2" : style.table.border.thead}
+              border={
+                colorMode == "light"
+                  ? "1px solid #e2e2e2"
+                  : style.table.border.thead
+              }
               borderRadius="20px"
             >
               {hookChainTxn?.filteredData && (
@@ -307,26 +330,50 @@ const Network = () => {
           <Flex
             justify="space-between"
             background={colorMode == "light" ? "#fff" : ""}
-            border={colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.contract}
+            border={
+              colorMode == "light"
+                ? "1px solid #e2e2e2"
+                : style.card.border.contract
+            }
             borderRadius={style.card.borderRadius.default}
           >
             <Box flex="1" p={4} display="flex" justifyContent="space-between">
               <Box>
-                <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginBottom={0}>Transactions Indexed</Text>
-                <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginBottom={0} fontWeight={style.fontWeight.extraDark}>
+                <Text
+                  color={colorMode == "light" ? "#3d3d3d" : ""}
+                  marginBottom={0}
+                >
+                  Transactions Indexed
+                </Text>
+                <Text
+                  color={colorMode == "light" ? "#3d3d3d" : ""}
+                  marginBottom={0}
+                  fontWeight={style.fontWeight.extraDark}
+                >
                   {hookChainTxn.totalTxns.toLocaleString("en-US")}
                 </Text>
               </Box>
               <Divider
                 orientation="vertical"
                 margin={0}
-                border={style.card.border.meta}
+                border={
+                  colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.meta
+                }
                 width={"0px"}
               />
             </Box>
             <Box flex="1" p={4}>
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginBottom={0}>Latest Block</Text>
-              <Text color={colorMode == "light" ? "#3d3d3d" : ""} marginBottom={0} fontWeight={style.fontWeight.extraDark}>
+              <Text
+                color={colorMode == "light" ? "#3d3d3d" : ""}
+                marginBottom={0}
+              >
+                Latest Block
+              </Text>
+              <Text
+                color={colorMode == "light" ? "#3d3d3d" : ""}
+                marginBottom={0}
+                fontWeight={style.fontWeight.extraDark}
+              >
                 {hookAlchemy.latestBlock}
               </Text>
             </Box>

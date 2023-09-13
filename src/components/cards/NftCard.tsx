@@ -183,13 +183,17 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
             </FlexColumn>
           ) : (
             <FlexRow height="100%">
-              <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="30%">
+              <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="50%">
                 <FlexColumn height="100%" hrAlign="flex-start">
                   {!hasNft ? (
                     <>
                       <Box
                         borderRadius={gStyle.card.borderRadius.default}
-                        border={colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default}
+                        border={
+                          colorMode == "light"
+                            ? "1px solid #e2e2e2"
+                            : gStyle.card.border.default
+                        }
                         width="98%"
                         height={"100%"}
                         overflow={"hidden"}
@@ -258,17 +262,20 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                               </FlexRow>
                             }
                             footer={
-                              <ButtonNative
-                                text="Claim NFT and own your Macha Profile"
-                                onClick={() => {
-                                  console.log("submit clicked");
-                                  // hookCreatorCreate.nextFormStep();
-                                  hookNftMint.submit();
-                                }}
-                                variant="state_brand"
-                                width="100%"
-                                marginTop="xs"
-                              />
+                              <FlexRow paddingBottom={style.padding.md} marginBottom="3rem">
+                                <ButtonNative
+                                  text="Claim NFT and own your Macha Profile"
+                                  onClick={() => {
+                                    console.log("submit clicked");
+                                    // hookCreatorCreate.nextFormStep();
+                                    hookNftMint.submit();
+                                  }}
+                                  variant="state_brand"
+                                  width="60%"
+                                  marginTop="xs"
+                               
+                                />
+                              </FlexRow>
                             }
                           >
                             <Box
@@ -312,8 +319,14 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                             fontSize={style.font.h5}
                             color={colorMode == "light" ? "#3d3d3d" : ""}
                           >
-                            Please wait patiently while the transaction is
-                            confirmed.
+                            Please wait patiently while the transaction is being confirmed.
+                          </Text>
+                          <Text
+                            mt={style.margin.sm}
+                            fontSize={style.font.h5}
+                            color={colorMode == "light" ? "#3d3d3d" : ""}
+                          >
+                            This might take a few minutes.
                           </Text>
                         </FlexColumn>
                       )}
