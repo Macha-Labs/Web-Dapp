@@ -144,7 +144,7 @@ const Network = () => {
                   <Box display="flex" flex="flex-wrap">
                     {chains[chainId].wallets.map((wallet: any, index: any) => (
                       <Link href={wallet.link} target="_blank" key={index}>
-                        <TagNative size="sm" value={wallet.title} />
+                        <TagNative size="md" value={wallet.title} />
                       </Link>
                     ))}
                   </Box>

@@ -22,58 +22,60 @@ const Search = () => {
 
   const renderBody = () => {
     return (
-      <FlexColumn
-        hrAlign="flex-start"
-        vrAlign="flex-start"
-        padding="0rem 0rem"
-        height="100vh"
-      >
-        <Box
-          border={colorMode ? "" : style.card.border.default}
-          backgroundImage={
-            colorMode == "light"
-              ? "url(/assets/explore/searchbg_light.svg)"
-              : "url(/assets/icons/searchbg.svg)"
-          }
-          backgroundPosition="center"
-          backgroundRepeat="no-repeat"
-          backgroundSize="cover"
-          height="100%"
-          width={"100%"}
-          // borderRadius={style.card.borderRadius.button}
-          // marginTop={style.margin.md}
-          // paddingTop={style.padding.xxl}
-          display={"flex"}
-          alignItems={"center"}
-          flexDir={"column"}
-          paddingTop={style.margin["4xl"]}
-          justifyContent={"flex-start"}
+      <Box overflowX="hidden">
+        <FlexColumn
+          hrAlign="flex-start"
+          vrAlign="flex-start"
+          padding="0rem 0rem"
+          height="150vh"
         >
-          <Image
-            // className=""
-            src="/assets/MACHALogo.svg"
-            alt="logo"
-            width={212}
-            height={78}
-            // width={246}
-            // marginBottom={style.margin.sm}
-          />
-          <Image
-            // className="headerLogo"
-            src={
+          <Box
+            border={colorMode ? "" : style.card.border.default}
+            backgroundImage={
               colorMode == "light"
-                ? "/assets/explore/search-home-title-light.svg"
-                : "/assets/title.png"
+                ? "url(/assets/explore/searchbg_light.svg)"
+                : "url(/assets/icons/searchbg.svg)"
             }
-            alt="logo"
-            // width={255}
-            // height={93}
-            // width={246}
-            marginBottom={style.margin.sm}
-          />
-          <SearchHeader />
-        </Box>
-      </FlexColumn>
+            backgroundPosition="center"
+            backgroundRepeat="no-repeat"
+            backgroundSize="cover"
+            height="100%"
+            width={"100%"}
+            // borderRadius={style.card.borderRadius.button}
+            // marginTop={style.margin.md}
+            // paddingTop={style.padding.xxl}
+            display={"flex"}
+            alignItems={"center"}
+            flexDir={"column"}
+            paddingTop={style.margin["4xl"]}
+            justifyContent={"flex-start"}
+          >
+            <Image
+              // className=""
+              src="/assets/MACHALogo.svg"
+              alt="logo"
+              width={212}
+              height={78}
+              // width={246}
+              // marginBottom={style.margin.sm}
+            />
+            <Image
+              // className="headerLogo"
+              src={
+                colorMode == "light"
+                  ? "/assets/explore/search-home-title-light.svg"
+                  : "/assets/title.png"
+              }
+              alt="logo"
+              // width={255}
+              // height={93}
+              // width={246}
+              marginBottom={style.margin.sm}
+            />
+            <SearchHeader />
+          </Box>
+        </FlexColumn>
+      </Box>
     );
   };
 

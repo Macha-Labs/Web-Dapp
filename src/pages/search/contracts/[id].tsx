@@ -134,6 +134,7 @@ const Contract = () => {
                       hookContractTxn.setPage(hookContractTxn.page - 1);
                     }
                   }}
+                  textColor={colorMode=="light" ? "#3d3d3d" : ""}
                   text="Prev"
                   disabled={hookContractTxn.page <= 1}
                   variant={colorMode == "light" ? "state_light" : "state_default_hover"}

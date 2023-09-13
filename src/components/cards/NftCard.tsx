@@ -100,17 +100,19 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
 
   let chainFilterOptions: any = [];
   Object.keys(chains).forEach((key) => {
-    chainFilterOptions.push({
-      value: chains[key].chainName,
+    if (chains[key].allowMinting) {
+      chainFilterOptions.push({
+        value: chains[key].chainName,
 
-      leftIcon: chains[key].chainImage,
-      onClick: () => {
-        hookNftMint.setChainId(key);
-        setChainId(key);
-        setChainValue(chains[key].chainName);
-        setAvatar(chains[key].chainImage);
-      },
-    });
+        leftIcon: chains[key].chainImage,
+        onClick: () => {
+          hookNftMint.setChainId(key);
+          setChainId(key);
+          setChainValue(chains[key].chainName);
+          setAvatar(chains[key].chainImage);
+        },
+      });
+    }
   });
 
   useEffect(() => {
