@@ -71,7 +71,7 @@ const Meta = () => {
 
     return (
       <Box display={"flex"} justifyContent={"space-between"}>
-        <Box width="38%">
+        <Box width="38%" marginTop="0.5rem">
           {/* <CardNative height="fit-content" width="100%"></CardNative> */}
           {hookMeta.isLoading ? (
             <CardSkeleton />
@@ -96,7 +96,7 @@ const Meta = () => {
             />
           )}
         </Box>
-        <Box width="58%">
+        <Box width="58%" marginTop="0.5rem">
           <CardNative
             header={
               <Tabs
