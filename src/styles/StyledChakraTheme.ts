@@ -22,13 +22,21 @@ const theme = extendTheme({
       "*::placeholder": {
         color: `${style.colorPlaceholder}`,
       },
-      // textarea: {
-      //   border: `${style.input.border.default} !important`,
-      //   color: `${style.colorInput} !important`,
-      //   background: `${mode("#fff","#000511")} !important`,
-      //   paddingLeft: "0.5rem !important",
-      //   paddingRight: "0.5rem !important",
-      // },
+      "::-webkit-scrollbar": {
+        width: "5px !important"
+      },
+      "::-webkit-scrollbar-thumb": {
+        background: `${mode("#ffff","#0f172e")} !important`
+      },
+      "::-webkit-scrollbar-track": {
+        background: "#00040d !important"
+      },
+      "::-webkit-scrollbar-thumb:hover": {
+        background: "#0f172ec1 !important"
+      },
+      ".no-scrollbar::-webkit-scrollbar": {
+        display: "none"
+      },
       "input:focus": {
         background: "#000",
       },

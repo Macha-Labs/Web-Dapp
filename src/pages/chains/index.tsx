@@ -7,17 +7,20 @@ import NavTop from "@/_ui/nav/NavTop";
 import SupportedChains from "@/components/studio/SupportedChains";
 import chains from "@/data/network";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, useColorMode } from "@chakra-ui/react";
 import React from "react";
 
 const Chains = () => {
+
+  const {colorMode} = useColorMode()
+
   const renderBody = () => {
     return (
       <CardNative
         height="fit-content"
         width="100%"
         header={
-          <Heading fontSize={style.font.h3} fontWeight={600} className="m-b-0">
+          <Heading color={colorMode == "light" ? "#282828" : ""} fontSize={style.font.h3} fontWeight={600} className="m-b-0">
             Explore Chains
           </Heading>
         }
