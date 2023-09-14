@@ -7,7 +7,6 @@ import {
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {
-  Avatar,
   Box,
   Image,
   Td,
@@ -15,6 +14,7 @@ import {
   Th,
   useColorMode
 } from "@chakra-ui/react";
+import Avatar from "boring-avatars";
 import { useRouter } from "next/router";
 
 type Prop = {
@@ -23,7 +23,7 @@ type Prop = {
 };
 
 const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode()
   const router = useRouter();
   return (
     <div>
@@ -31,7 +31,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
         <TableNative
           data={txnData}
           theadBottomBorder={colorMode == "light" ? "2px solid #e2e2e2" : ""}
-          
+
           theadChildren={
             <>
               <Th
@@ -141,7 +141,7 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                     }}
                   >
                     <Image
-                      src={colorMode == "light" ?  "/assets/icons/successful-light.svg" : "/assets/icons/coloured-successful.svg"}
+                      src={colorMode == "light" ? "/assets/icons/successful-light.svg" : "/assets/icons/coloured-successful.svg"}
                       alt=""
                       height="1.5rem"
                     />
@@ -196,10 +196,12 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                         alignItems: "center"
                       }}
                     >
-                      <Box width="1.5rem" height="1.5rem">
+                      <Box width="1.7rem" height="1.5rem">
                         <Avatar
-                          size="xxs"
-                          src={GlobalIcons["avatar-default"]}
+                          size="1.5rem"
+                          name={item?.transaction?.from}
+                          variant="pixel"
+                          colors={["#021E62", "#197CEC", "#231F20", "#5BA1FF", "#5BA1FF"]}
                         />
                       </Box>
                       <Text
@@ -229,10 +231,12 @@ const TxnTable = ({ txnData, displayFrom = true }: Prop) => {
                       alignItems: "center"
                     }}
                   >
-                    <Box width="1.5rem" height="1.5rem">
+                    <Box width="1.7rem" height="1.5rem">
                       <Avatar
-                        size="xxs"
-                        src={GlobalIcons["avatar-default"]}
+                        size="1.5rem"
+                        name={item?.transaction?.to}
+                        variant="pixel"
+                        colors={["#021E62", "#197CEC", "#231F20", "#5BA1FF", "#5BA1FF"]}
                       />
                     </Box>
                     <Text

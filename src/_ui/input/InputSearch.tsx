@@ -59,7 +59,7 @@ const InputSearch = ({
         _focus={{
           background: `${colorMode == "light" ? "#f2f5fd" : ""}`
         }}
-        color={colorMode == "light" ? `#3d3d3d` :`#fff`}
+        color={colorMode == "light" ? `#282828` :`#fff`}
         variant=""
         type={type}
         background={colorMode == "light" ? "#f2f5fd" : gStyle.input.bg.default}
@@ -69,7 +69,7 @@ const InputSearch = ({
         onChange={onChange ? onChange : () => {}}
         size={size}
         onKeyDown={onKeydown ? onKeydown : () => {}}
-        _placeholder={{ color: colorMode == "light" ? `#e2e2e2` :`#132041` }}
+        _placeholder={{ color: colorMode == "light" ? `#3d3d3d` :`#132041` }}
         // width={width}
         height={"50px"}
         border={colorMode == "light" ? "" : gStyle.input.border.search}

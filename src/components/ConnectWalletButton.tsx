@@ -338,7 +338,7 @@ export const ConnectWalletButton = (props: any) => {
                             }}
                           >
                             <FlexRow hrAlign="space-between">
-                              <IconBase slug={colorMode == "light" ? "icon-user-outline" : "icon-dark-user"} size="xl" />
+                              <IconBase slug={colorMode == "light" ? "icon-publisher-outline-light" : "icon-dark-user"} size="xl" />
                               <FlexRow
                                 hrAlign="flex-start"
                                 width="90%"

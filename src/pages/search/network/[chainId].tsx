@@ -195,7 +195,7 @@ const Network = () => {
     return (
       <>
         {selectedNavTab == "Transactions" && !hookChainTxn.isLoading && (
-          <>
+          <Box paddingBottom={style.margin.xxl}>
             <Box
               style={{
                 display: "flex",
@@ -289,7 +289,7 @@ const Network = () => {
                 <TxnTable txnData={hookChainTxn?.filteredData} />
               )}
             </Box>
-          </>
+          </Box>
         )}
       </>
     );

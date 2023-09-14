@@ -1,7 +1,7 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image } from "@chakra-ui/react";
+import { Box, Heading, Image, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -12,6 +12,8 @@ type Props = {
 
 const SupportedChains = ({ data, id }: Props) => {
   const router = useRouter();
+  const {colorMode} = useColorMode()
+
   return (
     <Box
       _hover={{
@@ -24,8 +26,8 @@ const SupportedChains = ({ data, id }: Props) => {
         router.push(`/search/network/${id}`);
       }}
       width={"20%"}
-      border={style.card.border.default}
-      background="#030c1a"
+      border={colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.default}
+      background={colorMode == "light" ? "" : "#030c1a"}
       marginX={style.margin.sm}
       marginTop={style.margin.sm}
       padding={style.padding.sm}
@@ -43,7 +45,7 @@ const SupportedChains = ({ data, id }: Props) => {
           alt="img"
           marginBottom={style.margin.sm}
         />
-        <Heading fontSize={style.font.h5} textAlign="center" height="2.5rem">
+        <Heading color={colorMode == "light" ? "#3d3d3d" : ""} fontSize={style.font.h5} textAlign="center" height="2.5rem">
           {data.chainName}
         </Heading>
       </FlexColumn>

@@ -2,14 +2,13 @@ import Header from "@/_ui/Head/Header";
 import { config } from "@/config/index";
 import AuthProvider from "@/providers/AuthProvider";
 import { DataProvider } from "@/providers/DataProvider";
-import "@/styles/globals.css";
 import theme from "@/styles/StyledChakraTheme";
+import "@/styles/globals.css";
 import { ChakraProvider, ThemeProvider } from "@chakra-ui/react";
 import {
-  darkTheme,
-  getDefaultWallets,
-  lightTheme,
   RainbowKitProvider,
+  darkTheme,
+  getDefaultWallets
 } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import { XMTPProvider } from "@xmtp/react-sdk";
@@ -19,10 +18,9 @@ import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { useEffect } from "react";
-import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
+import { WagmiConfig, configureChains, createClient, mainnet } from "wagmi";
 import { filecoin, filecoinCalibration, goerli, optimism, polygon, polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
-import { mode } from '@chakra-ui/theme-tools';
 
 const { chains, provider } = configureChains(
   [filecoinCalibration, mainnet, polygon, polygonMumbai, goerli, optimism, filecoin],
