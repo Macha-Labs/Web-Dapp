@@ -115,7 +115,7 @@ const DashBoard = () => {
     });
     return (
       <>
-        <FlexRow hrAlign="space-between" marginTop="4xl" marginBottom={"xl"}>
+        <FlexRow hrAlign="space-between" marginTop="3.5xl" marginBottom={"xl"}>
           {$address ? (
             <Box>
               <ButtonGroup

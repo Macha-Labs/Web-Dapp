@@ -63,7 +63,7 @@ export default function Home() {
   const hookTransaction = useTransaction();
   const hookMetasList = useMetaList();
   const router = useRouter();
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode()
 
   useEffect(() => {
     hookTransaction._fetchLatestTransactions();
@@ -77,45 +77,48 @@ export default function Home() {
   const renderBody = () => {
     return (
       <Box paddingX={style.padding.xxs} paddingBottom={style.margin.nav}>
-        <Carousel
-          autoPlay
-          showArrows={false}
-          showStatus={false}
-          stopOnHover={true}
-          infiniteLoop
-          interval={3000}
-        >
-          <CarouselSlide
-            title="Explore From MACHA"
-            description="POSTS • PROFILES • BLOGS"
-            avatarImage={GlobalIcons["logo-Macha-circular"]}
-            // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
-            bgGrid=""
-            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
-            bannerImage={"/assets/explore/home-carousal-1-hero-image.svg"}
-            buttonText="Explore"
-          />
-          <CarouselSlide
-            title="View From Contracts"
-            description="LENS • MIRROR • POAP"
-            avatarImage={GlobalIcons["base-SDK"]}
-            // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
-            bgGrid=""
-            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
-            bannerImage={"/assets/explore/home-carousal-2-hero-image.svg"}
-            buttonText="View Contracts Now"
-          />
-          <CarouselSlide
-            title="Discover From Chains"
-            description="TRANSACTIONS • INDEXING • CHAINS"
-            avatarImage={GlobalIcons["base-chain"]}
-            // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
-            bgGrid=""
-            bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
-            bannerImage={"/assets/explore/home-carousal-3-hero-image.svg"}
-            buttonText="View Chains"
-          />
-        </Carousel>
+        <Box boxShadow="-10px 10px 20px 0px rgba(137, 137, 137, 0.30)" borderRadius="20px" overflow="hidden">
+          <Carousel
+            autoPlay
+            showArrows={false}
+            showStatus={false}
+            stopOnHover={true}
+            infiniteLoop
+            interval={3000}
+            showThumbs={false}
+          >
+            <CarouselSlide
+              title="Explore From MACHA"
+              description="POSTS • PROFILES • BLOGS"
+              avatarImage={GlobalIcons["logo-Macha-circular"]}
+              // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
+              bgGrid=""
+              bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+              bannerImage={"/assets/explore/home-carousal-1-hero-image.svg"}
+              buttonText="Explore"
+            />
+            <CarouselSlide
+              title="View From Contracts"
+              description="LENS • MIRROR • POAP"
+              avatarImage={GlobalIcons["base-SDK"]}
+              // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
+              bgGrid=""
+              bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+              bannerImage={"/assets/explore/home-carousal-2-hero-image.svg"}
+              buttonText="View Contracts Now"
+            />
+            <CarouselSlide
+              title="Discover From Chains"
+              description="TRANSACTIONS • INDEXING • CHAINS"
+              avatarImage={GlobalIcons["base-chain"]}
+              // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
+              bgGrid=""
+              bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+              bannerImage={"/assets/explore/home-carousal-3-hero-image.svg"}
+              buttonText="View Chains"
+            />
+          </Carousel>
+        </Box>
         {hookTransaction.latestTransactions && (
           <Marquee
             speed={50000}

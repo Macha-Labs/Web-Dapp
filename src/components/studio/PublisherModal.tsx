@@ -100,7 +100,10 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
               hookPublisherCreate.formStep != 6 && (
                 <Image
                   src={GlobalIcons["icon-close"]}
-                  onClick={() => modal.onClose()}
+                  onClick={() => {
+                    modal.onClose()
+                    hookPublisherCreate.setClear()
+                  }}
                   style={{
                     display: "flex",
                     justifyContent: "center",
@@ -449,7 +452,8 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                           width: "48%",
                           flexDirection: "column",
                           justifyContent: "space-between",
-                          background: `${colorMode == "light" ? "" : "#000a24"}`,
+                          background: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Individual" ? "#f2f5fd" : "" : hookPublisherCreate.publisherType == "Individual" ? "#000a24" : ""}`,
+
                           border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" : "1px solid #e2e2e2" : hookPublisherCreate.publisherType == "Individual" ? "1.5px solid #197cec" : style.card.border.publisher}`,
                         }}
                         onClick={() =>
@@ -504,7 +508,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                         }}
                         style={{
                           width: "48%",
-                          background: `${colorMode == "light" ? "" : "#000a24"}`,
+                          background: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Organization" ? "#f2f5fd" : "" : hookPublisherCreate.publisherType == "Organization" ? "#000a24" : ""}`,
                           height: "100%",
                           border: `${colorMode == "light" ? hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" : "1px solid #e2e2e2" : hookPublisherCreate.publisherType == "Organization" ? "1.5px solid #197cec" : style.card.border.publisher}`,
                           borderRadius: `${style.card.borderRadius.default}`,
@@ -565,7 +569,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                 {hookPublisherCreate.formStep == 4 &&
                   hookPublisherCreate.publisherType == "Individual" && (
                     <Box width="100%">
-                      <Text>All * marked fields are required</Text>
+                      <Text color={colorMode == "light" ? "#3d3d3d" : ""}>All * marked fields are required</Text>
                       <InputLabel
                         variant={colorMode == "light" ? "light" : "normal"}
                         value={hookPublisherCreate.$publisherFormData.name}

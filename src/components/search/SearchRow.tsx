@@ -13,8 +13,8 @@ const SearchRow = ({ text, onClick, image }: any) => {
       onClick={onClick}
       _hover={{
         cursor: "pointer",
-        backgroundColor: `${colorMode == "light" ? "" : "#030c1a"}`,
-        border: `${style.card.border.default}!important`,
+        backgroundColor: `${colorMode == "light" ? "#f2f5fd" : "#030c1a"}`,
+        border: `${colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.default}!important`,
       }}
       style={{
         display: "flex",

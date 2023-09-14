@@ -123,11 +123,11 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
       hookAlchemy.nftByAddress.map((nft: any) => {
         if (
           nft.contract.address.toLowerCase() ==
-            config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS.toLowerCase() ||
+          config.MACHA_CALIBRATION_SBT_CONTRACT_ADDRESS.toLowerCase() ||
           nft.contract.address.toLowerCase() ==
-            config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS.toLowerCase() ||
+          config.MACHA_GOERLI_SBT_CONTRACT_ADDRESS.toLowerCase() ||
           nft.contract.address.toLowerCase() ==
-            config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS.toLowerCase()
+          config.MACHA_MUMBAI_SBT_CONTRACT_ADDRESS.toLowerCase()
         ) {
           setHasNft(true);
         }
@@ -262,30 +262,14 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                                 />
                               </FlexRow>
                             }
-                            footer={
-                              <FlexRow paddingBottom={style.padding.md} marginBottom="3rem">
-                                <ButtonNative
-                                  text="Claim NFT and own your Macha Profile"
-                                  onClick={() => {
-                                    console.log("submit clicked");
-                                    // hookCreatorCreate.nextFormStep();
-                                    hookNftMint.submit();
-                                  }}
-                                  variant="state_brand"
-                                  width="60%"
-                                  marginTop="xs"
-                               
-                                />
-                              </FlexRow>
-                            }
                           >
                             <Box
                               width="100%"
                               height="100%"
                               display={"flex"}
                               justifyContent={"center"}
-                              // padding={style.padding.md}
-                              // overflowY="scroll"
+                            // padding={style.padding.md}
+                            // overflowY="scroll"
                             >
                               <CardNative
                                 hrAlign={"center"}
@@ -310,6 +294,19 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                               discover your own chain content like ENS, Lens and
                               more.
                             </Text>
+                            <FlexRow>
+                              <ButtonNative
+                                text="Claim NFT and own your Macha Profile"
+                                onClick={() => {
+                                  console.log("submit clicked");
+                                  // hookCreatorCreate.nextFormStep();
+                                  hookNftMint.submit();
+                                }}
+                                variant="state_brand"
+                                width="60%"
+                                marginTop="xs"
+                              />
+                            </FlexRow>
                           </CardNative>
                         </>
                       ) : (
@@ -372,10 +369,10 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                               {selectedTab == "XPs"
                                 ? "Your Rewarded XPs"
                                 : selectedTab == "Tokens"
-                                ? "Your Total Tokens"
-                                : selectedTab == "NFTs"
-                                ? "Your Total NFTs"
-                                : "Your Total Metas"}
+                                  ? "Your Total Tokens"
+                                  : selectedTab == "NFTs"
+                                    ? "Your Total NFTs"
+                                    : "Your Total Metas"}
                             </Text>
                             <FlexRow hrAlign="center" width="15%">
                               <Heading
@@ -385,11 +382,11 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                               >
                                 {selectedTab == "Tokens"
                                   ? hookAlchemy?.userTokens &&
-                                    hookAlchemy?.userTokens.length
+                                  hookAlchemy?.userTokens.length
                                   : selectedTab == "NFTs"
-                                  ? hookAlchemy?.nftByAddress &&
+                                    ? hookAlchemy?.nftByAddress &&
                                     hookAlchemy?.nftByAddress.length
-                                  : ""}
+                                    : ""}
                               </Heading>
                             </FlexRow>
                           </FlexRow>
@@ -497,9 +494,9 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                                                 <Image
                                                   src={
                                                     GlobalIcons[
-                                                      projectSlugToLogo[
-                                                        item?.project
-                                                      ]
+                                                    projectSlugToLogo[
+                                                    item?.project
+                                                    ]
                                                     ]
                                                   }
                                                   height="2rem"

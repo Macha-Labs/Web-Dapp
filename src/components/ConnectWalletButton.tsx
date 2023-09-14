@@ -192,6 +192,8 @@ export const ConnectWalletButton = (props: any) => {
                     <MenuList
                       style={{
                         background: `${colorMode == "light" ? "#ffff" : ""}`,
+                        border: `${colorMode == "light" ? "1px solid #e2e2e2" : ""}`,
+                        borderRadius: `${style.card.borderRadius.button}`
                       }}
                     >
                       <MenuItem

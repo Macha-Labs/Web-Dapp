@@ -38,7 +38,7 @@ const CarouselSlide = ({
       style={{
         background: `${colorMode == "light" ? "rgba(242, 245, 253, 1)" : ""}`,
         backdropFilter: "",
-        boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+        // boxShadow: "-10px 10px 20px 0px rgba(137, 137, 137, 0.30)",
         borderRadius: `${style.card.borderRadius.default}`,
         backgroundSize: "90%",
         height: `${height ? height : "28rem"}`,
