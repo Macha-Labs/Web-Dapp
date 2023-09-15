@@ -94,6 +94,7 @@ const Meta = () => {
               description={
                 hookMeta?.metaData?.meta?.data?.modified?.meta_description
               }
+              showMore={true}
             />
           )}
         </Box>

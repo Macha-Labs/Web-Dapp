@@ -32,7 +32,7 @@ const ContractList = ({ openInNewTab, data }: Props) => {
   const renderComponent = () => {
     return (
       <>
-        <FlexRow hrAlign="flex-start" width="100%" flexWrap="wrap">
+        <FlexRow hrAlign="flex-start" width="100%" flexWrap="wrap" >
           {hookContractList.isLoading && (
             <FlexRow height="500px">
               <Loader size="lg" />

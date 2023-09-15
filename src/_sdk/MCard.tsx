@@ -28,7 +28,8 @@ type Props = {
   music?: any;
   titleMaxw?: any;
   musicplayer?: any;
-  shadowOnHover?: any
+  shadowOnHover?: any;
+  showMore?: boolean;
 };
 
 const MCard = ({
@@ -49,11 +50,13 @@ const MCard = ({
   titleMaxw,
   music,
   musicplayer,
-  shadowOnHover = true
+  shadowOnHover = true,
+  showMore,
 }: Props) => {
   const router = useRouter();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [viewMore, setViewMore] = useState<boolean>(false);
 
   const playAudio = (e: any) => {
     setIsPlaying(true);
@@ -72,7 +75,7 @@ const MCard = ({
   const handleAudioEnded = () => {
     setIsPlaying(false); // Update isPlaying to false when audio ends
   };
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode();
 
   return (
     <Box
@@ -84,7 +87,9 @@ const MCard = ({
       // marginLeft={style.margin["sm"]}
       // marginBottom={style.margin["lg"]}
       width={width ? width : "auto"}
-      border={colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default}
+      border={
+        colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default
+      }
       onClick={onClick}
       cursor={shadowOnHover && "pointer"}
       // flexWrap={"wrap"}
@@ -154,8 +159,12 @@ const MCard = ({
         <FlexRow height="fit-content" hrAlign="flex-start" marginBottom={"xs"}>
           <Avatar src={owner_image} />
           <FlexColumn vrAlign="flex-start" marginLeft={"xxs"}>
-            <Text  color={colorMode == "light" ? "#282828" : ""} mb="0">{owner_name}</Text>
-            <Text  color={colorMode == "light" ? "#282828" : ""} mb="0">{owner_heading}</Text>
+            <Text color={colorMode == "light" ? "#282828" : ""} mb="0">
+              {owner_name}
+            </Text>
+            <Text color={colorMode == "light" ? "#282828" : ""} mb="0">
+              {owner_heading}
+            </Text>
           </FlexColumn>
         </FlexRow>
       )}
@@ -197,7 +206,8 @@ const MCard = ({
       )}
 
       <FlexColumn height="auto" vrAlign="flex-start" padding="0% 3%">
-        <Text color={colorMode == "light" ? "#282828" : ""} 
+        <Text
+          color={colorMode == "light" ? "#282828" : ""}
           className="m-b-0"
           fontSize={"xl"}
           fontWeight={600}
@@ -207,17 +217,41 @@ const MCard = ({
         </Text>
         {/* <Box width="15rem"> */}
         {description && (
-          <Text color={colorMode == "light" ? "#282828" : ""} 
-            
-            className="m-b-0"
-            maxW={titleMaxw ? titleMaxw : "20rem"}
-            fontSize={"md"}
-            marginTop={gStyle.margin["xxs"]}
-          >
-            {image
-              ? truncateString(description, 200)
-              : truncateString(description, 500)}
-          </Text>
+          <>
+            <Text
+              color={colorMode == "light" ? "#282828" : ""}
+              className="m-b-0"
+              maxW={titleMaxw ? titleMaxw : "20rem"}
+              fontSize={"md"}
+              marginTop={gStyle.margin["xxs"]}
+            >
+              {image
+                ? viewMore
+                  ? description
+                  : truncateString(description, 200)
+                : viewMore
+                ? description
+                : truncateString(description, 500)}
+            </Text>
+
+            {showMore && (
+              <span>
+                <Text
+                  color="blue"
+                  _hover={{ textDecoration: "underline", cursor: "pointer" }}
+                  onClick={() => {
+                    if (viewMore) {
+                      setViewMore(false);
+                    } else {
+                      setViewMore(true);
+                    }
+                  }}
+                >
+                  {viewMore ? "View Less" : "View More"}
+                </Text>
+              </span>
+            )}
+          </>
         )}
         {/* </Box> */}
       </FlexColumn>

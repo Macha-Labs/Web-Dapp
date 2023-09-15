@@ -38,7 +38,7 @@ const Custom404 = () => {
           404 - Page Not Found
         </Text>
         <Image
-          src="/assets/empty-state-illustration - phone.svg"
+          src="/assets/empty-state-illustration-phone.svg"
           width={"15rem"}
           marginBottom={style.margin.xxl}
         />

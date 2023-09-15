@@ -3,7 +3,14 @@ import { exploreModules } from "@/data/studio/constant";
 import { truncateString } from "@/helpers";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { Avatar, Box, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Heading,
+  Image,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 
 const GraphCard = ({
   marginRight,
@@ -13,6 +20,7 @@ const GraphCard = ({
   tag,
   onCardClick,
 }: any) => {
+  const { colorMode } = useColorMode();
   return (
     <Box
       onClick={onCardClick}
@@ -66,11 +74,21 @@ const GraphCard = ({
         </>
       </Box>
       <FlexRow vrAlign="center" hrAlign="center" marginTop="xxs">
-        <Heading ml={1} mb={1} fontSize={style.font.h5}>
+        <Heading
+          ml={1}
+          mb={1}
+          fontSize={style.font.h5}
+          color={colorMode == "light" ? "#3d3d3d" : ""}
+        >
           {user}
         </Heading>
       </FlexRow>
-      <Text mb={2} fontSize={style.font.h7} textAlign={"center"}>
+      <Text
+        mb={2}
+        fontSize={style.font.h7}
+        textAlign={"center"}
+        color={colorMode == "light" ? "#3d3d3d" : ""}
+      >
         {truncateString(
           title
             ? title
@@ -86,7 +104,12 @@ const GraphCard = ({
           padding: "5px",
         }}
       >
-        <Text mb={0} fontSize="0.6rem" fontWeight={style.fontWeight.dark}>
+        <Text
+          mb={0}
+          fontSize="0.6rem"
+          fontWeight={style.fontWeight.dark}
+          color={colorMode == "light" ? "#3d3d3d" : ""}
+        >
           {tag}
         </Text>
       </Box>
