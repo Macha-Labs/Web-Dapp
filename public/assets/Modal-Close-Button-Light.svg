@@ -1,0 +1,28 @@
+<svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_ii_2436_48659)">
+<rect x="0.5" width="25" height="25" rx="12.5" fill="url(#paint0_linear_2436_48659)"/>
+</g>
+<path d="M9.55286 8.13307C9.29862 7.87882 8.8864 7.87882 8.63215 8.13307C8.37791 8.38732 8.3779 8.79953 8.63215 9.05378L12.078 12.4996L8.63209 15.9456C8.37784 16.1998 8.37784 16.612 8.63209 16.8663C8.88634 17.1205 9.29856 17.1205 9.5528 16.8663L12.9987 13.4204L16.4447 16.8663C16.6989 17.1205 17.1111 17.1205 17.3654 16.8663C17.6196 16.612 17.6196 16.1998 17.3654 15.9456L13.9194 12.4996L17.3653 9.05378C17.6196 8.79953 17.6196 8.38732 17.3653 8.13307C17.1111 7.87882 16.6988 7.87882 16.4446 8.13307L12.9987 11.5789L9.55286 8.13307Z" fill="white"/>
+<defs>
+<filter id="filter0_ii_2436_48659" x="0.253143" y="-0.246857" width="25.4937" height="25.4937" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="0.246857" dy="0.246857"/>
+<feGaussianBlur stdDeviation="0.987429"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_2436_48659"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="-0.246857" dy="-0.246857"/>
+<feGaussianBlur stdDeviation="0.987429"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0"/>
+<feBlend mode="normal" in2="effect1_innerShadow_2436_48659" result="effect2_innerShadow_2436_48659"/>
+</filter>
+<linearGradient id="paint0_linear_2436_48659" x1="3.22556" y1="-0.375939" x2="28.6015" y2="30.9211" gradientUnits="userSpaceOnUse">
+<stop stop-color="#197CEC"/>
+<stop offset="0.841023" stop-color="#004AD9"/>
+</linearGradient>
+</defs>
+</svg>

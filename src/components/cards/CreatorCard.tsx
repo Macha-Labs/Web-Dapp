@@ -36,7 +36,7 @@ const CreatorCard = ({ modal }: any) => {
     console.log("hookCreatorCreate.tags", hookCreatorCreate.tags);
   }, [hookCreatorCreate.tags]);
 
-  const {colorMode} = useColorMode();
+  const { colorMode } = useColorMode();
   return (
     <Box
       height={"85vh"}
@@ -54,24 +54,32 @@ const CreatorCard = ({ modal }: any) => {
         }}
       >
         <Image
-          src={GlobalIcons["icon-close"]}
+          src={
+            colorMode == "light"
+              ? "/assets/Modal-Close-Button-Light.svg"
+              : GlobalIcons["icon-close"]
+          }
           onClick={() => {
             hookCreatorCreate.setClear();
             modal.onClose();
           }}
           alt=""
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "7px",
-            cursor: "pointer",
-            width: "2rem",
-            height: "2rem",
-            background: `${style.icon.bg.default}`,
-            borderRadius: "50%",
-            boxShadow: `${style.icon.shadow.default}`,
-          }}
+          style={
+            colorMode == "light"
+              ? {}
+              : {
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "7px",
+                  cursor: "pointer",
+                  width: "2rem",
+                  height: "2rem",
+                  background: `${style.icon.bg.default}`,
+                  borderRadius: "50%",
+                  boxShadow: `${style.icon.shadow.default}`,
+                }
+          }
         />
       </Box>
       <FlexRow height="85vh">
@@ -85,8 +93,12 @@ const CreatorCard = ({ modal }: any) => {
               <FlexRow height="85vh" width="85vw">
                 {hookCreatorCreate.step == 3 && (
                   <Box
-                    backgroundImage="/assets/Content_Success_Modal_bg.svg"
-                    // backgroundSize="cover"
+                    backgroundImage={
+                      colorMode == "light"
+                        ? "/assets/Create-Content-Success-Light.svg"
+                        : "/assets/Content_Success_Modal_bg.svg"
+                    }
+                    backgroundSize="cover"
                     backgroundPosition="center"
                     width="100%"
                     height="100%"
@@ -135,7 +147,11 @@ const CreatorCard = ({ modal }: any) => {
                   {hookCreatorCreate.step == 1 && (
                     <Image
                       height={"85vh"}
-                      src="/assets/CreateContentStarting.png"
+                      src={
+                        colorMode == "light"
+                          ? "/assets/Create-Content-Starting-Light.png"
+                          : "/assets/CreateContentStarting.png"
+                      }
                       width={"100%"}
                       objectFit={"cover"}
                       objectPosition={"top"}
@@ -147,7 +163,11 @@ const CreatorCard = ({ modal }: any) => {
                   {hookCreatorCreate.step == 2 && (
                     <Image
                       height={"85vh"}
-                      src="/assets/CreateContentIPFS.png"
+                      src={
+                        colorMode == "light"
+                          ? "/assets/Create-Content-IPFS-Light.png"
+                          : "/assets/CreateContentIPFS.png"
+                      }
                       width={"100%"}
                       objectFit={"cover"}
                       objectPosition={"center center"}
@@ -190,7 +210,7 @@ const CreatorCard = ({ modal }: any) => {
                                   chain_id: chain,
                                 });
                               }}
-                              padding={style.padding.xxs}
+                              padding={style.padding.xxxs}
                               border={
                                 hookCreatorCreate.$creatorFormData.chain_id ==
                                 chain
@@ -337,7 +357,11 @@ const CreatorCard = ({ modal }: any) => {
                           }}
                         >
                           <Image
-                            src="/assets/CreatorUploadImage.svg"
+                            src={
+                              colorMode == "light"
+                                ? "/assets/Upload-Image-Light.svg"
+                                : "/assets/CreatorUploadImage.svg"
+                            }
                             alt="creatorUploadImage"
                           />
                           <Text
@@ -368,7 +392,11 @@ const CreatorCard = ({ modal }: any) => {
                           }}
                         >
                           <Image
-                            src="/assets/CreatorAddLink.svg"
+                            src={
+                              colorMode == "light"
+                                ? "/assets/Upload-Image-Light.svg"
+                                : "/assets/CreatorAddLink.svg"
+                            }
                             alt="creatorAddLink"
                           />
                           <Text
@@ -495,7 +523,11 @@ const CreatorCard = ({ modal }: any) => {
                         marginTop={"lg"}
                         width="100%"
                         text="Select Network and Publish to IPFS"
-                        variant={colorMode=="light"?"state_light":"state_default_hover"}
+                        variant={
+                          colorMode == "light"
+                            ? "state_light"
+                            : "state_default_hover"
+                        }
                         onClick={() => {
                           hookCreatorCreate.nextFormStep();
                         }}
