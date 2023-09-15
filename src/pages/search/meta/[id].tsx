@@ -78,6 +78,7 @@ const Meta = () => {
           ) : (
             <MCard
               // cardHeight={"95vh"}
+              shadowOnHover={false}
               musicplayer={hookMeta?.metaData?.meta?.data?.modified?.meta_audio}
               titleMaxw={"100%"}
               title={hookMeta?.metaData?.meta?.data?.modified?.meta_title}
@@ -158,7 +159,7 @@ const Meta = () => {
                             />
                           ) : (
                             <Avatar
-                              size={"md"}
+                              size={"sm"}
                               marginRight={style.margin.sm}
                               src={GlobalIcons["avatar-default"]}
                             />
@@ -298,7 +299,7 @@ const Meta = () => {
                                     )[0]
                                     ]
                                   ).length -
-                                  1 && style.card.border.card
+                                  1 && (colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.card)
                                 }
                               >
                                 <Text
@@ -319,7 +320,7 @@ const Meta = () => {
                                       )[0]
                                       ][item]
                                       : "[ ]",
-                                    50
+                                    30
                                   )}
                                 </Text>
                                 <Box
@@ -441,7 +442,7 @@ const Meta = () => {
                                     )[0]
                                     ]
                                   ).length -
-                                  1 && style.card.border.card
+                                  1 && ( colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.card)
                                 }
                               >
                                 <Text
@@ -466,7 +467,7 @@ const Meta = () => {
                                       )[0]
                                       ][item]
                                       : "[...]",
-                                    50
+                                    30
                                   )}
                                 </Text>
                                 <Box
@@ -583,7 +584,7 @@ const Meta = () => {
                                     )[0]
                                     ]
                                   ).length -
-                                  1 && style.card.border.card
+                                  1 && ( colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.card)
                                 }
                               >
                                 <Text
@@ -608,7 +609,7 @@ const Meta = () => {
                                       )[0]
                                       ][item]
                                       : "[...]",
-                                    50
+                                    30
                                   )}
                                 </Text>
                                 <Box
@@ -715,7 +716,7 @@ const Meta = () => {
                                       borderBottom={
                                         index !=
                                         Object.keys(source).length - 1 &&
-                                        style.card.border.card
+                                        ( colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.card)
                                       }
                                     >
                                       <Text
@@ -724,7 +725,7 @@ const Meta = () => {
                                         width={"20%"}
                                       >{`${item} : `}</Text>
                                       <Text width={"70%"} textAlign={"right"} color={colorMode == "light" ? "#282828" : ""}>
-                                        {truncateString(source[item], 50)}
+                                        {truncateString(source[item], 30)}
                                       </Text>
                                       <Box
                                         width="6%"

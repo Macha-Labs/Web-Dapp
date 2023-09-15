@@ -8,7 +8,8 @@ import { ChakraProvider, ThemeProvider } from "@chakra-ui/react";
 import {
   RainbowKitProvider,
   darkTheme,
-  getDefaultWallets
+  getDefaultWallets,
+  lightTheme
 } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import { XMTPProvider } from "@xmtp/react-sdk";

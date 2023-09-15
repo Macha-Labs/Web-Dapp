@@ -25,11 +25,11 @@ const InputCopy = ({
     <Box
       marginTop={!firstChild && style.margin.md}
       paddingBottom={!lastChild && style.margin.md}
-      borderBottom={!lastChild && style.card.border.card}
+      borderBottom={!lastChild && ( colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.card)}
       width={"100%"}
     >
       <FlexRow hrAlign="space-between">
-        <Heading color={colorMode == "light" ? "#282828" : ""} mb="0" fontSize={style.font.h6} width={"20%"}>
+        <Heading color={colorMode == "light" ? "#282828" : ""} minWidth="fit-content" mb="0" fontSize={style.font.h6} width={"20%"}>
           {parameter}
         </Heading>
 
@@ -41,7 +41,7 @@ const InputCopy = ({
             textAlign={"right"}
             color={colorMode == "light" ? "#282828" : style.color["white.5"]}
           >
-            {truncateString(JSON.stringify(value), 50)}
+            {truncateString(JSON.stringify(value), 30)}
           </Text>
           <Box width={"7%"}>
             <Button

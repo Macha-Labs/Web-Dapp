@@ -56,7 +56,7 @@ const NavLeft = (props: any) => {
                     src="../../assets/Logo.png"
                     height={"40px"}
                     alt="logo"
-                    borderRadius={style.card.borderRadius.button}
+                    // borderRadius={style.card.borderRadius.button}
                     onClick={() => {
                       router.push("/");
                     }}

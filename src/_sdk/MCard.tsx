@@ -28,6 +28,7 @@ type Props = {
   music?: any;
   titleMaxw?: any;
   musicplayer?: any;
+  shadowOnHover?: any
 };
 
 const MCard = ({
@@ -48,6 +49,7 @@ const MCard = ({
   titleMaxw,
   music,
   musicplayer,
+  shadowOnHover = true
 }: Props) => {
   const router = useRouter();
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -84,7 +86,7 @@ const MCard = ({
       width={width ? width : "auto"}
       border={colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default}
       onClick={onClick}
-      cursor={"pointer"}
+      cursor={shadowOnHover && "pointer"}
       // flexWrap={"wrap"}
       style={{
         transitionTimingFunction: "ease-in-out",
@@ -92,8 +94,8 @@ const MCard = ({
         transitionDuration: "600ms",
       }}
       _hover={{
-        border: `${gStyle.card.border.meta}`,
-        boxShadow: "-0.15px 0.15px 28px 0px #004AD9",
+        border: `${shadowOnHover && gStyle.card.border.meta}`,
+        boxShadow: `${shadowOnHover && "-0.15px 0.15px 28px 0px #004AD9"}`,
       }}
     >
       <FlexRow

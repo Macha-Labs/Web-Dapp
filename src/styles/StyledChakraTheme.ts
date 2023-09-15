@@ -6,33 +6,37 @@ const theme = extendTheme({
   initialColorMode: "system",
   useSystemColorMode: true,
   styles: {
-    global: {
+    global: (props: any) => ({
       html: {
-        backgroundColor: `${style.color.bgMain} !important`,
+        backgroundColor: props.colorMode == "light" ?  "#f2f5fd" :`${style.color.bgMain} !important`,
       },
       body: {
-        backgroundColor: `${style.color.bgMain} !important`,
+        backgroundColor: props.colorMode == "light" ?  "#f2f5fd" :`${style.color.bgMain} !important`,
       },
       "h1, h2, h3, h4, h5, h6": {
-        color: `${style.color.h}`,
+        color: props.colorMode == "light" ? "#282828" : `${style.color.h}`,
       },
       "div, p, span": {
-        color: `${style.color.p}`,
+        color: props.colorMode == "light" ? "#3d3d3d" :`${style.color.p}`,
       },
       "*::placeholder": {
         color: `${style.colorPlaceholder}`,
       },
       "::-webkit-scrollbar": {
-        width: "5px !important"
+        width: "10px"
       },
       "::-webkit-scrollbar-thumb": {
-        background: `${mode("#ffff","#0f172e")} !important`
+        background: props.colorMode == "light" ? "#c8c8c8" : "#0f172e",
+        borderRadius: "20px",
+        width: "8px",
+        marginRight: "2px"
       },
       "::-webkit-scrollbar-track": {
-        background: "#00040d !important"
+        background: props.colorMode == "light" ? "#ededed" : "#00040d !important",
+        // display: props.colorMode == "light" ? "none" : "block"
       },
       "::-webkit-scrollbar-thumb:hover": {
-        background: "#0f172ec1 !important"
+        background: props.colorMode == "light" ? "#9fabc8" : "#172857"
       },
       ".no-scrollbar::-webkit-scrollbar": {
         display: "none"
@@ -101,7 +105,7 @@ const theme = extendTheme({
         background: `${mode("#ffff", `${style.input.bg.default}`)} !important`,
         border: "0px",
       },
-    },
+    }),
   },
   textStyles: {},
   components: {
@@ -135,7 +139,7 @@ const theme = extendTheme({
             },
             _focusVisible: {
               bg: "#ffff",
-              shadow: `${style.input.shadow.hover}`,
+              // shadow: `${style.input.shadow.hover}`,
             },
           },
         },

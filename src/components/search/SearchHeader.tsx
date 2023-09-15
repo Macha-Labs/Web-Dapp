@@ -94,6 +94,11 @@ const SearchHeader = ({ options }: Props) => {
           </Box>
           {showSuggestions && (
             <Box
+              sx={{
+                '&::-webkit-scrollbar-thumb': {
+                  width: "1px !important",
+                }
+              }}
               width={"100%"}
               marginTop={style.margin.sm}
               borderRadius={style.card.borderRadius.default}
@@ -129,8 +134,9 @@ const SearchHeader = ({ options }: Props) => {
                     mb={style.margin.xxs}
                     fontSize={style.font.h7}
                     color={
-                      colorMode == "light" ? "#3d3d3d" : style.color["white.5"]
+                      colorMode == "light" ? "#282828" : style.color["white.5"]
                     }
+                    fontWeight={style.fontWeight.dark}
                   >
                     Trending Searches
                   </Text>
@@ -182,8 +188,9 @@ const SearchHeader = ({ options }: Props) => {
                     mb={style.margin.xxs}
                     fontSize={style.font.h7}
                     color={
-                      colorMode == "light" ? "#3d3d3d" : style.color["white.5"]
+                      colorMode == "light" ? "#282828" : style.color["white.5"]
                     }
+                    fontWeight={style.fontWeight.dark}
                   >
                     Explore More
                   </Text>
@@ -216,6 +223,7 @@ const SearchHeader = ({ options }: Props) => {
           )}
         </InputGroup>
       </FlexColumn>
+      
       <style jsx>{`
         .searchHeader {
         }
