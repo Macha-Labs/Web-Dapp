@@ -108,6 +108,7 @@ export const ConnectWalletButton = (props: any) => {
                       marginBottom="0px"
                       fontSize={props?.font}
                       style={{ marginBottom: "0px", paddingBottom: "0px" }}
+                      color="#ffffff"
                     >
                       Connect Wallet
                     </Text>

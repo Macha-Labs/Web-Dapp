@@ -26,7 +26,7 @@ export const commonStyle: any = {
     xl: "2.4rem",
     xxl: "3.2rem",
     xxxl: "4rem",
-    "3.5": "5rem",
+    "3.5xl": "5rem",
     "4xl": "6rem",
     "5xl": "8rem",
     nav: "70px",

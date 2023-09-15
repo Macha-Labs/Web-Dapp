@@ -100,15 +100,17 @@ const NavLeft = (props: any) => {
                         )
                       ) : router.pathname === `/` ? (
                         <Image
-                          width="2rem"
-                          src="/assets/icons/base-blue-search.svg"
-                          alt="icon-user"
+                          width="2.2rem"
+                          src="/assets/icons/Dark_icons/dark-search.svg"
+                          alt="icon-dark-user"
                         />
                       ) : (
                         <Image
-                          width="2rem"
-                          src="/assets/icons/Dark_icons/dark-search.svg"
-                          alt="icon-dark-user"
+                          width="1.5rem"
+                          // src="/assets/icons/Dark_icons/dark-search.svg"
+                          // alt="icon-dark-user"
+                          src="/assets/icons/base-blue-search.svg"
+                          alt="icon-user"
                         />
                       )}
                     </FlexRow>
@@ -146,15 +148,17 @@ const NavLeft = (props: any) => {
                         )
                       ) : router.pathname === `/profile` ? (
                         <Image
-                          width="2rem"
-                          src="/assets/icons/Base_blue_icons/base-blue-user.svg"
-                          alt="icon-user"
+                          width="2.2rem"
+                          src="/assets/icons/Dark_icons/dark-user.svg"
+                          alt="icon-dark-user"
                         />
                       ) : (
                         <Image
-                          width="2rem"
-                          src="/assets/icons/Dark_icons/dark-user.svg"
-                          alt="icon-dark-user"
+                          width="1.5rem"
+                          // src="/assets/icons/Dark_icons/dark-user.svg"
+                          // alt="icon-dark-user"
+                          src="/assets/icons/Base_blue_icons/base-blue-user.svg"
+                          alt="icon-user"
                         />
                       )}
                     </FlexRow>
