@@ -39,7 +39,7 @@ export default function Document() {
               marginBottom={style.margin.xxl}
             />
             <Image
-              src="/assets/empty-state-illustration - phone.svg"
+              src="/assets/empty-state-illustration-phone.svg"
               width={"15rem"}
             // marginTop={style.margin.xxl}
             />
@@ -48,6 +48,7 @@ export default function Document() {
               marginTop={style.margin.xl}
               fontSize={style.font.h5}
               textAlign={"center"}
+              color={"#ffff"}
             >
               Thanks for visiting!
             </Text>
@@ -55,6 +56,7 @@ export default function Document() {
               fontSize={style.font.h4}
               textAlign={"center"}
               marginBottom={style.margin.xl}
+              color={"#ffff"}
             >
               This link is currently only accessible on desktop.
             </Text>
@@ -79,6 +81,7 @@ export default function Document() {
                   padding={style.padding.sm}
                   borderRadius={style.button.borderRadius.default}
                   height={"2rem"}
+                  color={"#ffff"}
                 >
                   Follow On Twitter
                 </Button>
