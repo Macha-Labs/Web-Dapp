@@ -14,10 +14,12 @@ const theme = extendTheme({
         backgroundColor: props.colorMode == "light" ?  "#f2f5fd" :`${style.color.bgMain} !important`,
       },
       "h1, h2, h3, h4, h5, h6": {
-        color: props.colorMode == "light" ? "#282828" : `${style.color.h}`,
+        // color: props.colorMode == "light" ? "#282828" : `${style.color.h}`,
+        color: "#ffff"
       },
       "div, p, span": {
-        color: props.colorMode == "light" ? "#3d3d3d" :`${style.color.p}`,
+        // color: props.colorMode == "light" ? "#3d3d3d" :`${style.color.p}`,
+        color: "#ffff"
       },
       "*::placeholder": {
         color: `${style.colorPlaceholder}`,
