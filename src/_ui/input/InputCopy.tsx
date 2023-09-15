@@ -41,7 +41,7 @@ const InputCopy = ({
             textAlign={"right"}
             color={colorMode == "light" ? "#282828" : style.color["white.5"]}
           >
-            {truncateString(JSON.stringify(value), 30)}
+            {truncateString(String(value), 30)}
           </Text>
           <Box width={"7%"}>
             <Button
