@@ -383,7 +383,7 @@ const ChatNew = (props: any) => {
           onClick={() => {
             console.log("useraddresses", [
               ...userAddresses,
-              ...hookPortalChannelMembership?.userIds,
+              // ...hookPortalChannelMembership?.userIds,
             ]);
 
             // console.log("profilefromlens", hookLensConnections.profile);
@@ -432,48 +432,24 @@ const ChatNew = (props: any) => {
                 onChange={handleCheckboxChange}
               />
             </Box>
-            {hookPortalChannelMembership?.users.length && (
+            {/* {hookPortalChannelMembership?.users.length && ( */}
               <StyledRow className="flex-wrap">
                 <Tag
                   className="m-r-0-5 m-b-0-5"
                   style={{ backgroundColor: "red", cursor: "pointer" }}
                   key={`label-clearall `}
                   onClick={() => {
-                    hookPortalChannelMembership.setUsers([]);
-                    hookPortalChannelMembership.setUsersIds([]);
+                    // hookPortalChannelMembership.setUsers([]);
+                    // hookPortalChannelMembership.setUsersIds([]);
                   }}
                 >
                   <StyledRow className="vr-center p-0-5">
                     <Text>Clear All</Text>
                   </StyledRow>
                 </Tag>
-                {hookPortalChannelMembership?.users?.map((item: any) => {
-                  return (
-                    <Tag className="m-r-0-5 m-b-0-5" key={`label-${item}`}>
-                      <StyledRow className="vr-center p-0-5">
-                        <Avatar
-                          src={helperIPFS(item?.lens?.image)}
-                          className="m-r-0-5"
-                          size="sm"
-                        />
-                        <Text>
-                          {item?.lens?.name
-                            ? item?.lens?.name
-                            : item?.lens?.handle
-                            ? item?.lens?.handle
-                            : truncateAddress(item?.lens?.ownedBy)}
-                        </Text>
-                      </StyledRow>
-                      <TagCloseButton
-                        onClick={() => {
-                          hookPortalChannelMembership.handleCheckedUsers(item);
-                        }}
-                      />
-                    </Tag>
-                  );
-                })}
+               
               </StyledRow>
-            )}
+           
             {checkboxValues.checkbox1 && (
               <Box
                 height={200}
@@ -483,7 +459,7 @@ const ChatNew = (props: any) => {
                 borderColor="gray.700"
               >
                 <Input placeholder="Search" className="m-b-1" />
-                <TemplateFollowers />
+                
               </Box>
             )}
             <Box
@@ -565,37 +541,7 @@ const ChatNew = (props: any) => {
     return { header: header, body: body };
   };
 
-  const TemplateFollowers = () => {
-    return hookPortalChannelMembership?.followers.length ? (
-      hookPortalChannelMembership?.followers?.map((item: any, index: any) => {
-        return (
-          <StyledRow key={`key-${item?.id}`} className="hr-between p-1 ">
-            <StyledRow className="vr-center">
-              <Avatar src={helperIPFS(item?.lens?.image)} className="m-r-0-5" />
-              <Text>
-                {item?.lens?.name
-                  ? item?.lens?.name
-                  : item?.lens?.handle
-                  ? item?.lens?.handle
-                  : truncateAddress(item?.lens?.ownedBy)}
-              </Text>
-            </StyledRow>
-
-            <Checkbox
-              isChecked={hookPortalChannelMembership?.userIds?.includes(
-                String(item?.lens?.ownedBy?.toLowerCase())
-              )}
-              onChange={() =>
-                hookPortalChannelMembership.handleCheckedUsers(item)
-              }
-            />
-          </StyledRow>
-        );
-      })
-    ) : (
-      <></>
-    );
-  };
+  
 
   const TemplateLens = () => {
     return (

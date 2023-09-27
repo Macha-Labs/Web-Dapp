@@ -1,7 +1,7 @@
+import FlexColumn from "@/_ui/flex/FlexColumn";
 import InputSearch from "@/_ui/input/InputSearch";
 import useChatChannelsStore from "@/store/useChatChannelsStore";
 import useChatChannelStore from "@/store/useChatChannelStore";
-import { StyledCol } from "@/styles/StyledComponents";
 import { Button, Heading, Image, Spinner } from "@chakra-ui/react";
 import Link from "next/link";
 
@@ -11,34 +11,14 @@ const ChatNonDisplay = () => {
 
   return (
     <>
-      {$channelLoad && (
-        <StyledCol className="flex-hr-vr-center h-100">
-          <Spinner size="lg" />
-        </StyledCol>
-      )}
+      <FlexColumn>
+        <Image src="/assets/noChannels.png" className="w-30 m-b-1" />
+        <Heading className="m-b-1" size="lg">
+          Getting Started
+        </Heading>
 
-      {!$channelLoad && $channels?.length && (
-        <StyledCol className="flex-hr-vr-center h-100">
-          <Image src="/assets/nochatselected.png" className="w-30 m-b-2" />
-          <Heading className="m-b-1" size="lg">
-            Select Channel
-          </Heading>
-          <Heading className="" size="xs">
-            No chat selected, select from the pannel
-          </Heading>
-        </StyledCol>
-      )}
-
-      {!$channelLoad && !$channels?.length && (
-        <StyledCol className="flex-hr-vr-center h-100">
-          <Image src="/assets/noChannels.png" className="w-30 m-b-1" />
-          <Heading className="m-b-1" size="lg">
-            Getting Started
-          </Heading>
-
-          <InputSearch width="80%" />
-        </StyledCol>
-      )}
+        <InputSearch width="80%" />
+      </FlexColumn>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import LayoutInputs from "@/layouts/options/LayoutInputs";
-import usePortalChannel from "../../hooks/portal/usePortalChannel";
+// import usePortalChannel from "../../hooks/portal/usePortalChannel";
 import {
   Avatar,
   Button,
@@ -14,7 +14,7 @@ import {
 import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import ModalSlider from "@/_ui/modal/ModalSlider";
 import useChatChannelStore from "@/store/useChatChannelStore";
-import { ChatContext } from "@/providers/ChatProvider";
+// import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatEdit = (props: any) => {
   /**
@@ -22,15 +22,15 @@ const ChatEdit = (props: any) => {
    *
    *
    **/
-  const chatContext = useContext(ChatContext)
+  
   const $channel = useChatChannelStore((state: any) => state.channel);
   const toast = useToast();
 
   const handleToggle = () => {
-    hookPortalChannel?.setChannel({
-      ...hookPortalChannel?.channel,
-      private: !hookPortalChannel?.channel?.private,
-    });
+    // hookPortalChannel?.setChannel({
+    //   ...hookPortalChannel?.channel,
+    //   private: !hookPortalChannel?.channel?.private,
+    // });
   };
   /**
    * @description callbacks
@@ -45,8 +45,7 @@ const ChatEdit = (props: any) => {
       position: "bottom-right",
     });
 
-    chatContext?.hookChannel?.reload();
-    chatContext?.hookChannelList?.load();
+
     props.modal.onClose();
   };
 
@@ -71,10 +70,7 @@ const ChatEdit = (props: any) => {
    *
    *
    **/
-  const hookPortalChannel = usePortalChannel(
-    $channel,
-    { edit: callBack, prompt: callBackPrompt }
-  );
+  
 
   /**
    * @description
@@ -89,28 +85,28 @@ const ChatEdit = (props: any) => {
    *
    *
    **/
-  const data = [
-    {
-      label: "Name",
-      value: hookPortalChannel?.channel?.name,
-      onChange: (text: any) => {
-        hookPortalChannel?.setChannel({
-          ...hookPortalChannel?.channel,
-          name: text,
-        });
-      },
-    },
-    {
-      label: "Description",
-      value: hookPortalChannel?.channel?.description,
-      onChange: (text: any) => {
-        hookPortalChannel?.setChannel({
-          ...hookPortalChannel?.channel,
-          description: text,
-        });
-      },
-    },
-  ];
+  // const data = [
+  //   {
+  //     label: "Name",
+  //     value: hookPortalChannel?.channel?.name,
+  //     onChange: (text: any) => {
+  //       hookPortalChannel?.setChannel({
+  //         ...hookPortalChannel?.channel,
+  //         name: text,
+  //       });
+  //     },
+  //   },
+  //   {
+  //     label: "Description",
+  //     value: hookPortalChannel?.channel?.description,
+  //     onChange: (text: any) => {
+  //       hookPortalChannel?.setChannel({
+  //         ...hookPortalChannel?.channel,
+  //         description: text,
+  //       });
+  //     },
+  //   },
+  // ];
 
   /**
    * @description
@@ -133,9 +129,9 @@ const ChatEdit = (props: any) => {
           variant="state_brand"
           size="sm"
           onClick={() => {
-            hookPortalChannel?.update();
+            // hookPortalChannel?.update();
           }}
-          isLoading={hookPortalChannel?.isLoading}
+          // isLoading={hookPortalChannel?.isLoading}
         >
           Save
         </Button>
@@ -149,14 +145,14 @@ const ChatEdit = (props: any) => {
             <Avatar
               size="2xl"
               className="m-v-1"
-              name={hookPortalChannel?.channel?.name}
+              // name={hookPortalChannel?.channel?.name}
               src={URL.createObjectURL(profileImage)}
             />
           ) : (
             <Avatar
               size="2xl"
               className="m-v-1"
-              name={hookPortalChannel?.channel?.name}
+              // name={hookPortalChannel?.channel?.name}
             />
           )}
           <input
@@ -188,7 +184,7 @@ const ChatEdit = (props: any) => {
             </StyledCol>
             <StyledCol>
               <Switch
-                isChecked={hookPortalChannel?.channel?.private}                
+                // isChecked={hookPortalChannel?.channel?.private}                
                 onChange={handleToggle}
               />
             </StyledCol>

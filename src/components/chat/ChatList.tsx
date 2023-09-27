@@ -82,7 +82,7 @@ const ChatList = (props: any) => {
                 <StyledRow
                   className="hr-between w-100"
                   onClick={() => {
-                    hookPortalChannel.muteChannel(props.item);
+                    // hookPortalChannel.muteChannel(props.item);
                   }}
                 >
                   Mute Channel
@@ -98,7 +98,7 @@ const ChatList = (props: any) => {
                 <StyledRow
                   className="hr-between w-100"
                   onClick={() => {
-                    hookPortalChannel.unMuteChannel(props.item);
+                    // hookPortalChannel.unMuteChannel(props.item);
                   }}
                 >
                   Unmute Channel
@@ -115,7 +115,7 @@ const ChatList = (props: any) => {
                 <StyledRow
                   className="hr-between w-100"
                   onClick={() => {
-                    hookPortalChannel.deleteChannel(props.item);
+                    // hookPortalChannel.deleteChannel(props.item);
                   }}
                 >
                   Delete Channel
@@ -133,7 +133,7 @@ const ChatList = (props: any) => {
                 <StyledRow
                   className="hr-between w-100"
                   onClick={() => {
-                    hookPortalChannel.deleteChannel(props.item);
+                    // hookPortalChannel.deleteChannel(props.item);
                   }}
                 >
                   Delete Channel
@@ -149,7 +149,7 @@ const ChatList = (props: any) => {
                 <StyledRow
                   className="hr-between w-100"
                   onClick={() => {
-                    hookPortalChannel.leaveChannel(props.item);
+                    // hookPortalChannel.leaveChannel(props.item);
                   }}
                 >
                   Leave Channel
