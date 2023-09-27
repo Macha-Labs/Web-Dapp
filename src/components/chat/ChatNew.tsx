@@ -161,7 +161,7 @@ const ChatNew = (props: any) => {
               // hookPortalChannel?.update(hookPortalChannelMembership?.userIds);
             }}
             variant="state-brand"
-            size="sm"
+            width="100%"
             // isLoading={hookPortalChannel?.isLoading}
           >
             Create New

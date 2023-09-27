@@ -12,6 +12,7 @@ import NavTop from "@/_ui/nav/NavTop";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NewChatList from "@/components/chat/NewChatList";
 import FlexRow from "@/_ui/flex/FlexRow";
+import NavMeta from "@/_ui/nav/NavMeta";
 
 const Chat = () => {
   const renderNavLeft = () => {
@@ -23,13 +24,14 @@ const Chat = () => {
   };
 
   const renderNavTop = () => {
-    return <NavTop />;
+    return <NavMeta />;
   };
 
   const renderBody = () => {
     return (
-      <FlexRow vrAlign="flex-start">
+      <FlexRow vrAlign="flex-start" >
         <NewChatList />
+        
         <ChatContainer />
       </FlexRow>
     );

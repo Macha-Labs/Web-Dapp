@@ -12,12 +12,16 @@ const ChatNonDisplay = () => {
   return (
     <>
       <FlexColumn>
-        <Image src="/assets/noChannels.png" className="w-30 m-b-1" />
-        <Heading className="m-b-1" size="lg">
+        <Image
+          src="/assets/Macha-logo-text.svg"
+          alt="macha-logo"
+          marginBottom="2rem"
+        />
+        {/* <Heading className="m-b-1" size="lg">
           Getting Started
-        </Heading>
+        </Heading> */}
 
-        <InputSearch width="80%" />
+        <InputSearch width="80%" placeholder="Search for new internet" />
       </FlexColumn>
     </>
   );

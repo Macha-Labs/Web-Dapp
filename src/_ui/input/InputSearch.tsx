@@ -72,7 +72,7 @@ const InputSearch = ({
         _placeholder={{ color: colorMode == "light" ? `#c8c8c8` :`#132041` }}
         // width={width}
         height={"50px"}
-        border={colorMode == "light" ? "" : gStyle.input.border.search}
+      border={colorMode == "light" ? "" : gStyle.input.border.search}
         borderRadius={gStyle.input.borderRadius.default}
       />
     </InputGroup>
