@@ -6,15 +6,17 @@ import ModalWindow from "@/_ui/modal/ModalWindow";
 // import Nav from "@/_ui/nav/Nav";
 import { AuthContext } from "@/providers/AuthProvider";
 import { StyledChat, StyledChatList } from "@/styles/StyledComponents";
-import { Divider, useDisclosure } from "@chakra-ui/react";
+import { Divider, Flex, useColorMode, useDisclosure } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import NavTop from "@/_ui/nav/NavTop";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NewChatList from "@/components/chat/NewChatList";
 import FlexRow from "@/_ui/flex/FlexRow";
 import NavMeta from "@/_ui/nav/NavMeta";
+import { style } from "@/styles/StyledConstants";
 
 const Chat = () => {
+  const { colorMode } = useColorMode();
   const renderNavLeft = () => {
     return (
       <>
@@ -29,11 +31,15 @@ const Chat = () => {
 
   const renderBody = () => {
     return (
-      <FlexRow vrAlign="flex-start" >
+      <Flex
+        justifyContent="flex-start"
+        background={colorMode == "light" ? "#fff" : style.input.bg.default}
+        padding={style.padding.sm}
+        borderRadius={style.card.borderRadius.default}
+      >
         <NewChatList />
-        
         <ChatContainer />
-      </FlexRow>
+      </Flex>
     );
   };
   return (
