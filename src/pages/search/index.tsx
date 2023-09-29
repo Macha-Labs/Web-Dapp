@@ -7,6 +7,7 @@ import Loader from "@/_ui/loader/Loader";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import useSearch from "@/hooks/studio/useSearch";
+import useVectorSearch from "@/hooks/studio/useVectorSearch";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Grid, GridItem, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -15,7 +16,7 @@ import { useEffect } from "react";
 
 const Search = () => {
   const router = useRouter();
-  const hookSearch = useSearch();
+  const hookSearch = useVectorSearch();
   const {colorMode} = useColorMode()
 
   useEffect(() => {

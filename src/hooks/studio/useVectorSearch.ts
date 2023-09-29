@@ -1,14 +1,14 @@
-import { searchAllMetas } from "@/service/ApiService";
+import { vectorSearch } from "@/service/ApiService";
 import { useState, useEffect } from "react";
 
-const useSearch = () => {
+const useVectorSearch = () => {
   const [searchResults, setSearchResults] = useState<any>([]);
   const [searchString, setSearchString] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>(true);
 
   const _fetch = async (searchTerm: string) => {
     setIsLoading(true);
-    const res = await searchAllMetas(searchTerm);
+    const res = await vectorSearch(searchTerm);
     if (res.data) {
       setSearchResults(res.data);
     } else {
@@ -27,4 +27,4 @@ const useSearch = () => {
   };
 };
 
-export default useSearch;
+export default useVectorSearch;

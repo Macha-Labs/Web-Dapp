@@ -7,11 +7,12 @@ import InputSearch from "../input/InputSearch";
 import NavTop from "./NavTop";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
+import useVectorSearch from "@/hooks/studio/useVectorSearch";
 
 const NavStudio = () => {
-  const hookSearch = useSearch();
+  const hookSearch = useVectorSearch();
   const router = useRouter();
-  const {colorMode, toggleColorMode} = useColorMode()
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <NavTop
@@ -31,7 +32,6 @@ const NavStudio = () => {
       }
       rightElem={
         <FlexRow width="fit-content">
-
           <ConnectWalletButton
             showBalance={true}
             showRegisterPublisher={true}
@@ -43,11 +43,19 @@ const NavStudio = () => {
               toggleColorMode();
             }}
           >
-            <FlexRow >
-              <Image src={colorMode == "light" ? GlobalIcons["icon-dark-mode"] : GlobalIcons["icon-light-mode"]} height="2rem" width="3rem" marginLeft={style.margin.xxs} />
+            <FlexRow>
+              <Image
+                src={
+                  colorMode == "light"
+                    ? GlobalIcons["icon-dark-mode"]
+                    : GlobalIcons["icon-light-mode"]
+                }
+                height="2rem"
+                width="3rem"
+                marginLeft={style.margin.xxs}
+              />
             </FlexRow>
           </Box>
-
         </FlexRow>
       }
     />

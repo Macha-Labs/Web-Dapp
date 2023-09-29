@@ -35,6 +35,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import InputSearch from "@/_ui/input/InputSearch";
 import useSearch from "@/hooks/studio/useSearch";
+import useVectorSearch from "@/hooks/studio/useVectorSearch";
 
 const MetaCopy = () => {
   const hookMeta = useMeta();
@@ -43,7 +44,7 @@ const MetaCopy = () => {
   const { conversations } = useConversations();
   const sendMessage = useSendMessage();
   const $signer = useAuthStore((state: any) => state.signer);
-  const hookSearch = useSearch();
+  const hookSearch = useVectorSearch();
 
   const handleConnect = useCallback(async () => {
     console.log($signer);

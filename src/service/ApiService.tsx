@@ -46,6 +46,21 @@ export const searchAllMetas = async (searchTerm: string) => {
   }
 };
 
+export const vectorSearch = async (searchQuery: string) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/metas/vectorSearch/${searchQuery}`
+  );
+  if (response.status == 200) {
+    console.log("response vectorSearch api", response);
+    const data = await response.json();
+    return data;
+  } else {
+    return {
+      error: "Not found",
+    };
+  }
+};
+
 export const contractData = async (contractName: string) => {
   const response = await fetch(
     `${config.metaServer}/indexer/transactions/fetch-by-name/${contractName}`

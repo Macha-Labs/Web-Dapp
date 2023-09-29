@@ -3,6 +3,7 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
+import NavSearch from "@/_ui/nav/NavSearch";
 import SearchHeader from "@/components/search/SearchHeader";
 import { style } from "@/styles/StyledConstants";
 import { Box, Image, useColorMode } from "@chakra-ui/react";
@@ -17,7 +18,7 @@ const Search = () => {
   };
 
   const renderNavTop = () => {
-    return <NavMeta />;
+    return <NavSearch showLogo={true} />;
   };
 
   const renderBody = () => {
@@ -27,7 +28,7 @@ const Search = () => {
           hrAlign="flex-start"
           vrAlign="flex-start"
           padding="0rem 0rem"
-          height="150vh"
+          height="130vh"
         >
           <Box
             border={colorMode ? "" : style.card.border.default}
@@ -39,7 +40,7 @@ const Search = () => {
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
-            height="100%"
+            height="100%" //90
             width={"100%"}
             // borderRadius={style.card.borderRadius.button}
             // marginTop={style.margin.md}
@@ -50,7 +51,7 @@ const Search = () => {
             paddingTop={style.margin["4xl"]}
             justifyContent={"flex-start"}
           >
-            <Image
+            {/* <Image
               // className=""
               src="/assets/MACHALogo.svg"
               alt="logo"
@@ -58,9 +59,10 @@ const Search = () => {
               height={78}
               // width={246}
               // marginBottom={style.margin.sm}
-            />
+            /> */}
             <Image
               // className="headerLogo"
+              marginTop="4.5rem"
               src={
                 colorMode == "light"
                   ? "/assets/explore/search-home-title-light.svg"
@@ -81,9 +83,9 @@ const Search = () => {
 
   return (
     <FlexWindow
-      view="both"
+      view="col" //
       navLeft={renderNavLeft()}
-      // navTop={renderNavTop()}
+      navTop={renderNavTop()}
       padding="0% 0%"
       bodyElem={renderBody()}
       noPaddingTop={true}

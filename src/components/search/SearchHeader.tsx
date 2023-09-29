@@ -14,13 +14,14 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import SearchRow from "./SearchRow";
 import GlobalIcons from "@/styles/GlobalIcons";
+import useVectorSearch from "@/hooks/studio/useVectorSearch";
 
 type Props = {
   options?: any;
 };
 
 const SearchHeader = ({ options }: Props) => {
-  const hookSearch = useSearch();
+  const hookSearch = useVectorSearch();
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const searchRef = useRef(null);
   const router = useRouter();
@@ -95,9 +96,9 @@ const SearchHeader = ({ options }: Props) => {
           {showSuggestions && (
             <Box
               sx={{
-                '&::-webkit-scrollbar-thumb': {
+                "&::-webkit-scrollbar-thumb": {
                   width: "1px !important",
-                }
+                },
               }}
               width={"100%"}
               marginTop={style.margin.sm}
@@ -223,7 +224,7 @@ const SearchHeader = ({ options }: Props) => {
           )}
         </InputGroup>
       </FlexColumn>
-      
+
       <style jsx>{`
         .searchHeader {
         }

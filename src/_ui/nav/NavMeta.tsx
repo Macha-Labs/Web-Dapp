@@ -7,6 +7,7 @@ import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
 import InputSearch from "../input/InputSearch";
 import IconBase from "../icons/IconsBase";
+import useVectorSearch from "@/hooks/studio/useVectorSearch";
 
 type Props = {
   rightElem?: any;
@@ -19,7 +20,7 @@ const NavMeta = ({ rightElem, centerElem, search, showLogo }: Props) => {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(
     search ? search : false
   );
-  const hookSearch = useSearch();
+  const hookSearch = useVectorSearch();
   const router = useRouter();
   const { colorMode } = useColorMode()
 

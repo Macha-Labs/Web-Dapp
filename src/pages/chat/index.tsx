@@ -14,19 +14,16 @@ import NewChatList from "@/components/chat/NewChatList";
 import FlexRow from "@/_ui/flex/FlexRow";
 import NavMeta from "@/_ui/nav/NavMeta";
 import { style } from "@/styles/StyledConstants";
+import NavSearch from "@/_ui/nav/NavSearch";
 
 const Chat = () => {
   const { colorMode } = useColorMode();
   const renderNavLeft = () => {
-    return (
-      <>
-        <NavLeft />
-      </>
-    );
+    return <>{/* <NavLeft /> */}</>;
   };
 
   const renderNavTop = () => {
-    return <NavMeta />;
+    return <NavSearch showLogo={true} />;
   };
 
   const renderBody = () => {
@@ -36,6 +33,7 @@ const Chat = () => {
         background={colorMode == "light" ? "#fff" : style.input.bg.default}
         padding={style.padding.sm}
         borderRadius={style.card.borderRadius.default}
+        marginTop="4.6rem"
       >
         <NewChatList />
         <ChatContainer />
@@ -45,7 +43,7 @@ const Chat = () => {
   return (
     <>
       <FlexWindow
-        view="both"
+        view="col"
         navLeft={renderNavLeft()}
         navTop={renderNavTop()}
         bodyElem={renderBody()}

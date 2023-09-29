@@ -1,10 +1,11 @@
 import InputSearch from "@/_ui/input/InputSearch";
 import useSearch from "@/hooks/studio/useSearch";
+import useVectorSearch from "@/hooks/studio/useVectorSearch";
 import { useRouter } from "next/router";
 import React from "react";
 
 const SearchInput = (searchWidth?: any) => {
-  const hookSearch = useSearch();
+  const hookSearch = useVectorSearch();
   const router = useRouter();
   return (
     <InputSearch
