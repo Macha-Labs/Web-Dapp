@@ -87,8 +87,8 @@ const Search = () => {
 
   return (
     <FlexWindow
-      view="both"
-      navLeft={renderNavLeft()}
+      view="col"
+      // navLeft={renderNavLeft()}
       navTop={renderNavTop()}
       bodyElem={renderBody()}
     ></FlexWindow>

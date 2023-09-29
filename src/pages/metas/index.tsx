@@ -10,14 +10,14 @@ import chains from "@/data/network";
 import { exploreModules } from "@/data/studio/constant";
 import useMetaList from "@/hooks/meta/useMetasList";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 const Metas = () => {
   const router = useRouter();
   const hookMetasList = useMetaList();
-
+  const { colorMode } = useColorMode();
   useEffect(() => {
     hookMetasList._fetchMetaSchemas();
   }, []);
@@ -28,8 +28,13 @@ const Metas = () => {
         height="fit-content"
         width="100%"
         header={
-          <Heading fontSize={style.font.h3} fontWeight={600} className="m-b-0">
-            Discover Meta Content
+          <Heading
+            fontSize={style.font.h3}
+            fontWeight={600}
+            className="m-b-0"
+            color={colorMode == "light" ? "black" : ""}
+          >
+            Discover Metas
           </Heading>
         }
       >
@@ -69,8 +74,8 @@ const Metas = () => {
 
   return (
     <FlexWindow
-      view="both"
-      navLeft={<NavLeft />}
+      view="col"
+      // navLeft={<NavLeft />}
       navTop={<NavMeta />}
       bodyElem={renderBody()}
     ></FlexWindow>
