@@ -1,6 +1,5 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import InputSearch from "@/_ui/input/InputSearch";
-import VectorSearch from "@/components/search/VectorSearch";
 import useChatChannelsStore from "@/store/useChatChannelsStore";
 import useChatChannelStore from "@/store/useChatChannelStore";
 import { Button, Heading, Image, Spinner, useColorMode } from "@chakra-ui/react";
@@ -28,7 +27,6 @@ const ChatNonDisplay = () => {
         </Heading> */}
 
         <InputSearch width="80%" placeholder="Search for new internet" />
-        {/* <VectorSearch/> */}
       </FlexColumn>
     </>
   );
