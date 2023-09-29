@@ -33,7 +33,6 @@ const ChatNonDisplay = () => {
         </Heading> */}
 
         <InputSearch width="80%" placeholder="Search for new internet" />
-        {/* <VectorSearch/> */}
       </FlexColumn>
     </>
   );
