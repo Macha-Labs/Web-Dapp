@@ -28,7 +28,7 @@ const Search = () => {
           hrAlign="flex-start"
           vrAlign="flex-start"
           padding="0rem 0rem"
-          height="130vh"
+          height="110vh"
         >
           <Box
             border={colorMode ? "" : style.card.border.default}

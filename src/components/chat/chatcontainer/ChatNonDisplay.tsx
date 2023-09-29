@@ -2,7 +2,13 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import InputSearch from "@/_ui/input/InputSearch";
 import useChatChannelsStore from "@/store/useChatChannelsStore";
 import useChatChannelStore from "@/store/useChatChannelStore";
-import { Button, Heading, Image, Spinner, useColorMode } from "@chakra-ui/react";
+import {
+  Button,
+  Heading,
+  Image,
+  Spinner,
+  useColorMode,
+} from "@chakra-ui/react";
 import Link from "next/link";
 
 const ChatNonDisplay = () => {
