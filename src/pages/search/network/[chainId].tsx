@@ -357,7 +357,9 @@ const Network = () => {
                 orientation="vertical"
                 margin={0}
                 border={
-                  colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.meta
+                  colorMode == "light"
+                    ? "1px solid #e2e2e2"
+                    : style.card.border.meta
                 }
                 width={"0px"}
               />
@@ -416,6 +418,7 @@ const Network = () => {
                 fontWeight="600"
                 marginBottom={0}
                 marginLeft={style.margin.xxs}
+                color={colorMode == "light" ? "black" : ""}
               >
                 {chainId && chains[chainId]?.chainName}
               </Text>
@@ -431,12 +434,15 @@ const Network = () => {
   };
   return (
     <>
-      <Header title={`Macha | ${chains[chainId]?.chainName}`} />
+      <Header
+        title={`Macha | ${chains[chainId]?.chainName}`}
+        
+      />
       <FlexWindow
-        view="both"
+        view="col"
         bodyElem={renderBody()}
         navTop={<NavMeta />}
-        navLeft={<NavLeft />}
+        // navLeft={<NavLeft />}
       ></FlexWindow>
     </>
   );

@@ -17,6 +17,7 @@ import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import NavMeta from "@/_ui/nav/NavMeta";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -39,7 +40,7 @@ const Network = () => {
   }, [router.query.user, hookUserTxn.page]);
 
   const renderNav = () => {
-    return <NavStudio />;
+    return <NavMeta />;
   };
 
   const renderComponent = () => {
@@ -49,14 +50,17 @@ const Network = () => {
       </FlexRow>
     ) : (
       <>
-        <Box marginTop={style.margin.xxxl} paddingTop={style.padding.xxxl}>
+        <Box
+        // marginTop={style.margin.xxxl}
+        // paddingTop={style.padding.xxxl}
+        >
           <>
             <Box>
               {/* <Text fontSize="3rem">Interactions</Text> */}
               <Flex justify="space-between">
                 <Box
                   display="flex"
-                  alignItems="center"
+                  alignItems="start"
                   marginBottom={style.margin.lg}
                 >
                   <Avatar size="md" src={GlobalIcons["avatar-default"]} />
@@ -66,6 +70,7 @@ const Network = () => {
                     fontWeight="600"
                     marginBottom={0}
                     marginLeft={style.margin.xxs}
+                    textAlign="start"
                   >
                     {truncateAddress(router.query.user)}
                   </Text>
@@ -255,28 +260,7 @@ const Network = () => {
     );
   };
   const renderBody = () => {
-    return (
-      <>
-        <NavBlock
-          back={() => {
-            router.back();
-          }}
-          marginTop={style.margin["nav"]}
-        >
-          <FlexRow hrAlign="flex-start">
-            <Text
-              fontSize={style.font.h5}
-              fontWeight="600"
-              marginBottom={0}
-              //   marginLeft={style.margin.xxs}
-            >
-              {truncateAddress(router.query.user)}
-            </Text>
-          </FlexRow>
-        </NavBlock>
-        <FlexBody>{renderComponent()}</FlexBody>
-      </>
-    );
+    return <>{renderComponent()}</>;
   };
   return (
     <FlexWindow
