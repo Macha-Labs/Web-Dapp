@@ -151,7 +151,7 @@ const PostCard = ({
               <Text
                 color={colorMode == "light" ? "#282828" : ""}
                 className="m-b-0"
-                maxW={titleMaxw ? titleMaxw : "20rem"}
+                maxW={titleMaxw ? titleMaxw : "30rem"}
                 fontSize={"md"}
                 marginTop={gStyle.margin["xxs"]}
               >
