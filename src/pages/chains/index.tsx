@@ -41,8 +41,8 @@ const Chains = () => {
 
   return (
     <FlexWindow
-      view="both"
-      navLeft={<NavLeft />}
+      view="col"
+      // navLeft={<NavLeft />}
       navTop={<NavMeta />}
       bodyElem={renderBody()}
     ></FlexWindow>

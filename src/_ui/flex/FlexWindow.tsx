@@ -29,8 +29,7 @@ export const FlexWindow = ({
   padding,
   background,
 }: Props) => {
-
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
 
   return (
     <div
@@ -39,7 +38,9 @@ export const FlexWindow = ({
         position: "relative",
         width: "100vw",
         minHeight: "100vh",
-        background: `${colorMode == "light" ? "#f2f5fd"  : style.body.bg.default}`,
+        background: `${
+          colorMode == "light" ? "#f2f5fd" : style.body.bg.default
+        }`,
       }}
     >
       {view == "col" && (
@@ -57,7 +58,15 @@ export const FlexWindow = ({
           >
             {navTop}
           </div>
-          <div style={{ marginTop: `${marginTop}` }}>{bodyElem}</div>
+          <div
+            style={{
+              marginTop: `${marginTop}`,
+              padding: `${padding ? padding : "0% 3%"}`,
+              paddingTop: `${noPaddingTop ? "0px" : style.margin["4xl"]}`,
+            }}
+          >
+            {bodyElem}
+          </div>
         </>
       )}
 
@@ -98,7 +107,9 @@ export const FlexWindow = ({
                   paddingTop: `${style.margin.xs}`,
                   zIndex: "1000",
                   width: "95%",
-                  background: `${colorMode == "light" ? "#f2f5fd" : style.body.bg.default}`,
+                  background: `${
+                    colorMode == "light" ? "#f2f5fd" : style.body.bg.default
+                  }`,
                   display: "flex",
                   justifyContent: "center",
                 }}

@@ -147,7 +147,7 @@ const SearchHeader = ({ options }: Props) => {
                   image={GlobalIcons["logo-Lens"]}
                   text="Lens Posts"
                   onClick={() => {
-                    router.push("/search?search=lens_post");
+                    router.push("/explore/lens_post");
                     setShowSuggestions(false);
                   }}
                 />
@@ -155,7 +155,7 @@ const SearchHeader = ({ options }: Props) => {
                   image={GlobalIcons["logo-Ens"]}
                   text="Ens Handles"
                   onClick={() => {
-                    router.push("/search?search=ens_ethereum");
+                    router.push("/explore/ens_ethereum");
                     setShowSuggestions(false);
                   }}
                 />

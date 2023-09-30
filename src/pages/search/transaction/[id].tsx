@@ -111,10 +111,10 @@ const SearchResult = () => {
 
   return (
     <FlexWindow
-      view="both"
+      view="col"
       bodyElem={renderBody()}
       navTop={<NavMeta />}
-      navLeft={<NavLeft />}
+      // navLeft={<NavLeft />}
     ></FlexWindow>
   );
 };

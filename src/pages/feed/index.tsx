@@ -7,7 +7,7 @@ import MotionBar from "@/components/MotionBar";
 import MetaList from "@/components/meta/MetaList";
 import useMetaList from "@/hooks/meta/useMetasList";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, useColorMode } from "@chakra-ui/react";
 
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 const Explorer = () => {
   const hookMetasList = useMetaList();
   const router = useRouter();
-
+  const { colorMode } = useColorMode();
   useEffect(() => {
     if (router.isReady) {
       if (window !== undefined) {
@@ -46,7 +46,12 @@ const Explorer = () => {
       <CardNative
         header={
           <>
-            <Heading fontSize={style.font.h3}>Discover On Web3</Heading>
+            <Heading
+              fontSize={style.font.h3}
+              color={colorMode == "light" ? "black" : ""}
+            >
+              Discover On Web3
+            </Heading>
           </>
         }
       >
@@ -68,8 +73,8 @@ const Explorer = () => {
 
   return (
     <FlexWindow
-      view="both"
-      navLeft={renderNavLeft()}
+      view="col"
+      // navLeft={renderNavLeft()}
       navTop={renderNavTop()}
       bodyElem={renderBody()}
     ></FlexWindow>

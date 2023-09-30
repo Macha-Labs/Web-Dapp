@@ -32,13 +32,18 @@ const NavSearch = ({ rightElem, centerElem, search, showLogo }: Props) => {
       href: "/",
       value: "Search",
     },
+    // {
+    //   href: "/chat",
+    //   value: "Chat",
+    // },
+    
     {
-      href: "/chat",
-      value: "Chat",
+      href: "/chains",
+      value: "Chains",
     },
     {
-      href: "#",
-      value: "Feed",
+      href: "/metas",
+      value: "Metas",
     },
   ];
   const { colorMode, toggleColorMode } = useColorMode();

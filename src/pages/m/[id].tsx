@@ -874,7 +874,7 @@ const MetaCopy = () => {
       view="col"
       noPaddingTop={true}
       navTop={renderNav()}
-      navLeft={<NavLeft />}
+      // navLeft={<NavLeft />}
       bodyElem={renderBody()}
     ></FlexWindow>
   );

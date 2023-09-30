@@ -70,8 +70,13 @@ const Meta = () => {
     }
 
     return (
-      <Box display={"flex"} justifyContent={"space-between"}>
-        <Box width="38%" marginTop="0.5rem">
+      <Box display={"flex"} 
+      justifyContent={"space-between"} 
+      alignItems={"flex-start"}
+      >
+        <Box width="38%" 
+        marginTop="0.5rem"
+        >
           {/* <CardNative height="fit-content" width="100%"></CardNative> */}
           {hookMeta.isLoading ? (
             <CardSkeleton />
@@ -778,14 +783,14 @@ const Meta = () => {
     return (
       <>
         <Box
-          paddingX={style.padding.xxs}
+          // paddingX={style.padding.xxs}
           style={{
             width: "100%",
             overflow: "hidden",
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "start",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "flex-start",
             // paddingTop: `${style.padding.sm}`,
             paddingBottom: `${style.padding.sm}`,
           }}
@@ -808,11 +813,11 @@ const Meta = () => {
   return (
     <FlexWindow
       background={colorMode == "light" ? "" : "#000"}
-      marginTop={style.nav.margin}
-      view="both"
+      // marginTop={style.nav.margin}
+      view="col"
       // noPaddingTop={true}
       navTop={renderNav()}
-      navLeft={<NavLeft />}
+      // navLeft={<NavLeft />}
       bodyElem={renderBody()}
     ></FlexWindow>
   );

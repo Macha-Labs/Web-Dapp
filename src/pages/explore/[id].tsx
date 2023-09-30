@@ -68,10 +68,10 @@ const Explore = () => {
   };
   return (
     <FlexWindow
-      view="both"
+      view="col"
       bodyElem={renderBody()}
       navTop={renderNav()}
-      navLeft={<NavLeft />}
+      // navLeft={<NavLeft />}
     ></FlexWindow>
   );
 };
