@@ -200,5 +200,16 @@ const GlobalIcons: any = {
   "logo-Unstoppable": "/assets/icons/unstoppable-domains.svg",
   "base-chain": "/assets/explore/chain.svg",
   "base-SDK": "/assets/explore/SDK.svg",
+  "brand-discord":"/assets/icons/Socials/light/brand-discord.svg",
+  "brand-linkedin":"/assets/icons/Socials/light/brand-linkedIn.svg",
+  "brand-telegram":"/assets/icons/Socials/light/brand-telegram.svg",
+  "brand-twitter":"/assets/icons/Socials/light/brand-twitter.svg",
+  "dark-discord":"/assets/icons/Socials/dark/dark-discord.svg",
+  "dark-linkedin":"/assets/icons/Socials/dark/dark-linkedIn.svg",
+  "dark-telegram":"/assets/icons/Socials/dark/dark-telegram.svg",
+  "dark-twitter":"/assets/icons/Socials/dark/dark-twitter.svg",
+  "brand-addFriend":"/assets/icons/Socials/light/brand-addFriend.svg",
+  "dark-addFriend":"/assets/icons/Socials/dark/dark-addFriend.svg",
+  
 };
 export default GlobalIcons;
