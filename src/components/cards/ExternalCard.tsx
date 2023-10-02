@@ -1,9 +1,17 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import { Box, Divider, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Image,
+  Link,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import React from "react";
 import { style as gStyle, style } from "@/styles/StyledConstants";
 import IconImage from "@/_ui/icons/IconImage";
+import GlobalIcons from "@/styles/GlobalIcons";
 
 type Props = {
   width?: string;
@@ -60,13 +68,11 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
         <FlexRow marginBottom={style.margin.xxs} vrAlign="flex-start">
           <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
             <Text color={colorMode == "light" ? "black" : ""} m={0}>
-              Feature Requests
-            </Text>
-            <Text color={colorMode == "light" ? "black" : ""} m={0}>
-              MACHA APIs
+              Documentation
             </Text>
           </FlexColumn>
           <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
+            <Link href="https://mirror.xyz/0xE5717ede08ba94e516b6706A6ccBE30D6DA5d80D"></Link>
             <Text color={colorMode == "light" ? "black" : ""} m={0} p={0}>
               Blogs
             </Text>
@@ -84,20 +90,18 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
         </Text>
         <FlexRow marginBottom={style.margin.xxxs}>
           <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-            <Text color={colorMode == "light" ? "black" : ""} m={0}>
-              About
-            </Text>
-            <Text color={colorMode == "light" ? "black" : ""} m={0}>
-              Support
-            </Text>
+            <Link href="https://macha.ai/about">
+              <Text color={colorMode == "light" ? "black" : ""} m={0}>
+                About
+              </Text>
+            </Link>
           </FlexColumn>
           <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-            <Text color={colorMode == "light" ? "black" : ""} m={0}>
-              Careers
-            </Text>
-            <Text color={colorMode == "light" ? "black" : ""} m={0}>
-              Services
-            </Text>
+            <Link href="https://metaworkhq.notion.site/Macha-Hiring-ce58c7a7c36e48b79ea8f9041a72f880">
+              <Text color={colorMode == "light" ? "black" : ""} m={0}>
+                Careers
+              </Text>
+            </Link>
           </FlexColumn>
         </FlexRow>
         <Text
@@ -111,65 +115,44 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
           Connect with us
         </Text>
         <FlexRow marginBottom={style.margin.xxxs} hrAlign="flex-start">
-          {/* <IconImage
-            slug="IconDarkDiscord.svg"
-            style={{ className: "m-r-1" }}
-            onClick={() => {
-              const discordUrl = `https://discord.com/api/webhooks/{webhook.id}/{webhook.token}`;
-              const data = {
-                content: `Check out this link: ${inviteLink}`,
-              };
-              fetch(discordUrl, {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-              })
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                  }
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
-            }}
-          /> */}
-          <IconImage
-            onClick={() => {
-              const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                inviteLink
-              )}&text=${encodeURIComponent("text")}`;
-              window.open(twitterUrl, "_blank");
-            }}
-            slug="icon-twitter"
-            style={{ className: "m-r-1" }}
-          />
-          {/* <IconImage
-            onClick={() => {
-              const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(
-                inviteLink
-              )}&text=${encodeURIComponent("text")}`;
-              window.open(telegramUrl, "_blank");
-            }}
-            slug="IconDarkTwitter.svg"
-            style={{ className: "m-r-1" }}
-          /> */}
-          {/* <IconImage
-            onClick={() => {
-              const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
-                `${"text"} ${inviteLink}`
-              )}`;
-              window.open(whatsappUrl, "_blank");
-            }}
-            slug="IconDarkTwitter.svg"
-            style={{ className: "" }}
-          /> */}
+          <Link href="https://twitter.com/Macha0x">
+            <Image
+              alt="twitter"
+              src={
+                colorMode == "light"
+                  ? GlobalIcons["brand-twitter"]
+                  : GlobalIcons["dark-twitter"]
+              }
+              width="30px"
+              marginRight="1rem"
+            />
+          </Link>
+          <Link href="https://www.linkedin.com/company/metaworklab/">
+            <Image
+              alt="linkedin"
+              src={
+                colorMode == "light"
+                  ? GlobalIcons["brand-linkedin"]
+                  : GlobalIcons["dark-linkedin"]
+              }
+              width="30px"
+              marginRight="1rem"
+            />
+          </Link>
         </FlexRow>
       </FlexColumn>
       <Divider />
-      <FlexRow hrAlign="space-between">Privacy • Terms • © 2023 Macha</FlexRow>
+      <FlexRow hrAlign="space-between">
+        <Link href="https://macha.ai/privacy/">
+          <Text color={colorMode == "light" ? "black" : ""}>Privacy</Text>
+        </Link>
+        <Link href="https://macha.ai/terms/">
+          <Text color={colorMode == "light" ? "black" : ""}>• Terms</Text>
+        </Link>
+        <Text color={colorMode == "light" ? "black" : ""}>
+          • © 2023 MetaWork Labs
+        </Text>
+      </FlexRow>
     </Box>
   );
 };

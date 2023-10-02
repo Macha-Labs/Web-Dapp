@@ -46,20 +46,16 @@ const Search = () => {
 
   const renderBody = () => {
     return (
-      <CardNative
-        header={
-          <>
+      <>
+        <FlexRow hrAlign="space-evenly" vrAlign="flex-start">
+          <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="60%">
             <Heading
               color={colorMode == "light" ? "#282828" : ""}
               fontSize={style.font.h3}
+              marginBottom={style.margin.sm}
             >
               Search results
             </Heading>
-          </>
-        }
-      >
-        <FlexRow hrAlign="space-evenly" vrAlign="flex-start">
-          <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="60%">
             <Box
               // paddingTop={style.margin["lg"]}
               paddingTop={style.margin.navBoth}
@@ -116,36 +112,11 @@ const Search = () => {
               </Grid>
             </Box>
           </FlexColumn>
-          {/* <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="40%">
-            <Text fontSize={style.font.h5} m={0} marginBottom={style.margin.xxxs}>
-              External links
-            </Text>
-            <FlexRow>
-              <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-                <Text m={0}>Feature Requests</Text>
-                <Text m={0}>MACHA APIs</Text>
-              </FlexColumn>
-              <FlexColumn>
-                <Text>Blogs</Text>
-              </FlexColumn>
-            </FlexRow>
-            <Text fontSize={style.font.h5} m={0} marginBottom={style.margin.xxxs}>
-              Company
-            </Text>
-            <FlexRow>
-              <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-                <Text m={0}>About</Text>
-                <Text m={0}>Support</Text>
-              </FlexColumn>
-              <FlexColumn>
-                <Text m={0}>Careers</Text>
-                <Text m={0}>Services</Text>
-              </FlexColumn>
-            </FlexRow>
-          </FlexColumn> */}
-          <ExternalCard width="30%"/>
+          <FlexColumn width="30%" hrAlign="space-between">
+            <ExternalCard />
+          </FlexColumn>
         </FlexRow>
-      </CardNative>
+      </>
     );
   };
 
