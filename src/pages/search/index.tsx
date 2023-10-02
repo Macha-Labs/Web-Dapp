@@ -6,6 +6,7 @@ import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import Loader from "@/_ui/loader/Loader";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
+import ExternalCard from "@/components/cards/ExternalCard";
 import PostCard from "@/components/cards/PostCard";
 import useSearch from "@/hooks/studio/useSearch";
 import useVectorSearch from "@/hooks/studio/useVectorSearch";
@@ -57,25 +58,26 @@ const Search = () => {
           </>
         }
       >
-        <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-          <Box
-            // paddingTop={style.margin["lg"]}
-            paddingTop={style.margin.navBoth}
-            display={"flex"}
-            width="100%"
-            justifyContent={"center"}
-          >
-            <Grid  gap="10px" width="100%">
-              {hookSearch.isLoading && (
-                <FlexRow height="200px" width="80vw">
-                  <Loader size="lg" />
-                </FlexRow>
-              )}
-              {!hookSearch.isLoading &&
-                (hookSearch.searchResults.length !== 0 ? (
-                  hookSearch.searchResults.map((item: any, index: any) => (
-                    <FlexRow key={index} hrAlign="flex-start">
-                      {/* <MCard
+        <FlexRow hrAlign="space-evenly" vrAlign="flex-start">
+          <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="60%">
+            <Box
+              // paddingTop={style.margin["lg"]}
+              paddingTop={style.margin.navBoth}
+              display={"flex"}
+              width="100%"
+              justifyContent={"center"}
+            >
+              <Grid gap="10px" width="100%">
+                {hookSearch.isLoading && (
+                  <FlexRow height="200px" width="80vw">
+                    <Loader size="lg" />
+                  </FlexRow>
+                )}
+                {!hookSearch.isLoading &&
+                  (hookSearch.searchResults.length !== 0 ? (
+                    hookSearch.searchResults.map((item: any, index: any) => (
+                      <FlexRow key={index} hrAlign="flex-start">
+                        {/* <MCard
                         title={item?.meta?.data?.modified?.meta_title}
                         key={index}
                         image={item?.meta?.data?.modified?.meta_image}
@@ -87,33 +89,62 @@ const Search = () => {
                           router.push(`/search/meta/${item?._id}`);
                         }}
                       /> */}
-                      <PostCard
-                        // title={item?.meta?.data?.modified?.meta_title}
-                        key={index}
-                        image={item?.meta?.data?.modified?.meta_image}
-                        slug={item?.meta_schema?.name}
-                        description={
-                          item?.meta?.data?.modified?.meta_description
-                        }
-                        title={item?.meta?.data?.ipfs?.contentURI?.name}
-                        owner_name={item?.metaOwner}
-                        onClick={() => {
-                          router.push(`/search/meta/${item?._id}`);
-                        }}
-                        width="60%"
-                      />
-                    </FlexRow>
-                  ))
-                ) : (
-                  <Box>
-                    <Text color={colorMode == "light" ? "#282828" : ""}>
-                      No results found
-                    </Text>
-                  </Box>
-                ))}
-            </Grid>
-          </Box>
-        </FlexColumn>
+                        <PostCard
+                          // title={item?.meta?.data?.modified?.meta_title}
+                          key={index}
+                          image={item?.meta?.data?.modified?.meta_image}
+                          slug={item?.meta_schema?.name}
+                          description={
+                            item?.meta?.data?.modified?.meta_description
+                          }
+                          title={item?.meta?.data?.ipfs?.contentURI?.name}
+                          owner_name={item?.metaOwner}
+                          onClick={() => {
+                            router.push(`/search/meta/${item?._id}`);
+                          }}
+                          width="100%"
+                        />
+                      </FlexRow>
+                    ))
+                  ) : (
+                    <Box>
+                      <Text color={colorMode == "light" ? "#282828" : ""}>
+                        No results found
+                      </Text>
+                    </Box>
+                  ))}
+              </Grid>
+            </Box>
+          </FlexColumn>
+          {/* <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="40%">
+            <Text fontSize={style.font.h5} m={0} marginBottom={style.margin.xxxs}>
+              External links
+            </Text>
+            <FlexRow>
+              <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
+                <Text m={0}>Feature Requests</Text>
+                <Text m={0}>MACHA APIs</Text>
+              </FlexColumn>
+              <FlexColumn>
+                <Text>Blogs</Text>
+              </FlexColumn>
+            </FlexRow>
+            <Text fontSize={style.font.h5} m={0} marginBottom={style.margin.xxxs}>
+              Company
+            </Text>
+            <FlexRow>
+              <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
+                <Text m={0}>About</Text>
+                <Text m={0}>Support</Text>
+              </FlexColumn>
+              <FlexColumn>
+                <Text m={0}>Careers</Text>
+                <Text m={0}>Services</Text>
+              </FlexColumn>
+            </FlexRow>
+          </FlexColumn> */}
+          <ExternalCard width="30%"/>
+        </FlexRow>
       </CardNative>
     );
   };
