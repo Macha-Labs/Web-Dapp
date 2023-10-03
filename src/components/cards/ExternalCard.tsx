@@ -90,14 +90,17 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
         </Text>
         <FlexRow marginBottom={style.margin.xxxs}>
           <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-            <Link href="https://macha.ai/about">
+            <Link href="https://macha.ai/about" target="blank">
               <Text color={colorMode == "light" ? "black" : ""} m={0}>
                 About
               </Text>
             </Link>
           </FlexColumn>
           <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-            <Link href="https://metaworkhq.notion.site/Macha-Hiring-ce58c7a7c36e48b79ea8f9041a72f880">
+            <Link
+              href="https://metaworkhq.notion.site/Macha-Hiring-ce58c7a7c36e48b79ea8f9041a72f880"
+              target="blank"
+            >
               <Text color={colorMode == "light" ? "black" : ""} m={0}>
                 Careers
               </Text>
@@ -115,7 +118,7 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
           Connect with us
         </Text>
         <FlexRow marginBottom={style.margin.xxxs} hrAlign="flex-start">
-          <Link href="https://twitter.com/Macha0x">
+          <Link href="https://twitter.com/Macha0x" target="blank">
             <Image
               alt="twitter"
               src={
@@ -127,7 +130,10 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
               marginRight="1rem"
             />
           </Link>
-          <Link href="https://www.linkedin.com/company/metaworklab/">
+          <Link
+            href="https://www.linkedin.com/company/metaworklab/"
+            target="blank"
+          >
             <Image
               alt="linkedin"
               src={
@@ -142,11 +148,11 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
         </FlexRow>
       </FlexColumn>
       <Divider />
-      <FlexRow hrAlign="space-between">
-        <Link href="https://macha.ai/privacy/">
+      <FlexRow hrAlign="space-between" width="90%">
+        <Link href="https://macha.ai/privacy/" target="blank">
           <Text color={colorMode == "light" ? "black" : ""}>Privacy</Text>
         </Link>
-        <Link href="https://macha.ai/terms/">
+        <Link href="https://macha.ai/terms/" target="blank">
           <Text color={colorMode == "light" ? "black" : ""}>• Terms</Text>
         </Link>
         <Text color={colorMode == "light" ? "black" : ""}>
