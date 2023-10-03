@@ -36,7 +36,7 @@ const NavSearch = ({ rightElem, centerElem, search, showLogo }: Props) => {
     //   href: "/chat",
     //   value: "Chat",
     // },
-    
+
     {
       href: "/chains",
       value: "Chains",
@@ -71,7 +71,7 @@ const NavSearch = ({ rightElem, centerElem, search, showLogo }: Props) => {
                 ? style.nav.border.light
                 : style.nav.border.default
             }`,
-            // borderRadius: `${style.card.borderRadius.default}`,
+            borderRadius: `${style.card.borderRadius.default}`,
             boxShadow: `${
               colorMode == "light" ? "" : "0px 24px 64px 0px #000"
             }`,

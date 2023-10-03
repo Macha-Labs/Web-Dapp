@@ -51,7 +51,7 @@ const NavMeta = ({ rightElem, centerElem, search, showLogo }: Props) => {
                 ? style.nav.border.light
                 : style.nav.border.default
             }`,
-            // borderRadius: `${style.card.borderRadius.default}`,
+            borderRadius: `${style.card.borderRadius.default}`,
             boxShadow: `${
               colorMode == "light" ? "" : "0px 24px 64px 0px #000"
             }`,

@@ -47,7 +47,7 @@ const Search = () => {
   const renderBody = () => {
     return (
       <>
-        <FlexRow hrAlign="space-evenly" vrAlign="flex-start">
+        <FlexRow hrAlign="space-between" vrAlign="flex-start">
           <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="60%">
             <Heading
               color={colorMode == "light" ? "#282828" : ""}

@@ -13,10 +13,6 @@ const Search = () => {
   const router = useRouter();
   const { colorMode } = useColorMode();
 
-  const renderNavLeft = () => {
-    return <NavLeft />;
-  };
-
   const renderNavTop = () => {
     return <NavSearch showLogo={true} />;
   };
@@ -32,11 +28,6 @@ const Search = () => {
         >
           <Box
             border={colorMode ? "" : style.card.border.default}
-            backgroundImage={
-              colorMode == "light"
-                ? "url(/assets/explore/searchbg_light.svg)"
-                : "url(/assets/icons/searchbg.svg)"
-            }
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
@@ -82,14 +73,16 @@ const Search = () => {
   };
 
   return (
-    <FlexWindow
-      view="col" //
-      navLeft={renderNavLeft()}
-      navTop={renderNavTop()}
-      padding="0% 0%"
-      bodyElem={renderBody()}
-      noPaddingTop={true}
-    ></FlexWindow>
+    <>
+      <FlexWindow
+        view="col" //
+        navTop={renderNavTop()}
+        bodyElem={renderBody()}
+        marginTop="0"
+        padding={"0% 0%"}
+        enableBackground={true}
+      ></FlexWindow>
+    </>
   );
 };
 

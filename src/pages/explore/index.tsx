@@ -63,7 +63,7 @@ export default function Home() {
   const hookTransaction = useTransaction();
   const hookMetasList = useMetaList();
   const router = useRouter();
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     hookTransaction._fetchLatestTransactions();
@@ -77,7 +77,11 @@ export default function Home() {
   const renderBody = () => {
     return (
       <Box paddingX={style.padding.xxs} paddingBottom={style.margin.nav}>
-        <Box boxShadow="-10px 10px 20px 0px rgba(137, 137, 137, 0.30)" borderRadius="20px" overflow="hidden">
+        <Box
+          boxShadow="-10px 10px 20px 0px rgba(137, 137, 137, 0.30)"
+          borderRadius="20px"
+          overflow="hidden"
+        >
           <Carousel
             autoPlay
             showArrows={false}
@@ -93,7 +97,11 @@ export default function Home() {
               avatarImage={GlobalIcons["logo-Macha-circular"]}
               // bgGrid="/assets/explore/lens%20carousal%20bg%20grid.svg"
               bgGrid=""
-              bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+              bgBlur={
+                colorMode == "light"
+                  ? "/assets/explore/home_carousal_hero_bg_light.svg"
+                  : "/assets/explore/home-carousal-1-hero-bg.svg"
+              }
               bannerImage={"/assets/explore/home-carousal-1-hero-image.svg"}
               buttonText="Explore"
             />
@@ -103,7 +111,11 @@ export default function Home() {
               avatarImage={GlobalIcons["base-SDK"]}
               // bgGrid="/assets/explore/poap%20carousal%20bg%20grid.svg"
               bgGrid=""
-              bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+              bgBlur={
+                colorMode == "light"
+                  ? "/assets/explore/home_carousal_hero_bg_light.svg"
+                  : "/assets/explore/home-carousal-1-hero-bg.svg"
+              }
               bannerImage={"/assets/explore/home-carousal-2-hero-image.svg"}
               buttonText="View Contracts Now"
             />
@@ -113,7 +125,11 @@ export default function Home() {
               avatarImage={GlobalIcons["base-chain"]}
               // bgGrid="/assets/explore/mirror%20carousal%20bg%20grid.svg"
               bgGrid=""
-              bgBlur={colorMode == "light" ? "/assets/explore/home_carousal_hero_bg_light.svg" : "/assets/explore/home-carousal-1-hero-bg.svg"}
+              bgBlur={
+                colorMode == "light"
+                  ? "/assets/explore/home_carousal_hero_bg_light.svg"
+                  : "/assets/explore/home-carousal-1-hero-bg.svg"
+              }
               bannerImage={"/assets/explore/home-carousal-3-hero-image.svg"}
               buttonText="View Chains"
             />
@@ -146,7 +162,12 @@ export default function Home() {
           width="100%"
           header={
             <FlexRow hrAlign="space-between">
-              <Heading color={colorMode == "light" ? "#3d3d3d" : ""} mb="0px" fontSize={style.font.h3} fontWeight={600}>
+              <Heading
+                color={colorMode == "light" ? "#3d3d3d" : ""}
+                mb="0px"
+                fontSize={style.font.h3}
+                fontWeight={600}
+              >
                 Latest POAP indexed
               </Heading>
               <ButtonNative
@@ -202,7 +223,6 @@ export default function Home() {
     <>
       <FlexWindow
         view="col"
-        // navLeft={renderNavLeft()}
         navTop={renderNavTop()}
         bodyElem={renderBody()}
       ></FlexWindow>
