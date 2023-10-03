@@ -16,6 +16,7 @@ type Props = {
   noPaddingTop?: boolean;
   padding?: any;
   background?: any;
+  enableBackground?:boolean;
 };
 
 export const FlexWindow = ({
@@ -28,11 +29,12 @@ export const FlexWindow = ({
   noPaddingTop,
   padding,
   background,
+  enableBackground,
 }: Props) => {
   const { colorMode } = useColorMode();
 
   return (
-    <div
+    <Box
       className="window"
       style={{
         position: "relative",
@@ -44,30 +46,41 @@ export const FlexWindow = ({
       }}
     >
       {view == "col" && (
-        <>
-          <div
+        <Box
+          backgroundImage={ enableBackground ?
+            colorMode == "light"
+              ? "url(/assets/explore/searchbg_light.svg)"
+              : "url(/assets/icons/searchbg.svg)" : "none"
+          }
+          backgroundPosition="center"
+          backgroundRepeat="no-repeat"
+          backgroundSize="cover"
+        >
+          <Box
             style={{
               position: "fixed",
               top: "0",
               zIndex: "1000",
               width: "100%",
-              background: "#000",
+              // background: `${
+              //   colorMode == "light" ? "#f2f5fd" : style.body.bg.default
+              // }`,
               display: "flex",
               justifyContent: "center",
+              padding: "1% 2% 1% 3%",
             }}
           >
             {navTop}
-          </div>
+          </Box>
           <div
             style={{
-              marginTop: `${marginTop}`,
               padding: `${padding ? padding : "0% 3%"}`,
-              paddingTop: `${noPaddingTop ? "0px" : style.margin["4xl"]}`,
+              marginTop: `${marginTop ? marginTop : style.margin["5xl"]}`,
             }}
           >
             {bodyElem}
           </div>
-        </>
+        </Box>
       )}
 
       {view == "row" && (
@@ -129,6 +142,6 @@ export const FlexWindow = ({
           </Box>
         </Box>
       )}
-    </div>
+    </Box>
   );
 };
