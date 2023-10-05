@@ -192,7 +192,7 @@ export default function Home() {
                   <CollectorCard
                     name={item?.meta?.data?.modified?.meta_title}
                     key={index}
-                    image={item?.meta?.data?.modified?.meta_image}
+                    image={item?.meta?.data?.modified?.meta_image || item?.meta?.data?.modified?.meta_media}
                     //   image={item?.meta?.data?.modified?.meta_image}
                     //   slug={item?.meta_schema?.name}
                     width="31%"

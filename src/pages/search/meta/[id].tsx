@@ -95,7 +95,7 @@ const Meta = () => {
                     ? hookMeta?.metaData?.meta_tags[0]
                     : ""
               }
-              image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
+              image={hookMeta?.metaData?.meta?.data?.modified?.meta_image || hookMeta?.metaData?.meta?.data?.modified?.meta_media}
               description={
                 hookMeta?.metaData?.meta?.data?.modified?.meta_description
               }
