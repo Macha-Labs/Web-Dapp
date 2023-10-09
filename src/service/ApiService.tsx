@@ -61,6 +61,23 @@ export const vectorSearch = async (searchQuery: string) => {
   }
 };
 
+
+export const fetchByUser = async (address: string) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/metas/fetch-by-user/${address}`
+  );
+  if (response.status == 200) {
+    console.log("response vectorSearch api", response);
+    const data = await response.json();
+    return data;
+  } else {
+    return {
+      error: "Not found",
+    };
+  }
+};
+
+
 export const contractData = async (contractName: string) => {
   const response = await fetch(
     `${config.metaServer}/indexer/transactions/fetch-by-name/${contractName}`
