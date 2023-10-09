@@ -61,32 +61,33 @@ const Search = () => {
               Search results
             </Heading>
             <Box
-              // paddingTop={style.margin["lg"]}
               paddingTop={style.margin.navBoth}
               display={"flex"}
               width="100%"
               justifyContent={"center"}
             >
               <Grid gap="10px" width="100%">
-                {hookFetchByUser.isLoading && (
+                {/* {hookFetchByUser.isLoading && (
                   <FlexRow height="200px" width="80vw">
                     <Loader size="lg" />
                   </FlexRow>
-                )}
+                )} */}
                 {console.log(hookFetchByUser)}
                 {!hookFetchByUser.isLoading &&
                   (hookFetchByUser.searchResults.length !== 0 ? (
-                    hookFetchByUser.searchResults.map((item: any, index: any) => (
-                      <FlexRow key={index} hrAlign="flex-start">
-                        <UserProfileCard
-                          key={index}
-                          owner_address={item?.metaOwner}
-                          description={
-                            item?.meta?.data?.modified?.meta_description
-                          }
-                        />
-                      </FlexRow>
-                    ))
+                    hookFetchByUser.searchResults.map(
+                      (item: any, index: any) => (
+                        <FlexRow key={index} hrAlign="flex-start">
+                          <UserProfileCard
+                            key={index}
+                            owner_address={item?.metaOwner}
+                            description={
+                              item?.meta?.data?.modified?.meta_description
+                            }
+                          />
+                        </FlexRow>
+                      )
+                    )
                   ) : (
                     <Box>
                       {/* <Text color={colorMode == "light" ? "#282828" : ""}>
@@ -97,7 +98,6 @@ const Search = () => {
               </Grid>
             </Box>
             <Box
-              // paddingTop={style.margin["lg"]}
               paddingTop={style.margin.navBoth}
               display={"flex"}
               width="100%"
@@ -111,25 +111,30 @@ const Search = () => {
                 )}
                 {!hookVectorSearch.isLoading &&
                   (hookVectorSearch.searchResults.length !== 0 ? (
-                    hookVectorSearch.searchResults.map((item: any, index: any) => (
-                      <FlexRow key={index} hrAlign="flex-start">
-                        <PostCard
-                          // title={item?.meta?.data?.modified?.meta_title}
-                          key={index}
-                          image={item?.meta?.data?.modified?.meta_image || item?.meta?.data?.modified?.meta_media}
-                          slug={item?.meta_schema?.name}
-                          description={
-                            item?.meta?.data?.modified?.meta_description
-                          }
-                          title={item?.meta?.data?.ipfs?.contentURI?.name}
-                          owner_name={item?.metaOwner}
-                          onClick={() => {
-                            router.push(`/search/meta/${item?._id}`);
-                          }}
-                          width="100%"
-                        />
-                      </FlexRow>
-                    ))
+                    hookVectorSearch.searchResults.map(
+                      (item: any, index: any) => (
+                        <FlexRow key={index} hrAlign="flex-start">
+                          <PostCard
+                            // title={item?.meta?.data?.modified?.meta_title}
+                            key={index}
+                            image={
+                              item?.meta?.data?.modified?.meta_image ||
+                              item?.meta?.data?.modified?.meta_media
+                            }
+                            slug={item?.meta_schema?.name}
+                            description={
+                              item?.meta?.data?.modified?.meta_description
+                            }
+                            title={item?.meta?.data?.ipfs?.contentURI?.name}
+                            owner_name={item?.metaOwner}
+                            onClick={() => {
+                              router.push(`/search/meta/${item?._id}`);
+                            }}
+                            width="100%"
+                          />
+                        </FlexRow>
+                      )
+                    )
                   ) : (
                     <Box>
                       <Text color={colorMode == "light" ? "#282828" : ""}>
