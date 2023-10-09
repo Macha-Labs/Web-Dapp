@@ -6,6 +6,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
+import { truncateAddress } from "@/helpers/IpfsLink";
 
 type Props = {
   width?: string;
@@ -17,6 +18,8 @@ type Props = {
   showMore?: boolean;
   owner_name?: string;
   owner_image?: string;
+  owner_address?: string;
+  description?: string;
 };
 const UserProfileCard = ({
   width,
@@ -24,6 +27,9 @@ const UserProfileCard = ({
   shadowOnHover = true,
   owner_image,
   owner_name,
+  owner_address,
+  slug,
+  description,
 }: Props) => {
   const { colorMode } = useColorMode();
   const toast = useToast();
@@ -68,15 +74,15 @@ const UserProfileCard = ({
             fontWeight={style.fontWeight.dark}
             m={0}
           >
-            stani.lens
+            {slug}
+            {truncateAddress(owner_address)}
           </Text>
           <FlexRow hrAlign="flex-start" vrAlign="center">
             <Text
               color={colorMode == "light" ? "#3d3d3d" : ""}
               className="m-b-0"
             >
-              {/* {truncateAddress(data?.address)} */}
-              0x7241...9dff
+              {truncateAddress(owner_address)}
             </Text>
             <IconBase
               slug="icon-copy"
@@ -93,7 +99,7 @@ const UserProfileCard = ({
           </FlexRow>
         </FlexColumn>
       </FlexRow>
-
+      <Text color={colorMode == "light" ? "black" : ""} marginTop={style.margin.sm}>{description}</Text>
       <Text
         color={colorMode == "light" ? "black" : ""}
         fontSize={style.font.h4}

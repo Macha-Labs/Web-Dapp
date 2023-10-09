@@ -8,6 +8,8 @@ import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import ExternalCard from "@/components/cards/ExternalCard";
 import PostCard from "@/components/cards/PostCard";
+import UserProfileCard from "@/components/cards/UserProfileCard";
+import useFetchByUser from "@/hooks/studio/useFetchByUser";
 import useSearch from "@/hooks/studio/useSearch";
 import useVectorSearch from "@/hooks/studio/useVectorSearch";
 import { style } from "@/styles/StyledConstants";
@@ -27,12 +29,14 @@ import { useEffect } from "react";
 const Search = () => {
   const router = useRouter();
   const hookSearch = useVectorSearch();
+  const hookSearch1 = useFetchByUser();
   const { colorMode } = useColorMode();
 
   useEffect(() => {
     if (router.isReady) {
       // console.log(router.query.search)
       hookSearch._fetch(String(router.query.search));
+      hookSearch1._fetch(String(router.query.search));
     }
   }, [router.query.search]);
 
@@ -64,6 +68,42 @@ const Search = () => {
               justifyContent={"center"}
             >
               <Grid gap="10px" width="100%">
+                {hookSearch1.isLoading && (
+                  <FlexRow height="200px" width="80vw">
+                    <Loader size="lg" />
+                  </FlexRow>
+                )}
+                {console.log(hookSearch1)}
+                {!hookSearch1.isLoading &&
+                  (hookSearch1.searchResults.length !== 0 ? (
+                    hookSearch1.searchResults.map((item: any, index: any) => (
+                      <FlexRow key={index} hrAlign="flex-start">
+                        <UserProfileCard
+                          key={index}
+                          owner_address={item?.metaOwner}
+                          description={
+                            item?.meta?.data?.modified?.meta_description
+                          }
+                        />
+                      </FlexRow>
+                    ))
+                  ) : (
+                    <Box>
+                      {/* <Text color={colorMode == "light" ? "#282828" : ""}>
+                        No results found from hookSearch1
+                      </Text> */}
+                    </Box>
+                  ))}
+              </Grid>
+            </Box>
+            <Box
+              // paddingTop={style.margin["lg"]}
+              paddingTop={style.margin.navBoth}
+              display={"flex"}
+              width="100%"
+              justifyContent={"center"}
+            >
+              <Grid gap="10px" width="100%">
                 {hookSearch.isLoading && (
                   <FlexRow height="200px" width="80vw">
                     <Loader size="lg" />
@@ -73,18 +113,6 @@ const Search = () => {
                   (hookSearch.searchResults.length !== 0 ? (
                     hookSearch.searchResults.map((item: any, index: any) => (
                       <FlexRow key={index} hrAlign="flex-start">
-                        {/* <MCard
-                        title={item?.meta?.data?.modified?.meta_title}
-                        key={index}
-                        image={item?.meta?.data?.modified?.meta_image}
-                        slug={item?.meta_schema?.name}
-                        description={
-                          item?.meta?.data?.modified?.meta_description
-                        }
-                        onClick={() => {
-                          router.push(`/search/meta/${item?._id}`);
-                        }}
-                      /> */}
                         <PostCard
                           // title={item?.meta?.data?.modified?.meta_title}
                           key={index}

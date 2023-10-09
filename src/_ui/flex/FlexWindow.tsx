@@ -16,7 +16,7 @@ type Props = {
   noPaddingTop?: boolean;
   padding?: any;
   background?: any;
-  enableBackground?:boolean;
+  enableBackground?: boolean;
 };
 
 export const FlexWindow = ({
@@ -47,16 +47,21 @@ export const FlexWindow = ({
     >
       {view == "col" && (
         <Box
-          backgroundImage={ enableBackground ?
-            colorMode == "light"
-              ? "url(/assets/explore/searchbg_light.svg)"
-              : "url(/assets/icons/searchbg.svg)" : "none"
+          backgroundImage={
+            enableBackground
+              ? colorMode == "light"
+                ? "url(/assets/explore/searchbg_light.svg)"
+                : "url(/assets/icons/searchbg.svg)"
+              : "none"
           }
           backgroundPosition="center"
           backgroundRepeat="no-repeat"
           backgroundSize="cover"
         >
           <Box
+            background={!enableBackground ?
+              colorMode == "light" ? "#f2f5fd" : style.body.bg.default :"none"
+            }
             style={{
               position: "fixed",
               top: "0",

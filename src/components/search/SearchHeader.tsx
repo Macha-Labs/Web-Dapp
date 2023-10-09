@@ -15,6 +15,7 @@ import { useRef, useState } from "react";
 import SearchRow from "./SearchRow";
 import GlobalIcons from "@/styles/GlobalIcons";
 import useVectorSearch from "@/hooks/studio/useVectorSearch";
+import useFetchByUser from "@/hooks/studio/useFetchByUser";
 
 type Props = {
   options?: any;
@@ -22,6 +23,36 @@ type Props = {
 
 const SearchHeader = ({ options }: Props) => {
   const hookSearch = useVectorSearch();
+  const hookSearch1 = useFetchByUser();
+  const [inputValue, setInputValue] = useState("");
+  const regex = /@0x[0-9a-fA-F]{40}/g;
+
+  const handleInputChange = (e: any) => {
+    const newValue = e.target.value;
+    setInputValue(newValue);
+
+    // Check if the input value matches the regex pattern
+    if (regex.test(newValue)) {
+      // If it matches, use hookSearch1 and remove the first character
+      hookSearch1.setSearchString(newValue.slice(1));
+      setInputValue(newValue.substring(1));
+    } else {
+      // If it doesn't match, use hookSearch
+      hookSearch.setSearchString(newValue);
+    }
+  };
+
+  const handleKeyDown = (e: any) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      const searchValue = regex.test(inputValue)
+        ? hookSearch1.searchString
+        : hookSearch.searchString;
+      router.push(`/search?search=${searchValue}`);
+    }
+  };
+
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const searchRef = useRef(null);
   const router = useRouter();
@@ -59,17 +90,21 @@ const SearchHeader = ({ options }: Props) => {
               </Box>
             </InputLeftElement>
             <input
-              value={hookSearch.searchString}
+              value={inputValue} // Use local state to control the input value
+              // value={hookSearch.searchString}
               type="text"
               ref={searchRef}
               className="searchHeader"
-              onChange={(e: any) => hookSearch.setSearchString(e.target.value)}
-              onKeyDown={(e: any) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  router.push(`/search?search=${hookSearch.searchString}`);
-                }
-              }}
+              onChange={handleInputChange} // Call handleInputChange when input changes
+              onKeyDown={handleKeyDown} // Call handleKeyDown on Enter key press
+              
+              // onChange={(e: any) => hookSearch.setSearchString(e.target.value)}
+              // onKeyDown={(e: any) => {
+              //   if (e.key === "Enter") {
+              //     e.preventDefault();
+              //     router.push(`/search?search=${hookSearch.searchString}`);
+              //   }
+              // }}
               placeholder="Try Spectacular Search Now"
               style={{
                 height: "5rem",
