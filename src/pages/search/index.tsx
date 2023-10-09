@@ -28,15 +28,15 @@ import { useEffect } from "react";
 
 const Search = () => {
   const router = useRouter();
-  const hookSearch = useVectorSearch();
-  const hookSearch1 = useFetchByUser();
+  const hookVectorSearch = useVectorSearch();
+  const hookFetchByUser = useFetchByUser();
   const { colorMode } = useColorMode();
 
   useEffect(() => {
     if (router.isReady) {
       // console.log(router.query.search)
-      hookSearch._fetch(String(router.query.search));
-      hookSearch1._fetch(String(router.query.search));
+      hookVectorSearch._fetch(String(router.query.search));
+      hookFetchByUser._fetch(String(router.query.search));
     }
   }, [router.query.search]);
 
@@ -68,15 +68,15 @@ const Search = () => {
               justifyContent={"center"}
             >
               <Grid gap="10px" width="100%">
-                {hookSearch1.isLoading && (
+                {hookFetchByUser.isLoading && (
                   <FlexRow height="200px" width="80vw">
                     <Loader size="lg" />
                   </FlexRow>
                 )}
-                {console.log(hookSearch1)}
-                {!hookSearch1.isLoading &&
-                  (hookSearch1.searchResults.length !== 0 ? (
-                    hookSearch1.searchResults.map((item: any, index: any) => (
+                {console.log(hookFetchByUser)}
+                {!hookFetchByUser.isLoading &&
+                  (hookFetchByUser.searchResults.length !== 0 ? (
+                    hookFetchByUser.searchResults.map((item: any, index: any) => (
                       <FlexRow key={index} hrAlign="flex-start">
                         <UserProfileCard
                           key={index}
@@ -90,7 +90,7 @@ const Search = () => {
                   ) : (
                     <Box>
                       {/* <Text color={colorMode == "light" ? "#282828" : ""}>
-                        No results found from hookSearch1
+                        No results found from hookFetchByUser
                       </Text> */}
                     </Box>
                   ))}
@@ -104,14 +104,14 @@ const Search = () => {
               justifyContent={"center"}
             >
               <Grid gap="10px" width="100%">
-                {hookSearch.isLoading && (
+                {hookVectorSearch.isLoading && (
                   <FlexRow height="200px" width="80vw">
                     <Loader size="lg" />
                   </FlexRow>
                 )}
-                {!hookSearch.isLoading &&
-                  (hookSearch.searchResults.length !== 0 ? (
-                    hookSearch.searchResults.map((item: any, index: any) => (
+                {!hookVectorSearch.isLoading &&
+                  (hookVectorSearch.searchResults.length !== 0 ? (
+                    hookVectorSearch.searchResults.map((item: any, index: any) => (
                       <FlexRow key={index} hrAlign="flex-start">
                         <PostCard
                           // title={item?.meta?.data?.modified?.meta_title}
