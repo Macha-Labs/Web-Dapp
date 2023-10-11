@@ -52,7 +52,7 @@ const Tabs = ({
                         ? "state_brand"
                         : "state_transparent_hover"
                     }
-                    height="2.2rem"
+                    height="1.8rem"
                   >
                     <Link
                       className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0  "
@@ -62,7 +62,7 @@ const Tabs = ({
                       <FlexRow>
                         {icon && <IconImage slug={icon.slug} />}
                         <Text
-                          fontSize={style.font.h5}
+                          fontSize={style.font.h6}
                           fontWeight={value == option?.value ? "600" : "400"}
                           // bgGradient={
                           //   value == option?.value
