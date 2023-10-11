@@ -6,14 +6,13 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import IconBase from "@/_ui/icons/IconsBase";
 import InputCopy from "@/_ui/input/InputCopy";
-import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
 import useMeta from "@/hooks/meta/useMeta";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 
+import NavHeader from "@/_ui/nav/NavHeader";
 import { truncateString } from "@/helpers";
 import useAuthStore from "@/store/useAuthStore";
 import {
@@ -57,7 +56,7 @@ const Meta = () => {
   const toast = useToast();
 
   const renderNav = () => {
-    return <NavMeta />;
+    return <NavHeader />;
   };
 
   const renderMeta = () => {

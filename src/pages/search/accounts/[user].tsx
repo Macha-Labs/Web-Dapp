@@ -18,6 +18,7 @@ import GlobalIcons from "@/styles/GlobalIcons";
 import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import NavMeta from "@/_ui/nav/NavMeta";
+import NavHeader from "@/_ui/nav/NavHeader";
 
 const Network = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -40,7 +41,7 @@ const Network = () => {
   }, [router.query.user, hookUserTxn.page]);
 
   const renderNav = () => {
-    return <NavMeta />;
+    return <NavHeader />;
   };
 
   const renderComponent = () => {

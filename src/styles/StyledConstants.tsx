@@ -78,7 +78,8 @@ export const darkStyle = {
   nav: {
     width: "100%",
     widthLeft: "5%",
-    height: "75px",
+    height: "65px",
+    heightFooter:"85px",
     bg: { default: "#00040d", meta: "#000A24" },
     border: { default: "2px solid #0F172E", light: "1px solid rgba(226, 226, 226, 1)" },
     padding: { default: "1% 6%", meta: "1% 2%" },

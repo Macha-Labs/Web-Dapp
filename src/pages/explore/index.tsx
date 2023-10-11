@@ -2,8 +2,8 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardNative from "@/_ui/cards/CardNative";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
 import Marquee from "@/components/Marquee/Marquee";
 import CollectorCard from "@/components/cards/CollectorsCard";
 import TransactionCard from "@/components/cards/TransactionCard";
@@ -216,7 +216,7 @@ export default function Home() {
   };
 
   const renderNavTop = () => {
-    return <NavMeta />;
+    return <NavHeader />;
   };
 
   return (

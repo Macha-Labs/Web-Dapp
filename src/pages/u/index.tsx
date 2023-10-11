@@ -2,14 +2,10 @@ import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import IconImage from "@/_ui/icons/IconImage";
+import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import SearchHeader from "@/components/search/SearchHeader";
 import { AuthContext } from "@/providers/AuthProvider";
-import { style } from "@/styles/StyledConstants";
-import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
@@ -23,7 +19,7 @@ const Search = () => {
   };
 
   const renderNavTop = () => {
-    return <NavMeta />;
+    return <NavHeader />;
   };
   const authContext = useContext(AuthContext);
   const { address } = useAccount();

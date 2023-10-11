@@ -26,6 +26,7 @@ type Props = {
   marginLeft?: string;
   marginBottom?: string;
   lineHeight?: string;
+  image?:string;
 };
 
 const TagNative = ({
@@ -39,6 +40,7 @@ const TagNative = ({
   marginRight = "xxs",
   marginTop,
   lineHeight,
+  image,
 }: Props) => {
   const { colorMode } = useColorMode();
   return (
@@ -56,6 +58,9 @@ const TagNative = ({
     >
       {icon && icon.align == "left" && (
         <Avatar marginRight={1} boxSize="20px" src={GlobalIcons[icon.slug]} />
+      )}
+      {image && (
+        <Avatar marginRight={1} boxSize="20px" src={image} />
       )}
       <TagLabel
         style={{

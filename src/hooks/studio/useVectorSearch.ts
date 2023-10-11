@@ -2,8 +2,7 @@ import { vectorSearch } from "@/service/ApiService";
 import { useState, useEffect } from "react";
 
 const useVectorSearch = () => {
-  const [searchResults, setSearchResults] = useState<any>([]);
-  const [searchString, setSearchString] = useState<any>();
+  const [searchResults, setSearchResults] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>(true);
 
   const _fetch = async (searchTerm: string) => {
@@ -21,8 +20,6 @@ const useVectorSearch = () => {
   return {
     _fetch: _fetch,
     searchResults: searchResults,
-    searchString: searchString,
-    setSearchString: setSearchString,
     isLoading: isLoading,
   };
 };

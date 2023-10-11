@@ -1,9 +1,6 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
-import NavSearch from "@/_ui/nav/NavSearch";
+import NavHeader from "@/_ui/nav/NavHeader";
 import SearchHeader from "@/components/search/SearchHeader";
 import { style } from "@/styles/StyledConstants";
 import { Box, Image, useColorMode } from "@chakra-ui/react";
@@ -14,7 +11,7 @@ const Search = () => {
   const { colorMode } = useColorMode();
 
   const renderNavTop = () => {
-    return <NavSearch showLogo={true} />;
+    return <NavHeader showLogo={true} />;
   };
 
   const renderBody = () => {

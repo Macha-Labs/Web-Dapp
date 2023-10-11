@@ -4,12 +4,9 @@ import { style } from "@/styles/StyledConstants";
 import { useEffect, useState } from "react";
 
 import FlexColumn from "@/_ui/flex/FlexColumn";
+import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
-import MetaCollectionCard from "@/components/cards/MetaCollectionCard";
 import ContractList from "@/components/studio/ContractList";
-import SupportedChains from "@/components/studio/SupportedChains";
-import chains from "@/data/network";
 import useMetaList from "@/hooks/meta/useMetasList";
 import useAlchemy from "@/hooks/studio/useAlchemy";
 import useContractList from "@/hooks/studio/useContractList";
@@ -56,7 +53,7 @@ export default function Explore() {
   };
 
   const renderNavTop = () => {
-    return <NavMeta />;
+    return <NavHeader />;
   };
 
   return (
