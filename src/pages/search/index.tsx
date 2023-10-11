@@ -82,7 +82,10 @@ const Search = () => {
                           <PostCard
                             // title={item?.meta?.data?.modified?.meta_title}
                             key={index}
-                            image={item?.meta?.data?.modified?.meta_image}
+                            image={
+                              item?.meta?.data?.modified?.meta_image ||
+                              item?.meta?.data?.modified?.meta_media
+                            }
                             slug={item?.meta_schema?.name}
                             description={
                               item?.meta?.data?.modified?.meta_description
