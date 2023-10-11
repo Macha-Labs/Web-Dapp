@@ -78,7 +78,7 @@ const MetaCopy = () => {
   ];
 
   const toast = useToast();
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode();
 
   const renderNav = () => {
     return (
@@ -120,21 +120,7 @@ const MetaCopy = () => {
                 style={{ display: "flex", alignItems: "center" }}
                 width={"20%"}
               >
-                <InputSearch
-                  width="100%"
-                  height="2.2rem"
-                  defaultValue={hookSearch.searchString}
-                  value={hookSearch.searchString}
-                  onChange={(e: any) =>
-                    hookSearch.setSearchString(e.target.value)
-                  }
-                  onKeydown={(e: any) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      router.push(`/search?search=${hookSearch.searchString}`);
-                    }
-                  }}
-                />
+                <InputSearch width="100%" height="2.2rem" />
 
                 {/* <Image
                 style={{ marginLeft: `${style.margin.xs}`, cursor: "pointer" }}
@@ -413,8 +399,10 @@ const MetaCopy = () => {
                                     size="xs"
                                     width="100%"
                                     _hover={{
-                background: `${colorMode == "light" ? "" : ""}`
-              }}
+                                      background: `${
+                                        colorMode == "light" ? "" : ""
+                                      }`,
+                                    }}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
                                         typeof hookMeta?.metaData?.meta?.data
@@ -557,7 +545,9 @@ const MetaCopy = () => {
                                     size="xs"
                                     width="100%"
                                     _hover={{
-                                      background: `${colorMode == "light" ? "" : ""}`
+                                      background: `${
+                                        colorMode == "light" ? "" : ""
+                                      }`,
                                     }}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
@@ -696,7 +686,9 @@ const MetaCopy = () => {
                                     size="xs"
                                     width="100%"
                                     _hover={{
-                                      background: `${colorMode == "light" ? "" : ""}`
+                                      background: `${
+                                        colorMode == "light" ? "" : ""
+                                      }`,
                                     }}
                                     onClick={() => {
                                       navigator.clipboard.writeText(
@@ -799,7 +791,9 @@ const MetaCopy = () => {
                                         <Button
                                           size="xs"
                                           _hover={{
-                                            background: `${colorMode == "light" ? "" : ""}`
+                                            background: `${
+                                              colorMode == "light" ? "" : ""
+                                            }`,
                                           }}
                                           width="100%"
                                           onClick={() => {
