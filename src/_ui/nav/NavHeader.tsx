@@ -27,7 +27,7 @@ const NavHeader = ({ rightElem, centerElem, search, showLogo, field }: Props) =>
       value: "Socials",
     },
     {
-      href: "/search/music",
+      href: "/search?id=music",
       value: "Music",
     },
     {
@@ -63,7 +63,7 @@ const NavHeader = ({ rightElem, centerElem, search, showLogo, field }: Props) =>
                 ? style.nav.navLeftBgLight
                 : style.nav.navLeftBg
             }`,
-            border: `${
+            borderBottom: `${
               colorMode == "light"
                 ? style.nav.border.light
                 : style.nav.border.default

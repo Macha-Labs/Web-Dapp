@@ -78,7 +78,7 @@ const SearchHeader = ({ options, height }: Props) => {
                     : style.input.bg.default
                 }`,
                 border: `${
-                  colorMode == "light" ? "" : style.input.border.default
+                  colorMode == "light" ? "1px solid #e2e2e2" : style.input.border.default
                 }`,
                 width: "100%",
               }}

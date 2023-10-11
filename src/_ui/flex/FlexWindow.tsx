@@ -85,9 +85,9 @@ export const FlexWindow = ({
           <div
             style={{
               padding: `${padding ? padding : "0% 3%"}`,
-              marginTop: `${marginTop ? marginTop : style.margin["5xl"]}`,
+              marginTop: `${marginTop ? marginTop : style.margin["4xl"]}`,
               marginBottom: navBottom
-                ? `${marginTop ? marginTop : style.margin["5xl"]}`
+                ? `${marginTop ? marginTop : style.margin["4xl"]}`
                 : "0",
             }}
           >

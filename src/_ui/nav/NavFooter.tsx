@@ -20,7 +20,7 @@ const NavFooter = ({}: Props) => {
                 ? style.nav.navLeftBgLight
                 : style.nav.navLeftBg
             }`,
-            border: `${
+            borderTop: `${
               colorMode == "light"
                 ? style.nav.border.light
                 : style.nav.border.default
