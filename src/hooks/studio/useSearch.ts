@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import useResolverSearch from "./useResolverSearch";
 import useVectorSearch from "./useVectorSearch";
-import { querySearch } from "@/service/ApiService";
+import { categorySearch, querySearch } from "@/service/ApiService";
 
 const useSearch = () => {
   const hookVectorSearch = useVectorSearch();
@@ -14,9 +14,16 @@ const useSearch = () => {
   const [searchResults, setSearchResults] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>(true);
 
-  const handleSearch = async (searchTerm: any) => {
+  const handleSearch = async (searchType: any, searchTerm: any) => {
     setIsLoading(true);
-    const res = await querySearch(searchTerm);
+
+    let res;
+
+    if (["social", "nft", "music"].includes(searchType)) {
+      res = await categorySearch(searchType, searchTerm);
+    } else {
+      res = await querySearch(searchTerm);
+    }
     if (res.data) {
       setSearchResults(res.data);
     } else {
@@ -52,13 +59,18 @@ const useSearch = () => {
   };
 
   const handleRoute = (e: any) => {
+    console.log(router, "router value");
     if (e.key === "Enter") {
       e.preventDefault();
       const newValue = e.target.value;
       const searchValue = regex.test(inputValue)
         ? newValue.substring(1)
         : newValue;
-      router.push(`/search?search=${searchValue}`);
+      let url = `/search/?search=${searchValue}`;
+      if (router?.query?.id) {
+        url = `/search/?id=${router?.query?.id}&search=${searchValue}`;
+      }
+      router.push(url);
     }
   };
 

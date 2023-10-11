@@ -63,10 +63,28 @@ export const vectorSearch = async (searchQuery: string) => {
 
 export const querySearch = async (searchQuery: string) => {
   const response = await fetch(
-    `${config.metaServer}/indexer/metas/queryResolver/${searchQuery}` 
+    `${config.metaServer}/indexer/queryResolver/${searchQuery}`
   );
   if (response.status == 200) {
     console.log("response querySearch api", response);
+    const data = await response.json();
+    return data;
+  } else {
+    return {
+      error: "Not found",
+    };
+  }
+};
+
+export const categorySearch = async (
+  searchType: string,
+  searchQuery: string
+) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/categoryResolver/${searchType}/${searchQuery}`
+  );
+  if (response.status == 200) {
+    console.log("response categorySearch api", response);
     const data = await response.json();
     return data;
   } else {

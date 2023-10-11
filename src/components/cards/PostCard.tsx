@@ -30,6 +30,7 @@ type Props = {
   musicplayer?: any;
   shadowOnHover?: any;
   showMore?: boolean;
+  metaName?:any;
 };
 
 const PostCard = ({
@@ -52,6 +53,7 @@ const PostCard = ({
   musicplayer,
   shadowOnHover = true,
   showMore,
+  metaName,
 }: Props) => {
   const router = useRouter();
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -122,12 +124,12 @@ const PostCard = ({
               marginBottom={"xs"}
             >
               <Avatar
-                src={owner_image ? owner_image : GlobalIcons["avatar-default"]} 
+                src={owner_image ? owner_image : GlobalIcons["avatar-default"]}
                 size="sm"
               />
               <FlexColumn vrAlign="flex-start" marginLeft={"xxs"}>
                 <Text color={colorMode == "light" ? "#282828" : ""} mb="0">
-                {truncateAddress(owner_name)}
+                  {truncateAddress(owner_name)}
                   {/* {owner_name} */}
                 </Text>
                 <Text color={colorMode == "light" ? "#282828" : ""} mb="0">
@@ -191,17 +193,17 @@ const PostCard = ({
               icon={{
                 align: "left",
                 slug: `${
-                  slug == "Lens Post"
+                  slug == "lens_post"
                     ? "logo-Lens"
-                    : slug == "Poap NFT"
+                    : slug == "poap_nft"
                     ? "logo-Poap"
-                    : slug == "ENS Handles"
+                    : slug == "ens_ethereum"
                     ? "logo-Ens"
                     : "logo-Sound.xyz"
                 }`,
               }}
               size="md"
-              value={slug}
+              value={metaName}
               lineHeight="1.5rem"
             />
             {/* <AudioPlayer /> */}

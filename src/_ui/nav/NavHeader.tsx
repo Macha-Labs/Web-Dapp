@@ -13,18 +13,27 @@ type Props = {
   centerElem?: any;
   search?: boolean;
   showLogo?: boolean;
+  field?:any;
 };
 
-const NavHeader = ({ rightElem, centerElem, search, showLogo }: Props) => {
+const NavHeader = ({ rightElem, centerElem, search, showLogo, field }: Props) => {
   const options = [
     {
-      href: "/",
+      href: "/search",
       value: "Search",
     },
-    // {
-    //   href: "/chat",
-    //   value: "Chat",
-    // },
+    {
+      href: "/search?id=social",
+      value: "Socials",
+    },
+    {
+      href: "/search/music",
+      value: "Music",
+    },
+    {
+      href: "/search?id=nft",
+      value: "NFTs",
+    },
 
     {
       href: "/chains",
@@ -40,7 +49,7 @@ const NavHeader = ({ rightElem, centerElem, search, showLogo }: Props) => {
     search ? search : false
   );
   const router = useRouter();
-  const [tab, setTab] = useState<string>("Search");
+  const [tab, setTab] = useState<any>(field ? field : "Search");
 
   return (
     <>
@@ -85,8 +94,8 @@ const NavHeader = ({ rightElem, centerElem, search, showLogo }: Props) => {
             <FlexRow hrAlign="center" vrAlign="center" width="50%">
               <Tabs
                 options={options}
-                value={tab}
                 onChange={setTab}
+                value={tab}
                 width="fit-content"
               />
             </FlexRow>

@@ -21,7 +21,7 @@ const Search = () => {
 
   useEffect(() => {
     if (router.isReady) {
-      hookSearch.handleSearch(router.query.search);
+      hookSearch.handleSearch(router.query.id, router.query.search);
     }
   }, [router.query.search]);
 
@@ -54,14 +54,15 @@ const Search = () => {
             >
               Search results
             </Heading>
-            {hookSearch?.searchResults?.identities?.length && (
-              <FlexColumn>
-                <UserProfileCard
-                  user={hookSearch?.searchResults?.user}
-                  identities={hookSearch?.searchResults?.identities}
-                />
-              </FlexColumn>
-            )}
+            {(!hookSearch?.isLoading &&
+              hookSearch?.searchResults?.identities?.length) ? (
+                <FlexColumn>
+                  <UserProfileCard
+                    user={hookSearch?.searchResults?.user}
+                    identities={hookSearch?.searchResults?.identities}
+                  />
+                </FlexColumn>
+              ) :<></>}
             <Box
               paddingTop={style.margin.navBoth}
               display={"flex"}
@@ -69,24 +70,27 @@ const Search = () => {
               justifyContent={"center"}
             >
               <Grid gap="10px" width="100%">
-                {hookSearch.isLoading && (
+                {hookSearch?.isLoading && (
                   <FlexRow height="200px" width="80vw">
                     <Loader size="lg" />
                   </FlexRow>
                 )}
-                {!hookSearch.isLoading &&
-                  (hookSearch.searchResults.metas.length !== 0 ? (
-                    hookSearch.searchResults.metas.map(
+                {!hookSearch?.isLoading &&
+                hookSearch?.searchResults?.metas?.length ? (
+                  <>
+                    {hookSearch?.searchResults?.metas?.map(
                       (item: any, index: any) => (
-                        <FlexRow key={index} hrAlign="flex-start" marginBottom="xs">
+                        <FlexRow
+                          key={index}
+                          hrAlign="flex-start"
+                          marginBottom="xs"
+                        >
                           <PostCard
                             // title={item?.meta?.data?.modified?.meta_title}
                             key={index}
-                            image={
-                              item?.meta?.data?.modified?.meta_image ||
-                              item?.meta?.data?.modified?.meta_media
-                            }
-                            slug={item?.meta_schema?.name}
+                            image={item?.meta?.data?.modified?.meta_image}
+                            metaName={item?.meta_schema?.name}
+                            slug={item?.meta?.slug}
                             description={
                               item?.meta?.data?.modified?.meta_description
                             }
@@ -99,10 +103,11 @@ const Search = () => {
                           />
                         </FlexRow>
                       )
-                    )
-                  ) : (
-                    <></>
-                  ))}
+                    )}
+                  </>
+                ) : (
+                  <></>
+                )}
               </Grid>
             </Box>
           </FlexColumn>
