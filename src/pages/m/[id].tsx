@@ -34,7 +34,6 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import InputSearch from "@/_ui/input/InputSearch";
-import useSearch from "@/hooks/studio/useSearch";
 import useVectorSearch from "@/hooks/studio/useVectorSearch";
 
 const MetaCopy = () => {

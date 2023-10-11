@@ -1,12 +1,9 @@
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
-import CreatorCard from "@/components/cards/CreatorCard";
-import NftCard from "@/components/cards/NftCard";
 import SearchResultsTxn from "@/components/studio/SearchResultsTxn";
 import { style } from "@/styles/StyledConstants";
 import { Box } from "@chakra-ui/react";
-import React from "react";
 
 const SearchResults = () => {
   const renderNavLeft = () => {
@@ -14,7 +11,7 @@ const SearchResults = () => {
   };
 
   const renderNavTop = () => {
-    return <NavMeta />;
+    return <NavHeader />;
   };
 
   const renderBody = () => {

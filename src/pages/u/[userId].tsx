@@ -5,6 +5,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import InputSearch from "@/_ui/input/InputSearch";
 import Loader from "@/_ui/loader/Loader";
+import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import AssetCard from "@/components/cards/AssetCard";
@@ -570,7 +571,7 @@ const User = () => {
               </>
             ) : (
               <>
-                <NavMeta />
+                <NavHeader />
                 <Box marginTop={style.margin.lg}>
                   <FlexRow hrAlign="center">
                     <Image

@@ -1,21 +1,12 @@
-import MCard from "@/_sdk/MCard";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardNative from "@/_ui/cards/CardNative";
-import CardSkeleton from "@/_ui/cards/CardSkeleton";
-import FlexBody from "@/_ui/flex/FlexBody";
-import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import NavBlock from "@/_ui/nav/NavBlock";
-import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
-import NavStudio from "@/_ui/nav/NavStudio";
+import NavHeader from "@/_ui/nav/NavHeader";
 import MetaList from "@/components/meta/MetaList";
-import { metaSchemaName } from "@/data/studio/constant";
 import useMetaList from "@/hooks/meta/useMetasList";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 type Props = {
   metaInfo: any;
@@ -44,7 +35,7 @@ const Explore = () => {
   }, [router.query.id]);
 
   const renderNav = () => {
-    return <NavMeta />;
+    return <NavHeader />;
   };
 
   const renderComponent = () => {

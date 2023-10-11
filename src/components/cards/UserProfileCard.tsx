@@ -1,35 +1,35 @@
-import { Avatar, Box, Text, useColorMode, useToast } from "@chakra-ui/react";
-import React from "react";
-import { style as gStyle, style } from "@/styles/StyledConstants";
-import GlobalIcons from "@/styles/GlobalIcons";
-import FlexRow from "@/_ui/flex/FlexRow";
 import FlexColumn from "@/_ui/flex/FlexColumn";
+import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
 import { truncateAddress } from "@/helpers/IpfsLink";
+import GlobalIcons from "@/styles/GlobalIcons";
+import { style as gStyle, style } from "@/styles/StyledConstants";
+import {
+  Avatar,
+  Box,
+  Heading,
+  Text,
+  useColorMode,
+  useToast,
+} from "@chakra-ui/react";
 
 type Props = {
   width?: string;
   onClick?: any;
-  slug?: any;
   cardHeight?: any;
   titleMaxw?: any;
   shadowOnHover?: any;
   showMore?: boolean;
-  owner_name?: string;
-  owner_image?: string;
-  owner_address?: string;
-  description?: string;
+  user?: any;
+  identities?: any;
 };
 const UserProfileCard = ({
   width,
   cardHeight,
   shadowOnHover = true,
-  owner_image,
-  owner_name,
-  owner_address,
-  slug,
-  description,
+  user,
+  identities,
 }: Props) => {
   const { colorMode } = useColorMode();
   const toast = useToast();
@@ -59,14 +59,12 @@ const UserProfileCard = ({
         boxShadow: `${shadowOnHover && "-0.15px 0.15px 28px 0px #004AD9"}`,
       }}
     >
-      <FlexRow>
-        <FlexColumn width="20%" vrAlign="flex-start">
-          <Avatar
-            src={owner_image ? owner_image : GlobalIcons["avatar-default"]}
-            size="xl"
-            marginRight="1rem"
-          />
-        </FlexColumn>
+      <FlexRow hrAlign="flex-start">
+        <Avatar
+          src={user?.image ? user?.image : GlobalIcons["avatar-default"]}
+          size="xl"
+          marginRight="1rem"
+        />
         <FlexColumn width="80%" vrAlign="flex-start">
           <Text
             color={colorMode == "light" ? "black" : ""}
@@ -74,21 +72,20 @@ const UserProfileCard = ({
             fontWeight={style.fontWeight.dark}
             m={0}
           >
-            {slug}
-            {truncateAddress(owner_address)}
+            {user?.name}
           </Text>
           <FlexRow hrAlign="flex-start" vrAlign="center">
             <Text
               color={colorMode == "light" ? "#3d3d3d" : ""}
               className="m-b-0"
             >
-              {truncateAddress(owner_address)}
+              {truncateAddress(user?.address)}
             </Text>
             <IconBase
               slug="icon-copy"
               style={{ marginLeft: "sm" }}
               onClick={() => {
-                // navigator.clipboard.writeText(data?.address);
+                navigator.clipboard.writeText(user?.address);
                 toast({
                   title: "Copied To Clipboard",
                   status: "success",
@@ -99,44 +96,40 @@ const UserProfileCard = ({
           </FlexRow>
         </FlexColumn>
       </FlexRow>
-      <Text color={colorMode == "light" ? "black" : ""} marginTop={style.margin.sm}>{description}</Text>
-      <Text
-        color={colorMode == "light" ? "black" : ""}
-        fontSize={style.font.h4}
-        fontWeight={style.fontWeight.dark}
-        marginTop={style.margin.sm}
-      >
-        Profiles
-      </Text>
-      <FlexRow hrAlign="flex-start">
-        <TagNative
-          icon={{
-            align: "right",
-            slug: "logo-Lens",
-          }}
-          size="md"
-          value="stani.lens"
-          lineHeight="2rem"
-        />
-        <TagNative
-          icon={{
-            align: "right",
-            slug: "logo-Ens",
-          }}
-          size="md"
-          value="stani.lens"
-          lineHeight="2rem"
-        />
-        <TagNative
-          icon={{
-            align: "right",
-            slug: "logo-Ens",
-          }}
-          size="md"
-          value="ensofficial.end"
-          lineHeight="2rem"
-        />
-      </FlexRow>
+      {user?.description && (
+        <Text
+          color={colorMode == "light" ? "black" : ""}
+          marginTop={style.margin.sm}
+        >
+          {user?.description}
+        </Text>
+      )}
+
+      {identities?.length && (
+        <FlexColumn vrAlign="flex-start" marginTop="sm">
+          <Heading
+            color={colorMode == "light" ? "black" : ""}
+            fontSize={style.font.h5}
+            fontWeight={style.fontWeight.dark}
+            marginBottom={style.margin.sm}
+          >
+            Identities
+          </Heading>
+          <FlexRow hrAlign="flex-start">
+            {identities.map((item: any, index: any) => (
+              <FlexRow key={index} hrAlign="flex-start">
+                <TagNative
+                  key={index}
+                  image={item?.meta?.data?.modified?.meta_image}
+                  value={item?.meta?.data?.modified?.meta_title}
+                  size="md"
+                  lineHeight="2.5"
+                />
+              </FlexRow>
+            ))}
+          </FlexRow>
+        </FlexColumn>
+      )}
     </Box>
   );
 };

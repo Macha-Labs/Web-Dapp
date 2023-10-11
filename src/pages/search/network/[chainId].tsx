@@ -23,6 +23,7 @@ import useChainTxn from "@/hooks/studio/useChainTxn";
 import useContractList from "@/hooks/studio/useContractList";
 import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import NavHeader from "@/_ui/nav/NavHeader";
 
 const Network = () => {
   const hookChainTxn = useChainTxn();
@@ -441,7 +442,7 @@ const Network = () => {
       <FlexWindow
         view="col"
         bodyElem={renderBody()}
-        navTop={<NavMeta />}
+        navTop={<NavHeader />}
         // navLeft={<NavLeft />}
       ></FlexWindow>
     </>

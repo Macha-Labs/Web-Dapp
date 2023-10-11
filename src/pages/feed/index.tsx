@@ -1,8 +1,8 @@
 import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
 import MotionBar from "@/components/MotionBar";
 import MetaList from "@/components/meta/MetaList";
 import useMetaList from "@/hooks/meta/useMetasList";
@@ -10,7 +10,7 @@ import { style } from "@/styles/StyledConstants";
 import { Box, Heading, useColorMode } from "@chakra-ui/react";
 
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Explorer = () => {
   const hookMetasList = useMetaList();
@@ -38,7 +38,7 @@ const Explorer = () => {
   };
 
   const renderNavTop = () => {
-    return <NavMeta />;
+    return <NavHeader />;
   };
 
   const renderBody = () => {

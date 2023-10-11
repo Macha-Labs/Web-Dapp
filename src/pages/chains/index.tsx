@@ -1,14 +1,11 @@
 import CardNative from "@/_ui/cards/CardNative";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
-import NavTop from "@/_ui/nav/NavTop";
+import NavHeader from "@/_ui/nav/NavHeader";
 import SupportedChains from "@/components/studio/SupportedChains";
 import chains from "@/data/network";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, useColorMode } from "@chakra-ui/react";
-import React from "react";
 
 const Chains = () => {
 
@@ -42,8 +39,7 @@ const Chains = () => {
   return (
     <FlexWindow
       view="col"
-      // navLeft={<NavLeft />}
-      navTop={<NavMeta />}
+      navTop={<NavHeader />}
       bodyElem={renderBody()}
     ></FlexWindow>
   );

@@ -1,22 +1,12 @@
-import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import useSearch from "@/hooks/studio/useSearch";
-import {
-  Box,
-  useColorMode,
-  Image,
-  InputLeftElement,
-  InputGroup,
-} from "@chakra-ui/react";
+import SearchInput from "@/components/search/SearchInput";
+import useVectorSearch from "@/hooks/studio/useVectorSearch";
+import GlobalIcons from "@/styles/GlobalIcons";
+import { Box, Image, useColorMode } from "@chakra-ui/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
-import InputSearch from "../input/InputSearch";
-import IconBase from "../icons/IconsBase";
-import useVectorSearch from "@/hooks/studio/useVectorSearch";
-import GlobalIcons from "@/styles/GlobalIcons";
-import Link from "next/link";
-
 
 type Props = {
   rightElem?: any;
@@ -29,7 +19,7 @@ const NavMeta = ({ rightElem, centerElem, search, showLogo }: Props) => {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(
     search ? search : false
   );
-  const hookSearch = useVectorSearch();
+
   const router = useRouter();
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -63,20 +53,6 @@ const NavMeta = ({ rightElem, centerElem, search, showLogo }: Props) => {
               <Image height="30px" src="/assets/macha-image-text.svg" />
             )}
             <FlexRow hrAlign={showLogo ? "flex-end" : "space-between"}>
-              {/* <InputGroup> */}
-              {/* <InputLeftElement alignItems="start">
-                  <Box
-                    style={{
-                      height: "3rem",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginLeft: `${style.margin.xxs}`,
-                    }}
-                  >
-                    <IconBase slug="icon-search" size="sm" />
-                  </Box>
-                </InputLeftElement> */}
               <Link href="/">
                 <Image
                   height="30px"
@@ -92,22 +68,8 @@ const NavMeta = ({ rightElem, centerElem, search, showLogo }: Props) => {
                   }}
                 />
               </Link>
-              <InputSearch
-                width="30%"
-                height="1rem"
-                defaultValue={hookSearch.searchString}
-                value={hookSearch.searchString}
-                onChange={(e: any) =>
-                  hookSearch.setSearchString(e.target.value)
-                }
-                onKeydown={(e: any) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    router.push(`/search?search=${hookSearch.searchString}`);
-                  }
-                }}
-              />
-              {/* </InputGroup> */}
+
+              <SearchInput />
               <Box
                 style={{ cursor: "pointer" }}
                 onClick={() => {

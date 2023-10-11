@@ -1,6 +1,5 @@
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
+import NavHeader from "@/_ui/nav/NavHeader";
 import NavStudio from "@/_ui/nav/NavStudio";
 import TxnDetails from "@/components/studio/TxnDetails";
 import { config } from "@/config";
@@ -113,7 +112,7 @@ const SearchResult = () => {
     <FlexWindow
       view="col"
       bodyElem={renderBody()}
-      navTop={<NavMeta />}
+      navTop={<NavHeader />}
       // navLeft={<NavLeft />}
     ></FlexWindow>
   );

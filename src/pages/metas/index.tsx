@@ -1,18 +1,14 @@
 import CardNative from "@/_ui/cards/CardNative";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
-import NavTop from "@/_ui/nav/NavTop";
+import NavHeader from "@/_ui/nav/NavHeader";
 import GraphCard from "@/components/cards/GraphCard";
-import SupportedChains from "@/components/studio/SupportedChains";
-import chains from "@/data/network";
 import { exploreModules } from "@/data/studio/constant";
 import useMetaList from "@/hooks/meta/useMetasList";
 import { style } from "@/styles/StyledConstants";
-import { Box, Heading, useColorMode } from "@chakra-ui/react";
+import { Heading, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const Metas = () => {
   const router = useRouter();
@@ -76,7 +72,7 @@ const Metas = () => {
     <FlexWindow
       view="col"
       // navLeft={<NavLeft />}
-      navTop={<NavMeta />}
+      navTop={<NavHeader />}
       bodyElem={renderBody()}
     ></FlexWindow>
   );
