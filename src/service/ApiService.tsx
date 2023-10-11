@@ -61,6 +61,21 @@ export const vectorSearch = async (searchQuery: string) => {
   }
 };
 
+export const querySearch = async (searchQuery: string) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/metas/metaDocs/${searchQuery}`
+  );
+  if (response.status == 200) {
+    console.log("response querySearch api", response);
+    const data = await response.json();
+    return data;
+  } else {
+    return {
+      error: "Not found",
+    };
+  }
+};
+
 export const contractData = async (contractName: string) => {
   const response = await fetch(
     `${config.metaServer}/indexer/transactions/fetch-by-name/${contractName}`
@@ -263,6 +278,21 @@ export const userMetaByAddress = async (address: any) => {
   const data = await res.json();
   console.log("userMetas", data);
   return data;
+};
+
+export const userIdByAddress = async (address: string) => {
+  const response = await fetch(
+    `${config.metaServer}/indexer/metas/addressResolver/${address}`
+  );
+  if (response.status == 200) {
+    console.log("response addressReolver api", response);
+    const data = await response.json();
+    return data;
+  } else {
+    return {
+      error: "Not found",
+    };
+  }
 };
 
 export const getAllNfts = async (address: any) => {

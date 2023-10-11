@@ -1,14 +1,13 @@
 import CardNative from "@/_ui/cards/CardNative";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
+import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
 import LeaderboardTable from "@/components/table/LeaderboardTable";
 import UserXpTable from "@/components/table/UserXpTable";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import { Box, Heading, Image, useColorMode } from "@chakra-ui/react";
-import React from "react";
 
 const Xps = () => {
 
@@ -71,7 +70,7 @@ const Xps = () => {
     <FlexWindow
       view="both"
       navLeft={<NavLeft />}
-      navTop={<NavMeta />}
+      navTop={<NavHeader />}
       bodyElem={renderBody()}
     ></FlexWindow>
   );

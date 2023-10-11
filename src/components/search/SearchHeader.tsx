@@ -1,31 +1,30 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
 import useSearch from "@/hooks/studio/useSearch";
+import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {
   Box,
   InputGroup,
   InputLeftElement,
-  InputRightElement,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import SearchRow from "./SearchRow";
-import GlobalIcons from "@/styles/GlobalIcons";
-import useVectorSearch from "@/hooks/studio/useVectorSearch";
+import { useRouter } from "next/router";
 
 type Props = {
   options?: any;
+  height?: any;
 };
 
-const SearchHeader = ({ options }: Props) => {
-  const hookSearch = useVectorSearch();
+const SearchHeader = ({ options, height }: Props) => {
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-  const searchRef = useRef(null);
-  const router = useRouter();
+
+  const hookSearch = useSearch();
   const { colorMode } = useColorMode();
+  const router = useRouter();
 
   return (
     <>
@@ -48,7 +47,7 @@ const SearchHeader = ({ options }: Props) => {
             <InputLeftElement alignItems="start">
               <Box
                 style={{
-                  height: "5rem",
+                  height: height ? height : "5rem",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -59,20 +58,15 @@ const SearchHeader = ({ options }: Props) => {
               </Box>
             </InputLeftElement>
             <input
-              value={hookSearch.searchString}
+              value={hookSearch.inputValue} // Use local state to control the input value
               type="text"
-              ref={searchRef}
+              ref={hookSearch.searchRef}
               className="searchHeader"
-              onChange={(e: any) => hookSearch.setSearchString(e.target.value)}
-              onKeyDown={(e: any) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  router.push(`/search?search=${hookSearch.searchString}`);
-                }
-              }}
+              onChange={hookSearch.handleInputChange} // Call handleInputChange when input changes
+              onKeyDown={hookSearch.handleRoute} // Call handleKeyDown on Enter key press
               placeholder="Try Spectacular Search Now"
               style={{
-                height: "5rem",
+                height: height ? height : "5rem",
                 color: `${colorMode == "light" ? "#3d3d3d" : ""}`,
                 borderRadius: `${style.card.borderRadius.default}`,
                 fontSize: `${style.font.h4}`,
@@ -89,9 +83,6 @@ const SearchHeader = ({ options }: Props) => {
                 width: "100%",
               }}
             />
-            {/* <InputRightElement alignItems="start">
-              
-            </InputRightElement> */}
           </Box>
           {showSuggestions && (
             <Box

@@ -54,99 +54,101 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
         boxShadow: `${shadowOnHover && "-0.15px 0.15px 28px 0px #004AD9"}`,
       }}
     >
-      <FlexColumn hrAlign="flex-start" vrAlign="flex-start" width="100%">
-        <Text
-          color={colorMode == "light" ? "black" : ""}
-          fontSize={style.font.h5}
-          m={0}
-          marginTop={style.margin.xxs}
-          marginBottom={style.margin.xxs}
-          fontWeight={style.fontWeight.dark}
-        >
-          External links
-        </Text>
-        <FlexRow marginBottom={style.margin.xxs} vrAlign="flex-start">
-          <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
+      <FlexRow hrAlign="flex-start" vrAlign="flex-start" width="100%">
+        <FlexColumn marginBottom={style.margin.xxs} vrAlign="flex-start">
+          <Text
+            color={colorMode == "light" ? "black" : ""}
+            fontSize={style.font.h5}
+            m={0}
+            marginTop={style.margin.xxs}
+            marginBottom={style.margin.xxs}
+            fontWeight={style.fontWeight.dark}
+          >
+            External links
+          </Text>
+          <Text color={colorMode == "light" ? "black" : ""} m={0}>
+            Documentation
+          </Text>
+          <Link href="https://mirror.xyz/0xE5717ede08ba94e516b6706A6ccBE30D6DA5d80D"></Link>
+          <Text color={colorMode == "light" ? "black" : ""} m={0} p={0}>
+            Blogs
+          </Text>
+        </FlexColumn>
+
+        <FlexColumn marginBottom={style.margin.xxxs} vrAlign="flex-start">
+          <Text
+            color={colorMode == "light" ? "black" : ""}
+            fontSize={style.font.h5}
+            m={0}
+            marginTop={style.margin.xs}
+            marginBottom={style.margin.xxs}
+            fontWeight={style.fontWeight.dark}
+          >
+            Company
+          </Text>
+          <Link href="https://macha.ai/about" target="blank">
             <Text color={colorMode == "light" ? "black" : ""} m={0}>
-              Documentation
+              About
             </Text>
-          </FlexColumn>
-          <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-            <Link href="https://mirror.xyz/0xE5717ede08ba94e516b6706A6ccBE30D6DA5d80D"></Link>
-            <Text color={colorMode == "light" ? "black" : ""} m={0} p={0}>
-              Blogs
+          </Link>
+
+          <Link
+            href="https://metaworkhq.notion.site/Macha-Hiring-ce58c7a7c36e48b79ea8f9041a72f880"
+            target="blank"
+          >
+            <Text color={colorMode == "light" ? "black" : ""} m={0}>
+              Careers
             </Text>
-          </FlexColumn>
-        </FlexRow>
-        <Text
-          color={colorMode == "light" ? "black" : ""}
-          fontSize={style.font.h5}
-          m={0}
-          marginTop={style.margin.xs}
-          marginBottom={style.margin.xxs}
-          fontWeight={style.fontWeight.dark}
-        >
-          Company
-        </Text>
-        <FlexRow marginBottom={style.margin.xxxs}>
-          <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-            <Link href="https://macha.ai/about">
-              <Text color={colorMode == "light" ? "black" : ""} m={0}>
-                About
-              </Text>
-            </Link>
-          </FlexColumn>
-          <FlexColumn hrAlign="flex-start" vrAlign="flex-start">
-            <Link href="https://metaworkhq.notion.site/Macha-Hiring-ce58c7a7c36e48b79ea8f9041a72f880">
-              <Text color={colorMode == "light" ? "black" : ""} m={0}>
-                Careers
-              </Text>
-            </Link>
-          </FlexColumn>
-        </FlexRow>
-        <Text
-          color={colorMode == "light" ? "black" : ""}
-          fontSize={style.font.h5}
-          m={0}
-          marginTop={style.margin.xs}
-          marginBottom={style.margin.xxs}
-          fontWeight={style.fontWeight.dark}
-        >
-          Connect with us
-        </Text>
-        <FlexRow marginBottom={style.margin.xxxs} hrAlign="flex-start">
-          <Link href="https://twitter.com/Macha0x">
-            <Image
-              alt="twitter"
-              src={
-                colorMode == "light"
-                  ? GlobalIcons["brand-twitter"]
-                  : GlobalIcons["dark-twitter"]
-              }
-              width="30px"
-              marginRight="1rem"
-            />
           </Link>
-          <Link href="https://www.linkedin.com/company/metaworklab/">
-            <Image
-              alt="linkedin"
-              src={
-                colorMode == "light"
-                  ? GlobalIcons["brand-linkedin"]
-                  : GlobalIcons["dark-linkedin"]
-              }
-              width="30px"
-              marginRight="1rem"
-            />
-          </Link>
-        </FlexRow>
-      </FlexColumn>
+        </FlexColumn>
+        <FlexColumn vrAlign="flex-start">
+          <Text
+            color={colorMode == "light" ? "black" : ""}
+            fontSize={style.font.h5}
+            m={0}
+            marginTop={style.margin.xs}
+            marginBottom={style.margin.xxs}
+            fontWeight={style.fontWeight.dark}
+          >
+            Connect with us
+          </Text>
+          <FlexRow marginBottom={style.margin.xxxs} hrAlign="flex-start">
+            <Link href="https://twitter.com/Macha0x" target="blank">
+              <Image
+                alt="twitter"
+                src={
+                  colorMode == "light"
+                    ? GlobalIcons["brand-twitter"]
+                    : GlobalIcons["dark-twitter"]
+                }
+                width="30px"
+                marginRight="1rem"
+              />
+            </Link>
+            <Link
+              href="https://www.linkedin.com/company/metaworklab/"
+              target="blank"
+            >
+              <Image
+                alt="linkedin"
+                src={
+                  colorMode == "light"
+                    ? GlobalIcons["brand-linkedin"]
+                    : GlobalIcons["dark-linkedin"]
+                }
+                width="30px"
+                marginRight="1rem"
+              />
+            </Link>
+          </FlexRow>
+        </FlexColumn>
+      </FlexRow>
       <Divider />
-      <FlexRow hrAlign="space-between">
-        <Link href="https://macha.ai/privacy/">
+      <FlexRow hrAlign="flex-start" width="90%">
+        <Link href="https://macha.ai/privacy/" target="blank">
           <Text color={colorMode == "light" ? "black" : ""}>Privacy</Text>
         </Link>
-        <Link href="https://macha.ai/terms/">
+        <Link href="https://macha.ai/terms/" target="blank">
           <Text color={colorMode == "light" ? "black" : ""}>• Terms</Text>
         </Link>
         <Text color={colorMode == "light" ? "black" : ""}>

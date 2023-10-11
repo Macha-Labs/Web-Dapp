@@ -1,35 +1,17 @@
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import useSearch from "@/hooks/studio/useSearch";
-import { Box, Image, useColorMode } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import FlexRow from "../flex/FlexRow";
-import InputSearch from "../input/InputSearch";
-import NavTop from "./NavTop";
+import SearchInput from "@/components/search/SearchInput";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import useVectorSearch from "@/hooks/studio/useVectorSearch";
+import { Box, Image, useColorMode } from "@chakra-ui/react";
+import FlexRow from "../flex/FlexRow";
+import NavTop from "./NavTop";
 
 const NavStudio = () => {
-  const hookSearch = useVectorSearch();
-  const router = useRouter();
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <NavTop
-      centerElem={
-        <InputSearch
-          defaultValue={hookSearch.searchString}
-          value={hookSearch.searchString}
-          height="50px"
-          onChange={(e: any) => hookSearch.setSearchString(e.target.value)}
-          onKeydown={(e: any) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              router.push(`/search?search=${hookSearch.searchString}`);
-            }
-          }}
-        />
-      }
+      centerElem={<SearchInput />}
       rightElem={
         <FlexRow width="fit-content">
           <ConnectWalletButton
@@ -45,6 +27,7 @@ const NavStudio = () => {
           >
             <FlexRow>
               <Image
+              alt="icon"
                 src={
                   colorMode == "light"
                     ? GlobalIcons["icon-dark-mode"]

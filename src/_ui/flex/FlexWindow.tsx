@@ -1,6 +1,5 @@
 import { style } from "@/styles/StyledConstants";
 import { Box, useColorMode } from "@chakra-ui/react";
-import React from "react";
 
 type Props = {
   view?: string;
@@ -13,10 +12,11 @@ type Props = {
   rightElem?: any;
   navLeft?: any;
   navTop?: any;
+  navBottom?: any;
   noPaddingTop?: boolean;
   padding?: any;
   background?: any;
-  enableBackground?:boolean;
+  enableBackground?: boolean;
 };
 
 export const FlexWindow = ({
@@ -26,6 +26,7 @@ export const FlexWindow = ({
   marginTop,
   navLeft,
   navTop,
+  navBottom,
   noPaddingTop,
   padding,
   background,
@@ -47,16 +48,25 @@ export const FlexWindow = ({
     >
       {view == "col" && (
         <Box
-          backgroundImage={ enableBackground ?
-            colorMode == "light"
-              ? "url(/assets/explore/searchbg_light.svg)"
-              : "url(/assets/icons/searchbg.svg)" : "none"
+          backgroundImage={
+            enableBackground
+              ? colorMode == "light"
+                ? "url(/assets/explore/searchbg_light.svg)"
+                : "url(/assets/icons/searchbg.svg)"
+              : "none"
           }
           backgroundPosition="center"
           backgroundRepeat="no-repeat"
           backgroundSize="cover"
         >
           <Box
+            background={
+              !enableBackground
+                ? colorMode == "light"
+                  ? "#f2f5fd"
+                  : style.body.bg.default
+                : "none"
+            }
             style={{
               position: "fixed",
               top: "0",
@@ -67,7 +77,7 @@ export const FlexWindow = ({
               // }`,
               display: "flex",
               justifyContent: "center",
-              padding: "1% 2% 1% 3%",
+              // padding: "1% 2% 1% 3%",
             }}
           >
             {navTop}
@@ -76,10 +86,38 @@ export const FlexWindow = ({
             style={{
               padding: `${padding ? padding : "0% 3%"}`,
               marginTop: `${marginTop ? marginTop : style.margin["5xl"]}`,
+              marginBottom: navBottom
+                ? `${marginTop ? marginTop : style.margin["5xl"]}`
+                : "0",
             }}
           >
             {bodyElem}
           </div>
+          {navBottom && (
+            <Box
+              background={
+                !enableBackground
+                  ? colorMode == "light"
+                    ? "#f2f5fd"
+                    : style.body.bg.default
+                  : "none"
+              }
+              style={{
+                position: "fixed",
+                bottom: "0",
+                zIndex: "1000",
+                width: "100%",
+                // background: `${
+                //   colorMode == "light" ? "#f2f5fd" : style.body.bg.default
+                // }`,
+                display: "flex",
+                justifyContent: "center",
+                // padding: "1% 2% 1% 3%",
+              }}
+            >
+              {navBottom}
+            </Box>
+          )}
         </Box>
       )}
 

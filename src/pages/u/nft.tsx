@@ -1,42 +1,25 @@
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import { style } from "@/styles/StyledConstants";
 
+import FlexColumn from "@/_ui/flex/FlexColumn";
+import FlexRow from "@/_ui/flex/FlexRow";
+import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
-import NavMeta from "@/_ui/nav/NavMeta";
-import Marquee from "@/components/Marquee/Marquee";
-import TransactionCard from "@/components/cards/TransactionCard";
-import CarouselSlide from "@/components/studio/CarouselSlide";
-import useTransaction from "@/hooks/studio/useTransaction";
-import GlobalIcons from "@/styles/GlobalIcons";
+import Tabs from "@/_ui/tabs/Tabs";
+import GraphCard from "@/components/cards/GraphCard";
+import SearchHeader from "@/components/search/SearchHeader";
+import { exploreModules } from "@/data/studio/constant";
+import useMetaList from "@/hooks/meta/useMetasList";
 import {
   Box,
   Button,
   Flex,
-  Heading,
   Image,
-  Text,
-  Tooltip,
+  Text
 } from "@chakra-ui/react";
-import Tabs from "@/_ui/tabs/Tabs";
-import { useEffect, useState } from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import FlexRow from "@/_ui/flex/FlexRow";
-import CollectorCard from "@/components/cards/CollectorsCard";
-import useMetaList from "@/hooks/meta/useMetasList";
 import { useRouter } from "next/router";
-import ButtonNative from "@/_ui/buttons/ButtonNative";
-import FlexColumn from "@/_ui/flex/FlexColumn";
-import MetaCollectionCard from "@/components/cards/MetaCollectionCard";
-import GraphCard from "@/components/cards/GraphCard";
-import { exploreModules } from "@/data/studio/constant";
-import { getAllTransactions } from "@/service/ApiService";
-import { fetchAllMetas, fetchMetaSchemas } from "@/service/MetaService";
-import SupportedChains from "@/components/studio/SupportedChains";
-import chains from "@/data/network";
-import CardNative from "@/_ui/cards/CardNative";
-import JSONViewer from "@/_ui/JSONViewer";
-import SearchHeader from "@/components/search/SearchHeader";
+import { useEffect, useState } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function Home() {
   const options: any = [
@@ -219,7 +202,7 @@ export default function Home() {
   };
 
   const renderNavTop = () => {
-    return <NavMeta />;
+    return <NavHeader />;
   };
 
   return (
