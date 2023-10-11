@@ -63,7 +63,7 @@ export const vectorSearch = async (searchQuery: string) => {
 
 export const querySearch = async (searchQuery: string) => {
   const response = await fetch(
-    `${config.metaServer}/indexer/metas/queryResolver/${searchQuery}`
+    `${config.metaServer}/indexer/metas/queryResolver/${searchQuery}` 
   );
   if (response.status == 200) {
     console.log("response querySearch api", response);
