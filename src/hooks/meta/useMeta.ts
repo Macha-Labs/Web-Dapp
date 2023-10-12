@@ -1,20 +1,20 @@
-import { fetchMetaByIpfsCid, fetchMetaByUid } from "@/service/MetaService";
+import { fetchMetaByIpfsCid, metaResolver } from "@/service/MetaService";
 import { useState } from "react";
 
 const useMeta = () => {
   const [metaData, setMetaData] = useState<any>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const _fetch = (metaSlug: any) => {
-    if (String(metaSlug).length == 24) {
-      fetchMetaByUid(metaSlug).then((res) => {
-        setMetaData(res.data);
+  const _fetch = (value: any) => {
+    if (String(value).length == 24) {
+      metaResolver({uid:value}).then((res) => {
+        setMetaData(res.data[0]);
         setIsLoading(false)
         console.log(res.data, "useMeta");
       });
     }
     else {
-      fetchMetaByIpfsCid(metaSlug).then((res) => {
+      fetchMetaByIpfsCid(value).then((res) => {
         if (res) {
           console.log(res, "ipfs meta data")
           setMetaData({

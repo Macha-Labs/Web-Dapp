@@ -1,4 +1,4 @@
-import { fetchAllMetas, fetchMetaSchemas } from "@/service/MetaService";
+import { metaResolver, fetchMetaSchemas } from "@/service/MetaService";
 import { useEffect, useState } from "react";
 
 const useMetaList = () => {
@@ -9,7 +9,7 @@ const useMetaList = () => {
   const [lastPage, setLastPage] = useState<boolean>(false);
   const [pageNo, setPageNo] = useState<number>(1);
 
-  const _fetchMore = async (meta_schema?: any, limit?: number) => {
+  const _fetchMore = async (slug?: any, limit?: number) => {
     console.log("pageNo", pageNo);
     if (pageNo == 1) {
       setIsLoading(true);
@@ -17,7 +17,7 @@ const useMetaList = () => {
       setIsLoading(false);
       setShowMoreLoading(true);
     }
-    await fetchAllMetas(meta_schema, pageNo, limit ? limit : 30).then((res) => {
+    await metaResolver({slug:slug, page:pageNo, limit:limit ? limit : 30}).then((res) => {
       console.log("allmetas", res);
       setMetaAll(metaAll ? [...metaAll, ...res?.data] : res?.data);
       setPageNo(pageNo + 1);
