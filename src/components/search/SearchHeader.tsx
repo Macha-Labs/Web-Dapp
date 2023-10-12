@@ -11,7 +11,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import SearchRow from "./SearchRow";
+import SearchOption from "./SearchOption";
 import { useRouter } from "next/router";
 
 type Props = {
@@ -134,7 +134,7 @@ const SearchHeader = ({ options, height }: Props) => {
                   </Text>
                 </Box>
 
-                <SearchRow
+                <SearchOption
                   image={GlobalIcons["logo-Lens"]}
                   text="Lens Posts"
                   onClick={() => {
@@ -142,7 +142,7 @@ const SearchHeader = ({ options, height }: Props) => {
                     setShowSuggestions(false);
                   }}
                 />
-                <SearchRow
+                <SearchOption
                   image={GlobalIcons["logo-Ens"]}
                   text="Ens Handles"
                   onClick={() => {
@@ -150,7 +150,7 @@ const SearchHeader = ({ options, height }: Props) => {
                     setShowSuggestions(false);
                   }}
                 />
-                <SearchRow
+                <SearchOption
                   image={GlobalIcons["logo-Sound.xyz"]}
                   text="Sound.xyz Music"
                   onClick={() => {
@@ -158,7 +158,7 @@ const SearchHeader = ({ options, height }: Props) => {
                     setShowSuggestions(false);
                   }}
                 />
-                <SearchRow
+                <SearchOption
                   image={GlobalIcons["logo-Poap"]}
                   text="Poap Nfts"
                   onClick={() => {
@@ -188,7 +188,7 @@ const SearchHeader = ({ options, height }: Props) => {
                   </Text>
                 </Box>
 
-                <SearchRow
+                <SearchOption
                   text="View content across web3"
                   onClick={() => {
                     router.push("/feed");
@@ -196,14 +196,14 @@ const SearchHeader = ({ options, height }: Props) => {
                   }}
                 />
 
-                <SearchRow
+                <SearchOption
                   text="Explore Chains"
                   onClick={() => {
                     router.push("/chains");
                     setShowSuggestions(false);
                   }}
                 />
-                <SearchRow
+                <SearchOption
                   text="Explore Metas"
                   onClick={() => {
                     router.push("/metas");

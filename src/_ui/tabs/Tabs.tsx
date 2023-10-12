@@ -26,8 +26,7 @@ const Tabs = ({
   width,
   hrAlign,
 }: Props) => {
-
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode();
 
   return (
     <>
@@ -42,13 +41,13 @@ const Tabs = ({
           options?.map((option: any, idx: any) => {
             return (
               <>
-                {option && (
+                {
                   <ButtonNative
                     key={idx}
                     onClick={() => onChange(option?.value)}
                     marginRight="xs"
                     variant={
-                      value == option?.value
+                      option?.condition
                         ? "state_brand"
                         : "state_transparent_hover"
                     }
@@ -70,7 +69,13 @@ const Tabs = ({
                           //     : "linear(100.07deg, #fff 100%, #fff 100%)"
                           // }
                           // bgClip="text"
-                          color={colorMode == "light" ? value != option?.value ? "#282828" : "#ffff" : "#fff"}
+                          color={
+                            colorMode == "light"
+                              ? value != option?.value
+                                ? "#282828"
+                                : "#ffff"
+                              : "#fff"
+                          }
                           className="m-b-0"
                         >
                           {option?.value}
@@ -78,7 +83,7 @@ const Tabs = ({
                       </FlexRow>
                     </Link>
                   </ButtonNative>
-                )}
+                }
               </>
             );
           })
@@ -92,7 +97,8 @@ const Tabs = ({
 
 export default Tabs;
 
-{/* <StyledLi
+{
+  /* <StyledLi
                 className={`nav-item  ${
                   value === option?.value ? "active" : ""
                 }`}
@@ -117,4 +123,5 @@ export default Tabs;
                         value == option?.value ? colorMode == "light" ? "linear(100.07deg, #282828 100%, #282828 100%)" : "linear(100.07deg, #197cec 100%, #004889 100%)" : "linear(100.07deg, #fff 100%, #fff 100%)"
                       }
                       bgClip="text"
-                      className="m-b-0" */}
+                      className="m-b-0" */
+}
