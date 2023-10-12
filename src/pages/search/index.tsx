@@ -6,11 +6,12 @@ import NavFooter from "@/_ui/nav/NavFooter";
 import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
 import ExternalCard from "@/components/cards/ExternalCard";
-import PostCard from "@/components/cards/PostCard";
 import UserProfileCard from "@/components/cards/UserProfileCard";
+import SearchCol from "@/components/search/SearchCol";
+import SearchRow from "@/components/search/SearchRow";
 import useSearch from "@/hooks/studio/useSearch";
 import { style } from "@/styles/StyledConstants";
-import { Box, Grid, Heading, Text, useColorMode } from "@chakra-ui/react";
+import { Box, Grid, Heading, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -54,15 +55,17 @@ const Search = () => {
             >
               Search results
             </Heading>
-            {(!hookSearch?.isLoading &&
-              hookSearch?.searchResults?.identities?.length) ? (
-                <FlexColumn>
-                  <UserProfileCard
-                    user={hookSearch?.searchResults?.user}
-                    identities={hookSearch?.searchResults?.identities}
-                  />
-                </FlexColumn>
-              ) :<></>}
+            {!hookSearch?.isLoading &&
+            hookSearch?.searchResults?.identities?.length ? (
+              <FlexColumn>
+                <UserProfileCard
+                  user={hookSearch?.searchResults?.user}
+                  identities={hookSearch?.searchResults?.identities}
+                />
+              </FlexColumn>
+            ) : (
+              <></>
+            )}
             <Box
               paddingTop={style.margin.navBoth}
               display={"flex"}
@@ -70,44 +73,24 @@ const Search = () => {
               justifyContent={"center"}
             >
               <Grid gap="10px" width="100%">
-                {hookSearch?.isLoading && (
-                  <FlexRow height="200px" width="80vw">
-                    <Loader size="lg" />
-                  </FlexRow>
-                )}
-                {!hookSearch?.isLoading &&
-                hookSearch?.searchResults?.metas?.length ? (
-                  <>
-                    {hookSearch?.searchResults?.metas?.map(
-                      (item: any, index: any) => (
-                        <FlexRow
-                          key={index}
-                          hrAlign="flex-start"
-                          marginBottom="xs"
-                        >
-                          <PostCard
-                            // title={item?.meta?.data?.modified?.meta_title}
-                            key={index}
-                            image={item?.meta?.data?.modified?.meta_image}
-                            metaName={item?.meta_schema?.name}
-                            slug={item?.meta?.slug}
-                            description={
-                              item?.meta?.data?.modified?.meta_description
-                            }
-                            title={item?.meta?.data?.ipfs?.contentURI?.name}
-                            owner_name={item?.metaOwner}
-                            onClick={() => {
-                              router.push(`/search/meta/${item?._id}`);
-                            }}
-                            width="100%"
-                          />
-                        </FlexRow>
-                      )
+                <>
+                  {(router?.query?.id == "nft" ||
+                    router?.query?.id == "music") && (
+                    <SearchRow
+                      isLoading={hookSearch?.isLoading}
+                      router={router}
+                      results={hookSearch?.searchResults?.metas}
+                    />
+                  )}
+                  {router?.query?.id != "nft" &&
+                    router?.query?.id != "music" && (
+                      <SearchCol
+                        isLoading={hookSearch?.isLoading}
+                        results={hookSearch?.searchResults?.metas}
+                        router={router}
+                      />
                     )}
-                  </>
-                ) : (
-                  <></>
-                )}
+                </>
               </Grid>
             </Box>
           </FlexColumn>

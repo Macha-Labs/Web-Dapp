@@ -13,46 +13,60 @@ type Props = {
   centerElem?: any;
   search?: boolean;
   showLogo?: boolean;
-  field?:any;
+  field?: any;
 };
 
-const NavHeader = ({ rightElem, centerElem, search, showLogo, field }: Props) => {
+const NavHeader = ({
+  rightElem,
+  centerElem,
+  search,
+  showLogo,
+  field,
+}: Props) => {
+  const router = useRouter();
   const options = [
     {
       href: "/search",
       value: "Search",
+      condition: router.route == "/search" && !router.query.id,
     },
     {
       href: "/search?id=social",
       value: "Socials",
+      condition: router.route == "/search" && router.query.id == "social",
     },
     {
       href: "/search?id=music",
       value: "Music",
+      condition: router.route == "/search" && router.query.id == "music",
     },
     {
       href: "/search?id=nft",
       value: "NFTs",
+      condition: router.route == "/search" && router.query.id == "nft",
     },
 
     {
       href: "/chains",
       value: "Chains",
+      condition: router.route == "/chains",
     },
     {
       href: "/metas",
       value: "Metas",
+      condition: router.route == "/metas",
     },
   ];
   const { colorMode, toggleColorMode } = useColorMode();
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(
     search ? search : false
   );
-  const router = useRouter();
+
   const [tab, setTab] = useState<any>(field ? field : "Search");
 
   return (
     <>
+      {console.log(router, "router value")}
       <Box width={"100%"} display={"flex"} justifyContent={"center"}>
         <Box
           style={{
