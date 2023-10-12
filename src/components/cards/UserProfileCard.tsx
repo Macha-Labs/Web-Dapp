@@ -81,7 +81,7 @@ const UserProfileCard = ({
             >
               {truncateAddress(user?.address)}
             </Text>
-            <IconBase
+            {user?.address && <IconBase
               slug="icon-copy"
               style={{ marginLeft: "sm" }}
               onClick={() => {
@@ -92,7 +92,7 @@ const UserProfileCard = ({
                   duration: 3000,
                 });
               }}
-            />
+            />}
           </FlexRow>
         </FlexColumn>
       </FlexRow>

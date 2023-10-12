@@ -2,7 +2,8 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import useResolverSearch from "./useResolverSearch";
 import useVectorSearch from "./useVectorSearch";
-import { categorySearch, querySearch } from "@/service/ApiService";
+import { queryResolver } from "@/service/ApiService";
+import { metaResolver } from "@/service/MetaService";
 
 const useSearch = () => {
   const hookVectorSearch = useVectorSearch();
@@ -13,17 +14,15 @@ const useSearch = () => {
   const searchRef = useRef(null);
   const [searchResults, setSearchResults] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>(true);
-
-  const handleSearch = async (searchType: any, searchTerm: any) => {
+  const [page, setPage] = useState<any>(1);
+  const handleSearch = async (searchQuery: any, category: any) => {
     setIsLoading(true);
 
-    let res;
+    let res = await queryResolver({
+      searchQuery: searchQuery,
+      category: category,
+    });
 
-    if (["social", "nft", "music"].includes(searchType)) {
-      res = await categorySearch(searchType, searchTerm);
-    } else {
-      res = await querySearch(searchTerm);
-    }
     if (res.data) {
       setSearchResults(res.data);
     } else {
@@ -33,14 +32,19 @@ const useSearch = () => {
     setIsLoading(false);
   };
 
-  const handleFetch = (query: any) => {
-    if (regex.test(query)) {
-      // If it matches, use hookSearch1 and remove the first character
-      setInputValue(query.slice(1));
-    } else {
-      setInputValue(query);
-      hookVectorSearch._fetch(query);
-    }
+  const handleFetch = async (category: any) => {
+    setIsLoading(true);
+    let limit = 30;
+    await metaResolver({
+      category: category,
+      page: page,
+      limit: limit ? limit : 30,
+    }).then((res) => {
+      console.log("search results value", searchResults);
+      setSearchResults({metas:res?.data});
+      setIsLoading(false);
+    });
+
   };
 
   const handleInputChange = (e: any) => {

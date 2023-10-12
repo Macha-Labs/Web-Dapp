@@ -21,8 +21,14 @@ const Search = () => {
   const { colorMode } = useColorMode();
 
   useEffect(() => {
-    if (router.isReady) {
-      hookSearch.handleSearch(router.query.id, router.query.search);
+    if (router.isReady && router.query.id) {
+      hookSearch.handleFetch(router.query.id);
+    }
+  }, [router.query.id]);
+
+  useEffect(() => {
+    if (router.isReady && router.query.search) {
+      hookSearch.handleSearch(router.query.search, router.query.id);
     }
   }, [router.query.search]);
 
