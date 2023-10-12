@@ -32,8 +32,6 @@ import { useEffect, useState } from "react";
 import { useNetwork, useSwitchNetwork } from "wagmi";
 
 const DashBoard = () => {
-  const [exploreMeta, setExploreMeta] = useState<any>([]);
-  const [isPublisher, setIsPublisher] = useState<any>(false);
   const [filterValue, setFilterValue] = useState<any>("All Contracts");
   const [avatar, setAvatar] = useState<any>("icon-dashboard");
 
@@ -72,17 +70,9 @@ const DashBoard = () => {
     },
   ];
 
-  const fetchmetas = async () => {
-    const allMetas = await metaResolver();
-    setExploreMeta(allMetas.data);
-  };
   const contractModal = useDisclosure();
   const metaModal = useDisclosure();
   const hookContractCreate = useContractCreate(contractModal);
-
-  useEffect(() => {
-    fetchmetas();
-  }, []);
 
   const dashboardNav: any = [
     {
