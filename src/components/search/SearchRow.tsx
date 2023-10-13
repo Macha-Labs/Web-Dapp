@@ -6,6 +6,7 @@ import { Grid, GridItem, Text } from "@chakra-ui/react";
 import EmptyCard from "../cards/EmptyCard";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import { style } from "@/styles/StyledConstants";
 
 type Props = {
   isLoading?: any;
@@ -21,7 +22,12 @@ const SearchRow = ({ isLoading, results, router, next }: Props) => {
 
       {results?.length > 0 && (
         <FlexColumn marginBottom={"lg"}>
-          <Grid templateColumns="repeat(3,1fr)" gap="10px" width="100%">
+          <Grid
+            templateColumns="repeat(3,1fr)"
+            gap="10px"
+            width="100%"
+            marginBottom={style.margin.md}
+          >
             {results?.map((item: any, index: any) => {
               return (
                 <GridItem key={index} colSpan={1}>

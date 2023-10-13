@@ -21,6 +21,8 @@ const Search = () => {
   useEffect(() => {
     if (router.isReady && router.query.id) {
       hookSearch.handleSearch({ category: router.query.id });
+    }else if(router?.isReady && !router?.query?.id && !router?.query?.search){
+      hookSearch.handleSearch({searchQuery:"What is the latest in web3"});
     }
   }, [router.query.id]);
 

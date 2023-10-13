@@ -106,7 +106,6 @@ const useSearch = () => {
         category: category,
         slug: slug,
         owner: owner,
-
         next: next,
       });
     }
