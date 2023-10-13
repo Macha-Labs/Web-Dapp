@@ -43,13 +43,13 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
           >
             External links
           </Text>
-          <Link href="https://macha.gitbook.io/">
+          <Link href="https://macha.gitbook.io/" target="blank">
             <Text color={colorMode == "light" ? "black" : ""} m={0}>
               Documentation
             </Text>
           </Link>
 
-          <Link href="https://mirror.xyz/0xE5717ede08ba94e516b6706A6ccBE30D6DA5d80D">
+          <Link href="https://mirror.xyz/0xE5717ede08ba94e516b6706A6ccBE30D6DA5d80D" target="blank">
             <Text color={colorMode == "light" ? "black" : ""} m={0} p={0}>
               Blogs
             </Text>
