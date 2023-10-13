@@ -12,6 +12,7 @@ import React from "react";
 import { style as gStyle, style } from "@/styles/StyledConstants";
 import IconImage from "@/_ui/icons/IconImage";
 import GlobalIcons from "@/styles/GlobalIcons";
+import CardNative from "@/_ui/cards/CardNative";
 
 type Props = {
   width?: string;
@@ -29,31 +30,7 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
     "`${window.location.origin}/invite/c/6415b23b3b7d7f9068994e85`";
 
   return (
-    <Box
-      height={cardHeight ? cardHeight : "auto"}
-      borderRadius={gStyle.card.borderRadius.default}
-      background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
-      padding={style.card.padding.default}
-      position="sticky"
-      // marginRight={style.margin["sm"]}
-      // marginLeft={style.margin["sm"]}
-      // marginBottom={style.margin["lg"]}
-      width={width ? width : "100%"}
-      border={
-        colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default
-      }
-      //   cursor={shadowOnHover && "pointer"}
-      // flexWrap={"wrap"}
-      style={{
-        transitionTimingFunction: "ease-in-out",
-        transitionProperty: "all",
-        transitionDuration: "600ms",
-      }}
-      _hover={{
-        border: `${shadowOnHover && gStyle.card.border.meta}`,
-        boxShadow: `${shadowOnHover && "-0.15px 0.15px 28px 0px #004AD9"}`,
-      }}
-    >
+    <CardNative width="100%">
       <FlexRow hrAlign="flex-start" vrAlign="flex-start" width="100%">
         <FlexColumn marginBottom={style.margin.xxs} vrAlign="flex-start">
           <Text
@@ -155,7 +132,7 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
           • © 2023 MetaWork Labs
         </Text>
       </FlexRow>
-    </Box>
+    </CardNative>
   );
 };
 

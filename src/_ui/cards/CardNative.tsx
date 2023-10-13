@@ -1,4 +1,4 @@
-import { style } from "@/styles/StyledConstants";
+import { style as gStyle, style } from "../../styles/StyledConstants";
 import { Box, Divider, useColorMode } from "@chakra-ui/react";
 
 type Props = {
@@ -17,6 +17,7 @@ type Props = {
   marginTop?: any;
   marginBottom?: any;
   hrAlign?: any;
+  shadowOnHover?: any;
 };
 
 const CardNative = ({
@@ -35,19 +36,20 @@ const CardNative = ({
   header,
   footer,
   hrAlign,
+  shadowOnHover,
 }: Props) => {
-
-  const {colorMode} = useColorMode();
+  const { colorMode } = useColorMode();
 
   return (
     <Box
+      border={
+        colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default
+      }
+      borderRadius={style.card.borderRadius.default}
+      background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
       style={{
-        height: height ? `${height}` : "100%",
-        width: width ? `${width}` : "100%",
-        borderRadius: ` ${style.card.borderRadius.default}`,
-        border: `${border ? border : colorMode == "light" ? "#e2e2e2" : style.card.border.card}`,
-        background: ` ${colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}`,
-        boxShadow: ` ${style.card.shadow.default} `,
+        height: height ? `${height}` : "auto",
+        width: width ? `${width}` : "auto",
         margin: margin ? style?.margin[margin] : "0rem",
         marginLeft: `${style.margin[marginLeft]}`,
         marginRight: `${style.margin[marginRight]}`,
@@ -57,6 +59,15 @@ const CardNative = ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        transitionTimingFunction: "ease-in-out",
+        transitionProperty: "all",
+        transitionDuration: "600ms",
+      }}
+      onClick={onClick}
+      cursor={shadowOnHover && "pointer"}
+      _hover={{
+        border: `${shadowOnHover && gStyle.card.border.meta}`,
+        boxShadow: `${shadowOnHover && "-0.15px 0.15px 28px 0px #004AD9"}`,
       }}
       className="cardNative_container"
     >

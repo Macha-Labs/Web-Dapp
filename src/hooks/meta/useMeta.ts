@@ -1,4 +1,5 @@
-import { fetchMetaByIpfsCid, metaResolver } from "@/service/MetaService";
+import { metaResolver } from "@/_sdk/api";
+import { fetchMetaByIpfsCid } from "@/service/MetaService";
 import { useState } from "react";
 
 const useMeta = () => {

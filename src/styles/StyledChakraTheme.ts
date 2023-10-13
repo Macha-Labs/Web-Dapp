@@ -1,6 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import { style } from "./StyledConstants";
-import { mode } from '@chakra-ui/theme-tools';
+import { mode } from "@chakra-ui/theme-tools";
 
 const theme = extendTheme({
   initialColorMode: "system",
@@ -8,40 +8,47 @@ const theme = extendTheme({
   styles: {
     global: (props: any) => ({
       html: {
-        backgroundColor: props.colorMode == "light" ?  "#f2f5fd" :`${style.color.bgMain} !important`,
+        backgroundColor:
+          props.colorMode == "light"
+            ? "#f2f5fd"
+            : `${style.color.bgMain} !important`,
       },
       body: {
-        backgroundColor: props.colorMode == "light" ?  "#f2f5fd" :`${style.color.bgMain} !important`,
+        backgroundColor:
+          props.colorMode == "light"
+            ? "#f2f5fd"
+            : `${style.color.bgMain} !important`,
       },
       "h1, h2, h3, h4, h5, h6": {
         // color: props.colorMode == "light" ? "#282828" : `${style.color.h}`,
-        color: "#ffff"
+        color: "#ffff",
       },
       "div, p, span": {
         // color: props.colorMode == "light" ? "#3d3d3d" :`${style.color.p}`,
-        color: "#ffff"
+        color: "#ffff",
       },
       "*::placeholder": {
         color: `${style.colorPlaceholder}`,
       },
       "::-webkit-scrollbar": {
-        width: "10px"
+        width: "10px",
       },
       "::-webkit-scrollbar-thumb": {
         background: props.colorMode == "light" ? "#c8c8c8" : "#0f172e",
         borderRadius: "20px",
         width: "8px",
-        marginRight: "2px"
+        marginRight: "2px",
       },
       "::-webkit-scrollbar-track": {
-        background: props.colorMode == "light" ? "#ededed" : "#00040d !important",
+        background:
+          props.colorMode == "light" ? "#ededed" : "#00040d !important",
         // display: props.colorMode == "light" ? "none" : "block"
       },
       "::-webkit-scrollbar-thumb:hover": {
-        background: props.colorMode == "light" ? "#9fabc8" : "#172857"
+        background: props.colorMode == "light" ? "#9fabc8" : "#172857",
       },
       ".no-scrollbar::-webkit-scrollbar": {
-        display: "none"
+        display: "none",
       },
       "input:focus": {
         background: "#000",
@@ -113,7 +120,7 @@ const theme = extendTheme({
   components: {
     Input: {
       baseStyle: {
-        borderRadius: "10px"
+        borderRadius: "10px",
       },
       variants: {
         normal: {
@@ -137,7 +144,7 @@ const theme = extendTheme({
             color: "#3d3d3d !important",
             border: ``,
             _hover: {
-              bg: "#fffff"
+              bg: "#fffff",
             },
             _focusVisible: {
               bg: "#ffff",
@@ -174,7 +181,7 @@ const theme = extendTheme({
             color: "#3d3d3d !important",
             border: ``,
             _hover: {
-              bg: "#fffff"
+              bg: "#fffff",
             },
             _focusVisible: {
               bg: "#ffff",
@@ -185,7 +192,7 @@ const theme = extendTheme({
       },
       baseStyle: {
         field: {
-          borderRadius: "10px"
+          borderRadius: "10px",
         },
       },
       defaultProps: {
@@ -234,6 +241,28 @@ const theme = extendTheme({
             border: `${style.card.border.default}!important`,
           },
         },
+        state_transparent_to_brand_hover: {
+          background: "transparent",
+          border: `1px solid transparent`,
+          cursor: "pointer",
+          _hover: {
+            background: `${style.button.bg.activeTranslucent}`,
+            border: `1px solid ${style.brButton.active}`,
+            color: "#FFF",
+          },
+        },
+        state_empty_brand_to_solid_brand: {
+          background: "transparent",
+          border: `${style.button.border.active}`,
+          color:`${style.button.color.active}`,
+          cursor: "pointer",
+          _hover: {
+            background: `${style.button.bg.active}`,
+            border: `${style.button.border.active}`,
+            color: "#FFF",
+          },
+        },
+
         state_default_to_brand: {
           background: `${style.button.bg.default}`,
           _hover: {
@@ -247,16 +276,6 @@ const theme = extendTheme({
           border: "1px solid #ffffff",
         },
 
-        state_transparent_to_brand_hover: {
-          background: "transparent",
-          border: `1px solid transparent`,
-          cursor: "pointer",
-          _hover: {
-            background: `${style.button.bg.activeTranslucent}`,
-            border: `1px solid ${style.brButton.active}`,
-            color: "#FFF",
-          },
-        },
         state_brand: {
           background: `${style.button.bg.active}`,
           color: "#ffff",
@@ -265,7 +284,7 @@ const theme = extendTheme({
         state_light: {
           background: `rgba(255,255,255,1)`,
           color: "#3d3d3d",
-          border: "1px solid #e2e2e2"
+          border: "1px solid #e2e2e2",
         },
         state_brand_hover: {
           background: `${style.button.bg.activeTranslucent}`,

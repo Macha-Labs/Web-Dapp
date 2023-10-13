@@ -15,7 +15,6 @@ import useContract from "@/hooks/studio/useContract";
 import useContractCreate from "@/hooks/studio/useContractCreate";
 import useContractList from "@/hooks/studio/useContractList";
 import useMacha from "@/hooks/studio/useMacha";
-import { metaResolver } from "@/service/MetaService";
 import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";

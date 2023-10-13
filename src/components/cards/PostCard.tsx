@@ -9,6 +9,7 @@ import { Avatar, Box, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { style as gStyle, style } from "../../styles/StyledConstants";
+import CardNative from "@/_ui/cards/CardNative";
 
 type Props = {
   title?: string;
@@ -30,7 +31,7 @@ type Props = {
   musicplayer?: any;
   shadowOnHover?: any;
   showMore?: boolean;
-  metaName?:any;
+  metaName?: any;
 };
 
 const PostCard = ({
@@ -80,31 +81,7 @@ const PostCard = ({
   const { colorMode } = useColorMode();
 
   return (
-    <Box
-      height={cardHeight ? cardHeight : "auto"}
-      borderRadius={gStyle.card.borderRadius.default}
-      background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
-      padding={style.card.padding.default}
-      // marginRight={style.margin["sm"]}
-      // marginLeft={style.margin["sm"]}
-      // marginBottom={style.margin["lg"]}
-      width={width ? width : "auto"}
-      border={
-        colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default
-      }
-      onClick={onClick}
-      cursor={shadowOnHover && "pointer"}
-      // flexWrap={"wrap"}
-      style={{
-        transitionTimingFunction: "ease-in-out",
-        transitionProperty: "all",
-        transitionDuration: "600ms",
-      }}
-      _hover={{
-        border: `${shadowOnHover && gStyle.card.border.meta}`,
-        boxShadow: `${shadowOnHover && "-0.15px 0.15px 28px 0px #004AD9"}`,
-      }}
-    >
+    <CardNative width="100%" shadowOnHover={true}>
       <FlexRow
         hrAlign="space-between"
         height="auto"
@@ -283,7 +260,7 @@ const PostCard = ({
           marginTop="sm"
         />
       )}
-    </Box>
+    </CardNative>
   );
 };
 

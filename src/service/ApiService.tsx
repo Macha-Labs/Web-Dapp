@@ -61,25 +61,7 @@ export const vectorSearch = async (searchQuery: string) => {
   }
 };
 
-export const queryResolver = async (params: any) => {
-  const { searchQuery, category, slug, owner, page, limit } = params;
-  const response = await fetch(
-    `${config.metaServer}/indexer/queryResolver/${searchQuery}?limit=${
-      limit ? limit : 30
-    }${slug ? `&slug=${slug}` : ""}${category ? `&category=${category}` : ""}${
-      page ? `&page=${page}` : ""
-    }${owner ? `&owner=${owner}` : ""}`
-  );
-  if (response.status == 200) {
-    console.log("response querySearch api", response);
-    const data = await response.json();
-    return data;
-  } else {
-    return {
-      error: "Not found",
-    };
-  }
-};
+
 
 export const contractData = async (contractName: string) => {
   const response = await fetch(
