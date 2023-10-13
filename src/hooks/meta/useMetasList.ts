@@ -1,4 +1,5 @@
-import { metaResolver, fetchMetaSchemas } from "@/service/MetaService";
+import { metaResolver } from "@/_sdk/api";
+import { fetchMetaSchemas } from "@/service/MetaService";
 import { useEffect, useState } from "react";
 
 const useMetaList = () => {
