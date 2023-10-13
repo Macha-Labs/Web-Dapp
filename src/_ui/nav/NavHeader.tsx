@@ -26,9 +26,9 @@ const NavHeader = ({
   const router = useRouter();
   const options = [
     {
-      href: "/search",
+      href: "/",
       value: "Search",
-      condition: router.route == "/search" && !router.query.id,
+      condition: (router.route == "/search" && !router.query.id) || (router.route=="/"),
     },
     {
       href: "/search?id=social",
