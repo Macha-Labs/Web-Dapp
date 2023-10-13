@@ -43,13 +43,17 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
           >
             External links
           </Text>
-          <Text color={colorMode == "light" ? "black" : ""} m={0}>
-            Documentation
-          </Text>
-          <Link href="https://mirror.xyz/0xE5717ede08ba94e516b6706A6ccBE30D6DA5d80D"></Link>
-          <Text color={colorMode == "light" ? "black" : ""} m={0} p={0}>
-            Blogs
-          </Text>
+          <Link href="https://macha.gitbook.io/">
+            <Text color={colorMode == "light" ? "black" : ""} m={0}>
+              Documentation
+            </Text>
+          </Link>
+
+          <Link href="https://mirror.xyz/0xE5717ede08ba94e516b6706A6ccBE30D6DA5d80D">
+            <Text color={colorMode == "light" ? "black" : ""} m={0} p={0}>
+              Blogs
+            </Text>
+          </Link>
         </FlexColumn>
 
         <FlexColumn marginBottom={style.margin.xxxs} vrAlign="flex-start">
