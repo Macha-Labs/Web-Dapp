@@ -1,7 +1,6 @@
+import useSearch from "@/_sdk/hooks/useSearch";
 import FlexColumn from "@/_ui/flex/FlexColumn";
-import FlexRow from "@/_ui/flex/FlexRow";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import Loader from "@/_ui/loader/Loader";
 import NavFooter from "@/_ui/nav/NavFooter";
 import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
@@ -9,9 +8,8 @@ import ExternalCard from "@/components/cards/ExternalCard";
 import UserProfileCard from "@/components/cards/UserProfileCard";
 import SearchCol from "@/components/search/SearchCol";
 import SearchRow from "@/components/search/SearchRow";
-import useSearch from "@/hooks/studio/useSearch";
 import { style } from "@/styles/StyledConstants";
-import { Box, Grid, Heading, useColorMode } from "@chakra-ui/react";
+import { Box, Heading, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -22,13 +20,17 @@ const Search = () => {
 
   useEffect(() => {
     if (router.isReady && router.query.id) {
-      hookSearch.handleFetch(router.query.id);
+      hookSearch.handleSearch({ category: router.query.id });
     }
   }, [router.query.id]);
 
   useEffect(() => {
     if (router.isReady && router.query.search) {
-      hookSearch.handleSearch(router.query.search, router.query.id);
+      
+      hookSearch.handleSearch({
+        searchQuery: router.query.search,
+        category: router.query.id,
+      });
     }
   }, [router.query.search]);
 
@@ -63,7 +65,7 @@ const Search = () => {
             </Heading>
             {!hookSearch?.isLoading &&
             hookSearch?.searchResults?.identities?.length ? (
-              <FlexColumn>
+              <FlexColumn marginBottom="md">
                 <UserProfileCard
                   user={hookSearch?.searchResults?.user}
                   identities={hookSearch?.searchResults?.identities}
@@ -78,26 +80,35 @@ const Search = () => {
               width="100%"
               justifyContent={"center"}
             >
-              <Grid gap="10px" width="100%">
-                <>
-                  {(router?.query?.id == "nft" ||
-                    router?.query?.id == "music") && (
-                    <SearchRow
-                      isLoading={hookSearch?.isLoading}
-                      router={router}
-                      results={hookSearch?.searchResults?.metas}
-                    />
-                  )}
-                  {router?.query?.id != "nft" &&
-                    router?.query?.id != "music" && (
-                      <SearchCol
-                        isLoading={hookSearch?.isLoading}
-                        results={hookSearch?.searchResults?.metas}
-                        router={router}
-                      />
-                    )}
-                </>
-              </Grid>
+              <>
+                {(router?.query?.id == "nft" ||
+                  router?.query?.id == "music") && (
+                  <SearchRow
+                    next={() => {
+                      hookSearch?.handleNext({
+                        searchQuery: router?.query?.search,
+                        category: router?.query?.id,
+                      });
+                    }}
+                    isLoading={hookSearch?.isLoading}
+                    router={router}
+                    results={hookSearch?.searchResults?.metas}
+                  />
+                )}
+                {router?.query?.id != "nft" && router?.query?.id != "music" && (
+                  <SearchCol
+                    next={() => {
+                      hookSearch?.handleNext({
+                        searchQuery: router?.query?.search,
+                        category: router?.query?.id,
+                      });
+                    }}
+                    isLoading={hookSearch?.isLoading}
+                    results={hookSearch?.searchResults?.metas}
+                    router={router}
+                  />
+                )}
+              </>
             </Box>
           </FlexColumn>
 

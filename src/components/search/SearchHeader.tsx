@@ -1,6 +1,6 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
-import useSearch from "@/hooks/studio/useSearch";
+import useSearch from "@/_sdk/hooks/useSearch";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {

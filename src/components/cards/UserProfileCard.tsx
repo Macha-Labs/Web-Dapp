@@ -1,3 +1,4 @@
+import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
@@ -34,31 +35,7 @@ const UserProfileCard = ({
   const { colorMode } = useColorMode();
   const toast = useToast();
   return (
-    <Box
-      height={cardHeight ? cardHeight : "auto"}
-      borderRadius={gStyle.card.borderRadius.default}
-      background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
-      padding={style.card.padding.default}
-      position="sticky"
-      // marginRight={style.margin["sm"]}
-      // marginLeft={style.margin["sm"]}
-      marginBottom={style.margin["lg"]}
-      width={width ? width : "100%"}
-      border={
-        colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default
-      }
-      //   cursor={shadowOnHover && "pointer"}
-      // flexWrap={"wrap"}
-      style={{
-        transitionTimingFunction: "ease-in-out",
-        transitionProperty: "all",
-        transitionDuration: "600ms",
-      }}
-      _hover={{
-        border: `${shadowOnHover && gStyle.card.border.meta}`,
-        boxShadow: `${shadowOnHover && "-0.15px 0.15px 28px 0px #004AD9"}`,
-      }}
-    >
+    <CardNative width="100%" shadowOnHover={true}>
       <FlexRow hrAlign="flex-start">
         <Avatar
           src={user?.image ? user?.image : GlobalIcons["avatar-default"]}
@@ -81,18 +58,20 @@ const UserProfileCard = ({
             >
               {truncateAddress(user?.address)}
             </Text>
-            {user?.address && <IconBase
-              slug="icon-copy"
-              style={{ marginLeft: "sm" }}
-              onClick={() => {
-                navigator.clipboard.writeText(user?.address);
-                toast({
-                  title: "Copied To Clipboard",
-                  status: "success",
-                  duration: 3000,
-                });
-              }}
-            />}
+            {user?.address && (
+              <IconBase
+                slug="icon-copy"
+                style={{ marginLeft: "sm" }}
+                onClick={() => {
+                  navigator.clipboard.writeText(user?.address);
+                  toast({
+                    title: "Copied To Clipboard",
+                    status: "success",
+                    duration: 3000,
+                  });
+                }}
+              />
+            )}
           </FlexRow>
         </FlexColumn>
       </FlexRow>
@@ -130,7 +109,7 @@ const UserProfileCard = ({
           </FlexRow>
         </FlexColumn>
       )}
-    </Box>
+    </CardNative>
   );
 };
 

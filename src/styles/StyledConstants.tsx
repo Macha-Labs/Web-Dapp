@@ -268,7 +268,8 @@ export const darkStyle = {
       disabled: "",
       warning: "#C62424",
     },
-    color: "#EFEFEF",
+    border: {active:"2px solid #2448c7"},
+    color: {default :"#EFEFEF", active:"#2448c7"},
     margin: { default: "5px" },
     borderRadius: {
       default: "0.5rem",

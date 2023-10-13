@@ -1,5 +1,5 @@
 import InputSearch from "@/_ui/input/InputSearch";
-import useSearch from "@/hooks/studio/useSearch";
+import useSearch from "@/_sdk/hooks/useSearch";
 
 const SearchInput = (searchWidth?: any) => {
   const hookSearch = useSearch();
