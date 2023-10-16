@@ -104,7 +104,7 @@ const Search = () => {
                 )}
                 {router?.query?.id != "nft" && router?.query?.id != "music" && (
                   <FlexColumn>
-                    {hookSearch?.searchResults?.nfts && (
+                    {hookSearch?.searchResults?.nfts?.length>0 && (
                       <NftCarousal results={hookSearch?.searchResults?.nfts} />
                     )}
                     <Box marginTop={style.margin.sm} width="100%">
