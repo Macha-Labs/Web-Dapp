@@ -45,6 +45,7 @@ const SearchRow = ({ isLoading, results, router, next }: Props) => {
                       router.push(`/search/meta/${item?._id}`);
                     }}
                     cardHeight="500px"
+                    // showMore={true}
                   />
                 </GridItem>
               );
