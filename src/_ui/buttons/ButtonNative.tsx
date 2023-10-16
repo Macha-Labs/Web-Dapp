@@ -32,6 +32,7 @@ type Props = {
   backgroundColorHover?: any;
   textColorHover?: any;
   borderColorWhite?: boolean;
+  borderColor?:string;
   textColor?:any;
 };
 
@@ -64,6 +65,7 @@ export default function ButtonNative({
   backgroundColorHover,
   textColorHover,
   borderColorWhite = true,
+  borderColor,
   textColor,
 }: Props) {
   const { colorMode } = useColorMode();
@@ -96,7 +98,7 @@ export default function ButtonNative({
       paddingBottom={`${
         paddingBottom ? gStyle.padding[paddingBottom] : "12px"
       }`}
-      borderColor="#14244b"
+      borderColor={borderColor? borderColor:"#14244b"}
       border={borderColorWhite ? border : ""}
       height={height ? height : "3rem"}
     >

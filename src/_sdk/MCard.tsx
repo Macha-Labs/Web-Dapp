@@ -231,7 +231,7 @@ const MCard = ({
               {image
                 ? viewMore
                   ? description
-                  : truncateString(description, 110)
+                  : truncateString(description, 110) 
                 : viewMore
                 ? description
                 : truncateString(description, 500)}
