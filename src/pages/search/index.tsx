@@ -90,46 +90,36 @@ const Search = () => {
               <>
                 {(router?.query?.id == "nft" ||
                   router?.query?.id == "music") && (
-                  <FlexColumn>
-                    <NftCarousal
-                      next={() => {
-                        hookSearch?.handleNext({
-                          searchQuery: router?.query?.search,
-                          category: router?.query?.id,
-                        });
-                      }}
-                      isLoading={hookSearch?.isLoading}
-                      results={hookSearch?.searchResults?.metas}
-                    />
-                    <SearchRow
-                      next={() => {
-                        hookSearch?.handleNext({
-                          searchQuery: router?.query?.search,
-                          category: router?.query?.id,
-                        });
-                      }}
-                      isLoading={hookSearch?.isLoading}
-                      router={router}
-                      results={hookSearch?.searchResults?.metas}
-                    />
-                  </FlexColumn>
+                  <SearchRow
+                    next={() => {
+                      hookSearch?.handleNext({
+                        searchQuery: router?.query?.search,
+                        category: router?.query?.id,
+                      });
+                    }}
+                    isLoading={hookSearch?.isLoading}
+                    router={router}
+                    results={hookSearch?.searchResults?.metas}
+                  />
                 )}
                 {router?.query?.id != "nft" && router?.query?.id != "music" && (
                   <FlexColumn>
                     {hookSearch?.searchResults?.nfts && (
                       <NftCarousal results={hookSearch?.searchResults?.nfts} />
                     )}
-                    <SearchCol
-                      next={() => {
-                        hookSearch?.handleNext({
-                          searchQuery: router?.query?.search,
-                          category: router?.query?.id,
-                        });
-                      }}
-                      isLoading={hookSearch?.isLoading}
-                      results={hookSearch?.searchResults?.metas}
-                      router={router}
-                    />
+                    <Box marginTop={style.margin.sm} width="100%">
+                      <SearchCol
+                        next={() => {
+                          hookSearch?.handleNext({
+                            searchQuery: router?.query?.search,
+                            category: router?.query?.id,
+                          });
+                        }}
+                        isLoading={hookSearch?.isLoading}
+                        results={hookSearch?.searchResults?.metas}
+                        router={router}
+                      />
+                    </Box>
                   </FlexColumn>
                 )}
               </>

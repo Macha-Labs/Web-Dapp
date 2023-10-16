@@ -175,15 +175,15 @@ const MCard = ({
             height: "60%",
             display: "flex",
             justifyContent: "center",
-            marginBottom: `${style.margin.sm}`,
+            // marginBottom: `${style.margin.sm}`,
           }}
         >
           <Image
             src={helperIPFS(image)}
             alt="coverImage"
             width="auto"
-            maxW="16rem"
-            maxH="16rem"
+            maxW="14rem"
+            maxH="14rem"
             h="auto"
             // objectFit={"cover"}
             borderRadius={gStyle.card.borderRadius.default}

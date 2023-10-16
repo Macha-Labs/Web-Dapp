@@ -3,6 +3,7 @@ import { useState } from "react";
 import MCard from "@/_sdk/MCard";
 import IconImage from "../icons/IconImage";
 import { useRouter } from "next/router";
+import FlexRow from "../flex/FlexRow";
 
 type Props = {
   isLoading?: any;
@@ -15,7 +16,11 @@ const NftCarousal = ({ isLoading, results, next }: Props) => {
 
   const handlePrev = () => {
     setActiveIndex((prevIndex) => {
-      const newIndex = prevIndex - 3;
+      
+      let newIndex = prevIndex - 3;
+      if(newIndex<0 && results?.length<3){
+        newIndex =0;
+      }
       return newIndex < 0
         ? results.length - (Math.abs(newIndex) % results.length)
         : newIndex;
@@ -33,14 +38,14 @@ const NftCarousal = ({ isLoading, results, next }: Props) => {
 
   return (
     <Box width={"100%"}>
-      <HStack spacing={4} alignItems="center">
+      <FlexRow vrAlign="center">
         <IconImage slug="icon-chevron" onClick={handlePrev} size="sm" />
-        <Box width="100%" display="flex" justifyContent={"space-evenly"}>
+        <Box width="90%" display="flex" justifyContent={"space-evenly"}>
           {results &&
             results
               .slice(activeIndex, activeIndex + 3)
               .map((item: any, index: number) => (
-                <Box key={index} width="30%">
+                <Box key={index} width="32%">
                   <MCard
                     key={index}
                     music={item?.meta?.data?.modified?.meta_audio?.substr(5)}
@@ -56,13 +61,8 @@ const NftCarousal = ({ isLoading, results, next }: Props) => {
                 </Box>
               ))}
         </Box>
-        <IconImage
-          slug="icon-chevron-next"
-          onClick={handleNext}
-          size="sm"
-          style={{ marginLeft: "md" }}
-        />
-      </HStack>
+        <IconImage slug="icon-chevron-next" onClick={handleNext} size="sm" />
+      </FlexRow>
     </Box>
   );
 };
