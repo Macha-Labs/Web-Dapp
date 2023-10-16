@@ -79,7 +79,7 @@ const MCard = ({
 
   return (
     <Box
-      height={cardHeight ? cardHeight : "500px"}
+      height={cardHeight ? cardHeight : "auto"}
       borderRadius={gStyle.card.borderRadius.default}
       background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
       padding={style.card.padding.default}
@@ -175,14 +175,17 @@ const MCard = ({
             height: "60%",
             display: "flex",
             justifyContent: "center",
-            marginBottom: `${style.margin.sm}`,
+            // marginBottom: `${style.margin.sm}`,
           }}
         >
           <Image
             src={helperIPFS(image)}
             alt="coverImage"
-            width={"min-content"}
-            objectFit={"cover"}
+            width="auto"
+            maxW="14rem"
+            maxH="14rem"
+            h="auto"
+            // objectFit={"cover"}
             borderRadius={gStyle.card.borderRadius.default}
           />
         </div>
@@ -211,7 +214,7 @@ const MCard = ({
           className="m-b-0"
           fontSize={"xl"}
           fontWeight={600}
-          marginTop={gStyle.margin["xxs"]}
+          marginTop={gStyle.margin["xxxs"]}
         >
           {title}
         </Text>
@@ -223,12 +226,12 @@ const MCard = ({
               className="m-b-0"
               maxW={titleMaxw ? titleMaxw : "20rem"}
               fontSize={"md"}
-              marginTop={gStyle.margin["xxs"]}
+              marginTop={gStyle.margin["xxxs"]}
             >
               {image
                 ? viewMore
                   ? description
-                  : truncateString(description, 200)
+                  : truncateString(description, 110) 
                 : viewMore
                 ? description
                 : truncateString(description, 500)}

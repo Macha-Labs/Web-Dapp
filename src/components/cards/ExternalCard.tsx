@@ -6,6 +6,7 @@ import {
   Image,
   Link,
   Text,
+  chakra,
   useColorMode,
 } from "@chakra-ui/react";
 import React from "react";
@@ -25,31 +26,51 @@ type Props = {
 };
 
 const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
+  const BoldOnHoverText = chakra(Text, {
+    baseStyle: {
+      fontWeight: "normal", // Set the default font weight to normal
+      transition: "font-weight 0.3s", // Add a smooth transition effect on font-weight change
+      _hover: {
+        fontWeight: "bold", // Set font weight to bold on hover
+      },
+    },
+  });
   const { colorMode } = useColorMode();
   const inviteLink =
     "`${window.location.origin}/invite/c/6415b23b3b7d7f9068994e85`";
 
   return (
     <CardNative width="100%">
-      <FlexRow hrAlign="flex-start" vrAlign="flex-start" width="100%">
+      <FlexRow hrAlign="flex-start" vrAlign="flex-start" width="100%" marginBottom="sm">
         <FlexColumn marginBottom={style.margin.xxs} vrAlign="flex-start">
           <Text
             color={colorMode == "light" ? "black" : ""}
             fontSize={style.font.h5}
             m={0}
-            marginTop={style.margin.xxs}
+            // marginTop={style.margin.xxs}
             marginBottom={style.margin.xxs}
             fontWeight={style.fontWeight.dark}
           >
             External links
           </Text>
-          <Text color={colorMode == "light" ? "black" : ""} m={0}>
-            Documentation
-          </Text>
-          <Link href="https://mirror.xyz/0xE5717ede08ba94e516b6706A6ccBE30D6DA5d80D"></Link>
-          <Text color={colorMode == "light" ? "black" : ""} m={0} p={0}>
-            Blogs
-          </Text>
+          <Link href="https://macha.gitbook.io/" target="blank">
+            <BoldOnHoverText color={colorMode == "light" ? "black" : ""} m={0}>
+              Documentation
+            </BoldOnHoverText>
+          </Link>
+
+          <Link
+            href="https://mirror.xyz/0xE5717ede08ba94e516b6706A6ccBE30D6DA5d80D"
+            target="blank"
+          >
+            <BoldOnHoverText
+              color={colorMode == "light" ? "black" : ""}
+              m={0}
+              p={0}
+            >
+              Blogs
+            </BoldOnHoverText>
+          </Link>
         </FlexColumn>
 
         <FlexColumn marginBottom={style.margin.xxxs} vrAlign="flex-start">
@@ -57,25 +78,25 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
             color={colorMode == "light" ? "black" : ""}
             fontSize={style.font.h5}
             m={0}
-            marginTop={style.margin.xs}
+            // marginTop={style.margin.xs}
             marginBottom={style.margin.xxs}
             fontWeight={style.fontWeight.dark}
           >
             Company
           </Text>
           <Link href="https://macha.ai/about" target="blank">
-            <Text color={colorMode == "light" ? "black" : ""} m={0}>
+            <BoldOnHoverText color={colorMode == "light" ? "black" : ""} m={0}>
               About
-            </Text>
+            </BoldOnHoverText>
           </Link>
 
           <Link
             href="https://metaworkhq.notion.site/Macha-Hiring-ce58c7a7c36e48b79ea8f9041a72f880"
             target="blank"
           >
-            <Text color={colorMode == "light" ? "black" : ""} m={0}>
+            <BoldOnHoverText color={colorMode == "light" ? "black" : ""} m={0}>
               Careers
-            </Text>
+            </BoldOnHoverText>
           </Link>
         </FlexColumn>
         <FlexColumn vrAlign="flex-start">
@@ -83,7 +104,7 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
             color={colorMode == "light" ? "black" : ""}
             fontSize={style.font.h5}
             m={0}
-            marginTop={style.margin.xs}
+            // marginTop={style.margin.xs}
             marginBottom={style.margin.xxs}
             fontWeight={style.fontWeight.dark}
           >
@@ -123,10 +144,14 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
       <Divider />
       <FlexRow hrAlign="flex-start" width="90%">
         <Link href="https://macha.ai/privacy/" target="blank">
-          <Text color={colorMode == "light" ? "black" : ""}>Privacy</Text>
+          <BoldOnHoverText color={colorMode == "light" ? "black" : ""}>
+            Privacy
+          </BoldOnHoverText>
         </Link>
         <Link href="https://macha.ai/terms/" target="blank">
-          <Text color={colorMode == "light" ? "black" : ""}>• Terms</Text>
+          <BoldOnHoverText color={colorMode == "light" ? "black" : ""}>
+            • Terms
+          </BoldOnHoverText>
         </Link>
         <Text color={colorMode == "light" ? "black" : ""}>
           • © 2023 MetaWork Labs

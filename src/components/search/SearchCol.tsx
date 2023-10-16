@@ -33,7 +33,7 @@ const SearchCol = ({ results, router, isLoading, next }: Props) => {
                 onClick={() => {
                   router.push(`/search/meta/${item?._id}`);
                 }}
-                width="100%"
+              width="100%"
               />
             </FlexRow>
           ))}
@@ -42,6 +42,7 @@ const SearchCol = ({ results, router, isLoading, next }: Props) => {
             variant="state_empty_brand_to_solid_brand"
             size="xs"
             onClick={next}
+            borderColor="#2448c7"
           />}
         </FlexColumn>
       )}

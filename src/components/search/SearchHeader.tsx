@@ -138,7 +138,7 @@ const SearchHeader = ({ options, height }: Props) => {
                   image={GlobalIcons["logo-Lens"]}
                   text="Lens Posts"
                   onClick={() => {
-                    router.push("/explore/lens_post");
+                    router.push("/search?slug=lens_post");
                     setShowSuggestions(false);
                   }}
                 />
@@ -146,7 +146,7 @@ const SearchHeader = ({ options, height }: Props) => {
                   image={GlobalIcons["logo-Ens"]}
                   text="Ens Handles"
                   onClick={() => {
-                    router.push("/explore/ens_ethereum");
+                    router.push("/search?slug=ens_ethereum");
                     setShowSuggestions(false);
                   }}
                 />
@@ -154,7 +154,7 @@ const SearchHeader = ({ options, height }: Props) => {
                   image={GlobalIcons["logo-Sound.xyz"]}
                   text="Sound.xyz Music"
                   onClick={() => {
-                    router.push("/explore/sound_nft");
+                    router.push("/search?slug=sound_xyz");
                     setShowSuggestions(false);
                   }}
                 />
@@ -162,7 +162,7 @@ const SearchHeader = ({ options, height }: Props) => {
                   image={GlobalIcons["logo-Poap"]}
                   text="Poap Nfts"
                   onClick={() => {
-                    router.push("/explore/poap_nft");
+                    router.push("/search?slug=poap_nft");
                     setShowSuggestions(false);
                   }}
                 />

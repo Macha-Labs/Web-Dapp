@@ -1,12 +1,11 @@
 import MCard from "@/_sdk/MCard";
-import CardSkeleton from "@/_ui/cards/CardSkeleton";
-import FlexRow from "@/_ui/flex/FlexRow";
-import { truncateString } from "@/helpers";
-import { Grid, GridItem, Text } from "@chakra-ui/react";
-import EmptyCard from "../cards/EmptyCard";
-import FlexColumn from "@/_ui/flex/FlexColumn";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import CardSkeleton from "@/_ui/cards/CardSkeleton";
+import FlexColumn from "@/_ui/flex/FlexColumn";
+import FlexRow from "@/_ui/flex/FlexRow";
 import { style } from "@/styles/StyledConstants";
+import { Grid, GridItem } from "@chakra-ui/react";
+import EmptyCard from "../cards/EmptyCard";
 
 type Props = {
   isLoading?: any;
@@ -41,11 +40,12 @@ const SearchRow = ({ isLoading, results, router, next }: Props) => {
                     key={index}
                     image={item?.meta?.data?.modified?.meta_image}
                     slug={item?.meta_schema?.name}
-                    // width="30%"
                     description={item?.meta?.data?.modified?.meta_description}
                     onClick={() => {
                       router.push(`/search/meta/${item?._id}`);
                     }}
+                    cardHeight="500px"
+                    // showMore={true}
                   />
                 </GridItem>
               );

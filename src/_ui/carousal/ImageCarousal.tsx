@@ -19,6 +19,7 @@ const ImageCarousal = () => {
     );
   };
 
+  console.log("call from imageCarousal");
   return (
     <Box overflow="hidden">
       <FlexRow vrAlign="center" hrAlign="center">
@@ -41,8 +42,8 @@ const ImageCarousal = () => {
               opacity={activeIndex === index ? 1 : 0}
               transform={`translateX(${(index - activeIndex) * 100}%)`}
             >
-              <Image src={card.coverImage} alt="Cover Image" w="100%" />
-              {/* <FlexRow>
+              {/* <Image src={card.coverImage} alt="Cover Image" w="100%" /> */}
+              <FlexRow>
                 <Image
                   src={card.profileImage}
                   alt="Profile Image"
@@ -54,7 +55,7 @@ const ImageCarousal = () => {
                   {card.title}
                 </Text>
               </FlexRow>
-              <Text mt={2}>{card.description}</Text> */}
+              <Text mt={2}>{card.description}</Text>
             </Box>
           ))}
         </Box>
