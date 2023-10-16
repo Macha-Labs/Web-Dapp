@@ -16,7 +16,7 @@ const SearchCol = ({ results, router, isLoading, next }: Props) => {
   return (
     <>
     <FlexColumn>
-      {!isLoading && !results?.length && <EmptyCard />}
+      {/* {!isLoading && !results?.length && <EmptyCard />} */}
       {results?.length > 0 && (
         <FlexColumn width="100%">
           {results?.map((item: any, index: any) => (

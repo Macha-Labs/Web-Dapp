@@ -1,10 +1,11 @@
 import useSearch from "@/_sdk/hooks/useSearch";
-import NftCarousal from "@/_ui/carousal/NftCarousal";
+import MCarousal from "@/_ui/carousal/MCarousal";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import { FlexWindow } from "@/_ui/flex/FlexWindow";
 import NavFooter from "@/_ui/nav/NavFooter";
 import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
+import EmptyCard from "@/components/cards/EmptyCard";
 import ExternalCard from "@/components/cards/ExternalCard";
 import UserProfileCard from "@/components/cards/UserProfileCard";
 import SearchCol from "@/components/search/SearchCol";
@@ -71,15 +72,21 @@ const Search = () => {
             </Heading>
 
             {!hookSearch?.isLoading &&
-            hookSearch?.searchResults?.identities?.length ? (
-              <FlexColumn marginBottom="md">
+            hookSearch?.searchResults?.account?.owner ? (
+              <FlexColumn marginBottom="lg">
                 <UserProfileCard
-                  user={hookSearch?.searchResults?.user}
+                  account={hookSearch?.searchResults?.account}
                   identities={hookSearch?.searchResults?.identities}
                 />
               </FlexColumn>
             ) : (
               <></>
+            )}
+            {hookSearch?.searchResults?.nfts?.length > 0 && (
+              <MCarousal
+                results={hookSearch?.searchResults?.nfts}
+                marginLeft="-3.5rem"
+              />
             )}
             <Box
               paddingTop={style.margin.navBoth}
@@ -104,9 +111,6 @@ const Search = () => {
                 )}
                 {router?.query?.id != "nft" && router?.query?.id != "music" && (
                   <FlexColumn>
-                    {hookSearch?.searchResults?.nfts?.length>0 && (
-                      <NftCarousal results={hookSearch?.searchResults?.nfts} />
-                    )}
                     <Box marginTop={style.margin.sm} width="100%">
                       <SearchCol
                         next={() => {
@@ -124,6 +128,9 @@ const Search = () => {
                 )}
               </>
             </Box>
+            {!hookSearch?.isLoading &&
+              hookSearch?.searchResults?.nfts?.length! > 0 &&
+              hookSearch?.searchResults?.metas?.length! > 0 && <EmptyCard />}
           </FlexColumn>
 
           <ExternalCard />

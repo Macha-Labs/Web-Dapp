@@ -113,11 +113,11 @@ const MCard = ({
           icon={{
             align: "left",
             slug: `${
-              slug == "Lens Post"
+              slug == "lens_post"
                 ? "logo-Lens"
-                : slug == "Poap NFT"
+                : slug == "poap_nft"
                 ? "logo-Poap"
-                : slug == "ENS Handles"
+                : slug == "ens_ethereum"
                 ? "logo-Ens"
                 : "logo-Sound.xyz"
             }`,
@@ -231,7 +231,7 @@ const MCard = ({
               {image
                 ? viewMore
                   ? description
-                  : truncateString(description, 110) 
+                  : truncateString(description, 110)
                 : viewMore
                 ? description
                 : truncateString(description, 500)}
