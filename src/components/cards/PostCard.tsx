@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { style as gStyle, style } from "../../styles/StyledConstants";
 import CardNative from "@/_ui/cards/CardNative";
+import { slugToLogoMapping } from "@/data/meta";
 
 type Props = {
   title?: string;
@@ -169,15 +170,16 @@ const PostCard = ({
             <TagNative
               icon={{
                 align: "left",
-                slug: `${
-                  slug == "lens_post"
-                    ? "logo-Lens"
-                    : slug == "poap_nft"
-                    ? "logo-Poap"
-                    : slug == "ens_ethereum"
-                    ? "logo-Ens"
-                    : "logo-Sound.xyz"
-                }`,
+                // slug: `${
+                //   slug == "lens_post"
+                //     ? "logo-Lens"
+                //     : slug == "poap_nft"
+                //     ? "logo-Poap"
+                //     : slug == "ens_ethereum"
+                //     ? "logo-Ens"
+                //     : "logo-Sound.xyz"
+                // }`,
+                slug:`${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
               }}
               size="md"
               value={metaName}

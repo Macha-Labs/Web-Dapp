@@ -2,7 +2,14 @@ import MCard from "@/_sdk/MCard";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import useUserMeta from "@/hooks/studio/useUserMeta";
 import { style } from "@/styles/StyledConstants";
-import { Box, Grid, GridItem, Image, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Image,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -14,7 +21,7 @@ type Props = {
 const MetaUserList = ({ hookData }: Props) => {
   const router = useRouter();
   const hookUserMeta = useUserMeta();
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
   useEffect(() => {
     if (router.isReady) {
       hookUserMeta?.fetchMetas(String(router.query.userId));
@@ -31,7 +38,10 @@ const MetaUserList = ({ hookData }: Props) => {
                   <MCard
                     title={item?.meta?.data?.modified?.meta_title}
                     key={index}
-                    image={item?.meta?.data?.modified?.meta_image || item?.meta?.data?.modified?.meta_media}
+                    image={
+                      item?.meta?.data?.modified?.meta_image ||
+                      item?.meta?.data?.modified?.meta_media
+                    }
                     slug={item?.meta_schema?.name}
                     // width="30%"
                     description={item?.meta?.data?.modified?.meta_description}
@@ -46,10 +56,26 @@ const MetaUserList = ({ hookData }: Props) => {
         </>
       ) : (
         <FlexColumn width="100%" hrAlign="center" vrAlign="center">
-          <Image src={colorMode == "light" ? "/assets/userFeed-emptyState_light.svg" : "/assets/user-feed-empty-state.svg"} />
-          <Text color={colorMode == "light" ? "#3d3d3d" : ""} fontSize={style.font.h3} fontWeight={style.fontWeight.dark}>The feed is currently empty</Text>
-          <Text color={colorMode == "light" ? "#3d3d3d" : ""} mb={0}>Ready to share your Macha stories?</Text>
-          <Text color={colorMode == "light" ? "#3d3d3d" : ""} >This is where it all begins</Text>
+          <Image
+            src={
+              colorMode == "light"
+                ? "/assets/userFeed-emptyState_light.svg"
+                : "/assets/user-feed-empty-state.svg"
+            }
+          />
+          <Text
+            color={colorMode == "light" ? "#3d3d3d" : ""}
+            fontSize={style.font.h3}
+            fontWeight={style.fontWeight.dark}
+          >
+            The feed is currently empty
+          </Text>
+          <Text color={colorMode == "light" ? "#3d3d3d" : ""} mb={0}>
+            Ready to share your Macha stories?
+          </Text>
+          <Text color={colorMode == "light" ? "#3d3d3d" : ""}>
+            This is where it all begins
+          </Text>
         </FlexColumn>
       )}
     </Box>

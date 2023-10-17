@@ -43,11 +43,15 @@ const MCarousal = ({
   };
 
   const router = useRouter();
+  const shouldDisplayPrevIcon = activeIndex > 2;
+  const shouldDisplayNextIcon = activeIndex < results?.length - 3;
 
   return (
-    <Box width={"100%"} marginLeft={marginLeft}  marginRight={marginRight}>
+    <Box width={"100%"} marginLeft={marginLeft} marginRight={marginRight}>
       <FlexRow vrAlign="center">
-        <IconImage slug="icon-chevron" onClick={handlePrev} size="sm" />
+        {shouldDisplayPrevIcon && (
+          <IconImage slug="icon-chevron" onClick={handlePrev} size="sm" />
+        )}
         <Box width="90%" display="flex" justifyContent="flex-start">
           {results &&
             results
@@ -74,7 +78,9 @@ const MCarousal = ({
                 </Box>
               ))}
         </Box>
-        <IconImage slug="icon-chevron-next" onClick={handleNext} size="sm" />
+        {shouldDisplayNextIcon && (
+          <IconImage slug="icon-chevron-next" onClick={handleNext} size="sm" />
+        )}
       </FlexRow>
     </Box>
   );

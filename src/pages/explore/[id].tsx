@@ -4,7 +4,7 @@ import NavHeader from "@/_ui/nav/NavHeader";
 import MetaList from "@/components/meta/MetaList";
 import useMetaList from "@/hooks/meta/useMetasList";
 import { style } from "@/styles/StyledConstants";
-import { Heading } from "@chakra-ui/react";
+import { Heading, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -15,7 +15,7 @@ type Props = {
 const Explore = () => {
   const router = useRouter();
   const hookMetasList = useMetaList();
-
+  const { colorMode } = useColorMode();
   useEffect(() => {
     if (router.isReady) {
       if (window !== undefined) {
@@ -48,7 +48,12 @@ const Explore = () => {
         <CardNative
           header={
             <>
-              <Heading fontSize={style.font.h3}>Discover</Heading>
+              <Heading
+                fontSize={style.font.h3}
+                color={colorMode == "light" ? "black" : ""}
+              >
+                Discover
+              </Heading>
             </>
           }
         >

@@ -28,7 +28,8 @@ const NavHeader = ({
     {
       href: "/",
       value: "Search",
-      condition: (router.route == "/search" && !router.query.id) || (router.route=="/"),
+      condition:
+        (router.route == "/search" && !router.query.id) || router.route == "/",
     },
     {
       href: "/search?id=social",
@@ -106,6 +107,7 @@ const NavHeader = ({
             </FlexRow>
 
             <FlexRow hrAlign="center" vrAlign="center" width="50%">
+              {console.log("option tab", tab)}
               <Tabs
                 options={options}
                 onChange={setTab}
