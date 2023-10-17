@@ -26,7 +26,7 @@ const SearchRow = ({ isLoading, results, router, next }: Props) => {
             gap="10px"
             width="100%"
             marginBottom={style.margin.md}
-          >
+            >
             {results?.map((item: any, index: any) => {
               return (
                 <GridItem key={index} colSpan={1}>
