@@ -123,7 +123,7 @@ const MCard = ({
             //     ? "logo-Ens"
             //     : "logo-Sound.xyz"
             // }`,
-            slug:`${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
+            slug: `${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
           }}
           size="md"
           value={slug}
@@ -240,18 +240,12 @@ const MCard = ({
                 : truncateString(description, 500)}
             </Text>
 
-            {showMore && (
+            {description?.length>110 && showMore && (
               <span>
                 <Text
                   color="blue"
                   _hover={{ textDecoration: "underline", cursor: "pointer" }}
-                  onClick={() => {
-                    if (viewMore) {
-                      setViewMore(false);
-                    } else {
-                      setViewMore(true);
-                    }
-                  }}
+                  onClick={() => setViewMore((prevState) => !prevState)}
                 >
                   {viewMore ? "View Less" : "View More"}
                 </Text>

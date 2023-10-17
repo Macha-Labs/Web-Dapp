@@ -85,14 +85,15 @@ const Meta = () => {
               musicplayer={hookMeta?.metaData?.meta?.data?.modified?.meta_audio}
               titleMaxw={"100%"}
               title={hookMeta?.metaData?.meta?.data?.modified?.meta_title}
-              slug={
-                hookMeta?.metaData?.meta_schema
-                  ? hookMeta?.metaData?.meta_schema?.name
-                  : hookMeta?.metaData?.meta_tags &&
-                    hookMeta?.metaData?.meta_tags.length != 0
-                  ? hookMeta?.metaData?.meta_tags[0]
-                  : ""
-              }
+              // slug={
+              //   hookMeta?.metaData?.meta_schema
+              //     ? hookMeta?.metaData?.meta_schema?.name
+              //     : hookMeta?.metaData?.meta_tags &&
+              //       hookMeta?.metaData?.meta_tags.length != 0
+              //     ? hookMeta?.metaData?.meta_tags[0]
+              //     : ""
+              // }
+              slug={hookMeta?.metaData?.meta?.slug}
               image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
               description={
                 hookMeta?.metaData?.meta?.data?.modified?.meta_description
