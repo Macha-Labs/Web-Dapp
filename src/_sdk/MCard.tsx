@@ -9,6 +9,7 @@ import { Avatar, Box, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { style as gStyle, style } from "../styles/StyledConstants";
+import { slugToLogoMapping } from "@/data/meta";
 
 type Props = {
   title?: string;
@@ -109,18 +110,20 @@ const MCard = ({
         vrAlign="flex-start"
         marginBottom="sm"
       >
+        {/* const logoSlug = slugToLogoMapping[slug] || "logo-Sound.xyz"; */}
         <TagNative
           icon={{
             align: "left",
-            slug: `${
-              slug == "lens_post"
-                ? "logo-Lens"
-                : slug == "poap_nft"
-                ? "logo-Poap"
-                : slug == "ens_ethereum"
-                ? "logo-Ens"
-                : "logo-Sound.xyz"
-            }`,
+            // slug: `${
+            //   slug == "lens_post"
+            //     ? "logo-Lens"
+            //     : slug == "poap_nft"
+            //     ? "logo-Poap"
+            //     : slug == "ens_ethereum"
+            //     ? "logo-Ens"
+            //     : "logo-Sound.xyz"
+            // }`,
+            slug:`${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
           }}
           size="md"
           value={slug}
