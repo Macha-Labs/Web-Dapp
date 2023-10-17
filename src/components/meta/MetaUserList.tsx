@@ -32,7 +32,7 @@ const MetaUserList = ({ hookData }: Props) => {
                     title={item?.meta?.data?.modified?.meta_title}
                     key={index}
                     image={item?.meta?.data?.modified?.meta_image}
-                    slug={item?.meta_schema?.name}
+                    slug={item?.meta?.slug}
                     // width="30%"
                     description={item?.meta?.data?.modified?.meta_description}
                     onClick={() => {
