@@ -80,6 +80,7 @@ const Tabs = ({
                               : "#282828"
                             : "#fff"
                         }
+                        //checking for pull
                         className="m-b-0"
                       >
                         {option?.value}
