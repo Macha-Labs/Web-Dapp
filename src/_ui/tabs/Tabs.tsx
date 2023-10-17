@@ -1,11 +1,10 @@
-import { StyledLi } from "@/styles/StyledComponents";
 import { style } from "@/styles/StyledConstants";
-import { Text, useColorMode, Box } from "@chakra-ui/react";
+import { Text, useColorMode } from "@chakra-ui/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import ButtonNative from "../buttons/ButtonNative";
 import FlexRow from "../flex/FlexRow";
 import IconImage from "../icons/IconImage";
-import ButtonNative from "../buttons/ButtonNative";
+import { useRouter } from "next/router";
 
 type Props = {
   options: any;
@@ -27,6 +26,7 @@ const Tabs = ({
   hrAlign,
 }: Props) => {
   const { colorMode } = useColorMode();
+  const router = useRouter();
 
   return (
     <>
@@ -44,7 +44,11 @@ const Tabs = ({
                 {
                   <ButtonNative
                     key={idx}
-                    onClick={() => onChange(option?.value)}
+                    onClick={() => {
+                      console.log("option value", option?.value, value);
+                      onChange(option?.value);
+                      router.push(option?.href ? option?.href : "");
+                    }}
                     marginRight="xs"
                     variant={
                       option?.condition
@@ -53,35 +57,35 @@ const Tabs = ({
                     }
                     height="1.8rem"
                   >
-                    <Link
+                    {/* <Link
                       className=" d-flex flex-column justify-content-center align-items-center mt-1 mt-md-0  "
                       href={option?.href ? option?.href : ""}
                       style={gstyle}
-                    >
-                      <FlexRow>
-                        {icon && <IconImage slug={icon.slug} />}
-                        <Text
-                          fontSize={style.font.h6}
-                          fontWeight={value == option?.value ? "600" : "400"}
-                          // bgGradient={
-                          //   value == option?.value
-                          //     ? "linear(100.07deg, #197cec 100%, #004889 100%)"
-                          //     : "linear(100.07deg, #fff 100%, #fff 100%)"
-                          // }
-                          // bgClip="text"
-                          color={
-                            colorMode == "light"
-                              ? value != option?.value
-                                ? "#282828"
-                                : "#ffff"
-                              : "#fff"
-                          }
-                          className="m-b-0"
-                        >
-                          {option?.value}
-                        </Text>
-                      </FlexRow>
-                    </Link>
+                    > */}
+                    <FlexRow>
+                      {icon && <IconImage slug={icon.slug} />}
+                      <Text
+                        fontSize={style.font.h6}
+                        fontWeight={option?.condition ? "600" : "400"}
+                        // bgGradient={
+                        //   value == option?.value
+                        //     ? "linear(100.07deg, #197cec 100%, #004889 100%)"
+                        //     : "linear(100.07deg, #fff 100%, #fff 100%)"
+                        // }
+                        // bgClip="text"
+                        color={
+                          colorMode == "light"
+                            ? value != option?.value
+                              ? "#282828"
+                              : "#282828"
+                            : "#fff"
+                        }
+                        className="m-b-0"
+                      >
+                        {option?.value}
+                      </Text>
+                    </FlexRow>
+                    {/* </Link> */}
                   </ButtonNative>
                 }
               </>
