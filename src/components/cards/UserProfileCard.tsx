@@ -22,14 +22,14 @@ type Props = {
   titleMaxw?: any;
   shadowOnHover?: any;
   showMore?: boolean;
-  user?: any;
+  account?: any;
   identities?: any;
 };
 const UserProfileCard = ({
   width,
   cardHeight,
   shadowOnHover = true,
-  user,
+  account,
   identities,
 }: Props) => {
   const { colorMode } = useColorMode();
@@ -38,7 +38,7 @@ const UserProfileCard = ({
     <CardNative width="100%" shadowOnHover={true}>
       <FlexRow hrAlign="flex-start">
         <Avatar
-          src={user?.image ? user?.image : GlobalIcons["avatar-default"]}
+          src={account?.image ? account?.image : GlobalIcons["avatar-default"]}
           size="xl"
           marginRight="1rem"
         />
@@ -49,21 +49,21 @@ const UserProfileCard = ({
             fontWeight={style.fontWeight.dark}
             m={0}
           >
-            {user?.name}
+            {account?.name ? account?.name : truncateAddress(account?.owner)}
           </Text>
           <FlexRow hrAlign="flex-start" vrAlign="center">
             <Text
               color={colorMode == "light" ? "#3d3d3d" : ""}
               className="m-b-0"
             >
-              {truncateAddress(user?.address)}
+              {truncateAddress(account?.owner)}
             </Text>
-            {user?.address && (
+            {account?.owner && (
               <IconBase
                 slug="icon-copy"
                 style={{ marginLeft: "sm" }}
                 onClick={() => {
-                  navigator.clipboard.writeText(user?.address);
+                  navigator.clipboard.writeText(account?.owner);
                   toast({
                     title: "Copied To Clipboard",
                     status: "success",
@@ -75,16 +75,16 @@ const UserProfileCard = ({
           </FlexRow>
         </FlexColumn>
       </FlexRow>
-      {user?.description && (
+      {account?.description && (
         <Text
           color={colorMode == "light" ? "black" : ""}
           marginTop={style.margin.sm}
         >
-          {user?.description}
+          {account?.description}
         </Text>
       )}
 
-      {identities?.length && (
+      {identities?.length>0 && (
         <FlexColumn vrAlign="flex-start" marginTop="sm">
           <Heading
             color={colorMode == "light" ? "black" : ""}

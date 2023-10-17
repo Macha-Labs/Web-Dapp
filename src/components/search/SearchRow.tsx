@@ -17,7 +17,7 @@ type Props = {
 const SearchRow = ({ isLoading, results, router, next }: Props) => {
   return (
     <FlexRow flexWrap={"wrap"} hrAlign="flex-start" marginBottom={"lg"}>
-      {!isLoading && !results?.length && <EmptyCard />}
+      {/* {!isLoading && !results?.length && <EmptyCard />} */}
 
       {results?.length > 0 && (
         <FlexColumn marginBottom={"lg"}>
@@ -39,7 +39,7 @@ const SearchRow = ({ isLoading, results, router, next }: Props) => {
                     title={item?.meta?.data?.modified?.meta_title}
                     key={index}
                     image={item?.meta?.data?.modified?.meta_image}
-                    slug={item?.meta_schema?.name}
+                    slug={item?.meta?.slug}
                     description={item?.meta?.data?.modified?.meta_description}
                     onClick={() => {
                       router.push(`/search/meta/${item?._id}`);
