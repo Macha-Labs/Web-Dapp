@@ -75,8 +75,8 @@ const Tabs = ({
                         // bgClip="text"
                         color={
                           colorMode == "light"
-                            ? value != option?.value
-                              ? "#282828"
+                            ? option?.condition
+                              ? "#fff"
                               : "#282828"
                             : "#fff"
                         }
