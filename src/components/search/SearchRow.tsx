@@ -26,7 +26,7 @@ const SearchRow = ({ isLoading, results, router, next }: Props) => {
             gap="10px"
             width="100%"
             marginBottom={style.margin.md}
-            >
+          >
             {results?.map((item: any, index: any) => {
               return (
                 <GridItem key={index} colSpan={1}>
@@ -57,6 +57,7 @@ const SearchRow = ({ isLoading, results, router, next }: Props) => {
               variant="state_empty_brand_to_solid_brand"
               size="xs"
               onClick={next}
+              borderColor="#2448c7"
             />
           )}
         </FlexColumn>
