@@ -5,7 +5,7 @@ import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
 import { truncateAddress } from "@/helpers/IpfsLink";
 import GlobalIcons from "@/styles/GlobalIcons";
-import { style as gStyle, style } from "@/styles/StyledConstants";
+import { style } from "@/styles/StyledConstants";
 import {
   Avatar,
   Box,
@@ -84,7 +84,7 @@ const UserProfileCard = ({
         </Text>
       )}
 
-      {identities?.length>0 && (
+      {identities?.length > 0 && (
         <FlexColumn vrAlign="flex-start" marginTop="sm">
           <Heading
             color={colorMode == "light" ? "black" : ""}
@@ -94,9 +94,13 @@ const UserProfileCard = ({
           >
             Identities
           </Heading>
-          <FlexRow hrAlign="flex-start">
+          <Box display="flex" flexWrap="wrap" overflow="hidden">
             {identities.map((item: any, index: any) => (
-              <FlexRow key={index} hrAlign="flex-start">
+              <Box
+                key={index}
+                justifyContent="flex-start"
+                marginBottom={style.margin.xxs}
+              >
                 <TagNative
                   key={index}
                   image={item?.meta?.data?.modified?.meta_image}
@@ -104,9 +108,9 @@ const UserProfileCard = ({
                   size="md"
                   lineHeight="2.5"
                 />
-              </FlexRow>
+              </Box>
             ))}
-          </FlexRow>
+          </Box>
         </FlexColumn>
       )}
     </CardNative>
