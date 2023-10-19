@@ -38,29 +38,33 @@ const Metas = () => {
           {hookMetasList?.metaSchemas?.map((schema: any, index: any) => {
             console.log(schema, "schema");
             return (
-              <GraphCard
-                key={index}
-                image={
-                  exploreModules.find(
-                    (module) => module.heading === schema.name
-                  )?.image
-                }
-                user={schema.name}
-                tag={schema.slug}
-                title={schema.description}
-                onCardClick={() => {
-                  // schema.available &&
-                  router.push(
-                    {
-                      pathname: `/explore/[id]`,
-                      query: {
-                        id: schema?.slug,
+              schema?.slug != "mirror_blogs" &&
+              schema?.slug != "layer3_quests" &&
+              schema?.slug != "lens_profile_polygon" && (
+                <GraphCard
+                  key={index}
+                  image={
+                    exploreModules.find(
+                      (module) => module.heading === schema.name
+                    )?.image
+                  }
+                  user={schema.name}
+                  tag={schema.slug}
+                  title={schema.description}
+                  onCardClick={() => {
+                    // schema.available &&
+                    router.push(
+                      {
+                        pathname: `/explore/[id]`,
+                        query: {
+                          id: schema?.slug,
+                        },
                       },
-                    },
-                    `/explore/${schema?.slug}`
-                  );
-                }}
-              />
+                      `/explore/${schema?.slug}`
+                    );
+                  }}
+                />
+              )
             );
           })}
         </FlexRow>

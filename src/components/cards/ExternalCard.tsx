@@ -31,7 +31,7 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
       fontWeight: "normal", // Set the default font weight to normal
       transition: "font-weight 0.3s", // Add a smooth transition effect on font-weight change
       _hover: {
-        fontWeight: "bold", // Set font weight to bold on hover
+        fontWeight: "500", // Set font weight to bold on hover
         textDecoration: "underline", // Underline the text on hover
       },
     },
@@ -151,16 +151,30 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
       <FlexRow hrAlign="flex-start" width="90%">
         <Link href="https://macha.ai/privacy/" target="blank">
           <BoldOnHoverText color={colorMode == "light" ? "black" : ""}>
-            Privacy 
+            Privacy
           </BoldOnHoverText>
         </Link>
-        <Text color={colorMode == "light" ? "black" : ""} marginLeft="3px" marginRight="3px"> • </Text>
+        <Text
+          color={colorMode == "light" ? "black" : ""}
+          marginLeft="4px"
+          marginRight="4px"
+        >
+          {" "}
+          •{" "}
+        </Text>
         <Link href="https://macha.ai/terms/" target="blank">
           <BoldOnHoverText color={colorMode == "light" ? "black" : ""}>
-               Terms
+            Terms
           </BoldOnHoverText>
         </Link>
-        <Text color={colorMode == "light" ? "black" : ""} marginLeft="3px" marginRight="3px"> • </Text>◊
+        <Text
+          color={colorMode == "light" ? "black" : ""}
+          marginLeft="4px"
+          marginRight="4px"
+        >
+          {" "}
+          •{" "}
+        </Text>
         <Text color={colorMode == "light" ? "black" : ""}>
           © 2023 MetaWork Labs
         </Text>

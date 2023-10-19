@@ -238,19 +238,19 @@ const MCard = ({
                 : viewMore
                 ? description
                 : truncateString(description, 500)}
-            </Text>
 
-            {description?.length>110 && showMore && (
-              <span>
-                <Text
-                  color="blue"
-                  _hover={{ textDecoration: "underline", cursor: "pointer" }}
-                  onClick={() => setViewMore((prevState) => !prevState)}
-                >
-                  {viewMore ? "View Less" : "View More"}
-                </Text>
-              </span>
-            )}
+              {description?.length > 110 && showMore && (
+                // <span>
+                  <Text
+                    color="blue"
+                    _hover={{ textDecoration: "underline", cursor: "pointer" }}
+                    onClick={() => setViewMore((prevState) => !prevState)}
+                  >
+                    {viewMore ? "View Less" : "View More"}
+                  </Text>
+                // </span>
+              )}
+            </Text>
           </>
         )}
         {/* </Box> */}

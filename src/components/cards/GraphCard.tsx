@@ -29,6 +29,9 @@ const GraphCard = ({
         transform: "scale(1.05,1.05)",
         transition: "all 0.2s cubic-bezier(0.64, 0.04, 0.35, 1)",
       }}
+      border={
+        colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.default
+      }
       style={{
         display: "flex",
         flexDirection: "column",
