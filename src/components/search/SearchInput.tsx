@@ -1,12 +1,16 @@
 import InputSearch from "@/_ui/input/InputSearch";
 import useSearch from "@/_sdk/hooks/useSearch";
 
-const SearchInput = (searchWidth?: any) => {
+type Props = {
+  searchWidth?: string;
+};
+
+const SearchInput = ({ searchWidth }: Props) => {
   const hookSearch = useSearch();
-  
+
   return (
     <InputSearch
-      width={searchWidth ? searchWidth : "100%"}
+      width={searchWidth}
       height="2.2rem"
       value={hookSearch.inputValue}
       ref={hookSearch.searchRef}
