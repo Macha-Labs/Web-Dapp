@@ -25,7 +25,7 @@ import {
   IconButton,
   Image,
   useColorMode,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNetwork, useSwitchNetwork } from "wagmi";
@@ -42,7 +42,7 @@ const DashBoard = () => {
   const hookMacha = useMacha();
   const { chain } = useNetwork();
   const { switchNetwork } = useSwitchNetwork();
-  const {colorMode} = useColorMode()
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     if ($address) {
@@ -108,16 +108,22 @@ const DashBoard = () => {
           {$address ? (
             <Box>
               <ButtonGroup
-              marginLeft="5px"
+                marginLeft="5px"
                 _hover={{
                   background: `${style.card.bg.hover}`,
-                  border: `${colorMode == "light" ? "" : style.card.border.hover}`,
+                  border: `${
+                    colorMode == "light" ? "" : style.card.border.hover
+                  }`,
                   shadow: `${style.card.shadow.hover}`,
                 }}
                 style={{
-                  background: `${colorMode == "light" ? "#ffff" : style.card.bg.default}`,
+                  background: `${
+                    colorMode == "light" ? "#ffff" : style.card.bg.default
+                  }`,
                   // border: `${style.card.border.default}`,
-                  boxShadow: `${colorMode == "light" ? "" : style.card.shadow.default}`,
+                  boxShadow: `${
+                    colorMode == "light" ? "" : style.card.shadow.default
+                  }`,
                   borderRadius: `${style.card.borderRadius.button}`,
                 }}
                 size="sm"
@@ -149,7 +155,11 @@ const DashBoard = () => {
                   icon={
                     <Image
                       height="1.5rem"
-                      src={colorMode == "light" ? GlobalIcons["icon-base-edit-light"] : GlobalIcons["icon-base-edit"]}
+                      src={
+                        colorMode == "light"
+                          ? GlobalIcons["icon-base-edit-light"]
+                          : GlobalIcons["icon-base-edit"]
+                      }
                       alt="edit-contracts"
                       onClick={() => {
                         hookContract._fetchUserContracts($address).then(() => {
@@ -217,7 +227,7 @@ const DashBoard = () => {
   const renderBody = () => {
     return (
       <>
-        <NavBlock marginTop={style.margin["nav"]}>
+        {/* <NavBlock marginTop={style.margin["nav"]}>
           <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
             <FlexRow hrAlign="flex-start" vrAlign="center">
               <Tabs
@@ -229,7 +239,7 @@ const DashBoard = () => {
               />
             </FlexRow>
           </FlexRow>
-        </NavBlock>
+        </NavBlock> */}
 
         <FlexBody>
           <Box style={{ overflow: "hidden" }}>{renderContracts()}</Box>
