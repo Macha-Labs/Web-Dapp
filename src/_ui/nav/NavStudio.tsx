@@ -11,7 +11,7 @@ const NavStudio = () => {
 
   return (
     <NavTop
-      centerElem={<SearchInput />}
+      centerElem={<SearchInput searchWidth="100%" />}
       rightElem={
         <FlexRow width="fit-content">
           <ConnectWalletButton
@@ -27,7 +27,7 @@ const NavStudio = () => {
           >
             <FlexRow>
               <Image
-              alt="icon"
+                alt="icon"
                 src={
                   colorMode == "light"
                     ? GlobalIcons["icon-dark-mode"]
