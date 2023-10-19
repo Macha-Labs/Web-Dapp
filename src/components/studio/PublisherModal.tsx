@@ -157,7 +157,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                     hookPublisherCreate.setClear();
                     await hookMacha.connectMachaPublisher();
                     modal.onClose();
-                    router.push("/indexers");
+                    router.push("/studio/indexers");
                   }}
                 >
                   Create

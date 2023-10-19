@@ -32,6 +32,7 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
       transition: "font-weight 0.3s", // Add a smooth transition effect on font-weight change
       _hover: {
         fontWeight: "bold", // Set font weight to bold on hover
+        textDecoration: "underline", // Underline the text on hover
       },
     },
   });
@@ -41,7 +42,12 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
 
   return (
     <CardNative width="100%">
-      <FlexRow hrAlign="flex-start" vrAlign="flex-start" width="100%" marginBottom="sm">
+      <FlexRow
+        hrAlign="flex-start"
+        vrAlign="flex-start"
+        width="100%"
+        marginBottom="sm"
+      >
         <FlexColumn marginBottom={style.margin.xxs} vrAlign="flex-start">
           <Text
             color={colorMode == "light" ? "black" : ""}
@@ -145,16 +151,18 @@ const ExternalCard = ({ width, cardHeight, shadowOnHover = true }: Props) => {
       <FlexRow hrAlign="flex-start" width="90%">
         <Link href="https://macha.ai/privacy/" target="blank">
           <BoldOnHoverText color={colorMode == "light" ? "black" : ""}>
-            Privacy
+            Privacy 
           </BoldOnHoverText>
         </Link>
+        <Text color={colorMode == "light" ? "black" : ""} marginLeft="3px" marginRight="3px"> • </Text>
         <Link href="https://macha.ai/terms/" target="blank">
           <BoldOnHoverText color={colorMode == "light" ? "black" : ""}>
-            • Terms
+               Terms
           </BoldOnHoverText>
         </Link>
+        <Text color={colorMode == "light" ? "black" : ""} marginLeft="3px" marginRight="3px"> • </Text>◊
         <Text color={colorMode == "light" ? "black" : ""}>
-          • © 2023 MetaWork Labs
+          © 2023 MetaWork Labs
         </Text>
       </FlexRow>
     </CardNative>

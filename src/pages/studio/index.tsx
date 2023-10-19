@@ -31,7 +31,7 @@ const Home = () => {
     },
     {
       value: "Indexers",
-      href: "/indexers",
+      href: "/studio/indexers",
     },
     // {
     //   value: "Functions",

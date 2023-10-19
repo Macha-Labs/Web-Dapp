@@ -115,7 +115,7 @@ const HomeDev = () => {
           title="Indexers"
           description="Publish your smart contract for growth and developer community exposure."
           onClick={() => {
-            router.push("/indexers");
+            router.push("/studio/indexers");
           }}
         />
         <GetStartedCards
