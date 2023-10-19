@@ -53,23 +53,6 @@ const Home = () => {
   const renderBody = () => {
     return (
       <>
-        <NavBlock marginTop={style.margin["nav"]}>
-          <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
-            <FlexRow hrAlign="flex-start" vrAlign="center">
-              <Tabs
-                width="fit-content"
-                options={dashboardNav}
-                gstyle={{
-                  fontSize: `${style.font.h5}`,
-                  // background: `${colorMode == "light" ? "#ffff" : ""}`,
-                }}
-                value={"Home"}
-                onChange={() => {}}
-              />
-            </FlexRow>
-          </FlexRow>
-        </NavBlock>
-
         <FlexBody>
           <Box style={{ overflow: "hidden" }}>{renderHome()}</Box>
         </FlexBody>
