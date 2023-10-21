@@ -82,7 +82,7 @@ const PostCard = ({
   const { colorMode } = useColorMode();
 
   return (
-    <CardNative width="100%" shadowOnHover={true}>
+    <CardNative width="100%" shadowOnHover={true} onClick={onClick}>
       <FlexRow
         hrAlign="space-between"
         height="auto"
