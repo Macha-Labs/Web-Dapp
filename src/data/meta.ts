@@ -4,4 +4,5 @@ export const slugToLogoMapping: Record<string, string> = {
     poap_nft: "logo-Poap",
     ens_ethereum: "logo-Ens",
     lens_profile_polygon:"logo-Lens",
+    ud_ethereum:"logo-Unstoppable",
   };
