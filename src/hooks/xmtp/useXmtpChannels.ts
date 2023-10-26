@@ -4,7 +4,7 @@ import { Channel$ } from "@/schema/channel";
 import { useContext, useEffect, useState } from "react";
 
 const useXmtpChannels = () => {
-  console.log('Rendering >>>>> useXmtpChannels');
+  //console.log('Rendering >>>>> useXmtpChannels');
   const authContext = useContext(AuthContext);
   const [allConversations, setAllConversations] = useState<any>();
   const [rawConversations, setRawConversations] = useState<any>();

@@ -116,8 +116,8 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
   });
 
   useEffect(() => {
-    // console.log("called coz nftbyaddresschange change");
-    // console.log("get Nft by address", hookAlchemy.nftByAddress);
+    // //console.log("called coz nftbyaddresschange change");
+    // //console.log("get Nft by address", hookAlchemy.nftByAddress);
     if (hookAlchemy.nftByAddress && hookAlchemy.nftByAddress[0]) {
       setNftLoading(true);
       hookAlchemy.nftByAddress.map((nft: any) => {
@@ -140,7 +140,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
   }, [hookAlchemy.nftByAddress]);
 
   useEffect(() => {
-    console.log("called coz addresss change", address);
+    //console.log("called coz addresss change", address);
     if (address) {
       const fetch = async () => {
         await hookAlchemy.getNftsByAddress(address, chains);
@@ -298,7 +298,7 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                               <ButtonNative
                                 text="Claim NFT and own your Macha Profile"
                                 onClick={() => {
-                                  console.log("submit clicked");
+                                  //console.log("submit clicked");
                                   // hookCreatorCreate.nextFormStep();
                                   hookNftMint.submit();
                                 }}

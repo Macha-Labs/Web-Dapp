@@ -30,7 +30,7 @@ import { Contract } from "ethers";
 // import { ChatContext } from "@/providers/ChatProvider";
 
 const ChatNew = (props: any) => {
-  console.log("Rendering >>>>> ChatNew");
+  //console.log("Rendering >>>>> ChatNew");
   const [tab, setTab] = useState("details");
   const [inputFocus, setInputFocus] = useState(0);
   const [access, setAccess] = useState("Public");
@@ -64,7 +64,7 @@ const ChatNew = (props: any) => {
 
   const handleTabs = () => {
     if (tab == "details" && access == "Public") {
-      console.log("settin tab to public");
+      //console.log("settin tab to public");
       setTab("share");
     } else if (tab == "details" && access == "Private") {
       setTab("access");
@@ -78,7 +78,7 @@ const ChatNew = (props: any) => {
   //     duration: 3000,
   //     position: "bottom-right",
   //   });
-  //   console.log("Do the rest of the stuff");
+  //   //console.log("Do the rest of the stuff");
   //   chatContext?.hookChannel?.fetch({ id: channelId });
   //   chatContext?.hookChannelList?.load();
   //   props.modal.onClose();
@@ -381,12 +381,12 @@ const ChatNew = (props: any) => {
           size="sm"
           variant="state_brand"
           onClick={() => {
-            console.log("useraddresses", [
+            //console.log("useraddresses", [
               ...userAddresses,
               // ...hookPortalChannelMembership?.userIds,
             ]);
 
-            // console.log("profilefromlens", hookLensConnections.profile);
+            // //console.log("profilefromlens", hookLensConnections.profile);
             // const lensAddress = hookLensConnections.profile.map((item: any) => {
             //   return item.toLowerCase();
             // });
@@ -396,7 +396,7 @@ const ChatNew = (props: any) => {
             //   ...lensAddress,
             //   ...nftAddresses,
             // ];
-            // console.log("allAddresses", allAddresses);
+            // //console.log("allAddresses", allAddresses);
             // hookPortalChannel?.update(allAddresses);
           }}
         >

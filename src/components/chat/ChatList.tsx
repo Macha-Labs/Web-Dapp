@@ -37,7 +37,7 @@ import Link from "next/link";
 import FlexRow from "@/_ui/flex/FlexRow";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 const ChatList = (props: any) => {
-  console.log("Rendering >>>>> ChatList");
+  //console.log("Rendering >>>>> ChatList");
   // const chatContext = useContext(ChatContext);
   const authContext = useContext(AuthContext) as AuthContextType;
   const router = useRouter();

@@ -240,7 +240,7 @@ const PostCard = ({
       {musicplayer && (
         <>
           {" "}
-          {console.log(
+          {//console.log(
             "musicplayer",
             musicplayer.substr(5, musicplayer.length - 5)
           )}

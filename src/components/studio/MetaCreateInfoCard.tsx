@@ -13,7 +13,7 @@ type Props = {
 };
 
 function MetaCreateInfoCard({ data }: Props) {
-  console.log("metadata", data);
+  //console.log("metadata", data);
   const toast = useToast();
   return (
     <CardNative>

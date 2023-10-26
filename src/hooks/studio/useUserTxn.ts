@@ -13,7 +13,7 @@ const useUserTxn = () => {
 
   const _fetch = async (from_address: any) => {
     txnByUserAddress(from_address,page).then((res: any) => {
-      console.log("user txn fetching", res);
+      //console.log("user txn fetching", res);
       setTotalPages(Math.ceil(res.count / 10))
       setTotalTxns(res.count)
       setIsLoading(false)

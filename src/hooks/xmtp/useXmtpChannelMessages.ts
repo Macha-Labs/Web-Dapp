@@ -5,7 +5,7 @@ import { DecodedMessage, SortDirection } from "@xmtp/xmtp-js";
 import { useEffect, useState } from "react";
 
 const useXmtpChannelMessages = () => {
-  console.log('Rendering >>>>> useXmtpChannelMessages');
+  //console.log('Rendering >>>>> useXmtpChannelMessages');
   const [messages, setMessages] = useState<DecodedMessage[]>([]);
   const [messagesLogs, setMessagesLogs] = useState<any>();
   const $channel = useChatChannelStore((state: any) => state.channel);
@@ -23,13 +23,13 @@ const useXmtpChannelMessages = () => {
   }
 
   const _watch = async (channel: any) => {
-    console.log('Rendering >>>>>>> useXmtpChannelMessages._watch', channel?.xmtpRaw)
+    //console.log('Rendering >>>>>>> useXmtpChannelMessages._watch', channel?.xmtpRaw)
     const logs = await channel?.xmtpRaw?.streamMessages();
     setMessagesLogs(logs);
 
     if (logs) {
       for await (const msg of logs) {
-        console.log(`New message from ${msg.senderAddress}: ${msg.content}`)
+        //console.log(`New message from ${msg.senderAddress}: ${msg.content}`)
         setMessages(prevMessages => {
           const messages = [...prevMessages];
           messages.push(XmtpMessage$(msg));

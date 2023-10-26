@@ -23,7 +23,7 @@ const useNftData = () => {
             nft.contract.address,
             nft.tokenId
           );
-          console.log("responses", response);
+          //console.log("responses", response);
           return {
             contractAddress: nft.contract.address,
             tokenId: nft.tokenId,

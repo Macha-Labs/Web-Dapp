@@ -4,7 +4,7 @@ import { IUploadProgressCallback } from "@lighthouse-web3/sdk/dist/types";
 
 export const progressCallback = (progressData: any) => {
   // let percentageDone: any = 100 - (progressData?.total / progressData?.uploaded)?.toFixed(2);
-  console.log(progressData);
+  //console.log(progressData);
 };
 
 export const deploytoLightHouse = async (e: any, progressCallback: any) => {
@@ -15,8 +15,8 @@ export const deploytoLightHouse = async (e: any, progressCallback: any) => {
     undefined
     // progressCallback
   );
-  console.log("File Status:", output);
-  console.log(
+  //console.log("File Status:", output);
+  //console.log(
     "Visit at https://gateway.lighthouse.storage/ipfs/" + output.data.Hash
   );
   return output.data.Hash;
@@ -27,7 +27,7 @@ export const uploadTextToLighthouse = async (text: string) => {
     text,
     config.LIGHTHOUSE_API_KEY
   );
-  console.log("https://gateway.lighthouse.storage/ipfs/" + response.data.Hash);
+  //console.log("https://gateway.lighthouse.storage/ipfs/" + response.data.Hash);
   return response.data.Hash;
 };
 

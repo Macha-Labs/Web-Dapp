@@ -33,11 +33,11 @@ const useApiCreate = () => {
       triggers: [triggerData],
       prevIpfsCid: "",
     };
-    console.log("Meta Overview ", metaOverview.current);
-    console.log("Meta Trigger ", metaTrigger.current);
-    console.log("Meta Origin ", metaOrigin.current);
+    //console.log("Meta Overview ", metaOverview.current);
+    //console.log("Meta Trigger ", metaTrigger.current);
+    //console.log("Meta Origin ", metaOrigin.current);
 
-    console.log("Logging Meta Payload ", metaPayload);
+    //console.log("Logging Meta Payload ", metaPayload);
 
     await $macha.publisher.metaCreation(metaPayload);
   };
@@ -57,8 +57,8 @@ const useApiCreate = () => {
       }
     }
 
-    console.log("The Api payload data is ", apiPayload);
-    console.log("The macha instance is ", $macha);
+    //console.log("The Api payload data is ", apiPayload);
+    //console.log("The macha instance is ", $macha);
     await $macha.publisher.apiCreation(apiPayload);
   }
 

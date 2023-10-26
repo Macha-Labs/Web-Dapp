@@ -16,7 +16,7 @@ const useSearch = () => {
   }, []);
 
   useEffect(() => {
-    console.log("check search results", searchResults);
+    //console.log("check search results", searchResults);
   }, searchResults);
 
   const handleQuery = async (params: SearchInterface) => {
@@ -34,7 +34,7 @@ const useSearch = () => {
     }
 
     let res = await queryResolver(query);
-    console.log("check search results -> query", searchResults);
+    //console.log("check search results -> query", searchResults);
     if (res.data) {
       let newResults =
         next && searchResults
@@ -69,7 +69,7 @@ const useSearch = () => {
       query = { ...query, page: page + 1 };
     }
     await metaResolver(query).then((res) => {
-      console.log("check search results -> fetch", searchResults);
+      //console.log("check search results -> fetch", searchResults);
 
       let newResults =
         next && searchResults
@@ -121,7 +121,7 @@ const useSearch = () => {
 
   const handleClear = () => {
     setPage(1);
-    console.log("check search results -> clear", searchResults);
+    //console.log("check search results -> clear", searchResults);
     setSearchResults(null);
   };
 
@@ -141,7 +141,7 @@ const useSearch = () => {
   };
 
   const handleRoute = (e: any) => {
-    console.log(router, "router value");
+    //console.log(router, "router value");
     if (e.key === "Enter") {
       e.preventDefault();
       const newValue = e.target.value;

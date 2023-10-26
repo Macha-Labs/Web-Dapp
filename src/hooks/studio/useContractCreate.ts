@@ -29,7 +29,7 @@ const useContractCreate = (modal: any) => {
   const $address = useAuthStore((state: any) => state.address);
 
   useEffect(() => {
-    console.log("contract form data", $contractFormData);
+    //console.log("contract form data", $contractFormData);
   }, [$contractFormData]);
 
   const addressRegex = /^0x[a-fA-F0-9]{40}$/;
@@ -37,7 +37,7 @@ const useContractCreate = (modal: any) => {
   const setLoadingCallback = (progressData: any) => {
     let percentageDone: any =
       100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
-    console.log("percentage done: ", percentageDone);
+    //console.log("percentage done: ", percentageDone);
     setIpfsLoading(percentageDone);
   };
 
@@ -292,7 +292,7 @@ const useContractCreate = (modal: any) => {
           })
           setFormStep(2);
         } else {
-          console.log(formStep);
+          //console.log(formStep);
           setFormStep((currentStep: any) => currentStep + 1);
         }
       } else {
@@ -352,7 +352,7 @@ const useContractCreate = (modal: any) => {
       ownerAddress: $address,
     };
 
-    // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
+    // //console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
     if (
       contractPayload.name == undefined ||
       contractPayload.name == "" ||
@@ -378,7 +378,7 @@ const useContractCreate = (modal: any) => {
         position: "top-right",
       });
     } else {
-      console.log("The contract payload data is ", contractPayload);
+      //console.log("The contract payload data is ", contractPayload);
       createNewContract(contractPayload).then((res) => {
         toast({
           title: "Contract Edited!!",
@@ -422,7 +422,7 @@ const useContractCreate = (modal: any) => {
       contract_abi: $contractFormData.contract_abi,
     };
 
-    // console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
+    // //console.log("Intereseted methods", contractDataRef.current["interested_methods"].value);
     if (
       contractPayload.name == undefined ||
       contractPayload.name == "" ||
@@ -448,7 +448,7 @@ const useContractCreate = (modal: any) => {
         position: "top-right",
       });
     } else {
-      console.log("The contract payload data is ", contractPayload);
+      //console.log("The contract payload data is ", contractPayload);
       createNewContract(contractPayload).then((res) => {
         toast({
           title: "Contract created!",

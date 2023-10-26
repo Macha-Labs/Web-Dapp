@@ -26,7 +26,7 @@ export default function Explorer() {
   ];
 
   const renderBody = () => {
-    console.log("exploreMeta", hookNftData);
+    //console.log("exploreMeta", hookNftData);
     return (
       <>
         <NavBlock>

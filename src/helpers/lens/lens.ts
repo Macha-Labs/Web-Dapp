@@ -60,7 +60,7 @@ export const authenticate_user = async (address: any, signature: any) => {
 };
 
 export const newRefreshToken = async (refreshToken: string) => {
-  console.log("Refresh token for accessToken", refreshToken);
+  //console.log("Refresh token for accessToken", refreshToken);
   try {
     const { data } = await apolloClient.mutate({
       mutation: gql(REFRESH_TOKEN),
@@ -70,11 +70,11 @@ export const newRefreshToken = async (refreshToken: string) => {
         },
       },
     });
-    console.log("The response for the Refresh token ", data);
+    //console.log("The response for the Refresh token ", data);
     return data.refresh;
   } catch (error: any) {
-    console.log("Error in re-generating lens_access_token", error);
-    console.log(error?.networkError?.result?.errors);
+    //console.log("Error in re-generating lens_access_token", error);
+    //console.log(error?.networkError?.result?.errors);
   }
   
 };
@@ -208,7 +208,7 @@ export const createNewPost = async (request: CreatePublicPostRequest) => {
     });
     return result;
   } catch (error: any) {
-    console.log("Error in creaing new Lens Post ", error);
+    //console.log("Error in creaing new Lens Post ", error);
     throw new Error("Error in creaing new Lens Post ", error);
   }
 };
@@ -250,7 +250,7 @@ export const likePost = async (requestParam: any) => {
     });
     return result.data!.addReaction;
   } catch (error: any) {
-    console.log(
+    //console.log(
       "Error in Liking Lens post ", error,
       error?.networkError?.result?.errors
     );
@@ -267,7 +267,7 @@ export const unlikePost = async (requestParam: any) => {
     });
     return result.data!.removeReaction;
   } catch (error: any) {
-    console.log(
+    //console.log(
       "Error in Unliking Lens post ", error, 
       error?.networkError?.result?.errors
     );

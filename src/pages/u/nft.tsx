@@ -162,7 +162,7 @@ export default function Home() {
 
               <FlexRow hrAlign="flex-start" marginTop={"xl"} flexWrap="wrap">
                 {hookMetasList?.metaSchemas?.map((schema: any, index: any) => {
-                  console.log(schema, "schema");
+                  //console.log(schema, "schema");
                   return (
                     <GraphCard
                       key={index}

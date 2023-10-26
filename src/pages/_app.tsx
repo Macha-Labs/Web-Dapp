@@ -40,10 +40,10 @@ const wagmiClient = createClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  console.log("Rendering >>>>> APP");
+  //console.log("Rendering >>>>> APP");
   const router = useRouter();
   useEffect(() => {
-    console.log("router", router);
+    //console.log("router", router);
   }, [router]);
   return (
     <>

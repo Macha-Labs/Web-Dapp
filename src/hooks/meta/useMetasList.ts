@@ -11,7 +11,7 @@ const useMetaList = () => {
   const [pageNo, setPageNo] = useState<number>(1);
 
   const _fetchMore = async (slug?: any, limit?: number) => {
-    console.log("pageNo", pageNo);
+    //console.log("pageNo", pageNo);
     if (pageNo == 1) {
       setIsLoading(true);
     } else {
@@ -19,7 +19,7 @@ const useMetaList = () => {
       setShowMoreLoading(true);
     }
     await metaResolver({slug:slug, page:pageNo, limit:limit ? limit : 30}).then((res) => {
-      console.log("allmetas", res);
+      //console.log("allmetas", res);
       setMetaAll(metaAll ? [...metaAll, ...res?.data] : res?.data);
       setPageNo(pageNo + 1);
       setLastPage(res?.lastPage);

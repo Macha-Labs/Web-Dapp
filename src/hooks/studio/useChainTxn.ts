@@ -20,7 +20,7 @@ const useChainTxn = () => {
       else{
         setTotalPages(Math.ceil(res.count / 10))
         setTotalTxns(res.count)
-        console.log("chain txn fetching", res);
+        //console.log("chain txn fetching", res);
         setIsLoading(false)
         setChainTxnDetails(res.data);
         setFilteredData(res.data);

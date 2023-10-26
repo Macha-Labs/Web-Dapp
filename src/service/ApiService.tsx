@@ -36,7 +36,7 @@ export const searchAllMetas = async (searchTerm: string) => {
     `${config.metaServer}/indexer/metas/fetch-by-search/${searchTerm}?limit=30`
   );
   if (response.status == 200) {
-    console.log("response search api", response);
+    //console.log("response search api", response);
     const data = await response.json();
     return data;
   } else {
@@ -51,7 +51,7 @@ export const vectorSearch = async (searchQuery: string) => {
     `${config.metaServer}/indexer/metas/vectorSearch/${searchQuery}`
   );
   if (response.status == 200) {
-    console.log("response vectorSearch api", response);
+    //console.log("response vectorSearch api", response);
     const data = await response.json();
     return data;
   } else {
@@ -79,7 +79,7 @@ export const contractsByUserAddress = async (userAddress: string) => {
     const data = await response.json();
     return data;
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     return undefined;
   }
 };
@@ -108,7 +108,7 @@ export const txnDataBySlug = async (contractSlug: string, page: number) => {
     const data = await response.json();
     return data;
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
 };
 
@@ -123,7 +123,7 @@ export const allContracts = async () => {
 export const allXPRewards = async () => {
   const response = await fetch(`${config.metaServer}/indexer/XP/info/fetchAll`);
   const data = await response.json();
-  console.log("xpData", data);
+  //console.log("xpData", data);
   return data;
 };
 export const leaderBoardData = async () => {
@@ -151,7 +151,7 @@ export const createNewContract = async (data: any) => {
       },
     }
   );
-  console.log("form create new contract ", response);
+  //console.log("form create new contract ", response);
   return response.json();
 };
 
@@ -162,7 +162,7 @@ export const createNewPublisher = async (data: any, type: string) => {
   } else if (type == "Organization") {
     url = `${config.metaServer}/indexer/publishers/create?type=org`;
   }
-  console.log(data);
+  //console.log(data);
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(data),
@@ -170,7 +170,7 @@ export const createNewPublisher = async (data: any, type: string) => {
       "Content-Type": "application/json",
     },
   });
-  console.log("new publisher created ", response);
+  //console.log("new publisher created ", response);
   return response.json();
 };
 
@@ -184,7 +184,7 @@ export const deleteContract = async (contract_id: any) => {
       },
     }
   );
-  console.log("Deleted Contract", response);
+  //console.log("Deleted Contract", response);
   return response.json();
 };
 
@@ -222,7 +222,7 @@ export const etherscanVerification = async (contractAddress: any) => {
     `https://api.etherscan.io/api?module=contract&action=getabi&address=${contractAddress}&apikey=${config.ETHERSCAN_API_KEY}`
   );
   const data = await res.json();
-  console.log(data);
+  //console.log(data);
   return data;
 };
 export const polygonScanVerification = async (contractAddress: any) => {
@@ -230,7 +230,7 @@ export const polygonScanVerification = async (contractAddress: any) => {
     `https://api.polygonscan.com/api?module=contract&action=getabi&address=${contractAddress}&apikey=${config.POLYGONSCAN_API_KEY}`
   );
   const data = await res.json();
-  console.log(data);
+  //console.log(data);
   return data;
 };
 export const baseScanVerification = async (contractAddress: any) => {
@@ -238,7 +238,7 @@ export const baseScanVerification = async (contractAddress: any) => {
     `https://api.basescan.org/api?module=contract&action=getabi&address=${contractAddress}&apikey=${config.BASESCAN_API_KEY}`
   );
   const data = await res.json();
-  console.log(data);
+  //console.log(data);
   return data;
 };
 export const opScanVerification = async (contractAddress: any) => {
@@ -246,7 +246,7 @@ export const opScanVerification = async (contractAddress: any) => {
     `https://api-optimistic.etherscan.io/api?module=contract&action=getabi&address=${contractAddress}&apikey=${config.OPSCAN_API_KEY}`
   );
   const data = await res.json();
-  console.log(data);
+  //console.log(data);
   return data;
 };
 export const contractsOfChain = async (chainId: any) => {
@@ -254,7 +254,7 @@ export const contractsOfChain = async (chainId: any) => {
     `${config.metaServer}/indexer/contracts/fetch-by-chain/${chainId}`
   );
   const data = await res.json();
-  console.log(data);
+  //console.log(data);
   return data;
 };
 
@@ -263,7 +263,7 @@ export const userMetaByAddress = async (address: any) => {
     `${config.metaServer}/indexer/metas/fetch-by-user/${address}`
   );
   const data = await res.json();
-  console.log("userMetas", data);
+  //console.log("userMetas", data);
   return data;
 };
 
@@ -272,7 +272,7 @@ export const userIdByAddress = async (address: string) => {
     `${config.metaServer}/indexer/metas/addressResolver/${address}`
   );
   if (response.status == 200) {
-    console.log("response addressReolver api", response);
+    //console.log("response addressReolver api", response);
     const data = await response.json();
     return data;
   } else {
@@ -285,14 +285,14 @@ export const userIdByAddress = async (address: string) => {
 export const getAllNfts = async (address: any) => {
   const alchemy = new Alchemy(config);
   const nfts = await alchemy.nft.getNftsForOwner(address);
-  console.log(nfts);
+  //console.log(nfts);
   return nfts;
 };
 
 export const createUserInDB = async (data: any) => {
   let url = `${config.metaServer}/indexer/user/claimToken`;
 
-  console.log(data);
+  //console.log(data);
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(data),
@@ -300,7 +300,7 @@ export const createUserInDB = async (data: any) => {
       "Content-Type": "application/json",
     },
   });
-  console.log("new publisher created ", response);
+  //console.log("new publisher created ", response);
   return response.json();
 };
 export const updateXpInDB = async (data: any) => {
@@ -312,7 +312,7 @@ export const updateXpInDB = async (data: any) => {
       "Content-Type": "application/json",
     },
   });
-  console.log("xp updated", response);
+  //console.log("xp updated", response);
   return response.json();
 };
 
@@ -320,7 +320,7 @@ export const updateXpInDB = async (data: any) => {
 //   // Get all NFTs
 //   const nfts = await alchemy.nft.getNftsForOwner("elanhapern.eth");
 //   // Print NFTs
-//   console.log(nfts);
+//   //console.log(nfts);
 // };
 
 // const runMain = async () => {
@@ -328,7 +328,7 @@ export const updateXpInDB = async (data: any) => {
 //     await main();
 //     process.exit(0);
 //   } catch (error) {
-//     console.log(error);
+//     //console.log(error);
 //     process.exit(1);
 //   }
 // };

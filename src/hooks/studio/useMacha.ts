@@ -24,7 +24,7 @@ const useMacha = () => {
         const res = window.sessionStorage.getItem("macha.connected");
         if (res) {
           if (JSON.parse(res) == true) {
-            console.log("reconnecting wallet");
+            //console.log("reconnecting wallet");
             if (!isConnected) {
               const result = await connect({
                 connector: new InjectedConnector({
@@ -58,14 +58,14 @@ const useMacha = () => {
     try {
       if (signer) {
         macha = new Macha({ owner: $address, signer: signer });
-        console.log("create publisher called", macha);
+        //console.log("create publisher called", macha);
         const res = await macha?.createPublisher(publisherData);
         await connectMachaPublisher();
         window.localStorage.setItem("machaIsPublisher", JSON.stringify(true));
         return res;
       }
     } catch (error) {
-      console.log("Error in createMachaPublisher", error);
+      //console.log("Error in createMachaPublisher", error);
       return error;
     }
   };
@@ -74,7 +74,7 @@ const useMacha = () => {
     if (signer) {
       macha = new Macha({ owner: $address, signer: signer });
       const machaCreated: any = await macha?.connectPublisher();
-      console.log("macha created", machaCreated);
+      //console.log("macha created", machaCreated);
       setPublisherExists(machaCreated?.data?.data == null ? false : true);
       const connectedAddress = $address;
       if (machaCreated?.data?.data != null) {
@@ -107,7 +107,7 @@ const useMacha = () => {
     if (window.localStorage !== undefined) {
       const data = window.localStorage.getItem("machaIsPublisher");
       if (data !== null) {
-        console.log("local data", JSON.parse(data));
+        //console.log("local data", JSON.parse(data));
         const res = JSON.parse(data);
         if (res[$address] == true) {
           setPublisherExists(true);

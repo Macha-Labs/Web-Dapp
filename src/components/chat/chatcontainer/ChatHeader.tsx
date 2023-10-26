@@ -18,7 +18,7 @@ import { truncateAddress } from "@/helpers";
 import useChatChannelStore from "@/store/useChatChannelStore";
 
 const ChatHeader = (props: any) => {
-  console.log("Rendering >>>>> ChatHeader");
+  //console.log("Rendering >>>>> ChatHeader");
   const membersModal = useDisclosure();
   const modalSettings = useDisclosure();
   const router = useRouter();

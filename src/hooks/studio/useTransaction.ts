@@ -11,7 +11,7 @@ const useTransaction = () => {
 
   const _fetch = async (transactionHash: any) => {
     transactionData(transactionHash).then((res: any) => {
-      console.log("contract not", res);
+      //console.log("contract not", res);
       const dateObj = timeStampConversion(res.data?.timestamp);
       const timestamp = `${dateObj.date} ${dateObj.time}`;
       contractDataBySlug(res?.data?.transaction?.contract_slug).then(
@@ -102,10 +102,10 @@ const useTransaction = () => {
   const _fetchLatestTransactions = async () => {
     getAllTransactions().then((res: any) => {
       if (res.data) {
-        console.log(res.data, "latest txn");
+        //console.log(res.data, "latest txn");
         setLatestTransactions(res.data);
       } else {
-        console.log("Couldnt fetch");
+        //console.log("Couldnt fetch");
       }
     });
   }

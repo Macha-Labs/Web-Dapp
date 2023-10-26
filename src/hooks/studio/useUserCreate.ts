@@ -24,7 +24,7 @@ const useUserCreate = () => {
     };
 
     createUserInDB(usePayLoad).then((res) => {
-      console.log("res from useusercreate", res);
+      //console.log("res from useusercreate", res);
     });
   };
   return {

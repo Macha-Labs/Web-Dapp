@@ -95,7 +95,7 @@ const DashBoard = () => {
 
         leftIcon: chains[key].chainImage,
         onClick: () => {
-          // console.log(key, "clicked");
+          // //console.log(key, "clicked");
           hookContractList.handleFilter(key);
           setFilterValue(chains[key].chainName);
           setAvatar(chains[key].chainImage);

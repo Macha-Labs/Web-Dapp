@@ -14,7 +14,7 @@ function useXmtpAuth() {
     setXmtpClientAddress(xmtp.address);
     const logs = await xmtp?.conversations?.stream();
     setXmtpLogs(logs);
-    console.log("connected to XMTP");
+    //console.log("connected to XMTP");
   };
 
 

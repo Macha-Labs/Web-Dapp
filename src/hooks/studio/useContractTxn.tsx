@@ -16,7 +16,7 @@ const useContractTxn = () => {
       if (res) {
         setTotalPages(Math.ceil(res.count / 10))
         setTotalTxns(res.count)
-        console.log("contract txn fetching", res);
+        //console.log("contract txn fetching", res);
         setIsLoading(false)
         setContractTxnDetails(res.data);
         setFilteredData(res.data);

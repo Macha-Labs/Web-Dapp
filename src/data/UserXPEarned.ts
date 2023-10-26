@@ -26,11 +26,11 @@ export const checkUserXP: any = {
             const owner = userAddress;
     
             const response = await alchemy.nft.verifyNftOwnership(owner, address)
-            console.log("nftOwnership",response)
+            //console.log("nftOwnership",response)
             return response
         }
         else{
-            console.log("user address",userAddress)
+            //console.log("user address",userAddress)
         }
     },
     //alchemy does not support FVM yet, so goerli,
@@ -46,11 +46,11 @@ export const checkUserXP: any = {
             const owner = userAddress;
     
             const response = await alchemy.nft.verifyNftOwnership(owner, address)
-            console.log("nftOwnership",response)
+            //console.log("nftOwnership",response)
             return response
         }
         else{
-            console.log("user address",userAddress)
+            //console.log("user address",userAddress)
         }
     },
     //check contract address for lens and the network,
@@ -66,11 +66,11 @@ export const checkUserXP: any = {
             const owner = userAddress;
     
             const response = await alchemy.nft.verifyNftOwnership(owner, address)
-            console.log("nftOwnership",response)
+            //console.log("nftOwnership",response)
             return response
         }
         else{
-            console.log("user address",userAddress)
+            //console.log("user address",userAddress)
         }
     },
     //check contract address for ENS
@@ -86,11 +86,11 @@ export const checkUserXP: any = {
             const owner = userAddress;
     
             const response = await alchemy.nft.verifyNftOwnership(owner, address)
-            console.log("nftOwnership",response)
+            //console.log("nftOwnership",response)
             return response
         }
         else{
-            console.log("user address",userAddress)
+            //console.log("user address",userAddress)
         }
     },
     //check contract address for unstoppable
@@ -107,11 +107,11 @@ export const checkUserXP: any = {
             const owner = userAddress;
     
             const response = await alchemy.nft.verifyNftOwnership(owner, address)
-            console.log("nftOwnership",response)
+            //console.log("nftOwnership",response)
             return response
         }
         else{
-            console.log("user address",userAddress)
+            //console.log("user address",userAddress)
         }
     },
     //check contract address for POAP
@@ -127,11 +127,11 @@ export const checkUserXP: any = {
             const owner = userAddress;
     
             const response = await alchemy.nft.verifyNftOwnership(owner, address)
-            console.log("nftOwnership",response)
+            //console.log("nftOwnership",response)
             return response
         }
         else{
-            console.log("user address",userAddress)
+            //console.log("user address",userAddress)
         }
     },
     //Claim Macha NFT on Ethereum Goerli TestNet
@@ -146,11 +146,11 @@ export const checkUserXP: any = {
             const owner = userAddress;
     
             const response = await alchemy.nft.verifyNftOwnership(owner, address)
-            console.log("nftOwnership",response)
+            //console.log("nftOwnership",response)
             return response
         }
         else{
-            console.log("user address",userAddress)
+            //console.log("user address",userAddress)
         }
     },
     //Claim Macha NFT on Polygon TestNet
@@ -165,11 +165,11 @@ export const checkUserXP: any = {
             const owner = userAddress;
     
             const response = await alchemy.nft.verifyNftOwnership(owner, address)
-            console.log("nftOwnership",response)
+            //console.log("nftOwnership",response)
             return response
         }
         else{
-            console.log("user address",userAddress)
+            //console.log("user address",userAddress)
         }
     },
     //check contract address for Mirror
@@ -185,11 +185,11 @@ export const checkUserXP: any = {
     //         const owner = userAddress;
     
     //         const response = await alchemy.nft.verifyNftOwnership(owner, address)
-    //         console.log("nftOwnership",response)
+    //         //console.log("nftOwnership",response)
     //         return response
     //     }
     //     else{
-    //         console.log("user address",userAddress)
+    //         //console.log("user address",userAddress)
     //     }
     // },
     

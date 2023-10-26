@@ -121,9 +121,9 @@ const ChatWindow = (props: any) => {
   };
 
   const handleSelectedUser = (user: any) => {
-    console.log($memberAll);
+    //console.log($memberAll);
     if ($memberAll) {
-      console.log($memberAll);
+      //console.log($memberAll);
       const userProfile = $memberAll?.filter(
         (profile: any) =>
           String(profile.address).toLowerCase() ==

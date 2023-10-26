@@ -32,7 +32,7 @@ const SearchResult = () => {
         setCurrentApiId(currentApiId);
         hookMeta.apiInit($userApisMap[currentApiId]);
       } else {
-        console.log("storedApiId", storedApiId);
+        //console.log("storedApiId", storedApiId);
         setCurrentApiId(storedApiId);
         hookMeta.apiInit($userApisMap[storedApiId]);
       }

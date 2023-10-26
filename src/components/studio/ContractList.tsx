@@ -43,7 +43,7 @@ const ContractList = ({ openInNewTab, data }: Props) => {
             {!hookContractList.isLoading &&
               data &&
               data.map((item: any, index: number) => {
-                // console.log(hookContractList?.filterData, "filered data");
+                // //console.log(hookContractList?.filterData, "filered data");
                 return (
                   <GridItem key={index} colSpan={1}>
                     <ContractCard
@@ -64,7 +64,7 @@ const ContractList = ({ openInNewTab, data }: Props) => {
                           `/search/contracts/${item?.contract?.slug}`,
                           `${openInNewTab ? "_blank" : "_self"}`
                         );
-                        console.log(router.basePath, "url");
+                        //console.log(router.basePath, "url");
                       }}
                     />
                   </GridItem>

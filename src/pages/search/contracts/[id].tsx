@@ -26,10 +26,10 @@ type Props = {
 
 //   const resContract = await contractDataBySlug(contractSlug)
 //   if (resContract.data) {
-//     console.log(resContract.data, "contract");
+//     //console.log(resContract.data, "contract");
 //     contract = resContract.data
 //   } else {
-//     console.log("Couldnt fetch contract");
+//     //console.log("Couldnt fetch contract");
 //   }
 
 //   return {

@@ -17,7 +17,7 @@ export const initialiseNewMeta = async (data: metaInit) => {
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
-  console.log("form studio service ", response);
+  //console.log("form studio service ", response);
   return response.json();
 };
 
@@ -65,7 +65,7 @@ export const fetchMetaByIpfsCid = async (cid: any) => {
 //       },
 //     }
 //   );
-//   console.log("form studio service pending metas", response);
+//   //console.log("form studio service pending metas", response);
 //   return response.json();
 // };
 
@@ -79,7 +79,7 @@ export const deleteMetaInit = async (meta: any) => {
         },
       }
     );
-    console.log("form studio service deleting pending metas", response);
+    //console.log("form studio service deleting pending metas", response);
     return response.json();
   } else return null;
 };
@@ -96,6 +96,6 @@ export const editPendingMeta = async (id: string, data: any) => {
         },
       }
     );
-    console.log("Edit response", response);
+    //console.log("Edit response", response);
   }
 };

@@ -72,7 +72,7 @@ Props) {
   const [resultData, setResultData] = useState<any>({});
   const toast = useToast();
   useEffect(() => {
-    console.log("Logging $meta ", $metaInfo);
+    //console.log("Logging $meta ", $metaInfo);
   }, [$metaInfo]);
 
   return (
@@ -318,7 +318,7 @@ Props) {
     //       </InputRightElement>
     //     </InputGroup>
     //   </FlexRow>
-    //   {console.log("resultData", resultData)}
+    //   {//console.log("resultData", resultData)}
     //   <FlexRow flexWrap={"wrap"} marginTop={"lg"} hrAlign="flex-start">
     //     {Object.keys(resultData).length > 0 ? (
     //       resultData.proposals.map((result: any, index: any) => {

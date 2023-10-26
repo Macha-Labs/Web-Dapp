@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import MobileEmptyState from "../MobileEmptyState";
 
 const AuthCard = () => {
-  console.log("Rendering >>>>> AuthCard");
+  //console.log("Rendering >>>>> AuthCard");
   const authContext = useContext(AuthContext);
   const toast = useToast();
   const [mobile, setMobile] = useState<boolean>(false);

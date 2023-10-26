@@ -25,29 +25,29 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 //   const resAllTransactions = await getAllTransactions();
 //   if (resAllTransactions.data) {
-//     console.log(resAllTransactions.data, "latest txn");
+//     //console.log(resAllTransactions.data, "latest txn");
 //     allTransactions = resAllTransactions.data;
 //   } else {
-//     console.log("Couldnt fetch all transactions");
+//     //console.log("Couldnt fetch all transactions");
 //   }
 
 //   const resAllMetas = await fetchAllMetas("poap_nft", 1, 9);
 //   if (resAllMetas.data) {
-//     console.log(resAllMetas.data, "all metass");
+//     //console.log(resAllMetas.data, "all metass");
 //     allMetas = {
 //       data: resAllMetas.data,
 //       lastPage: resAllMetas.lastPage,
 //     };
 //   } else {
-//     console.log("Couldnt fetch all metas");
+//     //console.log("Couldnt fetch all metas");
 //   }
 
 //   const resAllMetaSchemas = await fetchMetaSchemas();
 //   if (resAllMetaSchemas.data) {
-//     console.log(resAllMetaSchemas.data, "all metas schemas");
+//     //console.log(resAllMetaSchemas.data, "all metas schemas");
 //     allMetaSchemas = resAllMetaSchemas.data;
 //   } else {
-//     console.log("Couldnt fetch all meta schemas");
+//     //console.log("Couldnt fetch all meta schemas");
 //   }
 
 //   return {
@@ -187,7 +187,7 @@ export default function Home() {
             {!hookMetasList.isLoading &&
               hookMetasList?.metaAll &&
               hookMetasList?.metaAll?.map((item: any, index: any) => {
-                console.log(item, "item");
+                //console.log(item, "item");
                 return (
                   <CollectorCard
                     name={item?.meta?.data?.modified?.meta_title}

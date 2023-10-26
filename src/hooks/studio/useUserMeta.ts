@@ -10,7 +10,7 @@ const useUserMeta = () => {
 
   const fetchMetas = async (userAdderss: string) => {
     await userMetaByAddress(userAdderss).then((res) => {
-      console.log("response form useUserMeta", res.data);
+      //console.log("response form useUserMeta", res.data);
       setUserMeta(res.data);
     });
   };

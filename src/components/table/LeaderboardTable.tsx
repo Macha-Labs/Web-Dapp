@@ -13,7 +13,7 @@ const LeaderboardTable = () => {
   const [leaderBoardTableData, setLeaderBoardTableData] = useState<any>();
   useEffect(() => {
     leaderBoardData().then((res) => {
-      console.log(res.data);
+      //console.log(res.data);
       setLeaderBoardTableData(
         res.data.sort((a: any, b: any) => {
           return b?.points - a?.points;

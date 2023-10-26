@@ -6,7 +6,7 @@ import ChatWindow from "./ChatWindow";
 
 const ChatContainer = () => {
   const $channel = useChatChannelStore((state: any) => state.channel);
-  console.log("Rendering >>>>> ChatContainer", $channel);
+  //console.log("Rendering >>>>> ChatContainer", $channel);
   return (
     <>
       {$channel ? (

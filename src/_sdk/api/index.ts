@@ -11,7 +11,6 @@ export const queryResolver = async (params: SearchInterface) => {
     }${owner ? `&owner=${owner}` : ""}`
   );
   if (response.status == 200) {
-    console.log("response querySearch api", response);
     const data = await response.json();
     return data;
   } else {
@@ -23,7 +22,7 @@ export const queryResolver = async (params: SearchInterface) => {
 
 export const metaResolver = async (params: MetaSearchInterface) => {
   const { slug, page, limit, category, uid, owner } = params;
-  console.log("slug and other params", slug, page, limit, category, uid, owner);
+  // //console.log("slug and other params", slug, page, limit, category, uid, owner);
   let url = `${config.metaServer}/indexer/metaResolver?limit=${
     limit ? limit : 30
   }${slug ? `&slug=${slug}` : ""}${category ? `&category=${category}` : ""}${

@@ -66,10 +66,10 @@ const useNftMint = () => {
     }
 
     if (address) {
-      console.log("chain", chain);
+      //console.log("chain", chain);
       if (chain) {
         if (Number(chainId) !== chain.id) {
-          console.log("wagmi chains", chains);
+          //console.log("wagmi chains", chains);
           switchNetwork?.(Number(chainId));
           return;
         }
@@ -89,15 +89,15 @@ const useNftMint = () => {
           MachaSBT_ABI,
           signer
         );
-        console.log("contractData", contract);
-        console.log("signer", signer);
-        console.log("provider", provider);
+        //console.log("contractData", contract);
+        //console.log("signer", signer);
+        //console.log("provider", provider);
 
         try {
           const res = await contract.safeMint();
           setIsLoading(true);
           await res.wait();
-          console.log("res nftmint", res);
+          //console.log("res nftmint", res);
           let tokenId;
           await provider.getTransactionReceipt(res.hash).then((res) => {
             tokenId = parseInt(res.logs[0].topics[3], 16);
@@ -129,7 +129,7 @@ const useNftMint = () => {
           setIsLoading(false);
           router.reload();
         } catch (error: any) {
-          console.log(error);
+          //console.log(error);
           toast({
             title: error.code,
             status: "warning",

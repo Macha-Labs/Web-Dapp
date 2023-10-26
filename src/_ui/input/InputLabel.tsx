@@ -150,7 +150,7 @@ const InputLabel = ({
         // Handle the transferred file using e.target.files
         if (fileInput.files && fileInput.files[0]) {
           const droppedFile = fileInput.files[0];
-          console.log("Transferred file:", droppedFile);
+          //console.log("Transferred file:", droppedFile);
         }
       }
       onChange(e);
@@ -197,7 +197,7 @@ const InputLabel = ({
               if (e.target.files && e.target.files[0]) {
                 onChange(e);
                 const file = e.target.files[0];
-                console.log("Selected file:", file);
+                //console.log("Selected file:", file);
               }
             }}
             hidden

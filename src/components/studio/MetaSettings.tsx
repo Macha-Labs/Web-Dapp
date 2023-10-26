@@ -43,9 +43,9 @@ function MetaSettings({ metaInfo }: Props) {
   const $triggerData = useMetaStore((state: any) => state.triggerData);
   const $originData = useMetaStore((state: any) => state.originData);
   const $meta = useMetaStore((state: any) => state.meta);
-  console.log("$meta", $meta);
+  //console.log("$meta", $meta);
 
-  console.log("metaInfo", metaInfo);
+  //console.log("metaInfo", metaInfo);
   const router = useRouter();
   return (
     <>
@@ -258,9 +258,9 @@ function MetaSettings({ metaInfo }: Props) {
               text="Publish Changes"
               variant="state_brand"
               onClick={async () => {
-                console.log("Meta Overview ", $overviewData);
-                console.log("Meta Trigger ", $triggerData);
-                console.log("Meta Origin ", $originData);
+                //console.log("Meta Overview ", $overviewData);
+                //console.log("Meta Trigger ", $triggerData);
+                //console.log("Meta Origin ", $originData);
                 deleteMetaInit($meta);
                 await hookMetaCreate.publishMeta(
                   $overviewData,

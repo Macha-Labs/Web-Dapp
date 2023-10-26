@@ -33,7 +33,7 @@ const usePublisherCreate = (modal: any) => {
 
   const setLoadingCallback = (progressData: any) => {
     let percentageDone: any = 100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
-    console.log("percentage done: ", percentageDone);
+    //console.log("percentage done: ", percentageDone);
     setIpfsLoading(percentageDone)
   }
 
@@ -170,7 +170,7 @@ const usePublisherCreate = (modal: any) => {
           position: "top-right",
         });
       } else {
-        console.log("The publisher payload data is ", publisherPayload);
+        //console.log("The publisher payload data is ", publisherPayload);
         setIsTransactionPending(true)
         toast({
           title: "Please wait for the transaction to confirm",
@@ -180,7 +180,7 @@ const usePublisherCreate = (modal: any) => {
         });
         hookMacha.createMachaPublisher(publisherPayload).then((res: any) => {
           setIsTransactionPending(false);
-          console.log(res)
+          //console.log(res)
           if (res?.code) {
             toast({
               title: res.code.code || res?.code,
@@ -221,7 +221,7 @@ const usePublisherCreate = (modal: any) => {
           position: "top-right",
         });
       } else {
-        console.log("The publisher payload data is ", publisherPayload);
+        //console.log("The publisher payload data is ", publisherPayload);
         setIsTransactionPending(true)
         toast({
           title: "Please wait for the transaction to confirm",

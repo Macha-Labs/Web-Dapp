@@ -19,7 +19,7 @@ const useXmtpChannelNew = () => {
   };
 
   const _initiateDirect = (peerAddress: any, callback?: any) => {
-    console.log(peerAddress);
+    //console.log(peerAddress);
     _validate(peerAddress, callback);
   };
 

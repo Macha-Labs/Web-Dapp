@@ -21,7 +21,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
   const $meta = useMetaStore((state: any) => state.meta);
 
   useEffect(() => {
-    console.log("Logging pending meta ", $meta);
+    //console.log("Logging pending meta ", $meta);
   }, [$meta]);
 
   return (
@@ -75,7 +75,7 @@ const MetaCreateModal = ({ metaModal, hookMeta }: Props) => {
             labelText="Image"
             placeholder="Image"
             onChange={async (e?: any) => {
-              console.log(e);
+              //console.log(e);
               setImageEvent(e);
             }}
           />

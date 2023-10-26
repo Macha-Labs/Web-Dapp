@@ -77,7 +77,7 @@ const useAlchemy = () => {
     };
     const alchemy = new Alchemy(settings);
     let response = await alchemy.core.getTokensForOwner(userAddress);
-    console.log("userTokens", response);
+    //console.log("userTokens", response);
     setUserTokens(response.tokens);
   };
 

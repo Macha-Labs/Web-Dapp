@@ -6,7 +6,7 @@ const useUserId = () => {
 
   const fetchIds = async (userAddress: string) => {
     await userIdByAddress(userAddress).then((res) => {
-      console.log("response form useUserId", res.data);
+      //console.log("response form useUserId", res.data);
       setUserIds(res.data);
     });
   };

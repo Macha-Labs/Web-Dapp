@@ -65,7 +65,7 @@ const ApiList = () => {
         {!hookApiList.isLoading &&
           hookApiList.filteredData &&
           hookApiList.filteredData.map((item: any, index: number) => {
-            console.log("Checking request ", item.request);
+            //console.log("Checking request ", item.request);
             return (
               <MetaCard
                 key={index}

@@ -27,7 +27,7 @@ export const DataContext = createContext<DataContextType>({
 });
 
 export const DataProvider = ({ children }: any) => {
-    console.log('Rendering >>>>> DataProvider');
+    //console.log('Rendering >>>>> DataProvider');
 
 
     const $messages = useChatMessagesStore((state: any) => state.messages);
@@ -41,13 +41,13 @@ export const DataProvider = ({ children }: any) => {
     const $loadMemberAll = useChatMembersStore(((state: any) => state.loadAll));
     const $loadMemberIds = useChatMembersStore(((state: any) => state.loadIds));
 
-    useEffect(() => {console.log('DataProvider ===> messages', $messages)}, [$messages]);
+    useEffect(() => {//console.log('DataProvider ===> messages', $messages)}, [$messages]);
 
-    useEffect(() => {console.log('DataProvider ===> members', $members)}, [$members]);
+    useEffect(() => {//console.log('DataProvider ===> members', $members)}, [$members]);
 
-    useEffect(() => {console.log('DataProvider ===> memberIds', $memberIds)}, [$memberIds]);
+    useEffect(() => {//console.log('DataProvider ===> memberIds', $memberIds)}, [$memberIds]);
 
-    useEffect(() => {console.log('DataProvider ===> memberAll', $memberAll)}, [$memberAll]);
+    useEffect(() => {//console.log('DataProvider ===> memberAll', $memberAll)}, [$memberAll]);
 
 
     return (

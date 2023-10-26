@@ -36,7 +36,7 @@ const Metas = () => {
       >
         <FlexRow hrAlign="flex-start" marginTop={"xl"} flexWrap="wrap">
           {hookMetasList?.metaSchemas?.map((schema: any, index: any) => {
-            console.log(schema, "schema");
+            //console.log(schema, "schema");
             return (
               schema?.slug != "mirror_blogs" &&
               schema?.slug != "layer3_quests" &&

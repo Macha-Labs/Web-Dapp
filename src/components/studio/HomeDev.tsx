@@ -74,7 +74,7 @@ const HomeDev = () => {
                         });
                       }
                     } catch (err) {
-                      console.log(err);
+                      //console.log(err);
                     }
                   };
                   if ($address == null) {

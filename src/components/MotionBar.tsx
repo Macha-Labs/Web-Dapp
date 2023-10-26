@@ -14,11 +14,11 @@ const MotionBar = () => {
   return (
     <motion.div
       onMouseEnter={() => {
-        console.log("in", isCloseHovered);
+        //console.log("in", isCloseHovered);
         if (isOpen) setIsCloseHovered(true);
       }}
       onMouseLeave={() => {
-        console.log("out", isCloseHovered);
+        //console.log("out", isCloseHovered);
         setIsCloseHovered(false);
       }}
       onClick={() => {

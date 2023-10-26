@@ -45,7 +45,7 @@ const Tabs = ({
                   <ButtonNative
                     key={idx}
                     onClick={() => {
-                      console.log("option value", option?.value, value);
+                      //console.log("option value", option?.value, value);
                       onChange(option?.value);
                       router.push(option?.href ? option?.href : "");
                     }}

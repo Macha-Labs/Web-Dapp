@@ -47,9 +47,9 @@ const useMachaAuth = () => {
     //   owner: "0x4eff290c1a734411b39aaa96eabe1e25f0e223ae",
     //   signer: browserSigner,
     // });
-    // console.log("Macha init ", macha);
-    // console.log("Macha Client ", macha.client);
-    // console.log("Macha Client metasOwned ", macha.client?.metasOwned);
+    // //console.log("Macha init ", macha);
+    // //console.log("Macha Client ", macha.client);
+    // //console.log("Macha Client metasOwned ", macha.client?.metasOwned);
     // $loadMacha(macha);
   };
 
@@ -60,11 +60,11 @@ const useMachaAuth = () => {
   // const fetchingMetas = async () => {
   //   fetchPendingMeta("0x4eff290c1a734411b39aaa96eabe1e25f0e223ae").then(
   //     (res) => {
-  //       console.log("response penging", res);
+  //       //console.log("response penging", res);
   //       const allMetas = $macha?.client?.metasOwned?.data
   //         ? [...$macha?.client?.metasOwned?.data, ...res.data]
   //         : [$macha?.client?.metasOwned?.data, ...res.data];
-  //       console.log("allMetas", allMetas);
+  //       //console.log("allMetas", allMetas);
   //       $loadUserMetas(allMetas);
   //       let userMetaMap: any = {};
   //       allMetas.filter((item: any, index: number) => {
@@ -72,7 +72,7 @@ const useMachaAuth = () => {
   //           ? (userMetaMap[item._id.toString()] = item)
   //           : (userMetaMap[item?.id] = item);
   //       });
-  //       console.log("userMetaMap", userMetaMap);
+  //       //console.log("userMetaMap", userMetaMap);
   //       $loadUserMetasMap(userMetaMap);
   //       return res.data;
   //     }
@@ -84,7 +84,7 @@ const useMachaAuth = () => {
     $loadUserApis($macha.client?.apisOwned?.data);
     let userApisMap: any = {};
     $macha.client?.apisOwned?.data.map((item: any, index: number) => {
-      console.log("Api name ", item?.name);
+      //console.log("Api name ", item?.name);
       userApisMap[item?.id] = item;
     });
     $loadUserApisMap(userApisMap);
@@ -93,12 +93,12 @@ const useMachaAuth = () => {
 
   useEffect(() => {
     if ($macha) {
-      console.log("Logging client ", $macha.client); // getting the right value
-      console.log("Logging client metasOwned", $macha.client?.metasOwned); // coming null
-      console.log("Metas Data array ", $macha?.client?.metasOwned?.data); // coming undefined
+      //console.log("Logging client ", $macha.client); // getting the right value
+      //console.log("Logging client metasOwned", $macha.client?.metasOwned); // coming null
+      //console.log("Metas Data array ", $macha?.client?.metasOwned?.data); // coming undefined
       // const pending = fetchingMetas();
       fetchingApis();
-      // console.log("pending metas", pending);
+      // //console.log("pending metas", pending);
     }
   }, [$macha]);
 
@@ -116,7 +116,7 @@ const useMachaAuth = () => {
       admins: clientDataRef.current["admins"].value,
     };
 
-    console.log(authPayload, clientData);
+    //console.log(authPayload, clientData);
     await $macha.createClient(clientData, authPayload);
   };
 

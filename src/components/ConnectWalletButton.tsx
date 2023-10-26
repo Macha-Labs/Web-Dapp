@@ -36,7 +36,7 @@ export const ConnectWalletButton = (props: any) => {
   const toast = useToast();
   const { disconnect } = useDisconnect();
   const $unload = useAuthStore((state: any) => state.unload);
-  // console.log("mobile device detection", window.navigator.userAgent);
+  // //console.log("mobile device detection", window.navigator.userAgent);
   const router = useRouter();
   const [balance, setBalance] = useState<any>(0.0);
   const { chain } = useNetwork();
@@ -49,7 +49,7 @@ export const ConnectWalletButton = (props: any) => {
       });
       setBalance(Number(balance.formatted).toFixed(2));
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 

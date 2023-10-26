@@ -34,7 +34,7 @@ const useCreatorCreate = () => {
   const linkRegex = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/;
 
   useEffect(() => {
-    console.log("creator form data")
+    //console.log("creator form data")
   },[$creatorFormData])
 
   const checkEvent = async () => {
@@ -50,7 +50,7 @@ const useCreatorCreate = () => {
     contract.on("event_FileUploaded", (metaId, sender, metaCid) => {
       setIsLoading(false);
       setStep(3);
-      console.log("meta Created", metaId, sender, metaCid);
+      //console.log("meta Created", metaId, sender, metaCid);
       setCreatedMetaCid(metaCid)
       // router.push(`/user/${metaCid}`);
     });
@@ -92,9 +92,9 @@ const useCreatorCreate = () => {
           MachaMeta_ABI,
           signer
         );
-        console.log("contractData", contract);
-        console.log("signer", signer);
-        console.log("provider", provider);
+        //console.log("contractData", contract);
+        //console.log("signer", signer);
+        //console.log("provider", provider);
         const tempMetaCID = {
           link: $creatorFormData.link,
           description: $creatorFormData.description,
@@ -115,7 +115,7 @@ const useCreatorCreate = () => {
         // const gasPrice = await provider.getGasPr()
         try{
           const res = await contract.uploadMeta([metaCID], [systemCID], { gasLimit: 360038800 });
-          console.log(res)
+          //console.log(res)
           checkEvent();
         }
         catch(error: any){
@@ -191,14 +191,14 @@ const useCreatorCreate = () => {
   const setLoadingCallback = (progressData: any) => {
     let percentageDone: any =
       100 - Number((progressData?.total / progressData?.uploaded)?.toFixed(2));
-    console.log("percentage done: ", percentageDone);
+    //console.log("percentage done: ", percentageDone);
     setIpfsLoading(percentageDone);
   };
 
   const handleTagRemove = (tag: any) => {
     const temp = tags;
     temp.splice(tags.indexOf(tag), 1);
-    console.log("temp", temp);
+    //console.log("temp", temp);
     setTags([...temp]);
   };
   const handleTagAdd = (tagToAdd: any) => {

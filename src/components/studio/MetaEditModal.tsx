@@ -27,7 +27,7 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
 
   const $overviewData = useMetaStore((state: any) => state.overviewData);
   const [imageEvent, setImageEvent] = useState<any>();
-  console.log("metaaaa", $meta);
+  //console.log("metaaaa", $meta);
   return (
     <ModalSlider
       event={metaModal}
@@ -82,7 +82,7 @@ const MetaEditModal = ({ metaModal, hookMetaCreate }: Props) => {
               labelText="Attach Image For Meta"
               placeholder="Image"
               onChange={async (e?: any) => {
-                console.log(e);
+                //console.log(e);
                 setImageEvent(e);
               }}
             />

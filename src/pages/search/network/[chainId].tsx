@@ -67,8 +67,8 @@ const Network = () => {
   ];
 
   const renderContracts = () => {
-    // console.log("chain contracts", hookContractList?.filterData);
-    // console.log(hookChainContracts.contracts);
+    // //console.log("chain contracts", hookContractList?.filterData);
+    // //console.log(hookChainContracts.contracts);
     return (
       <>
         {selectedNavTab == "Contracts" && hookChainContracts?.contracts && (

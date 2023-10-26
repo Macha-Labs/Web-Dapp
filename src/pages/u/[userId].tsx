@@ -67,7 +67,7 @@ const User = () => {
   }, [router.query.userId, address]);
 
   useEffect(() => {
-    console.log("get Nft by address", hookAlchemy.nftByAddress);
+    //console.log("get Nft by address", hookAlchemy.nftByAddress);
     if (hookAlchemy.nftByAddress && hookAlchemy.nftByAddress[0]) {
       hookAlchemy.nftByAddress.map((nft: any) => {
         if (

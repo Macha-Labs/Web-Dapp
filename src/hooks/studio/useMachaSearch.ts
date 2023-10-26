@@ -20,9 +20,9 @@ const useMachaSearch = () => {
   };
 
   const onSearch = async (query: any) => {
-    // console.log("query", query);
+    // //console.log("query", query);
     // const result = await $meta?.fetchMetaOrigin(query, 0);
-    // console.log("Origin result", result);
+    // //console.log("Origin result", result);
     // setResultData(result.data);
   };
 

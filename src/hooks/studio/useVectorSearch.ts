@@ -11,7 +11,7 @@ const useVectorSearch = () => {
     if (res.data) {
       setSearchResults(res.data);
     } else {
-      console.log("search results not found");
+      //console.log("search results not found");
       setSearchResults([]);
     }
     setIsLoading(false);

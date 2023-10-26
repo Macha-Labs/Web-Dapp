@@ -39,9 +39,9 @@ const Meta = () => {
   const $signer = useAuthStore((state: any) => state.signer);
 
   const handleConnect = useCallback(async () => {
-    console.log($signer);
+    //console.log($signer);
     await initialize({ signer: $signer });
-    console.log(await initialize({ signer: $signer }));
+    //console.log(await initialize({ signer: $signer }));
   }, [initialize, $signer]);
   useEffect(() => {
     if (router.isReady) {
@@ -899,7 +899,7 @@ export default Meta;
               height="2.5rem"
               variant="state_default_hover"
               onClick={() => {
-                console.log("conversations :  ", conversations);
+                //console.log("conversations :  ", conversations);
               }}
             />
             <ButtonNative
@@ -907,9 +907,9 @@ export default Meta;
               height="2.5rem"
               variant="state_default_hover"
               onClick={async () => {
-                console.log("sending ...");
+                //console.log("sending ...");
                 await sendMessage.sendMessage(conversations[0], "hey");
-                console.log("sent");
+                //console.log("sent");
               }}
             /> */
 }

@@ -34,12 +34,12 @@ const AuthProvider = ({ children }: any) => {
 
   const unwatch = watchAccount((account) => {
     if ($address != account) {
-      console.log(account, " . ", $address, "asdf");
+      //console.log(account, " . ", $address, "asdf");
       // window.location.href="https://metaworkhq.com"
     }
   });
 
-  console.log("Rendering >>>>> AuthProvider");
+  //console.log("Rendering >>>>> AuthProvider");
   const [user, setUser] = useState<any>(new User$(null, null, null));
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
@@ -97,7 +97,7 @@ const AuthProvider = ({ children }: any) => {
 
   useEffect(() => {
     logger("auth", "useEffect[address]", "address", [address]);
-    console.log("Connected address is ", address);
+    //console.log("Connected address is ", address);
     if (address) {
       $loadAddress(address.toLowerCase());
       _fetchSignerFromWagmi();

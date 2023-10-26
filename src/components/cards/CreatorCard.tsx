@@ -33,7 +33,7 @@ const CreatorCard = ({ modal }: any) => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("hookCreatorCreate.tags", hookCreatorCreate.tags);
+    //console.log("hookCreatorCreate.tags", hookCreatorCreate.tags);
   }, [hookCreatorCreate.tags]);
 
   const { colorMode } = useColorMode();
@@ -424,7 +424,7 @@ const CreatorCard = ({ modal }: any) => {
                                 onChange={async (e?: any) => {
                                   if (e.target.files && e.target.files[0]) {
                                     // const file = e.target.files[0];
-                                    // console.log("Selected file:", e.target.files[0].name);
+                                    // //console.log("Selected file:", e.target.files[0].name);
                                     if (e.target.files[0].name) {
                                       hookCreatorCreate.setImageName(
                                         e.target.files[0].name
@@ -546,7 +546,7 @@ const CreatorCard = ({ modal }: any) => {
                         }
                         variant="state_brand"
                         onClick={() => {
-                          console.log("submit clicked");
+                          //console.log("submit clicked");
                           // hookCreatorCreate.nextFormStep();
                           hookCreatorCreate.submit();
                         }}
@@ -590,7 +590,7 @@ export default CreatorCard;
                     text="View Metas"
                     variant="state_brand"
                     onClick={() => {
-                      console.log("submit clicked");
+                      //console.log("submit clicked");
                     }}
                   />
                 </Box>

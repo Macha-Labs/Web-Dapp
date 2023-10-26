@@ -127,7 +127,7 @@ const ApiCreateModal = ({ modal, hookApiCreate }: Props) => {
               </Heading>
               <FlexRow hrAlign="flex-start" marginBottom={"sm"}>
                 {hookMachaApi?.apiTypes?.map((item: any, index: number) => {
-                  console.log(item);
+                  //console.log(item);
                   return (
                     <CardNative
                       key={index}
@@ -148,7 +148,7 @@ const ApiCreateModal = ({ modal, hookApiCreate }: Props) => {
                         hookApiCreate.apiDataRef.current["requestType"] = {
                           value: item.slug,
                         };
-                        console.log("clicked", item.slug);
+                        //console.log("clicked", item.slug);
                         hookMachaApi.setSelectedType(item.slug);
                       }}
                     >

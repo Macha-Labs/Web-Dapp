@@ -43,7 +43,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
         setLowBalance(false);
       }
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -647,7 +647,7 @@ const CreatePublisherModal = ({ modal, hookPublisherCreate }: Props) => {
                             onChange={async (e?: any) => {
                               if (e.target.files && e.target.files[0]) {
                                 const file = e.target.files[0];
-                                console.log("Selected file:", file);
+                                //console.log("Selected file:", file);
                                 const cid = await deploytoLightHouse(
                                   e,
                                   hookPublisherCreate.setLoadingCallback

@@ -19,7 +19,7 @@ export const XmtpContext = createContext<XmtpContextType>({
 });
 
 export const XmtpProvider = ({ children }: any) => {
-  console.log('Rendering >>>>> XmtpProvider');
+  //console.log('Rendering >>>>> XmtpProvider');
   const authContext = useContext(AuthContext);
   const [conversation, setConversation] = useState<any>();  
   const [logs, setLogs] = useState<any>();
@@ -39,12 +39,12 @@ export const XmtpProvider = ({ children }: any) => {
     if (conversation) {
       const streamMessages = async () => {
         const newLog = await conversation?.xmtpRaw?.streamMessages();
-        console.log('Logs for conversations', conversation, newLog)
+        //console.log('Logs for conversations', conversation, newLog)
         setLogs(newLog);
       };
       streamMessages();
     }
-    console.log("first");
+    //console.log("first");
   }
   
 
@@ -55,7 +55,7 @@ export const XmtpProvider = ({ children }: any) => {
     setConversation(result);
   };
 
-  useEffect(() => {console.log('useEffect >>>>>>> Logs for conversations', conversation, logs); _watch()}, [conversation])
+  useEffect(() => {//console.log('useEffect >>>>>>> Logs for conversations', conversation, logs); _watch()}, [conversation])
 
 
 

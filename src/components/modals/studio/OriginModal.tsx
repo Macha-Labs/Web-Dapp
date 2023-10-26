@@ -31,7 +31,7 @@ const OriginModal = ({
 }: Props) => {
   useEffect(() => {
     if (defaultData) {
-      console.log("Calling request method");
+      //console.log("Calling request method");
       settingRequestMethod(defaultData?.requestType);
     }
   }, [defaultData, settingRequestMethod]);

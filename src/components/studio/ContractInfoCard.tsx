@@ -22,7 +22,7 @@ type Props = {
 };
 
 function ContractInfoCard({ data }: Props) {
-  console.log("metadata", data);
+  //console.log("metadata", data);
   const toast = useToast();
   const router = useRouter();
   const { colorMode } = useColorMode();

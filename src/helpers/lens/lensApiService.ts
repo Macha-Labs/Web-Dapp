@@ -16,7 +16,7 @@ export const signedTypeData = async (
     types: types,
     value: value,
   };
-  console.log("Getting typed Data in service ", typedData);
+  //console.log("Getting typed Data in service ", typedData);
 
   //@ts-ignore
   const result = signTypedData({

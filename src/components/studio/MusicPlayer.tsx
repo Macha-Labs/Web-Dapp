@@ -17,7 +17,7 @@ type Props = {
 };
 
 const MusicPlayer = ({ audioUrl }: Props) => {
-  console.log("audioUrl", audioUrl);
+  //console.log("audioUrl", audioUrl);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,12 +40,12 @@ const MusicPlayer = ({ audioUrl }: Props) => {
     });
 
     newAudio.addEventListener("loadeddata", () => {
-      console.log("loaded");
+      //console.log("loaded");
       setIsLoading(false);
     });
 
     newAudio.addEventListener("timeupdate", () => {
-      console.log("loaded time update");
+      //console.log("loaded time update");
       setCurrentTime(newAudio.currentTime);
     });
 

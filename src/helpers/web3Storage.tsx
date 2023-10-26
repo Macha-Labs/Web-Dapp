@@ -19,7 +19,7 @@ export const makeFileObjects = async (objectBody: any) => {
   // audio, or whatever you want!
 
   // const obj = { hello: 'world' }
-  console.log("Called makefile objects with ", objectBody);
+  //console.log("Called makefile objects with ", objectBody);
   const blob = new Blob([JSON.stringify(objectBody)], {
     type: "application/json",
   });
@@ -43,23 +43,23 @@ export const nonWrappedData = async (files: any) => {
     const client = makeStorageClient();
     client.then(client => {
       client.put(files, { wrapWithDirectory: false }).then(result => {
-        console.log("Uploaded to ipfs, here is the result ", result);
+        //console.log("Uploaded to ipfs, here is the result ", result);
         resolve(result);
       });
     });
   });
-  // console.log("Lens files being uploaded", files);
+  // //console.log("Lens files being uploaded", files);
   // const client = await makeStorageClient();
-  // console.log("Storage client ", client);
+  // //console.log("Storage client ", client);
   // let cid;
   // try {
   //   client.put(files, { wrapWithDirectory: false }).then(result => {
-  //     console.log("Uploaded to ipfs, here is the result ", result);
+  //     //console.log("Uploaded to ipfs, here is the result ", result);
   //     cid = result;
   //     return cid;
   //   });
   // } catch (e) {
-  //   console.log("Error happening in uploading to ipfs ", e);
+  //   //console.log("Error happening in uploading to ipfs ", e);
   // }
 
   return promise;

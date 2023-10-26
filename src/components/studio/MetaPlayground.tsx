@@ -21,7 +21,7 @@ function MetaPlayground({ id }: Props) {
   const [resultData, setResultData] = useState<any>({});
 
   useEffect(() => {
-    console.log("Logging $meta ", $metaInfo);
+    //console.log("Logging $meta ", $metaInfo);
   }, [$metaInfo]);
 
   return (
@@ -65,9 +65,9 @@ function MetaPlayground({ id }: Props) {
             <ButtonNative
               size="sm"
               onClick={async () => {
-                console.log("Logging meta ", $meta);
+                //console.log("Logging meta ", $meta);
                 const result = await $meta.fetchMetaOrigin("yam.eth", 0);
-                console.log("Origin result", result);
+                //console.log("Origin result", result);
                 setResultData(result.data);
               }}
               marginLeft="md"

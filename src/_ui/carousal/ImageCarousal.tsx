@@ -19,7 +19,7 @@ const ImageCarousal = () => {
     );
   };
 
-  console.log("call from imageCarousal");
+  //console.log("call from imageCarousal");
   return (
     <Box overflow="hidden">
       <FlexRow vrAlign="center" hrAlign="center">

@@ -25,7 +25,7 @@ const Chains = () => {
         <Box>
           <FlexRow hrAlign="flex-start" flexWrap="wrap">
             {Object.keys(chains).map((chain: any, index) => {
-              // console.log(chains[chain]);
+              // //console.log(chains[chain]);
               return (
                 <SupportedChains data={chains[chain]} id={chain} key={index} />
               );

@@ -11,13 +11,13 @@ const useMeta = () => {
       metaResolver({uid:value}).then((res) => {
         setMetaData(res.data[0]);
         setIsLoading(false)
-        console.log(res.data, "useMeta");
+        //console.log(res.data, "useMeta");
       });
     }
     else {
       fetchMetaByIpfsCid(value).then((res) => {
         if (res) {
-          console.log(res, "ipfs meta data")
+          //console.log(res, "ipfs meta data")
           setMetaData({
             meta: {
               data: {

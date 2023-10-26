@@ -25,7 +25,7 @@ export default function MetaCard({
   onCardClick = (e?: any) => {},
   height,
 }: Props) {
-  console.log("Got tags ", tags);
+  //console.log("Got tags ", tags);
   const horizontalView = () => {
     return (
       <>

@@ -16,7 +16,7 @@ const useXP = () => {
 
   const _fetchUserXP = async (address: any) => {
     // const res = await fetchUserXPRewards(address);
-    // console.log(res, "userXP");
+    // //console.log(res, "userXP");
     // setUserXPList(res.data);
     const checkUserXpKeys = Object.keys(checkUserXP)
     const responsePromises = checkUserXpKeys.map(async (taskId: any) => {
@@ -27,7 +27,7 @@ const useXP = () => {
     resolvedPromises.map((isNftOwner: any, index: any) => {
       userXPClaimedXPs[checkUserXpKeys[index]] = isNftOwner
     })
-    console.log("user xp claimed xps",userXPClaimedXPs)
+    //console.log("user xp claimed xps",userXPClaimedXPs)
     setUserXPList(userXPClaimedXPs)
   };
 

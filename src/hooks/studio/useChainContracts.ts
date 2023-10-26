@@ -12,11 +12,11 @@ const useChainContracts = () => {
 
   const [contracts, setContracts] = useState<any>();
   const chainId = router.query.chainId;
-  console.log("chainId from usechaincontracts", chainId);
+  //console.log("chainId from usechaincontracts", chainId);
 
   const _fetch = () => {
     contractsOfChain(chainId).then((res) => {
-      console.log("chain contracts", res);
+      //console.log("chain contracts", res);
       setContracts(res.data);
     });
   };
