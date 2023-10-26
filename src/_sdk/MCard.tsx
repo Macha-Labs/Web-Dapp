@@ -197,10 +197,6 @@ const MCard = ({
       {musicplayer && (
         <>
           {" "}
-          {console.log(
-            "musicplayer",
-            musicplayer.substr(5, musicplayer.length - 5)
-          )}
           <MusicPlayer
             key={musicplayer}
             audioUrl={`https://arweave.net/${musicplayer.substr(
