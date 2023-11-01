@@ -15,10 +15,6 @@ export const deploytoLightHouse = async (e: any, progressCallback: any) => {
     undefined
     // progressCallback
   );
-  //console.log("File Status:", output);
-  //console.log(
-    "Visit at https://gateway.lighthouse.storage/ipfs/" + output.data.Hash
-  );
   return output.data.Hash;
 };
 

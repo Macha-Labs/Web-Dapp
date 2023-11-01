@@ -55,10 +55,6 @@ export const XmtpProvider = ({ children }: any) => {
     setConversation(result);
   };
 
-  useEffect(() => {//console.log('useEffect >>>>>>> Logs for conversations', conversation, logs); _watch()}, [conversation])
-
-
-
   return (
     <XmtpContext.Provider
       value={{

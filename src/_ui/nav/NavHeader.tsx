@@ -67,7 +67,6 @@ const NavHeader = ({
 
   return (
     <>
-      {//console.log(router, "router value")}
       <Box width={"100%"} display={"flex"} justifyContent={"center"}>
         <Box
           style={{
@@ -107,7 +106,6 @@ const NavHeader = ({
             </FlexRow>
 
             <FlexRow hrAlign="center" vrAlign="center" width="50%">
-              {//console.log("option tab", tab)}
               <Tabs
                 options={options}
                 onChange={setTab}

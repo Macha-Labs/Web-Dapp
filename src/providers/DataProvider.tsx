@@ -1,7 +1,6 @@
-import useChatChannelStore from "@/store/useChatChannelStore";
-import {useChatMembersStore} from "@/store/useChatMembersStore";
+import { useChatMembersStore } from "@/store/useChatMembersStore";
 import useChatMessagesStore from "@/store/useChatMessagesStore";
-import { createContext, useEffect} from "react";
+import { createContext } from "react";
 
 
 export type DataContextType = {
@@ -40,14 +39,6 @@ export const DataProvider = ({ children }: any) => {
     const $loadMembers = useChatMembersStore(((state: any) => state.load));
     const $loadMemberAll = useChatMembersStore(((state: any) => state.loadAll));
     const $loadMemberIds = useChatMembersStore(((state: any) => state.loadIds));
-
-    useEffect(() => {//console.log('DataProvider ===> messages', $messages)}, [$messages]);
-
-    useEffect(() => {//console.log('DataProvider ===> members', $members)}, [$members]);
-
-    useEffect(() => {//console.log('DataProvider ===> memberIds', $memberIds)}, [$memberIds]);
-
-    useEffect(() => {//console.log('DataProvider ===> memberAll', $memberAll)}, [$memberAll]);
 
 
     return (

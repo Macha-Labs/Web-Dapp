@@ -1,6 +1,4 @@
 import { helperIPFS, truncateAddress, truncateLink } from "@/helpers";
-// import usePortalChannel from "@/hooks/portal/usePortalChannel";
-// import usePortalChannelMembership from "@/hooks/portal/usePortalChannelMembership";
 import { Channel$ } from "@/schema/channel";
 import { StyledCol, StyledRow, StyledCard } from "@/styles/StyledComponents";
 import {
@@ -380,25 +378,6 @@ const ChatNew = (props: any) => {
         <Button
           size="sm"
           variant="state_brand"
-          onClick={() => {
-            //console.log("useraddresses", [
-              ...userAddresses,
-              // ...hookPortalChannelMembership?.userIds,
-            ]);
-
-            // //console.log("profilefromlens", hookLensConnections.profile);
-            // const lensAddress = hookLensConnections.profile.map((item: any) => {
-            //   return item.toLowerCase();
-            // });
-            // const allAddresses = [
-            //   ...hookPortalChannelMembership?.userIds,
-            //   ...userAddresses,
-            //   ...lensAddress,
-            //   ...nftAddresses,
-            // ];
-            // //console.log("allAddresses", allAddresses);
-            // hookPortalChannel?.update(allAddresses);
-          }}
         >
           Continue
         </Button>

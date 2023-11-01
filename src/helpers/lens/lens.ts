@@ -250,10 +250,10 @@ export const likePost = async (requestParam: any) => {
     });
     return result.data!.addReaction;
   } catch (error: any) {
-    //console.log(
-      "Error in Liking Lens post ", error,
-      error?.networkError?.result?.errors
-    );
+    // console.log(
+    //   "Error in Liking Lens post ", error,
+    //   error?.networkError?.result?.errors
+    // );
   }
 };
 
@@ -267,10 +267,10 @@ export const unlikePost = async (requestParam: any) => {
     });
     return result.data!.removeReaction;
   } catch (error: any) {
-    //console.log(
-      "Error in Unliking Lens post ", error, 
-      error?.networkError?.result?.errors
-    );
+    // console.log(
+    //   "Error in Unliking Lens post ", error, 
+    //   error?.networkError?.result?.errors
+    // );
   }
 };
 
