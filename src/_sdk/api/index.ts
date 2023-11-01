@@ -8,7 +8,8 @@ export const queryResolver = async (params: SearchInterface) => {
       limit ? limit : 30
     }${slug ? `&slug=${slug}` : ""}${category ? `&category=${category}` : ""}${
       page ? `&page=${page}` : ""
-    }${owner ? `&owner=${owner}` : ""}`
+    }${owner ? `&owner=${owner}` : ""}`,
+    { headers: { Authorization: `Bearer ${config.apiKey}` } }
   );
   if (response.status == 200) {
     console.log("response querySearch api", response);
@@ -30,7 +31,9 @@ export const metaResolver = async (params: MetaSearchInterface) => {
     page ? `&page=${page}` : ""
   }${uid ? `&uid=${uid}` : ""}${owner ? `&owner=${owner}` : ""}`;
 
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    headers: { Authorization: `Bearer ${config.apiKey}` },
+  });
   const data = await response.json();
   return data;
 };
