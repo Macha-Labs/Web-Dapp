@@ -59,7 +59,7 @@ const NavStudio = () => {
           </FlexRow>
         }
       />
-      <NavBlock marginTop={style.margin["nav"]}>
+      <NavBlock marginTop={style.margin["subnav"]}>
         <FlexRow width="100%" vrAlign="center" hrAlign="space-between">
           <FlexRow hrAlign="flex-start" vrAlign="center">
             <Tabs

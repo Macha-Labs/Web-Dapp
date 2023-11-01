@@ -158,7 +158,7 @@ const ContractCard = ({
                 marginBottom: "0.5rem",
                 fontSize: `${style.font.h7}`,
               }}
-              lineHeight="0.5rem"
+              lineHeight="0.8rem"
             >
               {truncateAddress(address)}
             </Text>

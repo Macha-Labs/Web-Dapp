@@ -110,19 +110,9 @@ const MCard = ({
         vrAlign="flex-start"
         marginBottom="sm"
       >
-        {/* const logoSlug = slugToLogoMapping[slug] || "logo-Sound.xyz"; */}
         <TagNative
           icon={{
             align: "left",
-            // slug: `${
-            //   slug == "lens_post"
-            //     ? "logo-Lens"
-            //     : slug == "poap_nft"
-            //     ? "logo-Poap"
-            //     : slug == "ens_ethereum"
-            //     ? "logo-Ens"
-            //     : "logo-Sound.xyz"
-            // }`,
             slug: `${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
           }}
           size="md"
@@ -208,15 +198,15 @@ const MCard = ({
       )}
 
       <FlexColumn height="auto" vrAlign="flex-start" padding="0% 3%">
-        <Text
+        {title && <Text
           color={colorMode == "light" ? "#282828" : ""}
           className="m-b-0"
           fontSize={"xl"}
           fontWeight={600}
-          marginTop={gStyle.margin["xxxs"]}
+          marginTop={gStyle.margin["xs"]}
         >
           {title}
-        </Text>
+        </Text>}
         {/* <Box width="15rem"> */}
         {description && (
           <>
@@ -237,13 +227,13 @@ const MCard = ({
 
               {description?.length > 110 && showMore && (
                 // <span>
-                  <Text
-                    color="blue"
-                    _hover={{ textDecoration: "underline", cursor: "pointer" }}
-                    onClick={() => setViewMore((prevState) => !prevState)}
-                  >
-                    {viewMore ? "View Less" : "View More"}
-                  </Text>
+                <Text
+                  color="blue"
+                  _hover={{ textDecoration: "underline", cursor: "pointer" }}
+                  onClick={() => setViewMore((prevState) => !prevState)}
+                >
+                  {viewMore ? "View Less" : "View More"}
+                </Text>
                 // </span>
               )}
             </Text>

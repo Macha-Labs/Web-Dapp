@@ -25,9 +25,9 @@ const GraphCard = ({
     <Box
       onClick={onCardClick}
       _hover={{
-        border: `${style.card.border.meta}`,
-        transform: "scale(1.05,1.05)",
-        transition: "all 0.2s cubic-bezier(0.64, 0.04, 0.35, 1)",
+        transform: "scale(1.01,1.01)",
+        border: "1px solid #197cec !important",
+        boxShadow: "-0.15px 0.15px 28px 0px #004AD9",
       }}
       border={
         colorMode == "light" ? "1px solid #e2e2e2" : style.card.border.default
