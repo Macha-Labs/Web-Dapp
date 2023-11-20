@@ -1,3 +1,4 @@
+import MCard from "@/_sdk/MCard";
 import useSearch from "@/_sdk/hooks/useSearch";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import PostCard from "@/components/cards/PostCard";
@@ -16,7 +17,7 @@ const Index = () => {
   }, [router.query.id]);
   return (
     <FlexColumn height="100vh" vrAlign="center" hrAlign="center">
-      <PostCard
+      {/* <PostCard
         image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
         metaName={hookMeta?.metaData?.meta?.slug}
         slug={hookMeta?.metaData?.meta?.slug}
@@ -24,6 +25,14 @@ const Index = () => {
         title={hookMeta?.metaData?.meta?.data?.ipfs?.contentURI?.name}
         owner_name={hookMeta?.metaData?.metaOwner}
         width="100%"
+      /> */}
+      <MCard
+        music={hookMeta?.metaData?.meta?.data?.modified?.meta_audio?.substr(5)}
+        title={hookMeta?.metaData?.meta?.data?.modified?.meta_title}
+        image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
+        slug={hookMeta?.metaData?.meta?.slug}
+        description={hookMeta?.metaData?.meta?.data?.modified?.meta_description}
+        cardHeight="450px"
       />
     </FlexColumn>
   );
