@@ -1,36 +1,28 @@
+import useSearch from "@/_sdk/hooks/useSearch";
 import PostCard from "@/components/cards/PostCard";
-import React from "react";
+import useMeta from "@/hooks/meta/useMeta";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 const index = () => {
+  const hookMeta = useMeta();
+  console.log("metas from embed : ", hookMeta?.metaData?.meta);
+  const router = useRouter();
+  useEffect(() => {
+    if (router.isReady) {
+      hookMeta._fetch(router.query.id);
+    }
+  }, [router.query.id]);
   return (
     <PostCard
-      // title={item?.meta?.data?.modified?.meta_title}
-
-      image="https://ipfs.io/ipfs/bafybeiaskk4ztqzslykrkb6y67htnqyvbwg6yh2dicyzzi6cjb2s47aom4"
-      metaName="embed"
-      slug="lens_post"
-      description="sample desc"
-      title="iframe"
-      owner_name="0x26...e3"
-      //   onClick={() => {
-      //     router.push(`/search/meta/${item?._id}`);
-      //   }}
+      image={hookMeta?.metaData?.meta?.data?.modified?.meta_image}
+      metaName={hookMeta?.metaData?.meta?.slug}
+      slug={hookMeta?.metaData?.meta?.slug}
+      description={hookMeta?.metaData?.meta?.data?.modified?.meta_description}
+      title={hookMeta?.metaData?.meta?.data?.ipfs?.contentURI?.name}
+      owner_name={hookMeta?.metaData?.metaOwner}
       width="100%"
     />
-    // <PostCard
-    //   // title={item?.meta?.data?.modified?.meta_title}
-    //   key={index}
-    //   image={item?.meta?.data?.modified?.meta_image}
-    //   metaName={item?.meta_schema?.name}
-    //   slug={item?.meta?.slug}
-    //   description={item?.meta?.data?.modified?.meta_description}
-    //   title={item?.meta?.data?.ipfs?.contentURI?.name}
-    //   owner_name={item?.metaOwner}
-    //   onClick={() => {
-    //     router.push(`/search/meta/${item?._id}`);
-    //   }}
-    //   width="100%"
-    // />
   );
 };
 

@@ -27,14 +27,14 @@ const useSearch = () => {
       category: category,
       slug: slug,
       owner: owner,
-      limit: 10,
+      limit: limit ? limit : 10,
     };
     if (next) {
       query = { ...query, page: page + 1 };
     }
 
     let res = await queryResolver(query);
-    //console.log("check search results -> query", searchResults);
+    // console.log("check search results -> query", searchResults);
     if (res.data) {
       let newResults =
         next && searchResults
