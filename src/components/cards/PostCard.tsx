@@ -82,7 +82,11 @@ const PostCard = ({
   const { colorMode } = useColorMode();
 
   return (
-    <CardNative width="100%" shadowOnHover={true} onClick={onClick}>
+    <CardNative
+      width={width ? width : "100%"}
+      shadowOnHover={true}
+      onClick={onClick}
+    >
       <FlexRow
         hrAlign="space-between"
         height="auto"
@@ -179,7 +183,7 @@ const PostCard = ({
                 //     ? "logo-Ens"
                 //     : "logo-Sound.xyz"
                 // }`,
-                slug:`${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
+                slug: `${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
               }}
               size="md"
               value={metaName}
