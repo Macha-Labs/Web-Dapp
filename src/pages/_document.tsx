@@ -10,7 +10,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
-        <Box
+        {/* <Box
           sx={{
             "@media screen and (min-width: 769px)": { display: "none" },
           }}
@@ -88,13 +88,13 @@ export default function Document() {
               </Link>
             </FlexRow>
           </Box>
-        </Box>
+        </Box> */}
         <Box
-          sx={{
-            "@media screen and (max-width: 768px)": {
-              display: "none",
-            },
-          }}
+        // sx={{
+        //   "@media screen and (max-width: 768px)": {
+        //     display: "none",
+        //   },
+        // }}
         >
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
