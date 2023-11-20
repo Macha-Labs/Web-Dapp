@@ -23,7 +23,7 @@ const Index = () => {
         description={hookMeta?.metaData?.meta?.data?.modified?.meta_description}
         title={hookMeta?.metaData?.meta?.data?.ipfs?.contentURI?.name}
         owner_name={hookMeta?.metaData?.metaOwner}
-        width="80%"
+        width="100%"
       />
     </FlexColumn>
   );
