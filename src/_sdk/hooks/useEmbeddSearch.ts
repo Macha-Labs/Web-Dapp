@@ -15,9 +15,9 @@ const useEmbeddSearch = () => {
     const handleEmbeddSearch = async (query: String) => {
         setIsLoading(true)
         let res = await embeddSearchResolver(query);
-        // console.log("check search results -> query", searchResults);
-        if (res.data) {
-            setSearchResults(res.data);
+        console.log("check search results: ", res);
+        if (res) {
+            setSearchResults(res);
             setIsLoading(false)
         }
     };
