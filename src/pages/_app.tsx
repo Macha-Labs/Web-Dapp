@@ -9,7 +9,7 @@ import {
   RainbowKitProvider,
   darkTheme,
   getDefaultWallets,
-  lightTheme
+  lightTheme,
 } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import { XMTPProvider } from "@xmtp/react-sdk";
@@ -19,12 +19,28 @@ import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { useEffect } from "react";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { WagmiConfig, configureChains, createClient, mainnet } from "wagmi";
-import { filecoin, filecoinCalibration, goerli, optimism, polygon, polygonMumbai } from "wagmi/chains";
+import {
+  filecoin,
+  filecoinCalibration,
+  goerli,
+  optimism,
+  polygon,
+  polygonMumbai,
+} from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider } = configureChains(
-  [filecoinCalibration, mainnet, polygon, polygonMumbai, goerli, optimism, filecoin],
+  [
+    filecoinCalibration,
+    mainnet,
+    polygon,
+    polygonMumbai,
+    goerli,
+    optimism,
+    filecoin,
+  ],
   [publicProvider()]
 );
 
@@ -62,21 +78,26 @@ export default function App({ Component, pageProps }: AppProps) {
         gtag('config', '${config.GOOGLE_ANALYTICS_ID}');`}
       </Script>
       <WagmiConfig client={wagmiClient}>
-        <ChakraProvider theme={theme}>
-          <ThemeProvider theme={theme}>
-            <RainbowKitProvider chains={chains} theme={darkTheme()}>
-              <IKContext urlEndpoint="https://ik.imagekit.io/macha">
-                <AuthProvider>
-                  <DataProvider>
-                    <XMTPProvider>
-                      <Component {...pageProps} />
-                    </XMTPProvider>
-                  </DataProvider>
-                </AuthProvider>
-              </IKContext>
-            </RainbowKitProvider>
-          </ThemeProvider>
-        </ChakraProvider>
+        <ThirdwebProvider
+          activeChain="ethereum"
+          clientId="e7c2ac7e9931a273c03ce80bba2dd8b5"
+        >
+          <ChakraProvider theme={theme}>
+            <ThemeProvider theme={theme}>
+              <RainbowKitProvider chains={chains} theme={darkTheme()}>
+                <IKContext urlEndpoint="https://ik.imagekit.io/macha">
+                  <AuthProvider>
+                    <DataProvider>
+                      <XMTPProvider>
+                        <Component {...pageProps} />
+                      </XMTPProvider>
+                    </DataProvider>
+                  </AuthProvider>
+                </IKContext>
+              </RainbowKitProvider>
+            </ThemeProvider>
+          </ChakraProvider>
+        </ThirdwebProvider>
       </WagmiConfig>
     </>
   );

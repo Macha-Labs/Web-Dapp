@@ -21,8 +21,6 @@ export const initialiseNewMeta = async (data: metaInit) => {
   return response.json();
 };
 
-
-
 export const fetchMetaSchemas = async () => {
   const response = await fetch(
     `${config.metaServer}/indexer/meta-schemas/fetchAll`
@@ -55,6 +53,25 @@ export const fetchMetaByIpfsCid = async (cid: any) => {
   return data;
 };
 
+export const fetchArweaveData = async (id: any) => {
+  const response = await fetch(`${id}`);
+  const data = await response.json();
+  return data;
+};
+
+export const graphQuery = async (queryTo: string, data: any) => {
+  const response = await fetch(
+    `${config.metaServer}/graph/api/query/${queryTo}`,
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await response.json();
+};
 // export const fetchPendingMeta = async (owner: string) => {
 //   const response = await fetch(
 //     `${config.metaServer}/api/studio/getMeta/${owner}`,

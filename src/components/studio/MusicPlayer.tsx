@@ -1,5 +1,6 @@
 import Loader from "@/_ui/loader/Loader";
 import GlobalIcons from "@/styles/GlobalIcons";
+import { style } from "@/styles/StyledConstants";
 import {
   Box,
   CircularProgress,
@@ -8,15 +9,17 @@ import {
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
+  useColorMode,
   useToast,
 } from "@chakra-ui/react";
 import React, { useState, useEffect, useRef } from "react";
 
 type Props = {
   audioUrl: string;
+  colorMode?: string;
 };
 
-const MusicPlayer = ({ audioUrl }: Props) => {
+const MusicPlayer = ({ audioUrl, colorMode }: Props) => {
   //console.log("audioUrl", audioUrl);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -74,7 +77,12 @@ const MusicPlayer = ({ audioUrl }: Props) => {
     }
   };
   return (
-    <Box display={"flex"} justifyContent={"space-between"}>
+    <Box
+      display={"flex"}
+      justifyContent={"space-between"}
+      marginTop={style.margin.sm}
+      width={"100%"}
+    >
       {isLoading ? (
         <Loader size="sm" />
       ) : (
@@ -95,7 +103,7 @@ const MusicPlayer = ({ audioUrl }: Props) => {
         value={currentTime}
         onChange={handleSliderChange}
       >
-        <SliderTrack>
+        <SliderTrack bg={colorMode == "dark" ? "#ddd" : "#ddd"}>
           <SliderFilledTrack />
         </SliderTrack>
         <SliderThumb />

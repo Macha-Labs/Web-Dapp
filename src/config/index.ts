@@ -5,10 +5,10 @@ export const config = {
   url: "https://metawork-server.herokuapp.com",
 
   // Production
-  metaServer: "https://metawork-sdk.herokuapp.com",
-
+  // metaServer: "https://metawork-sdk.herokuapp.com",
+  apiKey: "3f833e3b7cd84282fcc0c9579002332c7ec904d396111b601a5b58bf37b3e79a",
   // Staging
-  // metaServer: "https://metawork-server-staging.herokuapp.com",
+  metaServer: "https://metawork-server-staging.herokuapp.com",
 
   // metaServer: "http://localhost:3080",
   // url: "http://localhost:3080",
