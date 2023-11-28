@@ -1,21 +1,14 @@
-import ButtonNative from "@/_ui/buttons/ButtonNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
-import TagNative from "@/_ui/tag/TagNative";
-import MusicPlayer from "@/components/studio/MusicPlayer";
-import { slugToLogoMapping } from "@/data/meta";
-import { helperIPFS, truncateString } from "@/helpers";
+import SearchEmbedd from "@/components/search/SearchEmbedd";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style as gStyle, style } from "@/styles/StyledConstants";
-import { ConnectWallet, metamaskWallet, useConnect } from "@thirdweb-dev/react";
 import { Box, Button, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { ConnectWallet, metamaskWallet, useConnect } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import Loader1 from "../loader/Loader1";
 import ModalSlider from "../modal/ModalSlider";
-import Carousel from "@/_ui/carousal/Carousel";
-import ReactPlayer from "react-player";
-import SearchHeader from "@/components/search/SearchHeader";
 
 type Props = {
   title?: string;
@@ -209,7 +202,7 @@ const MiCard = ({
                     marginBottom: `${style.margin.sm}`,
                   }}
                 >
-                  <SearchHeader />
+                  <SearchEmbedd />
                 </div>
               </FlexColumn>
             </Box>
