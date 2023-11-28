@@ -175,12 +175,12 @@ const MiCard = ({
                 height="10%"
                 vrAlign="center"
               >
-                <Box
+                {/*<Box
                   onClick={() => {
                     detailsModal.onOpen();
                   }}
-                >
-                  {/* <TagNative
+                > */}
+                {/* <TagNative
                     icon={{
                       align: "left",
                       slug: `${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
@@ -189,13 +189,13 @@ const MiCard = ({
                     value={slug}
                     lineHeight="1.5rem"
                   /> */}
-                </Box>
+                {/* </Box>
                 <Image
                   src={GlobalIcons["icon-wallet"]}
                   onClick={() => {
                     walletModal.onOpen();
                   }}
-                />
+                />*/}
               </FlexRow>
 
               <FlexColumn height="60%" vrAlign="center" hrAlign="center">
@@ -205,7 +205,7 @@ const MiCard = ({
                     display: "flex",
                     width: "100%",
                     justifyContent: "center",
-                    alignItems:"center",
+                    alignItems: "center",
                     marginBottom: `${style.margin.sm}`,
                   }}
                 >
