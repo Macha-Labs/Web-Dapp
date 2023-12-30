@@ -7,7 +7,7 @@ import { truncateAddress } from "@/helpers";
 import useMacha from "@/hooks/studio/useMacha";
 import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
 import useAuthStore from "@/store/useAuthStore";
-import GlobalIcons from "@/styles/GlobalIcons";
+import GlobalIcons from "@/styles/GlobalIcons"; 
 import { style } from "@/styles/StyledConstants";
 import {
   Button,
@@ -193,10 +193,8 @@ export const ConnectWalletButton = (props: any) => {
                     <MenuList
                       style={{
                         background: `${colorMode == "light" ? "#ffff" : ""}`,
-                        border: `${
-                          colorMode == "light" ? "1px solid #e2e2e2" : ""
-                        }`,
-                        borderRadius: `${style.card.borderRadius.button}`,
+                        border: `${colorMode == "light" ? "1px solid #e2e2e2" : ""}`,
+                        borderRadius: `${style.card.borderRadius.button}`
                       }}
                     >
                       <MenuItem
@@ -249,23 +247,15 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showStudio && (
                         <MenuItem
                           style={{
-                            background: `${
-                              colorMode == "light" ? "#ffff" : ""
-                            }`,
+                            background: `${colorMode == "light" ? "#ffff" : ""
+                              }`,
                           }}
                           onClick={async () => {
                             router.push("/studio");
                           }}
                         >
                           <FlexRow hrAlign="space-between">
-                            <IconBase
-                              slug={
-                                colorMode == "light"
-                                  ? "icon-deploy-light"
-                                  : "icon-dark-deploy"
-                              }
-                              size="xl"
-                            />
+                            <IconBase slug={colorMode == "light" ? "icon-deploy-light" : "icon-dark-deploy"} size="xl" />
                             <FlexRow
                               hrAlign="flex-start"
                               width="90%"
@@ -284,9 +274,8 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showContracts && (
                         <MenuItem
                           style={{
-                            background: `${
-                              colorMode == "light" ? "#ffff" : ""
-                            }`,
+                            background: `${colorMode == "light" ? "#ffff" : ""
+                              }`,
                           }}
                           onClick={async () => {
                             router.push("/mycontracts");
@@ -307,23 +296,15 @@ export const ConnectWalletButton = (props: any) => {
                       {props?.showExplorer && (
                         <MenuItem
                           style={{
-                            background: `${
-                              colorMode == "light" ? "#ffff" : ""
-                            }`,
+                            background: `${colorMode == "light" ? "#ffff" : ""
+                              }`,
                           }}
                           onClick={async () => {
                             router.push("/");
                           }}
                         >
                           <FlexRow hrAlign="space-between">
-                            <IconBase
-                              slug={
-                                colorMode == "light"
-                                  ? "icon-light-globe"
-                                  : "icon-dark-globe"
-                              }
-                              size="xl"
-                            />
+                            <IconBase slug={colorMode == "light" ? "icon-light-globe" : "icon-dark-globe"} size="xl" />
                             <FlexRow
                               hrAlign="flex-start"
                               width="90%"
@@ -343,9 +324,8 @@ export const ConnectWalletButton = (props: any) => {
                         props?.showRegisterPublisher && (
                           <MenuItem
                             style={{
-                              background: `${
-                                colorMode == "light" ? "#ffff" : ""
-                              }`,
+                              background: `${colorMode == "light" ? "#ffff" : ""
+                                }`,
                             }}
                             onClick={async () => {
                               await checkBalance();
@@ -361,14 +341,7 @@ export const ConnectWalletButton = (props: any) => {
                             }}
                           >
                             <FlexRow hrAlign="space-between">
-                              <IconBase
-                                slug={
-                                  colorMode == "light"
-                                    ? "icon-publisher-outline-light"
-                                    : "icon-dark-user"
-                                }
-                                size="xl"
-                              />
+                              <IconBase slug={colorMode == "light" ? "icon-publisher-outline-light" : "icon-dark-user"} size="xl" />
                               <FlexRow
                                 hrAlign="flex-start"
                                 width="90%"
@@ -401,11 +374,7 @@ export const ConnectWalletButton = (props: any) => {
                       >
                         <FlexRow hrAlign="space-between">
                           <IconBase
-                            slug={
-                              colorMode == "light"
-                                ? "icon-light-disconnectWallet"
-                                : "icon-dark-disconnectWallet"
-                            }
+                            slug={colorMode == "light" ? "icon-light-disconnectWallet" : "icon-dark-disconnectWallet"}
                             size="xl"
                           />
                           <FlexRow
