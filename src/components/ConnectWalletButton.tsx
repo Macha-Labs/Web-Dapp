@@ -7,7 +7,7 @@ import { truncateAddress } from "@/helpers";
 import useMacha from "@/hooks/studio/useMacha";
 import usePublisherCreate from "@/hooks/studio/usePublisherCreate";
 import useAuthStore from "@/store/useAuthStore";
-import GlobalIcons from "@/styles/GlobalIcons";
+import GlobalIcons from "@/styles/GlobalIcons"; 
 import { style } from "@/styles/StyledConstants";
 import {
   Button,
