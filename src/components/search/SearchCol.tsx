@@ -24,15 +24,16 @@ const SearchCol = ({ results, router, isLoading, next }: Props) => {
                 <PostCard
                   // title={item?.meta?.data?.modified?.meta_title}
                   key={index}
-                  image={item?.meta?.data?.modified?.meta_image}
+                  image={item?.metadata?.__typename == "ImageMetadataV3" ? item?.metadata?.asset?.image?.optimized?.uri : null}
+                  owner_image={item?.by?.metadata?.picture?.optimized?.uri}
                   metaName={item?.meta_schema?.name}
                   slug={item?.meta?.slug}
-                  description={item?.meta?.data?.modified?.meta_description}
-                  title={item?.meta?.data?.ipfs?.contentURI?.name}
-                  owner_name={item?.metaOwner}
-                  onClick={() => {
-                    router.push(`/search/meta/${item?._id}`);
-                  }}
+                  description={item?.metadata?.content}
+                  title={`${item.metadata.appId} - ${item.__typename}`}
+                  owner_name={item?.by?.handle?.localName}
+                  // onClick={() => {
+                  //   router.push(`/search/meta/${item?._id}`);
+                  // }}
                   width="100%"
                 />
               </FlexRow>

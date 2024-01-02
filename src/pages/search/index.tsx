@@ -120,7 +120,7 @@ const Search = () => {
                           });
                         }}
                         isLoading={hookSearch?.isLoading}
-                        results={hookSearch?.searchResults?.metas}
+                        results={hookSearch?.searchResults}
                         router={router}
                       />
                     </Box>

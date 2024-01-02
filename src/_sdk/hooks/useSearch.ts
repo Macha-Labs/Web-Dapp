@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { metaResolver, queryResolver } from "../api";
 import { MetaSearchInterface, SearchInterface } from "../interfaces";
+import { client as lensClient } from "@/helpers/lens/client";
 
 const useSearch = () => {
   const [inputValue, setInputValue] = useState("");
@@ -14,10 +15,6 @@ const useSearch = () => {
   useEffect(() => {
     setPage(0);
   }, []);
-
-  useEffect(() => {
-    //console.log("check search results", searchResults);
-  }, searchResults);
 
   const handleQuery = async (params: SearchInterface) => {
     const { searchQuery, category, slug, owner, limit, next } = params;
@@ -33,25 +30,30 @@ const useSearch = () => {
       query = { ...query, page: page + 1 };
     }
 
-    let res = await queryResolver(query);
-    // console.log("check search results -> query", searchResults);
-    if (res.data) {
-      let newResults =
-        next && searchResults
-          ? {
-              ...searchResults,
-              metas: searchResults?.metas
-                ? [...searchResults.metas, ...res?.data?.metas]
-                : res?.data?.metas,
-            }
-          : res?.data;
-      setSearchResults(newResults);
-      if (next) {
-        setPage(page + 1);
-      } else {
-        setPage(1);
-      }
+    // let res = await queryResolver(query);
+    let res = await lensClient.search.publications({query: searchQuery});
+    console.log("The result from lens SDK ", res);
+    if (res) {
+      setSearchResults(res.items);
     }
+    // console.log("check search results -> query", searchResults);
+    // if (res.data) {
+    //   let newResults =
+    //     next && searchResults
+    //       ? {
+    //           ...searchResults,
+    //           metas: searchResults?.metas
+    //             ? [...searchResults.metas, ...res?.data?.metas]
+    //             : res?.data?.metas,
+    //         }
+    //       : res?.data;
+    //   setSearchResults(newResults);
+    //   if (next) {
+    //     setPage(page + 1);
+    //   } else {
+    //     setPage(1);
+    //   }
+    // }
     setIsLoading(false);
   };
 
