@@ -31,32 +31,32 @@ const NavHeader = ({
       condition:
         (router.route == "/search" && !router.query.id) || router.route == "/",
     },
-    {
-      href: "/search?id=social",
-      value: "Socials",
-      condition: router.route == "/search" && router.query.id == "social",
-    },
-    {
-      href: "/search?id=music",
-      value: "Music",
-      condition: router.route == "/search" && router.query.id == "music",
-    },
-    {
-      href: "/search?id=nft",
-      value: "NFTs",
-      condition: router.route == "/search" && router.query.id == "nft",
-    },
+    // {
+    //   href: "/search?id=social",
+    //   value: "Socials",
+    //   condition: router.route == "/search" && router.query.id == "social",
+    // },
+    // {
+    //   href: "/search?id=music",
+    //   value: "Music",
+    //   condition: router.route == "/search" && router.query.id == "music",
+    // },
+    // {
+    //   href: "/search?id=nft",
+    //   value: "NFTs",
+    //   condition: router.route == "/search" && router.query.id == "nft",
+    // },
 
-    {
-      href: "/chains",
-      value: "Chains",
-      condition: router.route == "/chains",
-    },
-    {
-      href: "/metas",
-      value: "Metas",
-      condition: router.route == "/metas",
-    },
+    // {
+    //   href: "/chains",
+    //   value: "Chains",
+    //   condition: router.route == "/chains",
+    // },
+    // {
+    //   href: "/metas",
+    //   value: "Metas",
+    //   condition: router.route == "/metas",
+    // },
   ];
   const { colorMode, toggleColorMode } = useColorMode();
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(
