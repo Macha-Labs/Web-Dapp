@@ -1,6 +1,6 @@
+import useSearch from "@/_sdk/hooks/useSearch";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
-import useSearch from "@/_sdk/hooks/useSearch";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {
@@ -10,9 +10,9 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import SearchOption from "./SearchOption";
-import { useRouter } from "next/router";
 
 type Props = {
   options?: any;

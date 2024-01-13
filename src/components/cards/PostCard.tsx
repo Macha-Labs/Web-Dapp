@@ -1,16 +1,16 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import TagNative from "@/_ui/tag/TagNative";
 import MusicPlayer from "@/components/studio/MusicPlayer";
+import { slugToLogoMapping } from "@/data/meta";
 import { helperIPFS, truncateAddress, truncateString } from "@/helpers";
 import GlobalIcons from "@/styles/GlobalIcons";
-import { Avatar, Box, Image, Text, useColorMode } from "@chakra-ui/react";
+import { Avatar, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { style as gStyle, style } from "../../styles/StyledConstants";
-import CardNative from "@/_ui/cards/CardNative";
-import { slugToLogoMapping } from "@/data/meta";
 
 type Props = {
   title?: string;

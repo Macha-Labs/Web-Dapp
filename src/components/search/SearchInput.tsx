@@ -1,5 +1,5 @@
-import InputSearch from "@/_ui/input/InputSearch";
 import useSearch from "@/_sdk/hooks/useSearch";
+import InputSearch from "@/_ui/input/InputSearch";
 
 type Props = {
   searchWidth?: string;

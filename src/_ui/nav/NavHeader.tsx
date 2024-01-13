@@ -1,12 +1,11 @@
-import { Box, useColorMode, Image } from "@chakra-ui/react";
 import Tabs from "@/_ui/tabs/Tabs";
+import GlobalIcons from "@/styles/GlobalIcons";
+import { Box, Image, useColorMode } from "@chakra-ui/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { style } from "../../styles/StyledConstants";
 import FlexRow from "../flex/FlexRow";
-import FlexColumn from "../flex/FlexColumn";
-import GlobalIcons from "@/styles/GlobalIcons";
-import Link from "next/link";
 
 type Props = {
   rightElem?: any;

@@ -1,8 +1,8 @@
+import { client as lensClient } from "@/helpers/lens/client";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { metaResolver, queryResolver } from "../api";
+import { metaResolver } from "../api";
 import { MetaSearchInterface, SearchInterface } from "../interfaces";
-import { client as lensClient } from "@/helpers/lens/client";
 
 const useSearch = () => {
   const [inputValue, setInputValue] = useState("");

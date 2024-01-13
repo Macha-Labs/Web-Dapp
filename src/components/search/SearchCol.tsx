@@ -1,9 +1,8 @@
-import FlexRow from "@/_ui/flex/FlexRow";
-import PostCard from "../cards/PostCard";
-import Loader from "@/_ui/loader/Loader";
-import EmptyCard from "../cards/EmptyCard";
-import FlexColumn from "@/_ui/flex/FlexColumn";
 import ButtonNative from "@/_ui/buttons/ButtonNative";
+import FlexColumn from "@/_ui/flex/FlexColumn";
+import FlexRow from "@/_ui/flex/FlexRow";
+import Loader from "@/_ui/loader/Loader";
+import PostCard from "../cards/PostCard";
 
 type Props = {
   results?: any;
@@ -22,7 +21,6 @@ const SearchCol = ({ results, router, isLoading, next }: Props) => {
             {results?.map((item: any, index: any) => (
               <FlexRow key={index} hrAlign="flex-start" marginBottom="xs">
                 <PostCard
-                  // title={item?.meta?.data?.modified?.meta_title}
                   key={index}
                   image={item?.metadata?.__typename == "ImageMetadataV3" ? item?.metadata?.asset?.image?.optimized?.uri : null}
                   owner_image={item?.by?.metadata?.picture?.optimized?.uri}
