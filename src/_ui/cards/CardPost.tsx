@@ -35,7 +35,7 @@ type Props = {
   metaName?: any;
 };
 
-const PostCard = ({
+const CardPost = ({
   image,
   title,
   floorPrice,
@@ -183,7 +183,7 @@ const PostCard = ({
                 //     ? "logo-Ens"
                 //     : "logo-Sound.xyz"
                 // }`,
-                slug: `${dataPlugins[slug].image || "logo-Sound.xyz"}`,
+                slug: `${dataPlugins[slug]?.image || ""}`,
               }}
               size="md"
               value={metaName}
@@ -266,4 +266,4 @@ const PostCard = ({
   );
 };
 
-export default PostCard;
+export default CardPost;

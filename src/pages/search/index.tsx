@@ -59,9 +59,9 @@ const Search = () => {
         <TagNative
           icon={{
             align: "left",
-            slug: `${router.query.plugin ? dataPlugins[router.query.plugin].image : ""}`,
+            slug: `${router.query.plugin ? dataPlugins[router.query.plugin]?.image : ""}`,
           }}
-          value={dataPlugins[router.query.plugin].heading}
+          value={dataPlugins[router.query.plugin]?.heading}
           size="md"
           lineHeight="1.5rem"
         />
