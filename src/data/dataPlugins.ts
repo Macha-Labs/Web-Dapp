@@ -7,7 +7,8 @@ export const dataPlugins: any = {
       onClick: () => {},
       bg: "#061201",
       borderColor: "#1f2b11",
-      route: "lens"
+      route: "lens",
+      active: true
     },
     'farcaster': {
       heading: "Farcaster",
@@ -17,7 +18,8 @@ export const dataPlugins: any = {
       onClick: () => {},
       bg: "#0d0914",
       borderColor: "#2a184d",
-      route: "farcaster"
+      route: "farcaster",
+      active: false
     },
     'mirror': {
       heading: "Mirror",
@@ -27,7 +29,8 @@ export const dataPlugins: any = {
       onClick: () => {},
       bg: "#000c18",
       borderColor: "#00264f",
-      route: "mirror"
+      route: "mirror",
+      active: false
     },
     'sound': {
       heading: "Sound.xyz",
@@ -37,7 +40,8 @@ export const dataPlugins: any = {
       onClick: () => {},
       bg: "#1c1d24",
       borderColor: "#212122",
-      route: "sound"
+      route: "sound",
+      active: false
     },
     'poap': {
       heading: "POAP",
@@ -47,7 +51,8 @@ export const dataPlugins: any = {
       onClick: () => {},
       bg: "#2b2324",
       borderColor: "#462b2f",
-      route: "poap"
+      route: "poap",
+      active: false
     },
 };
 

@@ -1,9 +1,6 @@
 import ButtonNative from "@/_ui/buttons/ButtonNative";
 import CardNative from "@/_ui/cards/CardNative";
 import FlexRow from "@/_ui/flex/FlexRow";
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import NavHeader from "@/_ui/nav/NavHeader";
-import NavLeft from "@/_ui/nav/NavLeft";
 import Marquee from "@/components/Marquee/Marquee";
 import CollectorCard from "@/components/cards/CollectorsCard";
 import TransactionCard from "@/components/cards/TransactionCard";
@@ -18,46 +15,6 @@ import { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-// export async function getServerSideProps() {
-//   let allTransactions: any = [];
-//   let allMetas: any = [];
-//   let allMetaSchemas: any = [];
-
-//   const resAllTransactions = await getAllTransactions();
-//   if (resAllTransactions.data) {
-//     //console.log(resAllTransactions.data, "latest txn");
-//     allTransactions = resAllTransactions.data;
-//   } else {
-//     //console.log("Couldnt fetch all transactions");
-//   }
-
-//   const resAllMetas = await fetchAllMetas("poap_nft", 1, 9);
-//   if (resAllMetas.data) {
-//     //console.log(resAllMetas.data, "all metass");
-//     allMetas = {
-//       data: resAllMetas.data,
-//       lastPage: resAllMetas.lastPage,
-//     };
-//   } else {
-//     //console.log("Couldnt fetch all metas");
-//   }
-
-//   const resAllMetaSchemas = await fetchMetaSchemas();
-//   if (resAllMetaSchemas.data) {
-//     //console.log(resAllMetaSchemas.data, "all metas schemas");
-//     allMetaSchemas = resAllMetaSchemas.data;
-//   } else {
-//     //console.log("Couldnt fetch all meta schemas");
-//   }
-
-//   return {
-//     props: {
-//       allTransactions: allTransactions,
-//       allMetas: allMetas,
-//       allMetaSchemas: allMetaSchemas,
-//     },
-//   };
-// }
 
 export default function Home() {
   const hookTransaction = useTransaction();
@@ -209,14 +166,6 @@ export default function Home() {
         </CardNative>
       </Box>
     );
-  };
-
-  const renderNavLeft = () => {
-    return <NavLeft />;
-  };
-
-  const renderNavTop = () => {
-    return <NavHeader />;
   };
 
   return (

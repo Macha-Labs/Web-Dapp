@@ -41,6 +41,8 @@ const Home = () => {
                       onCardClick={() => {
                         router.push(`/search?plugin=${item.route}`);
                       }}
+                      badge={true}
+                      active={item.active}
                     />
                     </Box>
                   );

@@ -3,6 +3,7 @@ import { Image, Text } from "@chakra-ui/react";
 import FlexRow from "@/_ui/flex/FlexRow";
 import { truncateString } from "@/helpers";
 import IconBase from "@/_ui/icons/IconsBase";
+import TagNative from "../tag/TagNative";
 
 type Props = {
   image: string;
@@ -15,6 +16,8 @@ type Props = {
   height?: any;
   bg: any;
   borderColor: any;
+  badge: any;
+  active: any;
 };
 
 export default function CardColored({
@@ -28,6 +31,8 @@ export default function CardColored({
   width,
   onCardClick = (e?: any) => {},
   height,
+  badge,
+  active,
 }: Props) {
   return (
     <>
@@ -42,22 +47,26 @@ export default function CardColored({
           padding: ` ${style.card.padding.default}`,
           marginRight: ` ${style.margin.lg}`,
           cursor: "pointer",
+          opacity: `${active ? '1': '0.5'}`
         }}
         onClick={() => {
-          onCardClick();
+          active ? onCardClick(): '';
         }}
       >
         <div style={{}}>
-          <FlexRow hrAlign="flex-start" vrAlign="center">
-            <IconBase slug={image} />
-            <Text
-              fontSize={"xl"}
-              fontWeight={600}
-              className="m-b-0 m-l-0-5"
-              lineHeight={"1rem"}
-            >
-              {heading}
-            </Text>
+          <FlexRow hrAlign="space-between">
+            <FlexRow hrAlign="flex-start" vrAlign="center">
+              <IconBase slug={image} />
+              <Text
+                fontSize={"xl"}
+                fontWeight={600}
+                className="m-b-0 m-l-0-5"
+                lineHeight={"1rem"}
+              >
+                {heading}
+              </Text>
+            </FlexRow>
+            {badge && <FlexRow width="30%"><TagNative value={active ? 'Live' : 'Soon'} width="fit-content" /></FlexRow>}
           </FlexRow>
           <Text className="m-t-0-5">{truncateString(description, 50)}</Text>
           {/* <FlexRow hrAlign="flex-start" width="100%" height="50px">

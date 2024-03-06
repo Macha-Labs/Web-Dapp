@@ -372,6 +372,9 @@ const theme = extendTheme({
           background: `${style.button.bg.active}`,
           color: "#ffff",
         },
+        state_disabled: {
+          background: `${style.icon.bg.default}`,
+        },
         state_xmtp: {
           opacity: "0.95",
           background: `linear-gradient(91.55deg, #FC4F37 -5.05%, #31006E 105.58%)`,

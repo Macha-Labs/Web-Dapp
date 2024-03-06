@@ -1,6 +1,5 @@
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
-import { AddIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Tag,
@@ -27,6 +26,7 @@ type Props = {
   marginBottom?: string;
   lineHeight?: string;
   image?:string;
+  width?: string;
 };
 
 const TagNative = ({
@@ -41,6 +41,7 @@ const TagNative = ({
   marginTop,
   lineHeight,
   image,
+  width,
 }: Props) => {
   const { colorMode } = useColorMode();
   return (
@@ -48,13 +49,14 @@ const TagNative = ({
       size={size}
       key={size ? size : "md"}
       borderRadius={"2xl"}
-      // variant={variant ? variant : "solid"}
+      variant={variant ? variant : "solid"}
       bgGradient={variant ? variant : style.dropdown.bg.active}
       marginTop={marginTop}
       marginRight={style.margin[marginRight]}
       marginBottom={marginBottom}
       marginLeft={marginLeft}
       paddingY={"3px"}
+      width={width}
     >
       {icon && icon.align == "left" && (
         <Avatar marginRight={1} boxSize="20px" src={GlobalIcons[icon.slug]} />
