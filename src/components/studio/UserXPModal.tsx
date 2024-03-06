@@ -3,8 +3,6 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import InputSearch from "@/_ui/input/InputSearch";
 import ModalWindow from "@/_ui/modal/ModalWindow";
 import TagNative from "@/_ui/tag/TagNative";
-import { projectSlugToLogo } from "@/data/ProjectData";
-import chains from "@/data/network";
 import useXP from "@/hooks/studio/useXP";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
@@ -22,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useAccount } from "wagmi";
+import { dataPlugins } from "@/data/dataPlugins";
 
 type Props = {
   modal: any;
@@ -232,7 +231,7 @@ const UserXPModal = ({ modal }: Props) => {
                     >
                       <FlexRow hrAlign="flex-start">
                         <Image
-                          src={GlobalIcons[projectSlugToLogo[item?.project]]}
+                          src={GlobalIcons[dataPlugins[item?.project].image]}
                           height="2rem"
                           marginRight={style.margin.xs}
                         />

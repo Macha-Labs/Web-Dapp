@@ -1,6 +1,5 @@
 import FlexRow from "@/_ui/flex/FlexRow";
 import TableNative from "@/_ui/table/TableNative";
-import chains from "@/data/network";
 import useXP from "@/hooks/studio/useXP";
 import useAuthStore from "@/store/useAuthStore";
 import GlobalIcons from "@/styles/GlobalIcons";
@@ -8,7 +7,7 @@ import { style } from "@/styles/StyledConstants";
 import { Box, Image, Td, Text, Th, useColorMode } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { ConnectWalletButton } from "../ConnectWalletButton";
-import { projectSlugToLogo } from "@/data/ProjectData";
+import { dataPlugins } from "@/data/dataPlugins";
 
 const UserXpTable = () => {
   const $address = useAuthStore((state: any) => state.address);
@@ -75,7 +74,7 @@ const UserXpTable = () => {
                   >
                     <FlexRow hrAlign="flex-start">
                       <Image
-                        src={GlobalIcons[projectSlugToLogo[item?.project]]}
+                        src={GlobalIcons[dataPlugins[item?.project].image]}
                         height="2rem"
                         marginRight={style.margin.xs}
                       />

@@ -176,7 +176,7 @@ const MiCard = ({
                 {/* <TagNative
                     icon={{
                       align: "left",
-                      slug: `${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
+                      slug: `${dataPlugins[slug].image || "logo-Sound.xyz"}`,
                     }}
                     size="sm"
                     value={slug}

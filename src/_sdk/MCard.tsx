@@ -9,7 +9,7 @@ import { Avatar, Box, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { style as gStyle, style } from "../styles/StyledConstants";
-import { slugToLogoMapping } from "@/data/meta";
+import { dataPlugins } from "@/data/dataPlugins";
 
 type Props = {
   title?: string;
@@ -113,7 +113,7 @@ const MCard = ({
         <TagNative
           icon={{
             align: "left",
-            slug: `${slugToLogoMapping[slug] || ""}`,
+            slug: `${dataPlugins[slug].image || ""}`,
           }}
           size="md"
           value={slug}

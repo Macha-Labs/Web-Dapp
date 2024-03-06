@@ -11,7 +11,6 @@ import Loader from "@/_ui/loader/Loader";
 import Tabs from "@/_ui/tabs/Tabs";
 import TagNative from "@/_ui/tag/TagNative";
 import { config } from "@/config";
-import { projectSlugToLogo } from "@/data/ProjectData";
 import useAlchemy from "@/hooks/studio/useAlchemy";
 import useNftMint from "@/hooks/studio/useNftMint";
 import useUserMeta from "@/hooks/studio/useUserMeta";
@@ -39,6 +38,7 @@ import TokenRow from "../studio/TokenRow";
 import { truncateAddress } from "@/helpers";
 import Avatar from "boring-avatars";
 import { ConnectWalletButton } from "../ConnectWalletButton";
+import { dataPlugins } from "@/data/dataPlugins";
 
 // import { getAllNfts } from "@/service/ApiService";
 
@@ -494,9 +494,9 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
                                                 <Image
                                                   src={
                                                     GlobalIcons[
-                                                    projectSlugToLogo[
+                                                    dataPlugins[
                                                     item?.project
-                                                    ]
+                                                    ].image
                                                     ]
                                                   }
                                                   height="2rem"

@@ -4,13 +4,13 @@ import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import TagNative from "@/_ui/tag/TagNative";
 import MusicPlayer from "@/components/studio/MusicPlayer";
-import { slugToLogoMapping } from "@/data/meta";
 import { helperIPFS, truncateAddress, truncateString } from "@/helpers";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { Avatar, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { style as gStyle, style } from "../../styles/StyledConstants";
+import { dataPlugins } from "@/data/dataPlugins";
 
 type Props = {
   title?: string;
@@ -183,7 +183,7 @@ const PostCard = ({
                 //     ? "logo-Ens"
                 //     : "logo-Sound.xyz"
                 // }`,
-                slug: `${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
+                slug: `${dataPlugins[slug].image || "logo-Sound.xyz"}`,
               }}
               size="md"
               value={metaName}
