@@ -221,12 +221,7 @@ export default function Home() {
 
   return (
     <>
-      <FlexWindow
-        view="col"
-        navTop={renderNavTop()}
-        bodyElem={renderBody()}
-      ></FlexWindow>
-      {/* <Navigation /> */}
+      {renderBody()}
     </>
   );
 }

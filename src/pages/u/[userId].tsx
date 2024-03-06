@@ -9,7 +9,7 @@ import NavHeader from "@/_ui/nav/NavHeader";
 import NavLeft from "@/_ui/nav/NavLeft";
 import NavMeta from "@/_ui/nav/NavMeta";
 import AssetCard from "@/components/cards/AssetCard";
-import NftCard from "@/components/cards/NftCard";
+import ProfilePtsScreen from "@/components/screens/ProfilePtsScreen";
 import MetaUserList from "@/components/meta/MetaUserList";
 import CarouselSlide from "@/components/studio/CarouselSlide";
 import UserAssetsModal from "@/components/studio/UserAssetsModal";
@@ -280,7 +280,7 @@ const User = () => {
                   {/* <TokenModal modal={tokenModal} hookAlchemy={hookAlchemy} /> */}
                 </>
               ) : (
-                <NftCard
+                <ProfilePtsScreen
                   heading="Macha NFT"
                   image={
                     colorMode == "light"

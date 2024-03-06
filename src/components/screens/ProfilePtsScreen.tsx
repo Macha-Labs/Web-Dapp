@@ -61,7 +61,7 @@ type Props = {
   music?: any;
 };
 
-const NftCard = ({ heading, subHeading, image }: Props) => {
+const ProfilePtsScreen = ({ heading, subHeading, image }: Props) => {
   const { chain } = useNetwork();
   const hookNftMint = useNftMint();
   const [chainValue, setChainValue] = useState<any>("Select Chain");
@@ -675,4 +675,4 @@ const NftCard = ({ heading, subHeading, image }: Props) => {
   );
 };
 
-export default NftCard;
+export default ProfilePtsScreen;
