@@ -41,7 +41,7 @@ export const commonStyle: any = {
     lg: "1.8rem",
     xl: "2.4rem",
     xxl: "3.2rem",
-    xxxl: "4rem",
+    xxxl: "5rem",
   },
   color: {
     p: "#fff",

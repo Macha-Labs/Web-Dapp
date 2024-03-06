@@ -30,6 +30,7 @@ import {
   polygonMumbai,
 } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import Main from "./_main";
 
 const { chains, provider } = configureChains(
   [
@@ -89,7 +90,9 @@ export default function App({ Component, pageProps }: AppProps) {
                   <AuthProvider>
                     <DataProvider>
                       <XMTPProvider>
+                        <Main>
                         <Component {...pageProps} />
+                        </Main>
                       </XMTPProvider>
                     </DataProvider>
                   </AuthProvider>

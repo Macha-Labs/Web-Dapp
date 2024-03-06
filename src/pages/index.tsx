@@ -1,84 +1,56 @@
-import FlexColumn from "@/_ui/flex/FlexColumn";
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import NavHeader from "@/_ui/nav/NavHeader";
 import SearchHeader from "@/components/search/SearchHeader";
 import { style } from "@/styles/StyledConstants";
-import { Box, Image, useColorMode } from "@chakra-ui/react";
+import { Box, Heading, Image, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import CardColored from "@/_ui/cards/CardColored";
+import FlexRow from "@/_ui/flex/FlexRow";
+import { dataPlugins } from "@/data/dataPlugins";
 
 const Search = () => {
   const router = useRouter();
   const { colorMode } = useColorMode();
 
-  const renderNavTop = () => {
-    return <NavHeader showLogo={true} />;
-  };
-
-  const renderBody = () => {
-    return (
-      <Box overflowX="hidden">
-        <FlexColumn
-          hrAlign="flex-start"
-          vrAlign="flex-start"
-          padding="0rem 0rem"
-          height="110vh"
-        >
-          <Box
-            border={colorMode ? "" : style.card.border.default}
-            backgroundPosition="center"
-            backgroundRepeat="no-repeat"
-            backgroundSize="cover"
-            height="100%" //90
-            width={"100%"}
-            // borderRadius={style.card.borderRadius.button}
-            // marginTop={style.margin.md}
-            // paddingTop={style.padding.xxl}
-            display={"flex"}
-            alignItems={"center"}
-            flexDir={"column"}
-            paddingTop={style.margin["4xl"]}
-            justifyContent={"flex-start"}
-          >
-            {/* <Image
-              // className=""
-              src="/assets/MACHALogo.svg"
-              alt="logo"
-              width={212}
-              height={78}
-              // width={246}
-              // marginBottom={style.margin.sm}
-            /> */}
-            <Image
-              // className="headerLogo"
-              marginTop="4.5rem"
-              src={
-                colorMode == "light"
-                  ? "/assets/explore/search-home-title-light.svg"
-                  : "/assets/title.png"
-              }
-              alt="logo"
-              // width={255}
-              // height={93}
-              // width={246}
-              marginBottom={style.margin.sm}
-            />
-            <SearchHeader />
-          </Box>
-        </FlexColumn>
-      </Box>
-    );
-  };
-
   return (
     <>
-      <FlexWindow
-        view="col" //
-        navTop={renderNavTop()}
-        bodyElem={renderBody()}
-        marginTop="0"
-        padding={"0% 0%"}
-        enableBackground={true}
-      ></FlexWindow>
+            <Box height={"100%"}>
+              <Heading size={"4xl"} textAlign={"left"}>Hi Saxm,</Heading>
+              <Image
+                // className="headerLogo"
+                src={
+                  colorMode == "light"
+                    ? "/assets/explore/search-home-title-light.svg"
+                    : "/assets/title.png"
+                }
+                alt="logo"
+                // width={255}
+                // height={93}
+                // width={246}
+                marginBottom={style.margin.sm}
+              />
+              <Box marginBottom={style.margin.xxxl}>
+                <FlexRow hrAlign="flex-start" marginTop={"md"} flexWrap="wrap">
+                {dataPlugins.map((item: any) => {
+                  return (
+                    <Box width={"30%"} marginBottom={style.margin.lg}>
+                      <CardColored
+                      heading={item.heading}
+                      description={item.description}
+                      image={item.image}
+                      bg={item.bg}
+                      borderColor={item.borderColor}
+                      onCardClick={() => {
+                        router.push(`/search?${item.route}`);
+                      }}
+                    />
+                    </Box>
+                  );
+                })}
+              </FlexRow>
+              </Box>
+            </Box>
+            <Box position={"fixed"} bottom={"5%"} width={"60%"}>
+              <SearchHeader />
+            </Box>
     </>
   );
 };

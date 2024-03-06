@@ -24,6 +24,7 @@ export const FlexWindow = ({
   children,
   bodyElem,
   marginTop,
+  navElem,
   navLeft,
   navTop,
   navBottom,
@@ -58,6 +59,7 @@ export const FlexWindow = ({
           backgroundPosition="center"
           backgroundRepeat="no-repeat"
           backgroundSize="cover"
+          paddingTop={style.margin["4xl"]}
         >
           <Box
             background={
@@ -127,7 +129,7 @@ export const FlexWindow = ({
             className="window-left"
             style={{ height: "100vh", position: "fixed", left: "0" }}
           >
-            {navLeft}
+            {navElem}
           </div>
           <div
             className="window-right"

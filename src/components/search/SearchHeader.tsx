@@ -28,7 +28,7 @@ const SearchHeader = ({ options, height }: Props) => {
 
   return (
     <>
-      <FlexColumn width="50%" height="fit-content">
+      <FlexColumn width="100%" height="fit-content">
         <InputGroup
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => {
@@ -104,7 +104,7 @@ const SearchHeader = ({ options, height }: Props) => {
               paddingY={style.padding.xxs}
               overflow="hidden"
               position={"absolute"}
-              top="20"
+              bottom="20"
               zIndex={200}
             >
               <Box

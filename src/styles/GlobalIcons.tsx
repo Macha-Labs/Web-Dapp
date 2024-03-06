@@ -183,7 +183,7 @@ const GlobalIcons: any = {
   "logo-Lens": "/assets/icons/Lens.svg",
   "logo-Macha": "/assets/metawork.svg",
   "logo-Macha-circular": "/assets/metawork-circular.svg",
-  "logo-Farcaster": "/Studio-Logos/farcaster.svg",
+  "logo-Farcaster": "/assets/icons/Farcaster.svg",
   "logo-Poap": "/assets/icons/POAP.svg",
   "logo-Mirror": "/assets/icons/Mirror.svg",
   "logo-Paragraph.xyz": "/Studio-Logos/paragraph.svg",

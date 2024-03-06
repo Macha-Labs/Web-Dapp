@@ -14,6 +14,7 @@ import { style } from "@/styles/StyledConstants";
 import { Box, Heading, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import SearchHeader from "@/components/search/SearchHeader";
 
 const Search = () => {
   const router = useRouter();
@@ -41,22 +42,9 @@ const Search = () => {
     }
   }, [router.query.search]);
 
-  const renderNavLeft = () => {
-    return <NavLeft />;
-  };
-
-  const renderNavTop = () => {
-    return <NavHeader search={true} />;
-  };
-
-  const renderNavBottom = () => {
-    return <NavFooter />;
-  };
-
-  const renderBody = () => {
-    return (
-      <>
-        <FlexColumn hrAlign="space-between" vrAlign="flex-start">
+  return (
+    <Box height="80%">
+        <FlexColumn hrAlign="space-between" vrAlign="flex-start" >
           <FlexColumn
             hrAlign="flex-start"
             vrAlign="flex-start"
@@ -132,22 +120,12 @@ const Search = () => {
               hookSearch?.searchResults?.nfts?.length! > 0 &&
               hookSearch?.searchResults?.metas?.length! > 0 && <EmptyCard />}
           </FlexColumn>
-
-          <ExternalCard />
         </FlexColumn>
-      </>
-    );
-  };
 
-  return (
-    <FlexWindow
-      padding="0% 15%"
-      view="col"
-      // navLeft={renderNavLeft()}
-      navTop={renderNavTop()}
-      bodyElem={renderBody()}
-      navBottom={renderNavBottom()}
-    ></FlexWindow>
+        <Box position={"fixed"} bottom={"5%"} width={"60%"}>
+              <SearchHeader />
+            </Box>
+    </Box>
   );
 };
 
