@@ -1,4 +1,4 @@
-import useXmtpChannelNew from "@/hooks/xmtp/useXmtpChannelNew";
+import useXmtpChannelNew from "@/_external/hooks/xmtp/useXmtpChannelNew";
 import useUserStore from "@/store/useUserStore";
 import { StyledCol } from "@/styles/StyledComponents";
 import { Button, Heading, Image, Input, InputGroup, InputRightElement, useToast } from "@chakra-ui/react";

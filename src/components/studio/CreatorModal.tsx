@@ -1,6 +1,6 @@
 // import TableNative from "@/_ui/list/Tablenative";
 import ModalWindow from "@/_ui/modal/ModalWindow";
-import CreatorCard from "../cards/CreatorCard";
+import CreatorCard from "../../_external/minter/CreatorCard";
 
 type Props = {
   modal: any;

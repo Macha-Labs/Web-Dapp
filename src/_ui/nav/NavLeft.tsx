@@ -1,5 +1,4 @@
 import CreatorModal from "@/components/studio/CreatorModal";
-import useCreatorCreate from "@/hooks/studio/useCreatorCreate";
 import { style } from "@/styles/StyledConstants";
 import {
   Box,
@@ -22,7 +21,6 @@ const NavLeft = (props: any) => {
   const { openConnectModal } = useConnectModal();
   const router = useRouter();
   const creatorModal = useDisclosure();
-  const hookCreatorCreate = useCreatorCreate();
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -203,10 +201,6 @@ const NavLeft = (props: any) => {
             </FlexColumn>
           </div>
         </div>
-        <CreatorModal
-          modal={creatorModal}
-          hookCreatorCreate={hookCreatorCreate}
-        />
       </FlexRow>
     </>
   );
