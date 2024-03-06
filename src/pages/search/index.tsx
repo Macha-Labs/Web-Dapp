@@ -1,12 +1,7 @@
 import useSearch from "@/_sdk/hooks/useSearch";
 import MCarousal from "@/_ui/carousal/MCarousal";
 import FlexColumn from "@/_ui/flex/FlexColumn";
-import { FlexWindow } from "@/_ui/flex/FlexWindow";
-import NavFooter from "@/_ui/nav/NavFooter";
-import NavHeader from "@/_ui/nav/NavHeader";
-import NavLeft from "@/_ui/nav/NavLeft";
 import EmptyCard from "@/components/cards/EmptyCard";
-import ExternalCard from "@/components/cards/ExternalCard";
 import UserProfileCard from "@/components/cards/UserProfileCard";
 import SearchCol from "@/components/search/SearchCol";
 import SearchRow from "@/components/search/SearchRow";
@@ -15,6 +10,10 @@ import { Box, Heading, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import SearchHeader from "@/components/search/SearchHeader";
+import FlexRow from "@/_ui/flex/FlexRow";
+import IconBase from "@/_ui/icons/IconsBase";
+import TagNative from "@/_ui/tag/TagNative";
+import { dataPlugins } from "@/data/dataPlugins";
 
 const Search = () => {
   const router = useRouter();
@@ -22,6 +21,7 @@ const Search = () => {
   const { colorMode } = useColorMode();
 
   useEffect(() => {
+    console.log(router, 'here is router');
     if (router.isReady && router.query.id) {
       hookSearch.handleSearch({ category: router.query.id });
     } else if (
@@ -44,6 +44,28 @@ const Search = () => {
 
   return (
     <Box height="80%">
+        <FlexRow width="100%" hrAlign="start" height="content" marginBottom={'lg'}>
+          <IconBase
+              variant="solid"
+              slug="icon-chevron"
+              style={{ marginRight: "xs" }}
+              size="xl"
+              onClick={() => {
+                router.push("/");
+              }}
+            />
+        
+        {/* Todo fix these underlined errors */}
+        <TagNative
+          icon={{
+            align: "left",
+            slug: `${router.query.plugin ? dataPlugins[router.query.plugin].image : ""}`,
+          }}
+          value={dataPlugins[router.query.plugin].heading}
+          size="md"
+          lineHeight="1.5rem"
+        />
+        </FlexRow>
         <FlexColumn hrAlign="space-between" vrAlign="flex-start" >
           <FlexColumn
             hrAlign="flex-start"
@@ -123,8 +145,8 @@ const Search = () => {
         </FlexColumn>
 
         <Box position={"fixed"} bottom={"5%"} width={"60%"}>
-              <SearchHeader />
-            </Box>
+          <SearchHeader />
+        </Box>
     </Box>
   );
 };

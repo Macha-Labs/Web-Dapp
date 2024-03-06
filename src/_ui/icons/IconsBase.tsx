@@ -7,9 +7,10 @@ type Props = {
   size?: string;
   onClick?: any;
   style?: any;
+  variant?: any;
 };
 
-function IconBase({ slug, size, onClick, style }: Props) {
+function IconBase({ slug, size, onClick, style, variant }: Props) {
   return (
     <div
       style={{
@@ -20,9 +21,9 @@ function IconBase({ slug, size, onClick, style }: Props) {
         cursor: "pointer",
         width: "fit-content",
         height: "fit-content",
-        // background: `${gStyle.icon.bg.default}`,
-        // borderRadius: `${gStyle.icon.borderRadius}`,
-        // boxShadow: `${gStyle.icon.shadow.default}`,
+        background: `${variant == 'solid' ?  gStyle.icon.bg.default : ''}`,
+        borderRadius: `${variant == 'solid' ?  gStyle.icon.borderRadius : ''}`,
+        boxShadow: `${variant == 'solid' ? gStyle.icon.shadow.default : ''}`,
         marginLeft: `${gStyle.margin[style?.marginLeft]}`,
         marginRight: `${gStyle.margin[style?.marginRight]}`,
         marginBottom: `${gStyle.margin[style?.marginBottom]}`,

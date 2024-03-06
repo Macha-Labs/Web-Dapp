@@ -134,6 +134,7 @@ const NavLeft = (props: any) => {
                     <FlexRow>
                       {colorMode == "light" ? (
                         router.pathname === `/profile` ? (
+                          // TODO: These Icons should be fixed in IconBase
                           <Image
                             width="2rem"
                             src="/assets/icons/brand-user.svg"

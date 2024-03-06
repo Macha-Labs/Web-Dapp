@@ -113,7 +113,7 @@ const MCard = ({
         <TagNative
           icon={{
             align: "left",
-            slug: `${slugToLogoMapping[slug] || "logo-Sound.xyz"}`,
+            slug: `${slugToLogoMapping[slug] || ""}`,
           }}
           size="md"
           value={slug}

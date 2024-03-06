@@ -36,12 +36,12 @@ const Main = ({children}: Props) => {
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
-            height="80%" //90
+            height="100%"
             width={"60%"}
             margin={"auto"}
             display={"flex"}
             flexDir={"column"}
-            justifyContent={"flex-start"}
+            justifyContent={"center"}
           >
             {children}
           </Box>

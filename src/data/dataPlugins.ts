@@ -1,5 +1,5 @@
-export const dataPlugins = [
-    {
+export const dataPlugins: any = {
+    'lens': {
       heading: "Lens",
       description:
         "Web3 social graph on the Polygon Proof-of-Stake blockchain",
@@ -7,9 +7,9 @@ export const dataPlugins = [
       onClick: () => {},
       bg: "#061201",
       borderColor: "#1f2b11",
-      route: "lens_post"
+      route: "lens"
     },
-    {
+    'farcaster': {
       heading: "Farcaster",
       description:
         "sufficiently decentralized social network built on Ethereum",
@@ -17,9 +17,9 @@ export const dataPlugins = [
       onClick: () => {},
       bg: "#0d0914",
       borderColor: "#2a184d",
-      route: "lens_post"
+      route: "farcaster"
     },
-    {
+    'mirror': {
       heading: "Mirror",
       description:
         "Home for web3 publishing",
@@ -27,9 +27,9 @@ export const dataPlugins = [
       onClick: () => {},
       bg: "#000c18",
       borderColor: "#00264f",
-      route: "lens_post"
+      route: "mirror"
     },
-    {
+    'sound': {
       heading: "Sound.xyz",
       description:
         "Protocol and Tools for empowering artists and collectors",
@@ -37,9 +37,9 @@ export const dataPlugins = [
       onClick: () => {},
       bg: "#1c1d24",
       borderColor: "#212122",
-      route: "lens_post"
+      route: "sound"
     },
-    {
+    'poap': {
       heading: "POAP",
       description:
         "POAP, short for Proof of Attendance Protocol allows you to mint memories as digital mementos",
@@ -47,6 +47,8 @@ export const dataPlugins = [
       onClick: () => {},
       bg: "#2b2324",
       borderColor: "#462b2f",
-      route: "lens_post"
+      route: "poap"
     },
-  ];
+};
+
+export const dataPluginsArr = Object.keys(dataPlugins).map((key: string) => dataPlugins[key]);

@@ -4,15 +4,15 @@ import { Box, Heading, Image, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import CardColored from "@/_ui/cards/CardColored";
 import FlexRow from "@/_ui/flex/FlexRow";
-import { dataPlugins } from "@/data/dataPlugins";
+import { dataPlugins, dataPluginsArr } from "@/data/dataPlugins";
 
-const Search = () => {
+const Home = () => {
   const router = useRouter();
   const { colorMode } = useColorMode();
 
   return (
     <>
-            <Box height={"100%"}>
+            <Box height={"80%"}>
               <Heading size={"4xl"} textAlign={"left"}>Hi Saxm,</Heading>
               <Image
                 // className="headerLogo"
@@ -29,7 +29,7 @@ const Search = () => {
               />
               <Box marginBottom={style.margin.xxxl}>
                 <FlexRow hrAlign="flex-start" marginTop={"md"} flexWrap="wrap">
-                {dataPlugins.map((item: any) => {
+                {dataPluginsArr.map((item: any) => {
                   return (
                     <Box width={"30%"} marginBottom={style.margin.lg}>
                       <CardColored
@@ -39,7 +39,7 @@ const Search = () => {
                       bg={item.bg}
                       borderColor={item.borderColor}
                       onCardClick={() => {
-                        router.push(`/search?${item.route}`);
+                        router.push(`/search?plugin=${item.route}`);
                       }}
                     />
                     </Box>
@@ -55,4 +55,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Home;
