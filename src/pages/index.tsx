@@ -51,7 +51,7 @@ const Home = () => {
               </Box>
             </Box>
             <Box position={"fixed"} bottom={"5%"} width={"60%"}>
-              <SearchHeader />
+              <SearchHeader suggestionsActive={true} />
             </Box>
     </>
   );

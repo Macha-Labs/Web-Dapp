@@ -12,10 +12,6 @@ type Props = {
   margin?: string;
   border?: any;
   bg?: any;
-  marginLeft?: any;
-  marginRight?: any;
-  marginTop?: any;
-  marginBottom?: any;
   hrAlign?: any;
   shadowOnHover?: any;
 };
@@ -29,10 +25,6 @@ const CardNative = ({
   children,
   border,
   bg,
-  marginLeft,
-  marginRight,
-  marginTop,
-  marginBottom,
   header,
   footer,
   hrAlign,
@@ -42,20 +34,16 @@ const CardNative = ({
 
   return (
     <Box
-      border={
-        colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default
-      }
+      // border={
+      //   colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default
+      // }
       borderRadius={style.card.borderRadius.default}
-      background={colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}
+      
       style={{
         height: height ? `${height}` : "auto",
         width: width ? `${width}` : "auto",
-        margin: margin ? style?.margin[margin] : "0rem",
-        marginLeft: `${style.margin[marginLeft]}`,
-        marginRight: `${style.margin[marginRight]}`,
-        marginTop: `${style.margin[marginTop]}`,
-        marginBottom: `${style.margin[marginBottom]}`,
-        padding: padding ? `${padding}` : "0px",
+        // margin: margin ? style?.margin[margin] : "0rem",
+        // padding: padding ? `${padding}` : "0px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -66,8 +54,9 @@ const CardNative = ({
       onClick={onClick}
       cursor={shadowOnHover && "pointer"}
       _hover={{
-        border: `${shadowOnHover && gStyle.card.border.meta}`,
-        boxShadow: `${shadowOnHover && "-0.15px 0.15px 28px 0px #004AD9"}`,
+        // border: `${shadowOnHover && gStyle.card.border.meta}`,
+        boxShadow: `${shadowOnHover && "-0.15px 0.15px 2px 0px #004AD9"}`,
+        background : `${colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}`
       }}
       className="cardNative_container"
     >
@@ -79,7 +68,7 @@ const CardNative = ({
       >
         {header && (
           <Box className="cardNative_header">
-            <Box padding={style.padding.sm}>{header}</Box>
+            <Box >{header}</Box>
             <Divider
               mt="0px"
               mb="0px"
@@ -93,7 +82,6 @@ const CardNative = ({
         {children && (
           <Box
             style={{
-              padding: `${style.padding.sm}`,
               display: "flex",
               flexDirection: "column",
               // flex: "1",
@@ -120,7 +108,7 @@ const CardNative = ({
             alignSelf={"flex-end"}
             borderColor={colorMode == "light" ? "#e2e2e2" : "#102540"}
           />
-          <Box padding={style.padding.sm}>{footer}</Box>
+          <Box>{footer}</Box>
         </Box>
       )}
     </Box>

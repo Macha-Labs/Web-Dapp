@@ -1,7 +1,6 @@
 import useSearch from "@/_sdk/hooks/useSearch";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
-import GlobalIcons from "@/styles/GlobalIcons";
 import { style } from "@/styles/StyledConstants";
 import {
   Box,
@@ -13,16 +12,17 @@ import {
 import { useRouter } from "next/router";
 import { useState } from "react";
 import SearchOption from "./SearchOption";
+import { dataPrompts } from "@/data/dataPrompts";
 
 type Props = {
   options?: any;
   height?: any;
+  hookSearch?: any;
+  suggestionsActive?: any;
 };
 
-const SearchHeader = ({ options, height }: Props) => {
+const SearchHeader = ({ options, height, hookSearch, suggestionsActive = false }: Props) => {
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-
-  const hookSearch = useSearch();
   const { colorMode } = useColorMode();
   const router = useRouter();
 
@@ -58,12 +58,12 @@ const SearchHeader = ({ options, height }: Props) => {
               </Box>
             </InputLeftElement>
             <input
-              value={hookSearch.inputValue} // Use local state to control the input value
+              value={hookSearch?.inputValue} // Use local state to control the input value
               type="text"
-              ref={hookSearch.searchRef}
+              ref={hookSearch?.searchRef}
               className="searchHeader"
-              onChange={hookSearch.handleInputChange} // Call handleInputChange when input changes
-              onKeyDown={hookSearch.handleRoute} // Call handleKeyDown on Enter key press
+              onChange={hookSearch?.handleInputChange} // Call handleInputChange when input changes
+              onKeyDown={hookSearch?.handleSearch} // Call handleKeyDown on Enter key press
               placeholder="Try Spectacular Search Now"
               style={{
                 height: height ? height : "5rem",
@@ -84,7 +84,7 @@ const SearchHeader = ({ options, height }: Props) => {
               }}
             />
           </Box>
-          {showSuggestions && (
+          {suggestionsActive && showSuggestions && (
             <Box
               sx={{
                 "&::-webkit-scrollbar-thumb": {
@@ -109,7 +109,7 @@ const SearchHeader = ({ options, height }: Props) => {
             >
               <Box
                 overflowY={"scroll"}
-                height={"15rem"}
+                height={"10rem"}
                 paddingX={style.padding.xs}
               >
                 <Box
@@ -134,82 +134,18 @@ const SearchHeader = ({ options, height }: Props) => {
                   </Text>
                 </Box>
 
-                <SearchOption
-                  image={GlobalIcons["logo-Lens"]}
-                  text="Lens Posts"
-                  onClick={() => {
-                    router.push("/search?slug=lens_post");
-                    setShowSuggestions(false);
-                  }}
-                />
-                <SearchOption
-                  image={GlobalIcons["logo-Ens"]}
-                  text="Ens Handles"
-                  onClick={() => {
-                    router.push("/search?slug=ens_ethereum");
-                    setShowSuggestions(false);
-                  }}
-                />
-                <SearchOption
-                  image={GlobalIcons["logo-Sound.xyz"]}
-                  text="Sound.xyz Music"
-                  onClick={() => {
-                    router.push("/search?slug=sound_xyz");
-                    setShowSuggestions(false);
-                  }}
-                />
-                <SearchOption
-                  image={GlobalIcons["logo-Poap"]}
-                  text="Poap Nfts"
-                  onClick={() => {
-                    router.push("/search?slug=poap_nft");
-                    setShowSuggestions(false);
-                  }}
-                />
-                <Box
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    alignItems: "center",
-                    paddingRight: `${style.padding.xs}`,
-                    paddingLeft: `${style.padding.xs}`,
-                    paddingTop: `${style.padding.xxs}`,
-                  }}
-                >
-                  <Text
-                    mb={style.margin.xxs}
-                    fontSize={style.font.h7}
-                    color={
-                      colorMode == "light" ? "#282828" : style.color["white.5"]
-                    }
-                    fontWeight={style.fontWeight.dark}
-                  >
-                    Explore More
-                  </Text>
-                </Box>
-
-                <SearchOption
-                  text="View content across web3"
-                  onClick={() => {
-                    router.push("/feed");
-                    setShowSuggestions(false);
-                  }}
-                />
-
-                <SearchOption
-                  text="Explore Chains"
-                  onClick={() => {
-                    router.push("/chains");
-                    setShowSuggestions(false);
-                  }}
-                />
-                <SearchOption
-                  text="Explore Metas"
-                  onClick={() => {
-                    router.push("/metas");
-                    setShowSuggestions(false);
-                  }}
-                />
+                {dataPrompts[`${router.query?.plugin ? router.query?.plugin : 'general'}`].map((item: any) => {
+                  return (
+                    <SearchOption
+                    text={item.text}
+                    onClick={() => {
+                      // TODO: This needs to be resolved
+                      setShowSuggestions(false);
+                    }}
+                  />
+                  );
+                })}
+               
               </Box>
             </Box>
           )}

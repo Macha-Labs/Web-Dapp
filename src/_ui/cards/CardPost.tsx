@@ -6,7 +6,7 @@ import TagNative from "@/_ui/tag/TagNative";
 import MusicPlayer from "@/components/studio/MusicPlayer";
 import { helperIPFS, truncateAddress, truncateString } from "@/helpers";
 import GlobalIcons from "@/styles/GlobalIcons";
-import { Avatar, Image, Text, useColorMode } from "@chakra-ui/react";
+import { Avatar, Divider, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { style as gStyle, style } from "../../styles/StyledConstants";
@@ -97,7 +97,7 @@ const CardPost = ({
           width="70%"
           height="auto"
           vrAlign="flex-start"
-          padding="0% 3%"
+          padding="1% 1%"
         >
           {owner_name && (
             <FlexRow
@@ -169,54 +169,7 @@ const CardPost = ({
           )}
           {/* </Box> */}
         </FlexColumn>
-        <FlexColumn width="30%" vrAlign="flex-end">
-          <FlexRow hrAlign="flex-end">
-            <TagNative
-              icon={{
-                align: "left",
-                // slug: `${
-                //   slug == "lens_post"
-                //     ? "logo-Lens"
-                //     : slug == "poap_nft"
-                //     ? "logo-Poap"
-                //     : slug == "ens_ethereum"
-                //     ? "logo-Ens"
-                //     : "logo-Sound.xyz"
-                // }`,
-                slug: `${dataPlugins[slug]?.image || ""}`,
-              }}
-              size="md"
-              value={metaName}
-              lineHeight="1.5rem"
-            />
-            {/* <AudioPlayer /> */}
-            {music && (
-              <>
-                <audio
-                  ref={audioRef}
-                  onEnded={handleAudioEnded}
-                  src={`https://arweave.net/${music}`}
-                ></audio>
-                {isPlaying ? (
-                  <Image
-                    src={GlobalIcons["icon-pause"]}
-                    onClick={(e) => {
-                      stopAudio(e);
-                    }}
-                    alt="icon-pause"
-                  />
-                ) : (
-                  <Image
-                    src={GlobalIcons["icon-play"]}
-                    onClick={(e) => {
-                      playAudio(e);
-                    }}
-                    alt="icon-play"
-                  />
-                )}
-              </>
-            )}
-          </FlexRow>
+        <FlexColumn width="30%" vrAlign="center" hrAlign="center">
 
           {image && (
             <div
@@ -262,6 +215,7 @@ const CardPost = ({
           marginTop="sm"
         />
       )}
+
     </CardNative>
   );
 };

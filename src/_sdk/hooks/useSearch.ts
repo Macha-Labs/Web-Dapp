@@ -1,4 +1,5 @@
 import { client as lensClient } from "@/helpers/lens/client";
+import { useSearchLens } from "@/_external/lens";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { metaResolver } from "../api";
@@ -11,6 +12,7 @@ const useSearch = () => {
   const searchRef = useRef(null);
   const [searchResults, setSearchResults] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>(true);
+  const hookSearchLens = useSearchLens();
   let [page, setPage] = useState<any>();
   useEffect(() => {
     setPage(0);
@@ -113,8 +115,11 @@ const useSearch = () => {
     }
   };
 
-  const handleSearch = (params: any) => {
-    handleLoad({ ...params });
+  const handleSearch = async (params: any) => {
+    if (router.query.plugin == 'lens') {
+      const result = await hookSearchLens.lensPublications(inputValue);
+      setSearchResults(result.items);
+    }
   };
 
   const handleNext = (params: any) => {
