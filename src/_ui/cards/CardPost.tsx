@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { style as gStyle, style } from "../../styles/StyledConstants";
 import { dataPlugins } from "@/data/dataPlugins";
+import { uiStyleCard } from "../_style";
 
 type Props = {
   title?: string;
@@ -84,8 +85,8 @@ const CardPost = ({
   return (
     <CardNative
       width={width ? width : "100%"}
-      shadowOnHover={true}
       onClick={onClick}
+      addStyle={uiStyleCard.search}
     >
       <FlexRow
         hrAlign="space-between"

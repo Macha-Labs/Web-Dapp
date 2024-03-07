@@ -1,4 +1,3 @@
-import useSearch from "@/_sdk/hooks/useSearch";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
 import { style } from "@/styles/StyledConstants";
@@ -171,18 +170,6 @@ const SearchHeader = ({ options, height, hookSearch, suggestionsActive = false }
         .searchHeader:focus-visible {
           outline: none !important;
         }
-
-        ${colorMode == "light"
-          ? ""
-          : `.searchHeader:hover {
-          background: linear-gradient(
-            141.09deg,
-            rgba(10, 19, 51, 0.5) 11.08%,
-            rgba(0, 15, 44, 0.38) 89.68%
-          ) !important;
-          border: 1px solid rgba(15, 23, 46, 1) !important;
-          box-shadow: -7.993527412414551px 7.993527412414551px 15.987054824829102px 0px rgba(0, 0, 0, 0.2) !important;
-        }`}
       `}</style>
     </>
   );

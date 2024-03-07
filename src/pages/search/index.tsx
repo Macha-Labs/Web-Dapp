@@ -14,6 +14,7 @@ import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
 import TagNative from "@/_ui/tag/TagNative";
 import { dataPlugins } from "@/data/dataPlugins";
+import { SearchPrompt } from "@/components/search/SearchPrompts";
 
 const Search = () => {
   const router = useRouter();
@@ -71,6 +72,7 @@ const Search = () => {
           <Heading size="md">{hookSearch?.inputValue}</Heading>
         </FlexRow>}
         <FlexColumn hrAlign="space-between" vrAlign="flex-start" height="50%">
+          {!hookSearch?.isLoading && (!hookSearch?.searchResults || !hookSearch?.searchResults?.length) && <SearchPrompt />}
           {hookSearch?.searchResults?.length > 0 && 
           <FlexColumn
           hrAlign="flex-start"

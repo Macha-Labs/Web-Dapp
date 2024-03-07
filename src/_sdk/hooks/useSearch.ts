@@ -11,7 +11,7 @@ const useSearch = () => {
   const router = useRouter();
   const searchRef = useRef(null);
   const [searchResults, setSearchResults] = useState<any>();
-  const [isLoading, setIsLoading] = useState<any>(true);
+  const [isLoading, setIsLoading] = useState<any>(false);
   const hookSearchLens = useSearchLens();
   let [page, setPage] = useState<any>();
   useEffect(() => {

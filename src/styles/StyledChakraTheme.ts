@@ -267,7 +267,7 @@ const theme = extendTheme({
           background: `${style.button.bg.default}`,
           _hover: {
             background: `${style.button.bg.active}`,
-            color: "#FF",
+            color: "#FFF",
           },
         },
 

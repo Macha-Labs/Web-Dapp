@@ -1,3 +1,5 @@
+import { uiColors } from "@/_ui/_style/colors";
+
 export const commonStyle: any = {
   font: {
     h1: "2.2rem",
@@ -8,6 +10,9 @@ export const commonStyle: any = {
     h6: "1rem",
     h7: "0.8rem",
     p: "1rem",
+  },
+  borderRadius: {
+    'sm': '0.75rem'
   },
   fontWeight: {
     light: "200",
@@ -88,7 +93,7 @@ export const darkStyle = {
     padding: { default: "1% 6%", meta: "1% 2%" },
     margin: "75px",
     marginM: "120px",
-    navLeftBg: "#030c1a",
+    navLeftBg: `${uiColors.blueDark}`,
     navLeftBgLight: "rgba(255, 255, 255, 1)",
   },
   list: {
@@ -194,7 +199,7 @@ export const darkStyle = {
     bg: {
       default: "#020A21",
       overlay: "#00040d",
-      contractModal: "#030c1a",
+      contractModal: "",
     },
     border: {
       default: "1px solid #0F172E",
@@ -218,9 +223,9 @@ export const darkStyle = {
       transparent: "transparent",
       default: "#00040d",
       hover: "#000C29",
-      active: "linear-gradient(100.07deg, #2A85FF 0.39%, #2448C7 73.45%)",
+      active: `${uiColors.themeActive}`,
       activeTranslucent:
-        "linear-gradient(99.21deg, rgba(55, 121, 249, 0.66) 2.04%, rgba(28, 76, 244, 0.2) 95.15%);",
+        `${uiColors.themeActiveTranslucent}`,
       disabled: "",
     },
     border: "1px solid rgba(247,248,248,0.1)",

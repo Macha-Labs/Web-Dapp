@@ -1,5 +1,6 @@
 import { style as gStyle, style } from "../../styles/StyledConstants";
 import { Box, Divider, useColorMode } from "@chakra-ui/react";
+import { radius } from "@thirdweb-dev/react/dist/declarations/src/design-system";
 
 type Props = {
   header?: any;
@@ -14,49 +15,39 @@ type Props = {
   bg?: any;
   hrAlign?: any;
   shadowOnHover?: any;
+  addStyle?: any;
 };
 
 const CardNative = ({
   height,
   width,
-  padding,
   onClick,
-  margin,
   children,
-  border,
-  bg,
   header,
   footer,
   hrAlign,
-  shadowOnHover,
+  addStyle = {},
 }: Props) => {
   const { colorMode } = useColorMode();
 
   return (
     <Box
-      // border={
-      //   colorMode == "light" ? "1px solid #e2e2e2" : gStyle.card.border.default
-      // }
-      borderRadius={style.card.borderRadius.default}
-      
       style={{
         height: height ? `${height}` : "auto",
         width: width ? `${width}` : "auto",
-        // margin: margin ? style?.margin[margin] : "0rem",
-        // padding: padding ? `${padding}` : "0px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         transitionTimingFunction: "ease-in-out",
         transitionProperty: "all",
         transitionDuration: "600ms",
+        borderRadius:`${style.card.borderRadius.default}`,
+        ...addStyle
       }}
       onClick={onClick}
-      cursor={shadowOnHover && "pointer"}
+      cursor={"pointer"}
       _hover={{
-        // border: `${shadowOnHover && gStyle.card.border.meta}`,
-        boxShadow: `${shadowOnHover && "-0.15px 0.15px 2px 0px #004AD9"}`,
-        background : `${colorMode == "light" ? "rgba(255,255,255,1)" : "#030c1a"}`
+       ...addStyle._hover
       }}
       className="cardNative_container"
     >
