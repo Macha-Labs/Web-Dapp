@@ -14,6 +14,8 @@ const useSearch = () => {
   const [isLoading, setIsLoading] = useState<any>(false);
   const hookSearchLens = useSearchLens();
   let [page, setPage] = useState<any>();
+
+
   useEffect(() => {
     setPage(0);
   }, []);
@@ -38,24 +40,6 @@ const useSearch = () => {
     if (res) {
       setSearchResults(res.items);
     }
-    // console.log("check search results -> query", searchResults);
-    // if (res.data) {
-    //   let newResults =
-    //     next && searchResults
-    //       ? {
-    //           ...searchResults,
-    //           metas: searchResults?.metas
-    //             ? [...searchResults.metas, ...res?.data?.metas]
-    //             : res?.data?.metas,
-    //         }
-    //       : res?.data;
-    //   setSearchResults(newResults);
-    //   if (next) {
-    //     setPage(page + 1);
-    //   } else {
-    //     setPage(1);
-    //   }
-    // }
     setIsLoading(false);
   };
 
@@ -115,9 +99,12 @@ const useSearch = () => {
     }
   };
 
-  const handleSearch = async (params: any) => {
+  const handleSearch = async () => {
     if (router.query.plugin == 'lens') {
       const result = await hookSearchLens.lensPublications(inputValue);
+      setSearchResults(result.items);
+    } else if (router.query.plugin == 'lens-profile') {
+      const result = await hookSearchLens.lensProfiles(inputValue);
       setSearchResults(result.items);
     }
   };
@@ -132,42 +119,37 @@ const useSearch = () => {
     setSearchResults(null);
   };
 
+  const handleRoute = (e: any) => {
+    e.preventDefault();
+    const newValue = e.target.value;
+    const searchValue = regex.test(inputValue)
+      ? newValue.substring(1)
+      : newValue;
+    let url = `/search/?search=${searchValue}`;
+    if (router?.query?.id) {
+      url = `/search/?id=${router?.query?.id}&search=${searchValue}`;
+    }
+    router.push(url);
+  };
+
   const handleInputChange = (e: any) => {
     const newValue = e.target.value;
-
-    // Check if the input value matches the regex pattern
-    if (regex.test(newValue)) {
-      // If it matches, use hookSearch1 and remove the first character
-
-      setInputValue(newValue.substring(1));
-    } else {
-      // If it doesn't match, use hookSearch
-
-      setInputValue(newValue);
-    }
+    setInputValue(newValue);
   };
 
-  const handleRoute = (e: any) => {
-    //console.log(router, "router value");
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const newValue = e.target.value;
-      const searchValue = regex.test(inputValue)
-        ? newValue.substring(1)
-        : newValue;
-      let url = `/search/?search=${searchValue}`;
-      if (router?.query?.id) {
-        url = `/search/?id=${router?.query?.id}&search=${searchValue}`;
-      }
-      router.push(url);
+  const handleKeyEnter = (e:any) => {
+    if (e.keyCode === 13 || e.key === "Enter") {
+      handleSearch();
     }
-  };
+  }
+
 
   return {
     handleInputChange,
     handleRoute: handleRoute,
     handleSearch: handleSearch,
     handleNext: handleNext,
+    handleKeyEnter: handleKeyEnter,
     isLoading: isLoading,
     inputValue: inputValue,
     searchRef: searchRef,

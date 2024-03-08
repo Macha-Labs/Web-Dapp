@@ -62,7 +62,7 @@ const SearchHeader = ({ options, height, hookSearch, suggestionsActive = false }
               ref={hookSearch?.searchRef}
               className="searchHeader"
               onChange={hookSearch?.handleInputChange} // Call handleInputChange when input changes
-              onKeyDown={hookSearch?.handleSearch} // Call handleKeyDown on Enter key press
+              onKeyDown={hookSearch?.handleKeyEnter} // Call handleKeyDown on Enter key press
               placeholder="Try Spectacular Search Now"
               style={{
                 height: height ? height : "5rem",

@@ -1,6 +1,6 @@
 export const dataPlugins: any = {
     'lens': {
-      heading: "Lens",
+      heading: "Lens Posts",
       description:
         "Web3 social graph on the Polygon Proof-of-Stake blockchain",
       image: "logo-Lens",
@@ -8,7 +8,20 @@ export const dataPlugins: any = {
       bg: "#061201",
       borderColor: "#1f2b11",
       route: "lens",
-      active: true
+      active: true,
+      format: 'post'
+    },
+    'lens-profile': {
+      heading: "Lens Profiles",
+      description:
+        "Web3 social graph on the Polygon Proof-of-Stake blockchain",
+      image: "logo-Lens",
+      onClick: () => {},
+      bg: "#061201",
+      borderColor: "#1f2b11",
+      route: "lens-profile",
+      active: true,
+      format: 'action'
     },
     'farcaster': {
       heading: "Farcaster",
@@ -19,7 +32,8 @@ export const dataPlugins: any = {
       bg: "#0d0914",
       borderColor: "#2a184d",
       route: "farcaster",
-      active: false
+      active: false,
+      format: 'action'
     },
     'mirror': {
       heading: "Mirror",
@@ -30,7 +44,8 @@ export const dataPlugins: any = {
       bg: "#000c18",
       borderColor: "#00264f",
       route: "mirror",
-      active: false
+      active: false,
+      format: 'action'
     },
     'sound': {
       heading: "Sound.xyz",
@@ -41,7 +56,8 @@ export const dataPlugins: any = {
       bg: "#1c1d24",
       borderColor: "#212122",
       route: "sound",
-      active: false
+      active: false,
+      format: 'action'
     },
     'poap': {
       heading: "POAP",
@@ -52,7 +68,8 @@ export const dataPlugins: any = {
       bg: "#2b2324",
       borderColor: "#462b2f",
       route: "poap",
-      active: false
+      active: false,
+      format: 'action'
     },
 };
 

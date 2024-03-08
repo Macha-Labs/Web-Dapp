@@ -8,7 +8,6 @@ import SearchRow from "@/components/search/SearchRow";
 import { style } from "@/styles/StyledConstants";
 import { Avatar, Box, Heading, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import SearchHeader from "@/components/search/SearchHeader";
 import FlexRow from "@/_ui/flex/FlexRow";
 import IconBase from "@/_ui/icons/IconsBase";
@@ -20,28 +19,6 @@ const Search = () => {
   const router = useRouter();
   const hookSearch = useSearch();
   const { colorMode } = useColorMode();
-
-  useEffect(() => {
-    console.log(router, 'here is router');
-    if (router.isReady && router.query.id) {
-      hookSearch.handleSearch({ category: router.query.id });
-    } else if (
-      router?.isReady &&
-      !router?.query?.id &&
-      !router?.query?.search
-    ) {
-      hookSearch.handleSearch({ searchQuery: "What is the latest in web3" });
-    }
-  }, [router.query.id]);
-
-  useEffect(() => {
-    if (router.isReady && router.query.search) {
-      hookSearch.handleSearch({
-        searchQuery: router.query.search,
-        category: router.query.id,
-      });
-    }
-  }, [router.query.search]);
 
   return (
     <Box height="80%">
@@ -139,6 +116,7 @@ const Search = () => {
                       isLoading={hookSearch?.isLoading}
                       results={hookSearch?.searchResults}
                       router={router}
+                      plugin={dataPlugins[router?.query?.plugin]}
                     />
                   </Box>
                 </FlexColumn>
