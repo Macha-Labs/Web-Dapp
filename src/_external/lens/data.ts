@@ -1,14 +1,17 @@
-export interface SearchProfile {
-    heading: string;
-    image: string;
-    cover: string;
-    description: string;
-    externalLink: string;
+import { Result } from "../interface";
+
+export function mapToSearchPosts(dataList: any[]): Result[] {
+  return dataList.map((item): Result => ({
+    heading: `${item?.metadata?.appId} - ${item?.__typename}`,
+    image: item?.metadata?.__typename == "ImageMetadataV3" ? item?.metadata?.asset?.image?.optimized?.uri : null,
+    cover: item?.cover,
+    description: item?.metadata?.content,
+    externalLink: `https://hey.xyz/posts/${item?.handle?.localName}`
+  }));
 }
 
-
-export function mapToSearchProfile(dataList: any[]): SearchProfile[] {
-    return dataList.map((item): SearchProfile => ({
+export function mapToSearchProfile(dataList: any[]): Result[] {
+    return dataList.map((item): Result => ({
       heading: item?.metadata?.displayName,
       image: item?.metadata?.picture?.optimized?.uri,
       cover: item?.cover,

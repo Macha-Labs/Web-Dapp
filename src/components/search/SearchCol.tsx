@@ -24,17 +24,15 @@ const SearchCol = ({ results, router, isLoading, next, plugin }: Props) => {
                 {plugin?.format == 'post' && 
                 <CardPost
                 key={index}
-                image={item?.metadata?.__typename == "ImageMetadataV3" ? item?.metadata?.asset?.image?.optimized?.uri : null}
+                image={item?.image}
                 owner_image={item?.by?.metadata?.picture?.optimized?.uri}
                 metaName={item?.meta_schema?.name}
-                slug={item?.meta?.slug}
-                description={item?.metadata?.content}
-                title={`${item?.metadata?.appId} - ${item?.__typename}`}
+                slug={""}
+                description={item?.description}
+                title={item?.heading}
                 owner_name={item?.by?.handle?.localName}
-                // onClick={() => {
-                //   router.push(`/search/meta/${item?._id}`);
-                // }}
                 width="100%"
+                onClick={() => {window.open(item?.externalLink)}}
               />
               }
               {plugin?.format == 'action' && 
