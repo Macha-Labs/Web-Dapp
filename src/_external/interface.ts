@@ -1,5 +1,6 @@
 export interface Author {
     name?: string;
+    heading?: string;
     image?: string;
     externalLink?: string;
 }

@@ -10,7 +10,8 @@ export function mapToSearchPosts(dataList: any[]): Result[] {
     externalLink: `https://hey.xyz/posts/${item?.id}`,
     author: {
       image: item?.by?.metadata?.picture?.optimized?.uri,
-      name: item?.by?.handle?.localName,
+      heading: item?.by?.handle?.localName,
+      name: item?.by?.metadata?.displayName,
       externalLink: undefined
     }
   }));
