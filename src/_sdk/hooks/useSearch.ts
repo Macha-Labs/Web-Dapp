@@ -1,9 +1,8 @@
-import { client as lensClient } from "@/helpers/lens/client";
 import { useSearchLens } from "@/_external/lens";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { metaResolver } from "../api";
-import { MetaSearchInterface, SearchInterface } from "../interfaces";
+import { MetaSearchInterface} from "../interfaces";
 
 const useSearch = () => {
   const [inputValue, setInputValue] = useState("");
@@ -20,28 +19,6 @@ const useSearch = () => {
     setPage(0);
   }, []);
 
-  const handleQuery = async (params: SearchInterface) => {
-    const { searchQuery, category, slug, owner, limit, next } = params;
-    setIsLoading(true);
-    let query: any = {
-      searchQuery: searchQuery,
-      category: category,
-      slug: slug,
-      owner: owner,
-      limit: limit ? limit : 10,
-    };
-    if (next) {
-      query = { ...query, page: page + 1 };
-    }
-
-    // let res = await queryResolver(query);
-    let res = await lensClient.search.publications({query: searchQuery});
-    console.log("The result from lens SDK ", res);
-    if (res) {
-      setSearchResults(res.items);
-    }
-    setIsLoading(false);
-  };
 
   const handleFetch = async (params: MetaSearchInterface) => {
     const { category, slug, owner, limit, next } = params;
@@ -102,10 +79,10 @@ const useSearch = () => {
   const handleSearch = async () => {
     if (router.query.plugin == 'lens') {
       const result = await hookSearchLens.lensPublications(inputValue);
-      setSearchResults(result.items);
+      setSearchResults(result);
     } else if (router.query.plugin == 'lens-profile') {
       const result = await hookSearchLens.lensProfiles(inputValue);
-      setSearchResults(result.items);
+      setSearchResults(result);
     }
   };
 

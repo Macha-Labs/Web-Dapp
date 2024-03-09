@@ -28,7 +28,7 @@ export const CardAction = ({src, heading, width, onClick}: Props) => {
             />
             <FlexColumn width="80%" vrAlign="flex-start">
             <Text
-                fontSize={style.font.h3}
+                fontSize={style.font.h6}
                 fontWeight={style.fontWeight.dark}
                 m={0}
             >

@@ -1,6 +1,5 @@
 import { style as gStyle, style } from "../../styles/StyledConstants";
 import { Box, Divider, useColorMode } from "@chakra-ui/react";
-import { radius } from "@thirdweb-dev/react/dist/declarations/src/design-system";
 
 type Props = {
   header?: any;

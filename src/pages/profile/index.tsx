@@ -7,7 +7,7 @@ const Profile = () => {
   const { colorMode } = useColorMode();
   return (
     <Box paddingTop={style.padding.sm}>
-        <ProfileSettings/>
+      <ProfileSettings/>
     </Box>
   );
 };

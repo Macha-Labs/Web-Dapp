@@ -38,7 +38,7 @@ const SearchCol = ({ results, router, isLoading, next, plugin }: Props) => {
               />
               }
               {plugin?.format == 'action' && 
-              <CardAction src={""} heading={""} />
+              <CardAction src={item?.image} heading={item?.heading} onClick={() => {window.open(item?.externalLink)}} />
               }
               </FlexRow>
             ))}
