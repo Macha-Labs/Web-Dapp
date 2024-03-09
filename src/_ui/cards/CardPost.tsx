@@ -95,7 +95,7 @@ const CardPost = ({
         marginBottom="sm"
       >
         <FlexColumn
-          width="70%"
+          width={image ? "70%" : "100%"}
           height="auto"
           vrAlign="flex-start"
           padding="1% 1%"
@@ -136,7 +136,6 @@ const CardPost = ({
               <Text
                 color={colorMode == "light" ? "#282828" : ""}
                 className="m-b-0"
-                maxW={titleMaxw ? titleMaxw : "30rem"}
                 fontSize={"md"}
                 marginTop={gStyle.margin["xxs"]}
               >
@@ -170,9 +169,10 @@ const CardPost = ({
           )}
           {/* </Box> */}
         </FlexColumn>
-        <FlexColumn width="30%" vrAlign="center" hrAlign="center">
+       
 
           {image && (
+             <FlexColumn width="30%" vrAlign="center" hrAlign="center">
             <div
               style={{
                 height: "60%",
@@ -191,8 +191,9 @@ const CardPost = ({
                 maxHeight="8rem"
               />
             </div>
+            </FlexColumn>
           )}
-        </FlexColumn>
+       
       </FlexRow>
 
       {musicplayer && (

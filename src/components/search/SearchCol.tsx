@@ -25,12 +25,12 @@ const SearchCol = ({ results, router, isLoading, next, plugin }: Props) => {
                 <CardPost
                 key={index}
                 image={item?.image}
-                owner_image={item?.by?.metadata?.picture?.optimized?.uri}
+                owner_image={item?.author?.image}
                 metaName={item?.meta_schema?.name}
                 slug={""}
                 description={item?.description}
                 title={item?.heading}
-                owner_name={item?.by?.handle?.localName}
+                owner_name={item?.author?.name}
                 width="100%"
                 onClick={() => {window.open(item?.externalLink)}}
               />

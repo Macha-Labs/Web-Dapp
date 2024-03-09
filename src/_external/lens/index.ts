@@ -1,11 +1,12 @@
 import { client as lensClient } from "@/helpers/lens/client";
-import { mapToSearchProfile } from "./data";
+import { mapToSearchPosts, mapToSearchProfile } from "./data";
 
 export const useSearchLens = () => {
     const fetchPublications = async(query: string) => {
         const res = await lensClient.search.publications({query: query});
-        console.log('Lens Search Results Publications', res);
-        return res.items;
+        const resMapped = mapToSearchPosts(res.items);
+        console.log('Lens Search Results Publications', res, resMapped);
+        return resMapped;
     };
 
     const fetchProfiles = async(query: string) => {
