@@ -1,10 +1,8 @@
 import useSearch from "@/_sdk/hooks/useSearch";
-import MCarousal from "@/_ui/carousal/MCarousal";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import EmptyCard from "@/components/cards/EmptyCard";
 import UserProfileCard from "@/components/cards/UserProfileCard";
 import SearchCol from "@/components/search/SearchCol";
-import SearchRow from "@/components/search/SearchRow";
 import { style } from "@/styles/StyledConstants";
 import { Avatar, Box, Heading, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -76,12 +74,6 @@ const Search = () => {
           ) : (
             <></>
           )}
-          {hookSearch?.searchResults?.nfts?.length > 0 && (
-            <MCarousal
-              results={hookSearch?.searchResults?.nfts}
-              marginLeft="-3.5rem"
-            />
-          )}
           <Box
             paddingTop={style.margin.navBoth}
             display={"flex"}
@@ -89,21 +81,7 @@ const Search = () => {
             justifyContent={"center"}
           >
             <>
-              {(router?.query?.id == "nft" ||
-                router?.query?.id == "music") && (
-                <SearchRow
-                  next={() => {
-                    hookSearch?.handleNext({
-                      searchQuery: router?.query?.search,
-                      category: router?.query?.id,
-                    });
-                  }}
-                  isLoading={hookSearch?.isLoading}
-                  router={router}
-                  results={hookSearch?.searchResults?.metas}
-                />
-              )}
-              {router?.query?.id != "nft" && router?.query?.id != "music" && (
+              {
                 <FlexColumn>
                   <Box marginTop={style.margin.sm} width="100%">
                     <SearchCol
@@ -120,7 +98,7 @@ const Search = () => {
                     />
                   </Box>
                 </FlexColumn>
-              )}
+              }
             </>
           </Box>
           {!hookSearch?.isLoading &&

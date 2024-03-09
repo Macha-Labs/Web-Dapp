@@ -3,15 +3,14 @@ import CardNative from "@/_ui/cards/CardNative";
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import FlexRow from "@/_ui/flex/FlexRow";
 import TagNative from "@/_ui/tag/TagNative";
-import MusicPlayer from "@/components/studio/MusicPlayer";
 import { helperIPFS, truncateAddress, truncateString } from "@/helpers";
 import GlobalIcons from "@/styles/GlobalIcons";
 import { Avatar, Divider, Image, Text, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { style as gStyle, style } from "../../styles/StyledConstants";
-import { dataPlugins } from "@/data/dataPlugins";
 import { uiStyleCard } from "../_style";
+import MusicPlayer from "../music/MusicPlayer";
 
 type Props = {
   title?: string;
