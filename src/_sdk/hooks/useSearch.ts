@@ -9,6 +9,7 @@ const useSearch = () => {
   const regex = /@0x[0-9a-fA-F]{40}/g;
   const router = useRouter();
   const searchRef = useRef(null);
+  const [plugin, setPlugin] = useState<any>();
   const [searchResults, setSearchResults] = useState<any>();
   const [isLoading, setIsLoading] = useState<any>(false);
   const hookSearchLens = useSearchLens();
@@ -77,10 +78,10 @@ const useSearch = () => {
   };
 
   const handleSearch = async () => {
-    if (router.query.plugin == 'lens') {
+    if (plugin?.route == 'lens' ) {
       const result = await hookSearchLens.lensPublications(inputValue);
       setSearchResults(result);
-    } else if (router.query.plugin == 'lens-profile') {
+    } else if (plugin?.route == 'lens-profile') {
       const result = await hookSearchLens.lensProfiles(inputValue);
       setSearchResults(result);
     }
@@ -115,9 +116,19 @@ const useSearch = () => {
   };
 
   const handleKeyEnter = (e:any) => {
-    if (e.keyCode === 13 || e.key === "Enter") {
+    console.log(e.keyCode);
+    if (!inputValue.length && e.keyCode === 8) {
+      setPlugin(null);
+      setSearchResults(null);
+    } 
+    else if (e.keyCode === 13 || e.key === "Enter") {
       handleSearch();
     }
+  }
+
+  const triggerPlugin = (item: any) => {
+    console.log('Triggering plugin', item);
+    setPlugin(item);
   }
 
 
@@ -131,6 +142,8 @@ const useSearch = () => {
     inputValue: inputValue,
     searchRef: searchRef,
     searchResults: searchResults,
+    plugin: plugin,
+    triggerPlugin: triggerPlugin
   };
 };
 

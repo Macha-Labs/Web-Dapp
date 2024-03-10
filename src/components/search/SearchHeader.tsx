@@ -1,6 +1,7 @@
 import FlexColumn from "@/_ui/flex/FlexColumn";
 import IconBase from "@/_ui/icons/IconsBase";
 import { style } from "@/styles/StyledConstants";
+import GlobalIcons from "@/styles/GlobalIcons";
 import {
   Box,
   InputGroup,
@@ -12,6 +13,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import SearchOption from "./SearchOption";
 import { dataPrompts } from "@/data/dataPrompts";
+import TagNative from "@/_ui/tag/TagNative";
 
 type Props = {
   options?: any;
@@ -53,9 +55,11 @@ const SearchHeader = ({ options, height, hookSearch, suggestionsActive = false }
                   marginLeft: `${style.margin.sm}`,
                 }}
               >
-                <IconBase slug="icon-search" size="3xl" />
+                {!hookSearch?.plugin && <IconBase slug="icon-search" size="3xl" />}
+                {hookSearch?.plugin && <TagNative image={`${GlobalIcons[hookSearch?.plugin?.image]}`} />}
               </Box>
             </InputLeftElement>
+            
             <input
               value={hookSearch?.inputValue} // Use local state to control the input value
               type="text"
@@ -63,7 +67,7 @@ const SearchHeader = ({ options, height, hookSearch, suggestionsActive = false }
               className="searchHeader"
               onChange={hookSearch?.handleInputChange} // Call handleInputChange when input changes
               onKeyDown={hookSearch?.handleKeyEnter} // Call handleKeyDown on Enter key press
-              placeholder="Try Spectacular Search Now"
+              placeholder={hookSearch?.plugin?.heading ? hookSearch?.plugin?.heading : "Try Spectacular Search Now"}
               style={{
                 height: height ? height : "5rem",
                 color: `${colorMode == "light" ? "#3d3d3d" : ""}`,

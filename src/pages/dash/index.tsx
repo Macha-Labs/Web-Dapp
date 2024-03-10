@@ -4,7 +4,7 @@ import { Box, Heading, Image, useColorMode } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import CardColored from "@/_ui/cards/CardColored";
 import FlexRow from "@/_ui/flex/FlexRow";
-import { dataPlugins, dataPluginsArr } from "@/data/dataPlugins";
+import { dataPluginsArr } from "@/data/dataPlugins";
 
 const Home = () => {
   const router = useRouter();
@@ -39,7 +39,7 @@ const Home = () => {
                       bg={item.bg}
                       borderColor={item.borderColor}
                       onCardClick={() => {
-                        router.push(`/search?plugin=${item.route}`);
+                        router.push(`/dash/search?plugin=${item.route}`);
                       }}
                       badge={true}
                       active={item.active}
@@ -50,7 +50,7 @@ const Home = () => {
               </FlexRow>
               </Box>
             </Box>
-            <Box position={"fixed"} bottom={"5%"} width={"60%"}>
+            <Box position={"fixed"} bottom={"5%"} width={"50%"}>
               <SearchHeader suggestionsActive={true} />
             </Box>
     </>

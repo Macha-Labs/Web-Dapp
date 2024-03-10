@@ -51,7 +51,7 @@ export default function FlexRow({
         flexDirection: "row",
         textAlign: "left",
         width: width ? width : "100%",
-        height: height ? height : "100%",
+        height: height ? height : "fit-content",
         padding: padding ? padding : "0px",
         paddingLeft: paddingLeft ? `${gstyle.margin[paddingLeft]}` : "0px",
         paddingRight: paddingRight ? `${gstyle.margin[paddingRight]}` : "0px",

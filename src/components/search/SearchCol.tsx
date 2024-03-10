@@ -16,7 +16,6 @@ type Props = {
 const SearchCol = ({ results, router, isLoading, next, plugin }: Props) => {
   return (
     <>
-      <FlexColumn>
         {results?.length > 0 && (
           <FlexColumn width="100%">
             {results?.map((item: any, index: any) => (
@@ -56,7 +55,6 @@ const SearchCol = ({ results, router, isLoading, next, plugin }: Props) => {
             <Loader size="lg" />
           </FlexRow>
         )}
-      </FlexColumn>
     </>
   );
 };

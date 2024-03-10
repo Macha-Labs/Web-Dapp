@@ -8,3 +8,4 @@ export type SearchInterface = {
     next?: any;
   };
   
+  export type Nullable<T> = T | null;

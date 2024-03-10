@@ -27,7 +27,7 @@ const Search = () => {
               style={{ marginRight: "xs" }}
               size="xl"
               onClick={() => {
-                router.push("/");
+                router.push("/dash");
               }}
             />
         
@@ -107,7 +107,7 @@ const Search = () => {
         </FlexColumn>}
         </FlexColumn>
 
-        <Box position={"fixed"} bottom={"5%"} width={"60%"}>
+        <Box position={"fixed"} bottom={"5%"} width={"50%"}>
           <SearchHeader hookSearch={hookSearch} />
         </Box>
     </Box>

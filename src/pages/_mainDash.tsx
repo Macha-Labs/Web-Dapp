@@ -14,7 +14,7 @@ type Props = {
   };
   
 
-const Main = ({children}: Props) => {
+const MainDash = ({children}: Props) => {
   const router = useRouter();
   const { colorMode } = useColorMode();
 
@@ -64,4 +64,4 @@ const Main = ({children}: Props) => {
   );
 };
 
-export default Main;
+export default MainDash;

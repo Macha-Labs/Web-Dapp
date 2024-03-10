@@ -58,7 +58,7 @@ const GlobalIcons: any = {
   "icon-pin":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-pinFilled.svg?updatedAt=1680783894226",
   "icon-wallet":
-    "/icons/svg/Base-blue/base-blue-wallet.svg?updatedAt=1680783916158",
+    "/assets/base-blue-wallet.svg",
   "icon-poll":
     "https://ik.imagekit.io/metaworkLabs/icons/svg/Base-blue/base-blue-poll.svg?updatedAt=1680783894227",
   "icon-permissions":
