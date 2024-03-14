@@ -6,6 +6,7 @@ import {
   Box,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
@@ -14,6 +15,7 @@ import { useState } from "react";
 import SearchOption from "./SearchOption";
 import { dataPrompts } from "@/data/dataPrompts";
 import TagNative from "@/_ui/tag/TagNative";
+import Loader from "@/_ui/loader/Loader";
 
 type Props = {
   options?: any;
@@ -22,7 +24,7 @@ type Props = {
   suggestionsActive?: any;
 };
 
-const SearchHeader = ({ options, height, hookSearch, suggestionsActive = false }: Props) => {
+const SearchHeader = ({ options, height, hookSearch, suggestionsActive = false}: Props) => {
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const { colorMode } = useColorMode();
   const router = useRouter();
@@ -86,6 +88,20 @@ const SearchHeader = ({ options, height, hookSearch, suggestionsActive = false }
                 width: "100%",
               }}
             />
+
+            <InputRightElement alignItems="start">
+              <Box
+                style={{
+                  height: height ? height : "5rem",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginRight: `${style.margin.sm}`,
+                }}
+              >
+                {hookSearch?.isLoading && <Loader size="sm" />}
+              </Box>
+            </InputRightElement>
           </Box>
           {suggestionsActive && showSuggestions && (
             <Box

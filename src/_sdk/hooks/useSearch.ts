@@ -78,12 +78,15 @@ const useSearch = () => {
   };
 
   const handleSearch = async () => {
+    setIsLoading(true);
     if (plugin?.route == 'lens' ) {
       const result = await hookSearchLens.lensPublications(inputValue);
       setSearchResults(result);
+      setIsLoading(false);
     } else if (plugin?.route == 'lens-profile') {
       const result = await hookSearchLens.lensProfiles(inputValue);
       setSearchResults(result);
+      setIsLoading(false);
     }
   };
 
